@@ -20,10 +20,6 @@ public class GetStackTracesTag extends AutoEncodingTag {
     private String name;
     private String property;
 
-    public GetStackTracesTag() {
-        init();
-    }
-
     @Override
     protected void init() {
         scope = null;
@@ -38,7 +34,7 @@ public class GetStackTracesTag extends AutoEncodingTag {
     @Override
     public int doAutoEncodingStartTag() throws JspException {
         // Find the Throwable to display
-        Object value = PropertyUtils.findObject(pageContext, scope, name, property, true);
+        Object value = PropertyUtils.findObject(pageContext, scope, name, property, true, true);
         if(!(value instanceof Throwable)) throw new JspException(ApplicationResourcesAccessor.getMessage(pageContext.getRequest().getLocale(), "GetStackTracesTag.notThrowable", value.getClass().getName()));
         Throwable throwable = (Throwable)value;
 

@@ -35,7 +35,7 @@ public class PropertyUtils {
      *
      * @return  the resolved <code>Object</code> or <code>null</code> if not found.
      */
-    public static Object findObject(PageContext pageContext, String scope, String name, String property, boolean isRequired) throws JspException {
+    public static Object findObject(PageContext pageContext, String scope, String name, String property, boolean beanRequired, boolean valueRequired) throws JspException {
         try {
             // Check the name
             if(name==null) throw new JspException(ApplicationResourcesAccessor.getMessage(pageContext.getRequest().getLocale(), "PropertyUtils.name.required"));
@@ -51,7 +51,7 @@ public class PropertyUtils {
 
             // Check required
             if(bean==null) {
-                if(isRequired) {
+                if(beanRequired) {
                     // null and required
                     if(scope==null) throw new JspException(ApplicationResourcesAccessor.getMessage(pageContext.getRequest().getLocale(), "PropertyUtils.bean.required.nullScope", name));
                     else throw new JspException(ApplicationResourcesAccessor.getMessage(pageContext.getRequest().getLocale(), "PropertyUtils.bean.required.scope", name, scope));
@@ -66,7 +66,7 @@ public class PropertyUtils {
                 } else {
                     // Find the property
                     Object value = org.apache.commons.beanutils.PropertyUtils.getProperty(bean, property);
-                    if(isRequired && value==null) {
+                    if(valueRequired && value==null) {
                         // null and required
                         if(scope==null) throw new JspException(ApplicationResourcesAccessor.getMessage(pageContext.getRequest().getLocale(), "PropertyUtils.value.required.nullScope", property, name));
                         else throw new JspException(ApplicationResourcesAccessor.getMessage(pageContext.getRequest().getLocale(), "PropertyUtils.value.required.scope", property, name, scope));

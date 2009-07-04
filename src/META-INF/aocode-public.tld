@@ -52,8 +52,19 @@
     <example />
   </tag>
   <tag>
+    <name>pre</name>
+    <tag-class>com.aoindustries.taglib.PreTag</tag-class>
+    <body-content>JSP</body-content>
+    <description>
+      The body of this tag contains preformatted text.
+      The content type of this tag is text/plain+pre.
+    </description>
+    <example />
+  </tag>
+  <tag>
     <name>script</name>
     <tag-class>com.aoindustries.taglib.ScriptTag</tag-class>
+    <tei-class>com.aoindustries.taglib.ScriptTagTEI</tei-class>
     <body-content>JSP</body-content>
     <description>
       The body of this tag contains a script.  The script should not be encoded
@@ -74,6 +85,61 @@
         Specifies the type of script.  The default is "text/javascript".  This is
         also currently the only supported script language.
       </description>
+    </attribute>
+    <example />
+  </tag>
+  <tag>
+    <name>write</name>
+    <tag-class>com.aoindustries.taglib.WriteTag</tag-class>
+    <tei-class>com.aoindustries.taglib.WriteTagTEI</tei-class>
+    <body-content>empty</body-content>
+    <description>
+      Writes the bean contents.  If the bean is <code>null</code> then nothing is displayed.
+      Otherwise, if a public toString(Locale) method exists that returns a String, that will be used,
+      otherwise the standard toString() method will be used.
+
+      The content type depends on the value provided to the type attribute, and defaults to text/plain.
+    </description>
+    <attribute>
+      <name>scope</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>String</type>
+      <description>
+        Specifies the variable scope searched to retrieve the bean specified
+        by name. If not specified, the default rules applied by PageContext.findAttribute()
+        are applied.
+      </description>
+    </attribute>
+    <attribute>
+      <name>name</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>String</type>
+      <description>
+        Specifies the attribute name of the bean whose property is accessed to
+        retrieve the value specified by property (if specified). If property is
+        not specified, the value of this bean itself will be used.
+      </description>
+    </attribute>
+    <attribute>
+      <name>property</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>String</type>
+      <description>
+        Specifies the name of the property to be accessed on the bean specified
+        by name. This value may be a simple, indexed, or nested property reference
+        expression. If not specified, the bean identified by name will itself be
+        used.
+      </description>
+    </attribute>
+    <attribute>
+      <name>type</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>String</type>
+      <description>Specifies the type of content contained in the bean.  Defaults to text/plain.</description>
     </attribute>
     <example />
   </tag>

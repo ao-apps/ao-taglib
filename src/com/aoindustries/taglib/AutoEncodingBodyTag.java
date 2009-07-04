@@ -11,7 +11,7 @@ import com.aoindustries.media.MediaType;
 import java.io.IOException;
 import java.util.Locale;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.tagext.TagSupport;
+import javax.servlet.jsp.tagext.BodyTagSupport;
 
 /**
  * <p>
@@ -30,11 +30,11 @@ import javax.servlet.jsp.tagext.TagSupport;
  *
  * @author  AO Industries, Inc.
  */
-public abstract class AutoEncodingTag extends TagSupport implements ContentTypeTag {
+public abstract class AutoEncodingBodyTag extends BodyTagSupport implements ContentTypeTag {
 
     private MediaEncoder mediaEncoder;
 
-    public AutoEncodingTag() {
+    public AutoEncodingBodyTag() {
         doInit();
     }
 
@@ -92,11 +92,11 @@ public abstract class AutoEncodingTag extends TagSupport implements ContentTypeT
      * Once the out JspWriter has been replaced to output the proper content
      * type, this version of doStartTag is called.
      *
-     * @return This default implementation returns SKIP_BODY.
+     * @return This default implementation returns EVAL_BODY_BUFFERED.
      * @throws javax.servlet.jsp.JspException
      */
     public int doAutoEncodingStartTag() throws JspException {
-        return SKIP_BODY;
+        return EVAL_BODY_BUFFERED;
     }
 
     /**
