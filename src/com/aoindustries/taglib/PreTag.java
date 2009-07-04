@@ -11,7 +11,7 @@ import javax.servlet.jsp.JspException;
 /**
  * @author  AO Industries, Inc.
  */
-public class PreTag extends AutoEncodingTag {
+public class PreTag extends AutoEncodingBodyTag {
 
     private static final long serialVersionUID = 1L;
 

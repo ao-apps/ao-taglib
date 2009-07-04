@@ -94,7 +94,7 @@
     <tei-class>com.aoindustries.taglib.WriteTagTEI</tei-class>
     <body-content>empty</body-content>
     <description>
-      Writes the bean contents.  If the bean is <code>null</code> then nothing is displayed.
+      Writes the bean contents.  If the bean is &lt;code&gt;null&lt;/code&gt; then nothing is displayed.
       Otherwise, if a public toString(Locale) method exists that returns a String, that will be used,
       otherwise the standard toString() method will be used.
 

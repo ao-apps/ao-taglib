@@ -13,7 +13,7 @@ import javax.servlet.jsp.JspException;
 /**
  * @author  AO Industries, Inc.
  */
-public class ScriptTag extends AutoEncodingTag {
+public class ScriptTag extends AutoEncodingBodyTag {
 
     private static final long serialVersionUID = 1L;
 
@@ -21,7 +21,7 @@ public class ScriptTag extends AutoEncodingTag {
 
     @Override
     protected void init() {
-        type = MediaType.PLAINTEXT;
+        type = MediaType.JAVASCRIPT;
     }
 
     public MediaType getContentType() {
