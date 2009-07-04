@@ -15,9 +15,9 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
 
 /**
  * <p>
- * An implementation of <code>ContentTypeTag</code> that automatically encodes
+ * An implementation of <code>BodyTag</code> that automatically encodes
  * its output correctly given its context.  To determine its context, it finds
- * its nearest ancestore that also implements <code>ContentTypeTag</code>.  It
+ * its nearest ancestore that also implements <code>ContentTypeJspTag</code>.  It
  * then uses the content type of that tag to perform proper encoding.  If it
  * fails to find any such parent, it uses the content type of the
  * <code>HttpServletResponse</code>.
@@ -30,7 +30,7 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
  *
  * @author  AO Industries, Inc.
  */
-public abstract class AutoEncodingBodyTag extends BodyTagSupport implements ContentTypeTag {
+public abstract class AutoEncodingBodyTag extends BodyTagSupport implements ContentTypeJspTag {
 
     private MediaEncoder mediaEncoder;
 
@@ -48,7 +48,7 @@ public abstract class AutoEncodingBodyTag extends BodyTagSupport implements Cont
 
     /**
      * <p>
-     * (Re)initializes all fields of this tag to prepare it for its nest use.
+     * (Re)initializes all fields of this tag to prepare it for its next use.
      * This is called during construction and at doEndTag.  Any tags that have
      * attributes that are not required should clear them or set their default
      * values in the init method because tag instances may be reused by some JSP
@@ -63,7 +63,7 @@ public abstract class AutoEncodingBodyTag extends BodyTagSupport implements Cont
     }
 
     /**
-     * @see ContentTypeTag#getContentType()
+     * @see ContentTypeJspTag#getContentType()
      */
     public abstract MediaType getContentType();
 
@@ -71,8 +71,8 @@ public abstract class AutoEncodingBodyTag extends BodyTagSupport implements Cont
     final public int doStartTag() throws JspException {
         try {
             // Find the content type of the nearest parent
-            ContentTypeTag parent = (ContentTypeTag)findAncestorWithClass(this, ContentTypeTag.class);
-            Locale userLocale = pageContext.getRequest().getLocale();
+            ContentTypeJspTag parent = (ContentTypeJspTag)findAncestorWithClass(this, ContentTypeJspTag.class);
+            Locale userLocale = pageContext.getResponse().getLocale();
             MediaType outputContentType = parent!=null ? parent.getContentType() : MediaType.getMediaType(userLocale, pageContext.getResponse().getContentType());
             MediaType myContentType = getContentType();
             mediaEncoder = MediaEncoder.getMediaEncoder(userLocale, myContentType, outputContentType, pageContext.getOut());

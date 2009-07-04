@@ -35,7 +35,7 @@ public class GetStackTracesTag extends AutoEncodingTag {
     public int doAutoEncodingStartTag() throws JspException {
         // Find the Throwable to display
         Object value = PropertyUtils.findObject(pageContext, scope, name, property, true, true);
-        if(!(value instanceof Throwable)) throw new JspException(ApplicationResourcesAccessor.getMessage(pageContext.getRequest().getLocale(), "GetStackTracesTag.notThrowable", value.getClass().getName()));
+        if(!(value instanceof Throwable)) throw new JspException(ApplicationResourcesAccessor.getMessage(pageContext.getResponse().getLocale(), "GetStackTracesTag.notThrowable", value.getClass().getName()));
         Throwable throwable = (Throwable)value;
 
         // Print the stack traces

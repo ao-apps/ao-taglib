@@ -8,34 +8,18 @@ package com.aoindustries.taglib;
 import com.aoindustries.media.MediaException;
 import com.aoindustries.media.MediaType;
 import java.util.Locale;
-import javax.servlet.jsp.JspException;
 
 /**
  * @author  AO Industries, Inc.
  */
-public class ScriptTag extends AutoEncodingBodyTag {
+public class ScriptTag extends AutoEncodingSimpleTag {
 
     private static final long serialVersionUID = 1L;
 
-    private MediaType type;
-
-    @Override
-    protected void init() {
-        type = MediaType.JAVASCRIPT;
-    }
+    private MediaType type = MediaType.JAVASCRIPT;
 
     public MediaType getContentType() {
         return type;
-    }
-
-    @Override
-    public int doAutoEncodingStartTag() throws JspException {
-        return EVAL_BODY_INCLUDE;
-    }
-
-    @Override
-    public int doAutoEncodingEndTag() throws JspException {
-        return EVAL_PAGE;
     }
 
     public String getType() {
