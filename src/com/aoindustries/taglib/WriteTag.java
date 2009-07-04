@@ -9,31 +9,24 @@ import com.aoindustries.media.MediaException;
 import com.aoindustries.media.MediaType;
 import com.aoindustries.util.LocalizedToString;
 import java.io.IOException;
+import java.io.Writer;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Locale;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.JspWriter;
+import javax.servlet.jsp.PageContext;
 
 /**
  * @author  AO Industries, Inc.
  */
-public class WriteTag extends AutoEncodingTag {
+public class WriteTag extends AutoEncodingSimpleTag {
 
     private static final long serialVersionUID = 1L;
 
     private String scope;
     private String name;
     private String property;
-    private MediaType type;
-
-    @Override
-    protected void init() {
-        scope = null;
-        name = null;
-        property = null;
-        type = MediaType.PLAINTEXT;
-    }
+    private MediaType type = MediaType.TEXT;
 
     public MediaType getContentType() {
         return type;
@@ -42,14 +35,15 @@ public class WriteTag extends AutoEncodingTag {
     private static final Class[] toStringParamTypes = new Class[] {Locale.class};
 
     @Override
-    public int doAutoEncodingStartTag() throws JspException {
+    public void invokeAutoEncoding(Writer out) throws JspException, IOException {
         try {
+            PageContext pageContext = (PageContext)getJspContext();
+
             // Find the bean to write
             Object value = PropertyUtils.findObject(pageContext, scope, name, property, true, false);
 
             // Print the value
             if(value!=null) {
-                JspWriter out = pageContext.getOut();
                 // Avoid reflection when possible by using the aocode-public interface
                 if(value instanceof LocalizedToString) {
                     out.write(((LocalizedToString)value).toString(pageContext.getResponse().getLocale()));
@@ -68,19 +62,9 @@ public class WriteTag extends AutoEncodingTag {
                     }
                 }
             }
-
-            // Skip body
-            return SKIP_BODY;
-        } catch(IOException err) {
-            throw new JspException(err);
         } catch(InvocationTargetException err) {
             throw new JspException(err);
         }
-    }
-
-    @Override
-    public int doAutoEncodingEndTag() throws JspException {
-        return EVAL_PAGE;
     }
 
     /**

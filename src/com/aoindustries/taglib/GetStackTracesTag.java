@@ -7,12 +7,15 @@ package com.aoindustries.taglib;
  */
 import com.aoindustries.media.MediaType;
 import com.aoindustries.util.ErrorPrinter;
+import java.io.IOException;
+import java.io.Writer;
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.PageContext;
 
 /**
  * @author  AO Industries, Inc.
  */
-public class GetStackTracesTag extends AutoEncodingTag {
+public class GetStackTracesTag extends AutoEncodingSimpleTag {
 
     private static final long serialVersionUID = 1L;
 
@@ -20,34 +23,20 @@ public class GetStackTracesTag extends AutoEncodingTag {
     private String name;
     private String property;
 
-    @Override
-    protected void init() {
-        scope = null;
-        name = null;
-        property = null;
-    }
-
     public MediaType getContentType() {
-        return MediaType.PLAINTEXT;
+        return MediaType.TEXT;
     }
 
     @Override
-    public int doAutoEncodingStartTag() throws JspException {
+    public void invokeAutoEncoding(Writer out) throws JspException, IOException {
+        PageContext pageContext = (PageContext)getJspContext();
         // Find the Throwable to display
         Object value = PropertyUtils.findObject(pageContext, scope, name, property, true, true);
         if(!(value instanceof Throwable)) throw new JspException(ApplicationResourcesAccessor.getMessage(pageContext.getResponse().getLocale(), "GetStackTracesTag.notThrowable", value.getClass().getName()));
         Throwable throwable = (Throwable)value;
 
         // Print the stack traces
-        ErrorPrinter.printStackTraces(throwable, pageContext.getOut());
-
-        // Skip body
-        return SKIP_BODY;
-    }
-
-    @Override
-    public int doAutoEncodingEndTag() throws JspException {
-        return EVAL_PAGE;
+        ErrorPrinter.printStackTraces(throwable, out);
     }
 
     /**

@@ -139,4 +139,32 @@
     </attribute>
     <example />
   </tag>
+  <tag>
+    <description>
+      The body of this tag contains any arbitary plain text.  In some contexts,
+      such as contained in a JavaScript string, this could be binary transparent.
+      In others contexts it may lose control characters except \t, \r, and \n.
+      End of line conversions may also occur.
+
+      When contained in JavaScript, this will be surrounded by double quotes and
+      will be binary transparent through \uxxxx escape codes.
+
+      The content type of this tag text/plain.
+    </description>
+    <name>text</name>
+    <tag-class>com.aoindustries.taglib.TextTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>
+      The body of this tag contains XHTML 1.0-compliant markup.
+
+      The content type of this tag application/xhtml+xml..
+    </description>
+    <name>text</name>
+    <tag-class>com.aoindustries.taglib.XhtmlTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
 </taglib>
