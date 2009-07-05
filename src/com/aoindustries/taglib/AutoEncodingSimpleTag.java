@@ -19,12 +19,27 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 /**
  * <p>
- * An implementation of <code>SimpleTag</code> that automatically encodes
- * its output correctly given its context.  To determine its context, it finds
- * its nearest ancestore that also implements <code>ContentTypeJspTag</code>.  It
- * then uses the content type of that tag to perform proper encoding.  If it
- * fails to find any such parent, it uses the content type of the
- * <code>HttpServletResponse</code>.
+ * An implementation of <code>SimpleTag</code> that automatically validates its
+ * content and automatically encodes its output correctly given its context.
+ * </p>
+ * <p>
+ * The content validation is primarily focused on making sure the contained data
+ * is properly encoded.  This is to avoid data corruption or intermingling of
+ * data and code.  It does not go through great lengths such as ensuring that
+ * XHTML Strict is valid or JavaScript will run correctly.
+ * </p>
+ * <p>
+ * In additional to checking that its content are well-behaved, it also is
+ * well behaved for its container by properly encoding its output for its
+ * context.  To determine its context, it finds its nearest ancestore that also
+ * implements <code>ContentTypeJspTag</code>.  It then uses the content type
+ * of that tag to perform proper encoding.  If it fails to find any such parent,
+ * it uses the content type of the <code>HttpServletResponse</code>.
+ * </p>
+ * <p>
+ * Finally, if no parent <code>ContentTypeJspTag</code> is found, this will
+ * validate its own output against the content type of the
+ * <code>HttpServletResponse</code> to make sure it is well-behaved.
  * </p>
  *
  * @author  AO Industries, Inc.

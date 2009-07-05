@@ -13,6 +13,7 @@ import java.io.Writer;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Locale;
+import javax.servlet.ServletResponse;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
@@ -26,6 +27,7 @@ public class WriteTag extends AutoEncodingSimpleTag {
     private String scope;
     private String name;
     private String property;
+    private String method = "toString";
     private MediaType type = MediaType.TEXT;
 
     public MediaType getContentType() {
@@ -33,6 +35,7 @@ public class WriteTag extends AutoEncodingSimpleTag {
     }
 
     private static final Class[] toStringParamTypes = new Class[] {Locale.class};
+    private static final Class[] toStringEmptyParamTypes = new Class[0];
 
     @Override
     public void invokeAutoEncoding(Writer out) throws JspException, IOException {
@@ -44,24 +47,46 @@ public class WriteTag extends AutoEncodingSimpleTag {
 
             // Print the value
             if(value!=null) {
+                ServletResponse response = pageContext.getResponse();
+                // Try the localized version
+                boolean done;
                 // Avoid reflection when possible by using the aocode-public interface
-                if(value instanceof LocalizedToString) {
-                    out.write(((LocalizedToString)value).toString(pageContext.getResponse().getLocale()));
+                if("toString".equals(method) && (value instanceof LocalizedToString)) {
+                    out.write(((LocalizedToString)value).toString(response.getLocale()));
+                    done = true;
                 } else {
                     try {
-                        Method method = value.getClass().getMethod("toString", toStringParamTypes);
-                        if(method.getReturnType()==String.class) {
-                            out.write((String)method.invoke(value, pageContext.getResponse().getLocale()));
+                        Method refMethod = value.getClass().getMethod(method, toStringParamTypes);
+                        if(refMethod.getReturnType()==String.class) {
+                            out.write((String)refMethod.invoke(value, response.getLocale()));
+                            done = true;
                         } else {
-                            out.write(value.toString());
+                            done = false;
                         }
                     } catch(NoSuchMethodException err) {
-                        out.write(value.toString());
-                    } catch(IllegalAccessException err) {
-                        out.write(value.toString());
+                        // Fall-through to next method
+                        done = false;
                     }
                 }
+                if(!done) {
+                    // Now the non-localized version
+                    if("toString".equals(method)) out.write(value.toString());
+                    else {
+                        try {
+                            Method refMethod = value.getClass().getMethod(method, toStringEmptyParamTypes);
+                            if(refMethod.getReturnType()==String.class) {
+                                out.write((String)refMethod.invoke(value));
+                                done = true;
+                            }
+                        } catch(NoSuchMethodException err) {
+                            // Fall-through to failure
+                        }
+                    }
+                    if(!done) throw new JspException(ApplicationResourcesAccessor.getMessage(response.getLocale(), "WriteTag.unableToFindMethod", method));
+                }
             }
+        } catch(IllegalAccessException err) {
+            throw new JspException(err);
         } catch(InvocationTargetException err) {
             throw new JspException(err);
         }
@@ -107,6 +132,20 @@ public class WriteTag extends AutoEncodingSimpleTag {
      */
     public void setProperty(String property) {
         this.property = property;
+    }
+
+    /**
+     * @return the method
+     */
+    public String getMethod() {
+        return method;
+    }
+
+    /**
+     * @param method the method to set
+     */
+    public void setMethod(String method) {
+        this.method = method;
     }
 
     public String getType() {
