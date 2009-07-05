@@ -5,9 +5,9 @@ package com.aoindustries.taglib;
  * 7262 Bull Pen Cir, Mobile, Alabama, 36695, U.S.A.
  * All rights reserved.
  */
-import com.aoindustries.media.MediaEncoder;
-import com.aoindustries.media.MediaException;
-import com.aoindustries.media.MediaType;
+import com.aoindustries.encoding.MediaEncoder;
+import com.aoindustries.encoding.MediaException;
+import com.aoindustries.encoding.MediaType;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Locale;
@@ -20,7 +20,8 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 /**
  * <p>
  * An implementation of <code>SimpleTag</code> that automatically validates its
- * content and automatically encodes its output correctly given its context.
+ * content and automatically encodes its output correctly given its context.  It
+ * also validates its own output when used in a non-validating context.
  * </p>
  * <p>
  * The content validation is primarily focused on making sure the contained data
@@ -29,9 +30,9 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
  * XHTML Strict is valid or JavaScript will run correctly.
  * </p>
  * <p>
- * In additional to checking that its content are well-behaved, it also is
+ * In additional to checking that its contents are well-behaved, it also is
  * well behaved for its container by properly encoding its output for its
- * context.  To determine its context, it finds its nearest ancestore that also
+ * context.  To determine its context, it finds its nearest ancestor that also
  * implements <code>ContentTypeJspTag</code>.  It then uses the content type
  * of that tag to perform proper encoding.  If it fails to find any such parent,
  * it uses the content type of the <code>HttpServletResponse</code>.
@@ -54,13 +55,13 @@ public abstract class AutoEncodingSimpleTag extends SimpleTagSupport implements 
     @Override
     final public void doTag() throws JspException, IOException {
         try {
-            // Find our context
-            PageContext pageContext = (PageContext)getJspContext();
             // Find the content type of the nearest parent
+            PageContext pageContext = (PageContext)getJspContext();
             ContentTypeJspTag parent = (ContentTypeJspTag)findAncestorWithClass(this, ContentTypeJspTag.class);
             Locale userLocale = pageContext.getResponse().getLocale();
             MediaType outputContentType = parent!=null ? parent.getContentType() : MediaType.getMediaType(userLocale, pageContext.getResponse().getContentType());
             MediaType myContentType = getContentType();
+
             // Find the encoder
             JspWriter out = pageContext.getOut();
             MediaEncoder mediaEncoder = MediaEncoder.getMediaEncoder(userLocale, myContentType, outputContentType, out);

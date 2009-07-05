@@ -5,7 +5,7 @@ package com.aoindustries.taglib;
  * 7262 Bull Pen Cir, Mobile, Alabama, 36695, U.S.A.
  * All rights reserved.
  */
-import com.aoindustries.media.MediaType;
+import com.aoindustries.encoding.MediaType;
 import com.aoindustries.util.ErrorPrinter;
 import java.io.IOException;
 import java.io.Writer;
