@@ -20,7 +20,7 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
-public class WriteTag extends AutoEncodingSimpleTag {
+public class WriteTag extends AutoEncodingFilteredTag {
 
     private static final long serialVersionUID = 1L;
 
@@ -70,8 +70,9 @@ public class WriteTag extends AutoEncodingSimpleTag {
                 }
                 if(!done) {
                     // Now the non-localized version
-                    if("toString".equals(method)) out.write(value.toString());
-                    else {
+                    if("toString".equals(method)) {
+                        out.write(value.toString());
+                    } else {
                         try {
                             Method refMethod = value.getClass().getMethod(method, toStringEmptyParamTypes);
                             if(refMethod.getReturnType()==String.class) {
@@ -81,8 +82,8 @@ public class WriteTag extends AutoEncodingSimpleTag {
                         } catch(NoSuchMethodException err) {
                             // Fall-through to failure
                         }
+                        if(!done) throw new JspException(ApplicationResourcesAccessor.getMessage(response.getLocale(), "WriteTag.unableToFindMethod", method));
                     }
-                    if(!done) throw new JspException(ApplicationResourcesAccessor.getMessage(response.getLocale(), "WriteTag.unableToFindMethod", method));
                 }
             }
         } catch(IllegalAccessException err) {

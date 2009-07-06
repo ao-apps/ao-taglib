@@ -12,7 +12,7 @@ import java.util.Locale;
 /**
  * @author  AO Industries, Inc.
  */
-public class ScriptTag extends AutoEncodingSimpleTag {
+public class ScriptTag extends AutoEncodingFilteredTag {
 
     private static final long serialVersionUID = 1L;
 

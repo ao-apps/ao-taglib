@@ -15,7 +15,7 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
-public class GetStackTracesTag extends AutoEncodingSimpleTag {
+public class GetStackTracesTag extends AutoEncodingFilteredTag {
 
     private static final long serialVersionUID = 1L;
 

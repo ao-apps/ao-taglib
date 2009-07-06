@@ -5,6 +5,7 @@ package com.aoindustries.taglib;
  * 7262 Bull Pen Cir, Mobile, Alabama, 36695, U.S.A.
  * All rights reserved.
  */
+import com.aoindustries.encoding.ValidMediaInput;
 import com.aoindustries.encoding.MediaType;
 import javax.servlet.jsp.tagext.JspTag;
 
@@ -19,7 +20,7 @@ import javax.servlet.jsp.tagext.JspTag;
  *
  * @author  AO Industries, Inc.
  */
-public interface ContentTypeJspTag extends JspTag {
+public interface ContentTypeJspTag extends JspTag, ValidMediaInput {
 
     /**
      * Gets the type of data that is contained by this tag.

@@ -10,7 +10,7 @@ import com.aoindustries.encoding.MediaType;
 /**
  * @author  AO Industries, Inc.
  */
-public class TextTag extends AutoEncodingSimpleTag {
+public class TextTag extends AutoEncodingFilteredTag {
 
     private static final long serialVersionUID = 1L;
 

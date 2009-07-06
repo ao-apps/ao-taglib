@@ -10,11 +10,11 @@ import com.aoindustries.encoding.MediaType;
 /**
  * @author  AO Industries, Inc.
  */
-public class XhtmlTag extends AutoEncodingFilteredTag {
+public class UrlTag extends AutoEncodingFilteredTag {
 
     private static final long serialVersionUID = 1L;
 
     public MediaType getContentType() {
-        return MediaType.XHTML;
+        return MediaType.URL;
     }
 }

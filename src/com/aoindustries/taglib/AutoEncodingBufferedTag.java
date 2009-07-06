@@ -1,0 +1,142 @@
+package com.aoindustries.taglib;
+
+/*
+ * Copyright 2009 by AO Industries, Inc.,
+ * 7262 Bull Pen Cir, Mobile, Alabama, 36695, U.S.A.
+ * All rights reserved.
+ */
+import com.aoindustries.encoding.MediaEncoder;
+import com.aoindustries.encoding.MediaException;
+import com.aoindustries.encoding.ValidMediaInput;
+import com.aoindustries.encoding.MediaType;
+import com.aoindustries.encoding.MediaValidator;
+import com.aoindustries.io.StringBuilderWriter;
+import java.io.IOException;
+import java.io.Writer;
+import java.util.Locale;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.PageContext;
+import javax.servlet.jsp.tagext.JspFragment;
+import javax.servlet.jsp.tagext.SimpleTagSupport;
+
+/**
+ * <p>
+ * The exhibits all of the behavior of <code>AutoEncodingFilteredTag</code> with
+ * the only exception being that it buffers its content instead of using filters.
+ * This allows the tag to capture its body.  Character validation is performed
+ * as the data goes into the buffer to ensure the captured data is correct for
+ * its content type.
+ * </p>
+ * <p>
+ * The tag also has the addition of a separate output type.  Thus, we have three
+ * types involved:
+ * <ol>
+ * <li>contentType - The characters are validated to this type as they go into the buffer.</li>
+ * <li>outputType - Our output characters are validated to this type as they are written.</li>
+ * <li>containerContentType - Our output characters are encoded to this type as they are written.</li>
+ * </ol>
+ * </p>
+ *
+ * @author  AO Industries, Inc.
+ */
+public abstract class AutoEncodingBufferedTag extends SimpleTagSupport implements ContentTypeJspTag {
+
+    /**
+     * @see ContentTypeJspTag#getContentType()
+     */
+    public abstract MediaType getContentType();
+
+    /**
+     * Gets the output type of this tag.  This is used to determine the correct
+     * encoder.
+     */
+    public abstract MediaType getOutputType();
+
+    private ValidMediaInput inputValidator;
+
+    /**
+     * The validator is stored to allow nested tags to check if their output
+     * is already being filtered on this tags input.  When this occurs they
+     * skip the validation of their own output.
+     */
+    public boolean isValidatingMediaInputType(MediaType inputType) {
+        return inputValidator!=null && inputValidator.isValidatingMediaInputType(inputType);
+    }
+
+    /**
+     * Gets the initial buffer size.  Defaults to 32 characters (the same
+     * default as <code>CharArrayBuffer</code>.
+     */
+    public int getInitialBufferSize() {
+        return 32;
+    }
+
+    @Override
+    final public void doTag() throws JspException, IOException {
+        try {
+            PageContext pageContext = (PageContext)getJspContext();
+            HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
+            Writer out = pageContext.getOut();
+            ContentTypeJspTag parent = (ContentTypeJspTag)findAncestorWithClass(this, ContentTypeJspTag.class);
+            Locale userLocale = response.getLocale();
+            MediaType myContentType = getContentType();
+            MediaType myOutputType = getOutputType();
+
+            // Determine the container's content type and see if our output is already validated
+            MediaType containerContentType;
+            if(parent!=null) {
+                // Use the output type of the parent
+                containerContentType = parent.getContentType();
+                // Make sure the output is compatibly validated.  It is a bug in the parent to not validate its input consistent with its content type
+                if(!parent.isValidatingMediaInputType(containerContentType)) {
+                    throw new JspException(
+                        ApplicationResourcesAccessor.getMessage(
+                            userLocale,
+                            "AutoEncodingFilterTag.parentIncompatibleValidation",
+                            parent.getClass().getName(),
+                            containerContentType.getMediaType()
+                        )
+                    );
+                }
+            } else {
+                // Use the content type of the response
+                containerContentType = MediaType.getMediaType(userLocale, response.getContentType());
+            }
+
+            // Capture the body output while validating
+            StringBuilderWriter capturedBody = new StringBuilderWriter(getInitialBufferSize());
+            MediaValidator captureValidator = MediaValidator.getMediaValidator(userLocale, myContentType, capturedBody);
+            inputValidator = captureValidator;
+            JspFragment body = getJspBody();
+            if(body!=null) {
+                body.invoke(captureValidator);
+                captureValidator.flush();
+            }
+
+            // Find the encoder
+            MediaEncoder mediaEncoder = MediaEncoder.getMediaEncoder(userLocale, response, myOutputType, containerContentType, out);
+            if(mediaEncoder!=null) {
+                // Encode the content.  The encoder is also a redundant validator for our input and guarantees valid output for our parent.
+                mediaEncoder.writePrefix();
+                try {
+                    doTag(capturedBody, mediaEncoder);
+                } finally {
+                    mediaEncoder.writeSuffix();
+                }
+            } else {
+                // Not using an encoder, validate our own output.
+                MediaValidator validator = MediaValidator.getMediaValidator(userLocale, myOutputType, out);
+                doTag(capturedBody, validator);
+            }
+        } catch(MediaException err) {
+            throw new JspException(err);
+        }
+    }
+
+    /**
+     * Once the data is captured, this is called.
+     * type, this version of invoke is called.
+     */
+    abstract protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException;
+}
