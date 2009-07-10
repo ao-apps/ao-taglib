@@ -30,8 +30,10 @@ public class PropertyUtils {
      *                   <li><code>"session"</code></li>
      *                   <li><code>"application"</code></li>
      *                 </ul>
-     * @param isRequired when <code>true</code>, this method will not return <code>null</code>, instead it will
-     *                    throw a <code>JspException</code> with an appropriate localized message.
+     * @param beanRequired when <code>true</code>, this method will not return <code>null</code>, instead it will
+     *                     throw a <code>JspException</code> with an appropriate localized message.
+     * @param valueRequired when <code>true</code>, this method will not return <code>null</code>, instead it will
+     *                      throw a <code>JspException</code> with an appropriate localized message.
      *
      * @return  the resolved <code>Object</code> or <code>null</code> if not found.
      */
