@@ -5,8 +5,6 @@ package com.aoindustries.taglib;
  * 7262 Bull Pen Cir, Mobile, Alabama, 36695, U.S.A.
  * All rights reserved.
  */
-import com.aoindustries.encoding.MediaException;
-import com.aoindustries.encoding.MediaType;
 import java.util.Locale;
 import javax.servlet.jsp.tagext.TagData;
 import javax.servlet.jsp.tagext.TagExtraInfo;
@@ -15,7 +13,7 @@ import javax.servlet.jsp.tagext.ValidationMessage;
 /**
  * @author  AO Industries, Inc.
  */
-public class ScriptTagTEI extends TagExtraInfo {
+public class InputTagTEI extends TagExtraInfo {
 
     @Override
     public ValidationMessage[] validate(TagData data) {
@@ -25,17 +23,9 @@ public class ScriptTagTEI extends TagExtraInfo {
             && o != TagData.REQUEST_TIME_VALUE
         ) {
             String type = (String)o;
-            try {
-                Locale locale = Locale.getDefault();
-                MediaType mediaType = MediaType.getMediaType(locale, type);
-                if(mediaType!=MediaType.JAVASCRIPT) {
-                    return new ValidationMessage[] {
-                        new ValidationMessage(data.getId(), ApplicationResourcesAccessor.getMessage(locale, "ScriptTag.unsupportedMediaType", type))
-                    };
-                }
-            } catch(MediaException err) {
+            if(!InputTag.isValidType(type)) {
                 return new ValidationMessage[] {
-                    new ValidationMessage(data.getId(), err.getMessage())
+                    new ValidationMessage(data.getId(), ApplicationResourcesAccessor.getMessage(Locale.getDefault(), "InputTag.type.invalid", type))
                 };
             }
         }

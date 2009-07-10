@@ -49,7 +49,8 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport implement
 
     /**
      * Gets the output type of this tag.  This is used to determine the correct
-     * encoder.
+     * encoder.  If the tag never has any output this should return <code>null</code>.
+     * When <code>null</code> is returned, any output will result in an error.
      */
     public abstract MediaType getOutputType();
 
@@ -72,6 +73,58 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport implement
         return 32;
     }
 
+    private static final Writer failOnWriteWriter = new Writer() {
+        @Override
+        public void write(int c) throws IOException {
+            throw new IOException(ApplicationResourcesAccessor.getMessage(Locale.getDefault(), "AutoEncodingBufferedTag.noOutputAllowed"));
+        }
+
+        @Override
+        public void write(char cbuf[]) throws IOException {
+            throw new IOException(ApplicationResourcesAccessor.getMessage(Locale.getDefault(), "AutoEncodingBufferedTag.noOutputAllowed"));
+        }
+
+        @Override
+        public void write(char[] cbuf, int off, int len) throws IOException {
+            throw new IOException(ApplicationResourcesAccessor.getMessage(Locale.getDefault(), "AutoEncodingBufferedTag.noOutputAllowed"));
+        }
+
+        @Override
+        public void write(String str) throws IOException {
+            throw new IOException(ApplicationResourcesAccessor.getMessage(Locale.getDefault(), "AutoEncodingBufferedTag.noOutputAllowed"));
+        }
+
+        @Override
+        public void write(String str, int off, int len) throws IOException {
+            throw new IOException(ApplicationResourcesAccessor.getMessage(Locale.getDefault(), "AutoEncodingBufferedTag.noOutputAllowed"));
+        }
+
+        @Override
+        public Writer append(CharSequence csq) throws IOException {
+            throw new IOException(ApplicationResourcesAccessor.getMessage(Locale.getDefault(), "AutoEncodingBufferedTag.noOutputAllowed"));
+        }
+
+        @Override
+        public Writer append(CharSequence csq, int start, int end) throws IOException {
+            throw new IOException(ApplicationResourcesAccessor.getMessage(Locale.getDefault(), "AutoEncodingBufferedTag.noOutputAllowed"));
+        }
+
+        @Override
+        public Writer append(char c) throws IOException {
+            throw new IOException(ApplicationResourcesAccessor.getMessage(Locale.getDefault(), "AutoEncodingBufferedTag.noOutputAllowed"));
+        }
+
+        @Override
+        public void flush() {
+            // Do nothing
+        }
+
+        @Override
+        public void close() {
+            // Do nothing
+        }
+    };
+
     @Override
     final public void doTag() throws JspException, IOException {
         try {
@@ -81,7 +134,6 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport implement
             ContentTypeJspTag parent = (ContentTypeJspTag)findAncestorWithClass(this, ContentTypeJspTag.class);
             Locale userLocale = response.getLocale();
             MediaType myContentType = getContentType();
-            MediaType myOutputType = getOutputType();
 
             // Determine the container's content type and see if our output is already validated
             MediaType containerContentType;
@@ -114,20 +166,26 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport implement
                 captureValidator.flush();
             }
 
-            // Find the encoder
-            MediaEncoder mediaEncoder = MediaEncoder.getMediaEncoder(userLocale, response, myOutputType, containerContentType, out);
-            if(mediaEncoder!=null) {
-                // Encode the content.  The encoder is also a redundant validator for our input and guarantees valid output for our parent.
-                mediaEncoder.writePrefix();
-                try {
-                    doTag(capturedBody, mediaEncoder);
-                } finally {
-                    mediaEncoder.writeSuffix();
-                }
+            MediaType myOutputType = getOutputType();
+            if(myOutputType==null) {
+                // No output, error if anything written.
+                doTag(capturedBody, failOnWriteWriter);
             } else {
-                // Not using an encoder, validate our own output.
-                MediaValidator validator = MediaValidator.getMediaValidator(userLocale, myOutputType, out);
-                doTag(capturedBody, validator);
+                // Find the encoder
+                MediaEncoder mediaEncoder = MediaEncoder.getMediaEncoder(userLocale, response, myOutputType, containerContentType, out);
+                if(mediaEncoder!=null) {
+                    // Encode the content.  The encoder is also a redundant validator for our input and guarantees valid output for our parent.
+                    mediaEncoder.writePrefix();
+                    try {
+                        doTag(capturedBody, mediaEncoder);
+                    } finally {
+                        mediaEncoder.writeSuffix();
+                    }
+                } else {
+                    // Not using an encoder, validate our own output.
+                    MediaValidator validator = MediaValidator.getMediaValidator(userLocale, myOutputType, out);
+                    doTag(capturedBody, validator);
+                }
             }
         } catch(MediaException err) {
             throw new JspException(err);
