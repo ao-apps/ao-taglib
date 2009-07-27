@@ -100,6 +100,7 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport implement
             // Find the encoder
             MediaEncoder mediaEncoder = MediaEncoder.getMediaEncoder(userLocale, response, myContentType, containerContentType, out);
             if(mediaEncoder!=null) {
+                setMediaEncoderOptions(mediaEncoder);
                 // Encode the content.  The encoder is also the validator for our input and guarantees valid output for our parent.
                 mediaEncoder.writePrefix();
                 try {
@@ -117,6 +118,13 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport implement
         } catch(MediaException err) {
             throw new JspException(err);
         }
+    }
+
+    /**
+     * Sets the media encoder options.  This is how subclass tag attributes
+     * can effect the encoding.
+     */
+    protected void setMediaEncoderOptions(MediaEncoder mediaEncoder) {
     }
 
     /**

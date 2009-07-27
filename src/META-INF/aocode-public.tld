@@ -194,6 +194,20 @@
     <name>text</name>
     <tag-class>com.aoindustries.taglib.TextTag</tag-class>
     <body-content>scriptless</body-content>
+    <attribute>
+      <description>When true, newlines are converted to &lt;br /&gt;</description>
+      <name>makeBr</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>boolean</type>
+    </attribute>
+    <attribute>
+      <description>When true, consecutive spaces are converted to &amp;#160;</description>
+      <name>makeNbsp</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>boolean</type>
+    </attribute>
     <example />
   </tag>
   <tag>
