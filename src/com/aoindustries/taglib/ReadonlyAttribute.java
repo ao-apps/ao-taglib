@@ -23,13 +23,13 @@
 package com.aoindustries.taglib;
 
 /**
- * Something with an onclick attribute.
+ * Something with a readonly attribute.
  *
  * @author  AO Industries, Inc.
  */
-public interface OnclickAttribute {
+public interface ReadonlyAttribute {
 
-    String getOnclick();
+    boolean isReadonly();
 
-    void setOnclick(String onclick);
+    void setReadonly(boolean readonly);
 }

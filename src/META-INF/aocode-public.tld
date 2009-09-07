@@ -310,6 +310,25 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
     </attribute>
+    <attribute>
+      <description>The size of the input element.  A nested size tag will override this value.</description>
+      <name>size</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>
+          The readonly attribute.  Accepts values of "true" or "false".
+          A non-empty nested readonly tag will override this value.
+          If readonly is "true", will add the attribute as <code>readonly="readonly"</code>,
+          otherwise the attribute is not added.
+      </description>
+      <name>readonly</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>boolean</type>
+    </attribute>
     <example />
   </tag>
   <tag>
@@ -323,6 +342,24 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <description>Provides an onclick script to its OnclickAttribute parent tag.</description>
     <name>onclick</name>
     <tag-class>com.aoindustries.taglib.OnclickTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides a size attribute to its SizeAttribute parent tag.</description>
+    <name>size</name>
+    <tag-class>com.aoindustries.taglib.SizeTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>
+        Provides a readonly attribute to its ReadonlyAttribute parent tag.
+        The body, after trimming, must contain either "true", "false", or be empty.
+        If empty, the readonly attribute of the tag is not overridden.
+    </description>
+    <name>readonly</name>
+    <tag-class>com.aoindustries.taglib.ReadonlyTag</tag-class>
     <body-content>scriptless</body-content>
     <example />
   </tag>

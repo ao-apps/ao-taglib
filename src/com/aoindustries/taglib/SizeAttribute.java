@@ -23,13 +23,13 @@
 package com.aoindustries.taglib;
 
 /**
- * Something with an onclick attribute.
+ * Something with a size attribute.
  *
  * @author  AO Industries, Inc.
  */
-public interface OnclickAttribute {
+public interface SizeAttribute {
 
-    String getOnclick();
+    String getSize();
 
-    void setOnclick(String onclick);
+    void setSize(String size);
 }

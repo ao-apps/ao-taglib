@@ -36,7 +36,7 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
-public class InputTag extends AutoEncodingBufferedTag implements ValueAttribute, NameAttribute, OnclickAttribute {
+public class InputTag extends AutoEncodingBufferedTag implements NameAttribute, ValueAttribute, OnclickAttribute, SizeAttribute, ReadonlyAttribute {
 
     public static boolean isValidType(String type) {
         return
@@ -57,6 +57,8 @@ public class InputTag extends AutoEncodingBufferedTag implements ValueAttribute,
     private String name;
     private String value;
     private String onclick;
+    private String size;
+    private boolean readonly;
 
     public MediaType getContentType() {
         return MediaType.TEXT;
@@ -99,6 +101,22 @@ public class InputTag extends AutoEncodingBufferedTag implements ValueAttribute,
         this.onclick = onclick;
     }
 
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public boolean isReadonly() {
+        return readonly;
+    }
+
+    public void setReadonly(boolean readonly) {
+        this.readonly = readonly;
+    }
+
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
         PageContext pageContext = (PageContext)getJspContext();
         HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
@@ -121,6 +139,12 @@ public class InputTag extends AutoEncodingBufferedTag implements ValueAttribute,
             JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute(onclick, out);
             out.write('"');
         }
+        if(size!=null) {
+            out.write(" size=\"");
+            JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute(size, out);
+            out.write('"');
+        }
+        if(readonly) out.write(" readonly=\"readonly\"");
         out.write(" />");
     }
 }
