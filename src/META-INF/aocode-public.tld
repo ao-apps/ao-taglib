@@ -246,6 +246,17 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
   </tag>
   <tag>
     <description>
+      The body of this tag contains well-formed XHTML 1.0-compliant attribute.
+
+      The content type of this tag is application/xhtml+xml+attribute.
+    </description>
+    <name>xhtmlAttribute</name>
+    <tag-class>com.aoindustries.taglib.XhtmlAttributeTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>
       The body of this tag contains a Uniform Resource Identifier (URI or URL).
       The URL should be properly encoded and contain only valid characters.
       It should not be escaped for (X)HTML, meaning that parameter separators
