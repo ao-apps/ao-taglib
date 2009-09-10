@@ -329,6 +329,18 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <rtexprvalue>true</rtexprvalue>
       <type>boolean</type>
     </attribute>
+    <attribute>
+      <description>
+          The disabled attribute.  Accepts values of "true" or "false".
+          A non-empty nested disabled tag will override this value.
+          If disabled is "true", will add the attribute as <code>disabled="disabled"</code>,
+          otherwise the attribute is not added.
+      </description>
+      <name>disabled</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>boolean</type>
+    </attribute>
     <example />
   </tag>
   <tag>
@@ -360,6 +372,17 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     </description>
     <name>readonly</name>
     <tag-class>com.aoindustries.taglib.ReadonlyTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>
+        Provides a disabled attribute to its DisabledAttribute parent tag.
+        The body, after trimming, must contain either "true", "false", or be empty.
+        If empty, the disabled attribute of the tag is not overridden.
+    </description>
+    <name>disabled</name>
+    <tag-class>com.aoindustries.taglib.DisabledTag</tag-class>
     <body-content>scriptless</body-content>
     <example />
   </tag>

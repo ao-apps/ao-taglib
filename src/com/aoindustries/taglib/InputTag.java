@@ -36,7 +36,7 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
-public class InputTag extends AutoEncodingBufferedTag implements NameAttribute, ValueAttribute, OnclickAttribute, SizeAttribute, ReadonlyAttribute {
+public class InputTag extends AutoEncodingBufferedTag implements NameAttribute, ValueAttribute, OnclickAttribute, SizeAttribute, ReadonlyAttribute, DisabledAttribute {
 
     public static boolean isValidType(String type) {
         return
@@ -59,6 +59,7 @@ public class InputTag extends AutoEncodingBufferedTag implements NameAttribute, 
     private String onclick;
     private String size;
     private boolean readonly;
+    private boolean disabled;
 
     public MediaType getContentType() {
         return MediaType.TEXT;
@@ -117,6 +118,14 @@ public class InputTag extends AutoEncodingBufferedTag implements NameAttribute, 
         this.readonly = readonly;
     }
 
+    public boolean isDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
+    }
+
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
         PageContext pageContext = (PageContext)getJspContext();
         HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
@@ -145,6 +154,7 @@ public class InputTag extends AutoEncodingBufferedTag implements NameAttribute, 
             out.write('"');
         }
         if(readonly) out.write(" readonly=\"readonly\"");
+        if(disabled) out.write(" disabled=\"disabled\"");
         out.write(" />");
     }
 }
