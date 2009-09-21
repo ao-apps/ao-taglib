@@ -361,7 +361,8 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <body-content>scriptless</body-content>
     <attribute>
       <description>
-          The target for the link.
+          The href for the link.
+          If starts with a /, the context path will be prepended to the path.
           Session state URL rewriting is performed as needed.
           URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
           any character in the set { ':', '/', ';', '#' }
@@ -404,6 +405,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <attribute>
       <description>
           The src for the image.
+          If starts with a /, the context path will be prepended to the path.
           Session state URL rewriting is performed as needed.
           URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
           any character in the set { ':', '/', ';', '#' }
@@ -431,6 +433,13 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <attribute>
       <description>The alt text for the image.  A nested alt tag will override this value.</description>
       <name>alt</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>The CSS class for the img.  A nested class tag will override this value.</description>
+      <name>class</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>

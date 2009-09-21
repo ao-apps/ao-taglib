@@ -28,6 +28,7 @@ import com.aoindustries.io.StringBuilderWriter;
 import com.aoindustries.util.EncodingUtils;
 import java.io.IOException;
 import java.io.Writer;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
@@ -79,6 +80,10 @@ public class ATag extends AutoEncodingBufferedTag implements HrefAttribute, Clas
         if(href!=null) {
             HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
             out.write(" href=\"");
+            if(href.startsWith("/")) {
+                String contextPath = ((HttpServletRequest)pageContext.getRequest()).getContextPath();
+                if(contextPath.length()>0) href = contextPath+href;
+            }
             out.write(
                 response.encodeURL(
                     EncodingUtils.encodeXmlAttribute(

@@ -27,6 +27,7 @@ import com.aoindustries.io.StringBuilderWriter;
 import com.aoindustries.util.EncodingUtils;
 import java.io.IOException;
 import java.io.Writer;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
@@ -34,12 +35,13 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
-public class ImgTag extends AutoEncodingBufferedTag implements SrcAttribute, WidthAttribute, HeightAttribute, AltAttribute {
+public class ImgTag extends AutoEncodingBufferedTag implements SrcAttribute, WidthAttribute, HeightAttribute, AltAttribute, ClassAttribute {
 
     private String src;
     private String width;
     private String height;
     private String alt;
+    private String clazz;
 
     public MediaType getContentType() {
         return MediaType.TEXT;
@@ -81,11 +83,23 @@ public class ImgTag extends AutoEncodingBufferedTag implements SrcAttribute, Wid
         this.alt = alt;
     }
 
+    public String getClazz() {
+        return clazz;
+    }
+
+    public void setClazz(String clazz) {
+        this.clazz = clazz;
+    }
+
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
         PageContext pageContext = (PageContext)getJspContext();
         if(src==null) src = capturedBody.toString().trim();
         HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
         out.write("<img src=\"");
+        if(src.startsWith("/")) {
+            String contextPath = ((HttpServletRequest)pageContext.getRequest()).getContextPath();
+            if(contextPath.length()>0) src = contextPath+src;
+        }
         out.write(
             response.encodeURL(
                 EncodingUtils.encodeXmlAttribute(
@@ -107,6 +121,11 @@ public class ImgTag extends AutoEncodingBufferedTag implements SrcAttribute, Wid
         if(alt!=null) {
             out.write(" alt=\"");
             EncodingUtils.encodeXmlAttribute(alt, out);
+            out.write('"');
+        }
+        if(clazz!=null) {
+            out.write(" class=\"");
+            EncodingUtils.encodeXmlAttribute(clazz, out);
             out.write('"');
         }
         out.write(" />");
