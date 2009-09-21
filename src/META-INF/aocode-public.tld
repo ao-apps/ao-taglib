@@ -355,15 +355,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
-    <description>
-      Renders an a tag.  The value may be provided in one of three ways, in
-      precedence order:
-      &lt;ol&gt;
-        &lt;li&gt;Direct child &lt;value&gt; tag.&lt;/li&gt;
-        &lt;li&gt;As the value attribute&lt;/li&gt;
-        &lt;li&gt;Output of tag body, trimmed.&lt;/li&gt;
-      &lt;/ol&gt;
-    </description>
+    <description>Renders an a tag.</description>
     <name>a</name>
     <tag-class>com.aoindustries.taglib.ATag</tag-class>
     <body-content>scriptless</body-content>
@@ -390,6 +382,55 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <attribute>
       <description>A JavaScript onclick handler.  A nested onclick tag will override this value.</description>
       <name>onclick</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <example />
+  </tag>
+  <tag>
+    <description>
+        Renders an img tag.
+        The src may be provided in one of three ways, in precedence order:
+        &lt;ol&gt;
+            &lt;li&gt;Direct child &lt;src&gt; tag.&lt;/li&gt;
+            &lt;li&gt;As the src attribute&lt;/li&gt;
+            &lt;li&gt;Output of tag body, trimmed.&lt;/li&gt;
+        &lt;/ol&gt;
+    </description>
+    <name>img</name>
+    <tag-class>com.aoindustries.taglib.ImgTag</tag-class>
+    <body-content>scriptless</body-content>
+    <attribute>
+      <description>
+          The src for the image.
+          Session state URL rewriting is performed as needed.
+          URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
+          any character in the set { ':', '/', ';', '#' }
+          A nested src tag will override this value.
+      </description>
+      <name>src</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>The width for the image.  A nested width tag will override this value.</description>
+      <name>width</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>The height for the image.  A nested height tag will override this value.</description>
+      <name>height</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>The alt text for the image.  A nested alt tag will override this value.</description>
+      <name>alt</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
@@ -435,6 +476,34 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <description>Provides a size attribute to its SizeAttribute parent tag.</description>
     <name>size</name>
     <tag-class>com.aoindustries.taglib.SizeTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides an alt attribute to its AltAttribute parent tag.</description>
+    <name>alt</name>
+    <tag-class>com.aoindustries.taglib.AltTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides a height attribute to its HeightAttribute parent tag.</description>
+    <name>height</name>
+    <tag-class>com.aoindustries.taglib.HeightTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides a src attribute to its SrcAttribute parent tag.</description>
+    <name>src</name>
+    <tag-class>com.aoindustries.taglib.SrcTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides a width attribute to its WidthAttribute parent tag.</description>
+    <name>width</name>
+    <tag-class>com.aoindustries.taglib.WidthTag</tag-class>
     <body-content>scriptless</body-content>
     <example />
   </tag>
