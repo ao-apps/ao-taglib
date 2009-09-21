@@ -35,13 +35,14 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
-public class ImgTag extends AutoEncodingBufferedTag implements SrcAttribute, WidthAttribute, HeightAttribute, AltAttribute, ClassAttribute {
+public class ImgTag extends AutoEncodingBufferedTag implements SrcAttribute, WidthAttribute, HeightAttribute, AltAttribute, ClassAttribute, StyleAttribute {
 
     private String src;
     private String width;
     private String height;
     private String alt;
     private String clazz;
+    private String style;
 
     public MediaType getContentType() {
         return MediaType.TEXT;
@@ -91,10 +92,21 @@ public class ImgTag extends AutoEncodingBufferedTag implements SrcAttribute, Wid
         this.clazz = clazz;
     }
 
+    public String getStyle() {
+        return style;
+    }
+
+    public void setStyle(String style) {
+        this.style = style;
+    }
+
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
         PageContext pageContext = (PageContext)getJspContext();
         if(src==null) src = capturedBody.toString().trim();
         HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
+        if(width==null) throw new JspException(ApplicationResourcesAccessor.getMessage(response.getLocale(), "ImgTag.width.required"));
+        if(height==null) throw new JspException(ApplicationResourcesAccessor.getMessage(response.getLocale(), "ImgTag.height.required"));
+        if(alt==null) throw new JspException(ApplicationResourcesAccessor.getMessage(response.getLocale(), "ImgTag.alt.required"));
         out.write("<img src=\"");
         if(src.startsWith("/")) {
             String contextPath = ((HttpServletRequest)pageContext.getRequest()).getContextPath();
@@ -107,25 +119,21 @@ public class ImgTag extends AutoEncodingBufferedTag implements SrcAttribute, Wid
                 )
             )
         );
+        out.write("\" width=\"");
+        EncodingUtils.encodeXmlAttribute(width, out);
+        out.write("\" height=\"");
+        EncodingUtils.encodeXmlAttribute(height, out);
+        out.write("\" alt=\"");
+        EncodingUtils.encodeXmlAttribute(alt, out);
         out.write('"');
-        if(width!=null) {
-            out.write(" width=\"");
-            EncodingUtils.encodeXmlAttribute(width, out);
-            out.write('"');
-        }
-        if(height!=null) {
-            out.write(" height=\"");
-            EncodingUtils.encodeXmlAttribute(height, out);
-            out.write('"');
-        }
-        if(alt!=null) {
-            out.write(" alt=\"");
-            EncodingUtils.encodeXmlAttribute(alt, out);
-            out.write('"');
-        }
         if(clazz!=null) {
             out.write(" class=\"");
             EncodingUtils.encodeXmlAttribute(clazz, out);
+            out.write('"');
+        }
+        if(style!=null) {
+            out.write(" style=\"");
+            EncodingUtils.encodeXmlAttribute(style, out);
             out.write('"');
         }
         out.write(" />");

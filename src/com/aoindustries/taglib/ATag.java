@@ -36,10 +36,11 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
-public class ATag extends AutoEncodingBufferedTag implements HrefAttribute, ClassAttribute, OnclickAttribute {
+public class ATag extends AutoEncodingBufferedTag implements HrefAttribute, ClassAttribute, StyleAttribute, OnclickAttribute {
 
     private String href;
     private String clazz;
+    private String style;
     private String onclick;
 
     public MediaType getContentType() {
@@ -64,6 +65,14 @@ public class ATag extends AutoEncodingBufferedTag implements HrefAttribute, Clas
 
     public void setClazz(String clazz) {
         this.clazz = clazz;
+    }
+
+    public String getStyle() {
+        return style;
+    }
+
+    public void setStyle(String style) {
+        this.style = style;
     }
 
     public String getOnclick() {
@@ -96,6 +105,11 @@ public class ATag extends AutoEncodingBufferedTag implements HrefAttribute, Clas
         if(clazz!=null) {
             out.write(" class=\"");
             EncodingUtils.encodeXmlAttribute(clazz, out);
+            out.write('"');
+        }
+        if(style!=null) {
+            out.write(" style=\"");
+            EncodingUtils.encodeXmlAttribute(style, out);
             out.write('"');
         }
         if(onclick!=null) {

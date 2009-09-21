@@ -381,6 +381,13 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <type>java.lang.String</type>
     </attribute>
     <attribute>
+      <description>The CSS style for the link.  A nested style tag will override this value.</description>
+      <name>style</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
       <description>A JavaScript onclick handler.  A nested onclick tag will override this value.</description>
       <name>onclick</name>
       <required>false</required>
@@ -398,6 +405,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
             &lt;li&gt;As the src attribute&lt;/li&gt;
             &lt;li&gt;Output of tag body, trimmed.&lt;/li&gt;
         &lt;/ol&gt;
+        Also, the width, height, and alt values are required either as attributes or nested tags.
     </description>
     <name>img</name>
     <tag-class>com.aoindustries.taglib.ImgTag</tag-class>
@@ -444,6 +452,13 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
     </attribute>
+    <attribute>
+      <description>The CSS style for the img.  A nested style tag will override this value.</description>
+      <name>style</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
     <example />
   </tag>
   <tag>
@@ -478,6 +493,13 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <description>Provides a class to its ClassAttribute parent tag.</description>
     <name>class</name>
     <tag-class>com.aoindustries.taglib.ClassTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides a style to its StyleAttribute parent tag.</description>
+    <name>style</name>
+    <tag-class>com.aoindustries.taglib.StyleTag</tag-class>
     <body-content>scriptless</body-content>
     <example />
   </tag>

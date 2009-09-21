@@ -45,6 +45,7 @@ public class ATagBeanInfo extends SimpleBeanInfo {
                 props = new PropertyDescriptor[] {
                     new PropertyDescriptor("href", ATag.class),
                     new PropertyDescriptor("class", ATag.class, "getClazz", "setClazz"),
+                    new PropertyDescriptor("style", ATag.class),
                     new PropertyDescriptor("onclick", ATag.class)
                 };
                 properties = props;
