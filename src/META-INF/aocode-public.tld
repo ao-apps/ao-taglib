@@ -298,7 +298,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <type>java.lang.String</type>
     </attribute>
     <attribute>
-      <description>The name of input tag.</description>
+      <description>The name of input tag.  A nested name tag will override this value.</description>
       <name>name</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
@@ -355,6 +355,48 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
+    <description>
+      Renders an a tag.  The value may be provided in one of three ways, in
+      precedence order:
+      &lt;ol&gt;
+        &lt;li&gt;Direct child &lt;value&gt; tag.&lt;/li&gt;
+        &lt;li&gt;As the value attribute&lt;/li&gt;
+        &lt;li&gt;Output of tag body, trimmed.&lt;/li&gt;
+      &lt;/ol&gt;
+    </description>
+    <name>a</name>
+    <tag-class>com.aoindustries.taglib.ATag</tag-class>
+    <body-content>scriptless</body-content>
+    <attribute>
+      <description>
+          The target for the link.
+          Session state URL rewriting is performed as needed.
+          URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
+          any character in the set { ':', '/', ';', '#' }
+          A nested href tag will override this value.
+      </description>
+      <name>href</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>The CSS class for the link.  A nested class tag will override this value.</description>
+      <name>class</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>A JavaScript onclick handler.  A nested onclick tag will override this value.</description>
+      <name>onclick</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <example />
+  </tag>
+  <tag>
     <description>Provides a value to its ValueAttribute parent tag.</description>
     <name>value</name>
     <tag-class>com.aoindustries.taglib.ValueTag</tag-class>
@@ -365,6 +407,27 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <description>Provides an onclick script to its OnclickAttribute parent tag.</description>
     <name>onclick</name>
     <tag-class>com.aoindustries.taglib.OnclickTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides a name to its NameAttribute parent tag.</description>
+    <name>name</name>
+    <tag-class>com.aoindustries.taglib.NameTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides an href to its HrefAttribute parent tag.</description>
+    <name>href</name>
+    <tag-class>com.aoindustries.taglib.HrefTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides a class to its ClassAttribute parent tag.</description>
+    <name>class</name>
+    <tag-class>com.aoindustries.taglib.ClassTag</tag-class>
     <body-content>scriptless</body-content>
     <example />
   </tag>
