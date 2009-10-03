@@ -26,7 +26,14 @@ import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.StringBuilderWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.JspTag;
@@ -34,7 +41,9 @@ import javax.servlet.jsp.tagext.JspTag;
 /**
  * @author  AO Industries, Inc.
  */
-public class HrefTag extends AutoEncodingBufferedTag {
+public class HrefTag extends AutoEncodingBufferedTag implements ParamsAttribute {
+
+    private SortedMap<String,List<String>> params;
 
     public MediaType getContentType() {
         return MediaType.URL;
@@ -45,13 +54,42 @@ public class HrefTag extends AutoEncodingBufferedTag {
     }
 
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
-        JspTag parent = getParent();
-        if(parent==null || !(parent instanceof HrefAttribute)) {
+        JspTag parent = findAncestorWithClass(this, HrefAttribute.class);
+        if(parent==null) {
             PageContext pageContext = (PageContext)getJspContext();
             Locale userLocale = pageContext.getResponse().getLocale();
             throw new JspException(ApplicationResourcesAccessor.getMessage(userLocale, "HrefTag.needHrefAttributeParent"));
         }
+        String href = capturedBody.toString().trim();
+        if(params!=null) {
+            boolean hasQuestion = href.indexOf('?')!=-1;
+            StringBuilder sb = new StringBuilder(href);
+            for(Map.Entry<String,List<String>> entry : params.entrySet()) {
+                String encodedName = URLEncoder.encode(entry.getKey(), "UTF-8");
+                for(String value : entry.getValue()) {
+                    if(hasQuestion) sb.append('&');
+                    else {
+                        sb.append('?');
+                        hasQuestion = true;
+                    }
+                    sb.append(encodedName).append('=').append(URLEncoder.encode(value, "UTF-8"));
+                }
+            }
+            href = sb.toString();
+        }
         HrefAttribute hrefAttribute = (HrefAttribute)parent;
-        hrefAttribute.setHref(capturedBody.toString());
+        hrefAttribute.setHref(href);
+    }
+
+    public Map<String,List<String>> getParams() {
+        if(params==null) return Collections.emptyMap();
+        return params;
+    }
+
+    public void addParam(String name, String value) {
+        if(params==null) params = new TreeMap<String,List<String>>();
+        List<String> values = params.get(name);
+        if(values==null) params.put(name, values = new ArrayList<String>());
+        values.add(value);
     }
 }

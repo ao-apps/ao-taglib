@@ -36,7 +36,7 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
-public class InputTag extends AutoEncodingBufferedTag implements NameAttribute, ValueAttribute, OnclickAttribute, SizeAttribute, ReadonlyAttribute, DisabledAttribute {
+public class InputTag extends AutoEncodingBufferedTag implements TypeAttribute, NameAttribute, ValueAttribute, OnclickAttribute, SizeAttribute, ReadonlyAttribute, DisabledAttribute {
 
     public static boolean isValidType(String type) {
         return

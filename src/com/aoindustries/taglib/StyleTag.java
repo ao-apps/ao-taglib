@@ -45,13 +45,13 @@ public class StyleTag extends AutoEncodingBufferedTag {
     }
 
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
-        JspTag parent = getParent();
-        if(parent==null || !(parent instanceof StyleAttribute)) {
+        JspTag parent = findAncestorWithClass(this, StyleAttribute.class);
+        if(parent==null) {
             PageContext pageContext = (PageContext)getJspContext();
             Locale userLocale = pageContext.getResponse().getLocale();
             throw new JspException(ApplicationResourcesAccessor.getMessage(userLocale, "StyleTag.needStyleAttributeParent"));
         }
         StyleAttribute styleAttribute = (StyleAttribute)parent;
-        styleAttribute.setStyle(capturedBody.toString());
+        styleAttribute.setStyle(capturedBody.toString().trim());
     }
 }

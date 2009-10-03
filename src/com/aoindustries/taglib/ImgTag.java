@@ -23,6 +23,7 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
+import com.aoindustries.encoding.NewEncodingUtils;
 import com.aoindustries.io.StringBuilderWriter;
 import com.aoindustries.util.EncodingUtils;
 import java.io.IOException;
@@ -115,7 +116,7 @@ public class ImgTag extends AutoEncodingBufferedTag implements SrcAttribute, Wid
         out.write(
             response.encodeURL(
                 EncodingUtils.encodeXmlAttribute(
-                    EncodingUtils.encodeURL(src)
+                    NewEncodingUtils.encodeURL(src)
                 )
             )
         );

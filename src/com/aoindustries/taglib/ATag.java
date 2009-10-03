@@ -24,6 +24,7 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.MediaType;
+import com.aoindustries.encoding.NewEncodingUtils;
 import com.aoindustries.io.StringBuilderWriter;
 import com.aoindustries.util.EncodingUtils;
 import java.io.IOException;
@@ -96,7 +97,7 @@ public class ATag extends AutoEncodingBufferedTag implements HrefAttribute, Clas
             out.write(
                 response.encodeURL(
                     EncodingUtils.encodeXmlAttribute(
-                        EncodingUtils.encodeURL(href)
+                        NewEncodingUtils.encodeURL(href)
                     )
                 )
             );

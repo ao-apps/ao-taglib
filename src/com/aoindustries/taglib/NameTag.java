@@ -45,13 +45,13 @@ public class NameTag extends AutoEncodingBufferedTag {
     }
 
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
-        JspTag parent = getParent();
-        if(parent==null || !(parent instanceof NameAttribute)) {
+        JspTag parent = findAncestorWithClass(this, NameAttribute.class);
+        if(parent==null) {
             PageContext pageContext = (PageContext)getJspContext();
             Locale userLocale = pageContext.getResponse().getLocale();
             throw new JspException(ApplicationResourcesAccessor.getMessage(userLocale, "NameTag.needNameAttributeParent"));
         }
         NameAttribute nameAttribute = (NameAttribute)parent;
-        nameAttribute.setName(capturedBody.toString());
+        nameAttribute.setName(capturedBody.toString().trim());
     }
 }

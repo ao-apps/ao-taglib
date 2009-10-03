@@ -45,13 +45,13 @@ public class AltTag extends AutoEncodingBufferedTag {
     }
 
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
-        JspTag parent = getParent();
-        if(parent==null || !(parent instanceof AltAttribute)) {
+        JspTag parent = findAncestorWithClass(this, AltAttribute.class);
+        if(parent==null) {
             PageContext pageContext = (PageContext)getJspContext();
             Locale userLocale = pageContext.getResponse().getLocale();
             throw new JspException(ApplicationResourcesAccessor.getMessage(userLocale, "AltTag.needAltAttributeParent"));
         }
         AltAttribute altAttribute = (AltAttribute)parent;
-        altAttribute.setAlt(capturedBody.toString());
+        altAttribute.setAlt(capturedBody.toString().trim());
     }
 }

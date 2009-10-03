@@ -45,8 +45,8 @@ public class ValueTag extends AutoEncodingBufferedTag {
     }
 
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
-        JspTag parent = getParent();
-        if(parent==null || !(parent instanceof ValueAttribute)) {
+        JspTag parent = findAncestorWithClass(this, ValueAttribute.class);
+        if(parent==null) {
             PageContext pageContext = (PageContext)getJspContext();
             Locale userLocale = pageContext.getResponse().getLocale();
             throw new JspException(ApplicationResourcesAccessor.getMessage(userLocale, "ValueTag.needValueAttributeParent"));

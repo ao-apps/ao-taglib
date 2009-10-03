@@ -45,13 +45,13 @@ public class HeightTag extends AutoEncodingBufferedTag {
     }
 
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
-        JspTag parent = getParent();
-        if(parent==null || !(parent instanceof HeightAttribute)) {
+        JspTag parent = findAncestorWithClass(this, HeightAttribute.class);
+        if(parent==null) {
             PageContext pageContext = (PageContext)getJspContext();
             Locale userLocale = pageContext.getResponse().getLocale();
             throw new JspException(ApplicationResourcesAccessor.getMessage(userLocale, "HeightTag.needHeightAttributeParent"));
         }
         HeightAttribute heightAttribute = (HeightAttribute)parent;
-        heightAttribute.setHeight(capturedBody.toString());
+        heightAttribute.setHeight(capturedBody.toString().trim());
     }
 }

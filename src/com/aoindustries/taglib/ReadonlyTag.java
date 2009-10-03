@@ -45,8 +45,8 @@ public class ReadonlyTag extends AutoEncodingBufferedTag {
     }
 
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
-        JspTag parent = getParent();
-        if(parent==null || !(parent instanceof ReadonlyAttribute)) {
+        JspTag parent = findAncestorWithClass(this, ReadonlyAttribute.class);
+        if(parent==null) {
             PageContext pageContext = (PageContext)getJspContext();
             Locale userLocale = pageContext.getResponse().getLocale();
             throw new JspException(ApplicationResourcesAccessor.getMessage(userLocale, "ReadonlyTag.needReadonlyAttributeParent"));

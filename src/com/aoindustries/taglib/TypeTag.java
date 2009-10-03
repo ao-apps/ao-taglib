@@ -34,7 +34,7 @@ import javax.servlet.jsp.tagext.JspTag;
 /**
  * @author  AO Industries, Inc.
  */
-public class SizeTag extends AutoEncodingBufferedTag {
+public class TypeTag extends AutoEncodingBufferedTag {
 
     public MediaType getContentType() {
         return MediaType.TEXT;
@@ -45,13 +45,13 @@ public class SizeTag extends AutoEncodingBufferedTag {
     }
 
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
-        JspTag parent = findAncestorWithClass(this, SizeAttribute.class);
+        JspTag parent = findAncestorWithClass(this, TypeAttribute.class);
         if(parent==null) {
             PageContext pageContext = (PageContext)getJspContext();
             Locale userLocale = pageContext.getResponse().getLocale();
-            throw new JspException(ApplicationResourcesAccessor.getMessage(userLocale, "SizeTag.needSizeAttributeParent"));
+            throw new JspException(ApplicationResourcesAccessor.getMessage(userLocale, "TypeTag.needTypeAttributeParent"));
         }
-        SizeAttribute sizeAttribute = (SizeAttribute)parent;
-        sizeAttribute.setSize(capturedBody.toString().trim());
+        TypeAttribute typeAttribute = (TypeAttribute)parent;
+        typeAttribute.setType(capturedBody.toString().trim());
     }
 }

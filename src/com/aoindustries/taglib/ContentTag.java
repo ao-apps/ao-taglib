@@ -34,10 +34,10 @@ import javax.servlet.jsp.tagext.JspTag;
 /**
  * @author  AO Industries, Inc.
  */
-public class SizeTag extends AutoEncodingBufferedTag {
+public class ContentTag extends AutoEncodingBufferedTag {
 
     public MediaType getContentType() {
-        return MediaType.TEXT;
+        return MediaType.URL;
     }
 
     public MediaType getOutputType() {
@@ -45,13 +45,13 @@ public class SizeTag extends AutoEncodingBufferedTag {
     }
 
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
-        JspTag parent = findAncestorWithClass(this, SizeAttribute.class);
+        JspTag parent = findAncestorWithClass(this, ContentAttribute.class);
         if(parent==null) {
             PageContext pageContext = (PageContext)getJspContext();
             Locale userLocale = pageContext.getResponse().getLocale();
-            throw new JspException(ApplicationResourcesAccessor.getMessage(userLocale, "SizeTag.needSizeAttributeParent"));
+            throw new JspException(ApplicationResourcesAccessor.getMessage(userLocale, "ContentTag.needContentAttributeParent"));
         }
-        SizeAttribute sizeAttribute = (SizeAttribute)parent;
-        sizeAttribute.setSize(capturedBody.toString().trim());
+        ContentAttribute contentAttribute = (ContentAttribute)parent;
+        contentAttribute.setContent(capturedBody.toString().trim());
     }
 }

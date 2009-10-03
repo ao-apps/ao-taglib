@@ -22,36 +22,16 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.MediaType;
-import com.aoindustries.io.StringBuilderWriter;
-import java.io.IOException;
-import java.io.Writer;
-import java.util.Locale;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.PageContext;
-import javax.servlet.jsp.tagext.JspTag;
 
 /**
+ * Something with a type attribute.
+ *
  * @author  AO Industries, Inc.
  */
-public class SizeTag extends AutoEncodingBufferedTag {
+public interface TypeAttribute {
 
-    public MediaType getContentType() {
-        return MediaType.TEXT;
-    }
+    String getType();
 
-    public MediaType getOutputType() {
-        return null;
-    }
-
-    protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
-        JspTag parent = findAncestorWithClass(this, SizeAttribute.class);
-        if(parent==null) {
-            PageContext pageContext = (PageContext)getJspContext();
-            Locale userLocale = pageContext.getResponse().getLocale();
-            throw new JspException(ApplicationResourcesAccessor.getMessage(userLocale, "SizeTag.needSizeAttributeParent"));
-        }
-        SizeAttribute sizeAttribute = (SizeAttribute)parent;
-        sizeAttribute.setSize(capturedBody.toString().trim());
-    }
+    void setType(String type) throws JspException;
 }

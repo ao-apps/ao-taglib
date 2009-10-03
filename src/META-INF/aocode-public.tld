@@ -291,9 +291,12 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <tei-class>com.aoindustries.taglib.InputTagTEI</tei-class>
     <body-content>scriptless</body-content>
     <attribute>
-      <description>The type of input, must be one of button, checkbox, file, hidden, image, password, radio, reset, submit, or text.</description>
+      <description>
+          The type of input, must be one of button, checkbox, file, hidden, image, password, radio, reset, submit, or text.
+          A nested type tag will override this value.
+      </description>
       <name>type</name>
-      <required>true</required>
+      <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
     </attribute>
@@ -483,7 +486,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
-    <description>Provides an href to its HrefAttribute parent tag.</description>
+    <description>Provides an href to its HrefAttribute parent tag.  Parameters may be added with nested param tags.</description>
     <name>href</name>
     <tag-class>com.aoindustries.taglib.HrefTag</tag-class>
     <body-content>scriptless</body-content>
@@ -514,6 +517,13 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <description>Provides an alt attribute to its AltAttribute parent tag.</description>
     <name>alt</name>
     <tag-class>com.aoindustries.taglib.AltTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides a content attribute to its ContentAttribute parent tag.</description>
+    <name>content</name>
+    <tag-class>com.aoindustries.taglib.ContentTag</tag-class>
     <body-content>scriptless</body-content>
     <example />
   </tag>
@@ -558,6 +568,30 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <name>disabled</name>
     <tag-class>com.aoindustries.taglib.DisabledTag</tag-class>
     <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Adds a parameter to its ParamsAttribute parent tag.</description>
+    <name>param</name>
+    <tag-class>com.aoindustries.taglib.ParamTag</tag-class>
+    <body-content>scriptless</body-content>
+    <attribute>
+      <description>The name of parameter tag.  A nested name tag will override this value.</description>
+      <name>name</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>
+        The value of the parameter.  A nested value tag will override this value.  If neither is provided,
+        the output of the body is used with whitespace trimmed.
+      </description>
+      <name>value</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
     <example />
   </tag>
 </taglib>
