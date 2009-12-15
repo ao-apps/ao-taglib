@@ -24,7 +24,7 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.util.LocalizedToString;
+import com.aoindustries.util.i18n.LocalizedToString;
 import java.io.IOException;
 import java.io.Writer;
 import java.lang.reflect.InvocationTargetException;
