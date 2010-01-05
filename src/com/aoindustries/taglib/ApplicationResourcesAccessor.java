@@ -37,7 +37,7 @@ public final class ApplicationResourcesAccessor {
     private ApplicationResourcesAccessor() {
     }
 
-    private static final com.aoindustries.util.i18n.ApplicationResourcesAccessor accessor = new com.aoindustries.util.i18n.ApplicationResourcesAccessor("com.aoindustries.taglib.ApplicationResources");
+    private static final com.aoindustries.util.i18n.ApplicationResourcesAccessor accessor = com.aoindustries.util.i18n.ApplicationResourcesAccessor.getInstance("com.aoindustries.taglib.ApplicationResources");
 
     public static String getMessage(Locale locale, String key) {
         return accessor.getMessage(locale, key);
