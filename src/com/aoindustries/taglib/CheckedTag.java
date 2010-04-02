@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009, 2010  AO Industries, Inc.
+ * Copyright (C) 2010  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -34,7 +34,7 @@ import javax.servlet.jsp.tagext.JspTag;
 /**
  * @author  AO Industries, Inc.
  */
-public class DisabledTag extends AutoEncodingBufferedTag {
+public class CheckedTag extends AutoEncodingBufferedTag {
 
     public MediaType getContentType() {
         return MediaType.TEXT;
@@ -45,21 +45,21 @@ public class DisabledTag extends AutoEncodingBufferedTag {
     }
 
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
-        JspTag parent = findAncestorWithClass(this, DisabledAttribute.class);
+        JspTag parent = findAncestorWithClass(this, CheckedAttribute.class);
         if(parent==null) {
             PageContext pageContext = (PageContext)getJspContext();
             Locale userLocale = pageContext.getResponse().getLocale();
-            throw new JspException(ApplicationResourcesAccessor.getMessage(userLocale, "DisabledTag.needDisabledAttributeParent"));
+            throw new JspException(ApplicationResourcesAccessor.getMessage(userLocale, "CheckedTag.needCheckedAttributeParent"));
         }
-        DisabledAttribute disabledAttribute = (DisabledAttribute)parent;
+        CheckedAttribute checkedAttribute = (CheckedAttribute)parent;
         String value = capturedBody.toString().trim();
         if(value!=null) {
-            if("true".equals(value)) disabledAttribute.setDisabled(true);
-            else if("false".equals(value)) disabledAttribute.setDisabled(false);
+            if("true".equals(value)) checkedAttribute.setChecked(true);
+            else if("false".equals(value)) checkedAttribute.setChecked(false);
             else {
                 PageContext pageContext = (PageContext)getJspContext();
                 Locale userLocale = pageContext.getResponse().getLocale();
-                throw new JspException(ApplicationResourcesAccessor.getMessage(userLocale, "DisabledTag.invalidValue", value));
+                throw new JspException(ApplicationResourcesAccessor.getMessage(userLocale, "CheckedTag.invalidValue", value));
             }
         }
     }

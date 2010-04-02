@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009  AO Industries, Inc.
+ * Copyright (C) 2009, 2010  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -36,7 +36,7 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
-public class InputTag extends AutoEncodingBufferedTag implements TypeAttribute, NameAttribute, ValueAttribute, OnclickAttribute, SizeAttribute, ReadonlyAttribute, DisabledAttribute {
+public class InputTag extends AutoEncodingBufferedTag implements TypeAttribute, NameAttribute, ValueAttribute, OnclickAttribute, SizeAttribute, ReadonlyAttribute, DisabledAttribute, ClassAttribute, CheckedAttribute {
 
     public static boolean isValidType(String type) {
         return
@@ -60,6 +60,8 @@ public class InputTag extends AutoEncodingBufferedTag implements TypeAttribute, 
     private String size;
     private boolean readonly;
     private boolean disabled;
+    private String clazz;
+    private boolean checked;
 
     public MediaType getContentType() {
         return MediaType.TEXT;
@@ -126,6 +128,22 @@ public class InputTag extends AutoEncodingBufferedTag implements TypeAttribute, 
         this.disabled = disabled;
     }
 
+    public String getClazz() {
+        return clazz;
+    }
+
+    public void setClazz(String clazz) {
+        this.clazz = clazz;
+    }
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
+
+
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
         PageContext pageContext = (PageContext)getJspContext();
         HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
@@ -155,6 +173,12 @@ public class InputTag extends AutoEncodingBufferedTag implements TypeAttribute, 
         }
         if(readonly) out.write(" readonly=\"readonly\"");
         if(disabled) out.write(" disabled=\"disabled\"");
+        if(clazz!=null) {
+            out.write(" class=\"");
+            EncodingUtils.encodeXmlAttribute(clazz, out);
+            out.write('"');
+        }
+        if(checked) out.write(" checked=\"checked\"");
         out.write(" />");
     }
 }
