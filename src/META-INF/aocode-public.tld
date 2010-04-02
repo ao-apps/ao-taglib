@@ -594,4 +594,74 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     </attribute>
     <example />
   </tag>
+  <tag>
+    <description>
+      Renders a textarea tag.  The value may be provided in one of three ways, in
+      precedence order:
+      &lt;ol&gt;
+        &lt;li&gt;Direct child &lt;value&gt; tag.&lt;/li&gt;
+        &lt;li&gt;As the value attribute&lt;/li&gt;
+        &lt;li&gt;Output of tag body.&lt;/li&gt;
+      &lt;/ol&gt;
+    </description>
+    <name>textarea</name>
+    <tag-class>com.aoindustries.taglib.TextareaTag</tag-class>
+    <body-content>scriptless</body-content>
+    <attribute>
+      <description>The name of textarea tag.  A nested name tag will override this value.</description>
+      <name>name</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>
+        The value of the textarea.  A nested value tag will override this value.  If neither is provided,
+        the output of the body is used.
+      </description>
+      <name>value</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>The number of columns for the textarea element.  A nested cols tag will override this value.</description>
+      <name>cols</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>int</type>
+    </attribute>
+    <attribute>
+      <description>The number of rows for the textarea element.  A nested rows tag will override this value.</description>
+      <name>rows</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>int</type>
+    </attribute>
+    <attribute>
+      <description>
+          The readonly attribute.  Accepts values of "true" or "false".
+          A non-empty nested readonly tag will override this value.
+          If readonly is "true", will add the attribute as <code>readonly="readonly"</code>,
+          otherwise the attribute is not added.
+      </description>
+      <name>readonly</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>boolean</type>
+    </attribute>
+    <attribute>
+      <description>
+          The disabled attribute.  Accepts values of "true" or "false".
+          A non-empty nested disabled tag will override this value.
+          If disabled is "true", will add the attribute as <code>disabled="disabled"</code>,
+          otherwise the attribute is not added.
+      </description>
+      <name>disabled</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>boolean</type>
+    </attribute>
+    <example />
+  </tag>
 </taglib>
