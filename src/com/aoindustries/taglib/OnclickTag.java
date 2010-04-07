@@ -52,6 +52,6 @@ public class OnclickTag extends AutoEncodingBufferedTag {
             throw new JspException(ApplicationResourcesAccessor.getMessage(userLocale, "OnclickTag.needOnclickAttributeParent"));
         }
         OnclickAttribute onclickAttribute = (OnclickAttribute)parent;
-        onclickAttribute.setOnclick(capturedBody.toString());
+        onclickAttribute.setOnclick(capturedBody.toString().trim());
     }
 }

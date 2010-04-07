@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009  AO Industries, Inc.
+ * Copyright (C) 2010  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -34,7 +34,7 @@ import javax.servlet.jsp.tagext.JspTag;
 /**
  * @author  AO Industries, Inc.
  */
-public class StyleTag extends AutoEncodingBufferedTag {
+public class MethodTag extends AutoEncodingBufferedTag {
 
     public MediaType getContentType() {
         return MediaType.TEXT;
@@ -45,13 +45,13 @@ public class StyleTag extends AutoEncodingBufferedTag {
     }
 
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
-        JspTag parent = findAncestorWithClass(this, StyleAttribute.class);
+        JspTag parent = findAncestorWithClass(this, MethodAttribute.class);
         if(parent==null) {
             PageContext pageContext = (PageContext)getJspContext();
             Locale userLocale = pageContext.getResponse().getLocale();
-            throw new JspException(ApplicationResourcesAccessor.getMessage(userLocale, "StyleTag.needStyleAttributeParent"));
+            throw new JspException(ApplicationResourcesAccessor.getMessage(userLocale, "MethodTag.needMethodAttributeParent"));
         }
-        StyleAttribute styleAttribute = (StyleAttribute)parent;
-        styleAttribute.setStyle(capturedBody.toString().trim());
+        MethodAttribute methodAttribute = (MethodAttribute)parent;
+        methodAttribute.setMethod(capturedBody.toString().trim());
     }
 }

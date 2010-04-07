@@ -694,4 +694,70 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     </attribute>
     <example />
   </tag>
+  <tag>
+    <description>Renders a form tag.</description>
+    <name>form</name>
+    <tag-class>com.aoindustries.taglib.FormTag</tag-class>
+    <tei-class>com.aoindustries.taglib.FormTagTEI</tei-class>
+    <body-content>scriptless</body-content>
+    <attribute>
+      <description>
+          The method used, must be either post or get.
+          Defaults to "get".
+          A nested method tag will override this value.
+      </description>
+      <name>method</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>
+          The id of the form.
+          A nested id tag will override this value.</description>
+      <name>id</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>
+        The action for the form.
+        A nested action tag will override this value.
+      </description>
+      <name>action</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>A JavaScript onsubmit handler.  A nested onsubmit tag will override this value.</description>
+      <name>onsubmit</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides a method attribute to its MethodAttribute parent tag.</description>
+    <name>method</name>
+    <tag-class>com.aoindustries.taglib.MethodTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides an id attribute to its IdAttribute parent tag.</description>
+    <name>id</name>
+    <tag-class>com.aoindustries.taglib.IdTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides an action to its ActionAttribute parent tag.</description>
+    <name>action</name>
+    <tag-class>com.aoindustries.taglib.ActionTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
 </taglib>

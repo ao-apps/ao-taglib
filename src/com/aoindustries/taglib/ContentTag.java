@@ -37,7 +37,7 @@ import javax.servlet.jsp.tagext.JspTag;
 public class ContentTag extends AutoEncodingBufferedTag {
 
     public MediaType getContentType() {
-        return MediaType.URL;
+        return MediaType.TEXT;
     }
 
     public MediaType getOutputType() {
