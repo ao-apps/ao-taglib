@@ -95,8 +95,8 @@ public class ATag extends AutoEncodingBufferedTag implements HrefAttribute, Clas
                 if(contextPath.length()>0) href = contextPath+href;
             }
             out.write(
-                response.encodeURL(
-                    EncodingUtils.encodeXmlAttribute(
+                EncodingUtils.encodeXmlAttribute(
+                    response.encodeURL(
                         NewEncodingUtils.encodeURL(href)
                     )
                 )

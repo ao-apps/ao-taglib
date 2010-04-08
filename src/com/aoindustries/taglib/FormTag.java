@@ -111,8 +111,8 @@ public class FormTag extends AutoEncodingBufferedTag implements MethodAttribute,
                 if(contextPath.length()>0) action = contextPath+action;
             }
             out.write(
-                response.encodeURL(
-                    EncodingUtils.encodeXmlAttribute(
+                EncodingUtils.encodeXmlAttribute(
+                    response.encodeURL(
                         NewEncodingUtils.encodeURL(action)
                     )
                 )

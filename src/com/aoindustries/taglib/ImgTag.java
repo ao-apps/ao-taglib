@@ -114,8 +114,8 @@ public class ImgTag extends AutoEncodingBufferedTag implements SrcAttribute, Wid
             if(contextPath.length()>0) src = contextPath+src;
         }
         out.write(
-            response.encodeURL(
-                EncodingUtils.encodeXmlAttribute(
+            EncodingUtils.encodeXmlAttribute(
+                response.encodeURL(
                     NewEncodingUtils.encodeURL(src)
                 )
             )
