@@ -498,6 +498,13 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
+    <description>Provides an onsubmit script to its OnsubmitAttribute parent tag.</description>
+    <name>onsubmit</name>
+    <tag-class>com.aoindustries.taglib.OnsubmitTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
     <description>Provides a name to its NameAttribute parent tag.</description>
     <name>name</name>
     <tag-class>com.aoindustries.taglib.NameTag</tag-class>
