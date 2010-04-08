@@ -491,6 +491,13 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
+    <description>Provides an onchange script to its OnchangeAttribute parent tag.</description>
+    <name>onchange</name>
+    <tag-class>com.aoindustries.taglib.OnchangeTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
     <description>Provides an onclick script to its OnclickAttribute parent tag.</description>
     <name>onclick</name>
     <tag-class>com.aoindustries.taglib.OnclickTag</tag-class>
@@ -721,7 +728,8 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <attribute>
       <description>
           The id of the form.
-          A nested id tag will override this value.</description>
+          A nested id tag will override this value.
+      </description>
       <name>id</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
@@ -740,6 +748,33 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <attribute>
       <description>A JavaScript onsubmit handler.  A nested onsubmit tag will override this value.</description>
       <name>onsubmit</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <example />
+  </tag>
+  <tag>
+    <description>Renders a select tag.</description>
+    <name>select</name>
+    <tag-class>com.aoindustries.taglib.SelectTag</tag-class>
+    <body-content>scriptless</body-content>
+    <attribute>
+      <description>
+          The name of the select element.
+          A nested name tag will override this value.
+      </description>
+      <name>name</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>
+          A JavaScript onchange handler.
+          A nested onchange tag will override this value.
+      </description>
+      <name>onchange</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
