@@ -325,6 +325,16 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <type>java.lang.String</type>
     </attribute>
     <attribute>
+      <description>
+          A JavaScript onchange handler.
+          A nested onchange tag will override this value.
+      </description>
+      <name>onchange</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
       <description>The size of the input element.  A nested size tag will override this value.</description>
       <name>size</name>
       <required>false</required>
