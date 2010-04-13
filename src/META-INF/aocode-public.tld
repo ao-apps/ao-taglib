@@ -625,6 +625,17 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
+    <description>
+        Provides a selected attribute to its SelectedAttribute parent tag.
+        The body, after trimming, must contain either "true", "false", or be empty.
+        If empty, the selected attribute of the tag is not overridden.
+    </description>
+    <name>selected</name>
+    <tag-class>com.aoindustries.taglib.SelectedTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
     <description>Adds a parameter to its ParamsAttribute parent tag.</description>
     <name>param</name>
     <tag-class>com.aoindustries.taglib.ParamTag</tag-class>
@@ -788,6 +799,47 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
+    </attribute>
+    <example />
+  </tag>
+  <tag>
+    <description>Renders an option tag.</description>
+    <name>option</name>
+    <tag-class>com.aoindustries.taglib.OptionTag</tag-class>
+    <body-content>scriptless</body-content>
+    <attribute>
+      <description>
+        The value of the option.  A nested value tag will override this value.  If neither is provided,
+        the output of the body is used with whitespace trimmed.
+      </description>
+      <name>value</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>
+          The selected attribute.  Accepts values of "true" or "false".
+          A non-empty nested selected tag will override this value.
+          If selected is "true", will add the attribute as <code>selected="selected"</code>,
+          otherwise the attribute is not added.
+      </description>
+      <name>selected</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>boolean</type>
+    </attribute>
+    <attribute>
+      <description>
+          The disabled attribute.  Accepts values of "true" or "false".
+          A non-empty nested disabled tag will override this value.
+          If disabled is "true", will add the attribute as <code>disabled="disabled"</code>,
+          otherwise the attribute is not added.
+      </description>
+      <name>disabled</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>boolean</type>
     </attribute>
     <example />
   </tag>
