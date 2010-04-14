@@ -345,6 +345,16 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <type>java.lang.String</type>
     </attribute>
     <attribute>
+      <description>
+          A JavaScript onkeypress handler.
+          A nested onkeypress tag will override this value.
+      </description>
+      <name>onkeypress</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
       <description>The size of the input element.  A nested size tag will override this value.</description>
       <name>size</name>
       <required>false</required>
@@ -521,6 +531,13 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <description>Provides an onfocus script to its OnfocusAttribute parent tag.</description>
     <name>onfocus</name>
     <tag-class>com.aoindustries.taglib.OnfocusTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides an onkeypress script to its OnkeypressAttribute parent tag.</description>
+    <name>onkeypress</name>
+    <tag-class>com.aoindustries.taglib.OnkeypressTag</tag-class>
     <body-content>scriptless</body-content>
     <example />
   </tag>
@@ -823,6 +840,16 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
           A nested onfocus tag will override this value.
       </description>
       <name>onfocus</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>
+          A JavaScript onkeypress handler.
+          A nested onkeypress tag will override this value.
+      </description>
+      <name>onkeypress</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>

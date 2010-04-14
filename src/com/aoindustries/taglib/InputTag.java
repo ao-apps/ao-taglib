@@ -36,7 +36,7 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
-public class InputTag extends AutoEncodingBufferedTag implements TypeAttribute, NameAttribute, ValueAttribute, OnclickAttribute, OnchangeAttribute, OnfocusAttribute, SizeAttribute, ReadonlyAttribute, DisabledAttribute, ClassAttribute, CheckedAttribute {
+public class InputTag extends AutoEncodingBufferedTag implements TypeAttribute, NameAttribute, ValueAttribute, OnclickAttribute, OnchangeAttribute, OnfocusAttribute, OnkeypressAttribute, SizeAttribute, ReadonlyAttribute, DisabledAttribute, ClassAttribute, CheckedAttribute {
 
     public static boolean isValidType(String type) {
         return
@@ -59,6 +59,7 @@ public class InputTag extends AutoEncodingBufferedTag implements TypeAttribute, 
     private String onclick;
     private String onchange;
     private String onfocus;
+    private String onkeypress;
     private String size;
     private boolean readonly;
     private boolean disabled;
@@ -120,6 +121,14 @@ public class InputTag extends AutoEncodingBufferedTag implements TypeAttribute, 
 
     public void setOnfocus(String onfocus) {
         this.onfocus = onfocus;
+    }
+
+    public String getOnkeypress() {
+        return onkeypress;
+    }
+
+    public void setOnkeypress(String onkeypress) {
+        this.onkeypress = onkeypress;
     }
 
     public String getSize() {
@@ -192,6 +201,11 @@ public class InputTag extends AutoEncodingBufferedTag implements TypeAttribute, 
         if(onfocus!=null) {
             out.write(" onfocus=\"");
             JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute(onfocus, out);
+            out.write('"');
+        }
+        if(onkeypress!=null) {
+            out.write(" onkeypress=\"");
+            JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute(onkeypress, out);
             out.write('"');
         }
         if(size!=null) {

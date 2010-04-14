@@ -33,11 +33,12 @@ import javax.servlet.jsp.JspException;
 /**
  * @author  AO Industries, Inc.
  */
-public class SelectTag extends AutoEncodingBufferedTag implements NameAttribute, OnchangeAttribute, OnfocusAttribute {
+public class SelectTag extends AutoEncodingBufferedTag implements NameAttribute, OnchangeAttribute, OnfocusAttribute, OnkeypressAttribute {
 
     private String name;
     private String onchange;
     private String onfocus;
+    private String onkeypress;
 
     public MediaType getContentType() {
         return MediaType.XHTML;
@@ -71,6 +72,14 @@ public class SelectTag extends AutoEncodingBufferedTag implements NameAttribute,
         this.onfocus = onfocus;
     }
 
+    public String getOnkeypress() {
+        return onkeypress;
+    }
+
+    public void setOnkeypress(String onkeypress) {
+        this.onkeypress = onkeypress;
+    }
+
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
         out.write("<select");
         if(name!=null) {
@@ -86,6 +95,11 @@ public class SelectTag extends AutoEncodingBufferedTag implements NameAttribute,
         if(onfocus!=null) {
             out.write(" onfocus=\"");
             JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute(onfocus, out);
+            out.write('"');
+        }
+        if(onkeypress!=null) {
+            out.write(" onkeypress=\"");
+            JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute(onkeypress, out);
             out.write('"');
         }
         out.write('>');
