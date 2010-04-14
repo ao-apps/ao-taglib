@@ -88,7 +88,7 @@ public class OptionTag extends AutoEncodingBufferedTag implements ValueAttribute
         if(selected) out.write(" selected=\"selected\"");
         if(disabled) out.write(" disabled=\"disabled\"");
         out.write('>');
-        TextInXhtmlEncoder.encodeTextInXhtml(userLocale, value, out);
+        TextInXhtmlEncoder.encodeTextInXhtml(userLocale, body, out);
         out.write("</option>");
     }
 }
