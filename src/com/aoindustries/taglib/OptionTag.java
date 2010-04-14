@@ -38,6 +38,7 @@ import javax.servlet.jsp.PageContext;
  */
 public class OptionTag extends AutoEncodingBufferedTag implements ValueAttribute, SelectedAttribute, DisabledAttribute {
 
+    private boolean valueSet;
     private String value;
     private boolean selected;
     private boolean disabled;
@@ -55,6 +56,7 @@ public class OptionTag extends AutoEncodingBufferedTag implements ValueAttribute
     }
 
     public void setValue(String value) {
+        this.valueSet = true;
         this.value = value;
     }
 
@@ -78,7 +80,8 @@ public class OptionTag extends AutoEncodingBufferedTag implements ValueAttribute
         PageContext pageContext = (PageContext)getJspContext();
         HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
         Locale userLocale = response.getLocale();
-        if(value==null) value = capturedBody.toString().trim();
+        String body = capturedBody.toString().trim();
+        if(!valueSet) value = body;
         out.write("<option value=\"");
         EncodingUtils.encodeXmlAttribute(value, out);
         out.write('"');
