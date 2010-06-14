@@ -40,6 +40,7 @@ public class GetStackTracesTag extends AutoEncodingFilteredTag {
     private String name;
     private String property;
 
+    @Override
     public MediaType getContentType() {
         return MediaType.TEXT;
     }
@@ -49,7 +50,7 @@ public class GetStackTracesTag extends AutoEncodingFilteredTag {
         PageContext pageContext = (PageContext)getJspContext();
         // Find the Throwable to display
         Object value = PropertyUtils.findObject(pageContext, scope, name, property, true, true);
-        if(!(value instanceof Throwable)) throw new JspException(ApplicationResourcesAccessor.getMessage(pageContext.getResponse().getLocale(), "GetStackTracesTag.notThrowable", value.getClass().getName()));
+        if(!(value instanceof Throwable)) throw new JspException(ApplicationResourcesAccessor.getMessage("GetStackTracesTag.notThrowable", value.getClass().getName()));
         Throwable throwable = (Throwable)value;
 
         // Print the stack traces

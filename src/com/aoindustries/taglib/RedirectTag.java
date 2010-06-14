@@ -23,7 +23,6 @@
 package com.aoindustries.taglib;
 
 import java.io.IOException;
-import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
@@ -46,20 +45,24 @@ public class RedirectTag extends SimpleTagSupport implements HrefAttribute, Type
     private String href;
     private String type = "temporary";
 
+    @Override
     public String getHref() {
         return href;
     }
 
+    @Override
     public void setHref(String href) {
         this.href = href;
     }
 
+    @Override
     public String getType() {
         return type;
     }
 
+    @Override
     public void setType(String type) throws JspException {
-        if(!isValidType(type)) throw new JspException(ApplicationResourcesAccessor.getMessage(Locale.getDefault(), "RedirectTag.type.invalid", type));
+        if(!isValidType(type)) throw new JspException(ApplicationResourcesAccessor.getMessage("RedirectTag.type.invalid", type));
         this.type = type;
     }
 

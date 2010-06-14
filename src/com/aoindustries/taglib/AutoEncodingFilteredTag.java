@@ -29,7 +29,6 @@ import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.MediaValidator;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.Locale;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
@@ -70,6 +69,7 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport implement
     /**
      * @see ContentTypeJspTag#getContentType()
      */
+    @Override
     public abstract MediaType getContentType();
 
     private ValidMediaInput inputValidator;
@@ -79,6 +79,7 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport implement
      * is already being filtered on this tags input.  When this occurs they
      * skip the validation of their own output.
      */
+    @Override
     public boolean isValidatingMediaInputType(MediaType inputType) {
         return inputValidator!=null && inputValidator.isValidatingMediaInputType(inputType);
     }
@@ -90,7 +91,6 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport implement
             HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
             Writer out = pageContext.getOut();
             ContentTypeJspTag parent = (ContentTypeJspTag)findAncestorWithClass(this, ContentTypeJspTag.class);
-            Locale userLocale = response.getLocale();
             MediaType myContentType = getContentType();
 
             // Determine the container's content type and see if our output is already validated
@@ -102,7 +102,6 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport implement
                 if(!parent.isValidatingMediaInputType(containerContentType)) {
                     throw new JspException(
                         ApplicationResourcesAccessor.getMessage(
-                            userLocale,
                             "AutoEncodingFilterTag.parentIncompatibleValidation",
                             parent.getClass().getName(),
                             containerContentType.getMediaType()
@@ -111,11 +110,11 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport implement
                 }
             } else {
                 // Use the content type of the response
-                containerContentType = MediaType.getMediaType(userLocale, response.getContentType());
+                containerContentType = MediaType.getMediaType(response.getContentType());
             }
 
             // Find the encoder
-            MediaEncoder mediaEncoder = MediaEncoder.getMediaEncoder(userLocale, response, myContentType, containerContentType, out);
+            MediaEncoder mediaEncoder = MediaEncoder.getMediaEncoder(response, myContentType, containerContentType, out);
             if(mediaEncoder!=null) {
                 setMediaEncoderOptions(mediaEncoder);
                 // Encode the content.  The encoder is also the validator for our input and guarantees valid output for our parent.
@@ -128,7 +127,7 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport implement
                 }
             } else {
                 // Not using an encoder, validate our own content
-                MediaValidator validator = MediaValidator.getMediaValidator(userLocale, myContentType, out);
+                MediaValidator validator = MediaValidator.getMediaValidator(myContentType, out);
                 inputValidator = validator;
                 invokeAutoEncoding(validator);
             }

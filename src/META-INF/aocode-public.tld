@@ -119,10 +119,8 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       Writes the bean contents.  If the bean is &lt;code&gt;null&lt;/code&gt; then nothing is displayed.
       The method attribute provides the name of the method that will be used to convert to String.
       If not provided, it will default to &lt;code&gt;"toString"&lt;/code&gt;.  This method
-      name is first searched for a public version with a single parameter of Locale.  If the
-      method exists and returns a String, that will be used, next it will search for the
-      method without the Locale parameter and returns String.  It is an error if neither
-      method is found.
+      searches for the method with parameters and returns String.  It is an error if the method is
+      not found.
 
       The content type depends on the value provided to the type attribute, and
       defaults to text/plain.  The content is checked for well-formedness based
@@ -174,8 +172,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <attribute>
       <description>
         Specifies the method that will be used to convert the object to a
-        String.  Will first look for the method with a Locale parameter, then
-        if not found will look for the method with no parameters.
+        String.
         This defaults to toString
       </description>
       <name>method</name>

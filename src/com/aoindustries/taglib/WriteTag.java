@@ -24,13 +24,10 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.util.i18n.LocalizedToString;
 import java.io.IOException;
 import java.io.Writer;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Locale;
-import javax.servlet.ServletResponse;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
@@ -47,12 +44,12 @@ public class WriteTag extends AutoEncodingFilteredTag {
     private String method = "toString";
     private MediaType type = MediaType.TEXT;
 
+    @Override
     public MediaType getContentType() {
         return type;
     }
 
-    private static final Class[] toStringParamTypes = new Class[] {Locale.class};
-    private static final Class[] toStringEmptyParamTypes = new Class[0];
+    private static final Class[] emptyParamTypes = new Class[0];
 
     @Override
     public void invokeAutoEncoding(Writer out) throws JspException, IOException {
@@ -64,42 +61,17 @@ public class WriteTag extends AutoEncodingFilteredTag {
 
             // Print the value
             if(value!=null) {
-                ServletResponse response = pageContext.getResponse();
-                // Try the localized version
-                boolean done;
-                // Avoid reflection when possible by using the aocode-public interface
-                if("toString".equals(method) && (value instanceof LocalizedToString)) {
-                    out.write(((LocalizedToString)value).toString(response.getLocale()));
-                    done = true;
+                // Avoid reflection when possible
+                if("toString".equals(method)) {
+                    out.write(value.toString());
                 } else {
                     try {
-                        Method refMethod = value.getClass().getMethod(method, toStringParamTypes);
+                        Method refMethod = value.getClass().getMethod(method, emptyParamTypes);
                         if(refMethod.getReturnType()==String.class) {
-                            out.write((String)refMethod.invoke(value, response.getLocale()));
-                            done = true;
-                        } else {
-                            done = false;
+                            out.write((String)refMethod.invoke(value));
                         }
                     } catch(NoSuchMethodException err) {
-                        // Fall-through to next method
-                        done = false;
-                    }
-                }
-                if(!done) {
-                    // Now the non-localized version
-                    if("toString".equals(method)) {
-                        out.write(value.toString());
-                    } else {
-                        try {
-                            Method refMethod = value.getClass().getMethod(method, toStringEmptyParamTypes);
-                            if(refMethod.getReturnType()==String.class) {
-                                out.write((String)refMethod.invoke(value));
-                                done = true;
-                            }
-                        } catch(NoSuchMethodException err) {
-                            // Fall-through to failure
-                        }
-                        if(!done) throw new JspException(ApplicationResourcesAccessor.getMessage(response.getLocale(), "WriteTag.unableToFindMethod", method));
+                        throw new JspException(ApplicationResourcesAccessor.getMessage("WriteTag.unableToFindMethod", method));
                     }
                 }
             }
@@ -110,58 +82,34 @@ public class WriteTag extends AutoEncodingFilteredTag {
         }
     }
 
-    /**
-     * @return the scope
-     */
     public String getScope() {
         return scope;
     }
 
-    /**
-     * @param scope the scope to set
-     */
     public void setScope(String scope) {
         this.scope = scope;
     }
 
-    /**
-     * @return the name
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     * @param name the name to set
-     */
     public void setName(String name) {
         this.name = name;
     }
 
-    /**
-     * @return the property
-     */
     public String getProperty() {
         return property;
     }
 
-    /**
-     * @param property the property to set
-     */
     public void setProperty(String property) {
         this.property = property;
     }
 
-    /**
-     * @return the method
-     */
     public String getMethod() {
         return method;
     }
 
-    /**
-     * @param method the method to set
-     */
     public void setMethod(String method) {
         this.method = method;
     }
@@ -171,6 +119,6 @@ public class WriteTag extends AutoEncodingFilteredTag {
     }
 
     public void setType(String type) throws MediaException {
-        this.type = MediaType.getMediaType(Locale.getDefault(), type);
+        this.type = MediaType.getMediaType(type);
     }
 }

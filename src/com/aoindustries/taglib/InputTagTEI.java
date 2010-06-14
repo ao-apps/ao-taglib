@@ -22,7 +22,6 @@
  */
 package com.aoindustries.taglib;
 
-import java.util.Locale;
 import javax.servlet.jsp.tagext.TagData;
 import javax.servlet.jsp.tagext.TagExtraInfo;
 import javax.servlet.jsp.tagext.ValidationMessage;
@@ -42,7 +41,7 @@ public class InputTagTEI extends TagExtraInfo {
             String type = (String)o;
             if(!InputTag.isValidType(type)) {
                 return new ValidationMessage[] {
-                    new ValidationMessage(data.getId(), ApplicationResourcesAccessor.getMessage(Locale.getDefault(), "InputTag.type.invalid", type))
+                    new ValidationMessage(data.getId(), ApplicationResourcesAccessor.getMessage("InputTag.type.invalid", type))
                 };
             }
         }

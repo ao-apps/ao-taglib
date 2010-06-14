@@ -22,7 +22,6 @@
  */
 package com.aoindustries.taglib;
 
-import java.util.Locale;
 import javax.servlet.jsp.tagext.TagData;
 import javax.servlet.jsp.tagext.TagExtraInfo;
 import javax.servlet.jsp.tagext.ValidationMessage;
@@ -42,7 +41,7 @@ public class FormTagTEI extends TagExtraInfo {
             String method = (String)o;
             if(!FormTag.isValidMethod(method)) {
                 return new ValidationMessage[] {
-                    new ValidationMessage(data.getId(), ApplicationResourcesAccessor.getMessage(Locale.getDefault(), "FormTag.method.invalid", method))
+                    new ValidationMessage(data.getId(), ApplicationResourcesAccessor.getMessage("FormTag.method.invalid", method))
                 };
             }
         }

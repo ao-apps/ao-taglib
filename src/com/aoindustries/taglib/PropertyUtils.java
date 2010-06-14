@@ -57,7 +57,7 @@ public class PropertyUtils {
     public static Object findObject(PageContext pageContext, String scope, String name, String property, boolean beanRequired, boolean valueRequired) throws JspException {
         try {
             // Check the name
-            if(name==null) throw new JspException(ApplicationResourcesAccessor.getMessage(pageContext.getResponse().getLocale(), "PropertyUtils.name.required"));
+            if(name==null) throw new JspException(ApplicationResourcesAccessor.getMessage("PropertyUtils.name.required"));
 
             // Find the bean
             Object bean;
@@ -66,14 +66,14 @@ public class PropertyUtils {
             else if("request".equals(scope)) bean = pageContext.getAttribute(name, PageContext.REQUEST_SCOPE);
             else if("session".equals(scope)) bean = pageContext.getAttribute(name, PageContext.SESSION_SCOPE);
             else if("application".equals(scope)) bean = pageContext.getAttribute(name, PageContext.APPLICATION_SCOPE);
-            else throw new JspException(ApplicationResourcesAccessor.getMessage(pageContext.getResponse().getLocale(), "PropertyUtils.scope.invalid", scope));
+            else throw new JspException(ApplicationResourcesAccessor.getMessage("PropertyUtils.scope.invalid", scope));
 
             // Check required
             if(bean==null) {
                 if(beanRequired) {
                     // null and required
-                    if(scope==null) throw new JspException(ApplicationResourcesAccessor.getMessage(pageContext.getResponse().getLocale(), "PropertyUtils.bean.required.nullScope", name));
-                    else throw new JspException(ApplicationResourcesAccessor.getMessage(pageContext.getResponse().getLocale(), "PropertyUtils.bean.required.scope", name, scope));
+                    if(scope==null) throw new JspException(ApplicationResourcesAccessor.getMessage("PropertyUtils.bean.required.nullScope", name));
+                    else throw new JspException(ApplicationResourcesAccessor.getMessage("PropertyUtils.bean.required.scope", name, scope));
                 } else {
                     // null and not required
                     return null;
@@ -87,8 +87,8 @@ public class PropertyUtils {
                     Object value = org.apache.commons.beanutils.PropertyUtils.getProperty(bean, property);
                     if(valueRequired && value==null) {
                         // null and required
-                        if(scope==null) throw new JspException(ApplicationResourcesAccessor.getMessage(pageContext.getResponse().getLocale(), "PropertyUtils.value.required.nullScope", property, name));
-                        else throw new JspException(ApplicationResourcesAccessor.getMessage(pageContext.getResponse().getLocale(), "PropertyUtils.value.required.scope", property, name, scope));
+                        if(scope==null) throw new JspException(ApplicationResourcesAccessor.getMessage("PropertyUtils.value.required.nullScope", property, name));
+                        else throw new JspException(ApplicationResourcesAccessor.getMessage("PropertyUtils.value.required.scope", property, name, scope));
                     }
                     return value;
                 }

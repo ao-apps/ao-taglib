@@ -44,62 +44,77 @@ public class TextareaTag extends AutoEncodingBufferedTag implements NameAttribut
     private boolean readonly;
     private boolean disabled;
 
+    @Override
     public MediaType getContentType() {
         return MediaType.TEXT;
     }
 
+    @Override
     public MediaType getOutputType() {
         return MediaType.XHTML;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public void setName(String name) {
         this.name = name;
     }
 
+    @Override
     public String getValue() {
         return value;
     }
 
+    @Override
     public void setValue(String value) {
         this.value = value;
     }
 
+    @Override
     public int getCols() {
         return cols;
     }
 
+    @Override
     public void setCols(int cols) {
         this.cols = cols;
     }
 
+    @Override
     public int getRows() {
         return rows;
     }
 
+    @Override
     public void setRows(int rows) {
         this.rows = rows;
     }
 
+    @Override
     public boolean isReadonly() {
         return readonly;
     }
 
+    @Override
     public void setReadonly(boolean readonly) {
         this.readonly = readonly;
     }
 
+    @Override
     public boolean isDisabled() {
         return disabled;
     }
 
+    @Override
     public void setDisabled(boolean disabled) {
         this.disabled = disabled;
     }
 
+    @Override
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
         PageContext pageContext = (PageContext)getJspContext();
         HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
@@ -118,7 +133,7 @@ public class TextareaTag extends AutoEncodingBufferedTag implements NameAttribut
         if(readonly) out.write(" readonly=\"readonly\"");
         if(disabled) out.write(" disabled=\"disabled\"");
         out.write('>');
-        TextInXhtmlEncoder.encodeTextInXhtml(response.getLocale(), value, out);
+        TextInXhtmlEncoder.encodeTextInXhtml(value, out);
         out.write("</textarea>");
     }
 }

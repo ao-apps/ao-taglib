@@ -22,7 +22,6 @@
  */
 package com.aoindustries.taglib;
 
-import java.util.Locale;
 import javax.servlet.jsp.tagext.TagData;
 import javax.servlet.jsp.tagext.TagExtraInfo;
 import javax.servlet.jsp.tagext.ValidationMessage;
@@ -42,7 +41,7 @@ public class RedirectTagTEI extends TagExtraInfo {
             String type = (String)o;
             if(!RedirectTag.isValidType(type)) {
                 return new ValidationMessage[] {
-                    new ValidationMessage(data.getId(), ApplicationResourcesAccessor.getMessage(Locale.getDefault(), "RedirectTag.type.invalid", type))
+                    new ValidationMessage(data.getId(), ApplicationResourcesAccessor.getMessage("RedirectTag.type.invalid", type))
                 };
             }
         }

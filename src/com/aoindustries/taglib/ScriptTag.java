@@ -24,7 +24,6 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
-import java.util.Locale;
 
 /**
  * @author  AO Industries, Inc.
@@ -35,6 +34,7 @@ public class ScriptTag extends AutoEncodingFilteredTag {
 
     private MediaType type = MediaType.JAVASCRIPT;
 
+    @Override
     public MediaType getContentType() {
         return type;
     }
@@ -44,9 +44,8 @@ public class ScriptTag extends AutoEncodingFilteredTag {
     }
 
     public void setType(String type) throws MediaException {
-        Locale locale = Locale.getDefault();
-        MediaType newType = MediaType.getMediaType(locale, type);
-        if(newType!=MediaType.JAVASCRIPT) throw new MediaException(ApplicationResourcesAccessor.getMessage(locale, "ScriptTag.unsupportedMediaType", type));
+        MediaType newType = MediaType.getMediaType(type);
+        if(newType!=MediaType.JAVASCRIPT) throw new MediaException(ApplicationResourcesAccessor.getMessage("ScriptTag.unsupportedMediaType", type));
         this.type = newType;
     }
 }

@@ -26,9 +26,7 @@ import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.StringBuilderWriter;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.Locale;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.JspTag;
 
 /**
@@ -36,31 +34,26 @@ import javax.servlet.jsp.tagext.JspTag;
  */
 public class DisabledTag extends AutoEncodingBufferedTag {
 
+    @Override
     public MediaType getContentType() {
         return MediaType.TEXT;
     }
 
+    @Override
     public MediaType getOutputType() {
         return null;
     }
 
+    @Override
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
         JspTag parent = findAncestorWithClass(this, DisabledAttribute.class);
-        if(parent==null) {
-            PageContext pageContext = (PageContext)getJspContext();
-            Locale userLocale = pageContext.getResponse().getLocale();
-            throw new JspException(ApplicationResourcesAccessor.getMessage(userLocale, "DisabledTag.needDisabledAttributeParent"));
-        }
+        if(parent==null) throw new JspException(ApplicationResourcesAccessor.getMessage("DisabledTag.needDisabledAttributeParent"));
         DisabledAttribute disabledAttribute = (DisabledAttribute)parent;
         String value = capturedBody.toString().trim();
         if(value!=null) {
             if("true".equals(value)) disabledAttribute.setDisabled(true);
             else if("false".equals(value)) disabledAttribute.setDisabled(false);
-            else {
-                PageContext pageContext = (PageContext)getJspContext();
-                Locale userLocale = pageContext.getResponse().getLocale();
-                throw new JspException(ApplicationResourcesAccessor.getMessage(userLocale, "DisabledTag.invalidValue", value));
-            }
+            else throw new JspException(ApplicationResourcesAccessor.getMessage("DisabledTag.invalidValue", value));
         }
     }
 }

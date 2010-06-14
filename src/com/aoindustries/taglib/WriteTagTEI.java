@@ -24,7 +24,6 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
-import java.util.Locale;
 import javax.servlet.jsp.tagext.TagData;
 import javax.servlet.jsp.tagext.TagExtraInfo;
 import javax.servlet.jsp.tagext.ValidationMessage;
@@ -43,7 +42,7 @@ public class WriteTagTEI extends TagExtraInfo {
         ) {
             String type = (String)o;
             try {
-                MediaType mediaType = MediaType.getMediaType(Locale.getDefault(), type);
+                MediaType mediaType = MediaType.getMediaType(type);
                 // Value is OK
                 return null;
             } catch(MediaException err) {

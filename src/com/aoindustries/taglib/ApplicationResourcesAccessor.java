@@ -22,8 +22,6 @@
  */
 package com.aoindustries.taglib;
 
-import java.util.Locale;
-
 /**
  * Provides a simplified interface for obtaining localized values from the ApplicationResources.properties files.
  *
@@ -39,19 +37,19 @@ public final class ApplicationResourcesAccessor {
 
     private static final com.aoindustries.util.i18n.ApplicationResourcesAccessor accessor = com.aoindustries.util.i18n.ApplicationResourcesAccessor.getInstance("com.aoindustries.taglib.ApplicationResources");
 
-    public static String getMessage(Locale locale, String key) {
-        return accessor.getMessage(locale, key);
+    public static String getMessage(String key) {
+        return accessor.getMessage(key);
     }
     
-    public static String getMessage(Locale locale, String key, Object... args) {
-        return accessor.getMessage(locale, key, args);
+    public static String getMessage(String key, Object... args) {
+        return accessor.getMessage(key, args);
     }
 
-    public static String getMessage(String missingDefault, Locale locale, String key) {
-        return accessor.getMessage(missingDefault, locale, key);
+    public static String getMessage(String missingDefault, String key) {
+        return accessor.getMessage(missingDefault, key);
     }
 
-    public static String getMessage(String missingDefault, Locale locale, String key, Object... args) {
-        return accessor.getMessage(missingDefault, locale, key, args);
+    public static String getMessage(String missingDefault, String key, Object... args) {
+        return accessor.getMessage(missingDefault, key, args);
     }
 }

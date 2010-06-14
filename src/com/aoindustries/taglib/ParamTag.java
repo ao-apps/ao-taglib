@@ -27,7 +27,6 @@ import com.aoindustries.io.StringBuilderWriter;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.JspTag;
 
 /**
@@ -38,34 +37,41 @@ public class ParamTag extends AutoEncodingBufferedTag implements NameAttribute, 
     private String name;
     private String value;
 
+    @Override
     public MediaType getContentType() {
         return MediaType.TEXT;
     }
 
+    @Override
     public MediaType getOutputType() {
         return null;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public void setName(String name) {
         this.name = name;
     }
 
+    @Override
     public String getValue() {
         return value;
     }
 
+    @Override
     public void setValue(String value) {
         this.value = value;
     }
 
+    @Override
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
         JspTag parent = findAncestorWithClass(this, ParamsAttribute.class);
-        if(parent==null) throw new JspException(ApplicationResourcesAccessor.getMessage(((PageContext)getJspContext()).getResponse().getLocale(), "ParamTag.needParamsAttributeParent"));
-        if(name==null) throw new JspException(ApplicationResourcesAccessor.getMessage(((PageContext)getJspContext()).getResponse().getLocale(), "ParamTag.name.required"));
+        if(parent==null) throw new JspException(ApplicationResourcesAccessor.getMessage("ParamTag.needParamsAttributeParent"));
+        if(name==null) throw new JspException(ApplicationResourcesAccessor.getMessage("ParamTag.name.required"));
         if(value==null) value = capturedBody.toString().trim();
         ((ParamsAttribute)parent).addParam(name, value);
     }

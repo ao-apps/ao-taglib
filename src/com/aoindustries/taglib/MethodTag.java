@@ -26,9 +26,7 @@ import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.StringBuilderWriter;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.Locale;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.JspTag;
 
 /**
@@ -36,21 +34,20 @@ import javax.servlet.jsp.tagext.JspTag;
  */
 public class MethodTag extends AutoEncodingBufferedTag {
 
+    @Override
     public MediaType getContentType() {
         return MediaType.TEXT;
     }
 
+    @Override
     public MediaType getOutputType() {
         return null;
     }
 
+    @Override
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
         JspTag parent = findAncestorWithClass(this, MethodAttribute.class);
-        if(parent==null) {
-            PageContext pageContext = (PageContext)getJspContext();
-            Locale userLocale = pageContext.getResponse().getLocale();
-            throw new JspException(ApplicationResourcesAccessor.getMessage(userLocale, "MethodTag.needMethodAttributeParent"));
-        }
+        if(parent==null) throw new JspException(ApplicationResourcesAccessor.getMessage("MethodTag.needMethodAttributeParent"));
         MethodAttribute methodAttribute = (MethodAttribute)parent;
         methodAttribute.setMethod(capturedBody.toString().trim());
     }

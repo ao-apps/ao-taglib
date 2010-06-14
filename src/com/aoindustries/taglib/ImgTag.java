@@ -45,69 +45,84 @@ public class ImgTag extends AutoEncodingBufferedTag implements SrcAttribute, Wid
     private String clazz;
     private String style;
 
+    @Override
     public MediaType getContentType() {
         return MediaType.TEXT;
     }
 
+    @Override
     public MediaType getOutputType() {
         return MediaType.XHTML;
     }
 
+    @Override
     public String getSrc() {
         return src;
     }
 
+    @Override
     public void setSrc(String src) {
         this.src = src;
     }
 
+    @Override
     public String getWidth() {
         return width;
     }
 
+    @Override
     public void setWidth(String width) {
         this.width = width;
     }
 
+    @Override
     public String getHeight() {
         return height;
     }
 
+    @Override
     public void setHeight(String height) {
         this.height = height;
     }
 
+    @Override
     public String getAlt() {
         return alt;
     }
 
+    @Override
     public void setAlt(String alt) {
         this.alt = alt;
     }
 
+    @Override
     public String getClazz() {
         return clazz;
     }
 
+    @Override
     public void setClazz(String clazz) {
         this.clazz = clazz;
     }
 
+    @Override
     public String getStyle() {
         return style;
     }
 
+    @Override
     public void setStyle(String style) {
         this.style = style;
     }
 
+    @Override
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
         PageContext pageContext = (PageContext)getJspContext();
         if(src==null) src = capturedBody.toString().trim();
         HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
-        if(width==null) throw new JspException(ApplicationResourcesAccessor.getMessage(response.getLocale(), "ImgTag.width.required"));
-        if(height==null) throw new JspException(ApplicationResourcesAccessor.getMessage(response.getLocale(), "ImgTag.height.required"));
-        if(alt==null) throw new JspException(ApplicationResourcesAccessor.getMessage(response.getLocale(), "ImgTag.alt.required"));
+        if(width==null) throw new JspException(ApplicationResourcesAccessor.getMessage("ImgTag.width.required"));
+        if(height==null) throw new JspException(ApplicationResourcesAccessor.getMessage("ImgTag.height.required"));
+        if(alt==null) throw new JspException(ApplicationResourcesAccessor.getMessage("ImgTag.alt.required"));
         out.write("<img src=\"");
         if(src.startsWith("/")) {
             String contextPath = ((HttpServletRequest)pageContext.getRequest()).getContextPath();

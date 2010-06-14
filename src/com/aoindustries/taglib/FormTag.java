@@ -29,7 +29,6 @@ import com.aoindustries.io.StringBuilderWriter;
 import com.aoindustries.util.EncodingUtils;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
@@ -52,47 +51,58 @@ public class FormTag extends AutoEncodingBufferedTag implements MethodAttribute,
     private String action;
     private String onsubmit;
 
+    @Override
     public MediaType getContentType() {
         return MediaType.XHTML;
     }
 
+    @Override
     public MediaType getOutputType() {
         return MediaType.XHTML;
     }
 
+    @Override
     public String getMethod() {
         return method;
     }
 
+    @Override
     public void setMethod(String method) throws JspException {
-        if(!isValidMethod(method)) throw new JspException(ApplicationResourcesAccessor.getMessage(Locale.getDefault(), "FormTag.method.invalid", method));
+        if(!isValidMethod(method)) throw new JspException(ApplicationResourcesAccessor.getMessage("FormTag.method.invalid", method));
         this.method = method;
     }
 
+    @Override
     public String getId() {
         return id;
     }
 
+    @Override
     public void setId(String id) {
         this.id = id;
     }
 
+    @Override
     public String getAction() {
         return action;
     }
 
+    @Override
     public void setAction(String action) {
         this.action = action;
     }
 
+    @Override
     public String getOnsubmit() {
         return onsubmit;
     }
 
+    @Override
     public void setOnsubmit(String onsubmit) {
         this.onsubmit = onsubmit;
     }
 
+    @Override
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
         PageContext pageContext = (PageContext)getJspContext();
         out.write("<form method=\"");

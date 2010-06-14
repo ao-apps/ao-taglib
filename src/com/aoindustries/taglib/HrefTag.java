@@ -30,12 +30,10 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.JspTag;
 
 /**
@@ -45,21 +43,20 @@ public class HrefTag extends AutoEncodingBufferedTag implements ParamsAttribute 
 
     private SortedMap<String,List<String>> params;
 
+    @Override
     public MediaType getContentType() {
         return MediaType.URL;
     }
 
+    @Override
     public MediaType getOutputType() {
         return null;
     }
 
+    @Override
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
         JspTag parent = findAncestorWithClass(this, HrefAttribute.class);
-        if(parent==null) {
-            PageContext pageContext = (PageContext)getJspContext();
-            Locale userLocale = pageContext.getResponse().getLocale();
-            throw new JspException(ApplicationResourcesAccessor.getMessage(userLocale, "HrefTag.needHrefAttributeParent"));
-        }
+        if(parent==null) throw new JspException(ApplicationResourcesAccessor.getMessage("HrefTag.needHrefAttributeParent"));
         String href = capturedBody.toString().trim();
         if(params!=null) {
             boolean hasQuestion = href.indexOf('?')!=-1;
@@ -81,11 +78,13 @@ public class HrefTag extends AutoEncodingBufferedTag implements ParamsAttribute 
         hrefAttribute.setHref(href);
     }
 
+    @Override
     public Map<String,List<String>> getParams() {
         if(params==null) return Collections.emptyMap();
         return params;
     }
 
+    @Override
     public void addParam(String name, String value) {
         if(params==null) params = new TreeMap<String,List<String>>();
         List<String> values = params.get(name);

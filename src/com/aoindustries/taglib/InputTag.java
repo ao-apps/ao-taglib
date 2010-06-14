@@ -28,7 +28,6 @@ import com.aoindustries.io.StringBuilderWriter;
 import com.aoindustries.util.EncodingUtils;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.Locale;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
@@ -66,116 +65,142 @@ public class InputTag extends AutoEncodingBufferedTag implements TypeAttribute, 
     private String clazz;
     private boolean checked;
 
+    @Override
     public MediaType getContentType() {
         return MediaType.TEXT;
     }
 
+    @Override
     public MediaType getOutputType() {
         return MediaType.XHTML;
     }
 
+    @Override
     public String getType() {
         return type;
     }
 
+    @Override
     public void setType(String type) throws JspException {
-        if(!isValidType(type)) throw new JspException(ApplicationResourcesAccessor.getMessage(Locale.getDefault(), "InputTag.type.invalid", type));
+        if(!isValidType(type)) throw new JspException(ApplicationResourcesAccessor.getMessage("InputTag.type.invalid", type));
         this.type = type;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public void setName(String name) {
         this.name = name;
     }
 
+    @Override
     public String getValue() {
         return value;
     }
 
+    @Override
     public void setValue(String value) {
         this.value = value;
     }
 
+    @Override
     public String getOnclick() {
         return onclick;
     }
 
+    @Override
     public void setOnclick(String onclick) {
         this.onclick = onclick;
     }
 
+    @Override
     public String getOnchange() {
         return onchange;
     }
 
+    @Override
     public void setOnchange(String onchange) {
         this.onchange = onchange;
     }
 
+    @Override
     public String getOnfocus() {
         return onfocus;
     }
 
+    @Override
     public void setOnfocus(String onfocus) {
         this.onfocus = onfocus;
     }
 
+    @Override
     public String getOnkeypress() {
         return onkeypress;
     }
 
+    @Override
     public void setOnkeypress(String onkeypress) {
         this.onkeypress = onkeypress;
     }
 
+    @Override
     public String getSize() {
         return size;
     }
 
+    @Override
     public void setSize(String size) {
         this.size = size;
     }
 
+    @Override
     public boolean isReadonly() {
         return readonly;
     }
 
+    @Override
     public void setReadonly(boolean readonly) {
         this.readonly = readonly;
     }
 
+    @Override
     public boolean isDisabled() {
         return disabled;
     }
 
+    @Override
     public void setDisabled(boolean disabled) {
         this.disabled = disabled;
     }
 
+    @Override
     public String getClazz() {
         return clazz;
     }
 
+    @Override
     public void setClazz(String clazz) {
         this.clazz = clazz;
     }
+    @Override
     public boolean isChecked() {
         return checked;
     }
 
+    @Override
     public void setChecked(boolean checked) {
         this.checked = checked;
     }
 
 
+    @Override
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
         PageContext pageContext = (PageContext)getJspContext();
         HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
-        Locale userLocale = response.getLocale();
-        if(type==null) throw new JspException(ApplicationResourcesAccessor.getMessage(userLocale, "InputTag.type.required"));
+        if(type==null) throw new JspException(ApplicationResourcesAccessor.getMessage("InputTag.type.required"));
         if(value==null) value = capturedBody.toString().trim();
         out.write("<input type=\"");
         out.write(type);

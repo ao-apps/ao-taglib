@@ -24,7 +24,6 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
-import java.util.Locale;
 import javax.servlet.jsp.tagext.TagData;
 import javax.servlet.jsp.tagext.TagExtraInfo;
 import javax.servlet.jsp.tagext.ValidationMessage;
@@ -43,11 +42,10 @@ public class ScriptTagTEI extends TagExtraInfo {
         ) {
             String type = (String)o;
             try {
-                Locale locale = Locale.getDefault();
-                MediaType mediaType = MediaType.getMediaType(locale, type);
+                MediaType mediaType = MediaType.getMediaType(type);
                 if(mediaType!=MediaType.JAVASCRIPT) {
                     return new ValidationMessage[] {
-                        new ValidationMessage(data.getId(), ApplicationResourcesAccessor.getMessage(locale, "ScriptTag.unsupportedMediaType", type))
+                        new ValidationMessage(data.getId(), ApplicationResourcesAccessor.getMessage("ScriptTag.unsupportedMediaType", type))
                     };
                 }
             } catch(MediaException err) {

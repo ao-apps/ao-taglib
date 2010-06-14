@@ -28,7 +28,6 @@ import com.aoindustries.io.StringBuilderWriter;
 import com.aoindustries.util.EncodingUtils;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.Locale;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
@@ -43,43 +42,51 @@ public class OptionTag extends AutoEncodingBufferedTag implements ValueAttribute
     private boolean selected;
     private boolean disabled;
 
+    @Override
     public MediaType getContentType() {
         return MediaType.TEXT;
     }
 
+    @Override
     public MediaType getOutputType() {
         return MediaType.XHTML;
     }
 
+    @Override
     public String getValue() {
         return value;
     }
 
+    @Override
     public void setValue(String value) {
         this.valueSet = true;
         this.value = value;
     }
 
+    @Override
     public boolean isSelected() {
         return selected;
     }
 
+    @Override
     public void setSelected(boolean selected) {
         this.selected = selected;
     }
 
+    @Override
     public boolean isDisabled() {
         return disabled;
     }
 
+    @Override
     public void setDisabled(boolean disabled) {
         this.disabled = disabled;
     }
 
+    @Override
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
         PageContext pageContext = (PageContext)getJspContext();
         HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
-        Locale userLocale = response.getLocale();
         String body = capturedBody.toString().trim();
         if(!valueSet) value = body;
         out.write("<option value=\"");
@@ -88,7 +95,7 @@ public class OptionTag extends AutoEncodingBufferedTag implements ValueAttribute
         if(selected) out.write(" selected=\"selected\"");
         if(disabled) out.write(" disabled=\"disabled\"");
         out.write('>');
-        TextInXhtmlEncoder.encodeTextInXhtml(userLocale, body, out);
+        TextInXhtmlEncoder.encodeTextInXhtml(body, out);
         out.write("</option>");
     }
 }
