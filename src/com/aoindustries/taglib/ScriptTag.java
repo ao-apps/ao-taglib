@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009  AO Industries, Inc.
+ * Copyright (C) 2009, 2010  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -45,7 +45,7 @@ public class ScriptTag extends AutoEncodingFilteredTag {
 
     public void setType(String type) throws MediaException {
         MediaType newType = MediaType.getMediaType(type);
-        if(newType!=MediaType.JAVASCRIPT) throw new MediaException(ApplicationResourcesAccessor.getMessage("ScriptTag.unsupportedMediaType", type));
+        if(newType!=MediaType.JAVASCRIPT) throw new MediaException(ApplicationResources.accessor.getMessage("ScriptTag.unsupportedMediaType", type));
         this.type = newType;
     }
 }

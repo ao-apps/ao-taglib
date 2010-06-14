@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009  AO Industries, Inc.
+ * Copyright (C) 2009, 2010  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -47,7 +47,7 @@ public class RelTag extends AutoEncodingBufferedTag {
     @Override
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
         JspTag parent = findAncestorWithClass(this, RelAttribute.class);
-        if(parent==null) throw new JspException(ApplicationResourcesAccessor.getMessage("RelTag.needRelAttributeParent"));
+        if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("RelTag.needRelAttributeParent"));
         RelAttribute relAttribute = (RelAttribute)parent;
         relAttribute.setRel(capturedBody.toString().trim());
     }

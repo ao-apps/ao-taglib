@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009  AO Industries, Inc.
+ * Copyright (C) 2009, 2010  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -120,9 +120,9 @@ public class ImgTag extends AutoEncodingBufferedTag implements SrcAttribute, Wid
         PageContext pageContext = (PageContext)getJspContext();
         if(src==null) src = capturedBody.toString().trim();
         HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
-        if(width==null) throw new JspException(ApplicationResourcesAccessor.getMessage("ImgTag.width.required"));
-        if(height==null) throw new JspException(ApplicationResourcesAccessor.getMessage("ImgTag.height.required"));
-        if(alt==null) throw new JspException(ApplicationResourcesAccessor.getMessage("ImgTag.alt.required"));
+        if(width==null) throw new JspException(ApplicationResources.accessor.getMessage("ImgTag.width.required"));
+        if(height==null) throw new JspException(ApplicationResources.accessor.getMessage("ImgTag.height.required"));
+        if(alt==null) throw new JspException(ApplicationResources.accessor.getMessage("ImgTag.alt.required"));
         out.write("<img src=\"");
         if(src.startsWith("/")) {
             String contextPath = ((HttpServletRequest)pageContext.getRequest()).getContextPath();

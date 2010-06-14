@@ -47,7 +47,7 @@ public class OnchangeTag extends AutoEncodingBufferedTag {
     @Override
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
         JspTag parent = findAncestorWithClass(this, OnchangeAttribute.class);
-        if(parent==null) throw new JspException(ApplicationResourcesAccessor.getMessage("OnchangeTag.needOnchangeAttributeParent"));
+        if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("OnchangeTag.needOnchangeAttributeParent"));
         OnchangeAttribute onchangeAttribute = (OnchangeAttribute)parent;
         onchangeAttribute.setOnchange(capturedBody.toString().trim());
     }

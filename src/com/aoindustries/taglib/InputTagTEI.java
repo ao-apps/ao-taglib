@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009  AO Industries, Inc.
+ * Copyright (C) 2009, 2010  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -41,7 +41,7 @@ public class InputTagTEI extends TagExtraInfo {
             String type = (String)o;
             if(!InputTag.isValidType(type)) {
                 return new ValidationMessage[] {
-                    new ValidationMessage(data.getId(), ApplicationResourcesAccessor.getMessage("InputTag.type.invalid", type))
+                    new ValidationMessage(data.getId(), ApplicationResources.accessor.getMessage("InputTag.type.invalid", type))
                 };
             }
         }

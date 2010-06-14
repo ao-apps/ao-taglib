@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009  AO Industries, Inc.
+ * Copyright (C) 2009, 2010  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -94,42 +94,42 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport implement
     private static final Writer failOnWriteWriter = new Writer() {
         @Override
         public void write(int c) throws IOException {
-            throw new IOException(ApplicationResourcesAccessor.getMessage("AutoEncodingBufferedTag.noOutputAllowed"));
+            throw new IOException(ApplicationResources.accessor.getMessage("AutoEncodingBufferedTag.noOutputAllowed"));
         }
 
         @Override
         public void write(char cbuf[]) throws IOException {
-            throw new IOException(ApplicationResourcesAccessor.getMessage("AutoEncodingBufferedTag.noOutputAllowed"));
+            throw new IOException(ApplicationResources.accessor.getMessage("AutoEncodingBufferedTag.noOutputAllowed"));
         }
 
         @Override
         public void write(char[] cbuf, int off, int len) throws IOException {
-            throw new IOException(ApplicationResourcesAccessor.getMessage("AutoEncodingBufferedTag.noOutputAllowed"));
+            throw new IOException(ApplicationResources.accessor.getMessage("AutoEncodingBufferedTag.noOutputAllowed"));
         }
 
         @Override
         public void write(String str) throws IOException {
-            throw new IOException(ApplicationResourcesAccessor.getMessage("AutoEncodingBufferedTag.noOutputAllowed"));
+            throw new IOException(ApplicationResources.accessor.getMessage("AutoEncodingBufferedTag.noOutputAllowed"));
         }
 
         @Override
         public void write(String str, int off, int len) throws IOException {
-            throw new IOException(ApplicationResourcesAccessor.getMessage("AutoEncodingBufferedTag.noOutputAllowed"));
+            throw new IOException(ApplicationResources.accessor.getMessage("AutoEncodingBufferedTag.noOutputAllowed"));
         }
 
         @Override
         public Writer append(CharSequence csq) throws IOException {
-            throw new IOException(ApplicationResourcesAccessor.getMessage("AutoEncodingBufferedTag.noOutputAllowed"));
+            throw new IOException(ApplicationResources.accessor.getMessage("AutoEncodingBufferedTag.noOutputAllowed"));
         }
 
         @Override
         public Writer append(CharSequence csq, int start, int end) throws IOException {
-            throw new IOException(ApplicationResourcesAccessor.getMessage("AutoEncodingBufferedTag.noOutputAllowed"));
+            throw new IOException(ApplicationResources.accessor.getMessage("AutoEncodingBufferedTag.noOutputAllowed"));
         }
 
         @Override
         public Writer append(char c) throws IOException {
-            throw new IOException(ApplicationResourcesAccessor.getMessage("AutoEncodingBufferedTag.noOutputAllowed"));
+            throw new IOException(ApplicationResources.accessor.getMessage("AutoEncodingBufferedTag.noOutputAllowed"));
         }
 
         @Override
@@ -160,7 +160,7 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport implement
                 // Make sure the output is compatibly validated.  It is a bug in the parent to not validate its input consistent with its content type
                 if(!parent.isValidatingMediaInputType(containerContentType)) {
                     throw new JspException(
-                        ApplicationResourcesAccessor.getMessage(
+                        ApplicationResources.accessor.getMessage(
                             "AutoEncodingFilterTag.parentIncompatibleValidation",
                             parent.getClass().getName(),
                             containerContentType.getMediaType()

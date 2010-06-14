@@ -47,7 +47,7 @@ public class MethodTag extends AutoEncodingBufferedTag {
     @Override
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
         JspTag parent = findAncestorWithClass(this, MethodAttribute.class);
-        if(parent==null) throw new JspException(ApplicationResourcesAccessor.getMessage("MethodTag.needMethodAttributeParent"));
+        if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("MethodTag.needMethodAttributeParent"));
         MethodAttribute methodAttribute = (MethodAttribute)parent;
         methodAttribute.setMethod(capturedBody.toString().trim());
     }

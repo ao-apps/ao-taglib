@@ -62,7 +62,7 @@ public class RedirectTag extends SimpleTagSupport implements HrefAttribute, Type
 
     @Override
     public void setType(String type) throws JspException {
-        if(!isValidType(type)) throw new JspException(ApplicationResourcesAccessor.getMessage("RedirectTag.type.invalid", type));
+        if(!isValidType(type)) throw new JspException(ApplicationResources.accessor.getMessage("RedirectTag.type.invalid", type));
         this.type = type;
     }
 

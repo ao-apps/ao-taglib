@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009  AO Industries, Inc.
+ * Copyright (C) 2009, 2010  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -56,7 +56,7 @@ public class HrefTag extends AutoEncodingBufferedTag implements ParamsAttribute 
     @Override
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
         JspTag parent = findAncestorWithClass(this, HrefAttribute.class);
-        if(parent==null) throw new JspException(ApplicationResourcesAccessor.getMessage("HrefTag.needHrefAttributeParent"));
+        if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("HrefTag.needHrefAttributeParent"));
         String href = capturedBody.toString().trim();
         if(params!=null) {
             boolean hasQuestion = href.indexOf('?')!=-1;

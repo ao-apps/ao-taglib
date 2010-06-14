@@ -47,7 +47,7 @@ public class OnfocusTag extends AutoEncodingBufferedTag {
     @Override
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
         JspTag parent = findAncestorWithClass(this, OnfocusAttribute.class);
-        if(parent==null) throw new JspException(ApplicationResourcesAccessor.getMessage("OnfocusTag.needOnfocusAttributeParent"));
+        if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("OnfocusTag.needOnfocusAttributeParent"));
         OnfocusAttribute onfocusAttribute = (OnfocusAttribute)parent;
         onfocusAttribute.setOnfocus(capturedBody.toString().trim());
     }

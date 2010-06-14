@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009  AO Industries, Inc.
+ * Copyright (C) 2009, 2010  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -101,7 +101,7 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport implement
                 // Make sure the output is compatibly validated.  It is a bug in the parent to not validate its input consistent with its content type
                 if(!parent.isValidatingMediaInputType(containerContentType)) {
                     throw new JspException(
-                        ApplicationResourcesAccessor.getMessage(
+                        ApplicationResources.accessor.getMessage(
                             "AutoEncodingFilterTag.parentIncompatibleValidation",
                             parent.getClass().getName(),
                             containerContentType.getMediaType()

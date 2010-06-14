@@ -47,13 +47,13 @@ public class SelectedTag extends AutoEncodingBufferedTag {
     @Override
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
         JspTag parent = findAncestorWithClass(this, SelectedAttribute.class);
-        if(parent==null) throw new JspException(ApplicationResourcesAccessor.getMessage("SelectedTag.needSelectedAttributeParent"));
+        if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("SelectedTag.needSelectedAttributeParent"));
         SelectedAttribute selected = (SelectedAttribute)parent;
         String value = capturedBody.toString().trim();
         if(value!=null) {
             if("true".equals(value)) selected.setSelected(true);
             else if("false".equals(value)) selected.setSelected(false);
-            else throw new JspException(ApplicationResourcesAccessor.getMessage("SelectedTag.invalidValue", value));
+            else throw new JspException(ApplicationResources.accessor.getMessage("SelectedTag.invalidValue", value));
         }
     }
 }

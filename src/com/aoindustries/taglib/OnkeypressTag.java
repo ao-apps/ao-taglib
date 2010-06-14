@@ -47,7 +47,7 @@ public class OnkeypressTag extends AutoEncodingBufferedTag {
     @Override
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
         JspTag parent = findAncestorWithClass(this, OnkeypressAttribute.class);
-        if(parent==null) throw new JspException(ApplicationResourcesAccessor.getMessage("OnkeypressTag.needOnkeypressAttributeParent"));
+        if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("OnkeypressTag.needOnkeypressAttributeParent"));
         OnkeypressAttribute onkeypressAttribute = (OnkeypressAttribute)parent;
         onkeypressAttribute.setOnkeypress(capturedBody.toString().trim());
     }

@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009  AO Industries, Inc.
+ * Copyright (C) 2009, 2010  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -70,8 +70,8 @@ public class ParamTag extends AutoEncodingBufferedTag implements NameAttribute, 
     @Override
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
         JspTag parent = findAncestorWithClass(this, ParamsAttribute.class);
-        if(parent==null) throw new JspException(ApplicationResourcesAccessor.getMessage("ParamTag.needParamsAttributeParent"));
-        if(name==null) throw new JspException(ApplicationResourcesAccessor.getMessage("ParamTag.name.required"));
+        if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("ParamTag.needParamsAttributeParent"));
+        if(name==null) throw new JspException(ApplicationResources.accessor.getMessage("ParamTag.name.required"));
         if(value==null) value = capturedBody.toString().trim();
         ((ParamsAttribute)parent).addParam(name, value);
     }

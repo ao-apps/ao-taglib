@@ -47,13 +47,13 @@ public class CheckedTag extends AutoEncodingBufferedTag {
     @Override
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
         JspTag parent = findAncestorWithClass(this, CheckedAttribute.class);
-        if(parent==null) throw new JspException(ApplicationResourcesAccessor.getMessage("CheckedTag.needCheckedAttributeParent"));
+        if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("CheckedTag.needCheckedAttributeParent"));
         CheckedAttribute checkedAttribute = (CheckedAttribute)parent;
         String value = capturedBody.toString().trim();
         if(value!=null) {
             if("true".equals(value)) checkedAttribute.setChecked(true);
             else if("false".equals(value)) checkedAttribute.setChecked(false);
-            else throw new JspException(ApplicationResourcesAccessor.getMessage("CheckedTag.invalidValue", value));
+            else throw new JspException(ApplicationResources.accessor.getMessage("CheckedTag.invalidValue", value));
         }
     }
 }

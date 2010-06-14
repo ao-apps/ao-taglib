@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009  AO Industries, Inc.
+ * Copyright (C) 2009, 2010  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -50,7 +50,7 @@ public class GetStackTracesTag extends AutoEncodingFilteredTag {
         PageContext pageContext = (PageContext)getJspContext();
         // Find the Throwable to display
         Object value = PropertyUtils.findObject(pageContext, scope, name, property, true, true);
-        if(!(value instanceof Throwable)) throw new JspException(ApplicationResourcesAccessor.getMessage("GetStackTracesTag.notThrowable", value.getClass().getName()));
+        if(!(value instanceof Throwable)) throw new JspException(ApplicationResources.accessor.getMessage("GetStackTracesTag.notThrowable", value.getClass().getName()));
         Throwable throwable = (Throwable)value;
 
         // Print the stack traces

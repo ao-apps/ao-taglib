@@ -82,7 +82,7 @@ public class InputTag extends AutoEncodingBufferedTag implements TypeAttribute, 
 
     @Override
     public void setType(String type) throws JspException {
-        if(!isValidType(type)) throw new JspException(ApplicationResourcesAccessor.getMessage("InputTag.type.invalid", type));
+        if(!isValidType(type)) throw new JspException(ApplicationResources.accessor.getMessage("InputTag.type.invalid", type));
         this.type = type;
     }
 
@@ -200,7 +200,7 @@ public class InputTag extends AutoEncodingBufferedTag implements TypeAttribute, 
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
         PageContext pageContext = (PageContext)getJspContext();
         HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
-        if(type==null) throw new JspException(ApplicationResourcesAccessor.getMessage("InputTag.type.required"));
+        if(type==null) throw new JspException(ApplicationResources.accessor.getMessage("InputTag.type.required"));
         if(value==null) value = capturedBody.toString().trim();
         out.write("<input type=\"");
         out.write(type);

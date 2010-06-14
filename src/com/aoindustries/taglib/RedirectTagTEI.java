@@ -41,7 +41,7 @@ public class RedirectTagTEI extends TagExtraInfo {
             String type = (String)o;
             if(!RedirectTag.isValidType(type)) {
                 return new ValidationMessage[] {
-                    new ValidationMessage(data.getId(), ApplicationResourcesAccessor.getMessage("RedirectTag.type.invalid", type))
+                    new ValidationMessage(data.getId(), ApplicationResources.accessor.getMessage("RedirectTag.type.invalid", type))
                 };
             }
         }

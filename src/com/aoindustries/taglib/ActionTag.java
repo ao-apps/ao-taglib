@@ -47,7 +47,7 @@ public class ActionTag extends AutoEncodingBufferedTag {
     @Override
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
         JspTag parent = findAncestorWithClass(this, ActionAttribute.class);
-        if(parent==null) throw new JspException(ApplicationResourcesAccessor.getMessage("ActionTag.needActionAttributeParent"));
+        if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("ActionTag.needActionAttributeParent"));
         String action = capturedBody.toString().trim();
         ActionAttribute actionAttribute = (ActionAttribute)parent;
         actionAttribute.setAction(action);

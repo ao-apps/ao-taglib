@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009  AO Industries, Inc.
+ * Copyright (C) 2009, 2010  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,34 +22,25 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.util.i18n.EditableResourceBundle;
+import java.io.File;
+import java.util.Locale;
+
 /**
  * Provides a simplified interface for obtaining localized values from the ApplicationResources.properties files.
  *
  * @author  AO Industries, Inc.
  */
-public final class ApplicationResourcesAccessor {
+public final class ApplicationResources_ja extends EditableResourceBundle {
 
     /**
-     * Make no instances.
+     * Do not use directly.
      */
-    private ApplicationResourcesAccessor() {
-    }
-
-    private static final com.aoindustries.util.i18n.ApplicationResourcesAccessor accessor = com.aoindustries.util.i18n.ApplicationResourcesAccessor.getInstance("com.aoindustries.taglib.ApplicationResources");
-
-    public static String getMessage(String key) {
-        return accessor.getMessage(key);
-    }
-    
-    public static String getMessage(String key, Object... args) {
-        return accessor.getMessage(key, args);
-    }
-
-    public static String getMessage(String missingDefault, String key) {
-        return accessor.getMessage(missingDefault, key);
-    }
-
-    public static String getMessage(String missingDefault, String key, Object... args) {
-        return accessor.getMessage(missingDefault, key, args);
+    public ApplicationResources_ja() {
+        super(
+            new File(System.getProperty("user.home")+"/common/ao/cvswork/aocode-public-taglib/src/com/aoindustries/taglib/ApplicationResources_ja.properties"),
+            Locale.JAPANESE,
+            ApplicationResources.bundleSet
+        );
     }
 }

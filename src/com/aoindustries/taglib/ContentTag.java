@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009  AO Industries, Inc.
+ * Copyright (C) 2009, 2010  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -47,7 +47,7 @@ public class ContentTag extends AutoEncodingBufferedTag {
     @Override
     protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
         JspTag parent = findAncestorWithClass(this, ContentAttribute.class);
-        if(parent==null) throw new JspException(ApplicationResourcesAccessor.getMessage("ContentTag.needContentAttributeParent"));
+        if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("ContentTag.needContentAttributeParent"));
         ContentAttribute contentAttribute = (ContentAttribute)parent;
         contentAttribute.setContent(capturedBody.toString().trim());
     }

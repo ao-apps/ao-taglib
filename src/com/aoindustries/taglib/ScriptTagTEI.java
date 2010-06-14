@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009  AO Industries, Inc.
+ * Copyright (C) 2009, 2010  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -45,7 +45,7 @@ public class ScriptTagTEI extends TagExtraInfo {
                 MediaType mediaType = MediaType.getMediaType(type);
                 if(mediaType!=MediaType.JAVASCRIPT) {
                     return new ValidationMessage[] {
-                        new ValidationMessage(data.getId(), ApplicationResourcesAccessor.getMessage("ScriptTag.unsupportedMediaType", type))
+                        new ValidationMessage(data.getId(), ApplicationResources.accessor.getMessage("ScriptTag.unsupportedMediaType", type))
                     };
                 }
             } catch(MediaException err) {

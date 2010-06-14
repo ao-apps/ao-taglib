@@ -68,7 +68,7 @@ public class FormTag extends AutoEncodingBufferedTag implements MethodAttribute,
 
     @Override
     public void setMethod(String method) throws JspException {
-        if(!isValidMethod(method)) throw new JspException(ApplicationResourcesAccessor.getMessage("FormTag.method.invalid", method));
+        if(!isValidMethod(method)) throw new JspException(ApplicationResources.accessor.getMessage("FormTag.method.invalid", method));
         this.method = method;
     }
 

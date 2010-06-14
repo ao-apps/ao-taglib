@@ -41,7 +41,7 @@ public class FormTagTEI extends TagExtraInfo {
             String method = (String)o;
             if(!FormTag.isValidMethod(method)) {
                 return new ValidationMessage[] {
-                    new ValidationMessage(data.getId(), ApplicationResourcesAccessor.getMessage("FormTag.method.invalid", method))
+                    new ValidationMessage(data.getId(), ApplicationResources.accessor.getMessage("FormTag.method.invalid", method))
                 };
             }
         }
