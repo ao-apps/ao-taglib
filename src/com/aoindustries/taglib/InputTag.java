@@ -35,7 +35,7 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
-public class InputTag extends AutoEncodingBufferedTag implements TypeAttribute, NameAttribute, ValueAttribute, OnclickAttribute, OnchangeAttribute, OnfocusAttribute, OnkeypressAttribute, SizeAttribute, ReadonlyAttribute, DisabledAttribute, ClassAttribute, CheckedAttribute {
+public class InputTag extends AutoEncodingBufferedTag implements IdAttribute, TypeAttribute, NameAttribute, ValueAttribute, OnclickAttribute, OnchangeAttribute, OnfocusAttribute, OnkeypressAttribute, SizeAttribute, ReadonlyAttribute, DisabledAttribute, ClassAttribute, CheckedAttribute {
 
     public static boolean isValidType(String type) {
         return
@@ -52,6 +52,7 @@ public class InputTag extends AutoEncodingBufferedTag implements TypeAttribute, 
         ;
     }
 
+    private String id;
     private String type;
     private String name;
     private String value;
@@ -73,6 +74,16 @@ public class InputTag extends AutoEncodingBufferedTag implements TypeAttribute, 
     @Override
     public MediaType getOutputType() {
         return MediaType.XHTML;
+    }
+
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override
@@ -202,7 +213,13 @@ public class InputTag extends AutoEncodingBufferedTag implements TypeAttribute, 
         HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
         if(type==null) throw new JspException(ApplicationResources.accessor.getMessage("InputTag.type.required"));
         if(value==null) value = capturedBody.toString().trim();
-        out.write("<input type=\"");
+        out.write("<input");
+        if(id!=null) {
+            out.write(" id=\"");
+            EncodingUtils.encodeXmlAttribute(id, out);
+            out.write('"');
+        }
+        out.write(" type=\"");
         out.write(type);
         out.write('"');
         if(name!=null) {

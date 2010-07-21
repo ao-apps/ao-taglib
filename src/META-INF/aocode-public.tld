@@ -289,6 +289,16 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <body-content>scriptless</body-content>
     <attribute>
       <description>
+          The id of the input element.
+          A nested id tag will override this value.
+      </description>
+      <name>id</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>
           The type of input, must be one of button, checkbox, file, hidden, image, password, radio, reset, submit, or text.
           A nested type tag will override this value.
       </description>

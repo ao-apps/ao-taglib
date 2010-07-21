@@ -43,6 +43,7 @@ public class InputTagBeanInfo extends SimpleBeanInfo {
             PropertyDescriptor[] props = properties;
             if(props==null) {
                 props = new PropertyDescriptor[] {
+                    new PropertyDescriptor("id", InputTag.class),
                     new PropertyDescriptor("type", InputTag.class),
                     new PropertyDescriptor("name", InputTag.class),
                     new PropertyDescriptor("value", InputTag.class),
