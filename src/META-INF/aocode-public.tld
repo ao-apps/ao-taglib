@@ -822,6 +822,13 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <type>java.lang.String</type>
     </attribute>
     <attribute>
+      <description>The CSS style for the form.  A nested style tag will override this value.</description>
+      <name>style</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
       <description>A JavaScript onsubmit handler.  A nested onsubmit tag will override this value.</description>
       <name>onsubmit</name>
       <required>false</required>

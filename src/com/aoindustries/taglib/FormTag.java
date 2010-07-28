@@ -27,8 +27,10 @@ import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.NewEncodingUtils;
 import com.aoindustries.io.StringBuilderWriter;
 import com.aoindustries.util.EncodingUtils;
+import com.aoindustries.util.StringUtility;
 import java.io.IOException;
 import java.io.Writer;
+import java.net.URLDecoder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
@@ -37,7 +39,7 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
-public class FormTag extends AutoEncodingBufferedTag implements MethodAttribute, IdAttribute, ActionAttribute, OnsubmitAttribute {
+public class FormTag extends AutoEncodingBufferedTag implements MethodAttribute, IdAttribute, ActionAttribute, StyleAttribute, OnsubmitAttribute {
 
     public static boolean isValidMethod(String method) {
         return
@@ -49,6 +51,7 @@ public class FormTag extends AutoEncodingBufferedTag implements MethodAttribute,
     private String method = "get";
     private String id;
     private String action;
+    private String style;
     private String onsubmit;
 
     @Override
@@ -93,6 +96,16 @@ public class FormTag extends AutoEncodingBufferedTag implements MethodAttribute,
     }
 
     @Override
+    public String getStyle() {
+        return style;
+    }
+
+    @Override
+    public void setStyle(String style) {
+        this.style = style;
+    }
+
+    @Override
     public String getOnsubmit() {
         return onsubmit;
     }
@@ -113,6 +126,7 @@ public class FormTag extends AutoEncodingBufferedTag implements MethodAttribute,
             EncodingUtils.encodeXmlAttribute(id, out);
             out.write('"');
         }
+        String actionUrl;
         if(action!=null) {
             HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
             out.write(" action=\"");
@@ -120,13 +134,15 @@ public class FormTag extends AutoEncodingBufferedTag implements MethodAttribute,
                 String contextPath = ((HttpServletRequest)pageContext.getRequest()).getContextPath();
                 if(contextPath.length()>0) action = contextPath+action;
             }
-            out.write(
-                EncodingUtils.encodeXmlAttribute(
-                    response.encodeURL(
-                        NewEncodingUtils.encodeURL(action)
-                    )
-                )
-            );
+            actionUrl = response.encodeURL(NewEncodingUtils.encodeURL(action));
+            out.write(EncodingUtils.encodeXmlAttribute(actionUrl));
+            out.write('"');
+        } else {
+            actionUrl = null;
+        }
+        if(style!=null) {
+            out.write(" style=\"");
+            EncodingUtils.encodeXmlAttribute(style, out);
             out.write('"');
         }
         if(onsubmit!=null) {
@@ -135,6 +151,33 @@ public class FormTag extends AutoEncodingBufferedTag implements MethodAttribute,
             out.write('"');
         }
         out.write('>');
+        // Automatically add URL request parameters as hidden fields to support custom URL rewritten parameters in GET requests.
+        if(actionUrl!=null) {
+            int questionPos = actionUrl.indexOf('?');
+            if(questionPos!=-1) {
+                String[] nameVals = StringUtility.splitString(actionUrl.substring(questionPos+1), '&');
+                if(nameVals.length>0) {
+                    out.write("<div>");
+                    for(String nameVal : nameVals) {
+                        int equalPos = nameVal.indexOf('=');
+                        String name, value;
+                        if(equalPos==-1) {
+                            name = URLDecoder.decode(nameVal, "UTF-8");
+                            value = "";
+                        } else {
+                            name = URLDecoder.decode(nameVal.substring(0, equalPos), "UTF-8");
+                            value = URLDecoder.decode(nameVal.substring(equalPos+1), "UTF-8");
+                        }
+                        out.write("<input type=\"hidden\" name=\"");
+                        EncodingUtils.encodeXmlAttribute(name, out);
+                        out.write("\" value=\"");
+                        EncodingUtils.encodeXmlAttribute(value, out);
+                        out.write("\" />");
+                    }
+                    out.write("</div>");
+                }
+            }
+        }
         out.write(capturedBody.toString());
         out.write("</form>");
     }
