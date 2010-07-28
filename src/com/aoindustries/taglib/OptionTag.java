@@ -24,13 +24,11 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.TextInXhtmlEncoder;
-import com.aoindustries.io.StringBuilderWriter;
+import com.aoindustries.io.AutoTempFileWriter;
 import com.aoindustries.util.EncodingUtils;
 import java.io.IOException;
 import java.io.Writer;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.PageContext;
 
 /**
  * @author  AO Industries, Inc.
@@ -84,9 +82,7 @@ public class OptionTag extends AutoEncodingBufferedTag implements ValueAttribute
     }
 
     @Override
-    protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
-        PageContext pageContext = (PageContext)getJspContext();
-        HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
+    protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         String body = capturedBody.toString().trim();
         if(!valueSet) value = body;
         out.write("<option value=\"");

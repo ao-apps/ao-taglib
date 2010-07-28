@@ -25,6 +25,7 @@ package com.aoindustries.taglib;
 import com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.NewEncodingUtils;
+import com.aoindustries.io.AutoTempFileWriter;
 import com.aoindustries.io.StringBuilderWriter;
 import com.aoindustries.util.EncodingUtils;
 import java.io.IOException;
@@ -44,47 +45,58 @@ public class ATag extends AutoEncodingBufferedTag implements HrefAttribute, Clas
     private String style;
     private String onclick;
 
+    @Override
     public MediaType getContentType() {
         return MediaType.XHTML;
     }
 
+    @Override
     public MediaType getOutputType() {
         return MediaType.XHTML;
     }
 
+    @Override
     public String getHref() {
         return href;
     }
 
+    @Override
     public void setHref(String href) {
         this.href = href;
     }
 
+    @Override
     public String getClazz() {
         return clazz;
     }
 
+    @Override
     public void setClazz(String clazz) {
         this.clazz = clazz;
     }
 
+    @Override
     public String getStyle() {
         return style;
     }
 
+    @Override
     public void setStyle(String style) {
         this.style = style;
     }
 
+    @Override
     public String getOnclick() {
         return onclick;
     }
 
+    @Override
     public void setOnclick(String onclick) {
         this.onclick = onclick;
     }
 
-    protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
+    @Override
+    protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         PageContext pageContext = (PageContext)getJspContext();
         out.write("<a");
         if(href!=null) {
@@ -119,7 +131,7 @@ public class ATag extends AutoEncodingBufferedTag implements HrefAttribute, Clas
             out.write('"');
         }
         out.write('>');
-        out.write(capturedBody.toString());
+        capturedBody.writeTo(out);
         out.write("</a>");
     }
 }

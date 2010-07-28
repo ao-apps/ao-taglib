@@ -25,7 +25,7 @@ package com.aoindustries.taglib;
 import com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.NewEncodingUtils;
-import com.aoindustries.io.StringBuilderWriter;
+import com.aoindustries.io.AutoTempFileWriter;
 import com.aoindustries.util.EncodingUtils;
 import com.aoindustries.util.StringUtility;
 import java.io.IOException;
@@ -116,7 +116,7 @@ public class FormTag extends AutoEncodingBufferedTag implements MethodAttribute,
     }
 
     @Override
-    protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
+    protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         PageContext pageContext = (PageContext)getJspContext();
         out.write("<form method=\"");
         out.write(method);
@@ -178,7 +178,7 @@ public class FormTag extends AutoEncodingBufferedTag implements MethodAttribute,
                 }
             }
         }
-        out.write(capturedBody.toString());
+        capturedBody.writeTo(out);
         out.write("</form>");
     }
 }

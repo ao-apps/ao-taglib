@@ -24,6 +24,7 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.MediaType;
+import com.aoindustries.io.AutoTempFileWriter;
 import com.aoindustries.io.StringBuilderWriter;
 import com.aoindustries.util.EncodingUtils;
 import java.io.IOException;
@@ -208,9 +209,7 @@ public class InputTag extends AutoEncodingBufferedTag implements IdAttribute, Ty
 
 
     @Override
-    protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
-        PageContext pageContext = (PageContext)getJspContext();
-        HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
+    protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         if(type==null) throw new JspException(ApplicationResources.accessor.getMessage("InputTag.type.required"));
         if(value==null) value = capturedBody.toString().trim();
         out.write("<input");

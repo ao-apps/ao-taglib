@@ -23,7 +23,7 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.io.StringBuilderWriter;
+import com.aoindustries.io.AutoTempFileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -45,7 +45,7 @@ public class ActionTag extends AutoEncodingBufferedTag {
     }
 
     @Override
-    protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
+    protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         JspTag parent = findAncestorWithClass(this, ActionAttribute.class);
         if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("ActionTag.needActionAttributeParent"));
         String action = capturedBody.toString().trim();

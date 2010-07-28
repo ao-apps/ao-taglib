@@ -24,6 +24,7 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.TextInXhtmlEncoder;
+import com.aoindustries.io.AutoTempFileWriter;
 import com.aoindustries.io.StringBuilderWriter;
 import com.aoindustries.util.EncodingUtils;
 import java.io.IOException;
@@ -115,9 +116,7 @@ public class TextareaTag extends AutoEncodingBufferedTag implements NameAttribut
     }
 
     @Override
-    protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
-        PageContext pageContext = (PageContext)getJspContext();
-        HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
+    protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         if(value==null) value = capturedBody.toString().trim();
         out.write("<textarea");
         if(name!=null) {

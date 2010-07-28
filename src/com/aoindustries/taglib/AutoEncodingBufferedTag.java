@@ -27,6 +27,7 @@ import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.ValidMediaInput;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.MediaValidator;
+import com.aoindustries.io.AutoTempFileWriter;
 import com.aoindustries.io.StringBuilderWriter;
 import java.io.IOException;
 import java.io.Writer;
@@ -89,6 +90,14 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport implement
      */
     public int getInitialBufferSize() {
         return 32;
+    }
+
+    /**
+     * Gets the number of characters that may be buffered before switching to the
+     * use of a temp file.  The default is 4 MB.
+     */
+    public int getTempFileThreshold() {
+        return 4 * 1024 * 1024;
     }
 
     private static final Writer failOnWriteWriter = new Writer() {
@@ -173,35 +182,39 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport implement
             }
 
             // Capture the body output while validating
-            StringBuilderWriter capturedBody = new StringBuilderWriter(getInitialBufferSize());
-            MediaValidator captureValidator = MediaValidator.getMediaValidator(myContentType, capturedBody);
-            inputValidator = captureValidator;
-            JspFragment body = getJspBody();
-            if(body!=null) {
-                body.invoke(captureValidator);
-                captureValidator.flush();
-            }
-
-            MediaType myOutputType = getOutputType();
-            if(myOutputType==null) {
-                // No output, error if anything written.
-                doTag(capturedBody, failOnWriteWriter);
-            } else {
-                // Find the encoder
-                MediaEncoder mediaEncoder = MediaEncoder.getMediaEncoder(response, myOutputType, containerContentType, out);
-                if(mediaEncoder!=null) {
-                    // Encode the content.  The encoder is also a redundant validator for our input and guarantees valid output for our parent.
-                    mediaEncoder.writePrefix();
-                    try {
-                        doTag(capturedBody, mediaEncoder);
-                    } finally {
-                        mediaEncoder.writeSuffix();
-                    }
-                } else {
-                    // Not using an encoder, validate our own output.
-                    MediaValidator validator = MediaValidator.getMediaValidator(myOutputType, out);
-                    doTag(capturedBody, validator);
+            AutoTempFileWriter capturedBody = new AutoTempFileWriter(getInitialBufferSize(), getTempFileThreshold());
+            try {
+                MediaValidator captureValidator = MediaValidator.getMediaValidator(myContentType, capturedBody);
+                inputValidator = captureValidator;
+                JspFragment body = getJspBody();
+                if(body!=null) {
+                    body.invoke(captureValidator);
+                    captureValidator.flush();
                 }
+
+                MediaType myOutputType = getOutputType();
+                if(myOutputType==null) {
+                    // No output, error if anything written.
+                    doTag(capturedBody, failOnWriteWriter);
+                } else {
+                    // Find the encoder
+                    MediaEncoder mediaEncoder = MediaEncoder.getMediaEncoder(response, myOutputType, containerContentType, out);
+                    if(mediaEncoder!=null) {
+                        // Encode the content.  The encoder is also a redundant validator for our input and guarantees valid output for our parent.
+                        mediaEncoder.writePrefix();
+                        try {
+                            doTag(capturedBody, mediaEncoder);
+                        } finally {
+                            mediaEncoder.writeSuffix();
+                        }
+                    } else {
+                        // Not using an encoder, validate our own output.
+                        MediaValidator validator = MediaValidator.getMediaValidator(myOutputType, out);
+                        doTag(capturedBody, validator);
+                    }
+                }
+            } finally {
+                capturedBody.delete();
             }
         } catch(MediaException err) {
             throw new JspException(err);
@@ -212,5 +225,5 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport implement
      * Once the data is captured, this is called.
      * type, this version of invoke is called.
      */
-    abstract protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException;
+    abstract protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException;
 }

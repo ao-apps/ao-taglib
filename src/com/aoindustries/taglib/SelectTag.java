@@ -24,6 +24,7 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.MediaType;
+import com.aoindustries.io.AutoTempFileWriter;
 import com.aoindustries.io.StringBuilderWriter;
 import com.aoindustries.util.EncodingUtils;
 import java.io.IOException;
@@ -40,47 +41,58 @@ public class SelectTag extends AutoEncodingBufferedTag implements NameAttribute,
     private String onfocus;
     private String onkeypress;
 
+    @Override
     public MediaType getContentType() {
         return MediaType.XHTML;
     }
 
+    @Override
     public MediaType getOutputType() {
         return MediaType.XHTML;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public void setName(String name) {
         this.name = name;
     }
 
+    @Override
     public String getOnchange() {
         return onchange;
     }
 
+    @Override
     public void setOnchange(String onchange) {
         this.onchange = onchange;
     }
 
+    @Override
     public String getOnfocus() {
         return onfocus;
     }
 
+    @Override
     public void setOnfocus(String onfocus) {
         this.onfocus = onfocus;
     }
 
+    @Override
     public String getOnkeypress() {
         return onkeypress;
     }
 
+    @Override
     public void setOnkeypress(String onkeypress) {
         this.onkeypress = onkeypress;
     }
 
-    protected void doTag(StringBuilderWriter capturedBody, Writer out) throws JspException, IOException {
+    @Override
+    protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         out.write("<select");
         if(name!=null) {
             out.write(" name=\"");
@@ -103,7 +115,7 @@ public class SelectTag extends AutoEncodingBufferedTag implements NameAttribute,
             out.write('"');
         }
         out.write('>');
-        out.write(capturedBody.toString());
+        capturedBody.writeTo(out);
         out.write("</select>");
     }
 }
