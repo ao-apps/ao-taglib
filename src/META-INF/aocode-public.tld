@@ -716,6 +716,29 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
+    <description>Adds multiple parameters to its ParamsAttribute parent tag.</description>
+    <name>params</name>
+    <tag-class>com.aoindustries.taglib.ParamsTag</tag-class>
+    <body-content>scriptless</body-content>
+    <attribute>
+      <description>The name of parameter tag.  A nested name tag will override this value.</description>
+      <name>name</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>
+        The value of the parameter.  This may be an Iterable, Iterator, or array.
+      </description>
+      <name>values</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.Object</type>
+    </attribute>
+    <example />
+  </tag>
+  <tag>
     <description>
       Renders a textarea tag.  The value may be provided in one of three ways, in
       precedence order:
