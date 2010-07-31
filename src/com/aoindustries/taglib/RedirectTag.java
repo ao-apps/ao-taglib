@@ -23,6 +23,12 @@
 package com.aoindustries.taglib;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
@@ -33,17 +39,24 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 /**
  * @author  AO Industries, Inc.
  */
-public class RedirectTag extends SimpleTagSupport implements HrefAttribute, TypeAttribute {
+public class RedirectTag extends SimpleTagSupport implements HrefAttribute, ParamsAttribute, TypeAttribute {
 
     public static boolean isValidType(String type) {
         return
-            "temporary".equals(type)
+            "moved_permanently".equals(type)
             || "permanent".equals(type)
+            || "301".equals(type)
+            || "found".equals(type)
+            || "temporary".equals(type)
+            || "302".equals(type)
+            || "see_other".equals(type)
+            || "303".equals(type)
         ;
     }
 
     private String href;
-    private String type = "temporary";
+    private SortedMap<String,List<String>> params;
+    private String type = "found";
 
     @Override
     public String getHref() {
@@ -53,6 +66,20 @@ public class RedirectTag extends SimpleTagSupport implements HrefAttribute, Type
     @Override
     public void setHref(String href) {
         this.href = href;
+    }
+
+    @Override
+    public Map<String,List<String>> getParams() {
+        if(params==null) return Collections.emptyMap();
+        return params;
+    }
+
+    @Override
+    public void addParam(String name, String value) {
+        if(params==null) params = new TreeMap<String,List<String>>();
+        List<String> values = params.get(name);
+        if(values==null) params.put(name, values = new ArrayList<String>());
+        values.add(value);
     }
 
     @Override
@@ -67,7 +94,8 @@ public class RedirectTag extends SimpleTagSupport implements HrefAttribute, Type
     }
 
     @Override
-    public void doTag() throws IOException, SkipPageException {
+    public void doTag() throws IOException, SkipPageException, JspException {
+        getJspBody().invoke(null);
         PageContext pageContext = (PageContext)getJspContext();
         HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
         HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
@@ -75,12 +103,16 @@ public class RedirectTag extends SimpleTagSupport implements HrefAttribute, Type
             String contextPath = request.getContextPath();
             if(contextPath.length()>0) href = contextPath+href;
         }
+        href = HrefTag.addParams(href, params);
         String encodedHref = response.encodeRedirectURL(href);
-        if("temporary".equals(type)) {
-            response.sendRedirect(encodedHref);
-        } else if("permanent".equals(type)) {
+        if("moved_permanently".equals(type) || "permanent".equals(type) || "301".equals(type)) {
             response.setHeader("Location", encodedHref);
             response.sendError(HttpServletResponse.SC_MOVED_PERMANENTLY);
+        } else if("found".equals(type) || "temporary".equals(type) || "302".equals(type)) {
+            response.sendRedirect(encodedHref);
+        } else if("see_other".equals(type) || "303".equals(type)) {
+            response.setHeader("Location", encodedHref);
+            response.sendError(HttpServletResponse.SC_SEE_OTHER);
         } else {
             throw new AssertionError("Unexpected value for type: "+type);
         }

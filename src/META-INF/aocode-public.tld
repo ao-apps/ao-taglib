@@ -426,6 +426,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
           URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
           any character in the set { ':', '/', ';', '#' }
           A nested href tag will override this value.
+          Any directly nested param tag will add parameters to the href.
       </description>
       <name>href</name>
       <required>false</required>
@@ -960,6 +961,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
           URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
           any character in the set { ':', '/', ';', '#' }
           A nested href tag will override this value.
+          Any directly nested param tag will add parameters to the href.
       </description>
       <name>href</name>
       <required>false</required>
@@ -968,7 +970,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     </attribute>
     <attribute>
       <description>
-          The type of redirect performed.  Is one of "temporary" or "permanent", defaults to "temporary".
+          The type of redirect performed.  Is one of "moved_permanently" (or 301), "found" (or 302) or "see_other" (or 303), defaults to "found" (302).
           A nested type tag will override this value.
       </description>
       <name>type</name>

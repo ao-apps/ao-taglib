@@ -25,6 +25,7 @@ package com.aoindustries.taglib;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.AutoTempFileWriter;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -54,10 +55,20 @@ public class HrefTag extends AutoEncodingBufferedTag implements ParamsAttribute 
     }
 
     @Override
-    protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
-        JspTag parent = findAncestorWithClass(this, HrefAttribute.class);
-        if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("HrefTag.needHrefAttributeParent"));
-        String href = capturedBody.toString().trim();
+    public Map<String,List<String>> getParams() {
+        if(params==null) return Collections.emptyMap();
+        return params;
+    }
+
+    @Override
+    public void addParam(String name, String value) {
+        if(params==null) params = new TreeMap<String,List<String>>();
+        List<String> values = params.get(name);
+        if(values==null) params.put(name, values = new ArrayList<String>());
+        values.add(value);
+    }
+
+    static String addParams(String href, Map<String,List<String>> params) throws UnsupportedEncodingException {
         if(params!=null) {
             boolean hasQuestion = href.indexOf('?')!=-1;
             StringBuilder sb = new StringBuilder(href);
@@ -74,21 +85,15 @@ public class HrefTag extends AutoEncodingBufferedTag implements ParamsAttribute 
             }
             href = sb.toString();
         }
+        return href;
+    }
+
+    @Override
+    protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
+        JspTag parent = findAncestorWithClass(this, HrefAttribute.class);
+        if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("HrefTag.needHrefAttributeParent"));
+        String href = addParams(capturedBody.toString().trim(), params);
         HrefAttribute hrefAttribute = (HrefAttribute)parent;
         hrefAttribute.setHref(href);
-    }
-
-    @Override
-    public Map<String,List<String>> getParams() {
-        if(params==null) return Collections.emptyMap();
-        return params;
-    }
-
-    @Override
-    public void addParam(String name, String value) {
-        if(params==null) params = new TreeMap<String,List<String>>();
-        List<String> values = params.get(name);
-        if(values==null) params.put(name, values = new ArrayList<String>());
-        values.add(value);
     }
 }
