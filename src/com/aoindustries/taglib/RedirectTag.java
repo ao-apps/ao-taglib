@@ -34,6 +34,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.SkipPageException;
+import javax.servlet.jsp.tagext.JspFragment;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 /**
@@ -95,7 +96,8 @@ public class RedirectTag extends SimpleTagSupport implements HrefAttribute, Para
 
     @Override
     public void doTag() throws IOException, SkipPageException, JspException {
-        getJspBody().invoke(null);
+        JspFragment body = getJspBody();
+        if(body!=null) body.invoke(null);
         PageContext pageContext = (PageContext)getJspContext();
         HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
         HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
