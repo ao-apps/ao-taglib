@@ -28,7 +28,6 @@ import com.aoindustries.encoding.ValidMediaInput;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.MediaValidator;
 import com.aoindustries.io.AutoTempFileWriter;
-import com.aoindustries.io.StringBuilderWriter;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletResponse;

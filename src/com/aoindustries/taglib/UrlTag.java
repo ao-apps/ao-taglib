@@ -31,6 +31,7 @@ public class UrlTag extends AutoEncodingFilteredTag {
 
     private static final long serialVersionUID = 1L;
 
+    @Override
     public MediaType getContentType() {
         return MediaType.URL;
     }

@@ -234,7 +234,10 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       The body of this tag contains well-formed XHTML 1.0-compliant markup.
 
       The content type of this tag is application/xhtml+xml.
-      TODO: must be well-formed XHTML content. Currently only checks character values.
+
+      Note, for performance, this implementation currently only checks character
+      values.  This should be enough to ensure the no encodings are violated and
+      overall XML validation by the browse should catch problems.
     </description>
     <name>xhtml</name>
     <tag-class>com.aoindustries.taglib.XhtmlTag</tag-class>
@@ -280,7 +283,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       &lt;ol&gt;
         &lt;li&gt;Direct child &lt;value&gt; tag.&lt;/li&gt;
         &lt;li&gt;As the value attribute&lt;/li&gt;
-        &lt;li&gt;Output of tag body, trimmed.&lt;/li&gt;
+        &lt;li&gt;Contents of tag body, trimmed.&lt;/li&gt;
       &lt;/ol&gt;
     </description>
     <name>input</name>
@@ -463,7 +466,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
         &lt;ol&gt;
             &lt;li&gt;Direct child &lt;src&gt; tag.&lt;/li&gt;
             &lt;li&gt;As the src attribute&lt;/li&gt;
-            &lt;li&gt;Output of tag body, trimmed.&lt;/li&gt;
+            &lt;li&gt;Contents of tag body, trimmed.&lt;/li&gt;
         &lt;/ol&gt;
         Also, the width, height, and alt values are required either as attributes or nested tags.
     </description>
@@ -745,7 +748,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       &lt;ol&gt;
         &lt;li&gt;Direct child &lt;value&gt; tag.&lt;/li&gt;
         &lt;li&gt;As the value attribute&lt;/li&gt;
-        &lt;li&gt;Output of tag body.&lt;/li&gt;
+        &lt;li&gt;Contents of tag body.&lt;/li&gt;
       &lt;/ol&gt;
     </description>
     <name>textarea</name>
@@ -997,6 +1000,48 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
           A nested type tag will override this value.
       </description>
       <name>type</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <example />
+  </tag>
+  <tag>
+    <description>
+      If contained with any MetasAttribute parent, adds the meta data to the parent tag.
+      Otherwise, renders a meta tag.  The content may be provided in one of three ways, in
+      precedence order:
+      &lt;ol&gt;
+        &lt;li&gt;Direct child &lt;content&gt; tag.&lt;/li&gt;
+        &lt;li&gt;As the content attribute&lt;/li&gt;
+        &lt;li&gt;Contents of tag body, trimmed.&lt;/li&gt;
+      &lt;/ol&gt;
+    </description>
+    <name>meta</name>
+    <tag-class>com.aoindustries.taglib.MetaTag</tag-class>
+    <body-content>scriptless</body-content>
+    <attribute>
+      <description>
+          The http-equiv of the meta element.
+      </description>
+      <name>httpEquiv</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>The name of meta tag.  A nested name tag will override this value.</description>
+      <name>name</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>
+        The content of the meta data.  A nested content tag will override this value.  If neither is provided,
+        the output of the body is used with whitespace trimmed.
+      </description>
+      <name>content</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>

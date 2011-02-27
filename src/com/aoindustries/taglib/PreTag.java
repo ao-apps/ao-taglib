@@ -31,6 +31,7 @@ public class PreTag extends AutoEncodingFilteredTag {
 
     private static final long serialVersionUID = 1L;
 
+    @Override
     public MediaType getContentType() {
         return MediaType.XHTML_PRE;
     }

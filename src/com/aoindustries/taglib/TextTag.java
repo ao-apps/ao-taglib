@@ -36,6 +36,7 @@ public class TextTag extends AutoEncodingFilteredTag {
     private boolean makeBr = false;
     private boolean makeNbsp = false;
 
+    @Override
     public MediaType getContentType() {
         return MediaType.TEXT;
     }

@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009, 2010  AO Industries, Inc.
+ * Copyright (C) 2011  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,17 +22,35 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.MediaType;
+import javax.servlet.jsp.JspException;
 
 /**
+ * Holds the data for a Meta tag that is passed between MetaTag and any MetasAttribute parent.
+ *
  * @author  AO Industries, Inc.
  */
-public class XhtmlAttributeTag extends AutoEncodingFilteredTag {
+public class Meta {
 
-    private static final long serialVersionUID = 1L;
+    private final String name;
+    private final String httpEquiv;
+    private final String content;
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.XHTML_ATTRIBUTE;
+    public Meta(String name, String httpEquiv, String content) throws JspException {
+        this.name = name;
+        this.httpEquiv = httpEquiv;
+        if(content==null) throw new JspException(ApplicationResources.accessor.getMessage("Meta.contentRequired"));
+        this.content = content;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getHttpEquiv() {
+        return httpEquiv;
+    }
+
+    public String getContent() {
+        return content;
     }
 }
