@@ -23,16 +23,37 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
+import com.aoindustries.io.AutoTempFileWriter;
+import java.io.IOException;
+import java.io.Writer;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.PageContext;
 
 /**
  * @author  AO Industries, Inc.
  */
-public class UrlTag extends AutoEncodingFilteredTag {
+public class UrlTag extends AutoEncodingBufferedTag {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
 
     @Override
     public MediaType getContentType() {
         return MediaType.URL;
+    }
+
+    @Override
+    public MediaType getOutputType() {
+        return MediaType.URL;
+    }
+
+    @Override
+    protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
+        String url = capturedBody.toString().trim();
+        if(url.startsWith("/")) {
+            PageContext pageContext = (PageContext)getJspContext();
+            out.write(((HttpServletRequest)pageContext.getRequest()).getContextPath());
+        }
+        out.write(url);
     }
 }

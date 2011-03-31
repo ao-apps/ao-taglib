@@ -264,6 +264,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       be performed based on the context of this tag.
 
       It may be a relative or absolute URL.
+      If starts with a /, the context path will be prepended to the path.
 
       The URL will be passed through HttpServletResponse.encodeURL to add any
       URL-based session state.  Session state will not be added to external links.
