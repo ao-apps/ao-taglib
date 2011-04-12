@@ -99,7 +99,7 @@ public class MetaTag extends AutoEncodingBufferedTag implements NameAttribute, C
                 out.write('"');
             }
             out.write(" content=\"");
-            out.write(content);
+            EncodingUtils.encodeXmlAttribute(content, out);
             out.write("\" />");
         }
     }
