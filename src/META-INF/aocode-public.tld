@@ -430,7 +430,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
           URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
           any character in the set { ':', '/', ';', '#' }
           A nested href tag will override this value.
-          Any directly nested param tag will add parameters to the href.
+          Any directly nested param or params tag will add parameters to the href.
       </description>
       <name>href</name>
       <required>false</required>
@@ -482,6 +482,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
           URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
           any character in the set { ':', '/', ';', '#' }
           A nested src tag will override this value.
+          Any directly nested param or params tag will add parameters to the src.
       </description>
       <name>src</name>
       <required>false</required>
@@ -589,7 +590,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
-    <description>Provides an href to its HrefAttribute parent tag.  Parameters may be added with nested param tags.</description>
+    <description>Provides an href to its HrefAttribute parent tag.  Parameters may be added with nested param or params tags.</description>
     <name>href</name>
     <tag-class>com.aoindustries.taglib.HrefTag</tag-class>
     <body-content>scriptless</body-content>
@@ -638,7 +639,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
-    <description>Provides a src attribute to its SrcAttribute parent tag.</description>
+    <description>Provides a src attribute to its SrcAttribute parent tag.  Parameters may be added with nested param or params tags.</description>
     <name>src</name>
     <tag-class>com.aoindustries.taglib.SrcTag</tag-class>
     <body-content>scriptless</body-content>
@@ -988,7 +989,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
           URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
           any character in the set { ':', '/', ';', '#' }
           A nested href tag will override this value.
-          Any directly nested param tag will add parameters to the href.
+          Any directly nested param or params tag will add parameters to the href.
       </description>
       <name>href</name>
       <required>false</required>

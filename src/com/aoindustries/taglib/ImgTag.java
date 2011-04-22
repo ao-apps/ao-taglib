@@ -28,6 +28,12 @@ import com.aoindustries.io.AutoTempFileWriter;
 import com.aoindustries.util.EncodingUtils;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
@@ -36,9 +42,10 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
-public class ImgTag extends AutoEncodingBufferedTag implements SrcAttribute, WidthAttribute, HeightAttribute, AltAttribute, ClassAttribute, StyleAttribute {
+public class ImgTag extends AutoEncodingBufferedTag implements SrcAttribute, ParamsAttribute, WidthAttribute, HeightAttribute, AltAttribute, ClassAttribute, StyleAttribute {
 
     private String src;
+    private SortedMap<String,List<String>> params;
     private String width;
     private String height;
     private String alt;
@@ -63,6 +70,20 @@ public class ImgTag extends AutoEncodingBufferedTag implements SrcAttribute, Wid
     @Override
     public void setSrc(String src) {
         this.src = src;
+    }
+
+    @Override
+    public Map<String,List<String>> getParams() {
+        if(params==null) return Collections.emptyMap();
+        return params;
+    }
+
+    @Override
+    public void addParam(String name, String value) {
+        if(params==null) params = new TreeMap<String,List<String>>();
+        List<String> values = params.get(name);
+        if(values==null) params.put(name, values = new ArrayList<String>());
+        values.add(value);
     }
 
     @Override
@@ -128,6 +149,7 @@ public class ImgTag extends AutoEncodingBufferedTag implements SrcAttribute, Wid
             String contextPath = ((HttpServletRequest)pageContext.getRequest()).getContextPath();
             if(contextPath.length()>0) src = contextPath+src;
         }
+        src = HrefTag.addParams(src, params);
         out.write(
             EncodingUtils.encodeXmlAttribute(
                 response.encodeURL(

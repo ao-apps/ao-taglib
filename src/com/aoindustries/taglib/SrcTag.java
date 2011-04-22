@@ -26,13 +26,21 @@ import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.AutoTempFileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.JspTag;
 
 /**
  * @author  AO Industries, Inc.
  */
-public class SrcTag extends AutoEncodingBufferedTag {
+public class SrcTag extends AutoEncodingBufferedTag implements ParamsAttribute {
+
+    private SortedMap<String,List<String>> params;
 
     @Override
     public MediaType getContentType() {
@@ -45,10 +53,24 @@ public class SrcTag extends AutoEncodingBufferedTag {
     }
 
     @Override
+    public Map<String,List<String>> getParams() {
+        if(params==null) return Collections.emptyMap();
+        return params;
+    }
+
+    @Override
+    public void addParam(String name, String value) {
+        if(params==null) params = new TreeMap<String,List<String>>();
+        List<String> values = params.get(name);
+        if(values==null) params.put(name, values = new ArrayList<String>());
+        values.add(value);
+    }
+
+    @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         JspTag parent = findAncestorWithClass(this, SrcAttribute.class);
         if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("SrcTag.needSrcAttributeParent"));
         SrcAttribute srcAttribute = (SrcAttribute)parent;
-        srcAttribute.setSrc(capturedBody.toString().trim());
+        srcAttribute.setSrc(HrefTag.addParams(capturedBody.toString().trim(), params));
     }
 }
