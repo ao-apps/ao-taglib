@@ -26,15 +26,13 @@ import com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.NewEncodingUtils;
 import com.aoindustries.io.AutoTempFileWriter;
+import com.aoindustries.net.EmptyParameters;
+import com.aoindustries.net.HttpParameters;
+import com.aoindustries.net.HttpParametersMap;
+import com.aoindustries.net.MutableHttpParameters;
 import com.aoindustries.util.EncodingUtils;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.SortedMap;
-import java.util.TreeMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
@@ -46,7 +44,7 @@ import javax.servlet.jsp.PageContext;
 public class ATag extends AutoEncodingBufferedTag implements HrefAttribute, ParamsAttribute, ClassAttribute, StyleAttribute, OnclickAttribute {
 
     private String href;
-    private SortedMap<String,List<String>> params;
+    private MutableHttpParameters params;
     private String clazz;
     private String style;
     private String onclick;
@@ -72,17 +70,14 @@ public class ATag extends AutoEncodingBufferedTag implements HrefAttribute, Para
     }
 
     @Override
-    public Map<String,List<String>> getParams() {
-        if(params==null) return Collections.emptyMap();
-        return params;
+    public HttpParameters getParams() {
+        return params==null ? EmptyParameters.getInstance() : params;
     }
 
     @Override
     public void addParam(String name, String value) {
-        if(params==null) params = new TreeMap<String,List<String>>();
-        List<String> values = params.get(name);
-        if(values==null) params.put(name, values = new ArrayList<String>());
-        values.add(value);
+        if(params==null) params = new HttpParametersMap();
+        params.addParameter(name, value);
     }
 
     @Override
@@ -136,7 +131,7 @@ public class ATag extends AutoEncodingBufferedTag implements HrefAttribute, Para
             );
             out.write('"');
         } else {
-            if(params!=null && !params.isEmpty()) throw new JspException("parameters provided without href");
+            if(params!=null) throw new JspException("parameters provided without href");
         }
         if(clazz!=null) {
             out.write(" class=\"");

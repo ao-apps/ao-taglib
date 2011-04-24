@@ -22,8 +22,7 @@
  */
 package com.aoindustries.taglib;
 
-import java.util.Collection;
-import java.util.Map;
+import com.aoindustries.net.HttpParameters;
 
 /**
  * Something with a set of parameters.
@@ -32,7 +31,7 @@ import java.util.Map;
  */
 public interface ParamsAttribute {
 
-    Map<String,? extends Collection<String>> getParams();
+    HttpParameters getParams();
 
     void addParam(String name, String value);
 }

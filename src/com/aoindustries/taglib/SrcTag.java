@@ -24,14 +24,11 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.AutoTempFileWriter;
+import com.aoindustries.net.EmptyParameters;
+import com.aoindustries.net.HttpParameters;
+import com.aoindustries.net.HttpParametersMap;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.SortedMap;
-import java.util.TreeMap;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.JspTag;
 
@@ -40,7 +37,7 @@ import javax.servlet.jsp.tagext.JspTag;
  */
 public class SrcTag extends AutoEncodingBufferedTag implements ParamsAttribute {
 
-    private SortedMap<String,List<String>> params;
+    private HttpParametersMap params;
 
     @Override
     public MediaType getContentType() {
@@ -53,17 +50,14 @@ public class SrcTag extends AutoEncodingBufferedTag implements ParamsAttribute {
     }
 
     @Override
-    public Map<String,List<String>> getParams() {
-        if(params==null) return Collections.emptyMap();
-        return params;
+    public HttpParameters getParams() {
+        return params==null ? EmptyParameters.getInstance() : params;
     }
 
     @Override
     public void addParam(String name, String value) {
-        if(params==null) params = new TreeMap<String,List<String>>();
-        List<String> values = params.get(name);
-        if(values==null) params.put(name, values = new ArrayList<String>());
-        values.add(value);
+        if(params==null) params = new HttpParametersMap();
+        params.addParameter(name, value);
     }
 
     @Override

@@ -24,16 +24,15 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.AutoTempFileWriter;
+import com.aoindustries.net.EmptyParameters;
+import com.aoindustries.net.HttpParameters;
+import com.aoindustries.net.HttpParametersMap;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.SortedMap;
-import java.util.TreeMap;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.JspTag;
 
@@ -42,7 +41,7 @@ import javax.servlet.jsp.tagext.JspTag;
  */
 public class HrefTag extends AutoEncodingBufferedTag implements ParamsAttribute {
 
-    private SortedMap<String,List<String>> params;
+    private HttpParametersMap params;
 
     @Override
     public MediaType getContentType() {
@@ -55,24 +54,21 @@ public class HrefTag extends AutoEncodingBufferedTag implements ParamsAttribute 
     }
 
     @Override
-    public Map<String,List<String>> getParams() {
-        if(params==null) return Collections.emptyMap();
-        return params;
+    public HttpParameters getParams() {
+        return params==null ? EmptyParameters.getInstance() : params;
     }
 
     @Override
     public void addParam(String name, String value) {
-        if(params==null) params = new TreeMap<String,List<String>>();
-        List<String> values = params.get(name);
-        if(values==null) params.put(name, values = new ArrayList<String>());
-        values.add(value);
+        if(params==null) params = new HttpParametersMap();
+        params.addParameter(name, value);
     }
 
-    static String addParams(String href, Map<String,List<String>> params) throws UnsupportedEncodingException {
+    static String addParams(String href, HttpParameters params) throws UnsupportedEncodingException {
         if(params!=null) {
             boolean hasQuestion = href.indexOf('?')!=-1;
             StringBuilder sb = new StringBuilder(href);
-            for(Map.Entry<String,List<String>> entry : params.entrySet()) {
+            for(Map.Entry<String,List<String>> entry : params.getParameterMap().entrySet()) {
                 String encodedName = URLEncoder.encode(entry.getKey(), "UTF-8");
                 for(String value : entry.getValue()) {
                     if(hasQuestion) sb.append('&');
@@ -80,7 +76,8 @@ public class HrefTag extends AutoEncodingBufferedTag implements ParamsAttribute 
                         sb.append('?');
                         hasQuestion = true;
                     }
-                    sb.append(encodedName).append('=').append(URLEncoder.encode(value, "UTF-8"));
+                    sb.append(encodedName);
+                    if(value!=null) sb.append('=').append(URLEncoder.encode(value, "UTF-8"));
                 }
             }
             href = sb.toString();
