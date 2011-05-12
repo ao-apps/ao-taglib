@@ -33,7 +33,7 @@ import javax.servlet.jsp.JspException;
 /**
  * @author  AO Industries, Inc.
  */
-public class InputTag extends AutoEncodingBufferedTag implements IdAttribute, TypeAttribute, NameAttribute, ValueAttribute, OnclickAttribute, OnchangeAttribute, OnfocusAttribute, OnkeypressAttribute, SizeAttribute, ReadonlyAttribute, DisabledAttribute, ClassAttribute, CheckedAttribute {
+public class InputTag extends AutoEncodingBufferedTag implements IdAttribute, TypeAttribute, NameAttribute, ValueAttribute, OnclickAttribute, OnchangeAttribute, OnfocusAttribute, OnkeypressAttribute, SizeAttribute, ReadonlyAttribute, DisabledAttribute, ClassAttribute, StyleAttribute, CheckedAttribute {
 
     public static boolean isValidType(String type) {
         return
@@ -62,6 +62,7 @@ public class InputTag extends AutoEncodingBufferedTag implements IdAttribute, Ty
     private boolean readonly;
     private boolean disabled;
     private String clazz;
+    private String style;
     private boolean checked;
 
     @Override
@@ -194,6 +195,17 @@ public class InputTag extends AutoEncodingBufferedTag implements IdAttribute, Ty
     public void setClazz(String clazz) {
         this.clazz = clazz;
     }
+
+    @Override
+    public String getStyle() {
+        return style;
+    }
+
+    @Override
+    public void setStyle(String style) {
+        this.style = style;
+    }
+
     @Override
     public boolean isChecked() {
         return checked;
@@ -256,6 +268,11 @@ public class InputTag extends AutoEncodingBufferedTag implements IdAttribute, Ty
         if(clazz!=null) {
             out.write(" class=\"");
             EncodingUtils.encodeXmlAttribute(clazz, out);
+            out.write('"');
+        }
+        if(style!=null) {
+            out.write(" style=\"");
+            EncodingUtils.encodeXmlAttribute(style, out);
             out.write('"');
         }
         if(checked) out.write(" checked=\"checked\"");
