@@ -235,9 +235,9 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 
       The content type of this tag is application/xhtml+xml.
 
-      Note, for performance, this implementation currently only checks character
-      values.  This should be enough to ensure the no encodings are violated and
-      overall XML validation by the browse should catch problems.
+      Note: For performance, this implementation currently only checks character
+      values.  This ensures that no encodings are violated and overall XML validation
+      by the browser should catch problems.
     </description>
     <name>xhtml</name>
     <tag-class>com.aoindustries.taglib.XhtmlTag</tag-class>
@@ -851,6 +851,16 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <type>java.lang.String</type>
     </attribute>
     <attribute>
+      <description>
+        The enctype for the form.
+        A nested enctype tag will override this value.
+      </description>
+      <name>enctype</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
       <description>The CSS style for the form.  A nested style tag will override this value.</description>
       <name>style</name>
       <required>false</required>
@@ -871,6 +881,16 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <name>select</name>
     <tag-class>com.aoindustries.taglib.SelectTag</tag-class>
     <body-content>scriptless</body-content>
+    <attribute>
+      <description>
+          The id of the select element.
+          A nested id tag will override this value.
+      </description>
+      <name>id</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
     <attribute>
       <description>
           The name of the select element.
@@ -972,6 +992,13 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <description>Provides an action to its ActionAttribute parent tag.</description>
     <name>action</name>
     <tag-class>com.aoindustries.taglib.ActionTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides an enctype to its EnctypeAttribute parent tag.</description>
+    <name>enctype</name>
+    <tag-class>com.aoindustries.taglib.EnctypeTag</tag-class>
     <body-content>scriptless</body-content>
     <example />
   </tag>

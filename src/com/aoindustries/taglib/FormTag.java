@@ -39,7 +39,7 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
-public class FormTag extends AutoEncodingBufferedTag implements MethodAttribute, IdAttribute, ActionAttribute, StyleAttribute, OnsubmitAttribute {
+public class FormTag extends AutoEncodingBufferedTag implements MethodAttribute, IdAttribute, ActionAttribute, EnctypeAttribute, StyleAttribute, OnsubmitAttribute {
 
     public static boolean isValidMethod(String method) {
         return
@@ -51,6 +51,7 @@ public class FormTag extends AutoEncodingBufferedTag implements MethodAttribute,
     private String method = "get";
     private String id;
     private String action;
+    private String enctype;
     private String style;
     private String onsubmit;
 
@@ -93,6 +94,16 @@ public class FormTag extends AutoEncodingBufferedTag implements MethodAttribute,
     @Override
     public void setAction(String action) {
         this.action = action;
+    }
+
+    @Override
+    public String getEnctype() {
+        return enctype;
+    }
+
+    @Override
+    public void setEnctype(String enctype) {
+        this.enctype = enctype;
     }
 
     @Override
@@ -139,6 +150,11 @@ public class FormTag extends AutoEncodingBufferedTag implements MethodAttribute,
             out.write('"');
         } else {
             actionUrl = null;
+        }
+        if(enctype!=null) {
+            out.write(" enctype=\"");
+            EncodingUtils.encodeXmlAttribute(enctype, out);
+            out.write('"');
         }
         if(style!=null) {
             out.write(" style=\"");
