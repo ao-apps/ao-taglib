@@ -1105,4 +1105,25 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <function-signature>java.lang.String join(java.lang.Iterable,java.lang.String)</function-signature>
     <example>${ao:join(iterable, separator)}</example>
   </function>
+  <tag>
+    <description>Word wraps the textual content.</description>
+    <name>wordWrap</name>
+    <tag-class>com.aoindustries.taglib.WordWrapTag</tag-class>
+    <body-content>scriptless</body-content>
+    <attribute>
+      <description>The width to wrap to.  Defaults to 79.</description>
+      <name>width</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>int</type>
+    </attribute>
+    <example />
+  </tag>
+  <function>
+    <description>Word wraps a string.</description>
+    <name>wordWrap</name>
+    <function-class>com.aoindustries.util.StringUtility</function-class>
+    <function-signature>java.lang.String wordWrap(java.lang.String,int)</function-signature>
+    <example>${ao:wordWrap(text, width)}</example>
+  </function>
 </taglib>
