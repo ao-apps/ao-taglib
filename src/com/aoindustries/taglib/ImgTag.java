@@ -39,13 +39,14 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
-public class ImgTag extends AutoEncodingBufferedTag implements SrcAttribute, ParamsAttribute, WidthAttribute, HeightAttribute, AltAttribute, ClassAttribute, StyleAttribute {
+public class ImgTag extends AutoEncodingBufferedTag implements SrcAttribute, ParamsAttribute, WidthAttribute, HeightAttribute, AltAttribute, TitleAttribute, ClassAttribute, StyleAttribute {
 
     private String src;
     private HttpParametersMap params;
     private String width;
     private String height;
     private String alt;
+    private String title;
     private String clazz;
     private String style;
 
@@ -111,6 +112,16 @@ public class ImgTag extends AutoEncodingBufferedTag implements SrcAttribute, Par
     }
 
     @Override
+    public String getTitle() {
+        return title;
+    }
+
+    @Override
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    @Override
     public String getClazz() {
         return clazz;
     }
@@ -157,6 +168,11 @@ public class ImgTag extends AutoEncodingBufferedTag implements SrcAttribute, Par
         EncodingUtils.encodeXmlAttribute(height, out);
         out.write("\" alt=\"");
         EncodingUtils.encodeXmlAttribute(alt, out);
+        if(title!=null) {
+            out.write("\" title=\"");
+            EncodingUtils.encodeXmlAttribute(title, out);
+            out.write('"');
+        }
         out.write('"');
         if(clazz!=null) {
             out.write(" class=\"");
