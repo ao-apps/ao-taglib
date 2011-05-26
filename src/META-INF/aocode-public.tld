@@ -258,16 +258,22 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
   <tag>
     <description>
       The body of this tag contains a Uniform Resource Identifier (URI or URL).
-      The URL should be properly encoded and contain only valid characters.
-      It should not be escaped for (X)HTML, meaning that parameter separators
-      should be &amp; instead of &amp;amp;.  The proper escaping/encoding will
-      be performed based on the context of this tag.
 
-      It may be a relative or absolute URL.
-      If starts with a /, the context path will be prepended to the path.
+      Before the first ? symbol, may contain characters in any language.  This
+      is more flexible than a strict URL format, these characters will be
+      automatically encoded based on context.
 
-      The URL will be passed through HttpServletResponse.encodeURL to add any
-      URL-based session state.  Session state will not be added to external links.
+      After the first ?, however, the parameters must be properly URL encoded
+      and contain only valid characters.  It should not be escaped for (X)HTML,
+      meaning that parameter separators should be &amp; instead of &amp;amp;.
+      The proper escaping/encoding will be performed based on the context of
+      this tag.
+
+      It may be a relative or absolute URL.  If starts with a /, the context
+      path will be prepended to the path.
+
+      Depending on context, the URL will be passed through HttpServletResponse.encodeURL
+      to add any URL-based session state.  Session state will never be added to external links.
 
       The content type of this tag is text/url.
       Must be valid URL-encoded characters only.
@@ -825,6 +831,23 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <rtexprvalue>true</rtexprvalue>
       <type>boolean</type>
     </attribute>
+    <attribute>
+      <description>
+          A JavaScript onchange handler.
+          A nested onchange tag will override this value.
+      </description>
+      <name>onchange</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>The CSS style for the textarea element.  A nested style tag will override this value.</description>
+      <name>style</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
     <example />
   </tag>
   <tag>
@@ -1126,4 +1149,44 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <function-signature>java.lang.String wordWrap(java.lang.String,int)</function-signature>
     <example>${ao:wordWrap(text, width)}</example>
   </function>
+  <tag>
+    <description><![CDATA[
+        <ol>
+            <li>Clears the current output buffer (leaving status code and headers)</li>
+            <li>Sets the response contentType between html / xhtml based on request headers</li>
+            <li>Writes the DOCTYPE unless set to "none"</li>
+            <li>
+                Writes the html tag, including the xmlns, lang, and xml:lang attributes based on
+                the locale of the current response.
+            </li>
+        </ol>
+    ]]></description>
+    <name>html</name>
+    <tag-class>com.aoindustries.taglib.HtmlTag</tag-class>
+    <tei-class>com.aoindustries.taglib.HtmlTagTEI</tei-class>
+    <body-content>scriptless</body-content>
+    <attribute>
+      <description>
+        The doctype to use, one of "strict", "transitional", "frameset", or "none".
+        Defaults to strict.  "none" will suppress the output of a doctype.
+      </description>
+      <name>doctype</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>
+        If set to true, forces the content-type to be text/html.
+        If set to false (the default), will negotiate content-type based on browser support.
+        This should normally be left with the default value of false.  This is used
+        when the content is known to contain invalid markup and can't be parsed as XML.
+      </description>
+      <name>forceHtml</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>boolean</type>
+    </attribute>
+    <example />
+  </tag>
 </taglib>
