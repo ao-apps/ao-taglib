@@ -1153,7 +1153,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <description><![CDATA[
         <ol>
             <li>Clears the current output buffer (leaving status code and headers)</li>
-            <li>Sets the response contentType between html / xhtml based on request headers</li>
+            <li>Sets the response contentType between html / xhtml based on forceHtml attribute and request headers</li>
             <li>Writes the DOCTYPE unless set to "none"</li>
             <li>
                 Writes the html tag, including the xmlns, lang, and xml:lang attributes based on

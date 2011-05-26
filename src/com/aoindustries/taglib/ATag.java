@@ -125,7 +125,7 @@ public class ATag extends AutoEncodingBufferedTag implements HrefAttribute, Para
             out.write(
                 EncodingUtils.encodeXmlAttribute(
                     response.encodeURL(
-                        NewEncodingUtils.encodeURL(href)
+                        NewEncodingUtils.encodeUrlPath(href)
                     )
                 )
             );

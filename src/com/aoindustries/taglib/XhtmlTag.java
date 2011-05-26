@@ -29,8 +29,6 @@ import com.aoindustries.encoding.MediaType;
  */
 public class XhtmlTag extends AutoEncodingFilteredTag {
 
-    private static final long serialVersionUID = 1L;
-
     @Override
     public MediaType getContentType() {
         return MediaType.XHTML;

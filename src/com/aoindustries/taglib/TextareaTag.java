@@ -22,6 +22,7 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.TextInXhtmlEncoder;
 import com.aoindustries.io.AutoTempFileWriter;
@@ -33,7 +34,7 @@ import javax.servlet.jsp.JspException;
 /**
  * @author  AO Industries, Inc.
  */
-public class TextareaTag extends AutoEncodingBufferedTag implements NameAttribute, ValueAttribute, ColsAttribute, RowsAttribute, ReadonlyAttribute, DisabledAttribute {
+public class TextareaTag extends AutoEncodingBufferedTag implements NameAttribute, ValueAttribute, ColsAttribute, RowsAttribute, ReadonlyAttribute, DisabledAttribute, OnchangeAttribute, StyleAttribute {
 
     private String name;
     private String value;
@@ -41,6 +42,8 @@ public class TextareaTag extends AutoEncodingBufferedTag implements NameAttribut
     private int rows;
     private boolean readonly;
     private boolean disabled;
+    private String onchange;
+    private String style;
 
     @Override
     public MediaType getContentType() {
@@ -113,6 +116,26 @@ public class TextareaTag extends AutoEncodingBufferedTag implements NameAttribut
     }
 
     @Override
+    public String getOnchange() {
+        return onchange;
+    }
+
+    @Override
+    public void setOnchange(String onchange) {
+        this.onchange = onchange;
+    }
+
+    @Override
+    public String getStyle() {
+        return style;
+    }
+
+    @Override
+    public void setStyle(String style) {
+        this.style = style;
+    }
+
+    @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         if(value==null) value = capturedBody.toString().trim();
         out.write("<textarea");
@@ -128,6 +151,16 @@ public class TextareaTag extends AutoEncodingBufferedTag implements NameAttribut
         out.write('"');
         if(readonly) out.write(" readonly=\"readonly\"");
         if(disabled) out.write(" disabled=\"disabled\"");
+        if(onchange!=null) {
+            out.write(" onchange=\"");
+            JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute(onchange, out);
+            out.write('"');
+        }
+        if(style!=null) {
+            out.write(" style=\"");
+            EncodingUtils.encodeXmlAttribute(style, out);
+            out.write('"');
+        }
         out.write('>');
         TextInXhtmlEncoder.encodeTextInXhtml(value, out);
         out.write("</textarea>");

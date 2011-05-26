@@ -30,8 +30,6 @@ import com.aoindustries.encoding.MediaType;
  */
 public class ScriptTag extends AutoEncodingFilteredTag {
 
-    private static final long serialVersionUID = 1L;
-
     private MediaType type = MediaType.JAVASCRIPT;
 
     @Override

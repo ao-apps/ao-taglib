@@ -31,8 +31,6 @@ import com.aoindustries.encoding.TextInXhtmlEncoder;
  */
 public class TextTag extends AutoEncodingFilteredTag {
 
-    private static final long serialVersionUID = 1L;
-
     private boolean makeBr = false;
     private boolean makeNbsp = false;
 

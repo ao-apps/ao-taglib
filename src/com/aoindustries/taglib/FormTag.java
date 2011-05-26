@@ -145,7 +145,7 @@ public class FormTag extends AutoEncodingBufferedTag implements MethodAttribute,
                 String contextPath = ((HttpServletRequest)pageContext.getRequest()).getContextPath();
                 if(contextPath.length()>0) action = contextPath+action;
             }
-            actionUrl = response.encodeURL(NewEncodingUtils.encodeURL(action));
+            actionUrl = response.encodeURL(NewEncodingUtils.encodeUrlPath(action));
             out.write(EncodingUtils.encodeXmlAttribute(actionUrl));
             out.write('"');
         } else {

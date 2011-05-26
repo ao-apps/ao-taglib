@@ -36,8 +36,6 @@ import javax.servlet.jsp.PageContext;
  */
 public class WriteTag extends AutoEncodingFilteredTag {
 
-    private static final long serialVersionUID = 1L;
-
     private String scope;
     private String name;
     private String property;

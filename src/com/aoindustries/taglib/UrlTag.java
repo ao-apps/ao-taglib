@@ -35,8 +35,6 @@ import javax.servlet.jsp.PageContext;
  */
 public class UrlTag extends AutoEncodingBufferedTag {
 
-    private static final long serialVersionUID = 2L;
-
     @Override
     public MediaType getContentType() {
         return MediaType.URL;

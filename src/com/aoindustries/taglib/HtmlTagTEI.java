@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009, 2010, 2011  AO Industries, Inc.
+ * Copyright (C) 2011  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,15 +22,34 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.MediaType;
+import javax.servlet.jsp.tagext.TagData;
+import javax.servlet.jsp.tagext.TagExtraInfo;
+import javax.servlet.jsp.tagext.ValidationMessage;
 
 /**
  * @author  AO Industries, Inc.
  */
-public class XhtmlAttributeTag extends AutoEncodingFilteredTag {
+public class HtmlTagTEI extends TagExtraInfo {
 
     @Override
-    public MediaType getContentType() {
-        return MediaType.XHTML_ATTRIBUTE;
+    public ValidationMessage[] validate(TagData data) {
+        Object o = data.getAttribute("doctype");
+        if(
+            o != null
+            && o != TagData.REQUEST_TIME_VALUE
+        ) {
+            String doctype = (String)o;
+            if(
+                !"strict".equals(doctype)
+                && !"transitional".equals(doctype)
+                && !"frameset".equals(doctype)
+                && !"none".equals(doctype)
+            ) {
+                return new ValidationMessage[] {
+                    new ValidationMessage(data.getId(), ApplicationResources.accessor.getMessage("HtmlTag.doctype.invalid", doctype))
+                };
+            }
+        }
+        return null;
     }
 }

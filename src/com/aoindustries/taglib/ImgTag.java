@@ -158,7 +158,7 @@ public class ImgTag extends AutoEncodingBufferedTag implements SrcAttribute, Par
         out.write(
             EncodingUtils.encodeXmlAttribute(
                 response.encodeURL(
-                    NewEncodingUtils.encodeURL(src)
+                    NewEncodingUtils.encodeUrlPath(src)
                 )
             )
         );
