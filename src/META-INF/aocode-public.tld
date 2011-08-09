@@ -299,7 +299,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <body-content>scriptless</body-content>
     <attribute>
       <description>
-          The id of the input element.
+          The id of the element.
           A nested id tag will override this value.
       </description>
       <name>id</name>
@@ -424,6 +424,65 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
           otherwise the attribute is not added.
       </description>
       <name>checked</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>boolean</type>
+    </attribute>
+    <example />
+  </tag>
+  <tag>
+    <description>
+      Renders an iframe tag.
+    </description>
+    <name>iframe</name>
+    <tag-class>com.aoindustries.taglib.IframeTag</tag-class>
+    <body-content>scriptless</body-content>
+    <attribute>
+      <description>
+          The id of the element.
+          A nested id tag will override this value.
+      </description>
+      <name>id</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>
+          The src for the frame content.
+          If starts with a /, the context path will be prepended to the path.
+          Session state URL rewriting is performed as needed.
+          URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
+          any character in the set { ':', '/', ';', '#' }
+          A nested src tag will override this value.
+          Any directly nested param or params tag will add parameters to the src.
+      </description>
+      <name>src</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>The width for the frame.  A nested width tag will override this value.</description>
+      <name>width</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>The height for the frame.  A nested height tag will override this value.</description>
+      <name>height</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>
+          The frameborder attribute.  Accepts values of "true" or "false".
+          A non-empty nested frameborder tag will override this value.
+          Defaults to true.
+      </description>
+      <name>frameborder</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>boolean</type>
@@ -703,6 +762,17 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
   </tag>
   <tag>
     <description>
+        Provides a frameborder attribute to its FrameborderAttribute parent tag.
+        The body, after trimming, must contain either "true", "false", or be empty.
+        If empty, the frameborder attribute of the tag is not overridden.
+    </description>
+    <name>frameborder</name>
+    <tag-class>com.aoindustries.taglib.FrameborderTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>
         Provides a checked attribute to its CheckedAttribute parent tag.
         The body, after trimming, must contain either "true", "false", or be empty.
         If empty, the checked attribute of the tag is not overridden.
@@ -876,7 +946,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     </attribute>
     <attribute>
       <description>
-          The id of the form.
+          The id of the element.
           A nested id tag will override this value.
       </description>
       <name>id</name>
@@ -927,7 +997,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <body-content>scriptless</body-content>
     <attribute>
       <description>
-          The id of the select element.
+          The id of the element.
           A nested id tag will override this value.
       </description>
       <name>id</name>

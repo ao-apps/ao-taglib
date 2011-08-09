@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009, 2010, 2011  AO Industries, Inc.
+ * Copyright (C) 2011  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -32,7 +32,7 @@ import javax.servlet.jsp.tagext.JspTag;
 /**
  * @author  AO Industries, Inc.
  */
-public class DisabledTag extends AutoEncodingBufferedTag {
+public class FrameborderTag extends AutoEncodingBufferedTag {
 
     @Override
     public MediaType getContentType() {
@@ -46,14 +46,14 @@ public class DisabledTag extends AutoEncodingBufferedTag {
 
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
-        JspTag parent = findAncestorWithClass(this, DisabledAttribute.class);
-        if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("DisabledTag.needDisabledAttributeParent"));
-        DisabledAttribute disabledAttribute = (DisabledAttribute)parent;
+        JspTag parent = findAncestorWithClass(this, FrameborderAttribute.class);
+        if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("FrameborderTag.needFrameborderAttributeParent"));
+        FrameborderAttribute frameborderAttribute = (FrameborderAttribute)parent;
         String value = capturedBody.toString().trim();
         if(value.length()>0) {
-            if("true".equals(value)) disabledAttribute.setDisabled(true);
-            else if("false".equals(value)) disabledAttribute.setDisabled(false);
-            else throw new JspException(ApplicationResources.accessor.getMessage("DisabledTag.invalidValue", value));
+            if("true".equals(value)) frameborderAttribute.setFrameborder(true);
+            else if("false".equals(value)) frameborderAttribute.setFrameborder(false);
+            else throw new JspException(ApplicationResources.accessor.getMessage("FrameborderTag.invalidValue", value));
         }
     }
 }

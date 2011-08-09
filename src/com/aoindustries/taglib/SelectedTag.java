@@ -50,7 +50,7 @@ public class SelectedTag extends AutoEncodingBufferedTag {
         if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("SelectedTag.needSelectedAttributeParent"));
         SelectedAttribute selected = (SelectedAttribute)parent;
         String value = capturedBody.toString().trim();
-        if(value!=null) {
+        if(value.length()>0) {
             if("true".equals(value)) selected.setSelected(true);
             else if("false".equals(value)) selected.setSelected(false);
             else throw new JspException(ApplicationResources.accessor.getMessage("SelectedTag.invalidValue", value));

@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009, 2010, 2011  AO Industries, Inc.
+ * Copyright (C) 2011  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -39,25 +39,33 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
-public class ImgTag extends AutoEncodingBufferedTag implements SrcAttribute, ParamsAttribute, WidthAttribute, HeightAttribute, AltAttribute, TitleAttribute, ClassAttribute, StyleAttribute {
+public class IframeTag extends AutoEncodingBufferedTag implements IdAttribute, SrcAttribute, ParamsAttribute, WidthAttribute, HeightAttribute, FrameborderAttribute {
 
+    private String id;
     private String src;
     private HttpParametersMap params;
     private String width;
     private String height;
-    private String alt;
-    private String title;
-    private String clazz;
-    private String style;
+    private boolean frameborder = true;
 
     @Override
     public MediaType getContentType() {
-        return MediaType.TEXT;
+        return MediaType.XHTML;
     }
 
     @Override
     public MediaType getOutputType() {
         return MediaType.XHTML;
+    }
+
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override
@@ -102,54 +110,27 @@ public class ImgTag extends AutoEncodingBufferedTag implements SrcAttribute, Par
     }
 
     @Override
-    public String getAlt() {
-        return alt;
+    public boolean isFrameborder() {
+        return frameborder;
     }
 
     @Override
-    public void setAlt(String alt) {
-        this.alt = alt;
-    }
-
-    @Override
-    public String getTitle() {
-        return title;
-    }
-
-    @Override
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    @Override
-    public String getClazz() {
-        return clazz;
-    }
-
-    @Override
-    public void setClazz(String clazz) {
-        this.clazz = clazz;
-    }
-
-    @Override
-    public String getStyle() {
-        return style;
-    }
-
-    @Override
-    public void setStyle(String style) {
-        this.style = style;
+    public void setFrameborder(boolean frameborder) {
+        this.frameborder = frameborder;
     }
 
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         PageContext pageContext = (PageContext)getJspContext();
-        if(src==null) src = capturedBody.toString().trim();
         HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
-        if(width==null) throw new AttributeRequiredException("width");
-        if(height==null) throw new AttributeRequiredException("height");
-        if(alt==null) throw new AttributeRequiredException("alt");
-        out.write("<img src=\"");
+        if(src==null) throw new JspException(ApplicationResources.accessor.getMessage("IframeTag.src.required"));
+        out.write("<iframe");
+        if(id!=null) {
+            out.write(" id=\"");
+            EncodingUtils.encodeXmlAttribute(id, out);
+            out.write('"');
+        }
+        out.write(" src=\"");
         if(src.startsWith("/")) {
             String contextPath = ((HttpServletRequest)pageContext.getRequest()).getContextPath();
             if(contextPath.length()>0) src = contextPath+src;
@@ -162,28 +143,21 @@ public class ImgTag extends AutoEncodingBufferedTag implements SrcAttribute, Par
                 )
             )
         );
-        out.write("\" width=\"");
-        EncodingUtils.encodeXmlAttribute(width, out);
-        out.write("\" height=\"");
-        EncodingUtils.encodeXmlAttribute(height, out);
-        out.write("\" alt=\"");
-        EncodingUtils.encodeXmlAttribute(alt, out);
         out.write('"');
-        if(title!=null) {
-            out.write(" title=\"");
-            EncodingUtils.encodeXmlAttribute(title, out);
+        if(width!=null) {
+            out.write(" width=\"");
+            EncodingUtils.encodeXmlAttribute(width, out);
             out.write('"');
         }
-        if(clazz!=null) {
-            out.write(" class=\"");
-            EncodingUtils.encodeXmlAttribute(clazz, out);
+        if(height!=null) {
+            out.write(" height=\"");
+            EncodingUtils.encodeXmlAttribute(height, out);
             out.write('"');
         }
-        if(style!=null) {
-            out.write(" style=\"");
-            EncodingUtils.encodeXmlAttribute(style, out);
-            out.write('"');
-        }
-        out.write(" />");
+        out.write(" frameborder=\"");
+        out.write(frameborder ? '1' : '0');
+        out.write("\">");
+        capturedBody.writeTo(out);
+        out.write("</iframe>");
     }
 }

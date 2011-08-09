@@ -50,7 +50,7 @@ public class CheckedTag extends AutoEncodingBufferedTag {
         if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("CheckedTag.needCheckedAttributeParent"));
         CheckedAttribute checkedAttribute = (CheckedAttribute)parent;
         String value = capturedBody.toString().trim();
-        if(value!=null) {
+        if(value.length()>0) {
             if("true".equals(value)) checkedAttribute.setChecked(true);
             else if("false".equals(value)) checkedAttribute.setChecked(false);
             else throw new JspException(ApplicationResources.accessor.getMessage("CheckedTag.invalidValue", value));

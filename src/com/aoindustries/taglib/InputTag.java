@@ -219,7 +219,7 @@ public class InputTag extends AutoEncodingBufferedTag implements IdAttribute, Ty
 
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
-        if(type==null) throw new JspException(ApplicationResources.accessor.getMessage("InputTag.type.required"));
+        if(type==null) throw new AttributeRequiredException("type");
         if(value==null) value = capturedBody.toString().trim();
         out.write("<input");
         if(id!=null) {

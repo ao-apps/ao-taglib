@@ -50,7 +50,7 @@ public class ReadonlyTag extends AutoEncodingBufferedTag {
         if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("ReadonlyTag.needReadonlyAttributeParent"));
         ReadonlyAttribute ReadonlyAttribute = (ReadonlyAttribute)parent;
         String value = capturedBody.toString().trim();
-        if(value!=null) {
+        if(value.length()>0) {
             if("true".equals(value)) ReadonlyAttribute.setReadonly(true);
             else if("false".equals(value)) ReadonlyAttribute.setReadonly(false);
             else throw new JspException(ApplicationResources.accessor.getMessage("ReadonlyTag.invalidValue", value));

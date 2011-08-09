@@ -57,7 +57,7 @@ public class PropertyUtils {
     public static Object findObject(PageContext pageContext, String scope, String name, String property, boolean beanRequired, boolean valueRequired) throws JspException {
         try {
             // Check the name
-            if(name==null) throw new JspException(ApplicationResources.accessor.getMessage("PropertyUtils.name.required"));
+            if(name==null) throw new AttributeRequiredException("name");
 
             // Find the bean
             Object bean;
