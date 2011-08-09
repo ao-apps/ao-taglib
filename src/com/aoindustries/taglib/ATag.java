@@ -41,10 +41,11 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
-public class ATag extends AutoEncodingBufferedTag implements HrefAttribute, ParamsAttribute, ClassAttribute, StyleAttribute, OnclickAttribute {
+public class ATag extends AutoEncodingBufferedTag implements HrefAttribute, ParamsAttribute, TitleAttribute, ClassAttribute, StyleAttribute, OnclickAttribute {
 
     private String href;
     private MutableHttpParameters params;
+    private String title;
     private String clazz;
     private String style;
     private String onclick;
@@ -78,6 +79,16 @@ public class ATag extends AutoEncodingBufferedTag implements HrefAttribute, Para
     public void addParam(String name, String value) {
         if(params==null) params = new HttpParametersMap();
         params.addParameter(name, value);
+    }
+
+    @Override
+    public String getTitle() {
+        return title;
+    }
+
+    @Override
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Override
@@ -132,6 +143,11 @@ public class ATag extends AutoEncodingBufferedTag implements HrefAttribute, Para
             out.write('"');
         } else {
             if(params!=null) throw new JspException("parameters provided without href");
+        }
+        if(title!=null) {
+            out.write(" title=\"");
+            EncodingUtils.encodeXmlAttribute(title, out);
+            out.write('"');
         }
         if(clazz!=null) {
             out.write(" class=\"");

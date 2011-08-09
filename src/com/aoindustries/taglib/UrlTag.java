@@ -31,6 +31,11 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
 /**
+ * TODO: Have absolute option
+ * TODO: Support parameters nested
+ * TODO: Allow use in JavaScript with encoding like ao:text
+ * TODO: Replace uses of ao:text with this as it will then be more appropriate for sending dynamic parameters to JavaScript.
+ *
  * @author  AO Industries, Inc.
  */
 public class UrlTag extends AutoEncodingBufferedTag {

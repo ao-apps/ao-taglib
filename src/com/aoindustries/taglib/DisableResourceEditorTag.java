@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009, 2010, 2011  AO Industries, Inc.
+ * Copyright (C) 2011  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -23,24 +23,20 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.util.i18n.EditableResourceBundle;
-import java.io.File;
-import java.util.Locale;
+import java.io.IOException;
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.tagext.JspFragment;
+import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 /**
- * Provides a simplified interface for obtaining localized values from the ApplicationResources.properties files.
- *
- * @author  AO Industries, Inc.
+ * Disables the resource editor.
  */
-public final class ApplicationResources_ja extends EditableResourceBundle {
+public class DisableResourceEditorTag extends SimpleTagSupport {
 
-    /**
-     * Do not use directly.
-     */
-    public ApplicationResources_ja() {
-        super(
-            Locale.JAPANESE,
-            ApplicationResources.bundleSet,
-            new File(System.getProperty("user.home")+"/common/ao/cvswork/aocode-public-taglib/src/com/aoindustries/taglib/ApplicationResources_ja.properties")
-        );
+    @Override
+    public void doTag() throws JspException, IOException {
+        EditableResourceBundle.resetRequest(false, null, null, false);
+        JspFragment body = this.getJspBody();
+        if(body!=null) body.invoke(null);
     }
 }

@@ -168,12 +168,12 @@ public class ImgTag extends AutoEncodingBufferedTag implements SrcAttribute, Par
         EncodingUtils.encodeXmlAttribute(height, out);
         out.write("\" alt=\"");
         EncodingUtils.encodeXmlAttribute(alt, out);
+        out.write('"');
         if(title!=null) {
-            out.write("\" title=\"");
+            out.write(" title=\"");
             EncodingUtils.encodeXmlAttribute(title, out);
             out.write('"');
         }
-        out.write('"');
         if(clazz!=null) {
             out.write(" class=\"");
             EncodingUtils.encodeXmlAttribute(clazz, out);

@@ -451,6 +451,13 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <type>java.lang.String</type>
     </attribute>
     <attribute>
+      <description>The title text for the link.  A nested title tag will override this value.</description>
+      <name>title</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
       <description>The CSS class for the link.  A nested class tag will override this value.</description>
       <name>class</name>
       <required>false</required>
@@ -1188,5 +1195,17 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <type>boolean</type>
     </attribute>
     <example />
+  </tag>
+  <tag>
+    <description>Allows editing of the website resource bundles through the website itself.</description>
+    <name>resourceEditor</name>
+    <tag-class>com.aoindustries.taglib.ResourceEditorTag</tag-class>
+    <body-content>empty</body-content>
+  </tag>
+  <tag>
+    <description>Disables the resource editor for this request.</description>
+    <name>disableResourceEditor</name>
+    <tag-class>com.aoindustries.taglib.DisableResourceEditorTag</tag-class>
+    <body-content>empty</body-content>
   </tag>
 </taglib>
