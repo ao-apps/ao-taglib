@@ -37,6 +37,27 @@ public class PropertyUtils {
     }
 
     /**
+     * Gets the PageContext scope value for the textual scope name.
+     * Supports "page", "request", "session", or "application".
+     *
+     * @exception  JspException  if invalid scope
+     */
+    public static int getScope(String scope) throws JspException {
+        if(scope==null || "page".equals(scope)) return PageContext.PAGE_SCOPE;
+        else if("request".equals(scope)) return PageContext.REQUEST_SCOPE;
+        else if("session".equals(scope)) return PageContext.SESSION_SCOPE;
+        else if("application".equals(scope)) return PageContext.APPLICATION_SCOPE;
+        else throw new JspException(ApplicationResources.accessor.getMessage("PropertyUtils.scope.invalid", scope));
+    }
+
+    /**
+     * Sets an attribute in the provided textual scope.
+     */
+    public static void setAttribute(PageContext pageContext, String scope, String name, Object value) throws JspException {
+        pageContext.setAttribute(name, value, getScope(scope));
+    }
+
+    /**
      * Gets the object given its scope, name, and optional property.
      *
      * @param  scope  scope should be one of these acceptable values:
@@ -62,11 +83,7 @@ public class PropertyUtils {
             // Find the bean
             Object bean;
             if(scope==null) bean = pageContext.findAttribute(name);
-            else if("page".equals(scope)) bean = pageContext.getAttribute(name, PageContext.PAGE_SCOPE);
-            else if("request".equals(scope)) bean = pageContext.getAttribute(name, PageContext.REQUEST_SCOPE);
-            else if("session".equals(scope)) bean = pageContext.getAttribute(name, PageContext.SESSION_SCOPE);
-            else if("application".equals(scope)) bean = pageContext.getAttribute(name, PageContext.APPLICATION_SCOPE);
-            else throw new JspException(ApplicationResources.accessor.getMessage("PropertyUtils.scope.invalid", scope));
+            else bean = pageContext.getAttribute(name, getScope(scope));
 
             // Check required
             if(bean==null) {
