@@ -1024,6 +1024,18 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     </attribute>
     <attribute>
       <description>
+          The disabled attribute.  Accepts values of "true" or "false".
+          A non-empty nested disabled tag will override this value.
+          If disabled is "true", will add the attribute as <code>disabled="disabled"</code>,
+          otherwise the attribute is not added.
+      </description>
+      <name>disabled</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>boolean</type>
+    </attribute>
+    <attribute>
+      <description>
           A JavaScript onchange handler.
           A nested onchange tag will override this value.
       </description>
