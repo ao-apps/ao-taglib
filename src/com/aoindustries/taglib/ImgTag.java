@@ -28,6 +28,7 @@ import com.aoindustries.io.AutoTempFileWriter;
 import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
+import com.aoindustries.net.HttpParametersUtils;
 import com.aoindustries.util.EncodingUtils;
 import java.io.IOException;
 import java.io.Writer;
@@ -154,7 +155,7 @@ public class ImgTag extends AutoEncodingBufferedTag implements SrcAttribute, Par
             String contextPath = ((HttpServletRequest)pageContext.getRequest()).getContextPath();
             if(contextPath.length()>0) src = contextPath+src;
         }
-        src = HrefTag.addParams(src, params);
+        src = HttpParametersUtils.addParams(src, params);
         out.write(
             EncodingUtils.encodeXmlAttribute(
                 response.encodeURL(

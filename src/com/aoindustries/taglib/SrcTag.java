@@ -27,6 +27,7 @@ import com.aoindustries.io.AutoTempFileWriter;
 import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
+import com.aoindustries.net.HttpParametersUtils;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -65,6 +66,6 @@ public class SrcTag extends AutoEncodingBufferedTag implements ParamsAttribute {
         JspTag parent = findAncestorWithClass(this, SrcAttribute.class);
         if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("SrcTag.needSrcAttributeParent"));
         SrcAttribute srcAttribute = (SrcAttribute)parent;
-        srcAttribute.setSrc(HrefTag.addParams(capturedBody.toString().trim(), params));
+        srcAttribute.setSrc(HttpParametersUtils.addParams(capturedBody.toString().trim(), params));
     }
 }

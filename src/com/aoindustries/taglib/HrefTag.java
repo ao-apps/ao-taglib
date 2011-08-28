@@ -27,12 +27,9 @@ import com.aoindustries.io.AutoTempFileWriter;
 import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
+import com.aoindustries.net.HttpParametersUtils;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.io.Writer;
-import java.net.URLEncoder;
-import java.util.List;
-import java.util.Map;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.JspTag;
 
@@ -64,32 +61,11 @@ public class HrefTag extends AutoEncodingBufferedTag implements ParamsAttribute 
         params.addParameter(name, value);
     }
 
-    static String addParams(String href, HttpParameters params) throws UnsupportedEncodingException {
-        if(params!=null) {
-            boolean hasQuestion = href.indexOf('?')!=-1;
-            StringBuilder sb = new StringBuilder(href);
-            for(Map.Entry<String,List<String>> entry : params.getParameterMap().entrySet()) {
-                String encodedName = URLEncoder.encode(entry.getKey(), "UTF-8");
-                for(String value : entry.getValue()) {
-                    if(hasQuestion) sb.append('&');
-                    else {
-                        sb.append('?');
-                        hasQuestion = true;
-                    }
-                    sb.append(encodedName);
-                    if(value!=null) sb.append('=').append(URLEncoder.encode(value, "UTF-8"));
-                }
-            }
-            href = sb.toString();
-        }
-        return href;
-    }
-
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         JspTag parent = findAncestorWithClass(this, HrefAttribute.class);
         if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("HrefTag.needHrefAttributeParent"));
         HrefAttribute hrefAttribute = (HrefAttribute)parent;
-        hrefAttribute.setHref(addParams(capturedBody.toString().trim(), params));
+        hrefAttribute.setHref(HttpParametersUtils.addParams(capturedBody.toString().trim(), params));
     }
 }

@@ -25,6 +25,7 @@ package com.aoindustries.taglib;
 import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
+import com.aoindustries.net.HttpParametersUtils;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -99,7 +100,7 @@ public class RedirectTag extends SimpleTagSupport implements HrefAttribute, Para
             String contextPath = request.getContextPath();
             if(contextPath.length()>0) href = contextPath+href;
         }
-        href = HrefTag.addParams(href, params);
+        href = HttpParametersUtils.addParams(href, params);
         String encodedHref = response.encodeRedirectURL(href);
         if("moved_permanently".equals(type) || "permanent".equals(type) || "301".equals(type)) {
             response.setHeader("Location", encodedHref);

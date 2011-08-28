@@ -29,6 +29,7 @@ import com.aoindustries.io.AutoTempFileWriter;
 import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
+import com.aoindustries.net.HttpParametersUtils;
 import com.aoindustries.net.MutableHttpParameters;
 import com.aoindustries.util.EncodingUtils;
 import java.io.IOException;
@@ -132,7 +133,7 @@ public class ATag extends AutoEncodingBufferedTag implements HrefAttribute, Para
                 String contextPath = ((HttpServletRequest)pageContext.getRequest()).getContextPath();
                 if(contextPath.length()>0) href = contextPath+href;
             }
-            href = HrefTag.addParams(href, params);
+            href = HttpParametersUtils.addParams(href, params);
             out.write(
                 EncodingUtils.encodeXmlAttribute(
                     response.encodeURL(
