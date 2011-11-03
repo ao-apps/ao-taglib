@@ -24,6 +24,10 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.AutoTempFileWriter;
+import com.aoindustries.net.EmptyParameters;
+import com.aoindustries.net.HttpParameters;
+import com.aoindustries.net.HttpParametersMap;
+import com.aoindustries.net.HttpParametersUtils;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
@@ -32,13 +36,13 @@ import javax.servlet.jsp.PageContext;
 
 /**
  * TODO: Have absolute option
- * TODO: Support parameters nested
- * TODO: Allow use in JavaScript with encoding like ao:text
- * TODO: Replace uses of ao:text with this as it will then be more appropriate for sending dynamic parameters to JavaScript.
+ * TODO: Replace uses of ao:text with this as it is now more appropriate for sending dynamic parameters to JavaScript since it adds contextPath and encodeURL.
  *
  * @author  AO Industries, Inc.
  */
-public class UrlTag extends AutoEncodingBufferedTag {
+public class UrlTag extends AutoEncodingBufferedTag implements ParamsAttribute {
+
+    private HttpParametersMap params;
 
     @Override
     public MediaType getContentType() {
@@ -51,11 +55,23 @@ public class UrlTag extends AutoEncodingBufferedTag {
     }
 
     @Override
+    public HttpParameters getParams() {
+        return params==null ? EmptyParameters.getInstance() : params;
+    }
+
+    @Override
+    public void addParam(String name, String value) {
+        if(params==null) params = new HttpParametersMap();
+        params.addParameter(name, value);
+    }
+
+    @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
-        String url = capturedBody.toString().trim();
+        String url = HttpParametersUtils.addParams(capturedBody.toString().trim(), params);
         if(url.startsWith("/")) {
             PageContext pageContext = (PageContext)getJspContext();
-            out.write(((HttpServletRequest)pageContext.getRequest()).getContextPath());
+            HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
+            out.write(request.getContextPath());
         }
         out.write(url);
     }
