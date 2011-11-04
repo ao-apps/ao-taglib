@@ -1170,6 +1170,36 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
   </tag>
   <tag>
     <description>
+        Forwards to another resource, ends processing of the current page.
+        If parameters are not cleared, nested parameters are added before request parameters.
+        This has two advantages over the standard jsp:forward tag:
+            1) You may clear parameters such that only those specifically added will be passed on to the next page
+            2) You may have other nested tags used to select and build the set of parameters
+    </description>
+    <name>forward</name>
+    <tag-class>com.aoindustries.taglib.ForwardTag</tag-class>
+    <body-content>scriptless</body-content>
+    <attribute>
+      <description>The page that will be forwarded to.</description>
+      <name>page</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>
+          Optionally clears all parameters so that only those added by nested tags
+          are forwarded.  Defaults to false.
+      </description>
+      <name>clearParams</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>boolean</type>
+    </attribute>
+    <example />
+  </tag>
+  <tag>
+    <description>
       If contained with any MetasAttribute parent, adds the meta data to the parent tag.
       Otherwise, renders a meta tag.  The content may be provided in one of three ways, in
       precedence order:
