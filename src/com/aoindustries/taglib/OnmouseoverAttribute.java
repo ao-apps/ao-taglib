@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009, 2010, 2011, 2012  AO Industries, Inc.
+ * Copyright (C) 2012  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,33 +22,14 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.MediaType;
-import com.aoindustries.io.AutoTempFileWriter;
-import java.io.IOException;
-import java.io.Writer;
-import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.tagext.JspTag;
-
 /**
+ * Something with an onmouseover attribute.
+ *
  * @author  AO Industries, Inc.
  */
-public class RelTag extends AutoEncodingBufferedTag {
+public interface OnmouseoverAttribute {
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.TEXT;
-    }
+    String getOnmouseover();
 
-    @Override
-    public MediaType getOutputType() {
-        return null;
-    }
-
-    @Override
-    protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
-        JspTag parent = findAncestorWithClass(this, RelAttribute.class);
-        if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("JspException.needAttribueParent", "rel", "rel"));
-        RelAttribute relAttribute = (RelAttribute)parent;
-        relAttribute.setRel(capturedBody.toString().trim());
-    }
+    void setOnmouseover(String onmouseover);
 }

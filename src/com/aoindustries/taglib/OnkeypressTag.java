@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2010, 2011  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2012  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -47,7 +47,7 @@ public class OnkeypressTag extends AutoEncodingBufferedTag {
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         JspTag parent = findAncestorWithClass(this, OnkeypressAttribute.class);
-        if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("OnkeypressTag.needOnkeypressAttributeParent"));
+        if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("JspException.needAttribueParent", "onkeypress", "onkeypress"));
         OnkeypressAttribute onkeypressAttribute = (OnkeypressAttribute)parent;
         onkeypressAttribute.setOnkeypress(capturedBody.toString().trim());
     }

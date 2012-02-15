@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2010, 2011  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2012  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -47,7 +47,7 @@ public class OnchangeTag extends AutoEncodingBufferedTag {
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         JspTag parent = findAncestorWithClass(this, OnchangeAttribute.class);
-        if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("OnchangeTag.needOnchangeAttributeParent"));
+        if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("JspException.needAttribueParent", "onchange", "onchange"));
         OnchangeAttribute onchangeAttribute = (OnchangeAttribute)parent;
         onchangeAttribute.setOnchange(capturedBody.toString().trim());
     }

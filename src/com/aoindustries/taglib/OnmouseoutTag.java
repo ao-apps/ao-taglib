@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009, 2010, 2011, 2012  AO Industries, Inc.
+ * Copyright (C) 2012  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -32,11 +32,11 @@ import javax.servlet.jsp.tagext.JspTag;
 /**
  * @author  AO Industries, Inc.
  */
-public class RelTag extends AutoEncodingBufferedTag {
+public class OnmouseoutTag extends AutoEncodingBufferedTag {
 
     @Override
     public MediaType getContentType() {
-        return MediaType.TEXT;
+        return MediaType.JAVASCRIPT;
     }
 
     @Override
@@ -46,9 +46,9 @@ public class RelTag extends AutoEncodingBufferedTag {
 
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
-        JspTag parent = findAncestorWithClass(this, RelAttribute.class);
-        if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("JspException.needAttribueParent", "rel", "rel"));
-        RelAttribute relAttribute = (RelAttribute)parent;
-        relAttribute.setRel(capturedBody.toString().trim());
+        JspTag parent = findAncestorWithClass(this, OnmouseoutAttribute.class);
+        if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("JspException.needAttribueParent", "onmouseout", "onmouseout"));
+        OnmouseoutAttribute onmouseoutAttribute = (OnmouseoutAttribute)parent;
+        onmouseoutAttribute.setOnmouseout(capturedBody.toString().trim());
     }
 }

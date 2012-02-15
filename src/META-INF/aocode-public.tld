@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
-Copyright (C) 2009, 2010, 2011  AO Industries, Inc.
+Copyright (C) 2009, 2010, 2011, 2012  AO Industries, Inc.
     support@aoindustries.com
     7262 Bull Pen Cir
     Mobile, AL 36695
@@ -537,6 +537,20 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
     </attribute>
+    <attribute>
+      <description>A JavaScript onmouseover handler.  A nested onmouseover tag will override this value.</description>
+      <name>oumouseover</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>A JavaScript onmouseout handler.  A nested onmouseout tag will override this value.</description>
+      <name>oumouseout</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
     <example />
   </tag>
   <tag>
@@ -651,6 +665,20 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <description>Provides an onload script to its OnloadAttribute parent tag.</description>
     <name>onload</name>
     <tag-class>com.aoindustries.taglib.OnloadTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides an onmouseover script to its OnMouseoverAttribute parent tag.</description>
+    <name>onmouseover</name>
+    <tag-class>com.aoindustries.taglib.OnmouseoverTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides an onmouseout script to its OnMouseoutAttribute parent tag.</description>
+    <name>onmouseout</name>
+    <tag-class>com.aoindustries.taglib.OnmouseoutTag</tag-class>
     <body-content>scriptless</body-content>
     <example />
   </tag>

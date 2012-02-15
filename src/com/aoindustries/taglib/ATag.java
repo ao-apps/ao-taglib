@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009, 2010, 2011  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -42,7 +42,15 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
-public class ATag extends AutoEncodingBufferedTag implements HrefAttribute, ParamsAttribute, TitleAttribute, ClassAttribute, StyleAttribute, OnclickAttribute {
+public class ATag extends AutoEncodingBufferedTag implements
+    HrefAttribute,
+    ParamsAttribute,
+    TitleAttribute,
+    ClassAttribute,
+    StyleAttribute,
+    OnclickAttribute,
+    OnmouseoverAttribute,
+    OnmouseoutAttribute {
 
     private String href;
     private MutableHttpParameters params;
@@ -50,6 +58,8 @@ public class ATag extends AutoEncodingBufferedTag implements HrefAttribute, Para
     private String clazz;
     private String style;
     private String onclick;
+    private String onmouseover;
+    private String onmouseout;
 
     @Override
     public MediaType getContentType() {
@@ -123,6 +133,26 @@ public class ATag extends AutoEncodingBufferedTag implements HrefAttribute, Para
     }
 
     @Override
+    public String getOnmouseover() {
+        return onmouseover;
+    }
+
+    @Override
+    public void setOnmouseover(String onmouseover) {
+        this.onmouseover = onmouseover;
+    }
+
+    @Override
+    public String getOnmouseout() {
+        return onmouseout;
+    }
+
+    @Override
+    public void setOnmouseout(String onmouseout) {
+        this.onmouseout = onmouseout;
+    }
+
+    @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         PageContext pageContext = (PageContext)getJspContext();
         out.write("<a");
@@ -163,6 +193,16 @@ public class ATag extends AutoEncodingBufferedTag implements HrefAttribute, Para
         if(onclick!=null) {
             out.write(" onclick=\"");
             JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute(onclick, out);
+            out.write('"');
+        }
+        if(onmouseover!=null) {
+            out.write(" onmouseover=\"");
+            JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute(onmouseover, out);
+            out.write('"');
+        }
+        if(onmouseout!=null) {
+            out.write(" onmouseout=\"");
+            JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute(onmouseout, out);
             out.write('"');
         }
         out.write('>');
