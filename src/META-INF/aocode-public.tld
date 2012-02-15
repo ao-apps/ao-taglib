@@ -539,14 +539,14 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     </attribute>
     <attribute>
       <description>A JavaScript onmouseover handler.  A nested onmouseover tag will override this value.</description>
-      <name>oumouseover</name>
+      <name>onmouseover</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
     </attribute>
     <attribute>
       <description>A JavaScript onmouseout handler.  A nested onmouseout tag will override this value.</description>
-      <name>oumouseout</name>
+      <name>onmouseout</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
