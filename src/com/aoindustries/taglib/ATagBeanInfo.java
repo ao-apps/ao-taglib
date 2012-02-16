@@ -43,10 +43,10 @@ public class ATagBeanInfo extends SimpleBeanInfo {
             PropertyDescriptor[] props = properties;
             if(props==null) {
                 props = new PropertyDescriptor[] {
-                    new PropertyDescriptor("contentType", ATag.class),
-                    new PropertyDescriptor("outputType", ATag.class),
+                    new PropertyDescriptor("contentType", ATag.class, "getContentType", null),
+                    new PropertyDescriptor("outputType", ATag.class, "getOutputType", null),
                     new PropertyDescriptor("href", ATag.class),
-                    new PropertyDescriptor("params", ATag.class),
+                    new PropertyDescriptor("params", ATag.class, "getParams", null),
                     new PropertyDescriptor("title", ATag.class),
                     new PropertyDescriptor("class", ATag.class, "getClazz", "setClazz"),
                     new PropertyDescriptor("style", ATag.class),
