@@ -47,7 +47,7 @@ public class ResourceEditorTag extends AutoEncodingNullTag {
     }
 
     @Override
-    public void doTag(Writer out) throws JspException, IOException {
+    protected void doTag(Writer out) throws JspException, IOException {
         out.write("<div style=\"font-size:smaller\">");
         EditableResourceBundle.printEditableResourceBundleLookups(out, 3, false);
         out.write("</div>");

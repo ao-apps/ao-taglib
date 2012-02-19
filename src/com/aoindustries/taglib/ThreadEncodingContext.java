@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009, 2010, 2011  AO Industries, Inc.
+ * Copyright (C) 2012  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,25 +22,30 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.ValidMediaInput;
 import com.aoindustries.encoding.MediaType;
-import javax.servlet.jsp.tagext.JspTag;
+import com.aoindustries.encoding.ValidMediaInput;
 
 /**
- * Indicates that a tag contains a specific type of content in order to allow the
- * correct encoding of data between various types.  Any nested <code>tags</code>
- * must encode their data properly for this content type.  Likewise, this tag
- * must encode its output, including the output of its nested tags, properly for
- * the content type of its nearest <code>ContentTypeJspTag</code> parent or the
- * content type of the <code>HttpServletResponse</code> if no such parent is
- * found.
+ * Since the parent tag is not available from included JSP pages, the current
+ * content type and validator is maintained as a ThreadLocal.  These are updated
+ * for each of the nested tag levels.
  *
  * @author  AO Industries, Inc.
  */
-public interface ContentTypeJspTag extends JspTag, ValidMediaInput {
+class ThreadEncodingContext {
 
     /**
-     * Gets the type of data that is contained by this tag.
+     * The content type that is currently be written or null if not set.
      */
-    MediaType getContentType();
+    static ThreadLocal<MediaType> contentType = new ThreadLocal<MediaType>();
+
+    /**
+     * The validator that is ensuring the data being written is valid for the current
+     * outputType.
+     */
+    static ThreadLocal<ValidMediaInput> validMediaInput = new ThreadLocal<ValidMediaInput>();
+
+    // Make no instances
+    private ThreadEncodingContext() {
+    }
 }

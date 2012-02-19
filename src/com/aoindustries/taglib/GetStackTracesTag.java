@@ -44,7 +44,7 @@ public class GetStackTracesTag extends AutoEncodingNullTag {
     }
 
     @Override
-    public void doTag(Writer out) throws JspException, IOException {
+    protected void doTag(Writer out) throws JspException, IOException {
         PageContext pageContext = (PageContext)getJspContext();
         // Find the Throwable to display
         Object value = PropertyUtils.findObject(pageContext, scope, name, property, true, true);

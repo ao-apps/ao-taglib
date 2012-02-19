@@ -50,7 +50,7 @@ public class WriteTag extends AutoEncodingNullTag {
     private static final Class<?>[] emptyParamTypes = new Class<?>[0];
 
     @Override
-    public void doTag(Writer out) throws JspException, IOException {
+    protected void doTag(Writer out) throws JspException, IOException {
         try {
             PageContext pageContext = (PageContext)getJspContext();
 

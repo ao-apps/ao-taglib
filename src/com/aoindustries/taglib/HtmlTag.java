@@ -128,7 +128,7 @@ public class HtmlTag extends AutoEncodingFilteredTag {
     }
 
     @Override
-    public void invokeAutoEncoding(Writer out) throws JspException, IOException {
+    protected void doTag(Writer out) throws JspException, IOException {
         PageContext pageContext = (PageContext)getJspContext();
         ServletResponse response = pageContext.getResponse();
 
@@ -174,7 +174,7 @@ public class HtmlTag extends AutoEncodingFilteredTag {
         out.write('>');
 
         // Include the body
-        super.invokeAutoEncoding(out);
+        super.doTag(out);
 
         // End the HTML tag
         out.write("</html>");

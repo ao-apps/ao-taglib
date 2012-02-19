@@ -64,80 +64,93 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
  *
  * @author  AO Industries, Inc.
  */
-public abstract class AutoEncodingFilteredTag extends SimpleTagSupport implements ContentTypeJspTag {
+public abstract class AutoEncodingFilteredTag extends SimpleTagSupport {
 
     /**
-     * @see ContentTypeJspTag#getContentType()
+     * Gets the type of data that is contained by this tag.
      */
-    @Override
     public abstract MediaType getContentType();
-
-    private ValidMediaInput inputValidator;
 
     /**
      * The validator is stored to allow nested tags to check if their output
      * is already being filtered on this tags input.  When this occurs they
      * skip the validation of their own output.
      */
+    /*
     @Override
     public boolean isValidatingMediaInputType(MediaType inputType) {
         return inputValidator!=null && inputValidator.isValidatingMediaInputType(inputType);
-    }
+    }*/
 
     @Override
     final public void doTag() throws JspException, IOException {
         try {
-            PageContext pageContext = (PageContext)getJspContext();
-            HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
-            Writer out = pageContext.getOut();
-            ContentTypeJspTag parent = (ContentTypeJspTag)findAncestorWithClass(this, ContentTypeJspTag.class);
-            MediaType myContentType = getContentType();
+            final PageContext pageContext = (PageContext)getJspContext();
+            final HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
+            final Writer out = pageContext.getOut();
 
-            // Determine the container's content type and see if our output is already validated
+            final MediaType parentContentType = ThreadEncodingContext.contentType.get();
+            final ValidMediaInput parentValidMediaInput = ThreadEncodingContext.validMediaInput.get();
+
+            // Determine the container's content type
             MediaType containerContentType;
-            if(parent!=null) {
+            if(parentContentType!=null) {
                 // Use the output type of the parent
-                containerContentType = parent.getContentType();
+                containerContentType = parentContentType;
             } else {
                 // Use the content type of the response
                 containerContentType = MediaType.getMediaType(response.getContentType());
             }
-
             // Find the encoder
+            final MediaType myContentType = getContentType();
             MediaEncoder mediaEncoder = MediaEncoder.getMediaEncoder(response, myContentType, containerContentType, out);
             if(mediaEncoder!=null) {
                 setMediaEncoderOptions(mediaEncoder);
-                // Encode the content.  The encoder is also the validator for our input and guarantees valid output for our parent.
+                // Encode both our output and the content.  The encoder validates our input and guarantees valid output for our parent.
                 mediaEncoder.writePrefix();
                 try {
-                    inputValidator = mediaEncoder;
-                    System.err.println("DEBUG: Using media encoder");
-                    invokeAutoEncoding(mediaEncoder);
+                    ThreadEncodingContext.contentType.set(myContentType);
+                    ThreadEncodingContext.validMediaInput.set(mediaEncoder);
+                    try {
+                        doTag(mediaEncoder);
+                    } finally {
+                        // Restore previous encoding context that is used for our output
+                        ThreadEncodingContext.contentType.set(parentContentType);
+                        ThreadEncodingContext.validMediaInput.set(parentValidMediaInput);
+                    }
                 } finally {
                     mediaEncoder.writeSuffix();
                 }
             } else {
-                // If parent exists and not using an encoder, the parent should already be validating our output type.
-                if(parent!=null) {
+                // If parentValidMediaInput exists, the parent should already be validating our output type.
+                if(parentValidMediaInput!=null) {
                     // Make sure the output is compatibly validated.  It is a bug in the parent to not validate its input consistent with its content type
-                    if(!parent.isValidatingMediaInputType(containerContentType)) {
+                    if(!parentValidMediaInput.isValidatingMediaInputType(containerContentType)) {
                         throw new JspException(
                             ApplicationResources.accessor.getMessage(
                                 "AutoEncodingFilterTag.parentIncompatibleValidation",
-                                parent.getClass().getName(),
+                                parentValidMediaInput.getClass().getName(),
                                 containerContentType.getMediaType()
                             )
                         );
                     }
-                    System.err.println("DEBUG: Using parent as validator");
-                    inputValidator = parent;
-                    invokeAutoEncoding(out);
+                    ThreadEncodingContext.contentType.set(myContentType);
+                    try {
+                        doTag(out);
+                    } finally {
+                        ThreadEncodingContext.contentType.set(parentContentType);
+                    }
                 } else {
                     // Not using an encoder and no parent, validate our own output.
                     MediaValidator validator = MediaValidator.getMediaValidator(myContentType, out);
-                    inputValidator = validator;
-                    System.err.println("DEBUG: Validating self");
-                    invokeAutoEncoding(validator);
+                    ThreadEncodingContext.contentType.set(myContentType);
+                    ThreadEncodingContext.validMediaInput.set(validator);
+                    try {
+                        doTag(validator);
+                    } finally {
+                        ThreadEncodingContext.contentType.set(parentContentType);
+                        ThreadEncodingContext.validMediaInput.set(parentValidMediaInput);
+                    }
                 }
             }
         } catch(MediaException err) {
@@ -153,15 +166,20 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport implement
     }
 
     /**
+     * TODO: Delete this method once all subclasses have been renamed to doTag.
+     */
+    final protected void invokeAutoEncoding(Writer out) throws JspException, IOException {
+        throw new RuntimeException("TODO: Delete method");
+    }
+
+    /**
      * Once the out JspWriter has been replaced to output the proper content
      * type, this version of invoke is called.
      *
      * @return This default implementation invokes the jsp body, if present.
      * @throws javax.servlet.jsp.JspException
-     *
-     * // TODO: Should this be protected?
      */
-    public void invokeAutoEncoding(Writer out) throws JspException, IOException {
+    protected void doTag(Writer out) throws JspException, IOException {
         JspFragment body = getJspBody();
         if(body!=null) body.invoke(out);
     }

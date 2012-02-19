@@ -42,7 +42,7 @@ public class DisableResourceEditorTag extends AutoEncodingNullTag {
     }
 
     @Override
-    public void doTag(Writer out) throws JspException, IOException {
+    protected void doTag(Writer out) throws JspException, IOException {
         EditableResourceBundle.resetRequest(false, null, null, false);
     }
 }
