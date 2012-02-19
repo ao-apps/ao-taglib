@@ -47,7 +47,7 @@ public class OnsubmitTag extends AutoEncodingBufferedTag {
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         JspTag parent = findAncestorWithClass(this, OnsubmitAttribute.class);
-        if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("JspException.needAttribueParent", "onsubmit", "onsubmit"));
+        if(parent==null) throw new NeedAttributeParentException("onsubmit", "onsubmit");
         OnsubmitAttribute onsubmitAttribute = (OnsubmitAttribute)parent;
         onsubmitAttribute.setOnsubmit(capturedBody.toString().trim());
     }

@@ -47,7 +47,7 @@ public class ClassTag extends AutoEncodingBufferedTag {
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         JspTag parent = findAncestorWithClass(this, ClassAttribute.class);
-        if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("JspException.needAttribueParent", "class", "class"));
+        if(parent==null) throw new NeedAttributeParentException("class", "class");
         ClassAttribute classAttribute = (ClassAttribute)parent;
         classAttribute.setClazz(capturedBody.toString().trim());
     }

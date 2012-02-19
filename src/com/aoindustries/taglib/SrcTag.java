@@ -64,7 +64,7 @@ public class SrcTag extends AutoEncodingBufferedTag implements ParamsAttribute {
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         JspTag parent = findAncestorWithClass(this, SrcAttribute.class);
-        if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("JspException.needAttribueParent", "src", "src"));
+        if(parent==null) throw new NeedAttributeParentException("src", "src");
         SrcAttribute srcAttribute = (SrcAttribute)parent;
         srcAttribute.setSrc(HttpParametersUtils.addParams(capturedBody.toString().trim(), params));
     }

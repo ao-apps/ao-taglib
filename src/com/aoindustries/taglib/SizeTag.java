@@ -47,7 +47,7 @@ public class SizeTag extends AutoEncodingBufferedTag {
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         JspTag parent = findAncestorWithClass(this, SizeAttribute.class);
-        if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("JspException.needAttribueParent", "size", "size"));
+        if(parent==null) throw new NeedAttributeParentException("size", "size");
         SizeAttribute sizeAttribute = (SizeAttribute)parent;
         sizeAttribute.setSize(capturedBody.toString().trim());
     }

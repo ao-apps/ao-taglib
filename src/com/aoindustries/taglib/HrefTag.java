@@ -64,7 +64,7 @@ public class HrefTag extends AutoEncodingBufferedTag implements ParamsAttribute 
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         JspTag parent = findAncestorWithClass(this, HrefAttribute.class);
-        if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("JspException.needAttribueParent", "href", "href"));
+        if(parent==null) throw new NeedAttributeParentException("href", "href");
         HrefAttribute hrefAttribute = (HrefAttribute)parent;
         hrefAttribute.setHref(HttpParametersUtils.addParams(capturedBody.toString().trim(), params));
     }

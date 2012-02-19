@@ -47,7 +47,7 @@ public class FrameborderTag extends AutoEncodingBufferedTag {
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         JspTag parent = findAncestorWithClass(this, FrameborderAttribute.class);
-        if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("JspException.needAttribueParent", "frameborder", "frameborder"));
+        if(parent==null) throw new NeedAttributeParentException("frameborder", "frameborder");
         FrameborderAttribute frameborderAttribute = (FrameborderAttribute)parent;
         String value = capturedBody.toString().trim();
         if(value.length()>0) {

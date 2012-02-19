@@ -47,7 +47,7 @@ public class ValueTag extends AutoEncodingBufferedTag {
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         JspTag parent = findAncestorWithClass(this, ValueAttribute.class);
-        if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("JspException.needAttribueParent", "value", "value"));
+        if(parent==null) throw new NeedAttributeParentException("value", "value");
         ValueAttribute valueAttribute = (ValueAttribute)parent;
         valueAttribute.setValue(capturedBody.toString());
     }

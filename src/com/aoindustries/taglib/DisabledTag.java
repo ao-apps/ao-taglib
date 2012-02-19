@@ -47,7 +47,7 @@ public class DisabledTag extends AutoEncodingBufferedTag {
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         JspTag parent = findAncestorWithClass(this, DisabledAttribute.class);
-        if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("JspException.needAttribueParent", "disabled", "disabled"));
+        if(parent==null) throw new NeedAttributeParentException("disabled", "disabled");
         DisabledAttribute disabledAttribute = (DisabledAttribute)parent;
         String value = capturedBody.toString().trim();
         if(value.length()>0) {

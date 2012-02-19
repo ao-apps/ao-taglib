@@ -66,14 +66,14 @@ public class ParamsTag extends AutoEncodingBufferedTag implements NameAttribute 
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         JspTag parent = findAncestorWithClass(this, ParamsAttribute.class);
-        if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("JspException.needAttribueParent", "params", "params"));
+        if(parent==null) throw new NeedAttributeParentException("params", "params");
         if(name==null) throw new AttributeRequiredException("name");
         if(values!=null) {
             ParamsAttribute paramsParent = (ParamsAttribute)parent;
-            if(values instanceof Iterable) {
-                for(Object value : (Iterable)values) paramsParent.addParam(name, value==null ? "" : value.toString());
-            } else if(values instanceof Iterator) {
-                Iterator<?> iter = (Iterator)values;
+            if(values instanceof Iterable<?>) {
+                for(Object value : (Iterable<?>)values) paramsParent.addParam(name, value==null ? "" : value.toString());
+            } else if(values instanceof Iterator<?>) {
+                Iterator<?> iter = (Iterator<?>)values;
                 while(iter.hasNext()) {
                     Object value = iter.next();
                     paramsParent.addParam(name, value==null ? "" : value.toString());

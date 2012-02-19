@@ -47,7 +47,7 @@ public class OnmouseoutTag extends AutoEncodingBufferedTag {
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         JspTag parent = findAncestorWithClass(this, OnmouseoutAttribute.class);
-        if(parent==null) throw new JspException(ApplicationResources.accessor.getMessage("JspException.needAttribueParent", "onmouseout", "onmouseout"));
+        if(parent==null) throw new NeedAttributeParentException("onmouseout", "onmouseout");
         OnmouseoutAttribute onmouseoutAttribute = (OnmouseoutAttribute)parent;
         onmouseoutAttribute.setOnmouseout(capturedBody.toString().trim());
     }

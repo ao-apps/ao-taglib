@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009, 2010, 2011, 2012  AO Industries, Inc.
+ * Copyright (C) 2012  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,33 +22,29 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.MediaType;
-import com.aoindustries.io.AutoTempFileWriter;
-import java.io.IOException;
-import java.io.Writer;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.tagext.JspTag;
 
 /**
  * @author  AO Industries, Inc.
  */
-public class TypeTag extends AutoEncodingBufferedTag {
+public class NeedAttributeParentException extends JspException {
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.TEXT;
+    private static final long serialVersionUID = 1L;
+
+    private final String tag;
+    private final String attribute;
+
+    public NeedAttributeParentException(String tag, String attribute) {
+        super(ApplicationResources.accessor.getMessage("NeedAttributeParent.message", tag, attribute));
+        this.tag = tag;
+        this.attribute = attribute;
     }
 
-    @Override
-    public MediaType getOutputType() {
-        return null;
+    public String getTag() {
+        return tag;
     }
 
-    @Override
-    protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
-        JspTag parent = findAncestorWithClass(this, TypeAttribute.class);
-        if(parent==null) throw new NeedAttributeParentException("type", "type");
-        TypeAttribute typeAttribute = (TypeAttribute)parent;
-        typeAttribute.setType(capturedBody.toString().trim());
+    public String getAttribute() {
+        return attribute;
     }
 }

@@ -31,10 +31,11 @@ public class AttributeRequiredException extends JspException {
 
     private static final long serialVersionUID = -476461971893480958L;
 
-    private String attribute;
+    private final String attribute;
 
     public AttributeRequiredException(String attribute) {
         super(ApplicationResources.accessor.getMessage("AttributeRequiredException.message", attribute));
+        this.attribute = attribute;
     }
 
     public String getAttribute() {
