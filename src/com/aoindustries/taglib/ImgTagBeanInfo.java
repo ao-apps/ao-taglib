@@ -43,7 +43,10 @@ public class ImgTagBeanInfo extends SimpleBeanInfo {
             PropertyDescriptor[] props = properties;
             if(props==null) {
                 props = new PropertyDescriptor[] {
+                    new PropertyDescriptor("contentType", ImgTag.class, "getContentType", null),
+                    new PropertyDescriptor("outputType", ImgTag.class, "getOutputType", null),
                     new PropertyDescriptor("src", ImgTag.class),
+                    new PropertyDescriptor("params", ImgTag.class, "getParams", null),
                     new PropertyDescriptor("width", ImgTag.class),
                     new PropertyDescriptor("height", ImgTag.class),
                     new PropertyDescriptor("alt", ImgTag.class),
