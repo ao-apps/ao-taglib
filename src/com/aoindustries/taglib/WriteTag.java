@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009, 2010, 2011  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -34,7 +34,7 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
-public class WriteTag extends AutoEncodingFilteredTag {
+public class WriteTag extends AutoEncodingNullTag {
 
     private String scope;
     private String name;
@@ -43,14 +43,14 @@ public class WriteTag extends AutoEncodingFilteredTag {
     private MediaType type = MediaType.TEXT;
 
     @Override
-    public MediaType getContentType() {
+    public MediaType getOutputType() {
         return type;
     }
 
-    private static final Class[] emptyParamTypes = new Class[0];
+    private static final Class<?>[] emptyParamTypes = new Class<?>[0];
 
     @Override
-    public void invokeAutoEncoding(Writer out) throws JspException, IOException {
+    public void doTag(Writer out) throws JspException, IOException {
         try {
             PageContext pageContext = (PageContext)getJspContext();
 

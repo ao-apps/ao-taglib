@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009, 2010, 2011  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -98,16 +98,6 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport implement
             if(parent!=null) {
                 // Use the output type of the parent
                 containerContentType = parent.getContentType();
-                // Make sure the output is compatibly validated.  It is a bug in the parent to not validate its input consistent with its content type
-                if(!parent.isValidatingMediaInputType(containerContentType)) {
-                    throw new JspException(
-                        ApplicationResources.accessor.getMessage(
-                            "AutoEncodingFilterTag.parentIncompatibleValidation",
-                            parent.getClass().getName(),
-                            containerContentType.getMediaType()
-                        )
-                    );
-                }
             } else {
                 // Use the content type of the response
                 containerContentType = MediaType.getMediaType(response.getContentType());
@@ -121,15 +111,34 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport implement
                 mediaEncoder.writePrefix();
                 try {
                     inputValidator = mediaEncoder;
+                    System.err.println("DEBUG: Using media encoder");
                     invokeAutoEncoding(mediaEncoder);
                 } finally {
                     mediaEncoder.writeSuffix();
                 }
             } else {
-                // Not using an encoder, validate our own content
-                MediaValidator validator = MediaValidator.getMediaValidator(myContentType, out);
-                inputValidator = validator;
-                invokeAutoEncoding(validator);
+                // If parent exists and not using an encoder, the parent should already be validating our output type.
+                if(parent!=null) {
+                    // Make sure the output is compatibly validated.  It is a bug in the parent to not validate its input consistent with its content type
+                    if(!parent.isValidatingMediaInputType(containerContentType)) {
+                        throw new JspException(
+                            ApplicationResources.accessor.getMessage(
+                                "AutoEncodingFilterTag.parentIncompatibleValidation",
+                                parent.getClass().getName(),
+                                containerContentType.getMediaType()
+                            )
+                        );
+                    }
+                    System.err.println("DEBUG: Using parent as validator");
+                    inputValidator = parent;
+                    invokeAutoEncoding(out);
+                } else {
+                    // Not using an encoder and no parent, validate our own output.
+                    MediaValidator validator = MediaValidator.getMediaValidator(myContentType, out);
+                    inputValidator = validator;
+                    System.err.println("DEBUG: Validating self");
+                    invokeAutoEncoding(validator);
+                }
             }
         } catch(MediaException err) {
             throw new JspException(err);
@@ -149,6 +158,8 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport implement
      *
      * @return This default implementation invokes the jsp body, if present.
      * @throws javax.servlet.jsp.JspException
+     *
+     * // TODO: Should this be protected?
      */
     public void invokeAutoEncoding(Writer out) throws JspException, IOException {
         JspFragment body = getJspBody();

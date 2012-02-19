@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2011  AO Industries, Inc.
+ * Copyright (C) 2011, 2012  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,21 +22,27 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.encoding.MediaType;
 import com.aoindustries.util.i18n.EditableResourceBundle;
 import java.io.IOException;
+import java.io.Writer;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.tagext.JspFragment;
-import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 /**
  * Disables the resource editor.
  */
-public class DisableResourceEditorTag extends SimpleTagSupport {
+public class DisableResourceEditorTag extends AutoEncodingNullTag {
+
+    /**
+     * No output.
+     */
+    @Override
+    public MediaType getOutputType() {
+        return null;
+    }
 
     @Override
-    public void doTag() throws JspException, IOException {
+    public void doTag(Writer out) throws JspException, IOException {
         EditableResourceBundle.resetRequest(false, null, null, false);
-        JspFragment body = this.getJspBody();
-        if(body!=null) body.invoke(null);
     }
 }

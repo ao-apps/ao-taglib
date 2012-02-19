@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2011  AO Industries, Inc.
+ * Copyright (C) 2011, 2012  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -32,7 +32,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
-import javax.servlet.jsp.tagext.JspFragment;
 
 public class HtmlTag extends AutoEncodingFilteredTag {
 
@@ -49,7 +48,8 @@ public class HtmlTag extends AutoEncodingFilteredTag {
         //   IE 6: */*
         //   IE 8: */*
         //   IE 8 Compat: */*
-        Enumeration acceptValues = request.getHeaders("Accept");
+        @SuppressWarnings("unchecked")
+        Enumeration<String> acceptValues = request.getHeaders("Accept");
 
         boolean hasAcceptHeader = false;
         boolean hasAcceptApplicationXhtmlXml = false;
@@ -58,7 +58,7 @@ public class HtmlTag extends AutoEncodingFilteredTag {
         if(acceptValues!=null) {
             while(acceptValues.hasMoreElements()) {
                 hasAcceptHeader = true;
-                for(String value : StringUtility.splitString((String)acceptValues.nextElement(), ',')) {
+                for(String value : StringUtility.splitString(acceptValues.nextElement(), ',')) {
                     value = value.trim();
                     String[] params = StringUtility.splitString(value, ';');
                     if(params.length>0) {
@@ -174,8 +174,7 @@ public class HtmlTag extends AutoEncodingFilteredTag {
         out.write('>');
 
         // Include the body
-        JspFragment body = getJspBody();
-        if(body!=null) body.invoke(out);
+        super.invokeAutoEncoding(out);
 
         // End the HTML tag
         out.write("</html>");

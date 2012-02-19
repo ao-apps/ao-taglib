@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2011  AO Industries, Inc.
+ * Copyright (C) 2012  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,42 +22,19 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.MediaType;
-import com.aoindustries.io.AutoTempFileWriter;
-import com.aoindustries.util.StringUtility;
-import java.io.IOException;
-import java.io.Writer;
-import javax.servlet.jsp.JspException;
+import com.aoindustries.encoding.ValidMediaInput;
 
 /**
- * @see StringUtility#wordWrap(java.lang.String, int, java.lang.Appendable)
+ * Since the parent tag is not available from included JSP pages, the current
+ * effective validator is maintained as a ThreadLocal.  It is updated for each
+ * of the nested tag levels.
  *
  * @author  AO Industries, Inc.
  */
-public class WordWrapTag extends AutoEncodingBufferedTag {
+class ThreadValidMediaInput extends ThreadLocal<ValidMediaInput> {
 
-    private int width = 79;
+    static ThreadValidMediaInput instance = new ThreadValidMediaInput();
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.TEXT;
-    }
-
-    @Override
-    public MediaType getOutputType() {
-        return MediaType.TEXT;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    @Override
-    protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
-        StringUtility.wordWrap(capturedBody.toString(), width, out);
+    private ThreadValidMediaInput() {
     }
 }

@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009, 2010, 2011  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -99,58 +99,6 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport implement
         return 4 * 1024 * 1024;
     }
 
-    private static final Writer failOnWriteWriter = new Writer() {
-        @Override
-        public void write(int c) throws IOException {
-            throw new IOException(ApplicationResources.accessor.getMessage("AutoEncodingBufferedTag.noOutputAllowed"));
-        }
-
-        @Override
-        public void write(char cbuf[]) throws IOException {
-            throw new IOException(ApplicationResources.accessor.getMessage("AutoEncodingBufferedTag.noOutputAllowed"));
-        }
-
-        @Override
-        public void write(char[] cbuf, int off, int len) throws IOException {
-            throw new IOException(ApplicationResources.accessor.getMessage("AutoEncodingBufferedTag.noOutputAllowed"));
-        }
-
-        @Override
-        public void write(String str) throws IOException {
-            throw new IOException(ApplicationResources.accessor.getMessage("AutoEncodingBufferedTag.noOutputAllowed"));
-        }
-
-        @Override
-        public void write(String str, int off, int len) throws IOException {
-            throw new IOException(ApplicationResources.accessor.getMessage("AutoEncodingBufferedTag.noOutputAllowed"));
-        }
-
-        @Override
-        public Writer append(CharSequence csq) throws IOException {
-            throw new IOException(ApplicationResources.accessor.getMessage("AutoEncodingBufferedTag.noOutputAllowed"));
-        }
-
-        @Override
-        public Writer append(CharSequence csq, int start, int end) throws IOException {
-            throw new IOException(ApplicationResources.accessor.getMessage("AutoEncodingBufferedTag.noOutputAllowed"));
-        }
-
-        @Override
-        public Writer append(char c) throws IOException {
-            throw new IOException(ApplicationResources.accessor.getMessage("AutoEncodingBufferedTag.noOutputAllowed"));
-        }
-
-        @Override
-        public void flush() {
-            // Do nothing
-        }
-
-        @Override
-        public void close() {
-            // Do nothing
-        }
-    };
-
     @Override
     final public void doTag() throws JspException, IOException {
         try {
@@ -165,16 +113,6 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport implement
             if(parent!=null) {
                 // Use the output type of the parent
                 containerContentType = parent.getContentType();
-                // Make sure the output is compatibly validated.  It is a bug in the parent to not validate its input consistent with its content type
-                if(!parent.isValidatingMediaInputType(containerContentType)) {
-                    throw new JspException(
-                        ApplicationResources.accessor.getMessage(
-                            "AutoEncodingFilterTag.parentIncompatibleValidation",
-                            parent.getClass().getName(),
-                            containerContentType.getMediaType()
-                        )
-                    );
-                }
             } else {
                 // Use the content type of the response
                 containerContentType = MediaType.getMediaType(response.getContentType());
@@ -194,22 +132,41 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport implement
                 MediaType myOutputType = getOutputType();
                 if(myOutputType==null) {
                     // No output, error if anything written.
-                    doTag(capturedBody, failOnWriteWriter);
+                    doTag(capturedBody, FailOnWriteWriter.getInstance());
                 } else {
                     // Find the encoder
                     MediaEncoder mediaEncoder = MediaEncoder.getMediaEncoder(response, myOutputType, containerContentType, out);
                     if(mediaEncoder!=null) {
+                        setMediaEncoderOptions(mediaEncoder);
                         // Encode the content.  The encoder is also a redundant validator for our input and guarantees valid output for our parent.
                         mediaEncoder.writePrefix();
                         try {
+                            System.err.println("DEBUG: Using media encoder");
                             doTag(capturedBody, mediaEncoder);
                         } finally {
                             mediaEncoder.writeSuffix();
                         }
                     } else {
-                        // Not using an encoder, validate our own output.
-                        MediaValidator validator = MediaValidator.getMediaValidator(myOutputType, out);
-                        doTag(capturedBody, validator);
+                        // If parent exists and not using an encoder, the parent should already be validating our output type.
+                        if(parent!=null) {
+                            // Make sure the output is compatibly validated.  It is a bug in the parent to not validate its input consistent with its content type
+                            if(!parent.isValidatingMediaInputType(containerContentType)) {
+                                throw new JspException(
+                                    ApplicationResources.accessor.getMessage(
+                                        "AutoEncodingFilterTag.parentIncompatibleValidation",
+                                        parent.getClass().getName(),
+                                        containerContentType.getMediaType()
+                                    )
+                                );
+                            }
+                            System.err.println("DEBUG: Using parent as validator");
+                            doTag(capturedBody, out);
+                        } else {
+                            // Not using an encoder and no parent, validate our own output.
+                            MediaValidator validator = MediaValidator.getMediaValidator(myOutputType, out);
+                            System.err.println("DEBUG: Validating self");
+                            doTag(capturedBody, validator);
+                        }
                     }
                 }
             } finally {
@@ -218,6 +175,13 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport implement
         } catch(MediaException err) {
             throw new JspException(err);
         }
+    }
+
+    /**
+     * Sets the media encoder options.  This is how subclass tag attributes
+     * can effect the encoding.
+     */
+    protected void setMediaEncoderOptions(MediaEncoder mediaEncoder) {
     }
 
     /**

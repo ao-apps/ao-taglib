@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009, 2010, 2011  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -32,19 +32,19 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
-public class GetStackTracesTag extends AutoEncodingFilteredTag {
+public class GetStackTracesTag extends AutoEncodingNullTag {
 
     private String scope;
     private String name;
     private String property;
 
     @Override
-    public MediaType getContentType() {
+    public MediaType getOutputType() {
         return MediaType.TEXT;
     }
 
     @Override
-    public void invokeAutoEncoding(Writer out) throws JspException, IOException {
+    public void doTag(Writer out) throws JspException, IOException {
         PageContext pageContext = (PageContext)getJspContext();
         // Find the Throwable to display
         Object value = PropertyUtils.findObject(pageContext, scope, name, property, true, true);

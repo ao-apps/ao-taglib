@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2011  AO Industries, Inc.
+ * Copyright (C) 2011, 2012  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,11 +22,11 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.encoding.MediaType;
 import com.aoindustries.util.i18n.EditableResourceBundle;
 import java.io.IOException;
+import java.io.Writer;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.JspWriter;
-import javax.servlet.jsp.tagext.TagSupport;
 
 /**
  * Allows editing of the website resource bundles through the website itself.
@@ -36,25 +36,20 @@ import javax.servlet.jsp.tagext.TagSupport;
  *
  * @author  AO Industries, Inc.
  */
-public class ResourceEditorTag extends TagSupport {
-
-    private static final long serialVersionUID = -1602638063093001647L;
+public class ResourceEditorTag extends AutoEncodingNullTag {
 
     public ResourceEditorTag() {
     }
 
     @Override
-    public int doStartTag() throws JspException {
-        try {
-            //HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
-            //pageContext.getServletContext().log("ResourceEditorTag: Calling printEditableResourceBundleLookups: "+request.getUserPrincipal());
-            JspWriter out = pageContext.getOut();
-            out.print("<div style=\"font-size:smaller\">");
-            EditableResourceBundle.printEditableResourceBundleLookups(out, 3, false);
-            out.print("</div>");
-            return SKIP_BODY;
-        } catch(IOException err) {
-            throw new JspException(err);
-        }
+    public MediaType getOutputType() {
+        return MediaType.XHTML;
+    }
+
+    @Override
+    public void doTag(Writer out) throws JspException, IOException {
+        out.write("<div style=\"font-size:smaller\">");
+        EditableResourceBundle.printEditableResourceBundleLookups(out, 3, false);
+        out.write("</div>");
     }
 }
