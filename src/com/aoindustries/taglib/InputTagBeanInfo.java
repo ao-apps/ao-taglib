@@ -55,6 +55,7 @@ public class InputTagBeanInfo extends SimpleBeanInfo {
                     new PropertyDescriptor("onblur", InputTag.class),
                     new PropertyDescriptor("onkeypress", InputTag.class),
                     new PropertyDescriptor("size", InputTag.class),
+                    new PropertyDescriptor("maxlength", InputTag.class),
                     new PropertyDescriptor("readonly", InputTag.class),
                     new PropertyDescriptor("disabled", InputTag.class),
                     new PropertyDescriptor("class", InputTag.class, "getClazz", "setClazz"),

@@ -44,6 +44,7 @@ public class InputTag extends AutoEncodingBufferedTag implements
     OnblurAttribute,
     OnkeypressAttribute,
     SizeAttribute,
+    MaxlengthAttribute,
     ReadonlyAttribute,
     DisabledAttribute,
     ClassAttribute,
@@ -75,6 +76,7 @@ public class InputTag extends AutoEncodingBufferedTag implements
     private String onblur;
     private String onkeypress;
     private String size;
+    private Integer maxlength;
     private boolean readonly;
     private boolean disabled;
     private String clazz;
@@ -193,6 +195,16 @@ public class InputTag extends AutoEncodingBufferedTag implements
     }
 
     @Override
+    public Integer getMaxlength() {
+        return maxlength;
+    }
+
+    @Override
+    public void setMaxlength(Integer maxlength) {
+        this.maxlength = maxlength;
+    }
+
+    @Override
     public boolean isReadonly() {
         return readonly;
     }
@@ -292,6 +304,11 @@ public class InputTag extends AutoEncodingBufferedTag implements
         if(size!=null) {
             out.write(" size=\"");
             JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute(size, out);
+            out.write('"');
+        }
+        if(maxlength!=null) {
+            out.write(" maxlength=\"");
+            out.write(maxlength.toString());
             out.write('"');
         }
         if(readonly) out.write(" readonly=\"readonly\"");

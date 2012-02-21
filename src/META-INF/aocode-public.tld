@@ -389,6 +389,13 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <type>java.lang.String</type>
     </attribute>
     <attribute>
+      <description>The maxlength of the input element.  A nested maxlength tag will override this value.</description>
+      <name>maxlength</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.Integer</type>
+    </attribute>
+    <attribute>
       <description>
           The readonly attribute.  Accepts values of "true" or "false".
           A non-empty nested readonly tag will override this value.
@@ -745,6 +752,17 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <description>Provides a size attribute to its SizeAttribute parent tag.</description>
     <name>size</name>
     <tag-class>com.aoindustries.taglib.SizeTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>
+        Provides a maxlength attribute to its MaxlengthAttribute parent tag.
+        The body is trimmed.  If empty is sets the maxlength to null.  Otherwise
+        it must be a valid integer.
+    </description>
+    <name>maxlength</name>
+    <tag-class>com.aoindustries.taglib.MaxlengthTag</tag-class>
     <body-content>scriptless</body-content>
     <example />
   </tag>
