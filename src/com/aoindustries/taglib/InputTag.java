@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009, 2010, 2011  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -33,7 +33,22 @@ import javax.servlet.jsp.JspException;
 /**
  * @author  AO Industries, Inc.
  */
-public class InputTag extends AutoEncodingBufferedTag implements IdAttribute, TypeAttribute, NameAttribute, ValueAttribute, OnclickAttribute, OnchangeAttribute, OnfocusAttribute, OnkeypressAttribute, SizeAttribute, ReadonlyAttribute, DisabledAttribute, ClassAttribute, StyleAttribute, CheckedAttribute {
+public class InputTag extends AutoEncodingBufferedTag implements
+    IdAttribute,
+    TypeAttribute,
+    NameAttribute,
+    ValueAttribute,
+    OnclickAttribute,
+    OnchangeAttribute,
+    OnfocusAttribute,
+    OnblurAttribute,
+    OnkeypressAttribute,
+    SizeAttribute,
+    ReadonlyAttribute,
+    DisabledAttribute,
+    ClassAttribute,
+    StyleAttribute,
+    CheckedAttribute {
 
     public static boolean isValidType(String type) {
         return
@@ -57,6 +72,7 @@ public class InputTag extends AutoEncodingBufferedTag implements IdAttribute, Ty
     private String onclick;
     private String onchange;
     private String onfocus;
+    private String onblur;
     private String onkeypress;
     private String size;
     private boolean readonly;
@@ -144,6 +160,16 @@ public class InputTag extends AutoEncodingBufferedTag implements IdAttribute, Ty
     @Override
     public void setOnfocus(String onfocus) {
         this.onfocus = onfocus;
+    }
+
+    @Override
+    public String getOnblur() {
+        return onblur;
+    }
+
+    @Override
+    public void setOnblur(String onblur) {
+        this.onblur = onblur;
     }
 
     @Override
@@ -251,6 +277,11 @@ public class InputTag extends AutoEncodingBufferedTag implements IdAttribute, Ty
         if(onfocus!=null) {
             out.write(" onfocus=\"");
             JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute(onfocus, out);
+            out.write('"');
+        }
+        if(onblur!=null) {
+            out.write(" onblur=\"");
+            JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute(onblur, out);
             out.write('"');
         }
         if(onkeypress!=null) {

@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2010, 2011  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2012  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -52,6 +52,7 @@ public class InputTagBeanInfo extends SimpleBeanInfo {
                     new PropertyDescriptor("onclick", InputTag.class),
                     new PropertyDescriptor("onchange", InputTag.class),
                     new PropertyDescriptor("onfocus", InputTag.class),
+                    new PropertyDescriptor("onblur", InputTag.class),
                     new PropertyDescriptor("onkeypress", InputTag.class),
                     new PropertyDescriptor("size", InputTag.class),
                     new PropertyDescriptor("readonly", InputTag.class),

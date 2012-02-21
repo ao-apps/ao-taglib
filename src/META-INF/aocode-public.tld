@@ -363,6 +363,16 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     </attribute>
     <attribute>
       <description>
+          A JavaScript onblur handler.
+          A nested onblur tag will override this value.
+      </description>
+      <name>onblur</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>
           A JavaScript onkeypress handler.
           A nested onkeypress tag will override this value.
       </description>
@@ -648,6 +658,13 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
+    <description>Provides an onblur script to its OnblurAttribute parent tag.</description>
+    <name>onblur</name>
+    <tag-class>com.aoindustries.taglib.OnblurTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
     <description>Provides an onkeypress script to its OnkeypressAttribute parent tag.</description>
     <name>onkeypress</name>
     <tag-class>com.aoindustries.taglib.OnkeypressTag</tag-class>
@@ -669,14 +686,14 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
-    <description>Provides an onmouseover script to its OnMouseoverAttribute parent tag.</description>
+    <description>Provides an onmouseover script to its OnmouseoverAttribute parent tag.</description>
     <name>onmouseover</name>
     <tag-class>com.aoindustries.taglib.OnmouseoverTag</tag-class>
     <body-content>scriptless</body-content>
     <example />
   </tag>
   <tag>
-    <description>Provides an onmouseout script to its OnMouseoutAttribute parent tag.</description>
+    <description>Provides an onmouseout script to its OnmouseoutAttribute parent tag.</description>
     <name>onmouseout</name>
     <tag-class>com.aoindustries.taglib.OnmouseoutTag</tag-class>
     <body-content>scriptless</body-content>
@@ -1078,6 +1095,16 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
           A nested onfocus tag will override this value.
       </description>
       <name>onfocus</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>
+          A JavaScript onblur handler.
+          A nested onblur tag will override this value.
+      </description>
+      <name>onblur</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
