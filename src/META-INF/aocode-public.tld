@@ -1231,7 +1231,11 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     </attribute>
     <attribute>
       <description>
-          The type of redirect performed.  Is one of "moved_permanently" (or 301), "found" (or 302) or "see_other" (or 303), defaults to "found" (302).
+          The type of redirect performed.  Is one of "moved_permanently" (or 301), "moved_temporarily" (or 302) or "see_other" (or 303).
+
+          Because the redirect type has important consequences on search engines and browser caches, the decision should be made for
+          each redirect.  Thus, this attribute must be set directly or in an nested type tag.
+
           A nested type tag will override this value.
       </description>
       <name>type</name>

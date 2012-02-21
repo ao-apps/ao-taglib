@@ -22,10 +22,12 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.encoding.NewEncodingUtils;
 import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.net.HttpParametersUtils;
+import com.aoindustries.servlet.http.ServletUtil;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,6 +47,7 @@ public class RedirectTag extends SimpleTagSupport implements HrefAttribute, Para
             "moved_permanently".equals(type)
             || "permanent".equals(type)
             || "301".equals(type)
+            || "moved_temporarily".equals(type)
             || "found".equals(type)
             || "temporary".equals(type)
             || "302".equals(type)
@@ -55,7 +58,7 @@ public class RedirectTag extends SimpleTagSupport implements HrefAttribute, Para
 
     private String href;
     private HttpParametersMap params;
-    private String type = "found";
+    private String type;
 
     @Override
     public String getHref() {
@@ -96,19 +99,49 @@ public class RedirectTag extends SimpleTagSupport implements HrefAttribute, Para
         PageContext pageContext = (PageContext)getJspContext();
         HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
         HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
+
+        //System.err.println("DEBUG: RedirectTag.doTag: 1: href="+href);
+
+        // Convert page-relative paths to context-relative path, resolving ./ and ../
+        href = ServletUtil.getAbsolutePath(request, href);
+        //System.err.println("DEBUG: RedirectTag.doTag: 2: href="+href);
+
+        // Add any parameters to the URL
+        href = HttpParametersUtils.addParams(href, params);
+        //System.err.println("DEBUG: RedirectTag.doTag: 3: href="+href);
+
+        // Encode URL path elements (like Japanese filenames)
+        href = NewEncodingUtils.encodeUrlPath(href);
+        //System.err.println("DEBUG: RedirectTag.doTag: 4: href="+href);
+
+        // Perform URL rewriting
+        href = response.encodeRedirectURL(href);
+        //System.err.println("DEBUG: RedirectTag.doTag: 5: href="+href);
+
+        // Convert to absolute path if needed.  This will also add the context path.
+        if(href.startsWith("/")) {
+            href = ServletUtil.getAbsoluteURL(request, href);
+            //System.err.println("DEBUG: RedirectTag.doTag: 6: href="+href);
+        }
+        /*
+        // Add in the context path for context-relative paths
         if(href.startsWith("/")) {
             String contextPath = request.getContextPath();
             if(contextPath.length()>0) href = contextPath+href;
         }
-        href = HttpParametersUtils.addParams(href, params);
-        String encodedHref = response.encodeRedirectURL(href);
-        if("moved_permanently".equals(type) || "permanent".equals(type) || "301".equals(type)) {
-            response.setHeader("Location", encodedHref);
+        //System.err.println("DEBUG: RedirectTag.doTag: 3: href="+href);
+         */
+
+        if(type==null) throw new AttributeRequiredException("type");
+        if("301".equals(type) || "moved_permanently".equals(type) || "permanent".equals(type)) {
+            response.setHeader("Location", href);
             response.sendError(HttpServletResponse.SC_MOVED_PERMANENTLY);
-        } else if("found".equals(type) || "temporary".equals(type) || "302".equals(type)) {
-            response.sendRedirect(encodedHref);
-        } else if("see_other".equals(type) || "303".equals(type)) {
-            response.setHeader("Location", encodedHref);
+        } else if("302".equals(type) || "moved_temporarily".equals(type) || "found".equals(type) || "temporary".equals(type)) {
+            response.setHeader("Location", href);
+            response.sendError(HttpServletResponse.SC_MOVED_TEMPORARILY);
+            //response.sendRedirect(encodedHref);
+        } else if("303".equals(type) || "see_other".equals(type)) {
+            response.setHeader("Location", href);
             response.sendError(HttpServletResponse.SC_SEE_OTHER);
         } else {
             throw new AssertionError("Unexpected value for type: "+type);
