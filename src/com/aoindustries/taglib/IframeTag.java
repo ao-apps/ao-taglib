@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2011  AO Industries, Inc.
+ * Copyright (C) 2011, 2012  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -124,7 +124,7 @@ public class IframeTag extends AutoEncodingBufferedTag implements IdAttribute, S
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         PageContext pageContext = (PageContext)getJspContext();
         HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
-        if(src==null) throw new JspException(ApplicationResources.accessor.getMessage("IframeTag.src.required"));
+        if(src==null) throw new AttributeRequiredException("src");
         out.write("<iframe");
         if(id!=null) {
             out.write(" id=\"");

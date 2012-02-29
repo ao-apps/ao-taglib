@@ -22,6 +22,7 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.lang.NullArgumentException;
 import javax.servlet.jsp.JspException;
 
 /**
@@ -38,8 +39,7 @@ public class Meta {
     public Meta(String name, String httpEquiv, String content) throws JspException {
         this.name = name;
         this.httpEquiv = httpEquiv;
-        if(content==null) throw new AttributeRequiredException("content");
-        this.content = content;
+        this.content = NullArgumentException.checkNotNull(content, "content");
     }
 
     public String getName() {
