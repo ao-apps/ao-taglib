@@ -749,6 +749,13 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
+    <description>Provides a page to its PageAttribute parent tag.</description>
+    <name>page</name>
+    <tag-class>com.aoindustries.taglib.PageTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
     <description>Provides a size attribute to its SizeAttribute parent tag.</description>
     <name>size</name>
     <tag-class>com.aoindustries.taglib.SizeTag</tag-class>
@@ -1247,6 +1254,41 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
   </tag>
   <tag>
     <description>
+        Includes another resource and then continues processing of the current page.
+        If parameters are not cleared, nested parameters are added before request parameters.
+        This has two advantages over the standard jsp:include tag:
+            1) You may clear parameters such that only those specifically added will be passed on to the included page
+            2) You may have other nested tags used to select and build the set of parameters
+    </description>
+    <name>include</name>
+    <tag-class>com.aoindustries.taglib.IncludeTag</tag-class>
+    <body-content>scriptless</body-content>
+    <attribute>
+      <description>
+          The page that will be included.
+          A nested page tag will override this value.
+          The page is required, must be set in attribute or nested page tag.
+      </description>
+      </description>
+      <name>page</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>
+          Optionally clears all parameters so that only those added by nested tags
+          are included.  Defaults to false.
+      </description>
+      <name>clearParams</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>boolean</type>
+    </attribute>
+    <example />
+  </tag>
+  <tag>
+    <description>
         Forwards to another resource, ends processing of the current page.
         If parameters are not cleared, nested parameters are added before request parameters.
         This has two advantages over the standard jsp:forward tag:
@@ -1257,9 +1299,14 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <tag-class>com.aoindustries.taglib.ForwardTag</tag-class>
     <body-content>scriptless</body-content>
     <attribute>
-      <description>The page that will be forwarded to.</description>
+      <description>
+          The page that will be included.
+          A nested page tag will override this value.
+          The page is required, must be set in attribute or nested page tag.
+      </description>
+      </description>
       <name>page</name>
-      <required>true</required>
+      <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
     </attribute>
