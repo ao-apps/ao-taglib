@@ -22,12 +22,17 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.lang.NotImplementedException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletResponseWrapper;
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspWriter;
 
 /**
  * @author  AO Industries, Inc.
@@ -35,9 +40,28 @@ import javax.servlet.jsp.JspException;
 public class IncludeTag extends DispatchTag {
 
     @Override
-    void dispatch(RequestDispatcher dispatcher, ServletRequest request, ServletResponse response) throws IOException, JspException {
+    void dispatch(RequestDispatcher dispatcher, final JspWriter out, HttpServletRequest request, HttpServletResponse response) throws IOException, JspException {
         try {
-            dispatcher.include(request, response);
+            // Write to the current JSP out instead of creating a new writer.
+            dispatcher.include(
+                request,
+                new HttpServletResponseWrapper(response) {
+                    @Override
+                    public ServletOutputStream getOutputStream() throws IOException {
+                        throw new NotImplementedException("Implement when first needed, and how would we accomplish this?  What would it mean in a JSP context?  Pass-through to original response out and clear previous content?");
+                    }
+
+                    /**
+                     * Uses the writer from the JSP context instead of creating a new one.  This
+                     * is required because the JSP out cannot be flushed from a custom tag:
+                     * <pre>java.io.IOException: Illegal to flush within a custom tag</pre>
+                     */
+                    @Override
+                    public PrintWriter getWriter() throws IOException {
+                        return new PrintWriter(out);
+                    }
+                }
+            );
         } catch(ServletException e) {
             throw new JspException(e);
         }

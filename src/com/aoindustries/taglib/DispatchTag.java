@@ -34,8 +34,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
@@ -88,8 +86,9 @@ abstract class DispatchTag extends SimpleTagSupport implements PageAttribute, Pa
     @Override
     public void doTag() throws IOException, JspException {
         PageContext pageContext = (PageContext)getJspContext();
+        JspWriter out = pageContext.getOut();
         JspFragment body = getJspBody();
-        if(body!=null) body.invoke(getJspFragmentWriter(pageContext.getOut()));
+        if(body!=null) body.invoke(getJspFragmentWriter(out));
         HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
         HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
         // Make relative to current JSP page
@@ -102,7 +101,7 @@ abstract class DispatchTag extends SimpleTagSupport implements PageAttribute, Pa
                 // No parameters
                 if(request.getParameterMap().isEmpty()) {
                     // No need to wrap, use old request
-                    dispatch(dispatcher, request, response);
+                    dispatch(dispatcher, out, request, response);
                     return;
                 }
                 parameters = Collections.emptyMap();
@@ -127,7 +126,7 @@ abstract class DispatchTag extends SimpleTagSupport implements PageAttribute, Pa
                 //@SuppressWarnings("unchecked")
                 //Map<String,String[]> oldMap = request.getParameterMap();
                 //parameters = oldMap;
-                dispatch(dispatcher, request, response);
+                dispatch(dispatcher, out, request, response);
                 return;
             } else {
                 // Merge all parameters
@@ -162,6 +161,7 @@ abstract class DispatchTag extends SimpleTagSupport implements PageAttribute, Pa
         }
         dispatch(
             dispatcher,
+            out,
             new HttpServletRequestWrapper(request) {
                 @Override
                 public String getParameter(String name) {
@@ -196,5 +196,5 @@ abstract class DispatchTag extends SimpleTagSupport implements PageAttribute, Pa
         return out;
     }
 
-    abstract void dispatch(RequestDispatcher dispatcher, ServletRequest request, ServletResponse response) throws IOException, JspException;
+    abstract void dispatch(RequestDispatcher dispatcher, JspWriter out, HttpServletRequest request, HttpServletResponse response) throws IOException, JspException;
 }

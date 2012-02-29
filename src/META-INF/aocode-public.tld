@@ -1299,7 +1299,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <body-content>scriptless</body-content>
     <attribute>
       <description>
-          The page that will be included.
+          The page that will be forwarded to.
           A nested page tag will override this value.
           The page is required, must be set in attribute or nested page tag.
       </description>
