@@ -399,7 +399,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <description>
           The readonly attribute.  Accepts values of "true" or "false".
           A non-empty nested readonly tag will override this value.
-          If readonly is "true", will add the attribute as <code>readonly="readonly"</code>,
+          If readonly is "true", will add the attribute as &lt;code&gt;readonly="readonly"&lt;/code&gt;,
           otherwise the attribute is not added.
       </description>
       <name>readonly</name>
@@ -411,7 +411,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <description>
           The disabled attribute.  Accepts values of "true" or "false".
           A non-empty nested disabled tag will override this value.
-          If disabled is "true", will add the attribute as <code>disabled="disabled"</code>,
+          If disabled is "true", will add the attribute as &lt;code&gt;disabled="disabled"&lt;/code&gt;,
           otherwise the attribute is not added.
       </description>
       <name>disabled</name>
@@ -437,7 +437,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <description>
           The checked attribute.  Accepts values of "true" or "false".
           A non-empty nested checked tag will override this value.
-          If checked is "true", will add the attribute as <code>checked="checked"</code>,
+          If checked is "true", will add the attribute as &lt;code&gt;checked="checked"&lt;/code&gt;,
           otherwise the attribute is not added.
       </description>
       <name>checked</name>
@@ -958,7 +958,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <description>
           The readonly attribute.  Accepts values of "true" or "false".
           A non-empty nested readonly tag will override this value.
-          If readonly is "true", will add the attribute as <code>readonly="readonly"</code>,
+          If readonly is "true", will add the attribute as &lt;code&gt;readonly="readonly"&lt;/code&gt;,
           otherwise the attribute is not added.
       </description>
       <name>readonly</name>
@@ -970,7 +970,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <description>
           The disabled attribute.  Accepts values of "true" or "false".
           A non-empty nested disabled tag will override this value.
-          If disabled is "true", will add the attribute as <code>disabled="disabled"</code>,
+          If disabled is "true", will add the attribute as &lt;code&gt;disabled="disabled"&lt;/code&gt;,
           otherwise the attribute is not added.
       </description>
       <name>disabled</name>
@@ -1096,7 +1096,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <description>
           The disabled attribute.  Accepts values of "true" or "false".
           A non-empty nested disabled tag will override this value.
-          If disabled is "true", will add the attribute as <code>disabled="disabled"</code>,
+          If disabled is "true", will add the attribute as &lt;code&gt;disabled="disabled"&lt;/code&gt;,
           otherwise the attribute is not added.
       </description>
       <name>disabled</name>
@@ -1165,7 +1165,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <description>
           The selected attribute.  Accepts values of "true" or "false".
           A non-empty nested selected tag will override this value.
-          If selected is "true", will add the attribute as <code>selected="selected"</code>,
+          If selected is "true", will add the attribute as &lt;code&gt;selected="selected"&lt;/code&gt;,
           otherwise the attribute is not added.
       </description>
       <name>selected</name>
@@ -1177,7 +1177,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <description>
           The disabled attribute.  Accepts values of "true" or "false".
           A non-empty nested disabled tag will override this value.
-          If disabled is "true", will add the attribute as <code>disabled="disabled"</code>,
+          If disabled is "true", will add the attribute as &lt;code&gt;disabled="disabled"&lt;/code&gt;,
           otherwise the attribute is not added.
       </description>
       <name>disabled</name>
@@ -1269,7 +1269,6 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
           A nested page tag will override this value.
           The page is required, must be set in attribute or nested page tag.
       </description>
-      </description>
       <name>page</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
@@ -1303,7 +1302,6 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
           The page that will be included.
           A nested page tag will override this value.
           The page is required, must be set in attribute or nested page tag.
-      </description>
       </description>
       <name>page</name>
       <required>false</required>
@@ -1364,13 +1362,6 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     </attribute>
     <example />
   </tag>
-  <function>
-    <description>Joins elements of any Iterable into a String.</description>
-    <name>join</name>
-    <function-class>com.aoindustries.taglib.Functions</function-class>
-    <function-signature>java.lang.String join(java.lang.Iterable,java.lang.String)</function-signature>
-    <example>${ao:join(iterable, separator)}</example>
-  </function>
   <tag>
     <description>Word wraps the textual content.</description>
     <name>wordWrap</name>
@@ -1385,13 +1376,6 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     </attribute>
     <example />
   </tag>
-  <function>
-    <description>Word wraps a string.</description>
-    <name>wordWrap</name>
-    <function-class>com.aoindustries.util.StringUtility</function-class>
-    <function-signature>java.lang.String wordWrap(java.lang.String,int)</function-signature>
-    <example>${ao:wordWrap(text, width)}</example>
-  </function>
   <tag>
     <description><![CDATA[
         <ol>
@@ -1444,4 +1428,18 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <tag-class>com.aoindustries.taglib.DisableResourceEditorTag</tag-class>
     <body-content>empty</body-content>
   </tag>
+  <function>
+    <description>Word wraps a string.</description>
+    <name>wordWrap</name>
+    <function-class>com.aoindustries.util.StringUtility</function-class>
+    <function-signature>java.lang.String wordWrap(java.lang.String,int)</function-signature>
+    <example>${ao:wordWrap(text, width)}</example>
+  </function>
+  <function>
+    <description>Joins elements of any Iterable into a String.</description>
+    <name>join</name>
+    <function-class>com.aoindustries.taglib.Functions</function-class>
+    <function-signature>java.lang.String join(java.lang.Iterable,java.lang.String)</function-signature>
+    <example>${ao:join(iterable, separator)}</example>
+  </function>
 </taglib>
