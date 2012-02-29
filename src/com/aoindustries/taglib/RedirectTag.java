@@ -22,6 +22,7 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.io.NullWriter;
 import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
@@ -94,7 +95,12 @@ public class RedirectTag extends SimpleTagSupport implements HrefAttribute, Para
     @Override
     public void doTag() throws IOException, SkipPageException, JspException {
         JspFragment body = getJspBody();
-        if(body!=null) body.invoke(null);
+        if(body!=null) {
+            // Discard all nested output, since this will not use the output and this
+            // output could possibly fill the response buffer and prevent the redirect
+            // from functioning.
+            body.invoke(NullWriter.getInstance());
+        }
         PageContext pageContext = (PageContext)getJspContext();
         HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
         HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
