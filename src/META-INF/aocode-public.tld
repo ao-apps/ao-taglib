@@ -1253,6 +1253,31 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
+    <description>Returns an error status.  Results in error handler processing.</description>
+    <name>sendError</name>
+    <tag-class>com.aoindustries.taglib.SendErrorTag</tag-class>
+    <body-content>scriptless</body-content>
+    <attribute>
+      <description>
+          The status code for response.sendError.
+      </description>
+      <name>status</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>int</type>
+    </attribute>
+    <attribute>
+      <description>
+          The optional message to be sent.  If not set as an attribute, the message will be taken from the body, trimmed.
+      </description>
+      <name>message</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <example />
+  </tag>
+  <tag>
     <description>
         Includes another resource and then continues processing of the current page.
         If parameters are not cleared, nested parameters are added before request parameters.
