@@ -29,6 +29,8 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.SkipPageException;
@@ -49,7 +51,7 @@ public class ForwardTag extends DispatchTag {
     }
 
     @Override
-    void dispatch(RequestDispatcher dispatcher, ServletRequest request, ServletResponse response) throws IOException, JspException {
+    void dispatch(RequestDispatcher dispatcher, JspWriter out, HttpServletRequest request, HttpServletResponse response) throws IOException, JspException {
         try {
             dispatcher.forward(request, response);
         } catch(ServletException e) {
