@@ -1467,4 +1467,18 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <function-signature>java.lang.String join(java.lang.Iterable,java.lang.String)</function-signature>
     <example>${ao:join(iterable, separator)}</example>
   </function>
+  <function>
+    <description>Generates an absolute URL for the provided context-relative URL.  The URL is not automatically response encodeURL.</description>
+    <name>getAbsoluteURL</name>
+    <function-class>com.aoindustries.taglib.Functions</function-class>
+    <function-signature>java.lang.String getAbsoluteURL(java.lang.String)</function-signature>
+    <example>${ao:getAbsoluteURL('/path-to-page.jsp')}</example>
+  </function>
+  <function>
+    <description>Rewries a URL to maintain session state.</description>
+    <name>encodeURL</name>
+    <function-class>com.aoindustries.taglib.Functions</function-class>
+    <function-signature>java.lang.String encodeURL(java.lang.String)</function-signature>
+    <example>${ao:encodeURL('../path-to-page.jsp')}</example>
+  </function>
 </taglib>

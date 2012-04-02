@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2011  AO Industries, Inc.
+ * Copyright (C) 2011, 2012  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,6 +22,8 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.servlet.filter.FunctionContext;
+import com.aoindustries.servlet.http.ServletUtil;
 import com.aoindustries.util.StringUtility;
 
 final public class Functions {
@@ -32,5 +34,13 @@ final public class Functions {
     public static String join(Iterable<?> iter, String separator) {
         if(iter==null) return null;
         return StringUtility.join(iter, separator);
+    }
+
+    public static String getAbsoluteURL(String relPath) {
+        return ServletUtil.getAbsoluteURL(FunctionContext.getRequest(), relPath);
+    }
+
+    public static String encodeURL(String url) {
+        return FunctionContext.getResponse().encodeURL(url);
     }
 }
