@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009, 2010, 2011  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -30,13 +30,11 @@ import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.net.HttpParametersUtils;
 import java.io.IOException;
 import java.io.Writer;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.PageContext;
 
 /**
  * TODO: Have absolute option
- * TODO: Replace uses of ao:text with this as it is now more appropriate for sending dynamic parameters to JavaScript since it adds contextPath and encodeURL.
+ * TODO: Replace uses of ao:text with this as it is now more appropriate for sending dynamic parameters to JavaScript since it calls encodeURL.
  *
  * @author  AO Industries, Inc.
  */
@@ -68,11 +66,11 @@ public class UrlTag extends AutoEncodingBufferedTag implements ParamsAttribute {
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         String url = HttpParametersUtils.addParams(capturedBody.toString().trim(), params);
-        if(url.startsWith("/")) {
+        /*if(url.startsWith("/")) {
             PageContext pageContext = (PageContext)getJspContext();
             HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
             out.write(request.getContextPath());
-        }
+        }*/
         out.write(url);
     }
 }
