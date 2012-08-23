@@ -112,9 +112,32 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 
     }
 
-    private String doctype = "strict";
+    public enum DocType {
+        strict {
+            @Override
+            public String getDocTypeLine() {
+                return "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n";
+            }
+        },
+        transitional {
+            @Override
+            public String getDocTypeLine() {
+                return "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n";
+            }
+        },
+        frameset {
+            @Override
+            public String getDocTypeLine() {
+                return "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Frameset//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd\">\n";
+            }
+        };
+
+        public abstract String getDocTypeLine();
+    }
+
+    private DocType doctype = DocType.strict;
     public void setDoctype(String doctype) {
-        this.doctype = doctype;
+        this.doctype = doctype==null ? null : DocType.valueOf(doctype);
     }
 
     private boolean forceHtml = false;
@@ -127,29 +150,11 @@ public class HtmlTag extends AutoEncodingFilteredTag {
         return MediaType.XHTML;
     }
 
-    @Override
-    protected void doTag(Writer out) throws JspException, IOException {
-        PageContext pageContext = (PageContext)getJspContext();
-        ServletResponse response = pageContext.getResponse();
+    public static void writeDocTypeLine(DocType docType, Writer out) throws IOException {
+        out.write(docType.getDocTypeLine());
+    }
 
-        // Clear the output buffer
-        response.resetBuffer();
-
-        // Set the content type
-        response.setContentType(
-            forceHtml
-            ? CONTENT_TYPE_HTML
-            : getXhtmlContentType((HttpServletRequest)pageContext.getRequest())
-        );
-        // response.setCharacterEncoding("UTF-8");
-
-        // Write the DOCTYPE
-        if("strict".equals(doctype))            out.write("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n");
-        else if("transitional".equals(doctype)) out.write("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n");
-        else if("frameset".equals(doctype))     out.write("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Frameset//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd\">\n");
-        else if(!"none".equals(doctype))        throw new JspException(ApplicationResources.accessor.getMessage("HtmlTag.doctype.invalid", doctype));
-
-        // Begin the HTML tag
+    public static void beginHtmlTag(ServletResponse response, Writer out) throws IOException {
         out.write("<html xmlns=\"http://www.w3.org/1999/xhtml\"");
         Locale locale = response.getLocale();
         if(locale!=null) {
@@ -172,11 +177,31 @@ public class HtmlTag extends AutoEncodingFilteredTag {
             }
         }
         out.write('>');
+    }
 
-        // Include the body
-        super.doTag(out);
-
-        // End the HTML tag
+    public static void endHtmlTag(Writer out) throws IOException {
         out.write("</html>");
+    }
+
+    @Override
+    protected void doTag(Writer out) throws JspException, IOException {
+        PageContext pageContext = (PageContext)getJspContext();
+        ServletResponse response = pageContext.getResponse();
+
+        // Clear the output buffer
+        response.resetBuffer();
+
+        // Set the content type
+        response.setContentType(
+            forceHtml
+            ? CONTENT_TYPE_HTML
+            : getXhtmlContentType((HttpServletRequest)pageContext.getRequest())
+        );
+        // response.setCharacterEncoding("UTF-8");
+
+        writeDocTypeLine(doctype, out);
+        beginHtmlTag(response, out);
+        super.doTag(out);
+        endHtmlTag(out);
     }
 }
