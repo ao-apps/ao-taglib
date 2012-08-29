@@ -269,7 +269,8 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       The proper escaping/encoding will be performed based on the context of
       this tag.
 
-      It may be a relative or absolute URL.
+      It may be a relative or absolute URL.  If starts with a /, the context
+      path will be prepended to the path.
 
       Depending on context, the URL will be passed through HttpServletResponse.encodeURL
       to add any URL-based session state.  Session state will never be added to external links.
@@ -1240,7 +1241,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
           The type of redirect performed.  Is one of "moved_permanently" (or 301), "moved_temporarily" (or 302) or "see_other" (or 303).
 
           Because the redirect type has important consequences on search engines and browser caches, the decision should be made for
-          each redirect.  Thus, this attribute must be set directly or in an nested type tag.
+          each redirect.  Thus, this attribute must be set directly or in a nested type tag.
 
           A nested type tag will override this value.
       </description>
