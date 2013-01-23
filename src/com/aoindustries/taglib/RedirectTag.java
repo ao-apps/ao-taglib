@@ -38,6 +38,9 @@ import javax.servlet.jsp.tagext.JspFragment;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 /**
+ * TODO: Redirect does not work when response has been committed, and no error is logged.
+ *       Or some other issue, because jsp:forward worked while redirect didn't when HTML output before redirect.
+ *
  * @author  AO Industries, Inc.
  */
 public class RedirectTag extends SimpleTagSupport implements HrefAttribute, ParamsAttribute, TypeAttribute {
