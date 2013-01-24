@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2010, 2011, 2012  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2012, 2013  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -28,6 +28,7 @@ import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.net.HttpParametersUtils;
 import com.aoindustries.servlet.http.ServletUtil;
+import com.aoindustries.servlet.jsp.LocalizedJspException;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -91,7 +92,7 @@ public class RedirectTag extends SimpleTagSupport implements HrefAttribute, Para
 
     @Override
     public void setType(String type) throws JspException {
-        if(!isValidType(type)) throw new JspException(ApplicationResources.accessor.getMessage("RedirectTag.type.invalid", type));
+        if(!isValidType(type)) throw new LocalizedJspException(ApplicationResources.accessor, "RedirectTag.type.invalid", type);
         this.type = type;
     }
 

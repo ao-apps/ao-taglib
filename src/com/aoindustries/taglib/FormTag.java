@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2010, 2011  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2013  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -26,6 +26,7 @@ import com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.NewEncodingUtils;
 import com.aoindustries.io.AutoTempFileWriter;
+import com.aoindustries.servlet.jsp.LocalizedJspException;
 import com.aoindustries.util.EncodingUtils;
 import com.aoindustries.util.StringUtility;
 import java.io.IOException;
@@ -72,7 +73,7 @@ public class FormTag extends AutoEncodingBufferedTag implements MethodAttribute,
 
     @Override
     public void setMethod(String method) throws JspException {
-        if(!isValidMethod(method)) throw new JspException(ApplicationResources.accessor.getMessage("FormTag.method.invalid", method));
+        if(!isValidMethod(method)) throw new LocalizedJspException(ApplicationResources.accessor, "FormTag.method.invalid", method);
         this.method = method;
     }
 

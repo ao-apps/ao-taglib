@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009, 2010, 2011  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2013  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,6 +22,7 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.servlet.jsp.LocalizedJspException;
 import java.lang.reflect.InvocationTargetException;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
@@ -47,7 +48,7 @@ public class PropertyUtils {
         else if("request".equals(scope)) return PageContext.REQUEST_SCOPE;
         else if("session".equals(scope)) return PageContext.SESSION_SCOPE;
         else if("application".equals(scope)) return PageContext.APPLICATION_SCOPE;
-        else throw new JspException(ApplicationResources.accessor.getMessage("PropertyUtils.scope.invalid", scope));
+        else throw new LocalizedJspException(ApplicationResources.accessor, "PropertyUtils.scope.invalid", scope);
     }
 
     /**
@@ -89,8 +90,8 @@ public class PropertyUtils {
             if(bean==null) {
                 if(beanRequired) {
                     // null and required
-                    if(scope==null) throw new JspException(ApplicationResources.accessor.getMessage("PropertyUtils.bean.required.nullScope", name));
-                    else throw new JspException(ApplicationResources.accessor.getMessage("PropertyUtils.bean.required.scope", name, scope));
+                    if(scope==null) throw new LocalizedJspException(ApplicationResources.accessor, "PropertyUtils.bean.required.nullScope", name);
+                    else throw new LocalizedJspException(ApplicationResources.accessor, "PropertyUtils.bean.required.scope", name, scope);
                 } else {
                     // null and not required
                     return null;
@@ -104,8 +105,8 @@ public class PropertyUtils {
                     Object value = org.apache.commons.beanutils.PropertyUtils.getProperty(bean, property);
                     if(valueRequired && value==null) {
                         // null and required
-                        if(scope==null) throw new JspException(ApplicationResources.accessor.getMessage("PropertyUtils.value.required.nullScope", property, name));
-                        else throw new JspException(ApplicationResources.accessor.getMessage("PropertyUtils.value.required.scope", property, name, scope));
+                        if(scope==null) throw new LocalizedJspException(ApplicationResources.accessor, "PropertyUtils.value.required.nullScope", property, name);
+                        else throw new LocalizedJspException(ApplicationResources.accessor, "PropertyUtils.value.required.scope", property, name, scope);
                     }
                     return value;
                 }

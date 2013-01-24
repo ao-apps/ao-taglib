@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2011  AO Industries, Inc.
+ * Copyright (C) 2011, 2013  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,19 +22,19 @@
  */
 package com.aoindustries.taglib;
 
-import javax.servlet.jsp.JspException;
+import com.aoindustries.servlet.jsp.LocalizedJspException;
 
 /**
  * @author  AO Industries, Inc.
  */
-public class AttributeRequiredException extends JspException {
+public class AttributeRequiredException extends LocalizedJspException {
 
-    private static final long serialVersionUID = -476461971893480958L;
+    private static final long serialVersionUID = 2L;
 
     private final String attribute;
 
     public AttributeRequiredException(String attribute) {
-        super(ApplicationResources.accessor.getMessage("AttributeRequiredException.message", attribute));
+        super(ApplicationResources.accessor, "AttributeRequiredException.message", attribute);
         this.attribute = attribute;
     }
 

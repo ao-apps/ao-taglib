@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2011, 2012  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -24,6 +24,7 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.AutoTempFileWriter;
+import com.aoindustries.servlet.jsp.LocalizedJspException;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -46,14 +47,12 @@ public class FrameborderTag extends AutoEncodingBufferedTag {
 
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
-        JspTag parent = findAncestorWithClass(this, FrameborderAttribute.class);
-        if(parent==null) throw new NeedAttributeParentException("frameborder", "frameborder");
-        FrameborderAttribute frameborderAttribute = (FrameborderAttribute)parent;
+        FrameborderAttribute frameborderAttribute = AttributeUtils.findAttributeParent("frameborder", this, "frameborder", FrameborderAttribute.class);
         String value = capturedBody.toString().trim();
         if(value.length()>0) {
             if("true".equals(value)) frameborderAttribute.setFrameborder(true);
             else if("false".equals(value)) frameborderAttribute.setFrameborder(false);
-            else throw new JspException(ApplicationResources.accessor.getMessage("FrameborderTag.invalidValue", value));
+            else throw new LocalizedJspException(ApplicationResources.accessor, "FrameborderTag.invalidValue", value);
         }
     }
 }

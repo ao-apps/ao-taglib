@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009, 2010, 2011, 2012  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012, 2013  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -24,10 +24,10 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.AutoTempFileWriter;
+import com.aoindustries.servlet.jsp.LocalizedJspException;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.tagext.JspTag;
 
 /**
  * @author  AO Industries, Inc.
@@ -46,14 +46,12 @@ public class DisabledTag extends AutoEncodingBufferedTag {
 
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
-        JspTag parent = findAncestorWithClass(this, DisabledAttribute.class);
-        if(parent==null) throw new NeedAttributeParentException("disabled", "disabled");
-        DisabledAttribute disabledAttribute = (DisabledAttribute)parent;
+        DisabledAttribute disabledAttribute = AttributeUtils.findAttributeParent("disabled", this, "disabled", DisabledAttribute.class);
         String value = capturedBody.toString().trim();
         if(value.length()>0) {
             if("true".equals(value)) disabledAttribute.setDisabled(true);
             else if("false".equals(value)) disabledAttribute.setDisabled(false);
-            else throw new JspException(ApplicationResources.accessor.getMessage("DisabledTag.invalidValue", value));
+            else throw new LocalizedJspException(ApplicationResources.accessor, "DisabledTag.invalidValue", value);
         }
     }
 }

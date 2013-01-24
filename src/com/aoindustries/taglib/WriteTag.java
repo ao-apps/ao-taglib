@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009, 2010, 2011, 2012  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012, 2013  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -24,6 +24,7 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
+import com.aoindustries.servlet.jsp.LocalizedJspException;
 import java.io.IOException;
 import java.io.Writer;
 import java.lang.reflect.InvocationTargetException;
@@ -69,7 +70,7 @@ public class WriteTag extends AutoEncodingNullTag {
                             out.write((String)refMethod.invoke(value));
                         }
                     } catch(NoSuchMethodException err) {
-                        throw new JspException(ApplicationResources.accessor.getMessage("WriteTag.unableToFindMethod", method));
+                        throw new LocalizedJspException(ApplicationResources.accessor, "WriteTag.unableToFindMethod", method);
                     }
                 }
             }

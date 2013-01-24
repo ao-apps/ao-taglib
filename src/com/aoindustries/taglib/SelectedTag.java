@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2010, 2011, 2012  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2012, 2013  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -24,10 +24,10 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.AutoTempFileWriter;
+import com.aoindustries.servlet.jsp.LocalizedJspException;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.tagext.JspTag;
 
 /**
  * @author  AO Industries, Inc.
@@ -46,14 +46,12 @@ public class SelectedTag extends AutoEncodingBufferedTag {
 
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
-        JspTag parent = findAncestorWithClass(this, SelectedAttribute.class);
-        if(parent==null) throw new NeedAttributeParentException("selected", "selected");
-        SelectedAttribute selected = (SelectedAttribute)parent;
+        SelectedAttribute selected = AttributeUtils.findAttributeParent("selected", this, "selected", SelectedAttribute.class);
         String value = capturedBody.toString().trim();
         if(value.length()>0) {
             if("true".equals(value)) selected.setSelected(true);
             else if("false".equals(value)) selected.setSelected(false);
-            else throw new JspException(ApplicationResources.accessor.getMessage("SelectedTag.invalidValue", value));
+            else throw new LocalizedJspException(ApplicationResources.accessor, "SelectedTag.invalidValue", value);
         }
     }
 }

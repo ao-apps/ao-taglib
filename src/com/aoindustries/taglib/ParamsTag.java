@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2010, 2011, 2012  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2012, 2013  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -24,12 +24,12 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.AutoTempFileWriter;
+import com.aoindustries.servlet.jsp.LocalizedJspException;
 import java.io.IOException;
 import java.io.Writer;
 import java.lang.reflect.Array;
 import java.util.Iterator;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.tagext.JspTag;
 
 /**
  * @author  AO Industries, Inc.
@@ -65,27 +65,25 @@ public class ParamsTag extends AutoEncodingBufferedTag implements NameAttribute 
 
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
-        JspTag parent = findAncestorWithClass(this, ParamsAttribute.class);
-        if(parent==null) throw new NeedAttributeParentException("params", "params");
+        ParamsAttribute paramsAttribute = AttributeUtils.findAttributeParent("params", this, "params", ParamsAttribute.class);
         if(name==null) throw new AttributeRequiredException("name");
         if(values!=null) {
-            ParamsAttribute paramsParent = (ParamsAttribute)parent;
             if(values instanceof Iterable<?>) {
-                for(Object value : (Iterable<?>)values) paramsParent.addParam(name, value==null ? "" : value.toString());
+                for(Object value : (Iterable<?>)values) paramsAttribute.addParam(name, value==null ? "" : value.toString());
             } else if(values instanceof Iterator<?>) {
                 Iterator<?> iter = (Iterator<?>)values;
                 while(iter.hasNext()) {
                     Object value = iter.next();
-                    paramsParent.addParam(name, value==null ? "" : value.toString());
+                    paramsAttribute.addParam(name, value==null ? "" : value.toString());
                 }
             } else if(values.getClass().isArray()) {
                 int len = Array.getLength(values);
                 for(int c=0; c<len; c++) {
                     Object value = Array.get(values, c);
-                    paramsParent.addParam(name, value==null ? "" : value.toString());
+                    paramsAttribute.addParam(name, value==null ? "" : value.toString());
                 }
             } else {
-                throw new JspException(ApplicationResources.accessor.getMessage("ParamsTag.values.unexpectedType", values.getClass().getName()));
+                throw new LocalizedJspException(ApplicationResources.accessor, "ParamsTag.values.unexpectedType", values.getClass().getName());
             }
         }
     }

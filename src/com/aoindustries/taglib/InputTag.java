@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009, 2010, 2011, 2012  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012, 2013  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -25,6 +25,7 @@ package com.aoindustries.taglib;
 import com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.AutoTempFileWriter;
+import com.aoindustries.servlet.jsp.LocalizedJspException;
 import com.aoindustries.util.EncodingUtils;
 import java.io.IOException;
 import java.io.Writer;
@@ -110,7 +111,7 @@ public class InputTag extends AutoEncodingBufferedTag implements
 
     @Override
     public void setType(String type) throws JspException {
-        if(!isValidType(type)) throw new JspException(ApplicationResources.accessor.getMessage("InputTag.type.invalid", type));
+        if(!isValidType(type)) throw new LocalizedJspException(ApplicationResources.accessor, "InputTag.type.invalid", type);
         this.type = type;
     }
 

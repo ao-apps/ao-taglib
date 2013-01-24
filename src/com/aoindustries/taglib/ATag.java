@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009, 2010, 2011, 2012  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012, 2013  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -31,6 +31,7 @@ import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.net.HttpParametersUtils;
 import com.aoindustries.net.MutableHttpParameters;
+import com.aoindustries.servlet.jsp.LocalizedJspException;
 import com.aoindustries.util.EncodingUtils;
 import java.io.IOException;
 import java.io.Writer;
@@ -173,7 +174,7 @@ public class ATag extends AutoEncodingBufferedTag implements
             );
             out.write('"');
         } else {
-            if(params!=null) throw new JspException("parameters provided without href");
+            if(params!=null) throw new LocalizedJspException(ApplicationResources.accessor, "ATag.doTag.paramsWithoutHref");
         }
         if(title!=null) {
             out.write(" title=\"");

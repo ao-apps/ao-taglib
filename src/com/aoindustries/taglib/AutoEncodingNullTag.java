@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2012  AO Industries, Inc.
+ * Copyright (C) 2012, 2013  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -28,6 +28,7 @@ import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.MediaValidator;
 import com.aoindustries.encoding.ValidMediaInput;
 import com.aoindustries.io.NullWriter;
+import com.aoindustries.servlet.jsp.LocalizedJspException;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletResponse;
@@ -112,12 +113,11 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
                     if(parentValidMediaInput!=null) {
                         // Make sure the output is compatibly validated.  It is a bug in the parent to not validate its input consistent with its content type
                         if(!parentValidMediaInput.isValidatingMediaInputType(containerContentType)) {
-                            throw new JspException(
-                                ApplicationResources.accessor.getMessage(
-                                    "AutoEncodingFilterTag.parentIncompatibleValidation",
-                                    parentValidMediaInput.getClass().getName(),
-                                    containerContentType.getMediaType()
-                                )
+                            throw new LocalizedJspException(
+                                ApplicationResources.accessor,
+                                "AutoEncodingFilterTag.parentIncompatibleValidation",
+                                parentValidMediaInput.getClass().getName(),
+                                containerContentType.getMediaType()
                             );
                         }
                         ThreadEncodingContext.contentType.set(myOutputType);
