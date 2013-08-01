@@ -27,7 +27,6 @@ import com.aoindustries.io.AutoTempFileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.tagext.JspTag;
 
 /**
  * @author  AO Industries, Inc.
