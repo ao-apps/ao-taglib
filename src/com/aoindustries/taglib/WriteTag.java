@@ -74,7 +74,9 @@ public class WriteTag extends AutoEncodingNullTag {
                     }
                 }
             }
-        } catch(IllegalAccessException | InvocationTargetException err) {
+        } catch(IllegalAccessException err) {
+            throw new JspException(err);
+        } catch(InvocationTargetException err) {
             throw new JspException(err);
         }
     }
