@@ -46,6 +46,7 @@ import javax.servlet.jsp.PageContext;
 public class ATag extends AutoEncodingBufferedTag implements
     HrefAttribute,
     ParamsAttribute,
+	TargetAttribute,
     TitleAttribute,
     ClassAttribute,
     StyleAttribute,
@@ -55,6 +56,7 @@ public class ATag extends AutoEncodingBufferedTag implements
 
     private String href;
     private MutableHttpParameters params;
+	private String target;
     private String title;
     private String clazz;
     private String style;
@@ -94,6 +96,16 @@ public class ATag extends AutoEncodingBufferedTag implements
     }
 
     @Override
+    public String getTarget() {
+        return target;
+    }
+
+    @Override
+    public void setTarget(String target) {
+        this.target = target;
+    }
+
+	@Override
     public String getTitle() {
         return title;
     }
@@ -175,6 +187,11 @@ public class ATag extends AutoEncodingBufferedTag implements
             out.write('"');
         } else {
             if(params!=null) throw new LocalizedJspException(ApplicationResources.accessor, "ATag.doTag.paramsWithoutHref");
+        }
+        if(target!=null) {
+            out.write(" target=\"");
+            EncodingUtils.encodeXmlAttribute(target, out);
+            out.write('"');
         }
         if(title!=null) {
             out.write(" title=\"");

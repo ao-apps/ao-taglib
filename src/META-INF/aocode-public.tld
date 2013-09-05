@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
-Copyright (C) 2009, 2010, 2011, 2012  AO Industries, Inc.
+Copyright (C) 2009, 2010, 2011, 2012, 2013  AO Industries, Inc.
     support@aoindustries.com
     7262 Bull Pen Cir
     Mobile, AL 36695
@@ -25,6 +25,241 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
   <tlib-version>1.0</tlib-version>
   <short-name>aocode-public</short-name>
   <uri>http://aoindustries.com/aocode-public-taglib</uri>
+  <tag>
+    <description>Renders an a tag.</description>
+    <name>a</name>
+    <tag-class>com.aoindustries.taglib.ATag</tag-class>
+    <body-content>scriptless</body-content>
+    <attribute>
+      <description>
+          The href for the link.
+          If starts with a /, the context path will be prepended to the path.
+          Session state URL rewriting is performed as needed.
+          URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
+          any character in the set { ':', '/', ';', '#' }
+          A nested href tag will override this value.
+          Any directly nested param or params tag will add parameters to the href.
+      </description>
+      <name>href</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>The title text for the link.  A nested title tag will override this value.</description>
+      <name>title</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>The CSS class for the link.  A nested class tag will override this value.</description>
+      <name>class</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>The CSS style for the link.  A nested style tag will override this value.</description>
+      <name>style</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>A JavaScript onclick handler.  A nested onclick tag will override this value.</description>
+      <name>onclick</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>A JavaScript onmouseover handler.  A nested onmouseover tag will override this value.</description>
+      <name>onmouseover</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>A JavaScript onmouseout handler.  A nested onmouseout tag will override this value.</description>
+      <name>onmouseout</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides an action to its ActionAttribute parent tag.</description>
+    <name>action</name>
+    <tag-class>com.aoindustries.taglib.ActionTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides an alt attribute to its AltAttribute parent tag.</description>
+    <name>alt</name>
+    <tag-class>com.aoindustries.taglib.AltTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>
+        Provides a checked attribute to its CheckedAttribute parent tag.
+        The body, after trimming, must contain either "true", "false", or be empty.
+        If empty, the checked attribute of the tag is not overridden.
+    </description>
+    <name>checked</name>
+    <tag-class>com.aoindustries.taglib.CheckedTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides a class to its ClassAttribute parent tag.</description>
+    <name>class</name>
+    <tag-class>com.aoindustries.taglib.ClassTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides a content attribute to its ContentAttribute parent tag.</description>
+    <name>content</name>
+    <tag-class>com.aoindustries.taglib.ContentTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Disables the resource editor for this request.</description>
+    <name>disableResourceEditor</name>
+    <tag-class>com.aoindustries.taglib.DisableResourceEditorTag</tag-class>
+    <body-content>empty</body-content>
+  </tag>
+  <tag>
+    <description>
+        Provides a disabled attribute to its DisabledAttribute parent tag.
+        The body, after trimming, must contain either "true", "false", or be empty.
+        If empty, the disabled attribute of the tag is not overridden.
+    </description>
+    <name>disabled</name>
+    <tag-class>com.aoindustries.taglib.DisabledTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides an enctype to its EnctypeAttribute parent tag.</description>
+    <name>enctype</name>
+    <tag-class>com.aoindustries.taglib.EnctypeTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Renders a form tag.</description>
+    <name>form</name>
+    <tag-class>com.aoindustries.taglib.FormTag</tag-class>
+    <tei-class>com.aoindustries.taglib.FormTagTEI</tei-class>
+    <body-content>scriptless</body-content>
+    <attribute>
+      <description>
+          The method used, must be either post or get.
+          Defaults to "get".
+          A nested method tag will override this value.
+      </description>
+      <name>method</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>
+          The id of the element.
+          A nested id tag will override this value.
+      </description>
+      <name>id</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>
+        The action for the form.
+        A nested action tag will override this value.
+      </description>
+      <name>action</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>
+        The enctype for the form.
+        A nested enctype tag will override this value.
+      </description>
+      <name>enctype</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>The CSS style for the form.  A nested style tag will override this value.</description>
+      <name>style</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>A JavaScript onsubmit handler.  A nested onsubmit tag will override this value.</description>
+      <name>onsubmit</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <example />
+  </tag>
+  <tag>
+    <description>
+        Forwards to another resource, ends processing of the current page.
+        If parameters are not cleared, nested parameters are added before request parameters.
+        This has two advantages over the standard jsp:forward tag:
+            1) You may clear parameters such that only those specifically added will be passed on to the next page
+            2) You may have other nested tags used to select and build the set of parameters
+    </description>
+    <name>forward</name>
+    <tag-class>com.aoindustries.taglib.ForwardTag</tag-class>
+    <body-content>scriptless</body-content>
+    <attribute>
+      <description>
+          The page that will be forwarded to.
+          A nested page tag will override this value.
+          The page is required, must be set in attribute or nested page tag.
+      </description>
+      <name>page</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>
+          Optionally clears all parameters so that only those added by nested tags
+          are forwarded.  Defaults to false.
+      </description>
+      <name>clearParams</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>boolean</type>
+    </attribute>
+    <example />
+  </tag>
+  <tag>
+    <description>
+        Provides a frameborder attribute to its FrameborderAttribute parent tag.
+        The body, after trimming, must contain either "true", "false", or be empty.
+        If empty, the frameborder attribute of the tag is not overridden.
+    </description>
+    <name>frameborder</name>
+    <tag-class>com.aoindustries.taglib.FrameborderTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
   <tag>
     <description>
       Gets a detailed report of a Throwable as generated by com.aoindustries.util.ErrorPrinter.
@@ -71,158 +306,119 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
-    <description>
-      The body of this tag contains preformatted text.
-      If used in a (X)HTML context, will surround the
-      content with pre tags.
-
-      The content type of this tag is application/xhtml+xml+pre.
-      Every character must be valid in XML, and not have any &lt;, &gt;
-    </description>
-    <name>pre</name>
-    <tag-class>com.aoindustries.taglib.PreTag</tag-class>
+    <description>Provides a height attribute to its HeightAttribute parent tag.</description>
+    <name>height</name>
+    <tag-class>com.aoindustries.taglib.HeightTag</tag-class>
     <body-content>scriptless</body-content>
     <example />
   </tag>
   <tag>
-    <description>
-      The body of this tag contains a script.  The script should not be encoded
-      as if in HTML/XML, such as &amp;amp; instead of just a single &amp;.  The
-      script may contain any characters valid in that language, including &lt;,
-      &gt;, &amp;, \\u0000 (null), or any other values.
-
-      The script will be properly encoded for the content of this tag.  Thus, you
-      may have a script of arbitrary complexity containing arbitrary data within
-      an XHTML onclick attribute, the tags will make sure everything is properly
-      encoded.
-
-      The content type of this tag is equal to the type set in the type attribute.
-    </description>
-    <name>script</name>
-    <tag-class>com.aoindustries.taglib.ScriptTag</tag-class>
-    <tei-class>com.aoindustries.taglib.ScriptTagTEI</tei-class>
+    <description>Provides an href to its HrefAttribute parent tag.  Parameters may be added with nested param or params tags.</description>
+    <name>href</name>
+    <tag-class>com.aoindustries.taglib.HrefTag</tag-class>
     <body-content>scriptless</body-content>
-    <attribute>
-      <description>
-        Specifies the type of script.  The default is "text/javascript".  This is
-        also currently the only supported script language.
-      </description>
-      <name>type</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
-    </attribute>
     <example />
   </tag>
   <tag>
-    <description>
-      Writes the bean contents.  If the bean is &lt;code&gt;null&lt;/code&gt; then nothing is displayed.
-      The method attribute provides the name of the method that will be used to convert to String.
-      If not provided, it will default to &lt;code&gt;"toString"&lt;/code&gt;.  This method
-      searches for the method with parameters and returns String.  It is an error if the method is
-      not found.
-
-      The content type depends on the value provided to the type attribute, and
-      defaults to text/plain.  The content is checked for well-formedness based
-      on its type:
-          text/javascript - no validation
-          text/plain - no validation
-          text/url - must be valid URL-encoded characters only
-          application/xhtml+xml - TODO: must be well-formed XHTML content. Currently only checks character values.
-          application/xhtml+xml+pre - every character must be valid XML, and not have any &lt;, &gt;
-    </description>
-    <name>write</name>
-    <tag-class>com.aoindustries.taglib.WriteTag</tag-class>
-    <tei-class>com.aoindustries.taglib.WriteTagTEI</tei-class>
-    <body-content>empty</body-content>
-    <attribute>
-      <description>
-        Specifies the variable scope searched to retrieve the bean specified
-        by name. If not specified, the default rules applied by PageContext.findAttribute()
-        are applied.
-      </description>
-      <name>scope</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
-    </attribute>
-    <attribute>
-      <description>
-        Specifies the attribute name of the bean whose property is accessed to
-        retrieve the value specified by property (if specified). If property is
-        not specified, the value of this bean itself will be used.
-      </description>
-      <name>name</name>
-      <required>true</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
-    </attribute>
-    <attribute>
-      <description>
-        Specifies the name of the property to be accessed on the bean specified
-        by name. This value may be a simple, indexed, or nested property reference
-        expression. If not specified, the bean identified by name will itself be
-        used.
-      </description>
-      <name>property</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
-    </attribute>
-    <attribute>
-      <description>
-        Specifies the method that will be used to convert the object to a
-        String.
-        This defaults to toString
-      </description>
-      <name>method</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
-    </attribute>
-    <attribute>
-      <description>
-          Specifies the type of content contained in the bean.  Defaults to text/plain.
-      </description>
-      <name>type</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
-    </attribute>
-    <example />
-  </tag>
-  <tag>
-    <description>
-      The body of this tag contains any arbitary plain text.  In some contexts,
-      such as contained in a JavaScript string, this may be binary transparent.
-
-      In other contexts, it may result in an error when a character may not
-      be encoded to the container's system.  An example would be a NULL character
-      in an XML document.
-
-      End of line conversions may also occur in some contexts.
-
-      When contained in JavaScript, this will automatically be surrounded by
-      double quotes and will be binary transparent through \uxxxx escape codes.
-      The double quotes are automatically added to clearly separate data from
-      code.  Please note that this auto-quoting applies to all forms of data in
-      all tags, not just this text tag.
-
-      The content type of this tag text/plain.
-    </description>
-    <name>text</name>
-    <tag-class>com.aoindustries.taglib.TextTag</tag-class>
+    <description><![CDATA[
+        <ol>
+            <li>Clears the current output buffer (leaving status code and headers)</li>
+            <li>Sets the response contentType between html / xhtml based on forceHtml attribute and request headers</li>
+            <li>Writes the DOCTYPE unless set to "none"</li>
+            <li>
+                Writes the html tag, including the xmlns, lang, and xml:lang attributes based on
+                the locale of the current response.
+            </li>
+        </ol>
+    ]]></description>
+    <name>html</name>
+    <tag-class>com.aoindustries.taglib.HtmlTag</tag-class>
+    <tei-class>com.aoindustries.taglib.HtmlTagTEI</tei-class>
     <body-content>scriptless</body-content>
     <attribute>
-      <description>When true, newlines are converted to &lt;br /&gt;</description>
-      <name>makeBr</name>
+      <description>
+        The doctype to use, one of "strict", "transitional", "frameset", or "none".
+        Defaults to strict.  "none" will suppress the output of a doctype.
+      </description>
+      <name>doctype</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>
+        If set to true, forces the content-type to be text/html.
+        If set to false (the default), will negotiate content-type based on browser support.
+        This should normally be left with the default value of false.  This is used
+        when the content is known to contain invalid markup and can't be parsed as XML.
+      </description>
+      <name>forceHtml</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>boolean</type>
     </attribute>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides an id attribute to its IdAttribute parent tag.</description>
+    <name>id</name>
+    <tag-class>com.aoindustries.taglib.IdTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>
+      Renders an iframe tag.
+    </description>
+    <name>iframe</name>
+    <tag-class>com.aoindustries.taglib.IframeTag</tag-class>
+    <body-content>scriptless</body-content>
     <attribute>
-      <description>When true, consecutive spaces are converted to &amp;#160;</description>
-      <name>makeNbsp</name>
+      <description>
+          The id of the element.
+          A nested id tag will override this value.
+      </description>
+      <name>id</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>
+          The src for the frame content.
+          If starts with a /, the context path will be prepended to the path.
+          Session state URL rewriting is performed as needed.
+          URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
+          any character in the set { ':', '/', ';', '#' }
+          A nested src tag will override this value.
+          Any directly nested param or params tag will add parameters to the src.
+      </description>
+      <name>src</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>The width for the frame.  A nested width tag will override this value.</description>
+      <name>width</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>The height for the frame.  A nested height tag will override this value.</description>
+      <name>height</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>
+          The frameborder attribute.  Accepts values of "true" or "false".
+          A non-empty nested frameborder tag will override this value.
+          Defaults to true.
+      </description>
+      <name>frameborder</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>boolean</type>
@@ -231,56 +427,109 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
   </tag>
   <tag>
     <description>
-      The body of this tag contains well-formed XHTML 1.0-compliant markup.
-
-      The content type of this tag is application/xhtml+xml.
-
-      Note: For performance, this implementation currently only checks character
-      values.  This ensures that no encodings are violated and overall XML validation
-      by the browser should catch problems.
+        Renders an img tag.
+        The src may be provided in one of three ways, in precedence order:
+        &lt;ol&gt;
+            &lt;li&gt;Direct child &lt;src&gt; tag.&lt;/li&gt;
+            &lt;li&gt;As the src attribute&lt;/li&gt;
+            &lt;li&gt;Contents of tag body, trimmed.&lt;/li&gt;
+        &lt;/ol&gt;
+        Also, the width, height, and alt values are required either as attributes or nested tags.
     </description>
-    <name>xhtml</name>
-    <tag-class>com.aoindustries.taglib.XhtmlTag</tag-class>
+    <name>img</name>
+    <tag-class>com.aoindustries.taglib.ImgTag</tag-class>
     <body-content>scriptless</body-content>
+    <attribute>
+      <description>
+          The src for the image.
+          If starts with a /, the context path will be prepended to the path.
+          Session state URL rewriting is performed as needed.
+          URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
+          any character in the set { ':', '/', ';', '#' }
+          A nested src tag will override this value.
+          Any directly nested param or params tag will add parameters to the src.
+      </description>
+      <name>src</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>The width for the image.  A nested width tag will override this value.</description>
+      <name>width</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>The height for the image.  A nested height tag will override this value.</description>
+      <name>height</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>The alt text for the image.  A nested alt tag will override this value.</description>
+      <name>alt</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>The title text for the image.  A nested title tag will override this value.</description>
+      <name>title</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>The CSS class for the img.  A nested class tag will override this value.</description>
+      <name>class</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>The CSS style for the img.  A nested style tag will override this value.</description>
+      <name>style</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
     <example />
   </tag>
   <tag>
     <description>
-      The body of this tag contains well-formed XHTML 1.0-compliant attribute.
-
-      The content type of this tag is application/xhtml+xml+attribute.
+        Includes another resource and then continues processing of the current page.
+        If parameters are not cleared, nested parameters are added before request parameters.
+        This has two advantages over the standard jsp:include tag:
+            1) You may clear parameters such that only those specifically added will be passed on to the included page
+            2) You may have other nested tags used to select and build the set of parameters
     </description>
-    <name>xhtmlAttribute</name>
-    <tag-class>com.aoindustries.taglib.XhtmlAttributeTag</tag-class>
+    <name>include</name>
+    <tag-class>com.aoindustries.taglib.IncludeTag</tag-class>
     <body-content>scriptless</body-content>
-    <example />
-  </tag>
-  <tag>
-    <description>
-      The body of this tag contains a Uniform Resource Identifier (URI or URL).
-
-      Before the first ? symbol, may contain characters in any language.  This
-      is more flexible than a strict URL format, these characters will be
-      automatically encoded based on context.
-
-      After the first ?, however, the parameters must be properly URL encoded
-      and contain only valid characters.  It should not be escaped for (X)HTML,
-      meaning that parameter separators should be &amp; instead of &amp;amp;.
-      The proper escaping/encoding will be performed based on the context of
-      this tag.
-
-      It may be a relative or absolute URL.  If starts with a /, the context
-      path will be prepended to the path.
-
-      Depending on context, the URL will be passed through HttpServletResponse.encodeURL
-      to add any URL-based session state.  Session state will never be added to external links.
-
-      The content type of this tag is text/url.
-      Must be valid URL-encoded characters only.
-    </description>
-    <name>url</name>
-    <tag-class>com.aoindustries.taglib.UrlTag</tag-class>
-    <body-content>scriptless</body-content>
+    <attribute>
+      <description>
+          The page that will be included.
+          A nested page tag will override this value.
+          The page is required, must be set in attribute or nested page tag.
+      </description>
+      <name>page</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>
+          Optionally clears all parameters so that only those added by nested tags
+          are included.  Defaults to false.
+      </description>
+      <name>clearParams</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>boolean</type>
+    </attribute>
     <example />
   </tag>
   <tag>
@@ -449,194 +698,51 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
   </tag>
   <tag>
     <description>
-      Renders an iframe tag.
+        Provides a maxlength attribute to its MaxlengthAttribute parent tag.
+        The body is trimmed.  If empty is sets the maxlength to null.  Otherwise
+        it must be a valid integer.
     </description>
-    <name>iframe</name>
-    <tag-class>com.aoindustries.taglib.IframeTag</tag-class>
+    <name>maxlength</name>
+    <tag-class>com.aoindustries.taglib.MaxlengthTag</tag-class>
     <body-content>scriptless</body-content>
-    <attribute>
-      <description>
-          The id of the element.
-          A nested id tag will override this value.
-      </description>
-      <name>id</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
-    </attribute>
-    <attribute>
-      <description>
-          The src for the frame content.
-          If starts with a /, the context path will be prepended to the path.
-          Session state URL rewriting is performed as needed.
-          URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
-          any character in the set { ':', '/', ';', '#' }
-          A nested src tag will override this value.
-          Any directly nested param or params tag will add parameters to the src.
-      </description>
-      <name>src</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
-    </attribute>
-    <attribute>
-      <description>The width for the frame.  A nested width tag will override this value.</description>
-      <name>width</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
-    </attribute>
-    <attribute>
-      <description>The height for the frame.  A nested height tag will override this value.</description>
-      <name>height</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
-    </attribute>
-    <attribute>
-      <description>
-          The frameborder attribute.  Accepts values of "true" or "false".
-          A non-empty nested frameborder tag will override this value.
-          Defaults to true.
-      </description>
-      <name>frameborder</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>boolean</type>
-    </attribute>
-    <example />
-  </tag>
-  <tag>
-    <description>Renders an a tag.</description>
-    <name>a</name>
-    <tag-class>com.aoindustries.taglib.ATag</tag-class>
-    <body-content>scriptless</body-content>
-    <attribute>
-      <description>
-          The href for the link.
-          If starts with a /, the context path will be prepended to the path.
-          Session state URL rewriting is performed as needed.
-          URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
-          any character in the set { ':', '/', ';', '#' }
-          A nested href tag will override this value.
-          Any directly nested param or params tag will add parameters to the href.
-      </description>
-      <name>href</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
-    </attribute>
-    <attribute>
-      <description>The title text for the link.  A nested title tag will override this value.</description>
-      <name>title</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
-    </attribute>
-    <attribute>
-      <description>The CSS class for the link.  A nested class tag will override this value.</description>
-      <name>class</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
-    </attribute>
-    <attribute>
-      <description>The CSS style for the link.  A nested style tag will override this value.</description>
-      <name>style</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
-    </attribute>
-    <attribute>
-      <description>A JavaScript onclick handler.  A nested onclick tag will override this value.</description>
-      <name>onclick</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
-    </attribute>
-    <attribute>
-      <description>A JavaScript onmouseover handler.  A nested onmouseover tag will override this value.</description>
-      <name>onmouseover</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
-    </attribute>
-    <attribute>
-      <description>A JavaScript onmouseout handler.  A nested onmouseout tag will override this value.</description>
-      <name>onmouseout</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
-    </attribute>
     <example />
   </tag>
   <tag>
     <description>
-        Renders an img tag.
-        The src may be provided in one of three ways, in precedence order:
-        &lt;ol&gt;
-            &lt;li&gt;Direct child &lt;src&gt; tag.&lt;/li&gt;
-            &lt;li&gt;As the src attribute&lt;/li&gt;
-            &lt;li&gt;Contents of tag body, trimmed.&lt;/li&gt;
-        &lt;/ol&gt;
-        Also, the width, height, and alt values are required either as attributes or nested tags.
+      If contained with any MetasAttribute parent, adds the meta data to the parent tag.
+      Otherwise, renders a meta tag.  The content may be provided in one of three ways, in
+      precedence order:
+      &lt;ol&gt;
+        &lt;li&gt;Direct child &lt;content&gt; tag.&lt;/li&gt;
+        &lt;li&gt;As the content attribute&lt;/li&gt;
+        &lt;li&gt;Contents of tag body, trimmed.&lt;/li&gt;
+      &lt;/ol&gt;
     </description>
-    <name>img</name>
-    <tag-class>com.aoindustries.taglib.ImgTag</tag-class>
+    <name>meta</name>
+    <tag-class>com.aoindustries.taglib.MetaTag</tag-class>
     <body-content>scriptless</body-content>
     <attribute>
       <description>
-          The src for the image.
-          If starts with a /, the context path will be prepended to the path.
-          Session state URL rewriting is performed as needed.
-          URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
-          any character in the set { ':', '/', ';', '#' }
-          A nested src tag will override this value.
-          Any directly nested param or params tag will add parameters to the src.
+          The http-equiv of the meta element.
       </description>
-      <name>src</name>
+      <name>httpEquiv</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
     </attribute>
     <attribute>
-      <description>The width for the image.  A nested width tag will override this value.</description>
-      <name>width</name>
+      <description>The name of meta tag.  A nested name tag will override this value.</description>
+      <name>name</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
     </attribute>
     <attribute>
-      <description>The height for the image.  A nested height tag will override this value.</description>
-      <name>height</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
-    </attribute>
-    <attribute>
-      <description>The alt text for the image.  A nested alt tag will override this value.</description>
-      <name>alt</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
-    </attribute>
-    <attribute>
-      <description>The title text for the image.  A nested title tag will override this value.</description>
-      <name>title</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
-    </attribute>
-    <attribute>
-      <description>The CSS class for the img.  A nested class tag will override this value.</description>
-      <name>class</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
-    </attribute>
-    <attribute>
-      <description>The CSS style for the img.  A nested style tag will override this value.</description>
-      <name>style</name>
+      <description>
+        The content of the meta data.  A nested content tag will override this value.  If neither is provided,
+        the output of the body is used with whitespace trimmed.
+      </description>
+      <name>content</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
@@ -644,79 +750,9 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
-    <description>Provides a value to its ValueAttribute parent tag.</description>
-    <name>value</name>
-    <tag-class>com.aoindustries.taglib.ValueTag</tag-class>
-    <body-content>scriptless</body-content>
-    <example />
-  </tag>
-  <tag>
-    <description>Provides an onchange script to its OnchangeAttribute parent tag.</description>
-    <name>onchange</name>
-    <tag-class>com.aoindustries.taglib.OnchangeTag</tag-class>
-    <body-content>scriptless</body-content>
-    <example />
-  </tag>
-  <tag>
-    <description>Provides an onfocus script to its OnfocusAttribute parent tag.</description>
-    <name>onfocus</name>
-    <tag-class>com.aoindustries.taglib.OnfocusTag</tag-class>
-    <body-content>scriptless</body-content>
-    <example />
-  </tag>
-  <tag>
-    <description>Provides an onblur script to its OnblurAttribute parent tag.</description>
-    <name>onblur</name>
-    <tag-class>com.aoindustries.taglib.OnblurTag</tag-class>
-    <body-content>scriptless</body-content>
-    <example />
-  </tag>
-  <tag>
-    <description>Provides an onkeypress script to its OnkeypressAttribute parent tag.</description>
-    <name>onkeypress</name>
-    <tag-class>com.aoindustries.taglib.OnkeypressTag</tag-class>
-    <body-content>scriptless</body-content>
-    <example />
-  </tag>
-  <tag>
-    <description>Provides an onclick script to its OnclickAttribute parent tag.</description>
-    <name>onclick</name>
-    <tag-class>com.aoindustries.taglib.OnclickTag</tag-class>
-    <body-content>scriptless</body-content>
-    <example />
-  </tag>
-  <tag>
-    <description>Provides an onload script to its OnloadAttribute parent tag.</description>
-    <name>onload</name>
-    <tag-class>com.aoindustries.taglib.OnloadTag</tag-class>
-    <body-content>scriptless</body-content>
-    <example />
-  </tag>
-  <tag>
-    <description>Provides an onmouseover script to its OnmouseoverAttribute parent tag.</description>
-    <name>onmouseover</name>
-    <tag-class>com.aoindustries.taglib.OnmouseoverTag</tag-class>
-    <body-content>scriptless</body-content>
-    <example />
-  </tag>
-  <tag>
-    <description>Provides an onmouseout script to its OnmouseoutAttribute parent tag.</description>
-    <name>onmouseout</name>
-    <tag-class>com.aoindustries.taglib.OnmouseoutTag</tag-class>
-    <body-content>scriptless</body-content>
-    <example />
-  </tag>
-  <tag>
-    <description>Provides a title to its TitleAttribute parent tag.</description>
-    <name>title</name>
-    <tag-class>com.aoindustries.taglib.TitleTag</tag-class>
-    <body-content>scriptless</body-content>
-    <example />
-  </tag>
-  <tag>
-    <description>Provides an onsubmit script to its OnsubmitAttribute parent tag.</description>
-    <name>onsubmit</name>
-    <tag-class>com.aoindustries.taglib.OnsubmitTag</tag-class>
+    <description>Provides a method attribute to its MethodAttribute parent tag.</description>
+    <name>method</name>
+    <tag-class>com.aoindustries.taglib.MethodTag</tag-class>
     <body-content>scriptless</body-content>
     <example />
   </tag>
@@ -728,138 +764,113 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
-    <description>Provides an href to its HrefAttribute parent tag.  Parameters may be added with nested param or params tags.</description>
-    <name>href</name>
-    <tag-class>com.aoindustries.taglib.HrefTag</tag-class>
+    <description>Provides an onblur script to its OnblurAttribute parent tag.</description>
+    <name>onblur</name>
+    <tag-class>com.aoindustries.taglib.OnblurTag</tag-class>
     <body-content>scriptless</body-content>
     <example />
   </tag>
   <tag>
-    <description>Provides a class to its ClassAttribute parent tag.</description>
-    <name>class</name>
-    <tag-class>com.aoindustries.taglib.ClassTag</tag-class>
+    <description>Provides an onchange script to its OnchangeAttribute parent tag.</description>
+    <name>onchange</name>
+    <tag-class>com.aoindustries.taglib.OnchangeTag</tag-class>
     <body-content>scriptless</body-content>
     <example />
   </tag>
   <tag>
-    <description>Provides a style to its StyleAttribute parent tag.</description>
-    <name>style</name>
-    <tag-class>com.aoindustries.taglib.StyleTag</tag-class>
+    <description>Provides an onclick script to its OnclickAttribute parent tag.</description>
+    <name>onclick</name>
+    <tag-class>com.aoindustries.taglib.OnclickTag</tag-class>
     <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides an onfocus script to its OnfocusAttribute parent tag.</description>
+    <name>onfocus</name>
+    <tag-class>com.aoindustries.taglib.OnfocusTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides an onkeypress script to its OnkeypressAttribute parent tag.</description>
+    <name>onkeypress</name>
+    <tag-class>com.aoindustries.taglib.OnkeypressTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides an onload script to its OnloadAttribute parent tag.</description>
+    <name>onload</name>
+    <tag-class>com.aoindustries.taglib.OnloadTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides an onmouseout script to its OnmouseoutAttribute parent tag.</description>
+    <name>onmouseout</name>
+    <tag-class>com.aoindustries.taglib.OnmouseoutTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides an onmouseover script to its OnmouseoverAttribute parent tag.</description>
+    <name>onmouseover</name>
+    <tag-class>com.aoindustries.taglib.OnmouseoverTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides an onsubmit script to its OnsubmitAttribute parent tag.</description>
+    <name>onsubmit</name>
+    <tag-class>com.aoindustries.taglib.OnsubmitTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Renders an option tag.</description>
+    <name>option</name>
+    <tag-class>com.aoindustries.taglib.OptionTag</tag-class>
+    <body-content>scriptless</body-content>
+    <attribute>
+      <description>
+        The value of the option.  A nested value tag will override this value.  If neither is provided,
+        the output of the body is used with whitespace trimmed.
+      </description>
+      <name>value</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>
+          The selected attribute.  Accepts values of "true" or "false".
+          A non-empty nested selected tag will override this value.
+          If selected is "true", will add the attribute as &lt;code&gt;selected="selected"&lt;/code&gt;,
+          otherwise the attribute is not added.
+      </description>
+      <name>selected</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>boolean</type>
+    </attribute>
+    <attribute>
+      <description>
+          The disabled attribute.  Accepts values of "true" or "false".
+          A non-empty nested disabled tag will override this value.
+          If disabled is "true", will add the attribute as &lt;code&gt;disabled="disabled"&lt;/code&gt;,
+          otherwise the attribute is not added.
+      </description>
+      <name>disabled</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>boolean</type>
+    </attribute>
     <example />
   </tag>
   <tag>
     <description>Provides a page to its PageAttribute parent tag.</description>
     <name>page</name>
     <tag-class>com.aoindustries.taglib.PageTag</tag-class>
-    <body-content>scriptless</body-content>
-    <example />
-  </tag>
-  <tag>
-    <description>Provides a size attribute to its SizeAttribute parent tag.</description>
-    <name>size</name>
-    <tag-class>com.aoindustries.taglib.SizeTag</tag-class>
-    <body-content>scriptless</body-content>
-    <example />
-  </tag>
-  <tag>
-    <description>
-        Provides a maxlength attribute to its MaxlengthAttribute parent tag.
-        The body is trimmed.  If empty is sets the maxlength to null.  Otherwise
-        it must be a valid integer.
-    </description>
-    <name>maxlength</name>
-    <tag-class>com.aoindustries.taglib.MaxlengthTag</tag-class>
-    <body-content>scriptless</body-content>
-    <example />
-  </tag>
-  <tag>
-    <description>Provides an alt attribute to its AltAttribute parent tag.</description>
-    <name>alt</name>
-    <tag-class>com.aoindustries.taglib.AltTag</tag-class>
-    <body-content>scriptless</body-content>
-    <example />
-  </tag>
-  <tag>
-    <description>Provides a content attribute to its ContentAttribute parent tag.</description>
-    <name>content</name>
-    <tag-class>com.aoindustries.taglib.ContentTag</tag-class>
-    <body-content>scriptless</body-content>
-    <example />
-  </tag>
-  <tag>
-    <description>Provides a height attribute to its HeightAttribute parent tag.</description>
-    <name>height</name>
-    <tag-class>com.aoindustries.taglib.HeightTag</tag-class>
-    <body-content>scriptless</body-content>
-    <example />
-  </tag>
-  <tag>
-    <description>Provides a src attribute to its SrcAttribute parent tag.  Parameters may be added with nested param or params tags.</description>
-    <name>src</name>
-    <tag-class>com.aoindustries.taglib.SrcTag</tag-class>
-    <body-content>scriptless</body-content>
-    <example />
-  </tag>
-  <tag>
-    <description>Provides a width attribute to its WidthAttribute parent tag.</description>
-    <name>width</name>
-    <tag-class>com.aoindustries.taglib.WidthTag</tag-class>
-    <body-content>scriptless</body-content>
-    <example />
-  </tag>
-  <tag>
-    <description>
-        Provides a readonly attribute to its ReadonlyAttribute parent tag.
-        The body, after trimming, must contain either "true", "false", or be empty.
-        If empty, the readonly attribute of the tag is not overridden.
-    </description>
-    <name>readonly</name>
-    <tag-class>com.aoindustries.taglib.ReadonlyTag</tag-class>
-    <body-content>scriptless</body-content>
-    <example />
-  </tag>
-  <tag>
-    <description>
-        Provides a disabled attribute to its DisabledAttribute parent tag.
-        The body, after trimming, must contain either "true", "false", or be empty.
-        If empty, the disabled attribute of the tag is not overridden.
-    </description>
-    <name>disabled</name>
-    <tag-class>com.aoindustries.taglib.DisabledTag</tag-class>
-    <body-content>scriptless</body-content>
-    <example />
-  </tag>
-  <tag>
-    <description>
-        Provides a frameborder attribute to its FrameborderAttribute parent tag.
-        The body, after trimming, must contain either "true", "false", or be empty.
-        If empty, the frameborder attribute of the tag is not overridden.
-    </description>
-    <name>frameborder</name>
-    <tag-class>com.aoindustries.taglib.FrameborderTag</tag-class>
-    <body-content>scriptless</body-content>
-    <example />
-  </tag>
-  <tag>
-    <description>
-        Provides a checked attribute to its CheckedAttribute parent tag.
-        The body, after trimming, must contain either "true", "false", or be empty.
-        If empty, the checked attribute of the tag is not overridden.
-    </description>
-    <name>checked</name>
-    <tag-class>com.aoindustries.taglib.CheckedTag</tag-class>
-    <body-content>scriptless</body-content>
-    <example />
-  </tag>
-  <tag>
-    <description>
-        Provides a selected attribute to its SelectedAttribute parent tag.
-        The body, after trimming, must contain either "true", "false", or be empty.
-        If empty, the selected attribute of the tag is not overridden.
-    </description>
-    <name>selected</name>
-    <tag-class>com.aoindustries.taglib.SelectedTag</tag-class>
     <body-content>scriptless</body-content>
     <example />
   </tag>
@@ -912,85 +923,60 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
   </tag>
   <tag>
     <description>
-      Renders a textarea tag.  The value may be provided in one of three ways, in
-      precedence order:
-      &lt;ol&gt;
-        &lt;li&gt;Direct child &lt;value&gt; tag.&lt;/li&gt;
-        &lt;li&gt;As the value attribute&lt;/li&gt;
-        &lt;li&gt;Contents of tag body.&lt;/li&gt;
-      &lt;/ol&gt;
+      The body of this tag contains preformatted text.
+      If used in a (X)HTML context, will surround the
+      content with pre tags.
+
+      The content type of this tag is application/xhtml+xml+pre.
+      Every character must be valid in XML, and not have any &lt;, &gt;
     </description>
-    <name>textarea</name>
-    <tag-class>com.aoindustries.taglib.TextareaTag</tag-class>
+    <name>pre</name>
+    <tag-class>com.aoindustries.taglib.PreTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>
+        Provides a readonly attribute to its ReadonlyAttribute parent tag.
+        The body, after trimming, must contain either "true", "false", or be empty.
+        If empty, the readonly attribute of the tag is not overridden.
+    </description>
+    <name>readonly</name>
+    <tag-class>com.aoindustries.taglib.ReadonlyTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Redirects the browser, ends processing of the current page.</description>
+    <name>redirect</name>
+    <tag-class>com.aoindustries.taglib.RedirectTag</tag-class>
+    <tei-class>com.aoindustries.taglib.RedirectTagTEI</tei-class>
     <body-content>scriptless</body-content>
     <attribute>
-      <description>The name of textarea tag.  A nested name tag will override this value.</description>
-      <name>name</name>
+      <description>
+          The destination for the redirect.
+          If starts with a /, the context path will be prepended to the path.
+          Session state URL rewriting is performed as needed.
+          URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
+          any character in the set { ':', '/', ';', '#' }
+          A nested href tag will override this value.
+          Any directly nested param or params tag will add parameters to the href.
+      </description>
+      <name>href</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
     </attribute>
     <attribute>
       <description>
-        The value of the textarea.  A nested value tag will override this value.  If neither is provided,
-        the output of the body is used.
+          The type of redirect performed.  Is one of "moved_permanently" (or 301), "moved_temporarily" (or 302) or "see_other" (or 303).
+
+          Because the redirect type has important consequences on search engines and browser caches, the decision should be made for
+          each redirect.  Thus, this attribute must be set directly or in a nested type tag.
+
+          A nested type tag will override this value.
       </description>
-      <name>value</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
-    </attribute>
-    <attribute>
-      <description>The number of columns for the textarea element.  A nested cols tag will override this value.</description>
-      <name>cols</name>
-      <required>true</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>int</type>
-    </attribute>
-    <attribute>
-      <description>The number of rows for the textarea element.  A nested rows tag will override this value.</description>
-      <name>rows</name>
-      <required>true</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>int</type>
-    </attribute>
-    <attribute>
-      <description>
-          The readonly attribute.  Accepts values of "true" or "false".
-          A non-empty nested readonly tag will override this value.
-          If readonly is "true", will add the attribute as &lt;code&gt;readonly="readonly"&lt;/code&gt;,
-          otherwise the attribute is not added.
-      </description>
-      <name>readonly</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>boolean</type>
-    </attribute>
-    <attribute>
-      <description>
-          The disabled attribute.  Accepts values of "true" or "false".
-          A non-empty nested disabled tag will override this value.
-          If disabled is "true", will add the attribute as &lt;code&gt;disabled="disabled"&lt;/code&gt;,
-          otherwise the attribute is not added.
-      </description>
-      <name>disabled</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>boolean</type>
-    </attribute>
-    <attribute>
-      <description>
-          A JavaScript onchange handler.
-          A nested onchange tag will override this value.
-      </description>
-      <name>onchange</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
-    </attribute>
-    <attribute>
-      <description>The CSS style for the textarea element.  A nested style tag will override this value.</description>
-      <name>style</name>
+      <name>type</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
@@ -998,62 +984,42 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
-    <description>Renders a form tag.</description>
-    <name>form</name>
-    <tag-class>com.aoindustries.taglib.FormTag</tag-class>
-    <tei-class>com.aoindustries.taglib.FormTagTEI</tei-class>
+    <description>Provides a rel attribute to its RelAttribute parent tag.</description>
+    <name>rel</name>
+    <tag-class>com.aoindustries.taglib.RelTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Allows editing of the website resource bundles through the website itself.</description>
+    <name>resourceEditor</name>
+    <tag-class>com.aoindustries.taglib.ResourceEditorTag</tag-class>
+    <body-content>empty</body-content>
+  </tag>
+  <tag>
+    <description>
+      The body of this tag contains a script.  The script should not be encoded
+      as if in HTML/XML, such as &amp;amp; instead of just a single &amp;.  The
+      script may contain any characters valid in that language, including &lt;,
+      &gt;, &amp;, \\u0000 (null), or any other values.
+
+      The script will be properly encoded for the content of this tag.  Thus, you
+      may have a script of arbitrary complexity containing arbitrary data within
+      an XHTML onclick attribute, the tags will make sure everything is properly
+      encoded.
+
+      The content type of this tag is equal to the type set in the type attribute.
+    </description>
+    <name>script</name>
+    <tag-class>com.aoindustries.taglib.ScriptTag</tag-class>
+    <tei-class>com.aoindustries.taglib.ScriptTagTEI</tei-class>
     <body-content>scriptless</body-content>
     <attribute>
       <description>
-          The method used, must be either post or get.
-          Defaults to "get".
-          A nested method tag will override this value.
+        Specifies the type of script.  The default is "text/javascript".  This is
+        also currently the only supported script language.
       </description>
-      <name>method</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
-    </attribute>
-    <attribute>
-      <description>
-          The id of the element.
-          A nested id tag will override this value.
-      </description>
-      <name>id</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
-    </attribute>
-    <attribute>
-      <description>
-        The action for the form.
-        A nested action tag will override this value.
-      </description>
-      <name>action</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
-    </attribute>
-    <attribute>
-      <description>
-        The enctype for the form.
-        A nested enctype tag will override this value.
-      </description>
-      <name>enctype</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
-    </attribute>
-    <attribute>
-      <description>The CSS style for the form.  A nested style tag will override this value.</description>
-      <name>style</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
-    </attribute>
-    <attribute>
-      <description>A JavaScript onsubmit handler.  A nested onsubmit tag will override this value.</description>
-      <name>onsubmit</name>
+      <name>type</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
@@ -1147,109 +1113,14 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
-    <description>Renders an option tag.</description>
-    <name>option</name>
-    <tag-class>com.aoindustries.taglib.OptionTag</tag-class>
+    <description>
+        Provides a selected attribute to its SelectedAttribute parent tag.
+        The body, after trimming, must contain either "true", "false", or be empty.
+        If empty, the selected attribute of the tag is not overridden.
+    </description>
+    <name>selected</name>
+    <tag-class>com.aoindustries.taglib.SelectedTag</tag-class>
     <body-content>scriptless</body-content>
-    <attribute>
-      <description>
-        The value of the option.  A nested value tag will override this value.  If neither is provided,
-        the output of the body is used with whitespace trimmed.
-      </description>
-      <name>value</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
-    </attribute>
-    <attribute>
-      <description>
-          The selected attribute.  Accepts values of "true" or "false".
-          A non-empty nested selected tag will override this value.
-          If selected is "true", will add the attribute as &lt;code&gt;selected="selected"&lt;/code&gt;,
-          otherwise the attribute is not added.
-      </description>
-      <name>selected</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>boolean</type>
-    </attribute>
-    <attribute>
-      <description>
-          The disabled attribute.  Accepts values of "true" or "false".
-          A non-empty nested disabled tag will override this value.
-          If disabled is "true", will add the attribute as &lt;code&gt;disabled="disabled"&lt;/code&gt;,
-          otherwise the attribute is not added.
-      </description>
-      <name>disabled</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>boolean</type>
-    </attribute>
-    <example />
-  </tag>
-  <tag>
-    <description>Provides a method attribute to its MethodAttribute parent tag.</description>
-    <name>method</name>
-    <tag-class>com.aoindustries.taglib.MethodTag</tag-class>
-    <body-content>scriptless</body-content>
-    <example />
-  </tag>
-  <tag>
-    <description>Provides an id attribute to its IdAttribute parent tag.</description>
-    <name>id</name>
-    <tag-class>com.aoindustries.taglib.IdTag</tag-class>
-    <body-content>scriptless</body-content>
-    <example />
-  </tag>
-  <tag>
-    <description>Provides an action to its ActionAttribute parent tag.</description>
-    <name>action</name>
-    <tag-class>com.aoindustries.taglib.ActionTag</tag-class>
-    <body-content>scriptless</body-content>
-    <example />
-  </tag>
-  <tag>
-    <description>Provides an enctype to its EnctypeAttribute parent tag.</description>
-    <name>enctype</name>
-    <tag-class>com.aoindustries.taglib.EnctypeTag</tag-class>
-    <body-content>scriptless</body-content>
-    <example />
-  </tag>
-  <tag>
-    <description>Redirects the browser, ends processing of the current page.</description>
-    <name>redirect</name>
-    <tag-class>com.aoindustries.taglib.RedirectTag</tag-class>
-    <tei-class>com.aoindustries.taglib.RedirectTagTEI</tei-class>
-    <body-content>scriptless</body-content>
-    <attribute>
-      <description>
-          The destination for the redirect.
-          If starts with a /, the context path will be prepended to the path.
-          Session state URL rewriting is performed as needed.
-          URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
-          any character in the set { ':', '/', ';', '#' }
-          A nested href tag will override this value.
-          Any directly nested param or params tag will add parameters to the href.
-      </description>
-      <name>href</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
-    </attribute>
-    <attribute>
-      <description>
-          The type of redirect performed.  Is one of "moved_permanently" (or 301), "moved_temporarily" (or 302) or "see_other" (or 303).
-
-          Because the redirect type has important consequences on search engines and browser caches, the decision should be made for
-          each redirect.  Thus, this attribute must be set directly or in a nested type tag.
-
-          A nested type tag will override this value.
-      </description>
-      <name>type</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
-    </attribute>
     <example />
   </tag>
   <tag>
@@ -1278,33 +1149,65 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
+    <description>Provides a size attribute to its SizeAttribute parent tag.</description>
+    <name>size</name>
+    <tag-class>com.aoindustries.taglib.SizeTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides a src attribute to its SrcAttribute parent tag.  Parameters may be added with nested param or params tags.</description>
+    <name>src</name>
+    <tag-class>com.aoindustries.taglib.SrcTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides a style attribute to its StyleAttribute parent tag.</description>
+    <name>style</name>
+    <tag-class>com.aoindustries.taglib.StyleTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides a target attribute to its TargetAttribute parent tag.</description>
+    <name>target</name>
+    <tag-class>com.aoindustries.taglib.TargetTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
     <description>
-        Includes another resource and then continues processing of the current page.
-        If parameters are not cleared, nested parameters are added before request parameters.
-        This has two advantages over the standard jsp:include tag:
-            1) You may clear parameters such that only those specifically added will be passed on to the included page
-            2) You may have other nested tags used to select and build the set of parameters
+      The body of this tag contains any arbitary plain text.  In some contexts,
+      such as contained in a JavaScript string, this may be binary transparent.
+
+      In other contexts, it may result in an error when a character may not
+      be encoded to the container's system.  An example would be a NULL character
+      in an XML document.
+
+      End of line conversions may also occur in some contexts.
+
+      When contained in JavaScript, this will automatically be surrounded by
+      double quotes and will be binary transparent through \uxxxx escape codes.
+      The double quotes are automatically added to clearly separate data from
+      code.  Please note that this auto-quoting applies to all forms of data in
+      all tags, not just this text tag.
+
+      The content type of this tag text/plain.
     </description>
-    <name>include</name>
-    <tag-class>com.aoindustries.taglib.IncludeTag</tag-class>
+    <name>text</name>
+    <tag-class>com.aoindustries.taglib.TextTag</tag-class>
     <body-content>scriptless</body-content>
     <attribute>
-      <description>
-          The page that will be included.
-          A nested page tag will override this value.
-          The page is required, must be set in attribute or nested page tag.
-      </description>
-      <name>page</name>
+      <description>When true, newlines are converted to &lt;br /&gt;</description>
+      <name>makeBr</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>boolean</type>
     </attribute>
     <attribute>
-      <description>
-          Optionally clears all parameters so that only those added by nested tags
-          are included.  Defaults to false.
-      </description>
-      <name>clearParams</name>
+      <description>When true, consecutive spaces are converted to &amp;#160;</description>
+      <name>makeNbsp</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>boolean</type>
@@ -1313,63 +1216,19 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
   </tag>
   <tag>
     <description>
-        Forwards to another resource, ends processing of the current page.
-        If parameters are not cleared, nested parameters are added before request parameters.
-        This has two advantages over the standard jsp:forward tag:
-            1) You may clear parameters such that only those specifically added will be passed on to the next page
-            2) You may have other nested tags used to select and build the set of parameters
-    </description>
-    <name>forward</name>
-    <tag-class>com.aoindustries.taglib.ForwardTag</tag-class>
-    <body-content>scriptless</body-content>
-    <attribute>
-      <description>
-          The page that will be forwarded to.
-          A nested page tag will override this value.
-          The page is required, must be set in attribute or nested page tag.
-      </description>
-      <name>page</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
-    </attribute>
-    <attribute>
-      <description>
-          Optionally clears all parameters so that only those added by nested tags
-          are forwarded.  Defaults to false.
-      </description>
-      <name>clearParams</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>boolean</type>
-    </attribute>
-    <example />
-  </tag>
-  <tag>
-    <description>
-      If contained with any MetasAttribute parent, adds the meta data to the parent tag.
-      Otherwise, renders a meta tag.  The content may be provided in one of three ways, in
+      Renders a textarea tag.  The value may be provided in one of three ways, in
       precedence order:
       &lt;ol&gt;
-        &lt;li&gt;Direct child &lt;content&gt; tag.&lt;/li&gt;
-        &lt;li&gt;As the content attribute&lt;/li&gt;
-        &lt;li&gt;Contents of tag body, trimmed.&lt;/li&gt;
+        &lt;li&gt;Direct child &lt;value&gt; tag.&lt;/li&gt;
+        &lt;li&gt;As the value attribute&lt;/li&gt;
+        &lt;li&gt;Contents of tag body.&lt;/li&gt;
       &lt;/ol&gt;
     </description>
-    <name>meta</name>
-    <tag-class>com.aoindustries.taglib.MetaTag</tag-class>
+    <name>textarea</name>
+    <tag-class>com.aoindustries.taglib.TextareaTag</tag-class>
     <body-content>scriptless</body-content>
     <attribute>
-      <description>
-          The http-equiv of the meta element.
-      </description>
-      <name>httpEquiv</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
-    </attribute>
-    <attribute>
-      <description>The name of meta tag.  A nested name tag will override this value.</description>
+      <description>The name of textarea tag.  A nested name tag will override this value.</description>
       <name>name</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
@@ -1377,14 +1236,125 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     </attribute>
     <attribute>
       <description>
-        The content of the meta data.  A nested content tag will override this value.  If neither is provided,
-        the output of the body is used with whitespace trimmed.
+        The value of the textarea.  A nested value tag will override this value.  If neither is provided,
+        the output of the body is used.
       </description>
-      <name>content</name>
+      <name>value</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
     </attribute>
+    <attribute>
+      <description>The number of columns for the textarea element.  A nested cols tag will override this value.</description>
+      <name>cols</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>int</type>
+    </attribute>
+    <attribute>
+      <description>The number of rows for the textarea element.  A nested rows tag will override this value.</description>
+      <name>rows</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>int</type>
+    </attribute>
+    <attribute>
+      <description>
+          The readonly attribute.  Accepts values of "true" or "false".
+          A non-empty nested readonly tag will override this value.
+          If readonly is "true", will add the attribute as &lt;code&gt;readonly="readonly"&lt;/code&gt;,
+          otherwise the attribute is not added.
+      </description>
+      <name>readonly</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>boolean</type>
+    </attribute>
+    <attribute>
+      <description>
+          The disabled attribute.  Accepts values of "true" or "false".
+          A non-empty nested disabled tag will override this value.
+          If disabled is "true", will add the attribute as &lt;code&gt;disabled="disabled"&lt;/code&gt;,
+          otherwise the attribute is not added.
+      </description>
+      <name>disabled</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>boolean</type>
+    </attribute>
+    <attribute>
+      <description>
+          A JavaScript onchange handler.
+          A nested onchange tag will override this value.
+      </description>
+      <name>onchange</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>The CSS style for the textarea element.  A nested style tag will override this value.</description>
+      <name>style</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides a title to its TitleAttribute parent tag.</description>
+    <name>title</name>
+    <tag-class>com.aoindustries.taglib.TitleTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides a type to its TitleAttribute parent tag.</description>
+    <name>type</name>
+    <tag-class>com.aoindustries.taglib.TypeTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>
+      The body of this tag contains a Uniform Resource Identifier (URI or URL).
+
+      Before the first ? symbol, may contain characters in any language.  This
+      is more flexible than a strict URL format, these characters will be
+      automatically encoded based on context.
+
+      After the first ?, however, the parameters must be properly URL encoded
+      and contain only valid characters.  It should not be escaped for (X)HTML,
+      meaning that parameter separators should be &amp; instead of &amp;amp;.
+      The proper escaping/encoding will be performed based on the context of
+      this tag.
+
+      It may be a relative or absolute URL.  If starts with a /, the context
+      path will be prepended to the path.
+
+      Depending on context, the URL will be passed through HttpServletResponse.encodeURL
+      to add any URL-based session state.  Session state will never be added to external links.
+
+      The content type of this tag is text/url.
+      Must be valid URL-encoded characters only.
+    </description>
+    <name>url</name>
+    <tag-class>com.aoindustries.taglib.UrlTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides a value to its ValueAttribute parent tag.</description>
+    <name>value</name>
+    <tag-class>com.aoindustries.taglib.ValueTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides a width attribute to its WidthAttribute parent tag.</description>
+    <name>width</name>
+    <tag-class>com.aoindustries.taglib.WidthTag</tag-class>
+    <body-content>scriptless</body-content>
     <example />
   </tag>
   <tag>
@@ -1402,70 +1372,114 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
-    <description><![CDATA[
-        <ol>
-            <li>Clears the current output buffer (leaving status code and headers)</li>
-            <li>Sets the response contentType between html / xhtml based on forceHtml attribute and request headers</li>
-            <li>Writes the DOCTYPE unless set to "none"</li>
-            <li>
-                Writes the html tag, including the xmlns, lang, and xml:lang attributes based on
-                the locale of the current response.
-            </li>
-        </ol>
-    ]]></description>
-    <name>html</name>
-    <tag-class>com.aoindustries.taglib.HtmlTag</tag-class>
-    <tei-class>com.aoindustries.taglib.HtmlTagTEI</tei-class>
-    <body-content>scriptless</body-content>
+    <description>
+      Writes the bean contents.  If the bean is &lt;code&gt;null&lt;/code&gt; then nothing is displayed.
+      The method attribute provides the name of the method that will be used to convert to String.
+      If not provided, it will default to &lt;code&gt;"toString"&lt;/code&gt;.  This method
+      searches for the method with parameters and returns String.  It is an error if the method is
+      not found.
+
+      The content type depends on the value provided to the type attribute, and
+      defaults to text/plain.  The content is checked for well-formedness based
+      on its type:
+          text/javascript - no validation
+          text/plain - no validation
+          text/url - must be valid URL-encoded characters only
+          application/xhtml+xml - TODO: must be well-formed XHTML content. Currently only checks character values.
+          application/xhtml+xml+pre - every character must be valid XML, and not have any &lt;, &gt;
+    </description>
+    <name>write</name>
+    <tag-class>com.aoindustries.taglib.WriteTag</tag-class>
+    <tei-class>com.aoindustries.taglib.WriteTagTEI</tei-class>
+    <body-content>empty</body-content>
     <attribute>
       <description>
-        The doctype to use, one of "strict", "transitional", "frameset", or "none".
-        Defaults to strict.  "none" will suppress the output of a doctype.
+        Specifies the variable scope searched to retrieve the bean specified
+        by name. If not specified, the default rules applied by PageContext.findAttribute()
+        are applied.
       </description>
-      <name>doctype</name>
+      <name>scope</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
     </attribute>
     <attribute>
       <description>
-        If set to true, forces the content-type to be text/html.
-        If set to false (the default), will negotiate content-type based on browser support.
-        This should normally be left with the default value of false.  This is used
-        when the content is known to contain invalid markup and can't be parsed as XML.
+        Specifies the attribute name of the bean whose property is accessed to
+        retrieve the value specified by property (if specified). If property is
+        not specified, the value of this bean itself will be used.
       </description>
-      <name>forceHtml</name>
+      <name>name</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>
+        Specifies the name of the property to be accessed on the bean specified
+        by name. This value may be a simple, indexed, or nested property reference
+        expression. If not specified, the bean identified by name will itself be
+        used.
+      </description>
+      <name>property</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>boolean</type>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>
+        Specifies the method that will be used to convert the object to a
+        String.
+        This defaults to toString
+      </description>
+      <name>method</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>
+          Specifies the type of content contained in the bean.  Defaults to text/plain.
+      </description>
+      <name>type</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
     </attribute>
     <example />
   </tag>
   <tag>
-    <description>Allows editing of the website resource bundles through the website itself.</description>
-    <name>resourceEditor</name>
-    <tag-class>com.aoindustries.taglib.ResourceEditorTag</tag-class>
-    <body-content>empty</body-content>
+    <description>
+      The body of this tag contains well-formed XHTML 1.0-compliant attribute.
+
+      The content type of this tag is application/xhtml+xml+attribute.
+    </description>
+    <name>xhtmlAttribute</name>
+    <tag-class>com.aoindustries.taglib.XhtmlAttributeTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
   </tag>
   <tag>
-    <description>Disables the resource editor for this request.</description>
-    <name>disableResourceEditor</name>
-    <tag-class>com.aoindustries.taglib.DisableResourceEditorTag</tag-class>
-    <body-content>empty</body-content>
+    <description>
+      The body of this tag contains well-formed XHTML 1.0-compliant markup.
+
+      The content type of this tag is application/xhtml+xml.
+
+      Note: For performance, this implementation currently only checks character
+      values.  This ensures that no encodings are violated and overall XML validation
+      by the browser should catch problems.
+    </description>
+    <name>xhtml</name>
+    <tag-class>com.aoindustries.taglib.XhtmlTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
   </tag>
   <function>
-    <description>Word wraps a string.</description>
-    <name>wordWrap</name>
-    <function-class>com.aoindustries.util.StringUtility</function-class>
-    <function-signature>java.lang.String wordWrap(java.lang.String,int)</function-signature>
-    <example>${ao:wordWrap(text, width)}</example>
-  </function>
-  <function>
-    <description>Joins elements of any Iterable into a String.</description>
-    <name>join</name>
+    <description>Rewries a URL to maintain session state.</description>
+    <name>encodeURL</name>
     <function-class>com.aoindustries.taglib.Functions</function-class>
-    <function-signature>java.lang.String join(java.lang.Iterable,java.lang.String)</function-signature>
-    <example>${ao:join(iterable, separator)}</example>
+    <function-signature>java.lang.String encodeURL(java.lang.String)</function-signature>
+    <example>${ao:encodeURL('../path-to-page.jsp')}</example>
   </function>
   <function>
     <description>Generates an absolute URL for the provided context-relative URL.  The URL is not automatically response encodeURL.</description>
@@ -1475,10 +1489,17 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example>${ao:getAbsoluteURL('/path-to-page.jsp')}</example>
   </function>
   <function>
-    <description>Rewries a URL to maintain session state.</description>
-    <name>encodeURL</name>
+    <description>Joins elements of any Iterable into a String.</description>
+    <name>join</name>
     <function-class>com.aoindustries.taglib.Functions</function-class>
-    <function-signature>java.lang.String encodeURL(java.lang.String)</function-signature>
-    <example>${ao:encodeURL('../path-to-page.jsp')}</example>
+    <function-signature>java.lang.String join(java.lang.Iterable,java.lang.String)</function-signature>
+    <example>${ao:join(iterable, separator)}</example>
+  </function>
+  <function>
+    <description>Word wraps a string.</description>
+    <name>wordWrap</name>
+    <function-class>com.aoindustries.util.StringUtility</function-class>
+    <function-signature>java.lang.String wordWrap(java.lang.String,int)</function-signature>
+    <example>${ao:wordWrap(text, width)}</example>
   </function>
 </taglib>
