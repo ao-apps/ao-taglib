@@ -43,16 +43,19 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
-public class ATag extends AutoEncodingBufferedTag implements
-    HrefAttribute,
-    ParamsAttribute,
-	TargetAttribute,
-    TitleAttribute,
-    ClassAttribute,
-    StyleAttribute,
-    OnclickAttribute,
-    OnmouseoverAttribute,
-    OnmouseoutAttribute {
+public class ATag
+	extends AutoEncodingBufferedTag
+	implements
+		HrefAttribute,
+		ParamsAttribute,
+		TargetAttribute,
+		TitleAttribute,
+		ClassAttribute,
+		StyleAttribute,
+		OnclickAttribute,
+		OnmouseoverAttribute,
+		OnmouseoutAttribute
+{
 
     private String href;
     private MutableHttpParameters params;
