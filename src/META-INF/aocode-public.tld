@@ -1503,6 +1503,13 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example>${ao:getAbsoluteURL('/path-to-page.jsp')}</example>
   </function>
   <function>
+    <description>Gets a time span display for a given number of milliseconds or null for null milliseconds.</description>
+    <name>getDecimalTimeLength</name>
+    <function-class>com.aoindustries.taglib.Functions</function-class>
+    <function-signature>java.lang.String getDecimalTimeLength(java.lang.Long)</function-signature>
+    <example>${ao:getDecimalTimeLength(timeSpan)}</example>
+  </function>
+  <function>
     <description>Joins elements of any Iterable into a String.</description>
     <name>join</name>
     <function-class>com.aoindustries.taglib.Functions</function-class>

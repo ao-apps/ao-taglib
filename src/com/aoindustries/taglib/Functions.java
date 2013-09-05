@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2011, 2012  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -43,4 +43,8 @@ final public class Functions {
     public static String encodeURL(String url) {
         return FunctionContext.getResponse().encodeURL(url);
     }
+	
+	public static String getDecimalTimeLength(Long millis) {
+		return millis==null ? null : StringUtility.getDecimalTimeLengthString(millis);
+	}
 }
