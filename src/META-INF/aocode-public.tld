@@ -1138,7 +1138,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
-    <description>Returns an error status.  Results in error handler processing.</description>
+    <description>Returns an error status, stops processing of the containing JSP page.  Results in error handler processing.</description>
     <name>sendError</name>
     <tag-class>com.aoindustries.taglib.SendErrorTag</tag-class>
     <body-content>scriptless</body-content>
