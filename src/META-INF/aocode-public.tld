@@ -1106,8 +1106,25 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <description>
         Specifies the type of script.  The default is "text/javascript".  This is
         also currently the only supported script language.
-      </description>
+
+        A nested type tag will override this value.
+	  </description>
       <name>type</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>
+          The src for the script.
+          If starts with a /, the context path will be prepended to the path.
+          Session state URL rewriting is performed as needed.
+          URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
+          any character in the set { ':', '/', ';', '#' }
+          A nested src tag will override this value.
+          Any directly nested param or params tag will add parameters to the src.
+      </description>
+      <name>src</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>

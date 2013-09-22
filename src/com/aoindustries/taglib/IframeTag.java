@@ -29,6 +29,8 @@ import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.net.HttpParametersUtils;
+import com.aoindustries.net.MutableHttpParameters;
+import com.aoindustries.servlet.jsp.LocalizedJspException;
 import com.aoindustries.util.EncodingUtils;
 import java.io.IOException;
 import java.io.Writer;
@@ -40,7 +42,16 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
-public class IframeTag extends AutoEncodingBufferedTag implements IdAttribute, SrcAttribute, ParamsAttribute, WidthAttribute, HeightAttribute, FrameborderAttribute {
+public class IframeTag
+	extends AutoEncodingBufferedTag
+	implements
+		IdAttribute,
+		SrcAttribute,
+		ParamsAttribute,
+		WidthAttribute,
+		HeightAttribute,
+		FrameborderAttribute
+{
 
     private String id;
     private String src;
@@ -120,10 +131,31 @@ public class IframeTag extends AutoEncodingBufferedTag implements IdAttribute, S
         this.frameborder = frameborder;
     }
 
-    @Override
+	static void writeSrc(Writer out, PageContext pageContext, String src, MutableHttpParameters params) throws JspException, IOException {
+		if(src!=null) {
+            HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
+			out.write(" src=\"");
+			if(src.startsWith("/")) {
+				String contextPath = ((HttpServletRequest)pageContext.getRequest()).getContextPath();
+				if(contextPath.length()>0) src = contextPath+src;
+			}
+			src = HttpParametersUtils.addParams(src, params);
+			out.write(
+				EncodingUtils.encodeXmlAttribute(
+					response.encodeURL(
+						NewEncodingUtils.encodeUrlPath(src)
+					)
+				)
+			);
+			out.write('"');
+        } else {
+            if(params!=null) throw new LocalizedJspException(ApplicationResources.accessor, "IframeTag.doTag.paramsWithoutSrc");
+		}
+	}
+
+	@Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         PageContext pageContext = (PageContext)getJspContext();
-        HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
         if(src==null) throw new AttributeRequiredException("src");
         out.write("<iframe");
         if(id!=null) {
@@ -131,20 +163,7 @@ public class IframeTag extends AutoEncodingBufferedTag implements IdAttribute, S
             EncodingUtils.encodeXmlAttribute(id, out);
             out.write('"');
         }
-        out.write(" src=\"");
-        if(src.startsWith("/")) {
-            String contextPath = ((HttpServletRequest)pageContext.getRequest()).getContextPath();
-            if(contextPath.length()>0) src = contextPath+src;
-        }
-        src = HttpParametersUtils.addParams(src, params);
-        out.write(
-            EncodingUtils.encodeXmlAttribute(
-                response.encodeURL(
-                    NewEncodingUtils.encodeUrlPath(src)
-                )
-            )
-        );
-        out.write('"');
+		writeSrc(out, pageContext, src, params);
         if(width!=null) {
             out.write(" width=\"");
             EncodingUtils.encodeXmlAttribute(width, out);
