@@ -35,29 +35,35 @@ public class ATagBeanInfo extends SimpleBeanInfo {
 
     private static final Logger logger = Logger.getLogger(ATagBeanInfo.class.getName());
 
-    private static volatile PropertyDescriptor[] properties = null;
+	private static final Object propertiesLock = new Object();
+    private static PropertyDescriptor[] properties;
 
     @Override
     public PropertyDescriptor[] getPropertyDescriptors () {
         try {
-            PropertyDescriptor[] props = properties;
-            if(props==null) {
-                props = new PropertyDescriptor[] {
-                    new PropertyDescriptor("contentType", ATag.class, "getContentType", null),
-                    new PropertyDescriptor("outputType", ATag.class, "getOutputType", null),
-                    new PropertyDescriptor("href", ATag.class),
-                    new PropertyDescriptor("params", ATag.class, "getParams", null),
-                    new PropertyDescriptor("target", ATag.class),
-                    new PropertyDescriptor("title", ATag.class),
-                    new PropertyDescriptor("class", ATag.class, "getClazz", "setClazz"),
-                    new PropertyDescriptor("style", ATag.class),
-                    new PropertyDescriptor("onclick", ATag.class),
-                    new PropertyDescriptor("onmouseover", ATag.class),
-                    new PropertyDescriptor("onmouseout", ATag.class)
-                };
-                properties = props;
-            }
-            return props;
+			synchronized(propertiesLock) {
+				PropertyDescriptor[] props = properties;
+				if(props==null) {
+					props = new PropertyDescriptor[] {
+						new PropertyDescriptor("contentType", ATag.class, "getContentType", null),
+						new PropertyDescriptor("outputType", ATag.class, "getOutputType", null),
+						new PropertyDescriptor("href", ATag.class),
+						new PropertyDescriptor("params", ATag.class, "getParams", null),
+						new PropertyDescriptor("hreflang", ATag.class),
+						new PropertyDescriptor("rel", ATag.class),
+						new PropertyDescriptor("type", ATag.class),
+						new PropertyDescriptor("target", ATag.class),
+						new PropertyDescriptor("title", ATag.class),
+						new PropertyDescriptor("class", ATag.class, "getClazz", "setClazz"),
+						new PropertyDescriptor("style", ATag.class),
+						new PropertyDescriptor("onclick", ATag.class),
+						new PropertyDescriptor("onmouseover", ATag.class),
+						new PropertyDescriptor("onmouseout", ATag.class)
+					};
+					properties = props;
+				}
+				return props;
+			}
         } catch(IntrospectionException err) {
             logger.log(Level.SEVERE, null, err);
             return null;

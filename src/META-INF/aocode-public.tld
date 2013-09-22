@@ -46,6 +46,27 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <type>java.lang.String</type>
     </attribute>
     <attribute>
+      <description>The hreflang for the link.  A nested hreflang tag will override this value.</description>
+      <name>hreflang</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>The rel for the link.  A nested rel tag will override this value.</description>
+      <name>rel</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>The type for the link.  A nested type tag will override this value.</description>
+      <name>type</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
       <description>The target for the link.  A nested target tag will override this value.</description>
       <name>target</name>
       <required>false</required>
@@ -327,13 +348,6 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
-    <description>Provides an href to its HrefAttribute parent tag.  Parameters may be added with nested param or params tags.</description>
-    <name>href</name>
-    <tag-class>com.aoindustries.taglib.HrefTag</tag-class>
-    <body-content>scriptless</body-content>
-    <example />
-  </tag>
-  <tag>
     <description><![CDATA[
         <ol>
             <li>Clears the current output buffer (leaving status code and headers)</li>
@@ -371,6 +385,20 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <rtexprvalue>true</rtexprvalue>
       <type>boolean</type>
     </attribute>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides an href to its HrefAttribute parent tag.  Parameters may be added with nested param or params tags.</description>
+    <name>href</name>
+    <tag-class>com.aoindustries.taglib.HrefTag</tag-class>
+    <body-content>scriptless</body-content>
+    <example />
+  </tag>
+  <tag>
+    <description>Provides an hreflang attribute to its HreflangAttribute parent tag.</description>
+    <name>hreflang</name>
+    <tag-class>com.aoindustries.taglib.HreflangTag</tag-class>
+    <body-content>scriptless</body-content>
     <example />
   </tag>
   <tag>
@@ -707,6 +735,52 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>boolean</type>
+    </attribute>
+    <example />
+  </tag>
+  <tag>
+    <description>
+      If contained with any LinksAttribute parent, adds the link data to the parent tag.
+      Otherwise, renders a link tag.
+	</description>
+    <name>link</name>
+    <tag-class>com.aoindustries.taglib.LinkTag</tag-class>
+    <body-content>scriptless</body-content>
+    <attribute>
+      <description>
+          The href for the link.
+          If starts with a /, the context path will be prepended to the path.
+          Session state URL rewriting is performed as needed.
+          URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
+          any character in the set { ':', '/', ';', '#' }
+          A nested href tag will override this value.
+          Any directly nested param or params tag will add parameters to the href.
+      </description>
+      <name>href</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>The hreflang for the link.  A nested hreflang tag will override this value.</description>
+      <name>hreflang</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>The rel for the link.  A nested rel tag will override this value.</description>
+      <name>rel</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>The type for the link.  A nested type tag will override this value.</description>
+      <name>type</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
     </attribute>
     <example />
   </tag>

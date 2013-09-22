@@ -48,6 +48,9 @@ public class ATag
 	implements
 		HrefAttribute,
 		ParamsAttribute,
+		HreflangAttribute,
+		RelAttribute,
+		TypeAttribute,
 		TargetAttribute,
 		TitleAttribute,
 		ClassAttribute,
@@ -59,6 +62,9 @@ public class ATag
 
     private String href;
     private MutableHttpParameters params;
+	private String hreflang;
+	private String rel;
+	private String type;
 	private String target;
     private String title;
     private String clazz;
@@ -98,7 +104,37 @@ public class ATag
         params.addParameter(name, value);
     }
 
+	@Override
+    public String getHreflang() {
+        return hreflang;
+    }
+
+	@Override
+	public void setHreflang(String hreflang) {
+		this.hreflang = hreflang;
+	}
+
+	@Override
+    public String getRel() {
+        return rel;
+    }
+
     @Override
+    public void setRel(String rel) {
+        this.rel = rel;
+    }
+
+	@Override
+    public String getType() {
+        return type;
+    }
+
+    @Override
+    public void setType(String type) {
+        this.type = type;
+    }
+
+	@Override
     public String getTarget() {
         return target;
     }
@@ -168,10 +204,10 @@ public class ATag
         this.onmouseout = onmouseout;
     }
 
-    @Override
-    protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
-        PageContext pageContext = (PageContext)getJspContext();
-        out.write("<a");
+	/**
+	 * Writes an href attribute with parameters.
+	 */
+	static void writeHref(Writer out, PageContext pageContext, String href, MutableHttpParameters params) throws JspException, IOException {
         if(href!=null) {
             HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
             out.write(" href=\"");
@@ -190,6 +226,28 @@ public class ATag
             out.write('"');
         } else {
             if(params!=null) throw new LocalizedJspException(ApplicationResources.accessor, "ATag.doTag.paramsWithoutHref");
+        }
+	}
+
+	@Override
+    protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
+        PageContext pageContext = (PageContext)getJspContext();
+        out.write("<a");
+		writeHref(out, pageContext, href, params);
+        if(hreflang!=null) {
+            out.write(" hreflang=\"");
+            EncodingUtils.encodeXmlAttribute(hreflang, out);
+            out.write('"');
+        }
+        if(rel!=null) {
+            out.write(" rel=\"");
+            EncodingUtils.encodeXmlAttribute(rel, out);
+            out.write('"');
+        }
+        if(type!=null) {
+            out.write(" type=\"");
+            EncodingUtils.encodeXmlAttribute(type, out);
+            out.write('"');
         }
         if(target!=null) {
             out.write(" target=\"");
