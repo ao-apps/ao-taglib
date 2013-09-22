@@ -216,13 +216,12 @@ public class ATag
                 if(contextPath.length()>0) href = contextPath+href;
             }
             href = HttpParametersUtils.addParams(href, params);
-            out.write(
-                EncodingUtils.encodeXmlAttribute(
-                    response.encodeURL(
-                        NewEncodingUtils.encodeUrlPath(href)
-                    )
-                )
-            );
+			EncodingUtils.encodeXmlAttribute(
+				response.encodeURL(
+					NewEncodingUtils.encodeUrlPath(href)
+				),
+				out
+			);
             out.write('"');
         } else {
             if(params!=null) throw new LocalizedJspException(ApplicationResources.accessor, "ATag.doTag.paramsWithoutHref");

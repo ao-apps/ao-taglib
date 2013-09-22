@@ -140,12 +140,11 @@ public class IframeTag
 				if(contextPath.length()>0) src = contextPath+src;
 			}
 			src = HttpParametersUtils.addParams(src, params);
-			out.write(
-				EncodingUtils.encodeXmlAttribute(
-					response.encodeURL(
-						NewEncodingUtils.encodeUrlPath(src)
-					)
-				)
+			EncodingUtils.encodeXmlAttribute(
+				response.encodeURL(
+					NewEncodingUtils.encodeUrlPath(src)
+				),
+				out
 			);
 			out.write('"');
         } else {

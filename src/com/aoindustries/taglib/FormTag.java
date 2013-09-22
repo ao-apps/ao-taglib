@@ -168,7 +168,10 @@ public class FormTag
                 if(contextPath.length()>0) action = contextPath+action;
             }
             actionUrl = response.encodeURL(NewEncodingUtils.encodeUrlPath(action));
-            out.write(EncodingUtils.encodeXmlAttribute(actionUrl));
+            EncodingUtils.encodeXmlAttribute(
+				actionUrl,
+				out
+			);
             out.write('"');
         } else {
             actionUrl = null;
