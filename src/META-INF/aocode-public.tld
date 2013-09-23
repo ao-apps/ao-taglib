@@ -274,13 +274,20 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     </attribute>
     <attribute>
       <description>
-          Optionally clears all parameters so that only those added by nested tags
-          are forwarded.  Defaults to false.
+          Optionally clears all parameters that match any of the comma-separated patterns.
+		  This is so that only those added by nested tags are forwarded.
+		  As a result, parameters provided by the client will not be able to interfere for forwards that have optional parameters.
+		  Each pattern in the comma-separated list may in the following format:
+		     exact_name  matches the name exactly
+			 *           matches all (clears all parameters)
+		     *suffix     matches the name with "endsWith"
+			 prefix*     matches the name with "beginsWith"
+		  Defaults to none cleared.
       </description>
       <name>clearParams</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>boolean</type>
+      <type>java.lang.String</type>
     </attribute>
     <example />
   </tag>
@@ -564,13 +571,20 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     </attribute>
     <attribute>
       <description>
-          Optionally clears all parameters so that only those added by nested tags
-          are included.  Defaults to false.
+          Optionally clears all parameters that match any of the comma-separated patterns.
+		  This is so that only those added by nested tags are included
+		  As a result, parameters provided by the client will not be able to interfere for includes that have optional parameters.
+		  Each pattern in the comma-separated list may in the following format:
+		     exact_name  matches the name exactly
+			 *           matches all (clears all parameters)
+		     *suffix     matches the name with "endsWith"
+			 prefix*     matches the name with "beginsWith"
+		  Defaults to none cleared.
       </description>
       <name>clearParams</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>boolean</type>
+      <type>java.lang.String</type>
     </attribute>
     <example />
   </tag>
