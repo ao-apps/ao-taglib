@@ -75,7 +75,7 @@ public class ArgTag extends AutoEncodingBufferedTag implements NameAttribute, Va
 			if(value==null) setValue(capturedBody.trim());
 			argsAttribute.addArg(name, value);
 		} finally {
-			ReferenceUtils.release(value);
+			value = ReferenceUtils.release(value);
 		}
     }
 }

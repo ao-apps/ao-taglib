@@ -111,7 +111,7 @@ public class OptionTag
 			);
 			out.write("</option>");
 		} finally {
-			ReferenceUtils.release(value);
+			value = ReferenceUtils.release(value);
 		}
     }
 }

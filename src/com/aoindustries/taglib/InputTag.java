@@ -335,7 +335,7 @@ public class InputTag extends AutoEncodingBufferedTag implements
 			if(checked) out.write(" checked=\"checked\"");
 			out.write(" />");
 		} finally {
-			ReferenceUtils.release(value);
+			value = ReferenceUtils.release(value);
 		}
     }
 }

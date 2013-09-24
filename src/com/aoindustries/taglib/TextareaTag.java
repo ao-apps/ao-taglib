@@ -183,7 +183,7 @@ public class TextareaTag
 			);
 			out.write("</textarea>");
 		} finally {
-			ReferenceUtils.release(value);
+			value = ReferenceUtils.release(value);
 		}
     }
 }

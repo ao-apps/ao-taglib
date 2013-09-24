@@ -84,7 +84,7 @@ public class ParamTag
 				Coercion.toString(value)
 			);
 		} finally {
-			ReferenceUtils.release(value);
+			value = ReferenceUtils.release(value);
 		}
     }
 }
