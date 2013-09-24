@@ -62,7 +62,7 @@ public class ImgTag
     private String height;
     private Object alt;
     private String title;
-    private String clazz;
+    private Object clazz;
     private String style;
 
     @Override
@@ -137,13 +137,13 @@ public class ImgTag
     }
 
     @Override
-    public String getClazz() {
+    public Object getClazz() {
         return clazz;
     }
 
     @Override
-    public void setClazz(String clazz) {
-        this.clazz = clazz;
+    public void setClazz(Object clazz) {
+		this.clazz = ReferenceUtils.replace(this.clazz, clazz);
     }
 
     @Override
@@ -195,7 +195,11 @@ public class ImgTag
 			}
 			if(clazz!=null) {
 				out.write(" class=\"");
-				encodeTextInXhtmlAttribute(clazz, out);
+				Coercion.toString(
+					clazz,
+					TextInXhtmlAttributeEncoder.getInstance(),
+					out
+				);
 				out.write('"');
 			}
 			if(style!=null) {
@@ -206,6 +210,7 @@ public class ImgTag
 			out.write(" />");
 		} finally {
 			alt = ReferenceUtils.release(alt);
+			clazz = ReferenceUtils.release(clazz);
 		}
     }
 }

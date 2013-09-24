@@ -83,7 +83,7 @@ public class InputTag extends AutoEncodingBufferedTag implements
     private Integer maxlength;
     private boolean readonly;
     private boolean disabled;
-    private String clazz;
+    private Object clazz;
     private String style;
     private boolean checked;
 
@@ -229,13 +229,13 @@ public class InputTag extends AutoEncodingBufferedTag implements
     }
 
     @Override
-    public String getClazz() {
+    public Object getClazz() {
         return clazz;
     }
 
     @Override
-    public void setClazz(String clazz) {
-        this.clazz = clazz;
+    public void setClazz(Object clazz) {
+		this.clazz = ReferenceUtils.replace(this.clazz, clazz);
     }
 
     @Override
@@ -324,7 +324,11 @@ public class InputTag extends AutoEncodingBufferedTag implements
 			if(disabled) out.write(" disabled=\"disabled\"");
 			if(clazz!=null) {
 				out.write(" class=\"");
-				encodeTextInXhtmlAttribute(clazz, out);
+				Coercion.toString(
+					clazz,
+					TextInXhtmlAttributeEncoder.getInstance(),
+					out
+				);
 				out.write('"');
 			}
 			if(style!=null) {
@@ -336,6 +340,7 @@ public class InputTag extends AutoEncodingBufferedTag implements
 			out.write(" />");
 		} finally {
 			value = ReferenceUtils.release(value);
+			clazz = ReferenceUtils.release(clazz);
 		}
     }
 }
