@@ -22,6 +22,7 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.io.Coercion;
 import com.aoindustries.io.NullWriter;
 import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
@@ -68,7 +69,8 @@ public class RedirectTag
 
     private String href;
     private HttpParametersMap params;
-    private String type;
+    private Object type;
+	private String typeString;
 
     @Override
     public String getHref() {
@@ -92,14 +94,16 @@ public class RedirectTag
     }
 
     @Override
-    public String getType() {
+    public Object getType() {
         return type;
     }
 
     @Override
-    public void setType(String type) throws JspException {
-        if(!isValidType(type)) throw new LocalizedJspException(ApplicationResources.accessor, "RedirectTag.type.invalid", type);
+    public void setType(Object type) throws JspException {
+		String typeStr = Coercion.toString(type);
+        if(!isValidType(typeStr)) throw new LocalizedJspException(ApplicationResources.accessor, "RedirectTag.type.invalid", typeStr);
         this.type = type;
+		this.typeString = typeStr;
     }
 
     @Override
@@ -117,15 +121,27 @@ public class RedirectTag
 
         int status;
         if(type==null) throw new AttributeRequiredException("type");
-        if("301".equals(type) || "moved_permanently".equals(type) || "permanent".equals(type)) {
+        if(
+			"301".equals(typeString)
+			|| "moved_permanently".equals(typeString)
+			|| "permanent".equals(typeString)
+		) {
             status = HttpServletResponse.SC_MOVED_PERMANENTLY;
-        } else if("302".equals(type) || "moved_temporarily".equals(type) || "found".equals(type) || "temporary".equals(type)) {
+        } else if(
+			"302".equals(typeString)
+			|| "moved_temporarily".equals(typeString)
+			|| "found".equals(typeString)
+			|| "temporary".equals(typeString)
+		) {
             status = HttpServletResponse.SC_MOVED_TEMPORARILY;
             //response.sendRedirect(encodedHref);
-        } else if("303".equals(type) || "see_other".equals(type)) {
+        } else if(
+			"303".equals(typeString)
+			|| "see_other".equals(typeString)
+		) {
             status = HttpServletResponse.SC_SEE_OTHER;
         } else {
-            throw new AssertionError("Unexpected value for type: "+type);
+            throw new AssertionError("Unexpected value for type: "+typeString);
         }
 
         // Add any parameters to the URL

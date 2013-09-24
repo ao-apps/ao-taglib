@@ -46,6 +46,6 @@ public class TypeTag extends AutoEncodingBufferedTag {
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         TypeAttribute typeAttribute = AttributeUtils.findAttributeParent("type", this, "type", TypeAttribute.class);
-        typeAttribute.setType(capturedBody.toString().trim());
+        typeAttribute.setType(capturedBody.trim());
     }
 }

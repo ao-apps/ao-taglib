@@ -66,7 +66,7 @@ public class ATag
     private MutableHttpParameters params;
 	private Object hreflang;
 	private Object rel;
-	private String type;
+	private Object type;
 	private Object target;
     private Object title;
     private Object clazz;
@@ -127,12 +127,12 @@ public class ATag
     }
 
 	@Override
-    public String getType() {
+    public Object getType() {
         return type;
     }
 
     @Override
-    public void setType(String type) {
+    public void setType(Object type) {
         this.type = type;
     }
 
@@ -247,7 +247,7 @@ public class ATag
 		}
 		if(type!=null) {
 			out.write(" type=\"");
-			encodeTextInXhtmlAttribute(type, out);
+			Coercion.write(type, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
 		if(target!=null) {

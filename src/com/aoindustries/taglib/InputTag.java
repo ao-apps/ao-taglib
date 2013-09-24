@@ -73,7 +73,8 @@ public class InputTag
     }
 
     private Object id;
-    private String type;
+    private Object type;
+	private String typeString;
     private Object name;
     private Object value;
     private Object onclick;
@@ -110,14 +111,16 @@ public class InputTag
     }
 
     @Override
-    public String getType() {
+    public Object getType() {
         return type;
     }
 
     @Override
-    public void setType(String type) throws JspException {
-        if(!isValidType(type)) throw new LocalizedJspException(ApplicationResources.accessor, "InputTag.type.invalid", type);
+    public void setType(Object type) throws JspException {
+		String typeStr = Coercion.toString(type);
+        if(!isValidType(typeStr)) throw new LocalizedJspException(ApplicationResources.accessor, "InputTag.type.invalid", typeStr);
         this.type = type;
+		this.typeString = typeStr;
     }
 
     @Override
@@ -272,7 +275,7 @@ public class InputTag
 			out.write('"');
 		}
 		out.write(" type=\"");
-		out.write(type);
+		encodeTextInXhtmlAttribute(typeString, out);
 		out.write('"');
 		if(name!=null) {
 			out.write(" name=\"");

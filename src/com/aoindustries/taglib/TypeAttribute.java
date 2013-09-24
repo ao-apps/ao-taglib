@@ -31,7 +31,7 @@ import javax.servlet.jsp.JspException;
  */
 public interface TypeAttribute {
 
-    String getType();
+    Object getType();
 
-    void setType(String type) throws JspException;
+    void setType(Object type) throws JspException;
 }

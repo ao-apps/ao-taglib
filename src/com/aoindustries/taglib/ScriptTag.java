@@ -26,6 +26,7 @@ import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import com.aoindustries.io.AutoTempFileWriter;
+import com.aoindustries.io.Coercion;
 import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
@@ -45,31 +46,37 @@ public class ScriptTag
 		ParamsAttribute
 {
 
-    private MediaType type = MediaType.JAVASCRIPT;
+	private Object type = MediaType.JAVASCRIPT;
+    private MediaType mediaType = MediaType.JAVASCRIPT;
     private String src;
     private HttpParametersMap params;
 
     @Override
     public MediaType getContentType() {
-        return type;
+        return mediaType;
     }
 
     @Override
     public MediaType getOutputType() {
-        return src!=null ? MediaType.XHTML : type;
+        return src!=null ? MediaType.XHTML : mediaType;
     }
 
 	@Override
-    public String getType() {
-        return type.getMediaType();
+    public Object getType() {
+        return type;
     }
 
 	@Override
-    public void setType(String type) throws JspException {
+    public void setType(Object type) throws JspException {
 		try {
-			MediaType newType = MediaType.getMediaType(type);
-			if(newType!=MediaType.JAVASCRIPT) throw new MediaException(ApplicationResources.accessor.getMessage("ScriptTag.unsupportedMediaType", type));
-			this.type = newType;
+			MediaType newMediaType =
+				(type instanceof MediaType)
+				? (MediaType)type
+				: MediaType.getMediaType(Coercion.toString(type))
+			;
+			if(newMediaType!=MediaType.JAVASCRIPT) throw new MediaException(ApplicationResources.accessor.getMessage("ScriptTag.unsupportedMediaType", newMediaType));
+			this.type = type;
+			this.mediaType = newMediaType;
 		} catch(MediaException e) {
 			throw new JspException(e);
 		}
@@ -113,7 +120,7 @@ public class ScriptTag
 			// Write script tag with src attribute, discarding any body
 			PageContext pageContext = (PageContext)getJspContext();
 			out.write("<script type=\"");
-			encodeTextInXhtmlAttribute(type.getMediaType(), out);
+			encodeTextInXhtmlAttribute(mediaType.getMediaType(), out);
 			out.write('"');
 			IframeTag.writeSrc(out, pageContext, src, params);
 			out.write("></script>");

@@ -23,7 +23,6 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
-import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.Coercion;
 import com.aoindustries.net.EmptyParameters;
@@ -53,7 +52,7 @@ public class LinkTag
     private MutableHttpParameters params;
 	private Object hreflang;
 	private Object rel;
-	private String type;
+	private Object type;
 
     @Override
     public MediaType getOutputType() {
@@ -102,12 +101,12 @@ public class LinkTag
     }
 
 	@Override
-    public String getType() {
+    public Object getType() {
         return type;
     }
 
     @Override
-    public void setType(String type) {
+    public void setType(Object type) {
         this.type = type;
     }
 
@@ -123,7 +122,7 @@ public class LinkTag
 					params,
 					Coercion.toString(hreflang),
 					Coercion.toString(rel),
-					type
+					Coercion.toString(type)
 				)
 			);
 		} else {
@@ -142,7 +141,7 @@ public class LinkTag
 			}
 			if(type!=null) {
 				out.write(" type=\"");
-				encodeTextInXhtmlAttribute(type, out);
+				Coercion.write(type, textInXhtmlAttributeEncoder, out);
 				out.write('"');
 			}
 			out.write(" />");
