@@ -37,23 +37,26 @@ import javax.servlet.jsp.JspException;
 /**
  * @author  AO Industries, Inc.
  */
-public class InputTag extends AutoEncodingBufferedTag implements
-    IdAttribute,
-    TypeAttribute,
-    NameAttribute,
-    ValueAttribute,
-    OnclickAttribute,
-    OnchangeAttribute,
-    OnfocusAttribute,
-    OnblurAttribute,
-    OnkeypressAttribute,
-    SizeAttribute,
-    MaxlengthAttribute,
-    ReadonlyAttribute,
-    DisabledAttribute,
-    ClassAttribute,
-    StyleAttribute,
-    CheckedAttribute {
+public class InputTag
+	extends AutoEncodingBufferedTag
+	implements
+		IdAttribute,
+		TypeAttribute,
+		NameAttribute,
+		ValueAttribute,
+		OnclickAttribute,
+		OnchangeAttribute,
+		OnfocusAttribute,
+		OnblurAttribute,
+		OnkeypressAttribute,
+		SizeAttribute,
+		MaxlengthAttribute,
+		ReadonlyAttribute,
+		DisabledAttribute,
+		ClassAttribute,
+		StyleAttribute,
+		CheckedAttribute
+{
 
     public static boolean isValidType(String type) {
         return
@@ -70,7 +73,7 @@ public class InputTag extends AutoEncodingBufferedTag implements
         ;
     }
 
-    private String id;
+    private Object id;
     private String type;
     private String name;
     private Object value;
@@ -98,13 +101,13 @@ public class InputTag extends AutoEncodingBufferedTag implements
     }
 
     @Override
-    public String getId() {
+    public Object getId() {
         return id;
     }
 
     @Override
-    public void setId(String id) {
-        this.id = id;
+    public void setId(Object id) {
+		this.id = ReferenceUtils.replace(this.id, id);
     }
 
     @Override
@@ -267,7 +270,7 @@ public class InputTag extends AutoEncodingBufferedTag implements
 			out.write("<input");
 			if(id!=null) {
 				out.write(" id=\"");
-				encodeTextInXhtmlAttribute(id, out);
+				Coercion.write(id, textInXhtmlAttributeEncoder, out);
 				out.write('"');
 			}
 			out.write(" type=\"");
@@ -331,6 +334,7 @@ public class InputTag extends AutoEncodingBufferedTag implements
 			if(checked) out.write(" checked=\"checked\"");
 			out.write(" />");
 		} finally {
+			id = ReferenceUtils.release(id);
 			value = ReferenceUtils.release(value);
 			clazz = ReferenceUtils.release(clazz);
 		}

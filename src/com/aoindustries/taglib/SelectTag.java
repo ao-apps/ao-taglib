@@ -25,7 +25,10 @@ package com.aoindustries.taglib;
 import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute;
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
+import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.AutoTempFileWriter;
+import com.aoindustries.io.Coercion;
+import com.aoindustries.util.ref.ReferenceUtils;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -46,7 +49,7 @@ public class SelectTag
 		OnkeypressAttribute
 {
 
-    private String id;
+    private Object id;
     private String name;
     private String style;
     private boolean disabled;
@@ -66,13 +69,13 @@ public class SelectTag
     }
 
     @Override
-    public String getId() {
+    public Object getId() {
         return id;
     }
 
     @Override
-    public void setId(String id) {
-        this.id = id;
+    public void setId(Object id) {
+		this.id = ReferenceUtils.replace(this.id, id);
     }
 
     @Override
@@ -147,45 +150,49 @@ public class SelectTag
 
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
-        out.write("<select");
-        if(id!=null) {
-            out.write(" id=\"");
-            encodeTextInXhtmlAttribute(id, out);
-            out.write('"');
-        }
-        if(name!=null) {
-            out.write(" name=\"");
-            encodeTextInXhtmlAttribute(name, out);
-            out.write('"');
-        }
-        if(style!=null) {
-            out.write(" style=\"");
-            encodeTextInXhtmlAttribute(style, out);
-            out.write('"');
-        }
-        if(disabled) out.write(" disabled=\"disabled\"");
-        if(onchange!=null) {
-            out.write(" onchange=\"");
-            encodeJavaScriptInXhtmlAttribute(onchange, out);
-            out.write('"');
-        }
-        if(onfocus!=null) {
-            out.write(" onfocus=\"");
-            encodeJavaScriptInXhtmlAttribute(onfocus, out);
-            out.write('"');
-        }
-        if(onblur!=null) {
-            out.write(" onblur=\"");
-            encodeJavaScriptInXhtmlAttribute(onblur, out);
-            out.write('"');
-        }
-        if(onkeypress!=null) {
-            out.write(" onkeypress=\"");
-            encodeJavaScriptInXhtmlAttribute(onkeypress, out);
-            out.write('"');
-        }
-        out.write('>');
-        capturedBody.writeTo(out);
-        out.write("</select>");
+		try {
+			out.write("<select");
+			if(id!=null) {
+				out.write(" id=\"");
+				Coercion.write(id, textInXhtmlAttributeEncoder, out);
+				out.write('"');
+			}
+			if(name!=null) {
+				out.write(" name=\"");
+				encodeTextInXhtmlAttribute(name, out);
+				out.write('"');
+			}
+			if(style!=null) {
+				out.write(" style=\"");
+				encodeTextInXhtmlAttribute(style, out);
+				out.write('"');
+			}
+			if(disabled) out.write(" disabled=\"disabled\"");
+			if(onchange!=null) {
+				out.write(" onchange=\"");
+				encodeJavaScriptInXhtmlAttribute(onchange, out);
+				out.write('"');
+			}
+			if(onfocus!=null) {
+				out.write(" onfocus=\"");
+				encodeJavaScriptInXhtmlAttribute(onfocus, out);
+				out.write('"');
+			}
+			if(onblur!=null) {
+				out.write(" onblur=\"");
+				encodeJavaScriptInXhtmlAttribute(onblur, out);
+				out.write('"');
+			}
+			if(onkeypress!=null) {
+				out.write(" onkeypress=\"");
+				encodeJavaScriptInXhtmlAttribute(onkeypress, out);
+				out.write('"');
+			}
+			out.write('>');
+			capturedBody.writeTo(out);
+			out.write("</select>");
+		} finally {
+			id = ReferenceUtils.release(id);
+		}
     }
 }

@@ -56,7 +56,7 @@ public class IframeTag
 		FrameborderAttribute
 {
 
-    private String id;
+    private Object id;
     private String src;
     private HttpParametersMap params;
     private String width;
@@ -74,13 +74,13 @@ public class IframeTag
     }
 
     @Override
-    public String getId() {
+    public Object getId() {
         return id;
     }
 
     @Override
-    public void setId(String id) {
-        this.id = id;
+    public void setId(Object id) {
+		this.id = ReferenceUtils.replace(this.id, id);
     }
 
     @Override
@@ -163,7 +163,7 @@ public class IframeTag
 			out.write("<iframe");
 			if(id!=null) {
 				out.write(" id=\"");
-				encodeTextInXhtmlAttribute(id, out);
+				Coercion.write(id, textInXhtmlAttributeEncoder, out);
 				out.write('"');
 			}
 			writeSrc(out, pageContext, src, params);
@@ -183,6 +183,7 @@ public class IframeTag
 			capturedBody.writeTo(out);
 			out.write("</iframe>");
 		} finally {
+			id = ReferenceUtils.release(id);
 			height = ReferenceUtils.release(height);
 		}
     }

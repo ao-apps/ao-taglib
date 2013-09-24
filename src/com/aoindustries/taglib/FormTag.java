@@ -63,7 +63,7 @@ public class FormTag
     }
 
     private String method = "get";
-    private String id;
+    private Object id;
     private String action;
 	private String target;
     private Object enctype;
@@ -92,13 +92,13 @@ public class FormTag
     }
 
     @Override
-    public String getId() {
+    public Object getId() {
         return id;
     }
 
     @Override
-    public void setId(String id) {
-        this.id = id;
+    public void setId(Object id) {
+		this.id = ReferenceUtils.replace(this.id, id);
     }
 
     @Override
@@ -160,7 +160,7 @@ public class FormTag
 			out.write('"');
 			if(id!=null) {
 				out.write(" id=\"");
-				encodeTextInXhtmlAttribute(id, out);
+				Coercion.write(id, textInXhtmlAttributeEncoder, out);
 				out.write('"');
 			}
 			String actionUrl;
@@ -228,6 +228,7 @@ public class FormTag
 			capturedBody.writeTo(out);
 			out.write("</form>");
 		} finally {
+			id = ReferenceUtils.release(id);
 			enctype = ReferenceUtils.release(enctype);
 		}
     }

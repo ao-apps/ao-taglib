@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2010, 2011  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2013  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -29,7 +29,14 @@ package com.aoindustries.taglib;
  */
 public interface IdAttribute {
 
-    String getId();
+    Object getId();
 
-    void setId(String id);
+	/**
+	 * Sets the value for this attribute.  If the value implements ReferenceCount,
+	 * then incReferenceCount must be called to the object and decReferenceCount
+	 * must be called when no longer needed (end of tag, for instance).
+	 *
+	 * @see  ReferenceUtils
+	 */
+    void setId(Object id);
 }

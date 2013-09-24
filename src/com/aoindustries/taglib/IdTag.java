@@ -46,6 +46,6 @@ public class IdTag extends AutoEncodingBufferedTag {
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         IdAttribute idAttribute = AttributeUtils.findAttributeParent("id", this, "id", IdAttribute.class);
-        idAttribute.setId(capturedBody.toString().trim());
+        idAttribute.setId(capturedBody.trim());
     }
 }
