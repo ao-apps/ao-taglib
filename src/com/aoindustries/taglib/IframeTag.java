@@ -58,7 +58,7 @@ public class IframeTag
     private Object id;
     private String src;
     private HttpParametersMap params;
-    private String width;
+    private Object width;
     private Object height;
     private boolean frameborder = true;
 
@@ -104,12 +104,12 @@ public class IframeTag
     }
 
     @Override
-    public String getWidth() {
+    public Object getWidth() {
         return width;
     }
 
     @Override
-    public void setWidth(String width) {
+    public void setWidth(Object width) {
         this.width = width;
     }
 
@@ -167,7 +167,7 @@ public class IframeTag
 		writeSrc(out, pageContext, src, params);
 		if(width!=null) {
 			out.write(" width=\"");
-			encodeTextInXhtmlAttribute(width, out);
+			Coercion.write(width, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
 		if(height!=null) {

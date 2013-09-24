@@ -46,6 +46,6 @@ public class WidthTag extends AutoEncodingBufferedTag {
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         WidthAttribute widthAttribute = AttributeUtils.findAttributeParent("width", this, "width", WidthAttribute.class);
-        widthAttribute.setWidth(capturedBody.toString().trim());
+        widthAttribute.setWidth(capturedBody.trim());
     }
 }

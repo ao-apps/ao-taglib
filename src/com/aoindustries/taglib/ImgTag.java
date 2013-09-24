@@ -57,7 +57,7 @@ public class ImgTag
 
     private String src;
     private HttpParametersMap params;
-    private String width;
+    private Object width;
     private Object height;
     private Object alt;
     private Object title;
@@ -96,12 +96,12 @@ public class ImgTag
 	}
 
     @Override
-    public String getWidth() {
+    public Object getWidth() {
         return width;
     }
 
     @Override
-    public void setWidth(String width) {
+    public void setWidth(Object width) {
         this.width = width;
     }
 
@@ -176,7 +176,7 @@ public class ImgTag
 			out
 		);
 		out.write("\" width=\"");
-		encodeTextInXhtmlAttribute(width, out);
+		Coercion.write(width, textInXhtmlAttributeEncoder, out);
 		out.write("\" height=\"");
 		Coercion.write(height, textInXhtmlAttributeEncoder, out);
 		out.write("\" alt=\"");
