@@ -46,6 +46,6 @@ public class EnctypeTag extends AutoEncodingBufferedTag {
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         EnctypeAttribute enctypeAttribute = AttributeUtils.findAttributeParent("enctype", this, "enctype", EnctypeAttribute.class);
-        enctypeAttribute.setEnctype(capturedBody.toString().trim());
+        enctypeAttribute.setEnctype(capturedBody.trim());
     }
 }

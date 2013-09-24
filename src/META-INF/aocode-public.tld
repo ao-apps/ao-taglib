@@ -256,7 +256,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <name>enctype</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <attribute>
       <description>The CSS style for the form.  A nested style tag will override this value.</description>
