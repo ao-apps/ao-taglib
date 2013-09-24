@@ -46,6 +46,6 @@ public class OnblurTag extends AutoEncodingBufferedTag {
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         OnblurAttribute onblurAttribute = AttributeUtils.findAttributeParent("onblur", this, "onblur", OnblurAttribute.class);
-        onblurAttribute.setOnblur(capturedBody.toString().trim());
+        onblurAttribute.setOnblur(capturedBody.trim());
     }
 }

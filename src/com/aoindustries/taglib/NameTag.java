@@ -46,6 +46,6 @@ public class NameTag extends AutoEncodingBufferedTag {
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         NameAttribute nameAttribute = AttributeUtils.findAttributeParent("name", this, "name", NameAttribute.class);
-        nameAttribute.setName(capturedBody.toString().trim());
+        nameAttribute.setName(capturedBody.trim());
     }
 }

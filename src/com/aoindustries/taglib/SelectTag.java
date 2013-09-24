@@ -23,6 +23,7 @@
 package com.aoindustries.taglib;
 
 import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute;
+import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaScriptInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
@@ -54,7 +55,7 @@ public class SelectTag
     private boolean disabled;
     private String onchange;
     private String onfocus;
-    private String onblur;
+    private Object onblur;
     private String onkeypress;
 
     @Override
@@ -128,12 +129,12 @@ public class SelectTag
     }
 
     @Override
-    public String getOnblur() {
+    public Object getOnblur() {
         return onblur;
     }
 
     @Override
-    public void setOnblur(String onblur) {
+    public void setOnblur(Object onblur) {
         this.onblur = onblur;
     }
 
@@ -178,7 +179,7 @@ public class SelectTag
 		}
 		if(onblur!=null) {
 			out.write(" onblur=\"");
-			encodeJavaScriptInXhtmlAttribute(onblur, out);
+			Coercion.write(onblur, javaScriptInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
 		if(onkeypress!=null) {

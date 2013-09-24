@@ -24,6 +24,7 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute;
+import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaScriptInXhtmlAttributeEncoder;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.AutoTempFileWriter;
@@ -79,7 +80,7 @@ public class InputTag
     private String onclick;
     private String onchange;
     private String onfocus;
-    private String onblur;
+    private Object onblur;
     private String onkeypress;
     private String size;
     private Integer maxlength;
@@ -171,12 +172,12 @@ public class InputTag
     }
 
     @Override
-    public String getOnblur() {
+    public Object getOnblur() {
         return onblur;
     }
 
     @Override
-    public void setOnblur(String onblur) {
+    public void setOnblur(Object onblur) {
         this.onblur = onblur;
     }
 
@@ -299,7 +300,7 @@ public class InputTag
 		}
 		if(onblur!=null) {
 			out.write(" onblur=\"");
-			encodeJavaScriptInXhtmlAttribute(onblur, out);
+			Coercion.write(onblur, javaScriptInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
 		if(onkeypress!=null) {
