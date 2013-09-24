@@ -40,7 +40,7 @@ public class ParamTag
 		ValueAttribute
 {
 
-    private String name;
+    private Object name;
     private Object value;
 
     @Override
@@ -54,13 +54,13 @@ public class ParamTag
     }
 
     @Override
-    public String getName() {
+    public Object getName() {
         return name;
     }
 
     @Override
-    public void setName(String name) {
-        this.name = name;
+    public void setName(Object name) {
+		this.name = ReferenceUtils.replace(this.name, name);
     }
 
     @Override
@@ -80,10 +80,11 @@ public class ParamTag
 			if(name==null) throw new AttributeRequiredException("name");
 			if(value==null) setValue(capturedBody.trim());
 			paramsAttribute.addParam(
-				name,
+				Coercion.toString(name),
 				Coercion.toString(value)
 			);
 		} finally {
+			name = ReferenceUtils.release(name);
 			value = ReferenceUtils.release(value);
 		}
     }

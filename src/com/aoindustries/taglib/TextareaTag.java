@@ -25,6 +25,7 @@ package com.aoindustries.taglib;
 import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute;
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
+import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import static com.aoindustries.encoding.TextInXhtmlEncoder.textInXhtmlEncoder;
 import com.aoindustries.io.AutoTempFileWriter;
 import com.aoindustries.io.Coercion;
@@ -49,7 +50,7 @@ public class TextareaTag
 		StyleAttribute
 {
 
-    private String name;
+    private Object name;
     private Object value;
     private int cols;
     private int rows;
@@ -69,13 +70,13 @@ public class TextareaTag
     }
 
     @Override
-    public String getName() {
+    public Object getName() {
         return name;
     }
 
     @Override
-    public void setName(String name) {
-        this.name = name;
+    public void setName(Object name) {
+		this.name = ReferenceUtils.replace(this.name, name);
     }
 
     @Override
@@ -155,7 +156,7 @@ public class TextareaTag
 			out.write("<textarea");
 			if(name!=null) {
 				out.write(" name=\"");
-				encodeTextInXhtmlAttribute(name, out);
+				Coercion.write(name, textInXhtmlAttributeEncoder, out);
 				out.write('"');
 			}
 			out.write(" cols=\"");
@@ -179,6 +180,7 @@ public class TextareaTag
 			Coercion.write(value, textInXhtmlEncoder, out);
 			out.write("</textarea>");
 		} finally {
+			name = ReferenceUtils.release(name);
 			value = ReferenceUtils.release(value);
 		}
     }

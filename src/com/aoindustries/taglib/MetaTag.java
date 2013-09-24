@@ -44,7 +44,7 @@ public class MetaTag
 {
 
     private String httpEquiv;
-    private String name;
+    private Object name;
     private Object content;
 
     @Override
@@ -66,13 +66,13 @@ public class MetaTag
     }
 
     @Override
-    public String getName() {
+    public Object getName() {
         return name;
     }
 
     @Override
-    public void setName(String name) {
-        this.name = name;
+    public void setName(Object name) {
+		this.name = ReferenceUtils.replace(this.name, name);
     }
 
     @Override
@@ -92,12 +92,13 @@ public class MetaTag
 			if(content==null) setContent(capturedBody.trim());
 			// Create meta in all cases for its validation
 			if(parent!=null) {
-				Meta meta = new Meta(
-					name,
-					httpEquiv,
-					Coercion.toString(content)
+				((MetasAttribute)parent).addMeta(
+					new Meta(
+						Coercion.toString(name),
+						httpEquiv,
+						Coercion.toString(content)
+					)
 				);
-				((MetasAttribute)parent).addMeta(meta);
 			} else {
 				// Write the meta tag directly here
 				out.write("<meta");
@@ -106,9 +107,9 @@ public class MetaTag
 					encodeTextInXhtmlAttribute(httpEquiv, out);
 					out.write('"');
 				}
-				if(name!=null && name.length()>0) {
+				if(name!=null) {
 					out.write(" name=\"");
-					encodeTextInXhtmlAttribute(name, out);
+					Coercion.write(name, textInXhtmlAttributeEncoder, out);
 					out.write('"');
 				}
 				out.write(" content=\"");
@@ -116,6 +117,7 @@ public class MetaTag
 				out.write("\" />");
 			}
 		} finally {
+			name = ReferenceUtils.release(name);
 			content = ReferenceUtils.release(content);
 		}
     }

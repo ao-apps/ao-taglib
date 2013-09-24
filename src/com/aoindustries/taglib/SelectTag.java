@@ -50,7 +50,7 @@ public class SelectTag
 {
 
     private Object id;
-    private String name;
+    private Object name;
     private String style;
     private boolean disabled;
     private String onchange;
@@ -79,13 +79,13 @@ public class SelectTag
     }
 
     @Override
-    public String getName() {
+    public Object getName() {
         return name;
     }
 
     @Override
-    public void setName(String name) {
-        this.name = name;
+    public void setName(Object name) {
+		this.name = ReferenceUtils.replace(this.name, name);
     }
 
     @Override
@@ -159,7 +159,7 @@ public class SelectTag
 			}
 			if(name!=null) {
 				out.write(" name=\"");
-				encodeTextInXhtmlAttribute(name, out);
+				Coercion.write(name, textInXhtmlAttributeEncoder, out);
 				out.write('"');
 			}
 			if(style!=null) {
@@ -193,6 +193,7 @@ public class SelectTag
 			out.write("</select>");
 		} finally {
 			id = ReferenceUtils.release(id);
+			name = ReferenceUtils.release(name);
 		}
     }
 }

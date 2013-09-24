@@ -24,6 +24,7 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.AutoTempFileWriter;
+import com.aoindustries.io.Coercion;
 import com.aoindustries.util.ref.ReferenceUtils;
 import java.io.IOException;
 import java.io.Writer;
@@ -32,9 +33,14 @@ import javax.servlet.jsp.JspException;
 /**
  * @author  AO Industries, Inc.
  */
-public class ArgTag extends AutoEncodingBufferedTag implements NameAttribute, ValueAttribute {
+public class ArgTag
+	extends AutoEncodingBufferedTag
+	implements
+		NameAttribute,
+		ValueAttribute
+{
 
-    private String name;
+    private Object name;
     private Object value;
 
     @Override
@@ -48,13 +54,13 @@ public class ArgTag extends AutoEncodingBufferedTag implements NameAttribute, Va
     }
 
     @Override
-    public String getName() {
+    public Object getName() {
         return name;
     }
 
     @Override
-    public void setName(String name) {
-        this.name = name;
+    public void setName(Object name) {
+		this.name = ReferenceUtils.replace(this.name, name);
     }
 
     @Override
@@ -73,8 +79,9 @@ public class ArgTag extends AutoEncodingBufferedTag implements NameAttribute, Va
 			ArgsAttribute argsAttribute = AttributeUtils.findAttributeParent("arg", this, "args", ArgsAttribute.class);
 			if(name==null) throw new AttributeRequiredException("name");
 			if(value==null) setValue(capturedBody.trim());
-			argsAttribute.addArg(name, value);
+			argsAttribute.addArg(Coercion.toString(name), value);
 		} finally {
+			name = ReferenceUtils.release(name);
 			value = ReferenceUtils.release(value);
 		}
     }

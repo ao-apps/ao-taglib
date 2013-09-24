@@ -75,7 +75,7 @@ public class InputTag
 
     private Object id;
     private String type;
-    private String name;
+    private Object name;
     private Object value;
     private String onclick;
     private String onchange;
@@ -122,13 +122,13 @@ public class InputTag
     }
 
     @Override
-    public String getName() {
+    public Object getName() {
         return name;
     }
 
     @Override
-    public void setName(String name) {
-        this.name = name;
+    public void setName(Object name) {
+		this.name = ReferenceUtils.replace(this.name, name);
     }
 
     @Override
@@ -278,7 +278,7 @@ public class InputTag
 			out.write('"');
 			if(name!=null) {
 				out.write(" name=\"");
-				encodeTextInXhtmlAttribute(name, out);
+				Coercion.write(name, textInXhtmlAttributeEncoder, out);
 				out.write('"');
 			}
 			out.write(" value=\"");
@@ -335,6 +335,7 @@ public class InputTag
 			out.write(" />");
 		} finally {
 			id = ReferenceUtils.release(id);
+			name = ReferenceUtils.release(name);
 			value = ReferenceUtils.release(value);
 			clazz = ReferenceUtils.release(clazz);
 		}
