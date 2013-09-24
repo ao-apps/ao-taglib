@@ -46,6 +46,6 @@ public class AltTag extends AutoEncodingBufferedTag {
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         AltAttribute altAttribute = AttributeUtils.findAttributeParent("alt", this, "alt", AltAttribute.class);
-        altAttribute.setAlt(capturedBody.toString().trim());
+        altAttribute.setAlt(capturedBody.trim());
     }
 }

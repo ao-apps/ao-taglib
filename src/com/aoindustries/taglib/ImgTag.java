@@ -24,6 +24,7 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.NewEncodingUtils;
+import com.aoindustries.encoding.TextInXhtmlAttributeEncoder;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import com.aoindustries.io.AutoTempFileWriter;
 import com.aoindustries.io.Coercion;
@@ -31,6 +32,7 @@ import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.net.HttpParametersUtils;
+import com.aoindustries.util.ref.ReferenceUtils;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
@@ -58,7 +60,7 @@ public class ImgTag
     private HttpParametersMap params;
     private String width;
     private String height;
-    private String alt;
+    private Object alt;
     private String title;
     private String clazz;
     private String style;
@@ -115,13 +117,13 @@ public class ImgTag
     }
 
     @Override
-    public String getAlt() {
+    public Object getAlt() {
         return alt;
     }
 
     @Override
-    public void setAlt(String alt) {
-        this.alt = alt;
+    public void setAlt(Object alt) {
+		this.alt = ReferenceUtils.replace(this.alt, alt);
     }
 
     @Override
@@ -156,46 +158,54 @@ public class ImgTag
 
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
-        PageContext pageContext = (PageContext)getJspContext();
-        if(src==null) src = capturedBody.toString().trim();
-        HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
-        if(width==null) throw new AttributeRequiredException("width");
-        if(height==null) throw new AttributeRequiredException("height");
-        if(alt==null) throw new AttributeRequiredException("alt");
-        out.write("<img src=\"");
-        if(src.startsWith("/")) {
-            String contextPath = ((HttpServletRequest)pageContext.getRequest()).getContextPath();
-            if(contextPath.length()>0) src = contextPath+src;
-        }
-        src = HttpParametersUtils.addParams(src, params);
-		encodeTextInXhtmlAttribute(
-			response.encodeURL(
-				NewEncodingUtils.encodeUrlPath(src)
-			),
-			out
-        );
-        out.write("\" width=\"");
-        encodeTextInXhtmlAttribute(width, out);
-        out.write("\" height=\"");
-        encodeTextInXhtmlAttribute(height, out);
-        out.write("\" alt=\"");
-        encodeTextInXhtmlAttribute(alt, out);
-        out.write('"');
-        if(title!=null) {
-            out.write(" title=\"");
-            encodeTextInXhtmlAttribute(title, out);
-            out.write('"');
-        }
-        if(clazz!=null) {
-            out.write(" class=\"");
-            encodeTextInXhtmlAttribute(clazz, out);
-            out.write('"');
-        }
-        if(style!=null) {
-            out.write(" style=\"");
-            encodeTextInXhtmlAttribute(style, out);
-            out.write('"');
-        }
-        out.write(" />");
+		try {
+			PageContext pageContext = (PageContext)getJspContext();
+			if(src==null) src = capturedBody.toString().trim();
+			HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
+			if(width==null) throw new AttributeRequiredException("width");
+			if(height==null) throw new AttributeRequiredException("height");
+			if(alt==null) throw new AttributeRequiredException("alt");
+			out.write("<img src=\"");
+			if(src.startsWith("/")) {
+				String contextPath = ((HttpServletRequest)pageContext.getRequest()).getContextPath();
+				if(contextPath.length()>0) src = contextPath+src;
+			}
+			src = HttpParametersUtils.addParams(src, params);
+			encodeTextInXhtmlAttribute(
+				response.encodeURL(
+					NewEncodingUtils.encodeUrlPath(src)
+				),
+				out
+			);
+			out.write("\" width=\"");
+			encodeTextInXhtmlAttribute(width, out);
+			out.write("\" height=\"");
+			encodeTextInXhtmlAttribute(height, out);
+			out.write("\" alt=\"");
+			Coercion.toString(
+				alt,
+				TextInXhtmlAttributeEncoder.getInstance(),
+				out
+			);
+			out.write('"');
+			if(title!=null) {
+				out.write(" title=\"");
+				encodeTextInXhtmlAttribute(title, out);
+				out.write('"');
+			}
+			if(clazz!=null) {
+				out.write(" class=\"");
+				encodeTextInXhtmlAttribute(clazz, out);
+				out.write('"');
+			}
+			if(style!=null) {
+				out.write(" style=\"");
+				encodeTextInXhtmlAttribute(style, out);
+				out.write('"');
+			}
+			out.write(" />");
+		} finally {
+			alt = ReferenceUtils.release(alt);
+		}
     }
 }
