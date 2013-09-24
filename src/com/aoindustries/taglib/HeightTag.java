@@ -46,6 +46,6 @@ public class HeightTag extends AutoEncodingBufferedTag {
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         HeightAttribute heightAttribute = AttributeUtils.findAttributeParent("height", this, "height", HeightAttribute.class);
-        heightAttribute.setHeight(capturedBody.toString().trim());
+        heightAttribute.setHeight(capturedBody.trim());
     }
 }

@@ -23,8 +23,8 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.encoding.TextInXhtmlAttributeEncoder;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
+import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.AutoTempFileWriter;
 import com.aoindustries.io.Coercion;
 import com.aoindustries.util.ref.ReferenceUtils;
@@ -114,7 +114,7 @@ public class MetaTag
 				out.write(" content=\"");
 				Coercion.toString(
 					content,
-					TextInXhtmlAttributeEncoder.getInstance(),
+					textInXhtmlAttributeEncoder,
 					out
 				);
 				out.write("\" />");

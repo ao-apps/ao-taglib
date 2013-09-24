@@ -25,8 +25,8 @@ package com.aoindustries.taglib;
 import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.NewEncodingUtils;
-import com.aoindustries.encoding.TextInXhtmlAttributeEncoder;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
+import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.AutoTempFileWriter;
 import com.aoindustries.io.Coercion;
 import com.aoindustries.net.EmptyParameters;
@@ -266,7 +266,7 @@ public class ATag
 				out.write(" class=\"");
 				Coercion.toString(
 					clazz,
-					TextInXhtmlAttributeEncoder.getInstance(),
+					textInXhtmlAttributeEncoder,
 					out
 				);
 				out.write('"');

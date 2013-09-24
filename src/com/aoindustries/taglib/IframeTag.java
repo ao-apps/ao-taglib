@@ -25,13 +25,16 @@ package com.aoindustries.taglib;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.NewEncodingUtils;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
+import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.AutoTempFileWriter;
+import com.aoindustries.io.Coercion;
 import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.net.HttpParametersUtils;
 import com.aoindustries.net.MutableHttpParameters;
 import com.aoindustries.servlet.jsp.LocalizedJspException;
+import com.aoindustries.util.ref.ReferenceUtils;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
@@ -57,7 +60,7 @@ public class IframeTag
     private String src;
     private HttpParametersMap params;
     private String width;
-    private String height;
+    private Object height;
     private boolean frameborder = true;
 
     @Override
@@ -112,13 +115,13 @@ public class IframeTag
     }
 
     @Override
-    public String getHeight() {
+    public Object getHeight() {
         return height;
     }
 
     @Override
-    public void setHeight(String height) {
-        this.height = height;
+    public void setHeight(Object height) {
+		this.height = ReferenceUtils.replace(this.height, height);
     }
 
     @Override
@@ -154,29 +157,37 @@ public class IframeTag
 
 	@Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
-        PageContext pageContext = (PageContext)getJspContext();
-        if(src==null) throw new AttributeRequiredException("src");
-        out.write("<iframe");
-        if(id!=null) {
-            out.write(" id=\"");
-            encodeTextInXhtmlAttribute(id, out);
-            out.write('"');
-        }
-		writeSrc(out, pageContext, src, params);
-        if(width!=null) {
-            out.write(" width=\"");
-            encodeTextInXhtmlAttribute(width, out);
-            out.write('"');
-        }
-        if(height!=null) {
-            out.write(" height=\"");
-            encodeTextInXhtmlAttribute(height, out);
-            out.write('"');
-        }
-        out.write(" frameborder=\"");
-        out.write(frameborder ? '1' : '0');
-        out.write("\">");
-        capturedBody.writeTo(out);
-        out.write("</iframe>");
+		try {
+			PageContext pageContext = (PageContext)getJspContext();
+			if(src==null) throw new AttributeRequiredException("src");
+			out.write("<iframe");
+			if(id!=null) {
+				out.write(" id=\"");
+				encodeTextInXhtmlAttribute(id, out);
+				out.write('"');
+			}
+			writeSrc(out, pageContext, src, params);
+			if(width!=null) {
+				out.write(" width=\"");
+				encodeTextInXhtmlAttribute(width, out);
+				out.write('"');
+			}
+			if(height!=null) {
+				out.write(" height=\"");
+				Coercion.toString(
+					height,
+					textInXhtmlAttributeEncoder,
+					out
+				);
+				out.write('"');
+			}
+			out.write(" frameborder=\"");
+			out.write(frameborder ? '1' : '0');
+			out.write("\">");
+			capturedBody.writeTo(out);
+			out.write("</iframe>");
+		} finally {
+			height = ReferenceUtils.release(height);
+		}
     }
 }

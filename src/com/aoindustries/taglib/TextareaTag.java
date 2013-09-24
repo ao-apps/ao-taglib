@@ -25,7 +25,7 @@ package com.aoindustries.taglib;
 import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute;
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
-import com.aoindustries.encoding.TextInXhtmlEncoder;
+import static com.aoindustries.encoding.TextInXhtmlEncoder.textInXhtmlEncoder;
 import com.aoindustries.io.AutoTempFileWriter;
 import com.aoindustries.io.Coercion;
 import com.aoindustries.util.ref.ReferenceUtils;
@@ -178,7 +178,7 @@ public class TextareaTag
 			out.write('>');
 			Coercion.toString(
 				value,
-				TextInXhtmlEncoder.getInstance(),
+				textInXhtmlEncoder,
 				out
 			);
 			out.write("</textarea>");

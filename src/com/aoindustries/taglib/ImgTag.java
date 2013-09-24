@@ -24,8 +24,8 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.NewEncodingUtils;
-import com.aoindustries.encoding.TextInXhtmlAttributeEncoder;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
+import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.AutoTempFileWriter;
 import com.aoindustries.io.Coercion;
 import com.aoindustries.net.EmptyParameters;
@@ -59,7 +59,7 @@ public class ImgTag
     private String src;
     private HttpParametersMap params;
     private String width;
-    private String height;
+    private Object height;
     private Object alt;
     private String title;
     private Object clazz;
@@ -107,13 +107,13 @@ public class ImgTag
     }
 
     @Override
-    public String getHeight() {
+    public Object getHeight() {
         return height;
     }
 
     @Override
-    public void setHeight(String height) {
-        this.height = height;
+    public void setHeight(Object height) {
+		this.height = ReferenceUtils.replace(this.height, height);
     }
 
     @Override
@@ -180,11 +180,15 @@ public class ImgTag
 			out.write("\" width=\"");
 			encodeTextInXhtmlAttribute(width, out);
 			out.write("\" height=\"");
-			encodeTextInXhtmlAttribute(height, out);
+			Coercion.toString(
+				height,
+				textInXhtmlAttributeEncoder,
+				out
+			);
 			out.write("\" alt=\"");
 			Coercion.toString(
 				alt,
-				TextInXhtmlAttributeEncoder.getInstance(),
+				textInXhtmlAttributeEncoder,
 				out
 			);
 			out.write('"');
@@ -197,7 +201,7 @@ public class ImgTag
 				out.write(" class=\"");
 				Coercion.toString(
 					clazz,
-					TextInXhtmlAttributeEncoder.getInstance(),
+					textInXhtmlAttributeEncoder,
 					out
 				);
 				out.write('"');
@@ -209,6 +213,7 @@ public class ImgTag
 			}
 			out.write(" />");
 		} finally {
+			height = ReferenceUtils.release(height);
 			alt = ReferenceUtils.release(alt);
 			clazz = ReferenceUtils.release(clazz);
 		}

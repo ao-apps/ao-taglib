@@ -23,8 +23,8 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.encoding.TextInXhtmlAttributeEncoder;
-import com.aoindustries.encoding.TextInXhtmlEncoder;
+import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
+import static com.aoindustries.encoding.TextInXhtmlEncoder.textInXhtmlEncoder;
 import com.aoindustries.io.AutoTempFileWriter;
 import com.aoindustries.io.Coercion;
 import com.aoindustries.util.ref.ReferenceUtils;
@@ -97,7 +97,7 @@ public class OptionTag
 			out.write("<option value=\"");
 			Coercion.toString(
 				value,
-				TextInXhtmlAttributeEncoder.getInstance(),
+				textInXhtmlAttributeEncoder,
 				out
 			);
 			out.write('"');
@@ -106,7 +106,7 @@ public class OptionTag
 			out.write('>');
 			Coercion.toString(
 				capturedBody,
-				TextInXhtmlEncoder.getInstance(),
+				textInXhtmlEncoder,
 				out
 			);
 			out.write("</option>");
