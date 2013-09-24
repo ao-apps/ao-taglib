@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2011  AO Industries, Inc.
+ * Copyright (C) 2011, 2013  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -23,8 +23,11 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
+import com.aoindustries.encoding.TextInXhtmlAttributeEncoder;
+import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import com.aoindustries.io.AutoTempFileWriter;
-import com.aoindustries.util.EncodingUtils;
+import com.aoindustries.io.Coercion;
+import com.aoindustries.util.ref.ReferenceUtils;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -33,11 +36,16 @@ import javax.servlet.jsp.tagext.JspTag;
 /**
  * @author  AO Industries, Inc.
  */
-public class MetaTag extends AutoEncodingBufferedTag implements NameAttribute, ContentAttribute {
+public class MetaTag
+	extends AutoEncodingBufferedTag
+	implements
+		NameAttribute,
+		ContentAttribute
+{
 
     private String httpEquiv;
     private String name;
-    private String content;
+    private Object content;
 
     @Override
     public MediaType getContentType() {
@@ -68,39 +76,51 @@ public class MetaTag extends AutoEncodingBufferedTag implements NameAttribute, C
     }
 
     @Override
-    public String getContent() {
+    public Object getContent() {
         return content;
     }
 
     @Override
-    public void setContent(String content) {
-        this.content = content;
+    public void setContent(Object content) {
+		this.content = ReferenceUtils.replace(this.content, content);
     }
 
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
-        JspTag parent = findAncestorWithClass(this, MetasAttribute.class);
-        if(content==null) content = capturedBody.toString().trim();
-        // Create meta in all cases for its validation
-        Meta meta = new Meta(name, httpEquiv, content);
-        if(parent!=null) {
-            ((MetasAttribute)parent).addMeta(meta);
-        } else {
-            // Write the meta tag directly here
-            out.write("<meta");
-            if(httpEquiv!=null && httpEquiv.length()>0) {
-                out.write(" http-equiv=\"");
-                EncodingUtils.encodeXmlAttribute(httpEquiv, out);
-                out.write('"');
-            }
-            if(name!=null && name.length()>0) {
-                out.write(" name=\"");
-                EncodingUtils.encodeXmlAttribute(name, out);
-                out.write('"');
-            }
-            out.write(" content=\"");
-            EncodingUtils.encodeXmlAttribute(content, out);
-            out.write("\" />");
-        }
+		try {
+			JspTag parent = findAncestorWithClass(this, MetasAttribute.class);
+			if(content==null) setContent(capturedBody.trim());
+			// Create meta in all cases for its validation
+			if(parent!=null) {
+				Meta meta = new Meta(
+					name,
+					httpEquiv,
+					Coercion.toString(content)
+				);
+				((MetasAttribute)parent).addMeta(meta);
+			} else {
+				// Write the meta tag directly here
+				out.write("<meta");
+				if(httpEquiv!=null && httpEquiv.length()>0) {
+					out.write(" http-equiv=\"");
+					encodeTextInXhtmlAttribute(httpEquiv, out);
+					out.write('"');
+				}
+				if(name!=null && name.length()>0) {
+					out.write(" name=\"");
+					encodeTextInXhtmlAttribute(name, out);
+					out.write('"');
+				}
+				out.write(" content=\"");
+				Coercion.toString(
+					content,
+					TextInXhtmlAttributeEncoder.getInstance(),
+					out
+				);
+				out.write("\" />");
+			}
+		} finally {
+			content = ReferenceUtils.release(content);
+		}
     }
 }
