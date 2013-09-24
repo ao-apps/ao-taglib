@@ -65,7 +65,7 @@ public class ATag
 
     private String href;
     private MutableHttpParameters params;
-	private String hreflang;
+	private Object hreflang;
 	private String rel;
 	private String type;
 	private String target;
@@ -108,13 +108,13 @@ public class ATag
     }
 
 	@Override
-    public String getHreflang() {
+    public Object getHreflang() {
         return hreflang;
     }
 
 	@Override
-	public void setHreflang(String hreflang) {
-		this.hreflang = hreflang;
+	public void setHreflang(Object hreflang) {
+		this.hreflang = ReferenceUtils.replace(this.hreflang, hreflang);
 	}
 
 	@Override
@@ -239,7 +239,7 @@ public class ATag
 			writeHref(out, pageContext, href, params);
 			if(hreflang!=null) {
 				out.write(" hreflang=\"");
-				encodeTextInXhtmlAttribute(hreflang, out);
+				Coercion.write(hreflang, textInXhtmlAttributeEncoder, out);
 				out.write('"');
 			}
 			if(rel!=null) {
@@ -264,11 +264,7 @@ public class ATag
 			}
 			if(clazz!=null) {
 				out.write(" class=\"");
-				Coercion.toString(
-					clazz,
-					textInXhtmlAttributeEncoder,
-					out
-				);
+				Coercion.write(clazz, textInXhtmlAttributeEncoder, out);
 				out.write('"');
 			}
 			if(style!=null) {
@@ -295,6 +291,7 @@ public class ATag
 			capturedBody.writeTo(out);
 			out.write("</a>");
 		} finally {
+			hreflang = ReferenceUtils.release(hreflang);
 			clazz = ReferenceUtils.release(clazz);
 		}
     }

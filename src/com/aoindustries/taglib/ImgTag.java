@@ -180,17 +180,9 @@ public class ImgTag
 			out.write("\" width=\"");
 			encodeTextInXhtmlAttribute(width, out);
 			out.write("\" height=\"");
-			Coercion.toString(
-				height,
-				textInXhtmlAttributeEncoder,
-				out
-			);
+			Coercion.write(height, textInXhtmlAttributeEncoder, out);
 			out.write("\" alt=\"");
-			Coercion.toString(
-				alt,
-				textInXhtmlAttributeEncoder,
-				out
-			);
+			Coercion.write(alt, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 			if(title!=null) {
 				out.write(" title=\"");
@@ -199,11 +191,7 @@ public class ImgTag
 			}
 			if(clazz!=null) {
 				out.write(" class=\"");
-				Coercion.toString(
-					clazz,
-					textInXhtmlAttributeEncoder,
-					out
-				);
+				Coercion.write(clazz, textInXhtmlAttributeEncoder, out);
 				out.write('"');
 			}
 			if(style!=null) {

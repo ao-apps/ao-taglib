@@ -176,11 +176,7 @@ public class TextareaTag
 				out.write('"');
 			}
 			out.write('>');
-			Coercion.toString(
-				value,
-				textInXhtmlEncoder,
-				out
-			);
+			Coercion.write(value, textInXhtmlEncoder, out);
 			out.write("</textarea>");
 		} finally {
 			value = ReferenceUtils.release(value);

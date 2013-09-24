@@ -95,20 +95,12 @@ public class OptionTag
 			capturedBody.trim();
 			if(!valueSet) setValue(capturedBody);
 			out.write("<option value=\"");
-			Coercion.toString(
-				value,
-				textInXhtmlAttributeEncoder,
-				out
-			);
+			Coercion.write(value, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 			if(selected) out.write(" selected=\"selected\"");
 			if(disabled) out.write(" disabled=\"disabled\"");
 			out.write('>');
-			Coercion.toString(
-				capturedBody,
-				textInXhtmlEncoder,
-				out
-			);
+			Coercion.write(capturedBody, textInXhtmlEncoder, out);
 			out.write("</option>");
 		} finally {
 			value = ReferenceUtils.release(value);

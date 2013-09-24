@@ -46,6 +46,6 @@ public class HreflangTag extends AutoEncodingBufferedTag {
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         HreflangAttribute hreflangAttribute = AttributeUtils.findAttributeParent("hreflang", this, "hreflang", HreflangAttribute.class);
-        hreflangAttribute.setHreflang(capturedBody.toString().trim());
+        hreflangAttribute.setHreflang(capturedBody.trim());
     }
 }

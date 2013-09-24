@@ -184,11 +184,7 @@ public class FormTag
 			}
 			if(enctype!=null) {
 				out.write(" enctype=\"");
-				Coercion.toString(
-					enctype,
-					textInXhtmlAttributeEncoder,
-					out
-				);
+				Coercion.write(enctype, textInXhtmlAttributeEncoder, out);
 				out.write('"');
 			}
 			if(style!=null) {

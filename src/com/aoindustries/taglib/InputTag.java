@@ -279,11 +279,7 @@ public class InputTag extends AutoEncodingBufferedTag implements
 				out.write('"');
 			}
 			out.write(" value=\"");
-			Coercion.toString(
-				value,
-				textInXhtmlAttributeEncoder,
-				out
-			);
+			Coercion.write(value, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 			if(onclick!=null) {
 				out.write(" onclick=\"");
@@ -324,11 +320,7 @@ public class InputTag extends AutoEncodingBufferedTag implements
 			if(disabled) out.write(" disabled=\"disabled\"");
 			if(clazz!=null) {
 				out.write(" class=\"");
-				Coercion.toString(
-					clazz,
-					textInXhtmlAttributeEncoder,
-					out
-				);
+				Coercion.write(clazz, textInXhtmlAttributeEncoder, out);
 				out.write('"');
 			}
 			if(style!=null) {

@@ -112,11 +112,7 @@ public class MetaTag
 					out.write('"');
 				}
 				out.write(" content=\"");
-				Coercion.toString(
-					content,
-					textInXhtmlAttributeEncoder,
-					out
-				);
+				Coercion.write(content, textInXhtmlAttributeEncoder, out);
 				out.write("\" />");
 			}
 		} finally {

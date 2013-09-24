@@ -174,11 +174,7 @@ public class IframeTag
 			}
 			if(height!=null) {
 				out.write(" height=\"");
-				Coercion.toString(
-					height,
-					textInXhtmlAttributeEncoder,
-					out
-				);
+				Coercion.write(height, textInXhtmlAttributeEncoder, out);
 				out.write('"');
 			}
 			out.write(" frameborder=\"");

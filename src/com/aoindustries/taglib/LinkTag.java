@@ -24,10 +24,13 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
+import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
+import com.aoindustries.io.Coercion;
 import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.net.MutableHttpParameters;
+import com.aoindustries.util.ref.ReferenceUtils;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -49,7 +52,7 @@ public class LinkTag
 
     private String href;
     private MutableHttpParameters params;
-	private String hreflang;
+	private Object hreflang;
 	private String rel;
 	private String type;
 
@@ -80,13 +83,13 @@ public class LinkTag
     }
 
 	@Override
-    public String getHreflang() {
+    public Object getHreflang() {
         return hreflang;
     }
 
 	@Override
-	public void setHreflang(String hreflang) {
-		this.hreflang = hreflang;
+	public void setHreflang(Object hreflang) {
+		this.hreflang = ReferenceUtils.replace(this.hreflang, hreflang);
 	}
 
 	@Override
@@ -111,38 +114,43 @@ public class LinkTag
 
     @Override
     protected void doTag(Writer out) throws JspException, IOException {
-		super.doTag(out);
-        JspTag parent = findAncestorWithClass(this, LinksAttribute.class);
-		if(parent!=null) {
-            ((LinksAttribute)parent).addLink(
-				new Link(
-					href,
-					params,
-					hreflang,
-					rel,
-					type
-				)
-			);
-		} else {
-			PageContext pageContext = (PageContext)getJspContext();
-			out.write("<link");
-			ATag.writeHref(out, pageContext, href, params);
-			if(hreflang!=null) {
-				out.write(" hreflang=\"");
-				encodeTextInXhtmlAttribute(hreflang, out);
-				out.write('"');
+		try {
+			// Call super so attributes may be set by nested tags
+			super.doTag(out);
+			JspTag parent = findAncestorWithClass(this, LinksAttribute.class);
+			if(parent!=null) {
+				((LinksAttribute)parent).addLink(
+					new Link(
+						href,
+						params,
+						Coercion.toString(hreflang),
+						rel,
+						type
+					)
+				);
+			} else {
+				PageContext pageContext = (PageContext)getJspContext();
+				out.write("<link");
+				ATag.writeHref(out, pageContext, href, params);
+				if(hreflang!=null) {
+					out.write(" hreflang=\"");
+					Coercion.write(hreflang, textInXhtmlAttributeEncoder, out);
+					out.write('"');
+				}
+				if(rel!=null) {
+					out.write(" rel=\"");
+					encodeTextInXhtmlAttribute(rel, out);
+					out.write('"');
+				}
+				if(type!=null) {
+					out.write(" type=\"");
+					encodeTextInXhtmlAttribute(type, out);
+					out.write('"');
+				}
+				out.write(" />");
 			}
-			if(rel!=null) {
-				out.write(" rel=\"");
-				encodeTextInXhtmlAttribute(rel, out);
-				out.write('"');
-			}
-			if(type!=null) {
-				out.write(" type=\"");
-				encodeTextInXhtmlAttribute(type, out);
-				out.write('"');
-			}
-            out.write(" />");
+		} finally {
+			hreflang = ReferenceUtils.release(hreflang);
 		}
     }
 }
