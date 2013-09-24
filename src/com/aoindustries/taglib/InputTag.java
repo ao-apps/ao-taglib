@@ -86,7 +86,7 @@ public class InputTag
     private boolean readonly;
     private boolean disabled;
     private Object clazz;
-    private String style;
+    private Object style;
     private boolean checked;
 
     @Override
@@ -241,12 +241,12 @@ public class InputTag
     }
 
     @Override
-    public String getStyle() {
+    public Object getStyle() {
         return style;
     }
 
     @Override
-    public void setStyle(String style) {
+    public void setStyle(Object style) {
         this.style = style;
     }
 
@@ -326,7 +326,7 @@ public class InputTag
 		}
 		if(style!=null) {
 			out.write(" style=\"");
-			encodeTextInXhtmlAttribute(style, out);
+			Coercion.write(style, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
 		if(checked) out.write(" checked=\"checked\"");

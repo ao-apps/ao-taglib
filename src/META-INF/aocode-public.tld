@@ -92,7 +92,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <name>style</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <attribute>
       <description>A JavaScript onclick handler.  A nested onclick tag will override this value.</description>
@@ -263,7 +263,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <name>style</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <attribute>
       <description>A JavaScript onsubmit handler.  A nested onsubmit tag will override this value.</description>
@@ -574,7 +574,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <name>style</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <example />
   </tag>
@@ -774,7 +774,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <name>style</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <attribute>
       <description>
@@ -1199,7 +1199,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <name>style</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <attribute>
       <description>
@@ -1426,7 +1426,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <name>style</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <example />
   </tag>

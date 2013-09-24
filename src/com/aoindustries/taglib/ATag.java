@@ -70,7 +70,7 @@ public class ATag
 	private String target;
     private String title;
     private Object clazz;
-    private String style;
+    private Object style;
     private Object onclick;
     private Object onmouseover;
     private Object onmouseout;
@@ -167,12 +167,12 @@ public class ATag
     }
 
     @Override
-    public String getStyle() {
+    public Object getStyle() {
         return style;
     }
 
     @Override
-    public void setStyle(String style) {
+    public void setStyle(Object style) {
         this.style = style;
     }
 
@@ -267,7 +267,7 @@ public class ATag
 		}
 		if(style!=null) {
 			out.write(" style=\"");
-			encodeTextInXhtmlAttribute(style, out);
+			Coercion.write(style, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
 		if(onclick!=null) {

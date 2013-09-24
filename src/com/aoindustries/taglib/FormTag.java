@@ -66,7 +66,7 @@ public class FormTag
     private String action;
 	private String target;
     private Object enctype;
-    private String style;
+    private Object style;
     private Object onsubmit;
 
     @Override
@@ -131,12 +131,12 @@ public class FormTag
     }
 
     @Override
-    public String getStyle() {
+    public Object getStyle() {
         return style;
     }
 
     @Override
-    public void setStyle(String style) {
+    public void setStyle(Object style) {
         this.style = style;
     }
 
@@ -187,7 +187,7 @@ public class FormTag
 		}
 		if(style!=null) {
 			out.write(" style=\"");
-			encodeTextInXhtmlAttribute(style, out);
+			Coercion.write(style, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
 		if(onsubmit!=null) {

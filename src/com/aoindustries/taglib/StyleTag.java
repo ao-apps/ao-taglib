@@ -46,6 +46,6 @@ public class StyleTag extends AutoEncodingBufferedTag {
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         StyleAttribute styleAttribute = AttributeUtils.findAttributeParent("style", this, "style", StyleAttribute.class);
-        styleAttribute.setStyle(capturedBody.toString().trim());
+        styleAttribute.setStyle(capturedBody.trim());
     }
 }

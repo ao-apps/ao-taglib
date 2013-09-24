@@ -24,7 +24,6 @@ package com.aoindustries.taglib;
 
 import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaScriptInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.MediaType;
-import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.AutoTempFileWriter;
 import com.aoindustries.io.Coercion;
@@ -50,7 +49,7 @@ public class SelectTag
 
     private Object id;
     private Object name;
-    private String style;
+    private Object style;
     private boolean disabled;
     private Object onchange;
     private Object onfocus;
@@ -88,12 +87,12 @@ public class SelectTag
     }
 
     @Override
-    public String getStyle() {
+    public Object getStyle() {
         return style;
     }
 
     @Override
-    public void setStyle(String style) {
+    public void setStyle(Object style) {
         this.style = style;
     }
 
@@ -162,7 +161,7 @@ public class SelectTag
 		}
 		if(style!=null) {
 			out.write(" style=\"");
-			encodeTextInXhtmlAttribute(style, out);
+			Coercion.write(style, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
 		if(disabled) out.write(" disabled=\"disabled\"");
