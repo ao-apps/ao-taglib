@@ -29,7 +29,6 @@ import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlA
 import static com.aoindustries.encoding.TextInXhtmlEncoder.textInXhtmlEncoder;
 import com.aoindustries.io.AutoTempFileWriter;
 import com.aoindustries.io.Coercion;
-import com.aoindustries.util.ref.ReferenceUtils;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -76,7 +75,7 @@ public class TextareaTag
 
     @Override
     public void setName(Object name) {
-		this.name = ReferenceUtils.replace(this.name, name);
+		this.name = name;
     }
 
     @Override
@@ -86,7 +85,7 @@ public class TextareaTag
 
     @Override
     public void setValue(Object value) {
-		this.value = ReferenceUtils.replace(this.value, value);
+		this.value = value;
     }
 
     @Override
@@ -151,37 +150,32 @@ public class TextareaTag
 
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
-		try {
-			if(value==null) setValue(capturedBody.trim());
-			out.write("<textarea");
-			if(name!=null) {
-				out.write(" name=\"");
-				Coercion.write(name, textInXhtmlAttributeEncoder, out);
-				out.write('"');
-			}
-			out.write(" cols=\"");
-			out.write(Integer.toString(cols));
-			out.write("\" rows=\"");
-			out.write(Integer.toString(rows));
+		if(value==null) setValue(capturedBody.trim());
+		out.write("<textarea");
+		if(name!=null) {
+			out.write(" name=\"");
+			Coercion.write(name, textInXhtmlAttributeEncoder, out);
 			out.write('"');
-			if(readonly) out.write(" readonly=\"readonly\"");
-			if(disabled) out.write(" disabled=\"disabled\"");
-			if(onchange!=null) {
-				out.write(" onchange=\"");
-				encodeJavaScriptInXhtmlAttribute(onchange, out);
-				out.write('"');
-			}
-			if(style!=null) {
-				out.write(" style=\"");
-				encodeTextInXhtmlAttribute(style, out);
-				out.write('"');
-			}
-			out.write('>');
-			Coercion.write(value, textInXhtmlEncoder, out);
-			out.write("</textarea>");
-		} finally {
-			name = ReferenceUtils.release(name);
-			value = ReferenceUtils.release(value);
 		}
+		out.write(" cols=\"");
+		out.write(Integer.toString(cols));
+		out.write("\" rows=\"");
+		out.write(Integer.toString(rows));
+		out.write('"');
+		if(readonly) out.write(" readonly=\"readonly\"");
+		if(disabled) out.write(" disabled=\"disabled\"");
+		if(onchange!=null) {
+			out.write(" onchange=\"");
+			encodeJavaScriptInXhtmlAttribute(onchange, out);
+			out.write('"');
+		}
+		if(style!=null) {
+			out.write(" style=\"");
+			encodeTextInXhtmlAttribute(style, out);
+			out.write('"');
+		}
+		out.write('>');
+		Coercion.write(value, textInXhtmlEncoder, out);
+		out.write("</textarea>");
     }
 }

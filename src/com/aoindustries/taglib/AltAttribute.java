@@ -31,12 +31,5 @@ public interface AltAttribute {
 
     Object getAlt();
 
-	/**
-	 * Sets the value for this attribute.  If the value implements ReferenceCount,
-	 * then incReferenceCount must be called to the object and decReferenceCount
-	 * must be called when no longer needed (end of tag, for instance).
-	 *
-	 * @see  ReferenceUtils
-	 */
     void setAlt(Object alt);
 }

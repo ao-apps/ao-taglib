@@ -35,7 +35,6 @@ import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.net.HttpParametersUtils;
 import com.aoindustries.net.MutableHttpParameters;
 import com.aoindustries.servlet.jsp.LocalizedJspException;
-import com.aoindustries.util.ref.ReferenceUtils;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
@@ -114,7 +113,7 @@ public class ATag
 
 	@Override
 	public void setHreflang(Object hreflang) {
-		this.hreflang = ReferenceUtils.replace(this.hreflang, hreflang);
+		this.hreflang = hreflang;
 	}
 
 	@Override
@@ -164,7 +163,7 @@ public class ATag
 
     @Override
     public void setClazz(Object clazz) {
-		this.clazz = ReferenceUtils.replace(this.clazz, clazz);
+		this.clazz = clazz;
     }
 
     @Override
@@ -233,66 +232,61 @@ public class ATag
 
 	@Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
-		try {
-			PageContext pageContext = (PageContext)getJspContext();
-			out.write("<a");
-			writeHref(out, pageContext, href, params);
-			if(hreflang!=null) {
-				out.write(" hreflang=\"");
-				Coercion.write(hreflang, textInXhtmlAttributeEncoder, out);
-				out.write('"');
-			}
-			if(rel!=null) {
-				out.write(" rel=\"");
-				encodeTextInXhtmlAttribute(rel, out);
-				out.write('"');
-			}
-			if(type!=null) {
-				out.write(" type=\"");
-				encodeTextInXhtmlAttribute(type, out);
-				out.write('"');
-			}
-			if(target!=null) {
-				out.write(" target=\"");
-				encodeTextInXhtmlAttribute(target, out);
-				out.write('"');
-			}
-			if(title!=null) {
-				out.write(" title=\"");
-				encodeTextInXhtmlAttribute(title, out);
-				out.write('"');
-			}
-			if(clazz!=null) {
-				out.write(" class=\"");
-				Coercion.write(clazz, textInXhtmlAttributeEncoder, out);
-				out.write('"');
-			}
-			if(style!=null) {
-				out.write(" style=\"");
-				encodeTextInXhtmlAttribute(style, out);
-				out.write('"');
-			}
-			if(onclick!=null) {
-				out.write(" onclick=\"");
-				encodeJavaScriptInXhtmlAttribute(onclick, out);
-				out.write('"');
-			}
-			if(onmouseover!=null) {
-				out.write(" onmouseover=\"");
-				encodeJavaScriptInXhtmlAttribute(onmouseover, out);
-				out.write('"');
-			}
-			if(onmouseout!=null) {
-				out.write(" onmouseout=\"");
-				encodeJavaScriptInXhtmlAttribute(onmouseout, out);
-				out.write('"');
-			}
-			out.write('>');
-			capturedBody.writeTo(out);
-			out.write("</a>");
-		} finally {
-			hreflang = ReferenceUtils.release(hreflang);
-			clazz = ReferenceUtils.release(clazz);
+		PageContext pageContext = (PageContext)getJspContext();
+		out.write("<a");
+		writeHref(out, pageContext, href, params);
+		if(hreflang!=null) {
+			out.write(" hreflang=\"");
+			Coercion.write(hreflang, textInXhtmlAttributeEncoder, out);
+			out.write('"');
 		}
+		if(rel!=null) {
+			out.write(" rel=\"");
+			encodeTextInXhtmlAttribute(rel, out);
+			out.write('"');
+		}
+		if(type!=null) {
+			out.write(" type=\"");
+			encodeTextInXhtmlAttribute(type, out);
+			out.write('"');
+		}
+		if(target!=null) {
+			out.write(" target=\"");
+			encodeTextInXhtmlAttribute(target, out);
+			out.write('"');
+		}
+		if(title!=null) {
+			out.write(" title=\"");
+			encodeTextInXhtmlAttribute(title, out);
+			out.write('"');
+		}
+		if(clazz!=null) {
+			out.write(" class=\"");
+			Coercion.write(clazz, textInXhtmlAttributeEncoder, out);
+			out.write('"');
+		}
+		if(style!=null) {
+			out.write(" style=\"");
+			encodeTextInXhtmlAttribute(style, out);
+			out.write('"');
+		}
+		if(onclick!=null) {
+			out.write(" onclick=\"");
+			encodeJavaScriptInXhtmlAttribute(onclick, out);
+			out.write('"');
+		}
+		if(onmouseover!=null) {
+			out.write(" onmouseover=\"");
+			encodeJavaScriptInXhtmlAttribute(onmouseover, out);
+			out.write('"');
+		}
+		if(onmouseout!=null) {
+			out.write(" onmouseout=\"");
+			encodeJavaScriptInXhtmlAttribute(onmouseout, out);
+			out.write('"');
+		}
+		out.write('>');
+		capturedBody.writeTo(out);
+		out.write("</a>");
     }
 }

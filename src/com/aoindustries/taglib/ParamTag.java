@@ -25,7 +25,6 @@ package com.aoindustries.taglib;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.AutoTempFileWriter;
 import com.aoindustries.io.Coercion;
-import com.aoindustries.util.ref.ReferenceUtils;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -60,7 +59,7 @@ public class ParamTag
 
     @Override
     public void setName(Object name) {
-		this.name = ReferenceUtils.replace(this.name, name);
+		this.name = name;
     }
 
     @Override
@@ -70,22 +69,17 @@ public class ParamTag
 
     @Override
     public void setValue(Object value) {
-		this.value = ReferenceUtils.replace(this.value, value);
+		this.value = value;
     }
 
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
-		try {
-			ParamsAttribute paramsAttribute = AttributeUtils.findAttributeParent("param", this, "params", ParamsAttribute.class);
-			if(name==null) throw new AttributeRequiredException("name");
-			if(value==null) setValue(capturedBody.trim());
-			paramsAttribute.addParam(
-				Coercion.toString(name),
-				Coercion.toString(value)
-			);
-		} finally {
-			name = ReferenceUtils.release(name);
-			value = ReferenceUtils.release(value);
-		}
+		ParamsAttribute paramsAttribute = AttributeUtils.findAttributeParent("param", this, "params", ParamsAttribute.class);
+		if(name==null) throw new AttributeRequiredException("name");
+		if(value==null) setValue(capturedBody.trim());
+		paramsAttribute.addParam(
+			Coercion.toString(name),
+			Coercion.toString(value)
+		);
     }
 }

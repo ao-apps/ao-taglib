@@ -27,7 +27,6 @@ import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlA
 import static com.aoindustries.encoding.TextInXhtmlEncoder.textInXhtmlEncoder;
 import com.aoindustries.io.AutoTempFileWriter;
 import com.aoindustries.io.Coercion;
-import com.aoindustries.util.ref.ReferenceUtils;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -66,7 +65,7 @@ public class OptionTag
     @Override
     public void setValue(Object value) {
         this.valueSet = true;
-		this.value = ReferenceUtils.replace(this.value, value);
+		this.value = value;
     }
 
     @Override
@@ -91,19 +90,15 @@ public class OptionTag
 
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
-		try {
-			capturedBody.trim();
-			if(!valueSet) setValue(capturedBody);
-			out.write("<option value=\"");
-			Coercion.write(value, textInXhtmlAttributeEncoder, out);
-			out.write('"');
-			if(selected) out.write(" selected=\"selected\"");
-			if(disabled) out.write(" disabled=\"disabled\"");
-			out.write('>');
-			Coercion.write(capturedBody, textInXhtmlEncoder, out);
-			out.write("</option>");
-		} finally {
-			value = ReferenceUtils.release(value);
-		}
+		capturedBody.trim();
+		if(!valueSet) setValue(capturedBody);
+		out.write("<option value=\"");
+		Coercion.write(value, textInXhtmlAttributeEncoder, out);
+		out.write('"');
+		if(selected) out.write(" selected=\"selected\"");
+		if(disabled) out.write(" disabled=\"disabled\"");
+		out.write('>');
+		Coercion.write(capturedBody, textInXhtmlEncoder, out);
+		out.write("</option>");
     }
 }

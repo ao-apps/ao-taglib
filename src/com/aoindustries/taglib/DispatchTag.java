@@ -29,7 +29,6 @@ import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.servlet.http.ServletUtil;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.StringUtility;
-import com.aoindustries.util.ref.ReferenceUtils;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
@@ -108,16 +107,19 @@ abstract class DispatchTag
     }
 
 	@Override
+	public Map<String, Object> getArgs() {
+		if(args==null) return Collections.emptyMap();
+		return args;
+	}
+
+	@Override
 	public void addArg(String name, Object value) throws IllegalArgumentException {
 		if(args==null) {
 			args = new LinkedHashMap<String,Object>();
 		} else if(args.containsKey(name)) {
 			throw new LocalizedIllegalArgumentException(accessor, "DispatchTag.addArg.duplicateArgument", name);
 		}
-		args.put(
-			name,
-			ReferenceUtils.acquire(value)
-		);
+		args.put(name, value);
 	}
 
 	/**
@@ -163,147 +165,137 @@ abstract class DispatchTag
 	@Override
 	@SuppressWarnings("unchecked")
     final public void doTag() throws IOException, JspException {
+		PageContext pageContext = (PageContext)getJspContext();
+		JspWriter out = pageContext.getOut();
+		JspFragment body = getJspBody();
+		if(body!=null) body.invoke(getJspFragmentWriter(out));
+		HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
+		HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
+		if(page==null) throw new AttributeRequiredException("page");
+		List<String> myDispatchedPages = DispatchTag.dispatchedPages.get();
+		// Find the current JSP page
+		final String currentPage;
+		// Make relative to current JSP page
+		final String contextRelativePath = ServletUtil.getAbsolutePath(
+			myDispatchedPages.isEmpty()
+				? request.getServletPath()
+				: myDispatchedPages.get(myDispatchedPages.size()-1),
+			page
+		);
+		// Store as new relative path source
+		myDispatchedPages.add(contextRelativePath);
 		try {
-			PageContext pageContext = (PageContext)getJspContext();
-			JspWriter out = pageContext.getOut();
-			JspFragment body = getJspBody();
-			if(body!=null) body.invoke(getJspFragmentWriter(out));
-			HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
-			HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
-			if(page==null) throw new AttributeRequiredException("page");
-			List<String> myDispatchedPages = DispatchTag.dispatchedPages.get();
-			// Find the current JSP page
-			final String currentPage;
-			// Make relative to current JSP page
-			final String contextRelativePath = ServletUtil.getAbsolutePath(
-				myDispatchedPages.isEmpty()
-					? request.getServletPath()
-					: myDispatchedPages.get(myDispatchedPages.size()-1),
-				page
-			);
-			// Store as new relative path source
-			myDispatchedPages.add(contextRelativePath);
+			RequestDispatcher dispatcher = pageContext.getServletContext().getRequestDispatcher(contextRelativePath);
+
+			// Keep old arguments to restore
+			final Object oldArgs = request.getAttribute(ARG_ATTRIBUTE_NAME);
 			try {
-				RequestDispatcher dispatcher = pageContext.getServletContext().getRequestDispatcher(contextRelativePath);
+				// Set new arguments
+				request.setAttribute(
+					ARG_ATTRIBUTE_NAME,
+					args==null
+						? Collections.emptyMap()
+						: Collections.unmodifiableMap(args)
+				);
 
-				// Keep old arguments to restore
-				final Object oldArgs = request.getAttribute(ARG_ATTRIBUTE_NAME);
-				try {
-					// Set new arguments
-					request.setAttribute(
-						ARG_ATTRIBUTE_NAME,
-						args==null
-							? Collections.emptyMap()
-							: Collections.unmodifiableMap(args)
-					);
+				// Determine parameters to clear
+				final List<String> clearParamNames;
+				if(clearParams==null || clearParams.isEmpty()) clearParamNames = Collections.emptyList();
+				else clearParamNames = StringUtility.splitStringCommaSpace(clearParams);
 
-					// Determine parameters to clear
-					final List<String> clearParamNames;
-					if(clearParams==null || clearParams.isEmpty()) clearParamNames = Collections.emptyList();
-					else clearParamNames = StringUtility.splitStringCommaSpace(clearParams);
+				Map<String,String[]> oldMap = null; // Obtained when first needed
 
-					Map<String,String[]> oldMap = null; // Obtained when first needed
-
-					// If no parameters have been added
-					if(params==null) {
-						// And if there is no clearParamNames, then no need to wrap
-						if(clearParamNames.isEmpty()) {
-							// No need to wrap, use old request
-							dispatch(dispatcher, out, request, response);
-							return;
-						}
-
-						// And if there are no parameters on the request, then no need to wrap
-						if(oldMap==null) oldMap = request.getParameterMap();
-						if(oldMap.isEmpty()) {
-							// No need to wrap, use old request
-							dispatch(dispatcher, out, request, response);
-							return;
-						}
+				// If no parameters have been added
+				if(params==null) {
+					// And if there is no clearParamNames, then no need to wrap
+					if(clearParamNames.isEmpty()) {
+						// No need to wrap, use old request
+						dispatch(dispatcher, out, request, response);
+						return;
 					}
 
-					// Filter and merge all parameters
-					final Map<String,List<String>> newMap;
-					if(params==null) {
-						newMap = Collections.emptyMap();
-					} else {
-						newMap = params.getParameterMap();
-					}
+					// And if there are no parameters on the request, then no need to wrap
 					if(oldMap==null) oldMap = request.getParameterMap();
-					Map<String,String[]> newParameters = new LinkedHashMap<String,String[]>(
-						(
-							newMap.size()
-							+ oldMap.size()
-						)*4/3+1
-					);
-					for(Map.Entry<String,List<String>> entry : newMap.entrySet()) {
-						String name = entry.getKey();
-						List<String> newValues = entry.getValue();
-						String[] oldValues = isFiltered(clearParamNames, name) ? null : oldMap.get(name);
-						String[] merged;
-						if(oldValues==null) {
-							// No need to merge values
-							merged = newValues.toArray(new String[newValues.size()]);
-						} else {
-							// Merge values into single String[]
-							merged = new String[newValues.size() + oldValues.length];
-							String[] result = newValues.toArray(merged);
-							assert merged==result;
-							System.arraycopy(oldValues, 0, merged, newValues.size(), oldValues.length);
-						}
-						newParameters.put(name, merged);
+					if(oldMap.isEmpty()) {
+						// No need to wrap, use old request
+						dispatch(dispatcher, out, request, response);
+						return;
 					}
-					// Add any old parameters that were not merged
-					for(Map.Entry<String,String[]> entry : oldMap.entrySet()) {
-						String name = entry.getKey();
-						if(
-							!newMap.containsKey(name)
-							&& !isFiltered(clearParamNames, name)
-						) newParameters.put(name, entry.getValue());
-					}
-					final Map<String,String[]> parameters = Collections.unmodifiableMap(newParameters);
-					dispatch(
-						dispatcher,
-						out,
-						new HttpServletRequestWrapper(request) {
-							@Override
-							public String getParameter(String name) {
-								String[] values = parameters.get(name);
-								return values==null || values.length==0 ? null : values[0];
-							}
-
-							@Override
-							public Map getParameterMap() {
-								return parameters;
-							}
-
-							@Override
-							public Enumeration getParameterNames() {
-								return Collections.enumeration(parameters.keySet());
-							}
-
-							@Override
-							public String[] getParameterValues(String name) {
-								return parameters.get(name);
-							}
-						},
-						response
-					);
-				} finally {
-					// Restore any previous args
-					request.setAttribute(ARG_ATTRIBUTE_NAME, oldArgs);
 				}
+
+				// Filter and merge all parameters
+				final Map<String,List<String>> newMap;
+				if(params==null) {
+					newMap = Collections.emptyMap();
+				} else {
+					newMap = params.getParameterMap();
+				}
+				if(oldMap==null) oldMap = request.getParameterMap();
+				Map<String,String[]> newParameters = new LinkedHashMap<String,String[]>(
+					(
+						newMap.size()
+						+ oldMap.size()
+					)*4/3+1
+				);
+				for(Map.Entry<String,List<String>> entry : newMap.entrySet()) {
+					String name = entry.getKey();
+					List<String> newValues = entry.getValue();
+					String[] oldValues = isFiltered(clearParamNames, name) ? null : oldMap.get(name);
+					String[] merged;
+					if(oldValues==null) {
+						// No need to merge values
+						merged = newValues.toArray(new String[newValues.size()]);
+					} else {
+						// Merge values into single String[]
+						merged = new String[newValues.size() + oldValues.length];
+						String[] result = newValues.toArray(merged);
+						assert merged==result;
+						System.arraycopy(oldValues, 0, merged, newValues.size(), oldValues.length);
+					}
+					newParameters.put(name, merged);
+				}
+				// Add any old parameters that were not merged
+				for(Map.Entry<String,String[]> entry : oldMap.entrySet()) {
+					String name = entry.getKey();
+					if(
+						!newMap.containsKey(name)
+						&& !isFiltered(clearParamNames, name)
+					) newParameters.put(name, entry.getValue());
+				}
+				final Map<String,String[]> parameters = Collections.unmodifiableMap(newParameters);
+				dispatch(
+					dispatcher,
+					out,
+					new HttpServletRequestWrapper(request) {
+						@Override
+						public String getParameter(String name) {
+							String[] values = parameters.get(name);
+							return values==null || values.length==0 ? null : values[0];
+						}
+
+						@Override
+						public Map getParameterMap() {
+							return parameters;
+						}
+
+						@Override
+						public Enumeration getParameterNames() {
+							return Collections.enumeration(parameters.keySet());
+						}
+
+						@Override
+						public String[] getParameterValues(String name) {
+							return parameters.get(name);
+						}
+					},
+					response
+				);
 			} finally {
-				myDispatchedPages.remove(myDispatchedPages.size()-1);
+				// Restore any previous args
+				request.setAttribute(ARG_ATTRIBUTE_NAME, oldArgs);
 			}
 		} finally {
-			// Release any reference counted arguments
-			if(args!=null) {
-				for(Map.Entry<String,Object> entry : args.entrySet()) {
-					ReferenceUtils.release(entry.getValue());
-				}
-				args = null;
-			}
+			myDispatchedPages.remove(myDispatchedPages.size()-1);
 		}
     }
 

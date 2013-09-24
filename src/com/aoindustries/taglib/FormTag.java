@@ -31,7 +31,6 @@ import com.aoindustries.io.AutoTempFileWriter;
 import com.aoindustries.io.Coercion;
 import com.aoindustries.servlet.jsp.LocalizedJspException;
 import com.aoindustries.util.StringUtility;
-import com.aoindustries.util.ref.ReferenceUtils;
 import java.io.IOException;
 import java.io.Writer;
 import java.net.URLDecoder;
@@ -98,7 +97,7 @@ public class FormTag
 
     @Override
     public void setId(Object id) {
-		this.id = ReferenceUtils.replace(this.id, id);
+		this.id = id;
     }
 
     @Override
@@ -128,7 +127,7 @@ public class FormTag
 
     @Override
     public void setEnctype(Object enctype) {
-		this.enctype = ReferenceUtils.replace(this.enctype, enctype);
+		this.enctype = enctype;
     }
 
     @Override
@@ -153,83 +152,78 @@ public class FormTag
 
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
-		try {
-			PageContext pageContext = (PageContext)getJspContext();
-			out.write("<form method=\"");
-			out.write(method);
+		PageContext pageContext = (PageContext)getJspContext();
+		out.write("<form method=\"");
+		out.write(method);
+		out.write('"');
+		if(id!=null) {
+			out.write(" id=\"");
+			Coercion.write(id, textInXhtmlAttributeEncoder, out);
 			out.write('"');
-			if(id!=null) {
-				out.write(" id=\"");
-				Coercion.write(id, textInXhtmlAttributeEncoder, out);
-				out.write('"');
-			}
-			String actionUrl;
-			if(action!=null) {
-				HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
-				out.write(" action=\"");
-				if(action.startsWith("/")) {
-					String contextPath = ((HttpServletRequest)pageContext.getRequest()).getContextPath();
-					if(contextPath.length()>0) action = contextPath+action;
-				}
-				actionUrl = response.encodeURL(NewEncodingUtils.encodeUrlPath(action));
-				encodeTextInXhtmlAttribute(actionUrl, out);
-				out.write('"');
-			} else {
-				actionUrl = null;
-			}
-			if(target!=null) {
-				out.write(" target=\"");
-				encodeTextInXhtmlAttribute(target, out);
-				out.write('"');
-			}
-			if(enctype!=null) {
-				out.write(" enctype=\"");
-				Coercion.write(enctype, textInXhtmlAttributeEncoder, out);
-				out.write('"');
-			}
-			if(style!=null) {
-				out.write(" style=\"");
-				encodeTextInXhtmlAttribute(style, out);
-				out.write('"');
-			}
-			if(onsubmit!=null) {
-				out.write(" onsubmit=\"");
-				encodeJavaScriptInXhtmlAttribute(onsubmit, out);
-				out.write('"');
-			}
-			out.write('>');
-			// Automatically add URL request parameters as hidden fields to support custom URL rewritten parameters in GET requests.
-			if(actionUrl!=null) {
-				int questionPos = actionUrl.indexOf('?');
-				if(questionPos!=-1) {
-					String[] nameVals = StringUtility.splitString(actionUrl.substring(questionPos+1), '&');
-					if(nameVals.length>0) {
-						out.write("<div>");
-						for(String nameVal : nameVals) {
-							int equalPos = nameVal.indexOf('=');
-							String name, value;
-							if(equalPos==-1) {
-								name = URLDecoder.decode(nameVal, "UTF-8");
-								value = "";
-							} else {
-								name = URLDecoder.decode(nameVal.substring(0, equalPos), "UTF-8");
-								value = URLDecoder.decode(nameVal.substring(equalPos+1), "UTF-8");
-							}
-							out.write("<input type=\"hidden\" name=\"");
-							encodeTextInXhtmlAttribute(name, out);
-							out.write("\" value=\"");
-							encodeTextInXhtmlAttribute(value, out);
-							out.write("\" />");
-						}
-						out.write("</div>");
-					}
-				}
-			}
-			capturedBody.writeTo(out);
-			out.write("</form>");
-		} finally {
-			id = ReferenceUtils.release(id);
-			enctype = ReferenceUtils.release(enctype);
 		}
+		String actionUrl;
+		if(action!=null) {
+			HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
+			out.write(" action=\"");
+			if(action.startsWith("/")) {
+				String contextPath = ((HttpServletRequest)pageContext.getRequest()).getContextPath();
+				if(contextPath.length()>0) action = contextPath+action;
+			}
+			actionUrl = response.encodeURL(NewEncodingUtils.encodeUrlPath(action));
+			encodeTextInXhtmlAttribute(actionUrl, out);
+			out.write('"');
+		} else {
+			actionUrl = null;
+		}
+		if(target!=null) {
+			out.write(" target=\"");
+			encodeTextInXhtmlAttribute(target, out);
+			out.write('"');
+		}
+		if(enctype!=null) {
+			out.write(" enctype=\"");
+			Coercion.write(enctype, textInXhtmlAttributeEncoder, out);
+			out.write('"');
+		}
+		if(style!=null) {
+			out.write(" style=\"");
+			encodeTextInXhtmlAttribute(style, out);
+			out.write('"');
+		}
+		if(onsubmit!=null) {
+			out.write(" onsubmit=\"");
+			encodeJavaScriptInXhtmlAttribute(onsubmit, out);
+			out.write('"');
+		}
+		out.write('>');
+		// Automatically add URL request parameters as hidden fields to support custom URL rewritten parameters in GET requests.
+		if(actionUrl!=null) {
+			int questionPos = actionUrl.indexOf('?');
+			if(questionPos!=-1) {
+				String[] nameVals = StringUtility.splitString(actionUrl.substring(questionPos+1), '&');
+				if(nameVals.length>0) {
+					out.write("<div>");
+					for(String nameVal : nameVals) {
+						int equalPos = nameVal.indexOf('=');
+						String name, value;
+						if(equalPos==-1) {
+							name = URLDecoder.decode(nameVal, "UTF-8");
+							value = "";
+						} else {
+							name = URLDecoder.decode(nameVal.substring(0, equalPos), "UTF-8");
+							value = URLDecoder.decode(nameVal.substring(equalPos+1), "UTF-8");
+						}
+						out.write("<input type=\"hidden\" name=\"");
+						encodeTextInXhtmlAttribute(name, out);
+						out.write("\" value=\"");
+						encodeTextInXhtmlAttribute(value, out);
+						out.write("\" />");
+					}
+					out.write("</div>");
+				}
+			}
+		}
+		capturedBody.writeTo(out);
+		out.write("</form>");
     }
 }

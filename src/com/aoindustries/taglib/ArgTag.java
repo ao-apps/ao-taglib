@@ -25,7 +25,6 @@ package com.aoindustries.taglib;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.AutoTempFileWriter;
 import com.aoindustries.io.Coercion;
-import com.aoindustries.util.ref.ReferenceUtils;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -60,7 +59,7 @@ public class ArgTag
 
     @Override
     public void setName(Object name) {
-		this.name = ReferenceUtils.replace(this.name, name);
+		this.name = name;
     }
 
     @Override
@@ -70,19 +69,14 @@ public class ArgTag
 
     @Override
     public void setValue(Object value) {
-		this.value = ReferenceUtils.replace(this.value, value);
+		this.value = value;
     }
 
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
-		try {
-			ArgsAttribute argsAttribute = AttributeUtils.findAttributeParent("arg", this, "args", ArgsAttribute.class);
-			if(name==null) throw new AttributeRequiredException("name");
-			if(value==null) setValue(capturedBody.trim());
-			argsAttribute.addArg(Coercion.toString(name), value);
-		} finally {
-			name = ReferenceUtils.release(name);
-			value = ReferenceUtils.release(value);
-		}
+		ArgsAttribute argsAttribute = AttributeUtils.findAttributeParent("arg", this, "args", ArgsAttribute.class);
+		if(name==null) throw new AttributeRequiredException("name");
+		if(value==null) setValue(capturedBody.trim());
+		argsAttribute.addArg(Coercion.toString(name), value);
     }
 }

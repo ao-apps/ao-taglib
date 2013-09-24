@@ -30,7 +30,6 @@ import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.net.MutableHttpParameters;
-import com.aoindustries.util.ref.ReferenceUtils;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -89,7 +88,7 @@ public class LinkTag
 
 	@Override
 	public void setHreflang(Object hreflang) {
-		this.hreflang = ReferenceUtils.replace(this.hreflang, hreflang);
+		this.hreflang = hreflang;
 	}
 
 	@Override
@@ -114,43 +113,39 @@ public class LinkTag
 
     @Override
     protected void doTag(Writer out) throws JspException, IOException {
-		try {
-			// Call super so attributes may be set by nested tags
-			super.doTag(out);
-			JspTag parent = findAncestorWithClass(this, LinksAttribute.class);
-			if(parent!=null) {
-				((LinksAttribute)parent).addLink(
-					new Link(
-						href,
-						params,
-						Coercion.toString(hreflang),
-						rel,
-						type
-					)
-				);
-			} else {
-				PageContext pageContext = (PageContext)getJspContext();
-				out.write("<link");
-				ATag.writeHref(out, pageContext, href, params);
-				if(hreflang!=null) {
-					out.write(" hreflang=\"");
-					Coercion.write(hreflang, textInXhtmlAttributeEncoder, out);
-					out.write('"');
-				}
-				if(rel!=null) {
-					out.write(" rel=\"");
-					encodeTextInXhtmlAttribute(rel, out);
-					out.write('"');
-				}
-				if(type!=null) {
-					out.write(" type=\"");
-					encodeTextInXhtmlAttribute(type, out);
-					out.write('"');
-				}
-				out.write(" />");
+		// Call super so attributes may be set by nested tags
+		super.doTag(out);
+		JspTag parent = findAncestorWithClass(this, LinksAttribute.class);
+		if(parent!=null) {
+			((LinksAttribute)parent).addLink(
+				new Link(
+					href,
+					params,
+					Coercion.toString(hreflang),
+					rel,
+					type
+				)
+			);
+		} else {
+			PageContext pageContext = (PageContext)getJspContext();
+			out.write("<link");
+			ATag.writeHref(out, pageContext, href, params);
+			if(hreflang!=null) {
+				out.write(" hreflang=\"");
+				Coercion.write(hreflang, textInXhtmlAttributeEncoder, out);
+				out.write('"');
 			}
-		} finally {
-			hreflang = ReferenceUtils.release(hreflang);
+			if(rel!=null) {
+				out.write(" rel=\"");
+				encodeTextInXhtmlAttribute(rel, out);
+				out.write('"');
+			}
+			if(type!=null) {
+				out.write(" type=\"");
+				encodeTextInXhtmlAttribute(type, out);
+				out.write('"');
+			}
+			out.write(" />");
 		}
     }
 }

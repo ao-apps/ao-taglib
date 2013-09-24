@@ -29,7 +29,6 @@ import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlA
 import com.aoindustries.io.AutoTempFileWriter;
 import com.aoindustries.io.Coercion;
 import com.aoindustries.servlet.jsp.LocalizedJspException;
-import com.aoindustries.util.ref.ReferenceUtils;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -107,7 +106,7 @@ public class InputTag
 
     @Override
     public void setId(Object id) {
-		this.id = ReferenceUtils.replace(this.id, id);
+		this.id = id;
     }
 
     @Override
@@ -128,7 +127,7 @@ public class InputTag
 
     @Override
     public void setName(Object name) {
-		this.name = ReferenceUtils.replace(this.name, name);
+		this.name = name;
     }
 
     @Override
@@ -138,7 +137,7 @@ public class InputTag
 
     @Override
     public void setValue(Object value) {
-		this.value = ReferenceUtils.replace(this.value, value);
+		this.value = value;
     }
 
     @Override
@@ -238,7 +237,7 @@ public class InputTag
 
     @Override
     public void setClazz(Object clazz) {
-		this.clazz = ReferenceUtils.replace(this.clazz, clazz);
+		this.clazz = clazz;
     }
 
     @Override
@@ -264,80 +263,73 @@ public class InputTag
 
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
-		try {
-			if(type==null) throw new AttributeRequiredException("type");
-			if(value==null) setValue(capturedBody.trim());
-			out.write("<input");
-			if(id!=null) {
-				out.write(" id=\"");
-				Coercion.write(id, textInXhtmlAttributeEncoder, out);
-				out.write('"');
-			}
-			out.write(" type=\"");
-			out.write(type);
+		if(type==null) throw new AttributeRequiredException("type");
+		if(value==null) setValue(capturedBody.trim());
+		out.write("<input");
+		if(id!=null) {
+			out.write(" id=\"");
+			Coercion.write(id, textInXhtmlAttributeEncoder, out);
 			out.write('"');
-			if(name!=null) {
-				out.write(" name=\"");
-				Coercion.write(name, textInXhtmlAttributeEncoder, out);
-				out.write('"');
-			}
-			out.write(" value=\"");
-			Coercion.write(value, textInXhtmlAttributeEncoder, out);
-			out.write('"');
-			if(onclick!=null) {
-				out.write(" onclick=\"");
-				encodeJavaScriptInXhtmlAttribute(onclick, out);
-				out.write('"');
-			}
-			if(onchange!=null) {
-				out.write(" onchange=\"");
-				encodeJavaScriptInXhtmlAttribute(onchange, out);
-				out.write('"');
-			}
-			if(onfocus!=null) {
-				out.write(" onfocus=\"");
-				encodeJavaScriptInXhtmlAttribute(onfocus, out);
-				out.write('"');
-			}
-			if(onblur!=null) {
-				out.write(" onblur=\"");
-				encodeJavaScriptInXhtmlAttribute(onblur, out);
-				out.write('"');
-			}
-			if(onkeypress!=null) {
-				out.write(" onkeypress=\"");
-				encodeJavaScriptInXhtmlAttribute(onkeypress, out);
-				out.write('"');
-			}
-			if(size!=null) {
-				out.write(" size=\"");
-				encodeJavaScriptInXhtmlAttribute(size, out);
-				out.write('"');
-			}
-			if(maxlength!=null) {
-				out.write(" maxlength=\"");
-				out.write(maxlength.toString());
-				out.write('"');
-			}
-			if(readonly) out.write(" readonly=\"readonly\"");
-			if(disabled) out.write(" disabled=\"disabled\"");
-			if(clazz!=null) {
-				out.write(" class=\"");
-				Coercion.write(clazz, textInXhtmlAttributeEncoder, out);
-				out.write('"');
-			}
-			if(style!=null) {
-				out.write(" style=\"");
-				encodeTextInXhtmlAttribute(style, out);
-				out.write('"');
-			}
-			if(checked) out.write(" checked=\"checked\"");
-			out.write(" />");
-		} finally {
-			id = ReferenceUtils.release(id);
-			name = ReferenceUtils.release(name);
-			value = ReferenceUtils.release(value);
-			clazz = ReferenceUtils.release(clazz);
 		}
+		out.write(" type=\"");
+		out.write(type);
+		out.write('"');
+		if(name!=null) {
+			out.write(" name=\"");
+			Coercion.write(name, textInXhtmlAttributeEncoder, out);
+			out.write('"');
+		}
+		out.write(" value=\"");
+		Coercion.write(value, textInXhtmlAttributeEncoder, out);
+		out.write('"');
+		if(onclick!=null) {
+			out.write(" onclick=\"");
+			encodeJavaScriptInXhtmlAttribute(onclick, out);
+			out.write('"');
+		}
+		if(onchange!=null) {
+			out.write(" onchange=\"");
+			encodeJavaScriptInXhtmlAttribute(onchange, out);
+			out.write('"');
+		}
+		if(onfocus!=null) {
+			out.write(" onfocus=\"");
+			encodeJavaScriptInXhtmlAttribute(onfocus, out);
+			out.write('"');
+		}
+		if(onblur!=null) {
+			out.write(" onblur=\"");
+			encodeJavaScriptInXhtmlAttribute(onblur, out);
+			out.write('"');
+		}
+		if(onkeypress!=null) {
+			out.write(" onkeypress=\"");
+			encodeJavaScriptInXhtmlAttribute(onkeypress, out);
+			out.write('"');
+		}
+		if(size!=null) {
+			out.write(" size=\"");
+			encodeJavaScriptInXhtmlAttribute(size, out);
+			out.write('"');
+		}
+		if(maxlength!=null) {
+			out.write(" maxlength=\"");
+			out.write(maxlength.toString());
+			out.write('"');
+		}
+		if(readonly) out.write(" readonly=\"readonly\"");
+		if(disabled) out.write(" disabled=\"disabled\"");
+		if(clazz!=null) {
+			out.write(" class=\"");
+			Coercion.write(clazz, textInXhtmlAttributeEncoder, out);
+			out.write('"');
+		}
+		if(style!=null) {
+			out.write(" style=\"");
+			encodeTextInXhtmlAttribute(style, out);
+			out.write('"');
+		}
+		if(checked) out.write(" checked=\"checked\"");
+		out.write(" />");
     }
 }

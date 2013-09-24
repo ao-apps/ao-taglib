@@ -27,7 +27,6 @@ import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextIn
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.AutoTempFileWriter;
 import com.aoindustries.io.Coercion;
-import com.aoindustries.util.ref.ReferenceUtils;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -72,7 +71,7 @@ public class MetaTag
 
     @Override
     public void setName(Object name) {
-		this.name = ReferenceUtils.replace(this.name, name);
+		this.name = name;
     }
 
     @Override
@@ -82,43 +81,38 @@ public class MetaTag
 
     @Override
     public void setContent(Object content) {
-		this.content = ReferenceUtils.replace(this.content, content);
+		this.content = content;
     }
 
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
-		try {
-			JspTag parent = findAncestorWithClass(this, MetasAttribute.class);
-			if(content==null) setContent(capturedBody.trim());
-			// Create meta in all cases for its validation
-			if(parent!=null) {
-				((MetasAttribute)parent).addMeta(
-					new Meta(
-						Coercion.toString(name),
-						httpEquiv,
-						Coercion.toString(content)
-					)
-				);
-			} else {
-				// Write the meta tag directly here
-				out.write("<meta");
-				if(httpEquiv!=null && httpEquiv.length()>0) {
-					out.write(" http-equiv=\"");
-					encodeTextInXhtmlAttribute(httpEquiv, out);
-					out.write('"');
-				}
-				if(name!=null) {
-					out.write(" name=\"");
-					Coercion.write(name, textInXhtmlAttributeEncoder, out);
-					out.write('"');
-				}
-				out.write(" content=\"");
-				Coercion.write(content, textInXhtmlAttributeEncoder, out);
-				out.write("\" />");
+		JspTag parent = findAncestorWithClass(this, MetasAttribute.class);
+		if(content==null) setContent(capturedBody.trim());
+		// Create meta in all cases for its validation
+		if(parent!=null) {
+			((MetasAttribute)parent).addMeta(
+				new Meta(
+					Coercion.toString(name),
+					httpEquiv,
+					Coercion.toString(content)
+				)
+			);
+		} else {
+			// Write the meta tag directly here
+			out.write("<meta");
+			if(httpEquiv!=null && httpEquiv.length()>0) {
+				out.write(" http-equiv=\"");
+				encodeTextInXhtmlAttribute(httpEquiv, out);
+				out.write('"');
 			}
-		} finally {
-			name = ReferenceUtils.release(name);
-			content = ReferenceUtils.release(content);
+			if(name!=null) {
+				out.write(" name=\"");
+				Coercion.write(name, textInXhtmlAttributeEncoder, out);
+				out.write('"');
+			}
+			out.write(" content=\"");
+			Coercion.write(content, textInXhtmlAttributeEncoder, out);
+			out.write("\" />");
 		}
     }
 }

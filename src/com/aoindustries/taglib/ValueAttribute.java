@@ -22,8 +22,6 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.util.ref.ReferenceUtils;
-
 /**
  * Something with a value attribute.
  *
@@ -33,12 +31,5 @@ public interface ValueAttribute {
 
     Object getValue();
 
-	/**
-	 * Sets the value for this attribute.  If the value implements ReferenceCount,
-	 * then incReferenceCount must be called to the object and decReferenceCount
-	 * must be called when no longer needed (end of tag, for instance).
-	 *
-	 * @see  ReferenceUtils
-	 */
     void setValue(Object value);
 }

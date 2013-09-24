@@ -32,7 +32,6 @@ import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.net.HttpParametersUtils;
-import com.aoindustries.util.ref.ReferenceUtils;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
@@ -113,7 +112,7 @@ public class ImgTag
 
     @Override
     public void setHeight(Object height) {
-		this.height = ReferenceUtils.replace(this.height, height);
+		this.height = height;
     }
 
     @Override
@@ -123,7 +122,7 @@ public class ImgTag
 
     @Override
     public void setAlt(Object alt) {
-		this.alt = ReferenceUtils.replace(this.alt, alt);
+		this.alt = alt;
     }
 
     @Override
@@ -143,7 +142,7 @@ public class ImgTag
 
     @Override
     public void setClazz(Object clazz) {
-		this.clazz = ReferenceUtils.replace(this.clazz, clazz);
+		this.clazz = clazz;
     }
 
     @Override
@@ -158,52 +157,46 @@ public class ImgTag
 
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
-		try {
-			PageContext pageContext = (PageContext)getJspContext();
-			if(src==null) src = capturedBody.toString().trim();
-			HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
-			if(width==null) throw new AttributeRequiredException("width");
-			if(height==null) throw new AttributeRequiredException("height");
-			if(alt==null) throw new AttributeRequiredException("alt");
-			out.write("<img src=\"");
-			if(src.startsWith("/")) {
-				String contextPath = ((HttpServletRequest)pageContext.getRequest()).getContextPath();
-				if(contextPath.length()>0) src = contextPath+src;
-			}
-			src = HttpParametersUtils.addParams(src, params);
-			encodeTextInXhtmlAttribute(
-				response.encodeURL(
-					NewEncodingUtils.encodeUrlPath(src)
-				),
-				out
-			);
-			out.write("\" width=\"");
-			encodeTextInXhtmlAttribute(width, out);
-			out.write("\" height=\"");
-			Coercion.write(height, textInXhtmlAttributeEncoder, out);
-			out.write("\" alt=\"");
-			Coercion.write(alt, textInXhtmlAttributeEncoder, out);
-			out.write('"');
-			if(title!=null) {
-				out.write(" title=\"");
-				encodeTextInXhtmlAttribute(title, out);
-				out.write('"');
-			}
-			if(clazz!=null) {
-				out.write(" class=\"");
-				Coercion.write(clazz, textInXhtmlAttributeEncoder, out);
-				out.write('"');
-			}
-			if(style!=null) {
-				out.write(" style=\"");
-				encodeTextInXhtmlAttribute(style, out);
-				out.write('"');
-			}
-			out.write(" />");
-		} finally {
-			height = ReferenceUtils.release(height);
-			alt = ReferenceUtils.release(alt);
-			clazz = ReferenceUtils.release(clazz);
+		PageContext pageContext = (PageContext)getJspContext();
+		if(src==null) src = capturedBody.toString().trim();
+		HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
+		if(width==null) throw new AttributeRequiredException("width");
+		if(height==null) throw new AttributeRequiredException("height");
+		if(alt==null) throw new AttributeRequiredException("alt");
+		out.write("<img src=\"");
+		if(src.startsWith("/")) {
+			String contextPath = ((HttpServletRequest)pageContext.getRequest()).getContextPath();
+			if(contextPath.length()>0) src = contextPath+src;
 		}
+		src = HttpParametersUtils.addParams(src, params);
+		encodeTextInXhtmlAttribute(
+			response.encodeURL(
+				NewEncodingUtils.encodeUrlPath(src)
+			),
+			out
+		);
+		out.write("\" width=\"");
+		encodeTextInXhtmlAttribute(width, out);
+		out.write("\" height=\"");
+		Coercion.write(height, textInXhtmlAttributeEncoder, out);
+		out.write("\" alt=\"");
+		Coercion.write(alt, textInXhtmlAttributeEncoder, out);
+		out.write('"');
+		if(title!=null) {
+			out.write(" title=\"");
+			encodeTextInXhtmlAttribute(title, out);
+			out.write('"');
+		}
+		if(clazz!=null) {
+			out.write(" class=\"");
+			Coercion.write(clazz, textInXhtmlAttributeEncoder, out);
+			out.write('"');
+		}
+		if(style!=null) {
+			out.write(" style=\"");
+			encodeTextInXhtmlAttribute(style, out);
+			out.write('"');
+		}
+		out.write(" />");
     }
 }

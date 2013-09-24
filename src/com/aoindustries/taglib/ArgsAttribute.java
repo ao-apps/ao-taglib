@@ -22,6 +22,8 @@
  */
 package com.aoindustries.taglib;
 
+import java.util.Map;
+
 /**
  * Something with a set of arguments.
  *
@@ -29,16 +31,7 @@ package com.aoindustries.taglib;
  */
 public interface ArgsAttribute {
 
-    // Map<String,Object> getArgs();
+    Map<String,Object> getArgs();
 
-	/**
-	 * Adds an argument to this attribute.  If the value implements ReferenceCount,
-	 * then incReferenceCount must be called to the object and decReferenceCount
-	 * must be called when no longer needed (end of tag, for instance).
-	 *
-	 * @see  ReferenceUtils
-	 *
-	 * @throws IllegalArgumentException if the argument already exists (considered to exist even if set to null previously)
-	 */
     void addArg(String name, Object value) throws IllegalArgumentException;
 }
