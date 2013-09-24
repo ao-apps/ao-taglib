@@ -68,7 +68,7 @@ public class ATag
 	private Object rel;
 	private String type;
 	private Object target;
-    private String title;
+    private Object title;
     private Object clazz;
     private Object style;
     private Object onclick;
@@ -147,12 +147,12 @@ public class ATag
     }
 
 	@Override
-    public String getTitle() {
+    public Object getTitle() {
         return title;
     }
 
     @Override
-    public void setTitle(String title) {
+    public void setTitle(Object title) {
         this.title = title;
     }
 
@@ -257,7 +257,7 @@ public class ATag
 		}
 		if(title!=null) {
 			out.write(" title=\"");
-			encodeTextInXhtmlAttribute(title, out);
+			Coercion.write(title, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
 		if(clazz!=null) {

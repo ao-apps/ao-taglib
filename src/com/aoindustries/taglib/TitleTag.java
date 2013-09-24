@@ -46,6 +46,6 @@ public class TitleTag extends AutoEncodingBufferedTag {
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         TitleAttribute titleAttribute = AttributeUtils.findAttributeParent("title", this, "title", TitleAttribute.class);
-        titleAttribute.setTitle(capturedBody.toString().trim());
+        titleAttribute.setTitle(capturedBody.trim());
     }
 }

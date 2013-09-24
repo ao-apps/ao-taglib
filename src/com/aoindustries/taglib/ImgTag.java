@@ -60,7 +60,7 @@ public class ImgTag
     private String width;
     private Object height;
     private Object alt;
-    private String title;
+    private Object title;
     private Object clazz;
     private Object style;
 
@@ -126,12 +126,12 @@ public class ImgTag
     }
 
     @Override
-    public String getTitle() {
+    public Object getTitle() {
         return title;
     }
 
     @Override
-    public void setTitle(String title) {
+    public void setTitle(Object title) {
         this.title = title;
     }
 
@@ -184,7 +184,7 @@ public class ImgTag
 		out.write('"');
 		if(title!=null) {
 			out.write(" title=\"");
-			encodeTextInXhtmlAttribute(title, out);
+			Coercion.write(title, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
 		if(clazz!=null) {
