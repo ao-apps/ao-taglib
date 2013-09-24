@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2011, 2012  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -24,6 +24,7 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.NewEncodingUtils;
+import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import com.aoindustries.io.AutoTempFileWriter;
 import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
@@ -31,7 +32,6 @@ import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.net.HttpParametersUtils;
 import com.aoindustries.net.MutableHttpParameters;
 import com.aoindustries.servlet.jsp.LocalizedJspException;
-import com.aoindustries.util.EncodingUtils;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
@@ -140,7 +140,7 @@ public class IframeTag
 				if(contextPath.length()>0) src = contextPath+src;
 			}
 			src = HttpParametersUtils.addParams(src, params);
-			EncodingUtils.encodeXmlAttribute(
+			encodeTextInXhtmlAttribute(
 				response.encodeURL(
 					NewEncodingUtils.encodeUrlPath(src)
 				),
@@ -159,18 +159,18 @@ public class IframeTag
         out.write("<iframe");
         if(id!=null) {
             out.write(" id=\"");
-            EncodingUtils.encodeXmlAttribute(id, out);
+            encodeTextInXhtmlAttribute(id, out);
             out.write('"');
         }
 		writeSrc(out, pageContext, src, params);
         if(width!=null) {
             out.write(" width=\"");
-            EncodingUtils.encodeXmlAttribute(width, out);
+            encodeTextInXhtmlAttribute(width, out);
             out.write('"');
         }
         if(height!=null) {
             out.write(" height=\"");
-            EncodingUtils.encodeXmlAttribute(height, out);
+            encodeTextInXhtmlAttribute(height, out);
             out.write('"');
         }
         out.write(" frameborder=\"");

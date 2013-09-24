@@ -22,15 +22,13 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.JavaScriptInXhtmlEncoder;
-import com.aoindustries.encoding.MediaEncoder;
 import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
+import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import com.aoindustries.io.AutoTempFileWriter;
 import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
-import com.aoindustries.util.EncodingUtils;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -98,13 +96,13 @@ public class ScriptTag
         params.addParameter(name, value);
     }
 
-	@Override
-	protected void setMediaEncoderOptions(MediaEncoder mediaEncoder) {
-		if(mediaEncoder instanceof JavaScriptInXhtmlEncoder) {
-			assert src==null;
-			((JavaScriptInXhtmlEncoder)mediaEncoder).setType(type);
-		}
-	}
+	//@Override
+	//protected void setMediaEncoderOptions(MediaWriter mediaWriter) {
+	//	if(mediaWriter instanceof JavaScriptInXhtmlWriter) {
+	//		assert src==null;
+	//		((JavaScriptInXhtmlWriter)mediaWriter).setType(type);
+	//	}
+	//}
 
 	@Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
@@ -115,7 +113,7 @@ public class ScriptTag
 			// Write script tag with src attribute, discarding any body
 			PageContext pageContext = (PageContext)getJspContext();
 			out.write("<script type=\"");
-			EncodingUtils.encodeXmlAttribute(type.getMediaType(), out);
+			encodeTextInXhtmlAttribute(type.getMediaType(), out);
 			out.write('"');
 			IframeTag.writeSrc(out, pageContext, src, params);
 			out.write("></script>");

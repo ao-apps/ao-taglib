@@ -22,11 +22,14 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.MediaType;
+import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute;
+import com.aoindustries.encoding.TextInXhtmlAttributeEncoder;
+import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import com.aoindustries.io.AutoTempFileWriter;
+import com.aoindustries.io.Coercion;
 import com.aoindustries.servlet.jsp.LocalizedJspException;
-import com.aoindustries.util.EncodingUtils;
+import com.aoindustries.util.ref.ReferenceUtils;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -70,7 +73,7 @@ public class InputTag extends AutoEncodingBufferedTag implements
     private String id;
     private String type;
     private String name;
-    private String value;
+    private Object value;
     private String onclick;
     private String onchange;
     private String onfocus;
@@ -126,13 +129,13 @@ public class InputTag extends AutoEncodingBufferedTag implements
     }
 
     @Override
-    public String getValue() {
+    public Object getValue() {
         return value;
     }
 
     @Override
-    public void setValue(String value) {
-        this.value = value;
+    public void setValue(Object value) {
+		this.value = ReferenceUtils.replace(this.value, value);
     }
 
     @Override
@@ -258,73 +261,81 @@ public class InputTag extends AutoEncodingBufferedTag implements
 
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
-        if(type==null) throw new AttributeRequiredException("type");
-        if(value==null) value = capturedBody.toString().trim();
-        out.write("<input");
-        if(id!=null) {
-            out.write(" id=\"");
-            EncodingUtils.encodeXmlAttribute(id, out);
-            out.write('"');
-        }
-        out.write(" type=\"");
-        out.write(type);
-        out.write('"');
-        if(name!=null) {
-            out.write(" name=\"");
-            EncodingUtils.encodeXmlAttribute(name, out);
-            out.write('"');
-        }
-        out.write(" value=\"");
-        EncodingUtils.encodeXmlAttribute(value, out);
-        out.write('"');
-        if(onclick!=null) {
-            out.write(" onclick=\"");
-            JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute(onclick, out);
-            out.write('"');
-        }
-        if(onchange!=null) {
-            out.write(" onchange=\"");
-            JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute(onchange, out);
-            out.write('"');
-        }
-        if(onfocus!=null) {
-            out.write(" onfocus=\"");
-            JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute(onfocus, out);
-            out.write('"');
-        }
-        if(onblur!=null) {
-            out.write(" onblur=\"");
-            JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute(onblur, out);
-            out.write('"');
-        }
-        if(onkeypress!=null) {
-            out.write(" onkeypress=\"");
-            JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute(onkeypress, out);
-            out.write('"');
-        }
-        if(size!=null) {
-            out.write(" size=\"");
-            JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute(size, out);
-            out.write('"');
-        }
-        if(maxlength!=null) {
-            out.write(" maxlength=\"");
-            out.write(maxlength.toString());
-            out.write('"');
-        }
-        if(readonly) out.write(" readonly=\"readonly\"");
-        if(disabled) out.write(" disabled=\"disabled\"");
-        if(clazz!=null) {
-            out.write(" class=\"");
-            EncodingUtils.encodeXmlAttribute(clazz, out);
-            out.write('"');
-        }
-        if(style!=null) {
-            out.write(" style=\"");
-            EncodingUtils.encodeXmlAttribute(style, out);
-            out.write('"');
-        }
-        if(checked) out.write(" checked=\"checked\"");
-        out.write(" />");
+		try {
+			if(type==null) throw new AttributeRequiredException("type");
+			if(value==null) setValue(capturedBody.trim());
+			out.write("<input");
+			if(id!=null) {
+				out.write(" id=\"");
+				encodeTextInXhtmlAttribute(id, out);
+				out.write('"');
+			}
+			out.write(" type=\"");
+			out.write(type);
+			out.write('"');
+			if(name!=null) {
+				out.write(" name=\"");
+				encodeTextInXhtmlAttribute(name, out);
+				out.write('"');
+			}
+			out.write(" value=\"");
+			Coercion.toString(
+				value,
+				TextInXhtmlAttributeEncoder.getInstance(),
+				out
+			);
+			out.write('"');
+			if(onclick!=null) {
+				out.write(" onclick=\"");
+				encodeJavaScriptInXhtmlAttribute(onclick, out);
+				out.write('"');
+			}
+			if(onchange!=null) {
+				out.write(" onchange=\"");
+				encodeJavaScriptInXhtmlAttribute(onchange, out);
+				out.write('"');
+			}
+			if(onfocus!=null) {
+				out.write(" onfocus=\"");
+				encodeJavaScriptInXhtmlAttribute(onfocus, out);
+				out.write('"');
+			}
+			if(onblur!=null) {
+				out.write(" onblur=\"");
+				encodeJavaScriptInXhtmlAttribute(onblur, out);
+				out.write('"');
+			}
+			if(onkeypress!=null) {
+				out.write(" onkeypress=\"");
+				encodeJavaScriptInXhtmlAttribute(onkeypress, out);
+				out.write('"');
+			}
+			if(size!=null) {
+				out.write(" size=\"");
+				encodeJavaScriptInXhtmlAttribute(size, out);
+				out.write('"');
+			}
+			if(maxlength!=null) {
+				out.write(" maxlength=\"");
+				out.write(maxlength.toString());
+				out.write('"');
+			}
+			if(readonly) out.write(" readonly=\"readonly\"");
+			if(disabled) out.write(" disabled=\"disabled\"");
+			if(clazz!=null) {
+				out.write(" class=\"");
+				encodeTextInXhtmlAttribute(clazz, out);
+				out.write('"');
+			}
+			if(style!=null) {
+				out.write(" style=\"");
+				encodeTextInXhtmlAttribute(style, out);
+				out.write('"');
+			}
+			if(checked) out.write(" checked=\"checked\"");
+			out.write(" />");
+		} finally {
+			ReferenceUtils.release(value);
+		}
     }
 }

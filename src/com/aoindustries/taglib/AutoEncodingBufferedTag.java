@@ -23,6 +23,7 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaEncoder;
+import com.aoindustries.encoding.MediaWriter;
 import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.ValidMediaInput;
 import com.aoindustries.encoding.MediaType;
@@ -142,23 +143,24 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
                         containerContentType = MediaType.getMediaType(response.getContentType());
                     }
                     // Find the encoder
-                    MediaEncoder mediaEncoder = MediaEncoder.getMediaEncoder(response, myOutputType, containerContentType, out);
+                    MediaEncoder mediaEncoder = MediaEncoder.getInstance(response, myOutputType, containerContentType);
                     if(mediaEncoder!=null) {
                         setMediaEncoderOptions(mediaEncoder);
                         // Encode our output.  The encoder guarantees valid output for our parent.
-                        mediaEncoder.writePrefix();
+                        MediaWriter mediaWriter = new MediaWriter(mediaEncoder, out);
+						mediaWriter.writePrefix();
                         try {
                             ThreadEncodingContext.contentType.set(myOutputType);
-                            ThreadEncodingContext.validMediaInput.set(mediaEncoder);
+                            ThreadEncodingContext.validMediaInput.set(mediaWriter);
                             try {
-                                doTag(capturedBody, mediaEncoder);
+                                doTag(capturedBody, mediaWriter);
                             } finally {
                                 // Restore previous encoding context that is used for our output
                                 ThreadEncodingContext.contentType.set(parentContentType);
                                 ThreadEncodingContext.validMediaInput.set(parentValidMediaInput);
                             }
                         } finally {
-                            mediaEncoder.writeSuffix();
+                            mediaWriter.writeSuffix();
                         }
                     } else {
                         // If parentValidMediaInput exists, the parent should already be validating our output type.
@@ -193,7 +195,7 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
                     }
                 }
             } finally {
-                capturedBody.delete();
+                capturedBody.decReferenceCount();
             }
         } catch(MediaException err) {
             throw new JspException(err);

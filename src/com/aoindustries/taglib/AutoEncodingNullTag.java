@@ -23,6 +23,7 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaEncoder;
+import com.aoindustries.encoding.MediaWriter;
 import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.MediaValidator;
@@ -90,23 +91,24 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
                     containerContentType = MediaType.getMediaType(response.getContentType());
                 }
                 // Find the encoder
-                MediaEncoder mediaEncoder = MediaEncoder.getMediaEncoder(response, myOutputType, containerContentType, out);
+                MediaEncoder mediaEncoder = MediaEncoder.getInstance(response, myOutputType, containerContentType);
                 if(mediaEncoder!=null) {
                     setMediaEncoderOptions(mediaEncoder);
-                    // Encode out output.  The encoder guarantees valid output for our parent.
-                    mediaEncoder.writePrefix();
+                    // Encode our output.  The encoder guarantees valid output for our parent.
+					MediaWriter mediaWriter = new MediaWriter(mediaEncoder, out);
+                    mediaWriter.writePrefix();
                     try {
                         ThreadEncodingContext.contentType.set(myOutputType);
-                        ThreadEncodingContext.validMediaInput.set(mediaEncoder);
+                        ThreadEncodingContext.validMediaInput.set(mediaWriter);
                         try {
-                            doTag(mediaEncoder);
+                            doTag(mediaWriter);
                         } finally {
                             // Restore previous encoding context that is used for our output
                             ThreadEncodingContext.contentType.set(parentContentType);
                             ThreadEncodingContext.validMediaInput.set(parentValidMediaInput);
                         }
                     } finally {
-                        mediaEncoder.writeSuffix();
+                        mediaWriter.writeSuffix();
                     }
                 } else {
                     // If parentValidMediaInput exists, the parent should already be validating our output type.

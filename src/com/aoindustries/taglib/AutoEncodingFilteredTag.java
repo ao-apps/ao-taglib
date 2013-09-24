@@ -23,6 +23,7 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaEncoder;
+import com.aoindustries.encoding.MediaWriter;
 import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.ValidMediaInput;
 import com.aoindustries.encoding.MediaType;
@@ -104,23 +105,24 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport {
             }
             // Find the encoder
             final MediaType myContentType = getContentType();
-            MediaEncoder mediaEncoder = MediaEncoder.getMediaEncoder(response, myContentType, containerContentType, out);
+            MediaEncoder mediaEncoder = MediaEncoder.getInstance(response, myContentType, containerContentType);
             if(mediaEncoder!=null) {
                 setMediaEncoderOptions(mediaEncoder);
                 // Encode both our output and the content.  The encoder validates our input and guarantees valid output for our parent.
-                mediaEncoder.writePrefix();
+				MediaWriter mediaWriter = new MediaWriter(mediaEncoder, out);
+                mediaWriter.writePrefix();
                 try {
                     ThreadEncodingContext.contentType.set(myContentType);
-                    ThreadEncodingContext.validMediaInput.set(mediaEncoder);
+                    ThreadEncodingContext.validMediaInput.set(mediaWriter);
                     try {
-                        doTag(mediaEncoder);
+                        doTag(mediaWriter);
                     } finally {
                         // Restore previous encoding context that is used for our output
                         ThreadEncodingContext.contentType.set(parentContentType);
                         ThreadEncodingContext.validMediaInput.set(parentValidMediaInput);
                     }
                 } finally {
-                    mediaEncoder.writeSuffix();
+                    mediaWriter.writeSuffix();
                 }
             } else {
                 // If parentValidMediaInput exists, the parent should already be validating our output type.
@@ -163,13 +165,6 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport {
      * can effect the encoding.
      */
     protected void setMediaEncoderOptions(MediaEncoder mediaEncoder) {
-    }
-
-    /**
-     * TODO: Delete this method once all subclasses have been renamed to doTag.
-     */
-    final protected void invokeAutoEncoding(Writer out) throws JspException, IOException {
-        throw new RuntimeException("TODO: Delete method");
     }
 
     /**

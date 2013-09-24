@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2010, 2011  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2013  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -23,9 +23,11 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
+import com.aoindustries.encoding.TextInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.TextInXhtmlEncoder;
 import com.aoindustries.io.AutoTempFileWriter;
-import com.aoindustries.util.EncodingUtils;
+import com.aoindustries.io.Coercion;
+import com.aoindustries.util.ref.ReferenceUtils;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -33,10 +35,16 @@ import javax.servlet.jsp.JspException;
 /**
  * @author  AO Industries, Inc.
  */
-public class OptionTag extends AutoEncodingBufferedTag implements ValueAttribute, SelectedAttribute, DisabledAttribute {
+public class OptionTag
+	extends AutoEncodingBufferedTag
+	implements
+		ValueAttribute,
+		SelectedAttribute,
+		DisabledAttribute
+{
 
     private boolean valueSet;
-    private String value;
+    private Object value;
     private boolean selected;
     private boolean disabled;
 
@@ -51,14 +59,14 @@ public class OptionTag extends AutoEncodingBufferedTag implements ValueAttribute
     }
 
     @Override
-    public String getValue() {
+    public Object getValue() {
         return value;
     }
 
     @Override
-    public void setValue(String value) {
+    public void setValue(Object value) {
         this.valueSet = true;
-        this.value = value;
+		this.value = ReferenceUtils.replace(this.value, value);
     }
 
     @Override
@@ -83,15 +91,27 @@ public class OptionTag extends AutoEncodingBufferedTag implements ValueAttribute
 
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
-        String body = capturedBody.toString().trim();
-        if(!valueSet) value = body;
-        out.write("<option value=\"");
-        EncodingUtils.encodeXmlAttribute(value, out);
-        out.write('"');
-        if(selected) out.write(" selected=\"selected\"");
-        if(disabled) out.write(" disabled=\"disabled\"");
-        out.write('>');
-        TextInXhtmlEncoder.encodeTextInXhtml(body, out);
-        out.write("</option>");
+		try {
+			capturedBody.trim();
+			if(!valueSet) setValue(capturedBody);
+			out.write("<option value=\"");
+			Coercion.toString(
+				value,
+				TextInXhtmlAttributeEncoder.getInstance(),
+				out
+			);
+			out.write('"');
+			if(selected) out.write(" selected=\"selected\"");
+			if(disabled) out.write(" disabled=\"disabled\"");
+			out.write('>');
+			Coercion.toString(
+				capturedBody,
+				TextInXhtmlEncoder.getInstance(),
+				out
+			);
+			out.write("</option>");
+		} finally {
+			ReferenceUtils.release(value);
+		}
     }
 }

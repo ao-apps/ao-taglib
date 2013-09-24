@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009, 2010, 2011  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2013  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -24,12 +24,13 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.NewEncodingUtils;
+import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import com.aoindustries.io.AutoTempFileWriter;
+import com.aoindustries.io.Coercion;
 import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.net.HttpParametersUtils;
-import com.aoindustries.util.EncodingUtils;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
@@ -40,7 +41,18 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
-public class ImgTag extends AutoEncodingBufferedTag implements SrcAttribute, ParamsAttribute, WidthAttribute, HeightAttribute, AltAttribute, TitleAttribute, ClassAttribute, StyleAttribute {
+public class ImgTag
+	extends AutoEncodingBufferedTag
+	implements
+		SrcAttribute,
+		ParamsAttribute,
+		WidthAttribute,
+		HeightAttribute,
+		AltAttribute,
+		TitleAttribute,
+		ClassAttribute,
+		StyleAttribute
+{
 
     private String src;
     private HttpParametersMap params;
@@ -80,7 +92,7 @@ public class ImgTag extends AutoEncodingBufferedTag implements SrcAttribute, Par
     public void addParam(String name, String value) {
         if(params==null) params = new HttpParametersMap();
         params.addParameter(name, value);
-    }
+	}
 
     @Override
     public String getWidth() {
@@ -156,32 +168,32 @@ public class ImgTag extends AutoEncodingBufferedTag implements SrcAttribute, Par
             if(contextPath.length()>0) src = contextPath+src;
         }
         src = HttpParametersUtils.addParams(src, params);
-		EncodingUtils.encodeXmlAttribute(
+		encodeTextInXhtmlAttribute(
 			response.encodeURL(
 				NewEncodingUtils.encodeUrlPath(src)
 			),
 			out
         );
         out.write("\" width=\"");
-        EncodingUtils.encodeXmlAttribute(width, out);
+        encodeTextInXhtmlAttribute(width, out);
         out.write("\" height=\"");
-        EncodingUtils.encodeXmlAttribute(height, out);
+        encodeTextInXhtmlAttribute(height, out);
         out.write("\" alt=\"");
-        EncodingUtils.encodeXmlAttribute(alt, out);
+        encodeTextInXhtmlAttribute(alt, out);
         out.write('"');
         if(title!=null) {
             out.write(" title=\"");
-            EncodingUtils.encodeXmlAttribute(title, out);
+            encodeTextInXhtmlAttribute(title, out);
             out.write('"');
         }
         if(clazz!=null) {
             out.write(" class=\"");
-            EncodingUtils.encodeXmlAttribute(clazz, out);
+            encodeTextInXhtmlAttribute(clazz, out);
             out.write('"');
         }
         if(style!=null) {
             out.write(" style=\"");
-            EncodingUtils.encodeXmlAttribute(style, out);
+            encodeTextInXhtmlAttribute(style, out);
             out.write('"');
         }
         out.write(" />");

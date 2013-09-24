@@ -24,6 +24,8 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.AutoTempFileWriter;
+import com.aoindustries.io.Coercion;
+import com.aoindustries.util.ref.ReferenceUtils;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -31,10 +33,15 @@ import javax.servlet.jsp.JspException;
 /**
  * @author  AO Industries, Inc.
  */
-public class ParamTag extends AutoEncodingBufferedTag implements NameAttribute, ValueAttribute {
+public class ParamTag
+	extends AutoEncodingBufferedTag
+	implements
+		NameAttribute,
+		ValueAttribute
+{
 
     private String name;
-    private String value;
+    private Object value;
 
     @Override
     public MediaType getContentType() {
@@ -57,20 +64,27 @@ public class ParamTag extends AutoEncodingBufferedTag implements NameAttribute, 
     }
 
     @Override
-    public String getValue() {
+    public Object getValue() {
         return value;
     }
 
     @Override
-    public void setValue(String value) {
-        this.value = value;
+    public void setValue(Object value) {
+		this.value = ReferenceUtils.replace(this.value, value);
     }
 
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
-        ParamsAttribute paramsAttribute = AttributeUtils.findAttributeParent("param", this, "params", ParamsAttribute.class);
-        if(name==null) throw new AttributeRequiredException("name");
-        if(value==null) value = capturedBody.toString().trim();
-        paramsAttribute.addParam(name, value);
+		try {
+			ParamsAttribute paramsAttribute = AttributeUtils.findAttributeParent("param", this, "params", ParamsAttribute.class);
+			if(name==null) throw new AttributeRequiredException("name");
+			if(value==null) setValue(capturedBody.trim());
+			paramsAttribute.addParam(
+				name,
+				Coercion.toString(value)
+			);
+		} finally {
+			ReferenceUtils.release(value);
+		}
     }
 }

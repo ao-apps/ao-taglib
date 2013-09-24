@@ -44,7 +44,13 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
  *
  * @author  AO Industries, Inc.
  */
-public class RedirectTag extends SimpleTagSupport implements HrefAttribute, ParamsAttribute, TypeAttribute {
+public class RedirectTag
+	extends SimpleTagSupport
+	implements 
+		HrefAttribute,
+		ParamsAttribute,
+		TypeAttribute
+{
 
     public static boolean isValidType(String type) {
         return

@@ -22,12 +22,12 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder;
+import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.NewEncodingUtils;
+import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import com.aoindustries.io.AutoTempFileWriter;
 import com.aoindustries.servlet.jsp.LocalizedJspException;
-import com.aoindustries.util.EncodingUtils;
 import com.aoindustries.util.StringUtility;
 import java.io.IOException;
 import java.io.Writer;
@@ -156,7 +156,7 @@ public class FormTag
         out.write('"');
         if(id!=null) {
             out.write(" id=\"");
-            EncodingUtils.encodeXmlAttribute(id, out);
+            encodeTextInXhtmlAttribute(id, out);
             out.write('"');
         }
         String actionUrl;
@@ -168,32 +168,29 @@ public class FormTag
                 if(contextPath.length()>0) action = contextPath+action;
             }
             actionUrl = response.encodeURL(NewEncodingUtils.encodeUrlPath(action));
-            EncodingUtils.encodeXmlAttribute(
-				actionUrl,
-				out
-			);
+            encodeTextInXhtmlAttribute(actionUrl, out);
             out.write('"');
         } else {
             actionUrl = null;
         }
         if(target!=null) {
             out.write(" target=\"");
-            EncodingUtils.encodeXmlAttribute(target, out);
+            encodeTextInXhtmlAttribute(target, out);
             out.write('"');
         }
         if(enctype!=null) {
             out.write(" enctype=\"");
-            EncodingUtils.encodeXmlAttribute(enctype, out);
+            encodeTextInXhtmlAttribute(enctype, out);
             out.write('"');
         }
         if(style!=null) {
             out.write(" style=\"");
-            EncodingUtils.encodeXmlAttribute(style, out);
+            encodeTextInXhtmlAttribute(style, out);
             out.write('"');
         }
         if(onsubmit!=null) {
             out.write(" onsubmit=\"");
-            JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute(onsubmit, out);
+            encodeJavaScriptInXhtmlAttribute(onsubmit, out);
             out.write('"');
         }
         out.write('>');
@@ -215,9 +212,9 @@ public class FormTag
                             value = URLDecoder.decode(nameVal.substring(equalPos+1), "UTF-8");
                         }
                         out.write("<input type=\"hidden\" name=\"");
-                        EncodingUtils.encodeXmlAttribute(name, out);
+                        encodeTextInXhtmlAttribute(name, out);
                         out.write("\" value=\"");
-                        EncodingUtils.encodeXmlAttribute(value, out);
+                        encodeTextInXhtmlAttribute(value, out);
                         out.write("\" />");
                     }
                     out.write("</div>");

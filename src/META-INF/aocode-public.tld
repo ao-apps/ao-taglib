@@ -132,6 +132,30 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
+    <description>Adds an argument to its ArgsAttribute parent tag.</description>
+    <name>arg</name>
+    <tag-class>com.aoindustries.taglib.ArgTag</tag-class>
+    <body-content>scriptless</body-content>
+    <attribute>
+      <description>The name of argument tag.  A nested name tag will override this value.</description>
+      <name>name</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>
+        The value of the parameter.  A nested value tag will override this value.  If neither is provided,
+        the output of the body is used with whitespace trimmed.
+      </description>
+      <name>value</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.Object</type>
+    </attribute>
+    <example />
+  </tag>
+  <tag>
     <description>
         Provides a checked attribute to its CheckedAttribute parent tag.
         The body, after trimming, must contain either "true", "false", or be empty.
@@ -637,7 +661,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <name>value</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <attribute>
       <description>A JavaScript onclick handler.  A nested onclick tag will override this value.</description>
@@ -941,7 +965,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <name>value</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <attribute>
       <description>
@@ -996,7 +1020,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <name>value</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <example />
   </tag>
@@ -1021,20 +1045,6 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
-    <example />
-  </tag>
-  <tag>
-    <description>
-      The body of this tag contains preformatted text.
-      If used in a (X)HTML context, will surround the
-      content with pre tags.
-
-      The content type of this tag is application/xhtml+xml+pre.
-      Every character must be valid in XML, and not have any &lt;, &gt;
-    </description>
-    <name>pre</name>
-    <tag-class>com.aoindustries.taglib.PreTag</tag-class>
-    <body-content>scriptless</body-content>
     <example />
   </tag>
   <tag>
@@ -1317,20 +1327,6 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <name>text</name>
     <tag-class>com.aoindustries.taglib.TextTag</tag-class>
     <body-content>scriptless</body-content>
-    <attribute>
-      <description>When true, newlines are converted to &lt;br /&gt;</description>
-      <name>makeBr</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>boolean</type>
-    </attribute>
-    <attribute>
-      <description>When true, consecutive spaces are converted to &amp;#160;</description>
-      <name>makeNbsp</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>boolean</type>
-    </attribute>
     <example />
   </tag>
   <tag>
@@ -1361,7 +1357,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <name>value</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <attribute>
       <description>The number of columns for the textarea element.  A nested cols tag will override this value.</description>

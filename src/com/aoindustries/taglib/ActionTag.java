@@ -46,7 +46,6 @@ public class ActionTag extends AutoEncodingBufferedTag {
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         ActionAttribute actionAttribute = AttributeUtils.findAttributeParent("action", this, "action", ActionAttribute.class);
-        String action = capturedBody.toString().trim();
-        actionAttribute.setAction(action);
+        actionAttribute.setAction(capturedBody.toString().trim());
     }
 }

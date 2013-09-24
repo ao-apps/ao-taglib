@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2010, 2011, 2012  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2012, 2013  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,10 +22,10 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder;
+import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute;
 import com.aoindustries.encoding.MediaType;
+import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import com.aoindustries.io.AutoTempFileWriter;
-import com.aoindustries.util.EncodingUtils;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -33,15 +33,18 @@ import javax.servlet.jsp.JspException;
 /**
  * @author  AO Industries, Inc.
  */
-public class SelectTag extends AutoEncodingBufferedTag implements
-    IdAttribute,
-    NameAttribute,
-    StyleAttribute,
-    DisabledAttribute,
-    OnchangeAttribute,
-    OnfocusAttribute,
-    OnblurAttribute,
-    OnkeypressAttribute {
+public class SelectTag
+	extends AutoEncodingBufferedTag
+	implements
+		IdAttribute,
+		NameAttribute,
+		StyleAttribute,
+		DisabledAttribute,
+		OnchangeAttribute,
+		OnfocusAttribute,
+		OnblurAttribute,
+		OnkeypressAttribute
+{
 
     private String id;
     private String name;
@@ -147,38 +150,38 @@ public class SelectTag extends AutoEncodingBufferedTag implements
         out.write("<select");
         if(id!=null) {
             out.write(" id=\"");
-            EncodingUtils.encodeXmlAttribute(id, out);
+            encodeTextInXhtmlAttribute(id, out);
             out.write('"');
         }
         if(name!=null) {
             out.write(" name=\"");
-            EncodingUtils.encodeXmlAttribute(name, out);
+            encodeTextInXhtmlAttribute(name, out);
             out.write('"');
         }
         if(style!=null) {
             out.write(" style=\"");
-            EncodingUtils.encodeXmlAttribute(style, out);
+            encodeTextInXhtmlAttribute(style, out);
             out.write('"');
         }
         if(disabled) out.write(" disabled=\"disabled\"");
         if(onchange!=null) {
             out.write(" onchange=\"");
-            JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute(onchange, out);
+            encodeJavaScriptInXhtmlAttribute(onchange, out);
             out.write('"');
         }
         if(onfocus!=null) {
             out.write(" onfocus=\"");
-            JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute(onfocus, out);
+            encodeJavaScriptInXhtmlAttribute(onfocus, out);
             out.write('"');
         }
         if(onblur!=null) {
             out.write(" onblur=\"");
-            JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute(onblur, out);
+            encodeJavaScriptInXhtmlAttribute(onblur, out);
             out.write('"');
         }
         if(onkeypress!=null) {
             out.write(" onkeypress=\"");
-            JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute(onkeypress, out);
+            encodeJavaScriptInXhtmlAttribute(onkeypress, out);
             out.write('"');
         }
         out.write('>');

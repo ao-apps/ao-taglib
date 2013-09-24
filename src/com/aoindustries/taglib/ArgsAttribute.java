@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009, 2010, 2011  AO Industries, Inc.
+ * Copyright (C) 2013  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,15 +22,24 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.MediaType;
-
 /**
+ * Something with a set of arguments.
+ *
  * @author  AO Industries, Inc.
  */
-public class PreTag extends AutoEncodingFilteredTag {
+public interface ArgsAttribute {
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.XHTML_PRE;
-    }
+    // Map<String,Object> getArgs();
+
+	/**
+	 * Adds an argument to this attribute.  If the value implements ReferenceCount,
+	 * then incReferenceCount must be called to the object and decReferenceCount
+	 * must be called when no longer needed (end of tag, for instance).
+	 *
+	 * @see  ReferenceUtils#replace(java.lang.Object, java.lang.Object) 
+	 * @see  ReferenceUtils#release(java.lang.Object) 
+	 *
+	 * @throws IllegalArgumentException if the argument already exists (considered to exist even if set to null previously)
+	 */
+    void addArg(String name, Object value) throws IllegalArgumentException;
 }

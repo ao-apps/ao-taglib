@@ -24,6 +24,7 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.AutoTempFileWriter;
+import com.aoindustries.io.Coercion;
 import com.aoindustries.servlet.jsp.LocalizedJspException;
 import java.io.IOException;
 import java.io.Writer;
@@ -69,18 +70,27 @@ public class ParamsTag extends AutoEncodingBufferedTag implements NameAttribute 
         if(name==null) throw new AttributeRequiredException("name");
         if(values!=null) {
             if(values instanceof Iterable<?>) {
-                for(Object value : (Iterable<?>)values) paramsAttribute.addParam(name, value==null ? "" : value.toString());
+                for(Object value : (Iterable<?>)values) {
+					paramsAttribute.addParam(
+						name,
+						Coercion.toString(value)
+					);
+				}
             } else if(values instanceof Iterator<?>) {
                 Iterator<?> iter = (Iterator<?>)values;
                 while(iter.hasNext()) {
-                    Object value = iter.next();
-                    paramsAttribute.addParam(name, value==null ? "" : value.toString());
+                    paramsAttribute.addParam(
+						name,
+						Coercion.toString(iter.next())
+					);
                 }
             } else if(values.getClass().isArray()) {
                 int len = Array.getLength(values);
                 for(int c=0; c<len; c++) {
-                    Object value = Array.get(values, c);
-                    paramsAttribute.addParam(name, value==null ? "" : value.toString());
+                    paramsAttribute.addParam(
+						name,
+						Coercion.toString(Array.get(values, c))
+					);
                 }
             } else {
                 throw new LocalizedJspException(ApplicationResources.accessor, "ParamsTag.values.unexpectedType", values.getClass().getName());

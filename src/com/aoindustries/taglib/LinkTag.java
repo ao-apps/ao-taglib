@@ -23,12 +23,11 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.io.AutoTempFileWriter;
+import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.net.MutableHttpParameters;
-import com.aoindustries.util.EncodingUtils;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -39,7 +38,7 @@ import javax.servlet.jsp.tagext.JspTag;
  * @author  AO Industries, Inc.
  */
 public class LinkTag
-	extends AutoEncodingBufferedTag
+	extends AutoEncodingNullTag
 	implements
 		HrefAttribute,
 		ParamsAttribute,
@@ -53,13 +52,6 @@ public class LinkTag
 	private String hreflang;
 	private String rel;
 	private String type;
-
-    @Override
-    public MediaType getContentType() {
-		// TODO: Since we do not use our captured content, could add support for
-		//       returning null here and directly discarding output with NullWriter.
-        return MediaType.TEXT;
-    }
 
     @Override
     public MediaType getOutputType() {
@@ -118,7 +110,8 @@ public class LinkTag
     }
 
     @Override
-    protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
+    protected void doTag(Writer out) throws JspException, IOException {
+		super.doTag(out);
         JspTag parent = findAncestorWithClass(this, LinksAttribute.class);
 		if(parent!=null) {
             ((LinksAttribute)parent).addLink(
@@ -136,17 +129,17 @@ public class LinkTag
 			ATag.writeHref(out, pageContext, href, params);
 			if(hreflang!=null) {
 				out.write(" hreflang=\"");
-				EncodingUtils.encodeXmlAttribute(hreflang, out);
+				encodeTextInXhtmlAttribute(hreflang, out);
 				out.write('"');
 			}
 			if(rel!=null) {
 				out.write(" rel=\"");
-				EncodingUtils.encodeXmlAttribute(rel, out);
+				encodeTextInXhtmlAttribute(rel, out);
 				out.write('"');
 			}
 			if(type!=null) {
 				out.write(" type=\"");
-				EncodingUtils.encodeXmlAttribute(type, out);
+				encodeTextInXhtmlAttribute(type, out);
 				out.write('"');
 			}
             out.write(" />");

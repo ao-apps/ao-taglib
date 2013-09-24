@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2010, 2011  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2013  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,11 +22,13 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder;
+import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute;
 import com.aoindustries.encoding.MediaType;
+import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import com.aoindustries.encoding.TextInXhtmlEncoder;
 import com.aoindustries.io.AutoTempFileWriter;
-import com.aoindustries.util.EncodingUtils;
+import com.aoindustries.io.Coercion;
+import com.aoindustries.util.ref.ReferenceUtils;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -34,10 +36,21 @@ import javax.servlet.jsp.JspException;
 /**
  * @author  AO Industries, Inc.
  */
-public class TextareaTag extends AutoEncodingBufferedTag implements NameAttribute, ValueAttribute, ColsAttribute, RowsAttribute, ReadonlyAttribute, DisabledAttribute, OnchangeAttribute, StyleAttribute {
+public class TextareaTag
+	extends AutoEncodingBufferedTag
+	implements
+		NameAttribute,
+		ValueAttribute,
+		ColsAttribute,
+		RowsAttribute,
+		ReadonlyAttribute,
+		DisabledAttribute,
+		OnchangeAttribute,
+		StyleAttribute
+{
 
     private String name;
-    private String value;
+    private Object value;
     private int cols;
     private int rows;
     private boolean readonly;
@@ -66,13 +79,13 @@ public class TextareaTag extends AutoEncodingBufferedTag implements NameAttribut
     }
 
     @Override
-    public String getValue() {
+    public Object getValue() {
         return value;
     }
 
     @Override
-    public void setValue(String value) {
-        this.value = value;
+    public void setValue(Object value) {
+		this.value = ReferenceUtils.replace(this.value, value);
     }
 
     @Override
@@ -137,32 +150,40 @@ public class TextareaTag extends AutoEncodingBufferedTag implements NameAttribut
 
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
-        if(value==null) value = capturedBody.toString().trim();
-        out.write("<textarea");
-        if(name!=null) {
-            out.write(" name=\"");
-            EncodingUtils.encodeXmlAttribute(name, out);
-            out.write('"');
-        }
-        out.write(" cols=\"");
-        out.write(Integer.toString(cols));
-        out.write("\" rows=\"");
-        out.write(Integer.toString(rows));
-        out.write('"');
-        if(readonly) out.write(" readonly=\"readonly\"");
-        if(disabled) out.write(" disabled=\"disabled\"");
-        if(onchange!=null) {
-            out.write(" onchange=\"");
-            JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute(onchange, out);
-            out.write('"');
-        }
-        if(style!=null) {
-            out.write(" style=\"");
-            EncodingUtils.encodeXmlAttribute(style, out);
-            out.write('"');
-        }
-        out.write('>');
-        TextInXhtmlEncoder.encodeTextInXhtml(value, out);
-        out.write("</textarea>");
+		try {
+			if(value==null) setValue(capturedBody.trim());
+			out.write("<textarea");
+			if(name!=null) {
+				out.write(" name=\"");
+				encodeTextInXhtmlAttribute(name, out);
+				out.write('"');
+			}
+			out.write(" cols=\"");
+			out.write(Integer.toString(cols));
+			out.write("\" rows=\"");
+			out.write(Integer.toString(rows));
+			out.write('"');
+			if(readonly) out.write(" readonly=\"readonly\"");
+			if(disabled) out.write(" disabled=\"disabled\"");
+			if(onchange!=null) {
+				out.write(" onchange=\"");
+				encodeJavaScriptInXhtmlAttribute(onchange, out);
+				out.write('"');
+			}
+			if(style!=null) {
+				out.write(" style=\"");
+				encodeTextInXhtmlAttribute(style, out);
+				out.write('"');
+			}
+			out.write('>');
+			Coercion.toString(
+				value,
+				TextInXhtmlEncoder.getInstance(),
+				out
+			);
+			out.write("</textarea>");
+		} finally {
+			ReferenceUtils.release(value);
+		}
     }
 }

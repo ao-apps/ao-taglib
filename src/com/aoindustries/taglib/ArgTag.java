@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009, 2010, 2011, 2012, 2013  AO Industries, Inc.
+ * Copyright (C) 2013  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -24,6 +24,7 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.AutoTempFileWriter;
+import com.aoindustries.util.ref.ReferenceUtils;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -31,7 +32,10 @@ import javax.servlet.jsp.JspException;
 /**
  * @author  AO Industries, Inc.
  */
-public class ValueTag extends AutoEncodingBufferedTag {
+public class ArgTag extends AutoEncodingBufferedTag implements NameAttribute, ValueAttribute {
+
+    private String name;
+    private Object value;
 
     @Override
     public MediaType getContentType() {
@@ -44,8 +48,34 @@ public class ValueTag extends AutoEncodingBufferedTag {
     }
 
     @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public Object getValue() {
+        return value;
+    }
+
+    @Override
+    public void setValue(Object value) {
+		this.value = ReferenceUtils.replace(this.value, value);
+    }
+
+    @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
-        ValueAttribute valueAttribute = AttributeUtils.findAttributeParent("value", this, "value", ValueAttribute.class);
-        valueAttribute.setValue(capturedBody);
+		try {
+			ArgsAttribute argsAttribute = AttributeUtils.findAttributeParent("arg", this, "args", ArgsAttribute.class);
+			if(name==null) throw new AttributeRequiredException("name");
+			if(value==null) setValue(capturedBody.trim());
+			argsAttribute.addArg(name, value);
+		} finally {
+			ReferenceUtils.release(value);
+		}
     }
 }
