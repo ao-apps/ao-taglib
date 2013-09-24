@@ -23,7 +23,6 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
-import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.AutoTempFileWriter;
 import com.aoindustries.io.Coercion;
@@ -42,7 +41,7 @@ public class MetaTag
 		ContentAttribute
 {
 
-    private String httpEquiv;
+    private Object httpEquiv;
     private Object name;
     private Object content;
 
@@ -56,11 +55,11 @@ public class MetaTag
         return MediaType.XHTML;
     }
 
-    public String getHttpEquiv() {
+    public Object getHttpEquiv() {
         return httpEquiv;
     }
 
-    public void setHttpEquiv(String httpEquiv) {
+    public void setHttpEquiv(Object httpEquiv) {
         this.httpEquiv = httpEquiv;
     }
 
@@ -93,16 +92,16 @@ public class MetaTag
 			((MetasAttribute)parent).addMeta(
 				new Meta(
 					Coercion.toString(name),
-					httpEquiv,
+					Coercion.toString(httpEquiv),
 					Coercion.toString(content)
 				)
 			);
 		} else {
 			// Write the meta tag directly here
 			out.write("<meta");
-			if(httpEquiv!=null && httpEquiv.length()>0) {
+			if(httpEquiv!=null) {
 				out.write(" http-equiv=\"");
-				encodeTextInXhtmlAttribute(httpEquiv, out);
+				Coercion.write(httpEquiv, textInXhtmlAttributeEncoder, out);
 				out.write('"');
 			}
 			if(name!=null) {
