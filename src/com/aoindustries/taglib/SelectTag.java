@@ -22,7 +22,6 @@
  */
 package com.aoindustries.taglib;
 
-import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute;
 import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaScriptInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
@@ -53,10 +52,10 @@ public class SelectTag
     private Object name;
     private String style;
     private boolean disabled;
-    private String onchange;
-    private String onfocus;
+    private Object onchange;
+    private Object onfocus;
     private Object onblur;
-    private String onkeypress;
+    private Object onkeypress;
 
     @Override
     public MediaType getContentType() {
@@ -109,22 +108,22 @@ public class SelectTag
     }
 
     @Override
-    public String getOnchange() {
+    public Object getOnchange() {
         return onchange;
     }
 
     @Override
-    public void setOnchange(String onchange) {
+    public void setOnchange(Object onchange) {
         this.onchange = onchange;
     }
 
     @Override
-    public String getOnfocus() {
+    public Object getOnfocus() {
         return onfocus;
     }
 
     @Override
-    public void setOnfocus(String onfocus) {
+    public void setOnfocus(Object onfocus) {
         this.onfocus = onfocus;
     }
 
@@ -139,12 +138,12 @@ public class SelectTag
     }
 
     @Override
-    public String getOnkeypress() {
+    public Object getOnkeypress() {
         return onkeypress;
     }
 
     @Override
-    public void setOnkeypress(String onkeypress) {
+    public void setOnkeypress(Object onkeypress) {
         this.onkeypress = onkeypress;
     }
 
@@ -169,12 +168,12 @@ public class SelectTag
 		if(disabled) out.write(" disabled=\"disabled\"");
 		if(onchange!=null) {
 			out.write(" onchange=\"");
-			encodeJavaScriptInXhtmlAttribute(onchange, out);
+			Coercion.write(onchange, javaScriptInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
 		if(onfocus!=null) {
 			out.write(" onfocus=\"");
-			encodeJavaScriptInXhtmlAttribute(onfocus, out);
+			Coercion.write(onfocus, javaScriptInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
 		if(onblur!=null) {
@@ -184,7 +183,7 @@ public class SelectTag
 		}
 		if(onkeypress!=null) {
 			out.write(" onkeypress=\"");
-			encodeJavaScriptInXhtmlAttribute(onkeypress, out);
+			Coercion.write(onkeypress, javaScriptInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
 		out.write('>');

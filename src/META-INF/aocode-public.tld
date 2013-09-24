@@ -99,21 +99,21 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <name>onclick</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <attribute>
       <description>A JavaScript onmouseover handler.  A nested onmouseover tag will override this value.</description>
       <name>onmouseover</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <attribute>
       <description>A JavaScript onmouseout handler.  A nested onmouseout tag will override this value.</description>
       <name>onmouseout</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <example />
   </tag>
@@ -270,7 +270,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <name>onsubmit</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <example />
   </tag>
@@ -682,7 +682,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <name>onclick</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <attribute>
       <description>
@@ -692,7 +692,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <name>onchange</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <attribute>
       <description>
@@ -702,7 +702,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <name>onfocus</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <attribute>
       <description>
@@ -722,7 +722,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <name>onkeypress</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <attribute>
       <description>The size of the input element.  A nested size tag will override this value.</description>
@@ -1221,7 +1221,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <name>onchange</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <attribute>
       <description>
@@ -1231,7 +1231,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <name>onfocus</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <attribute>
       <description>
@@ -1251,7 +1251,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <name>onkeypress</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <example />
   </tag>
@@ -1419,7 +1419,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <name>onchange</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <attribute>
       <description>The CSS style for the textarea element.  A nested style tag will override this value.</description>

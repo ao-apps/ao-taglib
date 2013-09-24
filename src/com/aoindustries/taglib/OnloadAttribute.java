@@ -29,7 +29,7 @@ package com.aoindustries.taglib;
  */
 public interface OnloadAttribute {
 
-    String getOnload();
+    Object getOnload();
 
-    void setOnload(String onload);
+    void setOnload(Object onload);
 }

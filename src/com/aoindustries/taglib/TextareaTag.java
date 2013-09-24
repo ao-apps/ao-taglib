@@ -22,7 +22,7 @@
  */
 package com.aoindustries.taglib;
 
-import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute;
+import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaScriptInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
@@ -55,7 +55,7 @@ public class TextareaTag
     private int rows;
     private boolean readonly;
     private boolean disabled;
-    private String onchange;
+    private Object onchange;
     private String style;
 
     @Override
@@ -129,12 +129,12 @@ public class TextareaTag
     }
 
     @Override
-    public String getOnchange() {
+    public Object getOnchange() {
         return onchange;
     }
 
     @Override
-    public void setOnchange(String onchange) {
+    public void setOnchange(Object onchange) {
         this.onchange = onchange;
     }
 
@@ -166,7 +166,7 @@ public class TextareaTag
 		if(disabled) out.write(" disabled=\"disabled\"");
 		if(onchange!=null) {
 			out.write(" onchange=\"");
-			encodeJavaScriptInXhtmlAttribute(onchange, out);
+			Coercion.write(onchange, javaScriptInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
 		if(style!=null) {

@@ -22,7 +22,7 @@
  */
 package com.aoindustries.taglib;
 
-import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute;
+import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaScriptInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.NewEncodingUtils;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
@@ -71,9 +71,9 @@ public class ATag
     private String title;
     private Object clazz;
     private String style;
-    private String onclick;
-    private String onmouseover;
-    private String onmouseout;
+    private Object onclick;
+    private Object onmouseover;
+    private Object onmouseout;
 
     @Override
     public MediaType getContentType() {
@@ -177,32 +177,32 @@ public class ATag
     }
 
     @Override
-    public String getOnclick() {
+    public Object getOnclick() {
         return onclick;
     }
 
     @Override
-    public void setOnclick(String onclick) {
+    public void setOnclick(Object onclick) {
         this.onclick = onclick;
     }
 
     @Override
-    public String getOnmouseover() {
+    public Object getOnmouseover() {
         return onmouseover;
     }
 
     @Override
-    public void setOnmouseover(String onmouseover) {
+    public void setOnmouseover(Object onmouseover) {
         this.onmouseover = onmouseover;
     }
 
     @Override
-    public String getOnmouseout() {
+    public Object getOnmouseout() {
         return onmouseout;
     }
 
     @Override
-    public void setOnmouseout(String onmouseout) {
+    public void setOnmouseout(Object onmouseout) {
         this.onmouseout = onmouseout;
     }
 
@@ -272,17 +272,17 @@ public class ATag
 		}
 		if(onclick!=null) {
 			out.write(" onclick=\"");
-			encodeJavaScriptInXhtmlAttribute(onclick, out);
+			Coercion.write(onclick, javaScriptInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
 		if(onmouseover!=null) {
 			out.write(" onmouseover=\"");
-			encodeJavaScriptInXhtmlAttribute(onmouseover, out);
+			Coercion.write(onmouseover, javaScriptInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
 		if(onmouseout!=null) {
 			out.write(" onmouseout=\"");
-			encodeJavaScriptInXhtmlAttribute(onmouseout, out);
+			Coercion.write(onmouseout, javaScriptInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
 		out.write('>');

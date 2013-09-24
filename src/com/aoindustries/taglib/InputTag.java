@@ -23,7 +23,6 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
-import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute;
 import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaScriptInXhtmlAttributeEncoder;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
@@ -77,11 +76,11 @@ public class InputTag
     private String type;
     private Object name;
     private Object value;
-    private String onclick;
-    private String onchange;
-    private String onfocus;
+    private Object onclick;
+    private Object onchange;
+    private Object onfocus;
     private Object onblur;
-    private String onkeypress;
+    private Object onkeypress;
     private String size;
     private Integer maxlength;
     private boolean readonly;
@@ -142,32 +141,32 @@ public class InputTag
     }
 
     @Override
-    public String getOnclick() {
+    public Object getOnclick() {
         return onclick;
     }
 
     @Override
-    public void setOnclick(String onclick) {
+    public void setOnclick(Object onclick) {
         this.onclick = onclick;
     }
 
     @Override
-    public String getOnchange() {
+    public Object getOnchange() {
         return onchange;
     }
 
     @Override
-    public void setOnchange(String onchange) {
+    public void setOnchange(Object onchange) {
         this.onchange = onchange;
     }
 
     @Override
-    public String getOnfocus() {
+    public Object getOnfocus() {
         return onfocus;
     }
 
     @Override
-    public void setOnfocus(String onfocus) {
+    public void setOnfocus(Object onfocus) {
         this.onfocus = onfocus;
     }
 
@@ -182,12 +181,12 @@ public class InputTag
     }
 
     @Override
-    public String getOnkeypress() {
+    public Object getOnkeypress() {
         return onkeypress;
     }
 
     @Override
-    public void setOnkeypress(String onkeypress) {
+    public void setOnkeypress(Object onkeypress) {
         this.onkeypress = onkeypress;
     }
 
@@ -285,17 +284,17 @@ public class InputTag
 		out.write('"');
 		if(onclick!=null) {
 			out.write(" onclick=\"");
-			encodeJavaScriptInXhtmlAttribute(onclick, out);
+			Coercion.write(onclick, javaScriptInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
 		if(onchange!=null) {
 			out.write(" onchange=\"");
-			encodeJavaScriptInXhtmlAttribute(onchange, out);
+			Coercion.write(onchange, javaScriptInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
 		if(onfocus!=null) {
 			out.write(" onfocus=\"");
-			encodeJavaScriptInXhtmlAttribute(onfocus, out);
+			Coercion.write(onfocus, javaScriptInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
 		if(onblur!=null) {
@@ -305,12 +304,12 @@ public class InputTag
 		}
 		if(onkeypress!=null) {
 			out.write(" onkeypress=\"");
-			encodeJavaScriptInXhtmlAttribute(onkeypress, out);
+			Coercion.write(onkeypress, javaScriptInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
 		if(size!=null) {
 			out.write(" size=\"");
-			encodeJavaScriptInXhtmlAttribute(size, out);
+			encodeTextInXhtmlAttribute(size, out);
 			out.write('"');
 		}
 		if(maxlength!=null) {

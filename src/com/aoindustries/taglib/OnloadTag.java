@@ -46,6 +46,6 @@ public class OnloadTag extends AutoEncodingBufferedTag {
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         OnloadAttribute onloadAttribute = AttributeUtils.findAttributeParent("onload", this, "onload", OnloadAttribute.class);
-        onloadAttribute.setOnload(capturedBody.toString().trim());
+        onloadAttribute.setOnload(capturedBody.trim());
     }
 }

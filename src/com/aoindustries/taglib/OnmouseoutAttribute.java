@@ -29,7 +29,7 @@ package com.aoindustries.taglib;
  */
 public interface OnmouseoutAttribute {
 
-    String getOnmouseout();
+    Object getOnmouseout();
 
-    void setOnmouseout(String onmouseout);
+    void setOnmouseout(Object onmouseout);
 }

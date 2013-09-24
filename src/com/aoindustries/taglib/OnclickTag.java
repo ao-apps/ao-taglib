@@ -46,6 +46,6 @@ public class OnclickTag extends AutoEncodingBufferedTag {
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         OnclickAttribute onclickAttribute = AttributeUtils.findAttributeParent("onclick", this, "onclick", OnclickAttribute.class);
-        onclickAttribute.setOnclick(capturedBody.toString().trim());
+        onclickAttribute.setOnclick(capturedBody.trim());
     }
 }

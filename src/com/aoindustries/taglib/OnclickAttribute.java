@@ -29,7 +29,7 @@ package com.aoindustries.taglib;
  */
 public interface OnclickAttribute {
 
-    String getOnclick();
+    Object getOnclick();
 
-    void setOnclick(String onclick);
+    void setOnclick(Object onclick);
 }

@@ -22,7 +22,7 @@
  */
 package com.aoindustries.taglib;
 
-import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.encodeJavaScriptInXhtmlAttribute;
+import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaScriptInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.NewEncodingUtils;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
@@ -67,7 +67,7 @@ public class FormTag
 	private String target;
     private Object enctype;
     private String style;
-    private String onsubmit;
+    private Object onsubmit;
 
     @Override
     public MediaType getContentType() {
@@ -141,12 +141,12 @@ public class FormTag
     }
 
     @Override
-    public String getOnsubmit() {
+    public Object getOnsubmit() {
         return onsubmit;
     }
 
     @Override
-    public void setOnsubmit(String onsubmit) {
+    public void setOnsubmit(Object onsubmit) {
         this.onsubmit = onsubmit;
     }
 
@@ -192,7 +192,7 @@ public class FormTag
 		}
 		if(onsubmit!=null) {
 			out.write(" onsubmit=\"");
-			encodeJavaScriptInXhtmlAttribute(onsubmit, out);
+			Coercion.write(onsubmit, javaScriptInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
 		out.write('>');
