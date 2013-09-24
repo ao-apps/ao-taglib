@@ -29,7 +29,7 @@ package com.aoindustries.taglib;
  */
 public interface SizeAttribute {
 
-    String getSize();
+    Object getSize();
 
-    void setSize(String size);
+    void setSize(Object size);
 }

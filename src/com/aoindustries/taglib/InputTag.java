@@ -81,7 +81,7 @@ public class InputTag
     private Object onfocus;
     private Object onblur;
     private Object onkeypress;
-    private String size;
+    private Object size;
     private Integer maxlength;
     private boolean readonly;
     private boolean disabled;
@@ -191,12 +191,12 @@ public class InputTag
     }
 
     @Override
-    public String getSize() {
+    public Object getSize() {
         return size;
     }
 
     @Override
-    public void setSize(String size) {
+    public void setSize(Object size) {
         this.size = size;
     }
 
@@ -309,7 +309,7 @@ public class InputTag
 		}
 		if(size!=null) {
 			out.write(" size=\"");
-			encodeTextInXhtmlAttribute(size, out);
+			Coercion.write(size, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
 		if(maxlength!=null) {
