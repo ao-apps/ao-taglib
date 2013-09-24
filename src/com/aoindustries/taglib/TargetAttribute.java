@@ -31,7 +31,7 @@ import javax.servlet.jsp.JspException;
  */
 public interface TargetAttribute {
 
-    String getTarget();
+    Object getTarget();
 
-    void setTarget(String target) throws JspException;
+    void setTarget(Object target) throws JspException;
 }

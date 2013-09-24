@@ -67,7 +67,7 @@ public class ATag
 	private Object hreflang;
 	private Object rel;
 	private String type;
-	private String target;
+	private Object target;
     private String title;
     private Object clazz;
     private Object style;
@@ -137,12 +137,12 @@ public class ATag
     }
 
 	@Override
-    public String getTarget() {
+    public Object getTarget() {
         return target;
     }
 
     @Override
-    public void setTarget(String target) {
+    public void setTarget(Object target) {
         this.target = target;
     }
 
@@ -252,7 +252,7 @@ public class ATag
 		}
 		if(target!=null) {
 			out.write(" target=\"");
-			encodeTextInXhtmlAttribute(target, out);
+			Coercion.write(target, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
 		if(title!=null) {

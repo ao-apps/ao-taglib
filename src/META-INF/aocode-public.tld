@@ -71,7 +71,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <name>target</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <attribute>
       <description>The title text for the link.  A nested title tag will override this value.</description>
@@ -246,7 +246,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <name>target</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <attribute>
       <description>

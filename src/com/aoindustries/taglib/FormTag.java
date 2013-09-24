@@ -64,7 +64,7 @@ public class FormTag
     private String method = "get";
     private Object id;
     private String action;
-	private String target;
+	private Object target;
     private Object enctype;
     private Object style;
     private Object onsubmit;
@@ -111,12 +111,12 @@ public class FormTag
     }
 
     @Override
-    public String getTarget() {
+    public Object getTarget() {
         return target;
     }
 
     @Override
-    public void setTarget(String target) {
+    public void setTarget(Object target) {
         this.target = target;
     }
 
@@ -177,7 +177,7 @@ public class FormTag
 		}
 		if(target!=null) {
 			out.write(" target=\"");
-			encodeTextInXhtmlAttribute(target, out);
+			Coercion.write(target, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
 		if(enctype!=null) {
