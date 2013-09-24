@@ -129,6 +129,7 @@ public class RedirectTag
         }
 
         // Add any parameters to the URL
+        if(href==null) throw new AttributeRequiredException("href");
         href = HttpParametersUtils.addParams(href, params);
 
         ServletUtil.sendRedirect(request, response, href, status);
