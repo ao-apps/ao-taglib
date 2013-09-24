@@ -52,7 +52,7 @@ public class LinkTag
     private String href;
     private MutableHttpParameters params;
 	private Object hreflang;
-	private String rel;
+	private Object rel;
 	private String type;
 
     @Override
@@ -92,12 +92,12 @@ public class LinkTag
 	}
 
 	@Override
-    public String getRel() {
+    public Object getRel() {
         return rel;
     }
 
     @Override
-    public void setRel(String rel) {
+    public void setRel(Object rel) {
         this.rel = rel;
     }
 
@@ -122,7 +122,7 @@ public class LinkTag
 					href,
 					params,
 					Coercion.toString(hreflang),
-					rel,
+					Coercion.toString(rel),
 					type
 				)
 			);
@@ -137,7 +137,7 @@ public class LinkTag
 			}
 			if(rel!=null) {
 				out.write(" rel=\"");
-				encodeTextInXhtmlAttribute(rel, out);
+				Coercion.write(rel, textInXhtmlAttributeEncoder, out);
 				out.write('"');
 			}
 			if(type!=null) {

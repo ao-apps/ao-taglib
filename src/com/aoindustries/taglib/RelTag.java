@@ -46,6 +46,6 @@ public class RelTag extends AutoEncodingBufferedTag {
     @Override
     protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
         RelAttribute relAttribute = AttributeUtils.findAttributeParent("rel", this, "rel", RelAttribute.class);
-        relAttribute.setRel(capturedBody.toString().trim());
+        relAttribute.setRel(capturedBody.trim());
     }
 }
