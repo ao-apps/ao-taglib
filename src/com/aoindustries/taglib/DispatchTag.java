@@ -60,7 +60,7 @@ abstract class DispatchTag
 		ArgsAttribute
 {
 
-	private static final String ARG_ATTRIBUTE_NAME = "arg";
+	private static final String ARGS_ATTRIBUTE_NAME = "args";
 
 	private String page;
     private String clearParams = null;
@@ -164,11 +164,11 @@ abstract class DispatchTag
         RequestDispatcher dispatcher = pageContext.getServletContext().getRequestDispatcher(contextRelativePath);
 
 		// Keep old arguments to restore
-		final Object oldArgs = request.getAttribute(ARG_ATTRIBUTE_NAME);
+		final Object oldArgs = request.getAttribute(ARGS_ATTRIBUTE_NAME);
 		try {
 			// Set new arguments
 			request.setAttribute(
-				ARG_ATTRIBUTE_NAME,
+				ARGS_ATTRIBUTE_NAME,
 				args==null
 					? Collections.emptyMap()
 					: Collections.unmodifiableMap(args)
@@ -268,7 +268,7 @@ abstract class DispatchTag
 			);
 		} finally {
 			// Restore any previous args
-			request.setAttribute(ARG_ATTRIBUTE_NAME, oldArgs);
+			request.setAttribute(ARGS_ATTRIBUTE_NAME, oldArgs);
 		}
     }
 
