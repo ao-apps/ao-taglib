@@ -30,6 +30,7 @@ import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.MediaValidator;
 import com.aoindustries.io.AutoTempFileWriter;
 import com.aoindustries.servlet.jsp.LocalizedJspException;
+import com.aoindustries.util.ref.ReferenceUtils;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletResponse;
@@ -106,7 +107,7 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
             final ValidMediaInput parentValidMediaInput = ThreadEncodingContext.validMediaInput.get();
 
             // Capture the body output while validating
-            AutoTempFileWriter capturedBody = new AutoTempFileWriter(getInitialBufferSize(), getTempFileThreshold());
+            AutoTempFileWriter capturedBody = ReferenceUtils.acquire(new AutoTempFileWriter(getInitialBufferSize(), getTempFileThreshold()));
             try {
                 JspFragment body = getJspBody();
                 if(body!=null) {
@@ -195,7 +196,7 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
                     }
                 }
             } finally {
-                capturedBody.decReferenceCount();
+				capturedBody = ReferenceUtils.release(capturedBody);
             }
         } catch(MediaException err) {
             throw new JspException(err);
