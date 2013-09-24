@@ -281,6 +281,13 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
         This has two advantages over the standard jsp:forward tag:
             1) You may clear parameters such that only those specifically added will be passed on to the next page
             2) You may have other nested tags used to select and build the set of parameters
+		
+		Nested arg tags may be used to pass arguments (via request-scope args Map).
+		Any arguments to the current page are not automatically passed-on to the target page
+		(this differs from parameters in this way).
+		The current page arguments are restored when the forward completes.
+		Arguments are passed as objects.
+		It is an error for the same argument name to be used twice (including when set as null).
     </description>
     <name>forward</name>
     <tag-class>com.aoindustries.taglib.ForwardTag</tag-class>
@@ -578,6 +585,13 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
         This has two advantages over the standard jsp:include tag:
             1) You may clear parameters such that only those specifically added will be passed on to the included page
             2) You may have other nested tags used to select and build the set of parameters
+		
+		Nested arg tags may be used to pass arguments (via request-scope args Map).
+		Any arguments to the current page are not automatically passed-on to the included page
+		(this differs from parameters in this way).
+		The current page arguments are restored when the include completes.
+		Arguments are passed as objects.
+		It is an error for the same argument name to be used twice (including when set as null).
     </description>
     <name>include</name>
     <tag-class>com.aoindustries.taglib.IncludeTag</tag-class>

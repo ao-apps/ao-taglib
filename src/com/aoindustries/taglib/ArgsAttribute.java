@@ -36,8 +36,7 @@ public interface ArgsAttribute {
 	 * then incReferenceCount must be called to the object and decReferenceCount
 	 * must be called when no longer needed (end of tag, for instance).
 	 *
-	 * @see  ReferenceUtils#replace(java.lang.Object, java.lang.Object) 
-	 * @see  ReferenceUtils#release(java.lang.Object) 
+	 * @see  ReferenceUtils
 	 *
 	 * @throws IllegalArgumentException if the argument already exists (considered to exist even if set to null previously)
 	 */

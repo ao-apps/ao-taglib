@@ -38,8 +38,7 @@ public interface ValueAttribute {
 	 * then incReferenceCount must be called to the object and decReferenceCount
 	 * must be called when no longer needed (end of tag, for instance).
 	 *
-	 * @see  ReferenceUtils#replace(java.lang.Object, java.lang.Object) 
-	 * @see  ReferenceUtils#release(java.lang.Object) 
+	 * @see  ReferenceUtils
 	 */
     void setValue(Object value);
 }
