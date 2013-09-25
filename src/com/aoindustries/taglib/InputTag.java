@@ -26,7 +26,7 @@ import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaScriptInXhtmlAttributeEncoder;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
-import com.aoindustries.io.AutoTempFileWriter;
+import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.io.Coercion;
 import com.aoindustries.servlet.jsp.LocalizedJspException;
 import java.io.IOException;
@@ -265,7 +265,7 @@ public class InputTag
 
 
     @Override
-    protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
+    protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 		if(type==null) throw new AttributeRequiredException("type");
 		if(value==null) setValue(capturedBody.trim());
 		out.write("<input");

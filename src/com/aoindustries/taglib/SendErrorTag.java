@@ -23,7 +23,7 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.io.AutoTempFileWriter;
+import com.aoindustries.io.buffer.BufferResult;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletResponse;
@@ -66,8 +66,8 @@ public class SendErrorTag extends AutoEncodingBufferedTag {
     }
 
     @Override
-    protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
-        if(message==null) message = capturedBody.toString().trim();
+    protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+        if(message==null) message = capturedBody.trim().toString();
 
         PageContext pageContext = (PageContext)getJspContext();
         HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();

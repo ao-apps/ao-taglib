@@ -24,7 +24,7 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
-import com.aoindustries.io.AutoTempFileWriter;
+import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.io.Coercion;
 import java.io.IOException;
 import java.io.Writer;
@@ -84,7 +84,7 @@ public class MetaTag
     }
 
     @Override
-    protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
+    protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 		JspTag parent = findAncestorWithClass(this, MetasAttribute.class);
 		if(content==null) setContent(capturedBody.trim());
 		// Create meta in all cases for its validation

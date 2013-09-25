@@ -23,7 +23,7 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.io.AutoTempFileWriter;
+import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
@@ -61,8 +61,8 @@ public class SrcTag extends AutoEncodingBufferedTag implements ParamsAttribute {
     }
 
     @Override
-    protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
+    protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
         SrcAttribute srcAttribute = AttributeUtils.findAttributeParent("src", this, "src", SrcAttribute.class);
-        srcAttribute.setSrc(HttpParametersUtils.addParams(capturedBody.toString().trim(), params));
+        srcAttribute.setSrc(HttpParametersUtils.addParams(capturedBody.trim().toString(), params));
     }
 }

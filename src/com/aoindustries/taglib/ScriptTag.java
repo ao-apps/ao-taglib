@@ -25,7 +25,7 @@ package com.aoindustries.taglib;
 import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
-import com.aoindustries.io.AutoTempFileWriter;
+import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.io.Coercion;
 import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
@@ -112,7 +112,7 @@ public class ScriptTag
 	//}
 
 	@Override
-    protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
+    protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 		if(src==null) {
 			// Use default auto encoding
 			capturedBody.writeTo(out);

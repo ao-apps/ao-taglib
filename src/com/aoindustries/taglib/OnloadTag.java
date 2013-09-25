@@ -23,7 +23,7 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.io.AutoTempFileWriter;
+import com.aoindustries.io.buffer.BufferResult;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -44,7 +44,7 @@ public class OnloadTag extends AutoEncodingBufferedTag {
     }
 
     @Override
-    protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
+    protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
         OnloadAttribute onloadAttribute = AttributeUtils.findAttributeParent("onload", this, "onload", OnloadAttribute.class);
         onloadAttribute.setOnload(capturedBody.trim());
     }

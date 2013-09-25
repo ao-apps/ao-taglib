@@ -25,7 +25,7 @@ package com.aoindustries.taglib;
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import static com.aoindustries.encoding.TextInXhtmlEncoder.textInXhtmlEncoder;
-import com.aoindustries.io.AutoTempFileWriter;
+import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.io.Coercion;
 import java.io.IOException;
 import java.io.Writer;
@@ -89,8 +89,8 @@ public class OptionTag
     }
 
     @Override
-    protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
-		capturedBody.trim();
+    protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+		capturedBody = capturedBody.trim();
 		if(!valueSet) setValue(capturedBody);
 		out.write("<option value=\"");
 		Coercion.write(value, textInXhtmlAttributeEncoder, out);

@@ -23,7 +23,7 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.io.AutoTempFileWriter;
+import com.aoindustries.io.buffer.BufferResult;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -44,8 +44,8 @@ public class MethodTag extends AutoEncodingBufferedTag {
     }
 
     @Override
-    protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
+    protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
         MethodAttribute methodAttribute = AttributeUtils.findAttributeParent("method", this, "method", MethodAttribute.class);
-        methodAttribute.setMethod(capturedBody.toString().trim());
+        methodAttribute.setMethod(capturedBody.trim().toString());
     }
 }

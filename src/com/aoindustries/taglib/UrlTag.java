@@ -23,7 +23,7 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.io.AutoTempFileWriter;
+import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
@@ -64,8 +64,8 @@ public class UrlTag extends AutoEncodingBufferedTag implements ParamsAttribute {
     }
 
     @Override
-    protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException {
-        String url = HttpParametersUtils.addParams(capturedBody.toString().trim(), params);
+    protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+        String url = HttpParametersUtils.addParams(capturedBody.trim().toString(), params);
         /*if(url.startsWith("/")) {
             PageContext pageContext = (PageContext)getJspContext();
             HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();

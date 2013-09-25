@@ -28,9 +28,17 @@ import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.ValidMediaInput;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.MediaValidator;
-import com.aoindustries.io.AutoTempFileWriter;
+import com.aoindustries.io.TempFile;
+import com.aoindustries.io.buffer.BufferResult;
+import com.aoindustries.io.buffer.BufferWriter;
+import com.aoindustries.io.buffer.CharArrayBufferWriter;
+import com.aoindustries.io.buffer.LoggingWriter;
 import com.aoindustries.servlet.jsp.LocalizedJspException;
+import com.aoindustries.util.WrappedException;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.Writer;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
@@ -59,6 +67,33 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
  * @author  AO Industries, Inc.
  */
 public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
+
+	/**
+	 * Enables logging of all buffer calls.
+	 */
+	private static final boolean ENABLE_BUFFER_LOGGING = true;
+
+	/**
+	 * Shared log writer.
+	 */
+	private static final Writer log;
+	static {
+		if(ENABLE_BUFFER_LOGGING) {
+			try {
+				log = new BufferedWriter(
+					new OutputStreamWriter(
+						new FileOutputStream(
+							new TempFile("AutoEncodingBufferedTag.log").getFile()
+						)
+					)
+				);
+			} catch(IOException e) {
+				throw new WrappedException(e);
+			}
+		} else {
+			log = null;
+		}
+	}
 
     /**
      * Gets the type of data that is contained by this tag.
@@ -106,12 +141,13 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
             final ValidMediaInput parentValidMediaInput = ThreadEncodingContext.validMediaInput.get();
 
             // Capture the body output while validating
-            AutoTempFileWriter capturedBody = new AutoTempFileWriter(getInitialBufferSize(), getTempFileThreshold());
+            BufferWriter bufferWriter = new CharArrayBufferWriter(128, getTempFileThreshold()); // TODO: Segmented
 			try {
+				if(ENABLE_BUFFER_LOGGING) bufferWriter = new LoggingWriter(bufferWriter, log);
 				JspFragment body = getJspBody();
 				if(body!=null) {
 					final MediaType myContentType = getContentType();
-					MediaValidator captureValidator = MediaValidator.getMediaValidator(myContentType, capturedBody);
+					MediaValidator captureValidator = MediaValidator.getMediaValidator(myContentType, bufferWriter);
 					ThreadEncodingContext.contentType.set(myContentType);
 					ThreadEncodingContext.validMediaInput.set(captureValidator);
 					try {
@@ -124,8 +160,10 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 					}
 				}
 			} finally {
-				capturedBody.close();
+				bufferWriter.close();
 			}
+			final BufferResult capturedBody = bufferWriter.getResult();
+			bufferWriter = null; // Done with object, don't need to hold long-term reference
 
 			MediaType myOutputType = getOutputType();
 			if(myOutputType==null) {
@@ -213,5 +251,5 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
      * Once the data is captured, this is called.
      * type, this version of invoke is called.
      */
-    abstract protected void doTag(AutoTempFileWriter capturedBody, Writer out) throws JspException, IOException;
+    abstract protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException;
 }
