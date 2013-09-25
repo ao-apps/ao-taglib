@@ -28,7 +28,6 @@ import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.ValidMediaInput;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.MediaValidator;
-import com.aoindustries.io.TempFile;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.io.buffer.BufferWriter;
 import com.aoindustries.io.buffer.CharArrayBufferWriter;
@@ -36,6 +35,7 @@ import com.aoindustries.io.buffer.LoggingWriter;
 import com.aoindustries.servlet.jsp.LocalizedJspException;
 import com.aoindustries.util.WrappedException;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -71,7 +71,7 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 	/**
 	 * Enables logging of all buffer calls.
 	 */
-	private static final boolean ENABLE_BUFFER_LOGGING = true;
+	private static final boolean ENABLE_BUFFER_LOGGING = false;
 
 	/**
 	 * Shared log writer.
@@ -80,10 +80,12 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 	static {
 		if(ENABLE_BUFFER_LOGGING) {
 			try {
+				File tempFile = File.createTempFile("AutoEncodingBufferedTag.log", null);
+				tempFile.deleteOnExit();
 				log = new BufferedWriter(
 					new OutputStreamWriter(
 						new FileOutputStream(
-							new TempFile("AutoEncodingBufferedTag.log").getFile()
+							tempFile
 						)
 					)
 				);
