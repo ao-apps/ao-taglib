@@ -72,7 +72,7 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 	/**
 	 * Enables logging of all buffer calls.
 	 */
-	private static final boolean ENABLE_BUFFER_LOGGING = false;
+	private static final boolean ENABLE_BUFFER_LOGGING = false; // Must be false for production releases
 
 	/**
 	 * Shared log writer.
