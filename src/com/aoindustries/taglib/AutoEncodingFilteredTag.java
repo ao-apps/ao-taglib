@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.JspFragment;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
@@ -89,7 +90,7 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport {
         try {
             final PageContext pageContext = (PageContext)getJspContext();
             final HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
-            final Writer out = pageContext.getOut();
+            final JspWriter out = pageContext.getOut();
 
             final MediaType parentContentType = ThreadEncodingContext.contentType.get();
             final ValidMediaInput parentValidMediaInput = ThreadEncodingContext.validMediaInput.get();
@@ -171,11 +172,20 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport {
      * Once the out JspWriter has been replaced to output the proper content
      * type, this version of invoke is called.
      *
+	 * @param  out  the output.  If passed-through, this will be a <code>JspWriter</code>
+	 *
      * @return This default implementation invokes the jsp body, if present.
      * @throws javax.servlet.jsp.JspException
      */
     protected void doTag(Writer out) throws JspException, IOException {
         JspFragment body = getJspBody();
-        if(body!=null) body.invoke(out);
+        if(body!=null) {
+			// Check for JspWriter to avoid a JspWriter wrapping a JspWriter
+			body.invoke(
+				(out instanceof JspWriter)
+				? null
+				: out
+			);
+		}
     }
 }

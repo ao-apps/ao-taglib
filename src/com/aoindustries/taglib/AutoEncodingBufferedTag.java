@@ -30,8 +30,8 @@ import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.MediaValidator;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.io.buffer.BufferWriter;
-import com.aoindustries.io.buffer.CharArrayBufferWriter;
 import com.aoindustries.io.buffer.LoggingWriter;
+import com.aoindustries.io.buffer.SegmentedWriter;
 import com.aoindustries.servlet.jsp.LocalizedJspException;
 import com.aoindustries.util.WrappedException;
 import java.io.BufferedWriter;
@@ -42,6 +42,7 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.JspFragment;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
@@ -143,7 +144,8 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
             final ValidMediaInput parentValidMediaInput = ThreadEncodingContext.validMediaInput.get();
 
             // Capture the body output while validating
-            BufferWriter bufferWriter = new CharArrayBufferWriter(128, getTempFileThreshold()); // TODO: Segmented
+            // BufferWriter bufferWriter = new CharArrayBufferWriter(128, getTempFileThreshold());
+            BufferWriter bufferWriter = new SegmentedWriter(getTempFileThreshold());
 			try {
 				if(ENABLE_BUFFER_LOGGING) bufferWriter = new LoggingWriter(bufferWriter, log);
 				JspFragment body = getJspBody();
@@ -174,7 +176,7 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 			} else {
 				final PageContext pageContext = (PageContext)getJspContext();
 				final HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
-				final Writer out = pageContext.getOut();
+				final JspWriter out = pageContext.getOut();
 
 				// Determine the container's content type
 				MediaType containerContentType;

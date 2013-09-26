@@ -187,7 +187,15 @@ abstract class DispatchTag
 		PageContext pageContext = (PageContext)getJspContext();
 		JspWriter out = pageContext.getOut();
 		JspFragment body = getJspBody();
-		if(body!=null) body.invoke(getJspFragmentWriter(out));
+		if(body!=null) {
+			Writer newOut = getJspFragmentWriter(out);
+			// Check for JspWriter to avoid a JspWriter wrapping a JspWriter
+			body.invoke(
+				newOut==out
+				? null
+				: newOut
+			);
+		}
 		HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
 		HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
 		if(page==null) throw new AttributeRequiredException("page");
