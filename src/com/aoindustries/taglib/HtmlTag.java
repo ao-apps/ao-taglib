@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2011, 2012  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -27,6 +27,7 @@ import com.aoindustries.util.StringUtility;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.Locale;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
@@ -60,9 +61,10 @@ public class HtmlTag extends AutoEncodingFilteredTag {
                 hasAcceptHeader = true;
                 for(String value : StringUtility.splitString(acceptValues.nextElement(), ',')) {
                     value = value.trim();
-                    String[] params = StringUtility.splitString(value, ';');
-                    if(params.length>0) {
-                        String acceptType = params[0].trim();
+                    final List<String> params = StringUtility.splitString(value, ';');
+					final int paramsSize = params.size();
+                    if(paramsSize>0) {
+                        String acceptType = params.get(0).trim();
                         if(acceptType.equals("*/*")) {
                             // No q parameter parsing for */*
                             hasAcceptStarStar = true;
@@ -73,8 +75,8 @@ public class HtmlTag extends AutoEncodingFilteredTag {
                         ) {
                             // Find any q value
                             boolean hasNegativeQ = false;
-                            for(int paramNum = 1; paramNum<params.length; paramNum++) {
-                                String paramSet = params[paramNum].trim();
+                            for(int paramNum = 1; paramNum<paramsSize; paramNum++) {
+                                String paramSet = params.get(paramNum).trim();
                                 if(paramSet.startsWith("q=") || paramSet.startsWith("Q=")) {
                                     try {
                                         float q = Float.parseFloat(paramSet.substring(2).trim());

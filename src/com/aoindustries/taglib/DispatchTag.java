@@ -132,26 +132,45 @@ abstract class DispatchTag
 	 */
 	private static boolean isFiltered(List<String> clearParamNames, String paramName) {
 		for(String filter : clearParamNames) {
-			int len = filter.length();
-			if(len>0) {
+			final int filterLen = filter.length();
+			if(filterLen>0) {
 				char chFirst = filter.charAt(0);
-				if(len==1 && chFirst=='*') {
+				if(filterLen==1 && chFirst=='*') {
 					// Match all
 					return true;
 				}
-				char chLast = filter.charAt(len-1);
+				char chLast = filter.charAt(filterLen-1);
 				if(chFirst=='*') {
 					if(chLast=='*') {
 						// *error*
 						throw new LocalizedIllegalArgumentException(accessor, "DispatchTag.invalidParameterFilter", filter);
 					} else {
 						// Suffix match
-						if(paramName.endsWith(filter.substring(1))) return true;
+						final int paramNameLen = paramName.length();
+						if(
+							paramNameLen >= (filterLen-1)
+							&& paramName.regionMatches(
+								paramNameLen-(filterLen-1),
+								filter,
+								1,
+								filterLen-1
+							)
+							//paramName.endsWith(filter.substring(1))
+						) return true;
 					}
 				} else {
 					if(chLast=='*') {
 						// Prefix match
-						if(paramName.startsWith(filter.substring(0, len-1))) return true;
+						if(
+							paramName.length() >= (filterLen-1)
+							&& paramName.regionMatches(
+								0,
+								filter,
+								0,
+								filterLen-1
+							)
+							//paramName.startsWith(filter.substring(0, filterLen-1))
+						) return true;
 					} else {
 						// Exact match
 						if(paramName.equals(filter)) return true;

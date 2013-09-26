@@ -34,6 +34,7 @@ import com.aoindustries.util.StringUtility;
 import java.io.IOException;
 import java.io.Writer;
 import java.net.URLDecoder;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
@@ -200,8 +201,8 @@ public class FormTag
 		if(actionUrl!=null) {
 			int questionPos = actionUrl.indexOf('?');
 			if(questionPos!=-1) {
-				String[] nameVals = StringUtility.splitString(actionUrl.substring(questionPos+1), '&');
-				if(nameVals.length>0) {
+				List<String> nameVals = StringUtility.splitString(actionUrl, questionPos+1, actionUrl.length(), '&');
+				if(!nameVals.isEmpty()) {
 					out.write("<div>");
 					for(String nameVal : nameVals) {
 						int equalPos = nameVal.indexOf('=');
