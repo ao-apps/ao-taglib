@@ -87,7 +87,6 @@ public class MetaTag
     protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 		JspTag parent = findAncestorWithClass(this, MetasAttribute.class);
 		if(content==null) setContent(capturedBody.trim());
-		// Create meta in all cases for its validation
 		if(parent!=null) {
 			((MetasAttribute)parent).addMeta(
 				new Meta(
