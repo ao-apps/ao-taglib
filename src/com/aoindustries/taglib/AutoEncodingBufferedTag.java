@@ -28,10 +28,13 @@ import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.ValidMediaInput;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.MediaValidator;
+import com.aoindustries.io.TempFileList;
+import com.aoindustries.io.buffer.AutoTempFileWriter;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.io.buffer.BufferWriter;
 import com.aoindustries.io.buffer.LoggingWriter;
 import com.aoindustries.io.buffer.SegmentedWriter;
+import com.aoindustries.servlet.filter.TempFileContext;
 import com.aoindustries.servlet.jsp.LocalizedJspException;
 import com.aoindustries.util.WrappedException;
 import java.io.BufferedWriter;
@@ -40,6 +43,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
@@ -68,6 +73,8 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
  * @author  AO Industries, Inc.
  */
 public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
+
+	private static final Logger logger = Logger.getLogger(AutoEncodingBufferedTag.class.getName());
 
 	/**
 	 * Enables logging of all buffer calls.
@@ -132,21 +139,53 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
     /**
      * Gets the number of characters that may be buffered before switching to the
      * use of a temp file.  The default is 4 MB.
+	 * 
+	 * @return the threshold or <code>Long.MAX_VALUE</code> to never use temp files.
      */
-    public int getTempFileThreshold() {
-        return 4 * 1024 * 1024;
+    public long getTempFileThreshold() {
+        return 4L * 1024L * 1024L;
     }
+
+	private static final Object tempFileWarningLock = new Object();
+	private static boolean tempFileWarned = false;
 
     @Override
     final public void doTag() throws JspException, IOException {
         try {
+			final PageContext pageContext = (PageContext)getJspContext();
             final MediaType parentContentType = ThreadEncodingContext.contentType.get();
             final ValidMediaInput parentValidMediaInput = ThreadEncodingContext.validMediaInput.get();
 
             // Capture the body output while validating
             // BufferWriter bufferWriter = new CharArrayBufferWriter(128, getTempFileThreshold());
-            BufferWriter bufferWriter = new SegmentedWriter(getTempFileThreshold());
+            BufferWriter bufferWriter = new SegmentedWriter();
 			try {
+				// Enable temp files if context active and threshold not Long.MAX_VALUE
+				long tempFileThreshold = getTempFileThreshold();
+				if(tempFileThreshold!=Long.MAX_VALUE) {
+					TempFileList tempFileList = TempFileContext.getTempFileList(pageContext.getRequest());
+					if(tempFileList!=null) {
+						bufferWriter = new AutoTempFileWriter(
+							bufferWriter,
+							tempFileThreshold,
+							tempFileList
+						);
+					} else {
+						// Warn once
+						synchronized(tempFileWarningLock) {
+							if(!tempFileWarned) {
+								logger.log(
+									Level.WARNING,
+									"TempFileContext not initialized: refusing to automatically create temp files for large buffers.  "
+									+ "Additional heap space may be used for large requests.  "
+									+ "Please add the {0} filter to your web.xml file.",
+									TempFileContext.class.getName()
+								);
+								tempFileWarned = true;
+							}
+						}
+					}
+				}
 				if(ENABLE_BUFFER_LOGGING) bufferWriter = new LoggingWriter(bufferWriter, log);
 				JspFragment body = getJspBody();
 				if(body!=null) {
@@ -174,7 +213,6 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 				// No output, error if anything written.
 				doTag(capturedBody, FailOnWriteWriter.getInstance());
 			} else {
-				final PageContext pageContext = (PageContext)getJspContext();
 				final HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
 				final JspWriter out = pageContext.getOut();
 
