@@ -24,6 +24,7 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
+import com.aoindustries.io.Coercion;
 import com.aoindustries.servlet.jsp.LocalizedJspException;
 import java.io.IOException;
 import java.io.Writer;
@@ -35,50 +36,23 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
-public class WriteTag extends AutoEncodingNullTag {
+public class WriteTag
+	extends AutoEncodingNullTag
+	implements
+		NameAttribute,
+		TypeAttribute
+{
 
-    private String scope;
-    private String name;
+	private String scope;
+    private Object name;
     private String property;
     private String method = "toString";
-    private MediaType type = MediaType.TEXT;
+	private Object type = MediaType.TEXT;
+    private MediaType mediaType = MediaType.TEXT;
 
     @Override
     public MediaType getOutputType() {
-        return type;
-    }
-
-    private static final Class<?>[] emptyParamTypes = new Class<?>[0];
-
-    @Override
-    protected void doTag(Writer out) throws JspException, IOException {
-        try {
-            PageContext pageContext = (PageContext)getJspContext();
-
-            // Find the bean to write
-            Object value = PropertyUtils.findObject(pageContext, scope, name, property, true, false);
-
-            // Print the value
-            if(value!=null) {
-                // Avoid reflection when possible
-                if("toString".equals(method)) {
-                    out.write(value.toString());
-                } else {
-                    try {
-                        Method refMethod = value.getClass().getMethod(method, emptyParamTypes);
-                        if(refMethod.getReturnType()==String.class) {
-                            out.write((String)refMethod.invoke(value));
-                        }
-                    } catch(NoSuchMethodException err) {
-                        throw new LocalizedJspException(ApplicationResources.accessor, "WriteTag.unableToFindMethod", method);
-                    }
-                }
-            }
-        } catch(IllegalAccessException err) {
-            throw new JspException(err);
-        } catch(InvocationTargetException err) {
-            throw new JspException(err);
-        }
+        return mediaType;
     }
 
     public String getScope() {
@@ -89,11 +63,13 @@ public class WriteTag extends AutoEncodingNullTag {
         this.scope = scope;
     }
 
-    public String getName() {
+	@Override
+    public Object getName() {
         return name;
     }
 
-    public void setName(String name) {
+	@Override
+    public void setName(Object name) {
         this.name = name;
     }
 
@@ -113,11 +89,65 @@ public class WriteTag extends AutoEncodingNullTag {
         this.method = method;
     }
 
-    public String getType() {
-        return type.getMediaType();
+	@Override
+    public Object getType() {
+        return type;
     }
 
-    public void setType(String type) throws MediaException {
-        this.type = MediaType.getMediaType(type);
+	@Override
+    public void setType(Object type) throws JspException {
+		try {
+			MediaType newMediaType =
+				(type instanceof MediaType)
+				? (MediaType)type
+				: MediaType.getMediaType(Coercion.toString(type))
+			;
+			this.type = type;
+			this.mediaType = newMediaType;
+		} catch(MediaException e) {
+			throw new JspException(e);
+		}
+    }
+
+	@Override
+    protected void doTag(Writer out) throws JspException, IOException {
+        try {
+            PageContext pageContext = (PageContext)getJspContext();
+
+			if(name==null) throw new AttributeRequiredException("name");
+
+			// Find the bean to write
+            Object value = PropertyUtils.findObject(
+				pageContext,
+				scope,
+				Coercion.toString(name),
+				property,
+				true,
+				false
+			);
+
+            // Print the value
+            if(value!=null) {
+                // Avoid reflection when possible
+                if("toString".equals(method)) {
+					Coercion.write(value, out);
+                    // out.write(value.toString());
+                } else {
+                    try {
+                        Method refMethod = value.getClass().getMethod(method);
+						Coercion.write(
+							refMethod.invoke(value),
+							out
+						);
+                    } catch(NoSuchMethodException err) {
+                        throw new LocalizedJspException(ApplicationResources.accessor, "WriteTag.unableToFindMethod", method);
+                    }
+                }
+            }
+        } catch(IllegalAccessException err) {
+            throw new JspException(err);
+        } catch(InvocationTargetException err) {
+            throw new JspException(err);
+        }
     }
 }

@@ -1644,11 +1644,13 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
         Specifies the attribute name of the bean whose property is accessed to
         retrieve the value specified by property (if specified). If property is
         not specified, the value of this bean itself will be used.
+
+		A nested name tag will override this value.
       </description>
       <name>name</name>
-      <required>true</required>
+      <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <attribute>
       <description>
