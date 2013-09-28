@@ -1008,6 +1008,50 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
+    <description>
+		Writes the value with proper escaping based on the context of the tag.
+
+		The content type depends on the value provided to the type attribute, and
+		defaults to text/plain.  The content is checked for well-formedness based
+		on its type:
+			text/javascript - no validation
+			text/plain - no validation
+			text/url - must be a valid URL
+			application/xhtml+xml - must be well-formed XHTML content. (Note: Currently only checks character values.)
+	</description>
+    <name>out</name>
+    <tag-class>com.aoindustries.taglib.OutTag</tag-class>
+    <tei-class>com.aoindustries.taglib.OutTagTEI</tei-class>
+    <body-content>scriptless</body-content>
+    <attribute>
+      <description>
+        The value to be written.  A nested value tag will override this value.
+      </description>
+      <name>value</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.Object</type>
+    </attribute>
+    <attribute>
+      <description>The default value if the resulting value is null.</description>
+      <name>default</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.Object</type>
+    </attribute>
+    <attribute>
+		<description>
+			Specifies the type of content contained in the value.  Defaults to text/plain.
+			nested type tag will override this value.
+		</description>
+      <name>type</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <example />
+  </tag>
+  <tag>
     <description>Provides a page to its PageAttribute parent tag.</description>
     <name>page</name>
     <tag-class>com.aoindustries.taglib.PageTag</tag-class>
@@ -1513,9 +1557,8 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       on its type:
           text/javascript - no validation
           text/plain - no validation
-          text/url - must be valid URL-encoded characters only
-          application/xhtml+xml - TODO: must be well-formed XHTML content. Currently only checks character values.
-          application/xhtml+xml+pre - every character must be valid XML, and not have any &lt;, &gt;
+          text/url - must be a valid URL
+          application/xhtml+xml - must be well-formed XHTML content. (Note: Currently only checks character values.)
     </description>
     <name>write</name>
     <tag-class>com.aoindustries.taglib.WriteTag</tag-class>
