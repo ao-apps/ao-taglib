@@ -22,12 +22,13 @@
  */
 package com.aoindustries.taglib;
 
-import javax.servlet.jsp.JspException;
+import com.aoindustries.servlet.jsp.LocalizedJspException;
+import static com.aoindustries.taglib.ApplicationResources.accessor;
 
 /**
  * @author  AO Industries, Inc.
  */
-public class NeedAttributeParentException extends JspException {
+public class NeedAttributeParentException extends LocalizedJspException {
 
     private static final long serialVersionUID = 1L;
 
@@ -35,7 +36,7 @@ public class NeedAttributeParentException extends JspException {
     private final String attribute;
 
     public NeedAttributeParentException(String tag, String attribute) {
-        super(ApplicationResources.accessor.getMessage("NeedAttributeParent.message", tag, attribute));
+        super(accessor, "NeedAttributeParent.message", tag, attribute);
         this.tag = tag;
         this.attribute = attribute;
     }
