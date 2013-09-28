@@ -39,12 +39,9 @@ import javax.servlet.jsp.tagext.JspFragment;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 /**
- * <p>
- * The exhibits all of the behavior of <code>AutoEncodingFilteredTag</code> with
- * the only exception being that it discards all content.  When the direct output
- * of the body will not be used, this will increase efficiency by discarding all
- * write operations immediately.
- * </p>
+ * Automatically encodes its output based on tag context while discarding all
+ * content.  When the direct output of the body will not be used, this will
+ * increase efficiency by discarding all write operations immediately.
  *
  * @author  AO Industries, Inc.
  */
