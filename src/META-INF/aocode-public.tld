@@ -157,6 +157,29 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
   </tag>
   <tag>
     <description>
+		Sets the bundle used by any nested &lt;ao:message&gt; tags or functions.
+	</description>
+    <name>bundle</name>
+    <tag-class>com.aoindustries.taglib.BundleTag</tag-class>
+    <body-content>scriptless</body-content>
+    <attribute>
+      <description>The base name of resource bundle to access.</description>
+      <name>basename</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>The prefix applied to any nested &lt;ao:message&gt; tag or function keys.</description>
+      <name>prefix</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <example />
+  </tag>
+  <tag>
+    <description>
         Provides a checked attribute to its CheckedAttribute parent tag.
         The body, after trimming, must contain either "true", "false", or be empty.
         If empty, the checked attribute of the tag is not overridden.
@@ -341,6 +364,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     </description>
     <name>getStackTraces</name>
     <tag-class>com.aoindustries.taglib.GetStackTracesTag</tag-class>
+    <tei-class>com.aoindustries.taglib.GetStackTracesTagTEI</tei-class>
     <body-content>empty</body-content>
     <attribute>
       <description>
@@ -849,6 +873,46 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
   </tag>
   <tag>
     <description>
+		Writes a value from the current localization bundle given its key.
+		Writes the value with proper escaping based on the context of the tag.
+		Message substitution arguments may be provided by nested &lt;ao:messageArg&gt; tags.
+		Must be nested inside a &lt;ao:bundle&gt; tag.
+
+		The content type depends on the value provided to the type attribute, and
+		defaults to text/plain.  The content is checked for well-formedness based
+		on its type:
+			text/javascript - no validation
+			text/plain - no validation
+			text/url - must be a valid URL
+			application/xhtml+xml - must be well-formed XHTML content. (Note: Currently only checks character values.)
+	</description>
+    <name>message</name>
+    <tag-class>com.aoindustries.taglib.MessageTag</tag-class>
+    <tei-class>com.aoindustries.taglib.MessageTagTEI</tei-class>
+    <body-content>scriptless</body-content>
+    <attribute>
+      <description>
+        The key to lookup in the bundle.  This key is appended to any prefix specified in the bundle.
+      </description>
+      <name>key</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+		<description>
+			Specifies the type of content contained in the value.  Defaults to text/plain.
+			A nested type tag will override this value.
+		</description>
+      <name>type</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.Object</type>
+    </attribute>
+    <example />
+  </tag>
+  <tag>
+    <description>
       If contained with any MetasAttribute parent, adds the meta data to the parent tag.
       Otherwise, renders a meta tag.  The content may be provided in one of three ways, in
       precedence order:
@@ -1042,12 +1106,12 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <attribute>
 		<description>
 			Specifies the type of content contained in the value.  Defaults to text/plain.
-			nested type tag will override this value.
+			A nested type tag will override this value.
 		</description>
       <name>type</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <example />
   </tag>
@@ -1547,9 +1611,9 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
   <tag>
     <description>
       Writes the bean contents.  If the bean is &lt;code&gt;null&lt;/code&gt; then nothing is displayed.
-      The method attribute provides the name of the method that will be used to convert to String.
+      The method attribute provides the name of the method that will be used to get the display value.
       If not provided, it will default to &lt;code&gt;"toString"&lt;/code&gt;.  This method
-      searches for the method with parameters and returns String.  It is an error if the method is
+      searches for the method of the given name with no parameters.  It is an error if the method is
       not found.
 
       The content type depends on the value provided to the type attribute, and
@@ -1563,7 +1627,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <name>write</name>
     <tag-class>com.aoindustries.taglib.WriteTag</tag-class>
     <tei-class>com.aoindustries.taglib.WriteTagTEI</tei-class>
-    <body-content>empty</body-content>
+    <body-content>scriptless</body-content>
     <attribute>
       <description>
         Specifies the variable scope searched to retrieve the bean specified
@@ -1609,16 +1673,17 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
     </attribute>
-    <attribute>
-      <description>
-          Specifies the type of content contained in the bean.  Defaults to text/plain.
-      </description>
-      <name>type</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
-    </attribute>
-    <example />
+	<attribute>
+		<description>
+			Specifies the type of content contained in the bean.  Defaults to text/plain.
+			A nested type tag will override this value.
+		</description>
+		<name>type</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+		<type>java.lang.Object</type>
+	</attribute>
+	<example />
   </tag>
   <tag>
     <description>
@@ -1673,6 +1738,17 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <function-class>com.aoindustries.taglib.Functions</function-class>
     <function-signature>java.lang.String join(java.lang.Iterable,java.lang.String)</function-signature>
     <example>${ao:join(iterable, separator)}</example>
+  </function>
+  <function>
+    <description>
+		Gets a value from the current localization bundle given its key.
+		No parameters may be provided.
+		Must be nested inside a &lt;ao:bundle&gt; tag.
+	</description>
+    <name>message</name>
+    <function-class>com.aoindustries.taglib.Functions</function-class>
+    <function-signature>com.aoindustries.util.i18n.BundleLookup message(java.lang.String)</function-signature>
+    <example>${ao:message(key)}</example>
   </function>
   <function>
     <description>Word wraps a string.</description>

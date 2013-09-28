@@ -22,29 +22,47 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.servlet.filter.FunctionContext;
+import com.aoindustries.lang.NullArgumentException;
+import static com.aoindustries.servlet.filter.FunctionContext.getRequest;
+import static com.aoindustries.servlet.filter.FunctionContext.getResponse;
 import com.aoindustries.servlet.http.ServletUtil;
+import com.aoindustries.servlet.jsp.LocalizedJspException;
+import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.StringUtility;
+import com.aoindustries.util.i18n.BundleLookup;
+import javax.servlet.jsp.JspException;
 
 final public class Functions {
 
     private Functions() {
     }
 
-    public static String join(Iterable<?> iter, String separator) {
-        if(iter==null) return null;
-        return StringUtility.join(iter, separator);
-    }
-
-    public static String getAbsoluteURL(String relPath) {
-        return ServletUtil.getAbsoluteURL(FunctionContext.getRequest(), relPath);
-    }
-
     public static String encodeURL(String url) {
-        return FunctionContext.getResponse().encodeURL(url);
+        return getResponse().encodeURL(url);
+    }
+
+	public static String getAbsoluteURL(String relPath) {
+        return ServletUtil.getAbsoluteURL(getRequest(), relPath);
     }
 	
 	public static String getDecimalTimeLength(Long millis) {
 		return millis==null ? null : StringUtility.getDecimalTimeLengthString(millis);
+	}
+
+	public static String join(Iterable<?> iter, String separator) {
+        if(iter==null) return null;
+        return StringUtility.join(iter, separator);
+    }
+
+	public static BundleLookup message(String key) throws JspException {
+		NullArgumentException.checkNotNull(key, "key");
+		BundleTag bundleTag = BundleTag.getBundleTag(getRequest());
+		if(bundleTag==null) throw new LocalizedJspException(accessor, "error.requiredParentTagNotFound", "bundle");
+		String prefix = bundleTag.getPrefix();
+		return new BundleLookup(
+			bundleTag.getBasename(),
+			getResponse().getLocale(),
+			prefix==null || prefix.isEmpty() ? key : prefix.concat(key)
+		);
 	}
 }
