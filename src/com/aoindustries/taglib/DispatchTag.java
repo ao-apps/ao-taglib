@@ -327,7 +327,7 @@ abstract class DispatchTag
     }
 
     /**
-     * Gets the write to use for the JspFragment.  By default it uses the same
+     * Gets the writer to use for the JspFragment.  By default it uses the same
      * writer as this tag.
      */
     Writer getJspFragmentWriter(JspWriter out) {
