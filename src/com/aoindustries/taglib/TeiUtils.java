@@ -25,6 +25,8 @@ package com.aoindustries.taglib;
 import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.Coercion;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagData;
 import javax.servlet.jsp.tagext.ValidationMessage;
@@ -41,9 +43,13 @@ final public class TeiUtils {
 	/**
 	 * Checks that a type is a valid MediaType.
 	 * 
+	 * @param  message  the list of messages to add to, maybe <code>null</code>
+	 * 
+	 * @return  the list of messages.  A new list will have been created if the <code>message</code> parameter was <code>null</code>
+	 * 
 	 * @see  MediaType#getMediaType(java.lang.String)
 	 */
-    public static ValidationMessage validateMediaType(TagData data) {
+    public static List<ValidationMessage> validateMediaType(TagData data, List<ValidationMessage> messages) {
         Object o = data.getAttribute("type");
         if(
             o != null
@@ -54,25 +60,30 @@ final public class TeiUtils {
 			try {
 				MediaType mediaType = MediaType.getMediaType(type);
 				// Value is OK
-				return null;
 			} catch(MediaException err) {
-				return new ValidationMessage(
-					data.getId(),
-					err.getMessage()
+				if(messages == null) messages = new ArrayList<ValidationMessage>();
+				messages.add(
+					new ValidationMessage(
+						data.getId(),
+						err.getMessage()
+					)
 				);
 			}
-        } else {
-            return null;
         }
+		return messages;
     }
 
 	/**
 	 * Checks that a scope is a valid.
 	 * Must be one of "page", "request", "session", or "application".
 	 * 
+	 * @param  message  the list of messages to add to, maybe <code>null</code>
+	 * 
+	 * @return  the list of messages.  A new list will have been created if the <code>message</code> parameter was <code>null</code>
+	 * 
 	 * @see PropertyUtils#getScope(java.lang.String)
 	 */
-    public static ValidationMessage validateScope(TagData data) {
+    public static List<ValidationMessage> validateScope(TagData data, List<ValidationMessage> messages) {
         Object o = data.getAttribute("scope");
         if(
             o != null
@@ -82,15 +93,16 @@ final public class TeiUtils {
 			try {
 				PropertyUtils.getScope(type);
 				// Value is OK
-				return null;
 			} catch(JspException err) {
-				return new ValidationMessage(
-					data.getId(),
-					err.getMessage()
+				if(messages == null) messages = new ArrayList<ValidationMessage>();
+				messages.add(
+					new ValidationMessage(
+						data.getId(),
+						err.getMessage()
+					)
 				);
 			}
-        } else {
-            return null;
         }
+		return messages;
     }
 }
