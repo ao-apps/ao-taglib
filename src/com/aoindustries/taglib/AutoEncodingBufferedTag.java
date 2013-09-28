@@ -174,13 +174,15 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 						// Warn once
 						synchronized(tempFileWarningLock) {
 							if(!tempFileWarned) {
-								logger.log(
-									Level.WARNING,
-									"TempFileContext not initialized: refusing to automatically create temp files for large buffers.  "
-									+ "Additional heap space may be used for large requests.  "
-									+ "Please add the {0} filter to your web.xml file.",
-									TempFileContext.class.getName()
-								);
+								if(logger.isLoggable(Level.WARNING)) {
+									logger.log(
+										Level.WARNING,
+										"TempFileContext not initialized: refusing to automatically create temp files for large buffers.  "
+										+ "Additional heap space may be used for large requests.  "
+										+ "Please add the " + TempFileContext.class.getName() + " filter to your web.xml file.",
+										new Throwable("Stack Trace")
+									);
+								}
 								tempFileWarned = true;
 							}
 						}
