@@ -22,8 +22,7 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.MediaException;
-import com.aoindustries.encoding.MediaType;
+import java.util.List;
 import javax.servlet.jsp.tagext.TagData;
 import javax.servlet.jsp.tagext.TagExtraInfo;
 import javax.servlet.jsp.tagext.ValidationMessage;
@@ -35,26 +34,8 @@ public class OutTagTEI extends TagExtraInfo {
 
     @Override
     public ValidationMessage[] validate(TagData data) {
-        Object o = data.getAttribute("type");
-        if(
-            o != null
-            && o != TagData.REQUEST_TIME_VALUE
-        ) {
-            String type = (String)o;
-            try {
-                MediaType mediaType = MediaType.getMediaType(type);
-                // Value is OK
-                return null;
-            } catch(MediaException err) {
-                return new ValidationMessage[] {
-                    new ValidationMessage(
-                        data.getId(),
-                        err.getMessage()
-                    )
-                };
-            }
-        } else {
-            return null;
-        }
+		List<ValidationMessage> messages = null;
+		messages = TeiUtils.validateMediaType(data, messages);
+		return messages==null ? null : messages.toArray(new ValidationMessage[messages.size()]);
     }
 }

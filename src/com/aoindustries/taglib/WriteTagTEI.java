@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009, 2010, 2011  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2013  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,7 +22,6 @@
  */
 package com.aoindustries.taglib;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.jsp.tagext.TagData;
 import javax.servlet.jsp.tagext.TagExtraInfo;
@@ -38,10 +37,6 @@ public class WriteTagTEI extends TagExtraInfo {
 		List<ValidationMessage> messages = null;
 		messages = TeiUtils.validateMediaType(data, messages);
 		messages = TeiUtils.validateScope(data, messages);
-		return
-			messages==null
-			? null
-			: messages.toArray(new ValidationMessage[messages.size()])
-		;
+		return messages==null ? null : messages.toArray(new ValidationMessage[messages.size()]);
     }
 }
