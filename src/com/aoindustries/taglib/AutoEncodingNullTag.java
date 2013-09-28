@@ -69,6 +69,11 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
     @Override
     final public void doTag() throws JspException, IOException {
         try {
+			// The output type cannot be determined until the body of the tag is invoked, because nested tags may
+			// alter the resulting type.  We invoke the body first to accommodate nested tags.
+			JspFragment body = getJspBody();
+			if(body!=null) body.invoke(NullWriter.getInstance());
+			
             MediaType myOutputType = getOutputType();
             if(myOutputType==null) {
                 // No output, error if anything written.
@@ -157,12 +162,10 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
     /**
      * Once the out JspWriter has been replaced to output the proper content
      * type, this version of invoke is called.
+	 * 
+	 * The body, if present, has already been invoked and any output discarded.
      *
-     * @return This default implementation invokes the jsp body, if present, discarding all output of the body.
-     * @throws javax.servlet.jsp.JspException
+     * This default implementation does nothing.
      */
-    protected void doTag(Writer out) throws JspException, IOException {
-        JspFragment body = getJspBody();
-        if(body!=null) body.invoke(NullWriter.getInstance());
-    }
+    abstract protected void doTag(Writer out) throws JspException, IOException;
 }

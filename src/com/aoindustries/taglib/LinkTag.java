@@ -112,8 +112,6 @@ public class LinkTag
 
     @Override
     protected void doTag(Writer out) throws JspException, IOException {
-		// Call super so attributes may be set by nested tags
-		super.doTag(out);
 		JspTag parent = findAncestorWithClass(this, LinksAttribute.class);
 		if(parent!=null) {
 			((LinksAttribute)parent).addLink(
