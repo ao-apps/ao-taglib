@@ -28,6 +28,7 @@ import com.aoindustries.io.Coercion;
 import com.aoindustries.servlet.jsp.LocalizedJspException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.i18n.BundleLookup;
+import com.aoindustries.util.i18n.BundleLookupResult;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
@@ -100,8 +101,10 @@ public class MessageTag
 		messageArgs.add(value);
 	}
 
+	private BundleLookupResult lookupResult;
+
 	@Override
-    protected void doTag(Writer out) throws JspException, IOException {
+	protected void writePrefix(MediaType containerType, Writer out) throws JspException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
 		BundleTag bundleTag = BundleTag.getBundleTag(pageContext.getRequest());
 		if(bundleTag==null) throw new LocalizedJspException(accessor, "error.requiredParentTagNotFound", "bundle");
@@ -123,6 +126,17 @@ public class MessageTag
 				messageArgs.toArray()
 			);
 		}
-		Coercion.write(bundleLookup, out);
+		lookupResult = bundleLookup.toString(containerType.getMarkupType());
+		lookupResult.appendPrefixTo(out);
+	}
+
+	@Override
+    protected void doTag(Writer out) throws JspException, IOException {
+		out.write(lookupResult.getResult());
     }
+
+	@Override
+	protected void writeSuffix(MediaType containerType, Writer out) throws IOException {
+		lookupResult.appendSuffixTo(out);
+	}
 }

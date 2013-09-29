@@ -129,12 +129,12 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport {
                 // If parentValidMediaInput exists, the parent should already be validating our output type.
                 if(parentValidMediaInput!=null) {
                     // Make sure the output is compatibly validated.  It is a bug in the parent to not validate its input consistent with its content type
-                    if(!parentValidMediaInput.isValidatingMediaInputType(containerContentType)) {
+                    if(!parentValidMediaInput.isValidatingMediaInputType(myContentType)) { // Was containerContentType
                         throw new LocalizedJspException(
                             ApplicationResources.accessor,
                             "AutoEncodingFilterTag.parentIncompatibleValidation",
                             parentValidMediaInput.getClass().getName(),
-                            containerContentType.getMediaType()
+                            myContentType.getMediaType()
                         );
                     }
                     ThreadEncodingContext.contentType.set(myContentType);

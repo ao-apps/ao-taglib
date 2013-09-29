@@ -283,7 +283,15 @@ public class InputTag
 			out.write('"');
 		}
 		out.write(" value=\"");
-		Coercion.write(value, textInXhtmlAttributeEncoder, out);
+		if(
+            "button".equals(type)
+            || "submit".equals(type)
+		) {
+			// Allow text markup from translations
+			AttributeUtils.writeAttributeTextMarkup(value, out);
+		} else {
+			Coercion.write(value, textInXhtmlAttributeEncoder, out);
+		}
 		out.write('"');
 		if(onclick!=null) {
 			out.write(" onclick=\"");

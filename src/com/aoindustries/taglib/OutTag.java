@@ -25,6 +25,8 @@ package com.aoindustries.taglib;
 import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.Coercion;
+import com.aoindustries.util.i18n.BundleLookup;
+import com.aoindustries.util.i18n.BundleLookupResult;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -87,12 +89,33 @@ public class OutTag
 		}
     }
 
+	private BundleLookupResult lookupResult;
+
+	@Override
+	protected void writePrefix(MediaType containerType, Writer out) throws IOException {
+		if(value instanceof BundleLookup) {
+			lookupResult = ((BundleLookup)value).toString(containerType.getMarkupType());
+		} else if(def instanceof BundleLookup) {
+			lookupResult = ((BundleLookup)def).toString(containerType.getMarkupType());
+		} else {
+			lookupResult = null;
+		}
+		if(lookupResult!=null) lookupResult.appendPrefixTo(out);
+	}
+
 	@Override
     protected void doTag(Writer out) throws JspException, IOException {
-		if(value!=null) {
+		if(lookupResult!=null) {
+			out.write(lookupResult.getResult());
+		} else if(value!=null) {
 			Coercion.write(value, out);
 		} else if(def!=null) {
 			Coercion.write(def, out);
 		}
     }
+
+	@Override
+	protected void writeSuffix(MediaType containerType, Writer out) throws IOException {
+		if(lookupResult!=null) lookupResult.appendSuffixTo(out);
+	}
 }

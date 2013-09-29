@@ -74,7 +74,9 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
             MediaType myOutputType = getOutputType();
             if(myOutputType==null) {
                 // No output, error if anything written.
+				// prefix skipped
                 doTag(FailOnWriteWriter.getInstance());
+				// suffix skipped
             } else {
                 final PageContext pageContext = (PageContext)getJspContext();
                 final HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
@@ -92,7 +94,30 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
                     // Use the content type of the response
                     containerContentType = MediaType.getMediaType(response.getContentType());
                 }
-                // Find the encoder
+				
+				// Determine the validator for the parent type.  This is to make sure prefix and suffix are valid.
+				Writer containerValidator;
+				if(parentValidMediaInput!=null) {
+					// Make sure the output is compatibly validated.  It is a bug in the parent to not validate its input consistent with its content type
+					if(!parentValidMediaInput.isValidatingMediaInputType(containerContentType)) {
+						throw new LocalizedJspException(
+							ApplicationResources.accessor,
+							"AutoEncodingFilterTag.parentIncompatibleValidation",
+							parentValidMediaInput.getClass().getName(),
+							containerContentType.getMediaType()
+						);
+					}
+					// Already validated
+					containerValidator = out;
+				} else {
+					// Need to add validator
+					containerValidator = MediaValidator.getMediaValidator(containerContentType, out);
+				}
+				
+				// Write any prefix
+				writePrefix(containerContentType, containerValidator);
+
+				// Find the encoder
                 MediaEncoder mediaEncoder = MediaEncoder.getInstance(response, myOutputType, containerContentType);
                 if(mediaEncoder!=null) {
                     setMediaEncoderOptions(mediaEncoder);
@@ -116,12 +141,12 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
                     // If parentValidMediaInput exists, the parent should already be validating our output type.
                     if(parentValidMediaInput!=null) {
                         // Make sure the output is compatibly validated.  It is a bug in the parent to not validate its input consistent with its content type
-                        if(!parentValidMediaInput.isValidatingMediaInputType(containerContentType)) {
+                        if(!parentValidMediaInput.isValidatingMediaInputType(myOutputType)) { // was containerContentType 2013-09-29
                             throw new LocalizedJspException(
                                 ApplicationResources.accessor,
                                 "AutoEncodingFilterTag.parentIncompatibleValidation",
                                 parentValidMediaInput.getClass().getName(),
-                                containerContentType.getMediaType()
+                                myOutputType.getMediaType()
                             );
                         }
                         ThreadEncodingContext.contentType.set(myOutputType);
@@ -143,13 +168,32 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
                         }
                     }
                 }
+
+				// Write any suffix
+				writeSuffix(containerContentType, containerValidator);
             }
         } catch(MediaException err) {
             throw new JspException(err);
         }
     }
 
-    /**
+	/**
+	 * <p>
+	 * Writes any prefix in the container's media type.
+	 * The output must be valid for the provided type.
+	 * This will not be called when the output type is <code>null</code>.
+	 * </p>
+	 * <p>
+	 * This default implementation prints nothing.
+	 * </p>
+	 *
+	 * @see  #getOutputType()
+	 */
+	protected void writePrefix(MediaType containerType, Writer out) throws JspException, IOException {
+		// By default, nothing is printed.
+	}
+
+	/**
      * Sets the media encoder options.  This is how subclass tag attributes
      * can effect the encoding.
      */
@@ -165,4 +209,20 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
      * This default implementation does nothing.
      */
     abstract protected void doTag(Writer out) throws JspException, IOException;
+
+	/**
+	 * <p>
+	 * Writes any suffix in the container's media type.
+	 * The output must be valid for the provided type.
+	 * This will not be called when the output type is <code>null</code>.
+	 * </p>
+	 * <p>
+	 * This default implementation prints nothing.
+	 * </p>
+	 *
+	 * @see  #getOutputType()
+	 */
+	protected void writeSuffix(MediaType containerType, Writer out) throws JspException, IOException {
+		// By default, nothing is printed.
+	}
 }

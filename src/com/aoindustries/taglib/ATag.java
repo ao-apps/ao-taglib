@@ -257,7 +257,7 @@ public class ATag
 		}
 		if(title!=null) {
 			out.write(" title=\"");
-			Coercion.write(title, textInXhtmlAttributeEncoder, out);
+			AttributeUtils.writeAttributeTextMarkup(title, out);
 			out.write('"');
 		}
 		if(clazz!=null) {

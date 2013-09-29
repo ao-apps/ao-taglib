@@ -89,9 +89,9 @@ final public class TeiUtils {
             o != null
             && o != TagData.REQUEST_TIME_VALUE
         ) {
-			String type = Coercion.toString(o);
+			String scope = Coercion.toString(o);
 			try {
-				PropertyUtils.getScope(type);
+				PropertyUtils.getScope(scope);
 				// Value is OK
 			} catch(JspException err) {
 				if(messages == null) messages = new ArrayList<ValidationMessage>();

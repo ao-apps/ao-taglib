@@ -180,11 +180,11 @@ public class ImgTag
 		out.write("\" height=\"");
 		Coercion.write(height, textInXhtmlAttributeEncoder, out);
 		out.write("\" alt=\"");
-		Coercion.write(alt, textInXhtmlAttributeEncoder, out);
+		AttributeUtils.writeAttributeTextMarkup(alt, out);
 		out.write('"');
 		if(title!=null) {
 			out.write(" title=\"");
-			Coercion.write(title, textInXhtmlAttributeEncoder, out);
+			AttributeUtils.writeAttributeTextMarkup(title, out);
 			out.write('"');
 		}
 		if(clazz!=null) {

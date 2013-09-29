@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2011, 2012, 2013  AO Industries, Inc.
+ * Copyright (C) 2013  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -23,26 +23,45 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.util.i18n.EditableResourceBundle;
+import com.aoindustries.io.buffer.BufferResult;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
 
 /**
- * Disables the resource editor.
+ * @author  AO Industries, Inc.
  */
-public class DisableResourceEditorTag extends AutoEncodingNullTag {
+public class MessageArgTag
+	extends AutoEncodingBufferedTag
+	implements ValueAttribute
+{
 
-    /**
-     * No output.
-     */
+    private Object value;
+
+    @Override
+    public MediaType getContentType() {
+        return MediaType.TEXT;
+    }
+
     @Override
     public MediaType getOutputType() {
         return null;
     }
 
     @Override
-    protected void doTag(Writer out) throws JspException, IOException {
-        EditableResourceBundle.resetRequest(false, null, false);
+    public Object getValue() {
+        return value;
+    }
+
+    @Override
+    public void setValue(Object value) {
+		this.value = value;
+    }
+
+    @Override
+    protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+		MessageArgsAttribute messageArgsAttribute = AttributeUtils.findAttributeParent("messageArg", this, "messageArgs", MessageArgsAttribute.class);
+		if(value==null) setValue(capturedBody.trim());
+		messageArgsAttribute.addMessageArg(value);
     }
 }
