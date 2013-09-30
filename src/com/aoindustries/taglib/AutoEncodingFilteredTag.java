@@ -71,6 +71,7 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport {
 
     /**
      * Gets the type of data that is contained by this tag.
+	 * This is also the output type.
      */
     public abstract MediaType getContentType();
 
@@ -126,17 +127,11 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport {
                     mediaWriter.writeSuffix();
                 }
             } else {
-                // If parentValidMediaInput exists, the parent should already be validating our output type.
-                if(parentValidMediaInput!=null) {
-                    // Make sure the output is compatibly validated.  It is a bug in the parent to not validate its input consistent with its content type
-                    if(!parentValidMediaInput.isValidatingMediaInputType(containerContentType)) {
-                        throw new LocalizedJspException(
-                            ApplicationResources.accessor,
-                            "AutoEncodingFilterTag.parentIncompatibleValidation",
-                            parentValidMediaInput.getClass().getName(),
-                            containerContentType.getMediaType()
-                        );
-                    }
+				// If parentValidMediaInput exists and is validating our output type, no additional validation is required
+				if(
+					parentValidMediaInput!=null
+					&& parentValidMediaInput.isValidatingMediaInputType(myContentType)
+				) {
                     ThreadEncodingContext.contentType.set(myContentType);
                     try {
                         doTag(out);
@@ -144,7 +139,7 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport {
                         ThreadEncodingContext.contentType.set(parentContentType);
                     }
                 } else {
-                    // Not using an encoder and no parent, validate our own output.
+						// Not using an encoder and parent doesn't validate our output, validate our own output.
                     MediaValidator validator = MediaValidator.getMediaValidator(myContentType, out);
                     ThreadEncodingContext.contentType.set(myContentType);
                     ThreadEncodingContext.validMediaInput.set(validator);

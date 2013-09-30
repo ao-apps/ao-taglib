@@ -248,17 +248,11 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 						mediaWriter.writeSuffix();
 					}
 				} else {
-					// If parentValidMediaInput exists, the parent should already be validating our output type.
-					if(parentValidMediaInput!=null) {
-						// Make sure the output is compatibly validated.  It is a bug in the parent to not validate its input consistent with its content type
-						if(!parentValidMediaInput.isValidatingMediaInputType(containerContentType)) {
-							throw new LocalizedJspException(
-								ApplicationResources.accessor,
-								"AutoEncodingFilterTag.parentIncompatibleValidation",
-								parentValidMediaInput.getClass().getName(),
-								containerContentType.getMediaType()
-							);
-						}
+					// If parentValidMediaInput exists and is validating our output type, no additional validation is required
+					if(
+						parentValidMediaInput!=null
+						&& parentValidMediaInput.isValidatingMediaInputType(myOutputType)
+					) {
 						ThreadEncodingContext.contentType.set(myOutputType);
 						try {
 							doTag(capturedBody, out);
@@ -266,7 +260,7 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 							ThreadEncodingContext.contentType.set(parentContentType);
 						}
 					} else {
-						// Not using an encoder and no parent, validate our own output.
+						// Not using an encoder and parent doesn't validate our output, validate our own output.
 						MediaValidator validator = MediaValidator.getMediaValidator(myOutputType, out);
 						ThreadEncodingContext.contentType.set(myOutputType);
 						ThreadEncodingContext.validMediaInput.set(validator);
