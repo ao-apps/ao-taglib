@@ -881,10 +881,11 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		The content type depends on the value provided to the type attribute, and
 		defaults to text/plain.  The content is checked for well-formedness based
 		on its type:
-			text/javascript - no validation
-			text/plain - no validation
-			text/url - must be a valid URL
-			application/xhtml+xml - must be well-formed XHTML content. (Note: Currently only checks character values.)
+			"javascript" or "text/javascript" - no validation
+			"text" or "text/plain" - no validation
+			"url" or "text/url" - must be a valid URL
+			"xhtml" or "application/xhtml+xml" - must be well-formed XHTML content. (Note: Currently only checks character values.)
+			"xhtml_attribute" or "application/xhtml+xml+attribute" - must be a valid XHTML attribute.
 	</description>
     <name>message</name>
     <tag-class>com.aoindustries.taglib.MessageTag</tag-class>
@@ -1095,10 +1096,11 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		The content type depends on the value provided to the type attribute, and
 		defaults to text/plain.  The content is checked for well-formedness based
 		on its type:
-			text/javascript - no validation
-			text/plain - no validation
-			text/url - must be a valid URL
-			application/xhtml+xml - must be well-formed XHTML content. (Note: Currently only checks character values.)
+			"javascript" or "text/javascript" - no validation
+			"text" or "text/plain" - no validation
+			"url" or "text/url" - must be a valid URL
+			"xhtml" or "application/xhtml+xml" - must be well-formed XHTML content. (Note: Currently only checks character values.)
+			"xhtml_attribute" or "application/xhtml+xml+attribute" - must be a valid XHTML attribute.
 	</description>
     <name>out</name>
     <tag-class>com.aoindustries.taglib.OutTag</tag-class>
@@ -1639,10 +1641,11 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       The content type depends on the value provided to the type attribute, and
       defaults to text/plain.  The content is checked for well-formedness based
       on its type:
-          text/javascript - no validation
-          text/plain - no validation
-          text/url - must be a valid URL
-          application/xhtml+xml - must be well-formed XHTML content. (Note: Currently only checks character values.)
+			"javascript" or "text/javascript" - no validation
+			"text" or "text/plain" - no validation
+			"url" or "text/url" - must be a valid URL
+			"xhtml" or "application/xhtml+xml" - must be well-formed XHTML content. (Note: Currently only checks character values.)
+			"xhtml_attribute" or "application/xhtml+xml+attribute" - must be a valid XHTML attribute.
     </description>
     <name>write</name>
     <tag-class>com.aoindustries.taglib.WriteTag</tag-class>

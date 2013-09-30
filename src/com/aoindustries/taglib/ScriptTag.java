@@ -72,7 +72,7 @@ public class ScriptTag
 			MediaType newMediaType =
 				(type instanceof MediaType)
 				? (MediaType)type
-				: MediaType.getMediaType(Coercion.toString(type))
+				: MediaType.getMediaTypeForContentType(Coercion.toString(type))
 			;
 			if(newMediaType!=MediaType.JAVASCRIPT) throw new MediaException(ApplicationResources.accessor.getMessage("ScriptTag.unsupportedMediaType", newMediaType));
 			this.type = type;
@@ -120,7 +120,7 @@ public class ScriptTag
 			// Write script tag with src attribute, discarding any body
 			PageContext pageContext = (PageContext)getJspContext();
 			out.write("<script type=\"");
-			encodeTextInXhtmlAttribute(mediaType.getMediaType(), out);
+			encodeTextInXhtmlAttribute(mediaType.getContentType(), out);
 			out.write('"');
 			IframeTag.writeSrc(out, pageContext, src, params);
 			out.write("></script>");

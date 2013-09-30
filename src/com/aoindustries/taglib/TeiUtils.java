@@ -58,7 +58,11 @@ final public class TeiUtils {
         ) {
 			String type = Coercion.toString(o);
 			try {
-				MediaType mediaType = MediaType.getMediaType(type);
+				// First allow shortcuts (matching enum names)
+				MediaType mediaType = MediaType.getMediaTypeByName(type);
+				if(mediaType == null) {
+					mediaType = MediaType.getMediaTypeForContentType(type);
+				}
 				// Value is OK
 			} catch(MediaException err) {
 				if(messages == null) messages = new ArrayList<ValidationMessage>();

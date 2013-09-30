@@ -103,7 +103,7 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport {
                 containerContentType = parentContentType;
             } else {
                 // Use the content type of the response
-                containerContentType = MediaType.getMediaType(response.getContentType());
+                containerContentType = MediaType.getMediaTypeForContentType(response.getContentType());
             }
             // Find the encoder
             final MediaType myContentType = getContentType();

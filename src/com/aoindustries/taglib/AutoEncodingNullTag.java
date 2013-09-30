@@ -92,7 +92,7 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
                     containerContentType = parentContentType;
                 } else {
                     // Use the content type of the response
-                    containerContentType = MediaType.getMediaType(response.getContentType());
+                    containerContentType = MediaType.getMediaTypeForContentType(response.getContentType());
                 }
 				
 				// Determine the validator for the parent type.  This is to make sure prefix and suffix are valid.
@@ -104,7 +104,7 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
 							ApplicationResources.accessor,
 							"AutoEncodingFilterTag.parentIncompatibleValidation",
 							parentValidMediaInput.getClass().getName(),
-							containerContentType.getMediaType()
+							containerContentType.getContentType()
 						);
 					}
 					// Already validated

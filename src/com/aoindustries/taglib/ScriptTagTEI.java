@@ -42,7 +42,7 @@ public class ScriptTagTEI extends TagExtraInfo {
         ) {
             String type = (String)o;
             try {
-                MediaType mediaType = MediaType.getMediaType(type);
+                MediaType mediaType = MediaType.getMediaTypeForContentType(type);
                 if(mediaType!=MediaType.JAVASCRIPT) {
                     return new ValidationMessage[] {
                         new ValidationMessage(data.getId(), ApplicationResources.accessor.getMessage("ScriptTag.unsupportedMediaType", type))

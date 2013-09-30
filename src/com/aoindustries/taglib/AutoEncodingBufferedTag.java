@@ -225,7 +225,7 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 					containerContentType = parentContentType;
 				} else {
 					// Use the content type of the response
-					containerContentType = MediaType.getMediaType(response.getContentType());
+					containerContentType = MediaType.getMediaTypeForContentType(response.getContentType());
 				}
 				// Find the encoder
 				MediaEncoder mediaEncoder = MediaEncoder.getInstance(response, myOutputType, containerContentType);

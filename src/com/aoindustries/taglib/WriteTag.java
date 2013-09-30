@@ -98,17 +98,22 @@ public class WriteTag
 
 	@Override
     public void setType(Object type) throws JspException {
-		try {
-			MediaType newMediaType =
-				(type instanceof MediaType)
-				? (MediaType)type
-				: MediaType.getMediaType(Coercion.toString(type))
-			;
-			this.type = type;
-			this.mediaType = newMediaType;
-		} catch(MediaException e) {
-			throw new JspException(e);
+		MediaType newMediaType;
+		if(type instanceof MediaType) {
+			newMediaType = (MediaType)type;
+		} else {
+			String typeStr = Coercion.toString(type);
+			newMediaType = MediaType.getMediaTypeByName(typeStr);
+			if(newMediaType==null) {
+				try {
+					newMediaType = MediaType.getMediaTypeForContentType(typeStr);
+				} catch(MediaException e) {
+					throw new JspException(e);
+				}
+			}
 		}
+		this.type = type;
+		this.mediaType = newMediaType;
     }
 
 	// One or neither of these values will be set after writePrefix, but not both
