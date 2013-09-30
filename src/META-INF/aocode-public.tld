@@ -1249,6 +1249,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
   </tag>
   <tag>
     <description>
+      Manually establishes a script context when automatic detection is not possible.
       The body of this tag contains a script.  The script should not be encoded
       as if in HTML/XML, such as &amp;amp; instead of just a single &amp;.  The
       script may contain any characters valid in that language, including &lt;,
@@ -1446,6 +1447,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
   </tag>
   <tag>
     <description>
+      Manually establishes a plaintext context when automatic detection is not possible.
       The body of this tag contains any arbitary plain text.  In some contexts,
       such as contained in a JavaScript string, this may be binary transparent.
 
@@ -1571,6 +1573,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
   </tag>
   <tag>
     <description>
+      Manually establishes a URL context when automatic detection is not possible.
       The body of this tag contains a Uniform Resource Identifier (URI or URL).
 
       Before the first ? symbol, may contain characters in any language.  This
@@ -1706,6 +1709,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
   </tag>
   <tag>
     <description>
+      Manually establishes an XHTML attribute context when automatic detection is not possible.
       The body of this tag contains well-formed XHTML 1.0-compliant attribute.
 
       The content type of this tag is application/xhtml+xml+attribute.
@@ -1717,6 +1721,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
   </tag>
   <tag>
     <description>
+      Manually establishes an XHTML context when automatic detection is not possible.
       The body of this tag contains well-formed XHTML 1.0-compliant markup.
 
       The content type of this tag is application/xhtml+xml.
