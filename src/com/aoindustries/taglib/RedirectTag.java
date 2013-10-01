@@ -22,7 +22,6 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.io.Coercion;
 import com.aoindustries.io.NullWriter;
 import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
@@ -49,28 +48,26 @@ public class RedirectTag
 	extends SimpleTagSupport
 	implements 
 		HrefAttribute,
-		ParamsAttribute,
-		TypeAttribute
+		ParamsAttribute
 {
 
-    public static boolean isValidType(String type) {
+    public static boolean isValidStatusCode(String statusCode) {
         return
-            "moved_permanently".equals(type)
-            || "permanent".equals(type)
-            || "301".equals(type)
-            || "moved_temporarily".equals(type)
-            || "found".equals(type)
-            || "temporary".equals(type)
-            || "302".equals(type)
-            || "see_other".equals(type)
-            || "303".equals(type)
+            "moved_permanently".equals(statusCode)
+            || "permanent".equals(statusCode)
+            || "301".equals(statusCode)
+            || "moved_temporarily".equals(statusCode)
+            || "found".equals(statusCode)
+            || "temporary".equals(statusCode)
+            || "302".equals(statusCode)
+            || "see_other".equals(statusCode)
+            || "303".equals(statusCode)
         ;
     }
 
     private String href;
     private HttpParametersMap params;
-    private Object type;
-	private String typeString;
+	private String statusCode;
 
     @Override
     public String getHref() {
@@ -93,17 +90,13 @@ public class RedirectTag
         params.addParameter(name, value);
     }
 
-    @Override
-    public Object getType() {
-        return type;
+    public String getStatusCode() {
+        return statusCode;
     }
 
-    @Override
-    public void setType(Object type) throws JspException {
-		String typeStr = Coercion.toString(type);
-        if(!isValidType(typeStr)) throw new LocalizedJspException(ApplicationResources.accessor, "RedirectTag.type.invalid", typeStr);
-        this.type = type;
-		this.typeString = typeStr;
+    public void setStatusCode(String statusCode) throws JspException {
+        if(!isValidStatusCode(statusCode)) throw new LocalizedJspException(ApplicationResources.accessor, "RedirectTag.statusCode.invalid", statusCode);
+        this.statusCode = statusCode;
     }
 
     @Override
@@ -120,28 +113,28 @@ public class RedirectTag
         HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
 
         int status;
-        if(type==null) throw new AttributeRequiredException("type");
+        if(statusCode==null) throw new AttributeRequiredException("statusCode");
         if(
-			"301".equals(typeString)
-			|| "moved_permanently".equals(typeString)
-			|| "permanent".equals(typeString)
+			"301".equals(statusCode)
+			|| "moved_permanently".equals(statusCode)
+			|| "permanent".equals(statusCode)
 		) {
             status = HttpServletResponse.SC_MOVED_PERMANENTLY;
         } else if(
-			"302".equals(typeString)
-			|| "moved_temporarily".equals(typeString)
-			|| "found".equals(typeString)
-			|| "temporary".equals(typeString)
+			"302".equals(statusCode)
+			|| "moved_temporarily".equals(statusCode)
+			|| "found".equals(statusCode)
+			|| "temporary".equals(statusCode)
 		) {
             status = HttpServletResponse.SC_MOVED_TEMPORARILY;
             //response.sendRedirect(encodedHref);
         } else if(
-			"303".equals(typeString)
-			|| "see_other".equals(typeString)
+			"303".equals(statusCode)
+			|| "see_other".equals(statusCode)
 		) {
             status = HttpServletResponse.SC_SEE_OTHER;
         } else {
-            throw new AssertionError("Unexpected value for type: "+typeString);
+            throw new AssertionError("Unexpected value for statusCode: "+statusCode);
         }
 
         // Add any parameters to the URL

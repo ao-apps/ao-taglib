@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2010, 2011  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2013  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -33,15 +33,15 @@ public class RedirectTagTEI extends TagExtraInfo {
 
     @Override
     public ValidationMessage[] validate(TagData data) {
-        Object o = data.getAttribute("type");
+        Object o = data.getAttribute("statusCode");
         if(
             o != null
             && o != TagData.REQUEST_TIME_VALUE
         ) {
-            String type = (String)o;
-            if(!RedirectTag.isValidType(type)) {
+            String statusCode = (String)o;
+            if(!RedirectTag.isValidStatusCode(statusCode)) {
                 return new ValidationMessage[] {
-                    new ValidationMessage(data.getId(), ApplicationResources.accessor.getMessage("RedirectTag.type.invalid", type))
+                    new ValidationMessage(data.getId(), ApplicationResources.accessor.getMessage("RedirectTag.statusCode.invalid", statusCode))
                 };
             }
         }

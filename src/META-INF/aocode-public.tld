@@ -336,7 +336,10 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
   <tag>
 	<description><![CDATA[
 		<p>
-			Forwards to another resource, ends processing of the current page.
+			Forwards to another resource.
+			Stops processing of the containing JSP page.
+		</p>
+		<p>
 			If parameters are not cleared, nested parameters are added before request parameters.
 			This has three advantages over the standard &lt;jsp:forward&gt; tag:
 			<ol>
@@ -1408,11 +1411,34 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
-    <description>Redirects the browser, ends processing of the current page.</description>
+    <description><![CDATA[
+		Redirects the browser to another location.
+		Stops processing of the containing JSP page.
+	]]></description>
     <name>redirect</name>
     <tag-class>com.aoindustries.taglib.RedirectTag</tag-class>
     <tei-class>com.aoindustries.taglib.RedirectTagTEI</tei-class>
     <body-content>scriptless</body-content>
+    <attribute>
+		<description><![CDATA[
+			<p>
+				The status code of redirect performed.  Is one of:
+				<ul>
+					<li>"moved_permanently" (or 301)</li>
+					<li>"moved_temporarily" (or 302)</li>
+					<li>"see_other" (or 303) - Hint: Used for redirect-after-post</li>
+				</ul>
+			</p>
+			<p>
+				Because the redirect type has important consequences on search engines and browser caches, the decision should be made for
+				each redirect.  Thus, this attribute is required.
+			</p>
+      ]]></description>
+      <name>statusCode</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
     <attribute>
 		<description><![CDATA[
 			The destination for the redirect.
@@ -1427,29 +1453,6 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
-    </attribute>
-    <attribute>
-		<description><![CDATA[
-			<p>
-				The type of redirect performed.  Is one of:
-				<ul>
-					<li>"moved_permanently" (or 301)</li>
-					<li>"moved_temporarily" (or 302)</li>
-					<li>"see_other" (or 303)</li>
-				</ul>
-			</p>
-			<p>
-				Because the redirect type has important consequences on search engines and browser caches, the decision should be made for
-				each redirect.  Thus, this attribute must be set directly or in a nested &lt;ao:type&gt; tag.
-			</p>
-			<p>
-				A nested &lt;ao:type&gt; tag will override this value.
-			</p>
-      ]]></description>
-      <name>type</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.Object</type>
     </attribute>
     <example />
   </tag>
@@ -1618,7 +1621,11 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
-    <description>Returns an error status, stops processing of the containing JSP page.  Results in error handler processing.</description>
+    <description><![CDATA[
+		Returns an error status.
+		Stops processing of the containing JSP page.
+		Results in error handler processing.
+	]]></description>
     <name>sendError</name>
     <tag-class>com.aoindustries.taglib.SendErrorTag</tag-class>
     <body-content>scriptless</body-content>
