@@ -27,14 +27,14 @@ import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.Coercion;
 import com.aoindustries.servlet.jsp.LocalizedJspException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
-import com.aoindustries.util.i18n.BundleLookup;
-import com.aoindustries.util.i18n.BundleLookupResult;
+import com.aoindustries.util.i18n.ApplicationResourcesAccessor;
+import com.aoindustries.util.i18n.BundleLookupMarkup;
+import com.aoindustries.util.i18n.BundleLookupThreadContext;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
@@ -106,42 +106,39 @@ public class MessageTag
 		messageArgs.add(value);
 	}
 
-	private BundleLookupResult lookupResult;
+	private String lookupResult;
+	private BundleLookupMarkup lookupMarkup;
 
 	@Override
 	protected void writePrefix(MediaType containerType, Writer out) throws JspException, IOException {
+		// Find parent bundle
 		PageContext pageContext = (PageContext)getJspContext();
 		BundleTag bundleTag = BundleTag.getBundleTag(pageContext.getRequest());
 		if(bundleTag==null) throw new LocalizedJspException(accessor, "error.requiredParentTagNotFound", "bundle");
-		Locale locale = pageContext.getResponse().getLocale();
+		ApplicationResourcesAccessor accessor = bundleTag.getAccessor();
+		// Lookup the message value
 		String prefix = bundleTag.getPrefix();
 		String combinedKey = prefix==null || prefix.isEmpty() ? key : prefix.concat(key);
-		BundleLookup bundleLookup;
 		if(messageArgs==null) {
-			bundleLookup = new BundleLookup(
-				bundleTag.getBasename(),
-				locale,
-				combinedKey
-			);
+			lookupResult = accessor.getMessage(combinedKey);
 		} else {
-			bundleLookup = new BundleLookup(
-				bundleTag.getBasename(),
-				locale,
-				combinedKey,
-				messageArgs.toArray()
-			);
+			lookupResult = accessor.getMessage(combinedKey, messageArgs.toArray());
 		}
-		lookupResult = bundleLookup.toString(containerType.getMarkupType());
-		lookupResult.appendPrefixTo(out);
+		// Look for any message markup
+		BundleLookupThreadContext threadContext = BundleLookupThreadContext.getThreadContext(false);
+		if(threadContext!=null) {
+			lookupMarkup = threadContext.getLookupMarkup(lookupResult);
+		}
+		if(lookupMarkup!=null) lookupMarkup.appendPrefixTo(containerType.getMarkupType(), out);
 	}
 
 	@Override
     protected void doTag(Writer out) throws JspException, IOException {
-		out.write(lookupResult.getResult());
+		out.write(lookupResult);
     }
 
 	@Override
 	protected void writeSuffix(MediaType containerType, Writer out) throws IOException {
-		lookupResult.appendSuffixTo(out);
+		if(lookupMarkup!=null) lookupMarkup.appendSuffixTo(containerType.getMarkupType(), out);
 	}
 }

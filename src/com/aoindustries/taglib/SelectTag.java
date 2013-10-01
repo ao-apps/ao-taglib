@@ -27,6 +27,7 @@ import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.io.Coercion;
+import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -186,7 +187,7 @@ public class SelectTag
 			out.write('"');
 		}
 		out.write('>');
-		capturedBody.writeTo(out);
+		MarkupUtils.writeWithMarkup(capturedBody, MarkupType.XHTML, out);
 		out.write("</select>");
     }
 }

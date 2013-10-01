@@ -26,7 +26,10 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
   <short-name>aocode-public</short-name>
   <uri>http://aoindustries.com/aocode-public-taglib</uri>
   <tag>
-    <description>Renders an a tag.</description>
+    <description>
+		Renders an a tag.
+		The body is trimmed while written.
+	</description>
     <name>a</name>
     <tag-class>com.aoindustries.taglib.ATag</tag-class>
     <body-content>scriptless</body-content>
@@ -1774,7 +1777,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</description>
     <name>message</name>
     <function-class>com.aoindustries.taglib.Functions</function-class>
-    <function-signature>com.aoindustries.util.i18n.BundleLookup message(java.lang.String)</function-signature>
+    <function-signature>java.lang.String message(java.lang.String)</function-signature>
     <example>${ao:message(key)}</example>
   </function>
   <function>

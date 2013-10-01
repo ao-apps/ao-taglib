@@ -22,6 +22,7 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.util.i18n.ApplicationResourcesAccessor;
 import java.io.IOException;
 import javax.servlet.ServletRequest;
 import javax.servlet.jsp.JspException;
@@ -50,14 +51,20 @@ public class BundleTag
 	}
 
 	private String basename;
+	private ApplicationResourcesAccessor accessor; // Set along with basename
 	private String prefix;
 
     public String getBasename() {
         return basename;
     }
 
-    public void setBasename(String basename) {
+	public ApplicationResourcesAccessor getAccessor() {
+		return accessor;
+	}
+
+	public void setBasename(String basename) {
         this.basename = basename;
+		this.accessor = ApplicationResourcesAccessor.getInstance(basename);
     }
 
     public String getPrefix() {

@@ -22,13 +22,6 @@
  */
 package com.aoindustries.taglib;
 
-import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
-import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
-import com.aoindustries.io.Coercion;
-import com.aoindustries.util.i18n.BundleLookup;
-import com.aoindustries.util.i18n.BundleLookupResult;
-import java.io.IOException;
-import java.io.Writer;
 import javax.servlet.jsp.tagext.JspTag;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
@@ -48,22 +41,6 @@ public final class AttributeUtils  {
         if(parent==null) throw new NeedAttributeParentException(tag, attribute);
         return parent;
     }
-
-	/**
-	 * Writes an attribute with text markup enabled.  The attribute is encoded.
-	 * 
-	 * @see  BundleLookup.MarkupType
-	 */
-	public static void writeAttributeTextMarkup(Object value, Writer out) throws IOException {
-		if(value instanceof BundleLookup) {
-			BundleLookupResult result = ((BundleLookup)value).toString(BundleLookup.MarkupType.TEXT);
-			result.appendPrefixTo(textInXhtmlAttributeEncoder, out);
-			encodeTextInXhtmlAttribute(result.getResult(), out);
-			result.appendSuffixTo(textInXhtmlAttributeEncoder, out);
-		} else {
-			Coercion.write(value, textInXhtmlAttributeEncoder, out);
-		}
-	}
 
 	/**
      * Make no instances.

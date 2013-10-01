@@ -27,6 +27,7 @@ import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlA
 import static com.aoindustries.encoding.TextInXhtmlEncoder.textInXhtmlEncoder;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.io.Coercion;
+import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -98,7 +99,8 @@ public class OptionTag
 		if(selected) out.write(" selected=\"selected\"");
 		if(disabled) out.write(" disabled=\"disabled\"");
 		out.write('>');
-		Coercion.write(capturedBody, textInXhtmlEncoder, out);
+		// Allow text markup from translations
+		MarkupUtils.writeWithMarkup(capturedBody, MarkupType.TEXT, textInXhtmlEncoder, out);
 		out.write("</option>");
     }
 }

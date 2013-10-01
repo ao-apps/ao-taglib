@@ -35,6 +35,7 @@ import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.net.HttpParametersUtils;
 import com.aoindustries.net.MutableHttpParameters;
 import com.aoindustries.servlet.jsp.LocalizedJspException;
+import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
@@ -257,7 +258,7 @@ public class ATag
 		}
 		if(title!=null) {
 			out.write(" title=\"");
-			AttributeUtils.writeAttributeTextMarkup(title, out);
+			MarkupUtils.writeWithMarkup(title, MarkupType.TEXT, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
 		if(clazz!=null) {
@@ -286,7 +287,7 @@ public class ATag
 			out.write('"');
 		}
 		out.write('>');
-		capturedBody.writeTo(out);
+		MarkupUtils.writeWithMarkup(capturedBody.trim(), MarkupType.XHTML, out);
 		out.write("</a>");
     }
 }

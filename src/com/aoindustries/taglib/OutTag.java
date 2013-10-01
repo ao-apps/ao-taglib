@@ -25,8 +25,9 @@ package com.aoindustries.taglib;
 import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.Coercion;
-import com.aoindustries.util.i18n.BundleLookup;
-import com.aoindustries.util.i18n.BundleLookupResult;
+import com.aoindustries.io.Writable;
+import com.aoindustries.util.i18n.BundleLookupMarkup;
+import com.aoindustries.util.i18n.BundleLookupThreadContext;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -94,24 +95,32 @@ public class OutTag
 		this.mediaType = newMediaType;
     }
 
-	private BundleLookupResult lookupResult;
+	private String toStringResult;
+	private BundleLookupMarkup lookupMarkup;
 
 	@Override
 	protected void writePrefix(MediaType containerType, Writer out) throws IOException {
-		if(value instanceof BundleLookup) {
-			lookupResult = ((BundleLookup)value).toString(containerType.getMarkupType());
-		} else if(def instanceof BundleLookup) {
-			lookupResult = ((BundleLookup)def).toString(containerType.getMarkupType());
-		} else {
-			lookupResult = null;
+		Object effectiveValue = value!=null ? value : def;
+		if(
+			!(effectiveValue instanceof Writable)
+			|| ((Writable)effectiveValue).isFastToString()
+		) {
+			toStringResult = Coercion.toString(effectiveValue);
+			// Look for any message markup
+			BundleLookupThreadContext threadContext = BundleLookupThreadContext.getThreadContext(false);
+			if(threadContext!=null) {
+				lookupMarkup = threadContext.getLookupMarkup(toStringResult);
+			} else {
+				lookupMarkup = null;
+			}
+			if(lookupMarkup!=null) lookupMarkup.appendPrefixTo(containerType.getMarkupType(), out);
 		}
-		if(lookupResult!=null) lookupResult.appendPrefixTo(out);
 	}
 
 	@Override
     protected void doTag(Writer out) throws JspException, IOException {
-		if(lookupResult!=null) {
-			out.write(lookupResult.getResult());
+		if(toStringResult!=null) {
+			out.write(toStringResult);
 		} else if(value!=null) {
 			Coercion.write(value, out);
 		} else if(def!=null) {
@@ -121,6 +130,6 @@ public class OutTag
 
 	@Override
 	protected void writeSuffix(MediaType containerType, Writer out) throws IOException {
-		if(lookupResult!=null) lookupResult.appendSuffixTo(out);
+		if(lookupMarkup!=null) lookupMarkup.appendSuffixTo(containerType.getMarkupType(), out);
 	}
 }

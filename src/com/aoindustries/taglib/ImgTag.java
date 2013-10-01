@@ -32,6 +32,7 @@ import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.net.HttpParametersUtils;
+import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
@@ -180,11 +181,11 @@ public class ImgTag
 		out.write("\" height=\"");
 		Coercion.write(height, textInXhtmlAttributeEncoder, out);
 		out.write("\" alt=\"");
-		AttributeUtils.writeAttributeTextMarkup(alt, out);
+		MarkupUtils.writeWithMarkup(alt, MarkupType.TEXT, textInXhtmlAttributeEncoder, out);
 		out.write('"');
 		if(title!=null) {
 			out.write(" title=\"");
-			AttributeUtils.writeAttributeTextMarkup(title, out);
+			MarkupUtils.writeWithMarkup(title, MarkupType.TEXT, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
 		if(clazz!=null) {

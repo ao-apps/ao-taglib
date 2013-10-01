@@ -31,6 +31,7 @@ import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.io.Coercion;
 import com.aoindustries.servlet.jsp.LocalizedJspException;
 import com.aoindustries.util.StringUtility;
+import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
 import java.net.URLDecoder;
@@ -224,7 +225,7 @@ public class FormTag
 				}
 			}
 		}
-		capturedBody.writeTo(out);
+		MarkupUtils.writeWithMarkup(capturedBody, MarkupType.XHTML, out);
 		out.write("</form>");
     }
 }

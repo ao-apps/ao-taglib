@@ -34,6 +34,7 @@ import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.net.HttpParametersUtils;
 import com.aoindustries.net.MutableHttpParameters;
 import com.aoindustries.servlet.jsp.LocalizedJspException;
+import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
@@ -178,7 +179,7 @@ public class IframeTag
 		out.write(" frameborder=\"");
 		out.write(frameborder ? '1' : '0');
 		out.write("\">");
-		capturedBody.writeTo(out);
+		MarkupUtils.writeWithMarkup(capturedBody, MarkupType.XHTML, out);
 		out.write("</iframe>");
     }
 }

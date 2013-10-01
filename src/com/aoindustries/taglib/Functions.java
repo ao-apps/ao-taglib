@@ -29,7 +29,7 @@ import com.aoindustries.servlet.http.ServletUtil;
 import com.aoindustries.servlet.jsp.LocalizedJspException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.StringUtility;
-import com.aoindustries.util.i18n.BundleLookup;
+import java.util.ResourceBundle;
 import javax.servlet.jsp.JspException;
 
 final public class Functions {
@@ -54,14 +54,12 @@ final public class Functions {
         return StringUtility.join(iter, separator);
     }
 
-	public static BundleLookup message(String key) throws JspException {
+	public static String message(String key) throws JspException {
 		NullArgumentException.checkNotNull(key, "key");
 		BundleTag bundleTag = BundleTag.getBundleTag(getRequest());
 		if(bundleTag==null) throw new LocalizedJspException(accessor, "error.requiredParentTagNotFound", "bundle");
 		String prefix = bundleTag.getPrefix();
-		return new BundleLookup(
-			bundleTag.getBasename(),
-			getResponse().getLocale(),
+		return bundleTag.getAccessor().getMessage(
 			prefix==null || prefix.isEmpty() ? key : prefix.concat(key)
 		);
 	}

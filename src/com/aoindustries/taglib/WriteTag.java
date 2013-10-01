@@ -25,9 +25,10 @@ package com.aoindustries.taglib;
 import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.Coercion;
+import com.aoindustries.io.Writable;
 import com.aoindustries.servlet.jsp.LocalizedJspException;
-import com.aoindustries.util.i18n.BundleLookup;
-import com.aoindustries.util.i18n.BundleLookupResult;
+import com.aoindustries.util.i18n.BundleLookupMarkup;
+import com.aoindustries.util.i18n.BundleLookupThreadContext;
 import java.io.IOException;
 import java.io.Writer;
 import java.lang.reflect.InvocationTargetException;
@@ -117,7 +118,8 @@ public class WriteTag
     }
 
 	// One or neither of these values will be set after writePrefix, but not both
-	private BundleLookupResult lookupResult;
+	private String toStringResult;
+	private BundleLookupMarkup lookupMarkup;
 	private Object value;
 
 	@Override
@@ -139,27 +141,42 @@ public class WriteTag
             if(bean!=null) {
                 // Avoid reflection when possible
                 if("toString".equals(method)) {
-					if(bean instanceof BundleLookup) {
-						lookupResult = ((BundleLookup)bean).toString(containerType.getMarkupType());
-					} else {
+					if(
+						bean instanceof Writable
+						&& !((Writable)bean).isFastToString()
+					) {
 						// Stream with coercion in doTag
 						value = bean;
+					} else {
+						toStringResult = Coercion.toString(bean);
 					}
                 } else {
                     try {
                         Method refMethod = bean.getClass().getMethod(method);
 						Object retVal = refMethod.invoke(bean);
-						if(retVal instanceof BundleLookup) {
-							lookupResult = ((BundleLookup)retVal).toString(containerType.getMarkupType());
-						} else {
+						if(
+							retVal instanceof Writable
+							&& !((Writable)retVal).isFastToString()
+						) {
 							// Stream with coercion in doTag
 							value = retVal;
+						} else {
+							toStringResult = Coercion.toString(retVal);
 						}
                     } catch(NoSuchMethodException err) {
                         throw new LocalizedJspException(ApplicationResources.accessor, "WriteTag.unableToFindMethod", method);
                     }
                 }
-				if(lookupResult!=null) lookupResult.appendPrefixTo(out);
+				if(toStringResult!=null) {
+					// Look for any message markup
+					BundleLookupThreadContext threadContext = BundleLookupThreadContext.getThreadContext(false);
+					if(threadContext!=null) {
+						lookupMarkup = threadContext.getLookupMarkup(toStringResult);
+					} else {
+						lookupMarkup = null;
+					}
+					if(lookupMarkup!=null) lookupMarkup.appendPrefixTo(containerType.getMarkupType(), out);
+				}
             }
         } catch(IllegalAccessException err) {
             throw new JspException(err);
@@ -170,8 +187,8 @@ public class WriteTag
 
 	@Override
     protected void doTag(Writer out) throws JspException, IOException {
-		if(lookupResult!=null) {
-			out.write(lookupResult.getResult());
+		if(toStringResult!=null) {
+			out.write(toStringResult);
 		} else if(value!=null) {
 			Coercion.write(value, out);
 		}
@@ -179,6 +196,6 @@ public class WriteTag
 
 	@Override
 	protected void writeSuffix(MediaType containerType, Writer out) throws IOException {
-		if(lookupResult!=null) lookupResult.appendSuffixTo(out);
+		if(lookupMarkup!=null) lookupMarkup.appendSuffixTo(containerType.getMarkupType(), out);
 	}
 }

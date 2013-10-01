@@ -30,6 +30,7 @@ import com.aoindustries.io.Coercion;
 import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
+import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -115,7 +116,7 @@ public class ScriptTag
     protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 		if(src==null) {
 			// Use default auto encoding
-			capturedBody.writeTo(out);
+			MarkupUtils.writeWithMarkup(capturedBody, mediaType.getMarkupType(), out);
 		} else {
 			// Write script tag with src attribute, discarding any body
 			PageContext pageContext = (PageContext)getJspContext();

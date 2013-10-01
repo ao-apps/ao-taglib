@@ -29,6 +29,7 @@ import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlA
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.io.Coercion;
 import com.aoindustries.servlet.jsp.LocalizedJspException;
+import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -288,7 +289,7 @@ public class InputTag
             || "submit".equals(type)
 		) {
 			// Allow text markup from translations
-			AttributeUtils.writeAttributeTextMarkup(value, out);
+			MarkupUtils.writeWithMarkup(value, MarkupType.TEXT, textInXhtmlAttributeEncoder, out);
 		} else {
 			Coercion.write(value, textInXhtmlAttributeEncoder, out);
 		}
