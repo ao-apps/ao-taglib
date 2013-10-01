@@ -159,9 +159,9 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
-    <description>
+    <description><![CDATA[
 		Sets the bundle used by any nested &lt;ao:message&gt; tags or functions.
-	</description>
+	]]></description>
     <name>bundle</name>
     <tag-class>com.aoindustries.taglib.BundleTag</tag-class>
     <body-content>scriptless</body-content>
@@ -173,7 +173,9 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <type>java.lang.String</type>
     </attribute>
     <attribute>
-      <description>The prefix applied to any nested &lt;ao:message&gt; tag or function keys.</description>
+		<description><![CDATA[
+			The prefix applied to any nested &lt;ao:message&gt; tag or function keys.
+		]]></description>
       <name>prefix</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
@@ -301,22 +303,28 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
-	<description>
-		Forwards to another resource, ends processing of the current page.
-		If parameters are not cleared, nested parameters are added before request parameters.
-		This has three advantages over the standard jsp:forward tag:
-			1) You may clear parameters such that only those specifically added will be passed on to the next page
-			2) You may have other nested tags used to select and build the set of parameters
-			3) You may pass argument objects instead of only string parameters (see below)
-
-		Argument objects are passed to the forwarded page via request-scope "arg" Map.
-		Any arguments to the current page are not automatically passed-on to the forwarded page 
-		(this differs from parameters in this way).
-		
-		Any attribute that has no namespace and is not "page" or "clearParams" is added as an argument.
-		Nested arg tags may also be used to pass arguments.
-		It is an error for the same argument name to be used twice (including when set as null).
-	</description>
+	<description><![CDATA[
+		<p>
+			Forwards to another resource, ends processing of the current page.
+			If parameters are not cleared, nested parameters are added before request parameters.
+			This has three advantages over the standard &lt;jsp:forward&gt; tag:
+			<ol>
+				<li>You may clear parameters such that only those specifically added will be passed on to the next page</li>
+				<li>You may have other nested tags used to select and build the set of parameters</li>
+				<li>You may pass argument objects instead of only string parameters (see below)</li>
+			</ol>
+		</p>
+		<p>
+			Argument objects are passed to the forwarded page via request-scope "arg" Map.
+			Any arguments to the current page are not automatically passed-on to the forwarded page 
+			(this differs from parameters in this way).
+		</p>
+		<p>
+			Any attribute that has no namespace and is not "page" or "clearParams" is added as an argument.
+			Nested arg tags may also be used to pass arguments.
+			It is an error for the same argument name to be used twice (including when set as null).
+		</p>
+	]]></description>
     <name>forward</name>
     <tag-class>com.aoindustries.taglib.ForwardTag</tag-class>
 	<dynamic-attributes>true</dynamic-attributes>
@@ -536,16 +544,16 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
-    <description>
+    <description><![CDATA[
         Renders an img tag.
         The src may be provided in one of three ways, in precedence order:
-        &lt;ol&gt;
-            &lt;li&gt;Direct child &lt;src&gt; tag.&lt;/li&gt;
-            &lt;li&gt;As the src attribute&lt;/li&gt;
-            &lt;li&gt;Contents of tag body, trimmed.&lt;/li&gt;
-        &lt;/ol&gt;
+        <ol>
+            <li>Direct child <src> tag.</li>
+            <li>As the src attribute</li>
+            <li>Contents of tag body, trimmed.</li>
+        </ol>
         Also, the width, height, and alt values are required either as attributes or nested tags.
-    </description>
+    ]]></description>
     <name>img</name>
     <tag-class>com.aoindustries.taglib.ImgTag</tag-class>
     <body-content>scriptless</body-content>
@@ -609,23 +617,29 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
-	<description>
-		Includes another resource and then continues processing of the current page.
-		If parameters are not cleared, nested parameters are added before request parameters.
-		This has three advantages over the standard jsp:include tag:
-			1) You may clear parameters such that only those specifically added will be passed on to the included page
-			2) You may have other nested tags used to select and build the set of parameters
-			3) You may pass argument objects instead of only string parameters (see below)
-
-		Argument objects are passed to the included page via request-scope "arg" Map.
-		Any arguments to the current page are not automatically passed-on to the included page 
-		(this differs from parameters in this way).
-		The current page arguments are restored when the include completes.
-		
-		Any attribute that has no namespace and is not "page" or "clearParams" is added as an argument.
-		Nested arg tags may also be used to pass arguments.
-		It is an error for the same argument name to be used twice (including when set as null).
-	</description>
+	<description><![CDATA[
+		<p>
+			Includes another resource and then continues processing of the current page.
+			If parameters are not cleared, nested parameters are added before request parameters.
+			This has three advantages over the standard &lt;jsp:include&gt; tag:
+			<ol>
+				<li>You may clear parameters such that only those specifically added will be passed on to the included page</li>
+				<li>You may have other nested tags used to select and build the set of parameters</li>
+				<li>You may pass argument objects instead of only string parameters (see below)</li>
+			</ol>
+		</p>
+		<p>
+			Argument objects are passed to the included page via request-scope "arg" Map.
+			Any arguments to the current page are not automatically passed-on to the included page 
+			(this differs from parameters in this way).
+			The current page arguments are restored when the include completes.
+		</p>
+		<p>
+			Any attribute that has no namespace and is not "page" or "clearParams" is added as an argument.
+			Nested arg tags may also be used to pass arguments.
+			It is an error for the same argument name to be used twice (including when set as null).
+		</p>
+	]]></description>
     <name>include</name>
     <tag-class>com.aoindustries.taglib.IncludeTag</tag-class>
 	<dynamic-attributes>true</dynamic-attributes>
@@ -661,15 +675,15 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
-    <description>
+    <description><![CDATA[
       Renders an input tag.  The value may be provided in one of three ways, in
       precedence order:
-      &lt;ol&gt;
-        &lt;li&gt;Direct child &lt;value&gt; tag.&lt;/li&gt;
-        &lt;li&gt;As the value attribute&lt;/li&gt;
-        &lt;li&gt;Contents of tag body, trimmed.&lt;/li&gt;
-      &lt;/ol&gt;
-    </description>
+      <ol>
+        <li>Direct child <value> tag.</li>
+        <livAs the value attribute</li>
+        <li>Contents of tag body, trimmed.</li>
+      </ol>
+    ]]></description>
     <name>input</name>
     <tag-class>com.aoindustries.taglib.InputTag</tag-class>
     <tei-class>com.aoindustries.taglib.InputTagTEI</tei-class>
@@ -773,24 +787,24 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <type>java.lang.Integer</type>
     </attribute>
     <attribute>
-      <description>
+      <description><![CDATA[
           The readonly attribute.  Accepts values of "true" or "false".
           A non-empty nested readonly tag will override this value.
-          If readonly is "true", will add the attribute as &lt;code&gt;readonly="readonly"&lt;/code&gt;,
+          If readonly is "true", will add the attribute as <code>readonly="readonly"</code>,
           otherwise the attribute is not added.
-      </description>
+      ]]></description>
       <name>readonly</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>boolean</type>
     </attribute>
     <attribute>
-      <description>
+      <description><![CDATA[
           The disabled attribute.  Accepts values of "true" or "false".
           A non-empty nested disabled tag will override this value.
-          If disabled is "true", will add the attribute as &lt;code&gt;disabled="disabled"&lt;/code&gt;,
+          If disabled is "true", will add the attribute as <code>disabled="disabled"</code>,
           otherwise the attribute is not added.
-      </description>
+      ]]></description>
       <name>disabled</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
@@ -811,12 +825,12 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>
+      <description><![CDATA[
           The checked attribute.  Accepts values of "true" or "false".
           A non-empty nested checked tag will override this value.
-          If checked is "true", will add the attribute as &lt;code&gt;checked="checked"&lt;/code&gt;,
+          If checked is "true", will add the attribute as <code>checked="checked"</code>,
           otherwise the attribute is not added.
-      </description>
+      ]]></description>
       <name>checked</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
@@ -882,37 +896,47 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
-    <description>
-		Writes a value from the current localization bundle given its key.
-		Writes the value with proper escaping based on the context of the tag.
-		
-		Any number of "arg###" attributes may be provided, where ### is the substitution
-		parameter index, starting at zero.
-		For example, there could be arg0="First" arg1="Second" for two arguments.
-		They will be passed-on to the message format.
-
-		Additionally, message substitution arguments may be provided by
-		nested &lt;ao:messageArg&gt; tags.
-
-		These additional arguments will first fill-in any gap in the numeric ranges
-		provided by "arg###" attributes.  Because the first argument is zero, if
-		arg1="Second" and arg2="Third", then the first nested messageArg would be
-		applied filling the spot of arg0.
-
-		Once all gaps are filled, these additional arguments will be added after
-		all provided as "arg###" attritutes.
-
-		This tag must be nested inside a &lt;ao:bundle&gt; tag.
-
-		The content type depends on the value provided to the type attribute, and
-		defaults to text/plain.  The content is checked for well-formedness based
-		on its type:
-			"javascript" or "text/javascript" - no validation
-			"text" or "text/plain" - no validation
-			"url" or "text/url" - must be a valid URL
-			"xhtml" or "application/xhtml+xml" - must be well-formed XHTML content. (Note: Currently only checks character values.)
-			"xhtml_attribute" or "application/xhtml+xml+attribute" - must be a valid XHTML attribute.
-	</description>
+    <description><![CDATA[
+		<p>
+			Writes a value from the current localization bundle given its key.
+			Writes the value with proper escaping based on the context of the tag.
+		</p>
+		<p>
+			Any number of "arg###" attributes may be provided, where ### is the substitution
+			parameter index, starting at zero.
+			For example, there could be arg0="First" arg1="Second" for two arguments.
+			They will be passed-on to the message format.
+		</p>
+		<p>
+			Additionally, message substitution arguments may be provided by
+			nested &lt;ao:messageArg&gt; tags.
+		</p>
+		<p>
+			These additional arguments will first fill-in any gap in the numeric ranges
+			provided by "arg###" attributes.  Because the first argument is zero, if
+			arg1="Second" and arg2="Third", then the first nested messageArg would be
+			applied filling the spot of arg0.
+		</p>
+		<p>
+			Once all gaps are filled, these additional arguments will be added after
+			all provided as "arg###" attritutes.
+		</p>
+		<p>
+			This tag must be nested inside a &lt;ao:bundle&gt; tag.
+		</p>
+		<p>
+			The content type depends on the value provided to the type attribute, and
+			defaults to text/plain.  The content is checked for well-formedness based
+			on its type:
+			<ul>
+				<li>"javascript" or "text/javascript" - no validation</li>
+				<li>"text" or "text/plain" - no validation</li>
+				<li>"url" or "text/url" - must be a valid URL</li>
+				<li>"xhtml" or "application/xhtml+xml" - must be well-formed XHTML content. (Note: Currently only checks character values.)</li>
+				<li>"xhtml_attribute" or "application/xhtml+xml+attribute" - must be a valid XHTML attribute.</li>
+			</ul>
+		</p>
+	]]></description>
     <name>message</name>
     <tag-class>com.aoindustries.taglib.MessageTag</tag-class>
     <tei-class>com.aoindustries.taglib.MessageTagTEI</tei-class>
@@ -1005,16 +1029,16 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
-    <description>
+    <description><![CDATA[
       If contained with any MetasAttribute parent, adds the meta data to the parent tag.
       Otherwise, renders a meta tag.  The content may be provided in one of three ways, in
       precedence order:
-      &lt;ol&gt;
-        &lt;li&gt;Direct child &lt;content&gt; tag.&lt;/li&gt;
-        &lt;li&gt;As the content attribute&lt;/li&gt;
-        &lt;li&gt;Contents of tag body, trimmed.&lt;/li&gt;
-      &lt;/ol&gt;
-    </description>
+      <ol>
+        <li>Direct child <content> tag.</li>
+        <li>As the content attribute</li>
+        <li>Contents of tag body, trimmed.</li>
+      </ol>
+    ]]></description>
     <name>meta</name>
     <tag-class>com.aoindustries.taglib.MetaTag</tag-class>
     <body-content>scriptless</body-content>
@@ -1139,24 +1163,24 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>
+      <description><![CDATA[
           The selected attribute.  Accepts values of "true" or "false".
           A non-empty nested selected tag will override this value.
-          If selected is "true", will add the attribute as &lt;code&gt;selected="selected"&lt;/code&gt;,
+          If selected is "true", will add the attribute as <code>selected="selected"</code>,
           otherwise the attribute is not added.
-      </description>
+      ]]></description>
       <name>selected</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>boolean</type>
     </attribute>
     <attribute>
-      <description>
+      <description><![CDATA[
           The disabled attribute.  Accepts values of "true" or "false".
           A non-empty nested disabled tag will override this value.
-          If disabled is "true", will add the attribute as &lt;code&gt;disabled="disabled"&lt;/code&gt;,
+          If disabled is "true", will add the attribute as <code>disabled="disabled"</code>,
           otherwise the attribute is not added.
-      </description>
+      ]]></description>
       <name>disabled</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
@@ -1164,51 +1188,56 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     </attribute>
     <example />
   </tag>
-  <tag>
-    <description>
-		Writes the value with proper escaping based on the context of the tag.
-
-		The content type depends on the value provided to the type attribute, and
-		defaults to text/plain.  The content is checked for well-formedness based
-		on its type:
-			"javascript" or "text/javascript" - no validation
-			"text" or "text/plain" - no validation
-			"url" or "text/url" - must be a valid URL
-			"xhtml" or "application/xhtml+xml" - must be well-formed XHTML content. (Note: Currently only checks character values.)
-			"xhtml_attribute" or "application/xhtml+xml+attribute" - must be a valid XHTML attribute.
-	</description>
-    <name>out</name>
-    <tag-class>com.aoindustries.taglib.OutTag</tag-class>
-    <tei-class>com.aoindustries.taglib.OutTagTEI</tei-class>
-    <body-content>scriptless</body-content>
-    <attribute>
-      <description>
-        The value to be written.  A nested value tag will override this value.
-      </description>
-      <name>value</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.Object</type>
-    </attribute>
-    <attribute>
-      <description>The default value if the resulting value is null.</description>
-      <name>default</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.Object</type>
-    </attribute>
-    <attribute>
-		<description>
-			Specifies the type of content contained in the value.  Defaults to text/plain.
-			A nested type tag will override this value.
-		</description>
-      <name>type</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.Object</type>
-    </attribute>
-    <example />
-  </tag>
+	<tag>
+		<description><![CDATA[
+			<p>
+				Writes the value with proper escaping based on the context of the tag.
+			</p>
+			<p>
+				The content type depends on the value provided to the type attribute, and
+				defaults to text/plain.  The content is checked for well-formedness based
+				on its type:
+				<ul>
+					<li>"javascript" or "text/javascript" - no validation</li>
+					<li>"text" or "text/plain" - no validation</li>
+					<li>"url" or "text/url" - must be a valid URL</li>
+					<li>"xhtml" or "application/xhtml+xml" - must be well-formed XHTML content. (Note: Currently only checks character values.)</li>
+					<li>"xhtml_attribute" or "application/xhtml+xml+attribute" - must be a valid XHTML attribute.</li>
+				</ul>
+			</p>
+		]]></description>
+		<name>out</name>
+		<tag-class>com.aoindustries.taglib.OutTag</tag-class>
+		<tei-class>com.aoindustries.taglib.OutTagTEI</tei-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<description>
+				The value to be written.  A nested value tag will override this value.
+			</description>
+			<name>value</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description>The default value if the resulting value is null.</description>
+			<name>default</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description>
+				Specifies the type of content contained in the value.  Defaults to text/plain.
+				A nested type tag will override this value.
+			</description>
+			<name>type</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>
+		<example />
+	</tag>
   <tag>
     <description>Provides a page to its PageAttribute parent tag.</description>
     <name>page</name>
@@ -1296,14 +1325,23 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <type>java.lang.String</type>
     </attribute>
     <attribute>
-      <description>
-          The type of redirect performed.  Is one of "moved_permanently" (or 301), "moved_temporarily" (or 302) or "see_other" (or 303).
-
-          Because the redirect type has important consequences on search engines and browser caches, the decision should be made for
-          each redirect.  Thus, this attribute must be set directly or in a nested type tag.
-
-          A nested type tag will override this value.
-      </description>
+		<description><![CDATA[
+			<p>
+				The type of redirect performed.  Is one of:
+				<ul>
+					<li>"moved_permanently" (or 301)</li>
+					<li>"moved_temporarily" (or 302)</li>
+					<li>"see_other" (or 303)</li>
+				</ul>
+			</p>
+			<p>
+				Because the redirect type has important consequences on search engines and browser caches, the decision should be made for
+				each redirect.  Thus, this attribute must be set directly or in a nested type tag.
+			</p>
+			<p>
+				A nested type tag will override this value.
+			</p>
+      ]]></description>
       <name>type</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
@@ -1325,20 +1363,24 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <body-content>empty</body-content>
   </tag>
   <tag>
-    <description>
-      Manually establishes a script context when automatic detection is not possible.
-      The body of this tag contains a script.  The script should not be encoded
-      as if in HTML/XML, such as &amp;amp; instead of just a single &amp;.  The
-      script may contain any characters valid in that language, including &lt;,
-      &gt;, &amp;, \\u0000 (null), or any other values.
-
-      The script will be properly encoded for the content of this tag.  Thus, you
-      may have a script of arbitrary complexity containing arbitrary data within
-      an XHTML onclick attribute, the tags will make sure everything is properly
-      encoded.
-
-      The content type of this tag is equal to the type set in the type attribute.
-    </description>
+	<description><![CDATA[
+		<p>
+			Manually establishes a script context when automatic detection is not possible.
+			The body of this tag contains a script.  The script should not be encoded
+			as if in HTML/XML, it must have single "&" instead of "&amp;".  The
+			script may contain any characters valid in that language, including <,
+			>, &, \u0000 (null), or any other values.
+		</p>
+		<p>
+			The script will be properly encoded for the content of this tag.  Thus, you
+			may have a script of arbitrary complexity containing arbitrary data within
+			an XHTML onclick attribute, the tags will make sure everything is properly
+			encoded.
+		</p>
+		<p>
+			The content type of this tag is equal to the type set in the type attribute.
+		</p>
+	]]></description>
     <name>script</name>
     <tag-class>com.aoindustries.taglib.ScriptTag</tag-class>
     <tei-class>com.aoindustries.taglib.ScriptTagTEI</tei-class>
@@ -1405,12 +1447,12 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>
+      <description><![CDATA[
           The disabled attribute.  Accepts values of "true" or "false".
           A non-empty nested disabled tag will override this value.
-          If disabled is "true", will add the attribute as &lt;code&gt;disabled="disabled"&lt;/code&gt;,
+          If disabled is "true", will add the attribute as <code>disabled="disabled"</code>,
           otherwise the attribute is not added.
-      </description>
+      ]]></description>
       <name>disabled</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
@@ -1523,40 +1565,46 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
-    <description>
-      Manually establishes a plaintext context when automatic detection is not possible.
-      The body of this tag contains any arbitary plain text.  In some contexts,
-      such as contained in a JavaScript string, this may be binary transparent.
-
-      In other contexts, it may result in an error when a character may not
-      be encoded to the container's system.  An example would be a NULL character
-      in an XML document.
-
-      End of line conversions may also occur in some contexts.
-
-      When contained in JavaScript, this will automatically be surrounded by
-      double quotes and will be binary transparent through \uxxxx escape codes.
-      The double quotes are automatically added to clearly separate data from
-      code.  Please note that this auto-quoting applies to all forms of data in
-      all tags, not just this text tag.
-
-      The content type of this tag text/plain.
-    </description>
+	<description><![CDATA[
+		<p>
+			Manually establishes a plaintext context when automatic detection is not possible.
+			The body of this tag contains any arbitary plain text.  In some contexts,
+			such as contained in a JavaScript string, this may be binary transparent.
+		</p>
+		<p>
+			In other contexts, it may result in an error when a character may not
+			be encoded to the container's system.  An example would be a NULL character
+			in an XML document.
+		</p>
+		<p>
+			End of line conversions may also occur in some contexts.
+		</p>
+		<p>
+			When contained in JavaScript, this will automatically be surrounded by
+			double quotes and will be binary transparent through \uxxxx escape codes.
+			The double quotes are automatically added to clearly separate data from
+			code.  Please note that this auto-quoting applies to all forms of data in
+			all tags, not just this text tag.
+		</p>
+		<p>
+			The content type of this tag text/plain.
+		</p>
+	]]></description>
     <name>text</name>
     <tag-class>com.aoindustries.taglib.TextTag</tag-class>
     <body-content>scriptless</body-content>
     <example />
   </tag>
   <tag>
-    <description>
+	<description><![CDATA[
       Renders a textarea tag.  The value may be provided in one of three ways, in
       precedence order:
-      &lt;ol&gt;
-        &lt;li&gt;Direct child &lt;value&gt; tag.&lt;/li&gt;
-        &lt;li&gt;As the value attribute&lt;/li&gt;
-        &lt;li&gt;Contents of tag body.&lt;/li&gt;
-      &lt;/ol&gt;
-    </description>
+      <ol>
+        <li>Direct child <value> tag.</li>
+        <li>As the value attribute</li>
+        <li>Contents of tag body.</li>
+      </ol>
+	]]></description>
     <name>textarea</name>
     <tag-class>com.aoindustries.taglib.TextareaTag</tag-class>
     <body-content>scriptless</body-content>
@@ -1592,24 +1640,24 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <type>int</type>
     </attribute>
     <attribute>
-      <description>
+      <description><![CDATA[
           The readonly attribute.  Accepts values of "true" or "false".
           A non-empty nested readonly tag will override this value.
-          If readonly is "true", will add the attribute as &lt;code&gt;readonly="readonly"&lt;/code&gt;,
+          If readonly is "true", will add the attribute as <code>readonly="readonly"</code>,
           otherwise the attribute is not added.
-      </description>
+      ]]></description>
       <name>readonly</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>boolean</type>
     </attribute>
     <attribute>
-      <description>
+      <description><![CDATA[
           The disabled attribute.  Accepts values of "true" or "false".
           A non-empty nested disabled tag will override this value.
-          If disabled is "true", will add the attribute as &lt;code&gt;disabled="disabled"&lt;/code&gt;,
+          If disabled is "true", will add the attribute as <code>disabled="disabled"</code>,
           otherwise the attribute is not added.
-      </description>
+      ]]></description>
       <name>disabled</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
@@ -1649,29 +1697,36 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
-    <description>
-      Manually establishes a URL context when automatic detection is not possible.
-      The body of this tag contains a Uniform Resource Identifier (URI or URL).
-
-      Before the first ? symbol, may contain characters in any language.  This
-      is more flexible than a strict URL format, these characters will be
-      automatically encoded based on context.
-
-      After the first ?, however, the parameters must be properly URL encoded
-      and contain only valid characters.  It should not be escaped for (X)HTML,
-      meaning that parameter separators should be &amp; instead of &amp;amp;.
-      The proper escaping/encoding will be performed based on the context of
-      this tag.
-
-      It may be a relative or absolute URL.  If starts with a /, the context
-      path will be prepended to the path.
-
-      Depending on context, the URL will be passed through HttpServletResponse.encodeURL
-      to add any URL-based session state.  Session state will never be added to external links.
-
-      The content type of this tag is text/url.
-      Must be valid URL-encoded characters only.
-    </description>
+	<description><![CDATA[
+		<p>
+			Manually establishes a URL context when automatic detection is not possible.
+			The body of this tag contains a Uniform Resource Identifier (URI or URL).
+		</p>
+		<p>
+			Before the first ? symbol, may contain characters in any language.  This
+			is more flexible than a strict URL format, these characters will be
+			automatically encoded based on context.
+		</p>
+		<p>
+			After the first ?, however, the parameters must be properly URL encoded
+			and contain only valid characters.  It should not be escaped for (X)HTML,
+			meaning that parameter separators should be "&" instead of "&amp;".
+			The proper escaping/encoding will be performed based on the context of
+			this tag.
+		</p>
+		<p>
+			It may be a relative or absolute URL.  If starts with a /, the context
+			path will be prepended to the path.
+		</p>
+		<p>
+			Depending on context, the URL will be passed through HttpServletResponse.encodeURL
+			to add any URL-based session state.  Session state will never be added to external links.
+		</p>
+		<p>
+			The content type of this tag is text/url.
+			Must be valid URL-encoded characters only.
+		</p>
+	]]></description>
     <name>url</name>
     <tag-class>com.aoindustries.taglib.UrlTag</tag-class>
     <body-content>scriptless</body-content>
@@ -1706,22 +1761,27 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
-    <description>
-      Writes the bean contents.  If the bean is &lt;code&gt;null&lt;/code&gt; then nothing is displayed.
-      The method attribute provides the name of the method that will be used to get the display value.
-      If not provided, it will default to &lt;code&gt;"toString"&lt;/code&gt;.  This method
-      searches for the method of the given name with no parameters.  It is an error if the method is
-      not found.
-
-      The content type depends on the value provided to the type attribute, and
-      defaults to text/plain.  The content is checked for well-formedness based
-      on its type:
-			"javascript" or "text/javascript" - no validation
-			"text" or "text/plain" - no validation
-			"url" or "text/url" - must be a valid URL
-			"xhtml" or "application/xhtml+xml" - must be well-formed XHTML content. (Note: Currently only checks character values.)
-			"xhtml_attribute" or "application/xhtml+xml+attribute" - must be a valid XHTML attribute.
-    </description>
+	<description><![CDATA[
+		<p>
+			Writes the bean contents.  If the bean is <code>null</code> then nothing is displayed.
+			The method attribute provides the name of the method that will be used to get the display value.
+			If not provided, it will default to <code>"toString"</code>.  This method
+			searches for the method of the given name with no parameters.  It is an error if the method is
+			not found.
+		</p>
+		<p>
+			The content type depends on the value provided to the type attribute, and
+			defaults to text/plain.  The content is checked for well-formedness based
+			on its type:
+			<ul>
+				<li>"javascript" or "text/javascript" - no validation</li>
+				<li>"text" or "text/plain" - no validation</li>
+				<li>"url" or "text/url" - must be a valid URL</li>
+				<li>"xhtml" or "application/xhtml+xml" - must be well-formed XHTML content. (Note: Currently only checks character values.)</li>
+				<li>"xhtml_attribute" or "application/xhtml+xml+attribute" - must be a valid XHTML attribute.</li>
+			</ul>
+		</p>
+    ]]></description>
     <name>write</name>
     <tag-class>com.aoindustries.taglib.WriteTag</tag-class>
     <tei-class>com.aoindustries.taglib.WriteTagTEI</tei-class>
@@ -1786,28 +1846,36 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<example />
   </tag>
   <tag>
-    <description>
-      Manually establishes an XHTML attribute context when automatic detection is not possible.
-      The body of this tag contains well-formed XHTML 1.0-compliant attribute.
+	<description><![CDATA[
+		<p>
+			Manually establishes an XHTML attribute context when automatic detection is not possible.
+			The body of this tag contains well-formed XHTML 1.0-compliant attribute.
+		<p>
+		</p>
 
-      The content type of this tag is application/xhtml+xml+attribute.
-    </description>
+			The content type of this tag is application/xhtml+xml+attribute.
+		</p>
+	]]></description>
     <name>xhtmlAttribute</name>
     <tag-class>com.aoindustries.taglib.XhtmlAttributeTag</tag-class>
     <body-content>scriptless</body-content>
     <example />
   </tag>
   <tag>
-    <description>
-      Manually establishes an XHTML context when automatic detection is not possible.
-      The body of this tag contains well-formed XHTML 1.0-compliant markup.
-
-      The content type of this tag is application/xhtml+xml.
-
-      Note: For performance, this implementation currently only checks character
-      values.  This ensures that no encodings are violated and overall XML validation
-      by the browser should catch problems.
-    </description>
+	<description><![CDATA[
+		<p>
+			Manually establishes an XHTML context when automatic detection is not possible.
+			The body of this tag contains well-formed XHTML 1.0-compliant markup.
+		</p>
+		<p>
+			The content type of this tag is application/xhtml+xml.
+		</p>
+		<p>
+			Note: For performance, this implementation currently only checks character
+			values.  This ensures that no encodings are violated and overall XML validation
+			by the browser should catch problems.
+		</p>
+	]]></description>
     <name>xhtml</name>
     <tag-class>com.aoindustries.taglib.XhtmlTag</tag-class>
     <body-content>scriptless</body-content>
@@ -1842,11 +1910,11 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example>${ao:join(iterable, separator)}</example>
   </function>
   <function>
-    <description>
+    <description><![CDATA[
 		Gets a value from the current localization bundle given its key.
 		No parameters may be provided.
 		Must be nested inside a &lt;ao:bundle&gt; tag.
-	</description>
+	]]></description>
     <name>message</name>
     <function-class>com.aoindustries.taglib.Functions</function-class>
     <function-signature>java.lang.String message(java.lang.String)</function-signature>
