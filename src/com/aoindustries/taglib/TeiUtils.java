@@ -25,7 +25,7 @@ package com.aoindustries.taglib;
 import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.Coercion;
-import java.util.ArrayList;
+import com.aoindustries.util.MinimalList;
 import java.util.List;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagData;
@@ -65,8 +65,8 @@ final public class TeiUtils {
 				}
 				// Value is OK
 			} catch(MediaException err) {
-				if(messages == null) messages = new ArrayList<ValidationMessage>();
-				messages.add(
+				messages = MinimalList.add(
+					messages,
 					new ValidationMessage(
 						data.getId(),
 						err.getMessage()
@@ -98,8 +98,8 @@ final public class TeiUtils {
 				PropertyUtils.getScope(scope);
 				// Value is OK
 			} catch(JspException err) {
-				if(messages == null) messages = new ArrayList<ValidationMessage>();
-				messages.add(
+				messages = MinimalList.add(
+					messages,
 					new ValidationMessage(
 						data.getId(),
 						err.getMessage()
