@@ -45,7 +45,6 @@ public class MessageTagTEI extends TagExtraInfo {
 		Enumeration<String> attributeNames = data.getAttributes();
 		while(attributeNames.hasMoreElements()) {
 			String attributeName = attributeNames.nextElement();
-			System.err.println("DEBUG: attributeName="+attributeName);
 			if(
 				// Standard attribute names
 				!"key".equals(attributeName)
