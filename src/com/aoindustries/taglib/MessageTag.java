@@ -123,19 +123,19 @@ public class MessageTag
 	}
 
 	public void setArg0(Object value) throws JspException {
-		setDynamicAttribute(null, "arg0", value);
+		insertMessageArg("arg0", 0, value);
 	}
 
 	public void setArg1(Object value) throws JspException {
-		setDynamicAttribute(null, "arg1", value);
+		insertMessageArg("arg1", 1, value);
 	}
 
 	public void setArg2(Object value) throws JspException {
-		setDynamicAttribute(null, "arg2", value);
+		insertMessageArg("arg2", 2, value);
 	}
 
 	public void setArg3(Object value) throws JspException {
-		setDynamicAttribute(null, "arg3", value);
+		insertMessageArg("arg3", 3, value);
 	}
 
 	@Override
@@ -146,28 +146,32 @@ public class MessageTag
 				int index = Integer.parseInt(numSubstring);
 				// Do not allow "arg00" in place of "arg0"
 				if(!numSubstring.equals(Integer.toString(index))) throw new LocalizedJspException(accessor, "MessageTag.unexpectedDynamicAttribute", localName);
-				// Create lists on first use
-				if(messageArgs==null) {
-					messageArgsSet = new BitSet();
-					messageArgs = new ArrayList<Object>();
-				}
-				// Must not already be set
-				if(messageArgsSet.get(index)) throw new LocalizedJspException(accessor, "MessageTag.duplicateAttribute", localName);
-				messageArgsSet.set(index);
-				if(index>=messageArgs.size()) {
-					while(messageArgs.size() < index) {
-						messageArgs.add(null);
-					}
-					assert index==messageArgs.size();
-					messageArgs.add(value);
-				} else {
-					if(messageArgs.set(index, value)!=null) throw new AssertionError();
-				}
+				insertMessageArg(localName, index, value);
 			} catch(NumberFormatException err) {
 				throw new LocalizedJspException(err, accessor, "MessageTag.unexpectedDynamicAttribute", localName);
 			}
 		} else {
 			throw new LocalizedJspException(accessor, "MessageTag.unexpectedDynamicAttribute", localName);
+		}
+	}
+
+	private void insertMessageArg(String localName, int index, Object value) throws JspException {
+		// Create lists on first use
+		if(messageArgs==null) {
+			messageArgsSet = new BitSet();
+			messageArgs = new ArrayList<Object>();
+		}
+		// Must not already be set
+		if(messageArgsSet.get(index)) throw new LocalizedJspException(accessor, "MessageTag.duplicateAttribute", localName);
+		messageArgsSet.set(index);
+		if(index>=messageArgs.size()) {
+			while(messageArgs.size() < index) {
+				messageArgs.add(null);
+			}
+			assert index==messageArgs.size();
+			messageArgs.add(value);
+		} else {
+			if(messageArgs.set(index, value)!=null) throw new AssertionError();
 		}
 	}
 
