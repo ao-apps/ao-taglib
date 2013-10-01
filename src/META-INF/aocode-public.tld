@@ -34,85 +34,105 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <tag-class>com.aoindustries.taglib.ATag</tag-class>
     <body-content>scriptless</body-content>
     <attribute>
-      <description>
-          The href for the link.
-          If starts with a /, the context path will be prepended to the path.
-          Session state URL rewriting is performed as needed.
-          URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
-          any character in the set { ':', '/', ';', '#' }
-          A nested href tag will override this value.
-          Any directly nested param or params tag will add parameters to the href.
-      </description>
+		<description><![CDATA[
+			The href for the link.
+			If starts with a /, the context path will be prepended to the path.
+			Session state URL rewriting is performed as needed.
+			URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
+			any character in the set { ':', '/', ';', '#' }
+			A nested &lt;ao:href&gt; tag will override this value.
+			Any directly nested &lt;ao:param&gt; or &lt;ao:params&gt; tag will add parameters to the href.
+		]]></description>
       <name>href</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
     </attribute>
     <attribute>
-      <description>The hreflang for the link.  A nested hreflang tag will override this value.</description>
+		<description><![CDATA[
+			The hreflang for the link.  A nested &lt;ao:hreflang&gt; tag will override this value.
+		]]></description>
       <name>hreflang</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>The rel for the link.  A nested rel tag will override this value.</description>
+		<description><![CDATA[
+			The rel for the link.  A nested &lt;ao:rel&gt; tag will override this value.
+		]]></description>
       <name>rel</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>The type for the link.  A nested type tag will override this value.</description>
+		<description><![CDATA[
+			The type for the link.  A nested &lt;ao:type&gt; tag will override this value.
+		]]></description>
       <name>type</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>The target for the link.  A nested target tag will override this value.</description>
+		<description><![CDATA[
+			The target for the link.  A nested &lt;ao:target&gt; tag will override this value.
+		]]></description>
       <name>target</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>The title text for the link.  A nested title tag will override this value.</description>
+		<description><![CDATA[
+			The title text for the link.  A nested &lt;ao:title&gt; tag will override this value.
+		]]></description>
       <name>title</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>The CSS class for the link.  A nested class tag will override this value.</description>
+		<description><![CDATA[
+			The CSS class for the link.  A nested &lt;ao:class&gt; tag will override this value.
+		]]></description>
       <name>class</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>The CSS style for the link.  A nested style tag will override this value.</description>
+		<description><![CDATA[
+			The CSS style for the link.  A nested &lt;ao:style&gt; tag will override this value.
+		]]></description>
       <name>style</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>A JavaScript onclick handler.  A nested onclick tag will override this value.</description>
+		<description><![CDATA[
+			A JavaScript onclick handler.  A nested &lt;ao:onclick&gt; tag will override this value.
+		]]></description>
       <name>onclick</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>A JavaScript onmouseover handler.  A nested onmouseover tag will override this value.</description>
+		<description><![CDATA[
+			A JavaScript onmouseover handler.  A nested &lt;ao:onmouseover&gt; tag will override this value.
+		]]></description>
       <name>onmouseover</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>A JavaScript onmouseout handler.  A nested onmouseout tag will override this value.</description>
+		<description><![CDATA[
+			A JavaScript onmouseout handler.  A nested &lt;ao:onmouseout&gt; tag will override this value.
+		]]></description>
       <name>onmouseout</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
@@ -140,17 +160,19 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <tag-class>com.aoindustries.taglib.ArgTag</tag-class>
     <body-content>scriptless</body-content>
     <attribute>
-      <description>The name of argument tag.  A nested name tag will override this value.</description>
+		<description><![CDATA[
+			The name of argument tag.  A nested &lt;ao:name&gt; tag will override this value.
+		]]></description>
       <name>name</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>
-        The value of the parameter.  A nested value tag will override this value.  If neither is provided,
-        the output of the body is used with whitespace trimmed.
-      </description>
+		<description><![CDATA[
+			The value of the parameter.  A nested &lt;ao:value&gt; tag will override this value.  If neither is provided,
+			the output of the body is used with whitespace trimmed.
+		]]></description>
       <name>value</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
@@ -239,62 +261,71 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <tei-class>com.aoindustries.taglib.FormTagTEI</tei-class>
     <body-content>scriptless</body-content>
     <attribute>
-      <description>
-          The method used, must be either post or get.
-          Defaults to "get".
-          A nested method tag will override this value.
-      </description>
+		<description><![CDATA[
+			The method used, must be either post or get.
+			Defaults to "get".
+			A nested &lt;ao:method&gt; tag will override this value.
+		]]></description>
       <name>method</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
     </attribute>
     <attribute>
-      <description>
-          The id of the element.
-          A nested id tag will override this value.
-      </description>
+		<description><![CDATA[
+			The id of the element.
+			A nested &lt;ao:id&gt; tag will override this value.
+		]]></description>
       <name>id</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>
-        The action for the form.
-        A nested action tag will override this value.
-      </description>
+		<description><![CDATA[
+			The action for the form.
+			A nested &lt;ao:action&gt; tag will override this value.
+		]]></description>
       <name>action</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
     </attribute>
     <attribute>
-      <description>The target for the form.  A nested target tag will override this value.</description>
+		<description><![CDATA[
+			The target for the form.
+			A nested &lt;ao:target&gt; tag will override this value.
+		]]></description>
       <name>target</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>
-        The enctype for the form.
-        A nested enctype tag will override this value.
-      </description>
+		<description><![CDATA[
+			The enctype for the form.
+			A nested &lt;ao:enctype&gt; tag will override this value.
+		]]></description>
       <name>enctype</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>The CSS style for the form.  A nested style tag will override this value.</description>
+		<description><![CDATA[
+			The CSS style for the form.
+			A nested &lt;ao:style&gt; tag will override this value.
+		]]></description>
       <name>style</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>A JavaScript onsubmit handler.  A nested onsubmit tag will override this value.</description>
+		<description><![CDATA[
+			A JavaScript onsubmit handler.
+			A nested &lt;ao:onsubmit&gt; tag will override this value.
+		]]></description>
       <name>onsubmit</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
@@ -321,42 +352,44 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</p>
 		<p>
 			Any attribute that has no namespace and is not "page" or "clearParams" is added as an argument.
-			Nested arg tags may also be used to pass arguments.
+			Nested &lt;ao:arg&gt; tags may also be used to pass arguments.
 			It is an error for the same argument name to be used twice (including when set as null).
 		</p>
 	]]></description>
     <name>forward</name>
     <tag-class>com.aoindustries.taglib.ForwardTag</tag-class>
-	<dynamic-attributes>true</dynamic-attributes>
     <body-content>scriptless</body-content>
     <attribute>
-      <description>
-          The page that will be forwarded to.
-          A nested page tag will override this value.
-          The page is required, must be set in attribute or nested page tag.
-      </description>
+		<description><![CDATA[
+			The page that will be forwarded to.
+			A nested &lt;ao:page&gt; tag will override this value.
+			The page is required, must be set in attribute or nested &lt;ao:page&gt; tag.
+		]]></description>
       <name>page</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
     </attribute>
     <attribute>
-      <description>
-          Optionally clears all parameters that match any of the comma-separated patterns.
-		  This is so that only those added by nested tags are forwarded.
-		  As a result, parameters provided by the client will not be able to interfere for forwards that have optional parameters.
-		  Each pattern in the comma-separated list may in the following format:
-		     exact_name  matches the name exactly
-			 *           matches all (clears all parameters)
-		     *suffix     matches the name with "endsWith"
-			 prefix*     matches the name with "beginsWith"
-		  Defaults to none cleared.
-      </description>
+		<description><![CDATA[
+			Optionally clears all parameters that match any of the comma-separated patterns.
+			This is so that only those added by nested tags are forwarded.
+			As a result, parameters provided by the client will not be able to interfere for forwards that have optional parameters.
+			Each pattern in the comma-separated list may in the following format:
+			<ul>
+			   <li>exact_name  matches the name exactly</li>
+			   <li>*           matches all (clears all parameters)</li>
+			   <li>*suffix     matches the name with "endsWith"</li>
+			   <li>prefix*     matches the name with "beginsWith"</li>
+			</ul>
+			Defaults to none cleared.
+		]]></description>
       <name>clearParams</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
     </attribute>
+	<dynamic-attributes>true</dynamic-attributes>
     <example />
   </tag>
   <tag>
@@ -403,12 +436,12 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <type>java.lang.String</type>
     </attribute>
     <attribute>
-      <description>
-        Specifies the name of the property to be accessed on the bean specified
-        by name. This value may be a simple, indexed, or nested property reference
-        expression. If not specified, the bean identified by name will itself be
-        used.
-      </description>
+		<description><![CDATA[
+			Specifies the name of the property to be accessed on the bean specified
+			by name. This value may be a simple, indexed, or nested property reference
+			expression. If not specified, the bean identified by name will itself be
+			used.
+		]]></description>
       <name>property</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
@@ -464,7 +497,9 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
-    <description>Provides an href to its HrefAttribute parent tag.  Parameters may be added with nested param or params tags.</description>
+	<description><![CDATA[
+		Provides an href to its HrefAttribute parent tag.  Parameters may be added with nested &lt;ao:param&gt; or &lt;ao:params&gt; tags.
+	]]></description>
     <name>href</name>
     <tag-class>com.aoindustries.taglib.HrefTag</tag-class>
     <body-content>scriptless</body-content>
@@ -492,50 +527,56 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <tag-class>com.aoindustries.taglib.IframeTag</tag-class>
     <body-content>scriptless</body-content>
     <attribute>
-      <description>
-          The id of the element.
-          A nested id tag will override this value.
-      </description>
+		<description><![CDATA[
+			The id of the element.
+			A nested &lt;ao:id&gt; tag will override this value.
+		]]></description>
       <name>id</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>
-          The src for the frame content.
-          If starts with a /, the context path will be prepended to the path.
-          Session state URL rewriting is performed as needed.
-          URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
-          any character in the set { ':', '/', ';', '#' }
-          A nested src tag will override this value.
-          Any directly nested param or params tag will add parameters to the src.
-      </description>
+		<description><![CDATA[
+			The src for the frame content.
+			If starts with a /, the context path will be prepended to the path.
+			Session state URL rewriting is performed as needed.
+			URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
+			any character in the set { ':', '/', ';', '#' }
+			A nested &lt;ao:src&gt; tag will override this value.
+			Any directly nested &lt;ao:param&gt; or &lt;ao:params&gt; tag will add parameters to the src.
+		]]></description>
       <name>src</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
     </attribute>
     <attribute>
-      <description>The width for the frame.  A nested width tag will override this value.</description>
+		<description><![CDATA[
+			The width for the frame.
+			A nested &lt;ao:width&gt; tag will override this value.
+		]]></description>
       <name>width</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>The height for the frame.  A nested height tag will override this value.</description>
+		<description><![CDATA[
+			The height for the frame.
+			A nested &lt;ao:height&gt; tag will override this value.
+		]]></description>
       <name>height</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>
-          The frameborder attribute.  Accepts values of "true" or "false".
-          A non-empty nested frameborder tag will override this value.
-          Defaults to true.
-      </description>
+		<description><![CDATA[
+			The frameborder attribute.  Accepts values of "true" or "false".
+			A non-empty nested &lt;ao:frameborder&gt; tag will override this value.
+			Defaults to true.
+		]]></description>
       <name>frameborder</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
@@ -544,71 +585,89 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
-    <description><![CDATA[
-        Renders an img tag.
-        The src may be provided in one of three ways, in precedence order:
-        <ol>
-            <li>Direct child <src> tag.</li>
-            <li>As the src attribute</li>
-            <li>Contents of tag body, trimmed.</li>
-        </ol>
-        Also, the width, height, and alt values are required either as attributes or nested tags.
-    ]]></description>
+	<description><![CDATA[
+		Renders an img tag.
+		The src may be provided in one of three ways, in precedence order:
+		<ol>
+			<li>Direct child <src> tag.</li>
+			<li>As the src attribute</li>
+			<li>Contents of tag body, trimmed.</li>
+		</ol>
+		Also, the width, height, and alt values are required either as attributes or nested tags.
+	]]></description>
     <name>img</name>
     <tag-class>com.aoindustries.taglib.ImgTag</tag-class>
     <body-content>scriptless</body-content>
     <attribute>
-      <description>
-          The src for the image.
-          If starts with a /, the context path will be prepended to the path.
-          Session state URL rewriting is performed as needed.
-          URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
-          any character in the set { ':', '/', ';', '#' }
-          A nested src tag will override this value.
-          Any directly nested param or params tag will add parameters to the src.
-      </description>
+		<description><![CDATA[
+			The src for the image.
+			If starts with a /, the context path will be prepended to the path.
+			Session state URL rewriting is performed as needed.
+			URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
+			any character in the set { ':', '/', ';', '#' }
+			A nested &lt;ao:src&gt; tag will override this value.
+			Any directly nested &lt;ao:param&gt; or &lt;ao:params&gt; tag will add parameters to the src.
+		]]></description>
       <name>src</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
     </attribute>
     <attribute>
-      <description>The width for the image.  A nested width tag will override this value.</description>
+		<description><![CDATA[
+			The width for the image.
+			A nested &lt;ao:width&gt; tag will override this value.
+		]]></description>
       <name>width</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>The height for the image.  A nested height tag will override this value.</description>
+		<description><![CDATA[
+			The height for the image.
+			A nested &lt;ao:height&gt; tag will override this value.
+		]]></description>
       <name>height</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>The alt text for the image.  A nested alt tag will override this value.</description>
+		<description><![CDATA[
+			The alt text for the image.
+			A nested &lt;ao:alt&gt; tag will override this value.
+		]]></description>
       <name>alt</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>The title text for the image.  A nested title tag will override this value.</description>
+		<description><![CDATA[
+			The title text for the image.
+			A nested &lt;ao:title&gt; tag will override this value.
+		]]></description>
       <name>title</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>The CSS class for the img.  A nested class tag will override this value.</description>
+		<description><![CDATA[
+			The CSS class for the img.
+			A nested &lt;ao:class&gt; tag will override this value.
+		]]></description>
       <name>class</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>The CSS style for the img.  A nested style tag will override this value.</description>
+		<description><![CDATA[
+			The CSS style for the img.
+			A nested &lt;ao:style&gt; tag will override this value.
+		]]></description>
       <name>style</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
@@ -636,42 +695,44 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</p>
 		<p>
 			Any attribute that has no namespace and is not "page" or "clearParams" is added as an argument.
-			Nested arg tags may also be used to pass arguments.
+			Nested &lt;ao:arg&gt; tags may also be used to pass arguments.
 			It is an error for the same argument name to be used twice (including when set as null).
 		</p>
 	]]></description>
     <name>include</name>
     <tag-class>com.aoindustries.taglib.IncludeTag</tag-class>
-	<dynamic-attributes>true</dynamic-attributes>
     <body-content>scriptless</body-content>
     <attribute>
-      <description>
-          The page that will be included.
-          A nested page tag will override this value.
-          The page is required, must be set in attribute or nested page tag.
-      </description>
+		<description><![CDATA[
+			The page that will be included.
+			A nested &lt;ao:page&gt; tag will override this value.
+			The page is required, must be set in attribute or nested &lt;ao:page&gt; tag.
+		]]></description>
       <name>page</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
     </attribute>
     <attribute>
-      <description>
-          Optionally clears all parameters that match any of the comma-separated patterns.
-		  This is so that only those added by nested tags are included
-		  As a result, parameters provided by the client will not be able to interfere for includes that have optional parameters.
-		  Each pattern in the comma-separated list may in the following format:
-		     exact_name  matches the name exactly
-			 *           matches all (clears all parameters)
-		     *suffix     matches the name with "endsWith"
-			 prefix*     matches the name with "beginsWith"
-		  Defaults to none cleared.
-      </description>
+		<description><![CDATA[
+			Optionally clears all parameters that match any of the comma-separated patterns.
+			This is so that only those added by nested tags are included
+			As a result, parameters provided by the client will not be able to interfere for includes that have optional parameters.
+			Each pattern in the comma-separated list may in the following format:
+			<ul>
+			   <li>exact_name  matches the name exactly</li>
+			   <li>*           matches all (clears all parameters)</li>
+			   <li>*suffix     matches the name with "endsWith"</li>
+			   <li>prefix*     matches the name with "beginsWith"</li>
+			</ul>
+			Defaults to none cleared.
+		]]></description>
       <name>clearParams</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
     </attribute>
+	<dynamic-attributes>true</dynamic-attributes>
     <example />
   </tag>
   <tag>
@@ -689,148 +750,167 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <tei-class>com.aoindustries.taglib.InputTagTEI</tei-class>
     <body-content>scriptless</body-content>
     <attribute>
-      <description>
-          The id of the element.
-          A nested id tag will override this value.
-      </description>
+		<description><![CDATA[
+			The id of the element.
+			A nested &lt;ao:id&gt; tag will override this value.
+		]]></description>
       <name>id</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>
-          The type of input, must be one of button, checkbox, file, hidden, image, password, radio, reset, submit, or text.
-          A nested type tag will override this value.
-      </description>
+		<description><![CDATA[
+			The type of input, must be one of button, checkbox, file, hidden, image, password, radio, reset, submit, or text.
+			A nested &lt;ao:type&gt; tag will override this value.
+		]]></description>
       <name>type</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>The name of input tag.  A nested name tag will override this value.</description>
+		<description><![CDATA[
+			The name of input tag.
+			A nested &lt;ao:name&gt; tag will override this value.
+		]]></description>
       <name>name</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>
-        The value of the input.  A nested value tag will override this value.  If neither is provided,
-        the output of the body is used with whitespace trimmed.
-      </description>
+		<description><![CDATA[
+			The value of the input.
+			A nested &lt;ao:value&gt; tag will override this value.
+			If neither is provided, the output of the body is used with whitespace trimmed.
+		]]></description>
       <name>value</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>A JavaScript onclick handler.  A nested onclick tag will override this value.</description>
+		<description><![CDATA[
+			A JavaScript onclick handler.
+			A nested &lt;ao:onclick&gt; tag will override this value.
+		]]></description>
       <name>onclick</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>
-          A JavaScript onchange handler.
-          A nested onchange tag will override this value.
-      </description>
+		<description><![CDATA[
+			A JavaScript onchange handler.
+			A nested &lt;ao:onchange&gt; tag will override this value.
+		]]></description>
       <name>onchange</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>
-          A JavaScript onfocus handler.
-          A nested onfocus tag will override this value.
-      </description>
+		<description><![CDATA[
+			A JavaScript onfocus handler.
+			A nested &lt;ao:onfocus&gt; tag will override this value.
+		]]></description>
       <name>onfocus</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>
-          A JavaScript onblur handler.
-          A nested onblur tag will override this value.
-      </description>
+		<description><![CDATA[
+			A JavaScript onblur handler.
+			A nested &lt;ao:onblur&gt; tag will override this value.
+		]]></description>
       <name>onblur</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>
-          A JavaScript onkeypress handler.
-          A nested onkeypress tag will override this value.
-      </description>
+		<description><![CDATA[
+			A JavaScript onkeypress handler.
+			A nested &lt;ao:onkeypress&gt; tag will override this value.
+		]]></description>
       <name>onkeypress</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>The size of the input element.  A nested size tag will override this value.</description>
+		<description><![CDATA[
+			The size of the input element.
+			A nested &lt;ao:size&gt; tag will override this value.
+		]]></description>
       <name>size</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>The maxlength of the input element.  A nested maxlength tag will override this value.</description>
+		<description><![CDATA[
+			The maxlength of the input element.
+			A nested &lt;ao:maxlength&gt; tag will override this value.
+		]]></description>
       <name>maxlength</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Integer</type>
     </attribute>
     <attribute>
-      <description><![CDATA[
-          The readonly attribute.  Accepts values of "true" or "false".
-          A non-empty nested readonly tag will override this value.
-          If readonly is "true", will add the attribute as <code>readonly="readonly"</code>,
-          otherwise the attribute is not added.
-      ]]></description>
+		<description><![CDATA[
+			The readonly attribute.  Accepts values of "true" or "false".
+			A non-empty nested &lt;ao:readonly&gt; tag will override this value.
+			If readonly is "true", will add the attribute as <code>readonly="readonly"</code>,
+			otherwise the attribute is not added.
+		]]></description>
       <name>readonly</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>boolean</type>
     </attribute>
     <attribute>
-      <description><![CDATA[
-          The disabled attribute.  Accepts values of "true" or "false".
-          A non-empty nested disabled tag will override this value.
-          If disabled is "true", will add the attribute as <code>disabled="disabled"</code>,
-          otherwise the attribute is not added.
-      ]]></description>
+		<description><![CDATA[
+			The disabled attribute.  Accepts values of "true" or "false".
+			A non-empty nested &lt;ao:disabled&gt; tag will override this value.
+			If disabled is "true", will add the attribute as <code>disabled="disabled"</code>,
+			otherwise the attribute is not added.
+		]]></description>
       <name>disabled</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>boolean</type>
     </attribute>
     <attribute>
-      <description>The CSS class for the input element.  A nested class tag will override this value.</description>
+		<description><![CDATA[
+			The CSS class for the input element.
+			A nested &lt;ao:class&gt; tag will override this value.
+		]]></description>
       <name>class</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>The CSS style for the input element.  A nested style tag will override this value.</description>
+		<description><![CDATA[
+			The CSS style for the input element.
+			A nested &lt;ao:style&gt; tag will override this value.
+		]]></description>
       <name>style</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description><![CDATA[
-          The checked attribute.  Accepts values of "true" or "false".
-          A non-empty nested checked tag will override this value.
-          If checked is "true", will add the attribute as <code>checked="checked"</code>,
-          otherwise the attribute is not added.
-      ]]></description>
+		<description><![CDATA[
+			The checked attribute.  Accepts values of "true" or "false".
+			A non-empty nested &lt;ao:checked&gt; tag will override this value.
+			If checked is "true", will add the attribute as <code>checked="checked"</code>,
+			otherwise the attribute is not added.
+		]]></description>
       <name>checked</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
@@ -847,36 +927,45 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <tag-class>com.aoindustries.taglib.LinkTag</tag-class>
     <body-content>scriptless</body-content>
     <attribute>
-      <description>
-          The href for the link.
-          If starts with a /, the context path will be prepended to the path.
-          Session state URL rewriting is performed as needed.
-          URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
-          any character in the set { ':', '/', ';', '#' }
-          A nested href tag will override this value.
-          Any directly nested param or params tag will add parameters to the href.
-      </description>
+		<description><![CDATA[
+			The href for the link.
+			If starts with a /, the context path will be prepended to the path.
+			Session state URL rewriting is performed as needed.
+			URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
+			any character in the set { ':', '/', ';', '#' }
+			A nested &lt;ao:href&gt; tag will override this value.
+			Any directly nested &lt;ao:param&gt; or &lt;ao:params&gt; tag will add parameters to the href.
+		]]></description>
       <name>href</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
     </attribute>
     <attribute>
-      <description>The hreflang for the link.  A nested hreflang tag will override this value.</description>
+		<description><![CDATA[
+			The hreflang for the link.
+			A nested &lt;ao:hreflang&gt; tag will override this value.
+		]]></description>
       <name>hreflang</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>The rel for the link.  A nested rel tag will override this value.</description>
+		<description><![CDATA[
+			The rel for the link.
+			A nested &lt;ao:rel&gt; tag will override this value.
+		]]></description>
       <name>rel</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>The type for the link.  A nested type tag will override this value.</description>
+		<description><![CDATA[
+			The type for the link.
+			A nested &lt;ao:type&gt; tag will override this value.
+		]]></description>
       <name>type</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
@@ -914,7 +1003,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<p>
 			These additional arguments will first fill-in any gap in the numeric ranges
 			provided by "arg###" attributes.  Because the first argument is zero, if
-			arg1="Second" and arg2="Third", then the first nested messageArg would be
+			arg1="Second" and arg2="Third", then the first nested &lt;ao:messageArg&gt; would be
 			applied filling the spot of arg0.
 		</p>
 		<p>
@@ -940,7 +1029,6 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <name>message</name>
     <tag-class>com.aoindustries.taglib.MessageTag</tag-class>
     <tei-class>com.aoindustries.taglib.MessageTagTEI</tei-class>
-	<dynamic-attributes>true</dynamic-attributes>
     <body-content>scriptless</body-content>
     <attribute>
       <description>
@@ -1000,15 +1088,17 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-		<description>
-			Specifies the type of content contained in the value.  Defaults to text/plain.
-			A nested type tag will override this value.
-		</description>
+		<description><![CDATA[
+			Specifies the type of content contained in the value.
+			Defaults to text/plain.
+			A nested &lt;ao:type&gt; tag will override this value.
+		]]></description>
       <name>type</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
+	<dynamic-attributes>true</dynamic-attributes>
     <example />
   </tag>
   <tag>
@@ -1017,10 +1107,11 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <tag-class>com.aoindustries.taglib.MessageArgTag</tag-class>
     <body-content>scriptless</body-content>
     <attribute>
-      <description>
-        The value of the parameter.  A nested value tag will override this value.  If neither is provided,
-        the output of the body is used with whitespace trimmed.
-      </description>
+		<description><![CDATA[
+			The value of the parameter.
+			A nested &lt;ao:value&gt; tag will override this value.
+			If neither is provided, the output of the body is used with whitespace trimmed.
+		]]></description>
       <name>value</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
@@ -1052,17 +1143,21 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>The name of meta tag.  A nested name tag will override this value.</description>
+		<description><![CDATA[
+			The name of meta tag.
+			A nested &lt;ao:name&gt; tag will override this value.
+		]]></description>
       <name>name</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>
-        The content of the meta data.  A nested content tag will override this value.  If neither is provided,
-        the output of the body is used with whitespace trimmed.
-      </description>
+		<description><![CDATA[
+			The content of the meta data.
+			A nested &lt;ao:content&gt; tag will override this value.
+			If neither is provided, the output of the body is used with whitespace trimmed.
+		]]></description>
       <name>content</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
@@ -1153,10 +1248,11 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <tag-class>com.aoindustries.taglib.OptionTag</tag-class>
     <body-content>scriptless</body-content>
     <attribute>
-      <description>
-        The value of the option.  A nested value tag will override this value.  If neither is provided,
-        the output of the body is used with whitespace trimmed.
-      </description>
+		<description><![CDATA[
+			The value of the option.
+			A nested &lt;ao:value&gt; tag will override this value.
+			If neither is provided, the output of the body is used with whitespace trimmed.
+		]]></description>
       <name>value</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
@@ -1165,7 +1261,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <attribute>
       <description><![CDATA[
           The selected attribute.  Accepts values of "true" or "false".
-          A non-empty nested selected tag will override this value.
+          A non-empty nested &lt;ao:selected&gt; tag will override this value.
           If selected is "true", will add the attribute as <code>selected="selected"</code>,
           otherwise the attribute is not added.
       ]]></description>
@@ -1177,7 +1273,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <attribute>
       <description><![CDATA[
           The disabled attribute.  Accepts values of "true" or "false".
-          A non-empty nested disabled tag will override this value.
+          A non-empty nested &lt;ao:disabled&gt; tag will override this value.
           If disabled is "true", will add the attribute as <code>disabled="disabled"</code>,
           otherwise the attribute is not added.
       ]]></description>
@@ -1211,9 +1307,10 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<tei-class>com.aoindustries.taglib.OutTagTEI</tei-class>
 		<body-content>scriptless</body-content>
 		<attribute>
-			<description>
-				The value to be written.  A nested value tag will override this value.
-			</description>
+			<description><![CDATA[
+				The value to be written.
+				A nested &lt;ao:value&gt; tag will override this value.
+			]]></description>
 			<name>value</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -1227,10 +1324,10 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
-			<description>
+			<description><![CDATA[
 				Specifies the type of content contained in the value.  Defaults to text/plain.
-				A nested type tag will override this value.
-			</description>
+				A nested &lt;ao:type&gt; tag will override this value.
+			]]></description>
 			<name>type</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -1251,17 +1348,21 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <tag-class>com.aoindustries.taglib.ParamTag</tag-class>
     <body-content>scriptless</body-content>
     <attribute>
-      <description>The name of parameter tag.  A nested name tag will override this value.</description>
+		<description><![CDATA[
+			The name of parameter tag.
+			A nested &lt;ao:name&gt; tag will override this value.
+		]]></description>
       <name>name</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>
-        The value of the parameter.  A nested value tag will override this value.  If neither is provided,
-        the output of the body is used with whitespace trimmed.
-      </description>
+		<description><![CDATA[
+			The value of the parameter.
+			A nested &lt;ao:value&gt; tag will override this value.
+			If neither is provided, the output of the body is used with whitespace trimmed.
+		]]></description>
       <name>value</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
@@ -1275,7 +1376,10 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <tag-class>com.aoindustries.taglib.ParamsTag</tag-class>
     <body-content>scriptless</body-content>
     <attribute>
-      <description>The name of parameter tag.  A nested name tag will override this value.</description>
+		<description><![CDATA[
+			The name of parameter tag.
+			A nested &lt;ao:name&gt; tag will override this value.
+		]]></description>
       <name>name</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
@@ -1310,15 +1414,15 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <tei-class>com.aoindustries.taglib.RedirectTagTEI</tei-class>
     <body-content>scriptless</body-content>
     <attribute>
-      <description>
-          The destination for the redirect.
-          If starts with a /, the context path will be prepended to the path.
-          Session state URL rewriting is performed as needed.
-          URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
-          any character in the set { ':', '/', ';', '#' }
-          A nested href tag will override this value.
-          Any directly nested param or params tag will add parameters to the href.
-      </description>
+		<description><![CDATA[
+			The destination for the redirect.
+			If starts with a /, the context path will be prepended to the path.
+			Session state URL rewriting is performed as needed.
+			URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
+			any character in the set { ':', '/', ';', '#' }
+			A nested &lt;ao:href&gt; tag will override this value.
+			Any directly nested &lt;ao:param&gt; or &lt;ao:params&gt; tag will add parameters to the href.
+		]]></description>
       <name>href</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
@@ -1336,10 +1440,10 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 			<p>
 				Because the redirect type has important consequences on search engines and browser caches, the decision should be made for
-				each redirect.  Thus, this attribute must be set directly or in a nested type tag.
+				each redirect.  Thus, this attribute must be set directly or in a nested &lt;ao:type&gt; tag.
 			</p>
 			<p>
-				A nested type tag will override this value.
+				A nested &lt;ao:type&gt; tag will override this value.
 			</p>
       ]]></description>
       <name>type</name>
@@ -1386,27 +1490,26 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <tei-class>com.aoindustries.taglib.ScriptTagTEI</tei-class>
     <body-content>scriptless</body-content>
     <attribute>
-      <description>
-        Specifies the type of script.  The default is "text/javascript".  This is
-        also currently the only supported script language.
-
-        A nested type tag will override this value.
-	  </description>
+		<description><![CDATA[
+			Specifies the type of script.
+			The default is "text/javascript", currently the only supported script language.
+			A nested &lt;ao:type&gt; tag will override this value.
+		]]></description>
       <name>type</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>
-          The src for the script.
-          If starts with a /, the context path will be prepended to the path.
-          Session state URL rewriting is performed as needed.
-          URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
-          any character in the set { ':', '/', ';', '#' }
-          A nested src tag will override this value.
-          Any directly nested param or params tag will add parameters to the src.
-      </description>
+		<description><![CDATA[
+			The src for the script.
+			If starts with a /, the context path will be prepended to the path.
+			Session state URL rewriting is performed as needed.
+			URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
+			any character in the set { ':', '/', ';', '#' }
+			A nested &lt;ao:src&gt; tag will override this value.
+			Any directly nested &lt;ao:param&gt; or &lt;ao:params&gt; tag will add parameters to the src.
+		]]></description>
       <name>src</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
@@ -1420,27 +1523,30 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <tag-class>com.aoindustries.taglib.SelectTag</tag-class>
     <body-content>scriptless</body-content>
     <attribute>
-      <description>
+      <description><![CDATA[
           The id of the element.
-          A nested id tag will override this value.
-      </description>
+          A nested &lt;ao:id&gt; tag will override this value.
+      ]]></description>
       <name>id</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>
+      <description><![CDATA[
           The name of the select element.
-          A nested name tag will override this value.
-      </description>
+          A nested &lt;ao:name&gt; tag will override this value.
+      ]]></description>
       <name>name</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>The CSS style for the select element.  A nested style tag will override this value.</description>
+		<description><![CDATA[
+			The CSS style for the select element.
+			A nested &lt;ao:style&gt; tag will override this value.
+		]]></description>
       <name>style</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
@@ -1449,7 +1555,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <attribute>
       <description><![CDATA[
           The disabled attribute.  Accepts values of "true" or "false".
-          A non-empty nested disabled tag will override this value.
+          A non-empty nested &lt;ao:disabled&gt; tag will override this value.
           If disabled is "true", will add the attribute as <code>disabled="disabled"</code>,
           otherwise the attribute is not added.
       ]]></description>
@@ -1459,40 +1565,40 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <type>boolean</type>
     </attribute>
     <attribute>
-      <description>
-          A JavaScript onchange handler.
-          A nested onchange tag will override this value.
-      </description>
+		<description><![CDATA[
+			A JavaScript onchange handler.
+			A nested &lt;ao:onchange&gt; tag will override this value.
+		]]></description>
       <name>onchange</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>
-          A JavaScript onfocus handler.
-          A nested onfocus tag will override this value.
-      </description>
+		<description><![CDATA[
+			A JavaScript onfocus handler.
+			A nested &lt;ao:onfocus&gt; tag will override this value.
+		]]></description>
       <name>onfocus</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>
-          A JavaScript onblur handler.
-          A nested onblur tag will override this value.
-      </description>
+		<description><![CDATA[
+			A JavaScript onblur handler.
+			A nested &lt;ao:onblur&gt; tag will override this value.
+		]]></description>
       <name>onblur</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>
-          A JavaScript onkeypress handler.
-          A nested onkeypress tag will override this value.
-      </description>
+		<description><![CDATA[
+			A JavaScript onkeypress handler.
+			A nested &lt;ao:onkeypress&gt; tag will override this value.
+		]]></description>
       <name>onkeypress</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
@@ -1543,13 +1649,16 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <body-content>scriptless</body-content>
     <example />
   </tag>
-  <tag>
-    <description>Provides a src attribute to its SrcAttribute parent tag.  Parameters may be added with nested param or params tags.</description>
-    <name>src</name>
-    <tag-class>com.aoindustries.taglib.SrcTag</tag-class>
-    <body-content>scriptless</body-content>
-    <example />
-  </tag>
+	<tag>
+		<description><![CDATA[
+			Provides a src attribute to its SrcAttribute parent tag.
+			Parameters may be added with nested &lt;ao:param&gt; or &lt;ao:params&gt; tags.
+		]]></description>
+		<name>src</name>
+		<tag-class>com.aoindustries.taglib.SrcTag</tag-class>
+		<body-content>scriptless</body-content>
+		<example />
+	</tag>
   <tag>
     <description>Provides a style attribute to its StyleAttribute parent tag.</description>
     <name>style</name>
@@ -1609,72 +1718,85 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <tag-class>com.aoindustries.taglib.TextareaTag</tag-class>
     <body-content>scriptless</body-content>
     <attribute>
-      <description>The name of textarea tag.  A nested name tag will override this value.</description>
+		<description><![CDATA[
+			The name of textarea tag.
+			A nested &lt;ao:name&gt; tag will override this value.
+		]]></description>
       <name>name</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>
-        The value of the textarea.  A nested value tag will override this value.  If neither is provided,
-        the output of the body is used.
-      </description>
+		<description><![CDATA[
+			The value of the textarea.
+			A nested &lt;ao:value&gt; tag will override this value.
+			If neither is provided, the output of the body is used.
+		]]></description>
       <name>value</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>The number of columns for the textarea element.  A nested cols tag will override this value.</description>
+		<description><![CDATA[
+			The number of columns for the textarea element.
+			A nested &lt;ao:cols&gt; tag will override this value.
+		]]></description>
       <name>cols</name>
       <required>true</required>
       <rtexprvalue>true</rtexprvalue>
       <type>int</type>
     </attribute>
     <attribute>
-      <description>The number of rows for the textarea element.  A nested rows tag will override this value.</description>
+		<description><![CDATA[
+			The number of rows for the textarea element.
+			A nested &lt;ao:rows&gt; tag will override this value.
+		]]></description>
       <name>rows</name>
       <required>true</required>
       <rtexprvalue>true</rtexprvalue>
       <type>int</type>
     </attribute>
     <attribute>
-      <description><![CDATA[
-          The readonly attribute.  Accepts values of "true" or "false".
-          A non-empty nested readonly tag will override this value.
-          If readonly is "true", will add the attribute as <code>readonly="readonly"</code>,
-          otherwise the attribute is not added.
-      ]]></description>
+		<description><![CDATA[
+			The readonly attribute.  Accepts values of "true" or "false".
+			A non-empty nested &lt;ao:readonly&gt; tag will override this value.
+			If readonly is "true", will add the attribute as <code>readonly="readonly"</code>,
+			otherwise the attribute is not added.
+		]]></description>
       <name>readonly</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>boolean</type>
     </attribute>
     <attribute>
-      <description><![CDATA[
-          The disabled attribute.  Accepts values of "true" or "false".
-          A non-empty nested disabled tag will override this value.
-          If disabled is "true", will add the attribute as <code>disabled="disabled"</code>,
-          otherwise the attribute is not added.
-      ]]></description>
+		<description><![CDATA[
+			The disabled attribute.  Accepts values of "true" or "false".
+			A non-empty nested &lt;ao:disabled&gt; tag will override this value.
+			If disabled is "true", will add the attribute as <code>disabled="disabled"</code>,
+			otherwise the attribute is not added.
+		]]></description>
       <name>disabled</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>boolean</type>
     </attribute>
     <attribute>
-      <description>
-          A JavaScript onchange handler.
-          A nested onchange tag will override this value.
-      </description>
+		<description><![CDATA[
+			A JavaScript onchange handler.
+			A nested &lt;ao:onchange&gt; tag will override this value.
+		]]></description>
       <name>onchange</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>The CSS style for the textarea element.  A nested style tag will override this value.</description>
+		<description><![CDATA[
+			The CSS style for the textarea element.
+			A nested &lt;ao:style&gt; tag will override this value.
+		]]></description>
       <name>style</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
@@ -1798,25 +1920,25 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <type>java.lang.String</type>
     </attribute>
     <attribute>
-      <description>
-        Specifies the attribute name of the bean whose property is accessed to
-        retrieve the value specified by property (if specified). If property is
-        not specified, the value of this bean itself will be used.
+		<description><![CDATA[
+			Specifies the attribute name of the bean whose property is accessed to
+			retrieve the value specified by property (if specified). If property is
+			not specified, the value of this bean itself will be used.
 
-		A nested name tag will override this value.
-      </description>
+			A nested &lt;ao:name&gt; tag will override this value.
+		]]></description>
       <name>name</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>
-        Specifies the name of the property to be accessed on the bean specified
-        by name. This value may be a simple, indexed, or nested property reference
-        expression. If not specified, the bean identified by name will itself be
-        used.
-      </description>
+		<description><![CDATA[
+			Specifies the name of the property to be accessed on the bean specified
+			by name. This value may be a simple, indexed, or nested property reference
+			expression. If not specified, the bean identified by name will itself be
+			used.
+		]]></description>
       <name>property</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
@@ -1834,10 +1956,10 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <type>java.lang.String</type>
     </attribute>
 	<attribute>
-		<description>
+		<description><![CDATA[
 			Specifies the type of content contained in the bean.  Defaults to text/plain.
-			A nested type tag will override this value.
-		</description>
+			A nested &lt;ao:type&gt; tag will override this value.
+		]]></description>
 		<name>type</name>
 		<required>false</required>
 		<rtexprvalue>true</rtexprvalue>
@@ -1910,7 +2032,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example>${ao:join(iterable, separator)}</example>
   </function>
   <function>
-    <description><![CDATA[
+	<description><![CDATA[
 		Gets a value from the current localization bundle given its key.
 		No parameters may be provided.
 		Must be nested inside a &lt;ao:bundle&gt; tag.
