@@ -33,10 +33,12 @@ import com.aoindustries.util.i18n.BundleLookupThreadContext;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.Collections;
 import java.util.List;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
+import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
  * @author  AO Industries, Inc.
@@ -44,6 +46,7 @@ import javax.servlet.jsp.PageContext;
 public class MessageTag
 	extends AutoEncodingNullTag
 	implements
+		DynamicAttributes,
 		TypeAttribute,
 		MessageArgsAttribute
 {
@@ -51,6 +54,7 @@ public class MessageTag
 	private String key;
 	private Object type = MediaType.TEXT;
     private MediaType mediaType = MediaType.TEXT;
+	private BitSet messageArgsSet;
 	private List<Object> messageArgs;
 
 	@Override
@@ -102,8 +106,54 @@ public class MessageTag
 
 	@Override
 	public void addMessageArg(Object value) {
-		if(messageArgs==null) messageArgs = new ArrayList<Object>();
-		messageArgs.add(value);
+		// Create lists on first use
+		if(messageArgs==null) {
+			messageArgsSet = new BitSet();
+			messageArgs = new ArrayList<Object>();
+		}
+		// Find the first index that is not used
+		int index = messageArgsSet.nextClearBit(0);
+		messageArgsSet.set(index);
+		if(index>=messageArgs.size()) {
+			assert index==messageArgs.size();
+			messageArgs.add(value);
+		} else {
+			messageArgs.set(index, value);
+		}
+	}
+
+	@Override
+	public void setDynamicAttribute(String uri, String localName, Object value) throws JspException {
+		System.err.println("DEBUG: uri="+uri);
+		if(localName.startsWith("arg")) {
+			try {
+				String numSubstring = localName.substring(3);
+				int index = Integer.parseInt(numSubstring);
+				// Do not allow "arg00" in place of "arg0"
+				if(!numSubstring.equals(Integer.toString(index))) throw new LocalizedJspException(accessor, "MessageTag.unexpectedDynamicAttribute", localName);
+				// Create lists on first use
+				if(messageArgs==null) {
+					messageArgsSet = new BitSet();
+					messageArgs = new ArrayList<Object>();
+				}
+				// Must not already be set
+				if(messageArgsSet.get(index)) throw new LocalizedJspException(accessor, "MessageTag.duplicateAttribute", localName);
+				messageArgsSet.set(index);
+				if(index>=messageArgs.size()) {
+					while(messageArgs.size() < index) {
+						messageArgs.add(null);
+					}
+					assert index==messageArgs.size();
+					messageArgs.add(value);
+				} else {
+					if(messageArgs.set(index, value)!=null) throw new AssertionError();
+				}
+			} catch(NumberFormatException err) {
+				throw new LocalizedJspException(err, accessor, "MessageTag.unexpectedDynamicAttribute", localName);
+			}
+		} else {
+			throw new LocalizedJspException(accessor, "MessageTag.unexpectedDynamicAttribute", localName);
+		}
 	}
 
 	private String lookupResult;
@@ -122,6 +172,9 @@ public class MessageTag
 		if(messageArgs==null) {
 			lookupResult = accessor.getMessage(combinedKey);
 		} else {
+			// Error if gap in message args (any not set in range)
+			int firstClear = messageArgsSet.nextClearBit(0);
+			if(firstClear < messageArgs.size()) throw new LocalizedJspException(accessor, "MessageTag.argumentMissing", firstClear);
 			lookupResult = accessor.getMessage(combinedKey, messageArgs.toArray());
 		}
 		// Look for any message markup

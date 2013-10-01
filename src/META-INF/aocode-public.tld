@@ -878,8 +878,24 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <description>
 		Writes a value from the current localization bundle given its key.
 		Writes the value with proper escaping based on the context of the tag.
-		Message substitution arguments may be provided by nested &lt;ao:messageArg&gt; tags.
-		Must be nested inside a &lt;ao:bundle&gt; tag.
+		
+		Any number of "arg###" attributes may be provided, where ### is the substitution
+		parameter index, starting at zero.
+		For example, there could be arg0="First" arg1="Second" for two arguments.
+		They will be passed-on to the message format.
+
+		Additionally, message substitution arguments may be provided by
+		nested &lt;ao:messageArg&gt; tags.
+
+		These additional arguments will first fill-in any gap in the numeric ranges
+		provided by "arg###" attributes.  Because the first argument is zero, if
+		arg1="Second" and arg2="Third", then the first nested messageArg would be
+		applied filling the spot of arg0.
+
+		Once all gaps are filled, these additional arguments will be added after
+		all provided as "arg###" attritutes.
+
+		This tag must be nested inside a &lt;ao:bundle&gt; tag.
 
 		The content type depends on the value provided to the type attribute, and
 		defaults to text/plain.  The content is checked for well-formedness based
@@ -893,6 +909,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <name>message</name>
     <tag-class>com.aoindustries.taglib.MessageTag</tag-class>
     <tei-class>com.aoindustries.taglib.MessageTagTEI</tei-class>
+	<dynamic-attributes>true</dynamic-attributes>
     <body-content>scriptless</body-content>
     <attribute>
       <description>
