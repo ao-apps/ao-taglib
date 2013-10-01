@@ -301,22 +301,25 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
-    <description>
-        Forwards to another resource, ends processing of the current page.
-        If parameters are not cleared, nested parameters are added before request parameters.
-        This has two advantages over the standard jsp:forward tag:
-            1) You may clear parameters such that only those specifically added will be passed on to the next page
-            2) You may have other nested tags used to select and build the set of parameters
-		
-		Nested arg tags may be used to pass arguments (via request-scope args Map).
-		Any arguments to the current page are not automatically passed-on to the target page
+	<description>
+		Forwards to another resource, ends processing of the current page.
+		If parameters are not cleared, nested parameters are added before request parameters.
+		This has three advantages over the standard jsp:forward tag:
+			1) You may clear parameters such that only those specifically added will be passed on to the next page
+			2) You may have other nested tags used to select and build the set of parameters
+			3) You may pass argument objects instead of only string parameters (see below)
+
+		Argument objects are passed to the forwarded page via request-scope "arg" Map.
+		Any arguments to the current page are not automatically passed-on to the forwarded page 
 		(this differs from parameters in this way).
-		The current page arguments are restored when the forward completes.
-		Arguments are passed as objects.
+		
+		Any attribute that has no namespace and is not "page" or "clearParams" is added as an argument.
+		Nested arg tags may also be used to pass arguments.
 		It is an error for the same argument name to be used twice (including when set as null).
-    </description>
+	</description>
     <name>forward</name>
     <tag-class>com.aoindustries.taglib.ForwardTag</tag-class>
+	<dynamic-attributes>true</dynamic-attributes>
     <body-content>scriptless</body-content>
     <attribute>
       <description>
@@ -606,22 +609,26 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
-    <description>
-        Includes another resource and then continues processing of the current page.
-        If parameters are not cleared, nested parameters are added before request parameters.
-        This has two advantages over the standard jsp:include tag:
-            1) You may clear parameters such that only those specifically added will be passed on to the included page
-            2) You may have other nested tags used to select and build the set of parameters
-		
-		Nested arg tags may be used to pass arguments (via request-scope args Map).
-		Any arguments to the current page are not automatically passed-on to the included page
+	<description>
+		Includes another resource and then continues processing of the current page.
+		If parameters are not cleared, nested parameters are added before request parameters.
+		This has three advantages over the standard jsp:include tag:
+			1) You may clear parameters such that only those specifically added will be passed on to the included page
+			2) You may have other nested tags used to select and build the set of parameters
+			3) You may pass argument objects instead of only string parameters (see below)
+
+		Argument objects are passed to the included page via request-scope "arg" Map.
+		Any arguments to the current page are not automatically passed-on to the included page 
 		(this differs from parameters in this way).
 		The current page arguments are restored when the include completes.
-		Arguments are passed as objects.
+		
+		Any attribute that has no namespace and is not "page" or "clearParams" is added as an argument.
+		Nested arg tags may also be used to pass arguments.
 		It is an error for the same argument name to be used twice (including when set as null).
-    </description>
+	</description>
     <name>include</name>
     <tag-class>com.aoindustries.taglib.IncludeTag</tag-class>
+	<dynamic-attributes>true</dynamic-attributes>
     <body-content>scriptless</body-content>
     <attribute>
       <description>

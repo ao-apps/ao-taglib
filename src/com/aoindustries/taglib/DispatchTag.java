@@ -27,6 +27,7 @@ import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.servlet.http.ServletUtil;
+import com.aoindustries.servlet.jsp.LocalizedJspException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.StringUtility;
 import java.io.IOException;
@@ -44,6 +45,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
+import javax.servlet.jsp.tagext.DynamicAttributes;
 import javax.servlet.jsp.tagext.JspFragment;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
@@ -55,6 +57,7 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 abstract class DispatchTag
 	extends SimpleTagSupport
 	implements
+		DynamicAttributes,
 		PageAttribute,
 		ParamsAttribute,
 		ArgsAttribute
@@ -120,6 +123,15 @@ abstract class DispatchTag
 			throw new LocalizedIllegalArgumentException(accessor, "DispatchTag.addArg.duplicateArgument", name);
 		}
 		args.put(name, value);
+	}
+
+	@Override
+	public void setDynamicAttribute(String uri, String localName, Object value) throws JspException {
+		if(uri==null) {
+			addArg(localName, value);
+		} else {
+			throw new LocalizedJspException(accessor, "MessageTag.unexpectedDynamicAttribute", localName);
+		}
 	}
 
 	/**
