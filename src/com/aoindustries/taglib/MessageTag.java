@@ -122,10 +122,25 @@ public class MessageTag
 		}
 	}
 
+	public void setArg0(Object value) throws JspException {
+		setDynamicAttribute(null, "arg0", value);
+	}
+
+	public void setArg1(Object value) throws JspException {
+		setDynamicAttribute(null, "arg1", value);
+	}
+
+	public void setArg2(Object value) throws JspException {
+		setDynamicAttribute(null, "arg2", value);
+	}
+
+	public void setArg3(Object value) throws JspException {
+		setDynamicAttribute(null, "arg3", value);
+	}
+
 	@Override
 	public void setDynamicAttribute(String uri, String localName, Object value) throws JspException {
-		System.err.println("DEBUG: uri="+uri);
-		if(localName.startsWith("arg")) {
+		if(uri==null && localName.startsWith("arg")) {
 			try {
 				String numSubstring = localName.substring(3);
 				int index = Integer.parseInt(numSubstring);

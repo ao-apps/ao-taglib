@@ -921,6 +921,54 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <type>java.lang.String</type>
     </attribute>
     <attribute>
+      <description>
+        The argument that will replace {0} in the message format.
+
+		Any number of arguments may be provided as attributes.  The first four
+		are added to TLD to help JSP code assist.
+      </description>
+      <name>arg0</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.Object</type>
+    </attribute>
+    <attribute>
+      <description>
+        The argument that will replace {1} in the message format.
+
+		Any number of arguments may be provided as attributes.  The first four
+		are added to TLD to help JSP code assist.
+      </description>
+      <name>arg1</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.Object</type>
+    </attribute>
+    <attribute>
+      <description>
+        The argument that will replace {2} in the message format.
+
+		Any number of arguments may be provided as attributes.  The first four
+		are added to TLD to help JSP code assist.
+      </description>
+      <name>arg2</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.Object</type>
+    </attribute>
+    <attribute>
+      <description>
+        The argument that will replace {3} in the message format.
+
+		Any number of arguments may be provided as attributes.  The first four
+		are added to TLD to help JSP code assist.
+      </description>
+      <name>arg3</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.Object</type>
+    </attribute>
+    <attribute>
 		<description>
 			Specifies the type of content contained in the value.  Defaults to text/plain.
 			A nested type tag will override this value.
