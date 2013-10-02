@@ -356,7 +356,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<p>
 			Any attribute that has no namespace and begins with "arg." is added as an argument.
 			The argument name is the part of the attribute name following "arg.".
-			Because this argument is becomes a Map named "arg" in the forwarded page, the attribute
+			Because this argument becomes an element in the Map named "arg" in the forwarded page, the attribute
 			name and JSP EL name will match precisely.
 		</p>
 		<p>
@@ -706,7 +706,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<p>
 			Any attribute that has no namespace and begins with "arg." is added as an argument.
 			The argument name is the part of the attribute name following "arg.".
-			Because this argument is becomes a Map named "arg" in the included page, the attribute
+			Because this argument becomes an element in the Map named "arg" in the included page, the attribute
 			name and JSP EL name will match precisely.
 		</p>
 		<p>
