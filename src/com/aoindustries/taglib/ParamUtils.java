@@ -24,6 +24,8 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.io.Coercion;
 import com.aoindustries.lang.NullArgumentException;
+import com.aoindustries.servlet.jsp.LocalizedJspException;
+import static com.aoindustries.taglib.ApplicationResources.accessor;
 import java.lang.reflect.Array;
 import java.util.Iterator;
 import javax.servlet.jsp.JspException;
@@ -36,7 +38,10 @@ import javax.servlet.jsp.tagext.JspTag;
  */
 final public class ParamUtils {
 
-	private ParamUtils() {}
+	/**
+	 * The prefix for parameter attributes.
+	 */
+	public static final String PARAM_ATTRIBUTE_PREFIX = "param.";
 
 	/**
 	 * Adds one parameter to the first parent of the given tag that implements <code>ParamsAttribute</code>.
@@ -162,5 +167,65 @@ final public class ParamUtils {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Sets the dynamic param.* attributes.
+	 * Handles Iterable, Iterator, arrays, and direct coercion.
+	 *
+	 * @throws  JspException  if any dynamic parameter other than "param.*" is given
+	 */
+	public static void setDynamicAttribute(
+		ParamsAttribute paramsAttribute,
+		String uri,
+		String localName,
+		Object value
+	) throws JspException {
+		if(
+			uri==null
+			&& localName.startsWith(ParamUtils.PARAM_ATTRIBUTE_PREFIX)
+		) {
+			if(value!=null) {
+				String paramName = localName.substring(ParamUtils.PARAM_ATTRIBUTE_PREFIX.length());
+				if(value instanceof Iterable<?>) {
+					ParamUtils.addIterableParams(
+						paramsAttribute,
+						paramName,
+						(Iterable<?>)value
+					);
+				} else if(value instanceof Iterator<?>) {
+					ParamUtils.addIteratorParams(
+						paramsAttribute,
+						paramName,
+						(Iterator<?>)value
+					);
+				} else if(value.getClass().isArray()) {
+					ParamUtils.addArrayParams(
+						paramsAttribute,
+						paramName,
+						value
+					);
+				} else {
+					addParam(
+						paramsAttribute,
+						paramName,
+						Coercion.toString(value)
+					);
+				}
+			}
+		} else {
+			throw new LocalizedJspException(
+				accessor,
+				"error.unexpectedDynamicAttribute",
+				localName,
+				ParamUtils.PARAM_ATTRIBUTE_PREFIX+"*"
+			);
+		}
+	}
+
+	/**
+	 * Make no instances.
+	 */
+	private ParamUtils() {
 	}
 }

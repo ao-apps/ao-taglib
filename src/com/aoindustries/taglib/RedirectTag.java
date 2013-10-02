@@ -22,7 +22,6 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.io.Coercion;
 import com.aoindustries.io.NullWriter;
 import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
@@ -30,9 +29,7 @@ import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.net.HttpParametersUtils;
 import com.aoindustries.servlet.http.ServletUtil;
 import com.aoindustries.servlet.jsp.LocalizedJspException;
-import static com.aoindustries.taglib.ApplicationResources.accessor;
 import java.io.IOException;
-import java.util.Iterator;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
@@ -55,11 +52,6 @@ public class RedirectTag
 		HrefAttribute,
 		ParamsAttribute
 {
-
-	/**
-	 * The prefix for parameter attributes.
-	 */
-	private static final String PARAM_ATTRIBUTE_PREFIX = "param.";
 
 	public static boolean isValidStatusCode(String statusCode) {
         return
@@ -111,40 +103,7 @@ public class RedirectTag
 
 	@Override
 	public void setDynamicAttribute(String uri, String localName, Object value) throws JspException {
-		if(
-			uri==null
-			&& localName.startsWith(PARAM_ATTRIBUTE_PREFIX)
-		) {
-			if(value!=null) {
-				String paramName = localName.substring(PARAM_ATTRIBUTE_PREFIX.length());
-				if(value instanceof Iterable<?>) {
-					ParamUtils.addIterableParams(
-						this,
-						paramName,
-						(Iterable<?>)value
-					);
-				} else if(value instanceof Iterator<?>) {
-					ParamUtils.addIteratorParams(
-						this,
-						paramName,
-						(Iterator<?>)value
-					);
-				} else if(value.getClass().isArray()) {
-					ParamUtils.addArrayParams(
-						this,
-						paramName,
-						value
-					);
-				} else {
-					addParam(
-						paramName,
-						Coercion.toString(value)
-					);
-				}
-			}
-		} else {
-			throw new LocalizedJspException(accessor, "error.unexpectedDynamicAttribute", localName, PARAM_ATTRIBUTE_PREFIX+"*");
-		}
+		ParamUtils.setDynamicAttribute(this, uri, localName, value);
 	}
 
 	@Override
