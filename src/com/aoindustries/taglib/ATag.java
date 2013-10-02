@@ -42,6 +42,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
+import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
  * @author  AO Industries, Inc.
@@ -49,6 +50,7 @@ import javax.servlet.jsp.PageContext;
 public class ATag
 	extends AutoEncodingBufferedTag
 	implements
+		DynamicAttributes,
 		HrefAttribute,
 		ParamsAttribute,
 		HreflangAttribute,
@@ -206,6 +208,11 @@ public class ATag
     public void setOnmouseout(Object onmouseout) {
         this.onmouseout = onmouseout;
     }
+
+	@Override
+	public void setDynamicAttribute(String uri, String localName, Object value) throws JspException {
+		ParamUtils.setDynamicAttribute(this, uri, localName, value);
+	}
 
 	/**
 	 * Writes an href attribute with parameters.
