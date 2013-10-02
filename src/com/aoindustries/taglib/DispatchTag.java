@@ -29,7 +29,6 @@ import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.servlet.http.ServletUtil;
 import com.aoindustries.servlet.jsp.LocalizedJspException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
-import com.aoindustries.util.StringUtility;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
@@ -85,6 +84,7 @@ abstract class DispatchTag
 
 	private String page;
     private String clearParams = null;
+	private WildcardPatternMatcher clearParamsMatcher = WildcardPatternMatcher.getEmptyMatcher();
     private HttpParametersMap params;
 	private Map<String,Object> args;
 
@@ -104,6 +104,7 @@ abstract class DispatchTag
 
     public void setClearParams(String clearParams) {
         this.clearParams = clearParams;
+		this.clearParamsMatcher = WildcardPatternMatcher.getInstance(clearParams);
     }
 
     @Override
@@ -145,67 +146,8 @@ abstract class DispatchTag
 		}
 	}
 
-	/**
-	 * Determines if a parameter name is filtered by the set of filter rules.
-	 * Supports:
-	 *   *            Match all
-	 *   *suffix      Suffix match
-	 *   prefix*      Prefix match
-	 *   exact_value  Exact match
-	 */
-	private static boolean isFiltered(List<String> clearParamNames, String paramName) {
-		for(String filter : clearParamNames) {
-			final int filterLen = filter.length();
-			if(filterLen>0) {
-				char chFirst = filter.charAt(0);
-				if(filterLen==1 && chFirst=='*') {
-					// Match all
-					return true;
-				}
-				char chLast = filter.charAt(filterLen-1);
-				if(chFirst=='*') {
-					if(chLast=='*') {
-						// *error*
-						throw new LocalizedIllegalArgumentException(accessor, "DispatchTag.invalidParameterFilter", filter);
-					} else {
-						// Suffix match
-						final int paramNameLen = paramName.length();
-						if(
-							paramNameLen >= (filterLen-1)
-							&& paramName.regionMatches(
-								paramNameLen-(filterLen-1),
-								filter,
-								1,
-								filterLen-1
-							)
-							//paramName.endsWith(filter.substring(1))
-						) return true;
-					}
-				} else {
-					if(chLast=='*') {
-						// Prefix match
-						if(
-							paramName.length() >= (filterLen-1)
-							&& paramName.regionMatches(
-								0,
-								filter,
-								0,
-								filterLen-1
-							)
-							//paramName.startsWith(filter.substring(0, filterLen-1))
-						) return true;
-					} else {
-						// Exact match
-						if(paramName.equals(filter)) return true;
-					}
-				}
-			}
-		}
-		return false;
-	}
-
 	@Override
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "unchecked"})
     final public void doTag() throws IOException, JspException {
 		PageContext pageContext = (PageContext)getJspContext();
 		JspWriter out = pageContext.getOut();
@@ -248,17 +190,12 @@ abstract class DispatchTag
 						: Collections.unmodifiableMap(args)
 				);
 
-				// Determine parameters to clear
-				final List<String> clearParamNames;
-				if(clearParams==null || clearParams.isEmpty()) clearParamNames = Collections.emptyList();
-				else clearParamNames = StringUtility.splitStringCommaSpace(clearParams);
-
 				Map<String,String[]> oldMap = null; // Obtained when first needed
 
 				// If no parameters have been added
 				if(params==null) {
 					// And if there is no clearParamNames, then no need to wrap
-					if(clearParamNames.isEmpty()) {
+					if(clearParamsMatcher.isEmpty()) {
 						// No need to wrap, use old request
 						dispatch(dispatcher, out, request, response);
 						return;
@@ -290,7 +227,7 @@ abstract class DispatchTag
 				for(Map.Entry<String,List<String>> entry : newMap.entrySet()) {
 					String name = entry.getKey();
 					List<String> newValues = entry.getValue();
-					String[] oldValues = isFiltered(clearParamNames, name) ? null : oldMap.get(name);
+					String[] oldValues = clearParamsMatcher.isMatch(name) ? null : oldMap.get(name);
 					String[] merged;
 					if(oldValues==null) {
 						// No need to merge values
@@ -309,7 +246,7 @@ abstract class DispatchTag
 					String name = entry.getKey();
 					if(
 						!newMap.containsKey(name)
-						&& !isFiltered(clearParamNames, name)
+						&& !clearParamsMatcher.isMatch(name)
 					) newParameters.put(name, entry.getValue());
 				}
 				final Map<String,String[]> parameters = Collections.unmodifiableMap(newParameters);
