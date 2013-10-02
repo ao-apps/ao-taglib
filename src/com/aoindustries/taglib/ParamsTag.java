@@ -23,7 +23,6 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.io.Coercion;
 import com.aoindustries.servlet.jsp.LocalizedJspException;
 import java.io.IOException;
@@ -36,17 +35,12 @@ import javax.servlet.jsp.JspException;
  * @author  AO Industries, Inc.
  */
 public class ParamsTag
-	extends AutoEncodingBufferedTag
+	extends AutoEncodingNullTag
 	implements NameAttribute
 {
 
     private Object name;
     private Object values;
-
-    @Override
-    public MediaType getContentType() {
-        return MediaType.TEXT;
-    }
 
     @Override
     public MediaType getOutputType() {
@@ -68,7 +62,7 @@ public class ParamsTag
     }
 
     @Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+    protected void doTag(Writer out) throws JspException, IOException {
 		ParamsAttribute paramsAttribute = AttributeUtils.findAttributeParent("params", this, "params", ParamsAttribute.class);
 		if(name==null) throw new AttributeRequiredException("name");
 		if(values!=null) {
