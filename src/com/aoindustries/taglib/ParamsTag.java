@@ -27,7 +27,6 @@ import com.aoindustries.io.Coercion;
 import com.aoindustries.servlet.jsp.LocalizedJspException;
 import java.io.IOException;
 import java.io.Writer;
-import java.lang.reflect.Array;
 import java.util.Iterator;
 import javax.servlet.jsp.JspException;
 
@@ -68,36 +67,23 @@ public class ParamsTag
 		if(values!=null) {
 			final String nameStr = Coercion.toString(name);
 			if(values instanceof Iterable<?>) {
-				for(Object elem : (Iterable<?>)values) {
-					if(elem!=null) {
-						paramsAttribute.addParam(
-							nameStr,
-							Coercion.toString(elem)
-						);
-					}
-				}
+				ParamUtils.addIterableParams(
+					paramsAttribute,
+					nameStr,
+					(Iterable<?>)values
+				);
 			} else if(values instanceof Iterator<?>) {
-				Iterator<?> iter = (Iterator<?>)values;
-				while(iter.hasNext()) {
-					Object elem = iter.next();
-					if(elem!=null) {
-						paramsAttribute.addParam(
-							nameStr,
-							Coercion.toString(elem)
-						);
-					}
-				}
+				ParamUtils.addIteratorParams(
+					paramsAttribute,
+					nameStr,
+					(Iterator<?>)values
+				);
 			} else if(values.getClass().isArray()) {
-				int len = Array.getLength(values);
-				for(int c=0; c<len; c++) {
-					Object elem = Array.get(values, c);
-					if(elem!=null) {
-						paramsAttribute.addParam(
-							nameStr,
-							Coercion.toString(elem)
-						);
-					}
-				}
+				ParamUtils.addArrayParams(
+					paramsAttribute,
+					nameStr,
+					values
+				);
 			} else {
 				throw new LocalizedJspException(ApplicationResources.accessor, "ParamsTag.values.unexpectedType", values.getClass().getName());
 			}

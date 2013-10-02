@@ -32,7 +32,6 @@ import com.aoindustries.servlet.http.ServletUtil;
 import com.aoindustries.servlet.jsp.LocalizedJspException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.Iterator;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -119,36 +118,23 @@ public class RedirectTag
 			if(value!=null) {
 				String paramName = localName.substring(PARAM_ATTRIBUTE_PREFIX.length());
 				if(value instanceof Iterable<?>) {
-					for(Object elem : (Iterable<?>)value) {
-						if(elem!=null) {
-							addParam(
-								paramName,
-								Coercion.toString(elem)
-							);
-						}
-					}
+					ParamUtils.addIterableParams(
+						this,
+						paramName,
+						(Iterable<?>)value
+					);
 				} else if(value instanceof Iterator<?>) {
-					Iterator<?> iter = (Iterator<?>)value;
-					while(iter.hasNext()) {
-						Object elem = iter.next();
-						if(elem!=null) {
-							addParam(
-								paramName,
-								Coercion.toString(elem)
-							);
-						}
-					}
+					ParamUtils.addIteratorParams(
+						this,
+						paramName,
+						(Iterator<?>)value
+					);
 				} else if(value.getClass().isArray()) {
-					int len = Array.getLength(value);
-					for(int c=0; c<len; c++) {
-						Object elem = Array.get(value, c);
-						if(elem!=null) {
-							addParam(
-								paramName,
-								Coercion.toString(elem)
-							);
-						}
-					}
+					ParamUtils.addArrayParams(
+						this,
+						paramName,
+						value
+					);
 				} else {
 					addParam(
 						paramName,

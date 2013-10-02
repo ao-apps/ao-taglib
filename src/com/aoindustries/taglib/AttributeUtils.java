@@ -36,9 +36,9 @@ public final class AttributeUtils  {
      * @return  the parent tag
      * @exception  NeedAttributeParentException  if parent not found
      */
-    public static <T> T findAttributeParent(String tag, JspTag from, String attribute, Class<? extends T> clazz) throws NeedAttributeParentException {
+    public static <T> T findAttributeParent(String fromTagName, JspTag from, String attribute, Class<? extends T> clazz) throws NeedAttributeParentException {
         T parent = clazz.cast(SimpleTagSupport.findAncestorWithClass(from, clazz));
-        if(parent==null) throw new NeedAttributeParentException(tag, attribute);
+        if(parent==null) throw new NeedAttributeParentException(fromTagName, attribute);
         return parent;
     }
 

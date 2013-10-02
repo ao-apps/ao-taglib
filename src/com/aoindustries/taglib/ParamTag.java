@@ -23,8 +23,8 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.io.Coercion;
+import com.aoindustries.io.buffer.BufferResult;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -74,12 +74,12 @@ public class ParamTag
 
     @Override
     protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-		ParamsAttribute paramsAttribute = AttributeUtils.findAttributeParent("param", this, "params", ParamsAttribute.class);
 		if(name==null) throw new AttributeRequiredException("name");
-		if(value==null) setValue(capturedBody.trim());
-		paramsAttribute.addParam(
+		ParamUtils.addParam(
+			"param",
+			this,
 			Coercion.toString(name),
-			Coercion.toString(value)
+			value!=null ? value : capturedBody.trim()
 		);
     }
 }

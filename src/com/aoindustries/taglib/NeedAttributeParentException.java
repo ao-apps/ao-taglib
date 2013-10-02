@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2012  AO Industries, Inc.
+ * Copyright (C) 2012, 2013  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -32,17 +32,17 @@ public class NeedAttributeParentException extends LocalizedJspException {
 
     private static final long serialVersionUID = 1L;
 
-    private final String tag;
+    private final String fromTagName;
     private final String attribute;
 
-    public NeedAttributeParentException(String tag, String attribute) {
-        super(accessor, "NeedAttributeParent.message", tag, attribute);
-        this.tag = tag;
+    public NeedAttributeParentException(String fromTagName, String attribute) {
+        super(accessor, "NeedAttributeParent.message", fromTagName, attribute);
+        this.fromTagName = fromTagName;
         this.attribute = attribute;
     }
 
-    public String getTag() {
-        return tag;
+    public String getFromTagName() {
+        return fromTagName;
     }
 
     public String getAttribute() {
