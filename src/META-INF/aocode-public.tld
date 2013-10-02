@@ -1403,14 +1403,22 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
-    <description>Adds multiple parameters to its ParamsAttribute parent tag.</description>
+    <description><![CDATA[
+		Adds multiple parameters to its ParamsAttribute parent tag.
+	]]></description>
     <name>params</name>
     <tag-class>com.aoindustries.taglib.ParamsTag</tag-class>
     <body-content>scriptless</body-content>
     <attribute>
 		<description><![CDATA[
-			The name of parameter tag.
-			A nested &lt;ao:name&gt; tag will override this value.
+			<p>
+				The name of parameter to add.
+				A nested &lt;ao:name&gt; tag will override this value.
+			</p>
+			<p>
+				When provided, the values may not contain a Map and the exclude
+				attribute may not be provided.
+			</p>
 		]]></description>
       <name>name</name>
       <required>false</required>
@@ -1418,12 +1426,53 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-		<description>
-			The values of the parameters.
-			This may be an Iterable, Iterator, or array.
-			If values is null, then it is not added at all.
-	        Otherwise, each non-null element is coerced to string as a separate parameter in iteration order.
-		</description>
+		<description><![CDATA[
+			<p>
+				Optionally excludes all elements of a Map that match any of the comma-separated patterns.
+				May not be used in conjunction with the name attribute.
+			</p>
+			<p>
+				Each pattern in the comma-separated list may in the following format:
+				<ul>
+				   <li>exact_name  matches the name exactly</li>
+				   <li>*           matches all (clears all parameters)</li>
+				   <li>*suffix     matches the name with "endsWith"</li>
+				   <li>prefix*     matches the name with "beginsWith"</li>
+				</ul>
+			</p>
+			<p>
+				Defaults to none excluded.
+			</p>
+		]]></description>
+		<name>exclude</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+		<type>java.lang.String</type>
+    </attribute>
+    <attribute>
+		<description><![CDATA[
+			<p>
+				The values of the parameters.
+			</p>
+			<p>
+				When name is provided, supports <code>java.lang.Iterable</code>,
+				<code>java.util.Iterator</code>, or array values.
+			</p>
+			<p>
+				When name is not provided, requires <code>java.util.Map</code>, where
+				the parameter name is the map key coerced to string and the value
+				(or set of values) is the map value.  Each of the entry values may
+				be <code>java.lang.Iterable</code>, <code>java.util.Iterator</code>,
+				array, or single value.
+			</p>
+			<p>
+				When obtaining values from a <code>java.util.Map</code>, parameters
+				may be excluded with the "exclude" attribute.
+			</p>
+			<p>
+				Parameters are never added with <code>null</code> values.
+			</p>
+		]]></description>
       <name>values</name>
       <required>true</required>
       <rtexprvalue>true</rtexprvalue>
