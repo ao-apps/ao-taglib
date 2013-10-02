@@ -354,8 +354,15 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			(this differs from parameters in this way).
 		</p>
 		<p>
-			Any attribute that has no namespace and is not "page" or "clearParams" is added as an argument.
+			Any attribute that has no namespace and begins with "arg." is added as an argument.
+			The argument name is the part of the attribute name following "arg.".
+			Because this argument is becomes a Map named "arg" in the forwarded page, the attribute
+			name and JSP EL name will match precisely.
+		</p>
+		<p>
 			Nested &lt;ao:arg&gt; tags may also be used to pass arguments.
+		</p>
+		<p>
 			It is an error for the same argument name to be used twice (including when set as null).
 		</p>
 	]]></description>
@@ -697,8 +704,15 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			The current page arguments are restored when the include completes.
 		</p>
 		<p>
-			Any attribute that has no namespace and is not "page" or "clearParams" is added as an argument.
+			Any attribute that has no namespace and begins with "arg." is added as an argument.
+			The argument name is the part of the attribute name following "arg.".
+			Because this argument is becomes a Map named "arg" in the included page, the attribute
+			name and JSP EL name will match precisely.
+		</p>
+		<p>
 			Nested &lt;ao:arg&gt; tags may also be used to pass arguments.
+		</p>
+		<p>
 			It is an error for the same argument name to be used twice (including when set as null).
 		</p>
 	]]></description>

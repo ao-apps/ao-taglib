@@ -63,7 +63,15 @@ abstract class DispatchTag
 		ArgsAttribute
 {
 
-	private static final String ARG_ATTRIBUTE_NAME = "arg";
+	/**
+	 * The name of the request-scope Map that will contain the arguments for the current page.
+	 */
+	private static final String ARG_MAP_REQUEST_ATTRIBUTE_NAME = "arg";
+
+	/**
+	 * The prefix for argument attributes.
+	 */
+	private static final String ARG_ATTRIBUTE_PREFIX = ARG_MAP_REQUEST_ATTRIBUTE_NAME + ".";
 
 	/**
 	 * Tracks the dispatch of pages for correct page-relative paths.
@@ -127,8 +135,11 @@ abstract class DispatchTag
 
 	@Override
 	public void setDynamicAttribute(String uri, String localName, Object value) throws JspException {
-		if(uri==null) {
-			addArg(localName, value);
+		if(
+			uri==null
+			&& localName.startsWith(ARG_ATTRIBUTE_PREFIX)
+		) {
+			addArg(localName.substring(ARG_ATTRIBUTE_PREFIX.length()), value);
 		} else {
 			throw new LocalizedJspException(accessor, "MessageTag.unexpectedDynamicAttribute", localName);
 		}
@@ -227,11 +238,11 @@ abstract class DispatchTag
 			RequestDispatcher dispatcher = pageContext.getServletContext().getRequestDispatcher(contextRelativePath);
 
 			// Keep old arguments to restore
-			final Object oldArgs = request.getAttribute(ARG_ATTRIBUTE_NAME);
+			final Object oldArgs = request.getAttribute(ARG_MAP_REQUEST_ATTRIBUTE_NAME);
 			try {
 				// Set new arguments
 				request.setAttribute(
-					ARG_ATTRIBUTE_NAME,
+					ARG_MAP_REQUEST_ATTRIBUTE_NAME,
 					args==null
 						? Collections.emptyMap()
 						: Collections.unmodifiableMap(args)
@@ -331,7 +342,7 @@ abstract class DispatchTag
 				);
 			} finally {
 				// Restore any previous args
-				request.setAttribute(ARG_ATTRIBUTE_NAME, oldArgs);
+				request.setAttribute(ARG_MAP_REQUEST_ATTRIBUTE_NAME, oldArgs);
 			}
 		} finally {
 			myDispatchedPages.remove(myDispatchedPages.size()-1);
