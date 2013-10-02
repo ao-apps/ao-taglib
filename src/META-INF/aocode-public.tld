@@ -1403,9 +1403,12 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <type>java.lang.Object</type>
     </attribute>
     <attribute>
-      <description>
-        The value of the parameter.  This may be an Iterable, Iterator, or array.
-      </description>
+		<description>
+			The values of the parameters.
+			This may be an Iterable, Iterator, or array.
+			If values is null, then it is not added at all.
+	        Otherwise, each non-null element is coerced to string as a separate parameter in iteration order.
+		</description>
       <name>values</name>
       <required>true</required>
       <rtexprvalue>true</rtexprvalue>
@@ -1426,8 +1429,23 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
   </tag>
   <tag>
     <description><![CDATA[
-		Redirects the browser to another location.
-		Stops processing of the containing JSP page.
+		<p>
+			Redirects the browser to another location.
+			Stops processing of the containing JSP page.
+		</p>
+		<p>
+			Any attribute that has no namespace and begins with "param." is added to the href as a URL parameter.
+			The parameter name is the part of the attribute name following "param.".
+		</p>
+		<p>
+			If the value is null, then it is not added at all.
+	        If the value is an Iterable, Iterator, or array, then each non-null element is coerced to
+			string as a separate parameter in iteration order.  Otherwise, the value itself is
+			coerced to string for the parameter value.
+		</p>
+		<p>
+			Nested &lt;ao:param&gt; or &lt;ao:params&gt; tags will add parameters after any provided as attributes.
+		</p>
 	]]></description>
     <name>redirect</name>
     <tag-class>com.aoindustries.taglib.RedirectTag</tag-class>
@@ -1461,13 +1479,13 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
 			any character in the set { ':', '/', ';', '#' }
 			A nested &lt;ao:href&gt; tag will override this value.
-			Any directly nested &lt;ao:param&gt; or &lt;ao:params&gt; tag will add parameters to the href.
 		]]></description>
       <name>href</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
     </attribute>
+	<dynamic-attributes>true</dynamic-attributes>
     <example />
   </tag>
   <tag>

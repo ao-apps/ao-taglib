@@ -29,7 +29,6 @@ import com.aoindustries.servlet.http.ServletUtil;
 import com.aoindustries.servlet.jsp.LocalizedJspException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.StringUtility;
-import java.util.ResourceBundle;
 import javax.servlet.jsp.JspException;
 
 final public class Functions {

@@ -74,27 +74,35 @@ public class ParamsTag
 		if(values!=null) {
 			final String nameStr = Coercion.toString(name);
 			if(values instanceof Iterable<?>) {
-				for(Object value : (Iterable<?>)values) {
-					paramsAttribute.addParam(
-						nameStr,
-						Coercion.toString(value)
-					);
+				for(Object elem : (Iterable<?>)values) {
+					if(elem!=null) {
+						paramsAttribute.addParam(
+							nameStr,
+							Coercion.toString(elem)
+						);
+					}
 				}
 			} else if(values instanceof Iterator<?>) {
 				Iterator<?> iter = (Iterator<?>)values;
 				while(iter.hasNext()) {
-					paramsAttribute.addParam(
-						nameStr,
-						Coercion.toString(iter.next())
-					);
+					Object elem = iter.next();
+					if(elem!=null) {
+						paramsAttribute.addParam(
+							nameStr,
+							Coercion.toString(elem)
+						);
+					}
 				}
 			} else if(values.getClass().isArray()) {
 				int len = Array.getLength(values);
 				for(int c=0; c<len; c++) {
-					paramsAttribute.addParam(
-						nameStr,
-						Coercion.toString(Array.get(values, c))
-					);
+					Object elem = Array.get(values, c);
+					if(elem!=null) {
+						paramsAttribute.addParam(
+							nameStr,
+							Coercion.toString(elem)
+						);
+					}
 				}
 			} else {
 				throw new LocalizedJspException(ApplicationResources.accessor, "ParamsTag.values.unexpectedType", values.getClass().getName());

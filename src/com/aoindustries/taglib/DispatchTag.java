@@ -141,7 +141,7 @@ abstract class DispatchTag
 		) {
 			addArg(localName.substring(ARG_ATTRIBUTE_PREFIX.length()), value);
 		} else {
-			throw new LocalizedJspException(accessor, "MessageTag.unexpectedDynamicAttribute", localName);
+			throw new LocalizedJspException(accessor, "error.unexpectedDynamicAttribute", localName, ARG_ATTRIBUTE_PREFIX+"*");
 		}
 	}
 

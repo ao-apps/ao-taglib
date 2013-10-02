@@ -145,13 +145,13 @@ public class MessageTag
 				String numSubstring = localName.substring(3);
 				int index = Integer.parseInt(numSubstring);
 				// Do not allow "arg00" in place of "arg0"
-				if(!numSubstring.equals(Integer.toString(index))) throw new LocalizedJspException(accessor, "MessageTag.unexpectedDynamicAttribute", localName);
+				if(!numSubstring.equals(Integer.toString(index))) throw new LocalizedJspException(accessor, "error.unexpectedDynamicAttribute", localName, "arg*");
 				insertMessageArg(localName, index, value);
 			} catch(NumberFormatException err) {
-				throw new LocalizedJspException(err, accessor, "MessageTag.unexpectedDynamicAttribute", localName);
+				throw new LocalizedJspException(err, accessor, "error.unexpectedDynamicAttribute", localName, "arg*");
 			}
 		} else {
-			throw new LocalizedJspException(accessor, "MessageTag.unexpectedDynamicAttribute", localName);
+			throw new LocalizedJspException(accessor, "error.unexpectedDynamicAttribute", localName, "arg*");
 		}
 	}
 
@@ -162,7 +162,7 @@ public class MessageTag
 			messageArgs = new ArrayList<Object>();
 		}
 		// Must not already be set
-		if(messageArgsSet.get(index)) throw new LocalizedJspException(accessor, "MessageTag.duplicateAttribute", localName);
+		if(messageArgsSet.get(index)) throw new LocalizedJspException(accessor, "MessageTag.duplicateArgument", localName);
 		messageArgsSet.set(index);
 		if(index>=messageArgs.size()) {
 			while(messageArgs.size() < index) {
