@@ -85,16 +85,20 @@ final public class WildcardPatternMatcher {
 		for(String pattern : patterns) {
 			final int patternLen = pattern.length();
 			if(patternLen>0) {
-				char chFirst = pattern.charAt(0);
-				if(patternLen==1 && chFirst=='*') {
+				final int firstStar = pattern.indexOf('*');
+				if(firstStar==-1) {
+					// Exact match
+					if(paramName.equals(pattern)) return true;
+				} else if(patternLen==1) {
 					// Match all
 					return true;
-				}
-				if(chFirst=='*') {
-					// Suffix must not have another wildcard
-					if(pattern.indexOf('*', 1) != -1) {
+				} else {
+					final int lastStar = pattern.lastIndexOf('*');
+					// May not have two asterisks
+					if(firstStar!=lastStar) {
 						throw new LocalizedIllegalArgumentException(accessor, "ParameterMatcher.invalidParameterFilter", pattern);
-					} else {
+					}
+					if(firstStar==0) {
 						// Suffix match
 						final int paramNameLen = paramName.length();
 						if(
@@ -107,14 +111,7 @@ final public class WildcardPatternMatcher {
 							)
 							//paramName.endsWith(filter.substring(1))
 						) return true;
-					}
-				} else {
-					char chLast = pattern.charAt(patternLen-1);
-					if(chLast=='*') {
-						// Prefix must not have another wildcard
-						if(pattern.lastIndexOf('*', patternLen-1) != -1) {
-							throw new LocalizedIllegalArgumentException(accessor, "ParameterMatcher.invalidParameterFilter", pattern);
-						}
+					} else if(lastStar==(patternLen-1)) {
 						// Prefix match
 						if(
 							paramName.length() >= (patternLen-1)
@@ -127,8 +124,8 @@ final public class WildcardPatternMatcher {
 							//paramName.startsWith(filter.substring(0, filterLen-1))
 						) return true;
 					} else {
-						// Exact match
-						if(paramName.equals(pattern)) return true;
+						// Asterisk in middle
+						throw new LocalizedIllegalArgumentException(accessor, "ParameterMatcher.invalidParameterFilter", pattern);
 					}
 				}
 			}
