@@ -24,10 +24,12 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.Coercion;
+import com.aoindustries.net.HttpParameters;
 import com.aoindustries.servlet.jsp.LocalizedJspException;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.jsp.JspException;
 
@@ -77,39 +79,58 @@ public class ParamsTag
 		ParamsAttribute paramsAttribute = AttributeUtils.findAttributeParent("params", this, "params", ParamsAttribute.class);
 		if(values!=null) {
 			if(name==null) {
-				if(!(values instanceof Map<?,?>)) {
-					throw new LocalizedJspException(ApplicationResources.accessor, "ParamsTag.mapRequiredWithName");
-				}
-				// Get from Map with exclude
-				for(Map.Entry<?,?> entry : ((Map<?,?>)values).entrySet()) {
-					Object entryKey = entry.getKey();
-					if(entryKey!=null) {
-						String paramName = Coercion.toString(entryKey);
-						if(!excludeMatcher.isMatch(paramName)) {
-							Object entryValue = entry.getValue();
-							if(entryValue instanceof Iterable<?>) {
-								ParamUtils.addIterableParams(
-									paramsAttribute,
-									paramName,
-									(Iterable<?>)entryValue
-								);
-							} else if(entryValue instanceof Iterator<?>) {
-								ParamUtils.addIteratorParams(
-									paramsAttribute,
-									paramName,
-									(Iterator<?>)entryValue
-								);
-							} else if(entryValue.getClass().isArray()) {
-								ParamUtils.addArrayParams(
-									paramsAttribute,
-									paramName,
-									entryValue
-								);
-							} else {
-								ParamUtils.addParam(paramsAttribute, paramName, entryValue);
+				if(values instanceof Map<?,?>) {
+					// Get from Map with exclude
+					for(Map.Entry<?,?> entry : ((Map<?,?>)values).entrySet()) {
+						Object entryKey = entry.getKey();
+						if(entryKey!=null) {
+							String paramName = Coercion.toString(entryKey);
+							if(!excludeMatcher.isMatch(paramName)) {
+								Object entryValue = entry.getValue();
+								if(entryValue instanceof Iterable<?>) {
+									ParamUtils.addIterableParams(
+										paramsAttribute,
+										paramName,
+										(Iterable<?>)entryValue
+									);
+								} else if(entryValue instanceof Iterator<?>) {
+									ParamUtils.addIteratorParams(
+										paramsAttribute,
+										paramName,
+										(Iterator<?>)entryValue
+									);
+								} else if(entryValue.getClass().isArray()) {
+									ParamUtils.addArrayParams(
+										paramsAttribute,
+										paramName,
+										entryValue
+									);
+								} else {
+									ParamUtils.addParam(paramsAttribute, paramName, entryValue);
+								}
 							}
 						}
 					}
+				} else if(values instanceof HttpParameters) {
+					// Get from HttpParameters with exclude
+					HttpParameters httpParams = (HttpParameters)values;
+					Iterator<String> paramNames = httpParams.getParameterNames();
+					while(paramNames.hasNext()) {
+						String paramName = paramNames.next();
+						if(
+							paramName!=null
+							&& !excludeMatcher.isMatch(paramName)
+						) {
+							List<String> paramValues = httpParams.getParameterValues(paramName);
+							if(paramValues!=null) {
+								for(String paramValue : paramValues) {
+									ParamUtils.addParam(paramsAttribute, paramName, paramValue);
+								}
+							}
+						}
+					}
+				} else {
+					throw new LocalizedJspException(ApplicationResources.accessor, "ParamsTag.mapRequiredWithName");
 				}
 			} else {
 				// Exclude not allowed
@@ -135,7 +156,10 @@ public class ParamsTag
 						paramName,
 						values
 					);
-				} else if(values instanceof Map<?,?>) {
+				} else if(
+					values instanceof Map<?,?>
+					|| values instanceof HttpParameters
+				) {
 					throw new LocalizedJspException(ApplicationResources.accessor, "ParamsTag.mapWithNameNotAllowed");
 				} else {
 					throw new LocalizedJspException(ApplicationResources.accessor, "ParamsTag.values.unexpectedType", values.getClass().getName());

@@ -1416,8 +1416,8 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				A nested &lt;ao:name&gt; tag will override this value.
 			</p>
 			<p>
-				When provided, the values may not contain a Map and the exclude
-				attribute may not be provided.
+				When provided, the values may not contain a Map or HttpParameters.
+				When provided, the exclude attribute may not be provided.
 			</p>
 		]]></description>
       <name>name</name>
@@ -1428,7 +1428,8 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <attribute>
 		<description><![CDATA[
 			<p>
-				Optionally excludes all elements of a Map that match any of the comma-separated patterns.
+				Optionally excludes all elements of a Map or HttpParameters that
+				match any of the comma-separated patterns.
 				May not be used in conjunction with the name attribute.
 			</p>
 			<p>
@@ -1459,15 +1460,15 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<code>java.util.Iterator</code>, or array values.
 			</p>
 			<p>
-				When name is not provided, requires <code>java.util.Map</code>, where
+				When name is not provided, requires <code>java.util.Map</code> or <code>com.aoindustries.net.HttpParameters</code>, where
 				the parameter name is the map key coerced to string and the value
 				(or set of values) is the map value.  Each of the entry values may
 				be <code>java.lang.Iterable</code>, <code>java.util.Iterator</code>,
 				array, or single value.
 			</p>
 			<p>
-				When obtaining values from a <code>java.util.Map</code>, parameters
-				may be excluded with the "exclude" attribute.
+				When obtaining values from a <code>java.util.Map</code> or <code>com.aoindustries.net.HttpParameters</code>,
+				parameters may be excluded with the "exclude" attribute.
 			</p>
 			<p>
 				Parameters are never added with <code>null</code> values.
