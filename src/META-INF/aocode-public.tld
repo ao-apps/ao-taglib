@@ -432,6 +432,10 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				The page is required, must be set in attribute or nested &lt;ao:page&gt; tag.
 			</p>
 			<p>
+				Security Note: page must be a trusted value since it can access any resource avaiable via RequestDispatcher.
+				It would be incorrect to use a value that can be manipulated by a client in any way.
+			</p>
+			<p>
 				Recommend use of &lt;ao:base /&gt; on target page to have relative paths interpreted from the forwarded-to page.
 			</p>
 		]]></description>
@@ -826,9 +830,15 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <body-content>scriptless</body-content>
     <attribute>
 		<description><![CDATA[
-			The page that will be included.
-			A nested &lt;ao:page&gt; tag will override this value.
-			The page is required, must be set in attribute or nested &lt;ao:page&gt; tag.
+			<p>
+				The page that will be included.
+				A nested &lt;ao:page&gt; tag will override this value.
+				The page is required, must be set in attribute or nested &lt;ao:page&gt; tag.
+			</p>
+			<p>
+				Security Note: page must be a trusted value since it can access any resource avaiable via RequestDispatcher.
+				It would be incorrect to use a value that can be manipulated by a client in any way.
+			</p>
 		]]></description>
       <name>page</name>
       <required>false</required>
@@ -1691,6 +1701,10 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				When forward is performed instead of redirect, the original request parameters are hidden.
 				Only the parameters provided in the redirect are passed-on to the target page.
 				Also, any arguments to the current page are not passed-on (see &lt;ao:include&gt;).
+			</p>
+			<p>
+				Security Note: page must be a trusted value since it can access any resource avaiable via RequestDispatcher.
+				It would be incorrect to use a value that can be manipulated by a client in any way.
 			</p>
 			<p>
 				Recommend use of &lt;ao:base /&gt; on target page to have relative paths interpreted from the forwarded-to page.
