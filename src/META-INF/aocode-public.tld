@@ -195,6 +195,33 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     </attribute>
     <example />
   </tag>
+	<tag>
+		<description><![CDATA[
+			<p>
+				Adds a base tag only when necessary.
+			</p>
+			<p>
+				After forward (or forward fall-back from redirect), relative paths
+				might not resolve relative to the current page.  This will be most
+				evident when forwarding between different directories.
+			</p>
+			<p>
+				To keep paths relative to the page after a forward, a base tag is
+				written when the path of the current page does not equal the path
+				of the original request.
+			</p>
+			<p>
+				A &lt;base /&gt; tag will affect any anchor links on a page.  For this
+				reason, this base tag primarily exists for when a redirect has to fall-back
+				to a forward to a resource in another path.  Properly displaying the main
+				contents in this case is considered more important than correctly behaving anchors.
+			</p>
+		]]></description>
+		<name>base</name>
+		<tag-class>com.aoindustries.taglib.BaseTag</tag-class>
+		<body-content>empty</body-content>
+		<example />
+	</tag>
   <tag>
     <description><![CDATA[
 		Sets the bundle used by any nested &lt;ao:message&gt; tags or functions.
@@ -399,9 +426,14 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <body-content>scriptless</body-content>
     <attribute>
 		<description><![CDATA[
-			The page that will be forwarded to.
-			A nested &lt;ao:page&gt; tag will override this value.
-			The page is required, must be set in attribute or nested &lt;ao:page&gt; tag.
+			<p>
+				The page that will be forwarded to.
+				A nested &lt;ao:page&gt; tag will override this value.
+				The page is required, must be set in attribute or nested &lt;ao:page&gt; tag.
+			</p>
+			<p>
+				Recommend use of &lt;ao:base /&gt; on target page to have relative paths interpreted from the forwarded-to page.
+			</p>
 		]]></description>
       <name>page</name>
       <required>false</required>
@@ -1661,6 +1693,9 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				Also, any arguments to the current page are not passed-on (see &lt;ao:include&gt;).
 			</p>
 			<p>
+				Recommend use of &lt;ao:base /&gt; on target page to have relative paths interpreted from the forwarded-to page.
+			</p>
+			<p>
 				When the redirect type is 302 or 303, the <code>Cache-Control: no-cache</code> header is
 				automatically added to the response to try to best emulate the caching effects of the redirect.
 			</p>
@@ -2262,6 +2297,16 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <function-signature>java.lang.String getDecimalTimeLength(java.lang.Long)</function-signature>
     <example>${ao:getDecimalTimeLength(timeSpan)}</example>
   </function>
+	<function>
+		<description><![CDATA[
+			Determines if the current request has been forwarded by a &lt;ao:forward&gt;
+			or &lt;ao:redirect&gt; tag.
+		]]></description>
+		<name>isForwarded</name>
+		<function-class>com.aoindustries.taglib.DispatchTag</function-class>
+		<function-signature>boolean isForwarded()</function-signature>
+		<example>${ao:isForwarded()}</example>
+	</function>
   <function>
     <description>Joins elements of any Iterable into a String.</description>
     <name>join</name>

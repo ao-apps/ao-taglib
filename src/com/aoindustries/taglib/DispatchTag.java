@@ -53,7 +53,7 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
  *
  * @author  AO Industries, Inc.
  */
-abstract class DispatchTag
+abstract public class DispatchTag
 	extends SimpleTagSupport
 	implements
 		DynamicAttributes,
@@ -67,9 +67,47 @@ abstract class DispatchTag
 	protected static final String ARG_MAP_REQUEST_ATTRIBUTE_NAME = "arg";
 
 	/**
+	 * Tracks the first servlet path seen, before any include/forward.
+	 */
+	private static final ThreadLocal<String> originalPage = new ThreadLocal<String>();
+
+	/**
+	 * Gets the original page path corresponding to the original request before any forward/include.
+	 * Assumes all forward/include done with ao taglib.
+	 */
+	public static String getOriginalPagePath(HttpServletRequest request) {
+		String original = originalPage.get();
+		return original!=null ? original : request.getServletPath();
+	}
+
+	/**
 	 * Tracks the current dispatch page for correct page-relative paths.
 	 */
 	private static final ThreadLocal<String> dispatchedPage = new ThreadLocal<String>();
+
+	/**
+	 * Gets the current page path, including any effects from include/forward.
+	 * This will be the path of the current page on forward or include.
+	 * Assumes all forward/include done with ao taglib.
+	 * This may be used as a substitute for HttpServletRequest.getServletPath() when the current page is needed instead of the originally requested servlet.
+	 */
+	public static String getCurrentPagePath(HttpServletRequest request) {
+		String dispatched = dispatchedPage.get();
+		return dispatched!=null ? dispatched : request.getServletPath();
+	}
+
+	/**
+	 * Tracks if the request has been forwarded.
+	 */
+	protected static final ThreadLocal<Boolean> requestForwarded = new ThreadLocal<Boolean>();
+
+	/**
+	 * Checks if the request has been forwarded.
+	 */
+	public static boolean isForwarded() {
+		Boolean forwarded = requestForwarded.get();
+		return forwarded!=null && forwarded.booleanValue();
+	}
 
 	protected String page;
     protected HttpParametersMap params;
@@ -138,162 +176,173 @@ abstract class DispatchTag
 	@Override
 	@SuppressWarnings("unchecked")
     final public void doTag() throws IOException, JspException {
-		// Invoke body first to all nested tags to set attributes
-		final JspFragment body = getJspBody();
-		if(body!=null) {
-            // Discard all nested output, since this will not use the output and this
-            // output could possibly fill the response buffer and prevent the dispatch
-            // from functioning.
-			body.invoke(NullWriter.getInstance());
-		}
-		// Keep old dispatch page to restore
-		final String oldDispatchPage = DispatchTag.dispatchedPage.get();
+		// Track original page when first accessed
+		final String oldOriginal = originalPage.get();
 		try {
-			// Determine the path of the current page based on previous dispatch or original request
+			// Set original request path if not already set
 			final PageContext pageContext = (PageContext)getJspContext();
 			final HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
-			final String servletPath =
-				oldDispatchPage==null
-					? request.getServletPath()
-					: oldDispatchPage
-			;
+			if(oldOriginal==null) originalPage.set(request.getServletPath());
 
-			// Find any dispatcher before allowing subclass to intercept dispatch.  This ensures page is a correct
-			// value, even when not used for a particular request.
-			final String contextRelativePath;
-			final RequestDispatcher dispatcher;
-			if(page==null) {
-				contextRelativePath = null;
-				dispatcher = null;
-			} else {
-				// Make relative to current JSP page
-				contextRelativePath = ServletUtil.getAbsolutePath(
-					servletPath,
-					page
-				);
-				// Find dispatcher
-				dispatcher = pageContext.getServletContext().getRequestDispatcher(contextRelativePath);
-				if(dispatcher==null) throw new LocalizedJspException(accessor, "DispatchTag.dispatcherNotFound", contextRelativePath);
+			// Invoke body first to all nested tags to set attributes
+			final JspFragment body = getJspBody();
+			if(body!=null) {
+				// Discard all nested output, since this will not use the output and this
+				// output could possibly fill the response buffer and prevent the dispatch
+				// from functioning.
+				body.invoke(NullWriter.getInstance());
 			}
-			
-			// Call any subclass hook to handle the request before being dispatched.  If the request should not
-			// be dispatched, subclass will throw SkipPageException.
-			doTag(servletPath);
-
-			// Page is required when not already dispatched by subclass
-			if(page==null) throw new AttributeRequiredException("page");
-			assert contextRelativePath!=null : "Will have been set above when page non-null";
-			assert dispatcher!=null : "Will have been set above when page non-null";
-
-			// Store as new relative path source
-			DispatchTag.dispatchedPage.set(contextRelativePath);
-
-			// Keep old arguments to restore
-			final Object oldArgs = request.getAttribute(ARG_MAP_REQUEST_ATTRIBUTE_NAME);
+			// Keep old dispatch page to restore
+			final String oldDispatchPage = DispatchTag.dispatchedPage.get();
 			try {
-				final JspWriter out = pageContext.getOut();
-				final HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
+				// Determine the path of the current page based on previous dispatch or original request
+				final String servletPath =
+					oldDispatchPage==null
+						? request.getServletPath()
+						: oldDispatchPage
+				;
 
-				// Set new arguments
-				request.setAttribute(
-					ARG_MAP_REQUEST_ATTRIBUTE_NAME,
-					getArgs()
-				);
-
-				final WildcardPatternMatcher clearParamsMatcher = getClearParamsMatcher();
-				Map<String,String[]> oldMap = null; // Obtained when first needed
-
-				// If no parameters have been added
-				if(params==null) {
-					// And if there is no clearParamNames, then no need to wrap
-					if(clearParamsMatcher.isEmpty()) {
-						// No need to wrap, use old request
-						dispatch(dispatcher, out, request, response);
-						return;
-					}
-
-					// And if there are no parameters on the request, then no need to wrap
-					if(oldMap==null) oldMap = request.getParameterMap();
-					if(oldMap.isEmpty()) {
-						// No need to wrap, use old request
-						dispatch(dispatcher, out, request, response);
-						return;
-					}
-				}
-
-				// Filter and merge all parameters
-				final Map<String,List<String>> newMap;
-				if(params==null) {
-					newMap = Collections.emptyMap();
+				// Find any dispatcher before allowing subclass to intercept dispatch.  This ensures page is a correct
+				// value, even when not used for a particular request.
+				final String contextRelativePath;
+				final RequestDispatcher dispatcher;
+				if(page==null) {
+					contextRelativePath = null;
+					dispatcher = null;
 				} else {
-					newMap = params.getParameterMap();
+					// Make relative to current JSP page
+					contextRelativePath = ServletUtil.getAbsolutePath(
+						servletPath,
+						page
+					);
+					// Find dispatcher
+					dispatcher = pageContext.getServletContext().getRequestDispatcher(contextRelativePath);
+					if(dispatcher==null) throw new LocalizedJspException(accessor, "DispatchTag.dispatcherNotFound", contextRelativePath);
 				}
-				if(oldMap==null) oldMap = request.getParameterMap();
-				Map<String,String[]> newParameters = new LinkedHashMap<String,String[]>(
-					(
-						newMap.size()
-						+ oldMap.size()
-					)*4/3+1
-				);
-				for(Map.Entry<String,List<String>> entry : newMap.entrySet()) {
-					String name = entry.getKey();
-					List<String> newValues = entry.getValue();
-					String[] oldValues = clearParamsMatcher.isMatch(name) ? null : oldMap.get(name);
-					String[] merged;
-					if(oldValues==null) {
-						// No need to merge values
-						merged = newValues.toArray(new String[newValues.size()]);
-					} else {
-						// Merge values into single String[]
-						merged = new String[newValues.size() + oldValues.length];
-						String[] result = newValues.toArray(merged);
-						assert merged==result;
-						System.arraycopy(oldValues, 0, merged, newValues.size(), oldValues.length);
+
+				// Call any subclass hook to handle the request before being dispatched.  If the request should not
+				// be dispatched, subclass will throw SkipPageException.
+				doTag(servletPath);
+
+				// Page is required when not already dispatched by subclass
+				if(page==null) throw new AttributeRequiredException("page");
+				assert contextRelativePath!=null : "Will have been set above when page non-null";
+				assert dispatcher!=null : "Will have been set above when page non-null";
+
+				// Store as new relative path source
+				DispatchTag.dispatchedPage.set(contextRelativePath);
+
+				// Keep old arguments to restore
+				final Object oldArgs = request.getAttribute(ARG_MAP_REQUEST_ATTRIBUTE_NAME);
+				try {
+					final JspWriter out = pageContext.getOut();
+					final HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
+
+					// Set new arguments
+					request.setAttribute(
+						ARG_MAP_REQUEST_ATTRIBUTE_NAME,
+						getArgs()
+					);
+
+					final WildcardPatternMatcher clearParamsMatcher = getClearParamsMatcher();
+					Map<String,String[]> oldMap = null; // Obtained when first needed
+
+					// If no parameters have been added
+					if(params==null) {
+						// And if there is no clearParamNames, then no need to wrap
+						if(clearParamsMatcher.isEmpty()) {
+							// No need to wrap, use old request
+							dispatch(dispatcher, out, request, response);
+							return;
+						}
+
+						// And if there are no parameters on the request, then no need to wrap
+						if(oldMap==null) oldMap = request.getParameterMap();
+						if(oldMap.isEmpty()) {
+							// No need to wrap, use old request
+							dispatch(dispatcher, out, request, response);
+							return;
+						}
 					}
-					newParameters.put(name, merged);
+
+					// Filter and merge all parameters
+					final Map<String,List<String>> newMap;
+					if(params==null) {
+						newMap = Collections.emptyMap();
+					} else {
+						newMap = params.getParameterMap();
+					}
+					if(oldMap==null) oldMap = request.getParameterMap();
+					Map<String,String[]> newParameters = new LinkedHashMap<String,String[]>(
+						(
+							newMap.size()
+							+ oldMap.size()
+						)*4/3+1
+					);
+					for(Map.Entry<String,List<String>> entry : newMap.entrySet()) {
+						String name = entry.getKey();
+						List<String> newValues = entry.getValue();
+						String[] oldValues = clearParamsMatcher.isMatch(name) ? null : oldMap.get(name);
+						String[] merged;
+						if(oldValues==null) {
+							// No need to merge values
+							merged = newValues.toArray(new String[newValues.size()]);
+						} else {
+							// Merge values into single String[]
+							merged = new String[newValues.size() + oldValues.length];
+							String[] result = newValues.toArray(merged);
+							assert merged==result;
+							System.arraycopy(oldValues, 0, merged, newValues.size(), oldValues.length);
+						}
+						newParameters.put(name, merged);
+					}
+					// Add any old parameters that were not merged
+					for(Map.Entry<String,String[]> entry : oldMap.entrySet()) {
+						String name = entry.getKey();
+						if(
+							!newMap.containsKey(name)
+							&& !clearParamsMatcher.isMatch(name)
+						) newParameters.put(name, entry.getValue());
+					}
+					final Map<String,String[]> parameters = Collections.unmodifiableMap(newParameters);
+					dispatch(
+						dispatcher,
+						out,
+						new HttpServletRequestWrapper(request) {
+							@Override
+							public String getParameter(String name) {
+								String[] values = parameters.get(name);
+								return values==null || values.length==0 ? null : values[0];
+							}
+
+							@Override
+							public Map getParameterMap() {
+								return parameters;
+							}
+
+							@Override
+							public Enumeration getParameterNames() {
+								return Collections.enumeration(parameters.keySet());
+							}
+
+							@Override
+							public String[] getParameterValues(String name) {
+								return parameters.get(name);
+							}
+						},
+						response
+					);
+				} finally {
+					// Restore any previous args
+					request.setAttribute(ARG_MAP_REQUEST_ATTRIBUTE_NAME, oldArgs);
 				}
-				// Add any old parameters that were not merged
-				for(Map.Entry<String,String[]> entry : oldMap.entrySet()) {
-					String name = entry.getKey();
-					if(
-						!newMap.containsKey(name)
-						&& !clearParamsMatcher.isMatch(name)
-					) newParameters.put(name, entry.getValue());
-				}
-				final Map<String,String[]> parameters = Collections.unmodifiableMap(newParameters);
-				dispatch(
-					dispatcher,
-					out,
-					new HttpServletRequestWrapper(request) {
-						@Override
-						public String getParameter(String name) {
-							String[] values = parameters.get(name);
-							return values==null || values.length==0 ? null : values[0];
-						}
-
-						@Override
-						public Map getParameterMap() {
-							return parameters;
-						}
-
-						@Override
-						public Enumeration getParameterNames() {
-							return Collections.enumeration(parameters.keySet());
-						}
-
-						@Override
-						public String[] getParameterValues(String name) {
-							return parameters.get(name);
-						}
-					},
-					response
-				);
 			} finally {
-				// Restore any previous args
-				request.setAttribute(ARG_MAP_REQUEST_ATTRIBUTE_NAME, oldArgs);
+				DispatchTag.dispatchedPage.set(oldDispatchPage);
 			}
 		} finally {
-			DispatchTag.dispatchedPage.set(oldDispatchPage);
+			if(oldOriginal==null) {
+				originalPage.set(null);
+			}
 		}
     }
 
