@@ -1428,8 +1428,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <attribute>
 		<description><![CDATA[
 			<p>
-				Optionally excludes all elements of a Map or HttpParameters that
-				match any of the comma-separated patterns.
+				Optionally excludes all elements of a Map or HttpParameters that match any of the comma-separated patterns.
 				May not be used in conjunction with the name attribute.
 			</p>
 			<p>
