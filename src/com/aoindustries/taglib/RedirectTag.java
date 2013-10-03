@@ -174,6 +174,14 @@ public class RedirectTag
 			}
 	        ServletUtil.sendRedirect(response, location, status);
 		    throw new SkipPageException();
+		} else {
+			// Set no-cache header for 302 and 303 redirect
+			if(
+				status==HttpServletResponse.SC_MOVED_TEMPORARILY
+				|| status==HttpServletResponse.SC_SEE_OTHER
+			) {
+				response.setHeader("Cache-Control", "no-cache");
+			}
 		}
     }
 	
