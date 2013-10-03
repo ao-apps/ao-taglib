@@ -24,8 +24,6 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.io.Coercion;
 import com.aoindustries.lang.NullArgumentException;
-import com.aoindustries.servlet.jsp.LocalizedJspException;
-import static com.aoindustries.taglib.ApplicationResources.accessor;
 import java.lang.reflect.Array;
 import java.util.Iterator;
 import javax.servlet.jsp.JspException;
@@ -181,45 +179,35 @@ final public class ParamUtils {
 		String localName,
 		Object value
 	) throws JspException {
-		if(
-			uri==null
-			&& localName.startsWith(ParamUtils.PARAM_ATTRIBUTE_PREFIX)
-		) {
-			if(value!=null) {
-				String paramName = localName.substring(ParamUtils.PARAM_ATTRIBUTE_PREFIX.length());
-				if(value instanceof Iterable<?>) {
-					ParamUtils.addIterableParams(
-						paramsAttribute,
-						paramName,
-						(Iterable<?>)value
-					);
-				} else if(value instanceof Iterator<?>) {
-					ParamUtils.addIteratorParams(
-						paramsAttribute,
-						paramName,
-						(Iterator<?>)value
-					);
-				} else if(value.getClass().isArray()) {
-					ParamUtils.addArrayParams(
-						paramsAttribute,
-						paramName,
-						value
-					);
-				} else {
-					addParam(
-						paramsAttribute,
-						paramName,
-						Coercion.toString(value)
-					);
-				}
+		assert uri==null;
+		assert localName.startsWith(PARAM_ATTRIBUTE_PREFIX);
+		if(value!=null) {
+			String paramName = localName.substring(PARAM_ATTRIBUTE_PREFIX.length());
+			if(value instanceof Iterable<?>) {
+				addIterableParams(
+					paramsAttribute,
+					paramName,
+					(Iterable<?>)value
+				);
+			} else if(value instanceof Iterator<?>) {
+				addIteratorParams(
+					paramsAttribute,
+					paramName,
+					(Iterator<?>)value
+				);
+			} else if(value.getClass().isArray()) {
+				addArrayParams(
+					paramsAttribute,
+					paramName,
+					value
+				);
+			} else {
+				addParam(
+					paramsAttribute,
+					paramName,
+					Coercion.toString(value)
+				);
 			}
-		} else {
-			throw new LocalizedJspException(
-				accessor,
-				"error.unexpectedDynamicAttribute",
-				localName,
-				ParamUtils.PARAM_ATTRIBUTE_PREFIX+"*"
-			);
 		}
 	}
 

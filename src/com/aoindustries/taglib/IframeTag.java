@@ -34,6 +34,7 @@ import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.net.HttpParametersUtils;
 import com.aoindustries.net.MutableHttpParameters;
 import com.aoindustries.servlet.jsp.LocalizedJspException;
+import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
@@ -41,6 +42,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
+import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
  * @author  AO Industries, Inc.
@@ -48,6 +50,7 @@ import javax.servlet.jsp.PageContext;
 public class IframeTag
 	extends AutoEncodingBufferedTag
 	implements
+		DynamicAttributes,
 		IdAttribute,
 		SrcAttribute,
 		ParamsAttribute,
@@ -133,6 +136,23 @@ public class IframeTag
     public void setFrameborder(boolean frameborder) {
         this.frameborder = frameborder;
     }
+
+	@Override
+	public void setDynamicAttribute(String uri, String localName, Object value) throws JspException {
+		if(
+			uri==null
+			&& localName.startsWith(ParamUtils.PARAM_ATTRIBUTE_PREFIX)
+		) {
+			ParamUtils.setDynamicAttribute(this, uri, localName, value);
+		} else {
+			throw new LocalizedJspException(
+				accessor,
+				"error.unexpectedDynamicAttribute",
+				localName,
+				ParamUtils.PARAM_ATTRIBUTE_PREFIX+"*"
+			);
+		}
+	}
 
 	static void writeSrc(Writer out, PageContext pageContext, String src, MutableHttpParameters params) throws JspException, IOException {
 		if(src!=null) {

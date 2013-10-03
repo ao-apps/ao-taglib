@@ -29,10 +29,13 @@ import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.net.MutableHttpParameters;
+import com.aoindustries.servlet.jsp.LocalizedJspException;
+import static com.aoindustries.taglib.ApplicationResources.accessor;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
+import javax.servlet.jsp.tagext.DynamicAttributes;
 import javax.servlet.jsp.tagext.JspTag;
 
 /**
@@ -41,6 +44,7 @@ import javax.servlet.jsp.tagext.JspTag;
 public class LinkTag
 	extends AutoEncodingNullTag
 	implements
+		DynamicAttributes,
 		HrefAttribute,
 		ParamsAttribute,
 		HreflangAttribute,
@@ -110,7 +114,24 @@ public class LinkTag
         this.type = type;
     }
 
-    @Override
+	@Override
+	public void setDynamicAttribute(String uri, String localName, Object value) throws JspException {
+		if(
+			uri==null
+			&& localName.startsWith(ParamUtils.PARAM_ATTRIBUTE_PREFIX)
+		) {
+			ParamUtils.setDynamicAttribute(this, uri, localName, value);
+		} else {
+			throw new LocalizedJspException(
+				accessor,
+				"error.unexpectedDynamicAttribute",
+				localName,
+				ParamUtils.PARAM_ATTRIBUTE_PREFIX+"*"
+			);
+		}
+	}
+
+	@Override
     protected void doTag(Writer out) throws JspException, IOException {
 		JspTag parent = findAncestorWithClass(this, LinksAttribute.class);
 		if(parent!=null) {

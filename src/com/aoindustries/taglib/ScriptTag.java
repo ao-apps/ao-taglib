@@ -30,11 +30,13 @@ import com.aoindustries.io.Coercion;
 import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
-import com.aoindustries.util.i18n.MarkupType;
+import com.aoindustries.servlet.jsp.LocalizedJspException;
+import static com.aoindustries.taglib.ApplicationResources.accessor;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
+import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
  * @author  AO Industries, Inc.
@@ -42,6 +44,7 @@ import javax.servlet.jsp.PageContext;
 public class ScriptTag
 	extends AutoEncodingBufferedTag
 	implements
+		DynamicAttributes,
 		TypeAttribute,
 		SrcAttribute,
 		ParamsAttribute
@@ -103,6 +106,23 @@ public class ScriptTag
         if(params==null) params = new HttpParametersMap();
         params.addParameter(name, value);
     }
+
+	@Override
+	public void setDynamicAttribute(String uri, String localName, Object value) throws JspException {
+		if(
+			uri==null
+			&& localName.startsWith(ParamUtils.PARAM_ATTRIBUTE_PREFIX)
+		) {
+			ParamUtils.setDynamicAttribute(this, uri, localName, value);
+		} else {
+			throw new LocalizedJspException(
+				accessor,
+				"error.unexpectedDynamicAttribute",
+				localName,
+				ParamUtils.PARAM_ATTRIBUTE_PREFIX+"*"
+			);
+		}
+	}
 
 	//@Override
 	//protected void setMediaEncoderOptions(MediaWriter mediaWriter) {

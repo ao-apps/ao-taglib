@@ -355,13 +355,26 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			Stops processing of the containing JSP page.
 		</p>
 		<p>
-			If parameters are not cleared, nested parameters are added before request parameters.
 			This has three advantages over the standard &lt;jsp:forward&gt; tag:
 			<ol>
 				<li>You may clear parameters such that only those specifically added will be passed on to the next page</li>
 				<li>You may have other nested tags used to select and build the set of parameters</li>
 				<li>You may pass argument objects instead of only string parameters (see below)</li>
 			</ol>
+		</p>
+		<p>
+			Any attribute that has no namespace and begins with "param." is added to the parameters.
+			The parameter name is the part of the attribute name following "param.".
+		</p>
+		<p>
+			If the parameter value is null, then it is not added at all.
+	        If the value is an Iterable, Iterator, or array, then each non-null element is coerced to
+			string as a separate parameter in iteration order.  Otherwise, the value itself is
+			coerced to string for the parameter value.
+		</p>
+		<p>
+			Nested &lt;ao:param&gt; or &lt;ao:params&gt; tags will add parameters after any provided as attributes.
+			If parameters are not cleared, nested parameters are added before request parameters.
 		</p>
 		<p>
 			Argument objects are passed to the forwarded page via request-scope "arg" Map.
@@ -545,9 +558,24 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
-    <description>
-      Renders an iframe tag.
-    </description>
+	<description><![CDATA[
+		<p>
+			Renders an iframe tag.
+		</p>
+		<p>
+			Any attribute that has no namespace and begins with "param." is added to the src as a URL parameter.
+			The parameter name is the part of the attribute name following "param.".
+		</p>
+		<p>
+			If the parameter value is null, then it is not added at all.
+	        If the value is an Iterable, Iterator, or array, then each non-null element is coerced to
+			string as a separate parameter in iteration order.  Otherwise, the value itself is
+			coerced to string for the parameter value.
+		</p>
+		<p>
+			Nested &lt;ao:param&gt; or &lt;ao:params&gt; tags will add parameters after any provided as attributes.
+		</p>
+	]]></description>
     <name>iframe</name>
     <tag-class>com.aoindustries.taglib.IframeTag</tag-class>
     <body-content>scriptless</body-content>
@@ -607,18 +635,34 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <rtexprvalue>true</rtexprvalue>
       <type>boolean</type>
     </attribute>
+	<dynamic-attributes>true</dynamic-attributes>
     <example />
   </tag>
   <tag>
 	<description><![CDATA[
-		Renders an img tag.
-		The src may be provided in one of three ways, in precedence order:
-		<ol>
-			<li>Direct child <src> tag.</li>
-			<li>As the src attribute</li>
-			<li>Contents of tag body, trimmed.</li>
-		</ol>
-		Also, the width, height, and alt values are required either as attributes or nested tags.
+		<p>
+			Renders an img tag.
+			The src may be provided in one of three ways, in precedence order:
+			<ol>
+				<li>Direct child <src> tag.</li>
+				<li>As the src attribute</li>
+				<li>Contents of tag body, trimmed.</li>
+			</ol>
+			Also, the width, height, and alt values are required either as attributes or nested tags.
+		</p>
+		<p>
+			Any attribute that has no namespace and begins with "param." is added to the src as a URL parameter.
+			The parameter name is the part of the attribute name following "param.".
+		</p>
+		<p>
+			If the parameter value is null, then it is not added at all.
+	        If the value is an Iterable, Iterator, or array, then each non-null element is coerced to
+			string as a separate parameter in iteration order.  Otherwise, the value itself is
+			coerced to string for the parameter value.
+		</p>
+		<p>
+			Nested &lt;ao:param&gt; or &lt;ao:params&gt; tags will add parameters after any provided as attributes.
+		</p>
 	]]></description>
     <name>img</name>
     <tag-class>com.aoindustries.taglib.ImgTag</tag-class>
@@ -698,19 +742,33 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
+	<dynamic-attributes>true</dynamic-attributes>
     <example />
   </tag>
   <tag>
 	<description><![CDATA[
 		<p>
 			Includes another resource and then continues processing of the current page.
-			If parameters are not cleared, nested parameters are added before request parameters.
 			This has three advantages over the standard &lt;jsp:include&gt; tag:
 			<ol>
 				<li>You may clear parameters such that only those specifically added will be passed on to the included page</li>
 				<li>You may have other nested tags used to select and build the set of parameters</li>
 				<li>You may pass argument objects instead of only string parameters (see below)</li>
 			</ol>
+		</p>
+		<p>
+			Any attribute that has no namespace and begins with "param." is added to the parameters.
+			The parameter name is the part of the attribute name following "param.".
+		</p>
+		<p>
+			If the parameter value is null, then it is not added at all.
+	        If the value is an Iterable, Iterator, or array, then each non-null element is coerced to
+			string as a separate parameter in iteration order.  Otherwise, the value itself is
+			coerced to string for the parameter value.
+		</p>
+		<p>
+			Nested &lt;ao:param&gt; or &lt;ao:params&gt; tags will add parameters after any provided as attributes.
+			If parameters are not cleared, nested parameters are added before request parameters.
 		</p>
 		<p>
 			Argument objects are passed to the included page via request-scope "arg" Map.
@@ -951,10 +1009,25 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
-    <description>
-      If contained with any LinksAttribute parent, adds the link data to the parent tag.
-      Otherwise, renders a link tag.
-	</description>
+	<description><![CDATA[
+		<p>
+			If contained with any LinksAttribute parent, adds the link data to the parent tag.
+			Otherwise, renders a link tag.
+		</p>
+		<p>
+			Any attribute that has no namespace and begins with "param." is added to the href as a URL parameter.
+			The parameter name is the part of the attribute name following "param.".
+		</p>
+		<p>
+			If the parameter value is null, then it is not added at all.
+	        If the value is an Iterable, Iterator, or array, then each non-null element is coerced to
+			string as a separate parameter in iteration order.  Otherwise, the value itself is
+			coerced to string for the parameter value.
+		</p>
+		<p>
+			Nested &lt;ao:param&gt; or &lt;ao:params&gt; tags will add parameters after any provided as attributes.
+		</p>
+	]]></description>
     <name>link</name>
     <tag-class>com.aoindustries.taglib.LinkTag</tag-class>
     <body-content>scriptless</body-content>
@@ -1003,6 +1076,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
+	<dynamic-attributes>true</dynamic-attributes>
     <example />
   </tag>
   <tag>
@@ -1428,7 +1502,8 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <attribute>
 		<description><![CDATA[
 			<p>
-				Optionally excludes all elements of a Map or HttpParameters that match any of the comma-separated patterns.
+				Optionally excludes all elements of a Map or HttpParameters that
+				match any of the comma-separated patterns.
 				May not be used in conjunction with the name attribute.
 			</p>
 			<p>
@@ -1583,6 +1658,19 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<p>
 			The content type of this tag is equal to the type set in the type attribute.
 		</p>
+		<p>
+			Any attribute that has no namespace and begins with "param." is added to the src as a URL parameter.
+			The parameter name is the part of the attribute name following "param.".
+		</p>
+		<p>
+			If the parameter value is null, then it is not added at all.
+	        If the value is an Iterable, Iterator, or array, then each non-null element is coerced to
+			string as a separate parameter in iteration order.  Otherwise, the value itself is
+			coerced to string for the parameter value.
+		</p>
+		<p>
+			Nested &lt;ao:param&gt; or &lt;ao:params&gt; tags will add parameters after any provided as attributes.
+		</p>
 	]]></description>
     <name>script</name>
     <tag-class>com.aoindustries.taglib.ScriptTag</tag-class>
@@ -1614,6 +1702,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
     </attribute>
+	<dynamic-attributes>true</dynamic-attributes>
     <example />
   </tag>
   <tag>

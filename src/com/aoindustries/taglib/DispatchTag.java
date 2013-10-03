@@ -141,8 +141,13 @@ abstract class DispatchTag
 			&& localName.startsWith(ARG_ATTRIBUTE_PREFIX)
 		) {
 			addArg(localName.substring(ARG_ATTRIBUTE_PREFIX.length()), value);
+		} else if(
+			uri==null
+			&& localName.startsWith(ParamUtils.PARAM_ATTRIBUTE_PREFIX)
+		) {
+			ParamUtils.setDynamicAttribute(this, uri, localName, value);
 		} else {
-			throw new LocalizedJspException(accessor, "error.unexpectedDynamicAttribute", localName, ARG_ATTRIBUTE_PREFIX+"*");
+			throw new LocalizedJspException(accessor, "error.unexpectedDynamicAttribute2", localName, ARG_ATTRIBUTE_PREFIX+"*", ParamUtils.PARAM_ATTRIBUTE_PREFIX+"*");
 		}
 	}
 
