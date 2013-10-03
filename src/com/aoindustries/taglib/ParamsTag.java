@@ -43,7 +43,7 @@ public class ParamsTag
 
     private Object name;
     private String exclude = null;
-	private WildcardPatternMatcher excludeMatcher = WildcardPatternMatcher.getEmptyMatcher();
+	private WildcardPatternMatcher excludeMatcher = WildcardPatternMatcher.getMatchNone();
     private Object values;
 
     @Override

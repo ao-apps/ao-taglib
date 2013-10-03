@@ -22,9 +22,7 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.io.NullWriter;
 import java.io.IOException;
-import java.io.Writer;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -36,18 +34,11 @@ import javax.servlet.jsp.SkipPageException;
 /**
  * @author  AO Industries, Inc.
  */
-public class ForwardTag extends DispatchTag {
+public class ForwardTag extends ArgDispatchTag {
 
-    /**
-     * Discard all nested output, since this will not use the output and this
-     * output could possibly fill the response buffer and prevent the forward
-     * from functioning.
-     */
-    @Override
-    Writer getJspFragmentWriter(JspWriter out) {
-        return NullWriter.getInstance();
-    }
-
+	/**
+	 * Dispatch as forward
+	 */
     @Override
     void dispatch(RequestDispatcher dispatcher, JspWriter out, HttpServletRequest request, HttpServletResponse response) throws IOException, JspException {
         try {

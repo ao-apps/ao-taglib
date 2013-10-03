@@ -22,7 +22,7 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.lang.LocalizedIllegalArgumentException;
+import com.aoindustries.io.NullWriter;
 import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
@@ -30,8 +30,7 @@ import com.aoindustries.servlet.http.ServletUtil;
 import com.aoindustries.servlet.jsp.LocalizedJspException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import java.io.IOException;
-import java.io.Writer;
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.LinkedHashMap;
@@ -44,12 +43,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
+import javax.servlet.jsp.SkipPageException;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 import javax.servlet.jsp.tagext.JspFragment;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 /**
- * The parent implementation for both the forward and include tags.
+ * The base class for any tag that may call a request dispatcher.
  *
  * @author  AO Industries, Inc.
  */
@@ -58,35 +58,21 @@ abstract class DispatchTag
 	implements
 		DynamicAttributes,
 		PageAttribute,
-		ParamsAttribute,
-		ArgsAttribute
+		ParamsAttribute
 {
 
 	/**
 	 * The name of the request-scope Map that will contain the arguments for the current page.
 	 */
-	private static final String ARG_MAP_REQUEST_ATTRIBUTE_NAME = "arg";
+	protected static final String ARG_MAP_REQUEST_ATTRIBUTE_NAME = "arg";
 
 	/**
-	 * The prefix for argument attributes.
+	 * Tracks the current dispatch page for correct page-relative paths.
 	 */
-	private static final String ARG_ATTRIBUTE_PREFIX = ARG_MAP_REQUEST_ATTRIBUTE_NAME + ".";
+	private static final ThreadLocal<String> dispatchedPage = new ThreadLocal<String>();
 
-	/**
-	 * Tracks the dispatch of pages for correct page-relative paths.
-	 */
-	private static final ThreadLocal<List<String>> dispatchedPages = new ThreadLocal<List<String>>() {
-		@Override
-		protected List<String> initialValue() {
-			return new ArrayList<String>();
-		}
-	};
-
-	private String page;
-    private String clearParams = null;
-	private WildcardPatternMatcher clearParamsMatcher = WildcardPatternMatcher.getEmptyMatcher();
-    private HttpParametersMap params;
-	private Map<String,Object> args;
+	protected String page;
+    protected HttpParametersMap params;
 
     @Override
     public String getPage() {
@@ -98,14 +84,7 @@ abstract class DispatchTag
         this.page = page;
     }
 
-    public String getClearParams() {
-        return clearParams;
-    }
-
-    public void setClearParams(String clearParams) {
-        this.clearParams = clearParams;
-		this.clearParamsMatcher = WildcardPatternMatcher.getInstance(clearParams);
-    }
+	abstract protected WildcardPatternMatcher getClearParamsMatcher();
 
     @Override
     public HttpParameters getParams() {
@@ -118,83 +97,110 @@ abstract class DispatchTag
         params.addParameter(name, value);
     }
 
-	@Override
-	public Map<String, Object> getArgs() {
-		if(args==null) return Collections.emptyMap();
-		return args;
-	}
-
-	@Override
-	public void addArg(String name, Object value) throws IllegalArgumentException {
-		if(args==null) {
-			args = new LinkedHashMap<String,Object>();
-		} else if(args.containsKey(name)) {
-			throw new LocalizedIllegalArgumentException(accessor, "DispatchTag.addArg.duplicateArgument", name);
-		}
-		args.put(name, value);
-	}
+	abstract protected String getDynamicAttributeExceptionKey();
+	
+	abstract protected Serializable[] getDynamicAttributeExceptionArgs(String localName);
 
 	@Override
 	public void setDynamicAttribute(String uri, String localName, Object value) throws JspException {
 		if(
 			uri==null
-			&& localName.startsWith(ARG_ATTRIBUTE_PREFIX)
-		) {
-			addArg(localName.substring(ARG_ATTRIBUTE_PREFIX.length()), value);
-		} else if(
-			uri==null
 			&& localName.startsWith(ParamUtils.PARAM_ATTRIBUTE_PREFIX)
 		) {
 			ParamUtils.setDynamicAttribute(this, uri, localName, value);
 		} else {
-			throw new LocalizedJspException(accessor, "error.unexpectedDynamicAttribute2", localName, ARG_ATTRIBUTE_PREFIX+"*", ParamUtils.PARAM_ATTRIBUTE_PREFIX+"*");
+			throw new LocalizedJspException(
+				accessor,
+				getDynamicAttributeExceptionKey(),
+				getDynamicAttributeExceptionArgs(localName)
+			);
 		}
 	}
 
+	/**
+	 * Gets the arguments that will be passed on dispatch.  For no arguments, return null.
+	 */
+	abstract protected Map<String, Object> getArgs();
+
+	/**
+	 * Subclass hook to intercept request after servlet paths have been determined
+	 * and before dispatch is called.
+	 * 
+	 * This default implementation does nothing.
+	 * 
+	 * @exception  SkipPageException  If the implementation has handled the request,
+	 *                                must throw SkipPageException.
+	 */
+	protected void doTag(String servletPath) throws IOException, JspException, SkipPageException {
+		// Do nothing
+	}
+
 	@Override
-	@SuppressWarnings({"unchecked", "unchecked"})
+	@SuppressWarnings("unchecked")
     final public void doTag() throws IOException, JspException {
-		PageContext pageContext = (PageContext)getJspContext();
-		JspWriter out = pageContext.getOut();
-		JspFragment body = getJspBody();
+		// Invoke body first to all nested tags to set attributes
+		final JspFragment body = getJspBody();
 		if(body!=null) {
-			Writer newOut = getJspFragmentWriter(out);
-			// Check for JspWriter to avoid a JspWriter wrapping a JspWriter
-			body.invoke(
-				newOut==out
-				? null
-				: newOut
-			);
+            // Discard all nested output, since this will not use the output and this
+            // output could possibly fill the response buffer and prevent the dispatch
+            // from functioning.
+			body.invoke(NullWriter.getInstance());
 		}
-		HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
-		HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
-		if(page==null) throw new AttributeRequiredException("page");
-		List<String> myDispatchedPages = DispatchTag.dispatchedPages.get();
-		// Find the current JSP page
-		final String currentPage;
-		// Make relative to current JSP page
-		final String contextRelativePath = ServletUtil.getAbsolutePath(
-			myDispatchedPages.isEmpty()
-				? request.getServletPath()
-				: myDispatchedPages.get(myDispatchedPages.size()-1),
-			page
-		);
-		// Store as new relative path source
-		myDispatchedPages.add(contextRelativePath);
+		// Keep old dispatch page to restore
+		final String oldDispatchPage = DispatchTag.dispatchedPage.get();
 		try {
-			RequestDispatcher dispatcher = pageContext.getServletContext().getRequestDispatcher(contextRelativePath);
+			// Determine the path of the current page based on previous dispatch or original request
+			final PageContext pageContext = (PageContext)getJspContext();
+			final HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
+			final String servletPath =
+				oldDispatchPage==null
+					? request.getServletPath()
+					: oldDispatchPage
+			;
+
+			// Find any dispatcher before allowing subclass to intercept dispatch.  This ensures page is a correct
+			// value, even when not used for a particular request.
+			final String contextRelativePath;
+			final RequestDispatcher dispatcher;
+			if(page==null) {
+				contextRelativePath = null;
+				dispatcher = null;
+			} else {
+				// Make relative to current JSP page
+				contextRelativePath = ServletUtil.getAbsolutePath(
+					servletPath,
+					page
+				);
+				// Find dispatcher
+				dispatcher = pageContext.getServletContext().getRequestDispatcher(contextRelativePath);
+				if(dispatcher==null) throw new LocalizedJspException(accessor, "DispatchTag.dispatcherNotFound", contextRelativePath);
+			}
+			
+			// Call any subclass hook to handle the request before being dispatched.  If the request should not
+			// be dispatched, subclass will throw SkipPageException.
+			doTag(servletPath);
+
+			// Page is required when not already dispatched by subclass
+			if(page==null) throw new AttributeRequiredException("page");
+			assert contextRelativePath!=null : "Will have been set above when page non-null";
+			assert dispatcher!=null : "Will have been set above when page non-null";
+
+			// Store as new relative path source
+			DispatchTag.dispatchedPage.set(contextRelativePath);
 
 			// Keep old arguments to restore
 			final Object oldArgs = request.getAttribute(ARG_MAP_REQUEST_ATTRIBUTE_NAME);
 			try {
+				final JspWriter out = pageContext.getOut();
+				final HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
+
 				// Set new arguments
 				request.setAttribute(
 					ARG_MAP_REQUEST_ATTRIBUTE_NAME,
-					args==null
-						? Collections.emptyMap()
-						: Collections.unmodifiableMap(args)
+					getArgs()
 				);
 
+				final WildcardPatternMatcher clearParamsMatcher = getClearParamsMatcher();
 				Map<String,String[]> oldMap = null; // Obtained when first needed
 
 				// If no parameters have been added
@@ -287,16 +293,8 @@ abstract class DispatchTag
 				request.setAttribute(ARG_MAP_REQUEST_ATTRIBUTE_NAME, oldArgs);
 			}
 		} finally {
-			myDispatchedPages.remove(myDispatchedPages.size()-1);
+			DispatchTag.dispatchedPage.set(oldDispatchPage);
 		}
-    }
-
-    /**
-     * Gets the writer to use for the JspFragment.  By default it uses the same
-     * writer as this tag.
-     */
-    Writer getJspFragmentWriter(JspWriter out) {
-        return out;
     }
 
     abstract void dispatch(RequestDispatcher dispatcher, JspWriter out, HttpServletRequest request, HttpServletResponse response) throws IOException, JspException;

@@ -22,37 +22,40 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.io.NullWriter;
-import com.aoindustries.net.EmptyParameters;
-import com.aoindustries.net.HttpParameters;
-import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.net.HttpParametersUtils;
 import com.aoindustries.servlet.http.ServletUtil;
 import com.aoindustries.servlet.jsp.LocalizedJspException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import java.io.IOException;
+import java.io.Serializable;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.SkipPageException;
-import javax.servlet.jsp.tagext.DynamicAttributes;
-import javax.servlet.jsp.tagext.JspFragment;
-import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 /**
- * TODO: Redirect does not work when response has been committed, and no error is logged.
- *       Or some other issue, because jsp:forward worked while redirect didn't when HTML output before redirect.
- *
  * @author  AO Industries, Inc.
  */
 public class RedirectTag
-	extends SimpleTagSupport
-	implements
-		DynamicAttributes,
-		HrefAttribute,
-		ParamsAttribute
+	extends DispatchTag
+	implements HrefAttribute
 {
+
+	private static final Logger logger = Logger.getLogger(RedirectTag.class.getName());
+
+	/**
+	 * The maximum length of a URL allowed for redirect.
+	 *
+	 * @see <a href="http://www.boutell.com/newfaq/misc/urllength.html">WWW FAQs: What is the maximum length of a URL?</a>
+	 */
+	private static final int MAXIMUM_GET_REQUEST_LENGTH = 2000; // A little conservative below 2048 of Internet Explorer.
 
 	public static boolean isValidStatusCode(String statusCode) {
         return
@@ -70,7 +73,6 @@ public class RedirectTag
 
 	private String statusCode;
     private String href;
-    private HttpParametersMap params;
 
     public String getStatusCode() {
         return statusCode;
@@ -91,48 +93,36 @@ public class RedirectTag
         this.href = href;
     }
 
-    @Override
-    public HttpParameters getParams() {
-        return params==null ? EmptyParameters.getInstance() : params;
-    }
-
-    @Override
-    public void addParam(String name, String value) {
-        if(params==null) params = new HttpParametersMap();
-        params.addParameter(name, value);
-    }
-
 	@Override
-	public void setDynamicAttribute(String uri, String localName, Object value) throws JspException {
-		if(
-			uri==null
-			&& localName.startsWith(ParamUtils.PARAM_ATTRIBUTE_PREFIX)
-		) {
-			ParamUtils.setDynamicAttribute(this, uri, localName, value);
-		} else {
-			throw new LocalizedJspException(
-				accessor,
-				"error.unexpectedDynamicAttribute",
-				localName,
-				ParamUtils.PARAM_ATTRIBUTE_PREFIX+"*"
-			);
-		}
+	protected WildcardPatternMatcher getClearParamsMatcher() {
+		return WildcardPatternMatcher.getMatchAll();
 	}
 
 	@Override
-    public void doTag() throws IOException, SkipPageException, JspException {
-        JspFragment body = getJspBody();
-        if(body!=null) {
-            // Discard all nested output, since this will not use the output and this
-            // output could possibly fill the response buffer and prevent the redirect
-            // from functioning.
-            body.invoke(NullWriter.getInstance());
-        }
-        PageContext pageContext = (PageContext)getJspContext();
-        HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
-        HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
+	protected String getDynamicAttributeExceptionKey() {
+		return "error.unexpectedDynamicAttribute";
+	}
+	
+	@Override
+	protected Serializable[] getDynamicAttributeExceptionArgs(String localName) {
+		return new Serializable[] {
+			localName,
+			ParamUtils.PARAM_ATTRIBUTE_PREFIX+"*"
+		};
+	}
 
-        int status;
+	/**
+	 * args will be set to <code>null</code> to simulate initial request conditions of a redirect
+	 * as well as possible.
+	 */
+	@Override
+	protected Map<String, Object> getArgs() {
+		return null;
+	}
+
+	@Override
+    protected void doTag(String servletPath) throws IOException, JspException, SkipPageException {
+        final int status;
         if(statusCode==null) throw new AttributeRequiredException("statusCode");
         if(
 			"301".equals(statusCode)
@@ -158,10 +148,47 @@ public class RedirectTag
         }
 
         // Add any parameters to the URL
-        if(href==null) throw new AttributeRequiredException("href");
-        href = HttpParametersUtils.addParams(href, params);
+		String myHref = href;
+        if(myHref==null) throw new AttributeRequiredException("href");
+        myHref = HttpParametersUtils.addParams(myHref, params);
 
-        ServletUtil.sendRedirect(request, response, href, status);
+		// Get the full URL that will be used for the redirect
+		final PageContext pageContext = (PageContext)getJspContext();
+		final HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
+		final HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
+		String location = ServletUtil.getRedirectLocation(request, response, servletPath, myHref);
+		boolean isTooLong = location.length()>MAXIMUM_GET_REQUEST_LENGTH;
+		if(!isTooLong || page==null) {
+			if(isTooLong) {
+				// Warn about location too long
+				if(logger.isLoggable(Level.WARNING)) {
+					logger.warning(
+						accessor.getMessage(
+							"RedirectTag.locationTooLongWarning",
+							MAXIMUM_GET_REQUEST_LENGTH,
+							location.length(),
+							location.substring(0, 100)
+						)
+					);
+				}
+			}
+	        ServletUtil.sendRedirect(response, location, status);
+		    throw new SkipPageException();
+		}
+    }
+	
+	/**
+	 * Dispatch as forward
+	 */
+    @Override
+    void dispatch(RequestDispatcher dispatcher, JspWriter out, HttpServletRequest request, HttpServletResponse response) throws IOException, JspException {
+        try {
+            // Clear the previous JSP out buffer
+            out.clear();
+            dispatcher.forward(request, response);
+        } catch(ServletException e) {
+            throw new JspException(e);
+        }
         throw new SkipPageException();
     }
 }

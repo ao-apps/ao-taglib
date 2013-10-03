@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2012  AO Industries, Inc.
+ * Copyright (C) 2012, 2013  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -37,9 +37,9 @@ import javax.servlet.jsp.JspWriter;
 /**
  * @author  AO Industries, Inc.
  */
-public class IncludeTag extends DispatchTag {
+public class IncludeTag extends ArgDispatchTag {
 
-    @Override
+	@Override
     void dispatch(RequestDispatcher dispatcher, final JspWriter out, HttpServletRequest request, HttpServletResponse response) throws IOException, JspException {
         try {
             // Write to the current JSP out instead of creating a new writer.
