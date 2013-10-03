@@ -36,7 +36,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			The parameter name is the part of the attribute name following "param.".
 		</p>
 		<p>
-			If the parameter value is null, then it is not added at all.
+			When a parameter value is null it is not added.
 	        If the value is an Iterable, Iterator, or array, then each non-null element is coerced to
 			string as a separate parameter in iteration order.  Otherwise, the value itself is
 			coerced to string for the parameter value.
@@ -367,7 +367,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			The parameter name is the part of the attribute name following "param.".
 		</p>
 		<p>
-			If the parameter value is null, then it is not added at all.
+			When a parameter value is null it is not added.
 	        If the value is an Iterable, Iterator, or array, then each non-null element is coerced to
 			string as a separate parameter in iteration order.  Otherwise, the value itself is
 			coerced to string for the parameter value.
@@ -567,7 +567,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			The parameter name is the part of the attribute name following "param.".
 		</p>
 		<p>
-			If the parameter value is null, then it is not added at all.
+			When a parameter value is null it is not added.
 	        If the value is an Iterable, Iterator, or array, then each non-null element is coerced to
 			string as a separate parameter in iteration order.  Otherwise, the value itself is
 			coerced to string for the parameter value.
@@ -655,7 +655,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			The parameter name is the part of the attribute name following "param.".
 		</p>
 		<p>
-			If the parameter value is null, then it is not added at all.
+			When a parameter value is null it is not added.
 	        If the value is an Iterable, Iterator, or array, then each non-null element is coerced to
 			string as a separate parameter in iteration order.  Otherwise, the value itself is
 			coerced to string for the parameter value.
@@ -761,7 +761,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			The parameter name is the part of the attribute name following "param.".
 		</p>
 		<p>
-			If the parameter value is null, then it is not added at all.
+			When a parameter value is null it is not added.
 	        If the value is an Iterable, Iterator, or array, then each non-null element is coerced to
 			string as a separate parameter in iteration order.  Otherwise, the value itself is
 			coerced to string for the parameter value.
@@ -1019,7 +1019,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			The parameter name is the part of the attribute name following "param.".
 		</p>
 		<p>
-			If the parameter value is null, then it is not added at all.
+			When a parameter value is null it is not added.
 	        If the value is an Iterable, Iterator, or array, then each non-null element is coerced to
 			string as a separate parameter in iteration order.  Otherwise, the value itself is
 			coerced to string for the parameter value.
@@ -1577,7 +1577,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			The parameter name is the part of the attribute name following "param.".
 		</p>
 		<p>
-			If the parameter value is null, then it is not added at all.
+			When a parameter value is null it is not added.
 	        If the value is an Iterable, Iterator, or array, then each non-null element is coerced to
 			string as a separate parameter in iteration order.  Otherwise, the value itself is
 			coerced to string for the parameter value.
@@ -1623,12 +1623,24 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     </attribute>
     <attribute>
 		<description><![CDATA[
-			The destination for the redirect.
-			If starts with a /, the context path will be prepended to the path.
-			Session state URL rewriting is performed as needed.
-			URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
-			any character in the set { ':', '/', ';', '#' }
-			A nested &lt;ao:href&gt; tag will override this value.
+			<p>
+				The destination for the redirect.  This should only be provided when
+				either redirecting to an external resource or when the default obtained
+				from "page" is inappropriate.
+			</p>
+			<p>
+				If starts with a /, the context path will be prepended to the path.
+				Session state URL rewriting is performed as needed.
+				URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
+				any character in the set { ':', '/', ';', '#' }
+			</p>
+			<p>
+				A nested &lt;ao:href&gt; tag will override this value.
+			</p>
+			<p>
+				When not provided as attribute or a nested tag, defaults to the value for "page".
+				This should be a reasonable default except for unusual circumstances.
+			</p>
 		]]></description>
       <name>href</name>
       <required>false</required>
@@ -1697,7 +1709,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			The parameter name is the part of the attribute name following "param.".
 		</p>
 		<p>
-			If the parameter value is null, then it is not added at all.
+			When a parameter value is null it is not added.
 	        If the value is an Iterable, Iterator, or array, then each non-null element is coerced to
 			string as a separate parameter in iteration order.  Otherwise, the value itself is
 			coerced to string for the parameter value.

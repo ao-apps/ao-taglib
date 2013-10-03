@@ -137,7 +137,6 @@ public class RedirectTag
 			|| "temporary".equals(statusCode)
 		) {
             status = HttpServletResponse.SC_MOVED_TEMPORARILY;
-            //response.sendRedirect(encodedHref);
         } else if(
 			"303".equals(statusCode)
 			|| "see_other".equals(statusCode)
@@ -149,6 +148,7 @@ public class RedirectTag
 
         // Add any parameters to the URL
 		String myHref = href;
+		if(myHref==null) myHref = page; // Default to page when href not given
         if(myHref==null) throw new AttributeRequiredException("href");
         myHref = HttpParametersUtils.addParams(myHref, params);
 
