@@ -163,7 +163,11 @@ public class FormTag
 			Coercion.write(id, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
+		// TODO: Do not include ANY parameters in the action - put them all into hiddens instead
+		// TODO: Allow params on the form itself?  These would all become hiddens.  It would give a nice way
+		//       to pass-through values in the same was a redirect or link.
 		String actionUrl;
+		final int questionPos;
 		if(action!=null) {
 			HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
 			out.write(" action=\"");
@@ -172,10 +176,18 @@ public class FormTag
 				if(contextPath.length()>0) action = contextPath+action;
 			}
 			actionUrl = response.encodeURL(NewEncodingUtils.encodeUrlPath(action));
-			encodeTextInXhtmlAttribute(actionUrl, out);
+			questionPos = actionUrl.indexOf('?');
+			// The action attribute is everything up to the first question mark
+			encodeTextInXhtmlAttribute(
+				actionUrl,
+				0,
+				questionPos==-1 ? actionUrl.length() : questionPos,
+				out
+			);
 			out.write('"');
 		} else {
 			actionUrl = null;
+			questionPos = -1;
 		}
 		if(target!=null) {
 			out.write(" target=\"");
@@ -199,30 +211,27 @@ public class FormTag
 		}
 		out.write('>');
 		// Automatically add URL request parameters as hidden fields to support custom URL rewritten parameters in GET requests.
-		if(actionUrl!=null) {
-			int questionPos = actionUrl.indexOf('?');
-			if(questionPos!=-1) {
-				List<String> nameVals = StringUtility.splitString(actionUrl, questionPos+1, actionUrl.length(), '&');
-				if(!nameVals.isEmpty()) {
-					out.write("<div>");
-					for(String nameVal : nameVals) {
-						int equalPos = nameVal.indexOf('=');
-						String name, value;
-						if(equalPos==-1) {
-							name = URLDecoder.decode(nameVal, "UTF-8");
-							value = "";
-						} else {
-							name = URLDecoder.decode(nameVal.substring(0, equalPos), "UTF-8");
-							value = URLDecoder.decode(nameVal.substring(equalPos+1), "UTF-8");
-						}
-						out.write("<input type=\"hidden\" name=\"");
-						encodeTextInXhtmlAttribute(name, out);
-						out.write("\" value=\"");
-						encodeTextInXhtmlAttribute(value, out);
-						out.write("\" />");
+		if(questionPos!=-1) {
+			List<String> nameVals = StringUtility.splitString(actionUrl, questionPos+1, actionUrl.length(), '&');
+			if(!nameVals.isEmpty()) {
+				out.write("<div>");
+				for(String nameVal : nameVals) {
+					int equalPos = nameVal.indexOf('=');
+					String name, value;
+					if(equalPos==-1) {
+						name = URLDecoder.decode(nameVal, "UTF-8");
+						value = "";
+					} else {
+						name = URLDecoder.decode(nameVal.substring(0, equalPos), "UTF-8");
+						value = URLDecoder.decode(nameVal.substring(equalPos+1), "UTF-8");
 					}
-					out.write("</div>");
+					out.write("<input type=\"hidden\" name=\"");
+					encodeTextInXhtmlAttribute(name, out);
+					out.write("\" value=\"");
+					encodeTextInXhtmlAttribute(value, out);
+					out.write("\" />");
 				}
+				out.write("</div>");
 			}
 		}
 		MarkupUtils.writeWithMarkup(capturedBody, MarkupType.XHTML, out);
