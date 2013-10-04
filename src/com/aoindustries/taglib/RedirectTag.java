@@ -53,9 +53,11 @@ public class RedirectTag
 	/**
 	 * The maximum length of a URL allowed for redirect.
 	 *
+	 * Matching limit of Internet Explorer: http://support.microsoft.com/kb/208427
+	 *
 	 * @see <a href="http://www.boutell.com/newfaq/misc/urllength.html">WWW FAQs: What is the maximum length of a URL?</a>
 	 */
-	private static final int MAXIMUM_GET_REQUEST_LENGTH = 2000; // A little conservative below 2048 of Internet Explorer.
+	private static final int MAXIMUM_GET_REQUEST_LENGTH = 2048;
 
 	public static boolean isValidStatusCode(String statusCode) {
         return
