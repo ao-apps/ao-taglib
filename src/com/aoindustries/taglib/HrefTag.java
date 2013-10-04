@@ -24,10 +24,6 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.buffer.BufferResult;
-import com.aoindustries.net.EmptyParameters;
-import com.aoindustries.net.HttpParameters;
-import com.aoindustries.net.HttpParametersMap;
-import com.aoindustries.net.HttpParametersUtils;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -35,9 +31,7 @@ import javax.servlet.jsp.JspException;
 /**
  * @author  AO Industries, Inc.
  */
-public class HrefTag extends AutoEncodingBufferedTag implements ParamsAttribute {
-
-    private HttpParametersMap params;
+public class HrefTag extends AutoEncodingBufferedTag {
 
     @Override
     public MediaType getContentType() {
@@ -50,19 +44,8 @@ public class HrefTag extends AutoEncodingBufferedTag implements ParamsAttribute 
     }
 
     @Override
-    public HttpParameters getParams() {
-        return params==null ? EmptyParameters.getInstance() : params;
-    }
-
-    @Override
-    public void addParam(String name, String value) {
-        if(params==null) params = new HttpParametersMap();
-        params.addParameter(name, value);
-    }
-
-    @Override
     protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
         HrefAttribute hrefAttribute = AttributeUtils.findAttributeParent("href", this, "href", HrefAttribute.class);
-        hrefAttribute.setHref(HttpParametersUtils.addParams(capturedBody.trim().toString(), params));
+        hrefAttribute.setHref(capturedBody.trim().toString());
     }
 }
