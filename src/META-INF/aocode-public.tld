@@ -37,7 +37,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</p>
 		<p>
 			When a parameter value is null it is not added.
-	        If the value is an Iterable, Iterator, or array, then each non-null element is coerced to
+	        If the value is an Iterable, Iterator, Enumeration, or array, then each non-null element is coerced to
 			string as a separate parameter in iteration order.  Otherwise, the value itself is
 			coerced to string for the parameter value.
 		</p>
@@ -307,7 +307,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</p>
 		<p>
 			When a parameter value is null it is not added.
-	        If the value is an Iterable, Iterator, or array, then each non-null element is coerced to
+	        If the value is an Iterable, Iterator, Enumeration, or array, then each non-null element is coerced to
 			string as a separate parameter in iteration order.  Otherwise, the value itself is
 			coerced to string for the parameter value.
 		</p>
@@ -414,7 +414,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</p>
 		<p>
 			When a parameter value is null it is not added.
-	        If the value is an Iterable, Iterator, or array, then each non-null element is coerced to
+	        If the value is an Iterable, Iterator, Enumeration, or array, then each non-null element is coerced to
 			string as a separate parameter in iteration order.  Otherwise, the value itself is
 			coerced to string for the parameter value.
 		</p>
@@ -623,7 +623,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</p>
 		<p>
 			When a parameter value is null it is not added.
-	        If the value is an Iterable, Iterator, or array, then each non-null element is coerced to
+	        If the value is an Iterable, Iterator, Enumeration, or array, then each non-null element is coerced to
 			string as a separate parameter in iteration order.  Otherwise, the value itself is
 			coerced to string for the parameter value.
 		</p>
@@ -711,7 +711,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</p>
 		<p>
 			When a parameter value is null it is not added.
-	        If the value is an Iterable, Iterator, or array, then each non-null element is coerced to
+	        If the value is an Iterable, Iterator, Enumeration, or array, then each non-null element is coerced to
 			string as a separate parameter in iteration order.  Otherwise, the value itself is
 			coerced to string for the parameter value.
 		</p>
@@ -817,7 +817,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</p>
 		<p>
 			When a parameter value is null it is not added.
-	        If the value is an Iterable, Iterator, or array, then each non-null element is coerced to
+	        If the value is an Iterable, Iterator, Enumeration, or array, then each non-null element is coerced to
 			string as a separate parameter in iteration order.  Otherwise, the value itself is
 			coerced to string for the parameter value.
 		</p>
@@ -1081,7 +1081,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</p>
 		<p>
 			When a parameter value is null it is not added.
-	        If the value is an Iterable, Iterator, or array, then each non-null element is coerced to
+	        If the value is an Iterable, Iterator, Enumeration, or array, then each non-null element is coerced to
 			string as a separate parameter in iteration order.  Otherwise, the value itself is
 			coerced to string for the parameter value.
 		</p>
@@ -1592,14 +1592,14 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 			<p>
 				When name is provided, supports <code>java.lang.Iterable</code>,
-				<code>java.util.Iterator</code>, or array values.
+				<code>java.util.Iterator</code>, <code>java.util.Enumeration</code>, or array values.
 			</p>
 			<p>
 				When name is not provided, requires <code>java.util.Map</code> or <code>com.aoindustries.net.HttpParameters</code>, where
 				the parameter name is the map key coerced to string and the value
 				(or set of values) is the map value.  Each of the entry values may
 				be <code>java.lang.Iterable</code>, <code>java.util.Iterator</code>,
-				array, or single value.
+				<code>java.util.Enumeration</code>, array, or single value.
 			</p>
 			<p>
 				When obtaining values from a <code>java.util.Map</code> or <code>com.aoindustries.net.HttpParameters</code>,
@@ -1639,7 +1639,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</p>
 		<p>
 			When a parameter value is null it is not added.
-	        If the value is an Iterable, Iterator, or array, then each non-null element is coerced to
+	        If the value is an Iterable, Iterator, Enumeration, or array, then each non-null element is coerced to
 			string as a separate parameter in iteration order.  Otherwise, the value itself is
 			coerced to string for the parameter value.
 		</p>
@@ -1778,7 +1778,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</p>
 		<p>
 			When a parameter value is null it is not added.
-	        If the value is an Iterable, Iterator, or array, then each non-null element is coerced to
+	        If the value is an Iterable, Iterator, Enumeration, or array, then each non-null element is coerced to
 			string as a separate parameter in iteration order.  Otherwise, the value itself is
 			coerced to string for the parameter value.
 		</p>

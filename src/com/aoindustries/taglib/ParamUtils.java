@@ -25,6 +25,7 @@ package com.aoindustries.taglib;
 import com.aoindustries.io.Coercion;
 import com.aoindustries.lang.NullArgumentException;
 import java.lang.reflect.Array;
+import java.util.Enumeration;
 import java.util.Iterator;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.JspTag;
@@ -139,6 +140,34 @@ final public class ParamUtils {
 	}
 
 	/**
+	 * Adds a set of parameters to the given <code>ParamsAttribute</code> parent tag.
+	 * If value is null, no parameters are added.
+	 * If any element is null, the parameter is not added for the element.
+	 * 
+	 * @param  paramsAttribute  the parent tag that will receive the parameters
+	 * @param  name             the name of the parameter (required)
+	 */
+	public static void addEnumerationParams(
+		ParamsAttribute paramsAttribute,
+		String name,
+		Enumeration<?> values
+	) throws JspException {
+		NullArgumentException.checkNotNull(name, "name");
+		if(values!=null) {
+			while(values.hasMoreElements()) {
+				Object elem = values.nextElement();
+				if(elem!=null) {
+					addParam(
+						paramsAttribute,
+						name,
+						Coercion.toString(elem)
+					);
+				}
+			}
+		}
+	}
+
+	/**
 	 * Adds an array of parameters to the given <code>ParamsAttribute</code> parent tag.
 	 * If value is null, no parameters are added.
 	 * If any element is null, the parameter is not added for the element.
@@ -169,7 +198,7 @@ final public class ParamUtils {
 
 	/**
 	 * Sets the dynamic param.* attributes.
-	 * Handles Iterable, Iterator, arrays, and direct coercion.
+	 * Handles Iterable, Iterator, Enumeration, arrays, and direct coercion.
 	 *
 	 * @throws  JspException  if any dynamic parameter other than "param.*" is given
 	 */
@@ -194,6 +223,12 @@ final public class ParamUtils {
 					paramsAttribute,
 					paramName,
 					(Iterator<?>)value
+				);
+			} else if(value instanceof Enumeration<?>) {
+				addEnumerationParams(
+					paramsAttribute,
+					paramName,
+					(Enumeration<?>)value
 				);
 			} else if(value.getClass().isArray()) {
 				addArrayParams(

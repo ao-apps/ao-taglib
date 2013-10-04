@@ -28,6 +28,7 @@ import com.aoindustries.net.HttpParameters;
 import com.aoindustries.servlet.jsp.LocalizedJspException;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -99,6 +100,12 @@ public class ParamsTag
 										paramName,
 										(Iterator<?>)entryValue
 									);
+								} else if(entryValue instanceof Enumeration<?>) {
+									ParamUtils.addEnumerationParams(
+										paramsAttribute,
+										paramName,
+										(Enumeration<?>)entryValue
+									);
 								} else if(entryValue.getClass().isArray()) {
 									ParamUtils.addArrayParams(
 										paramsAttribute,
@@ -146,6 +153,12 @@ public class ParamsTag
 						paramsAttribute,
 						paramName,
 						(Iterator<?>)values
+					);
+				} else if(values instanceof Enumeration<?>) {
+					ParamUtils.addEnumerationParams(
+						paramsAttribute,
+						paramName,
+						(Enumeration<?>)values
 					);
 				} else if(values.getClass().isArray()) {
 					ParamUtils.addArrayParams(
