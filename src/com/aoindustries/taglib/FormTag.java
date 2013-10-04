@@ -214,7 +214,7 @@ public class FormTag
 		if(questionPos!=-1) {
 			List<String> nameVals = StringUtility.splitString(actionUrl, questionPos+1, actionUrl.length(), '&');
 			if(!nameVals.isEmpty()) {
-				out.write("<div>");
+				out.write("<div>\n");
 				for(String nameVal : nameVals) {
 					int equalPos = nameVal.indexOf('=');
 					String name, value;
@@ -229,7 +229,7 @@ public class FormTag
 					encodeTextInXhtmlAttribute(name, out);
 					out.write("\" value=\"");
 					encodeTextInXhtmlAttribute(value, out);
-					out.write("\" />");
+					out.write("\" />\n");
 				}
 				out.write("</div>");
 			}
