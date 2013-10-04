@@ -297,7 +297,24 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <tag>
-    <description>Renders a form tag.</description>
+    <description><![CDATA[
+		<p>
+			Renders a form tag.
+		</p>
+		<p>
+			Any attribute that has no namespace and begins with "param." is added as a hidden form element.
+			The parameter name is the part of the attribute name following "param.".
+		</p>
+		<p>
+			When a parameter value is null it is not added.
+	        If the value is an Iterable, Iterator, or array, then each non-null element is coerced to
+			string as a separate parameter in iteration order.  Otherwise, the value itself is
+			coerced to string for the parameter value.
+		</p>
+		<p>
+			Nested &lt;ao:param&gt; or &lt;ao:params&gt; tags will add parameters after any provided as attributes.
+		</p>
+	]]></description>
     <name>form</name>
     <tag-class>com.aoindustries.taglib.FormTag</tag-class>
     <tei-class>com.aoindustries.taglib.FormTagTEI</tei-class>
@@ -326,6 +343,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <attribute>
 		<description><![CDATA[
 			The action for the form.
+			Any URL parameters will not be in the action attribute, but instead will be rewritten into hidden form elements.
 			A nested &lt;ao:action&gt; tag will override this value.
 		]]></description>
       <name>action</name>
@@ -373,6 +391,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
+	<dynamic-attributes>true</dynamic-attributes>
     <example />
   </tag>
   <tag>
@@ -572,7 +591,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
   </tag>
   <tag>
 	<description><![CDATA[
-		Provides an href to its HrefAttribute parent tag.  Parameters may be added with nested &lt;ao:param&gt; or &lt;ao:params&gt; tags.
+		Provides an href to its HrefAttribute parent tag.
 	]]></description>
     <name>href</name>
     <tag-class>com.aoindustries.taglib.HrefTag</tag-class>
@@ -1937,10 +1956,9 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
 	<tag>
-		<description><![CDATA[
+		<description>
 			Provides a src attribute to its SrcAttribute parent tag.
-			Parameters may be added with nested &lt;ao:param&gt; or &lt;ao:params&gt; tags.
-		]]></description>
+		</description>
 		<name>src</name>
 		<tag-class>com.aoindustries.taglib.SrcTag</tag-class>
 		<body-content>scriptless</body-content>

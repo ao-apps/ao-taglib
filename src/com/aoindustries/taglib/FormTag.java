@@ -29,17 +29,24 @@ import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextIn
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.io.Coercion;
+import com.aoindustries.net.EmptyParameters;
+import com.aoindustries.net.HttpParameters;
+import com.aoindustries.net.HttpParametersMap;
+import com.aoindustries.net.MutableHttpParameters;
 import com.aoindustries.servlet.jsp.LocalizedJspException;
+import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.StringUtility;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
 import java.net.URLDecoder;
+import java.util.Iterator;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
+import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
  * @author  AO Industries, Inc.
@@ -47,9 +54,11 @@ import javax.servlet.jsp.PageContext;
 public class FormTag
 	extends AutoEncodingBufferedTag
 	implements
+		DynamicAttributes,
 		MethodAttribute,
 		IdAttribute,
 		ActionAttribute,
+		ParamsAttribute,
 		TargetAttribute,
 		EnctypeAttribute,
 		StyleAttribute,
@@ -66,6 +75,7 @@ public class FormTag
     private String method = "get";
     private Object id;
     private String action;
+    private MutableHttpParameters params;
 	private Object target;
     private Object enctype;
     private Object style;
@@ -113,6 +123,17 @@ public class FormTag
     }
 
     @Override
+    public HttpParameters getParams() {
+        return params==null ? EmptyParameters.getInstance() : params;
+    }
+
+    @Override
+    public void addParam(String name, String value) {
+        if(params==null) params = new HttpParametersMap();
+        params.addParameter(name, value);
+    }
+
+	@Override
     public Object getTarget() {
         return target;
     }
@@ -152,7 +173,24 @@ public class FormTag
         this.onsubmit = onsubmit;
     }
 
-    @Override
+	@Override
+	public void setDynamicAttribute(String uri, String localName, Object value) throws JspException {
+		if(
+			uri==null
+			&& localName.startsWith(ParamUtils.PARAM_ATTRIBUTE_PREFIX)
+		) {
+			ParamUtils.setDynamicAttribute(this, uri, localName, value);
+		} else {
+			throw new LocalizedJspException(
+				accessor,
+				"error.unexpectedDynamicAttribute",
+				localName,
+				ParamUtils.PARAM_ATTRIBUTE_PREFIX+"*"
+			);
+		}
+	}
+
+	@Override
     protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
 		out.write("<form method=\"");
@@ -163,7 +201,6 @@ public class FormTag
 			Coercion.write(id, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
-		// TODO: Do not include ANY parameters in the action - put them all into hiddens instead
 		// TODO: Allow params on the form itself?  These would all become hiddens.  It would give a nice way
 		//       to pass-through values in the same was a redirect or link.
 		String actionUrl;
@@ -211,10 +248,15 @@ public class FormTag
 		}
 		out.write('>');
 		// Automatically add URL request parameters as hidden fields to support custom URL rewritten parameters in GET requests.
+		boolean didDiv = false;
 		if(questionPos!=-1) {
+			assert actionUrl!=null;
 			List<String> nameVals = StringUtility.splitString(actionUrl, questionPos+1, actionUrl.length(), '&');
 			if(!nameVals.isEmpty()) {
-				out.write("<div>\n");
+				if(!didDiv) {
+					out.write("<div>\n");
+					didDiv = true;
+				}
 				for(String nameVal : nameVals) {
 					int equalPos = nameVal.indexOf('=');
 					String name, value;
@@ -231,9 +273,30 @@ public class FormTag
 					encodeTextInXhtmlAttribute(value, out);
 					out.write("\" />\n");
 				}
-				out.write("</div>");
 			}
 		}
+		// Write any parameters as hidden fields
+		if(params!=null) {
+			Iterator<String> paramNames = params.getParameterNames();
+			while(paramNames.hasNext()) {
+				String paramName = paramNames.next();
+				List<String> paramValues = params.getParameterValues(paramName);
+				if(paramValues!=null && !paramValues.isEmpty()) {
+					if(!didDiv) {
+						out.write("<div>\n");
+						didDiv = true;
+					}
+					for(String paramValue : paramValues) {
+						out.write("<input type=\"hidden\" name=\"");
+						encodeTextInXhtmlAttribute(paramName, out);
+						out.write("\" value=\"");
+						encodeTextInXhtmlAttribute(paramValue, out);
+						out.write("\" />\n");
+					}
+				}
+			}
+		}
+		if(didDiv) out.write("</div>");
 		MarkupUtils.writeWithMarkup(capturedBody, MarkupType.XHTML, out);
 		out.write("</form>");
     }

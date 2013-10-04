@@ -117,10 +117,7 @@ public class ParamsTag
 					Iterator<String> paramNames = httpParams.getParameterNames();
 					while(paramNames.hasNext()) {
 						String paramName = paramNames.next();
-						if(
-							paramName!=null
-							&& !excludeMatcher.isMatch(paramName)
-						) {
+						if(!excludeMatcher.isMatch(paramName)) {
 							List<String> paramValues = httpParams.getParameterValues(paramName);
 							if(paramValues!=null) {
 								for(String paramValue : paramValues) {
