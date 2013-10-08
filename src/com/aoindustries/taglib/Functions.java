@@ -40,6 +40,9 @@ final public class Functions {
         return getResponse().encodeURL(url);
     }
 
+	/**
+	 * @see  ServletUtil#getAbsoluteURL(javax.servlet.http.HttpServletRequest, java.lang.String)
+	 */
 	public static String getAbsoluteURL(String relPath) {
         return ServletUtil.getAbsoluteURL(getRequest(), relPath);
     }
