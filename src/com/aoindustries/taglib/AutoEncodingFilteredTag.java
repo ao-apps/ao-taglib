@@ -28,7 +28,6 @@ import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.ValidMediaInput;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.MediaValidator;
-import com.aoindustries.servlet.jsp.LocalizedJspException;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletResponse;
@@ -87,7 +86,7 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport {
     }*/
 
     @Override
-    final public void doTag() throws JspException, IOException {
+    public void doTag() throws JspException, IOException {
         try {
             final PageContext pageContext = (PageContext)getJspContext();
             final HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();

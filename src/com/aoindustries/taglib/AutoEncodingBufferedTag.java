@@ -35,7 +35,6 @@ import com.aoindustries.io.buffer.BufferWriter;
 import com.aoindustries.io.buffer.LoggingWriter;
 import com.aoindustries.io.buffer.SegmentedWriter;
 import com.aoindustries.servlet.filter.TempFileContext;
-import com.aoindustries.servlet.jsp.LocalizedJspException;
 import com.aoindustries.util.WrappedException;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -150,7 +149,7 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 	private static boolean tempFileWarned = false;
 
     @Override
-    final public void doTag() throws JspException, IOException {
+    public void doTag() throws JspException, IOException {
         try {
 			final PageContext pageContext = (PageContext)getJspContext();
             final MediaType parentContentType = ThreadEncodingContext.contentType.get();
@@ -196,7 +195,7 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 					ThreadEncodingContext.contentType.set(myContentType);
 					ThreadEncodingContext.validMediaInput.set(captureValidator);
 					try {
-						body.invoke(captureValidator);
+						invoke(body, captureValidator);
 						captureValidator.flush();
 					} finally {
 						// Restore previous encoding context that is used for our output
@@ -285,7 +284,16 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
     protected void setMediaEncoderOptions(MediaEncoder mediaEncoder) {
     }
 
-    /**
+	/**
+	 * Invokes the body.  This is only called when a body exists.  Subclasses may override this to perform
+	 * actions before and/or after invoking the body.  Any overriding implementation should call
+	 * super.invoke(JspFragment,MediaValidator) to invoke the body.
+	 */
+	protected void invoke(JspFragment body, MediaValidator captureValidator) throws JspException, IOException {
+		body.invoke(captureValidator);
+	}
+
+	/**
      * Once the data is captured, this is called.
      * type, this version of invoke is called.
      */
