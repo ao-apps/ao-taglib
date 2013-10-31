@@ -79,7 +79,8 @@ final public class TeiUtils {
 
 	/**
 	 * Checks that a scope is a valid.
-	 * Must be one of "page", "request", "session", or "application".
+	 *
+	 * @see  Scope for supported values.
 	 * 
 	 * @param  message  the list of messages to add to, maybe <code>null</code>
 	 * 
@@ -95,7 +96,7 @@ final public class TeiUtils {
         ) {
 			String scope = Coercion.toString(o);
 			try {
-				PropertyUtils.getScope(scope);
+				Scope.getScopeId(scope);
 				// Value is OK
 			} catch(JspException err) {
 				messages = MinimalList.add(

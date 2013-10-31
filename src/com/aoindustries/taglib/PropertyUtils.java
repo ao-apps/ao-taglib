@@ -38,24 +38,10 @@ public class PropertyUtils {
     }
 
     /**
-     * Gets the PageContext scope value for the textual scope name.
-     * Supports "page", "request", "session", or "application".
-     *
-     * @exception  JspException  if invalid scope
-     */
-    public static int getScope(String scope) throws JspException {
-        if(scope==null || "page".equals(scope)) return PageContext.PAGE_SCOPE;
-        else if("request".equals(scope)) return PageContext.REQUEST_SCOPE;
-        else if("session".equals(scope)) return PageContext.SESSION_SCOPE;
-        else if("application".equals(scope)) return PageContext.APPLICATION_SCOPE;
-        else throw new LocalizedJspException(ApplicationResources.accessor, "PropertyUtils.scope.invalid", scope);
-    }
-
-    /**
      * Sets an attribute in the provided textual scope.
      */
     public static void setAttribute(PageContext pageContext, String scope, String name, Object value) throws JspException {
-        pageContext.setAttribute(name, value, getScope(scope));
+        pageContext.setAttribute(name, value, Scope.getScopeId(scope));
     }
 
     /**
@@ -84,7 +70,7 @@ public class PropertyUtils {
             // Find the bean
             Object bean;
             if(scope==null) bean = pageContext.findAttribute(name);
-            else bean = pageContext.getAttribute(name, getScope(scope));
+            else bean = pageContext.getAttribute(name, Scope.getScopeId(scope));
 
             // Check required
             if(bean==null) {
