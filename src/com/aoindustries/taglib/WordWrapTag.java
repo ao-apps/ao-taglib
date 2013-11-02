@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2011  AO Industries, Inc.
+ * Copyright (C) 2011, 2013  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -27,7 +27,7 @@ import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.util.StringUtility;
 import java.io.IOException;
 import java.io.Writer;
-import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspTagException;
 
 /**
  * @see StringUtility#wordWrap(java.lang.String, int, java.lang.Appendable)
@@ -57,7 +57,7 @@ public class WordWrapTag extends AutoEncodingBufferedTag {
     }
 
     @Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
         StringUtility.wordWrap(capturedBody.toString(), width, out);
     }
 }

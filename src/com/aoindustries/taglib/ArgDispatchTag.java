@@ -28,7 +28,7 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspTagException;
 
 /**
  * A dispatch tag with arguments.
@@ -94,7 +94,7 @@ abstract class ArgDispatchTag
 	}
 
 	@Override
-	public void setDynamicAttribute(String uri, String localName, Object value) throws JspException {
+	public void setDynamicAttribute(String uri, String localName, Object value) throws JspTagException {
 		if(
 			uri==null
 			&& localName.startsWith(ARG_ATTRIBUTE_PREFIX)

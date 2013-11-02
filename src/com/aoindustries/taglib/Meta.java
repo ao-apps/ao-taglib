@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2011, 2012  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -23,7 +23,7 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.lang.NullArgumentException;
-import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspTagException;
 
 /**
  * Holds the data for a Meta tag that is passed between MetaTag and any MetasAttribute parent.
@@ -36,7 +36,7 @@ public class Meta {
     private final String httpEquiv;
     private final String content;
 
-    public Meta(String name, String httpEquiv, String content) throws JspException {
+    public Meta(String name, String httpEquiv, String content) throws JspTagException {
         this.name = name;
         this.httpEquiv = httpEquiv;
         this.content = NullArgumentException.checkNotNull(content, "content");

@@ -24,10 +24,10 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.buffer.BufferResult;
-import com.aoindustries.servlet.jsp.LocalizedJspException;
+import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import java.io.IOException;
 import java.io.Writer;
-import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspTagException;
 
 /**
  * @author  AO Industries, Inc.
@@ -45,13 +45,13 @@ public class FrameborderTag extends AutoEncodingBufferedTag {
     }
 
     @Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
         FrameborderAttribute frameborderAttribute = AttributeUtils.findAttributeParent("frameborder", this, "frameborder", FrameborderAttribute.class);
         String value = capturedBody.trim().toString();
         if(value.length()>0) {
             if("true".equals(value)) frameborderAttribute.setFrameborder(true);
             else if("false".equals(value)) frameborderAttribute.setFrameborder(false);
-            else throw new LocalizedJspException(ApplicationResources.accessor, "FrameborderTag.invalidValue", value);
+            else throw new LocalizedJspTagException(ApplicationResources.accessor, "FrameborderTag.invalidValue", value);
         }
     }
 }

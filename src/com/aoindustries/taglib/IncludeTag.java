@@ -31,7 +31,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
-import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.JspWriter;
 
 /**
@@ -40,7 +40,7 @@ import javax.servlet.jsp.JspWriter;
 public class IncludeTag extends ArgDispatchTag {
 
 	@Override
-    void dispatch(RequestDispatcher dispatcher, final JspWriter out, HttpServletRequest request, HttpServletResponse response) throws IOException, JspException {
+    void dispatch(RequestDispatcher dispatcher, final JspWriter out, HttpServletRequest request, HttpServletResponse response) throws IOException, JspTagException {
         try {
             // Write to the current JSP out instead of creating a new writer.
             dispatcher.include(
@@ -63,7 +63,7 @@ public class IncludeTag extends ArgDispatchTag {
                 }
             );
         } catch(ServletException e) {
-            throw new JspException(e);
+            throw new JspTagException(e);
         }
     }
 }

@@ -28,7 +28,7 @@ import com.aoindustries.servlet.http.ServletUtil;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 
 /**
@@ -42,7 +42,7 @@ public class BaseTag extends AutoEncodingNullTag {
 	}
 
 	@Override
-    protected void doTag(Writer out) throws JspException, IOException {
+    protected void doTag(Writer out) throws JspTagException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
 		HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
 		String originalPath = DispatchTag.getOriginalPagePath(request); // Before forward

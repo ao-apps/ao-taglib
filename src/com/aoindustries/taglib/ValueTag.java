@@ -26,7 +26,7 @@ import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.buffer.BufferResult;
 import java.io.IOException;
 import java.io.Writer;
-import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspTagException;
 
 /**
  * @author  AO Industries, Inc.
@@ -44,7 +44,7 @@ public class ValueTag extends AutoEncodingBufferedTag {
     }
 
     @Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
         ValueAttribute valueAttribute = AttributeUtils.findAttributeParent("value", this, "value", ValueAttribute.class);
         valueAttribute.setValue(capturedBody);
     }

@@ -22,7 +22,7 @@
  */
 package com.aoindustries.taglib;
 
-import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspTagException;
 
 /**
  * Something with a target attribute.
@@ -33,5 +33,5 @@ public interface TargetAttribute {
 
     Object getTarget();
 
-    void setTarget(Object target) throws JspException;
+    void setTarget(Object target) throws JspTagException;
 }

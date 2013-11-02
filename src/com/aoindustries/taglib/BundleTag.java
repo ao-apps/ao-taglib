@@ -76,7 +76,7 @@ public class BundleTag
     }
 
     @Override
-    public void doTag() throws IOException, JspException {
+    public void doTag() throws JspException, IOException {
         JspFragment body = getJspBody();
 		if(body!=null) {
 			PageContext pageContext = (PageContext)getJspContext();

@@ -24,10 +24,10 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.buffer.BufferResult;
-import com.aoindustries.servlet.jsp.LocalizedJspException;
+import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import java.io.IOException;
 import java.io.Writer;
-import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspTagException;
 
 /**
  * @author  AO Industries, Inc.
@@ -45,13 +45,13 @@ public class CheckedTag extends AutoEncodingBufferedTag {
     }
 
     @Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
         CheckedAttribute checkedAttribute = AttributeUtils.findAttributeParent("checked", this, "checked", CheckedAttribute.class);
         String value = capturedBody.trim().toString();
         if(value.length()>0) {
             if("true".equals(value)) checkedAttribute.setChecked(true);
             else if("false".equals(value)) checkedAttribute.setChecked(false);
-            else throw new LocalizedJspException(ApplicationResources.accessor, "CheckedTag.invalidValue", value);
+            else throw new LocalizedJspTagException(ApplicationResources.accessor, "CheckedTag.invalidValue", value);
         }
     }
 }

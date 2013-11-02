@@ -27,7 +27,7 @@ import com.aoindustries.lang.NullArgumentException;
 import java.lang.reflect.Array;
 import java.util.Enumeration;
 import java.util.Iterator;
-import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.JspTag;
 
 /**
@@ -58,7 +58,7 @@ final public class ParamUtils {
 		JspTag from,
 		String name,
 		Object value
-	) throws JspException {
+	) throws JspTagException {
 		addParam(
 			AttributeUtils.findAttributeParent(fromTagName, from, "params", ParamsAttribute.class),
 			name,
@@ -78,7 +78,7 @@ final public class ParamUtils {
 		ParamsAttribute paramsAttribute,
 		String name,
 		Object value
-	) throws JspException {
+	) throws JspTagException {
 		NullArgumentException.checkNotNull(name, "name");
 		if(value!=null) {
 			paramsAttribute.addParam(
@@ -100,7 +100,7 @@ final public class ParamUtils {
 		ParamsAttribute paramsAttribute,
 		String name,
 		Iterable<?> values
-	) throws JspException {
+	) throws JspTagException {
 		NullArgumentException.checkNotNull(name, "name");
 		if(values!=null) {
 			addIteratorParams(
@@ -123,7 +123,7 @@ final public class ParamUtils {
 		ParamsAttribute paramsAttribute,
 		String name,
 		Iterator<?> values
-	) throws JspException {
+	) throws JspTagException {
 		NullArgumentException.checkNotNull(name, "name");
 		if(values!=null) {
 			while(values.hasNext()) {
@@ -151,7 +151,7 @@ final public class ParamUtils {
 		ParamsAttribute paramsAttribute,
 		String name,
 		Enumeration<?> values
-	) throws JspException {
+	) throws JspTagException {
 		NullArgumentException.checkNotNull(name, "name");
 		if(values!=null) {
 			while(values.hasMoreElements()) {
@@ -179,7 +179,7 @@ final public class ParamUtils {
 		ParamsAttribute paramsAttribute,
 		String name,
 		Object values
-	) throws JspException {
+	) throws JspTagException {
 		NullArgumentException.checkNotNull(name, "name");
 		if(values!=null) {
 			int len = Array.getLength(values);
@@ -200,14 +200,14 @@ final public class ParamUtils {
 	 * Sets the dynamic param.* attributes.
 	 * Handles Iterable, Iterator, Enumeration, arrays, and direct coercion.
 	 *
-	 * @throws  JspException  if any dynamic parameter other than "param.*" is given
+	 * @throws  JspTagException  if any dynamic parameter other than "param.*" is given
 	 */
 	public static void setDynamicAttribute(
 		ParamsAttribute paramsAttribute,
 		String uri,
 		String localName,
 		Object value
-	) throws JspException {
+	) throws JspTagException {
 		assert uri==null;
 		assert localName.startsWith(PARAM_ATTRIBUTE_PREFIX);
 		if(value!=null) {

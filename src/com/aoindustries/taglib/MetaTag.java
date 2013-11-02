@@ -28,7 +28,7 @@ import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.io.Coercion;
 import java.io.IOException;
 import java.io.Writer;
-import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.JspTag;
 
 /**
@@ -84,7 +84,7 @@ public class MetaTag
     }
 
     @Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		JspTag parent = findAncestorWithClass(this, MetasAttribute.class);
 		if(content==null) setContent(capturedBody.trim());
 		if(parent!=null) {

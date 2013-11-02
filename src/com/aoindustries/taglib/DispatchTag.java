@@ -27,7 +27,7 @@ import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.servlet.http.ServletUtil;
-import com.aoindustries.servlet.jsp.LocalizedJspException;
+import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import java.io.IOException;
 import java.io.Serializable;
@@ -41,6 +41,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.SkipPageException;
@@ -140,14 +141,14 @@ abstract public class DispatchTag
 	abstract protected Serializable[] getDynamicAttributeExceptionArgs(String localName);
 
 	@Override
-	public void setDynamicAttribute(String uri, String localName, Object value) throws JspException {
+	public void setDynamicAttribute(String uri, String localName, Object value) throws JspTagException {
 		if(
 			uri==null
 			&& localName.startsWith(ParamUtils.PARAM_ATTRIBUTE_PREFIX)
 		) {
 			ParamUtils.setDynamicAttribute(this, uri, localName, value);
 		} else {
-			throw new LocalizedJspException(
+			throw new LocalizedJspTagException(
 				accessor,
 				getDynamicAttributeExceptionKey(),
 				getDynamicAttributeExceptionArgs(localName)
@@ -169,13 +170,13 @@ abstract public class DispatchTag
 	 * @exception  SkipPageException  If the implementation has handled the request,
 	 *                                must throw SkipPageException.
 	 */
-	protected void doTag(String servletPath) throws IOException, JspException, SkipPageException {
+	protected void doTag(String servletPath) throws IOException, JspTagException, SkipPageException {
 		// Do nothing
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
-    final public void doTag() throws IOException, JspException {
+    final public void doTag() throws JspException, IOException {
 		// Track original page when first accessed
 		final String oldOriginal = originalPage.get();
 		try {
@@ -217,7 +218,7 @@ abstract public class DispatchTag
 					);
 					// Find dispatcher
 					dispatcher = pageContext.getServletContext().getRequestDispatcher(contextRelativePath);
-					if(dispatcher==null) throw new LocalizedJspException(accessor, "DispatchTag.dispatcherNotFound", contextRelativePath);
+					if(dispatcher==null) throw new LocalizedJspTagException(accessor, "DispatchTag.dispatcherNotFound", contextRelativePath);
 				}
 
 				// Call any subclass hook to handle the request before being dispatched.  If the request should not
@@ -346,5 +347,5 @@ abstract public class DispatchTag
 		}
     }
 
-    abstract void dispatch(RequestDispatcher dispatcher, JspWriter out, HttpServletRequest request, HttpServletResponse response) throws IOException, JspException;
+    abstract void dispatch(RequestDispatcher dispatcher, JspWriter out, HttpServletRequest request, HttpServletResponse response) throws JspException, IOException;
 }

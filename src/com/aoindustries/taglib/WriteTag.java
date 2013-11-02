@@ -26,14 +26,14 @@ import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.Coercion;
 import com.aoindustries.io.Writable;
-import com.aoindustries.servlet.jsp.LocalizedJspException;
+import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.util.i18n.BundleLookupMarkup;
 import com.aoindustries.util.i18n.BundleLookupThreadContext;
 import java.io.IOException;
 import java.io.Writer;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 
 /**
@@ -98,7 +98,7 @@ public class WriteTag
     }
 
 	@Override
-    public void setType(Object type) throws JspException {
+    public void setType(Object type) throws JspTagException {
 		MediaType newMediaType;
 		if(type instanceof MediaType) {
 			newMediaType = (MediaType)type;
@@ -109,7 +109,7 @@ public class WriteTag
 				try {
 					newMediaType = MediaType.getMediaTypeForContentType(typeStr);
 				} catch(MediaException e) {
-					throw new JspException(e);
+					throw new JspTagException(e);
 				}
 			}
 		}
@@ -123,7 +123,7 @@ public class WriteTag
 	private Object value;
 
 	@Override
-	protected void writePrefix(MediaType containerType, Writer out) throws JspException, IOException {
+	protected void writePrefix(MediaType containerType, Writer out) throws JspTagException, IOException {
         try {
 			if(name==null) throw new AttributeRequiredException("name");
 
@@ -164,7 +164,7 @@ public class WriteTag
 							toStringResult = Coercion.toString(retVal);
 						}
                     } catch(NoSuchMethodException err) {
-                        throw new LocalizedJspException(ApplicationResources.accessor, "WriteTag.unableToFindMethod", method);
+                        throw new LocalizedJspTagException(ApplicationResources.accessor, "WriteTag.unableToFindMethod", method);
                     }
                 }
 				if(toStringResult!=null) {
@@ -179,14 +179,14 @@ public class WriteTag
 				}
             }
         } catch(IllegalAccessException err) {
-            throw new JspException(err);
+            throw new JspTagException(err);
         } catch(InvocationTargetException err) {
-            throw new JspException(err);
+            throw new JspTagException(err);
         }
 	}
 
 	@Override
-    protected void doTag(Writer out) throws JspException, IOException {
+    protected void doTag(Writer out) throws JspTagException, IOException {
 		if(toStringResult!=null) {
 			out.write(toStringResult);
 		} else if(value!=null) {

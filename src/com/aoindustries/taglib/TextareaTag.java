@@ -30,7 +30,7 @@ import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.io.Coercion;
 import java.io.IOException;
 import java.io.Writer;
-import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspTagException;
 
 /**
  * @author  AO Industries, Inc.
@@ -148,7 +148,7 @@ public class TextareaTag
     }
 
     @Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		if(value==null) setValue(capturedBody.trim());
 		out.write("<textarea");
 		if(name!=null) {

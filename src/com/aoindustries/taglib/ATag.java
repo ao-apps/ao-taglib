@@ -34,14 +34,14 @@ import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.net.HttpParametersUtils;
 import com.aoindustries.net.MutableHttpParameters;
-import com.aoindustries.servlet.jsp.LocalizedJspException;
+import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 
@@ -211,14 +211,14 @@ public class ATag
     }
 
 	@Override
-	public void setDynamicAttribute(String uri, String localName, Object value) throws JspException {
+	public void setDynamicAttribute(String uri, String localName, Object value) throws JspTagException {
 		if(
 			uri==null
 			&& localName.startsWith(ParamUtils.PARAM_ATTRIBUTE_PREFIX)
 		) {
 			ParamUtils.setDynamicAttribute(this, uri, localName, value);
 		} else {
-			throw new LocalizedJspException(
+			throw new LocalizedJspTagException(
 				accessor,
 				"error.unexpectedDynamicAttribute",
 				localName,
@@ -230,7 +230,7 @@ public class ATag
 	/**
 	 * Writes an href attribute with parameters.
 	 */
-	static void writeHref(Writer out, PageContext pageContext, String href, MutableHttpParameters params) throws JspException, IOException {
+	static void writeHref(Writer out, PageContext pageContext, String href, MutableHttpParameters params) throws JspTagException, IOException {
         if(href!=null) {
             HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
             out.write(" href=\"");
@@ -247,12 +247,12 @@ public class ATag
 			);
             out.write('"');
         } else {
-            if(params!=null) throw new LocalizedJspException(ApplicationResources.accessor, "ATag.doTag.paramsWithoutHref");
+            if(params!=null) throw new LocalizedJspTagException(ApplicationResources.accessor, "ATag.doTag.paramsWithoutHref");
         }
 	}
 
 	@Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
 		out.write("<a");
 		writeHref(out, pageContext, href, params);

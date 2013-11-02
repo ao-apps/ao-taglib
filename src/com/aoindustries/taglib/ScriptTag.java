@@ -30,11 +30,11 @@ import com.aoindustries.io.Coercion;
 import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
-import com.aoindustries.servlet.jsp.LocalizedJspException;
+import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import java.io.IOException;
 import java.io.Writer;
-import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 
@@ -71,7 +71,7 @@ public class ScriptTag
     }
 
 	@Override
-    public void setType(Object type) throws JspException {
+    public void setType(Object type) throws JspTagException {
 		try {
 			MediaType newMediaType =
 				(type instanceof MediaType)
@@ -82,7 +82,7 @@ public class ScriptTag
 			this.type = type;
 			this.mediaType = newMediaType;
 		} catch(MediaException e) {
-			throw new JspException(e);
+			throw new JspTagException(e);
 		}
     }
 
@@ -108,14 +108,14 @@ public class ScriptTag
     }
 
 	@Override
-	public void setDynamicAttribute(String uri, String localName, Object value) throws JspException {
+	public void setDynamicAttribute(String uri, String localName, Object value) throws JspTagException {
 		if(
 			uri==null
 			&& localName.startsWith(ParamUtils.PARAM_ATTRIBUTE_PREFIX)
 		) {
 			ParamUtils.setDynamicAttribute(this, uri, localName, value);
 		} else {
-			throw new LocalizedJspException(
+			throw new LocalizedJspTagException(
 				accessor,
 				"error.unexpectedDynamicAttribute",
 				localName,
@@ -133,7 +133,7 @@ public class ScriptTag
 	//}
 
 	@Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		if(src==null) {
 			// Use default auto encoding
 			MarkupUtils.writeWithMarkup(capturedBody, mediaType.getMarkupType(), out);

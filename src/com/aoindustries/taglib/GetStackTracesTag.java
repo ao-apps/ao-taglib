@@ -23,11 +23,11 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.servlet.jsp.LocalizedJspException;
+import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.util.ErrorPrinter;
 import java.io.IOException;
 import java.io.Writer;
-import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 
 /**
@@ -45,11 +45,11 @@ public class GetStackTracesTag extends AutoEncodingNullTag {
     }
 
     @Override
-    protected void doTag(Writer out) throws JspException, IOException {
+    protected void doTag(Writer out) throws JspTagException, IOException {
         PageContext pageContext = (PageContext)getJspContext();
         // Find the Throwable to display
         Object value = PropertyUtils.findObject(pageContext, scope, name, property, true, true);
-        if(!(value instanceof Throwable)) throw new LocalizedJspException(ApplicationResources.accessor, "GetStackTracesTag.notThrowable", value.getClass().getName());
+        if(!(value instanceof Throwable)) throw new LocalizedJspTagException(ApplicationResources.accessor, "GetStackTracesTag.notThrowable", value.getClass().getName());
         Throwable throwable = (Throwable)value;
 
         // Print the stack traces

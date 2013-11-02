@@ -24,10 +24,10 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.buffer.BufferResult;
-import com.aoindustries.servlet.jsp.LocalizedJspException;
+import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import java.io.IOException;
 import java.io.Writer;
-import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspTagException;
 
 /**
  * @author  AO Industries, Inc.
@@ -45,13 +45,13 @@ public class DisabledTag extends AutoEncodingBufferedTag {
     }
 
     @Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
         DisabledAttribute disabledAttribute = AttributeUtils.findAttributeParent("disabled", this, "disabled", DisabledAttribute.class);
         String value = capturedBody.trim().toString();
         if(value.length()>0) {
             if("true".equals(value)) disabledAttribute.setDisabled(true);
             else if("false".equals(value)) disabledAttribute.setDisabled(false);
-            else throw new LocalizedJspException(ApplicationResources.accessor, "DisabledTag.invalidValue", value);
+            else throw new LocalizedJspTagException(ApplicationResources.accessor, "DisabledTag.invalidValue", value);
         }
     }
 }

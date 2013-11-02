@@ -28,11 +28,11 @@ import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextIn
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.io.Coercion;
-import com.aoindustries.servlet.jsp.LocalizedJspException;
+import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
-import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspTagException;
 
 /**
  * @author  AO Industries, Inc.
@@ -117,9 +117,9 @@ public class InputTag
     }
 
     @Override
-    public void setType(Object type) throws JspException {
+    public void setType(Object type) throws JspTagException {
 		String typeStr = Coercion.toString(type);
-        if(!isValidType(typeStr)) throw new LocalizedJspException(ApplicationResources.accessor, "InputTag.type.invalid", typeStr);
+        if(!isValidType(typeStr)) throw new LocalizedJspTagException(ApplicationResources.accessor, "InputTag.type.invalid", typeStr);
         this.type = type;
 		this.typeString = typeStr;
     }
@@ -266,7 +266,7 @@ public class InputTag
 
 
     @Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		if(type==null) throw new AttributeRequiredException("type");
 		if(value==null) setValue(capturedBody.trim());
 		out.write("<input");

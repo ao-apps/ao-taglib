@@ -28,6 +28,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.SkipPageException;
 
@@ -40,7 +41,7 @@ public class ForwardTag extends ArgDispatchTag {
 	 * Dispatch as forward
 	 */
     @Override
-    void dispatch(RequestDispatcher dispatcher, JspWriter out, HttpServletRequest request, HttpServletResponse response) throws IOException, JspException {
+    void dispatch(RequestDispatcher dispatcher, JspWriter out, HttpServletRequest request, HttpServletResponse response) throws JspException, IOException {
 		Boolean oldForwarded = requestForwarded.get();
 		try {
 			requestForwarded.set(Boolean.TRUE);
@@ -49,7 +50,7 @@ public class ForwardTag extends ArgDispatchTag {
 				out.clear();
 				dispatcher.forward(request, response);
 			} catch(ServletException e) {
-				throw new JspException(e);
+				throw new JspTagException(e);
 			}
 			throw new SkipPageException();
 		} finally {

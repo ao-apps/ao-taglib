@@ -26,10 +26,10 @@ import com.aoindustries.lang.NullArgumentException;
 import static com.aoindustries.servlet.filter.FunctionContext.getRequest;
 import static com.aoindustries.servlet.filter.FunctionContext.getResponse;
 import com.aoindustries.servlet.http.ServletUtil;
-import com.aoindustries.servlet.jsp.LocalizedJspException;
+import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.StringUtility;
-import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspTagException;
 
 final public class Functions {
 
@@ -56,10 +56,10 @@ final public class Functions {
         return StringUtility.join(iter, separator);
     }
 
-	public static String message(String key) throws JspException {
+	public static String message(String key) throws JspTagException {
 		NullArgumentException.checkNotNull(key, "key");
 		BundleTag bundleTag = BundleTag.getBundleTag(getRequest());
-		if(bundleTag==null) throw new LocalizedJspException(accessor, "error.requiredParentTagNotFound", "bundle");
+		if(bundleTag==null) throw new LocalizedJspTagException(accessor, "error.requiredParentTagNotFound", "bundle");
 		String prefix = bundleTag.getPrefix();
 		return bundleTag.getAccessor().getMessage(
 			prefix==null || prefix.isEmpty() ? key : prefix.concat(key)

@@ -22,13 +22,13 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.servlet.jsp.LocalizedJspException;
+import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 
 /**
  * @author  AO Industries, Inc.
  */
-public class NeedAttributeParentException extends LocalizedJspException {
+public class NeedAttributeParentException extends LocalizedJspTagException {
 
     private static final long serialVersionUID = 1L;
 

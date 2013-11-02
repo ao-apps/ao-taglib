@@ -25,14 +25,14 @@ package com.aoindustries.taglib;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.Coercion;
 import com.aoindustries.net.HttpParameters;
-import com.aoindustries.servlet.jsp.LocalizedJspException;
+import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspTagException;
 
 /**
  * @author  AO Industries, Inc.
@@ -76,7 +76,7 @@ public class ParamsTag
     }
 
     @Override
-    protected void doTag(Writer out) throws JspException, IOException {
+    protected void doTag(Writer out) throws JspTagException, IOException {
 		ParamsAttribute paramsAttribute = AttributeUtils.findAttributeParent("params", this, "params", ParamsAttribute.class);
 		if(values!=null) {
 			if(name==null) {
@@ -134,12 +134,12 @@ public class ParamsTag
 						}
 					}
 				} else {
-					throw new LocalizedJspException(ApplicationResources.accessor, "ParamsTag.mapRequiredWithName");
+					throw new LocalizedJspTagException(ApplicationResources.accessor, "ParamsTag.mapRequiredWithName");
 				}
 			} else {
 				// Exclude not allowed
 				if(!excludeMatcher.isEmpty()) {
-					throw new LocalizedJspException(ApplicationResources.accessor, "ParamsTag.excludesNotAllowedWithName");
+					throw new LocalizedJspTagException(ApplicationResources.accessor, "ParamsTag.excludesNotAllowedWithName");
 				}
 				final String paramName = Coercion.toString(name);
 				if(values instanceof Iterable<?>) {
@@ -170,9 +170,9 @@ public class ParamsTag
 					values instanceof Map<?,?>
 					|| values instanceof HttpParameters
 				) {
-					throw new LocalizedJspException(ApplicationResources.accessor, "ParamsTag.mapWithNameNotAllowed");
+					throw new LocalizedJspTagException(ApplicationResources.accessor, "ParamsTag.mapWithNameNotAllowed");
 				} else {
-					throw new LocalizedJspException(ApplicationResources.accessor, "ParamsTag.values.unexpectedType", values.getClass().getName());
+					throw new LocalizedJspTagException(ApplicationResources.accessor, "ParamsTag.values.unexpectedType", values.getClass().getName());
 				}
 			}
 		}

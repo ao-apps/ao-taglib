@@ -25,7 +25,7 @@ package com.aoindustries.taglib;
 import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.Coercion;
-import com.aoindustries.servlet.jsp.LocalizedJspException;
+import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.i18n.ApplicationResourcesAccessor;
 import com.aoindustries.util.i18n.BundleLookupMarkup;
@@ -36,7 +36,7 @@ import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.Collections;
 import java.util.List;
-import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 
@@ -76,7 +76,7 @@ public class MessageTag
     }
 
 	@Override
-    public void setType(Object type) throws JspException {
+    public void setType(Object type) throws JspTagException {
 		MediaType newMediaType;
 		if(type instanceof MediaType) {
 			newMediaType = (MediaType)type;
@@ -87,7 +87,7 @@ public class MessageTag
 				try {
 					newMediaType = MediaType.getMediaTypeForContentType(typeStr);
 				} catch(MediaException e) {
-					throw new JspException(e);
+					throw new JspTagException(e);
 				}
 			}
 		}
@@ -122,47 +122,47 @@ public class MessageTag
 		}
 	}
 
-	public void setArg0(Object value) throws JspException {
+	public void setArg0(Object value) throws JspTagException {
 		insertMessageArg("arg0", 0, value);
 	}
 
-	public void setArg1(Object value) throws JspException {
+	public void setArg1(Object value) throws JspTagException {
 		insertMessageArg("arg1", 1, value);
 	}
 
-	public void setArg2(Object value) throws JspException {
+	public void setArg2(Object value) throws JspTagException {
 		insertMessageArg("arg2", 2, value);
 	}
 
-	public void setArg3(Object value) throws JspException {
+	public void setArg3(Object value) throws JspTagException {
 		insertMessageArg("arg3", 3, value);
 	}
 
 	@Override
-	public void setDynamicAttribute(String uri, String localName, Object value) throws JspException {
+	public void setDynamicAttribute(String uri, String localName, Object value) throws JspTagException {
 		if(uri==null && localName.startsWith("arg")) {
 			try {
 				String numSubstring = localName.substring(3);
 				int index = Integer.parseInt(numSubstring);
 				// Do not allow "arg00" in place of "arg0"
-				if(!numSubstring.equals(Integer.toString(index))) throw new LocalizedJspException(accessor, "error.unexpectedDynamicAttribute", localName, "arg*");
+				if(!numSubstring.equals(Integer.toString(index))) throw new LocalizedJspTagException(accessor, "error.unexpectedDynamicAttribute", localName, "arg*");
 				insertMessageArg(localName, index, value);
 			} catch(NumberFormatException err) {
-				throw new LocalizedJspException(err, accessor, "error.unexpectedDynamicAttribute", localName, "arg*");
+				throw new LocalizedJspTagException(err, accessor, "error.unexpectedDynamicAttribute", localName, "arg*");
 			}
 		} else {
-			throw new LocalizedJspException(accessor, "error.unexpectedDynamicAttribute", localName, "arg*");
+			throw new LocalizedJspTagException(accessor, "error.unexpectedDynamicAttribute", localName, "arg*");
 		}
 	}
 
-	private void insertMessageArg(String localName, int index, Object value) throws JspException {
+	private void insertMessageArg(String localName, int index, Object value) throws JspTagException {
 		// Create lists on first use
 		if(messageArgs==null) {
 			messageArgsSet = new BitSet();
 			messageArgs = new ArrayList<Object>();
 		}
 		// Must not already be set
-		if(messageArgsSet.get(index)) throw new LocalizedJspException(accessor, "MessageTag.duplicateArgument", localName);
+		if(messageArgsSet.get(index)) throw new LocalizedJspTagException(accessor, "MessageTag.duplicateArgument", localName);
 		messageArgsSet.set(index);
 		if(index>=messageArgs.size()) {
 			while(messageArgs.size() < index) {
@@ -179,11 +179,11 @@ public class MessageTag
 	private BundleLookupMarkup lookupMarkup;
 
 	@Override
-	protected void writePrefix(MediaType containerType, Writer out) throws JspException, IOException {
+	protected void writePrefix(MediaType containerType, Writer out) throws JspTagException, IOException {
 		// Find parent bundle
 		PageContext pageContext = (PageContext)getJspContext();
 		BundleTag bundleTag = BundleTag.getBundleTag(pageContext.getRequest());
-		if(bundleTag==null) throw new LocalizedJspException(accessor, "error.requiredParentTagNotFound", "bundle");
+		if(bundleTag==null) throw new LocalizedJspTagException(accessor, "error.requiredParentTagNotFound", "bundle");
 		ApplicationResourcesAccessor accessor = bundleTag.getAccessor();
 		// Lookup the message value
 		String prefix = bundleTag.getPrefix();
@@ -193,7 +193,7 @@ public class MessageTag
 		} else {
 			// Error if gap in message args (any not set in range)
 			int firstClear = messageArgsSet.nextClearBit(0);
-			if(firstClear < messageArgs.size()) throw new LocalizedJspException(accessor, "MessageTag.argumentMissing", firstClear);
+			if(firstClear < messageArgs.size()) throw new LocalizedJspTagException(accessor, "MessageTag.argumentMissing", firstClear);
 			lookupResult = accessor.getMessage(combinedKey, messageArgs.toArray());
 		}
 		// Look for any message markup
@@ -205,7 +205,7 @@ public class MessageTag
 	}
 
 	@Override
-    protected void doTag(Writer out) throws JspException, IOException {
+    protected void doTag(Writer out) throws JspTagException, IOException {
 		out.write(lookupResult);
     }
 

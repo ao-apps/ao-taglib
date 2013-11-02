@@ -30,7 +30,7 @@ import com.aoindustries.util.i18n.BundleLookupMarkup;
 import com.aoindustries.util.i18n.BundleLookupThreadContext;
 import java.io.IOException;
 import java.io.Writer;
-import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspTagException;
 
 /**
  * @author  AO Industries, Inc.
@@ -76,7 +76,7 @@ public class OutTag
     }
 
 	@Override
-    public void setType(Object type) throws JspException {
+    public void setType(Object type) throws JspTagException {
 		MediaType newMediaType;
 		if(type instanceof MediaType) {
 			newMediaType = (MediaType)type;
@@ -87,7 +87,7 @@ public class OutTag
 				try {
 					newMediaType = MediaType.getMediaTypeForContentType(typeStr);
 				} catch(MediaException e) {
-					throw new JspException(e);
+					throw new JspTagException(e);
 				}
 			}
 		}
@@ -118,7 +118,7 @@ public class OutTag
 	}
 
 	@Override
-    protected void doTag(Writer out) throws JspException, IOException {
+    protected void doTag(Writer out) throws JspTagException, IOException {
 		if(toStringResult!=null) {
 			out.write(toStringResult);
 		} else if(value!=null) {

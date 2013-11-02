@@ -29,11 +29,12 @@ import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.MediaValidator;
 import com.aoindustries.encoding.ValidMediaInput;
 import com.aoindustries.io.NullWriter;
-import com.aoindustries.servlet.jsp.LocalizedJspException;
+import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.JspFragment;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
@@ -100,7 +101,7 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
 				if(parentValidMediaInput!=null) {
 					// Make sure the output is compatibly validated.  It is a bug in the parent to not validate its input consistent with its content type
 					if(!parentValidMediaInput.isValidatingMediaInputType(containerContentType)) {
-						throw new LocalizedJspException(
+						throw new LocalizedJspTagException(
 							ApplicationResources.accessor,
 							"AutoEncodingFilterTag.parentIncompatibleValidation",
 							parentValidMediaInput.getClass().getName(),
@@ -167,7 +168,7 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
 				writeSuffix(containerContentType, containerValidator);
             }
         } catch(MediaException err) {
-            throw new JspException(err);
+            throw new JspTagException(err);
         }
     }
 
@@ -183,7 +184,7 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
 	 *
 	 * @see  #getOutputType()
 	 */
-	protected void writePrefix(MediaType containerType, Writer out) throws JspException, IOException {
+	protected void writePrefix(MediaType containerType, Writer out) throws JspTagException, IOException {
 		// By default, nothing is printed.
 	}
 
@@ -202,7 +203,7 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
      *
      * This default implementation does nothing.
      */
-    abstract protected void doTag(Writer out) throws JspException, IOException;
+    abstract protected void doTag(Writer out) throws JspTagException, IOException;
 
 	/**
 	 * <p>
@@ -216,7 +217,7 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
 	 *
 	 * @see  #getOutputType()
 	 */
-	protected void writeSuffix(MediaType containerType, Writer out) throws JspException, IOException {
+	protected void writeSuffix(MediaType containerType, Writer out) throws JspTagException, IOException {
 		// By default, nothing is printed.
 	}
 }

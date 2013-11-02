@@ -33,7 +33,7 @@ import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.net.MutableHttpParameters;
-import com.aoindustries.servlet.jsp.LocalizedJspException;
+import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.StringUtility;
 import com.aoindustries.util.i18n.MarkupType;
@@ -44,7 +44,7 @@ import java.util.Iterator;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 
@@ -97,8 +97,8 @@ public class FormTag
     }
 
     @Override
-    public void setMethod(String method) throws JspException {
-        if(!isValidMethod(method)) throw new LocalizedJspException(ApplicationResources.accessor, "FormTag.method.invalid", method);
+    public void setMethod(String method) throws JspTagException {
+        if(!isValidMethod(method)) throw new LocalizedJspTagException(ApplicationResources.accessor, "FormTag.method.invalid", method);
         this.method = method;
     }
 
@@ -174,14 +174,14 @@ public class FormTag
     }
 
 	@Override
-	public void setDynamicAttribute(String uri, String localName, Object value) throws JspException {
+	public void setDynamicAttribute(String uri, String localName, Object value) throws JspTagException {
 		if(
 			uri==null
 			&& localName.startsWith(ParamUtils.PARAM_ATTRIBUTE_PREFIX)
 		) {
 			ParamUtils.setDynamicAttribute(this, uri, localName, value);
 		} else {
-			throw new LocalizedJspException(
+			throw new LocalizedJspTagException(
 				accessor,
 				"error.unexpectedDynamicAttribute",
 				localName,
@@ -191,7 +191,7 @@ public class FormTag
 	}
 
 	@Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
 		out.write("<form method=\"");
 		out.write(method);

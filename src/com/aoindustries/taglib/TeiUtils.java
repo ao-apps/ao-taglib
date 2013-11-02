@@ -27,7 +27,7 @@ import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.Coercion;
 import com.aoindustries.util.MinimalList;
 import java.util.List;
-import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.TagData;
 import javax.servlet.jsp.tagext.ValidationMessage;
 
@@ -98,7 +98,7 @@ final public class TeiUtils {
 			try {
 				Scope.getScopeId(scope);
 				// Value is OK
-			} catch(JspException err) {
+			} catch(JspTagException err) {
 				messages = MinimalList.add(
 					messages,
 					new ValidationMessage(

@@ -24,7 +24,7 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.net.HttpParametersUtils;
 import com.aoindustries.servlet.http.ServletUtil;
-import com.aoindustries.servlet.jsp.LocalizedJspException;
+import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import java.io.IOException;
 import java.io.Serializable;
@@ -36,6 +36,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.SkipPageException;
@@ -80,8 +81,8 @@ public class RedirectTag
         return statusCode;
     }
 
-    public void setStatusCode(String statusCode) throws JspException {
-        if(!isValidStatusCode(statusCode)) throw new LocalizedJspException(ApplicationResources.accessor, "RedirectTag.statusCode.invalid", statusCode);
+    public void setStatusCode(String statusCode) throws JspTagException {
+        if(!isValidStatusCode(statusCode)) throw new LocalizedJspTagException(ApplicationResources.accessor, "RedirectTag.statusCode.invalid", statusCode);
         this.statusCode = statusCode;
     }
 
@@ -123,7 +124,7 @@ public class RedirectTag
 	}
 
 	@Override
-    protected void doTag(String servletPath) throws IOException, JspException, SkipPageException {
+    protected void doTag(String servletPath) throws IOException, JspTagException, SkipPageException {
         final int status;
         if(statusCode==null) throw new AttributeRequiredException("statusCode");
         if(
@@ -191,7 +192,7 @@ public class RedirectTag
 	 * Dispatch as forward
 	 */
     @Override
-    void dispatch(RequestDispatcher dispatcher, JspWriter out, HttpServletRequest request, HttpServletResponse response) throws IOException, JspException {
+    void dispatch(RequestDispatcher dispatcher, JspWriter out, HttpServletRequest request, HttpServletResponse response) throws JspException, IOException {
 		Boolean oldForwarded = requestForwarded.get();
 		try {
 			requestForwarded.set(Boolean.TRUE);
@@ -200,7 +201,7 @@ public class RedirectTag
 				out.clear();
 				dispatcher.forward(request, response);
 			} catch(ServletException e) {
-				throw new JspException(e);
+				throw new JspTagException(e);
 			}
 			throw new SkipPageException();
 		} finally {

@@ -22,8 +22,8 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.servlet.jsp.LocalizedJspException;
-import javax.servlet.jsp.JspException;
+import com.aoindustries.servlet.jsp.LocalizedJspTagException;
+import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 
 /**
@@ -46,14 +46,14 @@ final public class Scope {
     /**
      * Gets the PageContext scope value for the textual scope name.
      *
-     * @exception  JspException  if invalid scope
+     * @exception  JspTagException  if invalid scope
      */
-    public static int getScopeId(String scope) throws JspException {
+    public static int getScopeId(String scope) throws JspTagException {
         if(scope==null || PAGE.equals(scope)) return PageContext.PAGE_SCOPE;
         else if(REQUEST.equals(scope)) return PageContext.REQUEST_SCOPE;
         else if(SESSION.equals(scope)) return PageContext.SESSION_SCOPE;
         else if(APPLICATION.equals(scope)) return PageContext.APPLICATION_SCOPE;
-        else throw new LocalizedJspException(ApplicationResources.accessor, "Scope.scope.invalid", scope);
+        else throw new LocalizedJspTagException(ApplicationResources.accessor, "Scope.scope.invalid", scope);
     }
 
 	/** Make no instances */

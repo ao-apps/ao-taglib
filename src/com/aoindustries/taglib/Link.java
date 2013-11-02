@@ -23,7 +23,7 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.net.HttpParameters;
-import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspTagException;
 
 /**
  * Holds the data for a Link tag that is passed between LinkTag and any LinksAttribute parent.
@@ -38,7 +38,7 @@ public class Link {
     private final String rel;
     private final String type;
 
-    public Link(String href, HttpParameters params, String hreflang, String rel, String type) throws JspException {
+    public Link(String href, HttpParameters params, String hreflang, String rel, String type) throws JspTagException {
         this.href = href;
 		this.params = params;
         this.hreflang = hreflang;
