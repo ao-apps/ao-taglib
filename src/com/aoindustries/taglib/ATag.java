@@ -229,8 +229,10 @@ public class ATag
 
 	/**
 	 * Writes an href attribute with parameters.
+	 * Adds contextPath to URLs that begin with a slash (/).
+	 * Encodes the URL.
 	 */
-	static void writeHref(Writer out, PageContext pageContext, String href, MutableHttpParameters params) throws JspTagException, IOException {
+	public static void writeHref(Writer out, PageContext pageContext, String href, MutableHttpParameters params) throws JspTagException, IOException {
         if(href!=null) {
             HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
             out.write(" href=\"");
