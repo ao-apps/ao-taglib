@@ -25,6 +25,7 @@ package com.aoindustries.taglib;
 import com.aoindustries.lang.NullArgumentException;
 import static com.aoindustries.servlet.filter.FunctionContext.getRequest;
 import static com.aoindustries.servlet.filter.FunctionContext.getResponse;
+import static com.aoindustries.servlet.filter.FunctionContext.getServletContext;
 import com.aoindustries.servlet.http.ServletUtil;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
@@ -36,7 +37,11 @@ final public class Functions {
     private Functions() {
     }
 
-    public static String encodeURL(String url) {
+	public static String addLastModified(String url) {
+		return ServletUtil.addLastModified(getServletContext(), url);
+	}
+
+	public static String encodeURL(String url) {
         return getResponse().encodeURL(url);
     }
 

@@ -2375,7 +2375,17 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <example />
   </tag>
   <function>
-    <description>Rewries a URL to maintain session state.</description>
+		<description><![CDATA[
+			If the URL represents a local resource, a parameter of "lastModified=#####" will be
+			automatically added with the timestamp of the local resource to the nearest second.
+		]]></description>
+    <name>addLastModified</name>
+    <function-class>com.aoindustries.taglib.Functions</function-class>
+    <function-signature>java.lang.String addLastModified(java.lang.String)</function-signature>
+    <example>${ao:addLastModified('../path-to-page.jsp')}</example>
+  </function>
+  <function>
+    <description>Rewrites a URL to maintain session state.</description>
     <name>encodeURL</name>
     <function-class>com.aoindustries.taglib.Functions</function-class>
     <function-signature>java.lang.String encodeURL(java.lang.String)</function-signature>
