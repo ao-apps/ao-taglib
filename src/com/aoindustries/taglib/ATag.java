@@ -24,25 +24,19 @@ package com.aoindustries.taglib;
 
 import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaScriptInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.encoding.NewEncodingUtils;
-import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.io.Coercion;
 import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
-import com.aoindustries.net.HttpParametersUtils;
 import com.aoindustries.net.MutableHttpParameters;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspTagException;
-import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
@@ -68,6 +62,7 @@ public class ATag
 
     private String href;
     private MutableHttpParameters params;
+	private boolean addLastModified = true;
 	private Object hreflang;
 	private Object rel;
 	private Object type;
@@ -109,6 +104,14 @@ public class ATag
         if(params==null) params = new HttpParametersMap();
         params.addParameter(name, value);
     }
+
+	public boolean getAddLastModified() {
+		return addLastModified;
+	}
+
+	public void setAddLastModified(boolean addLastModified) {
+		this.addLastModified = addLastModified;
+	}
 
 	@Override
     public Object getHreflang() {
@@ -227,37 +230,10 @@ public class ATag
 		}
 	}
 
-	/**
-	 * Writes an href attribute with parameters.
-	 * Adds contextPath to URLs that begin with a slash (/).
-	 * Encodes the URL.
-	 */
-	public static void writeHref(Writer out, PageContext pageContext, String href, MutableHttpParameters params) throws JspTagException, IOException {
-        if(href!=null) {
-            HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
-            out.write(" href=\"");
-            if(href.startsWith("/")) {
-                String contextPath = ((HttpServletRequest)pageContext.getRequest()).getContextPath();
-                if(contextPath.length()>0) href = contextPath+href;
-            }
-            href = HttpParametersUtils.addParams(href, params);
-			encodeTextInXhtmlAttribute(
-				response.encodeURL(
-					NewEncodingUtils.encodeUrlPath(href)
-				),
-				out
-			);
-            out.write('"');
-        } else {
-            if(params!=null) throw new LocalizedJspTagException(ApplicationResources.accessor, "ATag.doTag.paramsWithoutHref");
-        }
-	}
-
 	@Override
     protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
-		PageContext pageContext = (PageContext)getJspContext();
 		out.write("<a");
-		writeHref(out, pageContext, href, params);
+		UrlUtils.writeHref(out, getJspContext(), href, params, addLastModified);
 		if(hreflang!=null) {
 			out.write(" hreflang=\"");
 			Coercion.write(hreflang, textInXhtmlAttributeEncoder, out);

@@ -33,6 +33,7 @@ import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.net.MutableHttpParameters;
+import com.aoindustries.servlet.http.ServletUtil;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.StringUtility;
@@ -203,27 +204,28 @@ public class FormTag
 		}
 		// TODO: Allow params on the form itself?  These would all become hiddens.  It would give a nice way
 		//       to pass-through values in the same was a redirect or link.
-		String actionUrl;
 		final int questionPos;
 		if(action!=null) {
+			HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
 			HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
 			out.write(" action=\"");
+			action = ServletUtil.getAbsolutePath(DispatchTag.getCurrentPagePath(request), action);
 			if(action.startsWith("/")) {
-				String contextPath = ((HttpServletRequest)pageContext.getRequest()).getContextPath();
-				if(contextPath.length()>0) action = contextPath+action;
+				String contextPath = request.getContextPath();
+				if(contextPath.length()>0) action = contextPath + action;
 			}
-			actionUrl = response.encodeURL(NewEncodingUtils.encodeUrlPath(action));
-			questionPos = actionUrl.indexOf('?');
+			action = NewEncodingUtils.encodeUrlPath(action);
+			action = response.encodeURL(action);
+			questionPos = action.indexOf('?');
 			// The action attribute is everything up to the first question mark
 			encodeTextInXhtmlAttribute(
-				actionUrl,
+				action,
 				0,
-				questionPos==-1 ? actionUrl.length() : questionPos,
+				questionPos==-1 ? action.length() : questionPos,
 				out
 			);
 			out.write('"');
 		} else {
-			actionUrl = null;
 			questionPos = -1;
 		}
 		if(target!=null) {
@@ -250,8 +252,8 @@ public class FormTag
 		// Automatically add URL request parameters as hidden fields to support custom URL rewritten parameters in GET requests.
 		boolean didDiv = false;
 		if(questionPos!=-1) {
-			assert actionUrl!=null;
-			List<String> nameVals = StringUtility.splitString(actionUrl, questionPos+1, actionUrl.length(), '&');
+			assert action!=null;
+			List<String> nameVals = StringUtility.splitString(action, questionPos+1, action.length(), '&');
 			if(!nameVals.isEmpty()) {
 				if(!didDiv) {
 					out.write("<div>\n");

@@ -76,6 +76,7 @@ public class RedirectTag
 
 	private String statusCode;
     private String href;
+	private boolean addLastModified = true;
 
     public String getStatusCode() {
         return statusCode;
@@ -95,6 +96,14 @@ public class RedirectTag
     public void setHref(String href) {
         this.href = href;
     }
+
+	public boolean getAddLastModified() {
+		return addLastModified;
+	}
+
+	public void setAddLastModified(boolean addLastModified) {
+		this.addLastModified = addLastModified;
+	}
 
 	@Override
 	protected WildcardPatternMatcher getClearParamsMatcher() {
@@ -149,16 +158,18 @@ public class RedirectTag
             throw new AssertionError("Unexpected value for statusCode: "+statusCode);
         }
 
+		final PageContext pageContext = (PageContext)getJspContext();
+		final HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
+		final HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
+
         // Add any parameters to the URL
 		String myHref = href;
 		if(myHref==null) myHref = page; // Default to page when href not given
         if(myHref==null) throw new AttributeRequiredException("href");
         myHref = HttpParametersUtils.addParams(myHref, params);
+		if(addLastModified) myHref = ServletUtil.addLastModified(pageContext.getServletContext(), myHref);
 
 		// Get the full URL that will be used for the redirect
-		final PageContext pageContext = (PageContext)getJspContext();
-		final HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
-		final HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
 		String location = ServletUtil.getRedirectLocation(request, response, servletPath, myHref);
 		boolean isTooLong = location.length()>MAXIMUM_GET_REQUEST_LENGTH;
 		if(!isTooLong || page==null) {

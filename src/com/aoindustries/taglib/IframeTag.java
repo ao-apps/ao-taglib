@@ -23,25 +23,18 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.encoding.NewEncodingUtils;
-import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.io.Coercion;
 import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
-import com.aoindustries.net.HttpParametersUtils;
-import com.aoindustries.net.MutableHttpParameters;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspTagException;
-import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
@@ -62,6 +55,7 @@ public class IframeTag
     private Object id;
     private String src;
     private HttpParametersMap params;
+	private boolean addLastModified = true;
     private Object width;
     private Object height;
     private boolean frameborder = true;
@@ -107,7 +101,15 @@ public class IframeTag
         params.addParameter(name, value);
     }
 
-    @Override
+	public boolean getAddLastModified() {
+		return addLastModified;
+	}
+
+	public void setAddLastModified(boolean addLastModified) {
+		this.addLastModified = addLastModified;
+	}
+
+	@Override
     public Object getWidth() {
         return width;
     }
@@ -154,30 +156,8 @@ public class IframeTag
 		}
 	}
 
-	static void writeSrc(Writer out, PageContext pageContext, String src, MutableHttpParameters params) throws JspTagException, IOException {
-		if(src!=null) {
-            HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
-			out.write(" src=\"");
-			if(src.startsWith("/")) {
-				String contextPath = ((HttpServletRequest)pageContext.getRequest()).getContextPath();
-				if(contextPath.length()>0) src = contextPath+src;
-			}
-			src = HttpParametersUtils.addParams(src, params);
-			encodeTextInXhtmlAttribute(
-				response.encodeURL(
-					NewEncodingUtils.encodeUrlPath(src)
-				),
-				out
-			);
-			out.write('"');
-        } else {
-            if(params!=null) throw new LocalizedJspTagException(ApplicationResources.accessor, "IframeTag.doTag.paramsWithoutSrc");
-		}
-	}
-
 	@Override
     protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
-		PageContext pageContext = (PageContext)getJspContext();
 		if(src==null) throw new AttributeRequiredException("src");
 		out.write("<iframe");
 		if(id!=null) {
@@ -185,7 +165,7 @@ public class IframeTag
 			Coercion.write(id, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
-		writeSrc(out, pageContext, src, params);
+		UrlUtils.writeSrc(out, getJspContext(), src, params, addLastModified);
 		if(width!=null) {
 			out.write(" width=\"");
 			Coercion.write(width, textInXhtmlAttributeEncoder, out);

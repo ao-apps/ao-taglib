@@ -49,6 +49,7 @@ public class ATagBeanInfo extends SimpleBeanInfo {
 						new PropertyDescriptor("outputType", ATag.class, "getOutputType", null),
 						new PropertyDescriptor("href", ATag.class),
 						new PropertyDescriptor("params", ATag.class, "getParams", null),
+						new PropertyDescriptor("addLastModified", ATag.class),
 						new PropertyDescriptor("hreflang", ATag.class),
 						new PropertyDescriptor("rel", ATag.class),
 						new PropertyDescriptor("type", ATag.class),

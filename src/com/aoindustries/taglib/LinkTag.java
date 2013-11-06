@@ -34,7 +34,6 @@ import static com.aoindustries.taglib.ApplicationResources.accessor;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspTagException;
-import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 import javax.servlet.jsp.tagext.JspTag;
 
@@ -54,6 +53,7 @@ public class LinkTag
 
     private String href;
     private MutableHttpParameters params;
+	private boolean addLastModified = true;
 	private Object hreflang;
 	private Object rel;
 	private Object type;
@@ -83,6 +83,14 @@ public class LinkTag
         if(params==null) params = new HttpParametersMap();
         params.addParameter(name, value);
     }
+
+	public boolean getAddLastModified() {
+		return addLastModified;
+	}
+
+	public void setAddLastModified(boolean addLastModified) {
+		this.addLastModified = addLastModified;
+	}
 
 	@Override
     public Object getHreflang() {
@@ -139,15 +147,15 @@ public class LinkTag
 				new Link(
 					href,
 					params,
+					addLastModified,
 					Coercion.toString(hreflang),
 					Coercion.toString(rel),
 					Coercion.toString(type)
 				)
 			);
 		} else {
-			PageContext pageContext = (PageContext)getJspContext();
 			out.write("<link");
-			ATag.writeHref(out, pageContext, href, params);
+			UrlUtils.writeHref(out, getJspContext(), href, params, addLastModified);
 			if(hreflang!=null) {
 				out.write(" hreflang=\"");
 				Coercion.write(hreflang, textInXhtmlAttributeEncoder, out);

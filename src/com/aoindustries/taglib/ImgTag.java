@@ -23,7 +23,6 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.encoding.NewEncodingUtils;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.buffer.BufferResult;
@@ -31,16 +30,12 @@ import com.aoindustries.io.Coercion;
 import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
-import com.aoindustries.net.HttpParametersUtils;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspTagException;
-import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
@@ -62,6 +57,7 @@ public class ImgTag
 
     private String src;
     private HttpParametersMap params;
+	private boolean addLastModified = true;
     private Object width;
     private Object height;
     private Object alt;
@@ -98,6 +94,14 @@ public class ImgTag
     public void addParam(String name, String value) {
         if(params==null) params = new HttpParametersMap();
         params.addParameter(name, value);
+	}
+
+	public boolean getAddLastModified() {
+		return addLastModified;
+	}
+
+	public void setAddLastModified(boolean addLastModified) {
+		this.addLastModified = addLastModified;
 	}
 
     @Override
@@ -179,22 +183,14 @@ public class ImgTag
 
 	@Override
     protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
-		PageContext pageContext = (PageContext)getJspContext();
 		if(src==null) src = capturedBody.trim().toString();
-		HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
 		if(width==null) throw new AttributeRequiredException("width");
 		if(height==null) throw new AttributeRequiredException("height");
 		if(alt==null) throw new AttributeRequiredException("alt");
+
 		out.write("<img src=\"");
-		if(src.startsWith("/")) {
-			String contextPath = ((HttpServletRequest)pageContext.getRequest()).getContextPath();
-			if(contextPath.length()>0) src = contextPath+src;
-		}
-		src = HttpParametersUtils.addParams(src, params);
 		encodeTextInXhtmlAttribute(
-			response.encodeURL(
-				NewEncodingUtils.encodeUrlPath(src)
-			),
+			UrlUtils.buildUrl(getJspContext(), src, params, addLastModified),
 			out
 		);
 		out.write("\" width=\"");

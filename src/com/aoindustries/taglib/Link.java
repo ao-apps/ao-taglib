@@ -34,13 +34,22 @@ public class Link {
 
     private final String href;
 	private final HttpParameters params;
+	private final boolean addLastModified;
     private final String hreflang;
     private final String rel;
     private final String type;
 
-    public Link(String href, HttpParameters params, String hreflang, String rel, String type) throws JspTagException {
+    public Link(
+		String href,
+		HttpParameters params,
+		boolean addLastModified,
+		String hreflang,
+		String rel,
+		String type
+	) throws JspTagException {
         this.href = href;
 		this.params = params;
+		this.addLastModified = addLastModified;
         this.hreflang = hreflang;
         this.rel = rel;
         this.type = type;
@@ -52,6 +61,10 @@ public class Link {
 
 	public HttpParameters getParams() {
 		return params;
+	}
+
+	public boolean getAddLastModified() {
+		return addLastModified;
 	}
 
 	public String getHreflang() {

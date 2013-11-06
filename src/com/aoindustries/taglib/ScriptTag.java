@@ -35,7 +35,6 @@ import static com.aoindustries.taglib.ApplicationResources.accessor;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspTagException;
-import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
@@ -54,6 +53,7 @@ public class ScriptTag
     private MediaType mediaType = MediaType.JAVASCRIPT;
     private String src;
     private HttpParametersMap params;
+	private boolean addLastModified = true;
 
     @Override
     public MediaType getContentType() {
@@ -107,6 +107,14 @@ public class ScriptTag
         params.addParameter(name, value);
     }
 
+	public boolean getAddLastModified() {
+		return addLastModified;
+	}
+
+	public void setAddLastModified(boolean addLastModified) {
+		this.addLastModified = addLastModified;
+	}
+
 	@Override
 	public void setDynamicAttribute(String uri, String localName, Object value) throws JspTagException {
 		if(
@@ -139,11 +147,10 @@ public class ScriptTag
 			MarkupUtils.writeWithMarkup(capturedBody, mediaType.getMarkupType(), out);
 		} else {
 			// Write script tag with src attribute, discarding any body
-			PageContext pageContext = (PageContext)getJspContext();
 			out.write("<script type=\"");
 			encodeTextInXhtmlAttribute(mediaType.getContentType(), out);
 			out.write('"');
-			IframeTag.writeSrc(out, pageContext, src, params);
+			UrlUtils.writeSrc(out, getJspContext(), src, params, addLastModified);
 			out.write("></script>");
 		}
     }

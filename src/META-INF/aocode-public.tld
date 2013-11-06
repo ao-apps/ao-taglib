@@ -64,6 +64,17 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     </attribute>
     <attribute>
 		<description><![CDATA[
+			If the href represents a local resource, a parameter of "lastModified=#####" may be
+			automatically added with the timestamp of the local resource to the nearest second.
+			Defaults to "true".
+		]]></description>
+      <name>addLastModified</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>boolean</type>
+    </attribute>
+    <attribute>
+		<description><![CDATA[
 			The hreflang for the link.  A nested &lt;ao:hreflang&gt; tag will override this value.
 		]]></description>
       <name>hreflang</name>
@@ -661,6 +672,17 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     </attribute>
     <attribute>
 		<description><![CDATA[
+			If the src represents a local resource, a parameter of "lastModified=#####" may be
+			automatically added with the timestamp of the local resource to the nearest second.
+			Defaults to "true".
+		]]></description>
+      <name>addLastModified</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>boolean</type>
+    </attribute>
+    <attribute>
+		<description><![CDATA[
 			The width for the frame.
 			A nested &lt;ao:width&gt; tag will override this value.
 		]]></description>
@@ -736,6 +758,17 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+		<description><![CDATA[
+			If the src represents a local resource, a parameter of "lastModified=#####" may be
+			automatically added with the timestamp of the local resource to the nearest second.
+			Defaults to "true".
+		]]></description>
+      <name>addLastModified</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>boolean</type>
     </attribute>
     <attribute>
 		<description><![CDATA[
@@ -1106,6 +1139,17 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+		<description><![CDATA[
+			If the href represents a local resource, a parameter of "lastModified=#####" may be
+			automatically added with the timestamp of the local resource to the nearest second.
+			Defaults to "true".
+		]]></description>
+      <name>addLastModified</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>boolean</type>
     </attribute>
     <attribute>
 		<description><![CDATA[
@@ -1710,6 +1754,17 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     </attribute>
     <attribute>
 		<description><![CDATA[
+			If the href represents a local resource, a parameter of "lastModified=#####" may be
+			automatically added with the timestamp of the local resource to the nearest second.
+			Defaults to "true".
+		]]></description>
+      <name>addLastModified</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>boolean</type>
+    </attribute>
+    <attribute>
+		<description><![CDATA[
 			<p>
 				The page that will be forwarded to when the GET request URL length is exceeded.
 				It is recommended to provide the page for any redirect within a web application,
@@ -1815,6 +1870,17 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+		<description><![CDATA[
+			If the src represents a local resource, a parameter of "lastModified=#####" may be
+			automatically added with the timestamp of the local resource to the nearest second.
+			Defaults to "true".
+		]]></description>
+      <name>addLastModified</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>boolean</type>
     </attribute>
 	<dynamic-attributes>true</dynamic-attributes>
     <example />
