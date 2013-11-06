@@ -66,12 +66,13 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<description><![CDATA[
 			If the href represents a local resource, a parameter of "lastModified=#####" may be
 			automatically added with the timestamp of the local resource to the nearest second.
-			Defaults to "true".
+			May be one of "true", "false", or "auto".
+			Defaults to "auto".
 		]]></description>
       <name>addLastModified</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>boolean</type>
+      <type>java.lang.String</type>
     </attribute>
     <attribute>
 		<description><![CDATA[
@@ -674,12 +675,13 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<description><![CDATA[
 			If the src represents a local resource, a parameter of "lastModified=#####" may be
 			automatically added with the timestamp of the local resource to the nearest second.
-			Defaults to "true".
+			May be one of "true", "false", or "auto".
+			Defaults to "auto".
 		]]></description>
       <name>addLastModified</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>boolean</type>
+      <type>java.lang.String</type>
     </attribute>
     <attribute>
 		<description><![CDATA[
@@ -763,12 +765,13 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<description><![CDATA[
 			If the src represents a local resource, a parameter of "lastModified=#####" may be
 			automatically added with the timestamp of the local resource to the nearest second.
-			Defaults to "true".
+			May be one of "true", "false", or "auto".
+			Defaults to "auto".
 		]]></description>
       <name>addLastModified</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>boolean</type>
+      <type>java.lang.String</type>
     </attribute>
     <attribute>
 		<description><![CDATA[
@@ -1144,12 +1147,13 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<description><![CDATA[
 			If the href represents a local resource, a parameter of "lastModified=#####" may be
 			automatically added with the timestamp of the local resource to the nearest second.
-			Defaults to "true".
+			May be one of "true", "false", or "auto".
+			Defaults to "auto".
 		]]></description>
       <name>addLastModified</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>boolean</type>
+      <type>java.lang.String</type>
     </attribute>
     <attribute>
 		<description><![CDATA[
@@ -1756,12 +1760,13 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<description><![CDATA[
 			If the href represents a local resource, a parameter of "lastModified=#####" may be
 			automatically added with the timestamp of the local resource to the nearest second.
-			Defaults to "true".
+			May be one of "true", "false", or "auto".
+			Defaults to "auto".
 		]]></description>
       <name>addLastModified</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>boolean</type>
+      <type>java.lang.String</type>
     </attribute>
     <attribute>
 		<description><![CDATA[
@@ -1875,12 +1880,13 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<description><![CDATA[
 			If the src represents a local resource, a parameter of "lastModified=#####" may be
 			automatically added with the timestamp of the local resource to the nearest second.
-			Defaults to "true".
+			May be one of "true", "false", or "auto".
+			Defaults to "auto".
 		]]></description>
       <name>addLastModified</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>boolean</type>
+      <type>java.lang.String</type>
     </attribute>
 	<dynamic-attributes>true</dynamic-attributes>
     <example />

@@ -29,6 +29,7 @@ import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.net.MutableHttpParameters;
+import com.aoindustries.servlet.http.ServletUtil;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import java.io.IOException;
@@ -53,7 +54,7 @@ public class LinkTag
 
     private String href;
     private MutableHttpParameters params;
-	private boolean addLastModified = true;
+	private ServletUtil.AddLastModifiedWhen addLastModified = ServletUtil.AddLastModifiedWhen.AUTO;
 	private Object hreflang;
 	private Object rel;
 	private Object type;
@@ -84,12 +85,12 @@ public class LinkTag
         params.addParameter(name, value);
     }
 
-	public boolean getAddLastModified() {
-		return addLastModified;
+	public String getAddLastModified() {
+		return addLastModified.getLowerName();
 	}
 
-	public void setAddLastModified(boolean addLastModified) {
-		this.addLastModified = addLastModified;
+	public void setAddLastModified(String addLastModified) {
+		this.addLastModified = ServletUtil.AddLastModifiedWhen.valueOfLowerName(addLastModified);
 	}
 
 	@Override

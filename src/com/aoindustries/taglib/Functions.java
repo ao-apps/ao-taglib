@@ -38,7 +38,7 @@ final public class Functions {
     }
 
 	public static String addLastModified(String url) {
-		return ServletUtil.addLastModified(getServletContext(), url);
+		return ServletUtil.addLastModified(getServletContext(), url, ServletUtil.AddLastModifiedWhen.TRUE);
 	}
 
 	public static String encodeURL(String url) {

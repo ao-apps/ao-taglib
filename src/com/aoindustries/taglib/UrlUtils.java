@@ -64,11 +64,11 @@ final public class UrlUtils {
 		HttpServletResponse response,
 		String src,
 		HttpParameters params,
-		boolean addLastModified
+		ServletUtil.AddLastModifiedWhen addLastModified
 	) throws MalformedURLException, UnsupportedEncodingException {
 		src = ServletUtil.getAbsolutePath(DispatchTag.getCurrentPagePath(request), src);
 		src = HttpParametersUtils.addParams(src, params);
-		if(addLastModified) src = ServletUtil.addLastModified(servletContext, src);
+		src = ServletUtil.addLastModified(servletContext, src, addLastModified);
 		if(src.startsWith("/")) {
 			String contextPath = request.getContextPath();
 			if(contextPath.length()>0) src = contextPath + src;
@@ -84,7 +84,7 @@ final public class UrlUtils {
 		PageContext pageContext,
 		String src,
 		HttpParameters params,
-		boolean addLastModified
+		ServletUtil.AddLastModifiedWhen addLastModified
 	) throws MalformedURLException, UnsupportedEncodingException {
 		return buildUrl(
 			pageContext.getServletContext(),
@@ -103,7 +103,7 @@ final public class UrlUtils {
 		JspContext jspContext,
 		String src,
 		HttpParameters params,
-		boolean addLastModified
+		ServletUtil.AddLastModifiedWhen addLastModified
 	) throws MalformedURLException, UnsupportedEncodingException {
 		return buildUrl(
 			(PageContext)jspContext,
@@ -123,12 +123,12 @@ final public class UrlUtils {
 		PageContext pageContext,
 		String href,
 		HttpParameters params,
-		boolean addLastModified
+		ServletUtil.AddLastModifiedWhen addLastModified
 	) throws JspTagException, IOException {
         if(href!=null) {
             out.write(" href=\"");
 			encodeTextInXhtmlAttribute(
-				UrlUtils.buildUrl(pageContext, href, params, addLastModified),
+				buildUrl(pageContext, href, params, addLastModified),
 				out
 			);
             out.write('"');
@@ -145,7 +145,7 @@ final public class UrlUtils {
 		JspContext jspContext,
 		String href,
 		HttpParameters params,
-		boolean addLastModified
+		ServletUtil.AddLastModifiedWhen addLastModified
 	) throws JspTagException, IOException {
 		writeHref(
 			out,
@@ -161,12 +161,12 @@ final public class UrlUtils {
 		PageContext pageContext,
 		String src,
 		HttpParameters params,
-		boolean addLastModified
+		ServletUtil.AddLastModifiedWhen addLastModified
 	) throws JspTagException, IOException {
 		if(src!=null) {
 			out.write(" src=\"");
 			encodeTextInXhtmlAttribute(
-				UrlUtils.buildUrl(pageContext, src, params, addLastModified),
+				buildUrl(pageContext, src, params, addLastModified),
 				out
 			);
 			out.write('"');
@@ -183,7 +183,7 @@ final public class UrlUtils {
 		JspContext jspContext,
 		String src,
 		HttpParameters params,
-		boolean addLastModified
+		ServletUtil.AddLastModifiedWhen addLastModified
 	) throws JspTagException, IOException {
 		writeSrc(
 			out,

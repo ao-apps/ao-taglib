@@ -30,6 +30,7 @@ import com.aoindustries.io.Coercion;
 import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
+import com.aoindustries.servlet.http.ServletUtil;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.i18n.MarkupType;
@@ -57,7 +58,7 @@ public class ImgTag
 
     private String src;
     private HttpParametersMap params;
-	private boolean addLastModified = true;
+	private ServletUtil.AddLastModifiedWhen addLastModified = ServletUtil.AddLastModifiedWhen.AUTO;
     private Object width;
     private Object height;
     private Object alt;
@@ -96,12 +97,12 @@ public class ImgTag
         params.addParameter(name, value);
 	}
 
-	public boolean getAddLastModified() {
-		return addLastModified;
+	public String getAddLastModified() {
+		return addLastModified.getLowerName();
 	}
 
-	public void setAddLastModified(boolean addLastModified) {
-		this.addLastModified = addLastModified;
+	public void setAddLastModified(String addLastModified) {
+		this.addLastModified = ServletUtil.AddLastModifiedWhen.valueOfLowerName(addLastModified);
 	}
 
     @Override

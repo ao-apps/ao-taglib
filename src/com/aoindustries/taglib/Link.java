@@ -23,6 +23,7 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.net.HttpParameters;
+import com.aoindustries.servlet.http.ServletUtil;
 import javax.servlet.jsp.JspTagException;
 
 /**
@@ -34,7 +35,7 @@ public class Link {
 
     private final String href;
 	private final HttpParameters params;
-	private final boolean addLastModified;
+	private final ServletUtil.AddLastModifiedWhen addLastModified;
     private final String hreflang;
     private final String rel;
     private final String type;
@@ -42,7 +43,7 @@ public class Link {
     public Link(
 		String href,
 		HttpParameters params,
-		boolean addLastModified,
+		ServletUtil.AddLastModifiedWhen addLastModified,
 		String hreflang,
 		String rel,
 		String type
@@ -63,7 +64,7 @@ public class Link {
 		return params;
 	}
 
-	public boolean getAddLastModified() {
+	public ServletUtil.AddLastModifiedWhen getAddLastModified() {
 		return addLastModified;
 	}
 

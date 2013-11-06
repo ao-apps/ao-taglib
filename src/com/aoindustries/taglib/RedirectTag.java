@@ -76,7 +76,7 @@ public class RedirectTag
 
 	private String statusCode;
     private String href;
-	private boolean addLastModified = true;
+	private ServletUtil.AddLastModifiedWhen addLastModified = ServletUtil.AddLastModifiedWhen.AUTO;
 
     public String getStatusCode() {
         return statusCode;
@@ -97,12 +97,12 @@ public class RedirectTag
         this.href = href;
     }
 
-	public boolean getAddLastModified() {
-		return addLastModified;
+	public String getAddLastModified() {
+		return addLastModified.getLowerName();
 	}
 
-	public void setAddLastModified(boolean addLastModified) {
-		this.addLastModified = addLastModified;
+	public void setAddLastModified(String addLastModified) {
+		this.addLastModified = ServletUtil.AddLastModifiedWhen.valueOfLowerName(addLastModified);
 	}
 
 	@Override
@@ -167,7 +167,7 @@ public class RedirectTag
 		if(myHref==null) myHref = page; // Default to page when href not given
         if(myHref==null) throw new AttributeRequiredException("href");
         myHref = HttpParametersUtils.addParams(myHref, params);
-		if(addLastModified) myHref = ServletUtil.addLastModified(pageContext.getServletContext(), myHref);
+		myHref = ServletUtil.addLastModified(pageContext.getServletContext(), myHref, addLastModified);
 
 		// Get the full URL that will be used for the redirect
 		String location = ServletUtil.getRedirectLocation(request, response, servletPath, myHref);
