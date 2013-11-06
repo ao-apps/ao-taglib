@@ -23,6 +23,7 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.net.HttpParametersUtils;
+import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.http.ServletUtil;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
@@ -76,7 +77,7 @@ public class RedirectTag
 
 	private String statusCode;
     private String href;
-	private ServletUtil.AddLastModifiedWhen addLastModified = ServletUtil.AddLastModifiedWhen.AUTO;
+	private LastModifiedServlet.AddLastModifiedWhen addLastModified = LastModifiedServlet.AddLastModifiedWhen.AUTO;
 
     public String getStatusCode() {
         return statusCode;
@@ -102,7 +103,7 @@ public class RedirectTag
 	}
 
 	public void setAddLastModified(String addLastModified) {
-		this.addLastModified = ServletUtil.AddLastModifiedWhen.valueOfLowerName(addLastModified);
+		this.addLastModified = LastModifiedServlet.AddLastModifiedWhen.valueOfLowerName(addLastModified);
 	}
 
 	@Override
@@ -167,7 +168,7 @@ public class RedirectTag
 		if(myHref==null) myHref = page; // Default to page when href not given
         if(myHref==null) throw new AttributeRequiredException("href");
         myHref = HttpParametersUtils.addParams(myHref, params);
-		myHref = ServletUtil.addLastModified(pageContext.getServletContext(), myHref, addLastModified);
+		myHref = LastModifiedServlet.addLastModified(pageContext.getServletContext(), myHref, addLastModified);
 
 		// Get the full URL that will be used for the redirect
 		String location = ServletUtil.getRedirectLocation(request, response, servletPath, myHref);

@@ -30,7 +30,7 @@ import com.aoindustries.io.Coercion;
 import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
-import com.aoindustries.servlet.http.ServletUtil;
+import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import java.io.IOException;
@@ -54,7 +54,7 @@ public class ScriptTag
     private MediaType mediaType = MediaType.JAVASCRIPT;
     private String src;
     private HttpParametersMap params;
-	private ServletUtil.AddLastModifiedWhen addLastModified = ServletUtil.AddLastModifiedWhen.AUTO;
+	private LastModifiedServlet.AddLastModifiedWhen addLastModified = LastModifiedServlet.AddLastModifiedWhen.AUTO;
 
     @Override
     public MediaType getContentType() {
@@ -113,7 +113,7 @@ public class ScriptTag
 	}
 
 	public void setAddLastModified(String addLastModified) {
-		this.addLastModified = ServletUtil.AddLastModifiedWhen.valueOfLowerName(addLastModified);
+		this.addLastModified = LastModifiedServlet.AddLastModifiedWhen.valueOfLowerName(addLastModified);
 	}
 
 	@Override

@@ -26,6 +26,7 @@ import com.aoindustries.lang.NullArgumentException;
 import static com.aoindustries.servlet.filter.FunctionContext.getRequest;
 import static com.aoindustries.servlet.filter.FunctionContext.getResponse;
 import static com.aoindustries.servlet.filter.FunctionContext.getServletContext;
+import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.http.ServletUtil;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
@@ -38,7 +39,7 @@ final public class Functions {
     }
 
 	public static String addLastModified(String url) {
-		return ServletUtil.addLastModified(getServletContext(), url, ServletUtil.AddLastModifiedWhen.TRUE);
+		return LastModifiedServlet.addLastModified(getServletContext(), url, LastModifiedServlet.AddLastModifiedWhen.TRUE);
 	}
 
 	public static String encodeURL(String url) {
