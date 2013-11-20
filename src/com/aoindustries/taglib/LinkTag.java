@@ -23,6 +23,7 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
+import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.Coercion;
 import com.aoindustries.net.EmptyParameters;
@@ -58,6 +59,7 @@ public class LinkTag
 	private Object hreflang;
 	private Object rel;
 	private Object type;
+	private String media;
 
     @Override
     public MediaType getOutputType() {
@@ -123,6 +125,14 @@ public class LinkTag
         this.type = type;
     }
 
+	public String getMedia() {
+		return media;
+	}
+
+	public void setMedia(String media) {
+        this.media = media;
+    }
+
 	@Override
 	public void setDynamicAttribute(String uri, String localName, Object value) throws JspTagException {
 		if(
@@ -151,7 +161,8 @@ public class LinkTag
 					addLastModified,
 					Coercion.toString(hreflang),
 					Coercion.toString(rel),
-					Coercion.toString(type)
+					Coercion.toString(type),
+					media
 				)
 			);
 		} else {
@@ -170,6 +181,11 @@ public class LinkTag
 			if(type!=null) {
 				out.write(" type=\"");
 				Coercion.write(type, textInXhtmlAttributeEncoder, out);
+				out.write('"');
+			}
+			if(media!=null) {
+				out.write(" media=\"");
+				encodeTextInXhtmlAttribute(media, out);
 				out.write('"');
 			}
 			out.write(" />");

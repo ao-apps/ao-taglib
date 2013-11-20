@@ -1185,6 +1185,15 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
+    <attribute>
+		<description><![CDATA[
+			The media type for the link.
+		]]></description>
+      <name>media</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
 	<dynamic-attributes>true</dynamic-attributes>
     <example />
   </tag>

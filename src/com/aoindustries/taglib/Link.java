@@ -39,6 +39,7 @@ public class Link {
     private final String hreflang;
     private final String rel;
     private final String type;
+	private final String media;
 
     public Link(
 		String href,
@@ -46,7 +47,8 @@ public class Link {
 		LastModifiedServlet.AddLastModifiedWhen addLastModified,
 		String hreflang,
 		String rel,
-		String type
+		String type,
+		String media
 	) throws JspTagException {
         this.href = href;
 		this.params = params;
@@ -54,6 +56,7 @@ public class Link {
         this.hreflang = hreflang;
         this.rel = rel;
         this.type = type;
+		this.media = media;
     }
 
     public String getHref() {
@@ -79,4 +82,8 @@ public class Link {
     public String getType() {
         return type;
     }
+
+	public String getMedia() {
+		return media;
+	}
 }
