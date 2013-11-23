@@ -22,6 +22,7 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.util.WildcardPatternMatcher;
 import com.aoindustries.lang.LocalizedIllegalArgumentException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import java.io.Serializable;

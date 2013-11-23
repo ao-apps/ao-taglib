@@ -22,6 +22,7 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.util.WildcardPatternMatcher;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.Coercion;
 import com.aoindustries.net.HttpParameters;

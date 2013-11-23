@@ -22,6 +22,7 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.util.WildcardPatternMatcher;
 import com.aoindustries.net.HttpParametersUtils;
 import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.http.ServletUtil;
