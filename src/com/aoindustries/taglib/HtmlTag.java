@@ -167,6 +167,11 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 		this.clazz = clazz;
     }
 
+	private String oldIeClass;
+	public void setOldIeClass(String oldIeClass) {
+		this.oldIeClass = oldIeClass;
+	}
+
 	@Override
     public MediaType getContentType() {
         return MediaType.XHTML;
@@ -228,7 +233,16 @@ public class HtmlTag extends AutoEncodingFilteredTag {
         // response.setCharacterEncoding("UTF-8");
 
         writeDocTypeLine(doctype, out);
-        beginHtmlTag(response, out, clazz);
+		if(oldIeClass!=null) {
+			out.write("<!--[if lte IE 8]>");
+			beginHtmlTag(response, out, clazz==null ? oldIeClass : (clazz + " " + oldIeClass));
+			out.write("<![endif]-->\n"
+					+ "<!--[if gt IE 8]><!-->");
+	        beginHtmlTag(response, out, clazz);
+			out.write("<!--<![endif]-->");
+		} else {
+	        beginHtmlTag(response, out, clazz);
+		}
         super.doTag(out);
         endHtmlTag(out);
     }

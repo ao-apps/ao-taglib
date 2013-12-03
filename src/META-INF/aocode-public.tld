@@ -608,6 +608,15 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
     </attribute>
+    <attribute>
+		<description><![CDATA[
+			An optional CSS class that is added for older versions of IE (before IE 9).
+		]]></description>
+      <name>oldIeClass</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
     <example />
   </tag>
   <tag>
