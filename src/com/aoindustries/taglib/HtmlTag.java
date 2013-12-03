@@ -181,8 +181,11 @@ public class HtmlTag extends AutoEncodingFilteredTag {
         out.write(docType.getDocTypeLine());
     }
 
-    public static void beginHtmlTag(ServletResponse response, Writer out, String clazz) throws IOException {
-        out.write("<html xmlns=\"http://www.w3.org/1999/xhtml\"");
+    public static void beginHtmlTag(ServletResponse response, Writer out, boolean isXml, String clazz) throws IOException {
+        out.write("<html");
+		if(isXml) {
+			out.write(" xmlns=\"http://www.w3.org/1999/xhtml\"");
+		}
 		if(clazz!=null) {
 			out.write(" class=\"");
 			encodeTextInXhtmlAttribute(clazz, out);
@@ -199,13 +202,16 @@ public class HtmlTag extends AutoEncodingFilteredTag {
                     out.write('-');
                     out.write(country);
                 }
-				out.write("\" xml:lang=\"");
-				out.write(language);
-				if(country.length()>0) {
-					out.write('-');
-					out.write(country);
-				}
 				out.write('"');
+				if(isXml) {
+					out.write(" xml:lang=\"");
+					out.write(language);
+					if(country.length()>0) {
+						out.write('-');
+						out.write(country);
+					}
+					out.write('"');
+				}
             }
         }
         out.write('>');
@@ -235,13 +241,13 @@ public class HtmlTag extends AutoEncodingFilteredTag {
         writeDocTypeLine(doctype, out);
 		if(oldIeClass!=null) {
 			out.write("<!--[if lte IE 8]>");
-			beginHtmlTag(response, out, clazz==null ? oldIeClass : (clazz + " " + oldIeClass));
+			beginHtmlTag(response, out, isXml, clazz==null ? oldIeClass : (clazz + " " + oldIeClass));
 			out.write("<![endif]-->\n"
 					+ "<!--[if gt IE 8]><!-->");
-	        beginHtmlTag(response, out, clazz);
+	        beginHtmlTag(response, out, isXml, clazz);
 			out.write("<!--<![endif]-->");
 		} else {
-	        beginHtmlTag(response, out, clazz);
+	        beginHtmlTag(response, out, isXml, clazz);
 		}
         super.doTag(out);
         endHtmlTag(out);
