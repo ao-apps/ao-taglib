@@ -185,8 +185,6 @@ public class ImgTag
 	@Override
     protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		if(src==null) src = capturedBody.trim().toString();
-		if(width==null) throw new AttributeRequiredException("width");
-		if(height==null) throw new AttributeRequiredException("height");
 		if(alt==null) throw new AttributeRequiredException("alt");
 
 		out.write("<img src=\"");
@@ -194,11 +192,18 @@ public class ImgTag
 			UrlUtils.buildUrl(getJspContext(), src, params, addLastModified),
 			out
 		);
-		out.write("\" width=\"");
-		Coercion.write(width, textInXhtmlAttributeEncoder, out);
-		out.write("\" height=\"");
-		Coercion.write(height, textInXhtmlAttributeEncoder, out);
-		out.write("\" alt=\"");
+		out.write('"');
+		if(width!=null) {
+			out.write(" width=\"");
+			Coercion.write(width, textInXhtmlAttributeEncoder, out);
+			out.write('"');
+		}
+		if(height!=null) {
+			out.write(" height=\"");
+			Coercion.write(height, textInXhtmlAttributeEncoder, out);
+			out.write('"');
+		}
+		out.write(" alt=\"");
 		MarkupUtils.writeWithMarkup(alt, MarkupType.TEXT, textInXhtmlAttributeEncoder, out);
 		out.write('"');
 		if(title!=null) {

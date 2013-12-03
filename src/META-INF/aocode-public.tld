@@ -793,7 +793,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     </attribute>
     <attribute>
 		<description><![CDATA[
-			The width for the image.
+			The optional width for the image.
 			A nested &lt;ao:width&gt; tag will override this value.
 		]]></description>
       <name>width</name>
@@ -803,7 +803,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     </attribute>
     <attribute>
 		<description><![CDATA[
-			The height for the image.
+			The optional height for the image.
 			A nested &lt;ao:height&gt; tag will override this value.
 		]]></description>
       <name>height</name>
