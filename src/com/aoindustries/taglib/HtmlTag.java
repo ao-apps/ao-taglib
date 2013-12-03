@@ -22,6 +22,7 @@
  */
 package com.aoindustries.taglib;
 
+import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.util.StringUtility;
 import java.io.IOException;
@@ -161,7 +162,12 @@ public class HtmlTag extends AutoEncodingFilteredTag {
         this.forceHtml = forceHtml;
     }
 
-    @Override
+    private String clazz;
+    public void setClazz(String clazz) {
+		this.clazz = clazz;
+    }
+
+	@Override
     public MediaType getContentType() {
         return MediaType.XHTML;
     }
@@ -170,8 +176,13 @@ public class HtmlTag extends AutoEncodingFilteredTag {
         out.write(docType.getDocTypeLine());
     }
 
-    public static void beginHtmlTag(ServletResponse response, Writer out) throws IOException {
+    public static void beginHtmlTag(ServletResponse response, Writer out, String clazz) throws IOException {
         out.write("<html xmlns=\"http://www.w3.org/1999/xhtml\"");
+		if(clazz!=null) {
+			out.write(" class=\"");
+			encodeTextInXhtmlAttribute(clazz, out);
+			out.write('"');
+		}
         Locale locale = response.getLocale();
         if(locale!=null) {
             String language = locale.getLanguage();
@@ -217,7 +228,7 @@ public class HtmlTag extends AutoEncodingFilteredTag {
         // response.setCharacterEncoding("UTF-8");
 
         writeDocTypeLine(doctype, out);
-        beginHtmlTag(response, out);
+        beginHtmlTag(response, out, clazz);
         super.doTag(out);
         endHtmlTag(out);
     }
