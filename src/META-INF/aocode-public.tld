@@ -579,8 +579,8 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <body-content>scriptless</body-content>
     <attribute>
       <description>
-        The doctype to use, one of "strict", "transitional", "frameset", or "none".
-        Defaults to strict.  "none" will suppress the output of a doctype.
+        The doctype to use, one of "html5", "strict", "transitional", "frameset", or "none".
+        Defaults to "strict".  "none" will suppress the output of a doctype.
       </description>
       <name>doctype</name>
       <required>false</required>

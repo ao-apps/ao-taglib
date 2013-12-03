@@ -39,12 +39,9 @@ public class HtmlTagTEI extends TagExtraInfo {
             && o != TagData.REQUEST_TIME_VALUE
         ) {
             String doctype = (String)o;
-            if(
-                !"strict".equals(doctype)
-                && !"transitional".equals(doctype)
-                && !"frameset".equals(doctype)
-                && !"none".equals(doctype)
-            ) {
+			try {
+				HtmlTag.DocType.valueOf(doctype);
+			} catch(IllegalArgumentException e) {
                 return new ValidationMessage[] {
                     new ValidationMessage(data.getId(), ApplicationResources.accessor.getMessage("HtmlTag.doctype.invalid", doctype))
                 };
