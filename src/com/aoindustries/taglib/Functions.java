@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2011, 2012, 2013  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2014  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -31,6 +31,7 @@ import com.aoindustries.servlet.http.ServletUtil;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.StringUtility;
+import java.net.MalformedURLException;
 import javax.servlet.jsp.JspTagException;
 
 final public class Functions {
@@ -38,8 +39,13 @@ final public class Functions {
     private Functions() {
     }
 
-	public static String addLastModified(String url) {
-		return LastModifiedServlet.addLastModified(getServletContext(), url, LastModifiedServlet.AddLastModifiedWhen.TRUE);
+	public static String addLastModified(String url) throws MalformedURLException {
+		return LastModifiedServlet.addLastModified(
+			getServletContext(),
+			DispatchTag.getCurrentPagePath(getRequest()),
+			url,
+			LastModifiedServlet.AddLastModifiedWhen.TRUE
+		);
 	}
 
 	public static String encodeURL(String url) {

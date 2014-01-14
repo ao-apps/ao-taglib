@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2013  AO Industries, Inc.
+ * Copyright (C) 2013, 2014  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -67,9 +67,10 @@ final public class UrlUtils {
 		HttpParameters params,
 		LastModifiedServlet.AddLastModifiedWhen addLastModified
 	) throws MalformedURLException, UnsupportedEncodingException {
-        href = ServletUtil.getAbsolutePath(DispatchTag.getCurrentPagePath(request), href);
+		String servletPath = DispatchTag.getCurrentPagePath(request);
+        href = ServletUtil.getAbsolutePath(servletPath, href);
 		href = HttpParametersUtils.addParams(href, params);
-		href = LastModifiedServlet.addLastModified(servletContext, href, addLastModified);
+		href = LastModifiedServlet.addLastModified(servletContext, servletPath, href, addLastModified);
 		if(href.startsWith("/")) {
 			String contextPath = request.getContextPath();
 			if(contextPath.length()>0) href = contextPath + href;
