@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009, 2010, 2011, 2012, 2013  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -25,6 +25,7 @@ package com.aoindustries.taglib;
 import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaScriptInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
+import static com.aoindustries.encoding.TextInXhtmlEncoder.encodeTextInXhtml;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.io.Coercion;
 import com.aoindustries.net.EmptyParameters;
@@ -32,12 +33,15 @@ import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.net.MutableHttpParameters;
 import com.aoindustries.servlet.http.LastModifiedServlet;
+import com.aoindustries.servlet.http.ServletUtil;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspTagException;
+import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
@@ -286,7 +290,24 @@ public class ATag
 			out.write('"');
 		}
 		out.write('>');
-		MarkupUtils.writeWithMarkup(capturedBody.trim(), MarkupType.XHTML, out);
+		BufferResult trimmedBody = capturedBody.trim();
+		if(trimmedBody.getLength()==0) {
+			// When the body is empty after trimming, display the href itself
+			if(href!=null) {
+				PageContext pageContext = (PageContext)getJspContext();
+				HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
+				if(href.startsWith("mailto:")) {
+					encodeTextInXhtml(href.substring(7), out);
+				} else {
+					encodeTextInXhtml(
+						ServletUtil.getAbsolutePath(DispatchTag.getCurrentPagePath(request), href),
+						out
+					);
+				}
+			}
+		} else {
+			MarkupUtils.writeWithMarkup(trimmedBody, MarkupType.XHTML, out);
+		}
 		out.write("</a>");
     }
 }
