@@ -60,7 +60,8 @@ public class InputTagBeanInfo extends SimpleBeanInfo {
                     new PropertyDescriptor("disabled", InputTag.class),
                     new PropertyDescriptor("class", InputTag.class, "getClazz", "setClazz"),
                     new PropertyDescriptor("style", InputTag.class),
-                    new PropertyDescriptor("checked", InputTag.class)
+                    new PropertyDescriptor("checked", InputTag.class),
+                    new PropertyDescriptor("tabindex", InputTag.class)
                 };
                 properties = props;
             }

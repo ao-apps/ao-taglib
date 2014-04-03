@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009, 2010, 2011, 2012, 2013  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -55,7 +55,8 @@ public class InputTag
 		DisabledAttribute,
 		ClassAttribute,
 		StyleAttribute,
-		CheckedAttribute
+		CheckedAttribute,
+		TabindexAttribute
 {
 
     public static boolean isValidType(String type) {
@@ -90,6 +91,7 @@ public class InputTag
     private Object clazz;
     private Object style;
     private boolean checked;
+	private int tabindex;
 
     @Override
     public MediaType getContentType() {
@@ -264,6 +266,15 @@ public class InputTag
         this.checked = checked;
     }
 
+    @Override
+    public int getTabindex() {
+        return tabindex;
+    }
+
+    @Override
+    public void setTabindex(int tabindex) {
+        this.tabindex = tabindex;
+    }
 
     @Override
     protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
@@ -342,6 +353,11 @@ public class InputTag
 			out.write('"');
 		}
 		if(checked) out.write(" checked=\"checked\"");
+		if(tabindex >= 1) {
+			out.write(" tabindex=\"");
+			out.write(Integer.toString(tabindex));
+			out.write('"');
+		}
 		out.write(" />");
     }
 }
