@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009, 2010, 2011, 2013  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2013, 2014  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -46,6 +46,7 @@ public class ImgTag
 	extends AutoEncodingBufferedTag
 	implements
 		DynamicAttributes,
+		IdAttribute,
 		SrcAttribute,
 		ParamsAttribute,
 		WidthAttribute,
@@ -56,6 +57,7 @@ public class ImgTag
 		StyleAttribute
 {
 
+    private Object id;
     private String src;
     private HttpParametersMap params;
 	private LastModifiedServlet.AddLastModifiedWhen addLastModified = LastModifiedServlet.AddLastModifiedWhen.AUTO;
@@ -77,6 +79,16 @@ public class ImgTag
     }
 
     @Override
+    public Object getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Object id) {
+		this.id = id;
+    }
+
+	@Override
     public String getSrc() {
         return src;
     }
@@ -187,7 +199,13 @@ public class ImgTag
 		if(src==null) src = capturedBody.trim().toString();
 		if(alt==null) throw new AttributeRequiredException("alt");
 
-		out.write("<img src=\"");
+		out.write("<img");
+		if(id!=null) {
+			out.write(" id=\"");
+			Coercion.write(id, textInXhtmlAttributeEncoder, out);
+			out.write('"');
+		}
+		out.write(" src=\"");
 		encodeTextInXhtmlAttribute(
 			UrlUtils.buildUrl(getJspContext(), src, params, addLastModified),
 			out
