@@ -188,6 +188,76 @@ abstract public class DispatchTag
 		}
 	}
 
+	@SuppressWarnings("unchecked")
+	public static HttpServletRequest getParameterAlteredRequest(
+		HttpServletRequest request,
+		HttpParametersMap params,
+		Map<String,String[]> oldMap,
+		WildcardPatternMatcher clearParamsMatcher
+	) {
+		final Map<String,List<String>> newMap;
+		if(params==null) {
+			newMap = Collections.emptyMap();
+		} else {
+			newMap = params.getParameterMap();
+		}
+		if(oldMap==null) oldMap = request.getParameterMap();
+		Map<String,String[]> newParameters = new LinkedHashMap<String,String[]>(
+			(
+				newMap.size()
+				+ oldMap.size()
+			)*4/3+1
+		);
+		for(Map.Entry<String,List<String>> entry : newMap.entrySet()) {
+			String name = entry.getKey();
+			List<String> newValues = entry.getValue();
+			String[] oldValues = clearParamsMatcher.isMatch(name) ? null : oldMap.get(name);
+			String[] merged;
+			if(oldValues==null) {
+				// No need to merge values
+				merged = newValues.toArray(new String[newValues.size()]);
+			} else {
+				// Merge values into single String[]
+				merged = new String[newValues.size() + oldValues.length];
+				String[] result = newValues.toArray(merged);
+				assert merged==result;
+				System.arraycopy(oldValues, 0, merged, newValues.size(), oldValues.length);
+			}
+			newParameters.put(name, merged);
+		}
+		// Add any old parameters that were not merged
+		for(Map.Entry<String,String[]> entry : oldMap.entrySet()) {
+			String name = entry.getKey();
+			if(
+				!newMap.containsKey(name)
+				&& !clearParamsMatcher.isMatch(name)
+			) newParameters.put(name, entry.getValue());
+		}
+		final Map<String,String[]> parameters = Collections.unmodifiableMap(newParameters);
+		return new HttpServletRequestWrapper(request) {
+			@Override
+			public String getParameter(String name) {
+				String[] values = parameters.get(name);
+				return values==null || values.length==0 ? null : values[0];
+			}
+
+			@Override
+			public Map getParameterMap() {
+				return parameters;
+			}
+
+			@Override
+			public Enumeration getParameterNames() {
+				return Collections.enumeration(parameters.keySet());
+			}
+
+			@Override
+			public String[] getParameterValues(String name) {
+				return parameters.get(name);
+			}
+		};
+	}
+
 	protected String page;
     protected HttpParametersMap params;
 
@@ -345,70 +415,10 @@ abstract public class DispatchTag
 					}
 
 					// Filter and merge all parameters
-					final Map<String,List<String>> newMap;
-					if(params==null) {
-						newMap = Collections.emptyMap();
-					} else {
-						newMap = params.getParameterMap();
-					}
-					if(oldMap==null) oldMap = request.getParameterMap();
-					Map<String,String[]> newParameters = new LinkedHashMap<String,String[]>(
-						(
-							newMap.size()
-							+ oldMap.size()
-						)*4/3+1
-					);
-					for(Map.Entry<String,List<String>> entry : newMap.entrySet()) {
-						String name = entry.getKey();
-						List<String> newValues = entry.getValue();
-						String[] oldValues = clearParamsMatcher.isMatch(name) ? null : oldMap.get(name);
-						String[] merged;
-						if(oldValues==null) {
-							// No need to merge values
-							merged = newValues.toArray(new String[newValues.size()]);
-						} else {
-							// Merge values into single String[]
-							merged = new String[newValues.size() + oldValues.length];
-							String[] result = newValues.toArray(merged);
-							assert merged==result;
-							System.arraycopy(oldValues, 0, merged, newValues.size(), oldValues.length);
-						}
-						newParameters.put(name, merged);
-					}
-					// Add any old parameters that were not merged
-					for(Map.Entry<String,String[]> entry : oldMap.entrySet()) {
-						String name = entry.getKey();
-						if(
-							!newMap.containsKey(name)
-							&& !clearParamsMatcher.isMatch(name)
-						) newParameters.put(name, entry.getValue());
-					}
-					final Map<String,String[]> parameters = Collections.unmodifiableMap(newParameters);
 					dispatch(
 						dispatcher,
 						out,
-						new HttpServletRequestWrapper(request) {
-							@Override
-							public String getParameter(String name) {
-								String[] values = parameters.get(name);
-								return values==null || values.length==0 ? null : values[0];
-							}
-
-							@Override
-							public Map getParameterMap() {
-								return parameters;
-							}
-
-							@Override
-							public Enumeration getParameterNames() {
-								return Collections.enumeration(parameters.keySet());
-							}
-
-							@Override
-							public String[] getParameterValues(String name) {
-								return parameters.get(name);
-							}
-						},
+						getParameterAlteredRequest(request, params, oldMap, clearParamsMatcher),
 						response
 					);
 				} finally {
