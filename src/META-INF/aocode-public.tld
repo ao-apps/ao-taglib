@@ -68,10 +68,16 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     </attribute>
     <attribute>
 		<description><![CDATA[
-			If the href represents a local resource, a parameter of "lastModified=#####" may be
-			automatically added with the timestamp of the local resource to the nearest second.
-			May be one of "true", "false", or "auto".
-			Defaults to "auto".
+			<p>
+				If the href represents a local resource, a parameter of "lastModified=#####" may be
+				automatically added with the timestamp of the local resource to the nearest second.
+				May be one of "true", "false", or "auto".
+				Defaults to "auto".
+			</p>
+			<p>
+				In auto mode, last modified stamping may be disabled by the client with
+				the <code>X-com-aoindustries-servlet-http-LastModifiedServlet-lastModified: false</code> header.
+			</p>
 		]]></description>
       <name>addLastModified</name>
       <required>false</required>
@@ -695,10 +701,16 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     </attribute>
     <attribute>
 		<description><![CDATA[
-			If the src represents a local resource, a parameter of "lastModified=#####" may be
-			automatically added with the timestamp of the local resource to the nearest second.
-			May be one of "true", "false", or "auto".
-			Defaults to "auto".
+			<p>
+				If the src represents a local resource, a parameter of "lastModified=#####" may be
+				automatically added with the timestamp of the local resource to the nearest second.
+				May be one of "true", "false", or "auto".
+				Defaults to "auto".
+			</p>
+			<p>
+				In auto mode, last modified stamping may be disabled by the client with
+				the <code>X-com-aoindustries-servlet-http-LastModifiedServlet-lastModified: false</code> header.
+			</p>
 		]]></description>
       <name>addLastModified</name>
       <required>false</required>
@@ -795,10 +807,16 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     </attribute>
     <attribute>
 		<description><![CDATA[
-			If the src represents a local resource, a parameter of "lastModified=#####" may be
-			automatically added with the timestamp of the local resource to the nearest second.
-			May be one of "true", "false", or "auto".
-			Defaults to "auto".
+			<p>
+				If the src represents a local resource, a parameter of "lastModified=#####" may be
+				automatically added with the timestamp of the local resource to the nearest second.
+				May be one of "true", "false", or "auto".
+				Defaults to "auto".
+			</p>
+			<p>
+				In auto mode, last modified stamping may be disabled by the client with
+				the <code>X-com-aoindustries-servlet-http-LastModifiedServlet-lastModified: false</code> header.
+			</p>
 		]]></description>
       <name>addLastModified</name>
       <required>false</required>
@@ -1188,10 +1206,16 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     </attribute>
     <attribute>
 		<description><![CDATA[
-			If the href represents a local resource, a parameter of "lastModified=#####" may be
-			automatically added with the timestamp of the local resource to the nearest second.
-			May be one of "true", "false", or "auto".
-			Defaults to "auto".
+			<p>
+				If the href represents a local resource, a parameter of "lastModified=#####" may be
+				automatically added with the timestamp of the local resource to the nearest second.
+				May be one of "true", "false", or "auto".
+				Defaults to "auto".
+			</p>
+			<p>
+				In auto mode, last modified stamping may be disabled by the client with
+				the <code>X-com-aoindustries-servlet-http-LastModifiedServlet-lastModified: false</code> header.
+			</p>
 		]]></description>
       <name>addLastModified</name>
       <required>false</required>
@@ -1810,10 +1834,16 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     </attribute>
     <attribute>
 		<description><![CDATA[
-			If the href represents a local resource, a parameter of "lastModified=#####" may be
-			automatically added with the timestamp of the local resource to the nearest second.
-			May be one of "true", "false", or "auto".
-			Defaults to "auto".
+			<p>
+				If the href represents a local resource, a parameter of "lastModified=#####" may be
+				automatically added with the timestamp of the local resource to the nearest second.
+				May be one of "true", "false", or "auto".
+				Defaults to "auto".
+			</p>
+			<p>
+				In auto mode, last modified stamping may be disabled by the client with
+				the <code>X-com-aoindustries-servlet-http-LastModifiedServlet-lastModified: false</code> header.
+			</p>
 		]]></description>
       <name>addLastModified</name>
       <required>false</required>
@@ -1930,10 +1960,16 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     </attribute>
     <attribute>
 		<description><![CDATA[
-			If the src represents a local resource, a parameter of "lastModified=#####" may be
-			automatically added with the timestamp of the local resource to the nearest second.
-			May be one of "true", "false", or "auto".
-			Defaults to "auto".
+			<p>
+				If the src represents a local resource, a parameter of "lastModified=#####" may be
+				automatically added with the timestamp of the local resource to the nearest second.
+				May be one of "true", "false", or "auto".
+				Defaults to "auto".
+			</p>
+			<p>
+				In auto mode, last modified stamping may be disabled by the client with
+				the <code>X-com-aoindustries-servlet-http-LastModifiedServlet-lastModified: false</code> header.
+			</p>
 		]]></description>
       <name>addLastModified</name>
       <required>false</required>

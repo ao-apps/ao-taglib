@@ -33,7 +33,6 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.net.MalformedURLException;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspContext;
@@ -60,7 +59,6 @@ final public class UrlUtils {
 	 * </ol>
 	 */
 	public static String buildUrl(
-		ServletContext servletContext,
 		HttpServletRequest request,
 		HttpServletResponse response,
 		String href,
@@ -70,7 +68,7 @@ final public class UrlUtils {
 		String servletPath = DispatchTag.getCurrentPagePath(request);
         href = ServletUtil.getAbsolutePath(servletPath, href);
 		href = HttpParametersUtils.addParams(href, params);
-		href = LastModifiedServlet.addLastModified(servletContext, servletPath, href, addLastModified);
+		href = LastModifiedServlet.addLastModified(request, servletPath, href, addLastModified);
 		if(href.startsWith("/")) {
 			String contextPath = request.getContextPath();
 			if(contextPath.length()>0) href = contextPath + href;
@@ -89,7 +87,6 @@ final public class UrlUtils {
 		LastModifiedServlet.AddLastModifiedWhen addLastModified
 	) throws MalformedURLException, UnsupportedEncodingException {
 		return buildUrl(
-			pageContext.getServletContext(),
 			(HttpServletRequest)pageContext.getRequest(),
 			(HttpServletResponse)pageContext.getResponse(),
 			href,

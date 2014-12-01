@@ -25,7 +25,6 @@ package com.aoindustries.taglib;
 import com.aoindustries.lang.NullArgumentException;
 import static com.aoindustries.servlet.filter.FunctionContext.getRequest;
 import static com.aoindustries.servlet.filter.FunctionContext.getResponse;
-import static com.aoindustries.servlet.filter.FunctionContext.getServletContext;
 import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.http.ServletUtil;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
@@ -41,7 +40,7 @@ final public class Functions {
 
 	public static String addLastModified(String url) throws MalformedURLException {
 		return LastModifiedServlet.addLastModified(
-			getServletContext(),
+			getRequest(),
 			DispatchTag.getCurrentPagePath(getRequest()),
 			url,
 			LastModifiedServlet.AddLastModifiedWhen.TRUE

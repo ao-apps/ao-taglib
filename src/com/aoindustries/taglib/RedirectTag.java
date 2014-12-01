@@ -169,7 +169,7 @@ public class RedirectTag
 		if(myHref==null) myHref = page; // Default to page when href not given
         if(myHref==null) throw new AttributeRequiredException("href");
         myHref = HttpParametersUtils.addParams(myHref, params);
-		myHref = LastModifiedServlet.addLastModified(pageContext.getServletContext(), servletPath, myHref, addLastModified);
+		myHref = LastModifiedServlet.addLastModified(request, servletPath, myHref, addLastModified);
 
 		// Get the full URL that will be used for the redirect
 		String location = ServletUtil.getRedirectLocation(request, response, servletPath, myHref);
