@@ -191,7 +191,7 @@ public class RedirectTag
 
 	        IncludeTag.setLocation(request, response, location);
 			IncludeTag.sendError(request, response, status);
-			SkipPageHandler.setPageSkipped(request);
+			IncludeTag.setPageSkipped(request);
 		    throw new SkipPageException();
 		} else {
 			// Set no-cache header for 302 and 303 redirect
@@ -219,7 +219,7 @@ public class RedirectTag
 			} catch(ServletException e) {
 				throw new JspTagException(e);
 			}
-			SkipPageHandler.setPageSkipped(request);
+			IncludeTag.setPageSkipped(request);
 			throw new SkipPageException();
 		} finally {
 			requestForwarded.set(oldForwarded);

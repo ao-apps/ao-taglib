@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2011, 2012, 2013  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2014  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -52,7 +52,7 @@ public class ForwardTag extends ArgDispatchTag {
 			} catch(ServletException e) {
 				throw new JspTagException(e);
 			}
-			SkipPageHandler.setPageSkipped(request);
+			IncludeTag.setPageSkipped(request);
 			throw new SkipPageException();
 		} finally {
 			requestForwarded.set(oldForwarded);
