@@ -136,7 +136,7 @@ public class RedirectTag
 
 	@Override
     protected void doTag(String servletPath) throws IOException, JspTagException, SkipPageException {
-        final int status;
+		final int status;
         if(statusCode==null) throw new AttributeRequiredException("statusCode");
         if(
 			"301".equals(statusCode)
@@ -188,7 +188,9 @@ public class RedirectTag
 					);
 				}
 			}
-	        ServletUtil.sendRedirect(response, location, status);
+
+	        response.setHeader("Location", location);
+			IncludeTag.sendError(request, response, status);
 			SkipPageHandler.setPageSkipped(request);
 		    throw new SkipPageException();
 		} else {

@@ -179,9 +179,7 @@ abstract public class DispatchTag
 				// Store as new relative path source
 				dispatchedPage.set(contextRelativePath);
 				// Perform dispatch
-				dispatcher.include(request, response);
-				// Propagate effects of SkipPageException
-				if(SkipPageHandler.isPageSkipped(request)) throw new SkipPageException();
+				IncludeTag.dispatchInclude(dispatcher, request, response);
 			} finally {
 				dispatchedPage.set(oldDispatchPage);
 			}
