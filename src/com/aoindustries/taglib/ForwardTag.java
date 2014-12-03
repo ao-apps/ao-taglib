@@ -52,6 +52,7 @@ public class ForwardTag extends ArgDispatchTag {
 			} catch(ServletException e) {
 				throw new JspTagException(e);
 			}
+			SkipPageHandler.setPageSkipped(request);
 			throw new SkipPageException();
 		} finally {
 			requestForwarded.set(oldForwarded);

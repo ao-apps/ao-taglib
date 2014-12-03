@@ -1758,6 +1758,11 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			Stops processing of the containing JSP page.
 		</p>
 		<p>
+			<strong>Important:</strong>
+			Redirects inside of standard &lt;jsp:include&gt; tags will be silently lost.
+			Use &lt;ao:include&gt; instead of &lt;jsp:include&gt; to support redirects inside of includes.
+		</p>
+		<p>
 			Any attribute that has no namespace and begins with "param." is added to the href as a URL parameter.
 			The parameter name is the part of the attribute name following "param.".
 		</p>
@@ -2081,9 +2086,16 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
   </tag>
   <tag>
     <description><![CDATA[
-		Returns an error status.
-		Stops processing of the containing JSP page.
-		Results in error handler processing.
+		<p>
+			Returns an error status.
+			Stops processing of the containing JSP page.
+			Results in error handler processing.
+		</p>
+		<p>
+			<strong>Important:</strong>
+			Errors sent inside of standard &lt;jsp:include&gt; tags will be silently lost.
+			Use &lt;ao:include&gt; instead of &lt;jsp:include&gt; to support sendError inside of includes.
+		</p>
 	]]></description>
     <name>sendError</name>
     <tag-class>com.aoindustries.taglib.SendErrorTag</tag-class>

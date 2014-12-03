@@ -155,13 +155,15 @@ abstract public class DispatchTag
 	/**
 	 * Performs an include, allowing page-relative paths and setting all values
 	 * compatible with &lt;ao:include&gt; tag.
+	 * 
+	 * @throws SkipPageException when the included page has been skipped due to a redirect.
 	 */
 	public static void include(
 		ServletContext servletContext,
 		String page,
 		HttpServletRequest request,
 		HttpServletResponse response
-	) throws ServletException, IOException {
+	) throws SkipPageException, ServletException, IOException {
 		// Resolve the dispatcher
 		String contextRelativePath = ServletUtil.getAbsolutePath(getCurrentPagePath(request), page);
 		RequestDispatcher dispatcher = servletContext.getRequestDispatcher(contextRelativePath);
@@ -178,6 +180,8 @@ abstract public class DispatchTag
 				dispatchedPage.set(contextRelativePath);
 				// Perform dispatch
 				dispatcher.include(request, response);
+				// Propagate effects of SkipPageException
+				if(SkipPageHandler.isPageSkipped(request)) throw new SkipPageException();
 			} finally {
 				dispatchedPage.set(oldDispatchPage);
 			}
