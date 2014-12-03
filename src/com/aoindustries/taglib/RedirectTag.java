@@ -189,7 +189,7 @@ public class RedirectTag
 				}
 			}
 
-	        response.setHeader("Location", location);
+	        IncludeTag.setLocation(request, response, location);
 			IncludeTag.sendError(request, response, status);
 			SkipPageHandler.setPageSkipped(request);
 		    throw new SkipPageException();
