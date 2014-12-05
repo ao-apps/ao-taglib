@@ -34,6 +34,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -161,6 +162,7 @@ public class RedirectTag
         }
 
 		final PageContext pageContext = (PageContext)getJspContext();
+		final ServletContext servletContext = pageContext.getServletContext();
 		final HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
 		final HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
 
@@ -169,7 +171,7 @@ public class RedirectTag
 		if(myHref==null) myHref = page; // Default to page when href not given
         if(myHref==null) throw new AttributeRequiredException("href");
         myHref = HttpParametersUtils.addParams(myHref, params);
-		myHref = LastModifiedServlet.addLastModified(request, servletPath, myHref, addLastModified);
+		myHref = LastModifiedServlet.addLastModified(servletContext, request, servletPath, myHref, addLastModified);
 
 		// Get the full URL that will be used for the redirect
 		String location = ServletUtil.getRedirectLocation(request, response, servletPath, myHref);
