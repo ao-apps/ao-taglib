@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2013, 2014  AO Industries, Inc.
+ * Copyright (C) 2013, 2014, 2015  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,7 +22,6 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.NewEncodingUtils;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersUtils;
@@ -75,7 +74,7 @@ final public class UrlUtils {
 			String contextPath = request.getContextPath();
 			if(contextPath.length()>0) href = contextPath + href;
 		}
-		href = NewEncodingUtils.encodeUrlPath(href);
+		href = com.aoindustries.net.UrlUtils.encodeUrlPath(href);
 		return response.encodeURL(href);
 	}
 

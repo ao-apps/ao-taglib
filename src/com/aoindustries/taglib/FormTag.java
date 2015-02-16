@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2010, 2011, 2013  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2013, 2015  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,13 +22,12 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.encoding.Coercion;
 import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaScriptInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.encoding.NewEncodingUtils;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.buffer.BufferResult;
-import com.aoindustries.io.Coercion;
 import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
@@ -214,7 +213,7 @@ public class FormTag
 				String contextPath = request.getContextPath();
 				if(contextPath.length()>0) action = contextPath + action;
 			}
-			action = NewEncodingUtils.encodeUrlPath(action);
+			action = com.aoindustries.net.UrlUtils.encodeUrlPath(action);
 			action = response.encodeURL(action);
 			questionPos = action.indexOf('?');
 			// The action attribute is everything up to the first question mark

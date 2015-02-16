@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009, 2010, 2011, 2012, 2013  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2015  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -24,7 +24,7 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.io.Coercion;
+import com.aoindustries.encoding.Coercion;
 import com.aoindustries.io.Writable;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.util.i18n.BundleLookupMarkup;
