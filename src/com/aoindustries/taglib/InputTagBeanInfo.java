@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2010, 2011, 2012  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2012, 2015  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,18 +22,16 @@
  */
 package com.aoindustries.taglib;
 
+import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
+import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.beans.SimpleBeanInfo;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * @author  AO Industries, Inc.
  */
 public class InputTagBeanInfo extends SimpleBeanInfo {
-
-    private static final Logger logger = Logger.getLogger(InputTagBeanInfo.class.getName());
 
     private static volatile PropertyDescriptor[] properties = null;
 
@@ -43,8 +41,8 @@ public class InputTagBeanInfo extends SimpleBeanInfo {
             PropertyDescriptor[] props = properties;
             if(props==null) {
                 props = new PropertyDescriptor[] {
-                    new PropertyDescriptor("contentType", InputTag.class, "getContentType", null),
-                    new PropertyDescriptor("outputType", InputTag.class, "getOutputType", null),
+                    // From base class: new PropertyDescriptor("contentType", InputTag.class, "getContentType", null),
+                    // From base class: new PropertyDescriptor("outputType", InputTag.class, "getOutputType", null),
                     new PropertyDescriptor("id", InputTag.class),
                     new PropertyDescriptor("type", InputTag.class),
                     new PropertyDescriptor("name", InputTag.class),
@@ -67,8 +65,21 @@ public class InputTagBeanInfo extends SimpleBeanInfo {
             }
             return props;
         } catch(IntrospectionException err) {
-            logger.log(Level.SEVERE, null, err);
-            return null;
+			throw new AssertionError(err);
         }
     }
+
+	/**
+	 * Include base class.
+	 */
+	@Override
+	public BeanInfo[] getAdditionalBeanInfo() {
+		try {
+			return new BeanInfo[] {
+				Introspector.getBeanInfo(InputTag.class.getSuperclass())
+			};
+        } catch(IntrospectionException err) {
+			throw new AssertionError(err);
+        }
+	}
 }

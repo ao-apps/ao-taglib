@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2011, 2012, 2013  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2015  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,8 +22,8 @@
  */
 package com.aoindustries.taglib;
 
-import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import com.aoindustries.encoding.MediaType;
+import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import com.aoindustries.util.StringUtility;
 import java.io.IOException;
 import java.io.Writer;
@@ -152,7 +152,12 @@ public class HtmlTag extends AutoEncodingFilteredTag {
         public abstract String getDocTypeLine();
     }
 
-    private DocType doctype = DocType.strict;
+	@Override
+    public MediaType getContentType() {
+        return MediaType.XHTML;
+    }
+
+	private DocType doctype = DocType.strict;
     public void setDoctype(String doctype) {
         this.doctype = doctype==null ? null : DocType.valueOf(doctype);
     }
@@ -171,11 +176,6 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 	public void setOldIeClass(String oldIeClass) {
 		this.oldIeClass = oldIeClass;
 	}
-
-	@Override
-    public MediaType getContentType() {
-        return MediaType.XHTML;
-    }
 
     public static void writeDocTypeLine(DocType docType, Writer out) throws IOException {
         out.write(docType.getDocTypeLine());

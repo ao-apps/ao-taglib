@@ -22,12 +22,12 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.MediaType;
+import com.aoindustries.encoding.Coercion;
 import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaScriptInXhtmlAttributeEncoder;
+import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.buffer.BufferResult;
-import com.aoindustries.encoding.Coercion;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;

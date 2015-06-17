@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009, 2010, 2011, 2012, 2013  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2015  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,18 +22,16 @@
  */
 package com.aoindustries.taglib;
 
+import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
+import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.beans.SimpleBeanInfo;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * @author  AO Industries, Inc.
  */
 public class ATagBeanInfo extends SimpleBeanInfo {
-
-    private static final Logger logger = Logger.getLogger(ATagBeanInfo.class.getName());
 
 	private static final Object propertiesLock = new Object();
     private static PropertyDescriptor[] properties;
@@ -45,8 +43,8 @@ public class ATagBeanInfo extends SimpleBeanInfo {
 				PropertyDescriptor[] props = properties;
 				if(props==null) {
 					props = new PropertyDescriptor[] {
-						new PropertyDescriptor("contentType", ATag.class, "getContentType", null),
-						new PropertyDescriptor("outputType", ATag.class, "getOutputType", null),
+						// From base class: new PropertyDescriptor("contentType", ATag.class, "getContentType", null),
+						// From base class: new PropertyDescriptor("outputType", ATag.class, "getOutputType", null),
 						new PropertyDescriptor("href", ATag.class),
 						new PropertyDescriptor("params", ATag.class, "getParams", null),
 						new PropertyDescriptor("addLastModified", ATag.class),
@@ -66,8 +64,21 @@ public class ATagBeanInfo extends SimpleBeanInfo {
 				return props;
 			}
         } catch(IntrospectionException err) {
-            logger.log(Level.SEVERE, null, err);
-            return null;
+			throw new AssertionError(err);
         }
     }
+
+	/**
+	 * Include base class.
+	 */
+	@Override
+	public BeanInfo[] getAdditionalBeanInfo() {
+		try {
+			return new BeanInfo[] {
+				Introspector.getBeanInfo(ATag.class.getSuperclass())
+			};
+        } catch(IntrospectionException err) {
+			throw new AssertionError(err);
+        }
+	}
 }
