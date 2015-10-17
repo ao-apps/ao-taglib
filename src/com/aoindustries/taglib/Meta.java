@@ -34,11 +34,13 @@ public class Meta {
 
     private final String name;
     private final String httpEquiv;
+	private final String charset;
     private final String content;
 
-    public Meta(String name, String httpEquiv, String content) throws JspTagException {
+    public Meta(String name, String httpEquiv, String charset, String content) throws JspTagException {
         this.name = name;
         this.httpEquiv = httpEquiv;
+		this.charset = charset;
         this.content = NullArgumentException.checkNotNull(content, "content");
     }
 
@@ -50,7 +52,11 @@ public class Meta {
         return httpEquiv;
     }
 
-    public String getContent() {
+	public String getCharset() {
+		return charset;
+	}
+
+	public String getContent() {
         return content;
     }
 }

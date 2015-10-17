@@ -1425,6 +1425,16 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <tag-class>com.aoindustries.taglib.MetaTag</tag-class>
     <body-content>scriptless</body-content>
     <attribute>
+		<description><![CDATA[
+			The name of meta tag.
+			A nested &lt;ao:name&gt; tag will override this value.
+		]]></description>
+      <name>name</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.Object</type>
+    </attribute>
+    <attribute>
       <description>
           The http-equiv of the meta element.
       </description>
@@ -1435,10 +1445,9 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     </attribute>
     <attribute>
 		<description><![CDATA[
-			The name of meta tag.
-			A nested &lt;ao:name&gt; tag will override this value.
+			The charset of meta tag.
 		]]></description>
-      <name>name</name>
+      <name>charset</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>

@@ -22,10 +22,10 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.buffer.BufferResult;
-import com.aoindustries.encoding.Coercion;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspTagException;
@@ -41,8 +41,25 @@ public class MetaTag
 		ContentAttribute
 {
 
+	/**
+	 * JSTL converts empty parameters to empty String, this converts back to null.
+	 */
+	private static Object nullIfEmpty(Object o) {
+		if(o instanceof String) {
+			String s = (String)o;
+			if(s.isEmpty()) return null;
+		/*
+		} else if(o instanceof BufferResult) {
+			BufferResult br = (BufferResult)o;
+			if(br.getLength() == 0) return null;
+		 */
+		}
+		return o;
+	}
+
+	private Object name;
     private Object httpEquiv;
-    private Object name;
+	private Object charset;
     private Object content;
 
     @Override
@@ -55,14 +72,6 @@ public class MetaTag
         return MediaType.XHTML;
     }
 
-    public Object getHttpEquiv() {
-        return httpEquiv;
-    }
-
-    public void setHttpEquiv(Object httpEquiv) {
-        this.httpEquiv = httpEquiv;
-    }
-
     @Override
     public Object getName() {
         return name;
@@ -70,17 +79,33 @@ public class MetaTag
 
     @Override
     public void setName(Object name) {
-		this.name = name;
+		this.name = nullIfEmpty(name);
     }
 
-    @Override
+    public Object getHttpEquiv() {
+        return httpEquiv;
+    }
+
+    public void setHttpEquiv(Object httpEquiv) {
+        this.httpEquiv = nullIfEmpty(httpEquiv);
+	}
+
+	public Object getCharset() {
+        return charset;
+    }
+
+    public void setCharset(Object charset) {
+        this.charset = nullIfEmpty(charset);
+    }
+
+	@Override
     public Object getContent() {
         return content;
     }
 
     @Override
     public void setContent(Object content) {
-		this.content = content;
+		this.content = nullIfEmpty(content);
     }
 
     @Override
@@ -92,25 +117,34 @@ public class MetaTag
 				new Meta(
 					Coercion.toString(name),
 					Coercion.toString(httpEquiv),
+					Coercion.toString(charset),
 					Coercion.toString(content)
 				)
 			);
 		} else {
 			// Write the meta tag directly here
 			out.write("<meta");
-			if(httpEquiv!=null) {
-				out.write(" http-equiv=\"");
-				Coercion.write(httpEquiv, textInXhtmlAttributeEncoder, out);
-				out.write('"');
-			}
-			if(name!=null) {
+			if(name != null) {
 				out.write(" name=\"");
 				Coercion.write(name, textInXhtmlAttributeEncoder, out);
 				out.write('"');
 			}
-			out.write(" content=\"");
-			Coercion.write(content, textInXhtmlAttributeEncoder, out);
-			out.write("\" />");
+			if(httpEquiv != null) {
+				out.write(" http-equiv=\"");
+				Coercion.write(httpEquiv, textInXhtmlAttributeEncoder, out);
+				out.write('"');
+			}
+			if(charset != null) {
+				out.write(" charset=\"");
+				Coercion.write(charset, textInXhtmlAttributeEncoder, out);
+				out.write('"');
+			}
+			if(content != null) {
+				out.write(" content=\"");
+				Coercion.write(content, textInXhtmlAttributeEncoder, out);
+				out.write('"');
+			}
+			out.write(" />");
 		}
     }
 }
