@@ -32,6 +32,10 @@ import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import javax.servlet.jsp.JspTagException;
 
 /**
@@ -59,19 +63,38 @@ public class InputTag
 		TabindexAttribute
 {
 
-    public static boolean isValidType(String type) {
-        return
-            "button".equals(type)
-            || "checkbox".equals(type)
-            || "file".equals(type)
-            || "hidden".equals(type)
-            || "image".equals(type)
-            || "password".equals(type)
-            || "radio".equals(type)
-            || "reset".equals(type)
-            || "submit".equals(type)
-            || "text".equals(type)
-        ;
+	private static final Set<String> validTypes = Collections.unmodifiableSet(
+		new LinkedHashSet<String>(
+			Arrays.asList(
+				// From http://www.w3schools.com/tags/att_input_type.asp
+				"button",
+				"checkbox",
+				"color",
+				"date",
+				"datetime-local",
+				"email",
+				"file",
+				"hidden",
+				"image",
+				"month",
+				"number",
+				"password",
+				"radio",
+				"range",
+				"reset",
+				"search",
+				"submit",
+				"tel",
+				"text",
+				"time",
+				"url",
+				"week"
+			)
+		)
+	);
+
+	public static boolean isValidType(String type) {
+        return validTypes.contains(type);
     }
 
     private Object id;

@@ -26,6 +26,7 @@ import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.buffer.BufferResult;
+import com.aoindustries.util.WrappedException;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspTagException;
@@ -42,17 +43,19 @@ public class MetaTag
 {
 
 	/**
-	 * JSTL converts empty parameters to empty String, this converts back to null.
+	 * Avoid empty string attributes.
 	 */
 	private static Object nullIfEmpty(Object o) {
 		if(o instanceof String) {
 			String s = (String)o;
 			if(s.isEmpty()) return null;
-		/*
 		} else if(o instanceof BufferResult) {
-			BufferResult br = (BufferResult)o;
-			if(br.getLength() == 0) return null;
-		 */
+			try {
+				BufferResult br = (BufferResult)o;
+				if(br.getLength() == 0) return null;
+			} catch(IOException e) {
+				throw new WrappedException(e);
+			}
 		}
 		return o;
 	}

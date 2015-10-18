@@ -998,7 +998,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     </attribute>
     <attribute>
 		<description><![CDATA[
-			The type of input, must be one of button, checkbox, file, hidden, image, password, radio, reset, submit, or text.
+			The type of input.
 			A nested &lt;ao:type&gt; tag will override this value.
 		]]></description>
       <name>type</name>
