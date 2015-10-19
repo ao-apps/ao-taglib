@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2010, 2011, 2012, 2013, 2014  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2012, 2013, 2014, 2015  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,12 +22,13 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.util.WildcardPatternMatcher;
 import com.aoindustries.net.HttpParametersUtils;
+import com.aoindustries.servlet.http.Includer;
 import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.http.ServletUtil;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
+import com.aoindustries.util.WildcardPatternMatcher;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Map;
@@ -191,9 +192,9 @@ public class RedirectTag
 				}
 			}
 
-	        IncludeTag.setLocation(request, response, location);
-			IncludeTag.sendError(request, response, status);
-			IncludeTag.setPageSkipped(request);
+	        Includer.setLocation(request, response, location);
+			Includer.sendError(request, response, status);
+			Includer.setPageSkipped(request);
 		    throw new SkipPageException();
 		} else {
 			// Set no-cache header for 302 and 303 redirect
@@ -221,7 +222,7 @@ public class RedirectTag
 			} catch(ServletException e) {
 				throw new JspTagException(e);
 			}
-			IncludeTag.setPageSkipped(request);
+			Includer.setPageSkipped(request);
 			throw new SkipPageException();
 		} finally {
 			requestForwarded.set(oldForwarded);

@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2011, 2012, 2013, 2014  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2014, 2015  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -23,9 +23,10 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.lang.NullArgumentException;
-import static com.aoindustries.servlet.filter.FunctionContext.getServletContext;
 import static com.aoindustries.servlet.filter.FunctionContext.getRequest;
 import static com.aoindustries.servlet.filter.FunctionContext.getResponse;
+import static com.aoindustries.servlet.filter.FunctionContext.getServletContext;
+import com.aoindustries.servlet.http.Dispatcher;
 import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.http.ServletUtil;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
@@ -43,7 +44,7 @@ final public class Functions {
 		return LastModifiedServlet.addLastModified(
 			getServletContext(),
 			getRequest(),
-			DispatchTag.getCurrentPagePath(getRequest()),
+			Dispatcher.getCurrentPagePath(getRequest()),
 			url,
 			LastModifiedServlet.AddLastModifiedWhen.TRUE
 		);

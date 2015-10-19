@@ -32,6 +32,7 @@ import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.net.MutableHttpParameters;
+import com.aoindustries.servlet.http.Dispatcher;
 import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.http.ServletUtil;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
@@ -300,7 +301,7 @@ public class ATag
 					encodeTextInXhtml(href.substring(7), out);
 				} else {
 					encodeTextInXhtml(
-						ServletUtil.getAbsolutePath(DispatchTag.getCurrentPagePath(request), href),
+						ServletUtil.getAbsolutePath(Dispatcher.getCurrentPagePath(request), href),
 						out
 					);
 				}

@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2012, 2014  AO Industries, Inc.
+ * Copyright (C) 2012, 2014, 2015  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -24,6 +24,7 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.buffer.BufferResult;
+import com.aoindustries.servlet.http.Includer;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
@@ -75,12 +76,12 @@ public class SendErrorTag extends AutoEncodingBufferedTag {
         HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
 
         if(message==null || message.isEmpty()) {
-			IncludeTag.sendError(request, response, status);
+			Includer.sendError(request, response, status);
 		} else {
-			IncludeTag.sendError(request, response, status, message);
+			Includer.sendError(request, response, status, message);
 		}
 
-		IncludeTag.setPageSkipped(request);
+		Includer.setPageSkipped(request);
         throw new SkipPageException();
     }
 }

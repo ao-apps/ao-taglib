@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2012, 2013  AO Industries, Inc.
+ * Copyright (C) 2012, 2013, 2015  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -27,7 +27,7 @@ import com.aoindustries.io.NullWriter;
 import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
-import com.aoindustries.servlet.LocalizedServletException;
+import com.aoindustries.servlet.http.Dispatcher;
 import com.aoindustries.servlet.http.ServletUtil;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
@@ -39,8 +39,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
@@ -74,36 +72,6 @@ abstract public class DispatchTag
 	protected static final String ARG_MAP_REQUEST_ATTRIBUTE_NAME = "arg";
 
 	/**
-	 * Tracks the first servlet path seen, before any include/forward.
-	 */
-	private static final ThreadLocal<String> originalPage = new ThreadLocal<String>();
-
-	/**
-	 * Gets the original page path corresponding to the original request before any forward/include.
-	 * Assumes all forward/include done with ao taglib.
-	 */
-	public static String getOriginalPagePath(HttpServletRequest request) {
-		String original = originalPage.get();
-		return original!=null ? original : request.getServletPath();
-	}
-
-	/**
-	 * Tracks the current dispatch page for correct page-relative paths.
-	 */
-	private static final ThreadLocal<String> dispatchedPage = new ThreadLocal<String>();
-
-	/**
-	 * Gets the current page path, including any effects from include/forward.
-	 * This will be the path of the current page on forward or include.
-	 * Assumes all forward/include done with ao taglib.
-	 * This may be used as a substitute for HttpServletRequest.getServletPath() when the current page is needed instead of the originally requested servlet.
-	 */
-	public static String getCurrentPagePath(HttpServletRequest request) {
-		String dispatched = dispatchedPage.get();
-		return dispatched!=null ? dispatched : request.getServletPath();
-	}
-
-	/**
 	 * Tracks if the request has been forwarded.
 	 */
 	protected static final ThreadLocal<Boolean> requestForwarded = new ThreadLocal<Boolean>();
@@ -113,81 +81,7 @@ abstract public class DispatchTag
 	 */
 	public static boolean isForwarded() {
 		Boolean forwarded = requestForwarded.get();
-		return forwarded!=null && forwarded.booleanValue();
-	}
-
-	/**
-	 * Performs a forward, allowing page-relative paths and setting all values
-	 * compatible with &lt;ao:forward&gt; tag.
-	 */
-	public static void forward(
-		ServletContext servletContext,
-		String page,
-		HttpServletRequest request,
-		HttpServletResponse response
-	) throws ServletException, IOException {
-		// Resolve the dispatcher
-		String contextRelativePath = ServletUtil.getAbsolutePath(getCurrentPagePath(request), page);
-		RequestDispatcher dispatcher = servletContext.getRequestDispatcher(contextRelativePath);
-		if(dispatcher==null) throw new LocalizedServletException(accessor, "DispatchTag.dispatcherNotFound", contextRelativePath);
-		// Track original page when first accessed
-		final String oldOriginal = originalPage.get();
-		try {
-			// Set original request path if not already set
-			if(oldOriginal==null) originalPage.set(request.getServletPath());
-			// Keep old dispatch page to restore
-			final String oldDispatchPage = dispatchedPage.get();
-			try {
-				// Store as new relative path source
-				dispatchedPage.set(contextRelativePath);
-				// Perform dispatch
-				dispatcher.forward(request, response);
-			} finally {
-				dispatchedPage.set(oldDispatchPage);
-			}
-		} finally {
-			if(oldOriginal==null) {
-				originalPage.set(null);
-			}
-		}
-	}
-
-	/**
-	 * Performs an include, allowing page-relative paths and setting all values
-	 * compatible with &lt;ao:include&gt; tag.
-	 * 
-	 * @throws SkipPageException when the included page has been skipped due to a redirect.
-	 */
-	public static void include(
-		ServletContext servletContext,
-		String page,
-		HttpServletRequest request,
-		HttpServletResponse response
-	) throws SkipPageException, ServletException, IOException {
-		// Resolve the dispatcher
-		String contextRelativePath = ServletUtil.getAbsolutePath(getCurrentPagePath(request), page);
-		RequestDispatcher dispatcher = servletContext.getRequestDispatcher(contextRelativePath);
-		if(dispatcher==null) throw new LocalizedServletException(accessor, "DispatchTag.dispatcherNotFound", contextRelativePath);
-		// Track original page when first accessed
-		final String oldOriginal = originalPage.get();
-		try {
-			// Set original request path if not already set
-			if(oldOriginal==null) originalPage.set(request.getServletPath());
-			// Keep old dispatch page to restore
-			final String oldDispatchPage = dispatchedPage.get();
-			try {
-				// Store as new relative path source
-				dispatchedPage.set(contextRelativePath);
-				// Perform dispatch
-				IncludeTag.dispatchInclude(dispatcher, request, response);
-			} finally {
-				dispatchedPage.set(oldDispatchPage);
-			}
-		} finally {
-			if(oldOriginal==null) {
-				originalPage.set(null);
-			}
-		}
+		return forwarded != null && forwarded;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -328,12 +222,12 @@ abstract public class DispatchTag
 	@SuppressWarnings("unchecked")
     final public void doTag() throws JspException, IOException {
 		// Track original page when first accessed
-		final String oldOriginal = originalPage.get();
+		final String oldOriginal = Dispatcher.getOriginalPage();
 		try {
 			// Set original request path if not already set
 			final PageContext pageContext = (PageContext)getJspContext();
 			final HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
-			if(oldOriginal==null) originalPage.set(request.getServletPath());
+			if(oldOriginal==null) Dispatcher.setOriginalPage(request.getServletPath());
 
 			// Invoke body first to all nested tags to set attributes
 			final JspFragment body = getJspBody();
@@ -344,7 +238,7 @@ abstract public class DispatchTag
 				body.invoke(NullWriter.getInstance());
 			}
 			// Keep old dispatch page to restore
-			final String oldDispatchPage = dispatchedPage.get();
+			final String oldDispatchPage = Dispatcher.getDispatchedPage();
 			try {
 				// Determine the path of the current page based on previous dispatch or original request
 				final String servletPath =
@@ -381,7 +275,7 @@ abstract public class DispatchTag
 				assert dispatcher!=null : "Will have been set above when page non-null";
 
 				// Store as new relative path source
-				dispatchedPage.set(contextRelativePath);
+				Dispatcher.setDispatchedPage(contextRelativePath);
 
 				// Keep old arguments to restore
 				final Object oldArgs = request.getAttribute(ARG_MAP_REQUEST_ATTRIBUTE_NAME);
@@ -428,11 +322,11 @@ abstract public class DispatchTag
 					request.setAttribute(ARG_MAP_REQUEST_ATTRIBUTE_NAME, oldArgs);
 				}
 			} finally {
-				dispatchedPage.set(oldDispatchPage);
+				Dispatcher.setDispatchedPage(oldDispatchPage);
 			}
 		} finally {
 			if(oldOriginal==null) {
-				originalPage.set(null);
+				Dispatcher.setOriginalPage(null);
 			}
 		}
     }

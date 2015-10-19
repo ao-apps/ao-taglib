@@ -25,6 +25,7 @@ package com.aoindustries.taglib;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersUtils;
+import com.aoindustries.servlet.http.Dispatcher;
 import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.http.ServletUtil;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
@@ -66,7 +67,7 @@ final public class UrlUtils {
 		HttpParameters params,
 		LastModifiedServlet.AddLastModifiedWhen addLastModified
 	) throws MalformedURLException, UnsupportedEncodingException {
-		String servletPath = DispatchTag.getCurrentPagePath(request);
+		String servletPath = Dispatcher.getCurrentPagePath(request);
         href = ServletUtil.getAbsolutePath(servletPath, href);
 		href = HttpParametersUtils.addParams(href, params);
 		href = LastModifiedServlet.addLastModified(servletContext, request, servletPath, href, addLastModified);

@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2013  AO Industries, Inc.
+ * Copyright (C) 2013, 2015  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -24,6 +24,7 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
+import com.aoindustries.servlet.http.Dispatcher;
 import com.aoindustries.servlet.http.ServletUtil;
 import java.io.IOException;
 import java.io.Writer;
@@ -45,9 +46,9 @@ public class BaseTag extends AutoEncodingNullTag {
     protected void doTag(Writer out) throws JspTagException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
 		HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
-		String originalPath = DispatchTag.getOriginalPagePath(request); // Before forward
+		String originalPath = Dispatcher.getOriginalPagePath(request); // Before forward
 		String currentPath = request.getServletPath(); // After forward
-		if(originalPath!=currentPath) { // Quick check for common case (string identity equals intentional)
+		if(originalPath != currentPath) { // Quick check for common case (string identity equals intentional)
 			// When the paths do not match, request has been forwarded to a different directory and base is required
 			int originalLastSlash = originalPath.lastIndexOf('/');
 			int currentLastSlash = currentPath.lastIndexOf('/');

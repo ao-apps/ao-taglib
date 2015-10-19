@@ -32,6 +32,7 @@ import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.net.MutableHttpParameters;
+import com.aoindustries.servlet.http.Dispatcher;
 import com.aoindustries.servlet.http.ServletUtil;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
@@ -208,7 +209,7 @@ public class FormTag
 			HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
 			HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
 			out.write(" action=\"");
-			action = ServletUtil.getAbsolutePath(DispatchTag.getCurrentPagePath(request), action);
+			action = ServletUtil.getAbsolutePath(Dispatcher.getCurrentPagePath(request), action);
 			if(action.startsWith("/")) {
 				String contextPath = request.getContextPath();
 				if(contextPath.length()>0) action = contextPath + action;
