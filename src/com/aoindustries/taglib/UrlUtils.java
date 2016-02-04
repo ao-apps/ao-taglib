@@ -72,7 +72,7 @@ final public class UrlUtils {
         href = ServletUtil.getAbsolutePath(servletPath, href);
 		href = HttpParametersUtils.addParams(href, params);
 		href = LastModifiedServlet.addLastModified(servletContext, request, servletPath, href, addLastModified);
-		if(href.startsWith("/")) {
+		if(!hrefAbsolute && href.startsWith("/")) {
 			String contextPath = request.getContextPath();
 			if(contextPath.length()>0) href = contextPath + href;
 		}
