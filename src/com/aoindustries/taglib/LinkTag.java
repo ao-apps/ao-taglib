@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2013, 2015  AO Industries, Inc.
+ * Copyright (C) 2013, 2015, 2016  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,10 +22,10 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
-import com.aoindustries.encoding.Coercion;
 import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
@@ -55,6 +55,7 @@ public class LinkTag
 
     private String href;
     private MutableHttpParameters params;
+	private boolean hrefAbsolute;
 	private LastModifiedServlet.AddLastModifiedWhen addLastModified = LastModifiedServlet.AddLastModifiedWhen.AUTO;
 	private Object hreflang;
 	private Object rel;
@@ -86,6 +87,14 @@ public class LinkTag
         if(params==null) params = new HttpParametersMap();
         params.addParameter(name, value);
     }
+
+	public boolean getHrefAbsolute() {
+		return hrefAbsolute;
+	}
+
+	public void setHrefAbsolute(boolean hrefAbsolute) {
+		this.hrefAbsolute = hrefAbsolute;
+	}
 
 	public String getAddLastModified() {
 		return addLastModified.getLowerName();
@@ -157,6 +166,7 @@ public class LinkTag
 			((LinksAttribute)parent).addLink(
 				new Link(
 					href,
+					hrefAbsolute,
 					params,
 					addLastModified,
 					Coercion.toString(hreflang),
@@ -167,7 +177,7 @@ public class LinkTag
 			);
 		} else {
 			out.write("<link");
-			UrlUtils.writeHref(out, getJspContext(), href, params, addLastModified);
+			UrlUtils.writeHref(out, getJspContext(), href, params, hrefAbsolute, addLastModified);
 			if(hreflang!=null) {
 				out.write(" hreflang=\"");
 				Coercion.write(hreflang, textInXhtmlAttributeEncoder, out);

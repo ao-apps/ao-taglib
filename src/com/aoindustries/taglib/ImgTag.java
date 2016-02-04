@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009, 2010, 2011, 2013, 2014, 2015  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2013, 2014, 2015, 2016  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -60,6 +60,7 @@ public class ImgTag
     private Object id;
     private String src;
     private HttpParametersMap params;
+	private boolean srcAbsolute;
 	private LastModifiedServlet.AddLastModifiedWhen addLastModified = LastModifiedServlet.AddLastModifiedWhen.AUTO;
     private Object width;
     private Object height;
@@ -107,6 +108,14 @@ public class ImgTag
     public void addParam(String name, String value) {
         if(params==null) params = new HttpParametersMap();
         params.addParameter(name, value);
+	}
+
+	public boolean getSrcAbsolute() {
+		return srcAbsolute;
+	}
+
+	public void setSrcAbsolute(boolean srcAbsolute) {
+		this.srcAbsolute = srcAbsolute;
 	}
 
 	public String getAddLastModified() {
@@ -207,7 +216,7 @@ public class ImgTag
 		}
 		out.write(" src=\"");
 		encodeTextInXhtmlAttribute(
-			UrlUtils.buildUrl(getJspContext(), src, params, addLastModified),
+			UrlUtils.buildUrl(getJspContext(), src, params, srcAbsolute, addLastModified),
 			out
 		);
 		out.write('"');

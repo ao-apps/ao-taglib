@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2013, 2014, 2015  AO Industries, Inc.
+ * Copyright (C) 2013, 2014, 2015, 2016  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -65,6 +65,7 @@ final public class UrlUtils {
 		HttpServletResponse response,
 		String href,
 		HttpParameters params,
+		boolean hrefAbsolute,
 		LastModifiedServlet.AddLastModifiedWhen addLastModified
 	) throws MalformedURLException, UnsupportedEncodingException {
 		String servletPath = Dispatcher.getCurrentPagePath(request);
@@ -76,7 +77,9 @@ final public class UrlUtils {
 			if(contextPath.length()>0) href = contextPath + href;
 		}
 		href = com.aoindustries.net.UrlUtils.encodeUrlPath(href);
-		return response.encodeURL(href);
+		href= response.encodeURL(href);
+        if(hrefAbsolute && href.startsWith("/")) href = ServletUtil.getAbsoluteURL(request, href);
+		return href;
 	}
 
 	/**
@@ -86,6 +89,7 @@ final public class UrlUtils {
 		PageContext pageContext,
 		String href,
 		HttpParameters params,
+		boolean hrefAbsolute,
 		LastModifiedServlet.AddLastModifiedWhen addLastModified
 	) throws MalformedURLException, UnsupportedEncodingException {
 		return buildUrl(
@@ -94,6 +98,7 @@ final public class UrlUtils {
 			(HttpServletResponse)pageContext.getResponse(),
 			href,
 			params,
+			hrefAbsolute,
 			addLastModified
 		);
 	}
@@ -105,12 +110,14 @@ final public class UrlUtils {
 		JspContext jspContext,
 		String src,
 		HttpParameters params,
+		boolean srcAbsolute,
 		LastModifiedServlet.AddLastModifiedWhen addLastModified
 	) throws MalformedURLException, UnsupportedEncodingException {
 		return buildUrl(
 			(PageContext)jspContext,
 			src,
 			params,
+			srcAbsolute,
 			addLastModified
 		);
 	}
@@ -125,12 +132,13 @@ final public class UrlUtils {
 		PageContext pageContext,
 		String href,
 		HttpParameters params,
+		boolean hrefAbsolute,
 		LastModifiedServlet.AddLastModifiedWhen addLastModified
 	) throws JspTagException, IOException {
         if(href!=null) {
             out.write(" href=\"");
 			encodeTextInXhtmlAttribute(
-				buildUrl(pageContext, href, params, addLastModified),
+				buildUrl(pageContext, href, params, hrefAbsolute, addLastModified),
 				out
 			);
             out.write('"');
@@ -147,6 +155,7 @@ final public class UrlUtils {
 		JspContext jspContext,
 		String href,
 		HttpParameters params,
+		boolean hrefAbsolute,
 		LastModifiedServlet.AddLastModifiedWhen addLastModified
 	) throws JspTagException, IOException {
 		writeHref(
@@ -154,6 +163,7 @@ final public class UrlUtils {
 			(PageContext)jspContext,
 			href,
 			params,
+			hrefAbsolute,
 			addLastModified
 		);
 	}
@@ -163,12 +173,13 @@ final public class UrlUtils {
 		PageContext pageContext,
 		String src,
 		HttpParameters params,
+		boolean srcAbsolute,
 		LastModifiedServlet.AddLastModifiedWhen addLastModified
 	) throws JspTagException, IOException {
 		if(src!=null) {
 			out.write(" src=\"");
 			encodeTextInXhtmlAttribute(
-				buildUrl(pageContext, src, params, addLastModified),
+				buildUrl(pageContext, src, params, srcAbsolute, addLastModified),
 				out
 			);
 			out.write('"');
@@ -185,6 +196,7 @@ final public class UrlUtils {
 		JspContext jspContext,
 		String src,
 		HttpParameters params,
+		boolean srcAbsolute,
 		LastModifiedServlet.AddLastModifiedWhen addLastModified
 	) throws JspTagException, IOException {
 		writeSrc(
@@ -192,6 +204,7 @@ final public class UrlUtils {
 			(PageContext)jspContext,
 			src,
 			params,
+			srcAbsolute,
 			addLastModified
 		);
 	}

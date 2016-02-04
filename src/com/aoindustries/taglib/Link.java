@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2013  AO Industries, Inc.
+ * Copyright (C) 2013, 2016  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -35,6 +35,7 @@ public class Link {
 
     private final String href;
 	private final HttpParameters params;
+	private final boolean hrefAbsolute;
 	private final LastModifiedServlet.AddLastModifiedWhen addLastModified;
     private final String hreflang;
     private final String rel;
@@ -43,6 +44,7 @@ public class Link {
 
     public Link(
 		String href,
+		boolean hrefAbsolute,
 		HttpParameters params,
 		LastModifiedServlet.AddLastModifiedWhen addLastModified,
 		String hreflang,
@@ -52,6 +54,7 @@ public class Link {
 	) throws JspTagException {
         this.href = href;
 		this.params = params;
+		this.hrefAbsolute = hrefAbsolute;
 		this.addLastModified = addLastModified;
         this.hreflang = hreflang;
         this.rel = rel;
@@ -62,6 +65,10 @@ public class Link {
     public String getHref() {
         return href;
     }
+
+	public boolean getHrefAbsolute() {
+		return hrefAbsolute;
+	}
 
 	public HttpParameters getParams() {
 		return params;

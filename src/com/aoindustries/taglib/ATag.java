@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014, 2015  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -68,6 +68,7 @@ public class ATag
 
     private String href;
     private MutableHttpParameters params;
+	private boolean hrefAbsolute;
 	private LastModifiedServlet.AddLastModifiedWhen addLastModified = LastModifiedServlet.AddLastModifiedWhen.AUTO;
 	private Object hreflang;
 	private Object rel;
@@ -110,6 +111,14 @@ public class ATag
         if(params==null) params = new HttpParametersMap();
         params.addParameter(name, value);
     }
+
+	public boolean getHrefAbsolute() {
+		return hrefAbsolute;
+	}
+
+	public void setHrefAbsolute(boolean hrefAbsolute) {
+		this.hrefAbsolute = hrefAbsolute;
+	}
 
 	public String getAddLastModified() {
 		return addLastModified.getLowerName();
@@ -239,7 +248,7 @@ public class ATag
 	@Override
     protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		out.write("<a");
-		UrlUtils.writeHref(out, getJspContext(), href, params, addLastModified);
+		UrlUtils.writeHref(out, getJspContext(), href, params, hrefAbsolute, addLastModified);
 		if(hreflang!=null) {
 			out.write(" hreflang=\"");
 			Coercion.write(hreflang, textInXhtmlAttributeEncoder, out);

@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2015  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2015, 2016  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -47,6 +47,7 @@ public class ATagBeanInfo extends SimpleBeanInfo {
 						// From base class: new PropertyDescriptor("outputType", ATag.class, "getOutputType", null),
 						new PropertyDescriptor("href", ATag.class),
 						new PropertyDescriptor("params", ATag.class, "getParams", null),
+						new PropertyDescriptor("hrefAbsolute", ATag.class),
 						new PropertyDescriptor("addLastModified", ATag.class),
 						new PropertyDescriptor("hreflang", ATag.class),
 						new PropertyDescriptor("rel", ATag.class),
