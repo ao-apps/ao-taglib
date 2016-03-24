@@ -2616,4 +2616,25 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <function-signature>java.lang.String wordWrap(java.lang.String,int)</function-signature>
     <example>${ao:wordWrap(text, width)}</example>
   </function>
+  <function>
+    <description>java.lang.Math.ceil(double)</description>
+    <name>ceil</name>
+    <function-class>java.lang.Math</function-class>
+    <function-signature>double ceil(double)</function-signature>
+    <example>${ao:ceil(a)}</example>
+  </function>
+  <function>
+    <description>java.lang.Math.floor(double)</description>
+    <name>floor</name>
+    <function-class>java.lang.Math</function-class>
+    <function-signature>double floor(double)</function-signature>
+    <example>${ao:floor(a)}</example>
+  </function>
+  <function>
+    <description>java.lang.Math.round(double)</description>
+    <name>round</name>
+    <function-class>java.lang.Math</function-class>
+    <function-signature>long round(double)</function-signature>
+    <example>${ao:round(a)}</example>
+  </function>
 </taglib>
