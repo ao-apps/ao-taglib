@@ -308,6 +308,8 @@ public class ATag
 				HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
 				if(href.startsWith("mailto:")) {
 					encodeTextInXhtml(href.substring(7), out);
+				} else if(href.startsWith("tel:")) {
+					encodeTextInXhtml(href.substring(4), out);
 				} else {
 					encodeTextInXhtml(
 						ServletUtil.getAbsolutePath(Dispatcher.getCurrentPagePath(request), href),
