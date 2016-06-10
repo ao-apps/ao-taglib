@@ -56,6 +56,16 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
     <body-content>scriptless</body-content>
     <attribute>
 		<description><![CDATA[
+			The id of the element.
+			A nested &lt;ao:id&gt; tag will override this value.
+		]]></description>
+      <name>id</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.Object</type>
+    </attribute>
+    <attribute>
+		<description><![CDATA[
 			The href for the link.
 			If starts with a /, the context path will be prepended to the path.
 			Session state URL rewriting is performed as needed.

@@ -52,6 +52,7 @@ public class ATag
 	extends AutoEncodingBufferedTag
 	implements
 		DynamicAttributes,
+		IdAttribute,
 		HrefAttribute,
 		ParamsAttribute,
 		HreflangAttribute,
@@ -66,6 +67,7 @@ public class ATag
 		OnmouseoutAttribute
 {
 
+    private Object id;
     private String href;
     private MutableHttpParameters params;
 	private boolean hrefAbsolute;
@@ -89,6 +91,16 @@ public class ATag
     @Override
     public MediaType getOutputType() {
         return MediaType.XHTML;
+    }
+
+    @Override
+    public Object getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Object id) {
+		this.id = id;
     }
 
     @Override
@@ -248,6 +260,11 @@ public class ATag
 	@Override
     protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		out.write("<a");
+		if(id!=null) {
+			out.write(" id=\"");
+			Coercion.write(id, textInXhtmlAttributeEncoder, out);
+			out.write('"');
+		}
 		UrlUtils.writeHref(out, getJspContext(), href, params, hrefAbsolute, addLastModified);
 		if(hreflang!=null) {
 			out.write(" hreflang=\"");
