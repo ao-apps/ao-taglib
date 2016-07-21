@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2013, 2015  AO Industries, Inc.
+ * Copyright (C) 2013, 2015, 2016  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -46,7 +46,7 @@ public class HtmlTagBeanInfo extends SimpleBeanInfo {
 						// From base class: new PropertyDescriptor("contentType", HtmlTag.class, "getContentType", null),
 						new PropertyDescriptor("doctype", HtmlTag.class, null, "setDoctype"),
 						new PropertyDescriptor("forceHtml", HtmlTag.class, null, "setForceHtml"),
-						new PropertyDescriptor("class", HtmlTag.class, null, "setClazz"),
+						new PropertyDescriptor("class", HtmlTag.class, "getClazz", "setClazz"),
 						new PropertyDescriptor("oldIeClass", HtmlTag.class, null, "setOldIeClass")
 					};
 					properties = props;
