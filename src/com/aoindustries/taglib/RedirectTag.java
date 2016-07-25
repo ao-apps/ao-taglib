@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2010, 2011, 2012, 2013, 2014, 2015  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2012, 2013, 2014, 2015, 2016  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -166,12 +166,13 @@ public class RedirectTag
 		final ServletContext servletContext = pageContext.getServletContext();
 		final HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
 		final HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
+		final String responseEncoding = response.getCharacterEncoding();
 
         // Add any parameters to the URL
 		String myHref = href;
 		if(myHref==null) myHref = page; // Default to page when href not given
         if(myHref==null) throw new AttributeRequiredException("href");
-        myHref = HttpParametersUtils.addParams(myHref, params);
+        myHref = HttpParametersUtils.addParams(myHref, params, responseEncoding);
 		myHref = LastModifiedServlet.addLastModified(servletContext, request, servletPath, myHref, addLastModified);
 
 		// Get the full URL that will be used for the redirect

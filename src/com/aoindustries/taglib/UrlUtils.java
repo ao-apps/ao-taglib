@@ -68,15 +68,16 @@ final public class UrlUtils {
 		boolean hrefAbsolute,
 		LastModifiedServlet.AddLastModifiedWhen addLastModified
 	) throws MalformedURLException, UnsupportedEncodingException {
+		String responseEncoding = response.getCharacterEncoding();
 		String servletPath = Dispatcher.getCurrentPagePath(request);
         href = ServletUtil.getAbsolutePath(servletPath, href);
-		href = HttpParametersUtils.addParams(href, params);
+		href = HttpParametersUtils.addParams(href, params, responseEncoding);
 		href = LastModifiedServlet.addLastModified(servletContext, request, servletPath, href, addLastModified);
 		if(!hrefAbsolute && href.startsWith("/")) {
 			String contextPath = request.getContextPath();
 			if(contextPath.length()>0) href = contextPath + href;
 		}
-		href = com.aoindustries.net.UrlUtils.encodeUrlPath(href);
+		href = com.aoindustries.net.UrlUtils.encodeUrlPath(href, responseEncoding);
 		href= response.encodeURL(href);
         if(hrefAbsolute && href.startsWith("/")) href = ServletUtil.getAbsoluteURL(request, href);
 		return href;

@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2010, 2011, 2013, 2015  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2013, 2015, 2016  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -194,6 +194,8 @@ public class FormTag
 	@Override
     protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
+		HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
+		String responseEncoding = response.getCharacterEncoding();
 		out.write("<form method=\"");
 		out.write(method);
 		out.write('"');
@@ -207,14 +209,13 @@ public class FormTag
 		final int questionPos;
 		if(action!=null) {
 			HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
-			HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
 			out.write(" action=\"");
 			action = ServletUtil.getAbsolutePath(Dispatcher.getCurrentPagePath(request), action);
 			if(action.startsWith("/")) {
 				String contextPath = request.getContextPath();
 				if(contextPath.length()>0) action = contextPath + action;
 			}
-			action = com.aoindustries.net.UrlUtils.encodeUrlPath(action);
+			action = com.aoindustries.net.UrlUtils.encodeUrlPath(action, responseEncoding);
 			action = response.encodeURL(action);
 			questionPos = action.indexOf('?');
 			// The action attribute is everything up to the first question mark
@@ -263,11 +264,11 @@ public class FormTag
 					int equalPos = nameVal.indexOf('=');
 					String name, value;
 					if(equalPos==-1) {
-						name = URLDecoder.decode(nameVal, "UTF-8");
+						name = URLDecoder.decode(nameVal, responseEncoding);
 						value = "";
 					} else {
-						name = URLDecoder.decode(nameVal.substring(0, equalPos), "UTF-8");
-						value = URLDecoder.decode(nameVal.substring(equalPos+1), "UTF-8");
+						name = URLDecoder.decode(nameVal.substring(0, equalPos), responseEncoding);
+						value = URLDecoder.decode(nameVal.substring(equalPos+1), responseEncoding);
 					}
 					out.write("<input type=\"hidden\" name=\"");
 					encodeTextInXhtmlAttribute(name, out);

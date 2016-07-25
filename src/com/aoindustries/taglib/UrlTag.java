@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009, 2010, 2011, 2012, 2013  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2016  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -30,7 +30,9 @@ import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.net.HttpParametersUtils;
 import java.io.IOException;
 import java.io.Writer;
+import javax.servlet.ServletResponse;
 import javax.servlet.jsp.JspTagException;
+import javax.servlet.jsp.PageContext;
 
 /**
  * TODO: Have absolute option
@@ -65,9 +67,11 @@ public class UrlTag extends AutoEncodingBufferedTag implements ParamsAttribute {
 
     @Override
     protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
-        String url = HttpParametersUtils.addParams(capturedBody.trim().toString(), params);
+		PageContext pageContext = (PageContext)getJspContext();
+		ServletResponse response = pageContext.getResponse();
+		String responseEncoding = response.getCharacterEncoding();
+        String url = HttpParametersUtils.addParams(capturedBody.trim().toString(), params, responseEncoding);
         /*if(url.startsWith("/")) {
-            PageContext pageContext = (PageContext)getJspContext();
             HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
             out.write(request.getContextPath());
         }*/

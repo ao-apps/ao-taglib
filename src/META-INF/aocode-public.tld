@@ -69,7 +69,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			The href for the link.
 			If starts with a /, the context path will be prepended to the path.
 			Session state URL rewriting is performed as needed.
-			URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
+			URL Encoding is performed on everything up to the first ? (if present), except for
 			any character in the set { ':', '/', ';', '#' }
 			A nested &lt;ao:href&gt; tag will override this value.
 		]]></description>
@@ -711,7 +711,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			The src for the frame content.
 			If starts with a /, the context path will be prepended to the path.
 			Session state URL rewriting is performed as needed.
-			URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
+			URL Encoding is performed on everything up to the first ? (if present), except for
 			any character in the set { ':', '/', ';', '#' }
 			A nested &lt;ao:src&gt; tag will override this value.
 			Any directly nested &lt;ao:param&gt; or &lt;ao:params&gt; tag will add parameters to the src.
@@ -827,7 +827,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			The src for the image.
 			If starts with a /, the context path will be prepended to the path.
 			Session state URL rewriting is performed as needed.
-			URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
+			URL Encoding is performed on everything up to the first ? (if present), except for
 			any character in the set { ':', '/', ';', '#' }
 			A nested &lt;ao:src&gt; tag will override this value.
 			Any directly nested &lt;ao:param&gt; or &lt;ao:params&gt; tag will add parameters to the src.
@@ -1236,7 +1236,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			The href for the link.
 			If starts with a /, the context path will be prepended to the path.
 			Session state URL rewriting is performed as needed.
-			URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
+			URL Encoding is performed on everything up to the first ? (if present), except for
 			any character in the set { ':', '/', ';', '#' }
 			A nested &lt;ao:href&gt; tag will override this value.
 			Any directly nested &lt;ao:param&gt; or &lt;ao:params&gt; tag will add parameters to the href.
@@ -1882,7 +1882,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<p>
 				If starts with a /, the context path will be prepended to the path.
 				Session state URL rewriting is performed as needed.
-				URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
+				URL Encoding is performed on everything up to the first ? (if present), except for
 				any character in the set { ':', '/', ';', '#' }
 			</p>
 			<p>
@@ -2014,7 +2014,7 @@ along with aocode-public-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			The src for the script.
 			If starts with a /, the context path will be prepended to the path.
 			Session state URL rewriting is performed as needed.
-			URL Encoding as UTF-8 is performed on everything up to the first ? (if present), except for
+			URL Encoding is performed on everything up to the first ? (if present), except for
 			any character in the set { ':', '/', ';', '#' }
 			A nested &lt;ao:src&gt; tag will override this value.
 			Any directly nested &lt;ao:param&gt; or &lt;ao:params&gt; tag will add parameters to the src.
