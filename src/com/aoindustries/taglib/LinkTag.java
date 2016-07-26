@@ -177,7 +177,7 @@ public class LinkTag
 			);
 		} else {
 			out.write("<link");
-			UrlUtils.writeHref(out, getJspContext(), href, params, hrefAbsolute, addLastModified);
+			UrlUtils.writeHref(getJspContext(), out, href, params, hrefAbsolute, addLastModified);
 			if(hreflang!=null) {
 				out.write(" hreflang=\"");
 				Coercion.write(hreflang, textInXhtmlAttributeEncoder, out);

@@ -213,7 +213,7 @@ public class ImgTag
 			Coercion.write(id, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
-		UrlUtils.writeSrc(out, getJspContext(), src, params, srcAbsolute, addLastModified);
+		UrlUtils.writeSrc(getJspContext(), out, src, params, srcAbsolute, addLastModified);
 		if(width!=null) {
 			out.write(" width=\"");
 			Coercion.write(width, textInXhtmlAttributeEncoder, out);

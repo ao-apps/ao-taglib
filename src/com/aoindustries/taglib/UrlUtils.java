@@ -44,14 +44,14 @@ final public class UrlUtils {
 	 * Encodes the URL.
 	 */
 	public static void writeHref(
-		Appendable out,
 		PageContext pageContext,
+		Appendable out,
 		String href,
 		HttpParameters params,
 		boolean hrefAbsolute,
 		LastModifiedServlet.AddLastModifiedWhen addLastModified
 	) throws JspTagException, IOException {
-        if(href!=null) {
+        if(href != null) {
             out.append(" href=\"");
 			encodeTextInXhtmlAttribute(
 				com.aoindustries.net.UrlUtils.buildUrl(pageContext, href, params, hrefAbsolute, addLastModified),
@@ -67,16 +67,16 @@ final public class UrlUtils {
 	 * @see  #writeHref(java.lang.Appendable, javax.servlet.jsp.PageContext, java.lang.String, com.aoindustries.net.HttpParameters, boolean, com.aoindustries.servlet.http.LastModifiedServlet.AddLastModifiedWhen) 
 	 */
 	public static void writeHref(
-		Appendable out,
 		JspContext jspContext,
+		Appendable out,
 		String href,
 		HttpParameters params,
 		boolean hrefAbsolute,
 		LastModifiedServlet.AddLastModifiedWhen addLastModified
 	) throws JspTagException, IOException {
 		writeHref(
-			out,
 			(PageContext)jspContext,
+			out,
 			href,
 			params,
 			hrefAbsolute,
@@ -85,14 +85,14 @@ final public class UrlUtils {
 	}
 
 	public static void writeSrc(
-		Appendable out,
 		PageContext pageContext,
+		Appendable out,
 		String src,
 		HttpParameters params,
 		boolean srcAbsolute,
 		LastModifiedServlet.AddLastModifiedWhen addLastModified
 	) throws JspTagException, IOException {
-		if(src!=null) {
+		if(src != null) {
 			out.append(" src=\"");
 			encodeTextInXhtmlAttribute(
 				com.aoindustries.net.UrlUtils.buildUrl(pageContext, src, params, srcAbsolute, addLastModified),
@@ -108,16 +108,16 @@ final public class UrlUtils {
 	 * @see  #writeSrc(java.lang.Appendable, javax.servlet.jsp.PageContext, java.lang.String, com.aoindustries.net.HttpParameters, boolean, com.aoindustries.servlet.http.LastModifiedServlet.AddLastModifiedWhen) 
 	 */
 	public static void writeSrc(
-		Appendable out,
 		JspContext jspContext,
+		Appendable out,
 		String src,
 		HttpParameters params,
 		boolean srcAbsolute,
 		LastModifiedServlet.AddLastModifiedWhen addLastModified
 	) throws JspTagException, IOException {
 		writeSrc(
-			out,
 			(PageContext)jspContext,
+			out,
 			src,
 			params,
 			srcAbsolute,

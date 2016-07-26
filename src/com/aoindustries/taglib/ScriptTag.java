@@ -160,7 +160,7 @@ public class ScriptTag
 			out.write("<script type=\"");
 			encodeTextInXhtmlAttribute(mediaType.getContentType(), out);
 			out.write('"');
-			UrlUtils.writeSrc(out, getJspContext(), src, params, srcAbsolute, addLastModified);
+			UrlUtils.writeSrc(getJspContext(), out, src, params, srcAbsolute, addLastModified);
 			out.write("></script>");
 		}
     }

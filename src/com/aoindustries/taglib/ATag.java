@@ -265,7 +265,7 @@ public class ATag
 			Coercion.write(id, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
-		UrlUtils.writeHref(out, getJspContext(), href, params, hrefAbsolute, addLastModified);
+		UrlUtils.writeHref(getJspContext(), out, href, params, hrefAbsolute, addLastModified);
 		if(hreflang!=null) {
 			out.write(" hreflang=\"");
 			Coercion.write(hreflang, textInXhtmlAttributeEncoder, out);
