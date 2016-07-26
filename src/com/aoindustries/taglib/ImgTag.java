@@ -24,7 +24,6 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaType;
-import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.net.EmptyParameters;
@@ -214,12 +213,7 @@ public class ImgTag
 			Coercion.write(id, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
-		out.write(" src=\"");
-		encodeTextInXhtmlAttribute(
-			UrlUtils.buildUrl(getJspContext(), src, params, srcAbsolute, addLastModified),
-			out
-		);
-		out.write('"');
+		UrlUtils.writeSrc(out, getJspContext(), src, params, srcAbsolute, addLastModified);
 		if(width!=null) {
 			out.write(" width=\"");
 			Coercion.write(width, textInXhtmlAttributeEncoder, out);

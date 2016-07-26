@@ -24,18 +24,9 @@ package com.aoindustries.taglib;
 
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import com.aoindustries.net.HttpParameters;
-import com.aoindustries.net.HttpParametersUtils;
-import com.aoindustries.servlet.http.Dispatcher;
 import com.aoindustries.servlet.http.LastModifiedServlet;
-import com.aoindustries.servlet.http.ServletUtil;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.io.Writer;
-import java.net.MalformedURLException;
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
@@ -48,88 +39,12 @@ import javax.servlet.jsp.PageContext;
 final public class UrlUtils {
 
 	/**
-	 * Performs all the proper URL conversions along with optionally adding a lastModified parameter.
-	 * This includes:
-	 * <ol>
-	 *   <li>Converting any page-relative path to a context-relative path starting with a slash (/)</li>
-	 *   <li>Adding any additional parameters</li>
-	 *   <li>Optionally adding lastModified parameter</li>
-	 *   <li>Converting any context-relative path to a site-relative path by prefixing contextPath</li>
-	 *   <li>Encoding any non-ASCII characters in the URL path</li>
-	 *   <li>Rewrite with response.encodeURL</li>
-	 * </ol>
-	 */
-	public static String buildUrl(
-		ServletContext servletContext,
-		HttpServletRequest request,
-		HttpServletResponse response,
-		String href,
-		HttpParameters params,
-		boolean hrefAbsolute,
-		LastModifiedServlet.AddLastModifiedWhen addLastModified
-	) throws MalformedURLException, UnsupportedEncodingException {
-		String responseEncoding = response.getCharacterEncoding();
-		String servletPath = Dispatcher.getCurrentPagePath(request);
-        href = ServletUtil.getAbsolutePath(servletPath, href);
-		href = HttpParametersUtils.addParams(href, params, responseEncoding);
-		href = LastModifiedServlet.addLastModified(servletContext, request, servletPath, href, addLastModified);
-		if(!hrefAbsolute && href.startsWith("/")) {
-			String contextPath = request.getContextPath();
-			if(contextPath.length()>0) href = contextPath + href;
-		}
-		href = com.aoindustries.net.UrlUtils.encodeUrlPath(href, responseEncoding);
-		href= response.encodeURL(href);
-        if(hrefAbsolute && href.startsWith("/")) href = ServletUtil.getAbsoluteURL(request, href);
-		return href;
-	}
-
-	/**
-	 * @see  #buildUrl(javax.servlet.ServletContext, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, java.lang.String, com.aoindustries.net.HttpParameters, boolean) 
-	 */
-	public static String buildUrl(
-		PageContext pageContext,
-		String href,
-		HttpParameters params,
-		boolean hrefAbsolute,
-		LastModifiedServlet.AddLastModifiedWhen addLastModified
-	) throws MalformedURLException, UnsupportedEncodingException {
-		return buildUrl(
-			pageContext.getServletContext(),
-			(HttpServletRequest)pageContext.getRequest(),
-			(HttpServletResponse)pageContext.getResponse(),
-			href,
-			params,
-			hrefAbsolute,
-			addLastModified
-		);
-	}
-	
-	/**
-	 * @see  #buildUrl(javax.servlet.ServletContext, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, java.lang.String, com.aoindustries.net.HttpParameters, boolean) 
-	 */
-	public static String buildUrl(
-		JspContext jspContext,
-		String src,
-		HttpParameters params,
-		boolean srcAbsolute,
-		LastModifiedServlet.AddLastModifiedWhen addLastModified
-	) throws MalformedURLException, UnsupportedEncodingException {
-		return buildUrl(
-			(PageContext)jspContext,
-			src,
-			params,
-			srcAbsolute,
-			addLastModified
-		);
-	}
-
-	/**
 	 * Writes an href attribute with parameters.
 	 * Adds contextPath to URLs that begin with a slash (/).
 	 * Encodes the URL.
 	 */
 	public static void writeHref(
-		Writer out,
+		Appendable out,
 		PageContext pageContext,
 		String href,
 		HttpParameters params,
@@ -137,22 +52,22 @@ final public class UrlUtils {
 		LastModifiedServlet.AddLastModifiedWhen addLastModified
 	) throws JspTagException, IOException {
         if(href!=null) {
-            out.write(" href=\"");
+            out.append(" href=\"");
 			encodeTextInXhtmlAttribute(
-				buildUrl(pageContext, href, params, hrefAbsolute, addLastModified),
+				com.aoindustries.net.UrlUtils.buildUrl(pageContext, href, params, hrefAbsolute, addLastModified),
 				out
 			);
-            out.write('"');
+            out.append('"');
         } else {
-            if(params!=null) throw new LocalizedJspTagException(ApplicationResources.accessor, "UrlUtils.paramsWithoutHref");
+            if(params != null) throw new LocalizedJspTagException(ApplicationResources.accessor, "UrlUtils.paramsWithoutHref");
         }
 	}
 	
 	/**
-	 * @see  #writeHref(java.io.Writer, javax.servlet.jsp.PageContext, java.lang.String, com.aoindustries.net.MutableHttpParameters, boolean) 
+	 * @see  #writeHref(java.lang.Appendable, javax.servlet.jsp.PageContext, java.lang.String, com.aoindustries.net.HttpParameters, boolean, com.aoindustries.servlet.http.LastModifiedServlet.AddLastModifiedWhen) 
 	 */
 	public static void writeHref(
-		Writer out,
+		Appendable out,
 		JspContext jspContext,
 		String href,
 		HttpParameters params,
@@ -170,7 +85,7 @@ final public class UrlUtils {
 	}
 
 	public static void writeSrc(
-		Writer out,
+		Appendable out,
 		PageContext pageContext,
 		String src,
 		HttpParameters params,
@@ -178,22 +93,22 @@ final public class UrlUtils {
 		LastModifiedServlet.AddLastModifiedWhen addLastModified
 	) throws JspTagException, IOException {
 		if(src!=null) {
-			out.write(" src=\"");
+			out.append(" src=\"");
 			encodeTextInXhtmlAttribute(
-				buildUrl(pageContext, src, params, srcAbsolute, addLastModified),
+				com.aoindustries.net.UrlUtils.buildUrl(pageContext, src, params, srcAbsolute, addLastModified),
 				out
 			);
-			out.write('"');
+			out.append('"');
         } else {
-            if(params!=null) throw new LocalizedJspTagException(ApplicationResources.accessor, "UrlUtils.paramsWithoutSrc");
+            if(params != null) throw new LocalizedJspTagException(ApplicationResources.accessor, "UrlUtils.paramsWithoutSrc");
 		}
 	}
-	
+
 	/**
-	 * @see  #writeSrc(java.io.Writer, javax.servlet.jsp.PageContext, java.lang.String, com.aoindustries.net.MutableHttpParameters, boolean) 
+	 * @see  #writeSrc(java.lang.Appendable, javax.servlet.jsp.PageContext, java.lang.String, com.aoindustries.net.HttpParameters, boolean, com.aoindustries.servlet.http.LastModifiedServlet.AddLastModifiedWhen) 
 	 */
 	public static void writeSrc(
-		Writer out,
+		Appendable out,
 		JspContext jspContext,
 		String src,
 		HttpParameters params,
