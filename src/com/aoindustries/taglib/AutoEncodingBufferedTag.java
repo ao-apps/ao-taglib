@@ -134,12 +134,14 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 
     /**
      * Gets the number of characters that may be buffered before switching to the
-     * use of a temp file.  The default is 4 MB.
-	 * 
+     * use of a temp file.
+	 *
 	 * @return the threshold or <code>Long.MAX_VALUE</code> to never use temp files.
+	 *
+	 * @see  AutoTempFileWriter#DEFAULT_TEMP_FILE_THRESHOLD
      */
     public long getTempFileThreshold() {
-        return 4L * 1024L * 1024L;
+        return AutoTempFileWriter.DEFAULT_TEMP_FILE_THRESHOLD;
     }
 
     @Override
@@ -153,7 +155,7 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
             // BufferWriter bufferWriter = new CharArrayBufferWriter(128, getTempFileThreshold());
             BufferWriter bufferWriter = new SegmentedWriter();
 			try {
-				// Enable temp files if context active and threshold not Long.MAX_VALUE
+				// Enable temp files if temp file context active and threshold not Long.MAX_VALUE
 				final long tempFileThreshold = getTempFileThreshold();
 				if(tempFileThreshold != Long.MAX_VALUE) {
 					bufferWriter = TempFileContext.wrapTempFileList(
@@ -164,8 +166,8 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 							public BufferWriter call(BufferWriter original, TempFileList tempFileList) {
 								return new AutoTempFileWriter(
 									original,
-									tempFileThreshold,
-									tempFileList
+									tempFileList,
+									tempFileThreshold
 								);
 							}
 						}
