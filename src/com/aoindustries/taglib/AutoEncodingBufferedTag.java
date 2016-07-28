@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2009, 2010, 2011, 2012, 2013  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2016  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -23,11 +23,11 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaEncoder;
-import com.aoindustries.encoding.MediaWriter;
 import com.aoindustries.encoding.MediaException;
-import com.aoindustries.encoding.ValidMediaInput;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.MediaValidator;
+import com.aoindustries.encoding.MediaWriter;
+import com.aoindustries.encoding.ValidMediaInput;
 import com.aoindustries.io.TempFileList;
 import com.aoindustries.io.buffer.AutoTempFileWriter;
 import com.aoindustries.io.buffer.BufferResult;
@@ -42,8 +42,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
@@ -73,8 +71,6 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
  * @author  AO Industries, Inc.
  */
 public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
-
-	private static final Logger logger = Logger.getLogger(AutoEncodingBufferedTag.class.getName());
 
 	/**
 	 * Enables logging of all buffer calls.
@@ -146,9 +142,6 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
         return 4L * 1024L * 1024L;
     }
 
-	private static final Object tempFileWarningLock = new Object();
-	private static boolean tempFileWarned = false;
-
     @Override
     public void doTag() throws JspException, IOException {
         try {
@@ -161,32 +154,22 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
             BufferWriter bufferWriter = new SegmentedWriter();
 			try {
 				// Enable temp files if context active and threshold not Long.MAX_VALUE
-				long tempFileThreshold = getTempFileThreshold();
+				final long tempFileThreshold = getTempFileThreshold();
 				if(tempFileThreshold!=Long.MAX_VALUE) {
-					TempFileList tempFileList = TempFileContext.getTempFileList(pageContext.getRequest());
-					if(tempFileList!=null) {
-						bufferWriter = new AutoTempFileWriter(
-							bufferWriter,
-							tempFileThreshold,
-							tempFileList
-						);
-					} else {
-						// Warn once
-						synchronized(tempFileWarningLock) {
-							if(!tempFileWarned) {
-								if(logger.isLoggable(Level.WARNING)) {
-									logger.log(
-										Level.WARNING,
-										"TempFileContext not initialized: refusing to automatically create temp files for large buffers.  "
-										+ "Additional heap space may be used for large requests.  "
-										+ "Please add the " + TempFileContext.class.getName() + " filter to your web.xml file.",
-										new Throwable("Stack Trace")
-									);
-								}
-								tempFileWarned = true;
+					bufferWriter = TempFileContext.wrapTempFileList(
+						bufferWriter,
+						pageContext.getRequest(),
+						new TempFileContext.Wrapper<BufferWriter>() {
+							@Override
+							public BufferWriter call(BufferWriter original, TempFileList tempFileList) {
+								return new AutoTempFileWriter(
+									original,
+									tempFileThreshold,
+									tempFileList
+								);
 							}
 						}
-					}
+					);
 				}
 				if(ENABLE_BUFFER_LOGGING) bufferWriter = new LoggingWriter(bufferWriter, log);
 				JspFragment body = getJspBody();
