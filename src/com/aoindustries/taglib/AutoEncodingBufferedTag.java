@@ -155,7 +155,7 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 			try {
 				// Enable temp files if context active and threshold not Long.MAX_VALUE
 				final long tempFileThreshold = getTempFileThreshold();
-				if(tempFileThreshold!=Long.MAX_VALUE) {
+				if(tempFileThreshold != Long.MAX_VALUE) {
 					bufferWriter = TempFileContext.wrapTempFileList(
 						bufferWriter,
 						pageContext.getRequest(),
