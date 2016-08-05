@@ -28,6 +28,7 @@ import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.MediaValidator;
 import com.aoindustries.encoding.MediaWriter;
 import com.aoindustries.encoding.ValidMediaInput;
+import com.aoindustries.encoding.servlet.HttpServletResponseEncodingContext;
 import com.aoindustries.io.TempFileList;
 import com.aoindustries.io.buffer.AutoTempFileWriter;
 import com.aoindustries.io.buffer.BufferResult;
@@ -213,7 +214,7 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 					containerContentType = MediaType.getMediaTypeForContentType(response.getContentType());
 				}
 				// Find the encoder
-				MediaEncoder mediaEncoder = MediaEncoder.getInstance(response, myOutputType, containerContentType);
+				MediaEncoder mediaEncoder = MediaEncoder.getInstance(new HttpServletResponseEncodingContext(response), myOutputType, containerContentType);
 				if(mediaEncoder!=null) {
 					setMediaEncoderOptions(mediaEncoder);
 					// Encode our output.  The encoder guarantees valid output for our parent.

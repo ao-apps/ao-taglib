@@ -1,6 +1,6 @@
 /*
  * aocode-public-taglib - Reusable Java taglib of general tools with minimal external dependencies.
- * Copyright (C) 2012, 2013  AO Industries, Inc.
+ * Copyright (C) 2012, 2013, 2016  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -23,11 +23,12 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaEncoder;
-import com.aoindustries.encoding.MediaWriter;
 import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.MediaValidator;
+import com.aoindustries.encoding.MediaWriter;
 import com.aoindustries.encoding.ValidMediaInput;
+import com.aoindustries.encoding.servlet.HttpServletResponseEncodingContext;
 import com.aoindustries.io.NullWriter;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import java.io.IOException;
@@ -119,7 +120,7 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
 				writePrefix(containerContentType, containerValidator);
 
 				// Find the encoder
-                MediaEncoder mediaEncoder = MediaEncoder.getInstance(response, myOutputType, containerContentType);
+                MediaEncoder mediaEncoder = MediaEncoder.getInstance(new HttpServletResponseEncodingContext(response), myOutputType, containerContentType);
                 if(mediaEncoder!=null) {
                     setMediaEncoderOptions(mediaEncoder);
                     // Encode our output.  The encoder guarantees valid output for our parent.
