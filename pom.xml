@@ -210,7 +210,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 			<artifactId>commons-beanutils</artifactId>
 			<version>1.9.2</version>
 			<!-- Only the write and getStackTraces tags use this -->
-			<!--<optional>true</optional>-->
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>com.aoindustries</groupId>
