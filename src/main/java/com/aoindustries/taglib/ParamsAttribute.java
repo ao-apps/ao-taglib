@@ -31,7 +31,7 @@ import com.aoindustries.net.HttpParameters;
  */
 public interface ParamsAttribute {
 
-    HttpParameters getParams();
+	HttpParameters getParams();
 
-    void addParam(String name, String value);
+	void addParam(String name, String value);
 }

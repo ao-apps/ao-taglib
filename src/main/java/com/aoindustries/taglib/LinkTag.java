@@ -53,8 +53,8 @@ public class LinkTag
 		TypeAttribute
 {
 
-    private String href;
-    private MutableHttpParameters params;
+	private String href;
+	private MutableHttpParameters params;
 	private boolean hrefAbsolute;
 	private LastModifiedServlet.AddLastModifiedWhen addLastModified = LastModifiedServlet.AddLastModifiedWhen.AUTO;
 	private Object hreflang;
@@ -62,31 +62,31 @@ public class LinkTag
 	private Object type;
 	private String media;
 
-    @Override
-    public MediaType getOutputType() {
-        return MediaType.XHTML;
-    }
+	@Override
+	public MediaType getOutputType() {
+		return MediaType.XHTML;
+	}
 
-    @Override
-    public String getHref() {
-        return href;
-    }
+	@Override
+	public String getHref() {
+		return href;
+	}
 
-    @Override
-    public void setHref(String href) {
-        this.href = href;
-    }
+	@Override
+	public void setHref(String href) {
+		this.href = href;
+	}
 
-    @Override
-    public HttpParameters getParams() {
-        return params==null ? EmptyParameters.getInstance() : params;
-    }
+	@Override
+	public HttpParameters getParams() {
+		return params==null ? EmptyParameters.getInstance() : params;
+	}
 
-    @Override
-    public void addParam(String name, String value) {
-        if(params==null) params = new HttpParametersMap();
-        params.addParameter(name, value);
-    }
+	@Override
+	public void addParam(String name, String value) {
+		if(params==null) params = new HttpParametersMap();
+		params.addParameter(name, value);
+	}
 
 	public boolean getHrefAbsolute() {
 		return hrefAbsolute;
@@ -105,9 +105,9 @@ public class LinkTag
 	}
 
 	@Override
-    public Object getHreflang() {
-        return hreflang;
-    }
+	public Object getHreflang() {
+		return hreflang;
+	}
 
 	@Override
 	public void setHreflang(Object hreflang) {
@@ -115,32 +115,32 @@ public class LinkTag
 	}
 
 	@Override
-    public Object getRel() {
-        return rel;
-    }
-
-    @Override
-    public void setRel(Object rel) {
-        this.rel = rel;
-    }
+	public Object getRel() {
+		return rel;
+	}
 
 	@Override
-    public Object getType() {
-        return type;
-    }
+	public void setRel(Object rel) {
+		this.rel = rel;
+	}
 
-    @Override
-    public void setType(Object type) {
-        this.type = type;
-    }
+	@Override
+	public Object getType() {
+		return type;
+	}
+
+	@Override
+	public void setType(Object type) {
+		this.type = type;
+	}
 
 	public String getMedia() {
 		return media;
 	}
 
 	public void setMedia(String media) {
-        this.media = media;
-    }
+		this.media = media;
+	}
 
 	@Override
 	public void setDynamicAttribute(String uri, String localName, Object value) throws JspTagException {
@@ -160,7 +160,7 @@ public class LinkTag
 	}
 
 	@Override
-    protected void doTag(Writer out) throws JspTagException, IOException {
+	protected void doTag(Writer out) throws JspTagException, IOException {
 		JspTag parent = findAncestorWithClass(this, LinksAttribute.class);
 		if(parent!=null) {
 			((LinksAttribute)parent).addLink(
@@ -200,5 +200,5 @@ public class LinkTag
 			}
 			out.write(" />");
 		}
-    }
+	}
 }

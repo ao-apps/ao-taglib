@@ -33,19 +33,19 @@ import javax.servlet.jsp.JspTagException;
  */
 public class StyleTag extends AutoEncodingBufferedTag {
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.TEXT;
-    }
+	@Override
+	public MediaType getContentType() {
+		return MediaType.TEXT;
+	}
 
-    @Override
-    public MediaType getOutputType() {
-        return null;
-    }
+	@Override
+	public MediaType getOutputType() {
+		return null;
+	}
 
-    @Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
-        StyleAttribute styleAttribute = AttributeUtils.findAttributeParent("style", this, "style", StyleAttribute.class);
-        styleAttribute.setStyle(capturedBody.trim());
-    }
+	@Override
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+		StyleAttribute styleAttribute = AttributeUtils.findAttributeParent("style", this, "style", StyleAttribute.class);
+		styleAttribute.setStyle(capturedBody.trim());
+	}
 }

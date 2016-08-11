@@ -29,7 +29,7 @@ package com.aoindustries.taglib;
  */
 public interface SelectedAttribute {
 
-    boolean isSelected();
+	boolean isSelected();
 
-    void setSelected(boolean selected);
+	void setSelected(boolean selected);
 }

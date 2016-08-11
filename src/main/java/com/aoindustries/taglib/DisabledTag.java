@@ -34,24 +34,24 @@ import javax.servlet.jsp.JspTagException;
  */
 public class DisabledTag extends AutoEncodingBufferedTag {
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.TEXT;
-    }
+	@Override
+	public MediaType getContentType() {
+		return MediaType.TEXT;
+	}
 
-    @Override
-    public MediaType getOutputType() {
-        return null;
-    }
+	@Override
+	public MediaType getOutputType() {
+		return null;
+	}
 
-    @Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
-        DisabledAttribute disabledAttribute = AttributeUtils.findAttributeParent("disabled", this, "disabled", DisabledAttribute.class);
-        String value = capturedBody.trim().toString();
-        if(value.length()>0) {
-            if("true".equals(value)) disabledAttribute.setDisabled(true);
-            else if("false".equals(value)) disabledAttribute.setDisabled(false);
-            else throw new LocalizedJspTagException(ApplicationResources.accessor, "DisabledTag.invalidValue", value);
-        }
-    }
+	@Override
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+		DisabledAttribute disabledAttribute = AttributeUtils.findAttributeParent("disabled", this, "disabled", DisabledAttribute.class);
+		String value = capturedBody.trim().toString();
+		if(value.length()>0) {
+			if("true".equals(value)) disabledAttribute.setDisabled(true);
+			else if("false".equals(value)) disabledAttribute.setDisabled(false);
+			else throw new LocalizedJspTagException(ApplicationResources.accessor, "DisabledTag.invalidValue", value);
+		}
+	}
 }

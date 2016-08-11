@@ -102,59 +102,59 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 		}
 	}
 
-    /**
-     * Gets the type of data that is contained by this tag.
-     */
-    public abstract MediaType getContentType();
+	/**
+	 * Gets the type of data that is contained by this tag.
+	 */
+	public abstract MediaType getContentType();
 
-    /**
-     * Gets the output type of this tag.  This is used to determine the correct
-     * encoder.  If the tag never has any output this should return <code>null</code>.
-     * When <code>null</code> is returned, any output will result in an error.
-     */
-    public abstract MediaType getOutputType();
+	/**
+	 * Gets the output type of this tag.  This is used to determine the correct
+	 * encoder.  If the tag never has any output this should return <code>null</code>.
+	 * When <code>null</code> is returned, any output will result in an error.
+	 */
+	public abstract MediaType getOutputType();
 
-    /**
-     * The validator is stored to allow nested tags to check if their output
-     * is already being filtered on this tags input.  When this occurs they
-     * skip the validation of their own output.
-     */
-    /*
-    @Override
-    public boolean isValidatingMediaInputType(MediaType inputType) {
-        return inputValidator!=null && inputValidator.isValidatingMediaInputType(inputType);
-    }*/
+	/**
+	 * The validator is stored to allow nested tags to check if their output
+	 * is already being filtered on this tags input.  When this occurs they
+	 * skip the validation of their own output.
+	 */
+	/*
+	@Override
+	public boolean isValidatingMediaInputType(MediaType inputType) {
+		return inputValidator!=null && inputValidator.isValidatingMediaInputType(inputType);
+	}*/
 
-    /**
-     * Gets the initial buffer size.  Defaults to 32 characters (the same
-     * default as <code>CharArrayBuffer</code>.
-     */
-    public int getInitialBufferSize() {
-        return 32;
-    }
+	/**
+	 * Gets the initial buffer size.  Defaults to 32 characters (the same
+	 * default as <code>CharArrayBuffer</code>.
+	 */
+	public int getInitialBufferSize() {
+		return 32;
+	}
 
-    /**
-     * Gets the number of characters that may be buffered before switching to the
-     * use of a temp file.
+	/**
+	 * Gets the number of characters that may be buffered before switching to the
+	 * use of a temp file.
 	 *
 	 * @return the threshold or <code>Long.MAX_VALUE</code> to never use temp files.
 	 *
 	 * @see  AutoTempFileWriter#DEFAULT_TEMP_FILE_THRESHOLD
-     */
-    public long getTempFileThreshold() {
-        return AutoTempFileWriter.DEFAULT_TEMP_FILE_THRESHOLD;
-    }
+	 */
+	public long getTempFileThreshold() {
+		return AutoTempFileWriter.DEFAULT_TEMP_FILE_THRESHOLD;
+	}
 
-    @Override
-    public void doTag() throws JspException, IOException {
-        try {
+	@Override
+	public void doTag() throws JspException, IOException {
+		try {
 			final PageContext pageContext = (PageContext)getJspContext();
-            final MediaType parentContentType = ThreadEncodingContext.contentType.get();
-            final ValidMediaInput parentValidMediaInput = ThreadEncodingContext.validMediaInput.get();
+			final MediaType parentContentType = ThreadEncodingContext.contentType.get();
+			final ValidMediaInput parentValidMediaInput = ThreadEncodingContext.validMediaInput.get();
 
-            // Capture the body output while validating
-            // BufferWriter bufferWriter = new CharArrayBufferWriter(128, getTempFileThreshold());
-            BufferWriter bufferWriter = new SegmentedWriter();
+			// Capture the body output while validating
+			// BufferWriter bufferWriter = new CharArrayBufferWriter(128, getTempFileThreshold());
+			BufferWriter bufferWriter = new SegmentedWriter();
 			try {
 				// Enable temp files if temp file context active and threshold not Long.MAX_VALUE
 				final long tempFileThreshold = getTempFileThreshold();
@@ -259,17 +259,17 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 					}
 				}
 			}
-        } catch(MediaException err) {
-            throw new JspTagException(err);
-        }
-    }
+		} catch(MediaException err) {
+			throw new JspTagException(err);
+		}
+	}
 
-    /**
-     * Sets the media encoder options.  This is how subclass tag attributes
-     * can effect the encoding.
-     */
-    protected void setMediaEncoderOptions(MediaEncoder mediaEncoder) {
-    }
+	/**
+	 * Sets the media encoder options.  This is how subclass tag attributes
+	 * can effect the encoding.
+	 */
+	protected void setMediaEncoderOptions(MediaEncoder mediaEncoder) {
+	}
 
 	/**
 	 * Invokes the body.  This is only called when a body exists.  Subclasses may override this to perform
@@ -281,8 +281,8 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 	}
 
 	/**
-     * Once the data is captured, this is called.
-     * type, this version of invoke is called.
-     */
-    abstract protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException;
+	 * Once the data is captured, this is called.
+	 * type, this version of invoke is called.
+	 */
+	abstract protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException;
 }

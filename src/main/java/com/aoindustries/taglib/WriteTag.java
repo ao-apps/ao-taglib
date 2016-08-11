@@ -47,58 +47,58 @@ public class WriteTag
 {
 
 	private String scope;
-    private Object name;
-    private String property;
-    private String method = "toString";
+	private Object name;
+	private String property;
+	private String method = "toString";
 	private Object type = MediaType.TEXT;
-    private MediaType mediaType = MediaType.TEXT;
-
-    @Override
-    public MediaType getOutputType() {
-        return mediaType;
-    }
-
-    public String getScope() {
-        return scope;
-    }
-
-    public void setScope(String scope) {
-        this.scope = scope;
-    }
+	private MediaType mediaType = MediaType.TEXT;
 
 	@Override
-    public Object getName() {
-        return name;
-    }
+	public MediaType getOutputType() {
+		return mediaType;
+	}
+
+	public String getScope() {
+		return scope;
+	}
+
+	public void setScope(String scope) {
+		this.scope = scope;
+	}
 
 	@Override
-    public void setName(Object name) {
-        this.name = name;
-    }
-
-    public String getProperty() {
-        return property;
-    }
-
-    public void setProperty(String property) {
-        this.property = property;
-    }
-
-    public String getMethod() {
-        return method;
-    }
-
-    public void setMethod(String method) {
-        this.method = method;
-    }
+	public Object getName() {
+		return name;
+	}
 
 	@Override
-    public Object getType() {
-        return type;
-    }
+	public void setName(Object name) {
+		this.name = name;
+	}
+
+	public String getProperty() {
+		return property;
+	}
+
+	public void setProperty(String property) {
+		this.property = property;
+	}
+
+	public String getMethod() {
+		return method;
+	}
+
+	public void setMethod(String method) {
+		this.method = method;
+	}
 
 	@Override
-    public void setType(Object type) throws JspTagException {
+	public Object getType() {
+		return type;
+	}
+
+	@Override
+	public void setType(Object type) throws JspTagException {
 		MediaType newMediaType;
 		if(type instanceof MediaType) {
 			newMediaType = (MediaType)type;
@@ -115,7 +115,7 @@ public class WriteTag
 		}
 		this.type = type;
 		this.mediaType = newMediaType;
-    }
+	}
 
 	// One or neither of these values will be set after writePrefix, but not both
 	private String toStringResult;
@@ -124,11 +124,11 @@ public class WriteTag
 
 	@Override
 	protected void writePrefix(MediaType containerType, Writer out) throws JspTagException, IOException {
-        try {
+		try {
 			if(name==null) throw new AttributeRequiredException("name");
 
 			// Find the bean to write
-            Object bean = PropertyUtils.findObject(
+			Object bean = PropertyUtils.findObject(
 				(PageContext)getJspContext(),
 				scope,
 				Coercion.toString(name),
@@ -137,10 +137,10 @@ public class WriteTag
 				false
 			);
 
-            // Print the value
-            if(bean!=null) {
-                // Avoid reflection when possible
-                if("toString".equals(method)) {
+			// Print the value
+			if(bean!=null) {
+				// Avoid reflection when possible
+				if("toString".equals(method)) {
 					if(
 						bean instanceof Writable
 						&& !((Writable)bean).isFastToString()
@@ -150,9 +150,9 @@ public class WriteTag
 					} else {
 						toStringResult = Coercion.toString(bean);
 					}
-                } else {
-                    try {
-                        Method refMethod = bean.getClass().getMethod(method);
+				} else {
+					try {
+						Method refMethod = bean.getClass().getMethod(method);
 						Object retVal = refMethod.invoke(bean);
 						if(
 							retVal instanceof Writable
@@ -163,10 +163,10 @@ public class WriteTag
 						} else {
 							toStringResult = Coercion.toString(retVal);
 						}
-                    } catch(NoSuchMethodException err) {
-                        throw new LocalizedJspTagException(ApplicationResources.accessor, "WriteTag.unableToFindMethod", method);
-                    }
-                }
+					} catch(NoSuchMethodException err) {
+						throw new LocalizedJspTagException(ApplicationResources.accessor, "WriteTag.unableToFindMethod", method);
+					}
+				}
 				if(toStringResult!=null) {
 					// Look for any message markup
 					BundleLookupThreadContext threadContext = BundleLookupThreadContext.getThreadContext(false);
@@ -177,22 +177,22 @@ public class WriteTag
 					}
 					if(lookupMarkup!=null) lookupMarkup.appendPrefixTo(containerType.getMarkupType(), out);
 				}
-            }
-        } catch(IllegalAccessException err) {
-            throw new JspTagException(err);
-        } catch(InvocationTargetException err) {
-            throw new JspTagException(err);
-        }
+			}
+		} catch(IllegalAccessException err) {
+			throw new JspTagException(err);
+		} catch(InvocationTargetException err) {
+			throw new JspTagException(err);
+		}
 	}
 
 	@Override
-    protected void doTag(Writer out) throws JspTagException, IOException {
+	protected void doTag(Writer out) throws JspTagException, IOException {
 		if(toStringResult!=null) {
 			out.write(toStringResult);
 		} else if(value!=null) {
 			Coercion.write(value, out);
 		}
-    }
+	}
 
 	@Override
 	protected void writeSuffix(MediaType containerType, Writer out) throws IOException {

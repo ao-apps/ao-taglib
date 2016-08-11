@@ -33,16 +33,16 @@ import javax.servlet.jsp.JspTagException;
  */
 public class DisableResourceEditorTag extends AutoEncodingNullTag {
 
-    /**
-     * No output.
-     */
-    @Override
-    public MediaType getOutputType() {
-        return null;
-    }
+	/**
+	 * No output.
+	 */
+	@Override
+	public MediaType getOutputType() {
+		return null;
+	}
 
-    @Override
-    protected void doTag(Writer out) throws JspTagException, IOException {
-        EditableResourceBundle.resetRequest(false, null, false);
-    }
+	@Override
+	protected void doTag(Writer out) throws JspTagException, IOException {
+		EditableResourceBundle.resetRequest(false, null, false);
+	}
 }

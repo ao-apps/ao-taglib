@@ -33,19 +33,19 @@ import javax.servlet.jsp.JspTagException;
  */
 public class OnsubmitTag extends AutoEncodingBufferedTag {
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.JAVASCRIPT;
-    }
+	@Override
+	public MediaType getContentType() {
+		return MediaType.JAVASCRIPT;
+	}
 
-    @Override
-    public MediaType getOutputType() {
-        return null;
-    }
+	@Override
+	public MediaType getOutputType() {
+		return null;
+	}
 
-    @Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
-        OnsubmitAttribute onsubmitAttribute = AttributeUtils.findAttributeParent("onsubmit", this, "onsubmit", OnsubmitAttribute.class);;
-        onsubmitAttribute.setOnsubmit(capturedBody.trim());
-    }
+	@Override
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+		OnsubmitAttribute onsubmitAttribute = AttributeUtils.findAttributeParent("onsubmit", this, "onsubmit", OnsubmitAttribute.class);;
+		onsubmitAttribute.setOnsubmit(capturedBody.trim());
+	}
 }

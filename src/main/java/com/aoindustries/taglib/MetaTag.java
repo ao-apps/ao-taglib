@@ -61,58 +61,58 @@ public class MetaTag
 	}
 
 	private Object name;
-    private Object httpEquiv;
+	private Object httpEquiv;
 	private Object charset;
-    private Object content;
+	private Object content;
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.TEXT;
-    }
+	@Override
+	public MediaType getContentType() {
+		return MediaType.TEXT;
+	}
 
-    @Override
-    public MediaType getOutputType() {
-        return MediaType.XHTML;
-    }
+	@Override
+	public MediaType getOutputType() {
+		return MediaType.XHTML;
+	}
 
-    @Override
-    public Object getName() {
-        return name;
-    }
+	@Override
+	public Object getName() {
+		return name;
+	}
 
-    @Override
-    public void setName(Object name) {
+	@Override
+	public void setName(Object name) {
 		this.name = nullIfEmpty(name);
-    }
+	}
 
-    public Object getHttpEquiv() {
-        return httpEquiv;
-    }
+	public Object getHttpEquiv() {
+		return httpEquiv;
+	}
 
-    public void setHttpEquiv(Object httpEquiv) {
-        this.httpEquiv = nullIfEmpty(httpEquiv);
+	public void setHttpEquiv(Object httpEquiv) {
+		this.httpEquiv = nullIfEmpty(httpEquiv);
 	}
 
 	public Object getCharset() {
-        return charset;
-    }
+		return charset;
+	}
 
-    public void setCharset(Object charset) {
-        this.charset = nullIfEmpty(charset);
-    }
+	public void setCharset(Object charset) {
+		this.charset = nullIfEmpty(charset);
+	}
 
 	@Override
-    public Object getContent() {
-        return content;
-    }
+	public Object getContent() {
+		return content;
+	}
 
-    @Override
-    public void setContent(Object content) {
+	@Override
+	public void setContent(Object content) {
 		this.content = nullIfEmpty(content);
-    }
+	}
 
-    @Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+	@Override
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		JspTag parent = findAncestorWithClass(this, MetasAttribute.class);
 		if(content==null) setContent(capturedBody.trim());
 		if(parent!=null) {
@@ -149,5 +149,5 @@ public class MetaTag
 			}
 			out.write(" />");
 		}
-    }
+	}
 }

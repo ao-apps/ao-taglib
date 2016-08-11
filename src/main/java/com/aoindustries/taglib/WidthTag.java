@@ -33,19 +33,19 @@ import javax.servlet.jsp.JspTagException;
  */
 public class WidthTag extends AutoEncodingBufferedTag {
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.TEXT;
-    }
+	@Override
+	public MediaType getContentType() {
+		return MediaType.TEXT;
+	}
 
-    @Override
-    public MediaType getOutputType() {
-        return null;
-    }
+	@Override
+	public MediaType getOutputType() {
+		return null;
+	}
 
-    @Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
-        WidthAttribute widthAttribute = AttributeUtils.findAttributeParent("width", this, "width", WidthAttribute.class);
-        widthAttribute.setWidth(capturedBody.trim());
-    }
+	@Override
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+		WidthAttribute widthAttribute = AttributeUtils.findAttributeParent("width", this, "width", WidthAttribute.class);
+		widthAttribute.setWidth(capturedBody.trim());
+	}
 }

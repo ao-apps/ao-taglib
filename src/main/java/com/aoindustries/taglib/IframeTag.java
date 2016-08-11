@@ -53,55 +53,55 @@ public class IframeTag
 		FrameborderAttribute
 {
 
-    private Object id;
-    private String src;
-    private HttpParametersMap params;
+private Object id;
+	private String src;
+	private HttpParametersMap params;
 	private boolean srcAbsolute;
 	private LastModifiedServlet.AddLastModifiedWhen addLastModified = LastModifiedServlet.AddLastModifiedWhen.AUTO;
-    private Object width;
-    private Object height;
-    private boolean frameborder = true;
+	private Object width;
+	private Object height;
+	private boolean frameborder = true;
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.XHTML;
-    }
+	@Override
+	public MediaType getContentType() {
+		return MediaType.XHTML;
+	}
 
-    @Override
-    public MediaType getOutputType() {
-        return MediaType.XHTML;
-    }
+	@Override
+	public MediaType getOutputType() {
+		return MediaType.XHTML;
+	}
 
-    @Override
-    public Object getId() {
-        return id;
-    }
+	@Override
+	public Object getId() {
+		return id;
+	}
 
-    @Override
-    public void setId(Object id) {
+	@Override
+	public void setId(Object id) {
 		this.id = id;
-    }
+	}
 
-    @Override
-    public String getSrc() {
-        return src;
-    }
+	@Override
+	public String getSrc() {
+		return src;
+	}
 
-    @Override
-    public void setSrc(String src) {
-        this.src = src;
-    }
+	@Override
+	public void setSrc(String src) {
+		this.src = src;
+	}
 
-    @Override
-    public HttpParameters getParams() {
-        return params==null ? EmptyParameters.getInstance() : params;
-    }
+	@Override
+	public HttpParameters getParams() {
+		return params==null ? EmptyParameters.getInstance() : params;
+	}
 
-    @Override
-    public void addParam(String name, String value) {
-        if(params==null) params = new HttpParametersMap();
-        params.addParameter(name, value);
-    }
+	@Override
+	public void addParam(String name, String value) {
+		if(params==null) params = new HttpParametersMap();
+		params.addParameter(name, value);
+	}
 
 	public boolean getSrcAbsolute() {
 		return srcAbsolute;
@@ -120,34 +120,34 @@ public class IframeTag
 	}
 
 	@Override
-    public Object getWidth() {
-        return width;
-    }
+	public Object getWidth() {
+		return width;
+	}
 
-    @Override
-    public void setWidth(Object width) {
-        this.width = width;
-    }
+	@Override
+	public void setWidth(Object width) {
+		this.width = width;
+	}
 
-    @Override
-    public Object getHeight() {
-        return height;
-    }
+	@Override
+	public Object getHeight() {
+		return height;
+	}
 
-    @Override
-    public void setHeight(Object height) {
+	@Override
+	public void setHeight(Object height) {
 		this.height = height;
-    }
+	}
 
-    @Override
-    public boolean isFrameborder() {
-        return frameborder;
-    }
+	@Override
+	public boolean isFrameborder() {
+		return frameborder;
+	}
 
-    @Override
-    public void setFrameborder(boolean frameborder) {
-        this.frameborder = frameborder;
-    }
+	@Override
+	public void setFrameborder(boolean frameborder) {
+		this.frameborder = frameborder;
+	}
 
 	@Override
 	public void setDynamicAttribute(String uri, String localName, Object value) throws JspTagException {
@@ -167,7 +167,7 @@ public class IframeTag
 	}
 
 	@Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		if(src==null) throw new AttributeRequiredException("src");
 		out.write("<iframe");
 		if(id!=null) {
@@ -191,5 +191,5 @@ public class IframeTag
 		out.write("\">");
 		MarkupUtils.writeWithMarkup(capturedBody, MarkupType.XHTML, out);
 		out.write("</iframe>");
-    }
+	}
 }

@@ -29,8 +29,8 @@ import com.aoindustries.encoding.MediaType;
  */
 public class XhtmlTag extends AutoEncodingFilteredTag {
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.XHTML;
-    }
+	@Override
+	public MediaType getContentType() {
+		return MediaType.XHTML;
+	}
 }

@@ -67,62 +67,62 @@ public class ATag
 		OnmouseoutAttribute
 {
 
-    private Object id;
-    private String href;
-    private MutableHttpParameters params;
+	private Object id;
+	private String href;
+	private MutableHttpParameters params;
 	private boolean hrefAbsolute;
 	private LastModifiedServlet.AddLastModifiedWhen addLastModified = LastModifiedServlet.AddLastModifiedWhen.AUTO;
 	private Object hreflang;
 	private Object rel;
 	private Object type;
 	private Object target;
-    private Object title;
-    private Object clazz;
-    private Object style;
-    private Object onclick;
-    private Object onmouseover;
-    private Object onmouseout;
+	private Object title;
+	private Object clazz;
+	private Object style;
+	private Object onclick;
+	private Object onmouseover;
+	private Object onmouseout;
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.XHTML;
-    }
+	@Override
+	public MediaType getContentType() {
+		return MediaType.XHTML;
+	}
 
-    @Override
-    public MediaType getOutputType() {
-        return MediaType.XHTML;
-    }
+	@Override
+	public MediaType getOutputType() {
+		return MediaType.XHTML;
+	}
 
-    @Override
-    public Object getId() {
-        return id;
-    }
+	@Override
+	public Object getId() {
+		return id;
+	}
 
-    @Override
-    public void setId(Object id) {
+	@Override
+	public void setId(Object id) {
 		this.id = id;
-    }
+	}
 
-    @Override
-    public String getHref() {
-        return href;
-    }
+	@Override
+	public String getHref() {
+		return href;
+	}
 
-    @Override
-    public void setHref(String href) {
-        this.href = href;
-    }
+	@Override
+	public void setHref(String href) {
+		this.href = href;
+	}
 
-    @Override
-    public HttpParameters getParams() {
-        return params==null ? EmptyParameters.getInstance() : params;
-    }
+	@Override
+	public HttpParameters getParams() {
+		return params==null ? EmptyParameters.getInstance() : params;
+	}
 
-    @Override
-    public void addParam(String name, String value) {
-        if(params==null) params = new HttpParametersMap();
-        params.addParameter(name, value);
-    }
+	@Override
+	public void addParam(String name, String value) {
+		if(params==null) params = new HttpParametersMap();
+		params.addParameter(name, value);
+	}
 
 	public boolean getHrefAbsolute() {
 		return hrefAbsolute;
@@ -141,9 +141,9 @@ public class ATag
 	}
 
 	@Override
-    public Object getHreflang() {
-        return hreflang;
-    }
+	public Object getHreflang() {
+		return hreflang;
+	}
 
 	@Override
 	public void setHreflang(Object hreflang) {
@@ -151,94 +151,94 @@ public class ATag
 	}
 
 	@Override
-    public Object getRel() {
-        return rel;
-    }
-
-    @Override
-    public void setRel(Object rel) {
-        this.rel = rel;
-    }
+	public Object getRel() {
+		return rel;
+	}
 
 	@Override
-    public Object getType() {
-        return type;
-    }
-
-    @Override
-    public void setType(Object type) {
-        this.type = type;
-    }
+	public void setRel(Object rel) {
+		this.rel = rel;
+	}
 
 	@Override
-    public Object getTarget() {
-        return target;
-    }
-
-    @Override
-    public void setTarget(Object target) {
-        this.target = target;
-    }
+	public Object getType() {
+		return type;
+	}
 
 	@Override
-    public Object getTitle() {
-        return title;
-    }
+	public void setType(Object type) {
+		this.type = type;
+	}
 
-    @Override
-    public void setTitle(Object title) {
-        this.title = title;
-    }
+	@Override
+	public Object getTarget() {
+		return target;
+	}
 
-    @Override
-    public Object getClazz() {
-        return clazz;
-    }
+	@Override
+	public void setTarget(Object target) {
+		this.target = target;
+	}
 
-    @Override
-    public void setClazz(Object clazz) {
+	@Override
+	public Object getTitle() {
+		return title;
+	}
+
+	@Override
+	public void setTitle(Object title) {
+		this.title = title;
+	}
+
+	@Override
+	public Object getClazz() {
+		return clazz;
+	}
+
+	@Override
+	public void setClazz(Object clazz) {
 		this.clazz = clazz;
-    }
+	}
 
-    @Override
-    public Object getStyle() {
-        return style;
-    }
+	@Override
+	public Object getStyle() {
+		return style;
+	}
 
-    @Override
-    public void setStyle(Object style) {
-        this.style = style;
-    }
+	@Override
+	public void setStyle(Object style) {
+		this.style = style;
+	}
 
-    @Override
-    public Object getOnclick() {
-        return onclick;
-    }
+	@Override
+	public Object getOnclick() {
+		return onclick;
+	}
 
-    @Override
-    public void setOnclick(Object onclick) {
-        this.onclick = onclick;
-    }
+	@Override
+	public void setOnclick(Object onclick) {
+		this.onclick = onclick;
+	}
 
-    @Override
-    public Object getOnmouseover() {
-        return onmouseover;
-    }
+	@Override
+	public Object getOnmouseover() {
+		return onmouseover;
+	}
 
-    @Override
-    public void setOnmouseover(Object onmouseover) {
-        this.onmouseover = onmouseover;
-    }
+	@Override
+	public void setOnmouseover(Object onmouseover) {
+		this.onmouseover = onmouseover;
+	}
 
-    @Override
-    public Object getOnmouseout() {
-        return onmouseout;
-    }
+	@Override
+	public Object getOnmouseout() {
+		return onmouseout;
+	}
 
-    @Override
-    public void setOnmouseout(Object onmouseout) {
-        this.onmouseout = onmouseout;
-    }
+	@Override
+	public void setOnmouseout(Object onmouseout) {
+		this.onmouseout = onmouseout;
+	}
 
 	@Override
 	public void setDynamicAttribute(String uri, String localName, Object value) throws JspTagException {
@@ -258,7 +258,7 @@ public class ATag
 	}
 
 	@Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		out.write("<a");
 		if(id!=null) {
 			out.write(" id=\"");
@@ -340,5 +340,5 @@ public class ATag
 			MarkupUtils.writeWithMarkup(trimmedBody, MarkupType.XHTML, out);
 		}
 		out.write("</a>");
-    }
+	}
 }

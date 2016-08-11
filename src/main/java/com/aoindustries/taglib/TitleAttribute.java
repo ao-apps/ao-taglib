@@ -29,7 +29,7 @@ package com.aoindustries.taglib;
  */
 public interface TitleAttribute {
 
-    Object getTitle();
+	Object getTitle();
 
-    void setTitle(Object title);
+	void setTitle(Object title);
 }

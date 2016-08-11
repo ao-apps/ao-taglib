@@ -33,20 +33,20 @@ import javax.servlet.jsp.JspTagException;
  */
 public class MaxlengthTag extends AutoEncodingBufferedTag {
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.TEXT;
-    }
+	@Override
+	public MediaType getContentType() {
+		return MediaType.TEXT;
+	}
 
-    @Override
-    public MediaType getOutputType() {
-        return null;
-    }
+	@Override
+	public MediaType getOutputType() {
+		return null;
+	}
 
-    @Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
-        MaxlengthAttribute maxlengthAttribute = AttributeUtils.findAttributeParent("maxlength", this, "maxlength", MaxlengthAttribute.class);
-        String trimmedMaxlength = capturedBody.trim().toString();
-        maxlengthAttribute.setMaxlength(trimmedMaxlength.isEmpty() ? null : Integer.valueOf(trimmedMaxlength));
-    }
+	@Override
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+		MaxlengthAttribute maxlengthAttribute = AttributeUtils.findAttributeParent("maxlength", this, "maxlength", MaxlengthAttribute.class);
+		String trimmedMaxlength = capturedBody.trim().toString();
+		maxlengthAttribute.setMaxlength(trimmedMaxlength.isEmpty() ? null : Integer.valueOf(trimmedMaxlength));
+	}
 }

@@ -29,7 +29,7 @@ package com.aoindustries.taglib;
  */
 public interface SrcAttribute {
 
-    String getSrc();
+	String getSrc();
 
-    void setSrc(String src);
+	void setSrc(String src);
 }

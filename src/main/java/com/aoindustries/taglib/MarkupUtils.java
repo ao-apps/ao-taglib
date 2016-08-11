@@ -104,8 +104,8 @@ public final class MarkupUtils  {
 	}
 
 	/**
-     * Make no instances.
-     */
-    private MarkupUtils() {
-    }
+	 * Make no instances.
+	 */
+	private MarkupUtils() {
+	}
 }

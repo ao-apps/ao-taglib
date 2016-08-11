@@ -33,19 +33,19 @@ import javax.servlet.jsp.JspTagException;
  */
 public class OnclickTag extends AutoEncodingBufferedTag {
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.JAVASCRIPT;
-    }
+	@Override
+	public MediaType getContentType() {
+		return MediaType.JAVASCRIPT;
+	}
 
-    @Override
-    public MediaType getOutputType() {
-        return null;
-    }
+	@Override
+	public MediaType getOutputType() {
+		return null;
+	}
 
-    @Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
-        OnclickAttribute onclickAttribute = AttributeUtils.findAttributeParent("onclick", this, "onclick", OnclickAttribute.class);
-        onclickAttribute.setOnclick(capturedBody.trim());
-    }
+	@Override
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+		OnclickAttribute onclickAttribute = AttributeUtils.findAttributeParent("onclick", this, "onclick", OnclickAttribute.class);
+		onclickAttribute.setOnclick(capturedBody.trim());
+	}
 }

@@ -29,7 +29,7 @@ package com.aoindustries.taglib;
  */
 public interface NameAttribute {
 
-    Object getName();
+	Object getName();
 
-    void setName(Object name);
+	void setName(Object name);
 }

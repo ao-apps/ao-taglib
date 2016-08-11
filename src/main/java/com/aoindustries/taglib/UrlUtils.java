@@ -51,18 +51,18 @@ final public class UrlUtils {
 		boolean hrefAbsolute,
 		LastModifiedServlet.AddLastModifiedWhen addLastModified
 	) throws JspTagException, IOException {
-        if(href != null) {
-            out.append(" href=\"");
+		if(href != null) {
+			out.append(" href=\"");
 			encodeTextInXhtmlAttribute(
 				com.aoindustries.net.UrlUtils.buildUrl(pageContext, href, params, hrefAbsolute, addLastModified),
 				out
 			);
-            out.append('"');
-        } else {
-            if(params != null) throw new LocalizedJspTagException(ApplicationResources.accessor, "UrlUtils.paramsWithoutHref");
-        }
+			out.append('"');
+		} else {
+			if(params != null) throw new LocalizedJspTagException(ApplicationResources.accessor, "UrlUtils.paramsWithoutHref");
+		}
 	}
-	
+
 	/**
 	 * @see  #writeHref(java.lang.Appendable, javax.servlet.jsp.PageContext, java.lang.String, com.aoindustries.net.HttpParameters, boolean, com.aoindustries.servlet.http.LastModifiedServlet.AddLastModifiedWhen) 
 	 */
@@ -99,8 +99,8 @@ final public class UrlUtils {
 				out
 			);
 			out.append('"');
-        } else {
-            if(params != null) throw new LocalizedJspTagException(ApplicationResources.accessor, "UrlUtils.paramsWithoutSrc");
+		} else {
+			if(params != null) throw new LocalizedJspTagException(ApplicationResources.accessor, "UrlUtils.paramsWithoutSrc");
 		}
 	}
 

@@ -65,41 +65,41 @@ public class RedirectTag
 	private static final int MAXIMUM_GET_REQUEST_LENGTH = 2048;
 
 	public static boolean isValidStatusCode(String statusCode) {
-        return
-            "moved_permanently".equals(statusCode)
-            || "permanent".equals(statusCode)
-            || "301".equals(statusCode)
-            || "moved_temporarily".equals(statusCode)
-            || "found".equals(statusCode)
-            || "temporary".equals(statusCode)
-            || "302".equals(statusCode)
-            || "see_other".equals(statusCode)
-            || "303".equals(statusCode)
-        ;
-    }
+		return
+			"moved_permanently".equals(statusCode)
+			|| "permanent".equals(statusCode)
+			|| "301".equals(statusCode)
+			|| "moved_temporarily".equals(statusCode)
+			|| "found".equals(statusCode)
+			|| "temporary".equals(statusCode)
+			|| "302".equals(statusCode)
+			|| "see_other".equals(statusCode)
+			|| "303".equals(statusCode)
+		;
+	}
 
 	private String statusCode;
-    private String href;
+	private String href;
 	private LastModifiedServlet.AddLastModifiedWhen addLastModified = LastModifiedServlet.AddLastModifiedWhen.AUTO;
 
-    public String getStatusCode() {
-        return statusCode;
-    }
+	public String getStatusCode() {
+		return statusCode;
+	}
 
-    public void setStatusCode(String statusCode) throws JspTagException {
-        if(!isValidStatusCode(statusCode)) throw new LocalizedJspTagException(ApplicationResources.accessor, "RedirectTag.statusCode.invalid", statusCode);
-        this.statusCode = statusCode;
-    }
+	public void setStatusCode(String statusCode) throws JspTagException {
+		if(!isValidStatusCode(statusCode)) throw new LocalizedJspTagException(ApplicationResources.accessor, "RedirectTag.statusCode.invalid", statusCode);
+		this.statusCode = statusCode;
+	}
 
 	@Override
-    public String getHref() {
-        return href;
-    }
+	public String getHref() {
+		return href;
+	}
 
-    @Override
-    public void setHref(String href) {
-        this.href = href;
-    }
+	@Override
+	public void setHref(String href) {
+		this.href = href;
+	}
 
 	public String getAddLastModified() {
 		return addLastModified.getLowerName();
@@ -118,7 +118,7 @@ public class RedirectTag
 	protected String getDynamicAttributeExceptionKey() {
 		return "error.unexpectedDynamicAttribute";
 	}
-	
+
 	@Override
 	protected Serializable[] getDynamicAttributeExceptionArgs(String localName) {
 		return new Serializable[] {
@@ -137,30 +137,30 @@ public class RedirectTag
 	}
 
 	@Override
-    protected void doTag(String servletPath) throws IOException, JspTagException, SkipPageException {
+	protected void doTag(String servletPath) throws IOException, JspTagException, SkipPageException {
 		final int status;
-        if(statusCode==null) throw new AttributeRequiredException("statusCode");
-        if(
+		if(statusCode==null) throw new AttributeRequiredException("statusCode");
+		if(
 			"301".equals(statusCode)
 			|| "moved_permanently".equals(statusCode)
 			|| "permanent".equals(statusCode)
 		) {
-            status = HttpServletResponse.SC_MOVED_PERMANENTLY;
-        } else if(
+			status = HttpServletResponse.SC_MOVED_PERMANENTLY;
+		} else if(
 			"302".equals(statusCode)
 			|| "moved_temporarily".equals(statusCode)
 			|| "found".equals(statusCode)
 			|| "temporary".equals(statusCode)
 		) {
-            status = HttpServletResponse.SC_MOVED_TEMPORARILY;
-        } else if(
+			status = HttpServletResponse.SC_MOVED_TEMPORARILY;
+		} else if(
 			"303".equals(statusCode)
 			|| "see_other".equals(statusCode)
 		) {
-            status = HttpServletResponse.SC_SEE_OTHER;
-        } else {
-            throw new AssertionError("Unexpected value for statusCode: "+statusCode);
-        }
+			status = HttpServletResponse.SC_SEE_OTHER;
+		} else {
+			throw new AssertionError("Unexpected value for statusCode: "+statusCode);
+		}
 
 		final PageContext pageContext = (PageContext)getJspContext();
 		final ServletContext servletContext = pageContext.getServletContext();
@@ -168,11 +168,11 @@ public class RedirectTag
 		final HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
 		final String responseEncoding = response.getCharacterEncoding();
 
-        // Add any parameters to the URL
+		// Add any parameters to the URL
 		String myHref = href;
 		if(myHref==null) myHref = page; // Default to page when href not given
-        if(myHref==null) throw new AttributeRequiredException("href");
-        myHref = HttpParametersUtils.addParams(myHref, params, responseEncoding);
+		if(myHref==null) throw new AttributeRequiredException("href");
+		myHref = HttpParametersUtils.addParams(myHref, params, responseEncoding);
 		myHref = LastModifiedServlet.addLastModified(servletContext, request, servletPath, myHref, addLastModified);
 
 		// Get the full URL that will be used for the redirect
@@ -193,10 +193,10 @@ public class RedirectTag
 				}
 			}
 
-	        Includer.setLocation(request, response, location);
+			Includer.setLocation(request, response, location);
 			Includer.sendError(request, response, status);
 			Includer.setPageSkipped(request);
-		    throw new SkipPageException();
+			throw new SkipPageException();
 		} else {
 			// Set no-cache header for 302 and 303 redirect
 			if(
@@ -206,13 +206,13 @@ public class RedirectTag
 				response.setHeader("Cache-Control", "no-cache");
 			}
 		}
-    }
-	
+	}
+
 	/**
 	 * Dispatch as forward
 	 */
-    @Override
-    void dispatch(RequestDispatcher dispatcher, JspWriter out, HttpServletRequest request, HttpServletResponse response) throws JspException, IOException {
+	@Override
+	void dispatch(RequestDispatcher dispatcher, JspWriter out, HttpServletRequest request, HttpServletResponse response) throws JspException, IOException {
 		Boolean oldForwarded = requestForwarded.get();
 		try {
 			requestForwarded.set(Boolean.TRUE);
@@ -228,5 +228,5 @@ public class RedirectTag
 		} finally {
 			requestForwarded.set(oldForwarded);
 		}
-    }
+	}
 }

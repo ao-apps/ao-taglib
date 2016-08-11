@@ -36,24 +36,24 @@ import java.util.Arrays;
  */
 public final class ApplicationResources extends EditableResourceBundle {
 
-    static final EditableResourceBundleSet bundleSet = new EditableResourceBundleSet(
-        ApplicationResources.class.getName(),
-        Arrays.asList(
-            Locales.ROOT,
-            Locales.JAPANESE
-        )
-    );
+	static final EditableResourceBundleSet bundleSet = new EditableResourceBundleSet(
+		ApplicationResources.class.getName(),
+		Arrays.asList(
+			Locales.ROOT,
+			Locales.JAPANESE
+		)
+	);
 
-    /**
-     * Do not use directly.
-     */
-    public ApplicationResources() {
-        super(
-            Locales.ROOT,
-            bundleSet,
-            new File(System.getProperty("user.home")+"/common/aoprod/cvswork/ao-taglib/src/com/aoindustries/taglib/ApplicationResources.properties")
-        );
-    }
+	/**
+	 * Do not use directly.
+	 */
+	public ApplicationResources() {
+		super(
+			Locales.ROOT,
+			bundleSet,
+			new File(System.getProperty("user.home")+"/common/aoprod/cvswork/ao-taglib/src/com/aoindustries/taglib/ApplicationResources.properties")
+		);
+	}
 
-    public static final ApplicationResourcesAccessor accessor = ApplicationResourcesAccessor.getInstance(bundleSet.getBaseName());
+	public static final ApplicationResourcesAccessor accessor = ApplicationResourcesAccessor.getInstance(bundleSet.getBaseName());
 }

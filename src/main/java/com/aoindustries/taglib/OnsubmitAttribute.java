@@ -29,7 +29,7 @@ package com.aoindustries.taglib;
  */
 public interface OnsubmitAttribute {
 
-    Object getOnsubmit();
+	Object getOnsubmit();
 
-    void setOnsubmit(Object onsubmit);
+	void setOnsubmit(Object onsubmit);
 }

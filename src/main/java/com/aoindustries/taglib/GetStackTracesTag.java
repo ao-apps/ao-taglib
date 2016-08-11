@@ -35,66 +35,66 @@ import javax.servlet.jsp.PageContext;
  */
 public class GetStackTracesTag extends AutoEncodingNullTag {
 
-    private String scope;
-    private String name;
-    private String property;
+	private String scope;
+	private String name;
+	private String property;
 
-    @Override
-    public MediaType getOutputType() {
-        return MediaType.TEXT;
-    }
+	@Override
+	public MediaType getOutputType() {
+		return MediaType.TEXT;
+	}
 
-    @Override
-    protected void doTag(Writer out) throws JspTagException, IOException {
-        PageContext pageContext = (PageContext)getJspContext();
-        // Find the Throwable to display
-        Object value = PropertyUtils.findObject(pageContext, scope, name, property, true, true);
-        if(!(value instanceof Throwable)) throw new LocalizedJspTagException(ApplicationResources.accessor, "GetStackTracesTag.notThrowable", value.getClass().getName());
-        Throwable throwable = (Throwable)value;
+	@Override
+	protected void doTag(Writer out) throws JspTagException, IOException {
+		PageContext pageContext = (PageContext)getJspContext();
+		// Find the Throwable to display
+		Object value = PropertyUtils.findObject(pageContext, scope, name, property, true, true);
+		if(!(value instanceof Throwable)) throw new LocalizedJspTagException(ApplicationResources.accessor, "GetStackTracesTag.notThrowable", value.getClass().getName());
+		Throwable throwable = (Throwable)value;
 
-        // Print the stack traces
-        ErrorPrinter.printStackTraces(throwable, out);
-    }
+		// Print the stack traces
+		ErrorPrinter.printStackTraces(throwable, out);
+	}
 
-    /**
-     * @return the scope
-     */
-    public String getScope() {
-        return scope;
-    }
+	/**
+	 * @return the scope
+	 */
+	public String getScope() {
+		return scope;
+	}
 
-    /**
-     * @param scope the scope to set
-     */
-    public void setScope(String scope) {
-        this.scope = scope;
-    }
+	/**
+	 * @param scope the scope to set
+	 */
+	public void setScope(String scope) {
+		this.scope = scope;
+	}
 
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
 
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    /**
-     * @return the property
-     */
-    public String getProperty() {
-        return property;
-    }
+	/**
+	 * @return the property
+	 */
+	public String getProperty() {
+		return property;
+	}
 
-    /**
-     * @param property the property to set
-     */
-    public void setProperty(String property) {
-        this.property = property;
-    }
+	/**
+	 * @param property the property to set
+	 */
+	public void setProperty(String property) {
+		this.property = property;
+	}
 }

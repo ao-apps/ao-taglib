@@ -29,7 +29,7 @@ package com.aoindustries.taglib;
  */
 public interface ReadonlyAttribute {
 
-    boolean isReadonly();
+	boolean isReadonly();
 
-    void setReadonly(boolean readonly);
+	void setReadonly(boolean readonly);
 }

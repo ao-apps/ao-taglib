@@ -29,7 +29,7 @@ package com.aoindustries.taglib;
  */
 public interface MaxlengthAttribute {
 
-    Integer getMaxlength();
+	Integer getMaxlength();
 
-    void setMaxlength(Integer maxlength);
+	void setMaxlength(Integer maxlength);
 }

@@ -29,16 +29,16 @@ import com.aoindustries.servlet.jsp.LocalizedJspTagException;
  */
 public class AttributeRequiredException extends LocalizedJspTagException {
 
-    private static final long serialVersionUID = 2L;
+	private static final long serialVersionUID = 2L;
 
-    private final String attribute;
+	private final String attribute;
 
-    public AttributeRequiredException(String attribute) {
-        super(ApplicationResources.accessor, "AttributeRequiredException.message", attribute);
-        this.attribute = attribute;
-    }
+	public AttributeRequiredException(String attribute) {
+		super(ApplicationResources.accessor, "AttributeRequiredException.message", attribute);
+		this.attribute = attribute;
+	}
 
-    public String getAttribute() {
-        return attribute;
-    }
+	public String getAttribute() {
+		return attribute;
+	}
 }

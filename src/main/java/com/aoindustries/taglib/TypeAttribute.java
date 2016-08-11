@@ -31,7 +31,7 @@ import javax.servlet.jsp.JspTagException;
  */
 public interface TypeAttribute {
 
-    Object getType();
+	Object getType();
 
-    void setType(Object type) throws JspTagException;
+	void setType(Object type) throws JspTagException;
 }

@@ -29,7 +29,7 @@ package com.aoindustries.taglib;
  */
 public interface WidthAttribute {
 
-    Object getWidth();
+	Object getWidth();
 
-    void setWidth(Object width);
+	void setWidth(Object width);
 }

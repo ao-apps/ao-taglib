@@ -29,7 +29,7 @@ package com.aoindustries.taglib;
  */
 public interface HrefAttribute {
 
-    String getHref();
+	String getHref();
 
-    void setHref(String href);
+	void setHref(String href);
 }

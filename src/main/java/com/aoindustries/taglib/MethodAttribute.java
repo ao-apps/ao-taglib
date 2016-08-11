@@ -31,7 +31,7 @@ import javax.servlet.jsp.JspTagException;
  */
 public interface MethodAttribute {
 
-    String getMethod();
+	String getMethod();
 
-    void setMethod(String method) throws JspTagException;
+	void setMethod(String method) throws JspTagException;
 }

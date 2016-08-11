@@ -43,54 +43,54 @@ public class OptionTag
 		DisabledAttribute
 {
 
-    private boolean valueSet;
-    private Object value;
-    private boolean selected;
-    private boolean disabled;
+	private boolean valueSet;
+	private Object value;
+	private boolean selected;
+	private boolean disabled;
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.TEXT;
-    }
+	@Override
+	public MediaType getContentType() {
+		return MediaType.TEXT;
+	}
 
-    @Override
-    public MediaType getOutputType() {
-        return MediaType.XHTML;
-    }
+	@Override
+	public MediaType getOutputType() {
+		return MediaType.XHTML;
+	}
 
-    @Override
-    public Object getValue() {
-        return value;
-    }
+	@Override
+	public Object getValue() {
+		return value;
+	}
 
-    @Override
-    public void setValue(Object value) {
-        this.valueSet = true;
+	@Override
+	public void setValue(Object value) {
+		this.valueSet = true;
 		this.value = value;
-    }
+	}
 
-    @Override
-    public boolean isSelected() {
-        return selected;
-    }
+	@Override
+	public boolean isSelected() {
+		return selected;
+	}
 
-    @Override
-    public void setSelected(boolean selected) {
-        this.selected = selected;
-    }
+	@Override
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+	}
 
-    @Override
-    public boolean isDisabled() {
-        return disabled;
-    }
+	@Override
+	public boolean isDisabled() {
+		return disabled;
+	}
 
-    @Override
-    public void setDisabled(boolean disabled) {
-        this.disabled = disabled;
-    }
+	@Override
+	public void setDisabled(boolean disabled) {
+		this.disabled = disabled;
+	}
 
-    @Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+	@Override
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		capturedBody = capturedBody.trim();
 		if(!valueSet) setValue(capturedBody);
 		out.write("<option value=\"");
@@ -102,5 +102,5 @@ public class OptionTag
 		// Allow text markup from translations
 		MarkupUtils.writeWithMarkup(capturedBody, MarkupType.TEXT, textInXhtmlEncoder, out);
 		out.write("</option>");
-    }
+	}
 }

@@ -39,41 +39,41 @@ public class ParamTag
 		ValueAttribute
 {
 
-    private Object name;
-    private Object value;
+	private Object name;
+	private Object value;
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.TEXT;
-    }
+	@Override
+	public MediaType getContentType() {
+		return MediaType.TEXT;
+	}
 
-    @Override
-    public MediaType getOutputType() {
-        return null;
-    }
+	@Override
+	public MediaType getOutputType() {
+		return null;
+	}
 
-    @Override
-    public Object getName() {
-        return name;
-    }
+	@Override
+	public Object getName() {
+		return name;
+	}
 
-    @Override
-    public void setName(Object name) {
+	@Override
+	public void setName(Object name) {
 		this.name = name;
-    }
+	}
 
-    @Override
-    public Object getValue() {
-        return value;
-    }
+	@Override
+	public Object getValue() {
+		return value;
+	}
 
-    @Override
-    public void setValue(Object value) {
+	@Override
+	public void setValue(Object value) {
 		this.value = value;
-    }
+	}
 
-    @Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+	@Override
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		if(name==null) throw new AttributeRequiredException("name");
 		ParamUtils.addParam(
 			"param",
@@ -81,5 +81,5 @@ public class ParamTag
 			Coercion.toString(name),
 			value!=null ? value : capturedBody.trim()
 		);
-    }
+	}
 }

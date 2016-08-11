@@ -29,7 +29,7 @@ package com.aoindustries.taglib;
  */
 public interface OnblurAttribute {
 
-    Object getOnblur();
+	Object getOnblur();
 
-    void setOnblur(Object onblur);
+	void setOnblur(Object onblur);
 }

@@ -155,33 +155,33 @@ abstract public class DispatchTag
 	}
 
 	protected String page;
-    protected HttpParametersMap params;
+	protected HttpParametersMap params;
 
-    @Override
-    public String getPage() {
-        return page;
-    }
+	@Override
+	public String getPage() {
+		return page;
+	}
 
-    @Override
-    public void setPage(String page) {
-        this.page = page;
-    }
+	@Override
+	public void setPage(String page) {
+		this.page = page;
+	}
 
 	abstract protected WildcardPatternMatcher getClearParamsMatcher();
 
-    @Override
-    public HttpParameters getParams() {
-        return params==null ? EmptyParameters.getInstance() : params;
-    }
+	@Override
+	public HttpParameters getParams() {
+		return params==null ? EmptyParameters.getInstance() : params;
+	}
 
-    @Override
-    public void addParam(String name, String value) {
-        if(params==null) params = new HttpParametersMap();
-        params.addParameter(name, value);
-    }
+	@Override
+	public void addParam(String name, String value) {
+		if(params==null) params = new HttpParametersMap();
+		params.addParameter(name, value);
+	}
 
 	abstract protected String getDynamicAttributeExceptionKey();
-	
+
 	abstract protected Serializable[] getDynamicAttributeExceptionArgs(String localName);
 
 	@Override
@@ -220,7 +220,7 @@ abstract public class DispatchTag
 
 	@Override
 	@SuppressWarnings("unchecked")
-    final public void doTag() throws JspException, IOException {
+	final public void doTag() throws JspException, IOException {
 		// Track original page when first accessed
 		final String oldOriginal = Dispatcher.getOriginalPage();
 		try {
@@ -329,7 +329,7 @@ abstract public class DispatchTag
 				Dispatcher.setOriginalPage(null);
 			}
 		}
-    }
+	}
 
-    abstract void dispatch(RequestDispatcher dispatcher, JspWriter out, HttpServletRequest request, HttpServletResponse response) throws JspException, IOException;
+	abstract void dispatch(RequestDispatcher dispatcher, JspWriter out, HttpServletRequest request, HttpServletResponse response) throws JspException, IOException;
 }

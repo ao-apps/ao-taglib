@@ -29,7 +29,7 @@ package com.aoindustries.taglib;
  */
 public interface HreflangAttribute {
 
-    Object getHreflang();
+	Object getHreflang();
 
-    void setHreflang(Object hreflang);
+	void setHreflang(Object hreflang);
 }

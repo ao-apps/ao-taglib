@@ -36,28 +36,28 @@ import javax.servlet.jsp.JspTagException;
  */
 public class WordWrapTag extends AutoEncodingBufferedTag {
 
-    private int width = 79;
+	private int width = 79;
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.TEXT;
-    }
+	@Override
+	public MediaType getContentType() {
+		return MediaType.TEXT;
+	}
 
-    @Override
-    public MediaType getOutputType() {
-        return MediaType.TEXT;
-    }
+	@Override
+	public MediaType getOutputType() {
+		return MediaType.TEXT;
+	}
 
-    public int getWidth() {
-        return width;
-    }
+	public int getWidth() {
+		return width;
+	}
 
-    public void setWidth(int width) {
-        this.width = width;
-    }
+	public void setWidth(int width) {
+		this.width = width;
+	}
 
-    @Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
-        StringUtility.wordWrap(capturedBody.toString(), width, out);
-    }
+	@Override
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+		StringUtility.wordWrap(capturedBody.toString(), width, out);
+	}
 }

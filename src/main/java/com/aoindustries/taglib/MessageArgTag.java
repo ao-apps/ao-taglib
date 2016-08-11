@@ -36,32 +36,32 @@ public class MessageArgTag
 	implements ValueAttribute
 {
 
-    private Object value;
+	private Object value;
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.TEXT;
-    }
+	@Override
+	public MediaType getContentType() {
+		return MediaType.TEXT;
+	}
 
-    @Override
-    public MediaType getOutputType() {
-        return null;
-    }
+	@Override
+	public MediaType getOutputType() {
+		return null;
+	}
 
-    @Override
-    public Object getValue() {
-        return value;
-    }
+	@Override
+	public Object getValue() {
+		return value;
+	}
 
-    @Override
-    public void setValue(Object value) {
+	@Override
+	public void setValue(Object value) {
 		this.value = value;
-    }
+	}
 
-    @Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+	@Override
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		MessageArgsAttribute messageArgsAttribute = AttributeUtils.findAttributeParent("messageArg", this, "messageArgs", MessageArgsAttribute.class);
 		if(value==null) setValue(capturedBody.trim());
 		messageArgsAttribute.addMessageArg(value);
-    }
+	}
 }

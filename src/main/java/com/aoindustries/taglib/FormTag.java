@@ -66,113 +66,113 @@ public class FormTag
 		OnsubmitAttribute
 {
 
-    public static boolean isValidMethod(String method) {
-        return
-            "get".equals(method)
-            || "post".equals(method)
-        ;
-    }
+	public static boolean isValidMethod(String method) {
+		return
+			"get".equals(method)
+			|| "post".equals(method)
+		;
+	}
 
-    private String method = "get";
-    private Object id;
-    private String action;
-    private MutableHttpParameters params;
+	private String method = "get";
+	private Object id;
+	private String action;
+	private MutableHttpParameters params;
 	private Object target;
-    private Object enctype;
-    private Object style;
-    private Object onsubmit;
+	private Object enctype;
+	private Object style;
+	private Object onsubmit;
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.XHTML;
-    }
+	@Override
+	public MediaType getContentType() {
+		return MediaType.XHTML;
+	}
 
-    @Override
-    public MediaType getOutputType() {
-        return MediaType.XHTML;
-    }
+	@Override
+	public MediaType getOutputType() {
+		return MediaType.XHTML;
+	}
 
-    @Override
-    public String getMethod() {
-        return method;
-    }
+	@Override
+	public String getMethod() {
+		return method;
+	}
 
-    @Override
-    public void setMethod(String method) throws JspTagException {
-        if(!isValidMethod(method)) throw new LocalizedJspTagException(ApplicationResources.accessor, "FormTag.method.invalid", method);
-        this.method = method;
-    }
+	@Override
+	public void setMethod(String method) throws JspTagException {
+		if(!isValidMethod(method)) throw new LocalizedJspTagException(ApplicationResources.accessor, "FormTag.method.invalid", method);
+		this.method = method;
+	}
 
-    @Override
-    public Object getId() {
-        return id;
-    }
+	@Override
+	public Object getId() {
+		return id;
+	}
 
-    @Override
-    public void setId(Object id) {
+	@Override
+	public void setId(Object id) {
 		this.id = id;
-    }
-
-    @Override
-    public String getAction() {
-        return action;
-    }
-
-    @Override
-    public void setAction(String action) {
-        this.action = action;
-    }
-
-    @Override
-    public HttpParameters getParams() {
-        return params==null ? EmptyParameters.getInstance() : params;
-    }
-
-    @Override
-    public void addParam(String name, String value) {
-        if(params==null) params = new HttpParametersMap();
-        params.addParameter(name, value);
-    }
+	}
 
 	@Override
-    public Object getTarget() {
-        return target;
-    }
-
-    @Override
-    public void setTarget(Object target) {
-        this.target = target;
-    }
+	public String getAction() {
+		return action;
+	}
 
 	@Override
-    public Object getEnctype() {
-        return enctype;
-    }
+	public void setAction(String action) {
+		this.action = action;
+	}
 
-    @Override
-    public void setEnctype(Object enctype) {
+	@Override
+	public HttpParameters getParams() {
+		return params==null ? EmptyParameters.getInstance() : params;
+	}
+
+	@Override
+	public void addParam(String name, String value) {
+		if(params==null) params = new HttpParametersMap();
+		params.addParameter(name, value);
+	}
+
+	@Override
+	public Object getTarget() {
+		return target;
+	}
+
+	@Override
+	public void setTarget(Object target) {
+		this.target = target;
+	}
+
+	@Override
+	public Object getEnctype() {
+		return enctype;
+	}
+
+	@Override
+	public void setEnctype(Object enctype) {
 		this.enctype = enctype;
-    }
+	}
 
-    @Override
-    public Object getStyle() {
-        return style;
-    }
+	@Override
+	public Object getStyle() {
+		return style;
+	}
 
-    @Override
-    public void setStyle(Object style) {
-        this.style = style;
-    }
+	@Override
+	public void setStyle(Object style) {
+		this.style = style;
+	}
 
-    @Override
-    public Object getOnsubmit() {
-        return onsubmit;
-    }
+	@Override
+	public Object getOnsubmit() {
+		return onsubmit;
+	}
 
-    @Override
-    public void setOnsubmit(Object onsubmit) {
-        this.onsubmit = onsubmit;
-    }
+	@Override
+	public void setOnsubmit(Object onsubmit) {
+		this.onsubmit = onsubmit;
+	}
 
 	@Override
 	public void setDynamicAttribute(String uri, String localName, Object value) throws JspTagException {
@@ -192,7 +192,7 @@ public class FormTag
 	}
 
 	@Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
 		HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
 		String responseEncoding = response.getCharacterEncoding();
@@ -302,5 +302,5 @@ public class FormTag
 		if(didDiv) out.write("</div>");
 		MarkupUtils.writeWithMarkup(capturedBody, MarkupType.XHTML, out);
 		out.write("</form>");
-    }
+	}
 }

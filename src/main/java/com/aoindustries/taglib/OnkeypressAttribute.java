@@ -29,7 +29,7 @@ package com.aoindustries.taglib;
  */
 public interface OnkeypressAttribute {
 
-    Object getOnkeypress();
+	Object getOnkeypress();
 
-    void setOnkeypress(Object onkeypress);
+	void setOnkeypress(Object onkeypress);
 }

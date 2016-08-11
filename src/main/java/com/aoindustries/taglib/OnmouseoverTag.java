@@ -33,19 +33,19 @@ import javax.servlet.jsp.JspTagException;
  */
 public class OnmouseoverTag extends AutoEncodingBufferedTag {
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.JAVASCRIPT;
-    }
+	@Override
+	public MediaType getContentType() {
+		return MediaType.JAVASCRIPT;
+	}
 
-    @Override
-    public MediaType getOutputType() {
-        return null;
-    }
+	@Override
+	public MediaType getOutputType() {
+		return null;
+	}
 
-    @Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
-        OnmouseoverAttribute onmouseoverAttribute = AttributeUtils.findAttributeParent("onmouseover", this, "onmouseover", OnmouseoverAttribute.class);
-        onmouseoverAttribute.setOnmouseover(capturedBody.trim());
-    }
+	@Override
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+		OnmouseoverAttribute onmouseoverAttribute = AttributeUtils.findAttributeParent("onmouseover", this, "onmouseover", OnmouseoverAttribute.class);
+		onmouseoverAttribute.setOnmouseover(capturedBody.trim());
+	}
 }

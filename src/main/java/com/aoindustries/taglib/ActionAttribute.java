@@ -29,7 +29,7 @@ package com.aoindustries.taglib;
  */
 public interface ActionAttribute {
 
-    String getAction();
+	String getAction();
 
-    void setAction(String action);
+	void setAction(String action);
 }

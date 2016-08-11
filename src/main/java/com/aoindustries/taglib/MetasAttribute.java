@@ -32,7 +32,7 @@ import java.util.Collection;
  */
 public interface MetasAttribute {
 
-    Collection<Meta> getMetas();
+	Collection<Meta> getMetas();
 
-    void addMeta(Meta meta);
+	void addMeta(Meta meta);
 }

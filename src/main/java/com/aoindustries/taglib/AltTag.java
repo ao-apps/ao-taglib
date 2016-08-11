@@ -33,19 +33,19 @@ import javax.servlet.jsp.JspTagException;
  */
 public class AltTag extends AutoEncodingBufferedTag {
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.TEXT;
-    }
+	@Override
+	public MediaType getContentType() {
+		return MediaType.TEXT;
+	}
 
-    @Override
-    public MediaType getOutputType() {
-        return null;
-    }
+	@Override
+	public MediaType getOutputType() {
+		return null;
+	}
 
-    @Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
-        AltAttribute altAttribute = AttributeUtils.findAttributeParent("alt", this, "alt", AltAttribute.class);
-        altAttribute.setAlt(capturedBody.trim());
-    }
+	@Override
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+		AltAttribute altAttribute = AttributeUtils.findAttributeParent("alt", this, "alt", AltAttribute.class);
+		altAttribute.setAlt(capturedBody.trim());
+	}
 }

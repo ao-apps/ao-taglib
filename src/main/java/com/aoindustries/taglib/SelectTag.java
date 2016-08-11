@@ -48,107 +48,107 @@ public class SelectTag
 		OnkeypressAttribute
 {
 
-    private Object id;
-    private Object name;
-    private Object style;
-    private boolean disabled;
-    private Object onchange;
-    private Object onfocus;
-    private Object onblur;
-    private Object onkeypress;
+	private Object id;
+	private Object name;
+	private Object style;
+	private boolean disabled;
+	private Object onchange;
+	private Object onfocus;
+	private Object onblur;
+	private Object onkeypress;
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.XHTML;
-    }
+	@Override
+	public MediaType getContentType() {
+		return MediaType.XHTML;
+	}
 
-    @Override
-    public MediaType getOutputType() {
-        return MediaType.XHTML;
-    }
+	@Override
+	public MediaType getOutputType() {
+		return MediaType.XHTML;
+	}
 
-    @Override
-    public Object getId() {
-        return id;
-    }
+	@Override
+	public Object getId() {
+		return id;
+	}
 
-    @Override
-    public void setId(Object id) {
+	@Override
+	public void setId(Object id) {
 		this.id = id;
-    }
+	}
 
-    @Override
-    public Object getName() {
-        return name;
-    }
+	@Override
+	public Object getName() {
+		return name;
+	}
 
-    @Override
-    public void setName(Object name) {
+	@Override
+	public void setName(Object name) {
 		this.name = name;
-    }
+	}
 
-    @Override
-    public Object getStyle() {
-        return style;
-    }
+	@Override
+	public Object getStyle() {
+		return style;
+	}
 
-    @Override
-    public void setStyle(Object style) {
-        this.style = style;
-    }
+	@Override
+	public void setStyle(Object style) {
+		this.style = style;
+	}
 
-    @Override
-    public boolean isDisabled() {
-        return disabled;
-    }
+	@Override
+	public boolean isDisabled() {
+		return disabled;
+	}
 
-    @Override
-    public void setDisabled(boolean disabled) {
-        this.disabled = disabled;
-    }
+	@Override
+	public void setDisabled(boolean disabled) {
+		this.disabled = disabled;
+	}
 
-    @Override
-    public Object getOnchange() {
-        return onchange;
-    }
+	@Override
+	public Object getOnchange() {
+		return onchange;
+	}
 
-    @Override
-    public void setOnchange(Object onchange) {
-        this.onchange = onchange;
-    }
+	@Override
+	public void setOnchange(Object onchange) {
+		this.onchange = onchange;
+	}
 
-    @Override
-    public Object getOnfocus() {
-        return onfocus;
-    }
+	@Override
+	public Object getOnfocus() {
+		return onfocus;
+	}
 
-    @Override
-    public void setOnfocus(Object onfocus) {
-        this.onfocus = onfocus;
-    }
+	@Override
+	public void setOnfocus(Object onfocus) {
+		this.onfocus = onfocus;
+	}
 
-    @Override
-    public Object getOnblur() {
-        return onblur;
-    }
+	@Override
+	public Object getOnblur() {
+		return onblur;
+	}
 
-    @Override
-    public void setOnblur(Object onblur) {
-        this.onblur = onblur;
-    }
+	@Override
+	public void setOnblur(Object onblur) {
+		this.onblur = onblur;
+	}
 
-    @Override
-    public Object getOnkeypress() {
-        return onkeypress;
-    }
+	@Override
+	public Object getOnkeypress() {
+		return onkeypress;
+	}
 
-    @Override
-    public void setOnkeypress(Object onkeypress) {
-        this.onkeypress = onkeypress;
-    }
+	@Override
+	public void setOnkeypress(Object onkeypress) {
+		this.onkeypress = onkeypress;
+	}
 
-    @Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+	@Override
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		out.write("<select");
 		if(id!=null) {
 			out.write(" id=\"");
@@ -189,5 +189,5 @@ public class SelectTag
 		out.write('>');
 		MarkupUtils.writeWithMarkup(capturedBody, MarkupType.XHTML, out);
 		out.write("</select>");
-    }
+	}
 }

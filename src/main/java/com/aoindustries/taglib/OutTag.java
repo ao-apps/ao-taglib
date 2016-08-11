@@ -45,12 +45,12 @@ public class OutTag
 	private Object value;
 	private Object def;
 	private Object type = MediaType.TEXT;
-    private MediaType mediaType = MediaType.TEXT;
+	private MediaType mediaType = MediaType.TEXT;
 
 	@Override
-    public MediaType getOutputType() {
-        return mediaType;
-    }
+	public MediaType getOutputType() {
+		return mediaType;
+	}
 
 	@Override
 	public Object getValue() {
@@ -65,18 +65,18 @@ public class OutTag
 	public Object getDefault() {
 		return def;
 	}
-	
+
 	public void setDefault(Object def) {
 		this.def = def;
 	}
 
 	@Override
-    public Object getType() {
-        return type;
-    }
+	public Object getType() {
+		return type;
+	}
 
 	@Override
-    public void setType(Object type) throws JspTagException {
+	public void setType(Object type) throws JspTagException {
 		MediaType newMediaType;
 		if(type instanceof MediaType) {
 			newMediaType = (MediaType)type;
@@ -93,7 +93,7 @@ public class OutTag
 		}
 		this.type = type;
 		this.mediaType = newMediaType;
-    }
+	}
 
 	private String toStringResult;
 	private BundleLookupMarkup lookupMarkup;
@@ -118,7 +118,7 @@ public class OutTag
 	}
 
 	@Override
-    protected void doTag(Writer out) throws JspTagException, IOException {
+	protected void doTag(Writer out) throws JspTagException, IOException {
 		if(toStringResult!=null) {
 			out.write(toStringResult);
 		} else if(value!=null) {
@@ -126,7 +126,7 @@ public class OutTag
 		} else if(def!=null) {
 			Coercion.write(def, out);
 		}
-    }
+	}
 
 	@Override
 	protected void writeSuffix(MediaType containerType, Writer out) throws IOException {
