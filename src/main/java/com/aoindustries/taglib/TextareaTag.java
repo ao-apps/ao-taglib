@@ -48,107 +48,107 @@ public class TextareaTag
 		StyleAttribute
 {
 
-    private Object name;
-    private Object value;
-    private int cols;
-    private int rows;
-    private boolean readonly;
-    private boolean disabled;
-    private Object onchange;
-    private Object style;
+	private Object name;
+	private Object value;
+	private int cols;
+	private int rows;
+	private boolean readonly;
+	private boolean disabled;
+	private Object onchange;
+	private Object style;
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.TEXT;
-    }
+	@Override
+	public MediaType getContentType() {
+		return MediaType.TEXT;
+	}
 
-    @Override
-    public MediaType getOutputType() {
-        return MediaType.XHTML;
-    }
+	@Override
+	public MediaType getOutputType() {
+		return MediaType.XHTML;
+	}
 
-    @Override
-    public Object getName() {
-        return name;
-    }
+	@Override
+	public Object getName() {
+		return name;
+	}
 
-    @Override
-    public void setName(Object name) {
+	@Override
+	public void setName(Object name) {
 		this.name = name;
-    }
+	}
 
-    @Override
-    public Object getValue() {
-        return value;
-    }
+	@Override
+	public Object getValue() {
+		return value;
+	}
 
-    @Override
-    public void setValue(Object value) {
+	@Override
+	public void setValue(Object value) {
 		this.value = value;
-    }
+	}
 
-    @Override
-    public int getCols() {
-        return cols;
-    }
+	@Override
+	public int getCols() {
+		return cols;
+	}
 
-    @Override
-    public void setCols(int cols) {
-        this.cols = cols;
-    }
+	@Override
+	public void setCols(int cols) {
+		this.cols = cols;
+	}
 
-    @Override
-    public int getRows() {
-        return rows;
-    }
+	@Override
+	public int getRows() {
+		return rows;
+	}
 
-    @Override
-    public void setRows(int rows) {
-        this.rows = rows;
-    }
+	@Override
+	public void setRows(int rows) {
+		this.rows = rows;
+	}
 
-    @Override
-    public boolean isReadonly() {
-        return readonly;
-    }
+	@Override
+	public boolean isReadonly() {
+		return readonly;
+	}
 
-    @Override
-    public void setReadonly(boolean readonly) {
-        this.readonly = readonly;
-    }
+	@Override
+	public void setReadonly(boolean readonly) {
+		this.readonly = readonly;
+	}
 
-    @Override
-    public boolean isDisabled() {
-        return disabled;
-    }
+	@Override
+	public boolean isDisabled() {
+		return disabled;
+	}
 
-    @Override
-    public void setDisabled(boolean disabled) {
-        this.disabled = disabled;
-    }
+	@Override
+	public void setDisabled(boolean disabled) {
+		this.disabled = disabled;
+	}
 
-    @Override
-    public Object getOnchange() {
-        return onchange;
-    }
+	@Override
+	public Object getOnchange() {
+		return onchange;
+	}
 
-    @Override
-    public void setOnchange(Object onchange) {
-        this.onchange = onchange;
-    }
+	@Override
+	public void setOnchange(Object onchange) {
+		this.onchange = onchange;
+	}
 
-    @Override
-    public Object getStyle() {
-        return style;
-    }
+	@Override
+	public Object getStyle() {
+		return style;
+	}
 
-    @Override
-    public void setStyle(Object style) {
-        this.style = style;
-    }
+	@Override
+	public void setStyle(Object style) {
+		this.style = style;
+	}
 
-    @Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+	@Override
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		if(value==null) setValue(capturedBody.trim());
 		out.write("<textarea");
 		if(name!=null) {
@@ -176,5 +176,5 @@ public class TextareaTag
 		out.write('>');
 		Coercion.write(value, textInXhtmlEncoder, out);
 		out.write("</textarea>");
-    }
+	}
 }

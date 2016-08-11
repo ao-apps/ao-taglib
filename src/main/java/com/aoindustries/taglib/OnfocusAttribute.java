@@ -29,7 +29,7 @@ package com.aoindustries.taglib;
  */
 public interface OnfocusAttribute {
 
-    Object getOnfocus();
+	Object getOnfocus();
 
-    void setOnfocus(Object onfocus);
+	void setOnfocus(Object onfocus);
 }

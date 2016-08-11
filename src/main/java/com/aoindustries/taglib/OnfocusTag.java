@@ -33,19 +33,19 @@ import javax.servlet.jsp.JspTagException;
  */
 public class OnfocusTag extends AutoEncodingBufferedTag {
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.JAVASCRIPT;
-    }
+	@Override
+	public MediaType getContentType() {
+		return MediaType.JAVASCRIPT;
+	}
 
-    @Override
-    public MediaType getOutputType() {
-        return null;
-    }
+	@Override
+	public MediaType getOutputType() {
+		return null;
+	}
 
-    @Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
-        OnfocusAttribute onfocusAttribute = AttributeUtils.findAttributeParent("onfocus", this, "onfocus", OnfocusAttribute.class);
-        onfocusAttribute.setOnfocus(capturedBody.trim());
-    }
+	@Override
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+		OnfocusAttribute onfocusAttribute = AttributeUtils.findAttributeParent("onfocus", this, "onfocus", OnfocusAttribute.class);
+		onfocusAttribute.setOnfocus(capturedBody.trim());
+	}
 }

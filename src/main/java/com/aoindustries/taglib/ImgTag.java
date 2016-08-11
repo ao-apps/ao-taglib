@@ -56,57 +56,57 @@ public class ImgTag
 		StyleAttribute
 {
 
-    private Object id;
-    private String src;
-    private HttpParametersMap params;
+	private Object id;
+	private String src;
+	private HttpParametersMap params;
 	private boolean srcAbsolute;
 	private LastModifiedServlet.AddLastModifiedWhen addLastModified = LastModifiedServlet.AddLastModifiedWhen.AUTO;
-    private Object width;
-    private Object height;
-    private Object alt;
-    private Object title;
-    private Object clazz;
-    private Object style;
-
-    @Override
-    public MediaType getContentType() {
-        return MediaType.TEXT;
-    }
-
-    @Override
-    public MediaType getOutputType() {
-        return MediaType.XHTML;
-    }
-
-    @Override
-    public Object getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Object id) {
-		this.id = id;
-    }
+	private Object width;
+	private Object height;
+	private Object alt;
+	private Object title;
+	private Object clazz;
+	private Object style;
 
 	@Override
-    public String getSrc() {
-        return src;
-    }
+	public MediaType getContentType() {
+		return MediaType.TEXT;
+	}
 
-    @Override
-    public void setSrc(String src) {
-        this.src = src;
-    }
+	@Override
+	public MediaType getOutputType() {
+		return MediaType.XHTML;
+	}
 
-    @Override
-    public HttpParameters getParams() {
-        return params==null ? EmptyParameters.getInstance() : params;
-    }
+	@Override
+	public Object getId() {
+		return id;
+	}
 
-    @Override
-    public void addParam(String name, String value) {
-        if(params==null) params = new HttpParametersMap();
-        params.addParameter(name, value);
+	@Override
+	public void setId(Object id) {
+		this.id = id;
+	}
+
+	@Override
+	public String getSrc() {
+		return src;
+	}
+
+	@Override
+	public void setSrc(String src) {
+		this.src = src;
+	}
+
+	@Override
+	public HttpParameters getParams() {
+		return params==null ? EmptyParameters.getInstance() : params;
+	}
+
+	@Override
+	public void addParam(String name, String value) {
+		if(params==null) params = new HttpParametersMap();
+		params.addParameter(name, value);
 	}
 
 	public boolean getSrcAbsolute() {
@@ -125,65 +125,65 @@ public class ImgTag
 		this.addLastModified = LastModifiedServlet.AddLastModifiedWhen.valueOfLowerName(addLastModified);
 	}
 
-    @Override
-    public Object getWidth() {
-        return width;
-    }
+	@Override
+	public Object getWidth() {
+		return width;
+	}
 
-    @Override
-    public void setWidth(Object width) {
-        this.width = width;
-    }
+	@Override
+	public void setWidth(Object width) {
+		this.width = width;
+	}
 
-    @Override
-    public Object getHeight() {
-        return height;
-    }
+	@Override
+	public Object getHeight() {
+		return height;
+	}
 
-    @Override
-    public void setHeight(Object height) {
+	@Override
+	public void setHeight(Object height) {
 		this.height = height;
-    }
+	}
 
-    @Override
-    public Object getAlt() {
-        return alt;
-    }
+	@Override
+	public Object getAlt() {
+		return alt;
+	}
 
-    @Override
-    public void setAlt(Object alt) {
+	@Override
+	public void setAlt(Object alt) {
 		this.alt = alt;
-    }
+	}
 
-    @Override
-    public Object getTitle() {
-        return title;
-    }
+	@Override
+	public Object getTitle() {
+		return title;
+	}
 
-    @Override
-    public void setTitle(Object title) {
-        this.title = title;
-    }
+	@Override
+	public void setTitle(Object title) {
+		this.title = title;
+	}
 
-    @Override
-    public Object getClazz() {
-        return clazz;
-    }
+	@Override
+	public Object getClazz() {
+		return clazz;
+	}
 
-    @Override
-    public void setClazz(Object clazz) {
+	@Override
+	public void setClazz(Object clazz) {
 		this.clazz = clazz;
-    }
+	}
 
-    @Override
-    public Object getStyle() {
-        return style;
-    }
+	@Override
+	public Object getStyle() {
+		return style;
+	}
 
-    @Override
-    public void setStyle(Object style) {
-        this.style = style;
-    }
+	@Override
+	public void setStyle(Object style) {
+		this.style = style;
+	}
 
 	@Override
 	public void setDynamicAttribute(String uri, String localName, Object value) throws JspTagException {
@@ -203,7 +203,7 @@ public class ImgTag
 	}
 
 	@Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		if(src==null) src = capturedBody.trim().toString();
 		if(alt==null) throw new AttributeRequiredException("alt");
 
@@ -243,5 +243,5 @@ public class ImgTag
 			out.write('"');
 		}
 		out.write(" />");
-    }
+	}
 }

@@ -34,11 +34,11 @@ import java.beans.SimpleBeanInfo;
 public class HtmlTagBeanInfo extends SimpleBeanInfo {
 
 	private static final Object propertiesLock = new Object();
-    private static PropertyDescriptor[] properties;
+	private static PropertyDescriptor[] properties;
 
-    @Override
-    public PropertyDescriptor[] getPropertyDescriptors () {
-        try {
+	@Override
+	public PropertyDescriptor[] getPropertyDescriptors () {
+		try {
 			synchronized(propertiesLock) {
 				PropertyDescriptor[] props = properties;
 				if(props==null) {
@@ -53,10 +53,10 @@ public class HtmlTagBeanInfo extends SimpleBeanInfo {
 				}
 				return props;
 			}
-        } catch(IntrospectionException err) {
+		} catch(IntrospectionException err) {
 			throw new AssertionError(err);
-        }
-    }
+		}
+	}
 
 	/**
 	 * Include base class.
@@ -67,8 +67,8 @@ public class HtmlTagBeanInfo extends SimpleBeanInfo {
 			return new BeanInfo[] {
 				Introspector.getBeanInfo(HtmlTag.class.getSuperclass())
 			};
-        } catch(IntrospectionException err) {
+		} catch(IntrospectionException err) {
 			throw new AssertionError(err);
-        }
+		}
 	}
 }

@@ -34,24 +34,24 @@ import javax.servlet.jsp.JspTagException;
  */
 public class FrameborderTag extends AutoEncodingBufferedTag {
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.TEXT;
-    }
+	@Override
+	public MediaType getContentType() {
+		return MediaType.TEXT;
+	}
 
-    @Override
-    public MediaType getOutputType() {
-        return null;
-    }
+	@Override
+	public MediaType getOutputType() {
+		return null;
+	}
 
-    @Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
-        FrameborderAttribute frameborderAttribute = AttributeUtils.findAttributeParent("frameborder", this, "frameborder", FrameborderAttribute.class);
-        String value = capturedBody.trim().toString();
-        if(value.length()>0) {
-            if("true".equals(value)) frameborderAttribute.setFrameborder(true);
-            else if("false".equals(value)) frameborderAttribute.setFrameborder(false);
-            else throw new LocalizedJspTagException(ApplicationResources.accessor, "FrameborderTag.invalidValue", value);
-        }
-    }
+	@Override
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+		FrameborderAttribute frameborderAttribute = AttributeUtils.findAttributeParent("frameborder", this, "frameborder", FrameborderAttribute.class);
+		String value = capturedBody.trim().toString();
+		if(value.length()>0) {
+			if("true".equals(value)) frameborderAttribute.setFrameborder(true);
+			else if("false".equals(value)) frameborderAttribute.setFrameborder(false);
+			else throw new LocalizedJspTagException(ApplicationResources.accessor, "FrameborderTag.invalidValue", value);
+		}
+	}
 }

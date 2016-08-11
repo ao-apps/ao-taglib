@@ -31,22 +31,22 @@ import javax.servlet.jsp.tagext.ValidationMessage;
  */
 public class HtmlTagTEI extends TagExtraInfo {
 
-    @Override
-    public ValidationMessage[] validate(TagData data) {
-        Object o = data.getAttribute("doctype");
-        if(
-            o != null
-            && o != TagData.REQUEST_TIME_VALUE
-        ) {
-            String doctype = (String)o;
+	@Override
+	public ValidationMessage[] validate(TagData data) {
+		Object o = data.getAttribute("doctype");
+		if(
+			o != null
+			&& o != TagData.REQUEST_TIME_VALUE
+		) {
+			String doctype = (String)o;
 			try {
 				HtmlTag.DocType.valueOf(doctype);
 			} catch(IllegalArgumentException e) {
-                return new ValidationMessage[] {
-                    new ValidationMessage(data.getId(), ApplicationResources.accessor.getMessage("HtmlTag.doctype.invalid", doctype))
-                };
-            }
-        }
-        return null;
-    }
+				return new ValidationMessage[] {
+					new ValidationMessage(data.getId(), ApplicationResources.accessor.getMessage("HtmlTag.doctype.invalid", doctype))
+				};
+			}
+		}
+		return null;
+	}
 }

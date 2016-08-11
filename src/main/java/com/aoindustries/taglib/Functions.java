@@ -37,8 +37,8 @@ import javax.servlet.jsp.JspTagException;
 
 final public class Functions {
 
-    private Functions() {
-    }
+	private Functions() {
+	}
 
 	public static String addLastModified(String url) throws MalformedURLException {
 		return LastModifiedServlet.addLastModified(
@@ -51,24 +51,24 @@ final public class Functions {
 	}
 
 	public static String encodeURL(String url) {
-        return getResponse().encodeURL(url);
-    }
+		return getResponse().encodeURL(url);
+	}
 
 	/**
 	 * @see  ServletUtil#getAbsoluteURL(javax.servlet.http.HttpServletRequest, java.lang.String)
 	 */
 	public static String getAbsoluteURL(String relPath) {
-        return ServletUtil.getAbsoluteURL(getRequest(), relPath);
-    }
-	
+		return ServletUtil.getAbsoluteURL(getRequest(), relPath);
+	}
+
 	public static String getDecimalTimeLength(Long millis) {
 		return millis==null ? null : StringUtility.getDecimalTimeLengthString(millis);
 	}
 
 	public static String join(Iterable<?> iter, String separator) {
-        if(iter==null) return null;
-        return StringUtility.join(iter, separator);
-    }
+		if(iter==null) return null;
+		return StringUtility.join(iter, separator);
+	}
 
 	public static String message(String key) throws JspTagException {
 		NullArgumentException.checkNotNull(key, "key");

@@ -29,7 +29,7 @@ package com.aoindustries.taglib;
  */
 public interface IdAttribute {
 
-    Object getId();
+	Object getId();
 
-    void setId(Object id);
+	void setId(Object id);
 }

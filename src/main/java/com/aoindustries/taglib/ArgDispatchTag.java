@@ -46,18 +46,18 @@ abstract class ArgDispatchTag
 	 */
 	private static final String ARG_ATTRIBUTE_PREFIX = ARG_MAP_REQUEST_ATTRIBUTE_NAME + ".";
 
-    private String clearParams = null;
+	private String clearParams = null;
 	private WildcardPatternMatcher clearParamsMatcher = WildcardPatternMatcher.getMatchNone();
 	private Map<String,Object> args;
 
-    public String getClearParams() {
-        return clearParams;
-    }
+	public String getClearParams() {
+		return clearParams;
+	}
 
-    public void setClearParams(String clearParams) {
-        this.clearParams = clearParams;
+	public void setClearParams(String clearParams) {
+		this.clearParams = clearParams;
 		this.clearParamsMatcher = WildcardPatternMatcher.getInstance(clearParams);
-    }
+	}
 
 	@Override
 	protected WildcardPatternMatcher getClearParamsMatcher() {
@@ -84,7 +84,7 @@ abstract class ArgDispatchTag
 	protected String getDynamicAttributeExceptionKey() {
 		return "error.unexpectedDynamicAttribute2";
 	}
-	
+
 	@Override
 	protected Serializable[] getDynamicAttributeExceptionArgs(String localName) {
 		return new Serializable[] {

@@ -70,112 +70,112 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
  */
 public abstract class AutoEncodingFilteredTag extends SimpleTagSupport {
 
-    /**
-     * Gets the type of data that is contained by this tag.
+	/**
+	 * Gets the type of data that is contained by this tag.
 	 * This is also the output type.
-     */
-    public abstract MediaType getContentType();
+	 */
+	public abstract MediaType getContentType();
 
-    /**
-     * The validator is stored to allow nested tags to check if their output
-     * is already being filtered on this tags input.  When this occurs they
-     * skip the validation of their own output.
-     */
-    /*
-    @Override
-    public boolean isValidatingMediaInputType(MediaType inputType) {
-        return inputValidator!=null && inputValidator.isValidatingMediaInputType(inputType);
-    }*/
+	/**
+	 * The validator is stored to allow nested tags to check if their output
+	 * is already being filtered on this tags input.  When this occurs they
+	 * skip the validation of their own output.
+	 */
+	/*
+	@Override
+	public boolean isValidatingMediaInputType(MediaType inputType) {
+		return inputValidator!=null && inputValidator.isValidatingMediaInputType(inputType);
+	}*/
 
-    @Override
-    public void doTag() throws JspException, IOException {
-        try {
-            final PageContext pageContext = (PageContext)getJspContext();
-            final HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
-            final JspWriter out = pageContext.getOut();
+	@Override
+	public void doTag() throws JspException, IOException {
+		try {
+			final PageContext pageContext = (PageContext)getJspContext();
+			final HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
+			final JspWriter out = pageContext.getOut();
 
-            final MediaType parentContentType = ThreadEncodingContext.contentType.get();
-            final ValidMediaInput parentValidMediaInput = ThreadEncodingContext.validMediaInput.get();
+			final MediaType parentContentType = ThreadEncodingContext.contentType.get();
+			final ValidMediaInput parentValidMediaInput = ThreadEncodingContext.validMediaInput.get();
 
-            // Determine the container's content type
-            MediaType containerContentType;
-            if(parentContentType!=null) {
-                // Use the output type of the parent
-                containerContentType = parentContentType;
-            } else {
-                // Use the content type of the response
-                containerContentType = MediaType.getMediaTypeForContentType(response.getContentType());
-            }
-            // Find the encoder
-            final MediaType myContentType = getContentType();
-            MediaEncoder mediaEncoder = MediaEncoder.getInstance(new HttpServletResponseEncodingContext(response), myContentType, containerContentType);
-            if(mediaEncoder!=null) {
-                setMediaEncoderOptions(mediaEncoder);
-                // Encode both our output and the content.  The encoder validates our input and guarantees valid output for our parent.
+			// Determine the container's content type
+			MediaType containerContentType;
+			if(parentContentType!=null) {
+				// Use the output type of the parent
+				containerContentType = parentContentType;
+			} else {
+				// Use the content type of the response
+				containerContentType = MediaType.getMediaTypeForContentType(response.getContentType());
+			}
+			// Find the encoder
+			final MediaType myContentType = getContentType();
+			MediaEncoder mediaEncoder = MediaEncoder.getInstance(new HttpServletResponseEncodingContext(response), myContentType, containerContentType);
+			if(mediaEncoder!=null) {
+				setMediaEncoderOptions(mediaEncoder);
+				// Encode both our output and the content.  The encoder validates our input and guarantees valid output for our parent.
 				MediaWriter mediaWriter = new MediaWriter(mediaEncoder, out);
-                mediaWriter.writePrefix();
-                try {
-                    ThreadEncodingContext.contentType.set(myContentType);
-                    ThreadEncodingContext.validMediaInput.set(mediaWriter);
-                    try {
-                        doTag(mediaWriter);
-                    } finally {
-                        // Restore previous encoding context that is used for our output
-                        ThreadEncodingContext.contentType.set(parentContentType);
-                        ThreadEncodingContext.validMediaInput.set(parentValidMediaInput);
-                    }
-                } finally {
-                    mediaWriter.writeSuffix();
-                }
-            } else {
+				mediaWriter.writePrefix();
+				try {
+					ThreadEncodingContext.contentType.set(myContentType);
+					ThreadEncodingContext.validMediaInput.set(mediaWriter);
+					try {
+						doTag(mediaWriter);
+					} finally {
+						// Restore previous encoding context that is used for our output
+						ThreadEncodingContext.contentType.set(parentContentType);
+						ThreadEncodingContext.validMediaInput.set(parentValidMediaInput);
+					}
+				} finally {
+					mediaWriter.writeSuffix();
+				}
+			} else {
 				// If parentValidMediaInput exists and is validating our output type, no additional validation is required
 				if(
 					parentValidMediaInput!=null
 					&& parentValidMediaInput.isValidatingMediaInputType(myContentType)
 				) {
-                    ThreadEncodingContext.contentType.set(myContentType);
-                    try {
-                        doTag(out);
-                    } finally {
-                        ThreadEncodingContext.contentType.set(parentContentType);
-                    }
-                } else {
+					ThreadEncodingContext.contentType.set(myContentType);
+					try {
+						doTag(out);
+					} finally {
+						ThreadEncodingContext.contentType.set(parentContentType);
+					}
+				} else {
 						// Not using an encoder and parent doesn't validate our output, validate our own output.
-                    MediaValidator validator = MediaValidator.getMediaValidator(myContentType, out);
-                    ThreadEncodingContext.contentType.set(myContentType);
-                    ThreadEncodingContext.validMediaInput.set(validator);
-                    try {
-                        doTag(validator);
-                    } finally {
-                        ThreadEncodingContext.contentType.set(parentContentType);
-                        ThreadEncodingContext.validMediaInput.set(parentValidMediaInput);
-                    }
-                }
-            }
-        } catch(MediaException err) {
-            throw new JspTagException(err);
-        }
-    }
+					MediaValidator validator = MediaValidator.getMediaValidator(myContentType, out);
+					ThreadEncodingContext.contentType.set(myContentType);
+					ThreadEncodingContext.validMediaInput.set(validator);
+					try {
+						doTag(validator);
+					} finally {
+						ThreadEncodingContext.contentType.set(parentContentType);
+						ThreadEncodingContext.validMediaInput.set(parentValidMediaInput);
+					}
+				}
+			}
+		} catch(MediaException err) {
+			throw new JspTagException(err);
+		}
+	}
 
-    /**
-     * Sets the media encoder options.  This is how subclass tag attributes
-     * can effect the encoding.
-     */
-    protected void setMediaEncoderOptions(MediaEncoder mediaEncoder) {
-    }
+	/**
+	 * Sets the media encoder options.  This is how subclass tag attributes
+	 * can effect the encoding.
+	 */
+	protected void setMediaEncoderOptions(MediaEncoder mediaEncoder) {
+	}
 
-    /**
-     * Once the out JspWriter has been replaced to output the proper content
-     * type, this version of invoke is called.
-     *
+	/**
+	 * Once the out JspWriter has been replaced to output the proper content
+	 * type, this version of invoke is called.
+	 *
 	 * @param  out  the output.  If passed-through, this will be a <code>JspWriter</code>
 	 *
-     * @return This default implementation invokes the jsp body, if present.
-     * @throws javax.servlet.jsp.JspTagException
-     */
-    protected void doTag(Writer out) throws JspException, IOException {
-        JspFragment body = getJspBody();
-        if(body!=null) {
+	 * @return This default implementation invokes the jsp body, if present.
+	 * @throws javax.servlet.jsp.JspTagException
+	 */
+	protected void doTag(Writer out) throws JspException, IOException {
+		JspFragment body = getJspBody();
+		if(body!=null) {
 			// Check for JspWriter to avoid a JspWriter wrapping a JspWriter
 			body.invoke(
 				(out instanceof JspWriter)
@@ -183,5 +183,5 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport {
 				: out
 			);
 		}
-    }
+	}
 }

@@ -30,22 +30,22 @@ import static com.aoindustries.taglib.ApplicationResources.accessor;
  */
 public class NeedAttributeParentException extends LocalizedJspTagException {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private final String fromTagName;
-    private final String attribute;
+	private final String fromTagName;
+	private final String attribute;
 
-    public NeedAttributeParentException(String fromTagName, String attribute) {
-        super(accessor, "NeedAttributeParent.message", fromTagName, attribute);
-        this.fromTagName = fromTagName;
-        this.attribute = attribute;
-    }
+	public NeedAttributeParentException(String fromTagName, String attribute) {
+		super(accessor, "NeedAttributeParent.message", fromTagName, attribute);
+		this.fromTagName = fromTagName;
+		this.attribute = attribute;
+	}
 
-    public String getFromTagName() {
-        return fromTagName;
-    }
+	public String getFromTagName() {
+		return fromTagName;
+	}
 
-    public String getAttribute() {
-        return attribute;
-    }
+	public String getAttribute() {
+		return attribute;
+	}
 }

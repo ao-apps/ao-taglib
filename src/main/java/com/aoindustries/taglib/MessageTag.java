@@ -53,14 +53,14 @@ public class MessageTag
 
 	private String key;
 	private Object type = MediaType.TEXT;
-    private MediaType mediaType = MediaType.TEXT;
+	private MediaType mediaType = MediaType.TEXT;
 	private BitSet messageArgsSet;
 	private List<Object> messageArgs;
 
 	@Override
-    public MediaType getOutputType() {
-        return mediaType;
-    }
+	public MediaType getOutputType() {
+		return mediaType;
+	}
 
 	public String getKey() {
 		return key;
@@ -71,12 +71,12 @@ public class MessageTag
 	}
 
 	@Override
-    public Object getType() {
-        return type;
-    }
+	public Object getType() {
+		return type;
+	}
 
 	@Override
-    public void setType(Object type) throws JspTagException {
+	public void setType(Object type) throws JspTagException {
 		MediaType newMediaType;
 		if(type instanceof MediaType) {
 			newMediaType = (MediaType)type;
@@ -93,7 +93,7 @@ public class MessageTag
 		}
 		this.type = type;
 		this.mediaType = newMediaType;
-    }
+	}
 
 	@Override
 	public List<Object> getMessageArgs() {
@@ -205,9 +205,9 @@ public class MessageTag
 	}
 
 	@Override
-    protected void doTag(Writer out) throws JspTagException, IOException {
+	protected void doTag(Writer out) throws JspTagException, IOException {
 		out.write(lookupResult);
-    }
+	}
 
 	@Override
 	protected void writeSuffix(MediaType containerType, Writer out) throws IOException {

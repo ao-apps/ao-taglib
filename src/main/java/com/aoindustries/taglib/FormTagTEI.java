@@ -31,20 +31,20 @@ import javax.servlet.jsp.tagext.ValidationMessage;
  */
 public class FormTagTEI extends TagExtraInfo {
 
-    @Override
-    public ValidationMessage[] validate(TagData data) {
-        Object o = data.getAttribute("method");
-        if(
-            o != null
-            && o != TagData.REQUEST_TIME_VALUE
-        ) {
-            String method = (String)o;
-            if(!FormTag.isValidMethod(method)) {
-                return new ValidationMessage[] {
-                    new ValidationMessage(data.getId(), ApplicationResources.accessor.getMessage("FormTag.method.invalid", method))
-                };
-            }
-        }
-        return null;
-    }
+	@Override
+	public ValidationMessage[] validate(TagData data) {
+		Object o = data.getAttribute("method");
+		if(
+			o != null
+			&& o != TagData.REQUEST_TIME_VALUE
+		) {
+			String method = (String)o;
+			if(!FormTag.isValidMethod(method)) {
+				return new ValidationMessage[] {
+					new ValidationMessage(data.getId(), ApplicationResources.accessor.getMessage("FormTag.method.invalid", method))
+				};
+			}
+		}
+		return null;
+	}
 }

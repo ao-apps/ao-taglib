@@ -34,75 +34,75 @@ import javax.servlet.jsp.PageContext;
  */
 public class PropertyUtils {
 
-    private PropertyUtils() {
-    }
+	private PropertyUtils() {
+	}
 
-    /**
-     * Sets an attribute in the provided textual scope.
-     */
-    public static void setAttribute(PageContext pageContext, String scope, String name, Object value) throws JspTagException {
-        pageContext.setAttribute(name, value, Scope.getScopeId(scope));
-    }
+	/**
+	 * Sets an attribute in the provided textual scope.
+	 */
+	public static void setAttribute(PageContext pageContext, String scope, String name, Object value) throws JspTagException {
+		pageContext.setAttribute(name, value, Scope.getScopeId(scope));
+	}
 
-    /**
-     * Gets the object given its scope, name, and optional property.
-     *
-     * @param  scope  scope should be one of these acceptable values:
-     *                 <ul>
-     *                   <li><code>null</code></li>
-     *                   <li><code>"page"</code></li>
-     *                   <li><code>"request"</code></li>
-     *                   <li><code>"session"</code></li>
-     *                   <li><code>"application"</code></li>
-     *                 </ul>
-     * @param beanRequired when <code>true</code>, this method will not return <code>null</code>, instead it will
-     *                     throw a <code>JspTagException</code> with an appropriate localized message.
-     * @param valueRequired when <code>true</code>, this method will not return <code>null</code>, instead it will
-     *                      throw a <code>JspTagException</code> with an appropriate localized message.
-     *
-     * @return  the resolved <code>Object</code> or <code>null</code> if not found.
-     */
-    public static Object findObject(PageContext pageContext, String scope, String name, String property, boolean beanRequired, boolean valueRequired) throws JspTagException {
-        try {
-            // Check the name
-            if(name==null) throw new AttributeRequiredException("name");
+	/**
+	 * Gets the object given its scope, name, and optional property.
+	 *
+	 * @param  scope  scope should be one of these acceptable values:
+	 *                 <ul>
+	 *                   <li><code>null</code></li>
+	 *                   <li><code>"page"</code></li>
+	 *                   <li><code>"request"</code></li>
+	 *                   <li><code>"session"</code></li>
+	 *                   <li><code>"application"</code></li>
+	 *                 </ul>
+	 * @param beanRequired when <code>true</code>, this method will not return <code>null</code>, instead it will
+	 *                     throw a <code>JspTagException</code> with an appropriate localized message.
+	 * @param valueRequired when <code>true</code>, this method will not return <code>null</code>, instead it will
+	 *                      throw a <code>JspTagException</code> with an appropriate localized message.
+	 *
+	 * @return  the resolved <code>Object</code> or <code>null</code> if not found.
+	 */
+	public static Object findObject(PageContext pageContext, String scope, String name, String property, boolean beanRequired, boolean valueRequired) throws JspTagException {
+		try {
+			// Check the name
+			if(name==null) throw new AttributeRequiredException("name");
 
-            // Find the bean
-            Object bean;
-            if(scope==null) bean = pageContext.findAttribute(name);
-            else bean = pageContext.getAttribute(name, Scope.getScopeId(scope));
+			// Find the bean
+			Object bean;
+			if(scope==null) bean = pageContext.findAttribute(name);
+			else bean = pageContext.getAttribute(name, Scope.getScopeId(scope));
 
-            // Check required
-            if(bean==null) {
-                if(beanRequired) {
-                    // null and required
-                    if(scope==null) throw new LocalizedJspTagException(ApplicationResources.accessor, "PropertyUtils.bean.required.nullScope", name);
-                    else throw new LocalizedJspTagException(ApplicationResources.accessor, "PropertyUtils.bean.required.scope", name, scope);
-                } else {
-                    // null and not required
-                    return null;
-                }
-            } else {
-                if(property==null) {
-                    // No property lookup, use the bean directly
-                    return bean;
-                } else {
-                    // Find the property
-                    Object value = org.apache.commons.beanutils.PropertyUtils.getProperty(bean, property);
-                    if(valueRequired && value==null) {
-                        // null and required
-                        if(scope==null) throw new LocalizedJspTagException(ApplicationResources.accessor, "PropertyUtils.value.required.nullScope", property, name);
-                        else throw new LocalizedJspTagException(ApplicationResources.accessor, "PropertyUtils.value.required.scope", property, name, scope);
-                    }
-                    return value;
-                }
-            }
-        } catch(IllegalAccessException err) {
-            throw new JspTagException(err);
-        } catch(InvocationTargetException err) {
-            throw new JspTagException(err);
-        } catch(NoSuchMethodException err) {
-            throw new JspTagException(err);
-        }
-    }
+			// Check required
+			if(bean==null) {
+				if(beanRequired) {
+					// null and required
+					if(scope==null) throw new LocalizedJspTagException(ApplicationResources.accessor, "PropertyUtils.bean.required.nullScope", name);
+					else throw new LocalizedJspTagException(ApplicationResources.accessor, "PropertyUtils.bean.required.scope", name, scope);
+				} else {
+					// null and not required
+					return null;
+				}
+			} else {
+				if(property==null) {
+					// No property lookup, use the bean directly
+					return bean;
+				} else {
+					// Find the property
+					Object value = org.apache.commons.beanutils.PropertyUtils.getProperty(bean, property);
+					if(valueRequired && value==null) {
+						// null and required
+						if(scope==null) throw new LocalizedJspTagException(ApplicationResources.accessor, "PropertyUtils.value.required.nullScope", property, name);
+						else throw new LocalizedJspTagException(ApplicationResources.accessor, "PropertyUtils.value.required.scope", property, name, scope);
+					}
+					return value;
+				}
+			}
+		} catch(IllegalAccessException err) {
+			throw new JspTagException(err);
+		} catch(InvocationTargetException err) {
+			throw new JspTagException(err);
+		} catch(NoSuchMethodException err) {
+			throw new JspTagException(err);
+		}
+	}
 }

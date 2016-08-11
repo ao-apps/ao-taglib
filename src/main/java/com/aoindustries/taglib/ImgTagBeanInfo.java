@@ -33,35 +33,35 @@ import java.beans.SimpleBeanInfo;
  */
 public class ImgTagBeanInfo extends SimpleBeanInfo {
 
-    private static volatile PropertyDescriptor[] properties = null;
+	private static volatile PropertyDescriptor[] properties = null;
 
-    @Override
-    public PropertyDescriptor[] getPropertyDescriptors () {
-        try {
-            PropertyDescriptor[] props = properties;
-            if(props==null) {
-                props = new PropertyDescriptor[] {
-                    // From base class: new PropertyDescriptor("contentType", ImgTag.class, "getContentType", null),
-                    // From base class: new PropertyDescriptor("outputType", ImgTag.class, "getOutputType", null),
-                    new PropertyDescriptor("id", ImgTag.class),
-                    new PropertyDescriptor("src", ImgTag.class),
-                    new PropertyDescriptor("params", ImgTag.class, "getParams", null),
-                    new PropertyDescriptor("srcAbsolute", ImgTag.class),
-                    new PropertyDescriptor("addLastModified", ImgTag.class),
-                    new PropertyDescriptor("width", ImgTag.class),
-                    new PropertyDescriptor("height", ImgTag.class),
-                    new PropertyDescriptor("alt", ImgTag.class),
-                    new PropertyDescriptor("title", ImgTag.class),
-                    new PropertyDescriptor("class", ImgTag.class, "getClazz", "setClazz"),
-                    new PropertyDescriptor("style", ImgTag.class)
-                };
-                properties = props;
-            }
-            return props;
-        } catch(IntrospectionException err) {
+	@Override
+	public PropertyDescriptor[] getPropertyDescriptors () {
+		try {
+			PropertyDescriptor[] props = properties;
+			if(props==null) {
+				props = new PropertyDescriptor[] {
+					// From base class: new PropertyDescriptor("contentType", ImgTag.class, "getContentType", null),
+					// From base class: new PropertyDescriptor("outputType", ImgTag.class, "getOutputType", null),
+					new PropertyDescriptor("id", ImgTag.class),
+					new PropertyDescriptor("src", ImgTag.class),
+					new PropertyDescriptor("params", ImgTag.class, "getParams", null),
+					new PropertyDescriptor("srcAbsolute", ImgTag.class),
+					new PropertyDescriptor("addLastModified", ImgTag.class),
+					new PropertyDescriptor("width", ImgTag.class),
+					new PropertyDescriptor("height", ImgTag.class),
+					new PropertyDescriptor("alt", ImgTag.class),
+					new PropertyDescriptor("title", ImgTag.class),
+					new PropertyDescriptor("class", ImgTag.class, "getClazz", "setClazz"),
+					new PropertyDescriptor("style", ImgTag.class)
+				};
+				properties = props;
+			}
+			return props;
+		} catch(IntrospectionException err) {
 			throw new AssertionError(err);
-        }
-    }
+		}
+	}
 
 	/**
 	 * Include base class.
@@ -72,8 +72,8 @@ public class ImgTagBeanInfo extends SimpleBeanInfo {
 			return new BeanInfo[] {
 				Introspector.getBeanInfo(ImgTag.class.getSuperclass())
 			};
-        } catch(IntrospectionException err) {
+		} catch(IntrospectionException err) {
 			throw new AssertionError(err);
-        }
+		}
 	}
 }

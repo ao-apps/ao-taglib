@@ -33,22 +33,22 @@ import javax.servlet.jsp.JspTagException;
  */
 public class TabindexTag extends AutoEncodingBufferedTag {
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.TEXT;
-    }
+	@Override
+	public MediaType getContentType() {
+		return MediaType.TEXT;
+	}
 
-    @Override
-    public MediaType getOutputType() {
-        return null;
-    }
+	@Override
+	public MediaType getOutputType() {
+		return null;
+	}
 
-    @Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
-        TabindexAttribute tabindexAttribute = AttributeUtils.findAttributeParent("tabindex", this, "tabindex", TabindexAttribute.class);
-        String value = capturedBody.trim().toString();
-        if(value.length()>0) {
+	@Override
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+		TabindexAttribute tabindexAttribute = AttributeUtils.findAttributeParent("tabindex", this, "tabindex", TabindexAttribute.class);
+		String value = capturedBody.trim().toString();
+		if(value.length()>0) {
 			tabindexAttribute.setTabindex(Integer.parseInt(value));
-        }
-    }
+		}
+	}
 }

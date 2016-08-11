@@ -94,213 +94,213 @@ public class InputTag
 	);
 
 	public static boolean isValidType(String type) {
-        return validTypes.contains(type);
-    }
+		return validTypes.contains(type);
+	}
 
-    private Object id;
-    private Object type;
+	private Object id;
+	private Object type;
 	private String typeString;
-    private Object name;
-    private Object value;
-    private Object onclick;
-    private Object onchange;
-    private Object onfocus;
-    private Object onblur;
-    private Object onkeypress;
-    private Object size;
-    private Integer maxlength;
-    private boolean readonly;
-    private boolean disabled;
-    private Object clazz;
-    private Object style;
-    private boolean checked;
+	private Object name;
+	private Object value;
+	private Object onclick;
+	private Object onchange;
+	private Object onfocus;
+	private Object onblur;
+	private Object onkeypress;
+	private Object size;
+	private Integer maxlength;
+	private boolean readonly;
+	private boolean disabled;
+	private Object clazz;
+	private Object style;
+	private boolean checked;
 	private int tabindex;
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.TEXT;
-    }
+	@Override
+	public MediaType getContentType() {
+		return MediaType.TEXT;
+	}
 
-    @Override
-    public MediaType getOutputType() {
-        return MediaType.XHTML;
-    }
+	@Override
+	public MediaType getOutputType() {
+		return MediaType.XHTML;
+	}
 
-    @Override
-    public Object getId() {
-        return id;
-    }
+	@Override
+	public Object getId() {
+		return id;
+	}
 
-    @Override
-    public void setId(Object id) {
+	@Override
+	public void setId(Object id) {
 		this.id = id;
-    }
+	}
 
-    @Override
-    public Object getType() {
-        return type;
-    }
+	@Override
+	public Object getType() {
+		return type;
+	}
 
-    @Override
-    public void setType(Object type) throws JspTagException {
+	@Override
+	public void setType(Object type) throws JspTagException {
 		String typeStr = Coercion.toString(type);
-        if(!isValidType(typeStr)) throw new LocalizedJspTagException(ApplicationResources.accessor, "InputTag.type.invalid", typeStr);
-        this.type = type;
+		if(!isValidType(typeStr)) throw new LocalizedJspTagException(ApplicationResources.accessor, "InputTag.type.invalid", typeStr);
+		this.type = type;
 		this.typeString = typeStr;
-    }
+	}
 
-    @Override
-    public Object getName() {
-        return name;
-    }
+	@Override
+	public Object getName() {
+		return name;
+	}
 
-    @Override
-    public void setName(Object name) {
+	@Override
+	public void setName(Object name) {
 		this.name = name;
-    }
+	}
 
-    @Override
-    public Object getValue() {
-        return value;
-    }
+	@Override
+	public Object getValue() {
+		return value;
+	}
 
-    @Override
-    public void setValue(Object value) {
+	@Override
+	public void setValue(Object value) {
 		this.value = value;
-    }
+	}
 
-    @Override
-    public Object getOnclick() {
-        return onclick;
-    }
+	@Override
+	public Object getOnclick() {
+		return onclick;
+	}
 
-    @Override
-    public void setOnclick(Object onclick) {
-        this.onclick = onclick;
-    }
+	@Override
+	public void setOnclick(Object onclick) {
+		this.onclick = onclick;
+	}
 
-    @Override
-    public Object getOnchange() {
-        return onchange;
-    }
+	@Override
+	public Object getOnchange() {
+		return onchange;
+	}
 
-    @Override
-    public void setOnchange(Object onchange) {
-        this.onchange = onchange;
-    }
+	@Override
+	public void setOnchange(Object onchange) {
+		this.onchange = onchange;
+	}
 
-    @Override
-    public Object getOnfocus() {
-        return onfocus;
-    }
+	@Override
+	public Object getOnfocus() {
+		return onfocus;
+	}
 
-    @Override
-    public void setOnfocus(Object onfocus) {
-        this.onfocus = onfocus;
-    }
+	@Override
+	public void setOnfocus(Object onfocus) {
+		this.onfocus = onfocus;
+	}
 
-    @Override
-    public Object getOnblur() {
-        return onblur;
-    }
+	@Override
+	public Object getOnblur() {
+		return onblur;
+	}
 
-    @Override
-    public void setOnblur(Object onblur) {
-        this.onblur = onblur;
-    }
+	@Override
+	public void setOnblur(Object onblur) {
+		this.onblur = onblur;
+	}
 
-    @Override
-    public Object getOnkeypress() {
-        return onkeypress;
-    }
+	@Override
+	public Object getOnkeypress() {
+		return onkeypress;
+	}
 
-    @Override
-    public void setOnkeypress(Object onkeypress) {
-        this.onkeypress = onkeypress;
-    }
+	@Override
+	public void setOnkeypress(Object onkeypress) {
+		this.onkeypress = onkeypress;
+	}
 
-    @Override
-    public Object getSize() {
-        return size;
-    }
+	@Override
+	public Object getSize() {
+		return size;
+	}
 
-    @Override
-    public void setSize(Object size) {
-        this.size = size;
-    }
+	@Override
+	public void setSize(Object size) {
+		this.size = size;
+	}
 
-    @Override
-    public Integer getMaxlength() {
-        return maxlength;
-    }
+	@Override
+	public Integer getMaxlength() {
+		return maxlength;
+	}
 
-    @Override
-    public void setMaxlength(Integer maxlength) {
-        this.maxlength = maxlength;
-    }
+	@Override
+	public void setMaxlength(Integer maxlength) {
+		this.maxlength = maxlength;
+	}
 
-    @Override
-    public boolean isReadonly() {
-        return readonly;
-    }
+	@Override
+	public boolean isReadonly() {
+		return readonly;
+	}
 
-    @Override
-    public void setReadonly(boolean readonly) {
-        this.readonly = readonly;
-    }
+	@Override
+	public void setReadonly(boolean readonly) {
+		this.readonly = readonly;
+	}
 
-    @Override
-    public boolean isDisabled() {
-        return disabled;
-    }
+	@Override
+	public boolean isDisabled() {
+		return disabled;
+	}
 
-    @Override
-    public void setDisabled(boolean disabled) {
-        this.disabled = disabled;
-    }
+	@Override
+	public void setDisabled(boolean disabled) {
+		this.disabled = disabled;
+	}
 
-    @Override
-    public Object getClazz() {
-        return clazz;
-    }
+	@Override
+	public Object getClazz() {
+		return clazz;
+	}
 
-    @Override
-    public void setClazz(Object clazz) {
+	@Override
+	public void setClazz(Object clazz) {
 		this.clazz = clazz;
-    }
+	}
 
-    @Override
-    public Object getStyle() {
-        return style;
-    }
+	@Override
+	public Object getStyle() {
+		return style;
+	}
 
-    @Override
-    public void setStyle(Object style) {
-        this.style = style;
-    }
+	@Override
+	public void setStyle(Object style) {
+		this.style = style;
+	}
 
-    @Override
-    public boolean isChecked() {
-        return checked;
-    }
+	@Override
+	public boolean isChecked() {
+		return checked;
+	}
 
-    @Override
-    public void setChecked(boolean checked) {
-        this.checked = checked;
-    }
+	@Override
+	public void setChecked(boolean checked) {
+		this.checked = checked;
+	}
 
-    @Override
-    public int getTabindex() {
-        return tabindex;
-    }
+	@Override
+	public int getTabindex() {
+		return tabindex;
+	}
 
-    @Override
-    public void setTabindex(int tabindex) {
-        this.tabindex = tabindex;
-    }
+	@Override
+	public void setTabindex(int tabindex) {
+		this.tabindex = tabindex;
+	}
 
-    @Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+	@Override
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		if(type==null) throw new AttributeRequiredException("type");
 		if(value==null) setValue(capturedBody.trim());
 		out.write("<input");
@@ -319,8 +319,8 @@ public class InputTag
 		}
 		out.write(" value=\"");
 		if(
-            "button".equals(type)
-            || "submit".equals(type)
+			"button".equals(type)
+			|| "submit".equals(type)
 		) {
 			// Allow text markup from translations
 			MarkupUtils.writeWithMarkup(value, MarkupType.TEXT, textInXhtmlAttributeEncoder, out);
@@ -382,5 +382,5 @@ public class InputTag
 			out.write('"');
 		}
 		out.write(" />");
-    }
+	}
 }

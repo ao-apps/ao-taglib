@@ -42,39 +42,39 @@ import javax.servlet.jsp.PageContext;
  */
 public class UrlTag extends AutoEncodingBufferedTag implements ParamsAttribute {
 
-    private HttpParametersMap params;
+	private HttpParametersMap params;
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.URL;
-    }
+	@Override
+	public MediaType getContentType() {
+		return MediaType.URL;
+	}
 
-    @Override
-    public MediaType getOutputType() {
-        return MediaType.URL;
-    }
+	@Override
+	public MediaType getOutputType() {
+		return MediaType.URL;
+	}
 
-    @Override
-    public HttpParameters getParams() {
-        return params==null ? EmptyParameters.getInstance() : params;
-    }
+	@Override
+	public HttpParameters getParams() {
+		return params==null ? EmptyParameters.getInstance() : params;
+	}
 
-    @Override
-    public void addParam(String name, String value) {
-        if(params==null) params = new HttpParametersMap();
-        params.addParameter(name, value);
-    }
+	@Override
+	public void addParam(String name, String value) {
+		if(params==null) params = new HttpParametersMap();
+		params.addParameter(name, value);
+	}
 
-    @Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+	@Override
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
 		ServletResponse response = pageContext.getResponse();
 		String responseEncoding = response.getCharacterEncoding();
-        String url = HttpParametersUtils.addParams(capturedBody.trim().toString(), params, responseEncoding);
-        /*if(url.startsWith("/")) {
-            HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
-            out.write(request.getContextPath());
-        }*/
-        out.write(url);
-    }
+		String url = HttpParametersUtils.addParams(capturedBody.trim().toString(), params, responseEncoding);
+		/*if(url.startsWith("/")) {
+			HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
+			out.write(request.getContextPath());
+		}*/
+		out.write(url);
+	}
 }

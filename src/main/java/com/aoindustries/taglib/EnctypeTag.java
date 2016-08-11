@@ -33,19 +33,19 @@ import javax.servlet.jsp.JspTagException;
  */
 public class EnctypeTag extends AutoEncodingBufferedTag {
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.TEXT;
-    }
+	@Override
+	public MediaType getContentType() {
+		return MediaType.TEXT;
+	}
 
-    @Override
-    public MediaType getOutputType() {
-        return null;
-    }
+	@Override
+	public MediaType getOutputType() {
+		return null;
+	}
 
-    @Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
-        EnctypeAttribute enctypeAttribute = AttributeUtils.findAttributeParent("enctype", this, "enctype", EnctypeAttribute.class);
-        enctypeAttribute.setEnctype(capturedBody.trim());
-    }
+	@Override
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+		EnctypeAttribute enctypeAttribute = AttributeUtils.findAttributeParent("enctype", this, "enctype", EnctypeAttribute.class);
+		enctypeAttribute.setEnctype(capturedBody.trim());
+	}
 }

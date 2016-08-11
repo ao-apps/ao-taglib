@@ -51,29 +51,29 @@ public class ScriptTag
 {
 
 	private Object type = MediaType.JAVASCRIPT;
-    private MediaType mediaType = MediaType.JAVASCRIPT;
-    private String src;
-    private HttpParametersMap params;
+	private MediaType mediaType = MediaType.JAVASCRIPT;
+	private String src;
+	private HttpParametersMap params;
 	private boolean srcAbsolute;
 	private LastModifiedServlet.AddLastModifiedWhen addLastModified = LastModifiedServlet.AddLastModifiedWhen.AUTO;
 
-    @Override
-    public MediaType getContentType() {
-        return mediaType;
-    }
-
-    @Override
-    public MediaType getOutputType() {
-        return src!=null ? MediaType.XHTML : mediaType;
-    }
+	@Override
+	public MediaType getContentType() {
+		return mediaType;
+	}
 
 	@Override
-    public Object getType() {
-        return type;
-    }
+	public MediaType getOutputType() {
+		return src!=null ? MediaType.XHTML : mediaType;
+	}
 
 	@Override
-    public void setType(Object type) throws JspTagException {
+	public Object getType() {
+		return type;
+	}
+
+	@Override
+	public void setType(Object type) throws JspTagException {
 		try {
 			MediaType newMediaType =
 				(type instanceof MediaType)
@@ -86,28 +86,28 @@ public class ScriptTag
 		} catch(MediaException e) {
 			throw new JspTagException(e);
 		}
-    }
+	}
 
-    @Override
-    public String getSrc() {
-        return src;
-    }
+	@Override
+	public String getSrc() {
+		return src;
+	}
 
-    @Override
-    public void setSrc(String src) {
-        this.src = src;
-    }
+	@Override
+	public void setSrc(String src) {
+		this.src = src;
+	}
 
-    @Override
-    public HttpParameters getParams() {
-        return params==null ? EmptyParameters.getInstance() : params;
-    }
+	@Override
+	public HttpParameters getParams() {
+		return params==null ? EmptyParameters.getInstance() : params;
+	}
 
-    @Override
-    public void addParam(String name, String value) {
-        if(params==null) params = new HttpParametersMap();
-        params.addParameter(name, value);
-    }
+	@Override
+	public void addParam(String name, String value) {
+		if(params==null) params = new HttpParametersMap();
+		params.addParameter(name, value);
+	}
 
 	public boolean getSrcAbsolute() {
 		return srcAbsolute;
@@ -151,7 +151,7 @@ public class ScriptTag
 	//}
 
 	@Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		if(src==null) {
 			// Use default auto encoding
 			MarkupUtils.writeWithMarkup(capturedBody, mediaType.getMarkupType(), out);
@@ -163,5 +163,5 @@ public class ScriptTag
 			UrlUtils.writeSrc(getJspContext(), out, src, params, srcAbsolute, addLastModified);
 			out.write("></script>");
 		}
-    }
+	}
 }

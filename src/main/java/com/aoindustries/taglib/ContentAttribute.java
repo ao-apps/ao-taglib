@@ -29,7 +29,7 @@ package com.aoindustries.taglib;
  */
 public interface ContentAttribute {
 
-    Object getContent();
+	Object getContent();
 
-    void setContent(Object content);
+	void setContent(Object content);
 }

@@ -29,7 +29,7 @@ package com.aoindustries.taglib;
  */
 public interface ClassAttribute {
 
-    Object getClazz();
+	Object getClazz();
 
-    void setClazz(Object clazz);
+	void setClazz(Object clazz);
 }

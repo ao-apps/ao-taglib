@@ -33,19 +33,19 @@ import javax.servlet.jsp.JspTagException;
  */
 public class HeightTag extends AutoEncodingBufferedTag {
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.TEXT;
-    }
+	@Override
+	public MediaType getContentType() {
+		return MediaType.TEXT;
+	}
 
-    @Override
-    public MediaType getOutputType() {
-        return null;
-    }
+	@Override
+	public MediaType getOutputType() {
+		return null;
+	}
 
-    @Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
-        HeightAttribute heightAttribute = AttributeUtils.findAttributeParent("height", this, "height", HeightAttribute.class);
-        heightAttribute.setHeight(capturedBody.trim());
-    }
+	@Override
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+		HeightAttribute heightAttribute = AttributeUtils.findAttributeParent("height", this, "height", HeightAttribute.class);
+		heightAttribute.setHeight(capturedBody.trim());
+	}
 }

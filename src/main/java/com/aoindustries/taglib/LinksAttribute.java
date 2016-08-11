@@ -32,7 +32,7 @@ import java.util.Collection;
  */
 public interface LinksAttribute {
 
-    Collection<Link> getLinks();
+	Collection<Link> getLinks();
 
-    void addLink(Link link);
+	void addLink(Link link);
 }

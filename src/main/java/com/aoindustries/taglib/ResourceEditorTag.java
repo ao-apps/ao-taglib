@@ -40,24 +40,24 @@ import javax.servlet.jsp.JspTagException;
  */
 public class ResourceEditorTag extends AutoEncodingNullTag {
 
-    public ResourceEditorTag() {
-    }
+	public ResourceEditorTag() {
+	}
 
-    @Override
-    public MediaType getOutputType() {
-        return MediaType.XHTML;
-    }
+	@Override
+	public MediaType getOutputType() {
+		return MediaType.XHTML;
+	}
 
-    @Override
-    protected void doTag(Writer out) throws JspTagException, IOException {
-        out.write("<div style=\"font-size:smaller\">");
-        EditableResourceBundle.printEditableResourceBundleLookups(
+	@Override
+	protected void doTag(Writer out) throws JspTagException, IOException {
+		out.write("<div style=\"font-size:smaller\">");
+		EditableResourceBundle.printEditableResourceBundleLookups(
 			TextInJavaScriptEncoder.textInJavaScriptEncoder,
 			TextInXhtmlEncoder.textInXhtmlEncoder,
 			out,
 			3,
 			false
 		);
-        out.write("</div>");
-    }
+		out.write("</div>");
+	}
 }

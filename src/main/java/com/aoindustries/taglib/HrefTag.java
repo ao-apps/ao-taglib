@@ -33,19 +33,19 @@ import javax.servlet.jsp.JspTagException;
  */
 public class HrefTag extends AutoEncodingBufferedTag {
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.URL;
-    }
+	@Override
+	public MediaType getContentType() {
+		return MediaType.URL;
+	}
 
-    @Override
-    public MediaType getOutputType() {
-        return null;
-    }
+	@Override
+	public MediaType getOutputType() {
+		return null;
+	}
 
-    @Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
-        HrefAttribute hrefAttribute = AttributeUtils.findAttributeParent("href", this, "href", HrefAttribute.class);
-        hrefAttribute.setHref(capturedBody.trim().toString());
-    }
+	@Override
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+		HrefAttribute hrefAttribute = AttributeUtils.findAttributeParent("href", this, "href", HrefAttribute.class);
+		hrefAttribute.setHref(capturedBody.trim().toString());
+	}
 }

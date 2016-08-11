@@ -29,7 +29,7 @@ package com.aoindustries.taglib;
  */
 public interface RelAttribute {
 
-    Object getRel();
+	Object getRel();
 
-    void setRel(Object rel);
+	void setRel(Object rel);
 }

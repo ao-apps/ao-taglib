@@ -33,19 +33,19 @@ import javax.servlet.jsp.JspTagException;
  */
 public class OnblurTag extends AutoEncodingBufferedTag {
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.JAVASCRIPT;
-    }
+	@Override
+	public MediaType getContentType() {
+		return MediaType.JAVASCRIPT;
+	}
 
-    @Override
-    public MediaType getOutputType() {
-        return null;
-    }
+	@Override
+	public MediaType getOutputType() {
+		return null;
+	}
 
-    @Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
-        OnblurAttribute onblurAttribute = AttributeUtils.findAttributeParent("onblur", this, "onblur", OnblurAttribute.class);
-        onblurAttribute.setOnblur(capturedBody.trim());
-    }
+	@Override
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+		OnblurAttribute onblurAttribute = AttributeUtils.findAttributeParent("onblur", this, "onblur", OnblurAttribute.class);
+		onblurAttribute.setOnblur(capturedBody.trim());
+	}
 }

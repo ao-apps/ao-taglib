@@ -38,12 +38,12 @@ import javax.servlet.jsp.PageContext;
 public class BaseTag extends AutoEncodingNullTag {
 
 	@Override
-    public MediaType getOutputType() {
+	public MediaType getOutputType() {
 		return MediaType.XHTML;
 	}
 
 	@Override
-    protected void doTag(Writer out) throws JspTagException, IOException {
+	protected void doTag(Writer out) throws JspTagException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
 		HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
 		String originalPath = Dispatcher.getOriginalPagePath(request); // Before forward

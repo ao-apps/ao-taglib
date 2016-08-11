@@ -32,10 +32,10 @@ import javax.servlet.jsp.tagext.ValidationMessage;
  */
 public class OutTagTEI extends TagExtraInfo {
 
-    @Override
-    public ValidationMessage[] validate(TagData data) {
+	@Override
+	public ValidationMessage[] validate(TagData data) {
 		List<ValidationMessage> messages = null;
 		messages = TeiUtils.validateMediaType(data, messages);
 		return messages==null ? null : messages.toArray(new ValidationMessage[messages.size()]);
-    }
+	}
 }

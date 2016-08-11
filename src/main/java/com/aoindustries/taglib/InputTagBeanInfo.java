@@ -33,41 +33,41 @@ import java.beans.SimpleBeanInfo;
  */
 public class InputTagBeanInfo extends SimpleBeanInfo {
 
-    private static volatile PropertyDescriptor[] properties = null;
+	private static volatile PropertyDescriptor[] properties = null;
 
-    @Override
-    public PropertyDescriptor[] getPropertyDescriptors () {
-        try {
-            PropertyDescriptor[] props = properties;
-            if(props==null) {
-                props = new PropertyDescriptor[] {
-                    // From base class: new PropertyDescriptor("contentType", InputTag.class, "getContentType", null),
-                    // From base class: new PropertyDescriptor("outputType", InputTag.class, "getOutputType", null),
-                    new PropertyDescriptor("id", InputTag.class),
-                    new PropertyDescriptor("type", InputTag.class),
-                    new PropertyDescriptor("name", InputTag.class),
-                    new PropertyDescriptor("value", InputTag.class),
-                    new PropertyDescriptor("onclick", InputTag.class),
-                    new PropertyDescriptor("onchange", InputTag.class),
-                    new PropertyDescriptor("onfocus", InputTag.class),
-                    new PropertyDescriptor("onblur", InputTag.class),
-                    new PropertyDescriptor("onkeypress", InputTag.class),
-                    new PropertyDescriptor("size", InputTag.class),
-                    new PropertyDescriptor("maxlength", InputTag.class),
-                    new PropertyDescriptor("readonly", InputTag.class),
-                    new PropertyDescriptor("disabled", InputTag.class),
-                    new PropertyDescriptor("class", InputTag.class, "getClazz", "setClazz"),
-                    new PropertyDescriptor("style", InputTag.class),
-                    new PropertyDescriptor("checked", InputTag.class),
-                    new PropertyDescriptor("tabindex", InputTag.class)
-                };
-                properties = props;
-            }
-            return props;
-        } catch(IntrospectionException err) {
+	@Override
+	public PropertyDescriptor[] getPropertyDescriptors () {
+		try {
+			PropertyDescriptor[] props = properties;
+			if(props==null) {
+				props = new PropertyDescriptor[] {
+					// From base class: new PropertyDescriptor("contentType", InputTag.class, "getContentType", null),
+					// From base class: new PropertyDescriptor("outputType", InputTag.class, "getOutputType", null),
+					new PropertyDescriptor("id", InputTag.class),
+					new PropertyDescriptor("type", InputTag.class),
+					new PropertyDescriptor("name", InputTag.class),
+					new PropertyDescriptor("value", InputTag.class),
+					new PropertyDescriptor("onclick", InputTag.class),
+					new PropertyDescriptor("onchange", InputTag.class),
+					new PropertyDescriptor("onfocus", InputTag.class),
+					new PropertyDescriptor("onblur", InputTag.class),
+					new PropertyDescriptor("onkeypress", InputTag.class),
+					new PropertyDescriptor("size", InputTag.class),
+					new PropertyDescriptor("maxlength", InputTag.class),
+					new PropertyDescriptor("readonly", InputTag.class),
+					new PropertyDescriptor("disabled", InputTag.class),
+					new PropertyDescriptor("class", InputTag.class, "getClazz", "setClazz"),
+					new PropertyDescriptor("style", InputTag.class),
+					new PropertyDescriptor("checked", InputTag.class),
+					new PropertyDescriptor("tabindex", InputTag.class)
+				};
+				properties = props;
+			}
+			return props;
+		} catch(IntrospectionException err) {
 			throw new AssertionError(err);
-        }
-    }
+		}
+	}
 
 	/**
 	 * Include base class.
@@ -78,8 +78,8 @@ public class InputTagBeanInfo extends SimpleBeanInfo {
 			return new BeanInfo[] {
 				Introspector.getBeanInfo(InputTag.class.getSuperclass())
 			};
-        } catch(IntrospectionException err) {
+		} catch(IntrospectionException err) {
 			throw new AssertionError(err);
-        }
+		}
 	}
 }

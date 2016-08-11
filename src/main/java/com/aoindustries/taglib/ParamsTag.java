@@ -22,11 +22,11 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.util.WildcardPatternMatcher;
-import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.Coercion;
+import com.aoindustries.encoding.MediaType;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
+import com.aoindustries.util.WildcardPatternMatcher;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Enumeration;
@@ -43,41 +43,41 @@ public class ParamsTag
 	implements NameAttribute
 {
 
-    private Object name;
-    private String exclude = null;
+	private Object name;
+	private String exclude = null;
 	private WildcardPatternMatcher excludeMatcher = WildcardPatternMatcher.getMatchNone();
-    private Object values;
+	private Object values;
 
-    @Override
-    public MediaType getOutputType() {
-        return null;
-    }
+	@Override
+	public MediaType getOutputType() {
+		return null;
+	}
 
-    @Override
-    public Object getName() {
-        return name;
-    }
+	@Override
+	public Object getName() {
+		return name;
+	}
 
-    @Override
-    public void setName(Object name) {
+	@Override
+	public void setName(Object name) {
 		this.name = name;
-    }
+	}
 
-    public String getExclude() {
-        return exclude;
-    }
+	public String getExclude() {
+		return exclude;
+	}
 
-    public void setExclude(String exclude) {
-        this.exclude = exclude;
+	public void setExclude(String exclude) {
+		this.exclude = exclude;
 		this.excludeMatcher = WildcardPatternMatcher.getInstance(exclude);
-    }
+	}
 
 	public void setValues(Object values) {
 		this.values = values;
-    }
+	}
 
-    @Override
-    protected void doTag(Writer out) throws JspTagException, IOException {
+	@Override
+	protected void doTag(Writer out) throws JspTagException, IOException {
 		ParamsAttribute paramsAttribute = AttributeUtils.findAttributeParent("params", this, "params", ParamsAttribute.class);
 		if(values!=null) {
 			if(name==null) {
@@ -177,5 +177,5 @@ public class ParamsTag
 				}
 			}
 		}
-    }
+	}
 }

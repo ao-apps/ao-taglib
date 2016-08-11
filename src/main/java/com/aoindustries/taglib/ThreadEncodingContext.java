@@ -34,18 +34,18 @@ import com.aoindustries.encoding.ValidMediaInput;
  */
 class ThreadEncodingContext {
 
-    /**
-     * The content type that is currently be written or null if not set.
-     */
-    static ThreadLocal<MediaType> contentType = new ThreadLocal<MediaType>();
+	/**
+	 * The content type that is currently be written or null if not set.
+	 */
+	static ThreadLocal<MediaType> contentType = new ThreadLocal<MediaType>();
 
-    /**
-     * The validator that is ensuring the data being written is valid for the current
-     * outputType.
-     */
-    static ThreadLocal<ValidMediaInput> validMediaInput = new ThreadLocal<ValidMediaInput>();
+	/**
+	 * The validator that is ensuring the data being written is valid for the current
+	 * outputType.
+	 */
+	static ThreadLocal<ValidMediaInput> validMediaInput = new ThreadLocal<ValidMediaInput>();
 
-    // Make no instances
-    private ThreadEncodingContext() {
-    }
+	// Make no instances
+	private ThreadEncodingContext() {
+	}
 }

@@ -30,21 +30,21 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
  */
 public final class AttributeUtils  {
 
-    /**
-     * Finds the attribute parent tag of the provided class (or subclass).
-     *
-     * @return  the parent tag
-     * @exception  NeedAttributeParentException  if parent not found
-     */
-    public static <T> T findAttributeParent(String fromTagName, JspTag from, String attribute, Class<? extends T> clazz) throws NeedAttributeParentException {
-        T parent = clazz.cast(SimpleTagSupport.findAncestorWithClass(from, clazz));
-        if(parent==null) throw new NeedAttributeParentException(fromTagName, attribute);
-        return parent;
-    }
+	/**
+	 * Finds the attribute parent tag of the provided class (or subclass).
+	 *
+	 * @return  the parent tag
+	 * @exception  NeedAttributeParentException  if parent not found
+	 */
+	public static <T> T findAttributeParent(String fromTagName, JspTag from, String attribute, Class<? extends T> clazz) throws NeedAttributeParentException {
+		T parent = clazz.cast(SimpleTagSupport.findAncestorWithClass(from, clazz));
+		if(parent==null) throw new NeedAttributeParentException(fromTagName, attribute);
+		return parent;
+	}
 
 	/**
-     * Make no instances.
-     */
-    private AttributeUtils() {
-    }
+	 * Make no instances.
+	 */
+	private AttributeUtils() {
+	}
 }

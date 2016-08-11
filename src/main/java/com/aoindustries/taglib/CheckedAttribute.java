@@ -29,7 +29,7 @@ package com.aoindustries.taglib;
  */
 public interface CheckedAttribute {
 
-    boolean isChecked();
+	boolean isChecked();
 
-    void setChecked(boolean checked);
+	void setChecked(boolean checked);
 }

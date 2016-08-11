@@ -34,24 +34,24 @@ import javax.servlet.jsp.JspTagException;
  */
 public class CheckedTag extends AutoEncodingBufferedTag {
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.TEXT;
-    }
+	@Override
+	public MediaType getContentType() {
+		return MediaType.TEXT;
+	}
 
-    @Override
-    public MediaType getOutputType() {
-        return null;
-    }
+	@Override
+	public MediaType getOutputType() {
+		return null;
+	}
 
-    @Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
-        CheckedAttribute checkedAttribute = AttributeUtils.findAttributeParent("checked", this, "checked", CheckedAttribute.class);
-        String value = capturedBody.trim().toString();
-        if(value.length()>0) {
-            if("true".equals(value)) checkedAttribute.setChecked(true);
-            else if("false".equals(value)) checkedAttribute.setChecked(false);
-            else throw new LocalizedJspTagException(ApplicationResources.accessor, "CheckedTag.invalidValue", value);
-        }
-    }
+	@Override
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+		CheckedAttribute checkedAttribute = AttributeUtils.findAttributeParent("checked", this, "checked", CheckedAttribute.class);
+		String value = capturedBody.trim().toString();
+		if(value.length()>0) {
+			if("true".equals(value)) checkedAttribute.setChecked(true);
+			else if("false".equals(value)) checkedAttribute.setChecked(false);
+			else throw new LocalizedJspTagException(ApplicationResources.accessor, "CheckedTag.invalidValue", value);
+		}
+	}
 }

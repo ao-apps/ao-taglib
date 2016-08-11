@@ -33,14 +33,14 @@ import java.io.File;
  */
 public final class ApplicationResources_ja extends EditableResourceBundle {
 
-    /**
-     * Do not use directly.
-     */
-    public ApplicationResources_ja() {
-        super(
-            Locales.JAPANESE,
-            ApplicationResources.bundleSet,
-            new File(System.getProperty("user.home")+"/common/aoprod/cvswork/ao-taglib/src/com/aoindustries/taglib/ApplicationResources_ja.properties")
-        );
-    }
+	/**
+	 * Do not use directly.
+	 */
+	public ApplicationResources_ja() {
+		super(
+			Locales.JAPANESE,
+			ApplicationResources.bundleSet,
+			new File(System.getProperty("user.home")+"/common/aoprod/cvswork/ao-taglib/src/com/aoindustries/taglib/ApplicationResources_ja.properties")
+		);
+	}
 }

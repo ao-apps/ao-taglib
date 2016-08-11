@@ -29,62 +29,62 @@ import java.io.Writer;
 
 final class FailOnWriteWriter extends Writer {
 
-    private static FailOnWriteWriter instance = new FailOnWriteWriter();
+	private static FailOnWriteWriter instance = new FailOnWriteWriter();
 
-    static FailOnWriteWriter getInstance() {
-        return instance;
-    }
+	static FailOnWriteWriter getInstance() {
+		return instance;
+	}
 
-    private FailOnWriteWriter() {
-    }
+	private FailOnWriteWriter() {
+	}
 
-    @Override
-    public void write(int c) throws IOException {
-        throw new LocalizedIOException(accessor, "FailOnWriteWriter.noOutputAllowed");
-    }
+	@Override
+	public void write(int c) throws IOException {
+		throw new LocalizedIOException(accessor, "FailOnWriteWriter.noOutputAllowed");
+	}
 
-    @Override
-    public void write(char cbuf[]) throws IOException {
-        throw new LocalizedIOException(accessor, "FailOnWriteWriter.noOutputAllowed");
-    }
+	@Override
+	public void write(char cbuf[]) throws IOException {
+		throw new LocalizedIOException(accessor, "FailOnWriteWriter.noOutputAllowed");
+	}
 
-    @Override
-    public void write(char[] cbuf, int off, int len) throws IOException {
-        throw new LocalizedIOException(accessor, "FailOnWriteWriter.noOutputAllowed");
-    }
+	@Override
+	public void write(char[] cbuf, int off, int len) throws IOException {
+		throw new LocalizedIOException(accessor, "FailOnWriteWriter.noOutputAllowed");
+	}
 
-    @Override
-    public void write(String str) throws IOException {
-        throw new LocalizedIOException(accessor, "FailOnWriteWriter.noOutputAllowed");
-    }
+	@Override
+	public void write(String str) throws IOException {
+		throw new LocalizedIOException(accessor, "FailOnWriteWriter.noOutputAllowed");
+	}
 
-    @Override
-    public void write(String str, int off, int len) throws IOException {
-        throw new LocalizedIOException(accessor, "FailOnWriteWriter.noOutputAllowed");
-    }
+	@Override
+	public void write(String str, int off, int len) throws IOException {
+		throw new LocalizedIOException(accessor, "FailOnWriteWriter.noOutputAllowed");
+	}
 
-    @Override
-    public FailOnWriteWriter append(CharSequence csq) throws IOException {
-        throw new LocalizedIOException(accessor, "FailOnWriteWriter.noOutputAllowed");
-    }
+	@Override
+	public FailOnWriteWriter append(CharSequence csq) throws IOException {
+		throw new LocalizedIOException(accessor, "FailOnWriteWriter.noOutputAllowed");
+	}
 
-    @Override
-    public FailOnWriteWriter append(CharSequence csq, int start, int end) throws IOException {
-        throw new LocalizedIOException(accessor, "FailOnWriteWriter.noOutputAllowed");
-    }
+	@Override
+	public FailOnWriteWriter append(CharSequence csq, int start, int end) throws IOException {
+		throw new LocalizedIOException(accessor, "FailOnWriteWriter.noOutputAllowed");
+	}
 
-    @Override
-    public FailOnWriteWriter append(char c) throws IOException {
-        throw new LocalizedIOException(accessor, "FailOnWriteWriter.noOutputAllowed");
-    }
+	@Override
+	public FailOnWriteWriter append(char c) throws IOException {
+		throw new LocalizedIOException(accessor, "FailOnWriteWriter.noOutputAllowed");
+	}
 
-    @Override
-    public void flush() {
-        // Do nothing
-    }
+	@Override
+	public void flush() {
+		// Do nothing
+	}
 
-    @Override
-    public void close() {
-        // Do nothing
-    }
+	@Override
+	public void close() {
+		// Do nothing
+	}
 }

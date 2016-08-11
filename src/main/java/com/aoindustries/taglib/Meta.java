@@ -32,31 +32,31 @@ import javax.servlet.jsp.JspTagException;
  */
 public class Meta {
 
-    private final String name;
-    private final String httpEquiv;
+	private final String name;
+	private final String httpEquiv;
 	private final String charset;
-    private final String content;
+	private final String content;
 
-    public Meta(String name, String httpEquiv, String charset, String content) throws JspTagException {
-        this.name = name;
-        this.httpEquiv = httpEquiv;
+	public Meta(String name, String httpEquiv, String charset, String content) throws JspTagException {
+		this.name = name;
+		this.httpEquiv = httpEquiv;
 		this.charset = charset;
-        this.content = NullArgumentException.checkNotNull(content, "content");
-    }
+		this.content = NullArgumentException.checkNotNull(content, "content");
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getHttpEquiv() {
-        return httpEquiv;
-    }
+	public String getHttpEquiv() {
+		return httpEquiv;
+	}
 
 	public String getCharset() {
 		return charset;
 	}
 
 	public String getContent() {
-        return content;
-    }
+		return content;
+	}
 }

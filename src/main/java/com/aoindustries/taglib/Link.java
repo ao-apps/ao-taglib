@@ -33,16 +33,16 @@ import javax.servlet.jsp.JspTagException;
  */
 public class Link {
 
-    private final String href;
+	private final String href;
 	private final HttpParameters params;
 	private final boolean hrefAbsolute;
 	private final LastModifiedServlet.AddLastModifiedWhen addLastModified;
-    private final String hreflang;
-    private final String rel;
-    private final String type;
+	private final String hreflang;
+	private final String rel;
+	private final String type;
 	private final String media;
 
-    public Link(
+	public Link(
 		String href,
 		boolean hrefAbsolute,
 		HttpParameters params,
@@ -52,19 +52,19 @@ public class Link {
 		String type,
 		String media
 	) throws JspTagException {
-        this.href = href;
+		this.href = href;
 		this.params = params;
 		this.hrefAbsolute = hrefAbsolute;
 		this.addLastModified = addLastModified;
-        this.hreflang = hreflang;
-        this.rel = rel;
-        this.type = type;
+		this.hreflang = hreflang;
+		this.rel = rel;
+		this.type = type;
 		this.media = media;
-    }
+	}
 
-    public String getHref() {
-        return href;
-    }
+	public String getHref() {
+		return href;
+	}
 
 	public boolean getHrefAbsolute() {
 		return hrefAbsolute;
@@ -79,16 +79,16 @@ public class Link {
 	}
 
 	public String getHreflang() {
-        return hreflang;
-    }
+		return hreflang;
+	}
 
-    public String getRel() {
-        return rel;
-    }
+	public String getRel() {
+		return rel;
+	}
 
-    public String getType() {
-        return type;
-    }
+	public String getType() {
+		return type;
+	}
 
 	public String getMedia() {
 		return media;

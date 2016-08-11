@@ -46,8 +46,8 @@ public class IncludeTag extends ArgDispatchTag {
 	 * behalf of any included pages.
 	 */
 	@Override
-    void dispatch(RequestDispatcher dispatcher, final JspWriter out, HttpServletRequest request, HttpServletResponse response) throws JspException, IOException {
-        try {
+	void dispatch(RequestDispatcher dispatcher, final JspWriter out, HttpServletRequest request, HttpServletResponse response) throws JspException, IOException {
+		try {
 			// Write to the current JSP out instead of creating a new writer.
 			Includer.dispatchInclude(
 				dispatcher,
@@ -69,8 +69,8 @@ public class IncludeTag extends ArgDispatchTag {
 					}
 				}
 			);
-        } catch(ServletException e) {
-            throw new JspTagException(e);
-        }
-    }
+		} catch(ServletException e) {
+			throw new JspTagException(e);
+		}
+	}
 }

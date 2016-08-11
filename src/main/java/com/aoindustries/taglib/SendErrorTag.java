@@ -38,50 +38,50 @@ import javax.servlet.jsp.SkipPageException;
  */
 public class SendErrorTag extends AutoEncodingBufferedTag {
 
-    private int status;
-    private String message;
+	private int status;
+	private String message;
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.TEXT;
-    }
+	@Override
+	public MediaType getContentType() {
+		return MediaType.TEXT;
+	}
 
-    @Override
-    public MediaType getOutputType() {
-        return null;
-    }
+	@Override
+	public MediaType getOutputType() {
+		return null;
+	}
 
-    public int getStatus() {
-        return status;
-    }
+	public int getStatus() {
+		return status;
+	}
 
-    public void setStatus(int status) {
-        this.status = status;
-    }
+	public void setStatus(int status) {
+		this.status = status;
+	}
 
-    public String getMessage() {
-        return message;
-    }
+	public String getMessage() {
+		return message;
+	}
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
+	public void setMessage(String message) {
+		this.message = message;
+	}
 
-    @Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-        if(message==null) message = capturedBody.trim().toString();
+	@Override
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+		if(message==null) message = capturedBody.trim().toString();
 
-        PageContext pageContext = (PageContext)getJspContext();
-        HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
-        HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
+		PageContext pageContext = (PageContext)getJspContext();
+		HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
+		HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
 
-        if(message==null || message.isEmpty()) {
+		if(message==null || message.isEmpty()) {
 			Includer.sendError(request, response, status);
 		} else {
 			Includer.sendError(request, response, status, message);
 		}
 
 		Includer.setPageSkipped(request);
-        throw new SkipPageException();
-    }
+		throw new SkipPageException();
+	}
 }

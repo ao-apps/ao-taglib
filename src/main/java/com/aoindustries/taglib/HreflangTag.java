@@ -33,19 +33,19 @@ import javax.servlet.jsp.JspTagException;
  */
 public class HreflangTag extends AutoEncodingBufferedTag {
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.TEXT;
-    }
+	@Override
+	public MediaType getContentType() {
+		return MediaType.TEXT;
+	}
 
-    @Override
-    public MediaType getOutputType() {
-        return null;
-    }
+	@Override
+	public MediaType getOutputType() {
+		return null;
+	}
 
-    @Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
-        HreflangAttribute hreflangAttribute = AttributeUtils.findAttributeParent("hreflang", this, "hreflang", HreflangAttribute.class);
-        hreflangAttribute.setHreflang(capturedBody.trim());
-    }
+	@Override
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+		HreflangAttribute hreflangAttribute = AttributeUtils.findAttributeParent("hreflang", this, "hreflang", HreflangAttribute.class);
+		hreflangAttribute.setHreflang(capturedBody.trim());
+	}
 }

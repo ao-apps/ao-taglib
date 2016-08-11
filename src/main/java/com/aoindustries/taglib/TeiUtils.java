@@ -49,13 +49,13 @@ final public class TeiUtils {
 	 * 
 	 * @see  MediaType#getMediaType(java.lang.String)
 	 */
-    public static List<ValidationMessage> validateMediaType(TagData data, List<ValidationMessage> messages) {
-        Object o = data.getAttribute("type");
-        if(
-            o != null
-            && o != TagData.REQUEST_TIME_VALUE
+	public static List<ValidationMessage> validateMediaType(TagData data, List<ValidationMessage> messages) {
+		Object o = data.getAttribute("type");
+		if(
+			o != null
+			&& o != TagData.REQUEST_TIME_VALUE
 			&& !(o instanceof MediaType)
-        ) {
+		) {
 			String type = Coercion.toString(o);
 			try {
 				// First allow shortcuts (matching enum names)
@@ -73,9 +73,9 @@ final public class TeiUtils {
 					)
 				);
 			}
-        }
+		}
 		return messages;
-    }
+	}
 
 	/**
 	 * Checks that a scope is a valid.
@@ -88,12 +88,12 @@ final public class TeiUtils {
 	 * 
 	 * @see PropertyUtils#getScope(java.lang.String)
 	 */
-    public static List<ValidationMessage> validateScope(TagData data, List<ValidationMessage> messages) {
-        Object o = data.getAttribute("scope");
-        if(
-            o != null
-            && o != TagData.REQUEST_TIME_VALUE
-        ) {
+	public static List<ValidationMessage> validateScope(TagData data, List<ValidationMessage> messages) {
+		Object o = data.getAttribute("scope");
+		if(
+			o != null
+			&& o != TagData.REQUEST_TIME_VALUE
+		) {
 			String scope = Coercion.toString(o);
 			try {
 				Scope.getScopeId(scope);
@@ -107,7 +107,7 @@ final public class TeiUtils {
 					)
 				);
 			}
-        }
+		}
 		return messages;
-    }
+	}
 }

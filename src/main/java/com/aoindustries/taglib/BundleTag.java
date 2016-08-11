@@ -54,30 +54,30 @@ public class BundleTag
 	private ApplicationResourcesAccessor accessor; // Set along with basename
 	private String prefix;
 
-    public String getBasename() {
-        return basename;
-    }
+	public String getBasename() {
+		return basename;
+	}
 
 	public ApplicationResourcesAccessor getAccessor() {
 		return accessor;
 	}
 
 	public void setBasename(String basename) {
-        this.basename = basename;
+		this.basename = basename;
 		this.accessor = ApplicationResourcesAccessor.getInstance(basename);
-    }
+	}
 
-    public String getPrefix() {
-        return prefix;
-    }
+	public String getPrefix() {
+		return prefix;
+	}
 
-    public void setPrefix(String prefix) {
+	public void setPrefix(String prefix) {
 		this.prefix = prefix;
-    }
+	}
 
-    @Override
-    public void doTag() throws JspException, IOException {
-        JspFragment body = getJspBody();
+	@Override
+	public void doTag() throws JspException, IOException {
+		JspFragment body = getJspBody();
 		if(body!=null) {
 			PageContext pageContext = (PageContext)getJspContext();
 			ServletRequest request = pageContext.getRequest();
@@ -89,5 +89,5 @@ public class BundleTag
 				request.setAttribute(REQUEST_ATTRIBUTE_KEY, oldRequestValue);
 			}
 		}
-    }
+	}
 }

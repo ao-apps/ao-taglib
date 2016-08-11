@@ -33,19 +33,19 @@ import javax.servlet.jsp.JspTagException;
  */
 public class RelTag extends AutoEncodingBufferedTag {
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.TEXT;
-    }
+	@Override
+	public MediaType getContentType() {
+		return MediaType.TEXT;
+	}
 
-    @Override
-    public MediaType getOutputType() {
-        return null;
-    }
+	@Override
+	public MediaType getOutputType() {
+		return null;
+	}
 
-    @Override
-    protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
-        RelAttribute relAttribute = AttributeUtils.findAttributeParent("rel", this, "rel", RelAttribute.class);
-        relAttribute.setRel(capturedBody.trim());
-    }
+	@Override
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+		RelAttribute relAttribute = AttributeUtils.findAttributeParent("rel", this, "rel", RelAttribute.class);
+		relAttribute.setRel(capturedBody.trim());
+	}
 }

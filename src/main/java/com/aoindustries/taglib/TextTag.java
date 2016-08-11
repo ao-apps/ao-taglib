@@ -29,8 +29,8 @@ import com.aoindustries.encoding.MediaType;
  */
 public class TextTag extends AutoEncodingFilteredTag {
 
-    @Override
-    public MediaType getContentType() {
-        return MediaType.TEXT;
-    }
+	@Override
+	public MediaType getContentType() {
+		return MediaType.TEXT;
+	}
 }

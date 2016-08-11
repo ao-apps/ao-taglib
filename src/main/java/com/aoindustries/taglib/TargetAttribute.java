@@ -31,7 +31,7 @@ import javax.servlet.jsp.JspTagException;
  */
 public interface TargetAttribute {
 
-    Object getTarget();
+	Object getTarget();
 
-    void setTarget(Object target) throws JspTagException;
+	void setTarget(Object target) throws JspTagException;
 }
