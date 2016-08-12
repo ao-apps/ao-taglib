@@ -33,6 +33,7 @@ import java.util.Locale;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 
 public class HtmlTag extends AutoEncodingFilteredTag {
@@ -234,12 +235,15 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 
 		// Set the content type
 		boolean isXml = !forceHtml && useXhtmlContentType((HttpServletRequest)pageContext.getRequest());
-		response.setContentType(
-			isXml
-			? CONTENT_TYPE_XHTML
-			: CONTENT_TYPE_HTML
-		);
-		// response.setCharacterEncoding("UTF-8");
+		String contentType = isXml ? CONTENT_TYPE_XHTML : CONTENT_TYPE_HTML;
+		response.setContentType(contentType);
+		//response.setCharacterEncoding("UTF-8");
+		String actualContentType = response.getContentType();
+		if(actualContentType != null) {
+			int semiPos = actualContentType.indexOf(';');
+			if(semiPos != -1) actualContentType = actualContentType.substring(0, semiPos);
+		}
+		if(!contentType.equals(actualContentType)) throw new JspTagException("Unable to set content type, response already committed? contentType=" + contentType + ", actualContentType=" + actualContentType);
 
 		writeDocTypeLine(doctype, out);
 		if(oldIeClass!=null) {
