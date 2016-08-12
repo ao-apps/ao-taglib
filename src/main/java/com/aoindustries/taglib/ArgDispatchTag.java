@@ -22,9 +22,10 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.util.WildcardPatternMatcher;
 import com.aoindustries.lang.LocalizedIllegalArgumentException;
+import com.aoindustries.servlet.http.Dispatcher;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
+import com.aoindustries.util.WildcardPatternMatcher;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -44,7 +45,7 @@ abstract class ArgDispatchTag
 	/**
 	 * The prefix for argument attributes.
 	 */
-	private static final String ARG_ATTRIBUTE_PREFIX = ARG_MAP_REQUEST_ATTRIBUTE_NAME + ".";
+	private static final String ARG_ATTRIBUTE_PREFIX = Dispatcher.ARG_MAP_REQUEST_ATTRIBUTE_NAME + ".";
 
 	private String clearParams = null;
 	private WildcardPatternMatcher clearParamsMatcher = WildcardPatternMatcher.getMatchNone();
