@@ -67,11 +67,6 @@ abstract public class DispatchTag
 {
 
 	/**
-	 * The name of the request-scope Map that will contain the arguments for the current page.
-	 */
-	protected static final String ARG_MAP_REQUEST_ATTRIBUTE_NAME = "arg";
-
-	/**
 	 * Tracks if the request has been forwarded.
 	 */
 	protected static final ThreadLocal<Boolean> requestForwarded = new ThreadLocal<Boolean>();
@@ -278,16 +273,13 @@ abstract public class DispatchTag
 				Dispatcher.setDispatchedPage(contextRelativePath);
 
 				// Keep old arguments to restore
-				final Object oldArgs = request.getAttribute(ARG_MAP_REQUEST_ATTRIBUTE_NAME);
+				final Object oldArgs = request.getAttribute(Dispatcher.ARG_MAP_REQUEST_ATTRIBUTE_NAME);
 				try {
 					final JspWriter out = pageContext.getOut();
 					final HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
 
 					// Set new arguments
-					request.setAttribute(
-						ARG_MAP_REQUEST_ATTRIBUTE_NAME,
-						getArgs()
-					);
+					request.setAttribute(Dispatcher.ARG_MAP_REQUEST_ATTRIBUTE_NAME, getArgs());
 
 					final WildcardPatternMatcher clearParamsMatcher = getClearParamsMatcher();
 					Map<String,String[]> oldMap = null; // Obtained when first needed
@@ -319,7 +311,7 @@ abstract public class DispatchTag
 					);
 				} finally {
 					// Restore any previous args
-					request.setAttribute(ARG_MAP_REQUEST_ATTRIBUTE_NAME, oldArgs);
+					request.setAttribute(Dispatcher.ARG_MAP_REQUEST_ATTRIBUTE_NAME, oldArgs);
 				}
 			} finally {
 				Dispatcher.setDispatchedPage(oldDispatchPage);
