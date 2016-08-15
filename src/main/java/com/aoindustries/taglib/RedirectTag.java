@@ -132,7 +132,7 @@ public class RedirectTag
 	 * as well as possible.
 	 */
 	@Override
-	protected Map<String, Object> getArgs() {
+	protected Map<String,?> getArgs() {
 		return null;
 	}
 

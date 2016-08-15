@@ -198,7 +198,7 @@ abstract public class DispatchTag
 	/**
 	 * Gets the arguments that will be passed on dispatch.  For no arguments, return null.
 	 */
-	abstract protected Map<String, Object> getArgs();
+	abstract protected Map<String,?> getArgs();
 
 	/**
 	 * Subclass hook to intercept request after servlet paths have been determined

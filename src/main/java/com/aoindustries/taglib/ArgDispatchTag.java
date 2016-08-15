@@ -66,7 +66,7 @@ abstract class ArgDispatchTag
 	}
 
 	@Override
-	public Map<String, Object> getArgs() {
+	public Map<String,?> getArgs() {
 		if(args==null) return Collections.emptyMap();
 		return Collections.unmodifiableMap(args);
 	}

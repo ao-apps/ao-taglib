@@ -31,7 +31,7 @@ import java.util.Map;
  */
 public interface ArgsAttribute {
 
-	Map<String,Object> getArgs();
+	Map<String,?> getArgs();
 
 	void addArg(String name, Object value) throws IllegalArgumentException;
 }
