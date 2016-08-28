@@ -203,7 +203,12 @@ public class ATag
 
 	@Override
 	public void setClazz(Object clazz) {
-		this.clazz = clazz;
+		try {
+			// JSP EL converts nulls to empty string
+			this.clazz = Coercion.isEmpty(clazz) ? null : clazz;
+		} catch(IOException e) {
+			throw new WrappedException(e);
+		}
 	}
 
 	@Override
