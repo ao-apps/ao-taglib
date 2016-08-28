@@ -37,6 +37,7 @@ import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.http.ServletUtil;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
+import com.aoindustries.util.WrappedException;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
@@ -100,7 +101,12 @@ public class ATag
 
 	@Override
 	public void setId(Object id) {
-		this.id = id;
+		try {
+			// JSP EL converts nulls to empty string
+			this.id = Coercion.isEmpty(id) ? null : id;
+		} catch(IOException e) {
+			throw new WrappedException(e);
+		}
 	}
 
 	@Override
