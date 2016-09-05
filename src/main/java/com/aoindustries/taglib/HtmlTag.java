@@ -237,7 +237,7 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 		boolean isXml = !forceHtml && useXhtmlContentType((HttpServletRequest)pageContext.getRequest());
 		String contentType = isXml ? CONTENT_TYPE_XHTML : CONTENT_TYPE_HTML;
 		response.setContentType(contentType);
-		//response.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8"); // Seems required by Jetty, otherwise the response stayed iso-8859-1 and could not handle unicode characters
 		String actualContentType = response.getContentType();
 		if(actualContentType != null) {
 			int semiPos = actualContentType.indexOf(';');
