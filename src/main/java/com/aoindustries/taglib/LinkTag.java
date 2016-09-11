@@ -35,6 +35,8 @@ import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.List;
+import java.util.Map;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 import javax.servlet.jsp.tagext.JspTag;
@@ -67,6 +69,29 @@ public class LinkTag
 	@Override
 	public MediaType getOutputType() {
 		return MediaType.XHTML;
+	}
+
+	/**
+	 * Copies all values from the provided link.
+	 */
+	public void setLink(Link link) {
+		setHref(link.getHref());
+		setHrefAbsolute(link.getHrefAbsolute());
+		HttpParameters linkParams = link.getParams();
+		if(linkParams != null) {
+			for(Map.Entry<String,List<String>> entry : linkParams.getParameterMap().entrySet()) {
+				String paramName = entry.getKey();
+				for(String paramValue : entry.getValue()) {
+					addParam(paramName, paramValue);
+				}
+			}
+		}
+		this.addLastModified = link.getAddLastModified();
+		setHreflang(link.getHreflang());
+		setRel(link.getRel());
+		setType(link.getType());
+		setMedia(link.getMedia());
+		setTitle(link.getTitle());
 	}
 
 	@Override
