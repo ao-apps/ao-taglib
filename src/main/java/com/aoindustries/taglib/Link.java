@@ -41,6 +41,7 @@ public class Link {
 	private final String rel;
 	private final String type;
 	private final String media;
+	private final String title;
 
 	public Link(
 		String href,
@@ -50,7 +51,8 @@ public class Link {
 		String hreflang,
 		String rel,
 		String type,
-		String media
+		String media,
+		String title
 	) throws JspTagException {
 		this.href = href;
 		this.params = params;
@@ -60,6 +62,7 @@ public class Link {
 		this.rel = rel;
 		this.type = type;
 		this.media = media;
+		this.title = title;
 	}
 
 	public String getHref() {
@@ -92,5 +95,9 @@ public class Link {
 
 	public String getMedia() {
 		return media;
+	}
+
+	public String getTitle() {
+		return title;
 	}
 }

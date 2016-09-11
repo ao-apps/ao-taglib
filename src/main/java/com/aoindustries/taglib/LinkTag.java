@@ -50,7 +50,8 @@ public class LinkTag
 		ParamsAttribute,
 		HreflangAttribute,
 		RelAttribute,
-		TypeAttribute
+		TypeAttribute,
+		TitleAttribute
 {
 
 	private String href;
@@ -61,6 +62,7 @@ public class LinkTag
 	private Object rel;
 	private Object type;
 	private String media;
+	private Object title;
 
 	@Override
 	public MediaType getOutputType() {
@@ -143,6 +145,16 @@ public class LinkTag
 	}
 
 	@Override
+	public Object getTitle() {
+		return title;
+	}
+
+	@Override
+	public void setTitle(Object title) {
+		this.title = title;
+	}
+
+	@Override
 	public void setDynamicAttribute(String uri, String localName, Object value) throws JspTagException {
 		if(
 			uri==null
@@ -172,7 +184,8 @@ public class LinkTag
 					Coercion.toString(hreflang),
 					Coercion.toString(rel),
 					Coercion.toString(type),
-					media
+					media,
+					Coercion.toString(title)
 				)
 			);
 		} else {
@@ -196,6 +209,11 @@ public class LinkTag
 			if(media!=null) {
 				out.write(" media=\"");
 				encodeTextInXhtmlAttribute(media, out);
+				out.write('"');
+			}
+			if(title!=null) {
+				out.write(" title=\"");
+				Coercion.write(title, textInXhtmlAttributeEncoder, out);
 				out.write('"');
 			}
 			out.write(" />");
