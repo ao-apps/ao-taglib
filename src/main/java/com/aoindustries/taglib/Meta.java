@@ -23,7 +23,6 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.lang.NullArgumentException;
-import javax.servlet.jsp.JspTagException;
 
 /**
  * Holds the data for a Meta tag that is passed between MetaTag and any MetasAttribute parent.
@@ -37,7 +36,7 @@ public class Meta {
 	private final String charset;
 	private final String content;
 
-	public Meta(String name, String httpEquiv, String charset, String content) throws JspTagException {
+	public Meta(String name, String httpEquiv, String charset, String content) {
 		this.name = name;
 		this.httpEquiv = httpEquiv;
 		this.charset = charset;
