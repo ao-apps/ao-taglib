@@ -1233,6 +1233,15 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 		<attribute>
 			<description><![CDATA[
+				An optional link to copy all the attributes from, as captured by a LinksAttribute parent tag.
+			]]></description>
+			<name>link</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>com.aoindustries.taglib.Link</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
 				The href for the link.
 				If starts with a /, the context path will be prepended to the path.
 				Session state URL rewriting is performed as needed.
