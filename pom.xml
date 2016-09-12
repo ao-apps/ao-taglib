@@ -203,6 +203,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 						<version>2.10.4</version>
 						<configuration>
 							<header><![CDATA[<a href="${project.url}">${project.name}<a>]]></header>
+							<keywords>true</keywords><!-- Help internal search systems -->
 							<links>
 								<link>http://docs.oracle.com/javaee/6/api/</link>
 								<link>https://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.2/apidocs/</link>
