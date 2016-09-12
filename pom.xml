@@ -174,7 +174,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 				</plugins>
 			</build>
 		</profile>
-		<profile> 
+		<profile>
 			<id>release</id>
 			<build>
 				<plugins>
@@ -195,6 +195,17 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-javadoc-plugin</artifactId>
 						<version>2.10.4</version>
+						<configuration>
+							<links>
+								<link>http://docs.oracle.com/javaee/6/api/</link>
+								<link>https://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.2/apidocs/</link>
+								<link>https://www.aoindustries.com/docs/ao-encoding/</link>
+								<link>https://www.aoindustries.com/docs/ao-encoding-servlet/</link>
+								<link>https://www.aoindustries.com/docs/ao-io-buffer/</link>
+								<link>https://www.aoindustries.com/docs/ao-servlet-filter/</link>
+								<link>https://www.aoindustries.com/docs/aocode-public/</link>
+							</links>
+						</configuration>
 						<executions>
 							<execution>
 								<id>attach-javadocs</id>
