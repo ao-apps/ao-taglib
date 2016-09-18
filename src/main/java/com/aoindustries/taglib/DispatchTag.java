@@ -39,6 +39,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
@@ -69,14 +70,20 @@ abstract public class DispatchTag
 	/**
 	 * Tracks if the request has been forwarded.
 	 */
-	protected static final ThreadLocal<Boolean> requestForwarded = new ThreadLocal<Boolean>();
+	protected static final String REQUEST_FORWARDED_ATTRIBUTE_NAME = DispatchTag.class.getName() + ".requestForwarded";
 
 	/**
 	 * Checks if the request has been forwarded.
 	 */
-	public static boolean isForwarded() {
-		Boolean forwarded = requestForwarded.get();
-		return forwarded != null && forwarded;
+	public static boolean isForwarded(ServletRequest req) {
+		return req.getAttribute(REQUEST_FORWARDED_ATTRIBUTE_NAME) != null;
+	}
+
+	protected static void setForwarded(ServletRequest req, boolean requestForwarded) {
+		req.setAttribute(
+			REQUEST_FORWARDED_ATTRIBUTE_NAME,
+			requestForwarded ? Boolean.TRUE : null
+		);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -133,12 +140,12 @@ abstract public class DispatchTag
 			}
 
 			@Override
-			public Map getParameterMap() {
+			public Map<String,String[]> getParameterMap() {
 				return parameters;
 			}
 
 			@Override
-			public Enumeration getParameterNames() {
+			public Enumeration<String> getParameterNames() {
 				return Collections.enumeration(parameters.keySet());
 			}
 
@@ -216,13 +223,15 @@ abstract public class DispatchTag
 	@Override
 	@SuppressWarnings("unchecked")
 	final public void doTag() throws JspException, IOException {
+		final PageContext pageContext = (PageContext)getJspContext();
+		final HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
 		// Track original page when first accessed
-		final String oldOriginal = Dispatcher.getOriginalPage();
+		final String oldOriginal = Dispatcher.getOriginalPage(request);
 		try {
 			// Set original request path if not already set
-			final PageContext pageContext = (PageContext)getJspContext();
-			final HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
-			if(oldOriginal==null) Dispatcher.setOriginalPage(request.getServletPath());
+			if(oldOriginal == null) {
+				Dispatcher.setOriginalPage(request, request.getServletPath());
+			}
 
 			// Invoke body first to all nested tags to set attributes
 			final JspFragment body = getJspBody();
@@ -233,7 +242,7 @@ abstract public class DispatchTag
 				body.invoke(NullWriter.getInstance());
 			}
 			// Keep old dispatch page to restore
-			final String oldDispatchPage = Dispatcher.getDispatchedPage();
+			final String oldDispatchPage = Dispatcher.getDispatchedPage(request);
 			try {
 				// Determine the path of the current page based on previous dispatch or original request
 				final String servletPath =
@@ -270,7 +279,7 @@ abstract public class DispatchTag
 				assert dispatcher!=null : "Will have been set above when page non-null";
 
 				// Store as new relative path source
-				Dispatcher.setDispatchedPage(contextRelativePath);
+				Dispatcher.setDispatchedPage(request, contextRelativePath);
 
 				// Keep old arguments to restore
 				final Object oldArgs = request.getAttribute(Dispatcher.ARG_MAP_REQUEST_ATTRIBUTE_NAME);
@@ -314,11 +323,11 @@ abstract public class DispatchTag
 					request.setAttribute(Dispatcher.ARG_MAP_REQUEST_ATTRIBUTE_NAME, oldArgs);
 				}
 			} finally {
-				Dispatcher.setDispatchedPage(oldDispatchPage);
+				Dispatcher.setDispatchedPage(request, oldDispatchPage);
 			}
 		} finally {
-			if(oldOriginal==null) {
-				Dispatcher.setOriginalPage(null);
+			if(oldOriginal == null) {
+				Dispatcher.setOriginalPage(request, null);
 			}
 		}
 	}

@@ -43,9 +43,9 @@ public class ForwardTag extends ArgDispatchTag {
 	 */
 	@Override
 	void dispatch(RequestDispatcher dispatcher, JspWriter out, HttpServletRequest request, HttpServletResponse response) throws JspException, IOException {
-		Boolean oldForwarded = requestForwarded.get();
+		boolean oldForwarded = isForwarded(request);
 		try {
-			requestForwarded.set(Boolean.TRUE);
+			setForwarded(request, true);
 			try {
 				// Clear the previous JSP out buffer
 				out.clear();
@@ -56,7 +56,7 @@ public class ForwardTag extends ArgDispatchTag {
 			Includer.setPageSkipped(request);
 			throw new SkipPageException();
 		} finally {
-			requestForwarded.set(oldForwarded);
+			setForwarded(request, oldForwarded);
 		}
 	}
 }
