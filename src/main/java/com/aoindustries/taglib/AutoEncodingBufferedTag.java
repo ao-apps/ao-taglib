@@ -27,7 +27,6 @@ import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.MediaValidator;
 import com.aoindustries.encoding.MediaWriter;
-import com.aoindustries.encoding.ValidMediaInput;
 import com.aoindustries.encoding.servlet.HttpServletResponseEncodingContext;
 import com.aoindustries.io.TempFileList;
 import com.aoindustries.io.buffer.AutoTempFileWriter;
@@ -43,6 +42,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
@@ -149,8 +149,8 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 	public void doTag() throws JspException, IOException {
 		try {
 			final PageContext pageContext = (PageContext)getJspContext();
-			final MediaType parentContentType = ThreadEncodingContext.contentType.get();
-			final ValidMediaInput parentValidMediaInput = ThreadEncodingContext.validMediaInput.get();
+			final ServletRequest request = pageContext.getRequest();
+			final ThreadEncodingContext parentEncodingContext = ThreadEncodingContext.getCurrentContext(request);
 
 			// Capture the body output while validating
 			// BufferWriter bufferWriter = new CharArrayBufferWriter(128, getTempFileThreshold());
@@ -161,7 +161,7 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 				if(tempFileThreshold != Long.MAX_VALUE) {
 					bufferWriter = TempFileContext.wrapTempFileList(
 						bufferWriter,
-						pageContext.getRequest(),
+						request,
 						new TempFileContext.Wrapper<BufferWriter>() {
 							@Override
 							public BufferWriter call(BufferWriter original, TempFileList tempFileList) {
@@ -179,15 +179,16 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 				if(body!=null) {
 					final MediaType myContentType = getContentType();
 					MediaValidator captureValidator = MediaValidator.getMediaValidator(myContentType, bufferWriter);
-					ThreadEncodingContext.contentType.set(myContentType);
-					ThreadEncodingContext.validMediaInput.set(captureValidator);
+					ThreadEncodingContext.setCurrentContext(
+						request,
+						new ThreadEncodingContext(myContentType, captureValidator)
+					);
 					try {
 						invoke(body, captureValidator);
 						captureValidator.flush();
 					} finally {
 						// Restore previous encoding context that is used for our output
-						ThreadEncodingContext.contentType.set(parentContentType);
-						ThreadEncodingContext.validMediaInput.set(parentValidMediaInput);
+						ThreadEncodingContext.setCurrentContext(request, parentEncodingContext);
 					}
 				}
 			} finally {
@@ -206,9 +207,9 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 
 				// Determine the container's content type
 				MediaType containerContentType;
-				if(parentContentType!=null) {
+				if(parentEncodingContext != null) {
 					// Use the output type of the parent
-					containerContentType = parentContentType;
+					containerContentType = parentEncodingContext.contentType;
 				} else {
 					// Use the content type of the response
 					containerContentType = MediaType.getMediaTypeForContentType(response.getContentType());
@@ -221,14 +222,15 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 					MediaWriter mediaWriter = new MediaWriter(mediaEncoder, out);
 					mediaWriter.writePrefix();
 					try {
-						ThreadEncodingContext.contentType.set(myOutputType);
-						ThreadEncodingContext.validMediaInput.set(mediaWriter);
+						ThreadEncodingContext.setCurrentContext(
+							request,
+							new ThreadEncodingContext(myOutputType, mediaWriter)
+						);
 						try {
 							doTag(capturedBody, mediaWriter);
 						} finally {
 							// Restore previous encoding context that is used for our output
-							ThreadEncodingContext.contentType.set(parentContentType);
-							ThreadEncodingContext.validMediaInput.set(parentValidMediaInput);
+							ThreadEncodingContext.setCurrentContext(request, parentEncodingContext);
 						}
 					} finally {
 						mediaWriter.writeSuffix();
@@ -236,25 +238,29 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 				} else {
 					// If parentValidMediaInput exists and is validating our output type, no additional validation is required
 					if(
-						parentValidMediaInput!=null
-						&& parentValidMediaInput.isValidatingMediaInputType(myOutputType)
+						parentEncodingContext != null
+						&& parentEncodingContext.validMediaInput.isValidatingMediaInputType(myOutputType)
 					) {
-						ThreadEncodingContext.contentType.set(myOutputType);
+						ThreadEncodingContext.setCurrentContext(
+							request,
+							new ThreadEncodingContext(myOutputType, parentEncodingContext.validMediaInput)
+						);
 						try {
 							doTag(capturedBody, out);
 						} finally {
-							ThreadEncodingContext.contentType.set(parentContentType);
+							ThreadEncodingContext.setCurrentContext(request, parentEncodingContext);
 						}
 					} else {
 						// Not using an encoder and parent doesn't validate our output, validate our own output.
 						MediaValidator validator = MediaValidator.getMediaValidator(myOutputType, out);
-						ThreadEncodingContext.contentType.set(myOutputType);
-						ThreadEncodingContext.validMediaInput.set(validator);
+						ThreadEncodingContext.setCurrentContext(
+							request,
+							new ThreadEncodingContext(myOutputType, validator)
+						);
 						try {
 							doTag(capturedBody, validator);
 						} finally {
-							ThreadEncodingContext.contentType.set(parentContentType);
-							ThreadEncodingContext.validMediaInput.set(parentValidMediaInput);
+							ThreadEncodingContext.setCurrentContext(request, parentEncodingContext);
 						}
 					}
 				}

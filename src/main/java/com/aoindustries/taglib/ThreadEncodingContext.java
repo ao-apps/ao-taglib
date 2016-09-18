@@ -24,28 +24,40 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.ValidMediaInput;
+import javax.servlet.ServletRequest;
 
 /**
  * Since the parent tag is not available from included JSP pages, the current
- * content type and validator is maintained as a ThreadLocal.  These are updated
- * for each of the nested tag levels.
+ * content type and validator is maintained as a request attribute.
+ * These are updated for each of the nested tag levels.
  *
  * @author  AO Industries, Inc.
  */
 class ThreadEncodingContext {
 
+	private static final String CURRENT_CONTEXT_REQUEST_ATTRIBUTE = ThreadEncodingContext.class.getName() + ".currentContext";
+
+	static ThreadEncodingContext getCurrentContext(ServletRequest request) {
+		return (ThreadEncodingContext)request.getAttribute(CURRENT_CONTEXT_REQUEST_ATTRIBUTE);
+	}
+
+	static void setCurrentContext(ServletRequest request, ThreadEncodingContext context) {
+		request.setAttribute(CURRENT_CONTEXT_REQUEST_ATTRIBUTE, context);
+	}
+
 	/**
 	 * The content type that is currently be written or null if not set.
 	 */
-	static ThreadLocal<MediaType> contentType = new ThreadLocal<MediaType>();
+	final MediaType contentType;
 
 	/**
 	 * The validator that is ensuring the data being written is valid for the current
 	 * outputType.
 	 */
-	static ThreadLocal<ValidMediaInput> validMediaInput = new ThreadLocal<ValidMediaInput>();
+	final ValidMediaInput validMediaInput;
 
-	// Make no instances
-	private ThreadEncodingContext() {
+	ThreadEncodingContext(MediaType contentType, ValidMediaInput validMediaInput) {
+		this.contentType = contentType;
+		this.validMediaInput = validMediaInput;
 	}
 }
