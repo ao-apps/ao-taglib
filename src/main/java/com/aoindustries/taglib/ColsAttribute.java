@@ -29,7 +29,5 @@ package com.aoindustries.taglib;
  */
 public interface ColsAttribute {
 
-	int getCols();
-
 	void setCols(int cols);
 }

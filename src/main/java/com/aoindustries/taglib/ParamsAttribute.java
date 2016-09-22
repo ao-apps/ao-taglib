@@ -22,16 +22,12 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.net.HttpParameters;
-
 /**
  * Something with a set of parameters.
  *
  * @author  AO Industries, Inc.
  */
 public interface ParamsAttribute {
-
-	HttpParameters getParams();
 
 	void addParam(String name, String value);
 }

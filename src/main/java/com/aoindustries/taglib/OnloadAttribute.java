@@ -29,7 +29,5 @@ package com.aoindustries.taglib;
  */
 public interface OnloadAttribute {
 
-	Object getOnload();
-
 	void setOnload(Object onload);
 }

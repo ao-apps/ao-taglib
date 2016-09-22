@@ -22,9 +22,9 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.encoding.Coercion;
 import com.aoindustries.io.Writable;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.util.i18n.BundleLookupMarkup;
@@ -58,17 +58,8 @@ public class WriteTag
 		return mediaType;
 	}
 
-	public String getScope() {
-		return scope;
-	}
-
 	public void setScope(String scope) {
 		this.scope = scope;
-	}
-
-	@Override
-	public Object getName() {
-		return name;
 	}
 
 	@Override
@@ -76,25 +67,12 @@ public class WriteTag
 		this.name = name;
 	}
 
-	public String getProperty() {
-		return property;
-	}
-
 	public void setProperty(String property) {
 		this.property = property;
 	}
 
-	public String getMethod() {
-		return method;
-	}
-
 	public void setMethod(String method) {
 		this.method = method;
-	}
-
-	@Override
-	public Object getType() {
-		return type;
 	}
 
 	@Override

@@ -26,8 +26,6 @@ import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.buffer.BufferResult;
-import com.aoindustries.net.EmptyParameters;
-import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
@@ -79,18 +77,8 @@ public class ImgTag
 	}
 
 	@Override
-	public Object getId() {
-		return id;
-	}
-
-	@Override
 	public void setId(Object id) {
 		this.id = id;
-	}
-
-	@Override
-	public String getSrc() {
-		return src;
 	}
 
 	@Override
@@ -99,35 +87,17 @@ public class ImgTag
 	}
 
 	@Override
-	public HttpParameters getParams() {
-		return params==null ? EmptyParameters.getInstance() : params;
-	}
-
-	@Override
 	public void addParam(String name, String value) {
 		if(params==null) params = new HttpParametersMap();
 		params.addParameter(name, value);
 	}
 
-	public boolean getSrcAbsolute() {
-		return srcAbsolute;
-	}
-
-	public void setSrcAbsolute(boolean srcAbsolute) {
+		public void setSrcAbsolute(boolean srcAbsolute) {
 		this.srcAbsolute = srcAbsolute;
-	}
-
-	public String getAddLastModified() {
-		return addLastModified.getLowerName();
 	}
 
 	public void setAddLastModified(String addLastModified) {
 		this.addLastModified = LastModifiedServlet.AddLastModifiedWhen.valueOfLowerName(addLastModified);
-	}
-
-	@Override
-	public Object getWidth() {
-		return width;
 	}
 
 	@Override
@@ -136,18 +106,8 @@ public class ImgTag
 	}
 
 	@Override
-	public Object getHeight() {
-		return height;
-	}
-
-	@Override
 	public void setHeight(Object height) {
 		this.height = height;
-	}
-
-	@Override
-	public Object getAlt() {
-		return alt;
 	}
 
 	@Override
@@ -156,28 +116,13 @@ public class ImgTag
 	}
 
 	@Override
-	public Object getTitle() {
-		return title;
-	}
-
-	@Override
 	public void setTitle(Object title) {
 		this.title = title;
 	}
 
 	@Override
-	public Object getClazz() {
-		return clazz;
-	}
-
-	@Override
 	public void setClazz(Object clazz) {
 		this.clazz = clazz;
-	}
-
-	@Override
-	public Object getStyle() {
-		return style;
 	}
 
 	@Override

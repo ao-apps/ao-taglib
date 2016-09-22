@@ -29,7 +29,5 @@ package com.aoindustries.taglib;
  */
 public interface ValueAttribute {
 
-	Object getValue();
-
 	void setValue(Object value);
 }

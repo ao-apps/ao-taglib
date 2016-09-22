@@ -22,11 +22,11 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import static com.aoindustries.encoding.TextInXhtmlEncoder.textInXhtmlEncoder;
 import com.aoindustries.io.buffer.BufferResult;
-import com.aoindustries.encoding.Coercion;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
@@ -59,29 +59,14 @@ public class OptionTag
 	}
 
 	@Override
-	public Object getValue() {
-		return value;
-	}
-
-	@Override
 	public void setValue(Object value) {
 		this.valueSet = true;
 		this.value = value;
 	}
 
 	@Override
-	public boolean isSelected() {
-		return selected;
-	}
-
-	@Override
 	public void setSelected(boolean selected) {
 		this.selected = selected;
-	}
-
-	@Override
-	public boolean isDisabled() {
-		return disabled;
 	}
 
 	@Override

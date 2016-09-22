@@ -22,6 +22,8 @@
  */
 package com.aoindustries.taglib;
 
+import javax.servlet.jsp.JspTagException;
+
 /**
  * Something with a content attribute.
  *
@@ -29,7 +31,5 @@ package com.aoindustries.taglib;
  */
 public interface ContentAttribute {
 
-	Object getContent();
-
-	void setContent(Object content);
+	void setContent(Object content) throws JspTagException;
 }

@@ -29,7 +29,5 @@ package com.aoindustries.taglib;
  */
 public interface HeightAttribute {
 
-	Object getHeight();
-
 	void setHeight(Object height);
 }

@@ -53,18 +53,8 @@ public class ParamTag
 	}
 
 	@Override
-	public Object getName() {
-		return name;
-	}
-
-	@Override
 	public void setName(Object name) {
 		this.name = name;
-	}
-
-	@Override
-	public Object getValue() {
-		return value;
 	}
 
 	@Override

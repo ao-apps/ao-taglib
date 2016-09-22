@@ -44,6 +44,18 @@ public class GetStackTracesTag extends AutoEncodingNullTag {
 		return MediaType.TEXT;
 	}
 
+	public void setScope(String scope) {
+		this.scope = scope;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setProperty(String property) {
+		this.property = property;
+	}
+
 	@Override
 	protected void doTag(Writer out) throws JspTagException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
@@ -54,47 +66,5 @@ public class GetStackTracesTag extends AutoEncodingNullTag {
 
 		// Print the stack traces
 		ErrorPrinter.printStackTraces(throwable, out);
-	}
-
-	/**
-	 * @return the scope
-	 */
-	public String getScope() {
-		return scope;
-	}
-
-	/**
-	 * @param scope the scope to set
-	 */
-	public void setScope(String scope) {
-		this.scope = scope;
-	}
-
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	/**
-	 * @return the property
-	 */
-	public String getProperty() {
-		return property;
-	}
-
-	/**
-	 * @param property the property to set
-	 */
-	public void setProperty(String property) {
-		this.property = property;
 	}
 }

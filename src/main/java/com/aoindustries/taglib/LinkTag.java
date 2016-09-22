@@ -26,7 +26,6 @@ import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
-import com.aoindustries.net.EmptyParameters;
 import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.net.MutableHttpParameters;
@@ -95,18 +94,8 @@ public class LinkTag
 	}
 
 	@Override
-	public String getHref() {
-		return href;
-	}
-
-	@Override
 	public void setHref(String href) {
 		this.href = href;
-	}
-
-	@Override
-	public HttpParameters getParams() {
-		return params==null ? EmptyParameters.getInstance() : params;
 	}
 
 	@Override
@@ -115,25 +104,12 @@ public class LinkTag
 		params.addParameter(name, value);
 	}
 
-	public boolean getHrefAbsolute() {
-		return hrefAbsolute;
-	}
-
 	public void setHrefAbsolute(boolean hrefAbsolute) {
 		this.hrefAbsolute = hrefAbsolute;
 	}
 
-	public String getAddLastModified() {
-		return addLastModified.getLowerName();
-	}
-
 	public void setAddLastModified(String addLastModified) {
 		this.addLastModified = LastModifiedServlet.AddLastModifiedWhen.valueOfLowerName(addLastModified);
-	}
-
-	@Override
-	public Object getHreflang() {
-		return hreflang;
 	}
 
 	@Override
@@ -142,18 +118,8 @@ public class LinkTag
 	}
 
 	@Override
-	public Object getRel() {
-		return rel;
-	}
-
-	@Override
 	public void setRel(Object rel) {
 		this.rel = rel;
-	}
-
-	@Override
-	public Object getType() {
-		return type;
 	}
 
 	@Override
@@ -161,17 +127,8 @@ public class LinkTag
 		this.type = type;
 	}
 
-	public String getMedia() {
-		return media;
-	}
-
 	public void setMedia(String media) {
 		this.media = media;
-	}
-
-	@Override
-	public Object getTitle() {
-		return title;
 	}
 
 	@Override

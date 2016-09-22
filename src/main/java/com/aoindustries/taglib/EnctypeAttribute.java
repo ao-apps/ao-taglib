@@ -29,7 +29,5 @@ package com.aoindustries.taglib;
  */
 public interface EnctypeAttribute {
 
-	Object getEnctype();
-
 	void setEnctype(Object enctype);
 }

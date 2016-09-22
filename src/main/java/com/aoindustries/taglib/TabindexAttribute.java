@@ -29,7 +29,5 @@ package com.aoindustries.taglib;
  */
 public interface TabindexAttribute {
 
-	int getTabindex();
-
 	void setTabindex(int tabindex);
 }

@@ -29,7 +29,5 @@ package com.aoindustries.taglib;
  */
 public interface AltAttribute {
 
-	Object getAlt();
-
 	void setAlt(Object alt);
 }

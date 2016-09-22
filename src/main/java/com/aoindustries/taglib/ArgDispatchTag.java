@@ -47,16 +47,10 @@ abstract class ArgDispatchTag
 	 */
 	private static final String ARG_ATTRIBUTE_PREFIX = Dispatcher.ARG_MAP_REQUEST_ATTRIBUTE_NAME + ".";
 
-	private String clearParams = null;
 	private WildcardPatternMatcher clearParamsMatcher = WildcardPatternMatcher.getMatchNone();
 	private Map<String,Object> args;
 
-	public String getClearParams() {
-		return clearParams;
-	}
-
 	public void setClearParams(String clearParams) {
-		this.clearParams = clearParams;
 		this.clearParamsMatcher = WildcardPatternMatcher.getInstance(clearParams);
 	}
 
@@ -66,7 +60,7 @@ abstract class ArgDispatchTag
 	}
 
 	@Override
-	public Map<String,?> getArgs() {
+	protected Map<String,?> getArgs() {
 		if(args==null) return Collections.emptyMap();
 		return Collections.unmodifiableMap(args);
 	}

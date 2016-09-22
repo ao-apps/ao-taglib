@@ -45,21 +45,20 @@ public class ATagBeanInfo extends SimpleBeanInfo {
 					props = new PropertyDescriptor[] {
 						// From base class: new PropertyDescriptor("contentType", ATag.class, "getContentType", null),
 						// From base class: new PropertyDescriptor("outputType", ATag.class, "getOutputType", null),
-						new PropertyDescriptor("id", ATag.class),
-						new PropertyDescriptor("href", ATag.class),
-						new PropertyDescriptor("params", ATag.class, "getParams", null),
-						new PropertyDescriptor("hrefAbsolute", ATag.class),
-						new PropertyDescriptor("addLastModified", ATag.class),
-						new PropertyDescriptor("hreflang", ATag.class),
-						new PropertyDescriptor("rel", ATag.class),
-						new PropertyDescriptor("type", ATag.class),
-						new PropertyDescriptor("target", ATag.class),
-						new PropertyDescriptor("title", ATag.class),
-						new PropertyDescriptor("class", ATag.class, "getClazz", "setClazz"),
-						new PropertyDescriptor("style", ATag.class),
-						new PropertyDescriptor("onclick", ATag.class),
-						new PropertyDescriptor("onmouseover", ATag.class),
-						new PropertyDescriptor("onmouseout", ATag.class)
+						new PropertyDescriptor("id", ATag.class, null, "setId"),
+						new PropertyDescriptor("href", ATag.class, null, "setHref"),
+						new PropertyDescriptor("hrefAbsolute", ATag.class, null, "setHrefAbsolute"),
+						new PropertyDescriptor("addLastModified", ATag.class, null, "setAddLastModified"),
+						new PropertyDescriptor("hreflang", ATag.class, null, "setHreflang"),
+						new PropertyDescriptor("rel", ATag.class, null, "setRel"),
+						new PropertyDescriptor("type", ATag.class, null, "setType"),
+						new PropertyDescriptor("target", ATag.class, null, "setTarget"),
+						new PropertyDescriptor("title", ATag.class, null, "setTitle"),
+						new PropertyDescriptor("class", ATag.class, null, "setClazz"),
+						new PropertyDescriptor("style", ATag.class, null, "setStyle"),
+						new PropertyDescriptor("onclick", ATag.class, null, "setOnclick"),
+						new PropertyDescriptor("onmouseover", ATag.class, null, "setOnmouseover"),
+						new PropertyDescriptor("onmouseout", ATag.class, null, "setOnmouseout")
 					};
 					properties = props;
 				}

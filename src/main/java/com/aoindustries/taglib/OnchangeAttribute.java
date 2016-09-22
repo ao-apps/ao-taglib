@@ -29,7 +29,5 @@ package com.aoindustries.taglib;
  */
 public interface OnchangeAttribute {
 
-	Object getOnchange();
-
 	void setOnchange(Object onchange);
 }

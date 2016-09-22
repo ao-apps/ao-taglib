@@ -27,8 +27,6 @@ import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import com.aoindustries.io.buffer.BufferResult;
-import com.aoindustries.net.EmptyParameters;
-import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
@@ -50,7 +48,6 @@ public class ScriptTag
 		ParamsAttribute
 {
 
-	private Object type = MediaType.JAVASCRIPT;
 	private MediaType mediaType = MediaType.JAVASCRIPT;
 	private String src;
 	private HttpParametersMap params;
@@ -68,11 +65,6 @@ public class ScriptTag
 	}
 
 	@Override
-	public Object getType() {
-		return type;
-	}
-
-	@Override
 	public void setType(Object type) throws JspTagException {
 		try {
 			MediaType newMediaType =
@@ -81,16 +73,10 @@ public class ScriptTag
 				: MediaType.getMediaTypeForContentType(Coercion.toString(type))
 			;
 			if(newMediaType!=MediaType.JAVASCRIPT) throw new MediaException(ApplicationResources.accessor.getMessage("ScriptTag.unsupportedMediaType", newMediaType));
-			this.type = type;
 			this.mediaType = newMediaType;
 		} catch(MediaException e) {
 			throw new JspTagException(e);
 		}
-	}
-
-	@Override
-	public String getSrc() {
-		return src;
 	}
 
 	@Override
@@ -99,26 +85,13 @@ public class ScriptTag
 	}
 
 	@Override
-	public HttpParameters getParams() {
-		return params==null ? EmptyParameters.getInstance() : params;
-	}
-
-	@Override
 	public void addParam(String name, String value) {
 		if(params==null) params = new HttpParametersMap();
 		params.addParameter(name, value);
 	}
 
-	public boolean getSrcAbsolute() {
-		return srcAbsolute;
-	}
-
 	public void setSrcAbsolute(boolean srcAbsolute) {
 		this.srcAbsolute = srcAbsolute;
-	}
-
-	public String getAddLastModified() {
-		return addLastModified.getLowerName();
 	}
 
 	public void setAddLastModified(String addLastModified) {

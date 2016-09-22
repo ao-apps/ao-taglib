@@ -23,8 +23,6 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.io.NullWriter;
-import com.aoindustries.net.EmptyParameters;
-import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.servlet.http.Dispatcher;
 import com.aoindustries.servlet.http.ServletUtil;
@@ -160,21 +158,11 @@ abstract public class DispatchTag
 	protected HttpParametersMap params;
 
 	@Override
-	public String getPage() {
-		return page;
-	}
-
-	@Override
 	public void setPage(String page) {
 		this.page = page;
 	}
 
 	abstract protected WildcardPatternMatcher getClearParamsMatcher();
-
-	@Override
-	public HttpParameters getParams() {
-		return params==null ? EmptyParameters.getInstance() : params;
-	}
 
 	@Override
 	public void addParam(String name, String value) {

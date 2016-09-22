@@ -22,12 +22,12 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.encoding.Coercion;
 import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaScriptInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import static com.aoindustries.encoding.TextInXhtmlEncoder.textInXhtmlEncoder;
 import com.aoindustries.io.buffer.BufferResult;
-import com.aoindustries.encoding.Coercion;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspTagException;
@@ -68,18 +68,8 @@ public class TextareaTag
 	}
 
 	@Override
-	public Object getName() {
-		return name;
-	}
-
-	@Override
 	public void setName(Object name) {
 		this.name = name;
-	}
-
-	@Override
-	public Object getValue() {
-		return value;
 	}
 
 	@Override
@@ -88,18 +78,8 @@ public class TextareaTag
 	}
 
 	@Override
-	public int getCols() {
-		return cols;
-	}
-
-	@Override
 	public void setCols(int cols) {
 		this.cols = cols;
-	}
-
-	@Override
-	public int getRows() {
-		return rows;
 	}
 
 	@Override
@@ -108,18 +88,8 @@ public class TextareaTag
 	}
 
 	@Override
-	public boolean isReadonly() {
-		return readonly;
-	}
-
-	@Override
 	public void setReadonly(boolean readonly) {
 		this.readonly = readonly;
-	}
-
-	@Override
-	public boolean isDisabled() {
-		return disabled;
 	}
 
 	@Override
@@ -128,18 +98,8 @@ public class TextareaTag
 	}
 
 	@Override
-	public Object getOnchange() {
-		return onchange;
-	}
-
-	@Override
 	public void setOnchange(Object onchange) {
 		this.onchange = onchange;
-	}
-
-	@Override
-	public Object getStyle() {
-		return style;
 	}
 
 	@Override

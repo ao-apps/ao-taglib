@@ -29,7 +29,5 @@ package com.aoindustries.taglib;
  */
 public interface StyleAttribute {
 
-	Object getStyle();
-
 	void setStyle(Object style);
 }
