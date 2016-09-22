@@ -51,7 +51,7 @@ public class ImgTagBeanInfo extends SimpleBeanInfo {
 					new PropertyDescriptor("height", ImgTag.class, null, "setHeight"),
 					new PropertyDescriptor("alt", ImgTag.class, null, "setAlt"),
 					new PropertyDescriptor("title", ImgTag.class, null, "setTitle"),
-					new PropertyDescriptor("class", ImgTag.class, null, "setClazz"),
+					new PropertyDescriptor("class", ImgTag.class, "getClazz", "setClazz"),
 					new PropertyDescriptor("style", ImgTag.class, null, "setStyle")
 				};
 				properties = props;

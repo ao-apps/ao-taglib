@@ -54,7 +54,7 @@ public class ATagBeanInfo extends SimpleBeanInfo {
 						new PropertyDescriptor("type", ATag.class, null, "setType"),
 						new PropertyDescriptor("target", ATag.class, null, "setTarget"),
 						new PropertyDescriptor("title", ATag.class, null, "setTitle"),
-						new PropertyDescriptor("class", ATag.class, null, "setClazz"),
+						new PropertyDescriptor("class", ATag.class, "getClazz", "setClazz"),
 						new PropertyDescriptor("style", ATag.class, null, "setStyle"),
 						new PropertyDescriptor("onclick", ATag.class, null, "setOnclick"),
 						new PropertyDescriptor("onmouseover", ATag.class, null, "setOnmouseover"),
