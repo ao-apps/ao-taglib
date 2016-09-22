@@ -22,8 +22,8 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.Coercion;
+import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.buffer.BufferResult;
 import java.io.IOException;
 import java.io.Writer;
@@ -53,18 +53,8 @@ public class ArgTag
 	}
 
 	@Override
-	public Object getName() {
-		return name;
-	}
-
-	@Override
 	public void setName(Object name) {
 		this.name = name;
-	}
-
-	@Override
-	public Object getValue() {
-		return value;
 	}
 
 	@Override

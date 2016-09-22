@@ -29,7 +29,5 @@ package com.aoindustries.taglib;
  */
 public interface DisabledAttribute {
 
-	boolean isDisabled();
-
 	void setDisabled(boolean disabled);
 }

@@ -22,11 +22,11 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.encoding.Coercion;
 import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaScriptInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.buffer.BufferResult;
-import com.aoindustries.encoding.Coercion;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
@@ -68,18 +68,8 @@ public class SelectTag
 	}
 
 	@Override
-	public Object getId() {
-		return id;
-	}
-
-	@Override
 	public void setId(Object id) {
 		this.id = id;
-	}
-
-	@Override
-	public Object getName() {
-		return name;
 	}
 
 	@Override
@@ -88,18 +78,8 @@ public class SelectTag
 	}
 
 	@Override
-	public Object getStyle() {
-		return style;
-	}
-
-	@Override
 	public void setStyle(Object style) {
 		this.style = style;
-	}
-
-	@Override
-	public boolean isDisabled() {
-		return disabled;
 	}
 
 	@Override
@@ -108,18 +88,8 @@ public class SelectTag
 	}
 
 	@Override
-	public Object getOnchange() {
-		return onchange;
-	}
-
-	@Override
 	public void setOnchange(Object onchange) {
 		this.onchange = onchange;
-	}
-
-	@Override
-	public Object getOnfocus() {
-		return onfocus;
 	}
 
 	@Override
@@ -128,18 +98,8 @@ public class SelectTag
 	}
 
 	@Override
-	public Object getOnblur() {
-		return onblur;
-	}
-
-	@Override
 	public void setOnblur(Object onblur) {
 		this.onblur = onblur;
-	}
-
-	@Override
-	public Object getOnkeypress() {
-		return onkeypress;
 	}
 
 	@Override

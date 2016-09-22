@@ -82,27 +82,14 @@ public class RedirectTag
 	private String href;
 	private LastModifiedServlet.AddLastModifiedWhen addLastModified = LastModifiedServlet.AddLastModifiedWhen.AUTO;
 
-	public String getStatusCode() {
-		return statusCode;
-	}
-
 	public void setStatusCode(String statusCode) throws JspTagException {
 		if(!isValidStatusCode(statusCode)) throw new LocalizedJspTagException(ApplicationResources.accessor, "RedirectTag.statusCode.invalid", statusCode);
 		this.statusCode = statusCode;
 	}
 
 	@Override
-	public String getHref() {
-		return href;
-	}
-
-	@Override
 	public void setHref(String href) {
 		this.href = href;
-	}
-
-	public String getAddLastModified() {
-		return addLastModified.getLowerName();
 	}
 
 	public void setAddLastModified(String addLastModified) {

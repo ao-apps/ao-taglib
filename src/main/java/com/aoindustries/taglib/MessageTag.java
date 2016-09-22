@@ -22,9 +22,9 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.encoding.Coercion;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.i18n.ApplicationResourcesAccessor;
@@ -34,7 +34,6 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.BitSet;
-import java.util.Collections;
 import java.util.List;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
@@ -62,17 +61,8 @@ public class MessageTag
 		return mediaType;
 	}
 
-	public String getKey() {
-		return key;
-	}
-
 	public void setKey(String key) {
 		this.key = key;
-	}
-
-	@Override
-	public Object getType() {
-		return type;
 	}
 
 	@Override
@@ -93,15 +83,6 @@ public class MessageTag
 		}
 		this.type = type;
 		this.mediaType = newMediaType;
-	}
-
-	@Override
-	public List<Object> getMessageArgs() {
-		if(messageArgs==null) {
-			return Collections.emptyList();
-		} else {
-			return messageArgs;
-		}
 	}
 
 	@Override

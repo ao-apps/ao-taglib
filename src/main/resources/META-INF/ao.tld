@@ -1686,6 +1686,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
+			<deferred-value>
+				<type>java.lang.Object</type>
+			</deferred-value>
 		</attribute>
 		<attribute>
 			<description>The default value if the resulting value is null.</description>
@@ -1693,6 +1696,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
+			<deferred-value>
+				<type>java.lang.Object</type>
+			</deferred-value>
 		</attribute>
 		<attribute>
 			<description><![CDATA[

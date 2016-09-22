@@ -22,6 +22,8 @@
  */
 package com.aoindustries.taglib;
 
+import javax.servlet.jsp.JspTagException;
+
 /**
  * Something with a name attribute.
  *
@@ -29,7 +31,5 @@ package com.aoindustries.taglib;
  */
 public interface NameAttribute {
 
-	Object getName();
-
-	void setName(Object name);
+	void setName(Object name) throws JspTagException;
 }

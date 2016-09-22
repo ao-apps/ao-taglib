@@ -24,8 +24,6 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.buffer.BufferResult;
-import com.aoindustries.net.EmptyParameters;
-import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.net.HttpParametersUtils;
 import java.io.IOException;
@@ -52,11 +50,6 @@ public class UrlTag extends AutoEncodingBufferedTag implements ParamsAttribute {
 	@Override
 	public MediaType getOutputType() {
 		return MediaType.URL;
-	}
-
-	@Override
-	public HttpParameters getParams() {
-		return params==null ? EmptyParameters.getInstance() : params;
 	}
 
 	@Override

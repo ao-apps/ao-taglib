@@ -22,6 +22,8 @@
  */
 package com.aoindustries.taglib;
 
+import javax.servlet.jsp.JspTagException;
+
 /**
  * Something with an id attribute.
  *
@@ -29,7 +31,5 @@ package com.aoindustries.taglib;
  */
 public interface IdAttribute {
 
-	Object getId();
-
-	void setId(Object id);
+	void setId(Object id) throws JspTagException;
 }

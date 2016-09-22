@@ -22,16 +22,12 @@
  */
 package com.aoindustries.taglib;
 
-import java.util.List;
-
 /**
  * Something with a set of message arguments.
  *
  * @author  AO Industries, Inc.
  */
 public interface MessageArgsAttribute {
-
-	List<Object> getMessageArgs();
 
 	void addMessageArg(Object value);
 }

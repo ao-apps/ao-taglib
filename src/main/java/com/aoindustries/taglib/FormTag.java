@@ -28,8 +28,6 @@ import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.buffer.BufferResult;
-import com.aoindustries.net.EmptyParameters;
-import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.net.MutableHttpParameters;
 import com.aoindustries.servlet.http.Dispatcher;
@@ -93,19 +91,9 @@ public class FormTag
 	}
 
 	@Override
-	public String getMethod() {
-		return method;
-	}
-
-	@Override
 	public void setMethod(String method) throws JspTagException {
 		if(!isValidMethod(method)) throw new LocalizedJspTagException(ApplicationResources.accessor, "FormTag.method.invalid", method);
 		this.method = method;
-	}
-
-	@Override
-	public Object getId() {
-		return id;
 	}
 
 	@Override
@@ -114,18 +102,8 @@ public class FormTag
 	}
 
 	@Override
-	public String getAction() {
-		return action;
-	}
-
-	@Override
 	public void setAction(String action) {
 		this.action = action;
-	}
-
-	@Override
-	public HttpParameters getParams() {
-		return params==null ? EmptyParameters.getInstance() : params;
 	}
 
 	@Override
@@ -135,18 +113,8 @@ public class FormTag
 	}
 
 	@Override
-	public Object getTarget() {
-		return target;
-	}
-
-	@Override
 	public void setTarget(Object target) {
 		this.target = target;
-	}
-
-	@Override
-	public Object getEnctype() {
-		return enctype;
 	}
 
 	@Override
@@ -155,18 +123,8 @@ public class FormTag
 	}
 
 	@Override
-	public Object getStyle() {
-		return style;
-	}
-
-	@Override
 	public void setStyle(Object style) {
 		this.style = style;
-	}
-
-	@Override
-	public Object getOnsubmit() {
-		return onsubmit;
 	}
 
 	@Override

@@ -26,7 +26,6 @@ import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.buffer.BufferResult;
-import com.aoindustries.util.WrappedException;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspTagException;
@@ -41,24 +40,6 @@ public class MetaTag
 		NameAttribute,
 		ContentAttribute
 {
-
-	/**
-	 * Avoid empty string attributes.
-	 */
-	private static Object nullIfEmpty(Object o) {
-		if(o instanceof String) {
-			String s = (String)o;
-			if(s.isEmpty()) return null;
-		} else if(o instanceof BufferResult) {
-			try {
-				BufferResult br = (BufferResult)o;
-				if(br.getLength() == 0) return null;
-			} catch(IOException e) {
-				throw new WrappedException(e);
-			}
-		}
-		return o;
-	}
 
 	private Object name;
 	private Object httpEquiv;
@@ -76,39 +57,37 @@ public class MetaTag
 	}
 
 	@Override
-	public Object getName() {
-		return name;
+	public void setName(Object name) throws JspTagException {
+		try {
+			this.name = Coercion.nullIfEmpty(name);
+		} catch(IOException e) {
+			throw new JspTagException(e);
+		}
+	}
+
+	public void setHttpEquiv(Object httpEquiv) throws JspTagException {
+		try {
+			this.httpEquiv = Coercion.nullIfEmpty(httpEquiv);
+		} catch(IOException e) {
+			throw new JspTagException(e);
+		}
+	}
+
+	public void setCharset(Object charset) throws JspTagException {
+		try {
+			this.charset = Coercion.nullIfEmpty(charset);
+		} catch(IOException e) {
+			throw new JspTagException(e);
+		}
 	}
 
 	@Override
-	public void setName(Object name) {
-		this.name = nullIfEmpty(name);
-	}
-
-	public Object getHttpEquiv() {
-		return httpEquiv;
-	}
-
-	public void setHttpEquiv(Object httpEquiv) {
-		this.httpEquiv = nullIfEmpty(httpEquiv);
-	}
-
-	public Object getCharset() {
-		return charset;
-	}
-
-	public void setCharset(Object charset) {
-		this.charset = nullIfEmpty(charset);
-	}
-
-	@Override
-	public Object getContent() {
-		return content;
-	}
-
-	@Override
-	public void setContent(Object content) {
-		this.content = nullIfEmpty(content);
+	public void setContent(Object content) throws JspTagException {
+		try {
+			this.content = Coercion.nullIfEmpty(content);
+		} catch(IOException e) {
+			throw new JspTagException(e);
+		}
 	}
 
 	@Override

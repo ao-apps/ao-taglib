@@ -28,8 +28,6 @@ import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import static com.aoindustries.encoding.TextInXhtmlEncoder.encodeTextInXhtml;
 import com.aoindustries.io.buffer.BufferResult;
-import com.aoindustries.net.EmptyParameters;
-import com.aoindustries.net.HttpParameters;
 import com.aoindustries.net.HttpParametersMap;
 import com.aoindustries.net.MutableHttpParameters;
 import com.aoindustries.servlet.http.Dispatcher;
@@ -95,23 +93,12 @@ public class ATag
 	}
 
 	@Override
-	public Object getId() {
-		return id;
-	}
-
-	@Override
-	public void setId(Object id) {
+	public void setId(Object id) throws JspTagException {
 		try {
-			// JSP EL converts nulls to empty string
-			this.id = Coercion.isEmpty(id) ? null : id;
+			this.id = Coercion.nullIfEmpty(id);
 		} catch(IOException e) {
-			throw new WrappedException(e);
+			throw new JspTagException(e);
 		}
-	}
-
-	@Override
-	public String getHref() {
-		return href;
 	}
 
 	@Override
@@ -120,35 +107,17 @@ public class ATag
 	}
 
 	@Override
-	public HttpParameters getParams() {
-		return params==null ? EmptyParameters.getInstance() : params;
-	}
-
-	@Override
 	public void addParam(String name, String value) {
 		if(params==null) params = new HttpParametersMap();
 		params.addParameter(name, value);
-	}
-
-	public boolean getHrefAbsolute() {
-		return hrefAbsolute;
 	}
 
 	public void setHrefAbsolute(boolean hrefAbsolute) {
 		this.hrefAbsolute = hrefAbsolute;
 	}
 
-	public String getAddLastModified() {
-		return addLastModified.getLowerName();
-	}
-
 	public void setAddLastModified(String addLastModified) {
 		this.addLastModified = LastModifiedServlet.AddLastModifiedWhen.valueOfLowerName(addLastModified);
-	}
-
-	@Override
-	public Object getHreflang() {
-		return hreflang;
 	}
 
 	@Override
@@ -157,18 +126,8 @@ public class ATag
 	}
 
 	@Override
-	public Object getRel() {
-		return rel;
-	}
-
-	@Override
 	public void setRel(Object rel) {
 		this.rel = rel;
-	}
-
-	@Override
-	public Object getType() {
-		return type;
 	}
 
 	@Override
@@ -177,18 +136,8 @@ public class ATag
 	}
 
 	@Override
-	public Object getTarget() {
-		return target;
-	}
-
-	@Override
 	public void setTarget(Object target) {
 		this.target = target;
-	}
-
-	@Override
-	public Object getTitle() {
-		return title;
 	}
 
 	@Override
@@ -197,23 +146,12 @@ public class ATag
 	}
 
 	@Override
-	public Object getClazz() {
-		return clazz;
-	}
-
-	@Override
 	public void setClazz(Object clazz) {
 		try {
-			// JSP EL converts nulls to empty string
-			this.clazz = Coercion.isEmpty(clazz) ? null : clazz;
+			this.clazz = Coercion.nullIfEmpty(clazz);
 		} catch(IOException e) {
 			throw new WrappedException(e);
 		}
-	}
-
-	@Override
-	public Object getStyle() {
-		return style;
 	}
 
 	@Override
@@ -222,28 +160,13 @@ public class ATag
 	}
 
 	@Override
-	public Object getOnclick() {
-		return onclick;
-	}
-
-	@Override
 	public void setOnclick(Object onclick) {
 		this.onclick = onclick;
 	}
 
 	@Override
-	public Object getOnmouseover() {
-		return onmouseover;
-	}
-
-	@Override
 	public void setOnmouseover(Object onmouseover) {
 		this.onmouseover = onmouseover;
-	}
-
-	@Override
-	public Object getOnmouseout() {
-		return onmouseout;
 	}
 
 	@Override

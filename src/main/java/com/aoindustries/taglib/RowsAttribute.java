@@ -29,7 +29,5 @@ package com.aoindustries.taglib;
  */
 public interface RowsAttribute {
 
-	int getRows();
-
 	void setRows(int rows);
 }

@@ -22,9 +22,9 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.encoding.Coercion;
 import com.aoindustries.io.Writable;
 import com.aoindustries.util.i18n.BundleLookupMarkup;
 import com.aoindustries.util.i18n.BundleLookupThreadContext;
@@ -53,26 +53,12 @@ public class OutTag
 	}
 
 	@Override
-	public Object getValue() {
-		return value;
-	}
-
-	@Override
 	public void setValue(Object value) {
 		this.value = value;
 	}
 
-	public Object getDefault() {
-		return def;
-	}
-
 	public void setDefault(Object def) {
 		this.def = def;
-	}
-
-	@Override
-	public Object getType() {
-		return type;
 	}
 
 	@Override

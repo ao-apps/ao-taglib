@@ -22,16 +22,12 @@
  */
 package com.aoindustries.taglib;
 
-import java.util.Map;
-
 /**
  * Something with a set of arguments.
  *
  * @author  AO Industries, Inc.
  */
 public interface ArgsAttribute {
-
-	Map<String,?> getArgs();
 
 	void addArg(String name, Object value) throws IllegalArgumentException;
 }

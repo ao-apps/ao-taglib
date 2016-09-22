@@ -54,10 +54,6 @@ public class BundleTag
 	private ApplicationResourcesAccessor accessor; // Set along with basename
 	private String prefix;
 
-	public String getBasename() {
-		return basename;
-	}
-
 	public ApplicationResourcesAccessor getAccessor() {
 		return accessor;
 	}

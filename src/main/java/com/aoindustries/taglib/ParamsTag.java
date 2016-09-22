@@ -54,17 +54,8 @@ public class ParamsTag
 	}
 
 	@Override
-	public Object getName() {
-		return name;
-	}
-
-	@Override
 	public void setName(Object name) {
 		this.name = name;
-	}
-
-	public String getExclude() {
-		return exclude;
 	}
 
 	public void setExclude(String exclude) {

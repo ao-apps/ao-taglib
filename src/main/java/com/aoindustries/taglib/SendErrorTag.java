@@ -51,16 +51,8 @@ public class SendErrorTag extends AutoEncodingBufferedTag {
 		return null;
 	}
 
-	public int getStatus() {
-		return status;
-	}
-
 	public void setStatus(int status) {
 		this.status = status;
-	}
-
-	public String getMessage() {
-		return message;
 	}
 
 	public void setMessage(String message) {

@@ -43,17 +43,16 @@ public class ImgTagBeanInfo extends SimpleBeanInfo {
 				props = new PropertyDescriptor[] {
 					// From base class: new PropertyDescriptor("contentType", ImgTag.class, "getContentType", null),
 					// From base class: new PropertyDescriptor("outputType", ImgTag.class, "getOutputType", null),
-					new PropertyDescriptor("id", ImgTag.class),
-					new PropertyDescriptor("src", ImgTag.class),
-					new PropertyDescriptor("params", ImgTag.class, "getParams", null),
-					new PropertyDescriptor("srcAbsolute", ImgTag.class),
-					new PropertyDescriptor("addLastModified", ImgTag.class),
-					new PropertyDescriptor("width", ImgTag.class),
-					new PropertyDescriptor("height", ImgTag.class),
-					new PropertyDescriptor("alt", ImgTag.class),
-					new PropertyDescriptor("title", ImgTag.class),
-					new PropertyDescriptor("class", ImgTag.class, "getClazz", "setClazz"),
-					new PropertyDescriptor("style", ImgTag.class)
+					new PropertyDescriptor("id", ImgTag.class, null, "setId"),
+					new PropertyDescriptor("src", ImgTag.class, null, "setSrc"),
+					new PropertyDescriptor("srcAbsolute", ImgTag.class, null, "setSrcAbsolute"),
+					new PropertyDescriptor("addLastModified", ImgTag.class, null, "setAddLastModified"),
+					new PropertyDescriptor("width", ImgTag.class, null, "setWidth"),
+					new PropertyDescriptor("height", ImgTag.class, null, "setHeight"),
+					new PropertyDescriptor("alt", ImgTag.class, null, "setAlt"),
+					new PropertyDescriptor("title", ImgTag.class, null, "setTitle"),
+					new PropertyDescriptor("class", ImgTag.class, null, "setClazz"),
+					new PropertyDescriptor("style", ImgTag.class, null, "setStyle")
 				};
 				properties = props;
 			}

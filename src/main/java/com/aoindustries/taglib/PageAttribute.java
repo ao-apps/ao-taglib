@@ -29,7 +29,5 @@ package com.aoindustries.taglib;
  */
 public interface PageAttribute {
 
-	String getPage();
-
 	void setPage(String page);
 }

@@ -22,8 +22,6 @@
  */
 package com.aoindustries.taglib;
 
-import java.util.Collection;
-
 /**
  * Something that captures meta data instead of meta data being written directly
  * where the MetaTag is placed.
@@ -31,8 +29,6 @@ import java.util.Collection;
  * @author  AO Industries, Inc.
  */
 public interface MetasAttribute {
-
-	Collection<Meta> getMetas();
 
 	void addMeta(Meta meta);
 }
