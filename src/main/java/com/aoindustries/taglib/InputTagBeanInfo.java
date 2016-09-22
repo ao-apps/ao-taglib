@@ -56,7 +56,7 @@ public class InputTagBeanInfo extends SimpleBeanInfo {
 					new PropertyDescriptor("maxlength", InputTag.class, null, "setMaxlength"),
 					new PropertyDescriptor("readonly", InputTag.class, null, "setReadonly"),
 					new PropertyDescriptor("disabled", InputTag.class, null, "setDisabled"),
-					new PropertyDescriptor("class", InputTag.class, null, "setClazz"),
+					new PropertyDescriptor("class", InputTag.class, "getClazz", "setClazz"),
 					new PropertyDescriptor("style", InputTag.class, null, "setStyle"),
 					new PropertyDescriptor("checked", InputTag.class, null, "setChecked"),
 					new PropertyDescriptor("tabindex", InputTag.class, null, "setTabindex")

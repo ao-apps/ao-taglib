@@ -29,5 +29,11 @@ package com.aoindustries.taglib;
  */
 public interface ClassAttribute {
 
+	/**
+	 * Getter required because without it, we get the exception:
+	 * <pre>Unable to find setter method for attribute: class</pre>
+	 */
+	Object getClazz();
+
 	void setClazz(Object clazz);
 }

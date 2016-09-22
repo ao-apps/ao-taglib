@@ -146,6 +146,11 @@ public class ATag
 	}
 
 	@Override
+	public Object getClazz() {
+		return clazz;
+	}
+
+	@Override
 	public void setClazz(Object clazz) {
 		try {
 			this.clazz = Coercion.nullIfEmpty(clazz);

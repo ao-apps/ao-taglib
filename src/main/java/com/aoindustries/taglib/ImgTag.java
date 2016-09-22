@@ -121,6 +121,11 @@ public class ImgTag
 	}
 
 	@Override
+	public Object getClazz() {
+		return clazz;
+	}
+
+	@Override
 	public void setClazz(Object clazz) {
 		this.clazz = clazz;
 	}
