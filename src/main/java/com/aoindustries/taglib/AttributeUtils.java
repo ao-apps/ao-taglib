@@ -22,6 +22,8 @@
  */
 package com.aoindustries.taglib;
 
+import javax.el.ELContext;
+import javax.el.ValueExpression;
 import javax.servlet.jsp.tagext.JspTag;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
@@ -40,6 +42,16 @@ public final class AttributeUtils  {
 		T parent = clazz.cast(SimpleTagSupport.findAncestorWithClass(from, clazz));
 		if(parent==null) throw new NeedAttributeParentException(fromTagName, attribute);
 		return parent;
+	}
+
+	/**
+	 * Casts or evaluates an expression then casts to the provided type.
+	 */
+	public static <T> T resolveValue(Object value, Class<T> type, ELContext elContext) {
+		if(value instanceof ValueExpression) {
+			value = ((ValueExpression)value).getValue(elContext);
+		}
+		return type.cast(value);
 	}
 
 	/**
