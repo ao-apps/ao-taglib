@@ -244,6 +244,37 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
+			Evaluates the test expression, if it is not true throws
+			AssertionError with the optional message.
+		]]></description>
+		<name>assert</name>
+		<tag-class>com.aoindustries.taglib.AssertTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<description><![CDATA[
+				The condition to be evaluated.  This condition is always evaluated
+				regardless whether Java asserts are enabled or disabled.
+			]]></description>
+			<name>test</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				The message included in the AssertionError, only evaluted as-needed due to
+				use of deferred expressions.
+			]]></description>
+			<name>message</name>
+			<required>false</required>
+			<deferred-value>
+				<type>java.lang.String</type>
+			</deferred-value>
+		</attribute>
+		<example />
+	</tag>
+	<tag>
+		<description><![CDATA[
 			<p>
 				Adds a base tag only when necessary.
 			</p>
@@ -2479,7 +2510,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 		<attribute>
 			<description><![CDATA[
-				The condition to be evaluated, only executed as-needed due to
+				The condition to be evaluated, only evaluated as-needed due to
 				use of deferred expressions.
 			]]></description>
 			<name>test</name>
