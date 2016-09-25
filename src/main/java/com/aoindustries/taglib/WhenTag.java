@@ -22,20 +22,19 @@
  */
 package com.aoindustries.taglib;
 
-import java.io.IOException;
 import javax.el.ValueExpression;
-import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
-import javax.servlet.jsp.tagext.JspFragment;
 import javax.servlet.jsp.tagext.JspTag;
-import javax.servlet.jsp.tagext.SimpleTagSupport;
+import javax.servlet.jsp.tagext.TagSupport;
 
 /**
  * @author  AO Industries, Inc.
  */
 public class WhenTag
-	extends SimpleTagSupport
+	extends TagSupport
 {
+
+	private static final long serialVersionUID = 1L;
 
 	private ValueExpression test;
 	public void setTest(ValueExpression test) {
@@ -43,22 +42,21 @@ public class WhenTag
 	}
 
 	@Override
-	public void doTag() throws JspException, IOException {
+	public int doStartTag() throws JspTagException {
 		JspTag parent = getParent();
 		if(!(parent instanceof ChooseTag)) {
 			throw new JspTagException("<ao:when> must be directly nested within <ao:choose>");
 		}
 		ChooseTag chooseTag = (ChooseTag)parent;
 		chooseTag.onWhen();
-		if(!chooseTag.getMatched()) {
-			Boolean matched = (Boolean)test.getValue(getJspContext().getELContext());
-			if(matched != null && matched) {
-				chooseTag.setMatched();
-				JspFragment body = getJspBody();
-				if(body != null) {
-					body.invoke(null);
-				}
-			}
+		if(chooseTag.getMatched()) {
+			return SKIP_BODY;
 		}
+		Boolean matched = (Boolean)test.getValue(pageContext.getELContext());
+		if(matched != null && matched) {
+			chooseTag.setMatched();
+			return EVAL_BODY_INCLUDE;
+		}
+		return SKIP_BODY;
 	}
 }
