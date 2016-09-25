@@ -45,13 +45,27 @@ public final class AttributeUtils  {
 	}
 
 	/**
+	 * Evaluates an expression then casts to the provided type.
+	 */
+	public static <T> T resolveValue(ValueExpression expression, Class<T> type, ELContext elContext) {
+		if(expression == null) {
+			return null;
+		} else {
+			return type.cast(expression.getValue(elContext));
+		}
+	}
+
+	/**
 	 * Casts or evaluates an expression then casts to the provided type.
 	 */
 	public static <T> T resolveValue(Object value, Class<T> type, ELContext elContext) {
-		if(value instanceof ValueExpression) {
-			value = ((ValueExpression)value).getValue(elContext);
+		if(value == null) {
+			return null;
+		} else if(value instanceof ValueExpression) {
+			return resolveValue((ValueExpression)value, type, elContext);
+		} else {
+			return type.cast(value);
 		}
-		return type.cast(value);
 	}
 
 	/**
