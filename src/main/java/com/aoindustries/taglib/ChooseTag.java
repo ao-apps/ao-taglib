@@ -47,8 +47,8 @@ public class ChooseTag
 		if(body != null) {
 			body.invoke(null);
 		}
-		if(!hasWhen && !hasOtherwise) {
-			throw new JspTagException("<ao:choose> requires at least one nested <ao:when> or <ao:otherwise>");
+		if(!hasWhen) {
+			throw new JspTagException("<ao:choose> requires at least one nested <ao:when>");
 		}
 	}
 
