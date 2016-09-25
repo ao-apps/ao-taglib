@@ -338,11 +338,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			Like &lt;c:choose&gt;, except uses deferred expressions and is scriptless.
+			Like &lt;c:choose&gt;, except uses deferred expressions.
 		]]></description>
 		<name>choose</name>
 		<tag-class>com.aoindustries.taglib.ChooseTag</tag-class>
-		<body-content>scriptless</body-content>
+		<body-content>JSP</body-content>
 		<example />
 	</tag>
 	<tag>
@@ -1700,11 +1700,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			Like &lt;c:otherwise&gt;, except uses deferred expressions and is scriptless.
+			Like &lt;c:otherwise&gt;, except uses deferred expressions.
 		]]></description>
 		<name>otherwise</name>
 		<tag-class>com.aoindustries.taglib.OtherwiseTag</tag-class>
-		<body-content>scriptless</body-content>
+		<body-content>JSP</body-content>
 		<example />
 	</tag>
 	<tag>
@@ -2503,11 +2503,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			Like &lt;c:when&gt;, except uses deferred expressions and is scriptless.
+			Like &lt;c:when&gt;, except uses deferred expressions.
 		]]></description>
 		<name>when</name>
 		<tag-class>com.aoindustries.taglib.WhenTag</tag-class>
-		<body-content>scriptless</body-content>
+		<body-content>JSP</body-content>
 		<attribute>
 			<description><![CDATA[
 				The condition to be evaluated, only evaluated as-needed due to

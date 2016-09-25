@@ -22,33 +22,27 @@
  */
 package com.aoindustries.taglib;
 
-import java.io.IOException;
-import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
-import javax.servlet.jsp.tagext.JspFragment;
 import javax.servlet.jsp.tagext.JspTag;
-import javax.servlet.jsp.tagext.SimpleTagSupport;
+import javax.servlet.jsp.tagext.TagSupport;
 
 /**
  * @author  AO Industries, Inc.
  */
 public class OtherwiseTag
-	extends SimpleTagSupport
+	extends TagSupport
 {
 
+	private static final long serialVersionUID = 1L;
+
 	@Override
-	public void doTag() throws JspException, IOException {
+	public int doStartTag() throws JspTagException {
 		JspTag parent = getParent();
 		if(!(parent instanceof ChooseTag)) {
 			throw new JspTagException("<ao:otherwise> must be directly nested within <ao:choose>");
 		}
 		ChooseTag chooseTag = (ChooseTag)parent;
 		chooseTag.onOtherwise();
-		if(!chooseTag.getMatched()) {
-			JspFragment body = getJspBody();
-			if(body != null) {
-				body.invoke(null);
-			}
-		}
+		return chooseTag.getMatched() ? SKIP_BODY : EVAL_BODY_INCLUDE;
 	}
 }

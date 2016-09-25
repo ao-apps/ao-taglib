@@ -22,34 +22,35 @@
  */
 package com.aoindustries.taglib;
 
-import java.io.IOException;
-import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
-import javax.servlet.jsp.tagext.JspFragment;
-import javax.servlet.jsp.tagext.SimpleTagSupport;
+import javax.servlet.jsp.tagext.TagSupport;
 
 /**
  * @author  AO Industries, Inc.
  */
 public class ChooseTag
-	extends SimpleTagSupport
+	extends TagSupport
 {
 
+	private static final long serialVersionUID = 1L;
+
 	private boolean hasWhen;
-
 	private boolean matched;
-
 	private boolean hasOtherwise;
 
+	private void init() {
+		hasWhen = false;
+		matched = false;
+		hasOtherwise = false;
+	}
+
+	public ChooseTag() {
+		init();
+	}
+
 	@Override
-	public void doTag() throws JspException, IOException {
-		JspFragment body = getJspBody();
-		if(body != null) {
-			body.invoke(null);
-		}
-		if(!hasWhen) {
-			throw new JspTagException("<ao:choose> requires at least one nested <ao:when>");
-		}
+	public int doStartTag() {
+		return EVAL_BODY_INCLUDE;
 	}
 
 	void onWhen() throws JspTagException {
@@ -74,6 +75,18 @@ public class ChooseTag
 			throw new JspTagException("Only one <ao:otherwise> allowed");
 		} else {
 			hasOtherwise = true;
+		}
+	}
+
+	@Override
+	public int doEndTag() throws JspTagException {
+		try {
+			if(!hasWhen) {
+				throw new JspTagException("<ao:choose> requires at least one nested <ao:when>");
+			}
+			return EVAL_PAGE;
+		} finally {
+			init();
 		}
 	}
 }
