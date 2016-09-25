@@ -38,6 +38,9 @@ public class WhenTag
 {
 
 	private ValueExpression test;
+	public void setTest(ValueExpression test) {
+		this.test = test;
+	}
 
 	@Override
 	public void doTag() throws JspException, IOException {
