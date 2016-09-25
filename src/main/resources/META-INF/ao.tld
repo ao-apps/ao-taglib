@@ -306,6 +306,15 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<example />
 	</tag>
 	<tag>
+		<description><![CDATA[
+			Like &lt;c:choose&gt;, except uses deferred expressions and is scriptless.
+		]]></description>
+		<name>choose</name>
+		<tag-class>com.aoindustries.taglib.ChooseTag</tag-class>
+		<body-content>scriptless</body-content>
+		<example />
+	</tag>
+	<tag>
 		<description>Provides a class to its ClassAttribute parent tag.</description>
 		<name>class</name>
 		<tag-class>com.aoindustries.taglib.ClassTag</tag-class>
@@ -1660,6 +1669,15 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
+			Like &lt;c:otherwise&gt;, except uses deferred expressions and is scriptless.
+		]]></description>
+		<name>otherwise</name>
+		<tag-class>com.aoindustries.taglib.OtherwiseTag</tag-class>
+		<body-content>scriptless</body-content>
+		<example />
+	</tag>
+	<tag>
+		<description><![CDATA[
 			<p>
 				Writes the value with proper escaping based on the context of the tag.
 			</p>
@@ -2450,6 +2468,26 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>value</name>
 		<tag-class>com.aoindustries.taglib.ValueTag</tag-class>
 		<body-content>scriptless</body-content>
+		<example />
+	</tag>
+	<tag>
+		<description><![CDATA[
+			Like &lt;c:when&gt;, except uses deferred expressions and is scriptless.
+		]]></description>
+		<name>when</name>
+		<tag-class>com.aoindustries.taglib.WhenTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<description><![CDATA[
+				The condition to be evaluated, only executed as-needed due to
+				use of deferred expressions.
+			]]></description>
+			<name>test</name>
+			<required>true</required>
+			<deferred-value>
+				<type>java.lang.Boolean</type>
+			</deferred-value>
+		</attribute>
 		<example />
 	</tag>
 	<tag>
