@@ -33,7 +33,8 @@ import java.beans.SimpleBeanInfo;
  */
 public class ATagBeanInfo extends SimpleBeanInfo {
 
-	private static final Object propertiesLock = new Object();
+	private static class PropertiesLock {}
+	private static final PropertiesLock propertiesLock = new PropertiesLock();
 	private static PropertyDescriptor[] properties;
 
 	@Override
