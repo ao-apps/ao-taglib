@@ -32,8 +32,8 @@ import com.aoindustries.io.TempFileList;
 import com.aoindustries.io.buffer.AutoTempFileWriter;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.io.buffer.BufferWriter;
+import com.aoindustries.io.buffer.CharArrayBufferWriter;
 import com.aoindustries.io.buffer.LoggingWriter;
-import com.aoindustries.io.buffer.SegmentedWriter;
 import com.aoindustries.servlet.filter.TempFileContext;
 import com.aoindustries.util.WrappedException;
 import java.io.BufferedWriter;
@@ -103,6 +103,20 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 	}
 
 	/**
+	 * Creates an instance of the currently preferred {@link BufferWriter}.
+	 * Buffering strategies may change over time as technology develops and
+	 * options become available.
+	 *
+	 * TODO: Auto temp file variant here?
+	 */
+	public static BufferWriter newBufferWriter() {
+		//return new SegmentedWriter();
+		// Is there a way to share buffers, such as allocate 4096 by default from buffer pool,
+		// then give back to pool when possible, such as when grown larger and discarding the old?
+		return new CharArrayBufferWriter();
+	}
+
+	/**
 	 * Gets the type of data that is contained by this tag.
 	 */
 	public abstract MediaType getContentType();
@@ -154,7 +168,7 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 
 			// Capture the body output while validating
 			// BufferWriter bufferWriter = new CharArrayBufferWriter(128, getTempFileThreshold());
-			BufferWriter bufferWriter = new SegmentedWriter();
+			BufferWriter bufferWriter = newBufferWriter();
 			try {
 				// Enable temp files if temp file context active and threshold not Long.MAX_VALUE
 				final long tempFileThreshold = getTempFileThreshold();
