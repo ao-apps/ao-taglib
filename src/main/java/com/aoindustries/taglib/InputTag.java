@@ -97,25 +97,6 @@ public class InputTag
 		return validTypes.contains(type);
 	}
 
-	private Object id;
-	private Object type;
-	private String typeString;
-	private Object name;
-	private Object value;
-	private Object onclick;
-	private Object onchange;
-	private Object onfocus;
-	private Object onblur;
-	private Object onkeypress;
-	private Object size;
-	private Integer maxlength;
-	private boolean readonly;
-	private boolean disabled;
-	private Object clazz;
-	private Object style;
-	private boolean checked;
-	private int tabindex;
-
 	@Override
 	public MediaType getContentType() {
 		return MediaType.TEXT;
@@ -126,11 +107,14 @@ public class InputTag
 		return MediaType.XHTML;
 	}
 
+	private Object id;
 	@Override
 	public void setId(Object id) {
 		this.id = id;
 	}
 
+	private Object type;
+	private String typeString;
 	@Override
 	public void setType(Object type) throws JspTagException {
 		String typeStr = Coercion.toString(type);
@@ -139,61 +123,73 @@ public class InputTag
 		this.typeString = typeStr;
 	}
 
+	private Object name;
 	@Override
 	public void setName(Object name) {
 		this.name = name;
 	}
 
+	private Object value;
 	@Override
 	public void setValue(Object value) {
 		this.value = value;
 	}
 
+	private Object onclick;
 	@Override
 	public void setOnclick(Object onclick) {
 		this.onclick = onclick;
 	}
 
+	private Object onchange;
 	@Override
 	public void setOnchange(Object onchange) {
 		this.onchange = onchange;
 	}
 
+	private Object onfocus;
 	@Override
 	public void setOnfocus(Object onfocus) {
 		this.onfocus = onfocus;
 	}
 
+	private Object onblur;
 	@Override
 	public void setOnblur(Object onblur) {
 		this.onblur = onblur;
 	}
 
+	private Object onkeypress;
 	@Override
 	public void setOnkeypress(Object onkeypress) {
 		this.onkeypress = onkeypress;
 	}
 
+	private Object size;
 	@Override
 	public void setSize(Object size) {
 		this.size = size;
 	}
 
+	private Integer maxlength;
 	@Override
 	public void setMaxlength(Integer maxlength) {
 		this.maxlength = maxlength;
 	}
 
+	private boolean readonly;
 	@Override
 	public void setReadonly(boolean readonly) {
 		this.readonly = readonly;
 	}
 
+	private boolean disabled;
 	@Override
 	public void setDisabled(boolean disabled) {
 		this.disabled = disabled;
 	}
 
+	private Object clazz;
 	@Override
 	public Object getClazz() {
 		return clazz;
@@ -204,19 +200,27 @@ public class InputTag
 		this.clazz = clazz;
 	}
 
+	private Object style;
 	@Override
 	public void setStyle(Object style) {
 		this.style = style;
 	}
 
+	private boolean checked;
 	@Override
 	public void setChecked(boolean checked) {
 		this.checked = checked;
 	}
 
+	private int tabindex;
 	@Override
 	public void setTabindex(int tabindex) {
 		this.tabindex = tabindex;
+	}
+
+	private boolean autocomplete = true;
+	public void setAutocomplete(boolean autocomplete) {
+		this.autocomplete = autocomplete;
 	}
 
 	@Override
@@ -300,6 +304,9 @@ public class InputTag
 			out.write(" tabindex=\"");
 			out.write(Integer.toString(tabindex));
 			out.write('"');
+		}
+		if(!autocomplete) {
+			out.write(" autocomplete=\"off\"");
 		}
 		out.write(" />");
 	}

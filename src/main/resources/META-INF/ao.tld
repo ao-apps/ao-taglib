@@ -1249,6 +1249,20 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<rtexprvalue>true</rtexprvalue>
 			<type>int</type>
 		</attribute>
+		<attribute>
+			<description><![CDATA[
+				Turns on or off the autocomplete for this input.
+				Accepts values of "true" or "false" (not "on" or "off" due to
+				this being a boolean type).
+				If autocomplete is "false", will add the attribute as <code>autocomplete="off"</code>,
+				otherwise the attribute is not added.
+				Defaults to "true" with no attribute added.
+			]]></description>
+			<name>autocomplete</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
 		<example />
 	</tag>
 	<tag>
