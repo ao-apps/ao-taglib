@@ -34,7 +34,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 	<packaging>jar</packaging>
 
 	<name>AO Taglib</name>
-	<url>https://www.aoindustries.com/docs/ao-taglib/</url>
+	<url>https://www.aoindustries.com/ao-taglib/</url>
 	<description>Making JSP what it should have been all along.</description>
 	<inceptionYear>2009</inceptionYear>
 
@@ -243,11 +243,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 							<links>
 								<link>http://docs.oracle.com/javaee/6/api/</link>
 								<link>https://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.3/apidocs/</link>
-								<link>https://www.aoindustries.com/docs/ao-encoding/</link>
-								<link>https://www.aoindustries.com/docs/ao-encoding-servlet/</link>
-								<link>https://www.aoindustries.com/docs/ao-io-buffer/</link>
-								<link>https://www.aoindustries.com/docs/ao-servlet-filter/</link>
-								<link>https://www.aoindustries.com/docs/aocode-public/</link>
+								<link>https://www.aoindustries.com/ao-encoding/apidocs/</link>
+								<link>https://www.aoindustries.com/ao-encoding/servlet/apidocs/</link>
+								<link>https://www.aoindustries.com/ao-io-buffer/apidocs/</link>
+								<link>https://www.aoindustries.com/ao-servlet-filter/apidocs/</link>
+								<link>https://www.aoindustries.com/aocode-public/apidocs/</link>
 							</links>
 						</configuration>
 						<executions>
