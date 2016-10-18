@@ -51,7 +51,6 @@ public class MessageTag
 {
 
 	private String key;
-	private Object type = MediaType.TEXT;
 	private MediaType mediaType = MediaType.TEXT;
 	private BitSet messageArgsSet;
 	private List<Object> messageArgs;
@@ -81,7 +80,6 @@ public class MessageTag
 				}
 			}
 		}
-		this.type = type;
 		this.mediaType = newMediaType;
 	}
 
