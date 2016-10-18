@@ -44,7 +44,6 @@ public class OutTag
 
 	private Object value;
 	private Object def;
-	private Object type = MediaType.TEXT;
 	private MediaType mediaType = MediaType.TEXT;
 
 	@Override
@@ -77,7 +76,6 @@ public class OutTag
 				}
 			}
 		}
-		this.type = type;
 		this.mediaType = newMediaType;
 	}
 

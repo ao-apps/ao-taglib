@@ -1438,6 +1438,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				on its type:
 				<ul>
 					<li>"javascript" or "text/javascript" - no validation</li>
+					<li>"json" or "application/json" - no validation</li>
+					<li>"ld_json" or "application/ls+json" - no validation</li>
 					<li>"text" or "text/plain" - no validation</li>
 					<li>"url" or "text/url" - must be a valid URL</li>
 					<li>"xhtml" or "application/xhtml+xml" - must be well-formed XHTML content. (Note: Currently only checks character values.)</li>
@@ -1732,6 +1734,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				on its type:
 				<ul>
 					<li>"javascript" or "text/javascript" - no validation</li>
+					<li>"json" or "application/json" - no validation</li>
+					<li>"ld_json" or "application/ls+json" - no validation</li>
 					<li>"text" or "text/plain" - no validation</li>
 					<li>"url" or "text/url" - must be a valid URL</li>
 					<li>"xhtml" or "application/xhtml+xml" - must be well-formed XHTML content. (Note: Currently only checks character values.)</li>
@@ -2096,7 +2100,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				Specifies the type of script.
-				The default is "text/javascript", currently the only supported script language.
+				The default is "text/javascript", also allows "application/json" and "application/ld+json".
 				A nested &lt;ao:type&gt; tag will override this value.
 			]]></description>
 			<name>type</name>
@@ -2571,6 +2575,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				on its type:
 				<ul>
 					<li>"javascript" or "text/javascript" - no validation</li>
+					<li>"json" or "application/json" - no validation</li>
+					<li>"ld_json" or "application/ls+json" - no validation</li>
 					<li>"text" or "text/plain" - no validation</li>
 					<li>"url" or "text/url" - must be a valid URL</li>
 					<li>"xhtml" or "application/xhtml+xml" - must be well-formed XHTML content. (Note: Currently only checks character values.)</li>

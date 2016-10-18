@@ -72,7 +72,11 @@ public class ScriptTag
 				? (MediaType)type
 				: MediaType.getMediaTypeForContentType(Coercion.toString(type))
 			;
-			if(newMediaType!=MediaType.JAVASCRIPT) throw new MediaException(ApplicationResources.accessor.getMessage("ScriptTag.unsupportedMediaType", newMediaType));
+			if(
+				newMediaType != MediaType.JAVASCRIPT
+				&& newMediaType != MediaType.JSON
+				&& newMediaType != MediaType.LD_JSON
+			) throw new MediaException(ApplicationResources.accessor.getMessage("ScriptTag.unsupportedMediaType", newMediaType));
 			this.mediaType = newMediaType;
 		} catch(MediaException e) {
 			throw new JspTagException(e);

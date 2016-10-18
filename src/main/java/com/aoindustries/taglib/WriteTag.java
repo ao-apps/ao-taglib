@@ -50,7 +50,6 @@ public class WriteTag
 	private Object name;
 	private String property;
 	private String method = "toString";
-	private Object type = MediaType.TEXT;
 	private MediaType mediaType = MediaType.TEXT;
 
 	@Override
@@ -91,7 +90,6 @@ public class WriteTag
 				}
 			}
 		}
-		this.type = type;
 		this.mediaType = newMediaType;
 	}
 
