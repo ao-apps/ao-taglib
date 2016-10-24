@@ -72,8 +72,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				The href for the link.
 				If starts with a /, the context path will be prepended to the path.
 				Session state URL rewriting is performed as needed.
-				URL Encoding is performed on everything up to the first ? (if present), except for
+				URL Encoding is performed on everything up to the last # or ? (first of the two), except for
 				any character in the set { ':', '/', ';', '#' }
+				To avoid ambiguity, any parameters or anchors in the URL must have been correctly encoded by the caller.
 				A nested &lt;ao:href&gt; tag will override this value.
 			]]></description>
 			<name>href</name>
@@ -754,8 +755,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				The src for the frame content.
 				If starts with a /, the context path will be prepended to the path.
 				Session state URL rewriting is performed as needed.
-				URL Encoding is performed on everything up to the first ? (if present), except for
+				URL Encoding is performed on everything up to the last # or ? (first of the two), except for
 				any character in the set { ':', '/', ';', '#' }
+				To avoid ambiguity, any parameters or anchors in the URL must have been correctly encoded by the caller.
 				A nested &lt;ao:src&gt; tag will override this value.
 				Any directly nested &lt;ao:param&gt; or &lt;ao:params&gt; tag will add parameters to the src.
 			]]></description>
@@ -870,8 +872,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				The src for the image.
 				If starts with a /, the context path will be prepended to the path.
 				Session state URL rewriting is performed as needed.
-				URL Encoding is performed on everything up to the first ? (if present), except for
+				URL Encoding is performed on everything up to the last # or ? (first of the two), except for
 				any character in the set { ':', '/', ';', '#' }
+				To avoid ambiguity, any parameters or anchors in the URL must have been correctly encoded by the caller.
 				A nested &lt;ao:src&gt; tag will override this value.
 				Any directly nested &lt;ao:param&gt; or &lt;ao:params&gt; tag will add parameters to the src.
 			]]></description>
@@ -1302,8 +1305,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				The href for the link.
 				If starts with a /, the context path will be prepended to the path.
 				Session state URL rewriting is performed as needed.
-				URL Encoding is performed on everything up to the first ? (if present), except for
+				URL Encoding is performed on everything up to the last # or ? (first of the two), except for
 				any character in the set { ':', '/', ';', '#' }
+				To avoid ambiguity, any parameters or anchors in the URL must have been correctly encoded by the caller.
 				A nested &lt;ao:href&gt; tag will override this value.
 				Any directly nested &lt;ao:param&gt; or &lt;ao:params&gt; tag will add parameters to the href.
 			]]></description>
@@ -1981,8 +1985,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					If starts with a /, the context path will be prepended to the path.
 					Session state URL rewriting is performed as needed.
-					URL Encoding is performed on everything up to the first ? (if present), except for
+					URL Encoding is performed on everything up to the last # or ? (first of the two), except for
 					any character in the set { ':', '/', ';', '#' }
+					To avoid ambiguity, any parameters or anchors in the URL must have been correctly encoded by the caller.
 				</p>
 				<p>
 					A nested &lt;ao:href&gt; tag will override this value.
@@ -2113,8 +2118,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				The src for the script.
 				If starts with a /, the context path will be prepended to the path.
 				Session state URL rewriting is performed as needed.
-				URL Encoding is performed on everything up to the first ? (if present), except for
+				URL Encoding is performed on everything up to the last # or ? (first of the two), except for
 				any character in the set { ':', '/', ';', '#' }
+				To avoid ambiguity, any parameters or anchors in the URL must have been correctly encoded by the caller.
 				A nested &lt;ao:src&gt; tag will override this value.
 				Any directly nested &lt;ao:param&gt; or &lt;ao:params&gt; tag will add parameters to the src.
 			]]></description>
