@@ -22,8 +22,8 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.MediaEncoder;
 import com.aoindustries.encoding.Coercion;
+import com.aoindustries.encoding.MediaEncoder;
 import com.aoindustries.io.Writable;
 import com.aoindustries.util.i18n.BundleLookupMarkup;
 import com.aoindustries.util.i18n.BundleLookupThreadContext;
@@ -42,7 +42,7 @@ public final class MarkupUtils  {
 	/**
 	 * Writes a value with markup enabled.
 	 * 
-	 * @see  BundleLookup.MarkupType
+	 * @see  MarkupType
 	 */
 	public static void writeWithMarkup(Object value, MarkupType markupType, Writer out) throws IOException {
 		if(value!=null) {
@@ -73,7 +73,7 @@ public final class MarkupUtils  {
 	 * 
 	 * @param  encoder  no encoding performed when null
 	 *
-	 * @see  BundleLookup.MarkupType
+	 * @see  MarkupType
 	 */
 	public static void writeWithMarkup(Object value, MarkupType markupType, MediaEncoder encoder, Writer out) throws IOException {
 		if(encoder==null) {

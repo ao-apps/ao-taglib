@@ -175,7 +175,8 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport {
 	 *
 	 * @param  out  the output.  If passed-through, this will be a <code>JspWriter</code>
 	 *
-	 * @return This default implementation invokes the jsp body, if present.
+	 * @implSpec This default implementation invokes the jsp body, if present.
+	 *
 	 * @throws javax.servlet.jsp.JspTagException
 	 */
 	protected void doTag(Writer out) throws JspException, IOException {
