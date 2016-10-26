@@ -1578,6 +1578,15 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
+			<description>
+				The itemprop used for semantic microdata.
+			</description>
+			<name>itemprop</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
 			<description><![CDATA[
 				The charset of meta tag.
 			]]></description>

@@ -33,12 +33,20 @@ public class Meta {
 
 	private final String name;
 	private final String httpEquiv;
+	private final String itemprop;
 	private final String charset;
 	private final String content;
 
-	public Meta(String name, String httpEquiv, String charset, String content) {
+	public Meta(
+		String name,
+		String httpEquiv,
+		String itemprop,
+		String charset,
+		String content
+	) {
 		this.name = name;
 		this.httpEquiv = httpEquiv;
+		this.itemprop = itemprop;
 		this.charset = charset;
 		this.content = NullArgumentException.checkNotNull(content, "content");
 	}
@@ -49,6 +57,10 @@ public class Meta {
 
 	public String getHttpEquiv() {
 		return httpEquiv;
+	}
+
+	public String getItemprop() {
+		return itemprop;
 	}
 
 	public String getCharset() {

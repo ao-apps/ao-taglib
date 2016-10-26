@@ -43,6 +43,7 @@ public class MetaTag
 
 	private Object name;
 	private Object httpEquiv;
+	private Object itemprop;
 	private Object charset;
 	private Object content;
 
@@ -68,6 +69,14 @@ public class MetaTag
 	public void setHttpEquiv(Object httpEquiv) throws JspTagException {
 		try {
 			this.httpEquiv = Coercion.nullIfEmpty(httpEquiv);
+		} catch(IOException e) {
+			throw new JspTagException(e);
+		}
+	}
+
+	public void setItemprop(Object itemprop) throws JspTagException {
+		try {
+			this.itemprop = Coercion.nullIfEmpty(itemprop);
 		} catch(IOException e) {
 			throw new JspTagException(e);
 		}
@@ -99,6 +108,7 @@ public class MetaTag
 				new Meta(
 					Coercion.toString(name),
 					Coercion.toString(httpEquiv),
+					Coercion.toString(itemprop),
 					Coercion.toString(charset),
 					Coercion.toString(content)
 				)
@@ -114,6 +124,11 @@ public class MetaTag
 			if(httpEquiv != null) {
 				out.write(" http-equiv=\"");
 				Coercion.write(httpEquiv, textInXhtmlAttributeEncoder, out);
+				out.write('"');
+			}
+			if(itemprop != null) {
+				out.write(" itemprop=\"");
+				Coercion.write(itemprop, textInXhtmlAttributeEncoder, out);
 				out.write('"');
 			}
 			if(charset != null) {
