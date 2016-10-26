@@ -33,6 +33,7 @@ import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.StringUtility;
 import java.net.MalformedURLException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspTagException;
 
 final public class Functions {
@@ -40,11 +41,32 @@ final public class Functions {
 	private Functions() {
 	}
 
+	/**
+	 * Gets the lastModified or {@code 0} when not known.
+	 */
+	public static long getLastModified(String url) throws MalformedURLException {
+		HttpServletRequest request = getRequest();
+		// Get the context-relative path (resolves relative paths)
+		String resourcePath = ServletUtil.getAbsolutePath(
+			Dispatcher.getCurrentPagePath(request),
+			url
+		);
+		if(resourcePath.startsWith("/")) {
+			return LastModifiedServlet.getLastModified(
+				getServletContext(),
+				request,
+				resourcePath
+			);
+		}
+		return 0;
+	}
+
 	public static String addLastModified(String url) throws MalformedURLException {
+		HttpServletRequest request = getRequest();
 		return LastModifiedServlet.addLastModified(
 			getServletContext(),
-			getRequest(),
-			Dispatcher.getCurrentPagePath(getRequest()),
+			request,
+			Dispatcher.getCurrentPagePath(request),
 			url,
 			LastModifiedServlet.AddLastModifiedWhen.TRUE
 		);

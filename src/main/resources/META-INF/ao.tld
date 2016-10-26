@@ -2690,6 +2690,15 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<function>
 		<description><![CDATA[
+			Gets the lastModified or <code>0</code> when not known.
+		]]></description>
+		<name>getLastModified</name>
+		<function-class>com.aoindustries.taglib.Functions</function-class>
+		<function-signature>long getLastModified(java.lang.String)</function-signature>
+		<example>${ao:getLastModified('../path-to-page.jsp')}</example>
+	</function>
+	<function>
+		<description><![CDATA[
 			If the URL represents a local resource, a parameter of "lastModified=#####" will be
 			automatically added with the timestamp of the local resource to the nearest second.
 		]]></description>
