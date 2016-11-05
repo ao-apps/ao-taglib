@@ -74,6 +74,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		</profile>
 	</profiles>
 
+	<!-- TODO: Try custom type for books, perhaps found in /src/book/...
+	           http://blog.sonatype.com/2009/08/create-a-customized-build-process-in-maven/ -->
 	<dependencies>
 		<dependency>
 			<groupId>javax.servlet</groupId>
