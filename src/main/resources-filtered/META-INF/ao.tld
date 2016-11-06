@@ -27,12 +27,14 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
 	version="2.1">
+	<description>@{project.description}</description>
+	<display-name>@{project.artifactId}</display-name>
 	<tlib-version>
 		<!-- Release: @{project.version} -->
 		@{parsedVersion.majorVersion}.@{parsedVersion.minorVersion}.@{parsedVersion.incrementalVersion}
 	</tlib-version>
 	<short-name>ao</short-name>
-	<uri>http://aoindustries.com/ao-taglib</uri>
+	<uri>@{project.url}</uri>
 	<tag>
 		<description><![CDATA[
 			<p>
