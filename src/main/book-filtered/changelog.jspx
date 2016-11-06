@@ -21,7 +21,7 @@ You should have received a copy of the GNU Lesser General Public License
 along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 -->
 <jsp:root
-	xmlns:ao="http://aoindustries.com/ao-taglib"
+	xmlns:ao="https://aoindustries.com/ao-taglib/"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:changelog="https://semanticcms.com/changelog/taglib/"
 	xmlns:core="https://semanticcms.com/core/taglib/"
@@ -36,7 +36,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2016-11-02T02:14:03-0500"
+		dateModified="2016-11-05T23:42:07-0500"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:if test="${fn:endsWith('@{project.version}', '-SNAPSHOT')}">
@@ -58,6 +58,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 						Unfortunately, we cannot include "-SNAPSHOT" on snapshot builds due to the requirement of "Dewey decimal"
 						for taglib versions.  The unambiguous full version is annotated via comment.
 					</li>
+					<li>Taglib URL changed to <code>https://aoindustries.com/ao-taglib/</code> to match project URL.</li>
 				</ul>
 			</changelog:release>
 		</c:if>
