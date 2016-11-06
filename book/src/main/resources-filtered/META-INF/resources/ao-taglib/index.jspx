@@ -29,10 +29,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 >
 	<jsp:directive.page language="java" pageEncoding="UTF-8" session="false" />
 	<core:page
-		title="@{project.name}"
-		description="@{project.description}"
+		title="@{documented.name}"
+		description="@{documented.description}"
 		datePublished="2016-10-17T00:09:00-0500"
-		dateModified="2016-10-28T00:11:09-0500"
+		dateModified="2016-11-06T02:26:44-0600"
 	>
 		<core:child page="changelog.jspx" />
 		<core:child page="apidocs/index.jspx" />
@@ -44,8 +44,14 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 				<li><core:link page="index.jspx">Project Home</core:link></li>
 				<li><core:link page="changelog.jspx">Changelog</core:link></li>
 				<li><core:link page="apidocs/index.jspx">API Docs</core:link></li>
-				<li><ao:a href="https://search.maven.org/#search%7Cgav%7C1%7Cg:%22@{project.groupId}%22%20AND%20a:%22@{project.artifactId}%22">Maven Central Repository</ao:a></li>
-				<li><ao:a href="@{project.scm.url}">GitHub</ao:a></li>
+				<li><ao:a href="https://search.maven.org/#search%7Cgav%7C1%7Cg:%22@{documented.groupId}%22%20AND%20a:%22@{documented.artifactId}%22">Maven Central Repository</ao:a></li>
+				<li><ao:a href="@{documented.scm.url}">GitHub</ao:a></li>
+			</ul>
+		</section:section>
+		<section:section label="XML Schemas">
+			<!-- TODO: file:file once cvsworkDirectory no longer required -->
+			<ul>
+				<li><ao:a href="ao.tld">ao.tld</ao:a></li>
 			</ul>
 		</section:section>
 	</core:page>

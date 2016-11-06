@@ -32,20 +32,20 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 	<jsp:directive.page language="java" pageEncoding="UTF-8" session="false" />
 	<!-- TODO: https://schema.org/TechArticle on this page -->
 	<core:page
-		title="@{project.name} Changelog"
+		title="@{documented.name} Changelog"
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
 		dateModified="2016-11-05T23:42:07-0500"
 	>
 		<!-- The current snapshot, unreleased version -->
-		<c:if test="${fn:endsWith('@{project.version}', '-SNAPSHOT')}">
+		<c:if test="${fn:endsWith('@{com.aoindustries:ao-taglib:jar.version}', '-SNAPSHOT')}">
 			<changelog:release
-				projectName="@{project.name}"
-				version="@{project.version}"
-				groupId="@{project.groupId}"
-				artifactId="@{project.artifactId}"
-				scmUrl="@{project.scm.url}"
+				projectName="@{documented.name}"
+				version="@{com.aoindustries:ao-taglib:jar.version}"
+				groupId="@{documented.groupId}"
+				artifactId="@{documented.artifactId}"
+				scmUrl="@{documented.scm.url}"
 			>
 				<ul>
 					<li>Not encoding anchors. To avoid ambiguity, anchors must be encoded by the caller, such as already done for parameters.</li>
@@ -64,12 +64,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		</c:if>
 
 		<changelog:release
-			projectName="@{project.name}"
+			projectName="@{documented.name}"
 			version="2.2.0"
 			datePublished="2016-10-20T18:03:00-0500"
-			groupId="@{project.groupId}"
-			artifactId="@{project.artifactId}"
-			scmUrl="@{project.scm.url}"
+			groupId="@{documented.groupId}"
+			artifactId="@{documented.artifactId}"
+			scmUrl="@{documented.scm.url}"
 		>
 			<ul>
 				<li>Improved Javadoc formatting.</li>
@@ -79,12 +79,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		</changelog:release>
 
 		<changelog:release
-			projectName="@{project.name}"
+			projectName="@{documented.name}"
 			version="2.1.0"
 			datePublished="2016-10-11T23:49:00-0500"
-			groupId="@{project.groupId}"
-			artifactId="@{project.artifactId}"
-			scmUrl="@{project.scm.url}"
+			groupId="@{documented.groupId}"
+			artifactId="@{documented.artifactId}"
+			scmUrl="@{documented.scm.url}"
 		>
 			<ul>
 				<li>Added autocomplete attribute on input tags.</li>
@@ -92,12 +92,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		</changelog:release>
 
 		<changelog:release
-			projectName="@{project.name}"
+			projectName="@{documented.name}"
 			version="2.0.1"
 			datePublished="2016-10-08T01:18:00-0500"
-			groupId="@{project.groupId}"
-			artifactId="@{project.artifactId}"
-			scmUrl="@{project.scm.url}"
+			groupId="@{documented.groupId}"
+			artifactId="@{documented.artifactId}"
+			scmUrl="@{documented.scm.url}"
 		>
 			<ul>
 				<li>Updated beanutils version.</li>
@@ -106,12 +106,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		</changelog:release>
 
 		<changelog:release
-			projectName="@{project.name}"
+			projectName="@{documented.name}"
 			version="2.0.0"
 			datePublished="2016-10-04T19:58:00-0500"
-			groupId="@{project.groupId}"
-			artifactId="@{project.artifactId}"
-			scmUrl="@{project.scm.url}"
+			groupId="@{documented.groupId}"
+			artifactId="@{documented.artifactId}"
+			scmUrl="@{documented.scm.url}"
 		>
 			<ul>
 				<li>Using request object instead of ThreadLocals to support asynchronous and concurrent request processing.</li>
@@ -131,12 +131,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		</changelog:release>
 
 		<changelog:release
-			projectName="@{project.name}"
+			projectName="@{documented.name}"
 			version="1.4"
 			datePublished="2016-09-11T15:31:00-0500"
-			groupId="@{project.groupId}"
-			artifactId="@{project.artifactId}"
-			scmUrl="@{project.scm.url}"
+			groupId="@{documented.groupId}"
+			artifactId="@{documented.artifactId}"
+			scmUrl="@{documented.scm.url}"
 		>
 			<ul>
 				<li>Minor fixes for Jetty compatibility.</li>
@@ -148,12 +148,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		</changelog:release>
 
 		<changelog:release
-			projectName="@{project.name}"
+			projectName="@{documented.name}"
 			version="1.3.1"
 			datePublished="2016-09-02T17:01:00-0500"
-			groupId="@{project.groupId}"
-			artifactId="@{project.artifactId}"
-			scmUrl="@{project.scm.url}"
+			groupId="@{documented.groupId}"
+			artifactId="@{documented.artifactId}"
+			scmUrl="@{documented.scm.url}"
 		>
 			<ul>
 				<li>Improved Maven configuration for Java EE 6 dependencies.</li>
@@ -161,12 +161,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		</changelog:release>
 
 		<changelog:release
-			projectName="@{project.name}"
+			projectName="@{documented.name}"
 			version="1.3"
 			datePublished="2016-08-28T20:29:00-0500"
-			groupId="@{project.groupId}"
-			artifactId="@{project.artifactId}"
-			scmUrl="@{project.scm.url}"
+			groupId="@{documented.groupId}"
+			artifactId="@{documented.artifactId}"
+			scmUrl="@{documented.scm.url}"
 		>
 			<ul>
 				<li>Efficient way to check if objects are empty.</li>
@@ -175,12 +175,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		</changelog:release>
 
 		<changelog:release
-			projectName="@{project.name}"
+			projectName="@{documented.name}"
 			version="1.2"
 			datePublished="2016-08-19T14:29:00-0500"
-			groupId="@{project.groupId}"
-			artifactId="@{project.artifactId}"
-			scmUrl="@{project.scm.url}"
+			groupId="@{documented.groupId}"
+			artifactId="@{documented.artifactId}"
+			scmUrl="@{documented.scm.url}"
 		>
 			<ul>
 				<li>Allowing ao-taglib style "arg" maps to be passed through Dispatcher for non-taglib use.</li>
@@ -191,12 +191,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		</changelog:release>
 
 		<changelog:release
-			projectName="@{project.name}"
+			projectName="@{documented.name}"
 			version="1.1"
 			datePublished="2016-08-07T23:32:00-0500"
-			groupId="@{project.groupId}"
-			artifactId="@{project.artifactId}"
-			scmUrl="@{project.scm.url}"
+			groupId="@{documented.groupId}"
+			artifactId="@{documented.artifactId}"
+			scmUrl="@{documented.scm.url}"
 		>
 			<ul>
 				<li>The beanutils dependency is now optional due to its limited scope in older components.</li>
@@ -205,12 +205,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		</changelog:release>
 
 		<changelog:release
-			projectName="@{project.name}"
+			projectName="@{documented.name}"
 			version="1.0"
 			datePublished="2016-08-07T16:31:00-0500"
-			groupId="@{project.groupId}"
-			artifactId="@{project.artifactId}"
-			scmUrl="@{project.scm.url}"
+			groupId="@{documented.groupId}"
+			artifactId="@{documented.artifactId}"
+			scmUrl="@{documented.scm.url}"
 		>
 			<ul>
 				<li>Project moved to GitHub and Maven.</li>
