@@ -94,7 +94,10 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
 					containerContentType = parentEncodingContext.contentType;
 				} else {
 					// Use the content type of the response
-					containerContentType = MediaType.getMediaTypeForContentType(response.getContentType());
+					String responseContentType = response.getContentType();
+					// Default to XHTML: TODO: Is there a better way since can't set content type early in response then reset again...
+					if(responseContentType == null) responseContentType = MediaType.XHTML.getContentType();
+					containerContentType = MediaType.getMediaTypeForContentType(responseContentType);
 				}
 
 				// Determine the validator for the parent type.  This is to make sure prefix and suffix are valid.
