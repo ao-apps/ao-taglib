@@ -207,21 +207,18 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<type>java.lang.Object</type>
 		</attribute>
 		<dynamic-attributes>true</dynamic-attributes>
-		<example />
 	</tag>
 	<tag>
 		<description>Provides an action to its ActionAttribute parent tag.</description>
 		<name>action</name>
 		<tag-class>com.aoindustries.taglib.ActionTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description>Provides an alt attribute to its AltAttribute parent tag.</description>
 		<name>alt</name>
 		<tag-class>com.aoindustries.taglib.AltTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description>Adds an argument to its ArgsAttribute parent tag.</description>
@@ -247,7 +244,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
-		<example />
 	</tag>
 	<tag>
 		<description><![CDATA[
@@ -278,7 +274,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<type>java.lang.String</type>
 			</deferred-value>
 		</attribute>
-		<example />
 	</tag>
 	<tag>
 		<description><![CDATA[
@@ -305,7 +300,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>base</name>
 		<tag-class>com.aoindustries.taglib.BaseTag</tag-class>
 		<body-content>empty</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description><![CDATA[
@@ -330,7 +324,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<rtexprvalue>false</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
-		<example />
 	</tag>
 	<tag>
 		<description>
@@ -341,7 +334,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>checked</name>
 		<tag-class>com.aoindustries.taglib.CheckedTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description><![CDATA[
@@ -350,21 +342,18 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>choose</name>
 		<tag-class>com.aoindustries.taglib.ChooseTag</tag-class>
 		<body-content>JSP</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description>Provides a class to its ClassAttribute parent tag.</description>
 		<name>class</name>
 		<tag-class>com.aoindustries.taglib.ClassTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description>Provides a content attribute to its ContentAttribute parent tag.</description>
 		<name>content</name>
 		<tag-class>com.aoindustries.taglib.ContentTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description>Disables the resource editor for this request.</description>
@@ -381,14 +370,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>disabled</name>
 		<tag-class>com.aoindustries.taglib.DisabledTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description>Provides an enctype to its EnctypeAttribute parent tag.</description>
 		<name>enctype</name>
 		<tag-class>com.aoindustries.taglib.EnctypeTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description><![CDATA[
@@ -486,7 +473,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<type>java.lang.Object</type>
 		</attribute>
 		<dynamic-attributes>true</dynamic-attributes>
-		<example />
 	</tag>
 	<tag>
 		<description><![CDATA[
@@ -577,7 +563,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<type>java.lang.String</type>
 		</attribute>
 		<dynamic-attributes>true</dynamic-attributes>
-		<example />
 	</tag>
 	<tag>
 		<description>
@@ -588,7 +573,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>frameborder</name>
 		<tag-class>com.aoindustries.taglib.FrameborderTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description>
@@ -634,14 +618,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
-		<example />
 	</tag>
 	<tag>
 		<description>Provides a height attribute to its HeightAttribute parent tag.</description>
 		<name>height</name>
 		<tag-class>com.aoindustries.taglib.HeightTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description><![CDATA[
@@ -699,7 +681,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
-		<example />
 	</tag>
 	<tag>
 		<description><![CDATA[
@@ -708,21 +689,18 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>href</name>
 		<tag-class>com.aoindustries.taglib.HrefTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description>Provides an hreflang attribute to its HreflangAttribute parent tag.</description>
 		<name>hreflang</name>
 		<tag-class>com.aoindustries.taglib.HreflangTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description>Provides an id attribute to its IdAttribute parent tag.</description>
 		<name>id</name>
 		<tag-class>com.aoindustries.taglib.IdTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description><![CDATA[
@@ -832,7 +810,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<type>boolean</type>
 		</attribute>
 		<dynamic-attributes>true</dynamic-attributes>
-		<example />
 	</tag>
 	<tag>
 		<description><![CDATA[
@@ -982,7 +959,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<type>java.lang.Object</type>
 		</attribute>
 		<dynamic-attributes>true</dynamic-attributes>
-		<example />
 	</tag>
 	<tag>
 		<description><![CDATA[
@@ -1070,7 +1046,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<type>java.lang.String</type>
 		</attribute>
 		<dynamic-attributes>true</dynamic-attributes>
-		<example />
 	</tag>
 	<tag>
 		<description><![CDATA[
@@ -1278,7 +1253,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<rtexprvalue>false</rtexprvalue>
 			<type>boolean</type>
 		</attribute>
-		<example />
 	</tag>
 	<tag>
 		<description><![CDATA[
@@ -1406,7 +1380,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<type>java.lang.Object</type>
 		</attribute>
 		<dynamic-attributes>true</dynamic-attributes>
-		<example />
 	</tag>
 	<tag>
 		<description>
@@ -1417,7 +1390,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>maxlength</name>
 		<tag-class>com.aoindustries.taglib.MaxlengthTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description><![CDATA[
@@ -1536,7 +1508,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<type>java.lang.Object</type>
 		</attribute>
 		<dynamic-attributes>true</dynamic-attributes>
-		<example />
 	</tag>
 	<tag>
 		<description>Adds a message argument to its MessageArgsAttribute parent tag.</description>
@@ -1554,7 +1525,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
-		<example />
 	</tag>
 	<tag>
 		<description><![CDATA[
@@ -1622,84 +1592,72 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
-		<example />
 	</tag>
 	<tag>
 		<description>Provides a method attribute to its MethodAttribute parent tag.</description>
 		<name>method</name>
 		<tag-class>com.aoindustries.taglib.MethodTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description>Provides a name to its NameAttribute parent tag.</description>
 		<name>name</name>
 		<tag-class>com.aoindustries.taglib.NameTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description>Provides an onblur script to its OnblurAttribute parent tag.</description>
 		<name>onblur</name>
 		<tag-class>com.aoindustries.taglib.OnblurTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description>Provides an onchange script to its OnchangeAttribute parent tag.</description>
 		<name>onchange</name>
 		<tag-class>com.aoindustries.taglib.OnchangeTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description>Provides an onclick script to its OnclickAttribute parent tag.</description>
 		<name>onclick</name>
 		<tag-class>com.aoindustries.taglib.OnclickTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description>Provides an onfocus script to its OnfocusAttribute parent tag.</description>
 		<name>onfocus</name>
 		<tag-class>com.aoindustries.taglib.OnfocusTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description>Provides an onkeypress script to its OnkeypressAttribute parent tag.</description>
 		<name>onkeypress</name>
 		<tag-class>com.aoindustries.taglib.OnkeypressTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description>Provides an onload script to its OnloadAttribute parent tag.</description>
 		<name>onload</name>
 		<tag-class>com.aoindustries.taglib.OnloadTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description>Provides an onmouseout script to its OnmouseoutAttribute parent tag.</description>
 		<name>onmouseout</name>
 		<tag-class>com.aoindustries.taglib.OnmouseoutTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description>Provides an onmouseover script to its OnmouseoverAttribute parent tag.</description>
 		<name>onmouseover</name>
 		<tag-class>com.aoindustries.taglib.OnmouseoverTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description>Provides an onsubmit script to its OnsubmitAttribute parent tag.</description>
 		<name>onsubmit</name>
 		<tag-class>com.aoindustries.taglib.OnsubmitTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description>Renders an option tag.</description>
@@ -1741,7 +1699,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<rtexprvalue>true</rtexprvalue>
 			<type>boolean</type>
 		</attribute>
-		<example />
 	</tag>
 	<tag>
 		<description><![CDATA[
@@ -1750,7 +1707,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>otherwise</name>
 		<tag-class>com.aoindustries.taglib.OtherwiseTag</tag-class>
 		<body-content>JSP</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description><![CDATA[
@@ -1818,14 +1774,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<rtexprvalue>false</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
-		<example />
 	</tag>
 	<tag>
 		<description>Provides a page to its PageAttribute parent tag.</description>
 		<name>page</name>
 		<tag-class>com.aoindustries.taglib.PageTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description>Adds a parameter to its ParamsAttribute parent tag.</description>
@@ -1853,7 +1807,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
-		<example />
 	</tag>
 	<tag>
 		<description><![CDATA[
@@ -1932,7 +1885,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
-		<example />
 	</tag>
 	<tag>
 		<description><![CDATA[
@@ -1947,7 +1899,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>readonly</name>
 		<tag-class>com.aoindustries.taglib.ReadonlyTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description><![CDATA[
@@ -2087,14 +2038,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<type>java.lang.String</type>
 		</attribute>
 		<dynamic-attributes>true</dynamic-attributes>
-		<example />
 	</tag>
 	<tag>
 		<description>Provides a rel attribute to its RelAttribute parent tag.</description>
 		<name>rel</name>
 		<tag-class>com.aoindustries.taglib.RelTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description>Allows editing of the website resource bundles through the website itself.</description>
@@ -2194,7 +2143,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<type>java.lang.String</type>
 		</attribute>
 		<dynamic-attributes>true</dynamic-attributes>
-		<example />
 	</tag>
 	<tag>
 		<description>Renders a select tag.</description>
@@ -2283,7 +2231,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<rtexprvalue>false</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
-		<example />
 	</tag>
 	<tag>
 		<description><![CDATA[
@@ -2298,7 +2245,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>selected</name>
 		<tag-class>com.aoindustries.taglib.SelectedTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description><![CDATA[
@@ -2334,14 +2280,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
-		<example />
 	</tag>
 	<tag>
 		<description>Provides a size attribute to its SizeAttribute parent tag.</description>
 		<name>size</name>
 		<tag-class>com.aoindustries.taglib.SizeTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description>
@@ -2350,14 +2294,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>src</name>
 		<tag-class>com.aoindustries.taglib.SrcTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description>Provides a style attribute to its StyleAttribute parent tag.</description>
 		<name>style</name>
 		<tag-class>com.aoindustries.taglib.StyleTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description><![CDATA[
@@ -2372,14 +2314,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>tabindex</name>
 		<tag-class>com.aoindustries.taglib.TabindexTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description>Provides a target attribute to its TargetAttribute parent tag.</description>
 		<name>target</name>
 		<tag-class>com.aoindustries.taglib.TargetTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description><![CDATA[
@@ -2410,7 +2350,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>text</name>
 		<tag-class>com.aoindustries.taglib.TextTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description><![CDATA[
@@ -2510,21 +2449,18 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
-		<example />
 	</tag>
 	<tag>
 		<description>Provides a title to its TitleAttribute parent tag.</description>
 		<name>title</name>
 		<tag-class>com.aoindustries.taglib.TitleTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description>Provides a type to its TitleAttribute parent tag.</description>
 		<name>type</name>
 		<tag-class>com.aoindustries.taglib.TypeTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description><![CDATA[
@@ -2560,14 +2496,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>url</name>
 		<tag-class>com.aoindustries.taglib.UrlTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description>Provides a value to its ValueAttribute parent tag.</description>
 		<name>value</name>
 		<tag-class>com.aoindustries.taglib.ValueTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description><![CDATA[
@@ -2587,14 +2521,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<type>java.lang.Boolean</type>
 			</deferred-value>
 		</attribute>
-		<example />
 	</tag>
 	<tag>
 		<description>Provides a width attribute to its WidthAttribute parent tag.</description>
 		<name>width</name>
 		<tag-class>com.aoindustries.taglib.WidthTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description>Word wraps the textual content.</description>
@@ -2608,7 +2540,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<rtexprvalue>true</rtexprvalue>
 			<type>int</type>
 		</attribute>
-		<example />
 	</tag>
 	<tag>
 		<description><![CDATA[
@@ -2703,7 +2634,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<rtexprvalue>false</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
-		<example />
 	</tag>
 	<tag>
 		<description><![CDATA[
@@ -2718,7 +2648,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>xhtmlAttribute</name>
 		<tag-class>com.aoindustries.taglib.XhtmlAttributeTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<tag>
 		<description><![CDATA[
@@ -2738,7 +2667,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>xhtml</name>
 		<tag-class>com.aoindustries.taglib.XhtmlTag</tag-class>
 		<body-content>scriptless</body-content>
-		<example />
 	</tag>
 	<function>
 		<description><![CDATA[
