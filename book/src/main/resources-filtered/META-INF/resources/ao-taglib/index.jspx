@@ -35,6 +35,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		dateModified="2016-11-06T02:26:44-0600"
 	>
 		<core:child page="changelog.jspx" />
+		<core:child page="ao.tld/" />
 		<core:child page="apidocs/index.jspx" />
 		<p>
 			@{description.html}
@@ -43,15 +44,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 			<ul>
 				<li><core:link page="index.jspx">Project Home</core:link></li>
 				<li><core:link page="changelog.jspx">Changelog</core:link></li>
+				<li><core:link page="ao.tld/">Taglib Reference</core:link></li>
 				<li><core:link page="apidocs/index.jspx">API Docs</core:link></li>
 				<li><ao:a href="https://search.maven.org/#search%7Cgav%7C1%7Cg:%22@{documented.groupId}%22%20AND%20a:%22@{documented.artifactId}%22">Maven Central Repository</ao:a></li>
 				<li><ao:a href="@{documented.scm.url}">GitHub</ao:a></li>
-			</ul>
-		</section:section>
-		<section:section label="XML Schemas">
-			<!-- TODO: file:file once cvsworkDirectory no longer required -->
-			<ul>
-				<li><ao:a href="ao.tld">ao.tld</ao:a></li>
 			</ul>
 		</section:section>
 	</core:page>

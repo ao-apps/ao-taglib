@@ -36,6 +36,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 	<version>2.3.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
+	<properties>
+		<javadoc.taglibReference><![CDATA[<li><a target="_top" href="${project.url}ao.tld/">Taglib Reference</a></li>]]></javadoc.taglibReference>
+	</properties>
+
 	<name>AO Taglib</name>
 	<url>https://aoindustries.com${bookPath}/</url><!-- Can't inherit due to multi-module -->
 	<description>Making JSP what it should have been all along.</description>

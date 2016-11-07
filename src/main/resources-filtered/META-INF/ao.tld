@@ -22,13 +22,12 @@ You should have received a copy of the GNU Lesser General Public License
 along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <!-- TODO: Consider trying https://github.com/icoloma/tldgen instead of maintaining this file manually -->
-<!-- TODO: Document with: http://maven-taglib.sourceforge.net/m2/usage.html -->
 <taglib xmlns="http://java.sun.com/xml/ns/javaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
 	version="2.1">
 	<description>@{project.description}</description>
-	<display-name>@{project.artifactId}</display-name>
+	<display-name>@{project.name}</display-name>
 	<tlib-version>
 		<!-- Release: @{project.version} -->
 		@{parsedVersion.majorVersion}.@{parsedVersion.minorVersion}.@{parsedVersion.incrementalVersion}
@@ -37,7 +36,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<uri>@{project.url}</uri>
 	<tag>
 		<description><![CDATA[
-			<p>
+			<p class="semanticcms-tag-reference-summary">
 				Renders an a tag.
 				The body is trimmed while written.
 			</p>
@@ -393,7 +392,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>
+			<p class="semanticcms-tag-reference-summary">
 				Renders a form tag.
 			</p>
 			<p>
@@ -491,18 +490,18 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>
-				Forwards to another resource.
-				Stops processing of the containing JSP page.
-			</p>
-			<p>
-				This has three advantages over the standard &lt;jsp:forward&gt; tag:
+			<div class="semanticcms-tag-reference-summary">
+				<p>
+					Forwards to another resource.
+					Stops processing of the containing JSP page.
+					This has three advantages over the standard &lt;jsp:forward&gt; tag:
+				</p>
 				<ol>
 					<li>You may clear parameters such that only those specifically added will be passed on to the next page</li>
 					<li>You may have other nested tags used to select and build the set of parameters</li>
 					<li>You may pass argument objects instead of only string parameters (see below)</li>
 				</ol>
-			</p>
+			</div>
 			<p>
 				Any attribute that has no namespace and begins with "param." is added to the parameters.
 				The parameter name is the part of the attribute name following "param.".
@@ -727,7 +726,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>
+			<p class="semanticcms-tag-reference-summary">
 				Renders an iframe tag.
 			</p>
 			<p>
@@ -837,14 +836,18 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>
+			<p class="semanticcms-tag-reference-summary">
 				Renders an img tag.
+			</p>
+			<p>
 				The src may be provided in one of three ways, in precedence order:
-				<ol>
-					<li>Direct child <src> tag.</li>
-					<li>As the src attribute</li>
-					<li>Contents of tag body, trimmed.</li>
-				</ol>
+			</p>
+			<ol>
+				<li>Direct child &lt;ao:src&gt; tag.</li>
+				<li>As the src attribute</li>
+				<li>Contents of tag body, trimmed.</li>
+			</ol>
+			<p>
 				Also, the width, height, and alt values are required either as attributes or nested tags.
 			</p>
 			<p>
@@ -983,15 +986,17 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>
-				Includes another resource and then continues processing of the current page.
-				This has three advantages over the standard &lt;jsp:include&gt; tag:
+			<div class="semanticcms-tag-reference-summary">
+				<p>
+					Includes another resource and then continues processing of the current page.
+					This has three advantages over the standard &lt;jsp:include&gt; tag:
+				</p>
 				<ol>
 					<li>You may clear parameters such that only those specifically added will be passed on to the included page</li>
 					<li>You may have other nested tags used to select and build the set of parameters</li>
 					<li>You may pass argument objects instead of only string parameters (see below)</li>
 				</ol>
-			</p>
+			</div>
 			<p>
 				Any attribute that has no namespace and begins with "param." is added to the parameters.
 				The parameter name is the part of the attribute name following "param.".
@@ -1072,8 +1077,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			Renders an input tag.  The value may be provided in one of three ways, in
 			precedence order:
 			<ol>
-				<li>Direct child <value> tag.</li>
-				<livAs the value attribute</li>
+				<li>Direct child &lt;ao:value&gt; tag.</li>
+				<li>As the value attribute</li>
 				<li>Contents of tag body, trimmed.</li>
 			</ol>
 		]]></description>
@@ -1277,7 +1282,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>
+			<p class="semanticcms-tag-reference-summary">
 				If contained with any LinksAttribute parent, adds the link data to the parent tag.
 				Otherwise, renders a link tag.
 			</p>
@@ -1416,7 +1421,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>
+			<p class="semanticcms-tag-reference-summary">
 				Writes a value from the current localization bundle given its key.
 				Writes the value with proper escaping based on the context of the tag.
 			</p>
@@ -1447,16 +1452,16 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				The content type depends on the value provided to the type attribute, and
 				defaults to text/plain.  The content is checked for well-formedness based
 				on its type:
-				<ul>
-					<li>"javascript" or "text/javascript" - no validation</li>
-					<li>"json" or "application/json" - no validation</li>
-					<li>"ld_json" or "application/ls+json" - no validation</li>
-					<li>"text" or "text/plain" - no validation</li>
-					<li>"url" or "text/url" - must be a valid URL</li>
-					<li>"xhtml" or "application/xhtml+xml" - must be well-formed XHTML content. (Note: Currently only checks character values.)</li>
-					<li>"xhtml_attribute" or "application/xhtml+xml+attribute" - must be a valid XHTML attribute.</li>
-				</ul>
 			</p>
+			<ul>
+				<li>"javascript" or "text/javascript" - no validation</li>
+				<li>"json" or "application/json" - no validation</li>
+				<li>"ld_json" or "application/ls+json" - no validation</li>
+				<li>"text" or "text/plain" - no validation</li>
+				<li>"url" or "text/url" - must be a valid URL</li>
+				<li>"xhtml" or "application/xhtml+xml" - must be well-formed XHTML content. (Note: Currently only checks character values.)</li>
+				<li>"xhtml_attribute" or "application/xhtml+xml+attribute" - must be a valid XHTML attribute.</li>
+			</ul>
 		]]></description>
 		<name>message</name>
 		<tag-class>com.aoindustries.taglib.MessageTag</tag-class>
@@ -1553,11 +1558,15 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			If contained with any MetasAttribute parent, adds the meta data to the parent tag.
-			Otherwise, renders a meta tag.  The content may be provided in one of three ways, in
-			precedence order:
+			<p class="semanticcms-tag-reference-summary">
+				If contained with any MetasAttribute parent, adds the meta data to the parent tag.
+				Otherwise, renders a meta tag.
+			</p>
+			<p>
+				The content may be provided in one of three ways, in precedence order:
+			</p>
 			<ol>
-				<li>Direct child <content> tag.</li>
+				<li>Direct child &lt;ao:content&gt; tag.</li>
 				<li>As the content attribute</li>
 				<li>Contents of tag body, trimmed.</li>
 			</ol>
@@ -1745,23 +1754,28 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>
+			<p class="semanticcms-tag-reference-summary">
 				Writes the value with proper escaping based on the context of the tag.
+				Supports data types beyond &lt;c:out&gt;.
+			</p>
+			<p>
+				In addition to the usual set of coercions expected for &lt;c:out&gt;,
+				also supports writing XML nodes such as for HTML snippets.
 			</p>
 			<p>
 				The content type depends on the value provided to the type attribute, and
 				defaults to text/plain.  The content is checked for well-formedness based
 				on its type:
-				<ul>
-					<li>"javascript" or "text/javascript" - no validation</li>
-					<li>"json" or "application/json" - no validation</li>
-					<li>"ld_json" or "application/ls+json" - no validation</li>
-					<li>"text" or "text/plain" - no validation</li>
-					<li>"url" or "text/url" - must be a valid URL</li>
-					<li>"xhtml" or "application/xhtml+xml" - must be well-formed XHTML content. (Note: Currently only checks character values.)</li>
-					<li>"xhtml_attribute" or "application/xhtml+xml+attribute" - must be a valid XHTML attribute.</li>
-				</ul>
 			</p>
+			<ul>
+				<li>"javascript" or "text/javascript" - no validation</li>
+				<li>"json" or "application/json" - no validation</li>
+				<li>"ld_json" or "application/ls+json" - no validation</li>
+				<li>"text" or "text/plain" - no validation</li>
+				<li>"url" or "text/url" - must be a valid URL</li>
+				<li>"xhtml" or "application/xhtml+xml" - must be well-formed XHTML content. (Note: Currently only checks character values.)</li>
+				<li>"xhtml_attribute" or "application/xhtml+xml+attribute" - must be a valid XHTML attribute.</li>
+			</ul>
 		]]></description>
 		<name>out</name>
 		<tag-class>com.aoindustries.taglib.OutTag</tag-class>
@@ -1873,13 +1887,13 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					Each pattern in the comma-separated list may in the following format:
-					<ul>
-					   <li>exact_name  matches the name exactly</li>
-					   <li>*           matches all (clears all parameters)</li>
-					   <li>*suffix     matches the name with "endsWith"</li>
-					   <li>prefix*     matches the name with "beginsWith"</li>
-					</ul>
 				</p>
+				<ul>
+				   <li>exact_name  matches the name exactly</li>
+				   <li>*           matches all (clears all parameters)</li>
+				   <li>*suffix     matches the name with "endsWith"</li>
+				   <li>prefix*     matches the name with "beginsWith"</li>
+				</ul>
 				<p>
 					Defaults to none excluded.
 				</p>
@@ -1921,11 +1935,15 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<example />
 	</tag>
 	<tag>
-		<description>
-			Provides a readonly attribute to its ReadonlyAttribute parent tag.
-			The body, after trimming, must contain either "true", "false", or be empty.
-			If empty, the readonly attribute of the parent tag is not overridden.
-		</description>
+		<description><![CDATA[
+			<p class="semanticcms-tag-reference-summary">
+				Provides a readonly attribute to its ReadonlyAttribute parent tag.
+			</p>
+			<p>
+				The body, after trimming, must contain either "true", "false", or be empty.
+				If empty, the readonly attribute of the parent tag is not overridden.
+			</p>
+		]]></description>
 		<name>readonly</name>
 		<tag-class>com.aoindustries.taglib.ReadonlyTag</tag-class>
 		<body-content>scriptless</body-content>
@@ -1933,15 +1951,17 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>
-				Redirects the browser to another location.
-				Stops processing of the containing JSP page.
-			</p>
-			<p>
-				<strong>Important:</strong>
-				Redirects inside of standard &lt;jsp:include&gt; tags will be silently lost.
-				Use &lt;ao:include&gt; instead of &lt;jsp:include&gt; to support redirects inside of includes.
-			</p>
+			<div class="semanticcms-tag-reference-summary">
+				<p>
+					Redirects the browser to another location.
+					Stops processing of the containing JSP page.
+				</p>
+				<p>
+					<strong>Important:</strong>
+					Redirects inside of standard &lt;jsp:include&gt; tags will be silently lost.
+					Use &lt;ao:include&gt; instead of &lt;jsp:include&gt; to support redirects inside of includes.
+				</p>
+			</div>
 			<p>
 				Any attribute that has no namespace and begins with "param." is added to the href as a URL parameter.
 				The parameter name is the part of the attribute name following "param.".
@@ -1975,12 +1995,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The status code of redirect performed.  Is one of:
-					<ul>
-						<li>"moved_permanently" (or 301)</li>
-						<li>"moved_temporarily" (or 302)</li>
-						<li>"see_other" (or 303) - Hint: Used for redirect-after-post</li>
-					</ul>
 				</p>
+				<ul>
+					<li>"moved_permanently" (or 301)</li>
+					<li>"moved_temporarily" (or 302)</li>
+					<li>"see_other" (or 303) - Hint: Used for redirect-after-post</li>
+				</ul>
 				<p>
 					Because the redirect type has important consequences on search engines and browser caches, the decision should be made for
 					each redirect.  Thus, this attribute is required.
@@ -2084,12 +2104,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>
+			<p class="semanticcms-tag-reference-summary">
 				Manually establishes a script context when automatic detection is not possible.
 				The body of this tag contains a script.  The script should not be encoded
-				as if in HTML/XML, it must have single "&" instead of "&amp;".  The
-				script may contain any characters valid in that language, including <,
-				>, &, \u0000 (null), or any other values.
+				as if in HTML/XML, it must have single "&amp;" instead of "&amp;amp;".  The
+				script may contain any characters valid in that language, including &lt;,
+				&gt;, &amp;, \u0000 (null), or any other values.
 			</p>
 			<p>
 				The script will be properly encoded for the content of this tag.  Thus, you
@@ -2266,11 +2286,15 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<example />
 	</tag>
 	<tag>
-		<description>
-			Provides a selected attribute to its SelectedAttribute parent tag.
-			The body, after trimming, must contain either "true", "false", or be empty.
-			If empty, the selected attribute of the parent tag is not overridden.
-		</description>
+		<description><![CDATA[
+			<p class="semanticcms-tag-reference-summary">
+				Provides a selected attribute to its SelectedAttribute parent tag.
+			</p>
+			<p>
+				The body, after trimming, must contain either "true", "false", or be empty.
+				If empty, the selected attribute of the parent tag is not overridden.
+			</p>
+		]]></description>
 		<name>selected</name>
 		<tag-class>com.aoindustries.taglib.SelectedTag</tag-class>
 		<body-content>scriptless</body-content>
@@ -2336,11 +2360,15 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<example />
 	</tag>
 	<tag>
-		<description>
-			Provides a tabindex attribute to its TabindexAttribute parent tag.
-			The body, after trimming, must contain an integer or be empty.
-			If empty, the tabindex attribute of the parent tag is not overridden.
-		</description>
+		<description><![CDATA[
+			<p class="semanticcms-tag-reference-summary">
+				Provides a tabindex attribute to its TabindexAttribute parent tag.
+			</p>
+			<p>
+				The body, after trimming, must contain an integer or be empty.
+				If empty, the tabindex attribute of the parent tag is not overridden.
+			</p>
+		]]></description>
 		<name>tabindex</name>
 		<tag-class>com.aoindustries.taglib.TabindexTag</tag-class>
 		<body-content>scriptless</body-content>
@@ -2355,7 +2383,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>
+			<p class="semanticcms-tag-reference-summary">
 				Manually establishes a plaintext context when automatic detection is not possible.
 				The body of this tag contains any arbitary plain text.  In some contexts,
 				such as contained in a JavaScript string, this may be binary transparent.
@@ -2389,7 +2417,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			Renders a textarea tag.  The value may be provided in one of three ways, in
 			precedence order:
 			<ol>
-				<li>Direct child <value> tag.</li>
+				<li>Direct child &lt;ao:value&gt; tag.</li>
 				<li>As the value attribute</li>
 				<li>Contents of tag body.</li>
 			</ol>
@@ -2500,7 +2528,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>
+			<p class="semanticcms-tag-reference-summary">
 				Manually establishes a URL context when automatic detection is not possible.
 				The body of this tag contains a Uniform Resource Identifier (URI or URL).
 			</p>
@@ -2512,7 +2540,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<p>
 				After the first ?, however, the parameters must be properly URL encoded
 				and contain only valid characters.  It should not be escaped for (X)HTML,
-				meaning that parameter separators should be "&" instead of "&amp;".
+				meaning that parameter separators should be "&amp;" instead of "&amp;amp;".
 				The proper escaping/encoding will be performed based on the context of
 				this tag.
 			</p>
@@ -2584,8 +2612,17 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>
+			<p class="semanticcms-tag-reference-summary">
 				Writes the bean contents.  If the bean is <code>null</code> then nothing is displayed.
+				Supports data types beyond &lt;c:out&gt;.
+				This is generally for compatibility with Struts 1.X and predates JSTL and Expression Language.
+				JSTL, Expression Language, and other tags should generally be preferred.
+			</p>
+			<p>
+				In addition to the usual set of coercions expected for &lt;bean:write&gt;,
+				also supports writing XML nodes such as for HTML snippets.
+			</p>
+			<p>
 				The method attribute provides the name of the method that will be used to get the display value.
 				If not provided, it will default to <code>"toString"</code>.  This method
 				searches for the method of the given name with no parameters.  It is an error if the method is
@@ -2595,16 +2632,16 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				The content type depends on the value provided to the type attribute, and
 				defaults to text/plain.  The content is checked for well-formedness based
 				on its type:
-				<ul>
-					<li>"javascript" or "text/javascript" - no validation</li>
-					<li>"json" or "application/json" - no validation</li>
-					<li>"ld_json" or "application/ls+json" - no validation</li>
-					<li>"text" or "text/plain" - no validation</li>
-					<li>"url" or "text/url" - must be a valid URL</li>
-					<li>"xhtml" or "application/xhtml+xml" - must be well-formed XHTML content. (Note: Currently only checks character values.)</li>
-					<li>"xhtml_attribute" or "application/xhtml+xml+attribute" - must be a valid XHTML attribute.</li>
-				</ul>
 			</p>
+			<ul>
+				<li>"javascript" or "text/javascript" - no validation</li>
+				<li>"json" or "application/json" - no validation</li>
+				<li>"ld_json" or "application/ls+json" - no validation</li>
+				<li>"text" or "text/plain" - no validation</li>
+				<li>"url" or "text/url" - must be a valid URL</li>
+				<li>"xhtml" or "application/xhtml+xml" - must be well-formed XHTML content. (Note: Currently only checks character values.)</li>
+				<li>"xhtml_attribute" or "application/xhtml+xml+attribute" - must be a valid XHTML attribute.</li>
+			</ul>
 		]]></description>
 		<name>write</name>
 		<tag-class>com.aoindustries.taglib.WriteTag</tag-class>
@@ -2673,9 +2710,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<p>
 				Manually establishes an XHTML attribute context when automatic detection is not possible.
 				The body of this tag contains well-formed XHTML 1.0-compliant attribute.
-			<p>
 			</p>
-
+			<p>
 				The content type of this tag is application/xhtml+xml+attribute.
 			</p>
 		]]></description>

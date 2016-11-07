@@ -36,7 +36,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2016-11-05T23:42:07-0500"
+		dateModified="2016-11-06T22:40:14-0600"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:if test="${fn:endsWith('@{com.aoindustries:ao-taglib:jar.version}', '-SNAPSHOT')}">
@@ -59,6 +59,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 						for taglib versions.  The unambiguous full version is annotated via comment.
 					</li>
 					<li>Taglib URL changed to <code>https://aoindustries.com/ao-taglib/</code> to match project URL.</li>
+					<li>Added support for XML DOM Node in toString type coercion.</li>
 				</ul>
 			</changelog:release>
 		</c:if>
