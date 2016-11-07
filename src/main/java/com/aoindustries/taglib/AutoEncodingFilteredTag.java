@@ -104,7 +104,10 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport {
 				containerContentType = parentEncodingContext.contentType;
 			} else {
 				// Use the content type of the response
-				containerContentType = MediaType.getMediaTypeForContentType(response.getContentType());
+				String responseContentType = response.getContentType();
+				// Default to XHTML: TODO: Is there a better way since can't set content type early in response then reset again...
+				if(responseContentType == null) responseContentType = MediaType.XHTML.getContentType();
+				containerContentType = MediaType.getMediaTypeForContentType(responseContentType);
 			}
 			// Find the encoder
 			final MediaType myContentType = getContentType();
