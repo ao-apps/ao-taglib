@@ -54,12 +54,19 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 			<p>
 				When a parameter value is null it is not added.
-				If the value is an Iterable, Iterator, Enumeration, or array, then each non-null element is coerced to
-				string as a separate parameter in iteration order.  Otherwise, the value itself is
-				coerced to string for the parameter value.
+				If the value is an <a href="@{javac.link.javaApi}java/lang/Iterable.html">Iterable</a>,
+				<a href="@{javac.link.javaApi}java/util/Iterator.html">Iterator</a>,
+				<a href="@{javac.link.javaApi}java/util/Enumeration.html">Enumeration</a>,
+				or array, then each non-null element is coerced to
+				<a href="@{javac.link.javaApi}java/lang/String.html">String</a> as a separate
+				parameter in iteration order.  Otherwise, the value itself is
+				coerced to <a href="@{javac.link.javaApi}java/lang/String.html">String</a>
+				for the parameter value.
 			</p>
 			<p>
-				Nested &lt;ao:param&gt; or &lt;ao:params&gt; tags will add parameters after any provided as attributes.
+				Nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a> or
+				<a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a> tags will
+				add parameters after any provided as attributes.
 			</p>
 		]]></description>
 		<name>a</name>
@@ -69,7 +76,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The id of the element.
-					A nested &lt;ao:id&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-id">&lt;ao:id&gt;</a> tag will override this value.
 				</p>
 			]]></description>
 			<name>id</name>
@@ -86,7 +93,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					URL Encoding is performed on everything up to the last # or ? (first of the two), except for
 					any character in the set { ':', '/', ';', '#' }
 					To avoid ambiguity, any parameters or anchors in the URL must have been correctly encoded by the caller.
-					A nested &lt;ao:href&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-href">&lt;ao:href&gt;</a> tag will override this value.
 				</p>
 			]]></description>
 			<name>href</name>
@@ -127,7 +134,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The hreflang for the link.  A nested &lt;ao:hreflang&gt; tag will override this value.
+					The hreflang for the link.
+					A nested <a href="@{project.url}ao.tld/tag-hreflang">&lt;ao:hreflang&gt;</a> tag will override this value.
 				</p>
 			]]></description>
 			<name>hreflang</name>
@@ -138,7 +146,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The rel for the link.  A nested &lt;ao:rel&gt; tag will override this value.
+					The rel for the link.
+					A nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:rel&gt;</a> tag will override this value.
 				</p>
 			]]></description>
 			<name>rel</name>
@@ -149,7 +158,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The type for the link.  A nested &lt;ao:type&gt; tag will override this value.
+					The type for the link.
+					A nested <a href="@{project.url}ao.tld/tag-type">&lt;ao:type&gt;</a> tag will override this value.
 				</p>
 			]]></description>
 			<name>type</name>
@@ -160,7 +170,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The target for the link.  A nested &lt;ao:target&gt; tag will override this value.
+					The target for the link.
+					A nested <a href="@{project.url}ao.tld/tag-target">&lt;ao:target&gt;</a> tag will override this value.
 				</p>
 			]]></description>
 			<name>target</name>
@@ -171,7 +182,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The title text for the link.  A nested &lt;ao:title&gt; tag will override this value.
+					The title text for the link.
+					A nested <a href="@{project.url}ao.tld/tag-title">&lt;ao:title&gt;</a> tag will override this value.
 				</p>
 			]]></description>
 			<name>title</name>
@@ -182,7 +194,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The CSS class for the link.  A nested &lt;ao:class&gt; tag will override this value.
+					The CSS class for the link.
+					A nested <a href="@{project.url}ao.tld/tag-class">&lt;ao:class&gt;</a> tag will override this value.
 				</p>
 			]]></description>
 			<name>class</name>
@@ -193,7 +206,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The CSS style for the link.  A nested &lt;ao:style&gt; tag will override this value.
+					The CSS style for the link.
+					A nested <a href="@{project.url}ao.tld/tag-style">&lt;ao:style&gt;</a> tag will override this value.
 				</p>
 			]]></description>
 			<name>style</name>
@@ -204,7 +218,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					A JavaScript onclick handler.  A nested &lt;ao:onclick&gt; tag will override this value.
+					A JavaScript onclick handler.
+					A nested <a href="@{project.url}ao.tld/tag-onclick">&lt;ao:onclick&gt;</a> tag will override this value.
 				</p>
 			]]></description>
 			<name>onclick</name>
@@ -215,7 +230,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					A JavaScript onmouseover handler.  A nested &lt;ao:onmouseover&gt; tag will override this value.
+					A JavaScript onmouseover handler.
+					A nested <a href="@{project.url}ao.tld/tag-onmouseover">&lt;ao:onmouseover&gt;</a> tag will override this value.
 				</p>
 			]]></description>
 			<name>onmouseover</name>
@@ -319,7 +335,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>
+			<p class="semanticcms-tag-reference-summary">
 				Adds a base tag only when necessary.
 			</p>
 			<p>
@@ -1178,9 +1194,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
+			<p class="semanticcms-tag-reference-summary">
+				Renders an input tag.
+			</p>
 			<p>
-				Renders an input tag.  The value may be provided in one of three ways, in
-				precedence order:
+				The value may be provided in one of three ways, in precedence order:
 			</p>
 			<ol>
 				<li>Direct child &lt;ao:value&gt; tag.</li>
@@ -2310,10 +2328,13 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Manually establishes a script context when automatic detection is not possible.
-				The body of this tag contains a script.  The script should not be encoded
-				as if in HTML/XML, it must have single "&amp;" instead of "&amp;amp;".  The
-				script may contain any characters valid in that language, including &lt;,
-				&gt;, &amp;, \u0000 (null), or any other values.
+				The body of this tag contains a script.
+			</p>
+			<p>
+				The script should not be encoded as if in HTML/XML, it must have single
+				"&amp;" instead of "&amp;amp;".  The script may contain any characters
+				valid in that language, including &lt;, &gt;, &amp;, \u0000 (null), or
+				any other values.
 			</p>
 			<p>
 				The script will be properly encoded for the content of this tag.  Thus, you
@@ -2612,8 +2633,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Manually establishes a plaintext context when automatic detection is not possible.
-				The body of this tag contains any arbitary plain text.  In some contexts,
-				such as contained in a JavaScript string, this may be binary transparent.
+				The body of this tag contains any arbitary plain text.
+			</p>
+			<p>
+				In some contexts, such as contained in a JavaScript string, this may be binary transparent.
 			</p>
 			<p>
 				In other contexts, it may result in an error when a character may not
@@ -2640,9 +2663,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
+			<p class="semanticcms-tag-reference-summary">
+				Renders a textarea tag.
+			</p>
 			<p>
-				Renders a textarea tag.  The value may be provided in one of three ways, in
-				precedence order:
+				The value may be provided in one of three ways, in precedence order:
 			</p>
 			<ol>
 				<li>Direct child &lt;ao:value&gt; tag.</li>
@@ -2863,14 +2888,13 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<tag>
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
-				Writes the bean contents.  If the bean is <code>null</code> then nothing is displayed.
-				Supports data types beyond &lt;c:out&gt;.
-				This is generally for compatibility with Struts 1.X and predates JSTL and Expression Language.
-				JSTL, Expression Language, and other tags should generally be preferred.
+				Writes the bean contents.  Supports data types beyond &lt;c:out&gt; and
+				&lt;bean:write&gt;, such as XML nodes for HTML snippets.
 			</p>
 			<p>
-				In addition to the usual set of coercions expected for &lt;bean:write&gt;,
-				also supports writing XML nodes such as for HTML snippets.
+				If the bean is <code>null</code> then nothing is displayed.
+				This is generally for compatibility with Struts 1.X and predates JSTL and Expression Language.
+				JSTL, Expression Language, and other tags should generally be preferred.
 			</p>
 			<p>
 				The method attribute provides the name of the method that will be used to get the display value.
@@ -2967,7 +2991,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>
+			<p class="semanticcms-tag-reference-summary">
 				Manually establishes an XHTML attribute context when automatic detection is not possible.
 				The body of this tag contains well-formed XHTML 1.0-compliant attribute.
 			</p>
@@ -2981,7 +3005,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>
+			<p class="semanticcms-tag-reference-summary">
 				Manually establishes an XHTML context when automatic detection is not possible.
 				The body of this tag contains well-formed XHTML 1.0-compliant markup.
 			</p>
