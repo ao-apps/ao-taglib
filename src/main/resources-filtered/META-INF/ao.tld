@@ -39,7 +39,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<tag>
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
-				Renders an a tag.
+				Renders an &lt;a&gt; tag.
 				The body is trimmed while written.
 			</p>
 			<p>
@@ -384,7 +384,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<tag>
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
-				Adds a base tag only when necessary.
+				Adds a &lt;base&gt; tag only when necessary.
 			</p>
 			<p>
 				After forward (or forward fall-back from redirect), relative paths
@@ -392,13 +392,13 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				evident when forwarding between different directories.
 			</p>
 			<p>
-				To keep paths relative to the page after a forward, a base tag is
+				To keep paths relative to the page after a forward, a &lt;base&gt; tag is
 				written when the path of the current page does not equal the path
 				of the original request.
 			</p>
 			<p>
 				A &lt;base&gt; tag will affect any anchor links on a page.  For this
-				reason, this base tag primarily exists for when a redirect has to fall-back
+				reason, this &lt;base&gt; tag primarily exists for when a redirect has to fall-back
 				to a forward to a resource in another path.  Properly displaying the main
 				contents in this case is considered more important than correctly behaving anchors.
 			</p>
@@ -530,7 +530,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<tag>
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
-				Renders a form tag.
+				Renders a &lt;form&gt; tag.
 			</p>
 			<p>
 				Any attribute that has no namespace and begins with "param." is added as a hidden form element.
@@ -874,7 +874,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<li>Sets the response contentType between html / xhtml based on forceHtml attribute and request headers</li>
 				<li>Writes the DOCTYPE unless set to "none"</li>
 				<li>
-					Writes the html tag, including the xmlns, lang, and xml:lang attributes based on
+					Writes the &lt;html&gt; tag, including the xmlns, lang, and xml:lang attributes based on
 					the locale of the current response.
 				</li>
 			</ol>
@@ -913,7 +913,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The CSS class for the html tag.
+					The CSS class for the &lt;html&gt; tag.
 				</p>
 			]]></description>
 			<name>class</name>
@@ -972,7 +972,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<tag>
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
-				Renders an iframe tag.
+				Renders an &lt;iframe&gt; tag.
 			</p>
 			<p>
 				Any attribute that has no namespace and begins with "param." is added to the src as a URL parameter.
@@ -1132,7 +1132,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<tag>
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
-				Renders an img tag.
+				Renders an &lt;img&gt; tag.
 			</p>
 			<p>
 				The src may be provided in one of three ways, in precedence order:
@@ -1466,7 +1466,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<tag>
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
-				Renders an input tag.
+				Renders an &lt;input&gt; tag.
 			</p>
 			<p>
 				The value may be provided in one of three ways, in precedence order:
@@ -1510,7 +1510,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The name of input tag.
+					The name of &lt;input&gt; tag.
 					A nested <a href="@{project.url}ao.tld/tag-name">&lt;ao:name&gt;</a>
 					tag will override this value.
 				</p>
@@ -1733,7 +1733,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				If contained with any
 				<a href="@{project.url}apidocs/com/aoindustries/taglib/LinksAttribute.html">LinksAttribute</a>
 				parent, adds the link data to the parent tag.
-				Otherwise, renders a link tag.
+				Otherwise, renders a &lt;link&gt; tag.
 			</p>
 			<p>
 				Any attribute that has no namespace and begins with "param." is added to the href as a URL parameter.
@@ -2096,7 +2096,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				If contained with any
 				<a href="@{project.url}apidocs/com/aoindustries/taglib/MetasAttribute.html">MetasAttribute</a>
 				parent, adds the meta data to the parent tag.
-				Otherwise, renders a meta tag.
+				Otherwise, renders a &lt;meta&gt; tag.
 			</p>
 			<p>
 				The content may be provided in one of three ways, in precedence order:
@@ -2113,7 +2113,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The name of meta tag.
+					The name of &lt;meta&gt; tag.
 					A nested <a href="@{project.url}ao.tld/tag-name">&lt;ao:name&gt;</a>
 					tag will override this value.
 				</p>
@@ -2148,7 +2148,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The charset of meta tag.
+					The charset of &lt;meta&gt; tag.
 				</p>
 			]]></description>
 			<name>charset</name>
@@ -2306,7 +2306,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<tag>
 		<description><![CDATA[
 			<p>
-				Renders an option tag.
+				Renders an &lt;option&gt; tag.
 			</p>
 		]]></description>
 		<name>option</name>
@@ -2971,7 +2971,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<tag>
 		<description><![CDATA[
 			<p>
-				Renders a select tag.
+				Renders a &lt;select&gt; tag.
 			</p>
 		]]></description>
 		<name>select</name>
@@ -3246,7 +3246,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<tag>
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
-				Renders a textarea tag.
+				Renders a &lt;textarea&gt; tag.
 			</p>
 			<p>
 				The value may be provided in one of three ways, in precedence order:
@@ -3263,7 +3263,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The name of textarea tag.
+					The name of &lt;textarea&gt; tag.
 					A nested <a href="@{project.url}ao.tld/tag-name">&lt;ao:name&gt;</a>
 					tag will override this value.
 				</p>
