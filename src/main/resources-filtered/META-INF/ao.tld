@@ -96,7 +96,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					In order to make relative paths predictable, relative paths are interpreted from
-					the current page, as long as all includes have been done via
+					the current JSP page, as long as all includes have been done via
 					<a href="@{project.url}ao.tld/tag-include">&lt;ao:include&gt;</a>
 					and any forward via <a href="@{project.url}ao.tld/tag-forward">&lt;ao:forward&gt;</a>.
 				</p>
@@ -388,12 +388,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 			<p>
 				After forward (or forward fall-back from redirect), relative paths
-				might not resolve relative to the current page.  This will be most
+				might not resolve relative to the current JSP page.  This will be most
 				evident when forwarding between different directories.
 			</p>
 			<p>
 				To keep paths relative to the page after a forward, a &lt;base&gt; tag is
-				written when the path of the current page does not equal the path
+				written when the path of the current JSP page does not equal the path
 				of the original request.
 			</p>
 			<p>
@@ -596,7 +596,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					In order to make relative paths predictable, relative paths are interpreted from
-					the current page, as long as all includes have been done via
+					the current JSP page, as long as all includes have been done via
 					<a href="@{project.url}ao.tld/tag-include">&lt;ao:include&gt;</a>
 					and any forward via <a href="@{project.url}ao.tld/tag-forward">&lt;ao:forward&gt;</a>.
 				</p>
@@ -733,7 +733,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<p>
 				Argument objects are passed to the forwarded page via request-scope <code>arg</code>
 				<a href="@{javac.link.javaApi}java/util/Map.html">Map</a>.
-				Any arguments to the current page are not automatically passed-on to the forwarded page 
+				Any arguments to the current JSP page are not automatically passed-on to the forwarded page 
 				(this differs from parameters in this way).
 			</p>
 			<p>
@@ -1058,7 +1058,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					In order to make relative paths predictable, relative paths are interpreted from
-					the current page, as long as all includes have been done via
+					the current JSP page, as long as all includes have been done via
 					<a href="@{project.url}ao.tld/tag-include">&lt;ao:include&gt;</a>
 					and any forward via <a href="@{project.url}ao.tld/tag-forward">&lt;ao:forward&gt;</a>.
 				</p>
@@ -1229,7 +1229,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					In order to make relative paths predictable, relative paths are interpreted from
-					the current page, as long as all includes have been done via
+					the current JSP page, as long as all includes have been done via
 					<a href="@{project.url}ao.tld/tag-include">&lt;ao:include&gt;</a>
 					and any forward via <a href="@{project.url}ao.tld/tag-forward">&lt;ao:forward&gt;</a>.
 				</p>
@@ -1377,7 +1377,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<description><![CDATA[
 			<div class="semanticcms-tag-reference-summary">
 				<p>
-					Includes another resource and then continues processing of the current page.
+					Includes another resource and then continues processing of the current JSP page.
 					This has three advantages over the standard
 					<a href="https://docs.oracle.com/cd/A87860_01/doc/java.817/a83726/genlovw3.htm#1008181">&lt;jsp:include&gt;</a>
 					tag:
@@ -1417,9 +1417,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<p>
 				Argument objects are passed to the included page via request-scope <code>arg</code>
 				<a href="@{javac.link.javaApi}java/util/Map.html">Map</a>.
-				Any arguments to the current page are not automatically passed-on to the included page 
+				Any arguments to the current JSP page are not automatically passed-on to the included page 
 				(this differs from parameters in this way).
-				The current page arguments are restored when the include completes.
+				The current JSP page arguments are restored when the include completes.
 			</p>
 			<p>
 				Any attribute that has no namespace and begins with <code>arg.</code> is added as an argument.
@@ -1819,7 +1819,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					In order to make relative paths predictable, relative paths are interpreted from
-					the current page, as long as all includes have been done via
+					the current JSP page, as long as all includes have been done via
 					<a href="@{project.url}ao.tld/tag-include">&lt;ao:include&gt;</a>
 					and any forward via <a href="@{project.url}ao.tld/tag-forward">&lt;ao:forward&gt;</a>.
 				</p>
@@ -2753,7 +2753,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					In order to make relative paths predictable, relative paths are interpreted from
-					the current page, as long as all includes have been done via
+					the current JSP page, as long as all includes have been done via
 					<a href="@{project.url}ao.tld/tag-include">&lt;ao:include&gt;</a>
 					and any forward via <a href="@{project.url}ao.tld/tag-forward">&lt;ao:forward&gt;</a>.
 				</p>
@@ -2817,7 +2817,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					When forward is performed instead of redirect, the original request parameters are hidden.
 					Only the parameters provided in the redirect are passed-on to the target page.
-					Also, any arguments to the current page are not passed-on (see
+					Also, any arguments to the current JSP page are not passed-on (see
 					<a href="@{project.url}ao.tld/tag-include">&lt;ao:include&gt;</a>).
 				</p>
 				<p>
@@ -2937,7 +2937,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					In order to make relative paths predictable, relative paths are interpreted from
-					the current page, as long as all includes have been done via
+					the current JSP page, as long as all includes have been done via
 					<a href="@{project.url}ao.tld/tag-include">&lt;ao:include&gt;</a>
 					and any forward via <a href="@{project.url}ao.tld/tag-forward">&lt;ao:forward&gt;</a>.
 				</p>
@@ -3625,7 +3625,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					Specifies the method that will be used to convert the object to a
 					<a href="@{javac.link.javaApi}java/lang/String.html">String</a>.
-					This defaults to <a href="@{javac.link.javaApi}java/lang/Object.html#toString()">toString</a>.
+					This defaults to
+					<code><a href="@{javac.link.javaApi}java/lang/Object.html#toString()">toString</a></code>.
 				</p>
 			]]></description>
 			<name>method</name>
