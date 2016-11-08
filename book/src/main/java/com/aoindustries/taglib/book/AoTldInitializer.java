@@ -23,7 +23,8 @@
 package com.aoindustries.taglib.book;
 
 import com.semanticcms.tagreference.TagReferenceInitializer;
-import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * @author  AO Industries, Inc.
@@ -34,6 +35,12 @@ public class AoTldInitializer extends TagReferenceInitializer {
 	private static final String TLD_PATH = "/ao.tld";
 	static final String TLD_SERVLET_PATH = TLD_BOOK + TLD_PATH;
 
+	private static final Map<String,String> additionalApiLinks = new LinkedHashMap<String,String>();
+	static {
+		additionalApiLinks.put("com.aoindustries.util.", "https://aoindustries.com/aocode-public/apidocs/");
+		additionalApiLinks.put("com.aoindustries.taglib.", "https://aoindustries.com/ao-taglib/apidocs/");
+	}
+
 	public AoTldInitializer() {
 		super(
 			"AO Taglib Reference",
@@ -42,7 +49,7 @@ public class AoTldInitializer extends TagReferenceInitializer {
 			TLD_PATH,
 			"https://docs.oracle.com/javase/6/docs/api/",
 			"https://docs.oracle.com/javaee/6/api/",
-			Collections.singletonMap("com.aoindustries.taglib.", "https://aoindustries.com/ao-taglib/apidocs/")
+			additionalApiLinks
 		);
 	}
 }

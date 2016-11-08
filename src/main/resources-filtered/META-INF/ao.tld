@@ -53,8 +53,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				The parameter name is the part of the attribute name following "param.".
 			</p>
 			<p>
-				When a parameter value is null it is not added.
-				If the value is an <a href="@{javac.link.javaApi}java/lang/Iterable.html">Iterable</a>,
+				When a parameter value is <code>null</code> it is not added.
+				If the value is an
+				<a href="@{javac.link.javaApi}java/lang/Iterable.html">Iterable</a>,
 				<a href="@{javac.link.javaApi}java/util/Iterator.html">Iterator</a>,
 				<a href="@{javac.link.javaApi}java/util/Enumeration.html">Enumeration</a>,
 				or array, then each non-null element is coerced to
@@ -104,8 +105,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					When true, generates an absolute URL for the href for the link.
-					Defaults to false.
+					When <code>true</code>, generates an absolute URL for the href for the link.
+					Defaults to <code>false</code>.
 				</p>
 			]]></description>
 			<name>hrefAbsolute</name>
@@ -118,8 +119,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					If the href represents a local resource, a parameter of "lastModified=#####" may be
 					automatically added with the timestamp of the local resource to the nearest second.
-					May be one of "true", "false", or "auto".
-					Defaults to "auto".
+					May be one of <code>true</code>, <code>false</code>, or <code>auto</code>.
+					Defaults to <code>auto</code>.
 				</p>
 				<p>
 					In auto mode, last modified stamping may be disabled by the client with
@@ -242,7 +243,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					A JavaScript onmouseout handler.  A nested &lt;ao:onmouseout&gt; tag will override this value.
+					A JavaScript onmouseout handler.
+					A nested <a href="@{project.url}ao.tld/tag-onmouseout">&lt;ao:onmouseout&gt;</a> tag will override this value.
 				</p>
 			]]></description>
 			<name>onmouseout</name>
@@ -254,7 +256,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Provides an action to its ActionAttribute parent tag.</p>
+			<p>
+				Provides an action to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/ActionAttribute.html">ActionAttribute</a>
+				parent tag.
+			</p>
 		]]></description>
 		<name>action</name>
 		<tag-class>com.aoindustries.taglib.ActionTag</tag-class>
@@ -262,7 +268,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Provides an alt attribute to its AltAttribute parent tag.</p>
+			<p>
+				Provides an alt attribute to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/AltAttribute.html">AltAttribute</a>
+				parent tag.
+			</p>
 		]]></description>
 		<name>alt</name>
 		<tag-class>com.aoindustries.taglib.AltTag</tag-class>
@@ -270,14 +280,21 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Adds an argument to its ArgsAttribute parent tag.</p>
+			<p>
+				Adds an argument to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/ArgsAttribute.html">ArgsAttribute</a>
+				parent tag.
+			</p>
 		]]></description>
 		<name>arg</name>
 		<tag-class>com.aoindustries.taglib.ArgTag</tag-class>
 		<body-content>scriptless</body-content>
 		<attribute>
 			<description><![CDATA[
-				<p>The name of argument tag.  A nested &lt;ao:name&gt; tag will override this value.</p>
+				<p>
+					The name of argument tag.
+					A nested <a href="@{project.url}ao.tld/tag-name">&lt;ao:name&gt;</a> tag will override this value.
+				</p>
 			]]></description>
 			<name>name</name>
 			<required>false</required>
@@ -287,8 +304,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The value of the parameter.  A nested &lt;ao:value&gt; tag will override this value.  If neither is provided,
-					the output of the body is used with whitespace trimmed.
+					The value of the parameter.
+					A nested <a href="@{project.url}ao.tld/tag-value">&lt;ao:value&gt;</a> tag will override this value.
+					If neither is provided, the output of the body is used with whitespace trimmed.
 				</p>
 			]]></description>
 			<name>value</name>
@@ -300,8 +318,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<tag>
 		<description><![CDATA[
 			<p>
-				Evaluates the test expression, if it is not true throws
-				AssertionError with the optional message.
+				Evaluates the test expression, if it is not <code>true</code> throws
+				<a href="@{javac.link.javaApi}java/lang/AssertionError.html">AssertionError</a>
+				with the optional message.
 			</p>
 		]]></description>
 		<name>assert</name>
@@ -322,8 +341,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The message included in the AssertionError, only evaluted as-needed due to
-					use of deferred expressions.
+					The message included in the
+					<a href="@{javac.link.javaApi}java/lang/AssertionError.html">AssertionError</a>,
+					only evaluted as-needed due to use of deferred expressions.
 				</p>
 			]]></description>
 			<name>message</name>
@@ -349,7 +369,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				of the original request.
 			</p>
 			<p>
-				A &lt;base /&gt; tag will affect any anchor links on a page.  For this
+				A &lt;base&gt; tag will affect any anchor links on a page.  For this
 				reason, this base tag primarily exists for when a redirect has to fall-back
 				to a forward to a resource in another path.  Properly displaying the main
 				contents in this case is considered more important than correctly behaving anchors.
@@ -361,7 +381,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Sets the bundle used by any nested &lt;ao:message&gt; tags or functions.</p>
+			<p>
+				Sets the bundle used by any nested
+				<a href="@{project.url}ao.tld/tag-message">&lt;ao:message&gt; tags</a>
+				or <a href="@{project.url}ao.tld/function-message">functions</a>.
+			</p>
 		]]></description>
 		<name>bundle</name>
 		<tag-class>com.aoindustries.taglib.BundleTag</tag-class>
@@ -377,7 +401,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</attribute>
 		<attribute>
 			<description><![CDATA[
-				<p>The prefix applied to any nested &lt;ao:message&gt; tag or function keys.</p>
+				<p>
+					The prefix applied to any nested
+					<a href="@{project.url}ao.tld/tag-message">&lt;ao:message&gt; tag</a>
+					or <a href="@{project.url}ao.tld/function-message">function</a> keys.
+				</p>
 			]]></description>
 			<name>prefix</name>
 			<required>false</required>
@@ -388,8 +416,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<tag>
 		<description><![CDATA[
 			<p>
-				Provides a checked attribute to its CheckedAttribute parent tag.
-				The body, after trimming, must contain either "true", "false", or be empty.
+				Provides a checked attribute to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/CheckedAttribute.html">CheckedAttribute</a>
+				parent tag.
+				The body, after trimming, must contain either <code>true</code>, <code>false</code>, or be empty.
 				If empty, the checked attribute of the parent tag is not overridden.
 			</p>
 		]]></description>
@@ -399,7 +429,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Like &lt;c:choose&gt;, except uses deferred expressions.</p>
+			<p>
+				Like
+				<a href="https://docs.oracle.com/javaee/5/jstl/1.1/docs/tlddocs/c/choose.html">&lt;c:choose&gt;</a>,
+				except uses deferred expressions.
+			</p>
 		]]></description>
 		<name>choose</name>
 		<tag-class>com.aoindustries.taglib.ChooseTag</tag-class>
@@ -407,7 +441,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Provides a class to its ClassAttribute parent tag.</p>
+			<p>
+				Provides a class to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/ClassAttribute.html">ClassAttribute</a>
+				parent tag.
+			</p>
 		]]></description>
 		<name>class</name>
 		<tag-class>com.aoindustries.taglib.ClassTag</tag-class>
@@ -415,7 +453,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Provides a content attribute to its ContentAttribute parent tag.</p>
+			<p>
+				Provides a content attribute to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/ContentAttribute.html">ContentAttribute</a>
+				parent tag.
+			</p>
 		]]></description>
 		<name>content</name>
 		<tag-class>com.aoindustries.taglib.ContentTag</tag-class>
@@ -423,7 +465,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Disables the resource editor for this request.</p>
+			<p>
+				Disables the resource editor for this request.
+			</p>
 		]]></description>
 		<name>disableResourceEditor</name>
 		<tag-class>com.aoindustries.taglib.DisableResourceEditorTag</tag-class>
@@ -432,8 +476,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<tag>
 		<description><![CDATA[
 			<p>
-				Provides a disabled attribute to its DisabledAttribute parent tag.
-				The body, after trimming, must contain either "true", "false", or be empty.
+				Provides a disabled attribute to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/DisabledAttribute.html">DisabledAttribute</a>
+				parent tag.
+				The body, after trimming, must contain either <code>true</code>, <code>false</code>, or be empty.
 				If empty, the disabled attribute of the parent tag is not overridden.
 			</p>
 		]]></description>
@@ -443,7 +489,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Provides an enctype to its EnctypeAttribute parent tag.</p>
+			<p>
+				Provides an enctype to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/EnctypeAttribute.html">EnctypeAttribute</a>
+				parent tag.
+			</p>
 		]]></description>
 		<name>enctype</name>
 		<tag-class>com.aoindustries.taglib.EnctypeTag</tag-class>
@@ -459,13 +509,21 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				The parameter name is the part of the attribute name following "param.".
 			</p>
 			<p>
-				When a parameter value is null it is not added.
-				If the value is an Iterable, Iterator, Enumeration, or array, then each non-null element is coerced to
-				string as a separate parameter in iteration order.  Otherwise, the value itself is
-				coerced to string for the parameter value.
+				When a parameter value is <code>null</code> it is not added.
+				If the value is an
+				<a href="@{javac.link.javaApi}java/lang/Iterable.html">Iterable</a>,
+				<a href="@{javac.link.javaApi}java/util/Iterator.html">Iterator</a>,
+				<a href="@{javac.link.javaApi}java/util/Enumeration.html">Enumeration</a>,
+				or array, then each non-null element is coerced to
+				<a href="@{javac.link.javaApi}java/lang/String.html">String</a>
+				as a separate parameter in iteration order.  Otherwise, the value itself is
+				coerced to <a href="@{javac.link.javaApi}java/lang/String.html">String</a>
+				for the parameter value.
 			</p>
 			<p>
-				Nested &lt;ao:param&gt; or &lt;ao:params&gt; tags will add parameters after any provided as attributes.
+				Nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a>
+				or <a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a>
+				tags will add parameters after any provided as attributes.
 			</p>
 		]]></description>
 		<name>form</name>
@@ -476,8 +534,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The method used, must be either post or get.
-					Defaults to "get".
-					A nested &lt;ao:method&gt; tag will override this value.
+					Defaults to <code>get</code>.
+					A nested <a href="@{project.url}ao.tld/tag-method">&lt;ao:method&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>method</name>
@@ -489,7 +548,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The id of the element.
-					A nested &lt;ao:id&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-id">&lt;ao:id&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>id</name>
@@ -502,7 +562,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					The action for the form.
 					Any URL parameters will not be in the action attribute, but instead will be rewritten into hidden form elements.
-					A nested &lt;ao:action&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-action">&lt;ao:action&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>action</name>
@@ -514,7 +575,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The target for the form.
-					A nested &lt;ao:target&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-target">&lt;ao:target&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>target</name>
@@ -526,7 +588,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The enctype for the form.
-					A nested &lt;ao:enctype&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-enctype">&lt;ao:enctype&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>enctype</name>
@@ -538,7 +601,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The CSS style for the form.
-					A nested &lt;ao:style&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-style">&lt;ao:style&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>style</name>
@@ -550,7 +614,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					A JavaScript onsubmit handler.
-					A nested &lt;ao:onsubmit&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-onsubmit">&lt;ao:onsubmit&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>onsubmit</name>
@@ -566,12 +631,18 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					Forwards to another resource.
 					Stops processing of the containing JSP page.
-					This has three advantages over the standard &lt;jsp:forward&gt; tag:
+					This has three advantages over the standard
+					<a href="https://docs.oracle.com/cd/A87860_01/doc/java.817/a83726/genlovw3.htm#1008181">&lt;jsp:forward&gt;</a>
+					tag:
 				</p>
 				<ol>
 					<li>You may clear parameters such that only those specifically added will be passed on to the next page</li>
 					<li>You may have other nested tags used to select and build the set of parameters</li>
-					<li>You may pass argument objects instead of only string parameters (see below)</li>
+					<li>
+						You may pass argument objects instead of only
+						<a href="@{javac.link.javaApi}java/lang/String.html">String</a>
+						parameters (see below)
+					</li>
 				</ol>
 			</div>
 			<p>
@@ -579,31 +650,43 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				The parameter name is the part of the attribute name following "param.".
 			</p>
 			<p>
-				When a parameter value is null it is not added.
-				If the value is an Iterable, Iterator, Enumeration, or array, then each non-null element is coerced to
-				string as a separate parameter in iteration order.  Otherwise, the value itself is
-				coerced to string for the parameter value.
+				When a parameter value is <code>null</code> it is not added.
+				If the value is an
+				<a href="@{javac.link.javaApi}java/lang/Iterable.html">Iterable</a>,
+				<a href="@{javac.link.javaApi}java/util/Iterator.html">Iterator</a>,
+				<a href="@{javac.link.javaApi}java/util/Enumeration.html">Enumeration</a>,
+				or array, then each non-null element is coerced to
+				<a href="@{javac.link.javaApi}java/lang/String.html">String</a>
+				as a separate parameter in iteration order.  Otherwise, the value itself is
+				coerced to <a href="@{javac.link.javaApi}java/lang/String.html">String</a>
+				for the parameter value.
 			</p>
 			<p>
-				Nested &lt;ao:param&gt; or &lt;ao:params&gt; tags will add parameters after any provided as attributes.
+				Nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a>
+				or <a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a>
+				tags will add parameters after any provided as attributes.
 				If parameters are not cleared, nested parameters are added before request parameters.
 			</p>
 			<p>
-				Argument objects are passed to the forwarded page via request-scope "arg" Map.
+				Argument objects are passed to the forwarded page via request-scope <code>arg</code>
+				<a href="@{javac.link.javaApi}java/util/Map.html">Map</a>.
 				Any arguments to the current page are not automatically passed-on to the forwarded page 
 				(this differs from parameters in this way).
 			</p>
 			<p>
-				Any attribute that has no namespace and begins with "arg." is added as an argument.
-				The argument name is the part of the attribute name following "arg.".
-				Because this argument becomes an element in the Map named "arg" in the forwarded page, the attribute
-				name and JSP EL name will match precisely.
+				Any attribute that has no namespace and begins with <code>arg.</code> is added as an argument.
+				The argument name is the part of the attribute name following <code>arg.</code>.
+				Because this argument becomes an element in the
+				<a href="@{javac.link.javaApi}java/util/Map.html">Map</a>
+				named <code>arg</code> in the forwarded page, the attribute
+				name and JSP <a href="https://docs.oracle.com/cd/E19226-01/820-7627/gjddd/">Expression Language</a> name will match precisely.
 			</p>
 			<p>
-				Nested &lt;ao:arg&gt; tags may also be used to pass arguments.
+				Nested <a href="@{project.url}ao.tld/tag-arg">&lt;ao:arg&gt;</a>
+				tags may also be used to pass arguments.
 			</p>
 			<p>
-				It is an error for the same argument name to be used twice (including when set as null).
+				It is an error for the same argument name to be used twice (including when set as <code>null</code>).
 			</p>
 		]]></description>
 		<name>forward</name>
@@ -613,15 +696,19 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The page that will be forwarded to.
-					A nested &lt;ao:page&gt; tag will override this value.
-					The page is required, must be set in attribute or nested &lt;ao:page&gt; tag.
+					A nested <a href="@{project.url}ao.tld/tag-page">&lt;ao:page&gt;</a>
+					tag will override this value.
+					The page is required, must be set in attribute or nested
+					<a href="@{project.url}ao.tld/tag-page">&lt;ao:page&gt;</a> tag.
 				</p>
 				<p>
-					Security Note: page must be a trusted value since it can access any resource avaiable via RequestDispatcher.
+					Security Note: page must be a trusted value since it can access any resource available via
+					<a href="@{javac.link.javaEEApi}javax/servlet/RequestDispatcher.html">RequestDispatcher</a>.
 					It would be incorrect to use a value that can be manipulated by a client in any way.
 				</p>
 				<p>
-					Recommend use of &lt;ao:base /&gt; on target page to have relative paths interpreted from the forwarded-to page.
+					Recommend use of <a href="@{project.url}ao.tld/tag-base">&lt;ao:base&gt;</a>
+					on target page to have relative paths interpreted from the forwarded-to page.
 				</p>
 			]]></description>
 			<name>page</name>
@@ -637,12 +724,26 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					As a result, parameters provided by the client will not be able to interfere for forwards that have optional parameters.
 					Each pattern in the comma-separated list may in the following format:
 				</p>
-				<ul>
-				   <li>exact_name  matches the name exactly</li>
-				   <li>*           matches all (clears all parameters)</li>
-				   <li>*suffix     matches the name with "endsWith"</li>
-				   <li>prefix*     matches the name with "beginsWith"</li>
-				</ul>
+				<table class="thinTable">
+					<tbody>
+						<tr>
+							<td>exact_name</td>
+							<td>matches the name exactly</td>
+						</tr>
+						<tr>
+							<td>*</td>
+							<td>matches all (clears all parameters)</td>
+						</tr>
+						<tr>
+							<td>*suffix</td>
+							<td>matches the name with "endsWith"</td>
+						</tr>
+						<tr>
+							<td>prefix*</td>
+							<td>matches the name with "beginsWith"</td>
+						</tr>
+					</tbody>
+				</table>
 				<p>
 					Defaults to none cleared.
 				</p>
@@ -657,8 +758,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<tag>
 		<description><![CDATA[
 			<p>
-				Provides a frameborder attribute to its FrameborderAttribute parent tag.
-				The body, after trimming, must contain either "true", "false", or be empty.
+				Provides a frameborder attribute to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/FrameborderAttribute.html">FrameborderAttribute</a>
+				parent tag.
+				The body, after trimming, must contain either <code>true</code>, <code>false</code>, or be empty.
 				If empty, the frameborder attribute of the parent tag is not overridden.
 			</p>
 		]]></description>
@@ -669,10 +772,13 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<tag>
 		<description><![CDATA[
 			<p>
-				Gets a detailed report of a Throwable as generated by com.aoindustries.util.ErrorPrinter.
+				Gets a detailed report of a
+				<a href="@{javac.link.javaApi}java/lang/Throwable.html">Throwable</a>
+				as generated by
+				<a href="https://aoindustries.com/aocode-public/apidocs/com/aoindustries/util/ErrorPrinter.html">ErrorPrinter</a>.
 			</p>
 			<p>
-				The content type of this tag is text/plain.
+				The content type of this tag is <code>text/plain</code>.
 			</p>
 		]]></description>
 		<name>getStackTraces</name>
@@ -683,7 +789,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					Specifies the variable scope searched to retrieve the bean specified
-					by name. If not specified, the default rules applied by PageContext.findAttribute()
+					by name. If not specified, the default rules applied by
+					<a href="@{javac.link.javaEEApi}javax/servlet/jsp/JspContext.html#findAttribute(java.lang.String)">JspContext.findAttribute()</a>
 					are applied.
 				</p>
 			]]></description>
@@ -722,7 +829,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Provides a height attribute to its HeightAttribute parent tag.</p>
+			<p>
+				Provides a height attribute to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/HeightAttribute.html">HeightAttribute</a>
+				parent tag.
+			</p>
 		]]></description>
 		<name>height</name>
 		<tag-class>com.aoindustries.taglib.HeightTag</tag-class>
@@ -747,8 +858,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The doctype to use, one of "html5", "strict", "transitional", "frameset", or "none".
-					Defaults to "strict".  "none" will suppress the output of a doctype.
+					The doctype to use, one of <code>html5</code>, <code>strict</code>, <code>transitional</code>,
+					<code>frameset</code>, or <code>none</code>.
+					Defaults to <code>strict</code>.  <code>none</code> will suppress the output of a doctype.
 				</p>
 			]]></description>
 			<name>doctype</name>
@@ -759,9 +871,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					If set to true, forces the content-type to be text/html.
-					If set to false (the default), will negotiate content-type based on browser support.
-					This should normally be left with the default value of false.  This is used
+					If set to <code>true</code>, forces the content-type to be <code>text/html</code>.
+					If set to <code>false</code> (the default), will negotiate content-type based on browser support.
+					This should normally be left with the default value of <code>false</code>.  This is used
 					when the content is known to contain invalid markup and can't be parsed as XML.
 				</p>
 			]]></description>
@@ -772,7 +884,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</attribute>
 		<attribute>
 			<description><![CDATA[
-				<p>The CSS class for the html tag.</p>
+				<p>
+					The CSS class for the html tag.
+				</p>
 			]]></description>
 			<name>class</name>
 			<required>false</required>
@@ -781,7 +895,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</attribute>
 		<attribute>
 			<description><![CDATA[
-				<p>An optional CSS class that is added for older versions of IE (before IE 9).</p>
+				<p>
+					An optional CSS class that is added for older versions of IE (before IE 9).
+				</p>
 			]]></description>
 			<name>oldIeClass</name>
 			<required>false</required>
@@ -791,7 +907,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Provides an href to its HrefAttribute parent tag.</p>
+			<p>
+				Provides an href to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/HrefAttribute.html">HrefAttribute</a>
+				parent tag.
+			</p>
 		]]></description>
 		<name>href</name>
 		<tag-class>com.aoindustries.taglib.HrefTag</tag-class>
@@ -799,7 +919,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Provides an hreflang attribute to its HreflangAttribute parent tag.</p>
+			<p>
+				Provides an hreflang attribute to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/HreflangAttribute.html">HreflangAttribute</a>
+				parent tag.
+			</p>
 		]]></description>
 		<name>hreflang</name>
 		<tag-class>com.aoindustries.taglib.HreflangTag</tag-class>
@@ -807,7 +931,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Provides an id attribute to its IdAttribute parent tag.</p>
+			<p>
+				Provides an id attribute to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/IdAttribute.html">IdAttribute</a>
+				parent tag.
+			</p>
 		]]></description>
 		<name>id</name>
 		<tag-class>com.aoindustries.taglib.IdTag</tag-class>
@@ -823,13 +951,21 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				The parameter name is the part of the attribute name following "param.".
 			</p>
 			<p>
-				When a parameter value is null it is not added.
-				If the value is an Iterable, Iterator, Enumeration, or array, then each non-null element is coerced to
-				string as a separate parameter in iteration order.  Otherwise, the value itself is
-				coerced to string for the parameter value.
+				When a parameter value is <code>null</code> it is not added.
+				If the value is an
+				<a href="@{javac.link.javaApi}java/lang/Iterable.html">Iterable</a>,
+				<a href="@{javac.link.javaApi}java/util/Iterator.html">Iterator</a>,
+				<a href="@{javac.link.javaApi}java/util/Enumeration.html">Enumeration</a>,
+				or array, then each non-null element is coerced to
+				<a href="@{javac.link.javaApi}java/lang/String.html">String</a>
+				as a separate parameter in iteration order.  Otherwise, the value itself is
+				coerced to <a href="@{javac.link.javaApi}java/lang/String.html">String</a>
+				for the parameter value.
 			</p>
 			<p>
-				Nested &lt;ao:param&gt; or &lt;ao:params&gt; tags will add parameters after any provided as attributes.
+				Nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a>
+				or <a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a>
+				tags will add parameters after any provided as attributes.
 			</p>
 		]]></description>
 		<name>iframe</name>
@@ -839,7 +975,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The id of the element.
-					A nested &lt;ao:id&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-id">&lt;ao:id&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>id</name>
@@ -856,8 +993,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					URL Encoding is performed on everything up to the last # or ? (first of the two), except for
 					any character in the set { ':', '/', ';', '#' }
 					To avoid ambiguity, any parameters or anchors in the URL must have been correctly encoded by the caller.
-					A nested &lt;ao:src&gt; tag will override this value.
-					Any directly nested &lt;ao:param&gt; or &lt;ao:params&gt; tag will add parameters to the src.
+					A nested <a href="@{project.url}ao.tld/tag-src">&lt;ao:src&gt;</a> tag will override this value.
+					Any directly nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a>
+					or <a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a>
+					tag will add parameters to the src.
 				</p>
 			]]></description>
 			<name>src</name>
@@ -868,8 +1007,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					When true, generates an absolute URL for the src for the frame.
-					Defaults to false.
+					When <code>true</code>, generates an absolute URL for the src for the frame.
+					Defaults to <code>false</code>.
 				</p>
 			]]></description>
 			<name>srcAbsolute</name>
@@ -882,8 +1021,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					If the src represents a local resource, a parameter of "lastModified=#####" may be
 					automatically added with the timestamp of the local resource to the nearest second.
-					May be one of "true", "false", or "auto".
-					Defaults to "auto".
+					May be one of <code>true</code>, <code>false</code>, or <code>auto</code>.
+					Defaults to <code>auto</code>.
 				</p>
 				<p>
 					In auto mode, last modified stamping may be disabled by the client with
@@ -899,7 +1038,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The width for the frame.
-					A nested &lt;ao:width&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-width">&lt;ao:width&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>width</name>
@@ -911,7 +1051,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The height for the frame.
-					A nested &lt;ao:height&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-height">&lt;ao:height&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>height</name>
@@ -922,9 +1063,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The frameborder attribute.  Accepts values of "true" or "false".
-					A non-empty nested &lt;ao:frameborder&gt; tag will override this value.
-					Defaults to true.
+					The frameborder attribute.  Accepts values of <code>true</code> or <code>false</code>.
+					A non-empty nested <a href="@{project.url}ao.tld/tag-frameborder">&lt;ao:frameborder&gt;</a>
+					tag will override this value.
+					Defaults to <code>true</code>.
 				</p>
 			]]></description>
 			<name>frameborder</name>
@@ -943,7 +1085,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				The src may be provided in one of three ways, in precedence order:
 			</p>
 			<ol>
-				<li>Direct child &lt;ao:src&gt; tag.</li>
+				<li>Direct child <a href="@{project.url}ao.tld/tag-src">&lt;ao:src&gt;</a> tag.</li>
 				<li>As the src attribute</li>
 				<li>Contents of tag body, trimmed.</li>
 			</ol>
@@ -955,13 +1097,21 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				The parameter name is the part of the attribute name following "param.".
 			</p>
 			<p>
-				When a parameter value is null it is not added.
-				If the value is an Iterable, Iterator, Enumeration, or array, then each non-null element is coerced to
-				string as a separate parameter in iteration order.  Otherwise, the value itself is
-				coerced to string for the parameter value.
+				When a parameter value is <code>null</code> it is not added.
+				If the value is an
+				<a href="@{javac.link.javaApi}java/lang/Iterable.html">Iterable</a>,
+				<a href="@{javac.link.javaApi}java/util/Iterator.html">Iterator</a>,
+				<a href="@{javac.link.javaApi}java/util/Enumeration.html">Enumeration</a>,
+				or array, then each non-null element is coerced to
+				<a href="@{javac.link.javaApi}java/lang/String.html">String</a>
+				as a separate parameter in iteration order.  Otherwise, the value itself is
+				coerced to <a href="@{javac.link.javaApi}java/lang/String.html">String</a>
+				for the parameter value.
 			</p>
 			<p>
-				Nested &lt;ao:param&gt; or &lt;ao:params&gt; tags will add parameters after any provided as attributes.
+				Nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a>
+				or <a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a>
+				tags will add parameters after any provided as attributes.
 			</p>
 		]]></description>
 		<name>img</name>
@@ -971,7 +1121,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The id of the element.
-					A nested &lt;ao:id&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-id">&lt;ao:id&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>id</name>
@@ -988,8 +1139,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					URL Encoding is performed on everything up to the last # or ? (first of the two), except for
 					any character in the set { ':', '/', ';', '#' }
 					To avoid ambiguity, any parameters or anchors in the URL must have been correctly encoded by the caller.
-					A nested &lt;ao:src&gt; tag will override this value.
-					Any directly nested &lt;ao:param&gt; or &lt;ao:params&gt; tag will add parameters to the src.
+					A nested <a href="@{project.url}ao.tld/tag-src">&lt;ao:src&gt;</a>
+					tag will override this value.
+					Any directly nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a>
+					or <a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a>
+					tag will add parameters to the src.
 				</p>
 			]]></description>
 			<name>src</name>
@@ -1000,8 +1154,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					When true, generates an absolute URL for the src for the image.
-					Defaults to false.
+					When <code>true</code>, generates an absolute URL for the src for the image.
+					Defaults to <code>false</code>.
 				</p>
 			]]></description>
 			<name>srcAbsolute</name>
@@ -1014,8 +1168,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					If the src represents a local resource, a parameter of "lastModified=#####" may be
 					automatically added with the timestamp of the local resource to the nearest second.
-					May be one of "true", "false", or "auto".
-					Defaults to "auto".
+					May be one of <code>true</code>, <code>false</code>, or <code>auto</code>.
+					Defaults to <code>auto</code>.
 				</p>
 				<p>
 					In auto mode, last modified stamping may be disabled by the client with
@@ -1031,7 +1185,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The optional width for the image.
-					A nested &lt;ao:width&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-width">&lt;ao:width&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>width</name>
@@ -1043,7 +1198,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The optional height for the image.
-					A nested &lt;ao:height&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-height">&lt;ao:height&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>height</name>
@@ -1055,7 +1211,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The alt text for the image.
-					A nested &lt;ao:alt&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-alt">&lt;ao:alt&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>alt</name>
@@ -1067,7 +1224,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The title text for the image.
-					A nested &lt;ao:title&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-title">&lt;ao:title&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>title</name>
@@ -1079,7 +1237,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The CSS class for the img.
-					A nested &lt;ao:class&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-class">&lt;ao:class&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>class</name>
@@ -1091,7 +1250,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The CSS style for the img.
-					A nested &lt;ao:style&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-style">&lt;ao:style&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>style</name>
@@ -1106,12 +1266,18 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<div class="semanticcms-tag-reference-summary">
 				<p>
 					Includes another resource and then continues processing of the current page.
-					This has three advantages over the standard &lt;jsp:include&gt; tag:
+					This has three advantages over the standard
+					<a href="https://docs.oracle.com/cd/A87860_01/doc/java.817/a83726/genlovw3.htm#1008181">&lt;jsp:include&gt;</a>
+					tag:
 				</p>
 				<ol>
 					<li>You may clear parameters such that only those specifically added will be passed on to the included page</li>
 					<li>You may have other nested tags used to select and build the set of parameters</li>
-					<li>You may pass argument objects instead of only string parameters (see below)</li>
+					<li>
+						You may pass argument objects instead of only
+						<a href="@{javac.link.javaApi}java/lang/String.html">String</a>
+						parameters (see below)
+					</li>
 				</ol>
 			</div>
 			<p>
@@ -1119,32 +1285,43 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				The parameter name is the part of the attribute name following "param.".
 			</p>
 			<p>
-				When a parameter value is null it is not added.
-				If the value is an Iterable, Iterator, Enumeration, or array, then each non-null element is coerced to
-				string as a separate parameter in iteration order.  Otherwise, the value itself is
-				coerced to string for the parameter value.
+				When a parameter value is <code>null</code> it is not added.
+				If the value is an
+				<a href="@{javac.link.javaApi}java/lang/Iterable.html">Iterable</a>,
+				<a href="@{javac.link.javaApi}java/util/Iterator.html">Iterator</a>,
+				<a href="@{javac.link.javaApi}java/util/Enumeration.html">Enumeration</a>,
+				or array, then each non-null element is coerced to
+				<a href="@{javac.link.javaApi}java/lang/String.html">String</a>
+				as a separate parameter in iteration order.  Otherwise, the value itself is
+				coerced to <a href="@{javac.link.javaApi}java/lang/String.html">String</a>
+				for the parameter value.
 			</p>
 			<p>
-				Nested &lt;ao:param&gt; or &lt;ao:params&gt; tags will add parameters after any provided as attributes.
+				Nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a>
+				or <a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a>
+				tags will add parameters after any provided as attributes.
 				If parameters are not cleared, nested parameters are added before request parameters.
 			</p>
 			<p>
-				Argument objects are passed to the included page via request-scope "arg" Map.
+				Argument objects are passed to the included page via request-scope <code>arg</code>
+				<a href="@{javac.link.javaApi}java/util/Map.html">Map</a>.
 				Any arguments to the current page are not automatically passed-on to the included page 
 				(this differs from parameters in this way).
 				The current page arguments are restored when the include completes.
 			</p>
 			<p>
-				Any attribute that has no namespace and begins with "arg." is added as an argument.
-				The argument name is the part of the attribute name following "arg.".
-				Because this argument becomes an element in the Map named "arg" in the included page, the attribute
-				name and JSP EL name will match precisely.
+				Any attribute that has no namespace and begins with <code>arg.</code> is added as an argument.
+				The argument name is the part of the attribute name following <code>arg.</code>.
+				Because this argument becomes an element in the
+				<a href="@{javac.link.javaApi}java/util/Map.html">Map</a>
+				named <code>arg</code> in the included page, the attribute
+				name and JSP <a href="https://docs.oracle.com/cd/E19226-01/820-7627/gjddd/">Expression Language</a> name will match precisely.
 			</p>
 			<p>
-				Nested &lt;ao:arg&gt; tags may also be used to pass arguments.
+				Nested <a href="@{project.url}ao.tld/tag-arg">&lt;ao:arg&gt;</a> tags may also be used to pass arguments.
 			</p>
 			<p>
-				It is an error for the same argument name to be used twice (including when set as null).
+				It is an error for the same argument name to be used twice (including when set as <code>null</code>).
 			</p>
 		]]></description>
 		<name>include</name>
@@ -1154,11 +1331,14 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The page that will be included.
-					A nested &lt;ao:page&gt; tag will override this value.
-					The page is required, must be set in attribute or nested &lt;ao:page&gt; tag.
+					A nested <a href="@{project.url}ao.tld/tag-page">&lt;ao:page&gt;</a>
+					tag will override this value.
+					The page is required, must be set in attribute or nested
+					<a href="@{project.url}ao.tld/tag-page">&lt;ao:page&gt;</a> tag.
 				</p>
 				<p>
-					Security Note: page must be a trusted value since it can access any resource avaiable via RequestDispatcher.
+					Security Note: page must be a trusted value since it can access any resource available via
+					<a href="@{javac.link.javaEEApi}javax/servlet/RequestDispatcher.html">RequestDispatcher</a>.
 					It would be incorrect to use a value that can be manipulated by a client in any way.
 				</p>
 			]]></description>
@@ -1175,12 +1355,26 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					As a result, parameters provided by the client will not be able to interfere for includes that have optional parameters.
 					Each pattern in the comma-separated list may in the following format:
 				</p>
-				<ul>
-				   <li>exact_name  matches the name exactly</li>
-				   <li>*           matches all (clears all parameters)</li>
-				   <li>*suffix     matches the name with "endsWith"</li>
-				   <li>prefix*     matches the name with "beginsWith"</li>
-				</ul>
+				<table class="thinTable">
+					<tbody>
+						<tr>
+							<td>exact_name</td>
+							<td>matches the name exactly</td>
+						</tr>
+						<tr>
+							<td>*</td>
+							<td>matches all (clears all parameters)</td>
+						</tr>
+						<tr>
+							<td>*suffix</td>
+							<td>matches the name with "endsWith"</td>
+						</tr>
+						<tr>
+							<td>prefix*</td>
+							<td>matches the name with "beginsWith"</td>
+						</tr>
+					</tbody>
+				</table>
 				<p>
 					Defaults to none cleared.
 				</p>
@@ -1201,7 +1395,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				The value may be provided in one of three ways, in precedence order:
 			</p>
 			<ol>
-				<li>Direct child &lt;ao:value&gt; tag.</li>
+				<li>Direct child <a href="@{project.url}ao.tld/tag-value">&lt;ao:value&gt;</a> tag.</li>
 				<li>As the value attribute</li>
 				<li>Contents of tag body, trimmed.</li>
 			</ol>
@@ -1214,7 +1408,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The id of the element.
-					A nested &lt;ao:id&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-id">&lt;ao:id&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>id</name>
@@ -1226,7 +1421,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The type of input.
-					A nested &lt;ao:type&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-type">&lt;ao:type&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>type</name>
@@ -1238,7 +1434,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The name of input tag.
-					A nested &lt;ao:name&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-name">&lt;ao:name&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>name</name>
@@ -1250,7 +1447,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The value of the input.
-					A nested &lt;ao:value&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-value">&lt;ao:value&gt;</a>
+					tag will override this value.
 					If neither is provided, the output of the body is used with whitespace trimmed.
 				</p>
 			]]></description>
@@ -1263,7 +1461,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					A JavaScript onclick handler.
-					A nested &lt;ao:onclick&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-onclick">&lt;ao:onclick&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>onclick</name>
@@ -1275,7 +1474,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					A JavaScript onchange handler.
-					A nested &lt;ao:onchange&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-onchange">&lt;ao:onchange&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>onchange</name>
@@ -1287,7 +1487,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					A JavaScript onfocus handler.
-					A nested &lt;ao:onfocus&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-onfocus">&lt;ao:onfocus&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>onfocus</name>
@@ -1299,7 +1500,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					A JavaScript onblur handler.
-					A nested &lt;ao:onblur&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-onblur">&lt;ao:onblur&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>onblur</name>
@@ -1311,7 +1513,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					A JavaScript onkeypress handler.
-					A nested &lt;ao:onkeypress&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-onkeypress">&lt;ao:onkeypress&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>onkeypress</name>
@@ -1323,7 +1526,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The size of the input element.
-					A nested &lt;ao:size&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-size">&lt;ao:size&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>size</name>
@@ -1335,7 +1539,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The maxlength of the input element.
-					A nested &lt;ao:maxlength&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-maxlength">&lt;ao:maxlength&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>maxlength</name>
@@ -1346,9 +1551,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The readonly attribute.  Accepts values of "true" or "false".
-					A non-empty nested &lt;ao:readonly&gt; tag will override this value.
-					If readonly is "true", will add the attribute as <code>readonly="readonly"</code>,
+					The readonly attribute.  Accepts values of <code>true</code> or <code>false</code>.
+					A non-empty nested <a href="@{project.url}ao.tld/tag-readonly">&lt;ao:readonly&gt;</a>
+					tag will override this value.
+					If readonly is <code>true</code>, will add the attribute as <code>readonly="readonly"</code>,
 					otherwise the attribute is not added.
 				</p>
 			]]></description>
@@ -1360,9 +1566,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The disabled attribute.  Accepts values of "true" or "false".
-					A non-empty nested &lt;ao:disabled&gt; tag will override this value.
-					If disabled is "true", will add the attribute as <code>disabled="disabled"</code>,
+					The disabled attribute.  Accepts values of <code>true</code> or <code>false</code>.
+					A non-empty nested <a href="@{project.url}ao.tld/tag-disabled">&lt;ao:disabled&gt;</a>
+					tag will override this value.
+					If disabled is <code>true</code>, will add the attribute as <code>disabled="disabled"</code>,
 					otherwise the attribute is not added.
 				</p>
 			]]></description>
@@ -1375,7 +1582,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The CSS class for the input element.
-					A nested &lt;ao:class&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-class">&lt;ao:class&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>class</name>
@@ -1387,7 +1595,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The CSS style for the input element.
-					A nested &lt;ao:style&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-style">&lt;ao:style&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>style</name>
@@ -1398,9 +1607,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The checked attribute.  Accepts values of "true" or "false".
-					A non-empty nested &lt;ao:checked&gt; tag will override this value.
-					If checked is "true", will add the attribute as <code>checked="checked"</code>,
+					The checked attribute.  Accepts values of <code>true</code> or <code>false</code>.
+					A non-empty nested <a href="@{project.url}ao.tld/tag-checked">&lt;ao:checked&gt;</a>
+					tag will override this value.
+					If checked is <code>true</code>, will add the attribute as <code>checked="checked"</code>,
 					otherwise the attribute is not added.
 				</p>
 			]]></description>
@@ -1412,9 +1622,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The optional tabindex value.  Defaults to "0".
-					If value is >= 1, will add tabindex attribute.
-					A non-empty nested &lt;ao:tabindex&gt; tag will override this value.
+					The optional tabindex value.  Defaults to <code>0</code>.
+					If value is <code>&gt;= 1</code>, will add tabindex attribute.
+					A non-empty nested <a href="@{project.url}ao.tld/tag-tabindex">&lt;ao:tabindex&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>tabindex</name>
@@ -1426,11 +1637,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					Turns on or off the autocomplete for this input.
-					Accepts values of "true" or "false" (not "on" or "off" due to
+					Accepts values of <code>true</code> or <code>false</code> (not "on" or "off" due to
 					this being a boolean type).
-					If autocomplete is "false", will add the attribute as <code>autocomplete="off"</code>,
+					If autocomplete is <code>false</code>, will add the attribute as <code>autocomplete="off"</code>,
 					otherwise the attribute is not added.
-					Defaults to "true" with no attribute added.
+					Defaults to <code>true</code> with no attribute added.
 				</p>
 			]]></description>
 			<name>autocomplete</name>
@@ -1442,7 +1653,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<tag>
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
-				If contained with any LinksAttribute parent, adds the link data to the parent tag.
+				If contained with any
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/LinksAttribute.html">LinksAttribute</a>
+				parent, adds the link data to the parent tag.
 				Otherwise, renders a link tag.
 			</p>
 			<p>
@@ -1450,13 +1663,21 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				The parameter name is the part of the attribute name following "param.".
 			</p>
 			<p>
-				When a parameter value is null it is not added.
-				If the value is an Iterable, Iterator, Enumeration, or array, then each non-null element is coerced to
-				string as a separate parameter in iteration order.  Otherwise, the value itself is
-				coerced to string for the parameter value.
+				When a parameter value is <code>null</code> it is not added.
+				If the value is an
+				<a href="@{javac.link.javaApi}java/lang/Iterable.html">Iterable</a>,
+				<a href="@{javac.link.javaApi}java/util/Iterator.html">Iterator</a>,
+				<a href="@{javac.link.javaApi}java/util/Enumeration.html">Enumeration</a>,
+				or array, then each non-null element is coerced to
+				<a href="@{javac.link.javaApi}java/lang/String.html">String</a>
+				as a separate parameter in iteration order.  Otherwise, the value itself is
+				coerced to <a href="@{javac.link.javaApi}java/lang/String.html">String</a>
+				for the parameter value.
 			</p>
 			<p>
-				Nested &lt;ao:param&gt; or &lt;ao:params&gt; tags will add parameters after any provided as attributes.
+				Nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a>
+				or <a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a>
+				tags will add parameters after any provided as attributes.
 			</p>
 		]]></description>
 		<name>link</name>
@@ -1465,7 +1686,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					An optional link to copy all the attributes from, as captured by a LinksAttribute parent tag.
+					An optional link to copy all the attributes from, as captured by a
+					<a href="@{project.url}apidocs/com/aoindustries/taglib/LinksAttribute.html">LinksAttribute</a>
+					parent tag.
 				</p>
 			]]></description>
 			<name>link</name>
@@ -1482,8 +1705,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					URL Encoding is performed on everything up to the last # or ? (first of the two), except for
 					any character in the set { ':', '/', ';', '#' }
 					To avoid ambiguity, any parameters or anchors in the URL must have been correctly encoded by the caller.
-					A nested &lt;ao:href&gt; tag will override this value.
-					Any directly nested &lt;ao:param&gt; or &lt;ao:params&gt; tag will add parameters to the href.
+					A nested <a href="@{project.url}ao.tld/tag-href">&lt;ao:href&gt;</a>
+					tag will override this value.
+					Any directly nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a>
+					or <a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a>
+					tag will add parameters to the href.
 				</p>
 			]]></description>
 			<name>href</name>
@@ -1494,8 +1720,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					When true, generates an absolute URL for the href for the link.
-					Defaults to false.
+					When <code>true</code>, generates an absolute URL for the href for the link.
+					Defaults to <code>false</code>.
 				</p>
 			]]></description>
 			<name>hrefAbsolute</name>
@@ -1508,8 +1734,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					If the href represents a local resource, a parameter of "lastModified=#####" may be
 					automatically added with the timestamp of the local resource to the nearest second.
-					May be one of "true", "false", or "auto".
-					Defaults to "auto".
+					May be one of <code>true</code>, <code>false</code>, or <code>auto</code>.
+					Defaults to <code>auto</code>.
 				</p>
 				<p>
 					In auto mode, last modified stamping may be disabled by the client with
@@ -1525,7 +1751,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The hreflang for the link.
-					A nested &lt;ao:hreflang&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-hreflang">&lt;ao:hreflang&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>hreflang</name>
@@ -1537,7 +1764,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The rel for the link.
-					A nested &lt;ao:rel&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-rel">&lt;ao:rel&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>rel</name>
@@ -1549,7 +1777,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The type for the link.
-					A nested &lt;ao:type&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-type">&lt;ao:type&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>type</name>
@@ -1559,7 +1788,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</attribute>
 		<attribute>
 			<description><![CDATA[
-				<p>The media type for the link.</p>
+				<p>
+					The media type for the link.
+				</p>
 			]]></description>
 			<name>media</name>
 			<required>false</required>
@@ -1570,7 +1801,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The title for the link.
-					A nested &lt;ao:title&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-title">&lt;ao:title&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>title</name>
@@ -1583,8 +1815,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<tag>
 		<description><![CDATA[
 			<p>
-				Provides a maxlength attribute to its MaxlengthAttribute parent tag.
-				The body is trimmed.  If empty is sets the maxlength to null.  Otherwise
+				Provides a maxlength attribute to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/MaxlengthAttribute.html">MaxlengthAttribute</a>
+				parent tag.
+				The body is trimmed.  If empty is sets the maxlength to <code>null</code>.  Otherwise
 				it must be a valid integer.
 			</p>
 		]]></description>
@@ -1601,39 +1835,41 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<p>
 				Any number of "arg###" attributes may be provided, where ### is the substitution
 				parameter index, starting at zero.
-				For example, there could be arg0="First" arg1="Second" for two arguments.
+				For example, there could be <code>arg0="First" arg1="Second"</code> for two arguments.
 				They will be passed-on to the message format.
 			</p>
 			<p>
 				Additionally, message substitution arguments may be provided by
-				nested &lt;ao:messageArg&gt; tags.
+				nested <a href="@{project.url}ao.tld/tag-messageArg">&lt;ao:messageArg&gt;</a>
+				tags.
 			</p>
 			<p>
 				These additional arguments will first fill-in any gap in the numeric ranges
 				provided by "arg###" attributes.  Because the first argument is zero, if
-				arg1="Second" and arg2="Third", then the first nested &lt;ao:messageArg&gt; would be
-				applied filling the spot of arg0.
+				<code>arg1="Second" arg2="Third"</code>, then the first nested
+				<a href="@{project.url}ao.tld/tag-messageArg">&lt;ao:messageArg&gt;</a>
+				would be applied filling the spot of <code>arg0</code>.
 			</p>
 			<p>
 				Once all gaps are filled, these additional arguments will be added after
 				all provided as "arg###" attritutes.
 			</p>
 			<p>
-				This tag must be nested inside a &lt;ao:bundle&gt; tag.
+				This tag must be nested inside a <a href="@{project.url}ao.tld/tag-bundle">&lt;ao:bundle&gt;</a> tag.
 			</p>
 			<p>
 				The content type depends on the value provided to the type attribute, and
-				defaults to text/plain.  The content is checked for well-formedness based
+				defaults to <code>text/plain</code>.  The content is checked for well-formedness based
 				on its type:
 			</p>
 			<ul>
-				<li>"javascript" or "text/javascript" - no validation</li>
-				<li>"json" or "application/json" - no validation</li>
-				<li>"ld_json" or "application/ls+json" - no validation</li>
-				<li>"text" or "text/plain" - no validation</li>
-				<li>"url" or "text/url" - must be a valid URL</li>
-				<li>"xhtml" or "application/xhtml+xml" - must be well-formed XHTML content. (Note: Currently only checks character values.)</li>
-				<li>"xhtml_attribute" or "application/xhtml+xml+attribute" - must be a valid XHTML attribute.</li>
+				<li><code>javascript</code> or <code>text/javascript</code> - no validation</li>
+				<li><code>json</code> or <code>application/json</code> - no validation</li>
+				<li><code>ld_json</code> or <code>application/ld+json</code> - no validation</li>
+				<li><code>text</code> or <code>text/plain</code> - no validation</li>
+				<li><code>url</code> or <code>text/url</code> - must be a valid URL</li>
+				<li><code>xhtml</code> or <code>application/xhtml+xml</code> - must be well-formed XHTML content. (Note: Currently only checks character values.)</li>
+				<li><code>xhtml_attribute</code> or <code>application/xhtml+xml+attribute</code> - must be a valid XHTML attribute.</li>
 			</ul>
 		]]></description>
 		<name>message</name>
@@ -1654,7 +1890,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The argument that will replace {0} in the message format.
+					The argument that will replace <code>{0}</code> in the message format.
 				</p>
 				<p>
 					Any number of arguments may be provided as attributes.  The first four
@@ -1669,7 +1905,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The argument that will replace {1} in the message format.
+					The argument that will replace <code>{1}</code> in the message format.
 				</p>
 				<p>
 					Any number of arguments may be provided as attributes.  The first four
@@ -1684,7 +1920,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The argument that will replace {2} in the message format.
+					The argument that will replace <code>{2}</code> in the message format.
 				</p>
 				<p>
 					Any number of arguments may be provided as attributes.  The first four
@@ -1699,7 +1935,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The argument that will replace {3} in the message format.
+					The argument that will replace <code>{3}</code> in the message format.
 				</p>
 				<p>
 					Any number of arguments may be provided as attributes.  The first four
@@ -1715,8 +1951,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					Specifies the type of content contained in the value.
-					Defaults to text/plain.
-					A nested &lt;ao:type&gt; tag will override this value.
+					Defaults to <code>text/plain</code>.
+					A nested <a href="@{project.url}ao.tld/tag-type">&lt;ao:type&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>type</name>
@@ -1728,7 +1965,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Adds a message argument to its MessageArgsAttribute parent tag.</p>
+			<p>
+				Adds a message argument to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/MessageArgsAttribute.html">MessageArgsAttribute</a>
+				parent tag.
+			</p>
 		]]></description>
 		<name>messageArg</name>
 		<tag-class>com.aoindustries.taglib.MessageArgTag</tag-class>
@@ -1737,7 +1978,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The value of the parameter.
-					A nested &lt;ao:value&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-value">&lt;ao:value&gt;</a>
+					tag will override this value.
 					If neither is provided, the output of the body is used with whitespace trimmed.
 				</p>
 			]]></description>
@@ -1750,14 +1992,16 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<tag>
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
-				If contained with any MetasAttribute parent, adds the meta data to the parent tag.
+				If contained with any
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/MetasAttribute.html">MetasAttribute</a>
+				parent, adds the meta data to the parent tag.
 				Otherwise, renders a meta tag.
 			</p>
 			<p>
 				The content may be provided in one of three ways, in precedence order:
 			</p>
 			<ol>
-				<li>Direct child &lt;ao:content&gt; tag.</li>
+				<li>Direct child <a href="@{project.url}ao.tld/tag-content">&lt;ao:content&gt;</a> tag.</li>
 				<li>As the content attribute</li>
 				<li>Contents of tag body, trimmed.</li>
 			</ol>
@@ -1769,7 +2013,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The name of meta tag.
-					A nested &lt;ao:name&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-name">&lt;ao:name&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>name</name>
@@ -1779,7 +2024,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</attribute>
 		<attribute>
 			<description><![CDATA[
-				<p>The http-equiv of the meta element.</p>
+				<p>
+					The http-equiv of the meta element.
+				</p>
 			]]></description>
 			<name>httpEquiv</name>
 			<required>false</required>
@@ -1788,7 +2035,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</attribute>
 		<attribute>
 			<description><![CDATA[
-				<p>The itemprop used for semantic microdata.</p>
+				<p>
+					The itemprop used for semantic microdata.
+				</p>
 			]]></description>
 			<name>itemprop</name>
 			<required>false</required>
@@ -1797,7 +2046,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</attribute>
 		<attribute>
 			<description><![CDATA[
-				<p>The charset of meta tag.</p>
+				<p>
+					The charset of meta tag.
+				</p>
 			]]></description>
 			<name>charset</name>
 			<required>false</required>
@@ -1808,7 +2059,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The content of the meta data.
-					A nested &lt;ao:content&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-value">&lt;ao:content&gt;</a>
+					tag will override this value.
 					If neither is provided, the output of the body is used with whitespace trimmed.
 				</p>
 			]]></description>
@@ -1820,7 +2072,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Provides a method attribute to its MethodAttribute parent tag.</p>
+			<p>
+				Provides a method attribute to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/MethodAttribute.html">MethodAttribute</a>
+				parent tag.
+			</p>
 		]]></description>
 		<name>method</name>
 		<tag-class>com.aoindustries.taglib.MethodTag</tag-class>
@@ -1828,7 +2084,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Provides a name to its NameAttribute parent tag.</p>
+			<p>
+				Provides a name to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/NameAttribute.html">NameAttribute</a>
+				parent tag.
+			</p>
 		]]></description>
 		<name>name</name>
 		<tag-class>com.aoindustries.taglib.NameTag</tag-class>
@@ -1836,7 +2096,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Provides an onblur script to its OnblurAttribute parent tag.</p>
+			<p>
+				Provides an onblur script to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/OnblurAttribute.html">OnblurAttribute</a>
+				parent tag.
+			</p>
 		]]></description>
 		<name>onblur</name>
 		<tag-class>com.aoindustries.taglib.OnblurTag</tag-class>
@@ -1844,7 +2108,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Provides an onchange script to its OnchangeAttribute parent tag.</p>
+			<p>
+				Provides an onchange script to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/OnchangeAttribute.html">OnchangeAttribute</a>
+				parent tag.
+			</p>
 		]]></description>
 		<name>onchange</name>
 		<tag-class>com.aoindustries.taglib.OnchangeTag</tag-class>
@@ -1852,7 +2120,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Provides an onclick script to its OnclickAttribute parent tag.</p>
+			<p>
+				Provides an onclick script to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/OnclickAttribute.html">OnclickAttribute</a>
+				parent tag.
+			</p>
 		]]></description>
 		<name>onclick</name>
 		<tag-class>com.aoindustries.taglib.OnclickTag</tag-class>
@@ -1860,7 +2132,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Provides an onfocus script to its OnfocusAttribute parent tag.</p>
+			<p>
+				Provides an onfocus script to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/OnfocusAttribute.html">OnfocusAttribute</a>
+				parent tag.
+			</p>
 		]]></description>
 		<name>onfocus</name>
 		<tag-class>com.aoindustries.taglib.OnfocusTag</tag-class>
@@ -1868,7 +2144,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Provides an onkeypress script to its OnkeypressAttribute parent tag.</p>
+			<p>
+				Provides an onkeypress script to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/OnkeypressAttribute.html">OnkeypressAttribute</a>
+				parent tag.
+			</p>
 		]]></description>
 		<name>onkeypress</name>
 		<tag-class>com.aoindustries.taglib.OnkeypressTag</tag-class>
@@ -1876,7 +2156,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Provides an onload script to its OnloadAttribute parent tag.</p>
+			<p>
+				Provides an onload script to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/OnloadAttribute.html">OnloadAttribute</a>
+				parent tag.
+			</p>
 		]]></description>
 		<name>onload</name>
 		<tag-class>com.aoindustries.taglib.OnloadTag</tag-class>
@@ -1884,7 +2168,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Provides an onmouseout script to its OnmouseoutAttribute parent tag.</p>
+			<p>
+				Provides an onmouseout script to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/OnmouseoutAttribute.html">OnmouseoutAttribute</a>
+				parent tag.
+			</p>
 		]]></description>
 		<name>onmouseout</name>
 		<tag-class>com.aoindustries.taglib.OnmouseoutTag</tag-class>
@@ -1892,7 +2180,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Provides an onmouseover script to its OnmouseoverAttribute parent tag.</p>
+			<p>
+				Provides an onmouseover script to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/OnmouseoverAttribute.html">OnmouseoverAttribute</a>
+				parent tag.
+			</p>
 		]]></description>
 		<name>onmouseover</name>
 		<tag-class>com.aoindustries.taglib.OnmouseoverTag</tag-class>
@@ -1900,7 +2192,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Provides an onsubmit script to its OnsubmitAttribute parent tag.</p>
+			<p>
+				Provides an onsubmit script to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/OnsubmitAttribute.html">OnsubmitAttribute</a>
+				parent tag.
+			</p>
 		]]></description>
 		<name>onsubmit</name>
 		<tag-class>com.aoindustries.taglib.OnsubmitTag</tag-class>
@@ -1908,7 +2204,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Renders an option tag.</p>
+			<p>
+				Renders an option tag.
+			</p>
 		]]></description>
 		<name>option</name>
 		<tag-class>com.aoindustries.taglib.OptionTag</tag-class>
@@ -1917,7 +2215,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The value of the option.
-					A nested &lt;ao:value&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-value">&lt;ao:value&gt;</a>
+					tag will override this value.
 					If neither is provided, the output of the body is used with whitespace trimmed.
 				</p>
 			]]></description>
@@ -1929,9 +2228,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The selected attribute.  Accepts values of "true" or "false".
-					A non-empty nested &lt;ao:selected&gt; tag will override this value.
-					If selected is "true", will add the attribute as <code>selected="selected"</code>,
+					The selected attribute.  Accepts values of <code>true</code> or <code>false</code>.
+					A non-empty nested <a href="@{project.url}ao.tld/tag-selected">&lt;ao:selected&gt;</a>
+					tag will override this value.
+					If selected is <code>true</code>, will add the attribute as <code>selected="selected"</code>,
 					otherwise the attribute is not added.
 				</p>
 			]]></description>
@@ -1943,9 +2243,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The disabled attribute.  Accepts values of "true" or "false".
-					A non-empty nested &lt;ao:disabled&gt; tag will override this value.
-					If disabled is "true", will add the attribute as <code>disabled="disabled"</code>,
+					The disabled attribute.  Accepts values of <code>true</code> or <code>false</code>.
+					A non-empty nested <a href="@{project.url}ao.tld/tag-disabled">&lt;ao:disabled&gt;</a>
+					tag will override this value.
+					If disabled is <code>true</code>, will add the attribute as <code>disabled="disabled"</code>,
 					otherwise the attribute is not added.
 				</p>
 			]]></description>
@@ -1957,7 +2258,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Like &lt;c:otherwise&gt;, except uses deferred expressions.</p>
+			<p>
+				Like
+				<a href="https://docs.oracle.com/javaee/5/jstl/1.1/docs/tlddocs/c/otherwise.html">&lt;c:otherwise&gt;</a>,
+				except uses deferred expressions.
+			</p>
 		]]></description>
 		<name>otherwise</name>
 		<tag-class>com.aoindustries.taglib.OtherwiseTag</tag-class>
@@ -1967,25 +2272,28 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Writes the value with proper escaping based on the context of the tag.
-				Supports data types beyond &lt;c:out&gt;.
+				Supports data types beyond
+				<a href="https://docs.oracle.com/javaee/5/jstl/1.1/docs/tlddocs/c/out.html">&lt;c:out&gt;</a>.
 			</p>
 			<p>
-				In addition to the usual set of coercions expected for &lt;c:out&gt;,
-				also supports writing XML nodes such as for HTML snippets.
+				In addition to the usual set of coercions expected for
+				<a href="https://docs.oracle.com/javaee/5/jstl/1.1/docs/tlddocs/c/out.html">&lt;c:out&gt;</a>,
+				also supports writing <a href="@{javac.link.javaApi}org/w3c/dom/Node.html">XML nodes</a>
+				such as for HTML snippets.
 			</p>
 			<p>
 				The content type depends on the value provided to the type attribute, and
-				defaults to text/plain.  The content is checked for well-formedness based
+				defaults to <code>text/plain</code>.  The content is checked for well-formedness based
 				on its type:
 			</p>
 			<ul>
-				<li>"javascript" or "text/javascript" - no validation</li>
-				<li>"json" or "application/json" - no validation</li>
-				<li>"ld_json" or "application/ls+json" - no validation</li>
-				<li>"text" or "text/plain" - no validation</li>
-				<li>"url" or "text/url" - must be a valid URL</li>
-				<li>"xhtml" or "application/xhtml+xml" - must be well-formed XHTML content. (Note: Currently only checks character values.)</li>
-				<li>"xhtml_attribute" or "application/xhtml+xml+attribute" - must be a valid XHTML attribute.</li>
+				<li><code>javascript</code> or <code>text/javascript</code> - no validation</li>
+				<li><code>json</code> or <code>application/json</code> - no validation</li>
+				<li><code>ld_json</code> or <code>application/ld+json</code> - no validation</li>
+				<li><code>text</code> or <code>text/plain</code> - no validation</li>
+				<li><code>url</code> or <code>text/url</code> - must be a valid URL</li>
+				<li><code>xhtml</code> or <code>application/xhtml+xml</code> - must be well-formed XHTML content. (Note: Currently only checks character values.)</li>
+				<li><code>xhtml_attribute</code> or <code>application/xhtml+xml+attribute</code> - must be a valid XHTML attribute.</li>
 			</ul>
 		]]></description>
 		<name>out</name>
@@ -1996,7 +2304,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The value to be written.
-					A nested &lt;ao:value&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-value">&lt;ao:value&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>value</name>
@@ -2011,7 +2320,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</attribute>
 		<attribute>
 			<description><![CDATA[
-				<p>The default value if the resulting value is null.</p>
+				<p>
+					The default value if the resulting value is <code>null</code>.
+				</p>
 			]]></description>
 			<name>default</name>
 			<required>false</required>
@@ -2026,8 +2337,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					Specifies the type of content contained in the value.  Defaults to text/plain.
-					A nested &lt;ao:type&gt; tag will override this value.
+					Specifies the type of content contained in the value.
+					Defaults to <code>text/plain</code>.
+					A nested <a href="@{project.url}ao.tld/tag-type">&lt;ao:type&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>type</name>
@@ -2038,7 +2351,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Provides a page to its PageAttribute parent tag.</p>
+			<p>
+				Provides a page to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/PageAttribute.html">PageAttribute</a>
+				parent tag.
+			</p>
 		]]></description>
 		<name>page</name>
 		<tag-class>com.aoindustries.taglib.PageTag</tag-class>
@@ -2046,7 +2363,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Adds a parameter to its ParamsAttribute parent tag.</p>
+			<p>
+				Adds a parameter to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/ParamsAttribute.html">ParamsAttribute</a>
+				parent tag.
+			</p>
 		]]></description>
 		<name>param</name>
 		<tag-class>com.aoindustries.taglib.ParamTag</tag-class>
@@ -2055,7 +2376,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The name of parameter tag.
-					A nested &lt;ao:name&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-name">&lt;ao:name&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>name</name>
@@ -2067,7 +2389,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The value of the parameter.
-					A nested &lt;ao:value&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-value">&lt;ao:value&gt;</a>
+					tag will override this value.
 					If neither is provided, the output of the body is used with whitespace trimmed.
 				</p>
 			]]></description>
@@ -2079,7 +2402,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Adds multiple parameters to its ParamsAttribute parent tag.</p>
+			<p>
+				Adds multiple parameters to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/ParamsAttribute.html">ParamsAttribute</a>
+				parent tag.
+			</p>
 		]]></description>
 		<name>params</name>
 		<tag-class>com.aoindustries.taglib.ParamsTag</tag-class>
@@ -2088,10 +2415,13 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The name of parameter to add.
-					A nested &lt;ao:name&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-name">&lt;ao:name&gt;</a>
+					tag will override this value.
 				</p>
 				<p>
-					When provided, the values may not contain a Map or HttpParameters.
+					When provided, the values may not contain a
+					<a href="@{javac.link.javaApi}java/util/Map.html">Map</a>
+					or <a href="https://aoindustries.com/aocode-public/apidocs/com/aoindustries/net/HttpParameters.html">HttpParameters</a>.
 					When provided, the exclude attribute may not be provided.
 				</p>
 			]]></description>
@@ -2103,19 +2433,35 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					Optionally excludes all elements of a Map or HttpParameters that
-					match any of the comma-separated patterns.
+					Optionally excludes all elements of a
+					<a href="@{javac.link.javaApi}java/util/Map.html">Map</a>
+					or <a href="https://aoindustries.com/aocode-public/apidocs/com/aoindustries/net/HttpParameters.html">HttpParameters</a>
+					that match any of the comma-separated patterns.
 					May not be used in conjunction with the name attribute.
 				</p>
 				<p>
 					Each pattern in the comma-separated list may in the following format:
 				</p>
-				<ul>
-				   <li>exact_name  matches the name exactly</li>
-				   <li>*           matches all (clears all parameters)</li>
-				   <li>*suffix     matches the name with "endsWith"</li>
-				   <li>prefix*     matches the name with "beginsWith"</li>
-				</ul>
+				<table class="thinTable">
+					<tbody>
+						<tr>
+							<td>exact_name</td>
+							<td>matches the name exactly</td>
+						</tr>
+						<tr>
+							<td>*</td>
+							<td>matches all (clears all parameters)</td>
+						</tr>
+						<tr>
+							<td>*suffix</td>
+							<td>matches the name with "endsWith"</td>
+						</tr>
+						<tr>
+							<td>prefix*</td>
+							<td>matches the name with "beginsWith"</td>
+						</tr>
+					</tbody>
+				</table>
 				<p>
 					Defaults to none excluded.
 				</p>
@@ -2131,18 +2477,27 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					The values of the parameters.
 				</p>
 				<p>
-					When name is provided, supports <code>java.lang.Iterable</code>,
-					<code>java.util.Iterator</code>, <code>java.util.Enumeration</code>, or array values.
+					When name is provided, supports
+					<a href="@{javac.link.javaApi}java/lang/Iterable.html">Iterable</a>,
+					<a href="@{javac.link.javaApi}java/util/Iterator.html">Iterator</a>,
+					<a href="@{javac.link.javaApi}java/util/Enumeration.html">Enumeration</a>,
+					or array values.
 				</p>
 				<p>
-					When name is not provided, requires <code>java.util.Map</code> or <code>com.aoindustries.net.HttpParameters</code>, where
-					the parameter name is the map key coerced to string and the value
-					(or set of values) is the map value.  Each of the entry values may
-					be <code>java.lang.Iterable</code>, <code>java.util.Iterator</code>,
-					<code>java.util.Enumeration</code>, array, or single value.
+					When name is not provided, requires
+					<a href="@{javac.link.javaApi}java/util/Map.html">Map</a>
+					or <a href="https://aoindustries.com/aocode-public/apidocs/com/aoindustries/net/HttpParameters.html">HttpParameters</a>,
+					where the parameter name is the map key coerced to <a href="@{javac.link.javaApi}java/lang/String.html">String</a>
+					and the value (or set of values) is the map value.  Each of the entry values may be
+					<a href="@{javac.link.javaApi}java/lang/Iterable.html">Iterable</a>,
+					<a href="@{javac.link.javaApi}java/util/Iterator.html">Iterator</a>,
+					<a href="@{javac.link.javaApi}java/util/Enumeration.html">Enumeration</a>,
+					array, or single value.
 				</p>
 				<p>
-					When obtaining values from a <code>java.util.Map</code> or <code>com.aoindustries.net.HttpParameters</code>,
+					When obtaining values from a
+					<a href="@{javac.link.javaApi}java/util/Map.html">Map</a>
+					or <a href="https://aoindustries.com/aocode-public/apidocs/com/aoindustries/net/HttpParameters.html">HttpParameters</a>,
 					parameters may be excluded with the "exclude" attribute.
 				</p>
 				<p>
@@ -2158,10 +2513,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<tag>
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
-				Provides a readonly attribute to its ReadonlyAttribute parent tag.
+				Provides a readonly attribute to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/ReadonlyAttribute.html">ReadonlyAttribute</a>
+				parent tag.
 			</p>
 			<p>
-				The body, after trimming, must contain either "true", "false", or be empty.
+				The body, after trimming, must contain either <code>true</code>, <code>false</code>, or be empty.
 				If empty, the readonly attribute of the parent tag is not overridden.
 			</p>
 		]]></description>
@@ -2178,8 +2535,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					<strong>Important:</strong>
-					Redirects inside of standard &lt;jsp:include&gt; tags will be silently lost.
-					Use &lt;ao:include&gt; instead of &lt;jsp:include&gt; to support redirects inside of includes.
+					Redirects inside of standard
+					<a href="https://docs.oracle.com/cd/A87860_01/doc/java.817/a83726/genlovw3.htm#1008181">&lt;jsp:include&gt;</a>
+					tags will be silently lost.
+					Use <a href="@{project.url}ao.tld/tag-include">&lt;ao:include&gt;</a>
+					instead of <a href="https://docs.oracle.com/cd/A87860_01/doc/java.817/a83726/genlovw3.htm#1008181">&lt;jsp:include&gt;</a>
+					to support redirects inside of includes.
 				</p>
 			</div>
 			<p>
@@ -2187,18 +2548,26 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				The parameter name is the part of the attribute name following "param.".
 			</p>
 			<p>
-				When a parameter value is null it is not added.
-				If the value is an Iterable, Iterator, Enumeration, or array, then each non-null element is coerced to
-				string as a separate parameter in iteration order.  Otherwise, the value itself is
-				coerced to string for the parameter value.
+				When a parameter value is <code>null</code> it is not added.
+				If the value is an
+				<a href="@{javac.link.javaApi}java/lang/Iterable.html">Iterable</a>,
+				<a href="@{javac.link.javaApi}java/util/Iterator.html">Iterator</a>,
+				<a href="@{javac.link.javaApi}java/util/Enumeration.html">Enumeration</a>,
+				or array, then each non-null element is coerced to
+				<a href="@{javac.link.javaApi}java/lang/String.html">String</a>
+				as a separate parameter in iteration order.  Otherwise, the value itself is
+				coerced to <a href="@{javac.link.javaApi}java/lang/String.html">String</a>
+				for the parameter value.
 			</p>
 			<p>
-				Nested &lt;ao:param&gt; or &lt;ao:params&gt; tags will add parameters after any provided as attributes.
+				Nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a>
+				or <a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a>
+				tags will add parameters after any provided as attributes.
 			</p>
 			<p>
 				Due to browser and server URL length limitations for GET requests, it is recommended to not
 				exceed about 2000 characters for URLs, including all parameters.
-				See <a href="http://www.boutell.com/newfaq/misc/urllength.html">WWW FAQs: What is the maximum length of a URL?</a>
+				See <a href="https://www.boutell.com/newfaq/misc/urllength.html">WWW FAQs: What is the maximum length of a URL?</a>
 			</p>
 			<p>
 				When redirecting to a resource within the application, such as for a 303 redirect-after-post response,
@@ -2217,9 +2586,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					The status code of redirect performed.  Is one of:
 				</p>
 				<ul>
-					<li>"moved_permanently" (or 301)</li>
-					<li>"moved_temporarily" (or 302)</li>
-					<li>"see_other" (or 303) - Hint: Used for redirect-after-post</li>
+					<li><code>moved_permanently</code> or <code>301</code></li>
+					<li><code>moved_temporarily</code> or <code>302</code></li>
+					<li><code>see_other</code> or <code>303</code> - Hint: Used for redirect-after-post</li>
 				</ul>
 				<p>
 					Because the redirect type has important consequences on search engines and browser caches, the decision should be made for
@@ -2246,7 +2615,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					To avoid ambiguity, any parameters or anchors in the URL must have been correctly encoded by the caller.
 				</p>
 				<p>
-					A nested &lt;ao:href&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-href">&lt;ao:href&gt;</a>
+					tag will override this value.
 				</p>
 				<p>
 					When not provided as attribute or a nested tag, defaults to the value for "page".
@@ -2263,8 +2633,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					If the href represents a local resource, a parameter of "lastModified=#####" may be
 					automatically added with the timestamp of the local resource to the nearest second.
-					May be one of "true", "false", or "auto".
-					Defaults to "auto".
+					May be one of <code>true</code>, <code>false</code>, or <code>auto</code>.
+					Defaults to <code>auto</code>.
 				</p>
 				<p>
 					In auto mode, last modified stamping may be disabled by the client with
@@ -2282,22 +2652,27 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					The page that will be forwarded to when the GET request URL length is exceeded.
 					It is recommended to provide the page for any redirect within a web application,
 					such as 303 redirect-after-post.
-					A nested &lt;ao:page&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-page">&lt;ao:page&gt;</a>
+					tag will override this value.
 				</p>
 				<p>
 					When forward is performed instead of redirect, the original request parameters are hidden.
 					Only the parameters provided in the redirect are passed-on to the target page.
-					Also, any arguments to the current page are not passed-on (see &lt;ao:include&gt;).
+					Also, any arguments to the current page are not passed-on (see
+					<a href="@{project.url}ao.tld/tag-include">&lt;ao:include&gt;</a>).
 				</p>
 				<p>
-					Security Note: page must be a trusted value since it can access any resource avaiable via RequestDispatcher.
+					Security Note: page must be a trusted value since it can access any resource available via
+					<a href="@{javac.link.javaEEApi}javax/servlet/RequestDispatcher.html">RequestDispatcher</a>.
 					It would be incorrect to use a value that can be manipulated by a client in any way.
 				</p>
 				<p>
-					Recommend use of &lt;ao:base /&gt; on target page to have relative paths interpreted from the forwarded-to page.
+					Recommend use of <a href="@{project.url}ao.tld/tag-include">&lt;ao:base&gt;</a>
+					on target page to have relative paths interpreted from the forwarded-to page.
 				</p>
 				<p>
-					When the redirect type is 302 or 303, the <code>Cache-Control: no-cache</code> header is
+					When the redirect type is <code>302</code> or <code>303</code>,
+					the <code>Cache-Control: no-cache</code> header is
 					automatically added to the response to try to best emulate the caching effects of the redirect.
 				</p>
 			]]></description>
@@ -2310,7 +2685,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Provides a rel attribute to its RelAttribute parent tag.</p>
+			<p>
+				Provides a rel attribute to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/RelAttribute.html">RelAttribute</a>
+				parent tag.
+			</p>
 		]]></description>
 		<name>rel</name>
 		<tag-class>com.aoindustries.taglib.RelTag</tag-class>
@@ -2318,7 +2697,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Allows editing of the website resource bundles through the website itself.</p>
+			<p>
+				Allows editing of the website resource bundles through the website itself.
+			</p>
 		]]></description>
 		<name>resourceEditor</name>
 		<tag-class>com.aoindustries.taglib.ResourceEditorTag</tag-class>
@@ -2333,7 +2714,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<p>
 				The script should not be encoded as if in HTML/XML, it must have single
 				"&amp;" instead of "&amp;amp;".  The script may contain any characters
-				valid in that language, including &lt;, &gt;, &amp;, \u0000 (null), or
+				valid in that language, including &lt;, &gt;, &amp;, \u0000 (<code>null</code>), or
 				any other values.
 			</p>
 			<p>
@@ -2350,13 +2731,21 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				The parameter name is the part of the attribute name following "param.".
 			</p>
 			<p>
-				When a parameter value is null it is not added.
-				If the value is an Iterable, Iterator, Enumeration, or array, then each non-null element is coerced to
-				string as a separate parameter in iteration order.  Otherwise, the value itself is
-				coerced to string for the parameter value.
+				When a parameter value is <code>null</code> it is not added.
+				If the value is an
+				<a href="@{javac.link.javaApi}java/lang/Iterable.html">Iterable</a>,
+				<a href="@{javac.link.javaApi}java/util/Iterator.html">Iterator</a>,
+				<a href="@{javac.link.javaApi}java/util/Enumeration.html">Enumeration</a>,
+				or array, then each non-null element is coerced to
+				<a href="@{javac.link.javaApi}java/lang/String.html">String</a>
+				as a separate parameter in iteration order.  Otherwise, the value itself is
+				coerced to <a href="@{javac.link.javaApi}java/lang/String.html">String</a>
+				for the parameter value.
 			</p>
 			<p>
-				Nested &lt;ao:param&gt; or &lt;ao:params&gt; tags will add parameters after any provided as attributes.
+				Nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a>
+				or <a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a>
+				tags will add parameters after any provided as attributes.
 			</p>
 		]]></description>
 		<name>script</name>
@@ -2367,8 +2756,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					Specifies the type of script.
-					The default is "text/javascript", also allows "application/json" and "application/ld+json".
-					A nested &lt;ao:type&gt; tag will override this value.
+					The default is <code>text/javascript</code>, also allows
+					<code>application/json</code> and <code>application/ld+json</code>.
+					A nested <a href="@{project.url}ao.tld/tag-type">&lt;ao:type&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>type</name>
@@ -2385,8 +2776,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					URL Encoding is performed on everything up to the last # or ? (first of the two), except for
 					any character in the set { ':', '/', ';', '#' }
 					To avoid ambiguity, any parameters or anchors in the URL must have been correctly encoded by the caller.
-					A nested &lt;ao:src&gt; tag will override this value.
-					Any directly nested &lt;ao:param&gt; or &lt;ao:params&gt; tag will add parameters to the src.
+					A nested <a href="@{project.url}ao.tld/tag-src">&lt;ao:src&gt;</a>
+					tag will override this value.
+					Any directly nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a>
+					or <a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a>
+					tag will add parameters to the src.
 				</p>
 			]]></description>
 			<name>src</name>
@@ -2397,8 +2791,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					When true, generates an absolute URL for the src for the script.
-					Defaults to false.
+					When <code>true</code>, generates an absolute URL for the src for the script.
+					Defaults to <code>false</code>.
 				</p>
 			]]></description>
 			<name>srcAbsolute</name>
@@ -2411,8 +2805,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					If the src represents a local resource, a parameter of "lastModified=#####" may be
 					automatically added with the timestamp of the local resource to the nearest second.
-					May be one of "true", "false", or "auto".
-					Defaults to "auto".
+					May be one of <code>true</code>, <code>false</code>, or <code>auto</code>.
+					Defaults to <code>auto</code>.
 				</p>
 				<p>
 					In auto mode, last modified stamping may be disabled by the client with
@@ -2428,7 +2822,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Renders a select tag.</p>
+			<p>
+				Renders a select tag.
+			</p>
 		]]></description>
 		<name>select</name>
 		<tag-class>com.aoindustries.taglib.SelectTag</tag-class>
@@ -2437,7 +2833,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The id of the element.
-					A nested &lt;ao:id&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-id">&lt;ao:id&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>id</name>
@@ -2449,7 +2846,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The name of the select element.
-					A nested &lt;ao:name&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-name">&lt;ao:name&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>name</name>
@@ -2461,7 +2859,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The CSS style for the select element.
-					A nested &lt;ao:style&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-style">&lt;ao:style&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>style</name>
@@ -2472,9 +2871,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The disabled attribute.  Accepts values of "true" or "false".
-					A non-empty nested &lt;ao:disabled&gt; tag will override this value.
-					If disabled is "true", will add the attribute as <code>disabled="disabled"</code>,
+					The disabled attribute.  Accepts values of <code>true</code> or <code>false</code>.
+					A non-empty nested <a href="@{project.url}ao.tld/tag-disabled">&lt;ao:disabled&gt;</a>
+					tag will override this value.
+					If disabled is <code>true</code>, will add the attribute as <code>disabled="disabled"</code>,
 					otherwise the attribute is not added.
 				</p>
 			]]></description>
@@ -2487,7 +2887,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					A JavaScript onchange handler.
-					A nested &lt;ao:onchange&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-onchange">&lt;ao:onchange&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>onchange</name>
@@ -2499,7 +2900,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					A JavaScript onfocus handler.
-					A nested &lt;ao:onfocus&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-onfocus">&lt;ao:onfocus&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>onfocus</name>
@@ -2511,7 +2913,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					A JavaScript onblur handler.
-					A nested &lt;ao:onblur&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-onblur">&lt;ao:onblur&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>onblur</name>
@@ -2523,7 +2926,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					A JavaScript onkeypress handler.
-					A nested &lt;ao:onkeypress&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-onkeypress">&lt;ao:onkeypress&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>onkeypress</name>
@@ -2535,10 +2939,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<tag>
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
-				Provides a selected attribute to its SelectedAttribute parent tag.
+				Provides a selected attribute to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/SelectedAttribute.html">SelectedAttribute</a>
+				parent tag.
 			</p>
 			<p>
-				The body, after trimming, must contain either "true", "false", or be empty.
+				The body, after trimming, must contain either <code>true</code>, <code>false</code>, or be empty.
 				If empty, the selected attribute of the parent tag is not overridden.
 			</p>
 		]]></description>
@@ -2555,8 +2961,15 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 			<p>
 				<strong>Important:</strong>
-				Errors sent inside of standard &lt;jsp:include&gt; tags will be silently lost.
-				Use &lt;ao:include&gt; instead of &lt;jsp:include&gt; to support sendError inside of includes.
+				Errors sent inside of standard
+				<a href="https://docs.oracle.com/cd/A87860_01/doc/java.817/a83726/genlovw3.htm#1008181">&lt;jsp:include&gt;</a>
+				tags will be silently lost.
+				Use <a href="@{project.url}ao.tld/tag-include">&lt;ao:include&gt;</a>
+				instead of
+				<a href="https://docs.oracle.com/cd/A87860_01/doc/java.817/a83726/genlovw3.htm#1008181">&lt;jsp:include&gt;</a>
+				to support
+				<a href="@{javac.link.javaEEApi}javax/servlet/http/HttpServletResponse.html#sendError(int)">sendError</a>
+				inside of includes.
 			</p>
 		]]></description>
 		<name>sendError</name>
@@ -2564,7 +2977,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 		<attribute>
 			<description><![CDATA[
-				<p>The status code for response.sendError.</p>
+				<p>
+					The status code for
+					<a href="@{javac.link.javaEEApi}javax/servlet/http/HttpServletResponse.html#sendError(int)">response.sendError</a>.
+				</p>
 			]]></description>
 			<name>status</name>
 			<required>true</required>
@@ -2585,7 +3001,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Provides a size attribute to its SizeAttribute parent tag.</p>
+			<p>
+				Provides a size attribute to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/SizeAttribute.html">SizeAttribute</a>
+				parent tag.
+			</p>
 		]]></description>
 		<name>size</name>
 		<tag-class>com.aoindustries.taglib.SizeTag</tag-class>
@@ -2593,7 +3013,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Provides a src attribute to its SrcAttribute parent tag.</p>
+			<p>
+				Provides a src attribute to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/SrcAttribute.html">SrcAttribute</a>
+				parent tag.
+			</p>
 		]]></description>
 		<name>src</name>
 		<tag-class>com.aoindustries.taglib.SrcTag</tag-class>
@@ -2601,7 +3025,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Provides a style attribute to its StyleAttribute parent tag.</p>
+			<p>
+				Provides a style attribute to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/StyleAttribute.html">StyleAttribute</a>
+				parent tag.
+			</p>
 		]]></description>
 		<name>style</name>
 		<tag-class>com.aoindustries.taglib.StyleTag</tag-class>
@@ -2610,7 +3038,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<tag>
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
-				Provides a tabindex attribute to its TabindexAttribute parent tag.
+				Provides a tabindex attribute to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/TabindexAttribute.html">TabindexAttribute</a>
+				parent tag.
 			</p>
 			<p>
 				The body, after trimming, must contain an integer or be empty.
@@ -2623,7 +3053,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Provides a target attribute to its TargetAttribute parent tag.</p>
+			<p>
+				Provides a target attribute to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/TargetAttribute.html">TargetAttribute</a>
+				parent tag.
+			</p>
 		]]></description>
 		<name>target</name>
 		<tag-class>com.aoindustries.taglib.TargetTag</tag-class>
@@ -2654,7 +3088,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				all tags, not just this text tag.
 			</p>
 			<p>
-				The content type of this tag text/plain.
+				The content type of this tag <code>text/plain</code>.
 			</p>
 		]]></description>
 		<name>text</name>
@@ -2670,7 +3104,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				The value may be provided in one of three ways, in precedence order:
 			</p>
 			<ol>
-				<li>Direct child &lt;ao:value&gt; tag.</li>
+				<li>Direct child <a href="@{project.url}ao.tld/tag-value">&lt;ao:value&gt;</a> tag.</li>
 				<li>As the value attribute</li>
 				<li>Contents of tag body.</li>
 			</ol>
@@ -2682,7 +3116,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The name of textarea tag.
-					A nested &lt;ao:name&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-name">&lt;ao:name&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>name</name>
@@ -2694,7 +3129,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The value of the textarea.
-					A nested &lt;ao:value&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-value">&lt;ao:value&gt;</a>
+					tag will override this value.
 					If neither is provided, the output of the body is used.
 				</p>
 			]]></description>
@@ -2707,7 +3143,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The number of columns for the textarea element.
-					A nested &lt;ao:cols&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-cols">&lt;ao:cols&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>cols</name>
@@ -2719,7 +3156,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The number of rows for the textarea element.
-					A nested &lt;ao:rows&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-rows">&lt;ao:rows&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>rows</name>
@@ -2730,9 +3168,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The readonly attribute.  Accepts values of "true" or "false".
-					A non-empty nested &lt;ao:readonly&gt; tag will override this value.
-					If readonly is "true", will add the attribute as <code>readonly="readonly"</code>,
+					The readonly attribute.  Accepts values of <code>true</code> or <code>false</code>.
+					A non-empty nested <a href="@{project.url}ao.tld/tag-readonly">&lt;ao:readonly&gt;</a>
+					tag will override this value.
+					If readonly is <code>true</code>, will add the attribute as <code>readonly="readonly"</code>,
 					otherwise the attribute is not added.
 				</p>
 			]]></description>
@@ -2744,9 +3183,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The disabled attribute.  Accepts values of "true" or "false".
-					A non-empty nested &lt;ao:disabled&gt; tag will override this value.
-					If disabled is "true", will add the attribute as <code>disabled="disabled"</code>,
+					The disabled attribute.  Accepts values of <code>true</code> or <code>false</code>.
+					A non-empty nested <a href="@{project.url}ao.tld/tag-disabled">&lt;ao:disabled&gt;</a>
+					tag will override this value.
+					If disabled is <code>true</code>, will add the attribute as <code>disabled="disabled"</code>,
 					otherwise the attribute is not added.
 				</p>
 			]]></description>
@@ -2759,7 +3199,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					A JavaScript onchange handler.
-					A nested &lt;ao:onchange&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-onchange">&lt;ao:onchange&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>onchange</name>
@@ -2771,7 +3212,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The CSS style for the textarea element.
-					A nested &lt;ao:style&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-style">&lt;ao:style&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>style</name>
@@ -2782,7 +3224,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Provides a title to its TitleAttribute parent tag.</p>
+			<p>
+				Provides a title to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/TitleAttribute.html">TitleAttribute</a>
+				parent tag.
+			</p>
 		]]></description>
 		<name>title</name>
 		<tag-class>com.aoindustries.taglib.TitleTag</tag-class>
@@ -2790,7 +3236,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Provides a type to its TitleAttribute parent tag.</p>
+			<p>
+				Provides a type to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/TypeAttribute.html">TypeAttribute</a>
+				parent tag.
+			</p>
 		]]></description>
 		<name>type</name>
 		<tag-class>com.aoindustries.taglib.TypeTag</tag-class>
@@ -2819,11 +3269,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				path will be prepended to the path.
 			</p>
 			<p>
-				Depending on context, the URL will be passed through HttpServletResponse.encodeURL
+				Depending on context, the URL will be passed through
+				<a href="@{javac.link.javaEEApi}javax/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>
 				to add any URL-based session state.  Session state will never be added to external links.
 			</p>
 			<p>
-				The content type of this tag is text/url.
+				The content type of this tag is <code>text/url</code>.
 				Must be valid URL-encoded characters only.
 			</p>
 		]]></description>
@@ -2833,7 +3284,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Provides a value to its ValueAttribute parent tag.</p>
+			<p>
+				Provides a value to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/ValueAttribute.html">ValueAttribute</a>
+				parent tag.
+			</p>
 		]]></description>
 		<name>value</name>
 		<tag-class>com.aoindustries.taglib.ValueTag</tag-class>
@@ -2841,7 +3296,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Like &lt;c:when&gt;, except uses deferred expressions.</p>
+			<p>
+				Like
+				<a href="https://docs.oracle.com/javaee/5/jstl/1.1/docs/tlddocs/c/when.html">&lt;c:when&gt;</a>,
+				except uses deferred expressions.
+			</p>
 		]]></description>
 		<name>when</name>
 		<tag-class>com.aoindustries.taglib.WhenTag</tag-class>
@@ -2862,7 +3321,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Provides a width attribute to its WidthAttribute parent tag.</p>
+			<p>
+				Provides a width attribute to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/WidthAttribute.html">WidthAttribute</a>
+				parent tag.
+			</p>
 		]]></description>
 		<name>width</name>
 		<tag-class>com.aoindustries.taglib.WidthTag</tag-class>
@@ -2870,14 +3333,19 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
-			<p>Word wraps the textual content.</p>
+			<p>
+				Word wraps the textual content.
+			</p>
 		]]></description>
 		<name>wordWrap</name>
 		<tag-class>com.aoindustries.taglib.WordWrapTag</tag-class>
 		<body-content>scriptless</body-content>
 		<attribute>
 			<description><![CDATA[
-				<p>The width to wrap to.  Defaults to 79.</p>
+				<p>
+					The width to wrap to.
+					Defaults to <code>79</code>.
+				</p>
 			]]></description>
 			<name>width</name>
 			<required>false</required>
@@ -2888,33 +3356,40 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<tag>
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
-				Writes the bean contents.  Supports data types beyond &lt;c:out&gt; and
-				&lt;bean:write&gt;, such as XML nodes for HTML snippets.
+				Writes the bean contents.  Supports data types beyond
+				<a href="https://docs.oracle.com/javaee/5/jstl/1.1/docs/tlddocs/c/out.html">&lt;c:out&gt;</a>
+				and <a href="https://people.apache.org/~germuska/struts-taglib/docs/tlddoc/bean/write.html">&lt;bean:write&gt;</a>,
+				such as <a href="@{javac.link.javaApi}org/w3c/dom/Node.html">XML nodes</a>
+				for HTML snippets.
 			</p>
 			<p>
 				If the bean is <code>null</code> then nothing is displayed.
-				This is generally for compatibility with Struts 1.X and predates JSTL and Expression Language.
-				JSTL, Expression Language, and other tags should generally be preferred.
+				This is generally for compatibility with Struts 1.X and predates
+				<a href="https://docs.oracle.com/javaee/5/jstl/1.1/docs/tlddocs/">JSTL</a>
+				and <a href="https://docs.oracle.com/cd/E19226-01/820-7627/gjddd/">Expression Language</a>.
+				<a href="https://docs.oracle.com/javaee/5/jstl/1.1/docs/tlddocs/">JSTL</a>,
+				<a href="https://docs.oracle.com/cd/E19226-01/820-7627/gjddd/">Expression Language</a>,
+				and other tags should generally be preferred.
 			</p>
 			<p>
 				The method attribute provides the name of the method that will be used to get the display value.
-				If not provided, it will default to <code>"toString"</code>.  This method
-				searches for the method of the given name with no parameters.  It is an error if the method is
+				If not provided, it will default to <a href="@{javac.link.javaApi}java/lang/Object.html#toString()">toString/a>.
+				This method searches for the method of the given name with no parameters.  It is an error if the method is
 				not found.
 			</p>
 			<p>
 				The content type depends on the value provided to the type attribute, and
-				defaults to text/plain.  The content is checked for well-formedness based
+				defaults to <code>text/plain</code>.  The content is checked for well-formedness based
 				on its type:
 			</p>
 			<ul>
-				<li>"javascript" or "text/javascript" - no validation</li>
-				<li>"json" or "application/json" - no validation</li>
-				<li>"ld_json" or "application/ls+json" - no validation</li>
-				<li>"text" or "text/plain" - no validation</li>
-				<li>"url" or "text/url" - must be a valid URL</li>
-				<li>"xhtml" or "application/xhtml+xml" - must be well-formed XHTML content. (Note: Currently only checks character values.)</li>
-				<li>"xhtml_attribute" or "application/xhtml+xml+attribute" - must be a valid XHTML attribute.</li>
+				<li><code>javascript</code> or <code>text/javascript</code> - no validation</li>
+				<li><code>json</code> or <code>application/json</code> - no validation</li>
+				<li><code>ld_json</code> or <code>application/ld+json</code> - no validation</li>
+				<li><code>text</code> or <code>text/plain</code> - no validation</li>
+				<li><code>url</code> or <code>text/url</code> - must be a valid URL</li>
+				<li><code>xhtml</code> or <code>application/xhtml+xml</code> - must be well-formed XHTML content. (Note: Currently only checks character values.)</li>
+				<li><code>xhtml_attribute</code> or <code>application/xhtml+xml+attribute</code> - must be a valid XHTML attribute.</li>
 			</ul>
 		]]></description>
 		<name>write</name>
@@ -2925,7 +3400,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					Specifies the variable scope searched to retrieve the bean specified
-					by name. If not specified, the default rules applied by PageContext.findAttribute()
+					by name. If not specified, the default rules applied by
+					<a href="@{javac.link.javaEEApi}javax/servlet/jsp/JspContext.html#findAttribute(java.lang.String)">JspContext.findAttribute()</a>
 					are applied.
 				</p>
 			]]></description>
@@ -2942,7 +3418,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					not specified, the value of this bean itself will be used.
 				</p>
 				<p>
-					A nested &lt;ao:name&gt; tag will override this value.
+					A nested <a href="@{project.url}ao.tld/tag-name">&lt;ao:name&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>name</name>
@@ -2967,8 +3444,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					Specifies the method that will be used to convert the object to a String.
-					This defaults to toString
+					Specifies the method that will be used to convert the object to a
+					<a href="@{javac.link.javaApi}java/lang/String.html">String</a>.
+					This defaults to <a href="@{javac.link.javaApi}java/lang/Object.html#toString()">toString/a>.
 				</p>
 			]]></description>
 			<name>method</name>
@@ -2979,8 +3457,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					Specifies the type of content contained in the bean.  Defaults to text/plain.
-					A nested &lt;ao:type&gt; tag will override this value.
+					Specifies the type of content contained in the bean.
+					Defaults to <code>text/plain</code>.
+					A nested <a href="@{project.url}ao.tld/tag-type">&lt;ao:type&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
 			<name>type</name>
@@ -2996,7 +3476,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				The body of this tag contains well-formed XHTML 1.0-compliant attribute.
 			</p>
 			<p>
-				The content type of this tag is application/xhtml+xml+attribute.
+				The content type of this tag is <code>application/xhtml+xml+attribute</code>.
 			</p>
 		]]></description>
 		<name>xhtmlAttribute</name>
@@ -3010,7 +3490,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				The body of this tag contains well-formed XHTML 1.0-compliant markup.
 			</p>
 			<p>
-				The content type of this tag is application/xhtml+xml.
+				The content type of this tag is <code>application/xhtml+xml</code>.
 			</p>
 			<p>
 				Note: For performance, this implementation currently only checks character
@@ -3024,7 +3504,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<function>
 		<description><![CDATA[
-			<p>Gets the lastModified or <code>0</code> when not known.</p>
+			<p>
+				Gets the lastModified timestamp in milliseconds since Epoch or <code>0</code> when not known.
+			</p>
 		]]></description>
 		<name>getLastModified</name>
 		<function-class>com.aoindustries.taglib.Functions</function-class>
@@ -3045,7 +3527,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</function>
 	<function>
 		<description><![CDATA[
-			<p>Rewrites a URL to maintain session state.</p>
+			<p>
+				Rewrites a URL to maintain session state via
+				<a href="@{javac.link.javaEEApi}javax/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>.
+			</p>
 		]]></description>
 		<name>encodeURL</name>
 		<function-class>com.aoindustries.taglib.Functions</function-class>
@@ -3054,7 +3539,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</function>
 	<function>
 		<description><![CDATA[
-			<p>Generates an absolute URL for the provided context-relative URL.  The URL is not automatically response encodeURL.</p>
+			<p>
+				Generates an absolute URL for the provided context-relative URL.
+				The URL is not automatically
+				<a href="@{javac.link.javaEEApi}javax/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">response encodeURL</a>.
+			</p>
 		]]></description>
 		<name>getAbsoluteURL</name>
 		<function-class>com.aoindustries.taglib.Functions</function-class>
@@ -3063,7 +3552,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</function>
 	<function>
 		<description><![CDATA[
-			<p>Gets a time span display for a given number of milliseconds or null for null milliseconds.</p>
+			<p>
+				Gets a time span display for a given number of milliseconds or
+				<code>null</code> for <code>null</code> milliseconds.
+			</p>
 		]]></description>
 		<name>getDecimalTimeLength</name>
 		<function-class>com.aoindustries.taglib.Functions</function-class>
@@ -3073,8 +3565,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<function>
 		<description><![CDATA[
 			<p>
-				Determines if the current request has been forwarded by a &lt;ao:forward&gt;
-				or &lt;ao:redirect&gt; tag.
+				Determines if the current request has been forwarded by a
+				<a href="@{project.url}ao.tld/tag-forward">&lt;ao:forward&gt;</a> or
+				<a href="@{project.url}ao.tld/tag-redirect">&lt;ao:redirect&gt;</a> tag.
 			</p>
 		]]></description>
 		<name>isForwarded</name>
@@ -3084,7 +3577,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</function>
 	<function>
 		<description><![CDATA[
-			<p>Joins elements of any Iterable into a String.</p>
+			<p>
+				Joins elements of any
+				<a href="@{javac.link.javaApi}java/lang/Iterable.html">Iterable</a>
+				into a <a href="@{javac.link.javaApi}java/lang/String.html">String</a>.
+			</p>
 		]]></description>
 		<name>join</name>
 		<function-class>com.aoindustries.taglib.Functions</function-class>
@@ -3096,7 +3593,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<p>
 				Gets a value from the current localization bundle given its key.
 				No parameters may be provided.
-				Must be nested inside a &lt;ao:bundle&gt; tag.
+				Must be nested inside a <a href="@{project.url}ao.tld/tag-bundle">&lt;ao:bundle&gt;</a>
+				tag.
 			</p>
 		]]></description>
 		<name>message</name>
@@ -3106,7 +3604,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</function>
 	<function>
 		<description><![CDATA[
-			<p>Word wraps a string.</p>
+			<p>
+				Word wraps a <a href="@{javac.link.javaApi}java/lang/String.html">String</a>.
+			</p>
 		]]></description>
 		<name>wordWrap</name>
 		<function-class>com.aoindustries.util.StringUtility</function-class>
@@ -3115,7 +3615,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</function>
 	<function>
 		<description><![CDATA[
-			<p>java.lang.Math.ceil(double)</p>
+			<p>
+				Calls <a href="@{javac.link.javaApi}java/lang/Math.html#ceil(double)">java.lang.Math.ceil(double)</a>.
+			</p>
 		]]></description>
 		<name>ceil</name>
 		<function-class>java.lang.Math</function-class>
@@ -3124,7 +3626,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</function>
 	<function>
 		<description><![CDATA[
-			<p>java.lang.Math.floor(double)</p>
+			<p>
+				Calls <a href="@{javac.link.javaApi}java/lang/Math.html#floor(double)">java.lang.Math.floor(double)</a>.
+			</p>
 		]]></description>
 		<name>floor</name>
 		<function-class>java.lang.Math</function-class>
@@ -3133,7 +3637,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</function>
 	<function>
 		<description><![CDATA[
-			<p>java.lang.Math.round(double)</p>
+			<p>
+				Calls <a href="@{javac.link.javaApi}java/lang/Math.html#round(double)">java.lang.Math.round(double)</a>.
+			</p>
 		]]></description>
 		<name>round</name>
 		<function-class>java.lang.Math</function-class>
