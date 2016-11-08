@@ -587,11 +587,46 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</attribute>
 		<attribute>
 			<description><![CDATA[
+				<p class="semanticcms-tag-reference-summary">
+					The action for the &lt;form&gt;.
+					The action is modified in several ways to make things much easier to work with.
+				</p>
 				<p>
-					The action for the form.
+					A nested <a href="@{project.url}ao.tld/tag-action">&lt;ao:action&gt;</a> tag will override this value.
+				</p>
+				<p>
+					In order to make relative paths predictable, relative paths are interpreted from
+					the current page, as long as all includes have been done via
+					<a href="@{project.url}ao.tld/tag-include">&lt;ao:include&gt;</a>
+					and any forward via <a href="@{project.url}ao.tld/tag-forward">&lt;ao:forward&gt;</a>.
+				</p>
+				<p>
+					In order to keep paths app-relative, if starts with a /, the context path will be
+					prepended to the path.
+				</p>
+				<p>
+					In order to simplying things behing URL mapping schemes,
+					the action is always written starting with '/'.  This avoids any need to include any
+					<a href="@{project.url}ao.tld/tag-base">&lt;ao:base&gt;</a> tags.
+				</p>
+				<p>
+					URL rewriting is performed as needed via
+					<a href="@{javac.link.javaEEApi}javax/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>.
+				</p>
+				<p>
+					To support paths in different character sets, URL encoding is performed
+					on every path element up to the last # or ? (first of the two), except for
+					any character in the set {':', '/', ';', '#'}.
+					To avoid ambiguity, any parameters or anchors in the URL must have been correctly encoded by the caller.
+				</p>
+				<p>
+					Any directly nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a>
+					or <a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a>
+					tag will add parameters to the action.
+				</p>
+				<p>
 					Any URL parameters will not be in the action attribute, but instead will be rewritten into hidden form elements.
-					A nested <a href="@{project.url}ao.tld/tag-action">&lt;ao:action&gt;</a>
-					tag will override this value.
+					This, in conjuction with response URL rewriting, can maintain state even through for posts.
 				</p>
 			]]></description>
 			<name>action</name>
