@@ -3507,7 +3507,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>getLastModified</name>
 		<function-class>com.aoindustries.taglib.Functions</function-class>
 		<function-signature>long getLastModified(java.lang.String)</function-signature>
-		<example><![CDATA[<pre>${ao:getLastModified('../path-to-page.jsp')}</pre>]]></example>
+		<example><![CDATA[<code>${ao:getLastModified('../path-to-page.jsp')}</code>]]></example>
 	</function>
 	<function>
 		<description><![CDATA[
@@ -3519,7 +3519,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>addLastModified</name>
 		<function-class>com.aoindustries.taglib.Functions</function-class>
 		<function-signature>java.lang.String addLastModified(java.lang.String)</function-signature>
-		<example><![CDATA[<pre>${ao:addLastModified('../path-to-page.jsp')}</pre>]]></example>
+		<example><![CDATA[<code>${ao:addLastModified('../path-to-page.jsp')}</code>]]></example>
 	</function>
 	<function>
 		<description><![CDATA[
@@ -3531,7 +3531,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>encodeURL</name>
 		<function-class>com.aoindustries.taglib.Functions</function-class>
 		<function-signature>java.lang.String encodeURL(java.lang.String)</function-signature>
-		<example><![CDATA[<pre>${ao:encodeURL('../path-to-page.jsp')}</pre>]]></example>
+		<example><![CDATA[<code>${ao:encodeURL('../path-to-page.jsp')}</code>]]></example>
 	</function>
 	<function>
 		<description><![CDATA[
@@ -3544,7 +3544,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>getAbsoluteURL</name>
 		<function-class>com.aoindustries.taglib.Functions</function-class>
 		<function-signature>java.lang.String getAbsoluteURL(java.lang.String)</function-signature>
-		<example><![CDATA[<pre>${ao:getAbsoluteURL('/path-to-page.jsp')}</pre>]]></example>
+		<example><![CDATA[<code>${ao:getAbsoluteURL('/path-to-page.jsp')}</code>]]></example>
 	</function>
 	<function>
 		<description><![CDATA[
@@ -3556,7 +3556,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>getDecimalTimeLength</name>
 		<function-class>com.aoindustries.taglib.Functions</function-class>
 		<function-signature>java.lang.String getDecimalTimeLength(java.lang.Long)</function-signature>
-		<example><![CDATA[<pre>${ao:getDecimalTimeLength(timeSpan)}</pre>]]></example>
+		<example><![CDATA[<code>${ao:getDecimalTimeLength(timeSpan)}</code>]]></example>
 	</function>
 	<function>
 		<description><![CDATA[
@@ -3569,7 +3569,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>isForwarded</name>
 		<function-class>com.aoindustries.taglib.DispatchTag</function-class>
 		<function-signature>boolean isForwarded()</function-signature>
-		<example><![CDATA[<pre>${ao:isForwarded()}</pre>]]></example>
+		<example><![CDATA[<code>${ao:isForwarded()}</code>]]></example>
 	</function>
 	<function>
 		<description><![CDATA[
@@ -3582,7 +3582,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>join</name>
 		<function-class>com.aoindustries.taglib.Functions</function-class>
 		<function-signature>java.lang.String join(java.lang.Iterable,java.lang.String)</function-signature>
-		<example><![CDATA[<pre>${ao:join(iterable, separator)}</pre>]]></example>
+		<example><![CDATA[<code>${ao:join(iterable, separator)}</code>]]></example>
 	</function>
 	<function>
 		<description><![CDATA[
@@ -3596,7 +3596,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>message</name>
 		<function-class>com.aoindustries.taglib.Functions</function-class>
 		<function-signature>java.lang.String message(java.lang.String)</function-signature>
-		<example><![CDATA[<pre>${ao:message(key)}</pre>]]></example>
+		<example><![CDATA[<code>${ao:message(key)}</code>]]></example>
 	</function>
 	<function>
 		<description><![CDATA[
@@ -3607,7 +3607,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>wordWrap</name>
 		<function-class>com.aoindustries.util.StringUtility</function-class>
 		<function-signature>java.lang.String wordWrap(java.lang.String,int)</function-signature>
-		<example><![CDATA[<pre>${ao:wordWrap(text, width)}</pre>]]></example>
+		<example><![CDATA[<code>${ao:wordWrap(text, width)}</code>]]></example>
 	</function>
 	<function>
 		<description><![CDATA[
@@ -3618,7 +3618,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>ceil</name>
 		<function-class>java.lang.Math</function-class>
 		<function-signature>double ceil(double)</function-signature>
-		<example><![CDATA[<pre>${ao:ceil(a)}</pre>]]></example>
+		<example><![CDATA[<code>${ao:ceil(a)}</code>]]></example>
 	</function>
 	<function>
 		<description><![CDATA[
@@ -3629,7 +3629,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>floor</name>
 		<function-class>java.lang.Math</function-class>
 		<function-signature>double floor(double)</function-signature>
-		<example><![CDATA[<pre>${ao:floor(a)}</pre>]]></example>
+		<example><![CDATA[<code>${ao:floor(a)}</code>]]></example>
 	</function>
 	<function>
 		<description><![CDATA[
@@ -3640,6 +3640,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>round</name>
 		<function-class>java.lang.Math</function-class>
 		<function-signature>long round(double)</function-signature>
-		<example><![CDATA[<pre>${ao:round(a)}</pre>]]></example>
+		<example><![CDATA[<code>${ao:round(a)}</code>]]></example>
 	</function>
 </taglib>
