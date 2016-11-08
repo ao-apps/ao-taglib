@@ -383,7 +383,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<description><![CDATA[
 			<p>
 				Sets the bundle used by any nested
-				<a href="@{project.url}ao.tld/tag-message">&lt;ao:message&gt; tags</a>
+				<a href="@{project.url}ao.tld/tag-message">&lt;ao:message&gt;</a> tags
 				or <a href="@{project.url}ao.tld/function-message">functions</a>.
 			</p>
 		]]></description>
@@ -403,7 +403,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The prefix applied to any nested
-					<a href="@{project.url}ao.tld/tag-message">&lt;ao:message&gt; tag</a>
+					<a href="@{project.url}ao.tld/tag-message">&lt;ao:message&gt;</a> tag
 					or <a href="@{project.url}ao.tld/function-message">function</a> keys.
 				</p>
 			]]></description>
@@ -3143,8 +3143,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The number of columns for the textarea element.
-					A nested <a href="@{project.url}ao.tld/tag-cols">&lt;ao:cols&gt;</a>
-					tag will override this value.
 				</p>
 			]]></description>
 			<name>cols</name>
@@ -3156,8 +3154,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The number of rows for the textarea element.
-					A nested <a href="@{project.url}ao.tld/tag-rows">&lt;ao:rows&gt;</a>
-					tag will override this value.
 				</p>
 			]]></description>
 			<name>rows</name>
@@ -3373,7 +3369,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 			<p>
 				The method attribute provides the name of the method that will be used to get the display value.
-				If not provided, it will default to <a href="@{javac.link.javaApi}java/lang/Object.html#toString()">toString/a>.
+				If not provided, it will default to <code><a href="@{javac.link.javaApi}java/lang/Object.html#toString()">toString</a></code>.
 				This method searches for the method of the given name with no parameters.  It is an error if the method is
 				not found.
 			</p>
@@ -3446,7 +3442,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					Specifies the method that will be used to convert the object to a
 					<a href="@{javac.link.javaApi}java/lang/String.html">String</a>.
-					This defaults to <a href="@{javac.link.javaApi}java/lang/Object.html#toString()">toString/a>.
+					This defaults to <a href="@{javac.link.javaApi}java/lang/Object.html#toString()">toString</a>.
 				</p>
 			]]></description>
 			<name>method</name>
@@ -3511,7 +3507,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>getLastModified</name>
 		<function-class>com.aoindustries.taglib.Functions</function-class>
 		<function-signature>long getLastModified(java.lang.String)</function-signature>
-		<example>${ao:getLastModified('../path-to-page.jsp')}</example>
+		<example><![CDATA[<pre>${ao:getLastModified('../path-to-page.jsp')}</pre>]]></example>
 	</function>
 	<function>
 		<description><![CDATA[
@@ -3523,7 +3519,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>addLastModified</name>
 		<function-class>com.aoindustries.taglib.Functions</function-class>
 		<function-signature>java.lang.String addLastModified(java.lang.String)</function-signature>
-		<example>${ao:addLastModified('../path-to-page.jsp')}</example>
+		<example><![CDATA[<pre>${ao:addLastModified('../path-to-page.jsp')}</pre>]]></example>
 	</function>
 	<function>
 		<description><![CDATA[
@@ -3535,7 +3531,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>encodeURL</name>
 		<function-class>com.aoindustries.taglib.Functions</function-class>
 		<function-signature>java.lang.String encodeURL(java.lang.String)</function-signature>
-		<example>${ao:encodeURL('../path-to-page.jsp')}</example>
+		<example><![CDATA[<pre>${ao:encodeURL('../path-to-page.jsp')}</pre>]]></example>
 	</function>
 	<function>
 		<description><![CDATA[
@@ -3548,7 +3544,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>getAbsoluteURL</name>
 		<function-class>com.aoindustries.taglib.Functions</function-class>
 		<function-signature>java.lang.String getAbsoluteURL(java.lang.String)</function-signature>
-		<example>${ao:getAbsoluteURL('/path-to-page.jsp')}</example>
+		<example><![CDATA[<pre>${ao:getAbsoluteURL('/path-to-page.jsp')}</pre>]]></example>
 	</function>
 	<function>
 		<description><![CDATA[
@@ -3560,7 +3556,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>getDecimalTimeLength</name>
 		<function-class>com.aoindustries.taglib.Functions</function-class>
 		<function-signature>java.lang.String getDecimalTimeLength(java.lang.Long)</function-signature>
-		<example>${ao:getDecimalTimeLength(timeSpan)}</example>
+		<example><![CDATA[<pre>${ao:getDecimalTimeLength(timeSpan)}</pre>]]></example>
 	</function>
 	<function>
 		<description><![CDATA[
@@ -3573,7 +3569,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>isForwarded</name>
 		<function-class>com.aoindustries.taglib.DispatchTag</function-class>
 		<function-signature>boolean isForwarded()</function-signature>
-		<example>${ao:isForwarded()}</example>
+		<example><![CDATA[<pre>${ao:isForwarded()}</pre>]]></example>
 	</function>
 	<function>
 		<description><![CDATA[
@@ -3586,7 +3582,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>join</name>
 		<function-class>com.aoindustries.taglib.Functions</function-class>
 		<function-signature>java.lang.String join(java.lang.Iterable,java.lang.String)</function-signature>
-		<example>${ao:join(iterable, separator)}</example>
+		<example><![CDATA[<pre>${ao:join(iterable, separator)}</pre>]]></example>
 	</function>
 	<function>
 		<description><![CDATA[
@@ -3600,7 +3596,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>message</name>
 		<function-class>com.aoindustries.taglib.Functions</function-class>
 		<function-signature>java.lang.String message(java.lang.String)</function-signature>
-		<example>${ao:message(key)}</example>
+		<example><![CDATA[<pre>${ao:message(key)}</pre>]]></example>
 	</function>
 	<function>
 		<description><![CDATA[
@@ -3611,7 +3607,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>wordWrap</name>
 		<function-class>com.aoindustries.util.StringUtility</function-class>
 		<function-signature>java.lang.String wordWrap(java.lang.String,int)</function-signature>
-		<example>${ao:wordWrap(text, width)}</example>
+		<example><![CDATA[<pre>${ao:wordWrap(text, width)}</pre>]]></example>
 	</function>
 	<function>
 		<description><![CDATA[
@@ -3622,7 +3618,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>ceil</name>
 		<function-class>java.lang.Math</function-class>
 		<function-signature>double ceil(double)</function-signature>
-		<example>${ao:ceil(a)}</example>
+		<example><![CDATA[<pre>${ao:ceil(a)}</pre>]]></example>
 	</function>
 	<function>
 		<description><![CDATA[
@@ -3633,7 +3629,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>floor</name>
 		<function-class>java.lang.Math</function-class>
 		<function-signature>double floor(double)</function-signature>
-		<example>${ao:floor(a)}</example>
+		<example><![CDATA[<pre>${ao:floor(a)}</pre>]]></example>
 	</function>
 	<function>
 		<description><![CDATA[
@@ -3644,6 +3640,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>round</name>
 		<function-class>java.lang.Math</function-class>
 		<function-signature>long round(double)</function-signature>
-		<example>${ao:round(a)}</example>
+		<example><![CDATA[<pre>${ao:round(a)}</pre>]]></example>
 	</function>
 </taglib>
