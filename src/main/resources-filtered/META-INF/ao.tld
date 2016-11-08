@@ -40,9 +40,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an &lt;a&gt; tag.
-				The body is trimmed while written.
 			</p>
 			<p>
+				The body is trimmed while written.
 				If the body is empty after being trimmed, then href itself will be written as the body.
 				If the href begins with mailto:, the mailto: is stripped and the remainder of the href is displayed verbatim.
 				If the href begins with telnet:, the telnet: is stripped and the remainder of the href is displayed verbatim.
