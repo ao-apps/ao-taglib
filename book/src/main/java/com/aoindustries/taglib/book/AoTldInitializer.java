@@ -23,6 +23,7 @@
 package com.aoindustries.taglib.book;
 
 import com.semanticcms.tagreference.TagReferenceInitializer;
+import java.util.Collections;
 
 /**
  * @author  AO Industries, Inc.
@@ -38,7 +39,10 @@ public class AoTldInitializer extends TagReferenceInitializer {
 			"AO Taglib Reference",
 			"Taglib Reference",
 			TLD_BOOK,
-			TLD_PATH
+			TLD_PATH,
+			"https://docs.oracle.com/javase/6/docs/api/",
+			"https://docs.oracle.com/javaee/6/api/",
+			Collections.singletonMap("com.aoindustries.taglib.", "https://aoindustries.com/ao-taglib/apidocs/")
 		);
 	}
 }
