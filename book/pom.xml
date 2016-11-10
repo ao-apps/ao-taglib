@@ -42,18 +42,18 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		<documented.artifactId>ao-taglib</documented.artifactId>
 
 		<documented.name>AO Taglib</documented.name>
-		<documented.url>https://aoindustries.com${bookPath}/</documented.url>
+		<documented.url>https://aoindustries.com/${documented.artifactId}/</documented.url>
 		<documented.description>Making JSP what it should have been all along.</documented.description>
 		<documented.inceptionYear>2009</documented.inceptionYear>
 
 		<documented.scm.url>https://github.com/aoindustries/${documented.artifactId}</documented.scm.url>
 
-		<bookPath>/${documented.artifactId}</bookPath>
+		<description.html><![CDATA[Documentation for <a target="_top" href="${documented.url}">${documented.name}</a> in <a target="_top" href="https://semanticcms.com/">SemanticCMS</a> format.]]></description.html>
 	</properties>
 
 	<name>${documented.name} Book</name>
 	<url>${documented.url}</url>
-	<description>${documented.description}</description>
+	<description>Documentation for ${documented.name} in SemanticCMS format.</description>
 	<inceptionYear>${documented.inceptionYear}</inceptionYear>
 
 	<scm>
@@ -111,7 +111,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 								</resource>
 							</resources>
 							<!-- Put into META-INF/resources to be accessible as website content when jar included in WEB-INF/lib -->
-							<outputDirectory>${project.build.outputDirectory}/META-INF/resources${bookPath}</outputDirectory>
+							<outputDirectory>${project.build.outputDirectory}/META-INF/resources/${documented.artifactId}</outputDirectory>
 						</configuration>
 					</execution>
 				</executions>
@@ -135,6 +135,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 								<link>https://semanticcms.com/changelog/taglib/apidocs/</link>
 								<link>https://semanticcms.com/core/taglib/apidocs/</link>
 								<link>https://semanticcms.com/section/taglib/apidocs/</link>
+								<link>https://semanticcms.com/tag-reference/apidocs/</link>
 							</links>
 						</configuration>
 					</plugin>
