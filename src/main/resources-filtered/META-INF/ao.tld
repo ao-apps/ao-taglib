@@ -2464,7 +2464,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
-			<!-- TODO
+			<!-- TODO: Deferred would be better here, since value only needed some of the time.
 			<deferred-value>
 				<type>java.lang.Object</type>
 			</deferred-value>
