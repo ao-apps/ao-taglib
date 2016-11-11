@@ -49,8 +49,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				If the href begins with tel:, the tel: is stripped and the remainder of the href is displayed verbatim.
 			</p>
 			<p>
-				Any attribute that has no namespace and begins with "param." is added to the href as a URL parameter.
-				The parameter name is the part of the attribute name following "param.".
+				Any attribute that has no namespace and begins with <code>param.</code> is added to the href as a URL parameter.
+				The parameter name is the part of the attribute name following <code>param.</code>.
 			</p>
 			<p>
 				When a parameter value is <code>null</code> it is not added.
@@ -533,8 +533,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				Renders a &lt;form&gt; tag.
 			</p>
 			<p>
-				Any attribute that has no namespace and begins with "param." is added as a hidden form element.
-				The parameter name is the part of the attribute name following "param.".
+				Any attribute that has no namespace and begins with <code>param.</code> is added as a hidden form element.
+				The parameter name is the part of the attribute name following <code>param.</code>.
 			</p>
 			<p>
 				When a parameter value is <code>null</code> it is not added.
@@ -709,8 +709,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</ol>
 			</div>
 			<p>
-				Any attribute that has no namespace and begins with "param." is added to the parameters.
-				The parameter name is the part of the attribute name following "param.".
+				Any attribute that has no namespace and begins with <code>param.</code> is added to the parameters.
+				The parameter name is the part of the attribute name following <code>param.</code>.
 			</p>
 			<p>
 				When a parameter value is <code>null</code> it is not added.
@@ -1010,8 +1010,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				Renders an &lt;iframe&gt; tag.
 			</p>
 			<p>
-				Any attribute that has no namespace and begins with "param." is added to the src as a URL parameter.
-				The parameter name is the part of the attribute name following "param.".
+				Any attribute that has no namespace and begins with <code>param.</code> is added to the src as a URL parameter.
+				The parameter name is the part of the attribute name following <code>param.</code>.
 			</p>
 			<p>
 				When a parameter value is <code>null</code> it is not added.
@@ -1181,8 +1181,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				Also, the width, height, and alt values are required either as attributes or nested tags.
 			</p>
 			<p>
-				Any attribute that has no namespace and begins with "param." is added to the src as a URL parameter.
-				The parameter name is the part of the attribute name following "param.".
+				Any attribute that has no namespace and begins with <code>param.</code> is added to the src as a URL parameter.
+				The parameter name is the part of the attribute name following <code>param.</code>.
 			</p>
 			<p>
 				When a parameter value is <code>null</code> it is not added.
@@ -1393,8 +1393,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</ol>
 			</div>
 			<p>
-				Any attribute that has no namespace and begins with "param." is added to the parameters.
-				The parameter name is the part of the attribute name following "param.".
+				Any attribute that has no namespace and begins with <code>param.</code> is added to the parameters.
+				The parameter name is the part of the attribute name following <code>param.</code>.
 			</p>
 			<p>
 				When a parameter value is <code>null</code> it is not added.
@@ -1771,8 +1771,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				Otherwise, renders a &lt;link&gt; tag.
 			</p>
 			<p>
-				Any attribute that has no namespace and begins with "param." is added to the href as a URL parameter.
-				The parameter name is the part of the attribute name following "param.".
+				Any attribute that has no namespace and begins with <code>param.</code> is added to the href as a URL parameter.
+				The parameter name is the part of the attribute name following <code>param.</code>.
 			</p>
 			<p>
 				When a parameter value is <code>null</code> it is not added.
@@ -2680,8 +2680,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 			</div>
 			<p>
-				Any attribute that has no namespace and begins with "param." is added to the href as a URL parameter.
-				The parameter name is the part of the attribute name following "param.".
+				Any attribute that has no namespace and begins with <code>param.</code> is added to the href as a URL parameter.
+				The parameter name is the part of the attribute name following <code>param.</code>.
 			</p>
 			<p>
 				When a parameter value is <code>null</code> it is not added.
@@ -2886,8 +2886,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				The content type of this tag is equal to the type set in the type attribute.
 			</p>
 			<p>
-				Any attribute that has no namespace and begins with "param." is added to the src as a URL parameter.
-				The parameter name is the part of the attribute name following "param.".
+				Any attribute that has no namespace and begins with <code>param.</code> is added to the src as a URL parameter.
+				The parameter name is the part of the attribute name following <code>param.</code>.
 			</p>
 			<p>
 				When a parameter value is <code>null</code> it is not added.
