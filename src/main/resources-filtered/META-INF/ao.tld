@@ -105,7 +105,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					prepended to the path.
 				</p>
 				<p>
-					In order to simplying things behing URL mapping schemes,
+					In order to simplify things behing URL mapping schemes,
 					the href is always written starting with '/'.  This avoids any need to include any
 					<a href="@{project.url}ao.tld/tag-base">&lt;ao:base&gt;</a> tags.
 				</p>
@@ -605,7 +605,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					prepended to the path.
 				</p>
 				<p>
-					In order to simplying things behing URL mapping schemes,
+					In order to simplify things behing URL mapping schemes,
 					the action is always written starting with '/'.  This avoids any need to include any
 					<a href="@{project.url}ao.tld/tag-base">&lt;ao:base&gt;</a> tags.
 				</p>
@@ -1067,7 +1067,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					prepended to the path.
 				</p>
 				<p>
-					In order to simplying things behing URL mapping schemes,
+					In order to simplify things behing URL mapping schemes,
 					the src is always written starting with '/'.  This avoids any need to include any
 					<a href="@{project.url}ao.tld/tag-base">&lt;ao:base&gt;</a> tags.
 				</p>
@@ -1238,7 +1238,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					prepended to the path.
 				</p>
 				<p>
-					In order to simplying things behing URL mapping schemes,
+					In order to simplify things behing URL mapping schemes,
 					the src is always written starting with '/'.  This avoids any need to include any
 					<a href="@{project.url}ao.tld/tag-base">&lt;ao:base&gt;</a> tags.
 				</p>
@@ -1828,7 +1828,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					prepended to the path.
 				</p>
 				<p>
-					In order to simplying things behing URL mapping schemes,
+					In order to simplify things behing URL mapping schemes,
 					the href is always written starting with '/'.  This avoids any need to include any
 					<a href="@{project.url}ao.tld/tag-base">&lt;ao:base&gt;</a> tags.
 				</p>
@@ -2762,7 +2762,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					prepended to the path.
 				</p>
 				<p>
-					In order to simplying things behing URL mapping schemes,
+					In order to simplify things behing URL mapping schemes,
 					the href is always written starting with '/'.  This avoids any need to include any
 					<a href="@{project.url}ao.tld/tag-base">&lt;ao:base&gt;</a> tags.
 				</p>
@@ -2946,7 +2946,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					prepended to the path.
 				</p>
 				<p>
-					In order to simplying things behing URL mapping schemes,
+					In order to simplify things behing URL mapping schemes,
 					the src is always written starting with '/'.  This avoids any need to include any
 					<a href="@{project.url}ao.tld/tag-base">&lt;ao:base&gt;</a> tags.
 				</p>
