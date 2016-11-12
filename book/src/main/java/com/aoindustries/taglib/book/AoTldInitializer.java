@@ -31,10 +31,6 @@ import java.util.Map;
  */
 public class AoTldInitializer extends TagReferenceInitializer {
 
-	private static final String TLD_BOOK = "/ao-taglib";
-	private static final String TLD_PATH = "/ao.tld";
-	static final String TLD_SERVLET_PATH = TLD_BOOK + TLD_PATH;
-
 	private static final Map<String,String> additionalApiLinks = new LinkedHashMap<String,String>();
 	static {
 		additionalApiLinks.put("com.aoindustries.util.", "https://aoindustries.com/aocode-public/apidocs/");
@@ -45,8 +41,8 @@ public class AoTldInitializer extends TagReferenceInitializer {
 		super(
 			"AO Taglib Reference",
 			"Taglib Reference",
-			TLD_BOOK,
-			TLD_PATH,
+			"/ao-taglib",
+			"/ao.tld",
 			"https://docs.oracle.com/javase/6/docs/api/",
 			"https://docs.oracle.com/javaee/6/api/",
 			additionalApiLinks
