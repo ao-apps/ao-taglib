@@ -40,12 +40,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		<!-- These values are copied from the project being documented -->
 		<documented.groupId>com.aoindustries</documented.groupId>
 		<documented.artifactId>ao-taglib</documented.artifactId>
-
 		<documented.name>AO Taglib</documented.name>
 		<documented.url>https://aoindustries.com/${documented.artifactId}/</documented.url>
 		<documented.description>Making JSP what it should have been all along.</documented.description>
 		<documented.inceptionYear>2009</documented.inceptionYear>
-
 		<documented.scm.url>https://github.com/aoindustries/${documented.artifactId}</documented.scm.url>
 
 		<description.html><![CDATA[Documentation for <a target="_top" href="${documented.url}">${documented.name}</a> in <a target="_top" href="https://semanticcms.com/">SemanticCMS</a> format.]]></description.html>
@@ -207,6 +205,15 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 			<groupId>com.semanticcms</groupId>
 			<artifactId>semanticcms-tag-reference</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<!-- Dependency for dependencyversion-maven-plugin only -->
+		<dependency>
+			<groupId>com.aoindustries</groupId>
+			<artifactId>ao-taglib</artifactId>
+			<version>2.3.0-SNAPSHOT</version>
+			<type>pom</type>
+			<scope>provided</scope>
+			<optional>true</optional>
 		</dependency>
 	</dependencies>
 </project>
