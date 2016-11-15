@@ -358,7 +358,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The condition to be evaluated.  This condition is always evaluated
-					regardless whether Java asserts are enabled or disabled.
+					regardless whether Java assertions are enabled or disabled.
 				</p>
 			]]></description>
 			<name>test</name>
@@ -371,7 +371,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					The message included in the
 					<a href="@{javac.link.javaApi}java/lang/AssertionError.html">AssertionError</a>,
-					only evaluted as-needed due to use of deferred expressions.
+					only evaluated as-needed due to use of deferred expressions.
 				</p>
 			]]></description>
 			<name>message</name>
