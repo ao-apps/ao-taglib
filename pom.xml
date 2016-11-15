@@ -27,7 +27,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 	<parent>
 		<groupId>com.aoindustries</groupId>
 		<artifactId>ao-oss-parent</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<version>1.0.1</version>
 		<relativePath>../ao-oss-parent/pom.xml</relativePath>
 	</parent>
 
@@ -81,8 +81,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		</profile>
 	</profiles>
 
-	<!-- TODO: Try custom type for books, perhaps found in /src/book/...
-	           http://blog.sonatype.com/2009/08/create-a-customized-build-process-in-maven/ -->
 	<dependencies>
 		<dependency>
 			<groupId>javax.servlet</groupId>
