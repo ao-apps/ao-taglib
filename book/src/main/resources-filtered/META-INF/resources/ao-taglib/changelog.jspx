@@ -36,7 +36,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2016-11-13T21:10:46-0600"
+		dateModified="2016-11-15T15:53:43-0600"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -51,23 +51,32 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 				groupId="@{documented.groupId}"
 				artifactId="@{documented.artifactId}"
 				scmUrl="@{documented.scm.url}"
-			>
-				<ul>
-					<li>Not encoding anchors. To avoid ambiguity, anchors must be encoded by the caller, such as already done for parameters.</li>
-					<li>New <core:link book="/ao-oss-parent" page="/index.jspx" /> POM to simplify <code>pom.xml</code> files.</li>
-					<li>Project documentation moved to per-project book in <ao:a href="https://semanticcms.com/">SemanticCMS</ao:a> format.</li>
-					<li>Added changelog as top-level project link.</li>
-					<li>Added itemprop for semantic microdata.</li>
-					<li>
-						Taglib tlib-version is now set automatically during build.
-						Unfortunately, we cannot include "-SNAPSHOT" on snapshot builds due to the requirement of "Dewey decimal"
-						for taglib versions.  The unambiguous full version is annotated via comment.
-					</li>
-					<li>Taglib URL changed to <code>https://aoindustries.com/ao-taglib/</code> to match project URL.</li>
-					<li>Added support for XML DOM Node in toString type coercion.</li>
-				</ul>
-			</changelog:release>
+			/>
 		</c:if>
+
+		<changelog:release
+			projectName="@{documented.name}"
+			version="2.3.0"
+			datePublished="2016-11-15T15:53:43-0600"
+			groupId="@{documented.groupId}"
+			artifactId="@{documented.artifactId}"
+			scmUrl="@{documented.scm.url}"
+		>
+			<ul>
+				<li>Not encoding anchors. To avoid ambiguity, anchors must be encoded by the caller, such as already done for parameters.</li>
+				<li>New <core:link book="/ao-oss-parent" page="/index.jspx" /> POM to simplify <code>pom.xml</code> files.</li>
+				<li>Project documentation moved to per-project book in <ao:a href="https://semanticcms.com/">SemanticCMS</ao:a> format.</li>
+				<li>Added changelog as top-level project link.</li>
+				<li>Added itemprop for semantic microdata.</li>
+				<li>
+					Taglib tlib-version is now set automatically during build.
+					Unfortunately, we cannot include "-SNAPSHOT" on snapshot builds due to the requirement of "Dewey decimal"
+					for taglib versions.  The unambiguous full version is annotated via comment.
+				</li>
+				<li>Taglib URL changed to <code>https://aoindustries.com/ao-taglib/</code> to match project URL.</li>
+				<li>Added support for XML DOM Node in toString type coercion.</li>
+			</ul>
+		</changelog:release>
 
 		<changelog:release
 			projectName="@{documented.name}"
