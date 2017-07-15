@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 ao-taglib - Making JSP what it should have been all along.
-Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014, 2016  AO Industries, Inc.
+Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014, 2016, 2017  AO Industries, Inc.
 	support@aoindustries.com
 	7262 Bull Pen Cir
 	Mobile, AL 36695
@@ -111,7 +111,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					URL rewriting is performed as needed via
-					<a href="@{javac.link.javaEEApi}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
+					<a href="@{javac.link.javaeeApi.6}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
 				</p>
 				<p>
 					To support paths in different character sets, URL encoding is performed
@@ -611,7 +611,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					URL rewriting is performed as needed via
-					<a href="@{javac.link.javaEEApi}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
+					<a href="@{javac.link.javaeeApi.6}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
 				</p>
 				<p>
 					To support paths in different character sets, URL encoding is performed
@@ -766,7 +766,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					Security Note: page must be a trusted value since it can access any resource available via
-					<a href="@{javac.link.javaEEApi}javax/servlet/RequestDispatcher.html">RequestDispatcher</a>.
+					<a href="@{javac.link.javaeeApi.6}javax/servlet/RequestDispatcher.html">RequestDispatcher</a>.
 					It would be incorrect to use a value that can be manipulated by a client in any way.
 				</p>
 				<p>
@@ -853,7 +853,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					Specifies the variable scope searched to retrieve the bean specified
 					by name. If not specified, the default rules applied by
-					<a href="@{javac.link.javaEEApi}javax/servlet/jsp/JspContext.html#findAttribute%28java.lang.String%29">JspContext.findAttribute()</a>
+					<a href="@{javac.link.javaeeApi.6}javax/servlet/jsp/JspContext.html#findAttribute%28java.lang.String%29">JspContext.findAttribute()</a>
 					are applied.
 				</p>
 			]]></description>
@@ -1073,7 +1073,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					URL rewriting is performed as needed via
-					<a href="@{javac.link.javaEEApi}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
+					<a href="@{javac.link.javaeeApi.6}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
 				</p>
 				<p>
 					To support paths in different character sets, URL encoding is performed
@@ -1244,7 +1244,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					URL rewriting is performed as needed via
-					<a href="@{javac.link.javaEEApi}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
+					<a href="@{javac.link.javaeeApi.6}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
 				</p>
 				<p>
 					To support paths in different character sets, URL encoding is performed
@@ -1450,7 +1450,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					Security Note: page must be a trusted value since it can access any resource available via
-					<a href="@{javac.link.javaEEApi}javax/servlet/RequestDispatcher.html">RequestDispatcher</a>.
+					<a href="@{javac.link.javaeeApi.6}javax/servlet/RequestDispatcher.html">RequestDispatcher</a>.
 					It would be incorrect to use a value that can be manipulated by a client in any way.
 				</p>
 			]]></description>
@@ -1834,7 +1834,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					URL rewriting is performed as needed via
-					<a href="@{javac.link.javaEEApi}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
+					<a href="@{javac.link.javaeeApi.6}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
 				</p>
 				<p>
 					To support paths in different character sets, URL encoding is performed
@@ -2768,7 +2768,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					URL rewriting is performed as needed via
-					<a href="@{javac.link.javaEEApi}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
+					<a href="@{javac.link.javaeeApi.6}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
 				</p>
 				<p>
 					To support paths in different character sets, URL encoding is performed
@@ -2822,7 +2822,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					Security Note: page must be a trusted value since it can access any resource available via
-					<a href="@{javac.link.javaEEApi}javax/servlet/RequestDispatcher.html">RequestDispatcher</a>.
+					<a href="@{javac.link.javaeeApi.6}javax/servlet/RequestDispatcher.html">RequestDispatcher</a>.
 					It would be incorrect to use a value that can be manipulated by a client in any way.
 				</p>
 				<p>
@@ -2952,7 +2952,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					URL rewriting is performed as needed via
-					<a href="@{javac.link.javaEEApi}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
+					<a href="@{javac.link.javaeeApi.6}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
 				</p>
 				<p>
 					To support paths in different character sets, URL encoding is performed
@@ -3151,7 +3151,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				instead of
 				<a href="https://docs.oracle.com/cd/A87860_01/doc/java.817/a83726/genlovw3.htm#1008181">&lt;jsp:include&gt;</a>
 				to support
-				<a href="@{javac.link.javaEEApi}javax/servlet/http/HttpServletResponse.html#sendError%28int%29">sendError</a>
+				<a href="@{javac.link.javaeeApi.6}javax/servlet/http/HttpServletResponse.html#sendError%28int%29">sendError</a>
 				inside of includes.
 			</p>
 		]]></description>
@@ -3162,7 +3162,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The status code for
-					<a href="@{javac.link.javaEEApi}javax/servlet/http/HttpServletResponse.html#sendError%28int%29">response.sendError</a>.
+					<a href="@{javac.link.javaeeApi.6}javax/servlet/http/HttpServletResponse.html#sendError%28int%29">response.sendError</a>.
 				</p>
 			]]></description>
 			<name>status</name>
@@ -3449,7 +3449,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 			<p>
 				Depending on context, the URL will be passed through
-				<a href="@{javac.link.javaEEApi}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>
+				<a href="@{javac.link.javaeeApi.6}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>
 				to add any URL-based session state.  Session state will never be added to external links.
 			</p>
 			<p>
@@ -3580,7 +3580,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					Specifies the variable scope searched to retrieve the bean specified
 					by name. If not specified, the default rules applied by
-					<a href="@{javac.link.javaEEApi}javax/servlet/jsp/JspContext.html#findAttribute%28java.lang.String%29">JspContext.findAttribute()</a>
+					<a href="@{javac.link.javaeeApi.6}javax/servlet/jsp/JspContext.html#findAttribute%28java.lang.String%29">JspContext.findAttribute()</a>
 					are applied.
 				</p>
 			]]></description>
@@ -3709,7 +3709,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<description><![CDATA[
 			<p>
 				Rewrites a URL to maintain session state via
-				<a href="@{javac.link.javaEEApi}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
+				<a href="@{javac.link.javaeeApi.6}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
 			</p>
 		]]></description>
 		<name>encodeURL</name>
@@ -3722,7 +3722,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<p>
 				Generates an absolute URL for the provided context-relative URL.
 				The URL is not automatically
-				<a href="@{javac.link.javaEEApi}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">response encodeURL</a>.
+				<a href="@{javac.link.javaeeApi.6}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">response encodeURL</a>.
 			</p>
 		]]></description>
 		<name>getAbsoluteURL</name>
