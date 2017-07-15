@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP what it should have been all along.
- * Copyright (C) 2016  AO Industries, Inc.
+ * Copyright (C) 2016, 2017  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,19 +22,33 @@
  */
 package com.aoindustries.taglib.book;
 
+import com.aoindustries.util.PropertiesUtils;
 import com.semanticcms.tagreference.TagReferenceInitializer;
+import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Properties;
 
 /**
  * @author  AO Industries, Inc.
  */
 public class AoTldInitializer extends TagReferenceInitializer {
 
+	private static final Properties properties;
+	static {
+		try {
+			properties = PropertiesUtils.loadFromResource(AoTldInitializer.class, "ao-taglib-book.properties");
+		} catch(IOException e) {
+			throw new ExceptionInInitializerError(e);
+		}
+	}
+
 	private static final Map<String,String> additionalApiLinks = new LinkedHashMap<String,String>();
 	static {
+		// Self
+		additionalApiLinks.put("com.aoindustries.taglib.", properties.getProperty("documented.url") + "apidocs/");
+		// Dependencies
 		additionalApiLinks.put("com.aoindustries.util.", "https://aoindustries.com/aocode-public/apidocs/");
-		additionalApiLinks.put("com.aoindustries.taglib.", "https://aoindustries.com/ao-taglib/apidocs/");
 	}
 
 	public AoTldInitializer() {
@@ -43,8 +57,8 @@ public class AoTldInitializer extends TagReferenceInitializer {
 			"Taglib Reference",
 			"/ao-taglib",
 			"/ao.tld",
-			"https://docs.oracle.com/javase/6/docs/api/",
-			"https://docs.oracle.com/javaee/6/api/",
+			properties.getProperty("javac.link.javaApi.jdk16"),
+			properties.getProperty("javac.link.javaeeApi.6"),
 			additionalApiLinks
 		);
 	}
