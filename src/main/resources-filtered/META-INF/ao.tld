@@ -663,6 +663,18 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
+					The CSS class for the form.
+					A nested <a href="@{project.url}ao.tld/tag-class">&lt;ao:class&gt;</a> tag will override this value.
+				</p>
+			]]></description>
+			<name>class</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
 					The CSS style for the form.
 					A nested <a href="@{project.url}ao.tld/tag-style">&lt;ao:style&gt;</a>
 					tag will override this value.
