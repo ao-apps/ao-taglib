@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP what it should have been all along.
- * Copyright (C) 2010, 2011, 2013, 2015, 2016  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2013, 2015, 2016, 2017  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -35,6 +35,7 @@ import com.aoindustries.servlet.http.ServletUtil;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.StringUtility;
+import com.aoindustries.util.WrappedException;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
@@ -60,6 +61,7 @@ public class FormTag
 		ParamsAttribute,
 		TargetAttribute,
 		EnctypeAttribute,
+		ClassAttribute,
 		StyleAttribute,
 		OnsubmitAttribute
 {
@@ -77,6 +79,7 @@ public class FormTag
 	private MutableHttpParameters params;
 	private Object target;
 	private Object enctype;
+	private Object clazz;
 	private Object style;
 	private Object onsubmit;
 
@@ -120,6 +123,20 @@ public class FormTag
 	@Override
 	public void setEnctype(Object enctype) {
 		this.enctype = enctype;
+	}
+
+	@Override
+	public Object getClazz() {
+		return clazz;
+	}
+
+	@Override
+	public void setClazz(Object clazz) {
+		try {
+			this.clazz = Coercion.nullIfEmpty(clazz);
+		} catch(IOException e) {
+			throw new WrappedException(e);
+		}
 	}
 
 	@Override
@@ -195,6 +212,11 @@ public class FormTag
 		if(enctype!=null) {
 			out.write(" enctype=\"");
 			Coercion.write(enctype, textInXhtmlAttributeEncoder, out);
+			out.write('"');
+		}
+		if(clazz!=null) {
+			out.write(" class=\"");
+			Coercion.write(clazz, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
 		if(style!=null) {
