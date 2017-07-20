@@ -33,7 +33,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 
 	<groupId>com.aoindustries</groupId>
 	<artifactId>ao-taglib-book</artifactId>
-	<version>2.3.1-SNAPSHOT</version>
+	<version>2.3.1</version>
 	<packaging>jar</packaging>
 
 	<properties>
@@ -61,7 +61,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		<connection>scm:git:git://github.com/aoindustries/${documented.artifactId}.git</connection>
 		<developerConnection>scm:git:git@github.com:aoindustries/${documented.artifactId}.git</developerConnection>
 		<url>${documented.scm.url}</url>
-		<tag>HEAD</tag>
+		<tag>ao-taglib-book-2.3.1</tag>
 	</scm>
 
 	<build>
