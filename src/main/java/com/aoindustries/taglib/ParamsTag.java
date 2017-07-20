@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP what it should have been all along.
- * Copyright (C) 2010, 2011, 2012, 2013, 2015, 2016  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2012, 2013, 2015, 2016, 2017  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -45,7 +45,7 @@ public class ParamsTag
 
 	private Object name;
 	private String exclude = null;
-	private WildcardPatternMatcher excludeMatcher = WildcardPatternMatcher.getMatchNone();
+	private WildcardPatternMatcher excludeMatcher = WildcardPatternMatcher.matchNone();
 	private Object values;
 
 	@Override
@@ -60,7 +60,7 @@ public class ParamsTag
 
 	public void setExclude(String exclude) {
 		this.exclude = exclude;
-		this.excludeMatcher = WildcardPatternMatcher.getInstance(exclude);
+		this.excludeMatcher = WildcardPatternMatcher.compile(exclude);
 	}
 
 	public void setValues(Object values) {
