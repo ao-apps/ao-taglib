@@ -82,7 +82,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 								<artifactItem>
 									<groupId>com.aoindustries</groupId>
 									<artifactId>ao-taglib</artifactId>
-									<version>2.3.1</version>
+									<version>2.3.2-SNAPSHOT</version>
 									<type>jar</type>
 									<includes>META-INF/ao.tld</includes>
 								</artifactItem>
@@ -130,6 +130,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 							<artifactId>maven-javadoc-plugin</artifactId>
 							<configuration>
 								<links>
+									<link>${javac.link.javaApi}</link>
 									<link>${javac.link.javaeeApi.6}</link>
 									<link>https://aoindustries.com/ao-taglib/apidocs/</link>
 									<link>https://semanticcms.com/changelog/taglib/apidocs/</link>
@@ -217,7 +218,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		<dependency>
 			<groupId>com.aoindustries</groupId>
 			<artifactId>ao-taglib</artifactId>
-			<version>2.3.1</version>
+			<version>2.3.2-SNAPSHOT</version>
 			<type>pom</type>
 			<scope>provided</scope>
 			<optional>true</optional>
