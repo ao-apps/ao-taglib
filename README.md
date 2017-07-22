@@ -24,7 +24,7 @@
 	</a>
 </p>
 
-Making JSP what it should have been all along.
+Making JSP be what it should have been all along.
 
 ## Project Links
 * [Project Home](https://aoindustries.com/ao-taglib/)

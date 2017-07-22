@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-ao-taglib - Making JSP what it should have been all along.
+ao-taglib - Making JSP be what it should have been all along.
 Copyright (C) 2016, 2017  AO Industries, Inc.
     support@aoindustries.com
     7262 Bull Pen Cir
@@ -44,7 +44,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		<documented.javac.link.javaApi>${javac.link.javaApi.jdk16}</documented.javac.link.javaApi>
 		<documented.name>AO Taglib</documented.name>
 		<documented.url>https://aoindustries.com/${documented.artifactId}/</documented.url>
-		<documented.description>Making JSP what it should have been all along.</documented.description>
+		<documented.description>Making JSP be what it should have been all along.</documented.description>
 		<documented.inceptionYear>2009</documented.inceptionYear>
 		<documented.scm.url>https://github.com/aoindustries/${documented.artifactId}</documented.scm.url>
 

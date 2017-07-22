@@ -1,5 +1,5 @@
 /*
- * ao-taglib - Making JSP what it should have been all along.
+ * ao-taglib - Making JSP be what it should have been all along.
  * Copyright (C) 2017  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
