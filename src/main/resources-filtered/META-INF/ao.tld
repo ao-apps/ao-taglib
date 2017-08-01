@@ -797,7 +797,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					Optionally clears all parameters that match any of the comma-separated patterns.
 					This is so that only those added by nested tags are forwarded.
-					As a result, parameters provided by the client will not be able to interfere for forwards that have optional parameters.
+					As a result, parameters provided by the client will not be able to interfere with forwards that have optional parameters.
 					Each pattern in the comma-separated list may in the following format:
 				</p>
 				<table class="thinTable">
@@ -1477,7 +1477,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					Optionally clears all parameters that match any of the comma-separated patterns.
 					This is so that only those added by nested tags are included.
-					As a result, parameters provided by the client will not be able to interfere for includes that have optional parameters.
+					As a result, parameters provided by the client will not be able to interfere with includes that have optional parameters.
 					Each pattern in the comma-separated list may in the following format:
 				</p>
 				<table class="thinTable">
