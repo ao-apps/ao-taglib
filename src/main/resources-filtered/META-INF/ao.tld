@@ -1473,6 +1473,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<!-- TODO: Document that uses WildcardPattern matcher, here and elsewhere -->
 			<description><![CDATA[
 				<p>
 					Optionally clears all parameters that match any of the comma-separated patterns.
