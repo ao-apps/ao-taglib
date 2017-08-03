@@ -65,7 +65,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		>
 			<ul>
 				<li>Updated dependencies.</li>
-				<li>Added <code>class</code> attribute to <ao:a href="ao.tld/tag-form"><![CDATA[&lt;ao:form&gt;]]></ao:a> tag.</li>
+				<li>Added <code>class</code> attribute to <core:link page="ao.tld/tag-form" /> tag.</li>
 			</ul>
 		</changelog:release>
 
