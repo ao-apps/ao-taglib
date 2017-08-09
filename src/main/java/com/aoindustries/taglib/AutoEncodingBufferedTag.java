@@ -28,13 +28,13 @@ import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.MediaValidator;
 import com.aoindustries.encoding.MediaWriter;
 import com.aoindustries.encoding.servlet.HttpServletResponseEncodingContext;
-import com.aoindustries.io.TempFileList;
 import com.aoindustries.io.buffer.AutoTempFileWriter;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.io.buffer.BufferWriter;
 import com.aoindustries.io.buffer.CharArrayBufferWriter;
 import com.aoindustries.io.buffer.LoggingWriter;
-import com.aoindustries.servlet.filter.TempFileContext;
+import com.aoindustries.tempfiles.TempFileContext;
+import com.aoindustries.tempfiles.servlet.ServletTempFileContext;
 import com.aoindustries.util.WrappedException;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -107,13 +107,44 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 	 * Buffering strategies may change over time as technology develops and
 	 * options become available.
 	 *
-	 * TODO: Auto temp file variant here?
+	 * @see  TempFileContext
+	 * @see  AutoTempFileWriter
 	 */
-	public static BufferWriter newBufferWriter() {
+	public static BufferWriter newBufferWriter(TempFileContext tempFileContext, long tempFileThreshold) {
 		//return new SegmentedWriter();
-		// Is there a way to share buffers, such as allocate 4096 by default from buffer pool,
-		// then give back to pool when possible, such as when grown larger and discarding the old?
-		return new CharArrayBufferWriter();
+		BufferWriter bufferWriter = new CharArrayBufferWriter();
+		if(tempFileThreshold != Long.MAX_VALUE) {
+			bufferWriter = new AutoTempFileWriter(
+				bufferWriter,
+				tempFileContext,
+				tempFileThreshold
+			);
+		}
+		return bufferWriter;
+	}
+
+	/**
+	 * @see  #newBufferWriter(com.aoindustries.tempfiles.TempFileContext, long)
+	 * @see  AutoTempFileWriter#DEFAULT_TEMP_FILE_THRESHOLD
+	 */
+	public static BufferWriter newBufferWriter(TempFileContext tempFileContext) {
+		return newBufferWriter(tempFileContext, AutoTempFileWriter.DEFAULT_TEMP_FILE_THRESHOLD);
+	}
+
+	/**
+	 * @see  #newBufferWriter(com.aoindustries.tempfiles.TempFileContext, long)
+	 * @see  ServletTempFileContext#getTempFileContext(javax.servlet.ServletRequest)
+	 */
+	public static BufferWriter newBufferWriter(ServletRequest request, long tempFileThreshold) {
+		return newBufferWriter(ServletTempFileContext.getTempFileContext(request), tempFileThreshold);
+	}
+
+	/**
+	 * @see  #newBufferWriter(javax.servlet.ServletRequest, long)
+	 * @see  AutoTempFileWriter#DEFAULT_TEMP_FILE_THRESHOLD
+	 */
+	public static BufferWriter newBufferWriter(ServletRequest request) {
+		return newBufferWriter(request, AutoTempFileWriter.DEFAULT_TEMP_FILE_THRESHOLD);
 	}
 
 	/**
@@ -168,26 +199,8 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 
 			// Capture the body output while validating
 			// BufferWriter bufferWriter = new CharArrayBufferWriter(128, getTempFileThreshold());
-			BufferWriter bufferWriter = newBufferWriter();
+			BufferWriter bufferWriter = newBufferWriter(request, getTempFileThreshold());
 			try {
-				// Enable temp files if temp file context active and threshold not Long.MAX_VALUE
-				final long tempFileThreshold = getTempFileThreshold();
-				if(tempFileThreshold != Long.MAX_VALUE) {
-					bufferWriter = TempFileContext.wrapTempFileList(
-						bufferWriter,
-						request,
-						new TempFileContext.Wrapper<BufferWriter>() {
-							@Override
-							public BufferWriter call(BufferWriter original, TempFileList tempFileList) {
-								return new AutoTempFileWriter(
-									original,
-									tempFileList,
-									tempFileThreshold
-								);
-							}
-						}
-					);
-				}
 				if(ENABLE_BUFFER_LOGGING) bufferWriter = new LoggingWriter(bufferWriter, log);
 				JspFragment body = getJspBody();
 				if(body!=null) {
