@@ -22,6 +22,10 @@
  */
 package com.aoindustries.taglib.book;
 
+import com.aoindustries.net.Path;
+import com.aoindustries.validation.ValidationException;
+import com.semanticcms.core.model.BookRef;
+import com.semanticcms.core.model.ResourceRef;
 import com.semanticcms.tagreference.TagReferenceInitializer;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -39,13 +43,14 @@ public class AoTldInitializer extends TagReferenceInitializer {
 		additionalApiLinks.put("com.aoindustries.util.", "https://aoindustries.com/aocode-public/apidocs/");
 	}
 
-	public AoTldInitializer() {
+	public AoTldInitializer() throws ValidationException {
 		super(
 			"AO Taglib Reference",
 			"Taglib Reference",
-			"aoindustries.com",
-			"/ao-taglib",
-			"/ao.tld",
+			new ResourceRef(
+				new BookRef("aoindustries.com", Path.valueOf("/ao-taglib")),
+				Path.valueOf("/ao.tld")
+			),
 			Maven.properties.getProperty("javac.link.javaApi.jdk16"),
 			Maven.properties.getProperty("javac.link.javaeeApi.6"),
 			additionalApiLinks
