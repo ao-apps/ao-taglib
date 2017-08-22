@@ -22,6 +22,7 @@
  */
 package com.aoindustries.taglib.book;
 
+import com.aoindustries.net.DomainName;
 import com.aoindustries.net.Path;
 import com.aoindustries.validation.ValidationException;
 import com.semanticcms.core.model.BookRef;
@@ -48,7 +49,10 @@ public class AoTldInitializer extends TagReferenceInitializer {
 			"AO Taglib Reference",
 			"Taglib Reference",
 			new ResourceRef(
-				new BookRef("aoindustries.com", Path.valueOf("/ao-taglib")),
+				new BookRef(
+					DomainName.valueOf("aoindustries.com"),
+					Path.valueOf("/ao-taglib")
+				),
 				Path.valueOf("/ao.tld")
 			),
 			Maven.properties.getProperty("javac.link.javaApi.jdk16"),
