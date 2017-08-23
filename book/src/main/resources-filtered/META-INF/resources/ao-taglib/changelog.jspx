@@ -88,7 +88,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		>
 			<ul>
 				<li>Not encoding anchors. To avoid ambiguity, anchors must be encoded by the caller, such as already done for parameters.</li>
-				<li>New <core:link book="/ao-oss-parent" page="/index.jspx" /> POM to simplify <code>pom.xml</code> files.</li>
+				<li>New <core:link book="/ao-oss-parent" page="/" /> POM to simplify <code>pom.xml</code> files.</li>
 				<li>Project documentation moved to per-project book in <ao:a href="https://semanticcms.com/">SemanticCMS</ao:a> format.</li>
 				<li>Added changelog as top-level project link.</li>
 				<li>Added itemprop for semantic microdata.</li>
