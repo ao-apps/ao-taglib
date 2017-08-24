@@ -23,6 +23,7 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.servlet.http.Includer;
+import com.aoindustries.servlet.http.ServletUtil;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -31,7 +32,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.JspWriter;
-import javax.servlet.jsp.SkipPageException;
 
 /**
  * @author  AO Industries, Inc.
@@ -54,7 +54,7 @@ public class ForwardTag extends ArgDispatchTag {
 				throw new JspTagException(e);
 			}
 			Includer.setPageSkipped(request);
-			throw new SkipPageException();
+			throw ServletUtil.SKIP_PAGE_EXCEPTION;
 		} finally {
 			setForwarded(request, oldForwarded);
 		}
