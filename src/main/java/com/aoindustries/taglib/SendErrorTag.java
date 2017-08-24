@@ -25,13 +25,13 @@ package com.aoindustries.taglib;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.servlet.http.Includer;
+import com.aoindustries.servlet.http.ServletUtil;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
-import javax.servlet.jsp.SkipPageException;
 
 /**
  * @author  AO Industries, Inc.
@@ -74,6 +74,6 @@ public class SendErrorTag extends AutoEncodingBufferedTag {
 		}
 
 		Includer.setPageSkipped(request);
-		throw new SkipPageException();
+		throw ServletUtil.SKIP_PAGE_EXCEPTION;
 	}
 }
