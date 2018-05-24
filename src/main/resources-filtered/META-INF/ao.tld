@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 ao-taglib - Making JSP be what it should have been all along.
-Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014, 2016, 2017  AO Industries, Inc.
+Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014, 2016, 2017, 2018  AO Industries, Inc.
 	support@aoindustries.com
 	7262 Bull Pen Cir
 	Mobile, AL 36695
@@ -139,7 +139,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>hrefAbsolute</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>boolean</type>
 		</attribute>
 		<attribute>
@@ -157,7 +157,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>addLastModified</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
@@ -205,7 +205,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>target</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
@@ -253,7 +253,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>onclick</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
@@ -265,7 +265,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>onmouseover</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
@@ -277,7 +277,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>onmouseout</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
 		<dynamic-attributes>true</dynamic-attributes>
@@ -424,7 +424,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>basename</name>
 			<required>true</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
@@ -437,7 +437,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>prefix</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
 	</tag>
@@ -570,7 +570,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>method</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
@@ -632,7 +632,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>action</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
@@ -645,7 +645,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>target</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
@@ -658,7 +658,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>enctype</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
@@ -696,7 +696,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>onsubmit</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
 		<dynamic-attributes>true</dynamic-attributes>
@@ -826,7 +826,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>clearParams</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
 		<dynamic-attributes>true</dynamic-attributes>
@@ -872,7 +872,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>scope</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
@@ -885,7 +885,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>name</name>
 			<required>true</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
@@ -941,7 +941,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>doctype</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
@@ -955,7 +955,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>forceHtml</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>boolean</type>
 		</attribute>
 		<attribute>
@@ -1114,7 +1114,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>srcAbsolute</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>boolean</type>
 		</attribute>
 		<attribute>
@@ -1132,7 +1132,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>addLastModified</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
@@ -1172,7 +1172,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>frameborder</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>boolean</type>
 		</attribute>
 		<dynamic-attributes>true</dynamic-attributes>
@@ -1285,7 +1285,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>srcAbsolute</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>boolean</type>
 		</attribute>
 		<attribute>
@@ -1303,7 +1303,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>addLastModified</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
@@ -1507,7 +1507,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>clearParams</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
 		<dynamic-attributes>true</dynamic-attributes>
@@ -1553,7 +1553,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>type</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
@@ -1593,7 +1593,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>onclick</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
@@ -1606,7 +1606,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>onchange</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
@@ -1619,7 +1619,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>onfocus</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
@@ -1632,7 +1632,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>onblur</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
@@ -1645,7 +1645,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>onkeypress</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
@@ -1772,7 +1772,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>autocomplete</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>boolean</type>
 		</attribute>
 	</tag>
@@ -1876,7 +1876,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>hrefAbsolute</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>boolean</type>
 		</attribute>
 		<attribute>
@@ -1894,7 +1894,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>addLastModified</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
@@ -1944,7 +1944,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>media</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
@@ -2108,7 +2108,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>type</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
 		<dynamic-attributes>true</dynamic-attributes>
@@ -2169,7 +2169,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>name</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
@@ -2180,7 +2180,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>httpEquiv</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
@@ -2191,7 +2191,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>itemprop</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
@@ -2495,7 +2495,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>type</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
 	</tag>
@@ -2618,7 +2618,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>exclude</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
@@ -2747,7 +2747,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>statusCode</name>
 			<required>true</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
@@ -2816,7 +2816,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>addLastModified</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
@@ -2937,7 +2937,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>type</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
@@ -2994,7 +2994,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>srcAbsolute</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>boolean</type>
 		</attribute>
 		<attribute>
@@ -3012,7 +3012,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>addLastModified</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
 		<dynamic-attributes>true</dynamic-attributes>
@@ -3090,7 +3090,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>onchange</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
@@ -3103,7 +3103,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>onfocus</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
@@ -3116,7 +3116,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>onblur</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
@@ -3129,7 +3129,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>onkeypress</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
 	</tag>
@@ -3181,7 +3181,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>status</name>
 			<required>true</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>int</type>
 		</attribute>
 		<attribute>
@@ -3398,7 +3398,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>onchange</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
@@ -3600,7 +3600,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>scope</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
@@ -3617,7 +3617,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>name</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
@@ -3645,7 +3645,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>method</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
@@ -3659,7 +3659,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>type</name>
 			<required>false</required>
-			<rtexprvalue>false</rtexprvalue>
+			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
 	</tag>
