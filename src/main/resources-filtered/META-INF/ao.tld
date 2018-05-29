@@ -2020,6 +2020,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<li><code>url</code> or <code>text/url</code> - must be a valid URL</li>
 				<li><code>xhtml</code> or <code>application/xhtml+xml</code> - must be well-formed XHTML content. (Note: Currently only checks character values.)</li>
 				<li><code>xhtml_attribute</code> or <code>application/xhtml+xml+attribute</code> - must be a valid XHTML attribute.</li>
+				<li><code>mysql</code> or <code>text/x+mysql</code> - must be valid for the MySQL command line "mysql"</li>
+				<li><code>psql</code> or <code>text/x+psql</code> - must be valid for the PostgreSQL command line "psql"</li>
+				<li><code>sh</code> or <code>text/x+sh</code> - must be valid shell script</li>
 			</ul>
 		]]></description>
 		<name>message</name>
@@ -2234,6 +2237,20 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
+			<p class="semanticcms-tag-reference-summary">
+				Manually establishes a MySQL context when automatic detection is not possible.
+				The body of this tag is valid for the MySQL command line "mysql".
+			</p>
+			<p>
+				The content type of this tag is <code>text/x+mysql</code>.
+			</p>
+		]]></description>
+		<name>mysql</name>
+		<tag-class>com.aoindustries.taglib.MysqlTag</tag-class>
+		<body-content>scriptless</body-content>
+	</tag>
+	<tag>
+		<description><![CDATA[
 			<p>
 				Provides a name to its
 				<a href="@{project.url}apidocs/com/aoindustries/taglib/NameAttribute.html">NameAttribute</a>
@@ -2444,6 +2461,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<li><code>url</code> or <code>text/url</code> - must be a valid URL</li>
 				<li><code>xhtml</code> or <code>application/xhtml+xml</code> - must be well-formed XHTML content. (Note: Currently only checks character values.)</li>
 				<li><code>xhtml_attribute</code> or <code>application/xhtml+xml+attribute</code> - must be a valid XHTML attribute.</li>
+				<li><code>mysql</code> or <code>text/x+mysql</code> - must be valid for the MySQL command line "mysql"</li>
+				<li><code>psql</code> or <code>text/x+psql</code> - must be valid for the PostgreSQL command line "psql"</li>
+				<li><code>sh</code> or <code>text/x+sh</code> - must be valid shell script</li>
 			</ul>
 		]]></description>
 		<name>out</name>
@@ -2659,6 +2679,20 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
+	</tag>
+	<tag>
+		<description><![CDATA[
+			<p class="semanticcms-tag-reference-summary">
+				Manually establishes a PostgreSQL context when automatic detection is not possible.
+				The body of this tag is valid for the PostgreSQL command line "psql".
+			</p>
+			<p>
+				The content type of this tag is <code>text/x+psql</code>.
+			</p>
+		]]></description>
+		<name>psql</name>
+		<tag-class>com.aoindustries.taglib.PsqlTag</tag-class>
+		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
 		<description><![CDATA[
@@ -3198,6 +3232,20 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<description><![CDATA[
+			<p class="semanticcms-tag-reference-summary">
+				Manually establishes a shell script context when automatic detection is not possible.
+				The body of this tag is a valid shell script.
+			</p>
+			<p>
+				The content type of this tag is <code>text/x+sh</code>.
+			</p>
+		]]></description>
+		<name>sh</name>
+		<tag-class>com.aoindustries.taglib.ShTag</tag-class>
+		<body-content>scriptless</body-content>
+	</tag>
+	<tag>
+		<description><![CDATA[
 			<p>
 				Provides a size attribute to its
 				<a href="@{project.url}apidocs/com/aoindustries/taglib/SizeAttribute.html">SizeAttribute</a>
@@ -3583,6 +3631,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<li><code>url</code> or <code>text/url</code> - must be a valid URL</li>
 				<li><code>xhtml</code> or <code>application/xhtml+xml</code> - must be well-formed XHTML content. (Note: Currently only checks character values.)</li>
 				<li><code>xhtml_attribute</code> or <code>application/xhtml+xml+attribute</code> - must be a valid XHTML attribute.</li>
+				<li><code>mysql</code> or <code>text/x+mysql</code> - must be valid for the MySQL command line "mysql"</li>
+				<li><code>psql</code> or <code>text/x+psql</code> - must be valid for the PostgreSQL command line "psql"</li>
+				<li><code>sh</code> or <code>text/x+sh</code> - must be valid shell script</li>
 			</ul>
 		]]></description>
 		<name>write</name>
