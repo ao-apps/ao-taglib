@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2013, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2013, 2016, 2017, 2018  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,6 +22,7 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.util.MinimalList;
 import java.util.List;
 import javax.servlet.jsp.tagext.TagData;
 import javax.servlet.jsp.tagext.TagExtraInfo;
@@ -34,8 +35,8 @@ public class OutTagTEI extends TagExtraInfo {
 
 	@Override
 	public ValidationMessage[] validate(TagData data) {
-		List<ValidationMessage> messages = null;
+		List<ValidationMessage> messages = MinimalList.emptyList();
 		messages = TeiUtils.validateMediaType(data, messages);
-		return messages==null ? null : messages.toArray(new ValidationMessage[messages.size()]);
+		return messages.isEmpty() ? null : messages.toArray(new ValidationMessage[messages.size()]);
 	}
 }
