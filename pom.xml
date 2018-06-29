@@ -53,28 +53,26 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		<profile>
 			<id>release</id>
 			<build>
-				<pluginManagement>
-					<plugins>
-						<plugin>
-							<groupId>org.apache.maven.plugins</groupId><artifactId>maven-javadoc-plugin</artifactId>
-							<configuration>
-								<links>
-									<link>${javac.link.javaApi}</link>
-									<link>${javac.link.javaeeApi.6}</link>
-									<link>https://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.3/apidocs/</link>
-									<link>https://aoindustries.com/ao-encoding/apidocs/</link>
-									<link>https://aoindustries.com/ao-encoding/servlet/apidocs/</link>
-									<link>https://aoindustries.com/ao-io-buffer/apidocs/</link>
-									<link>https://aoindustries.com/ao-lang/apidocs/</link>
-									<link>https://aoindustries.com/ao-servlet-filter/apidocs/</link>
-									<link>https://aoindustries.com/ao-tempfiles/apidocs/</link>
-									<link>https://aoindustries.com/ao-tempfiles-servlet/apidocs/</link>
-									<link>https://aoindustries.com/aocode-public/apidocs/</link>
-								</links>
-							</configuration>
-						</plugin>
-					</plugins>
-				</pluginManagement>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId><artifactId>maven-javadoc-plugin</artifactId>
+						<configuration>
+							<links>
+								<link>${javac.link.javaApi}</link>
+								<link>${javac.link.javaeeApi.6}</link>
+								<link>https://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.3/apidocs</link>
+								<link>https://aoindustries.com/ao-encoding/apidocs</link>
+								<link>https://aoindustries.com/ao-encoding/servlet/apidocs</link>
+								<link>https://aoindustries.com/ao-io-buffer/apidocs</link>
+								<link>https://aoindustries.com/ao-lang/apidocs</link>
+								<link>https://aoindustries.com/ao-servlet-filter/apidocs</link>
+								<link>https://aoindustries.com/ao-tempfiles/apidocs</link>
+								<link>https://aoindustries.com/ao-tempfiles-servlet/apidocs</link>
+								<link>https://aoindustries.com/aocode-public/apidocs</link>
+							</links>
+						</configuration>
+					</plugin>
+				</plugins>
 			</build>
 		</profile>
 	</profiles>
