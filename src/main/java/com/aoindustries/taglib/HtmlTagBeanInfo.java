@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2013, 2015, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2013, 2015, 2016, 2017, 2018  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -33,27 +33,23 @@ import java.beans.SimpleBeanInfo;
  */
 public class HtmlTagBeanInfo extends SimpleBeanInfo {
 
-	private static class PropertiesLock {}
-	private static final PropertiesLock propertiesLock = new PropertiesLock();
-	private static PropertyDescriptor[] properties;
+	private static volatile PropertyDescriptor[] properties;
 
 	@Override
 	public PropertyDescriptor[] getPropertyDescriptors () {
 		try {
-			synchronized(propertiesLock) {
-				PropertyDescriptor[] props = properties;
-				if(props==null) {
-					props = new PropertyDescriptor[] {
-						// From base class: new PropertyDescriptor("contentType", HtmlTag.class, "getContentType", null),
-						new PropertyDescriptor("doctype", HtmlTag.class, null, "setDoctype"),
-						new PropertyDescriptor("forceHtml", HtmlTag.class, null, "setForceHtml"),
-						new PropertyDescriptor("class", HtmlTag.class, null, "setClazz"),
-						new PropertyDescriptor("oldIeClass", HtmlTag.class, null, "setOldIeClass")
-					};
-					properties = props;
-				}
-				return props;
+			PropertyDescriptor[] props = properties;
+			if(props == null) {
+				props = new PropertyDescriptor[] {
+					// From base class: new PropertyDescriptor("contentType", HtmlTag.class, "getContentType", null),
+					new PropertyDescriptor("doctype", HtmlTag.class, null, "setDoctype"),
+					new PropertyDescriptor("forceHtml", HtmlTag.class, null, "setForceHtml"),
+					new PropertyDescriptor("class", HtmlTag.class, null, "setClazz"),
+					new PropertyDescriptor("oldIeClass", HtmlTag.class, null, "setOldIeClass")
+				};
+				properties = props;
 			}
+			return props; // Not copying array for performance
 		} catch(IntrospectionException err) {
 			throw new AssertionError(err);
 		}

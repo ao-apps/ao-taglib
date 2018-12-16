@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2015, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2015, 2016, 2017, 2018  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -33,38 +33,34 @@ import java.beans.SimpleBeanInfo;
  */
 public class ATagBeanInfo extends SimpleBeanInfo {
 
-	private static class PropertiesLock {}
-	private static final PropertiesLock propertiesLock = new PropertiesLock();
-	private static PropertyDescriptor[] properties;
+	private static volatile PropertyDescriptor[] properties;
 
 	@Override
 	public PropertyDescriptor[] getPropertyDescriptors () {
 		try {
-			synchronized(propertiesLock) {
-				PropertyDescriptor[] props = properties;
-				if(props==null) {
-					props = new PropertyDescriptor[] {
-						// From base class: new PropertyDescriptor("contentType", ATag.class, "getContentType", null),
-						// From base class: new PropertyDescriptor("outputType", ATag.class, "getOutputType", null),
-						new PropertyDescriptor("id", ATag.class, null, "setId"),
-						new PropertyDescriptor("href", ATag.class, null, "setHref"),
-						new PropertyDescriptor("hrefAbsolute", ATag.class, null, "setHrefAbsolute"),
-						new PropertyDescriptor("addLastModified", ATag.class, null, "setAddLastModified"),
-						new PropertyDescriptor("hreflang", ATag.class, null, "setHreflang"),
-						new PropertyDescriptor("rel", ATag.class, null, "setRel"),
-						new PropertyDescriptor("type", ATag.class, null, "setType"),
-						new PropertyDescriptor("target", ATag.class, null, "setTarget"),
-						new PropertyDescriptor("title", ATag.class, null, "setTitle"),
-						new PropertyDescriptor("class", ATag.class, "getClazz", "setClazz"),
-						new PropertyDescriptor("style", ATag.class, null, "setStyle"),
-						new PropertyDescriptor("onclick", ATag.class, null, "setOnclick"),
-						new PropertyDescriptor("onmouseover", ATag.class, null, "setOnmouseover"),
-						new PropertyDescriptor("onmouseout", ATag.class, null, "setOnmouseout")
-					};
-					properties = props;
-				}
-				return props;
+			PropertyDescriptor[] props = properties;
+			if(props == null) {
+				props = new PropertyDescriptor[] {
+					// From base class: new PropertyDescriptor("contentType", ATag.class, "getContentType", null),
+					// From base class: new PropertyDescriptor("outputType", ATag.class, "getOutputType", null),
+					new PropertyDescriptor("id", ATag.class, null, "setId"),
+					new PropertyDescriptor("href", ATag.class, null, "setHref"),
+					new PropertyDescriptor("hrefAbsolute", ATag.class, null, "setHrefAbsolute"),
+					new PropertyDescriptor("addLastModified", ATag.class, null, "setAddLastModified"),
+					new PropertyDescriptor("hreflang", ATag.class, null, "setHreflang"),
+					new PropertyDescriptor("rel", ATag.class, null, "setRel"),
+					new PropertyDescriptor("type", ATag.class, null, "setType"),
+					new PropertyDescriptor("target", ATag.class, null, "setTarget"),
+					new PropertyDescriptor("title", ATag.class, null, "setTitle"),
+					new PropertyDescriptor("class", ATag.class, "getClazz", "setClazz"),
+					new PropertyDescriptor("style", ATag.class, null, "setStyle"),
+					new PropertyDescriptor("onclick", ATag.class, null, "setOnclick"),
+					new PropertyDescriptor("onmouseover", ATag.class, null, "setOnmouseover"),
+					new PropertyDescriptor("onmouseout", ATag.class, null, "setOnmouseout")
+				};
+				properties = props;
 			}
+			return props; // Not copying array for performance
 		} catch(IntrospectionException err) {
 			throw new AssertionError(err);
 		}

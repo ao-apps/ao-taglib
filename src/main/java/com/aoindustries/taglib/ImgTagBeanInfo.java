@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2013, 2014, 2015, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2013, 2014, 2015, 2016, 2017, 2018  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -39,7 +39,7 @@ public class ImgTagBeanInfo extends SimpleBeanInfo {
 	public PropertyDescriptor[] getPropertyDescriptors () {
 		try {
 			PropertyDescriptor[] props = properties;
-			if(props==null) {
+			if(props == null) {
 				props = new PropertyDescriptor[] {
 					// From base class: new PropertyDescriptor("contentType", ImgTag.class, "getContentType", null),
 					// From base class: new PropertyDescriptor("outputType", ImgTag.class, "getOutputType", null),
@@ -56,7 +56,7 @@ public class ImgTagBeanInfo extends SimpleBeanInfo {
 				};
 				properties = props;
 			}
-			return props;
+			return props; // Not copying array for performance
 		} catch(IntrospectionException err) {
 			throw new AssertionError(err);
 		}
