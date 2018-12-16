@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2017  AO Industries, Inc.
+ * Copyright (C) 2017, 2018  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -33,32 +33,28 @@ import java.beans.SimpleBeanInfo;
  */
 public class FormTagBeanInfo extends SimpleBeanInfo {
 
-	private static class PropertiesLock {}
-	private static final PropertiesLock propertiesLock = new PropertiesLock();
-	private static PropertyDescriptor[] properties;
+	private static volatile PropertyDescriptor[] properties;
 
 	@Override
 	public PropertyDescriptor[] getPropertyDescriptors () {
 		try {
-			synchronized(propertiesLock) {
-				PropertyDescriptor[] props = properties;
-				if(props==null) {
-					props = new PropertyDescriptor[] {
-						// From base class: new PropertyDescriptor("contentType", FormTag.class, "getContentType", null),
-						// From base class: new PropertyDescriptor("outputType", FormTag.class, "getOutputType", null),
-						new PropertyDescriptor("method", FormTag.class, null, "setMethod"),
-						new PropertyDescriptor("id", FormTag.class, null, "setId"),
-						new PropertyDescriptor("action", FormTag.class, null, "setAction"),
-						new PropertyDescriptor("target", FormTag.class, null, "setTarget"),
-						new PropertyDescriptor("enctype", FormTag.class, null, "setEnctype"),
-						new PropertyDescriptor("class", FormTag.class, "getClazz", "setClazz"),
-						new PropertyDescriptor("style", FormTag.class, null, "setStyle"),
-						new PropertyDescriptor("onsubmit", FormTag.class, null, "setOnsubmit")
-					};
-					properties = props;
-				}
-				return props;
+			PropertyDescriptor[] props = properties;
+			if(props == null) {
+				props = new PropertyDescriptor[] {
+					// From base class: new PropertyDescriptor("contentType", FormTag.class, "getContentType", null),
+					// From base class: new PropertyDescriptor("outputType", FormTag.class, "getOutputType", null),
+					new PropertyDescriptor("method", FormTag.class, null, "setMethod"),
+					new PropertyDescriptor("id", FormTag.class, null, "setId"),
+					new PropertyDescriptor("action", FormTag.class, null, "setAction"),
+					new PropertyDescriptor("target", FormTag.class, null, "setTarget"),
+					new PropertyDescriptor("enctype", FormTag.class, null, "setEnctype"),
+					new PropertyDescriptor("class", FormTag.class, "getClazz", "setClazz"),
+					new PropertyDescriptor("style", FormTag.class, null, "setStyle"),
+					new PropertyDescriptor("onsubmit", FormTag.class, null, "setOnsubmit")
+				};
+				properties = props;
 			}
+			return props; // Not copying array for performance
 		} catch(IntrospectionException err) {
 			throw new AssertionError(err);
 		}
