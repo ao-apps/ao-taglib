@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2016, 2017, 2019  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,11 +22,6 @@
  */
 package com.aoindustries.taglib.book;
 
-import com.aoindustries.net.DomainName;
-import com.aoindustries.net.Path;
-import com.aoindustries.validation.ValidationException;
-import com.semanticcms.core.model.BookRef;
-import com.semanticcms.core.model.ResourceRef;
 import com.semanticcms.tagreference.TagReferenceInitializer;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -39,22 +34,17 @@ public class AoTldInitializer extends TagReferenceInitializer {
 	private static final Map<String,String> additionalApiLinks = new LinkedHashMap<String,String>();
 	static {
 		// Self
-		additionalApiLinks.put("com.aoindustries.taglib.", Maven.properties.getProperty("documented.url") + "apidocs/");
+		additionalApiLinks.put("com.aoindustries.taglib.", Maven.properties.getProperty("documented.url") + "apidocs");
 		// Dependencies
-		additionalApiLinks.put("com.aoindustries.util.", "https://aoindustries.com/aocode-public/apidocs/");
+		additionalApiLinks.put("com.aoindustries.util.", "https://aoindustries.com/aocode-public/apidocs");
 	}
 
-	public AoTldInitializer() throws ValidationException {
+	public AoTldInitializer() {
 		super(
 			"AO Taglib Reference",
 			"Taglib Reference",
-			new ResourceRef(
-				new BookRef(
-					DomainName.valueOf("aoindustries.com"),
-					Path.valueOf("/ao-taglib")
-				),
-				Path.valueOf("/ao.tld")
-			),
+			"/ao-taglib",
+			"/ao.tld",
 			Maven.properties.getProperty("javac.link.javaApi.jdk16"),
 			Maven.properties.getProperty("javac.link.javaeeApi.6"),
 			additionalApiLinks
