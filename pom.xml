@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 ao-taglib - Making JSP be what it should have been all along.
-Copyright (C) 2016, 2017, 2018  AO Industries, Inc.
+Copyright (C) 2016, 2017, 2018, 2019  AO Industries, Inc.
     support@aoindustries.com
     7262 Bull Pen Cir
     Mobile, AL 36695
@@ -60,15 +60,15 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 							<links>
 								<link>${javac.link.javaApi}</link>
 								<link>${javac.link.javaeeApi.6}</link>
-								<link>https://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.3/apidocs</link>
-								<link>https://aoindustries.com/ao-encoding/apidocs</link>
-								<link>https://aoindustries.com/ao-encoding/servlet/apidocs</link>
-								<link>https://aoindustries.com/ao-io-buffer/apidocs</link>
-								<link>https://aoindustries.com/ao-lang/apidocs</link>
-								<link>https://aoindustries.com/ao-servlet-filter/apidocs</link>
-								<link>https://aoindustries.com/ao-tempfiles/apidocs</link>
-								<link>https://aoindustries.com/ao-tempfiles-servlet/apidocs</link>
-								<link>https://aoindustries.com/aocode-public/apidocs</link>
+								<link>https://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.3/apidocs/</link>
+								<link>https://aoindustries.com/ao-encoding/apidocs/</link>
+								<link>https://aoindustries.com/ao-encoding/servlet/apidocs/</link>
+								<link>https://aoindustries.com/ao-io-buffer/apidocs/</link>
+								<link>https://aoindustries.com/ao-lang/apidocs/</link>
+								<link>https://aoindustries.com/ao-servlet-filter/apidocs/</link>
+								<link>https://aoindustries.com/ao-tempfiles/apidocs/</link>
+								<link>https://aoindustries.com/ao-tempfiles-servlet/apidocs/</link>
+								<link>https://aoindustries.com/aocode-public/apidocs/</link>
 							</links>
 						</configuration>
 					</plugin>

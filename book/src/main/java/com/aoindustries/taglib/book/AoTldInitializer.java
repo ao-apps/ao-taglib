@@ -31,9 +31,9 @@ public class AoTldInitializer extends TagReferenceInitializer {
 	private static final Map<String,String> additionalApiLinks = new LinkedHashMap<String,String>();
 	static {
 		// Self
-		additionalApiLinks.put("com.aoindustries.taglib.", Maven.properties.getProperty("documented.url") + "apidocs");
+		additionalApiLinks.put("com.aoindustries.taglib.", Maven.properties.getProperty("documented.url") + "apidocs/");
 		// Dependencies
-		additionalApiLinks.put("com.aoindustries.util.", "https://aoindustries.com/aocode-public/apidocs");
+		additionalApiLinks.put("com.aoindustries.util.", "https://aoindustries.com/aocode-public/apidocs/");
 	}
 
 	public AoTldInitializer() {
@@ -42,7 +42,7 @@ public class AoTldInitializer extends TagReferenceInitializer {
 			"Taglib Reference",
 			"/ao-taglib",
 			"/ao.tld",
-			Maven.properties.getProperty("javac.link.javaApi.jdk6"),
+			Maven.properties.getProperty("javac.link.javaApi.jdk7"),
 			Maven.properties.getProperty("javac.link.javaeeApi.6"),
 			additionalApiLinks
 		);
