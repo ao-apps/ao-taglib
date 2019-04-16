@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2018-05-28T20:08:50-0500"
+		dateModified="2019-04-16T02:16:27-0500"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -61,7 +61,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 						and registers a shutdown hook to delete on JVM exit.
 					</li>
 					<li>
-						Allowing all attributes to have runtime expressions with <code>&lt;rtexprvalue&gt;true&lt;/rtexprvalue&gt;</code>.
+						Allowing all attributes to have runtime expressions with <code><![CDATA[&lt;rtexprvalue&gt;true&lt;/rtexprvalue&gt;]]></code>.
 						There is no compelling reason to disable the runtime expressions, and disabling them can hinder developer options.
 					</li>
 					<li>
