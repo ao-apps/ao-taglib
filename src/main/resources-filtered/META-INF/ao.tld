@@ -55,13 +55,13 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<p>
 				When a parameter value is <code>null</code> it is not added.
 				If the value is an
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/lang/Iterable.html">Iterable</a>,
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/util/Iterator.html">Iterator</a>,
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/util/Enumeration.html">Enumeration</a>,
+				<a rel="nofollow" href="@{javac.link.javaApi}java/lang/Iterable.html">Iterable</a>,
+				<a rel="nofollow" href="@{javac.link.javaApi}java/util/Iterator.html">Iterator</a>,
+				<a rel="nofollow" href="@{javac.link.javaApi}java/util/Enumeration.html">Enumeration</a>,
 				or array, then each non-null element is coerced to
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/lang/String.html">String</a> as a separate
+				<a rel="nofollow" href="@{javac.link.javaApi}java/lang/String.html">String</a> as a separate
 				parameter in iteration order.  Otherwise, the value itself is
-				coerced to <a rel="nofollow" href="@{javac.link.javaApi}/java/lang/String.html">String</a>
+				coerced to <a rel="nofollow" href="@{javac.link.javaApi}java/lang/String.html">String</a>
 				for the parameter value.
 			</p>
 			<p>
@@ -111,7 +111,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					URL rewriting is performed as needed via
-					<a rel="nofollow" href="@{javac.link.javaeeApi.6}/javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
+					<a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
 				</p>
 				<p>
 					To support paths in different character sets, URL encoding is performed
@@ -347,7 +347,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<description><![CDATA[
 			<p>
 				Evaluates the test expression, if it is not <code>true</code> throws
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/lang/AssertionError.html">AssertionError</a>
+				<a rel="nofollow" href="@{javac.link.javaApi}java/lang/AssertionError.html">AssertionError</a>
 				with the optional message.
 			</p>
 		]]></description>
@@ -370,7 +370,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The message included in the
-					<a rel="nofollow" href="@{javac.link.javaApi}/java/lang/AssertionError.html">AssertionError</a>,
+					<a rel="nofollow" href="@{javac.link.javaApi}java/lang/AssertionError.html">AssertionError</a>,
 					only evaluated as-needed due to use of deferred expressions.
 				</p>
 			]]></description>
@@ -540,13 +540,13 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<p>
 				When a parameter value is <code>null</code> it is not added.
 				If the value is an
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/lang/Iterable.html">Iterable</a>,
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/util/Iterator.html">Iterator</a>,
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/util/Enumeration.html">Enumeration</a>,
+				<a rel="nofollow" href="@{javac.link.javaApi}java/lang/Iterable.html">Iterable</a>,
+				<a rel="nofollow" href="@{javac.link.javaApi}java/util/Iterator.html">Iterator</a>,
+				<a rel="nofollow" href="@{javac.link.javaApi}java/util/Enumeration.html">Enumeration</a>,
 				or array, then each non-null element is coerced to
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/lang/String.html">String</a>
+				<a rel="nofollow" href="@{javac.link.javaApi}java/lang/String.html">String</a>
 				as a separate parameter in iteration order.  Otherwise, the value itself is
-				coerced to <a rel="nofollow" href="@{javac.link.javaApi}/java/lang/String.html">String</a>
+				coerced to <a rel="nofollow" href="@{javac.link.javaApi}java/lang/String.html">String</a>
 				for the parameter value.
 			</p>
 			<p>
@@ -612,7 +612,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					URL rewriting is performed as needed via
-					<a rel="nofollow" href="@{javac.link.javaeeApi.6}/javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
+					<a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
 				</p>
 				<p>
 					To support paths in different character sets, URL encoding is performed
@@ -716,7 +716,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					<li>You may have other nested tags used to select and build the set of parameters</li>
 					<li>
 						You may pass argument objects instead of only
-						<a rel="nofollow" href="@{javac.link.javaApi}/java/lang/String.html">String</a>
+						<a rel="nofollow" href="@{javac.link.javaApi}java/lang/String.html">String</a>
 						parameters (see below)
 					</li>
 				</ol>
@@ -728,13 +728,13 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<p>
 				When a parameter value is <code>null</code> it is not added.
 				If the value is an
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/lang/Iterable.html">Iterable</a>,
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/util/Iterator.html">Iterator</a>,
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/util/Enumeration.html">Enumeration</a>,
+				<a rel="nofollow" href="@{javac.link.javaApi}java/lang/Iterable.html">Iterable</a>,
+				<a rel="nofollow" href="@{javac.link.javaApi}java/util/Iterator.html">Iterator</a>,
+				<a rel="nofollow" href="@{javac.link.javaApi}java/util/Enumeration.html">Enumeration</a>,
 				or array, then each non-null element is coerced to
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/lang/String.html">String</a>
+				<a rel="nofollow" href="@{javac.link.javaApi}java/lang/String.html">String</a>
 				as a separate parameter in iteration order.  Otherwise, the value itself is
-				coerced to <a rel="nofollow" href="@{javac.link.javaApi}/java/lang/String.html">String</a>
+				coerced to <a rel="nofollow" href="@{javac.link.javaApi}java/lang/String.html">String</a>
 				for the parameter value.
 			</p>
 			<p>
@@ -745,7 +745,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 			<p>
 				Argument objects are passed to the forwarded page via request-scope <code>arg</code>
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/util/Map.html">Map</a>.
+				<a rel="nofollow" href="@{javac.link.javaApi}java/util/Map.html">Map</a>.
 				Any arguments to the current JSP page are not automatically passed-on to the forwarded page 
 				(this differs from parameters in this way).
 			</p>
@@ -753,7 +753,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				Any attribute that has no namespace and begins with <code>arg.</code> is added as an argument.
 				The argument name is the part of the attribute name following <code>arg.</code>.
 				Because this argument becomes an element in the
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/util/Map.html">Map</a>
+				<a rel="nofollow" href="@{javac.link.javaApi}java/util/Map.html">Map</a>
 				named <code>arg</code> in the forwarded page, the attribute
 				name and JSP <a rel="nofollow" href="https://docs.oracle.com/cd/E19226-01/820-7627/gjddd/">Expression Language</a> name will match precisely.
 			</p>
@@ -779,7 +779,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					Security Note: page must be a trusted value since it can access any resource available via
-					<a rel="nofollow" href="@{javac.link.javaeeApi.6}/javax/servlet/RequestDispatcher.html">RequestDispatcher</a>.
+					<a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/RequestDispatcher.html">RequestDispatcher</a>.
 					It would be incorrect to use a value that can be manipulated by a client in any way.
 				</p>
 				<p>
@@ -849,7 +849,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<description><![CDATA[
 			<p>
 				Gets a detailed report of a
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/lang/Throwable.html">Throwable</a>
+				<a rel="nofollow" href="@{javac.link.javaApi}java/lang/Throwable.html">Throwable</a>
 				as generated by
 				<a href="https://aoindustries.com/aocode-public/apidocs/com/aoindustries/util/ErrorPrinter.html">ErrorPrinter</a>.
 			</p>
@@ -866,7 +866,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					Specifies the variable scope searched to retrieve the bean specified
 					by name. If not specified, the default rules applied by
-					<a rel="nofollow" href="@{javac.link.javaeeApi.6}/javax/servlet/jsp/JspContext.html#findAttribute%28java.lang.String%29">JspContext.findAttribute()</a>
+					<a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/jsp/JspContext.html#findAttribute%28java.lang.String%29">JspContext.findAttribute()</a>
 					are applied.
 				</p>
 			]]></description>
@@ -1029,13 +1029,13 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<p>
 				When a parameter value is <code>null</code> it is not added.
 				If the value is an
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/lang/Iterable.html">Iterable</a>,
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/util/Iterator.html">Iterator</a>,
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/util/Enumeration.html">Enumeration</a>,
+				<a rel="nofollow" href="@{javac.link.javaApi}java/lang/Iterable.html">Iterable</a>,
+				<a rel="nofollow" href="@{javac.link.javaApi}java/util/Iterator.html">Iterator</a>,
+				<a rel="nofollow" href="@{javac.link.javaApi}java/util/Enumeration.html">Enumeration</a>,
 				or array, then each non-null element is coerced to
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/lang/String.html">String</a>
+				<a rel="nofollow" href="@{javac.link.javaApi}java/lang/String.html">String</a>
 				as a separate parameter in iteration order.  Otherwise, the value itself is
-				coerced to <a rel="nofollow" href="@{javac.link.javaApi}/java/lang/String.html">String</a>
+				coerced to <a rel="nofollow" href="@{javac.link.javaApi}java/lang/String.html">String</a>
 				for the parameter value.
 			</p>
 			<p>
@@ -1086,7 +1086,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					URL rewriting is performed as needed via
-					<a rel="nofollow" href="@{javac.link.javaeeApi.6}/javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
+					<a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
 				</p>
 				<p>
 					To support paths in different character sets, URL encoding is performed
@@ -1200,13 +1200,13 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<p>
 				When a parameter value is <code>null</code> it is not added.
 				If the value is an
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/lang/Iterable.html">Iterable</a>,
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/util/Iterator.html">Iterator</a>,
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/util/Enumeration.html">Enumeration</a>,
+				<a rel="nofollow" href="@{javac.link.javaApi}java/lang/Iterable.html">Iterable</a>,
+				<a rel="nofollow" href="@{javac.link.javaApi}java/util/Iterator.html">Iterator</a>,
+				<a rel="nofollow" href="@{javac.link.javaApi}java/util/Enumeration.html">Enumeration</a>,
 				or array, then each non-null element is coerced to
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/lang/String.html">String</a>
+				<a rel="nofollow" href="@{javac.link.javaApi}java/lang/String.html">String</a>
 				as a separate parameter in iteration order.  Otherwise, the value itself is
-				coerced to <a rel="nofollow" href="@{javac.link.javaApi}/java/lang/String.html">String</a>
+				coerced to <a rel="nofollow" href="@{javac.link.javaApi}java/lang/String.html">String</a>
 				for the parameter value.
 			</p>
 			<p>
@@ -1257,7 +1257,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					URL rewriting is performed as needed via
-					<a rel="nofollow" href="@{javac.link.javaeeApi.6}/javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
+					<a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
 				</p>
 				<p>
 					To support paths in different character sets, URL encoding is performed
@@ -1400,7 +1400,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					<li>You may have other nested tags used to select and build the set of parameters</li>
 					<li>
 						You may pass argument objects instead of only
-						<a rel="nofollow" href="@{javac.link.javaApi}/java/lang/String.html">String</a>
+						<a rel="nofollow" href="@{javac.link.javaApi}java/lang/String.html">String</a>
 						parameters (see below)
 					</li>
 				</ol>
@@ -1412,13 +1412,13 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<p>
 				When a parameter value is <code>null</code> it is not added.
 				If the value is an
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/lang/Iterable.html">Iterable</a>,
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/util/Iterator.html">Iterator</a>,
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/util/Enumeration.html">Enumeration</a>,
+				<a rel="nofollow" href="@{javac.link.javaApi}java/lang/Iterable.html">Iterable</a>,
+				<a rel="nofollow" href="@{javac.link.javaApi}java/util/Iterator.html">Iterator</a>,
+				<a rel="nofollow" href="@{javac.link.javaApi}java/util/Enumeration.html">Enumeration</a>,
 				or array, then each non-null element is coerced to
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/lang/String.html">String</a>
+				<a rel="nofollow" href="@{javac.link.javaApi}java/lang/String.html">String</a>
 				as a separate parameter in iteration order.  Otherwise, the value itself is
-				coerced to <a rel="nofollow" href="@{javac.link.javaApi}/java/lang/String.html">String</a>
+				coerced to <a rel="nofollow" href="@{javac.link.javaApi}java/lang/String.html">String</a>
 				for the parameter value.
 			</p>
 			<p>
@@ -1429,7 +1429,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 			<p>
 				Argument objects are passed to the included page via request-scope <code>arg</code>
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/util/Map.html">Map</a>.
+				<a rel="nofollow" href="@{javac.link.javaApi}java/util/Map.html">Map</a>.
 				Any arguments to the current JSP page are not automatically passed-on to the included page 
 				(this differs from parameters in this way).
 				The current JSP page arguments are restored when the include completes.
@@ -1438,7 +1438,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				Any attribute that has no namespace and begins with <code>arg.</code> is added as an argument.
 				The argument name is the part of the attribute name following <code>arg.</code>.
 				Because this argument becomes an element in the
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/util/Map.html">Map</a>
+				<a rel="nofollow" href="@{javac.link.javaApi}java/util/Map.html">Map</a>
 				named <code>arg</code> in the included page, the attribute
 				name and JSP <a rel="nofollow" href="https://docs.oracle.com/cd/E19226-01/820-7627/gjddd/">Expression Language</a> name will match precisely.
 			</p>
@@ -1463,7 +1463,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					Security Note: page must be a trusted value since it can access any resource available via
-					<a rel="nofollow" href="@{javac.link.javaeeApi.6}/javax/servlet/RequestDispatcher.html">RequestDispatcher</a>.
+					<a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/RequestDispatcher.html">RequestDispatcher</a>.
 					It would be incorrect to use a value that can be manipulated by a client in any way.
 				</p>
 			]]></description>
@@ -1791,13 +1791,13 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<p>
 				When a parameter value is <code>null</code> it is not added.
 				If the value is an
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/lang/Iterable.html">Iterable</a>,
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/util/Iterator.html">Iterator</a>,
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/util/Enumeration.html">Enumeration</a>,
+				<a rel="nofollow" href="@{javac.link.javaApi}java/lang/Iterable.html">Iterable</a>,
+				<a rel="nofollow" href="@{javac.link.javaApi}java/util/Iterator.html">Iterator</a>,
+				<a rel="nofollow" href="@{javac.link.javaApi}java/util/Enumeration.html">Enumeration</a>,
 				or array, then each non-null element is coerced to
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/lang/String.html">String</a>
+				<a rel="nofollow" href="@{javac.link.javaApi}java/lang/String.html">String</a>
 				as a separate parameter in iteration order.  Otherwise, the value itself is
-				coerced to <a rel="nofollow" href="@{javac.link.javaApi}/java/lang/String.html">String</a>
+				coerced to <a rel="nofollow" href="@{javac.link.javaApi}java/lang/String.html">String</a>
 				for the parameter value.
 			</p>
 			<p>
@@ -1848,7 +1848,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					URL rewriting is performed as needed via
-					<a rel="nofollow" href="@{javac.link.javaeeApi.6}/javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
+					<a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
 				</p>
 				<p>
 					To support paths in different character sets, URL encoding is performed
@@ -2445,7 +2445,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<p>
 				In addition to the usual set of coercions expected for
 				<a rel="nofollow" href="https://docs.oracle.com/javaee/5/jstl/1.1/docs/tlddocs/c/out.html">&lt;c:out&gt;</a>,
-				also supports writing <a rel="nofollow" href="@{javac.link.javaApi}/org/w3c/dom/Node.html">XML nodes</a>
+				also supports writing <a rel="nofollow" href="@{javac.link.javaApi}org/w3c/dom/Node.html">XML nodes</a>
 				such as for HTML snippets.
 			</p>
 			<p>
@@ -2590,7 +2590,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					When provided, the values may not contain a
-					<a rel="nofollow" href="@{javac.link.javaApi}/java/util/Map.html">Map</a>
+					<a rel="nofollow" href="@{javac.link.javaApi}java/util/Map.html">Map</a>
 					or <a href="https://aoindustries.com/aocode-public/apidocs/com/aoindustries/net/HttpParameters.html">HttpParameters</a>.
 					When provided, the exclude attribute may not be provided.
 				</p>
@@ -2604,7 +2604,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					Optionally excludes all elements of a
-					<a rel="nofollow" href="@{javac.link.javaApi}/java/util/Map.html">Map</a>
+					<a rel="nofollow" href="@{javac.link.javaApi}java/util/Map.html">Map</a>
 					or <a href="https://aoindustries.com/aocode-public/apidocs/com/aoindustries/net/HttpParameters.html">HttpParameters</a>
 					that match any of the comma-separated patterns.
 					May not be used in conjunction with the name attribute.
@@ -2648,25 +2648,25 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					When name is provided, supports
-					<a rel="nofollow" href="@{javac.link.javaApi}/java/lang/Iterable.html">Iterable</a>,
-					<a rel="nofollow" href="@{javac.link.javaApi}/java/util/Iterator.html">Iterator</a>,
-					<a rel="nofollow" href="@{javac.link.javaApi}/java/util/Enumeration.html">Enumeration</a>,
+					<a rel="nofollow" href="@{javac.link.javaApi}java/lang/Iterable.html">Iterable</a>,
+					<a rel="nofollow" href="@{javac.link.javaApi}java/util/Iterator.html">Iterator</a>,
+					<a rel="nofollow" href="@{javac.link.javaApi}java/util/Enumeration.html">Enumeration</a>,
 					or array values.
 				</p>
 				<p>
 					When name is not provided, requires
-					<a rel="nofollow" href="@{javac.link.javaApi}/java/util/Map.html">Map</a>
+					<a rel="nofollow" href="@{javac.link.javaApi}java/util/Map.html">Map</a>
 					or <a href="https://aoindustries.com/aocode-public/apidocs/com/aoindustries/net/HttpParameters.html">HttpParameters</a>,
-					where the parameter name is the map key coerced to <a rel="nofollow" href="@{javac.link.javaApi}/java/lang/String.html">String</a>
+					where the parameter name is the map key coerced to <a rel="nofollow" href="@{javac.link.javaApi}java/lang/String.html">String</a>
 					and the value (or set of values) is the map value.  Each of the entry values may be
-					<a rel="nofollow" href="@{javac.link.javaApi}/java/lang/Iterable.html">Iterable</a>,
-					<a rel="nofollow" href="@{javac.link.javaApi}/java/util/Iterator.html">Iterator</a>,
-					<a rel="nofollow" href="@{javac.link.javaApi}/java/util/Enumeration.html">Enumeration</a>,
+					<a rel="nofollow" href="@{javac.link.javaApi}java/lang/Iterable.html">Iterable</a>,
+					<a rel="nofollow" href="@{javac.link.javaApi}java/util/Iterator.html">Iterator</a>,
+					<a rel="nofollow" href="@{javac.link.javaApi}java/util/Enumeration.html">Enumeration</a>,
 					array, or single value.
 				</p>
 				<p>
 					When obtaining values from a
-					<a rel="nofollow" href="@{javac.link.javaApi}/java/util/Map.html">Map</a>
+					<a rel="nofollow" href="@{javac.link.javaApi}java/util/Map.html">Map</a>
 					or <a href="https://aoindustries.com/aocode-public/apidocs/com/aoindustries/net/HttpParameters.html">HttpParameters</a>,
 					parameters may be excluded with the "exclude" attribute.
 				</p>
@@ -2734,13 +2734,13 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<p>
 				When a parameter value is <code>null</code> it is not added.
 				If the value is an
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/lang/Iterable.html">Iterable</a>,
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/util/Iterator.html">Iterator</a>,
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/util/Enumeration.html">Enumeration</a>,
+				<a rel="nofollow" href="@{javac.link.javaApi}java/lang/Iterable.html">Iterable</a>,
+				<a rel="nofollow" href="@{javac.link.javaApi}java/util/Iterator.html">Iterator</a>,
+				<a rel="nofollow" href="@{javac.link.javaApi}java/util/Enumeration.html">Enumeration</a>,
 				or array, then each non-null element is coerced to
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/lang/String.html">String</a>
+				<a rel="nofollow" href="@{javac.link.javaApi}java/lang/String.html">String</a>
 				as a separate parameter in iteration order.  Otherwise, the value itself is
-				coerced to <a rel="nofollow" href="@{javac.link.javaApi}/java/lang/String.html">String</a>
+				coerced to <a rel="nofollow" href="@{javac.link.javaApi}java/lang/String.html">String</a>
 				for the parameter value.
 			</p>
 			<p>
@@ -2816,7 +2816,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					URL rewriting is performed as needed via
-					<a rel="nofollow" href="@{javac.link.javaeeApi.6}/javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
+					<a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
 				</p>
 				<p>
 					To support paths in different character sets, URL encoding is performed
@@ -2870,7 +2870,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					Security Note: page must be a trusted value since it can access any resource available via
-					<a rel="nofollow" href="@{javac.link.javaeeApi.6}/javax/servlet/RequestDispatcher.html">RequestDispatcher</a>.
+					<a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/RequestDispatcher.html">RequestDispatcher</a>.
 					It would be incorrect to use a value that can be manipulated by a client in any way.
 				</p>
 				<p>
@@ -2940,13 +2940,13 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<p>
 				When a parameter value is <code>null</code> it is not added.
 				If the value is an
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/lang/Iterable.html">Iterable</a>,
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/util/Iterator.html">Iterator</a>,
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/util/Enumeration.html">Enumeration</a>,
+				<a rel="nofollow" href="@{javac.link.javaApi}java/lang/Iterable.html">Iterable</a>,
+				<a rel="nofollow" href="@{javac.link.javaApi}java/util/Iterator.html">Iterator</a>,
+				<a rel="nofollow" href="@{javac.link.javaApi}java/util/Enumeration.html">Enumeration</a>,
 				or array, then each non-null element is coerced to
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/lang/String.html">String</a>
+				<a rel="nofollow" href="@{javac.link.javaApi}java/lang/String.html">String</a>
 				as a separate parameter in iteration order.  Otherwise, the value itself is
-				coerced to <a rel="nofollow" href="@{javac.link.javaApi}/java/lang/String.html">String</a>
+				coerced to <a rel="nofollow" href="@{javac.link.javaApi}java/lang/String.html">String</a>
 				for the parameter value.
 			</p>
 			<p>
@@ -3000,7 +3000,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					URL rewriting is performed as needed via
-					<a rel="nofollow" href="@{javac.link.javaeeApi.6}/javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
+					<a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
 				</p>
 				<p>
 					To support paths in different character sets, URL encoding is performed
@@ -3199,7 +3199,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				instead of
 				<a rel="nofollow" href="https://docs.oracle.com/cd/A87860_01/doc/java.817/a83726/genlovw3.htm#1008181">&lt;jsp:include&gt;</a>
 				to support
-				<a rel="nofollow" href="@{javac.link.javaeeApi.6}/javax/servlet/http/HttpServletResponse.html#sendError%28int%29">sendError</a>
+				<a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/http/HttpServletResponse.html#sendError%28int%29">sendError</a>
 				inside of includes.
 			</p>
 		]]></description>
@@ -3210,7 +3210,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The status code for
-					<a rel="nofollow" href="@{javac.link.javaeeApi.6}/javax/servlet/http/HttpServletResponse.html#sendError%28int%29">response.sendError</a>.
+					<a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/http/HttpServletResponse.html#sendError%28int%29">response.sendError</a>.
 				</p>
 			]]></description>
 			<name>status</name>
@@ -3511,7 +3511,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 			<p>
 				Depending on context, the URL will be passed through
-				<a rel="nofollow" href="@{javac.link.javaeeApi.6}/javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>
+				<a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>
 				to add any URL-based session state.  Session state will never be added to external links.
 			</p>
 			<p>
@@ -3600,7 +3600,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				Writes the bean contents.  Supports data types beyond
 				<a rel="nofollow" href="https://docs.oracle.com/javaee/5/jstl/1.1/docs/tlddocs/c/out.html">&lt;c:out&gt;</a>
 				and <a href="https://people.apache.org/~germuska/struts-taglib/docs/tlddoc/bean/write.html">&lt;bean:write&gt;</a>,
-				such as <a rel="nofollow" href="@{javac.link.javaApi}/org/w3c/dom/Node.html">XML nodes</a>
+				such as <a rel="nofollow" href="@{javac.link.javaApi}org/w3c/dom/Node.html">XML nodes</a>
 				for HTML snippets.
 			</p>
 			<p>
@@ -3614,7 +3614,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 			<p>
 				The method attribute provides the name of the method that will be used to get the display value.
-				If not provided, it will default to <code><a rel="nofollow" href="@{javac.link.javaApi}/java/lang/Object.html#toString%28%29">toString</a></code>.
+				If not provided, it will default to <code><a rel="nofollow" href="@{javac.link.javaApi}java/lang/Object.html#toString%28%29">toString</a></code>.
 				This method searches for the method of the given name with no parameters.  It is an error if the method is
 				not found.
 			</p>
@@ -3645,7 +3645,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					Specifies the variable scope searched to retrieve the bean specified
 					by name. If not specified, the default rules applied by
-					<a rel="nofollow" href="@{javac.link.javaeeApi.6}/javax/servlet/jsp/JspContext.html#findAttribute%28java.lang.String%29">JspContext.findAttribute()</a>
+					<a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/jsp/JspContext.html#findAttribute%28java.lang.String%29">JspContext.findAttribute()</a>
 					are applied.
 				</p>
 			]]></description>
@@ -3689,9 +3689,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					Specifies the method that will be used to convert the object to a
-					<a rel="nofollow" href="@{javac.link.javaApi}/java/lang/String.html">String</a>.
+					<a rel="nofollow" href="@{javac.link.javaApi}java/lang/String.html">String</a>.
 					This defaults to
-					<code><a rel="nofollow" href="@{javac.link.javaApi}/java/lang/Object.html#toString%28%29">toString</a></code>.
+					<code><a rel="nofollow" href="@{javac.link.javaApi}java/lang/Object.html#toString%28%29">toString</a></code>.
 				</p>
 			]]></description>
 			<name>method</name>
@@ -3774,7 +3774,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<description><![CDATA[
 			<p>
 				Rewrites a URL to maintain session state via
-				<a rel="nofollow" href="@{javac.link.javaeeApi.6}/javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
+				<a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
 			</p>
 		]]></description>
 		<name>encodeURL</name>
@@ -3787,7 +3787,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<p>
 				Generates an absolute URL for the provided context-relative URL.
 				The URL is not automatically
-				<a rel="nofollow" href="@{javac.link.javaeeApi.6}/javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">response encodeURL</a>.
+				<a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">response encodeURL</a>.
 			</p>
 		]]></description>
 		<name>getAbsoluteURL</name>
@@ -3824,8 +3824,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<description><![CDATA[
 			<p>
 				Joins elements of any
-				<a rel="nofollow" href="@{javac.link.javaApi}/java/lang/Iterable.html">Iterable</a>
-				into a <a rel="nofollow" href="@{javac.link.javaApi}/java/lang/String.html">String</a>.
+				<a rel="nofollow" href="@{javac.link.javaApi}java/lang/Iterable.html">Iterable</a>
+				into a <a rel="nofollow" href="@{javac.link.javaApi}java/lang/String.html">String</a>.
 			</p>
 		]]></description>
 		<name>join</name>
@@ -3850,7 +3850,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<function>
 		<description><![CDATA[
 			<p>
-				Word wraps a <a rel="nofollow" href="@{javac.link.javaApi}/java/lang/String.html">String</a>.
+				Word wraps a <a rel="nofollow" href="@{javac.link.javaApi}java/lang/String.html">String</a>.
 			</p>
 		]]></description>
 		<name>wordWrap</name>
@@ -3861,7 +3861,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<function>
 		<description><![CDATA[
 			<p>
-				Calls <a rel="nofollow" href="@{javac.link.javaApi}/java/lang/Math.html#ceil%28double%29">java.lang.Math.ceil(double)</a>.
+				Calls <a rel="nofollow" href="@{javac.link.javaApi}java/lang/Math.html#ceil%28double%29">java.lang.Math.ceil(double)</a>.
 			</p>
 		]]></description>
 		<name>ceil</name>
@@ -3872,7 +3872,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<function>
 		<description><![CDATA[
 			<p>
-				Calls <a rel="nofollow" href="@{javac.link.javaApi}/java/lang/Math.html#floor%28double%29">java.lang.Math.floor(double)</a>.
+				Calls <a rel="nofollow" href="@{javac.link.javaApi}java/lang/Math.html#floor%28double%29">java.lang.Math.floor(double)</a>.
 			</p>
 		]]></description>
 		<name>floor</name>
@@ -3883,7 +3883,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<function>
 		<description><![CDATA[
 			<p>
-				Calls <a rel="nofollow" href="@{javac.link.javaApi}/java/lang/Math.html#round%28double%29">java.lang.Math.round(double)</a>.
+				Calls <a rel="nofollow" href="@{javac.link.javaApi}java/lang/Math.html#round%28double%29">java.lang.Math.round(double)</a>.
 			</p>
 		]]></description>
 		<name>round</name>
