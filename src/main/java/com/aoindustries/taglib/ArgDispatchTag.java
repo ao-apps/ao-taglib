@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2013, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2013, 2016, 2017, 2019  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -68,7 +68,7 @@ abstract class ArgDispatchTag
 	@Override
 	public void addArg(String name, Object value) throws IllegalArgumentException {
 		if(args==null) {
-			args = new LinkedHashMap<String,Object>();
+			args = new LinkedHashMap<>();
 		} else if(args.containsKey(name)) {
 			throw new LocalizedIllegalArgumentException(accessor, "DispatchTag.addArg.duplicateArgument", name);
 		}

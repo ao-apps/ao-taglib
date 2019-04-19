@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2013, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2013, 2016, 2017, 2019  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -97,11 +97,7 @@ public class PropertyUtils {
 					return value;
 				}
 			}
-		} catch(IllegalAccessException err) {
-			throw new JspTagException(err);
-		} catch(InvocationTargetException err) {
-			throw new JspTagException(err);
-		} catch(NoSuchMethodException err) {
+		} catch(IllegalAccessException | InvocationTargetException | NoSuchMethodException err) {
 			throw new JspTagException(err);
 		}
 	}

@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2012, 2013, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2012, 2013, 2016, 2017, 2019  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -45,7 +45,7 @@ public class OnmouseoutTag extends AutoEncodingBufferedTag {
 
 	@Override
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
-		OnmouseoutAttribute onmouseoutAttribute = AttributeUtils.findAttributeParent("onmouseout", this, "onmouseout", OnmouseoutAttribute.class);;
+		OnmouseoutAttribute onmouseoutAttribute = AttributeUtils.findAttributeParent("onmouseout", this, "onmouseout", OnmouseoutAttribute.class);
 		onmouseoutAttribute.setOnmouseout(capturedBody.trim());
 	}
 }
