@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2012, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2012, 2016, 2017, 2019  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,14 +22,14 @@
  */
 package com.aoindustries.taglib;
 
-import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.io.LocalizedIOException;
+import static com.aoindustries.taglib.ApplicationResources.accessor;
 import java.io.IOException;
 import java.io.Writer;
 
 final class FailOnWriteWriter extends Writer {
 
-	private static FailOnWriteWriter instance = new FailOnWriteWriter();
+	private static final FailOnWriteWriter instance = new FailOnWriteWriter();
 
 	static FailOnWriteWriter getInstance() {
 		return instance;

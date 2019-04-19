@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -64,7 +64,7 @@ public class InputTag
 {
 
 	private static final Set<String> validTypes = Collections.unmodifiableSet(
-		new LinkedHashSet<String>(
+		new LinkedHashSet<>(
 			Arrays.asList(
 				// From http://www.w3schools.com/tags/att_input_type.asp
 				"button",
