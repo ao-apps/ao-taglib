@@ -53,6 +53,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 				artifactId="@{documented.artifactId}"
 				scmUrl="@{documented.scm.url}"
 			/>
+			<!-- TODO:
+				Split ao-taglib into ao-encoding-taglib, which would then be usable as a compatibility base for other auto-encoding taglibs,
+				without depending on the full ao-taglib itself.
+
+				nmw-email-taglib might be able to establish a proper context based on the content type of the content for a message, for example.
+			-->
 		</c:if>
 
 		<changelog:release
