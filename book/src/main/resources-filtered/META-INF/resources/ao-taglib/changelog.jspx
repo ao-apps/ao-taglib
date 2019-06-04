@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2019-04-19T07:20:55-0500"
+		dateModified="2019-06-03T22:24:15-0500"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -52,13 +52,24 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 				groupId="@{documented.groupId}"
 				artifactId="@{documented.artifactId}"
 				scmUrl="@{documented.scm.url}"
-			/>
-			<!-- TODO:
-				Split ao-taglib into ao-encoding-taglib, which would then be usable as a compatibility base for other auto-encoding taglibs,
-				without depending on the full ao-taglib itself.
+			>
+				<ul>
+					<li>Using managed dependencies:
+						<ol>
+							<li>This project uses transitive managed dependencies.</li>
+							<li>This project's managed dependencies may also be imported by other projects.</li>
+						</ol>
+					</li>
+					<!-- TODO:
+					<li>
+						Split ao-taglib into ao-encoding-taglib, which would then be usable as a compatibility base for other auto-encoding taglibs,
+						without depending on the full ao-taglib itself.
 
-				nmw-email-taglib might be able to establish a proper context based on the content type of the content for a message, for example.
-			-->
+						nmw-email-taglib might be able to establish a proper context based on the content type of the content for a message, for example.
+					</li>
+					-->
+				</ul>
+			</changelog:release>
 		</c:if>
 
 		<changelog:release
