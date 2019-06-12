@@ -43,11 +43,12 @@ final public class TeiUtils {
 	/**
 	 * Checks that a type is a valid MediaType.
 	 * 
-	 * @param  message  the list of messages to add to, maybe <code>null</code>
+	 * @param  messages  the list of messages to add to, maybe <code>null</code>
 	 * 
 	 * @return  the list of messages.  A new list will have been created if the <code>message</code> parameter was <code>null</code>
 	 * 
-	 * @see  MediaType#getMediaType(java.lang.String)
+	 * @see  MediaType#getMediaTypeByName(java.lang.String)
+	 * @see  MediaType#getMediaTypeForContentType(java.lang.String)
 	 */
 	public static List<ValidationMessage> validateMediaType(TagData data, List<ValidationMessage> messages) {
 		Object o = data.getAttribute("type");
@@ -82,11 +83,11 @@ final public class TeiUtils {
 	 *
 	 * @see  Scope for supported values.
 	 * 
-	 * @param  message  the list of messages to add to, maybe <code>null</code>
+	 * @param  messages  the list of messages to add to, maybe <code>null</code>
 	 * 
 	 * @return  the list of messages.  A new list will have been created if the <code>message</code> parameter was <code>null</code>
 	 * 
-	 * @see PropertyUtils#getScope(java.lang.String)
+	 * @see Scope#getScopeId(java.lang.String)
 	 */
 	public static List<ValidationMessage> validateScope(TagData data, List<ValidationMessage> messages) {
 		Object o = data.getAttribute("scope");
