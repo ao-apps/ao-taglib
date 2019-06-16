@@ -26,6 +26,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
 	version="2.1">
+	<!-- datePublished="2016-08-07T16:29:54-0500" -->
+	<!-- dateModified="2016-11-10T22:19:54-0600" -->
 	<description><![CDATA[
 		<p>@{description.html}</p>
 	]]></description>
@@ -37,6 +39,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<short-name>ao</short-name>
 	<uri>@{project.url}</uri>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2019-04-15T19:37:30-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an &lt;a&gt; tag.
@@ -283,6 +287,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<dynamic-attributes>true</dynamic-attributes>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Provides an action to its
@@ -295,6 +301,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Provides an alt attribute to its
@@ -307,6 +315,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Adds an argument to its
@@ -344,6 +354,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</attribute>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-09-25T11:33:29-0500" -->
+		<!-- dateModified="2019-04-15T19:37:30-0500" -->
 		<description><![CDATA[
 			<p>
 				Evaluates the test expression, if it is not <code>true</code> throws
@@ -382,6 +394,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</attribute>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T13:25:10-0600" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Adds a &lt;base&gt; tag only when necessary.
@@ -408,6 +422,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>empty</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2018-05-24T14:52:09-0500" -->
 		<description><![CDATA[
 			<p>
 				Sets the bundle used by any nested
@@ -442,6 +458,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</attribute>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Provides a checked attribute to its
@@ -456,6 +474,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-09-25T11:14:02-0500" -->
+		<!-- dateModified="2017-08-03T11:16:40-0500" -->
 		<description><![CDATA[
 			<p>
 				Like
@@ -468,6 +488,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>JSP</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Provides a class to its
@@ -480,6 +502,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Provides a content attribute to its
@@ -492,6 +516,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Disables the resource editor for this request.
@@ -502,6 +528,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>empty</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Provides a disabled attribute to its
@@ -516,6 +544,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Provides an enctype to its
@@ -528,6 +558,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2019-04-15T19:37:30-0500" -->
 		<!-- TODO: param.* dynamic attributes should not do automatic multi-parameter.  Make a params.* dynamic attribute for this purpose. -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
@@ -702,6 +734,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<dynamic-attributes>true</dynamic-attributes>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2019-04-15T19:37:30-0500" -->
 		<description><![CDATA[
 			<div class="semanticcms-tag-reference-summary">
 				<p>
@@ -832,6 +866,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<dynamic-attributes>true</dynamic-attributes>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Provides a frameborder attribute to its
@@ -846,6 +882,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2019-04-15T19:37:30-0500" -->
 		<description><![CDATA[
 			<p>
 				Gets a detailed report of a
@@ -904,6 +942,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</attribute>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Provides a height attribute to its
@@ -916,6 +956,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2018-05-24T14:52:09-0500" -->
 		<description><![CDATA[
 			<ol>
 				<li>Clears the current output buffer (leaving status code and headers)</li>
@@ -982,6 +1024,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</attribute>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Provides an href to its
@@ -994,6 +1038,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Provides an hreflang attribute to its
@@ -1006,6 +1052,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Provides an id attribute to its
@@ -1018,6 +1066,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2019-04-15T19:37:30-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an &lt;iframe&gt; tag.
@@ -1178,6 +1228,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<dynamic-attributes>true</dynamic-attributes>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2019-04-15T19:37:30-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an &lt;img&gt; tag.
@@ -1387,6 +1439,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<dynamic-attributes>true</dynamic-attributes>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2019-04-15T19:37:30-0500" -->
 		<description><![CDATA[
 			<div class="semanticcms-tag-reference-summary">
 				<p>
@@ -1513,6 +1567,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<dynamic-attributes>true</dynamic-attributes>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2018-05-24T14:52:09-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an &lt;input&gt; tag.
@@ -1777,6 +1833,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</attribute>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2019-04-15T19:37:30-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				If contained with any
@@ -1963,6 +2021,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<dynamic-attributes>true</dynamic-attributes>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Provides a maxlength attribute to its
@@ -1977,6 +2037,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2018-05-28T20:11:52-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Writes a value from the current localization bundle given its key.
@@ -2117,6 +2179,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<dynamic-attributes>true</dynamic-attributes>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Adds a message argument to its
@@ -2143,6 +2207,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</attribute>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2018-05-24T14:52:09-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				If contained with any
@@ -2224,6 +2290,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</attribute>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Provides a method attribute to its
@@ -2236,6 +2304,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2018-05-28T20:11:52-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Manually establishes a MySQL context when automatic detection is not possible.
@@ -2250,6 +2319,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2018-05-28T20:11:52-0500" -->
 		<description><![CDATA[
 			<p>
 				Provides a name to its
@@ -2262,6 +2333,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Provides an onblur script to its
@@ -2274,6 +2347,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Provides an onchange script to its
@@ -2286,6 +2361,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Provides an onclick script to its
@@ -2298,6 +2375,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Provides an onfocus script to its
@@ -2310,6 +2389,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Provides an onkeypress script to its
@@ -2322,6 +2403,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Provides an onload script to its
@@ -2334,6 +2417,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Provides an onmouseout script to its
@@ -2346,6 +2431,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Provides an onmouseover script to its
@@ -2358,6 +2445,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Provides an onsubmit script to its
@@ -2370,6 +2459,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T03:31:29-0600" -->
 		<description><![CDATA[
 			<p>
 				Renders an &lt;option&gt; tag.
@@ -2424,6 +2515,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</attribute>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-09-25T11:14:02-0500" -->
+		<!-- dateModified="2017-08-03T11:16:40-0500" -->
 		<description><![CDATA[
 			<p>
 				Like
@@ -2436,6 +2529,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>JSP</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2019-04-15T19:37:30-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Writes the value with proper escaping based on the context of the tag.
@@ -2520,6 +2615,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</attribute>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Provides a page to its
@@ -2532,6 +2629,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Adds a parameter to its
@@ -2571,6 +2670,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</attribute>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2019-04-15T19:37:30-0500" -->
 		<description><![CDATA[
 			<p>
 				Adds multiple parameters to its
@@ -2681,6 +2782,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</attribute>
 	</tag>
 	<tag>
+		<!-- datePublished="2018-05-28T20:11:52-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Manually establishes a PostgreSQL context when automatic detection is not possible.
@@ -2695,6 +2797,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2018-05-28T20:11:52-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Provides a readonly attribute to its
@@ -2711,6 +2815,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2019-04-15T19:37:30-0500" -->
 		<description><![CDATA[
 			<div class="semanticcms-tag-reference-summary">
 				<p>
@@ -2891,6 +2997,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<dynamic-attributes>true</dynamic-attributes>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Provides a rel attribute to its
@@ -2903,6 +3011,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Allows editing of the website resource bundles through the website itself.
@@ -2913,6 +3023,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>empty</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2019-04-15T19:37:30-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Manually establishes a script context when automatic detection is not possible.
@@ -3052,6 +3164,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<dynamic-attributes>true</dynamic-attributes>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2018-05-24T14:52:09-0500" -->
 		<description><![CDATA[
 			<p>
 				Renders a &lt;select&gt; tag.
@@ -3168,6 +3282,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</attribute>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Provides a selected attribute to its
@@ -3184,6 +3300,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2019-04-15T19:37:30-0500" -->
 		<description><![CDATA[
 			<p>
 				Returns an error status.
@@ -3231,6 +3349,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</attribute>
 	</tag>
 	<tag>
+		<!-- datePublished="2018-05-28T20:11:52-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Manually establishes a shell script context when automatic detection is not possible.
@@ -3245,6 +3364,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2018-05-28T20:11:52-0500" -->
 		<description><![CDATA[
 			<p>
 				Provides a size attribute to its
@@ -3257,6 +3378,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Provides a src attribute to its
@@ -3269,6 +3392,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Provides a style attribute to its
@@ -3281,6 +3406,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Provides a tabindex attribute to its
@@ -3297,6 +3424,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Provides a target attribute to its
@@ -3309,6 +3438,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Manually establishes a plaintext context when automatic detection is not possible.
@@ -3341,6 +3472,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2018-05-24T14:52:09-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders a &lt;textarea&gt; tag.
@@ -3464,6 +3597,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</attribute>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Provides a title to its
@@ -3476,6 +3611,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Provides a type to its
@@ -3488,6 +3625,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2019-04-15T19:37:30-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Manually establishes a URL context when automatic detection is not possible.
@@ -3524,6 +3663,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Provides a value to its
@@ -3536,6 +3677,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-09-25T11:14:02-0500" -->
 		<description><![CDATA[
 			<p>
 				Like
@@ -3561,6 +3703,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</attribute>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Provides a width attribute to its
@@ -3573,6 +3717,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p>
 				Word wraps the textual content.
@@ -3595,6 +3741,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</attribute>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2019-04-15T19:37:30-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Writes the bean contents.  Supports data types beyond
@@ -3715,6 +3863,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</attribute>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Manually establishes an XHTML attribute context when automatic detection is not possible.
@@ -3729,6 +3879,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Manually establishes an XHTML context when automatic detection is not possible.
@@ -3748,6 +3900,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<function>
+		<!-- datePublished="2016-10-26T03:33:31-0500" -->
+		<!-- dateModified="2016-11-08T02:37:29-0600" -->
 		<description><![CDATA[
 			<p>
 				Gets the lastModified timestamp in milliseconds since Epoch or <code>0</code> when not known.
@@ -3759,6 +3913,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<example><![CDATA[<code>${ao:getLastModified('../path-to-page.jsp')}</code>]]></example>
 	</function>
 	<function>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T02:37:29-0600" -->
 		<description><![CDATA[
 			<p>
 				If the URL represents a local resource, a parameter of "lastModified=#####" will be
@@ -3771,6 +3927,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<example><![CDATA[<code>${ao:addLastModified('../path-to-page.jsp')}</code>]]></example>
 	</function>
 	<function>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2019-04-15T19:37:30-0500" -->
 		<description><![CDATA[
 			<p>
 				Rewrites a URL to maintain session state via
@@ -3783,6 +3941,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<example><![CDATA[<code>${ao:encodeURL('../path-to-page.jsp')}</code>]]></example>
 	</function>
 	<function>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2019-04-15T19:37:30-0500" -->
 		<description><![CDATA[
 			<p>
 				Generates an absolute URL for the provided context-relative URL.
@@ -3796,6 +3956,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<example><![CDATA[<code>${ao:getAbsoluteURL('/path-to-page.jsp')}</code>]]></example>
 	</function>
 	<function>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T02:37:29-0600" -->
 		<description><![CDATA[
 			<p>
 				Gets a time span display for a given number of milliseconds or
@@ -3808,6 +3970,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<example><![CDATA[<code>${ao:getDecimalTimeLength(timeSpan)}</code>]]></example>
 	</function>
 	<function>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T02:37:29-0600" -->
 		<description><![CDATA[
 			<p>
 				Determines if the current request has been forwarded by a
@@ -3821,6 +3985,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<example><![CDATA[<code>${ao:isForwarded()}</code>]]></example>
 	</function>
 	<function>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2019-04-15T19:37:30-0500" -->
 		<description><![CDATA[
 			<p>
 				Joins elements of any
@@ -3834,6 +4000,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<example><![CDATA[<code>${ao:join(iterable, separator)}</code>]]></example>
 	</function>
 	<function>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2016-11-08T02:37:29-0600" -->
 		<description><![CDATA[
 			<p>
 				Gets a value from the current localization bundle given its key.
@@ -3848,6 +4016,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<example><![CDATA[<code>${ao:message(key)}</code>]]></example>
 	</function>
 	<function>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2019-04-15T19:37:30-0500" -->
 		<description><![CDATA[
 			<p>
 				Word wraps a <a rel="nofollow" href="@{javac.link.javaApi}java/lang/String.html">String</a>.
@@ -3859,6 +4029,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<example><![CDATA[<code>${ao:wordWrap(text, width)}</code>]]></example>
 	</function>
 	<function>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2019-04-15T19:37:30-0500" -->
 		<description><![CDATA[
 			<p>
 				Calls <a rel="nofollow" href="@{javac.link.javaApi}java/lang/Math.html#ceil%28double%29">java.lang.Math.ceil(double)</a>.
@@ -3870,6 +4042,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<example><![CDATA[<code>${ao:ceil(a)}</code>]]></example>
 	</function>
 	<function>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2019-04-15T19:37:30-0500" -->
 		<description><![CDATA[
 			<p>
 				Calls <a rel="nofollow" href="@{javac.link.javaApi}java/lang/Math.html#floor%28double%29">java.lang.Math.floor(double)</a>.
@@ -3881,6 +4055,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<example><![CDATA[<code>${ao:floor(a)}</code>]]></example>
 	</function>
 	<function>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2019-04-15T19:37:30-0500" -->
 		<description><![CDATA[
 			<p>
 				Calls <a rel="nofollow" href="@{javac.link.javaApi}java/lang/Math.html#round%28double%29">java.lang.Math.round(double)</a>.
