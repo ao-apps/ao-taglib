@@ -1229,7 +1229,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-04-15T19:37:30-0500" -->
+		<!-- dateModified="2019-06-21T17:38:28-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an &lt;img&gt; tag.
@@ -1243,7 +1243,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<li>Contents of tag body, trimmed.</li>
 			</ol>
 			<p>
-				Also, the width, height, and alt values are required either as attributes or nested tags.
+				Also, the alt value is required either as an attribute or a nested
+				<a href="@{project.url}ao.tld/tag-alt">&lt;ao:alt&gt;</a> tag.
 			</p>
 			<p>
 				Any attribute that has no namespace and begins with <code>param.</code> is added to the src as a URL parameter.
