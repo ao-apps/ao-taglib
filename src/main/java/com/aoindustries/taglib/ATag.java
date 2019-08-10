@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -262,12 +262,12 @@ public class ATag
 			if(href!=null) {
 				PageContext pageContext = (PageContext)getJspContext();
 				HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
-				if(href.startsWith("mailto:")) {
-					encodeTextInXhtml(href.substring(7), out);
-				} else if(href.startsWith("telnet:")) {
-					encodeTextInXhtml(href.substring(7), out);
-				} else if(href.startsWith("tel:")) {
-					encodeTextInXhtml(href.substring(4), out);
+				if(com.aoindustries.net.UrlUtils.isScheme(href, "mailto")) {
+					encodeTextInXhtml(href.substring("mailto:".length()), out);
+				} else if(com.aoindustries.net.UrlUtils.isScheme(href, "telnet")) {
+					encodeTextInXhtml(href.substring("telnet:".length()), out);
+				} else if(com.aoindustries.net.UrlUtils.isScheme(href, "tel")) {
+					encodeTextInXhtml(href.substring("tel:".length()), out);
 				} else {
 					encodeTextInXhtml(
 						ServletUtil.getAbsolutePath(Dispatcher.getCurrentPagePath(request), href),
