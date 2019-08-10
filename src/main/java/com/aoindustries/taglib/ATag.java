@@ -269,8 +269,16 @@ public class ATag
 				} else if(com.aoindustries.net.UrlUtils.isScheme(href, "tel")) {
 					encodeTextInXhtml(href.substring("tel:".length()), out);
 				} else {
+					// Encode then decode to get a human-readable (but still unambiguous) display
+					String responseEncode = pageContext.getResponse().getCharacterEncoding();
 					encodeTextInXhtml(
-						ServletUtil.getAbsolutePath(Dispatcher.getCurrentPagePath(request), href),
+						com.aoindustries.net.UrlUtils.decodeUrlPath(
+							com.aoindustries.net.UrlUtils.encodeUrlPath(
+								ServletUtil.getAbsolutePath(Dispatcher.getCurrentPagePath(request), href),
+								responseEncode
+							),
+							responseEncode
+						),
 						out
 					);
 				}
