@@ -262,26 +262,25 @@ public class ATag
 			if(href!=null) {
 				PageContext pageContext = (PageContext)getJspContext();
 				HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
+				String toDecode;
 				if(com.aoindustries.net.UrlUtils.isScheme(href, "mailto")) {
-					encodeTextInXhtml(href.substring("mailto:".length()), out);
+					toDecode = href.substring("mailto:".length());
 				} else if(com.aoindustries.net.UrlUtils.isScheme(href, "telnet")) {
-					encodeTextInXhtml(href.substring("telnet:".length()), out);
+					toDecode = href.substring("telnet:".length());
 				} else if(com.aoindustries.net.UrlUtils.isScheme(href, "tel")) {
-					encodeTextInXhtml(href.substring("tel:".length()), out);
+					toDecode = href.substring("tel:".length());
 				} else {
-					// Encode then decode to get a human-readable (but still unambiguous) display
-					String responseEncode = pageContext.getResponse().getCharacterEncoding();
-					encodeTextInXhtml(
-						com.aoindustries.net.UrlUtils.decodeUrlPath(
-							com.aoindustries.net.UrlUtils.encodeUrlPath(
-								ServletUtil.getAbsolutePath(Dispatcher.getCurrentPagePath(request), href),
-								responseEncode
-							),
-							responseEncode
-						),
-						out
-					);
+					toDecode = ServletUtil.getAbsolutePath(Dispatcher.getCurrentPagePath(request), href);
 				}
+				// Encode then decode to get a human-readable (but still unambiguous) display
+				String responseEncode = pageContext.getResponse().getCharacterEncoding();
+				encodeTextInXhtml(
+					com.aoindustries.net.UrlUtils.decodeUrlPath(
+						com.aoindustries.net.UrlUtils.encodeUrlPath(toDecode, responseEncode),
+						responseEncode
+					),
+					out
+				);
 			}
 		} else {
 			MarkupUtils.writeWithMarkup(trimmedBody, MarkupType.XHTML, out);
