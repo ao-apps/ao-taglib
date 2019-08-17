@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2011, 2012, 2013, 2015, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2015, 2016, 2017, 2019  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -27,6 +27,8 @@ import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextIn
 import com.aoindustries.util.StringUtility;
 import java.io.IOException;
 import java.io.Writer;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Locale;
@@ -40,6 +42,8 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 
 	public static final String CONTENT_TYPE_XHTML = "application/xhtml+xml";
 	public static final String CONTENT_TYPE_HTML = "text/html";
+
+	public static final Charset ENCODING = StandardCharsets.UTF_8;
 
 	/**
 	 * Determine if the content may be served as application/xhtml+xml by the
@@ -234,7 +238,7 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 		boolean isXml = !forceHtml && useXhtmlContentType((HttpServletRequest)pageContext.getRequest());
 		String contentType = isXml ? CONTENT_TYPE_XHTML : CONTENT_TYPE_HTML;
 		response.setContentType(contentType);
-		response.setCharacterEncoding("UTF-8"); // Seems required by Jetty, otherwise the response stayed iso-8859-1 and could not handle unicode characters
+		response.setCharacterEncoding(ENCODING.name()); // Seems required by Jetty, otherwise the response stayed iso-8859-1 and could not handle unicode characters
 		String actualContentType = response.getContentType();
 		if(actualContentType != null) {
 			int semiPos = actualContentType.indexOf(';');
