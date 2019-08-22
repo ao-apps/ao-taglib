@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,10 +22,11 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.net.HttpParametersUtils;
+import com.aoindustries.net.URIParametersUtils;
+import com.aoindustries.servlet.ServletUtil;
+import com.aoindustries.servlet.http.HttpServletUtil;
 import com.aoindustries.servlet.http.Includer;
 import com.aoindustries.servlet.http.LastModifiedServlet;
-import com.aoindustries.servlet.http.ServletUtil;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.WildcardPatternMatcher;
@@ -159,11 +160,11 @@ public class RedirectTag
 		String myHref = href;
 		if(myHref==null) myHref = page; // Default to page when href not given
 		if(myHref==null) throw new AttributeRequiredException("href");
-		myHref = HttpParametersUtils.addParams(myHref, params, responseEncoding);
+		myHref = URIParametersUtils.addParams(myHref, params, responseEncoding);
 		myHref = LastModifiedServlet.addLastModified(servletContext, request, servletPath, myHref, addLastModified);
 
 		// Get the full URL that will be used for the redirect
-		String location = ServletUtil.getRedirectLocation(request, response, servletPath, myHref);
+		String location = HttpServletUtil.getRedirectLocation(request, response, servletPath, myHref);
 		boolean isTooLong = location.length()>MAXIMUM_GET_REQUEST_LENGTH;
 		if(!isTooLong || page==null) {
 			if(isTooLong) {

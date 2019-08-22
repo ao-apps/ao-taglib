@@ -23,15 +23,19 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.lang.NullArgumentException;
+import com.aoindustries.net.URIDecoder;
+import com.aoindustries.net.URIEncoder;
+import com.aoindustries.net.URIResolver;
 import static com.aoindustries.servlet.filter.FunctionContext.getRequest;
 import static com.aoindustries.servlet.filter.FunctionContext.getResponse;
 import static com.aoindustries.servlet.filter.FunctionContext.getServletContext;
 import com.aoindustries.servlet.http.Dispatcher;
+import com.aoindustries.servlet.http.HttpServletUtil;
 import com.aoindustries.servlet.http.LastModifiedServlet;
-import com.aoindustries.servlet.http.ServletUtil;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.StringUtility;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspTagException;
@@ -49,11 +53,12 @@ final public class Functions {
 	public static long getLastModified(String url) throws MalformedURLException {
 		HttpServletRequest request = getRequest();
 		// Get the context-relative path (resolves relative paths)
-		String resourcePath = ServletUtil.getAbsolutePath(
+		String resourcePath = URIResolver.getAbsolutePath(
 			Dispatcher.getCurrentPagePath(request),
 			url
 		);
 		if(resourcePath.startsWith("/")) {
+			// TODO: url decode path components except '/' to Unicode?
 			return LastModifiedServlet.getLastModified(
 				getServletContext(),
 				request,
@@ -75,14 +80,46 @@ final public class Functions {
 	}
 
 	public static String encodeURL(String url) {
-		return getResponse().encodeURL(url);
+		return getResponse().encodeURL(
+			URIEncoder.encodeURI(
+				url
+			)
+		);
+	}
+
+	public static String encodeParam(String value) throws UnsupportedEncodingException {
+		return URIEncoder.encodeURIComponent(
+			value,
+			getResponse().getCharacterEncoding()
+		);
+	}
+
+	public static String decodeParam(String value) throws UnsupportedEncodingException {
+		return URIDecoder.decodeURIComponent(
+			value,
+			getResponse().getCharacterEncoding()
+		);
+	}
+
+	public static String encodeURI(String value) throws UnsupportedEncodingException {
+		return URIEncoder.encodeURI(
+			value,
+			getResponse().getCharacterEncoding()
+		);
+	}
+
+	public static String decodeURI(String value) throws UnsupportedEncodingException {
+		return URIDecoder.decodeURI(
+			value,
+			getResponse().getCharacterEncoding()
+		);
 	}
 
 	/**
 	 * @see  ServletUtil#getAbsoluteURL(javax.servlet.http.HttpServletRequest, java.lang.String)
 	 */
 	public static String getAbsoluteURL(String relPath) {
-		return ServletUtil.getAbsoluteURL(getRequest(), relPath);
+		return HttpServletUtil.getAbsoluteURL(getRequest(), relPath);
 	}
 
 	public static String getDecimalTimeLength(Long millis) {

@@ -26,13 +26,15 @@ import com.aoindustries.encoding.Coercion;
 import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaScriptInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
-import static com.aoindustries.encoding.TextInXhtmlEncoder.encodeTextInXhtml;
+import static com.aoindustries.encoding.TextInXhtmlEncoder.textInXhtmlEncoder;
 import com.aoindustries.io.buffer.BufferResult;
-import com.aoindustries.net.HttpParametersMap;
-import com.aoindustries.net.MutableHttpParameters;
+import com.aoindustries.net.MutableURIParameters;
+import com.aoindustries.net.URIDecoder;
+import com.aoindustries.net.URIParametersMap;
+import com.aoindustries.net.URIParser;
+import com.aoindustries.net.URIResolver;
 import com.aoindustries.servlet.http.Dispatcher;
 import com.aoindustries.servlet.http.LastModifiedServlet;
-import com.aoindustries.servlet.http.ServletUtil;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.WrappedException;
@@ -68,7 +70,7 @@ public class ATag
 
 	private Object id;
 	private String href;
-	private MutableHttpParameters params;
+	private MutableURIParameters params;
 	private boolean hrefAbsolute;
 	private LastModifiedServlet.AddLastModifiedWhen addLastModified = LastModifiedServlet.AddLastModifiedWhen.AUTO;
 	private Object hreflang;
@@ -108,7 +110,7 @@ public class ATag
 
 	@Override
 	public void addParam(String name, String value) {
-		if(params==null) params = new HttpParametersMap();
+		if(params==null) params = new URIParametersMap();
 		params.addParameter(name, value);
 	}
 
@@ -204,7 +206,13 @@ public class ATag
 			Coercion.write(id, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
-		UrlUtils.writeHref(getJspContext(), out, href, params, hrefAbsolute, addLastModified);
+		String transformed;
+		if(URIParser.isScheme(href, "tel")) {
+			transformed = href.replace(' ', '-');
+		} else {
+			transformed = href;
+		}
+		UrlUtils.writeHref(getJspContext(), out, transformed, params, hrefAbsolute, addLastModified);
 		if(hreflang!=null) {
 			out.write(" hreflang=\"");
 			Coercion.write(hreflang, textInXhtmlAttributeEncoder, out);
@@ -263,24 +271,17 @@ public class ATag
 				PageContext pageContext = (PageContext)getJspContext();
 				HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
 				String toDecode;
-				if(com.aoindustries.net.UrlUtils.isScheme(href, "mailto")) {
+				if(URIParser.isScheme(href, "mailto")) {
 					toDecode = href.substring("mailto:".length());
-				} else if(com.aoindustries.net.UrlUtils.isScheme(href, "telnet")) {
+				} else if(URIParser.isScheme(href, "telnet")) {
 					toDecode = href.substring("telnet:".length());
-				} else if(com.aoindustries.net.UrlUtils.isScheme(href, "tel")) {
+				} else if(URIParser.isScheme(href, "tel")) {
 					toDecode = href.substring("tel:".length());
 				} else {
-					toDecode = ServletUtil.getAbsolutePath(Dispatcher.getCurrentPagePath(request), href);
+					toDecode = URIResolver.getAbsolutePath(Dispatcher.getCurrentPagePath(request), href);
 				}
-				// Encode then decode to get a human-readable (but still unambiguous) display
-				String responseEncode = pageContext.getResponse().getCharacterEncoding();
-				encodeTextInXhtml(
-					com.aoindustries.net.UrlUtils.decodeUrlPath(
-						com.aoindustries.net.UrlUtils.encodeUrlPath(toDecode, responseEncode),
-						responseEncode
-					),
-					out
-				);
+				// Decode to get a human-readable (but still unambiguous) display
+				URIDecoder.decodeURI(toDecode, out, textInXhtmlEncoder);
 			}
 		} else {
 			MarkupUtils.writeWithMarkup(trimmedBody, MarkupType.XHTML, out);

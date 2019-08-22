@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2010, 2011, 2012, 2013, 2015, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2012, 2013, 2015, 2016, 2017, 2019  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -24,7 +24,7 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.net.HttpParameters;
+import com.aoindustries.net.URIParameters;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.util.WildcardPatternMatcher;
 import java.io.IOException;
@@ -76,7 +76,7 @@ public class ParamsTag
 					// Get from Map with exclude
 					for(Map.Entry<?,?> entry : ((Map<?,?>)values).entrySet()) {
 						Object entryKey = entry.getKey();
-						if(entryKey!=null) {
+						if(entryKey != null) {
 							String paramName = Coercion.toString(entryKey);
 							if(!excludeMatcher.isMatch(paramName)) {
 								Object entryValue = entry.getValue();
@@ -98,7 +98,7 @@ public class ParamsTag
 										paramName,
 										(Enumeration<?>)entryValue
 									);
-								} else if(entryValue.getClass().isArray()) {
+								} else if(entryValue != null && entryValue.getClass().isArray()) {
 									ParamUtils.addArrayParams(
 										paramsAttribute,
 										paramName,
@@ -110,14 +110,14 @@ public class ParamsTag
 							}
 						}
 					}
-				} else if(values instanceof HttpParameters) {
+				} else if(values instanceof URIParameters) {
 					// Get from HttpParameters with exclude
-					HttpParameters httpParams = (HttpParameters)values;
-					Iterator<String> paramNames = httpParams.getParameterNames();
+					URIParameters uriParams = (URIParameters)values;
+					Iterator<String> paramNames = uriParams.getParameterNames();
 					while(paramNames.hasNext()) {
 						String paramName = paramNames.next();
 						if(!excludeMatcher.isMatch(paramName)) {
-							List<String> paramValues = httpParams.getParameterValues(paramName);
+							List<String> paramValues = uriParams.getParameterValues(paramName);
 							if(paramValues!=null) {
 								for(String paramValue : paramValues) {
 									ParamUtils.addParam(paramsAttribute, paramName, paramValue);
@@ -160,7 +160,7 @@ public class ParamsTag
 					);
 				} else if(
 					values instanceof Map<?,?>
-					|| values instanceof HttpParameters
+					|| values instanceof URIParameters
 				) {
 					throw new LocalizedJspTagException(ApplicationResources.accessor, "ParamsTag.mapWithNameNotAllowed");
 				} else {

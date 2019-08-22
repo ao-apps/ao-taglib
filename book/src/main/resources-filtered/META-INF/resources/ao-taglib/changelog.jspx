@@ -36,7 +36,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2019-08-10T14:28:58-0500"
+		dateModified="2019-08-13T18:15:47-0500"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -59,6 +59,18 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 						code and tools, but this is now a correct implementation.
 					</li>
 					<li><core:link page="ao.tld/tag-a" /> now displays URL in more human-readable, but still unambiguous, format.</li>
+					<li>
+						Implementation changed from encoding URI in response encoding to <code>UTF-8</code> per
+						<ao:a href="https://www.w3.org/TR/html40/appendix/notes.html#non-ascii-chars">B.2.1 Non-ASCII characters in URI attribute values</ao:a>.
+					</li>
+					<li>New functions for encoding/decoding URI:
+						<ol>
+							<li><code><core:link page="ao.tld/function-encodeURIComponent" /></code></li>
+							<li><code><core:link page="ao.tld/function-decodeURIComponent" /></code></li>
+							<li><code><core:link page="ao.tld/function-encodeURI" /></code></li>
+							<li><code><core:link page="ao.tld/function-decodeURI" /></code></li>
+						</ol>
+					</li>
 					<!-- TODO:
 					<li>
 						Split ao-taglib into ao-encoding-taglib, which would then be usable as a compatibility base for other auto-encoding taglibs,

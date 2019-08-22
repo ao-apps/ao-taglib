@@ -23,9 +23,11 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.io.NullWriter;
-import com.aoindustries.net.HttpParametersMap;
+import com.aoindustries.net.MutableURIParameters;
+import com.aoindustries.net.URIParameters;
+import com.aoindustries.net.URIParametersMap;
+import com.aoindustries.net.URIResolver;
 import com.aoindustries.servlet.http.Dispatcher;
-import com.aoindustries.servlet.http.ServletUtil;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.WildcardPatternMatcher;
@@ -87,7 +89,7 @@ abstract public class DispatchTag
 	@SuppressWarnings("unchecked")
 	public static HttpServletRequest getParameterAlteredRequest(
 		HttpServletRequest request,
-		HttpParametersMap params,
+		URIParameters params,
 		Map<String,String[]> oldMap,
 		WildcardPatternMatcher clearParamsMatcher
 	) {
@@ -155,7 +157,7 @@ abstract public class DispatchTag
 	}
 
 	protected String page;
-	protected HttpParametersMap params;
+	protected MutableURIParameters params;
 
 	@Override
 	public void setPage(String page) {
@@ -166,7 +168,7 @@ abstract public class DispatchTag
 
 	@Override
 	public void addParam(String name, String value) {
-		if(params==null) params = new HttpParametersMap();
+		if(params==null) params = new URIParametersMap();
 		params.addParameter(name, value);
 	}
 
@@ -248,7 +250,7 @@ abstract public class DispatchTag
 					dispatcher = null;
 				} else {
 					// Make relative to current JSP page
-					contextRelativePath = ServletUtil.getAbsolutePath(
+					contextRelativePath = URIResolver.getAbsolutePath(
 						servletPath,
 						page
 					);

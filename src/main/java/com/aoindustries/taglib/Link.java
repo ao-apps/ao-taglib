@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2013, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2013, 2016, 2017, 2019  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,7 +22,7 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.net.HttpParameters;
+import com.aoindustries.net.URIParameters;
 import com.aoindustries.servlet.http.LastModifiedServlet;
 
 /**
@@ -33,7 +33,7 @@ import com.aoindustries.servlet.http.LastModifiedServlet;
 public class Link {
 
 	private final String href;
-	private final HttpParameters params;
+	private final URIParameters params; // TODO: MutableURLParameters here and all others
 	private final boolean hrefAbsolute;
 	private final LastModifiedServlet.AddLastModifiedWhen addLastModified;
 	private final String hreflang;
@@ -45,7 +45,7 @@ public class Link {
 	public Link(
 		String href,
 		boolean hrefAbsolute,
-		HttpParameters params,
+		URIParameters params,
 		LastModifiedServlet.AddLastModifiedWhen addLastModified,
 		String hreflang,
 		String rel,
@@ -72,7 +72,7 @@ public class Link {
 		return hrefAbsolute;
 	}
 
-	public HttpParameters getParams() {
+	public URIParameters getParams() {
 		return params;
 	}
 

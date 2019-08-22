@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2013, 2015, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2013, 2015, 2016, 2017, 2019  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -26,9 +26,9 @@ import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
-import com.aoindustries.net.HttpParameters;
-import com.aoindustries.net.HttpParametersMap;
-import com.aoindustries.net.MutableHttpParameters;
+import com.aoindustries.net.MutableURIParameters;
+import com.aoindustries.net.URIParameters;
+import com.aoindustries.net.URIParametersMap;
 import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
@@ -56,7 +56,7 @@ public class LinkTag
 {
 
 	private String href;
-	private MutableHttpParameters params;
+	private MutableURIParameters params;
 	private boolean hrefAbsolute;
 	private LastModifiedServlet.AddLastModifiedWhen addLastModified = LastModifiedServlet.AddLastModifiedWhen.AUTO;
 	private Object hreflang;
@@ -76,7 +76,7 @@ public class LinkTag
 	public void setLink(Link link) {
 		setHref(link.getHref());
 		setHrefAbsolute(link.getHrefAbsolute());
-		HttpParameters linkParams = link.getParams();
+		URIParameters linkParams = link.getParams();
 		if(linkParams != null) {
 			for(Map.Entry<String,List<String>> entry : linkParams.getParameterMap().entrySet()) {
 				String paramName = entry.getKey();
@@ -100,7 +100,7 @@ public class LinkTag
 
 	@Override
 	public void addParam(String name, String value) {
-		if(params==null) params = new HttpParametersMap();
+		if(params==null) params = new URIParametersMap();
 		params.addParameter(name, value);
 	}
 
