@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2010, 2011, 2013, 2015, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2013, 2015, 2016, 2017, 2019  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -28,20 +28,20 @@ import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.buffer.BufferResult;
-import com.aoindustries.net.HttpParametersMap;
-import com.aoindustries.net.MutableHttpParameters;
+import com.aoindustries.net.AnyURI;
+import com.aoindustries.net.MutableURIParameters;
+import com.aoindustries.net.URIParametersMap;
+import com.aoindustries.net.URIParametersUtils;
+import com.aoindustries.net.URIResolver;
 import com.aoindustries.servlet.http.Dispatcher;
-import com.aoindustries.servlet.http.ServletUtil;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
-import com.aoindustries.util.StringUtility;
 import com.aoindustries.util.WrappedException;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
-import java.net.URLDecoder;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspTagException;
@@ -76,7 +76,7 @@ public class FormTag
 	private String method = "get";
 	private Object id;
 	private String action;
-	private MutableHttpParameters params;
+	private MutableURIParameters params;
 	private Object target;
 	private Object enctype;
 	private Object clazz;
@@ -111,7 +111,7 @@ public class FormTag
 
 	@Override
 	public void addParam(String name, String value) {
-		if(params==null) params = new HttpParametersMap();
+		if(params==null) params = new URIParametersMap();
 		params.addParameter(name, value);
 	}
 
@@ -179,30 +179,23 @@ public class FormTag
 			Coercion.write(id, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
-		// TODO: Allow params on the form itself?  These would all become hiddens.  It would give a nice way
-		//       to pass-through values in the same was a redirect or link.
-		final int questionPos;
-		if(action!=null) {
+		Map<String,List<String>> actionParams;
+		if(action != null) {
 			HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
 			out.write(" action=\"");
-			action = ServletUtil.getAbsolutePath(Dispatcher.getCurrentPagePath(request), action);
-			if(action.startsWith("/")) {
+			String encodedAction = URIResolver.getAbsolutePath(Dispatcher.getCurrentPagePath(request), action);
+			if(encodedAction.startsWith("/")) {
 				String contextPath = request.getContextPath();
-				if(contextPath.length()>0) action = contextPath + action;
+				if(!contextPath.isEmpty()) encodedAction = contextPath + encodedAction;
 			}
-			action = com.aoindustries.net.UrlUtils.encodeUrlPath(action, responseEncoding);
-			action = response.encodeURL(action);
-			questionPos = action.indexOf('?');
+			encodedAction = response.encodeURL(encodedAction);
 			// The action attribute is everything up to the first question mark
-			encodeTextInXhtmlAttribute(
-				action,
-				0,
-				questionPos==-1 ? action.length() : questionPos,
-				out
-			);
+			AnyURI actionURI = new AnyURI(encodedAction);
+			actionParams = URIParametersUtils.of(actionURI.getQueryString(), responseEncoding).getParameterMap();
+			textInXhtmlAttributeEncoder.write(actionURI.setQueryString(null).toURI(responseEncoding).toString(), out);
 			out.write('"');
 		} else {
-			questionPos = -1;
+			actionParams = null;
 		}
 		if(target!=null) {
 			out.write(" target=\"");
@@ -232,24 +225,14 @@ public class FormTag
 		out.write('>');
 		// Automatically add URL request parameters as hidden fields to support custom URL rewritten parameters in GET requests.
 		boolean didDiv = false;
-		if(questionPos!=-1) {
-			assert action!=null;
-			List<String> nameVals = StringUtility.splitString(action, questionPos+1, action.length(), '&');
-			if(!nameVals.isEmpty()) {
+		if(actionParams != null && !actionParams.isEmpty()) {
+			for(Map.Entry<String,List<String>> entry : actionParams.entrySet()) {
 				if(!didDiv) {
 					out.write("<div>\n");
 					didDiv = true;
 				}
-				for(String nameVal : nameVals) {
-					int equalPos = nameVal.indexOf('=');
-					String name, value;
-					if(equalPos==-1) {
-						name = URLDecoder.decode(nameVal, responseEncoding);
-						value = "";
-					} else {
-						name = URLDecoder.decode(nameVal.substring(0, equalPos), responseEncoding);
-						value = URLDecoder.decode(nameVal.substring(equalPos+1), responseEncoding);
-					}
+				String name = entry.getKey();
+				for(String value : entry.getValue()) {
 					out.write("<input type=\"hidden\" name=\"");
 					encodeTextInXhtmlAttribute(name, out);
 					out.write("\" value=\"");
@@ -259,23 +242,19 @@ public class FormTag
 			}
 		}
 		// Write any parameters as hidden fields
-		if(params!=null) {
-			Iterator<String> paramNames = params.getParameterNames();
-			while(paramNames.hasNext()) {
-				String paramName = paramNames.next();
-				List<String> paramValues = params.getParameterValues(paramName);
-				if(paramValues!=null && !paramValues.isEmpty()) {
-					if(!didDiv) {
-						out.write("<div>\n");
-						didDiv = true;
-					}
-					for(String paramValue : paramValues) {
-						out.write("<input type=\"hidden\" name=\"");
-						encodeTextInXhtmlAttribute(paramName, out);
-						out.write("\" value=\"");
-						encodeTextInXhtmlAttribute(paramValue, out);
-						out.write("\" />\n");
-					}
+		if(params != null) {
+			for(Map.Entry<String,List<String>> entry : params.getParameterMap().entrySet()) {
+				if(!didDiv) {
+					out.write("<div>\n");
+					didDiv = true;
+				}
+				String name = entry.getKey();
+				for(String paramValue : entry.getValue()) {
+					out.write("<input type=\"hidden\" name=\"");
+					encodeTextInXhtmlAttribute(name, out);
+					out.write("\" value=\"");
+					encodeTextInXhtmlAttribute(paramValue, out);
+					out.write("\" />\n");
 				}
 			}
 		}

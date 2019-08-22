@@ -23,7 +23,8 @@
 package com.aoindustries.taglib;
 
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
-import com.aoindustries.net.HttpParameters;
+import com.aoindustries.net.URIParameters;
+import com.aoindustries.servlet.http.HttpServletUtil;
 import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import java.io.IOException;
@@ -47,14 +48,14 @@ final public class UrlUtils {
 		PageContext pageContext,
 		Appendable out,
 		String href,
-		HttpParameters params,
+		URIParameters params,
 		boolean hrefAbsolute,
 		LastModifiedServlet.AddLastModifiedWhen addLastModified
 	) throws JspTagException, IOException {
 		if(href != null) {
 			out.append(" href=\"");
 			encodeTextInXhtmlAttribute(
-				com.aoindustries.net.UrlUtils.buildUrl(pageContext, href, params, hrefAbsolute, addLastModified),
+				HttpServletUtil.buildUrl(pageContext, href, params, hrefAbsolute, addLastModified),
 				out
 			);
 			out.append('"');
@@ -70,7 +71,7 @@ final public class UrlUtils {
 		JspContext jspContext,
 		Appendable out,
 		String href,
-		HttpParameters params,
+		URIParameters params,
 		boolean hrefAbsolute,
 		LastModifiedServlet.AddLastModifiedWhen addLastModified
 	) throws JspTagException, IOException {
@@ -88,14 +89,14 @@ final public class UrlUtils {
 		PageContext pageContext,
 		Appendable out,
 		String src,
-		HttpParameters params,
+		URIParameters params,
 		boolean srcAbsolute,
 		LastModifiedServlet.AddLastModifiedWhen addLastModified
 	) throws JspTagException, IOException {
 		if(src != null) {
 			out.append(" src=\"");
 			encodeTextInXhtmlAttribute(
-				com.aoindustries.net.UrlUtils.buildUrl(pageContext, src, params, srcAbsolute, addLastModified),
+				HttpServletUtil.buildUrl(pageContext, src, params, srcAbsolute, addLastModified),
 				out
 			);
 			out.append('"');
@@ -111,7 +112,7 @@ final public class UrlUtils {
 		JspContext jspContext,
 		Appendable out,
 		String src,
-		HttpParameters params,
+		URIParameters params,
 		boolean srcAbsolute,
 		LastModifiedServlet.AddLastModifiedWhen addLastModified
 	) throws JspTagException, IOException {
