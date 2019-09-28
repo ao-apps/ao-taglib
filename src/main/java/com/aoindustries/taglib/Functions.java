@@ -87,6 +87,7 @@ final public class Functions {
 		);
 	}
 
+	// TODO: Is this in ao-taglib.tld?
 	public static String encodeParam(String value) throws UnsupportedEncodingException {
 		return URIEncoder.encodeURIComponent(
 			value,
@@ -94,6 +95,7 @@ final public class Functions {
 		);
 	}
 
+	// TODO: Is this in ao-taglib.tld?
 	public static String decodeParam(String value) throws UnsupportedEncodingException {
 		return URIDecoder.decodeURIComponent(
 			value,
