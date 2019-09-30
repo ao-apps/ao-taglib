@@ -23,9 +23,9 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.lang.NullArgumentException;
-import com.aoindustries.net.URIDecoder;
-import com.aoindustries.net.URIEncoder;
 import com.aoindustries.net.URIResolver;
+import com.aoindustries.servlet.ServletUtil;
+import com.aoindustries.servlet.URIComponent;
 import static com.aoindustries.servlet.filter.FunctionContext.getRequest;
 import static com.aoindustries.servlet.filter.FunctionContext.getResponse;
 import static com.aoindustries.servlet.filter.FunctionContext.getServletContext;
@@ -38,6 +38,7 @@ import com.aoindustries.util.StringUtility;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspTagException;
 
 final public class Functions {
@@ -79,46 +80,45 @@ final public class Functions {
 		);
 	}
 
-	public static String encodeURL(String url) {
-		return getResponse().encodeURL(
-			URIEncoder.encodeURI(
-				url
-			)
-		);
+	public static String encodePath(String value) {
+		return URIComponent.BASE.encode(value, getResponse());
 	}
 
-	// TODO: Is this in ao-taglib.tld?
-	public static String encodeParam(String value) throws UnsupportedEncodingException {
-		return URIEncoder.encodeURIComponent(
-			value,
-			getResponse().getCharacterEncoding()
-		);
+	public static String decodePath(String value) throws UnsupportedEncodingException {
+		return URIComponent.BASE.decode(value, getRequest());
 	}
 
-	// TODO: Is this in ao-taglib.tld?
-	public static String decodeParam(String value) throws UnsupportedEncodingException {
-		return URIDecoder.decodeURIComponent(
-			value,
-			getResponse().getCharacterEncoding()
-		);
+	public static String encodeQuery(String value) {
+		return URIComponent.QUERY.encode(value, getResponse());
 	}
 
-	public static String encodeURI(String value) throws UnsupportedEncodingException {
-		return URIEncoder.encodeURI(
-			value,
-			getResponse().getCharacterEncoding()
-		);
+	public static String decodeQuery(String value) throws UnsupportedEncodingException {
+		return URIComponent.QUERY.decode(value, getRequest());
+	}
+
+	public static String encodeFragment(String value) {
+		return URIComponent.FRAGMENT.encode(value, getResponse());
+	}
+
+	public static String decodeFragment(String value) throws UnsupportedEncodingException {
+		return URIComponent.FRAGMENT.decode(value, getRequest());
+	}
+
+	public static String encodeURI(String value){
+		return ServletUtil.encodeURI(value, getResponse());
 	}
 
 	public static String decodeURI(String value) throws UnsupportedEncodingException {
-		return URIDecoder.decodeURI(
-			value,
-			getResponse().getCharacterEncoding()
-		);
+		return ServletUtil.decodeURI(value, getRequest());
+	}
+
+	public static String encodeURL(String url) {
+		HttpServletResponse response = getResponse();
+		return response.encodeURL(ServletUtil.encodeURI(url, response));
 	}
 
 	/**
-	 * @see  ServletUtil#getAbsoluteURL(javax.servlet.http.HttpServletRequest, java.lang.String)
+	 * @see  HttpServletUtil#getAbsoluteURL(javax.servlet.http.HttpServletRequest, java.lang.String)
 	 */
 	public static String getAbsoluteURL(String relPath) {
 		return HttpServletUtil.getAbsoluteURL(getRequest(), relPath);

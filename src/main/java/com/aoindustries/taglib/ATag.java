@@ -281,7 +281,7 @@ public class ATag
 					toDecode = URIResolver.getAbsolutePath(Dispatcher.getCurrentPagePath(request), href);
 				}
 				// Decode to get a human-readable (but still unambiguous) display
-				URIDecoder.decodeURI(toDecode, out, textInXhtmlEncoder);
+				URIDecoder.decodeURI(toDecode, pageContext.getResponse().getCharacterEncoding(), out, textInXhtmlEncoder);
 			}
 		} else {
 			MarkupUtils.writeWithMarkup(trimmedBody, MarkupType.XHTML, out);
