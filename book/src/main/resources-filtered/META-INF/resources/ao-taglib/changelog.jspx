@@ -36,7 +36,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2019-08-13T18:15:47-0500"
+		dateModified="2019-09-30T01:47:35-0500"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -62,11 +62,17 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 					<li>
 						Implementation changed from encoding URI in response encoding to <code>UTF-8</code> per
 						<ao:a href="https://www.w3.org/TR/html40/appendix/notes.html#non-ascii-chars">B.2.1 Non-ASCII characters in URI attribute values</ao:a>.
+						However, query strings are still encoded in response encoding per <ao:a href="https://dev.w3.org/html5/spec-LC/urls.html#resolving-urls">HTML 5: 2.6.3 Resolving URLs</ao:a>:
+						"The node has a Document, and the URL character encoding is the document's character encoding."
 					</li>
 					<li>New functions for encoding/decoding URI:
 						<ol>
-							<li><code><core:link page="ao.tld/function-encodeURIComponent" /></code></li>
-							<li><code><core:link page="ao.tld/function-decodeURIComponent" /></code></li>
+							<li><code><core:link page="ao.tld/function-encodePath" /></code></li>
+							<li><code><core:link page="ao.tld/function-decodePath" /></code></li>
+							<li><code><core:link page="ao.tld/function-encodeQuery" /></code></li>
+							<li><code><core:link page="ao.tld/function-decodeQuery" /></code></li>
+							<li><code><core:link page="ao.tld/function-encodeFragment" /></code></li>
+							<li><code><core:link page="ao.tld/function-decodeFragment" /></code></li>
 							<li><code><core:link page="ao.tld/function-encodeURI" /></code></li>
 							<li><code><core:link page="ao.tld/function-decodeURI" /></code></li>
 						</ol>
