@@ -170,7 +170,6 @@ public class FormTag
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
 		HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
-		String responseEncoding = response.getCharacterEncoding();
 		out.write("<form method=\"");
 		out.write(method);
 		out.write('"');
@@ -191,8 +190,8 @@ public class FormTag
 			encodedAction = response.encodeURL(encodedAction);
 			// The action attribute is everything up to the first question mark
 			AnyURI actionURI = new AnyURI(encodedAction);
-			actionParams = URIParametersUtils.of(actionURI.getQueryString(), responseEncoding).getParameterMap();
-			textInXhtmlAttributeEncoder.write(actionURI.setQueryString(null).toURI(responseEncoding).toString(), out);
+			actionParams = URIParametersUtils.of(actionURI.getQueryString()).getParameterMap();
+			textInXhtmlAttributeEncoder.write(actionURI.setQueryString(null).toURI().toString(), out);
 			out.write('"');
 		} else {
 			actionParams = null;
