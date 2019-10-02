@@ -3921,135 +3921,69 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<example><![CDATA[<code>${ao:addLastModified('../path-to-page.jsp')}</code>]]></example>
 	</function>
 	<function>
-		<!-- datePublished="2019-09-30T01:47:35-0500" -->
+		<!-- datePublished="2019-10-02T02:16:44-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
-				<a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/URIComponent.html#BASE">Encodes a value</a>
-				for use in a URI path component.
+				<a href="https://aoindustries.com/ao-net-types/apidocs/com/aoindustries/net/URIEncoder.html#encodeURIComponent-java.lang.String-">Encodes a value</a>
+				for use in a URI path component, query string, or fragment.
 			</p>
 			<p>
 				Encodes characters in the <a href="https://www.w3.org/TR/html40/appendix/notes.html#non-ascii-chars">recommended <code>UTF-8</code> encoding</a>.
 			</p>
 		]]></description>
-		<name>encodePath</name>
-		<function-class>com.aoindustries.taglib.Functions</function-class>
-		<function-signature>java.lang.String encodePath(java.lang.String)</function-signature>
-		<example><![CDATA[<code>${ao:encodePath(value)}</code>]]></example>
+		<name>encodeURIComponent</name>
+		<function-class>com.aoindustries.net.URIEncoder</function-class>
+		<function-signature>java.lang.String encodeURIComponent(java.lang.String)</function-signature>
+		<example><![CDATA[<code>${ao:encodeURIComponent(value)}</code>]]></example>
 	</function>
 	<function>
-		<!-- datePublished="2019-09-30T01:47:35-0500" -->
+		<!-- datePublished="2019-10-02T02:16:44-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
-				<a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/URIComponent.html#BASE">Decodes a value</a>
-				from use as a URI path component.
+				<a href="https://aoindustries.com/ao-net-types/apidocs/com/aoindustries/net/URIDecoder.html#decodeURIComponent-java.lang.String-">Decodes a value</a>
+				from use as a URI path component, query string, or fragment.
 			</p>
 			<p>
 				Decodes characters in the <a href="https://www.w3.org/TR/html40/appendix/notes.html#non-ascii-chars">recommended <code>UTF-8</code> encoding</a>.
 			</p>
 		]]></description>
-		<name>decodePath</name>
-		<function-class>com.aoindustries.taglib.Functions</function-class>
-		<function-signature>java.lang.String decodePath(java.lang.String)</function-signature>
-		<example><![CDATA[<code>${ao:decodePath(value)}</code>]]></example>
-	</function>
-	<function>
-		<!-- datePublished="2019-09-30T01:47:35-0500" -->
-		<description><![CDATA[
-			<p class="semanticcms-tag-reference-summary">
-				<a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/URIComponent.html#QUERY">Encodes a value</a>
-				for use in a URI query.
-			</p>
-			<p>
-				Encodes characters in the <a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/ServletResponse.html#getCharacterEncoding%28%29">response encoding</a>.
-			</p>
-		]]></description>
-		<name>encodeQuery</name>
-		<function-class>com.aoindustries.taglib.Functions</function-class>
-		<function-signature>java.lang.String encodeQuery(java.lang.String)</function-signature>
-		<example><![CDATA[<code>${ao:encodeQuery(value)}</code>]]></example>
-	</function>
-	<function>
-		<!-- datePublished="2019-09-30T01:47:35-0500" -->
-		<description><![CDATA[
-			<p class="semanticcms-tag-reference-summary">
-				<a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/URIComponent.html#QUERY">Decodes a value</a>
-				from use as a URI query.
-			</p>
-			<p>
-				Decodes characters in the <a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/ServletRequest.html#getCharacterEncoding%28%29">request encoding</a>
-				(or <code>ISO-8859-1</code> if the request has no encoding set).
-			</p>
-		]]></description>
-		<name>decodeQuery</name>
-		<function-class>com.aoindustries.taglib.Functions</function-class>
-		<function-signature>java.lang.String decodeQuery(java.lang.String)</function-signature>
-		<example><![CDATA[<code>${ao:decodeQuery(value)}</code>]]></example>
-	</function>
-	<function>
-		<!-- datePublished="2019-09-30T01:47:35-0500" -->
-		<description><![CDATA[
-			<p class="semanticcms-tag-reference-summary">
-				<a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/URIComponent.html#FRAGMENT">Encodes a value</a>
-				for use in a URI fragment.
-			</p>
-			<p>
-				Encodes characters in the <a href="https://www.w3.org/TR/html40/appendix/notes.html#non-ascii-chars">recommended <code>UTF-8</code> encoding</a>.
-			</p>
-		]]></description>
-		<name>encodeFragment</name>
-		<function-class>com.aoindustries.taglib.Functions</function-class>
-		<function-signature>java.lang.String encodeFragment(java.lang.String)</function-signature>
-		<example><![CDATA[<code>${ao:encodeFragment(value)}</code>]]></example>
-	</function>
-	<function>
-		<!-- datePublished="2019-09-30T01:47:35-0500" -->
-		<description><![CDATA[
-			<p class="semanticcms-tag-reference-summary">
-				<a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/URIComponent.html#FRAGMENT">Decodes a value</a>
-				from use as a URI fragment.
-			</p>
-			<p>
-				Decodes characters in the <a href="https://www.w3.org/TR/html40/appendix/notes.html#non-ascii-chars">recommended <code>UTF-8</code> encoding</a>.
-			</p>
-		]]></description>
-		<name>decodeFragment</name>
-		<function-class>com.aoindustries.taglib.Functions</function-class>
-		<function-signature>java.lang.String decodeFragment(java.lang.String)</function-signature>
-		<example><![CDATA[<code>${ao:decodeFragment(value)}</code>]]></example>
+		<name>decodeURIComponent</name>
+		<function-class>com.aoindustries.net.URIDecoder</function-class>
+		<function-signature>java.lang.String decodeURIComponent(java.lang.String)</function-signature>
+		<example><![CDATA[<code>${ao:decodeURIComponent(value)}</code>]]></example>
 	</function>
 	<function>
 		<!-- datePublished="2019-08-13T18:02:13-0500" -->
-		<!-- dateModified="2019-09-30T01:47:35-0500" -->
+		<!-- dateModified="2019-10-02T02:16:44-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
-				<a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/ServletUtil.html#encodeURI-java.lang.String-javax.servlet.ServletResponse-">Encodes a URI to ASCII format</a>.
+				<a href="https://aoindustries.com/ao-net-types/apidocs/com/aoindustries/net/URIEncoder.html#encodeURI-java.lang.String-">Encodes a URI to ASCII format</a>.
 			</p>
 			<p>
-				Encodes characters in the <a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/ServletResponse.html#getCharacterEncoding%28%29">response encoding</a>.
+				Encodes characters in the <a href="https://www.w3.org/TR/html40/appendix/notes.html#non-ascii-chars">recommended <code>UTF-8</code> encoding</a>.
 			</p>
 		]]></description>
 		<name>encodeURI</name>
-		<function-class>com.aoindustries.taglib.Functions</function-class>
+		<function-class>com.aoindustries.net.URIEncoder</function-class>
 		<function-signature>java.lang.String encodeURI(java.lang.String)</function-signature>
 		<example><![CDATA[<code>${ao:encodeURI(value)}</code>]]></example>
 	</function>
 	<function>
 		<!-- datePublished="2019-08-13T18:02:13-0500" -->
-		<!-- dateModified="2019-09-30T01:47:35-0500" -->
+		<!-- dateModified="2019-10-02T02:16:44-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
-				<a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/ServletUtil.html#decodeURI-java.lang.String-javax.servlet.ServletRequest-">Decodes a URI to Unicode format</a>.
+				<a href="https://aoindustries.com/ao-net-types/apidocs/com/aoindustries/net/URIDecoder.html#decodeURI-java.lang.String-">Decodes a URI to Unicode format</a>.
 			</p>
 			<p>
 				Characters that would decode to <a href="https://tools.ietf.org/html/rfc3986#section-2.2">a reserved character</a> are left percent-encoded to avoid ambiguity.
 			</p>
 			<p>
-				Decodes characters in the <a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/ServletRequest.html#getCharacterEncoding%28%29">request encoding</a>
-				(or <code>ISO-8859-1</code> if the request has no encoding set).
+				Decodes characters in the <a href="https://www.w3.org/TR/html40/appendix/notes.html#non-ascii-chars">recommended <code>UTF-8</code> encoding</a>.
 			</p>
 		]]></description>
 		<name>decodeURI</name>
-		<function-class>com.aoindustries.taglib.Functions</function-class>
+		<function-class>com.aoindustries.net.URIDecoder</function-class>
 		<function-signature>java.lang.String decodeURI(java.lang.String)</function-signature>
 		<example><![CDATA[<code>${ao:decodeURI(value)}</code>]]></example>
 	</function>
@@ -4065,7 +3999,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				then passes through <a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
 			</p>
 			<p>
-				Encodes characters in the <a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/ServletResponse.html#getCharacterEncoding%28%29">response encoding</a>.
+				Encodes characters in the <a href="https://www.w3.org/TR/html40/appendix/notes.html#non-ascii-chars">recommended <code>UTF-8</code> encoding</a>.
 			</p>
 		]]></description>
 		<name>encodeURL</name>

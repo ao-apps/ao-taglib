@@ -154,13 +154,12 @@ public class RedirectTag
 		final ServletContext servletContext = pageContext.getServletContext();
 		final HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
 		final HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
-		final String responseEncoding = response.getCharacterEncoding();
 
 		// Add any parameters to the URL
 		String myHref = href;
 		if(myHref==null) myHref = page; // Default to page when href not given
 		if(myHref==null) throw new AttributeRequiredException("href");
-		myHref = URIParametersUtils.addParams(myHref, params, responseEncoding);
+		myHref = URIParametersUtils.addParams(myHref, params);
 		myHref = LastModifiedServlet.addLastModified(servletContext, request, servletPath, myHref, addLastModified);
 
 		// Get the full URL that will be used for the redirect

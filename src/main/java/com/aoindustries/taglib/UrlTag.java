@@ -29,9 +29,7 @@ import com.aoindustries.net.URI;
 import com.aoindustries.net.URIParametersMap;
 import java.io.IOException;
 import java.io.Writer;
-import javax.servlet.ServletResponse;
 import javax.servlet.jsp.JspTagException;
-import javax.servlet.jsp.PageContext;
 
 /**
  * TODO: Have absolute option
@@ -61,14 +59,8 @@ public class UrlTag extends AutoEncodingBufferedTag implements ParamsAttribute {
 
 	@Override
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
-		PageContext pageContext = (PageContext)getJspContext();
-		ServletResponse response = pageContext.getResponse();
-		String responseEncoding = response.getCharacterEncoding();
 		// TODO: decodeURI for UTF-8, encodeURI for all others
-		URI splitUrl = new URI(
-			capturedBody.trim().toString(),
-			responseEncoding
-		).addParameters(params, responseEncoding);
+		URI splitUrl = new URI(capturedBody.trim().toString()).addParameters(params);
 		/* TODO: This?: if(url.startsWith("/")) {
 			HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
 			out.write(request.getContextPath());
