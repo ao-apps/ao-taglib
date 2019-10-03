@@ -23,12 +23,13 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
-import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
+import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import com.aoindustries.servlet.http.Dispatcher;
 import com.aoindustries.servlet.http.HttpServletUtil;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 
@@ -57,8 +58,17 @@ public class BaseTag extends AutoEncodingNullTag {
 				originalLastSlash!=currentLastSlash
 				|| !originalPath.regionMatches(0, currentPath, 0, originalLastSlash)
 			) {
+				HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
 				out.write("<base href=\"");
-				HttpServletUtil.getAbsoluteURL(request, currentPath.substring(0, currentLastSlash+1), textInXhtmlAttributeEncoder, out);
+				encodeTextInXhtmlAttribute(
+					response.encodeURL(
+						HttpServletUtil.getAbsoluteURL(
+							request,
+							currentPath.substring(0, currentLastSlash+1)
+						)
+					),
+					out
+				);
 				out.write("\" />");
 			}
 		}
