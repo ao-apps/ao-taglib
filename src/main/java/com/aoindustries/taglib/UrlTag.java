@@ -59,11 +59,11 @@ public class UrlTag extends AutoEncodingBufferedTag implements ParamsAttribute {
 
 	@Override
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
-		// TODO: decodeURI for UTF-8, encodeURI for all others
 		URI splitUrl = new URI(capturedBody.trim().toString()).addParameters(params);
-		/* TODO: This?: if(url.startsWith("/")) {
+		/* TODO: Prefix context path?
+		if(url.startsWith("/")) {
 			HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
-			out.write(request.getContextPath());
+			out.write(URIEncoder.encodeURI(request.getContextPath()));
 		}*/
 		out.write(splitUrl.toString());
 	}
