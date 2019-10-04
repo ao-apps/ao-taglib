@@ -30,6 +30,7 @@ import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlA
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.net.AnyURI;
 import com.aoindustries.net.MutableURIParameters;
+import com.aoindustries.net.URIEncoder;
 import com.aoindustries.net.URIParametersMap;
 import com.aoindustries.net.URIParametersUtils;
 import com.aoindustries.net.URIResolver;
@@ -187,11 +188,11 @@ public class FormTag
 				String contextPath = request.getContextPath();
 				if(!contextPath.isEmpty()) encodedAction = contextPath + encodedAction;
 			}
-			encodedAction = response.encodeURL(encodedAction);
+			encodedAction = response.encodeURL(URIEncoder.encodeURI(encodedAction));
 			// The action attribute is everything up to the first question mark
 			AnyURI actionURI = new AnyURI(encodedAction);
 			actionParams = URIParametersUtils.of(actionURI.getQueryString()).getParameterMap();
-			textInXhtmlAttributeEncoder.write(actionURI.setQueryString(null).toURI().toString(), out);
+			textInXhtmlAttributeEncoder.write(actionURI.setQueryString(null).toString(), out);
 			out.write('"');
 		} else {
 			actionParams = null;
