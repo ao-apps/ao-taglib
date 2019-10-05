@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2013, 2014, 2015, 2016, 2017, 2018  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2013, 2014, 2015, 2016, 2017, 2018, 2019  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -46,6 +46,7 @@ public class ImgTagBeanInfo extends SimpleBeanInfo {
 					new PropertyDescriptor("id", ImgTag.class, null, "setId"),
 					new PropertyDescriptor("src", ImgTag.class, null, "setSrc"),
 					new PropertyDescriptor("srcAbsolute", ImgTag.class, null, "setSrcAbsolute"),
+					new PropertyDescriptor("canonical", ImgTag.class, null, "setCanonical"),
 					new PropertyDescriptor("addLastModified", ImgTag.class, null, "setAddLastModified"),
 					new PropertyDescriptor("width", ImgTag.class, null, "setWidth"),
 					new PropertyDescriptor("height", ImgTag.class, null, "setHeight"),
