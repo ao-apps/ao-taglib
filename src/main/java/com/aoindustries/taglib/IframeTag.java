@@ -54,8 +54,8 @@ public class IframeTag
 private Object id;
 	private String src;
 	private URIParametersMap params;
-	private boolean srcAbsolute;
-	private boolean canonical = false;
+	private boolean absolute;
+	private boolean canonical;
 	private LastModifiedServlet.AddLastModifiedWhen addLastModified = LastModifiedServlet.AddLastModifiedWhen.AUTO;
 	private Object width;
 	private Object height;
@@ -87,8 +87,8 @@ private Object id;
 		params.addParameter(name, value);
 	}
 
-	public void setSrcAbsolute(boolean srcAbsolute) {
-		this.srcAbsolute = srcAbsolute;
+	public void setAbsolute(boolean absolute) {
+		this.absolute = absolute;
 	}
 
 	public void setCanonical(boolean canonical) {
@@ -140,7 +140,7 @@ private Object id;
 			Coercion.write(id, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
-		UrlUtils.writeSrc(getJspContext(), out, src, params, srcAbsolute, canonical, addLastModified);
+		UrlUtils.writeSrc(getJspContext(), out, src, params, absolute, canonical, addLastModified);
 		if(width!=null) {
 			out.write(" width=\"");
 			Coercion.write(width, textInXhtmlAttributeEncoder, out);

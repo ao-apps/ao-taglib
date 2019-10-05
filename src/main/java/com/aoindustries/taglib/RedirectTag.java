@@ -81,7 +81,7 @@ public class RedirectTag
 
 	private String statusCode;
 	private String href;
-	private boolean canonical = false;
+	private boolean canonical;
 	private LastModifiedServlet.AddLastModifiedWhen addLastModified = LastModifiedServlet.AddLastModifiedWhen.AUTO;
 
 	public void setStatusCode(String statusCode) throws JspTagException {

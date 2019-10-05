@@ -52,8 +52,8 @@ public class ScriptTag
 	private MediaType mediaType = MediaType.JAVASCRIPT;
 	private String src;
 	private MutableURIParameters params;
-	private boolean srcAbsolute;
-	private boolean canonical = false;
+	private boolean absolute;
+	private boolean canonical;
 	private LastModifiedServlet.AddLastModifiedWhen addLastModified = LastModifiedServlet.AddLastModifiedWhen.AUTO;
 
 	@Override
@@ -96,8 +96,8 @@ public class ScriptTag
 		params.addParameter(name, value);
 	}
 
-	public void setSrcAbsolute(boolean srcAbsolute) {
-		this.srcAbsolute = srcAbsolute;
+	public void setAbsolute(boolean absolute) {
+		this.absolute = absolute;
 	}
 
 	public void setCanonical(boolean canonical) {
@@ -143,7 +143,7 @@ public class ScriptTag
 			out.write("<script type=\"");
 			encodeTextInXhtmlAttribute(mediaType.getContentType(), out);
 			out.write('"');
-			UrlUtils.writeSrc(getJspContext(), out, src, params, srcAbsolute, canonical, addLastModified);
+			UrlUtils.writeSrc(getJspContext(), out, src, params, absolute, canonical, addLastModified);
 			out.write("></script>");
 		}
 	}

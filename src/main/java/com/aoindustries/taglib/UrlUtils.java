@@ -49,14 +49,14 @@ final public class UrlUtils {
 		Appendable out,
 		String href,
 		URIParameters params,
-		boolean hrefAbsolute,
+		boolean absolute,
 		boolean canonical,
 		LastModifiedServlet.AddLastModifiedWhen addLastModified
 	) throws JspTagException, IOException {
 		if(href != null) {
 			out.append(" href=\"");
 			encodeTextInXhtmlAttribute(
-				HttpServletUtil.buildUrl(pageContext, href, params, hrefAbsolute, canonical, addLastModified),
+				HttpServletUtil.buildUrl(pageContext, href, params, absolute, canonical, addLastModified),
 				out
 			);
 			out.append('"');
@@ -73,7 +73,7 @@ final public class UrlUtils {
 		Appendable out,
 		String href,
 		URIParameters params,
-		boolean hrefAbsolute,
+		boolean absolute,
 		boolean canonical,
 		LastModifiedServlet.AddLastModifiedWhen addLastModified
 	) throws JspTagException, IOException {
@@ -82,7 +82,7 @@ final public class UrlUtils {
 			out,
 			href,
 			params,
-			hrefAbsolute,
+			absolute,
 			canonical,
 			addLastModified
 		);
@@ -98,14 +98,14 @@ final public class UrlUtils {
 		Appendable out,
 		String src,
 		URIParameters params,
-		boolean srcAbsolute,
+		boolean absolute,
 		boolean canonical,
 		LastModifiedServlet.AddLastModifiedWhen addLastModified
 	) throws JspTagException, IOException {
 		if(src != null) {
 			out.append(" src=\"");
 			encodeTextInXhtmlAttribute(
-				HttpServletUtil.buildUrl(pageContext, src, params, srcAbsolute, canonical, addLastModified),
+				HttpServletUtil.buildUrl(pageContext, src, params, absolute, canonical, addLastModified),
 				out
 			);
 			out.append('"');
@@ -122,7 +122,7 @@ final public class UrlUtils {
 		Appendable out,
 		String src,
 		URIParameters params,
-		boolean srcAbsolute,
+		boolean absolute,
 		boolean canonical,
 		LastModifiedServlet.AddLastModifiedWhen addLastModified
 	) throws JspTagException, IOException {
@@ -131,7 +131,7 @@ final public class UrlUtils {
 			out,
 			src,
 			params,
-			srcAbsolute,
+			absolute,
 			canonical,
 			addLastModified
 		);
