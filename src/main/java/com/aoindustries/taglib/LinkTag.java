@@ -58,6 +58,7 @@ public class LinkTag
 	private String href;
 	private MutableURIParameters params;
 	private boolean hrefAbsolute;
+	private boolean canonical = false;
 	private LastModifiedServlet.AddLastModifiedWhen addLastModified = LastModifiedServlet.AddLastModifiedWhen.AUTO;
 	private Object hreflang;
 	private Object rel;
@@ -106,6 +107,10 @@ public class LinkTag
 
 	public void setHrefAbsolute(boolean hrefAbsolute) {
 		this.hrefAbsolute = hrefAbsolute;
+	}
+
+	public void setCanonical(boolean canonical) {
+		this.canonical = canonical;
 	}
 
 	public void setAddLastModified(String addLastModified) {
@@ -172,7 +177,7 @@ public class LinkTag
 			);
 		} else {
 			out.write("<link");
-			UrlUtils.writeHref(getJspContext(), out, href, params, hrefAbsolute, addLastModified);
+			UrlUtils.writeHref(getJspContext(), out, href, params, hrefAbsolute, canonical, addLastModified);
 			if(hreflang!=null) {
 				out.write(" hreflang=\"");
 				Coercion.write(hreflang, textInXhtmlAttributeEncoder, out);

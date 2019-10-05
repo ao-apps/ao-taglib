@@ -50,12 +50,13 @@ final public class UrlUtils {
 		String href,
 		URIParameters params,
 		boolean hrefAbsolute,
+		boolean canonical,
 		LastModifiedServlet.AddLastModifiedWhen addLastModified
 	) throws JspTagException, IOException {
 		if(href != null) {
 			out.append(" href=\"");
 			encodeTextInXhtmlAttribute(
-				HttpServletUtil.buildUrl(pageContext, href, params, hrefAbsolute, addLastModified),
+				HttpServletUtil.buildUrl(pageContext, href, params, hrefAbsolute, canonical, addLastModified),
 				out
 			);
 			out.append('"');
@@ -65,7 +66,7 @@ final public class UrlUtils {
 	}
 
 	/**
-	 * @see  #writeHref(javax.servlet.jsp.PageContext, java.lang.Appendable, java.lang.String, com.aoindustries.net.URIParameters, boolean, com.aoindustries.servlet.http.LastModifiedServlet.AddLastModifiedWhen)
+	 * @see  #writeHref(javax.servlet.jsp.PageContext, java.lang.Appendable, java.lang.String, com.aoindustries.net.URIParameters, boolean, boolean, com.aoindustries.servlet.http.LastModifiedServlet.AddLastModifiedWhen)
 	 */
 	public static void writeHref(
 		JspContext jspContext,
@@ -73,6 +74,7 @@ final public class UrlUtils {
 		String href,
 		URIParameters params,
 		boolean hrefAbsolute,
+		boolean canonical,
 		LastModifiedServlet.AddLastModifiedWhen addLastModified
 	) throws JspTagException, IOException {
 		writeHref(
@@ -81,22 +83,29 @@ final public class UrlUtils {
 			href,
 			params,
 			hrefAbsolute,
+			canonical,
 			addLastModified
 		);
 	}
 
+	/**
+	 * Writes a src attribute with parameters.
+	 * Adds contextPath to URLs that begin with a slash (/).
+	 * Encodes the URL.
+	 */
 	public static void writeSrc(
 		PageContext pageContext,
 		Appendable out,
 		String src,
 		URIParameters params,
 		boolean srcAbsolute,
+		boolean canonical,
 		LastModifiedServlet.AddLastModifiedWhen addLastModified
 	) throws JspTagException, IOException {
 		if(src != null) {
 			out.append(" src=\"");
 			encodeTextInXhtmlAttribute(
-				HttpServletUtil.buildUrl(pageContext, src, params, srcAbsolute, addLastModified),
+				HttpServletUtil.buildUrl(pageContext, src, params, srcAbsolute, canonical, addLastModified),
 				out
 			);
 			out.append('"');
@@ -106,7 +115,7 @@ final public class UrlUtils {
 	}
 
 	/**
-	 * @see  #writeSrc(javax.servlet.jsp.PageContext, java.lang.Appendable, java.lang.String, com.aoindustries.net.URIParameters, boolean, com.aoindustries.servlet.http.LastModifiedServlet.AddLastModifiedWhen)
+	 * @see  #writeSrc(javax.servlet.jsp.PageContext, java.lang.Appendable, java.lang.String, com.aoindustries.net.URIParameters, boolean, boolean, com.aoindustries.servlet.http.LastModifiedServlet.AddLastModifiedWhen)
 	 */
 	public static void writeSrc(
 		JspContext jspContext,
@@ -114,6 +123,7 @@ final public class UrlUtils {
 		String src,
 		URIParameters params,
 		boolean srcAbsolute,
+		boolean canonical,
 		LastModifiedServlet.AddLastModifiedWhen addLastModified
 	) throws JspTagException, IOException {
 		writeSrc(
@@ -122,6 +132,7 @@ final public class UrlUtils {
 			src,
 			params,
 			srcAbsolute,
+			canonical,
 			addLastModified
 		);
 	}

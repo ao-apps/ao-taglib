@@ -53,6 +53,7 @@ public class ScriptTag
 	private String src;
 	private MutableURIParameters params;
 	private boolean srcAbsolute;
+	private boolean canonical = false;
 	private LastModifiedServlet.AddLastModifiedWhen addLastModified = LastModifiedServlet.AddLastModifiedWhen.AUTO;
 
 	@Override
@@ -99,6 +100,10 @@ public class ScriptTag
 		this.srcAbsolute = srcAbsolute;
 	}
 
+	public void setCanonical(boolean canonical) {
+		this.canonical = canonical;
+	}
+
 	public void setAddLastModified(String addLastModified) {
 		this.addLastModified = LastModifiedServlet.AddLastModifiedWhen.valueOfLowerName(addLastModified);
 	}
@@ -138,7 +143,7 @@ public class ScriptTag
 			out.write("<script type=\"");
 			encodeTextInXhtmlAttribute(mediaType.getContentType(), out);
 			out.write('"');
-			UrlUtils.writeSrc(getJspContext(), out, src, params, srcAbsolute, addLastModified);
+			UrlUtils.writeSrc(getJspContext(), out, src, params, srcAbsolute, canonical, addLastModified);
 			out.write("></script>");
 		}
 	}

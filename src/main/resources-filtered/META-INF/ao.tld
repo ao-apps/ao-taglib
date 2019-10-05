@@ -40,7 +40,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<uri>@{project.url}</uri>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-08-12T16:01:26-0500" -->
+		<!-- dateModified="2019-10-05T00:26:22-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an &lt;a&gt; tag.
@@ -141,6 +141,20 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 			]]></description>
 			<name>hrefAbsolute</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					When <code>true</code>, will generate a <a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URL</a>.
+					Canonical URLs should be used where per-user response URL rewriting
+					(such as information added when cookies are disabled) should be avoided.
+					Defaults to <code>false</code>.
+				</p>
+			]]></description>
+			<name>canonical</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>boolean</type>
@@ -1065,7 +1079,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-08-12T16:01:26-0500" -->
+		<!-- dateModified="2019-10-05T00:26:22-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an &lt;iframe&gt; tag.
@@ -1167,6 +1181,20 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
+					When <code>true</code>, will generate a <a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URL</a>.
+					Canonical URLs should be used where per-user response URL rewriting
+					(such as information added when cookies are disabled) should be avoided.
+					Defaults to <code>false</code>.
+				</p>
+			]]></description>
+			<name>canonical</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
 					If the src represents a local resource, a parameter of "lastModified=#####" may be
 					automatically added with the timestamp of the local resource to the nearest second.
 					May be one of <code>true</code>, <code>false</code>, or <code>auto</code>.
@@ -1226,7 +1254,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-08-12T16:01:26-0500" -->
+		<!-- dateModified="2019-10-05T00:26:22-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an &lt;img&gt; tag.
@@ -1333,6 +1361,20 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 			]]></description>
 			<name>srcAbsolute</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					When <code>true</code>, will generate a <a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URL</a>.
+					Canonical URLs should be used where per-user response URL rewriting
+					(such as information added when cookies are disabled) should be avoided.
+					Defaults to <code>false</code>.
+				</p>
+			]]></description>
+			<name>canonical</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>boolean</type>
@@ -1831,7 +1873,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-08-12T16:01:26-0500" -->
+		<!-- dateModified="2019-10-05T00:26:22-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				If contained with any
@@ -1929,6 +1971,20 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 			]]></description>
 			<name>hrefAbsolute</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					When <code>true</code>, will generate a <a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URL</a>.
+					Canonical URLs should be used where per-user response URL rewriting
+					(such as information added when cookies are disabled) should be avoided.
+					Defaults to <code>false</code>.
+				</p>
+			]]></description>
+			<name>canonical</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>boolean</type>
@@ -2812,7 +2868,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-08-12T16:01:26-0500" -->
+		<!-- dateModified="2019-10-05T00:26:22-0500" -->
 		<description><![CDATA[
 			<div class="semanticcms-tag-reference-summary">
 				<p>
@@ -2939,6 +2995,20 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
+					When <code>true</code>, will generate a <a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URL</a>.
+					Canonical URLs should be used where per-user response URL rewriting
+					(such as information added when cookies are disabled) should be avoided.
+					Defaults to <code>false</code>.
+				</p>
+			]]></description>
+			<name>canonical</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
 					If the href represents a local resource, a parameter of "lastModified=#####" may be
 					automatically added with the timestamp of the local resource to the nearest second.
 					May be one of <code>true</code>, <code>false</code>, or <code>auto</code>.
@@ -3019,7 +3089,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-08-12T16:01:26-0500" -->
+		<!-- dateModified="2019-10-05T00:26:22-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Manually establishes a script context when automatic detection is not possible.
@@ -3133,6 +3203,20 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 			]]></description>
 			<name>srcAbsolute</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					When <code>true</code>, will generate a <a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URL</a>.
+					Canonical URLs should be used where per-user response URL rewriting
+					(such as information added when cookies are disabled) should be avoided.
+					Defaults to <code>false</code>.
+				</p>
+			]]></description>
+			<name>canonical</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>boolean</type>
