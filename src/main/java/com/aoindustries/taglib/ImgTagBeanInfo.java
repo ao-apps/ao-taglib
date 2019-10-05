@@ -45,7 +45,7 @@ public class ImgTagBeanInfo extends SimpleBeanInfo {
 					// From base class: new PropertyDescriptor("outputType", ImgTag.class, "getOutputType", null),
 					new PropertyDescriptor("id", ImgTag.class, null, "setId"),
 					new PropertyDescriptor("src", ImgTag.class, null, "setSrc"),
-					new PropertyDescriptor("srcAbsolute", ImgTag.class, null, "setSrcAbsolute"),
+					new PropertyDescriptor("absolute", ImgTag.class, null, "setAbsolute"),
 					new PropertyDescriptor("canonical", ImgTag.class, null, "setCanonical"),
 					new PropertyDescriptor("addLastModified", ImgTag.class, null, "setAddLastModified"),
 					new PropertyDescriptor("width", ImgTag.class, null, "setWidth"),

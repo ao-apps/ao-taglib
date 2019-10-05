@@ -36,7 +36,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2019-10-05T00:26:22-0500"
+		dateModified="2019-10-05T08:36:36-0500"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -86,6 +86,15 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 								</ul>
 							</li>
 						</ol>
+					</li>
+					<li>Renamed all <code>hrefAbsolute</code> and <code>srcAbsolute</code> attributes to <code>absolute</code> on:
+						<ul>
+							<li><core:link page="ao.tld/tag-a" /></li>
+							<li><core:link page="ao.tld/tag-iframe" /></li>
+							<li><core:link page="ao.tld/tag-img" /></li>
+							<li><core:link page="ao.tld/tag-link" /></li>
+							<li><core:link page="ao.tld/tag-script" /></li>
+						</ul>
 					</li>
 					<!-- TODO:
 					<li>

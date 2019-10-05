@@ -57,8 +57,8 @@ public class LinkTag
 
 	private String href;
 	private MutableURIParameters params;
-	private boolean hrefAbsolute;
-	private boolean canonical = false;
+	private boolean absolute;
+	private boolean canonical;
 	private LastModifiedServlet.AddLastModifiedWhen addLastModified = LastModifiedServlet.AddLastModifiedWhen.AUTO;
 	private Object hreflang;
 	private Object rel;
@@ -76,7 +76,7 @@ public class LinkTag
 	 */
 	public void setLink(Link link) {
 		setHref(link.getHref());
-		setHrefAbsolute(link.getHrefAbsolute());
+		setAbsolute(link.getAbsolute());
 		URIParameters linkParams = link.getParams();
 		if(linkParams != null) {
 			for(Map.Entry<String,List<String>> entry : linkParams.getParameterMap().entrySet()) {
@@ -105,8 +105,8 @@ public class LinkTag
 		params.addParameter(name, value);
 	}
 
-	public void setHrefAbsolute(boolean hrefAbsolute) {
-		this.hrefAbsolute = hrefAbsolute;
+	public void setAbsolute(boolean absolute) {
+		this.absolute = absolute;
 	}
 
 	public void setCanonical(boolean canonical) {
@@ -162,10 +162,9 @@ public class LinkTag
 	protected void doTag(Writer out) throws JspTagException, IOException {
 		JspTag parent = findAncestorWithClass(this, LinksAttribute.class);
 		if(parent!=null) {
-			((LinksAttribute)parent).addLink(
-				new Link(
+			((LinksAttribute)parent).addLink(new Link(
 					href,
-					hrefAbsolute,
+					absolute,
 					params,
 					addLastModified,
 					Coercion.toString(hreflang),
@@ -177,7 +176,7 @@ public class LinkTag
 			);
 		} else {
 			out.write("<link");
-			UrlUtils.writeHref(getJspContext(), out, href, params, hrefAbsolute, canonical, addLastModified);
+			UrlUtils.writeHref(getJspContext(), out, href, params, absolute, canonical, addLastModified);
 			if(hreflang!=null) {
 				out.write(" hreflang=\"");
 				Coercion.write(hreflang, textInXhtmlAttributeEncoder, out);
