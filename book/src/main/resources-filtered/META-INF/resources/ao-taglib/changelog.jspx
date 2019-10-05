@@ -36,7 +36,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2019-10-03T18:35:44-0500"
+		dateModified="2019-10-05T00:26:22-0500"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -72,6 +72,21 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 						</ol>
 					</li>
 					<li><core:link page="ao.tld/tag-base" /> now performs response URL encoding.</li>
+					<li>Added <ao:a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URL</ao:a> support:
+						<ol>
+							<li><code>UrlUtils</code> updated with new <code>canonical</code> parameters.</li>
+							<li>New <code>canonical</code> attribute on:
+								<ul>
+									<li><core:link page="ao.tld/tag-a" /></li>
+									<li><core:link page="ao.tld/tag-iframe" /></li>
+									<li><core:link page="ao.tld/tag-img" /></li>
+									<li><core:link page="ao.tld/tag-link" /></li>
+									<li><core:link page="ao.tld/tag-redirect" /></li>
+									<li><core:link page="ao.tld/tag-script" /></li>
+								</ul>
+							</li>
+						</ol>
+					</li>
 					<!-- TODO:
 					<li>
 						Split ao-taglib into ao-encoding-taglib, which would then be usable as a compatibility base for other auto-encoding taglibs,

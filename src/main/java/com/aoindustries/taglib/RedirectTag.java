@@ -81,6 +81,7 @@ public class RedirectTag
 
 	private String statusCode;
 	private String href;
+	private boolean canonical = false;
 	private LastModifiedServlet.AddLastModifiedWhen addLastModified = LastModifiedServlet.AddLastModifiedWhen.AUTO;
 
 	public void setStatusCode(String statusCode) throws JspTagException {
@@ -91,6 +92,10 @@ public class RedirectTag
 	@Override
 	public void setHref(String href) {
 		this.href = href;
+	}
+
+	public void setCanonical(boolean canonical) {
+		this.canonical = canonical;
 	}
 
 	public void setAddLastModified(String addLastModified) {
@@ -163,7 +168,7 @@ public class RedirectTag
 		myHref = LastModifiedServlet.addLastModified(servletContext, request, servletPath, myHref, addLastModified);
 
 		// Get the full URL that will be used for the redirect
-		String location = HttpServletUtil.getRedirectLocation(request, response, servletPath, myHref);
+		String location = HttpServletUtil.getRedirectLocation(request, response, servletPath, myHref, canonical);
 		boolean isTooLong = location.length()>MAXIMUM_GET_REQUEST_LENGTH;
 		if(!isTooLong || page==null) {
 			if(isTooLong) {

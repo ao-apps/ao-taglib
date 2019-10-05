@@ -58,6 +58,7 @@ public class ImgTag
 	private String src;
 	private URIParametersMap params;
 	private boolean srcAbsolute;
+	private boolean canonical = false;
 	private LastModifiedServlet.AddLastModifiedWhen addLastModified = LastModifiedServlet.AddLastModifiedWhen.AUTO;
 	private Object width;
 	private Object height;
@@ -94,6 +95,10 @@ public class ImgTag
 
 		public void setSrcAbsolute(boolean srcAbsolute) {
 		this.srcAbsolute = srcAbsolute;
+	}
+
+	public void setCanonical(boolean canonical) {
+		this.canonical = canonical;
 	}
 
 	public void setAddLastModified(String addLastModified) {
@@ -163,7 +168,7 @@ public class ImgTag
 			Coercion.write(id, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
-		UrlUtils.writeSrc(getJspContext(), out, src, params, srcAbsolute, addLastModified);
+		UrlUtils.writeSrc(getJspContext(), out, src, params, srcAbsolute, canonical, addLastModified);
 		if(width!=null) {
 			out.write(" width=\"");
 			Coercion.write(width, textInXhtmlAttributeEncoder, out);
