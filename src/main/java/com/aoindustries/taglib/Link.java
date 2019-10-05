@@ -35,6 +35,7 @@ public class Link {
 	private final String href;
 	private final URIParameters params; // TODO: MutableURLParameters here and all others
 	private final boolean absolute;
+	private final boolean canonical;
 	private final LastModifiedServlet.AddLastModifiedWhen addLastModified;
 	private final String hreflang;
 	private final String rel;
@@ -45,6 +46,7 @@ public class Link {
 	public Link(
 		String href,
 		boolean absolute,
+		boolean canonical,
 		URIParameters params,
 		LastModifiedServlet.AddLastModifiedWhen addLastModified,
 		String hreflang,
@@ -56,6 +58,7 @@ public class Link {
 		this.href = href;
 		this.params = params;
 		this.absolute = absolute;
+		this.canonical = canonical;
 		this.addLastModified = addLastModified;
 		this.hreflang = hreflang;
 		this.rel = rel;
@@ -70,6 +73,10 @@ public class Link {
 
 	public boolean getAbsolute() {
 		return absolute;
+	}
+
+	public boolean getCanonical() {
+		return canonical;
 	}
 
 	public URIParameters getParams() {
