@@ -165,6 +165,7 @@ public class LinkTag
 			((LinksAttribute)parent).addLink(new Link(
 					href,
 					absolute,
+					canonical,
 					params,
 					addLastModified,
 					Coercion.toString(hreflang),
