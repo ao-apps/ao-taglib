@@ -36,7 +36,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2019-10-05T08:36:36-0500"
+		dateModified="2019-10-06T08:13:45-0500"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -71,7 +71,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 							<li><code><core:link page="ao.tld/function-decodeURI" /></code></li>
 						</ol>
 					</li>
-					<li><core:link page="ao.tld/tag-base" /> now performs response URL encoding.</li>
+					<li>
+						<core:link page="ao.tld/tag-base" /> uses <ao:a href="https://aoindustries.com/ao-servlet-filter/apidocs/com/aoindustries/servlet/filter/EncodeURIFilter.html">EncodeURIFilter</ao:a>
+						for final character encoding, or encodes to <a href="https://tools.ietf.org/html/rfc3986">RFC 3986 URI</a> US-ASCII format
+						when the filter is not active.
+					</li>
 					<li>Added <ao:a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URL</ao:a> support:
 						<ol>
 							<li><code>UrlUtils</code> updated with new <code>canonical</code> parameters.</li>
