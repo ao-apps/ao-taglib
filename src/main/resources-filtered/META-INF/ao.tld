@@ -40,7 +40,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<uri>@{project.url}</uri>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-05T08:36:36-0500" -->
+		<!-- dateModified="2019-10-06T08:53:15-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an &lt;a&gt; tag.
@@ -170,6 +170,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					In auto mode, last modified stamping may be disabled by the client with
 					the <code>X-com-aoindustries-servlet-http-LastModifiedServlet-lastModified: false</code> header.
+				</p>
+				<p>
+					In auto mode, last modified stamping is not performed on
+					<a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URLs</a>.
 				</p>
 			]]></description>
 			<name>addLastModified</name>
@@ -1079,7 +1083,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-05T08:36:36-0500" -->
+		<!-- dateModified="2019-10-06T08:53:15-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an &lt;iframe&gt; tag.
@@ -1204,6 +1208,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					In auto mode, last modified stamping may be disabled by the client with
 					the <code>X-com-aoindustries-servlet-http-LastModifiedServlet-lastModified: false</code> header.
 				</p>
+				<p>
+					In auto mode, last modified stamping is not performed on
+					<a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URLs</a>.
+				</p>
 			]]></description>
 			<name>addLastModified</name>
 			<required>false</required>
@@ -1254,7 +1262,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-05T08:36:36-0500" -->
+		<!-- dateModified="2019-10-06T08:53:15-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an &lt;img&gt; tag.
@@ -1390,6 +1398,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					In auto mode, last modified stamping may be disabled by the client with
 					the <code>X-com-aoindustries-servlet-http-LastModifiedServlet-lastModified: false</code> header.
+				</p>
+				<p>
+					In auto mode, last modified stamping is not performed on
+					<a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URLs</a>.
 				</p>
 			]]></description>
 			<name>addLastModified</name>
@@ -1873,7 +1885,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-05T08:36:36-0500" -->
+		<!-- dateModified="2019-10-06T08:53:15-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				If contained with any
@@ -2000,6 +2012,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					In auto mode, last modified stamping may be disabled by the client with
 					the <code>X-com-aoindustries-servlet-http-LastModifiedServlet-lastModified: false</code> header.
+				</p>
+				<p>
+					In auto mode, last modified stamping is not performed on
+					<a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URLs</a>.
 				</p>
 			]]></description>
 			<name>addLastModified</name>
@@ -2868,7 +2884,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-05T00:26:22-0500" -->
+		<!-- dateModified="2019-10-06T08:53:15-0500" -->
 		<description><![CDATA[
 			<div class="semanticcms-tag-reference-summary">
 				<p>
@@ -3018,6 +3034,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					In auto mode, last modified stamping may be disabled by the client with
 					the <code>X-com-aoindustries-servlet-http-LastModifiedServlet-lastModified: false</code> header.
 				</p>
+				<p>
+					In auto mode, last modified stamping is not performed on
+					<a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URLs</a>.
+				</p>
 			]]></description>
 			<name>addLastModified</name>
 			<required>false</required>
@@ -3089,7 +3109,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-05T08:36:36-0500" -->
+		<!-- dateModified="2019-10-06T08:53:15-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Manually establishes a script context when automatic detection is not possible.
@@ -3232,6 +3252,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					In auto mode, last modified stamping may be disabled by the client with
 					the <code>X-com-aoindustries-servlet-http-LastModifiedServlet-lastModified: false</code> header.
+				</p>
+				<p>
+					In auto mode, last modified stamping is not performed on
+					<a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URLs</a>.
 				</p>
 			]]></description>
 			<name>addLastModified</name>
