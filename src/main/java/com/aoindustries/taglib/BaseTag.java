@@ -24,12 +24,14 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
+import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
+import com.aoindustries.net.URIEncoder;
+import com.aoindustries.servlet.filter.EncodeURIFilter;
 import com.aoindustries.servlet.http.Dispatcher;
 import com.aoindustries.servlet.http.HttpServletUtil;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 
@@ -58,17 +60,24 @@ public class BaseTag extends AutoEncodingNullTag {
 				originalLastSlash!=currentLastSlash
 				|| !originalPath.regionMatches(0, currentPath, 0, originalLastSlash)
 			) {
-				HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
 				out.write("<base href=\"");
-				encodeTextInXhtmlAttribute(
-					response.encodeURL(
-						HttpServletUtil.getAbsoluteURL(
-							request,
-							currentPath.substring(0, currentLastSlash+1)
-						)
-					),
-					out
-				);
+
+				// Note: This does not directly do response encodeURL because URL rewriting would interfere with the intent of the base tag
+
+				String url = HttpServletUtil.getAbsoluteURL(request, currentPath.substring(0, currentLastSlash + 1));
+
+				// TODO: Should we create a registry for things that want to modify the base URL,
+				//       instead of this direct connection between BaseTag and EncodeURIFilter?
+				EncodeURIFilter encodeURIFilter = EncodeURIFilter.getActiveFilter(request);
+				if(encodeURIFilter != null) {
+					encodeTextInXhtmlAttribute(
+						encodeURIFilter.encode(url, pageContext.getResponse().getCharacterEncoding()),
+						out
+					);
+				} else {
+					// Encoding US-ASCII
+					URIEncoder.encodeURI(url, textInXhtmlAttributeEncoder, out);
+				}
 				out.write("\" />");
 			}
 		}
