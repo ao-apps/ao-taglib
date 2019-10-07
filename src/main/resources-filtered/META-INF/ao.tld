@@ -40,17 +40,19 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<uri>@{project.url}</uri>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-07T02:55:46-0500" -->
+		<!-- dateModified="2019-10-07T02:59:19-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an &lt;a&gt; tag.
 			</p>
 			<p>
 				The body is trimmed while written.
-				If the body is empty after being trimmed, then href itself will be written as the body.
-				If the href begins with mailto:, the mailto: is stripped and the remainder of the href is displayed verbatim.
-				If the href begins with telnet:, the telnet: is stripped and the remainder of the href is displayed verbatim.
-				If the href begins with tel:, the tel: is stripped and the remainder of the href is displayed verbatim.
+			</p>
+			<p>
+				If the body is empty after being trimmed, then href itself will be written as the body,
+				represented in <a href="https://tools.ietf.org/html/rfc3987">RFC 3987: IRI</a> Unicode format.
+				If the href has a scheme of <code>mailto:</code>, <code>telnet:</code>, or <code>tel:</code>,
+				the scheme is stripped and the remainder of the href is displayed.
 			</p>
 			<p>
 				Any attribute that has no namespace and begins with <code>param.</code> is added to the href as a URL parameter.
