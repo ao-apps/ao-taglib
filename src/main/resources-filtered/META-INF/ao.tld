@@ -2884,7 +2884,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-06T08:53:15-0500" -->
+		<!-- dateModified="2019-10-07T02:24:43-0500" -->
 		<description><![CDATA[
 			<div class="semanticcms-tag-reference-summary">
 				<p>
@@ -3083,8 +3083,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					When the redirect type is <code>302</code> or <code>303</code>,
-					the <code>Cache-Control: no-cache</code> header is
-					automatically added to the response to try to best emulate the caching effects of the redirect.
+					the <code>Cache-Control: no-cache</code> header is set on the
+					response to try to best emulate the caching effects the
+					corresponding redirect.
 				</p>
 			]]></description>
 			<name>page</name>
