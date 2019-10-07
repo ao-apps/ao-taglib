@@ -56,7 +56,7 @@ final public class UrlUtils {
 		if(href != null) {
 			out.append(" href=\"");
 			encodeTextInXhtmlAttribute(
-				HttpServletUtil.buildUrl(pageContext, href, params, absolute, canonical, addLastModified),
+				HttpServletUtil.buildURL(pageContext, href, params, absolute, canonical, addLastModified),
 				out
 			);
 			out.append('"');
@@ -105,7 +105,7 @@ final public class UrlUtils {
 		if(src != null) {
 			out.append(" src=\"");
 			encodeTextInXhtmlAttribute(
-				HttpServletUtil.buildUrl(pageContext, src, params, absolute, canonical, addLastModified),
+				HttpServletUtil.buildURL(pageContext, src, params, absolute, canonical, addLastModified),
 				out
 			);
 			out.append('"');
