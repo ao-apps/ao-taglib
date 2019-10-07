@@ -3011,6 +3011,19 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
+					When <code>true</code>, generates an absolute URL for the Location of the redirect.
+					Defaults to <code>true</code> for compatibility with the requirements prior to
+					<a href="https://tools.ietf.org/html/rfc7231#section-7.1.2">RFC 7231: 7.1.2. Location</a>.
+				</p>
+			]]></description>
+			<name>absolute</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
 					When <code>true</code>, will generate a <a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URL</a>.
 					Canonical URLs should be used where per-user response URL rewriting
 					(such as information added when cookies are disabled) should be avoided.

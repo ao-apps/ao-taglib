@@ -81,6 +81,7 @@ public class RedirectTag
 
 	private String statusCode;
 	private String href;
+	private boolean absolute = true;
 	private boolean canonical;
 	private LastModifiedServlet.AddLastModifiedWhen addLastModified = LastModifiedServlet.AddLastModifiedWhen.AUTO;
 
@@ -92,6 +93,10 @@ public class RedirectTag
 	@Override
 	public void setHref(String href) {
 		this.href = href;
+	}
+
+	public void setAbsolute(boolean absolute) {
+		this.absolute = absolute;
 	}
 
 	public void setCanonical(boolean canonical) {
@@ -164,11 +169,19 @@ public class RedirectTag
 		String myHref = href;
 		if(myHref==null) myHref = page; // Default to page when href not given
 		if(myHref==null) throw new AttributeRequiredException("href");
-		myHref = URIParametersUtils.addParams(myHref, params);
-		myHref = LastModifiedServlet.addLastModified(servletContext, request, servletPath, myHref, addLastModified);
 
 		// Get the full URL that will be used for the redirect
-		String location = HttpServletUtil.getRedirectLocation(request, response, servletPath, myHref, canonical);
+		String location = HttpServletUtil.buildRedirectURL(
+			servletContext,
+			request,
+			response,
+			servletPath,
+			myHref,
+			params,
+			absolute,
+			canonical,
+			addLastModified
+		);
 		boolean isTooLong = location.length()>MAXIMUM_GET_REQUEST_LENGTH;
 		if(!isTooLong || page==null) {
 			if(isTooLong) {

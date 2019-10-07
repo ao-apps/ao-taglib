@@ -36,7 +36,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2019-10-06T08:53:15-0500"
+		dateModified="2019-10-07T01:34:34-0500"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -103,6 +103,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 							<li><core:link page="ao.tld/tag-link" /></li>
 							<li><core:link page="ao.tld/tag-script" /></li>
 						</ul>
+					</li>
+					<li>
+						Added new <code>absolute</code> attribute to <core:link page="ao.tld/tag-redirect" />,
+						defaulting to <code>true</code> for compatibility with the requirements prior to
+						<ao:a href="https://tools.ietf.org/html/rfc7231#section-7.1.2">RFC 7231: 7.1.2. Location</ao:a>.
 					</li>
 					<!-- TODO:
 					<li>
