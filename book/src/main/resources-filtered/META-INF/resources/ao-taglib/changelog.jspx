@@ -126,6 +126,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 					<li>Trimming more attributes, and avoiding writing most attributes when they would be empty.</li>
 					<li><core:link page="ao.tld/tag-iframe" /> now writes both <code>id</code> and <code>name</code> attributes for maximum compatibility.</li>
 					<!-- TODO:
+					<li>Support script async and defer attributes</li>
+					<li>Support autofocus and required attributes (textarea, input, ...)</li>
+					<li>Support other nice HTML 5 features of textarea/input)</li>
 					<li>
 						Split ao-taglib into ao-encoding-taglib, which would then be usable as a compatibility base for other auto-encoding taglibs,
 						without depending on the full ao-taglib itself.  The encoding taglib would probably be short name "encode:", which
