@@ -30,6 +30,7 @@ import com.aoindustries.util.i18n.BundleLookupMarkup;
 import com.aoindustries.util.i18n.BundleLookupThreadContext;
 import java.io.IOException;
 import java.io.Writer;
+import javax.el.ValueExpression;
 import javax.servlet.jsp.JspTagException;
 
 /**
@@ -43,7 +44,9 @@ public class OutTag
 {
 
 	private Object value;
-	private Object def;
+	private ValueExpression def;
+	private boolean defValueSet;
+	private Object defValue;
 	private MediaType mediaType = MediaType.TEXT;
 
 	@Override
@@ -56,8 +59,19 @@ public class OutTag
 		this.value = value;
 	}
 
-	public void setDefault(Object def) {
+	public void setDefault(ValueExpression def) {
 		this.def = def;
+		this.defValueSet = false;
+		this.defValue = null;
+	}
+
+	private Object getDefault() {
+		if(def == null) return null;
+		if(defValueSet) return defValue;
+		Object value = def.getValue(getJspContext().getELContext());
+		defValue = value;
+		defValueSet = true;
+		return value;
 	}
 
 	/**
@@ -97,7 +111,7 @@ public class OutTag
 
 	@Override
 	protected void writePrefix(MediaType containerType, Writer out) throws IOException {
-		Object effectiveValue = value!=null ? value : def;
+		Object effectiveValue = value!=null ? value : getDefault();
 		if(
 			!(effectiveValue instanceof Writable)
 			|| ((Writable)effectiveValue).isFastToString()
@@ -120,8 +134,11 @@ public class OutTag
 			out.write(toStringResult);
 		} else if(value!=null) {
 			Coercion.write(value, out);
-		} else if(def!=null) {
-			Coercion.write(def, out);
+		} else {
+			Object defValue = getDefault();
+			if(defValue != null) {
+				Coercion.write(defValue, out);
+			}
 		}
 	}
 

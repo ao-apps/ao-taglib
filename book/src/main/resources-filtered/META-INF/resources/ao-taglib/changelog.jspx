@@ -36,7 +36,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2019-10-09T07:02:53-0500"
+		dateModified="2019-10-09T07:29:41-0500"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -130,6 +130,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 					<li>Trimming more attributes, and avoiding writing most attributes when they would be empty.</li>
 					<li><core:link page="ao.tld/tag-iframe" /> now writes both <code>id</code> and <code>name</code> attributes for maximum compatibility.</li>
 					<li><core:link page="ao.tld/function-getLastModified" /> now properly decodes paths</li>
+					<li>The <code>default</code> attribute of <core:link page="ao.tld/tag-out" /> is now deferred, must use <code>\#{…}</code> instead of <code>\${…}</code>.</li>
 					<!-- TODO:
 					<li>Support script async and defer attributes</li>
 					<li>Support autofocus and required attributes (textarea, input, ...)</li>
