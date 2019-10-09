@@ -260,7 +260,10 @@ public class AreaTag
 			Coercion.write(target, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
-		if(alt != null) {
+		if(
+			alt != null
+			&& (href != null || !Coercion.isEmpty(alt))
+		) {
 			out.write(" alt=\"");
 			MarkupUtils.writeWithMarkup(alt, MarkupType.TEXT, textInXhtmlAttributeEncoder, out);
 			out.write('"');
