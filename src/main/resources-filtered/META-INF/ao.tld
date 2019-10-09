@@ -1387,7 +1387,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2019-10-09T05:48:40-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_iframe.asp">&lt;iframe&gt;</a> tag.
@@ -1423,6 +1423,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					The <a href="https://www.w3schools.com/tags/att_global_id.asp">id of the element</a>.
 					A nested <a href="@{project.url}ao.tld/tag-id">&lt;ao:id&gt;</a>
 					tag will override this value.
+				</p>
+				<p>
+					For maximum HTML/XHTML and HTML 4/5 compatibility, this value is
+					written as both <code>id</code> and <code>name</code> attributes.
 				</p>
 			]]></description>
 			<name>id</name>
