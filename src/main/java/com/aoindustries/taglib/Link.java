@@ -33,7 +33,7 @@ import com.aoindustries.servlet.http.LastModifiedServlet;
 public class Link {
 
 	private final String href;
-	private final URIParameters params; // TODO: MutableURLParameters here and all others
+	private final URIParameters params;
 	private final boolean absolute;
 	private final boolean canonical;
 	private final LastModifiedServlet.AddLastModifiedWhen addLastModified;
