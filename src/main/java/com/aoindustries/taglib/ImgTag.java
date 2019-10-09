@@ -119,7 +119,7 @@ public class ImgTag
 
 	@Override
 	public void setAlt(Object alt) throws JspTagException {
-		this.alt = AttributeUtils.trimNullIfEmpty(alt);
+		this.alt = AttributeUtils.trim(alt);
 	}
 
 	@Override
