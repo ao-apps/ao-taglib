@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2013, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2013, 2016, 2017, 2019  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,8 +22,12 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.encoding.Coercion;
+import com.aoindustries.util.StringUtility;
+import java.io.IOException;
 import javax.el.ELContext;
 import javax.el.ValueExpression;
+import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.JspTag;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
@@ -66,6 +70,46 @@ public final class AttributeUtils  {
 		} else {
 			return type.cast(value);
 		}
+	}
+
+	/**
+	 * @see  Coercion#nullIfEmpty(java.lang.Object)
+	 */
+	public static <T> T nullIfEmpty(T value) throws JspTagException {
+		try {
+			return Coercion.nullIfEmpty(value);
+		} catch(IOException e) {
+			throw new JspTagException(e);
+		}
+	}
+
+	/**
+	 * @see  StringUtility#nullIfEmpty(java.lang.String)
+	 */
+	public static String nullIfEmpty(String value) {
+		return StringUtility.nullIfEmpty(value);
+	}
+
+	/**
+	 * @see  Coercion#trimNullIfEmpty(java.lang.Object)
+	 */
+	public static Object trimNullIfEmpty(Object value) throws JspTagException {
+		try {
+			return Coercion.trimNullIfEmpty(value);
+		} catch(IOException e) {
+			throw new JspTagException(e);
+		}
+	}
+
+	/**
+	 * Trims a value, returning {@code null} if empty after trimming.
+	 */
+	public static String trimNullIfEmpty(String value) {
+		if(value != null) {
+			value = value.trim();
+			if(value.isEmpty()) value = null;
+		}
+		return value;
 	}
 
 	/**

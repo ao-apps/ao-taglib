@@ -109,15 +109,15 @@ public class InputTag
 
 	private Object id;
 	@Override
-	public void setId(Object id) {
-		this.id = id;
+	public void setId(Object id) throws JspTagException {
+		this.id = AttributeUtils.trimNullIfEmpty(id);
 	}
 
 	private Object type;
 	private String typeString;
 	@Override
 	public void setType(Object type) throws JspTagException {
-		String typeStr = Coercion.toString(type);
+		String typeStr = Coercion.toString(AttributeUtils.trimNullIfEmpty(type));
 		if(!isValidType(typeStr)) throw new LocalizedJspTagException(ApplicationResources.accessor, "InputTag.type.invalid", typeStr);
 		this.type = type;
 		this.typeString = typeStr;
@@ -125,50 +125,50 @@ public class InputTag
 
 	private Object name;
 	@Override
-	public void setName(Object name) {
-		this.name = name;
+	public void setName(Object name) throws JspTagException {
+		this.name = AttributeUtils.nullIfEmpty(name);
 	}
 
 	private Object value;
 	@Override
-	public void setValue(Object value) {
-		this.value = value;
+	public void setValue(Object value) throws JspTagException {
+		this.value = AttributeUtils.nullIfEmpty(value);
 	}
 
 	private Object onclick;
 	@Override
-	public void setOnclick(Object onclick) {
-		this.onclick = onclick;
+	public void setOnclick(Object onclick) throws JspTagException {
+		this.onclick = AttributeUtils.trimNullIfEmpty(onclick);
 	}
 
 	private Object onchange;
 	@Override
-	public void setOnchange(Object onchange) {
-		this.onchange = onchange;
+	public void setOnchange(Object onchange) throws JspTagException {
+		this.onchange = AttributeUtils.trimNullIfEmpty(onchange);
 	}
 
 	private Object onfocus;
 	@Override
-	public void setOnfocus(Object onfocus) {
-		this.onfocus = onfocus;
+	public void setOnfocus(Object onfocus) throws JspTagException {
+		this.onfocus = AttributeUtils.trimNullIfEmpty(onfocus);
 	}
 
 	private Object onblur;
 	@Override
-	public void setOnblur(Object onblur) {
-		this.onblur = onblur;
+	public void setOnblur(Object onblur) throws JspTagException {
+		this.onblur = AttributeUtils.trimNullIfEmpty(onblur);
 	}
 
 	private Object onkeypress;
 	@Override
-	public void setOnkeypress(Object onkeypress) {
-		this.onkeypress = onkeypress;
+	public void setOnkeypress(Object onkeypress) throws JspTagException {
+		this.onkeypress = AttributeUtils.trimNullIfEmpty(onkeypress);
 	}
 
 	private Object size;
 	@Override
-	public void setSize(Object size) {
-		this.size = size;
+	public void setSize(Object size) throws JspTagException {
+		this.size = AttributeUtils.trimNullIfEmpty(size);
 	}
 
 	private Integer maxlength;
@@ -196,14 +196,14 @@ public class InputTag
 	}
 
 	@Override
-	public void setClazz(Object clazz) {
-		this.clazz = clazz;
+	public void setClazz(Object clazz) throws JspTagException {
+		this.clazz = AttributeUtils.trimNullIfEmpty(clazz);
 	}
 
 	private Object style;
 	@Override
-	public void setStyle(Object style) {
-		this.style = style;
+	public void setStyle(Object style) throws JspTagException {
+		this.style = AttributeUtils.trimNullIfEmpty(style);
 	}
 
 	private boolean checked;

@@ -74,7 +74,7 @@ public class LinkTag
 	/**
 	 * Copies all values from the provided link.
 	 */
-	public void setLink(Link link) {
+	public void setLink(Link link) throws JspTagException {
 		setHref(link.getHref());
 		setAbsolute(link.getAbsolute());
 		URIParameters linkParams = link.getParams();
@@ -96,7 +96,7 @@ public class LinkTag
 
 	@Override
 	public void setHref(String href) {
-		this.href = href;
+		this.href = AttributeUtils.nullIfEmpty(href);
 	}
 
 	@Override
@@ -114,31 +114,31 @@ public class LinkTag
 	}
 
 	public void setAddLastModified(String addLastModified) {
-		this.addLastModified = LastModifiedServlet.AddLastModifiedWhen.valueOfLowerName(addLastModified);
+		this.addLastModified = LastModifiedServlet.AddLastModifiedWhen.valueOfLowerName(addLastModified.trim());
 	}
 
 	@Override
-	public void setHreflang(Object hreflang) {
-		this.hreflang = hreflang;
+	public void setHreflang(Object hreflang) throws JspTagException {
+		this.hreflang = AttributeUtils.trimNullIfEmpty(hreflang);
 	}
 
 	@Override
-	public void setRel(Object rel) {
-		this.rel = rel;
+	public void setRel(Object rel) throws JspTagException {
+		this.rel = AttributeUtils.trimNullIfEmpty(rel);
 	}
 
 	@Override
-	public void setType(Object type) {
-		this.type = type;
+	public void setType(Object type) throws JspTagException {
+		this.type = AttributeUtils.trimNullIfEmpty(type);
 	}
 
 	public void setMedia(String media) {
-		this.media = media;
+		this.media = AttributeUtils.trimNullIfEmpty(media);
 	}
 
 	@Override
-	public void setTitle(Object title) {
-		this.title = title;
+	public void setTitle(Object title) throws JspTagException {
+		this.title = AttributeUtils.trimNullIfEmpty(title);
 	}
 
 	@Override

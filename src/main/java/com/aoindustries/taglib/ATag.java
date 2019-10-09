@@ -96,16 +96,12 @@ public class ATag
 
 	@Override
 	public void setId(Object id) throws JspTagException {
-		try {
-			this.id = Coercion.nullIfEmpty(id);
-		} catch(IOException e) {
-			throw new JspTagException(e);
-		}
+		this.id = AttributeUtils.trimNullIfEmpty(id);
 	}
 
 	@Override
-	public void setHref(String href) {
-		this.href = href;
+	public void setHref(String href) throws JspTagException {
+		this.href = AttributeUtils.nullIfEmpty(href);
 	}
 
 	@Override
@@ -123,32 +119,32 @@ public class ATag
 	}
 
 	public void setAddLastModified(String addLastModified) {
-		this.addLastModified = LastModifiedServlet.AddLastModifiedWhen.valueOfLowerName(addLastModified);
+		this.addLastModified = LastModifiedServlet.AddLastModifiedWhen.valueOfLowerName(addLastModified.trim());
 	}
 
 	@Override
-	public void setHreflang(Object hreflang) {
-		this.hreflang = hreflang;
+	public void setHreflang(Object hreflang) throws JspTagException {
+		this.hreflang = AttributeUtils.trimNullIfEmpty(hreflang);
 	}
 
 	@Override
-	public void setRel(Object rel) {
-		this.rel = rel;
+	public void setRel(Object rel) throws JspTagException {
+		this.rel = AttributeUtils.trimNullIfEmpty(rel);
 	}
 
 	@Override
-	public void setType(Object type) {
-		this.type = type;
+	public void setType(Object type) throws JspTagException {
+		this.type = AttributeUtils.trimNullIfEmpty(type);
 	}
 
 	@Override
-	public void setTarget(Object target) {
-		this.target = target;
+	public void setTarget(Object target) throws JspTagException {
+		this.target = AttributeUtils.trimNullIfEmpty(target);
 	}
 
 	@Override
-	public void setTitle(Object title) {
-		this.title = title;
+	public void setTitle(Object title) throws JspTagException {
+		this.title = AttributeUtils.trimNullIfEmpty(title);
 	}
 
 	@Override
@@ -158,31 +154,27 @@ public class ATag
 
 	@Override
 	public void setClazz(Object clazz) throws JspTagException {
-		try {
-			this.clazz = Coercion.nullIfEmpty(clazz);
-		} catch(IOException e) {
-			throw new JspTagException(e);
-		}
+		this.clazz = AttributeUtils.trimNullIfEmpty(clazz);
 	}
 
 	@Override
-	public void setStyle(Object style) {
-		this.style = style;
+	public void setStyle(Object style) throws JspTagException {
+		this.style = AttributeUtils.trimNullIfEmpty(style);
 	}
 
 	@Override
-	public void setOnclick(Object onclick) {
-		this.onclick = onclick;
+	public void setOnclick(Object onclick) throws JspTagException {
+		this.onclick = AttributeUtils.trimNullIfEmpty(onclick);
 	}
 
 	@Override
-	public void setOnmouseover(Object onmouseover) {
-		this.onmouseover = onmouseover;
+	public void setOnmouseover(Object onmouseover) throws JspTagException {
+		this.onmouseover = AttributeUtils.trimNullIfEmpty(onmouseover);
 	}
 
 	@Override
-	public void setOnmouseout(Object onmouseout) {
-		this.onmouseout = onmouseout;
+	public void setOnmouseout(Object onmouseout) throws JspTagException {
+		this.onmouseout = AttributeUtils.trimNullIfEmpty(onmouseout);
 	}
 
 	@Override

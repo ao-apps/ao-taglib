@@ -22,7 +22,6 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.net.URIParametersUtils;
 import com.aoindustries.servlet.ServletUtil;
 import com.aoindustries.servlet.http.HttpServletUtil;
 import com.aoindustries.servlet.http.Includer;
@@ -86,13 +85,14 @@ public class RedirectTag
 	private LastModifiedServlet.AddLastModifiedWhen addLastModified = LastModifiedServlet.AddLastModifiedWhen.AUTO;
 
 	public void setStatusCode(String statusCode) throws JspTagException {
+		statusCode = statusCode.trim();
 		if(!isValidStatusCode(statusCode)) throw new LocalizedJspTagException(ApplicationResources.accessor, "RedirectTag.statusCode.invalid", statusCode);
 		this.statusCode = statusCode;
 	}
 
 	@Override
 	public void setHref(String href) {
-		this.href = href;
+		this.href = AttributeUtils.nullIfEmpty(href);
 	}
 
 	public void setAbsolute(boolean absolute) {
@@ -104,7 +104,7 @@ public class RedirectTag
 	}
 
 	public void setAddLastModified(String addLastModified) {
-		this.addLastModified = LastModifiedServlet.AddLastModifiedWhen.valueOfLowerName(addLastModified);
+		this.addLastModified = LastModifiedServlet.AddLastModifiedWhen.valueOfLowerName(addLastModified.trim());
 	}
 
 	@Override

@@ -31,7 +31,6 @@ import com.aoindustries.net.URIParametersMap;
 import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
-import com.aoindustries.util.StringUtility;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
@@ -105,11 +104,7 @@ public class AreaTag
 
 	@Override
 	public void setId(Object id) throws JspTagException {
-		try {
-			this.id = Coercion.nullIfEmpty(id);
-		} catch(IOException e) {
-			throw new JspTagException(e);
-		}
+		this.id = AttributeUtils.trimNullIfEmpty(id);
 	}
 
 	public static boolean isValidShape(String shape) {
@@ -121,7 +116,7 @@ public class AreaTag
 	}
 
 	public void setShape(String shape) throws JspTagException {
-		shape = shape.trim(); // TODO: Review more places that should be trimmed
+		shape = shape.trim();
 		if(shape.isEmpty()) {
 			throw new AttributeRequiredException("shape");
 		} else if(!isValidShape(shape)) {
@@ -135,13 +130,12 @@ public class AreaTag
 	}
 
 	public void setCoords(String coords) {
-		if(coords != null) coords = coords.trim();
-		this.coords = StringUtility.nullIfEmpty(coords);
+		this.coords = AttributeUtils.trimNullIfEmpty(coords);
 	}
 
 	@Override
-	public void setHref(String href) {
-		this.href = href;
+	public void setHref(String href) throws JspTagException {
+		this.href = AttributeUtils.nullIfEmpty(href);
 	}
 
 	@Override
@@ -159,61 +153,37 @@ public class AreaTag
 	}
 
 	public void setAddLastModified(String addLastModified) {
-		this.addLastModified = LastModifiedServlet.AddLastModifiedWhen.valueOfLowerName(addLastModified); // TODO: Trim all these?
+		this.addLastModified = LastModifiedServlet.AddLastModifiedWhen.valueOfLowerName(addLastModified.trim());
 	}
 
 	@Override
 	public void setHreflang(Object hreflang) throws JspTagException {
-		try {
-			this.hreflang = Coercion.nullIfEmpty(hreflang);
-		} catch(IOException e) {
-			throw new JspTagException(e);
-		}
+		this.hreflang = AttributeUtils.trimNullIfEmpty(hreflang);
 	}
 
 	@Override
 	public void setRel(Object rel) throws JspTagException {
-		try {
-			this.rel = Coercion.nullIfEmpty(rel);
-		} catch(IOException e) {
-			throw new JspTagException(e);
-		}
+		this.rel = AttributeUtils.trimNullIfEmpty(rel);
 	}
 
 	@Override
 	public void setType(Object type) throws JspTagException {
-		try {
-			this.type = Coercion.nullIfEmpty(type);
-		} catch(IOException e) {
-			throw new JspTagException(e);
-		}
+		this.type = AttributeUtils.trimNullIfEmpty(type);
 	}
 
 	@Override
 	public void setTarget(Object target) throws JspTagException {
-		try {
-			this.target = Coercion.nullIfEmpty(target);
-		} catch(IOException e) {
-			throw new JspTagException(e);
-		}
+		this.target = AttributeUtils.trimNullIfEmpty(target);
 	}
 
 	@Override
 	public void setAlt(Object alt) throws JspTagException {
-		try {
-			this.alt = Coercion.nullIfEmpty(alt);
-		} catch(IOException e) {
-			throw new JspTagException(e);
-		}
+		this.alt = AttributeUtils.trimNullIfEmpty(alt);
 	}
 
 	@Override
 	public void setTitle(Object title) throws JspTagException {
-		try {
-			this.title = Coercion.nullIfEmpty(title);
-		} catch(IOException e) {
-			throw new JspTagException(e);
-		}
+		this.title = AttributeUtils.trimNullIfEmpty(title);
 	}
 
 	@Override
@@ -223,47 +193,27 @@ public class AreaTag
 
 	@Override
 	public void setClazz(Object clazz) throws JspTagException {
-		try {
-			this.clazz = Coercion.nullIfEmpty(clazz);
-		} catch(IOException e) {
-			throw new JspTagException(e);
-		}
+		this.clazz = AttributeUtils.trimNullIfEmpty(clazz);
 	}
 
 	@Override
 	public void setStyle(Object style) throws JspTagException {
-		try {
-			this.style = Coercion.nullIfEmpty(style);
-		} catch(IOException e) {
-			throw new JspTagException(e);
-		}
+		this.style = AttributeUtils.trimNullIfEmpty(style);
 	}
 
 	@Override
 	public void setOnclick(Object onclick) throws JspTagException {
-		try {
-			this.onclick = Coercion.nullIfEmpty(onclick);
-		} catch(IOException e) {
-			throw new JspTagException(e);
-		}
+		this.onclick = AttributeUtils.trimNullIfEmpty(onclick);
 	}
 
 	@Override
 	public void setOnmouseover(Object onmouseover) throws JspTagException {
-		try {
-			this.onmouseover = Coercion.nullIfEmpty(onmouseover);
-		} catch(IOException e) {
-			throw new JspTagException(e);
-		}
+		this.onmouseover = AttributeUtils.trimNullIfEmpty(onmouseover);
 	}
 
 	@Override
 	public void setOnmouseout(Object onmouseout) throws JspTagException {
-		try {
-			this.onmouseout = Coercion.nullIfEmpty(onmouseout);
-		} catch(IOException e) {
-			throw new JspTagException(e);
-		}
+		this.onmouseout = AttributeUtils.trimNullIfEmpty(onmouseout);
 	}
 
 	@Override

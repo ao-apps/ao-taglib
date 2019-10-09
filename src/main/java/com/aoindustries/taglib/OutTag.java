@@ -79,7 +79,7 @@ public class OutTag
 		if(type instanceof MediaType) {
 			newMediaType = (MediaType)type;
 		} else {
-			String typeStr = Coercion.toString(type);
+			String typeStr = Coercion.toString(type).trim();
 			newMediaType = MediaType.getMediaTypeByName(typeStr);
 			if(newMediaType==null) {
 				try {

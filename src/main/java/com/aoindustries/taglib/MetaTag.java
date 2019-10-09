@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2011, 2013, 2015, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2011, 2013, 2015, 2016, 2017, 2019  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -59,44 +59,24 @@ public class MetaTag
 
 	@Override
 	public void setName(Object name) throws JspTagException {
-		try {
-			this.name = Coercion.nullIfEmpty(name);
-		} catch(IOException e) {
-			throw new JspTagException(e);
-		}
+		this.name = AttributeUtils.trimNullIfEmpty(name);
 	}
 
 	public void setHttpEquiv(Object httpEquiv) throws JspTagException {
-		try {
-			this.httpEquiv = Coercion.nullIfEmpty(httpEquiv);
-		} catch(IOException e) {
-			throw new JspTagException(e);
-		}
+		this.httpEquiv = AttributeUtils.trimNullIfEmpty(httpEquiv);
 	}
 
 	public void setItemprop(Object itemprop) throws JspTagException {
-		try {
-			this.itemprop = Coercion.nullIfEmpty(itemprop);
-		} catch(IOException e) {
-			throw new JspTagException(e);
-		}
+		this.itemprop = AttributeUtils.trimNullIfEmpty(itemprop);
 	}
 
 	public void setCharset(Object charset) throws JspTagException {
-		try {
-			this.charset = Coercion.nullIfEmpty(charset);
-		} catch(IOException e) {
-			throw new JspTagException(e);
-		}
+		this.charset = AttributeUtils.trimNullIfEmpty(charset);
 	}
 
 	@Override
 	public void setContent(Object content) throws JspTagException {
-		try {
-			this.content = Coercion.nullIfEmpty(content);
-		} catch(IOException e) {
-			throw new JspTagException(e);
-		}
+		this.content = AttributeUtils.nullIfEmpty(content);
 	}
 
 	@Override
