@@ -138,6 +138,8 @@ private Object id;
 		if(id!=null) {
 			out.write(" id=\"");
 			Coercion.write(id, textInXhtmlAttributeEncoder, out);
+			out.write("\" name=\"");
+			Coercion.write(id, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
 		UrlUtils.writeSrc(getJspContext(), out, src, params, absolute, canonical, addLastModified);
