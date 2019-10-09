@@ -1571,7 +1571,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2019-10-09T06:35:47-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_img.asp">&lt;img&gt;</a> tag.
@@ -1585,7 +1585,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<li>Contents of tag body, trimmed.</li>
 			</ol>
 			<p>
-				Also, the alt value is required either as an attribute or a nested
+				Also, when <code>usemap</code> is not set, the alt value is required either as an attribute or a nested
 				<a href="@{project.url}ao.tld/tag-alt">&lt;ao:alt&gt;</a> tag.
 			</p>
 			<p>
