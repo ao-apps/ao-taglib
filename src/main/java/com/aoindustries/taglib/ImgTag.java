@@ -170,7 +170,7 @@ public class ImgTag
 	@Override
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		if(src==null) src = capturedBody.trim().toString();
-		if(alt==null) throw new AttributeRequiredException("alt");
+		if(usemap == null && alt == null) throw new AttributeRequiredException("alt");
 
 		out.write("<img");
 		if(id!=null) {
@@ -189,9 +189,11 @@ public class ImgTag
 			Coercion.write(height, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
-		out.write(" alt=\"");
-		MarkupUtils.writeWithMarkup(alt, MarkupType.TEXT, textInXhtmlAttributeEncoder, out);
-		out.write('"');
+		if(alt != null) {
+			out.write(" alt=\"");
+			MarkupUtils.writeWithMarkup(alt, MarkupType.TEXT, textInXhtmlAttributeEncoder, out);
+			out.write('"');
+		}
 		if(title!=null) {
 			out.write(" title=\"");
 			MarkupUtils.writeWithMarkup(title, MarkupType.TEXT, textInXhtmlAttributeEncoder, out);
