@@ -32,7 +32,7 @@ import java.io.Writer;
 import javax.servlet.jsp.JspTagException;
 
 /**
- * TODO: Have absolute option
+ * TODO: Have absolute option, canonical and lastModified, too?
  * TODO: Replace uses of ao:text with this as it is now more appropriate for sending dynamic parameters to JavaScript since it calls encodeURL.
  *
  * @author  AO Industries, Inc.
