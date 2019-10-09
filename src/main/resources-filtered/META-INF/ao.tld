@@ -2977,7 +2977,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T05:19:23-0500" -->
+		<!-- dateModified="2019-10-09T07:29:41-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Writes the value with proper escaping based on the context of the tag.
@@ -3038,13 +3038,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			]]></description>
 			<name>default</name>
 			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
-			<!-- TODO: Deferred would be better here, since value only needed some of the time.
 			<deferred-value>
 				<type>java.lang.Object</type>
 			</deferred-value>
-			-->
 		</attribute>
 		<attribute>
 			<description><![CDATA[
