@@ -36,7 +36,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2019-10-08T21:41:35-0500"
+		dateModified="2019-10-09T00:34:45-0500"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -121,7 +121,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 							<li>Added new <core:link page="ao.tld/tag-area" /> tag</li>
 						</ol>
 					</li>
-					<!-- TODO: More links to w3schools in TLD -->
+					<li>Added relevant links to <ao:a href="https://www.w3schools.com/">w3schools</ao:a> in <core:link page="ao.tld/" />.</li>
 					<!-- TODO:
 					<li><core:link page="ao.tld/tag-iframe" /> tag only have id, instead of both id and name?  Then write both id and name from id?
 						https://www.w3schools.com/tags/tag_a.asp:
