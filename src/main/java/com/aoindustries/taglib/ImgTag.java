@@ -96,7 +96,7 @@ public class ImgTag
 		params.addParameter(name, value);
 	}
 
-		public void setAbsolute(boolean absolute) {
+	public void setAbsolute(boolean absolute) {
 		this.absolute = absolute;
 	}
 

@@ -32,7 +32,6 @@ import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.StringUtility;
-import com.aoindustries.util.WrappedException;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
@@ -164,56 +163,56 @@ public class AreaTag
 	}
 
 	@Override
-	public void setHreflang(Object hreflang) {
+	public void setHreflang(Object hreflang) throws JspTagException {
 		try {
 			this.hreflang = Coercion.nullIfEmpty(hreflang);
 		} catch(IOException e) {
-			throw new WrappedException(e);
+			throw new JspTagException(e);
 		}
 	}
 
 	@Override
-	public void setRel(Object rel) {
+	public void setRel(Object rel) throws JspTagException {
 		try {
 			this.rel = Coercion.nullIfEmpty(rel);
 		} catch(IOException e) {
-			throw new WrappedException(e);
+			throw new JspTagException(e);
 		}
 	}
 
 	@Override
-	public void setType(Object type) {
+	public void setType(Object type) throws JspTagException {
 		try {
 			this.type = Coercion.nullIfEmpty(type);
 		} catch(IOException e) {
-			throw new WrappedException(e);
+			throw new JspTagException(e);
 		}
 	}
 
 	@Override
-	public void setTarget(Object target) {
+	public void setTarget(Object target) throws JspTagException {
 		try {
 			this.target = Coercion.nullIfEmpty(target);
 		} catch(IOException e) {
-			throw new WrappedException(e);
+			throw new JspTagException(e);
 		}
 	}
 
 	@Override
-	public void setAlt(Object alt) {
+	public void setAlt(Object alt) throws JspTagException {
 		try {
 			this.alt = Coercion.nullIfEmpty(alt);
 		} catch(IOException e) {
-			throw new WrappedException(e); // TODO: Find where WrappedException and convert to JspTagException
+			throw new JspTagException(e);
 		}
 	}
 
 	@Override
-	public void setTitle(Object title) {
+	public void setTitle(Object title) throws JspTagException {
 		try {
 			this.title = Coercion.nullIfEmpty(title);
 		} catch(IOException e) {
-			throw new WrappedException(e);
+			throw new JspTagException(e);
 		}
 	}
 
@@ -223,47 +222,47 @@ public class AreaTag
 	}
 
 	@Override
-	public void setClazz(Object clazz) {
+	public void setClazz(Object clazz) throws JspTagException {
 		try {
 			this.clazz = Coercion.nullIfEmpty(clazz);
 		} catch(IOException e) {
-			throw new WrappedException(e);
+			throw new JspTagException(e);
 		}
 	}
 
 	@Override
-	public void setStyle(Object style) {
+	public void setStyle(Object style) throws JspTagException {
 		try {
 			this.style = Coercion.nullIfEmpty(style);
 		} catch(IOException e) {
-			throw new WrappedException(e);
+			throw new JspTagException(e);
 		}
 	}
 
 	@Override
-	public void setOnclick(Object onclick) {
+	public void setOnclick(Object onclick) throws JspTagException {
 		try {
 			this.onclick = Coercion.nullIfEmpty(onclick);
 		} catch(IOException e) {
-			throw new WrappedException(e);
+			throw new JspTagException(e);
 		}
 	}
 
 	@Override
-	public void setOnmouseover(Object onmouseover) {
+	public void setOnmouseover(Object onmouseover) throws JspTagException {
 		try {
 			this.onmouseover = Coercion.nullIfEmpty(onmouseover);
 		} catch(IOException e) {
-			throw new WrappedException(e);
+			throw new JspTagException(e);
 		}
 	}
 
 	@Override
-	public void setOnmouseout(Object onmouseout) {
+	public void setOnmouseout(Object onmouseout) throws JspTagException {
 		try {
 			this.onmouseout = Coercion.nullIfEmpty(onmouseout);
 		} catch(IOException e) {
-			throw new WrappedException(e);
+			throw new JspTagException(e);
 		}
 	}
 
