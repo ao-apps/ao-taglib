@@ -36,7 +36,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2019-10-07T01:34:34-0500"
+		dateModified="2019-10-08T21:41:35-0500"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -109,7 +109,24 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 						defaulting to <code>true</code> for compatibility with the requirements prior to
 						<ao:a href="https://tools.ietf.org/html/rfc7231#section-7.1.2">RFC 7231: 7.1.2. Location</ao:a>.
 					</li>
+					<li>
+						Added <ao:a href="https://www.w3schools.com/tags/tag_map.asp">image map</ao:a> support:
+						<ol>
+							<li>
+								Added new <code><ao:a href="https://www.w3schools.com/tags/att_img_usemap.asp">usemap</ao:a></code>
+								and <code><ao:a href="https://www.w3schools.com/tags/att_img_ismap.asp">ismap</ao:a></code>
+								attributes to <core:link page="ao.tld/tag-img" />
+							</li>
+							<li>Added new <core:link page="ao.tld/tag-map" /> tag</li>
+							<li>Added new <core:link page="ao.tld/tag-area" /> tag</li>
+						</ol>
+					</li>
+					<!-- TODO: More links to w3schools in TLD -->
 					<!-- TODO:
+					<li><core:link page="ao.tld/tag-iframe" /> tag only have id, instead of both id and name?  Then write both id and name from id?
+						https://www.w3schools.com/tags/tag_a.asp:
+						"Not supported in HTML5. Use the global id attribute instead"
+					</li>
 					<li>
 						Split ao-taglib into ao-encoding-taglib, which would then be usable as a compatibility base for other auto-encoding taglibs,
 						without depending on the full ao-taglib itself.  The encoding taglib would probably be short name "encode:", which
