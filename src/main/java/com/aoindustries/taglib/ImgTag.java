@@ -30,7 +30,6 @@ import com.aoindustries.net.URIParametersMap;
 import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
-import com.aoindustries.util.StringUtility;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
@@ -81,13 +80,13 @@ public class ImgTag
 	}
 
 	@Override
-	public void setId(Object id) {
-		this.id = id;
+	public void setId(Object id) throws JspTagException {
+		this.id = AttributeUtils.trimNullIfEmpty(id);
 	}
 
 	@Override
-	public void setSrc(String src) {
-		this.src = src;
+	public void setSrc(String src) throws JspTagException {
+		this.src = AttributeUtils.nullIfEmpty(src);
 	}
 
 	@Override
@@ -105,27 +104,27 @@ public class ImgTag
 	}
 
 	public void setAddLastModified(String addLastModified) {
-		this.addLastModified = LastModifiedServlet.AddLastModifiedWhen.valueOfLowerName(addLastModified);
+		this.addLastModified = LastModifiedServlet.AddLastModifiedWhen.valueOfLowerName(addLastModified.trim());
 	}
 
 	@Override
-	public void setWidth(Object width) {
-		this.width = width;
+	public void setWidth(Object width) throws JspTagException {
+		this.width = AttributeUtils.trimNullIfEmpty(width);
 	}
 
 	@Override
-	public void setHeight(Object height) {
-		this.height = height;
+	public void setHeight(Object height) throws JspTagException {
+		this.height = AttributeUtils.trimNullIfEmpty(height);
 	}
 
 	@Override
-	public void setAlt(Object alt) {
-		this.alt = alt;
+	public void setAlt(Object alt) throws JspTagException {
+		this.alt = AttributeUtils.trimNullIfEmpty(alt);
 	}
 
 	@Override
-	public void setTitle(Object title) {
-		this.title = title;
+	public void setTitle(Object title) throws JspTagException {
+		this.title = AttributeUtils.trimNullIfEmpty(title);
 	}
 
 	@Override
@@ -134,18 +133,17 @@ public class ImgTag
 	}
 
 	@Override
-	public void setClazz(Object clazz) {
-		this.clazz = clazz;
+	public void setClazz(Object clazz) throws JspTagException {
+		this.clazz = AttributeUtils.trimNullIfEmpty(clazz);
 	}
 
 	@Override
-	public void setStyle(Object style) {
-		this.style = style;
+	public void setStyle(Object style) throws JspTagException {
+		this.style = AttributeUtils.trimNullIfEmpty(style);
 	}
 
 	public void setUsemap(String usemap) {
-		// TODO: Review taglib for more places where nullIfEmpty would be appropriate
-		this.usemap = StringUtility.nullIfEmpty(usemap);
+		this.usemap = AttributeUtils.trimNullIfEmpty(usemap);
 	}
 
 	public void setIsmap(boolean ismap) {

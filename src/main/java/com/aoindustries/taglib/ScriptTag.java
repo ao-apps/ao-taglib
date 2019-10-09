@@ -72,7 +72,7 @@ public class ScriptTag
 			MediaType newMediaType =
 				(type instanceof MediaType)
 				? (MediaType)type
-				: MediaType.getMediaTypeForContentType(Coercion.toString(type))
+				: MediaType.getMediaTypeForContentType(Coercion.toString(type).trim())
 			;
 			if(
 				newMediaType != MediaType.JAVASCRIPT
@@ -87,7 +87,7 @@ public class ScriptTag
 
 	@Override
 	public void setSrc(String src) {
-		this.src = src;
+		this.src = AttributeUtils.nullIfEmpty(src);
 	}
 
 	@Override
@@ -105,7 +105,7 @@ public class ScriptTag
 	}
 
 	public void setAddLastModified(String addLastModified) {
-		this.addLastModified = LastModifiedServlet.AddLastModifiedWhen.valueOfLowerName(addLastModified);
+		this.addLastModified = LastModifiedServlet.AddLastModifiedWhen.valueOfLowerName(addLastModified.trim());
 	}
 
 	@Override
@@ -129,7 +129,7 @@ public class ScriptTag
 	//protected void setMediaEncoderOptions(MediaWriter mediaWriter) {
 	//	if(mediaWriter instanceof JavaScriptInXhtmlWriter) {
 	//		assert src==null;
-	//		((JavaScriptInXhtmlWriter)mediaWriter).setType(type);
+	//		((JavaScriptInXhtmlWriter)mediaWriter).setType(type); // .trim()?
 	//	}
 	//}
 

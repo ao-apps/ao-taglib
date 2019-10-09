@@ -23,7 +23,6 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.util.MinimalList;
-import com.aoindustries.util.StringUtility;
 import java.util.List;
 import javax.servlet.jsp.tagext.TagData;
 import javax.servlet.jsp.tagext.TagExtraInfo;
@@ -65,7 +64,7 @@ public class AreaTagTEI extends TagExtraInfo {
 							new ValidationMessage(data.getId(), ApplicationResources.accessor.getMessage("AttributeRequiredException.message", "coords"))
 						);
 					} else if(coordsAttr != TagData.REQUEST_TIME_VALUE) {
-						String coords = StringUtility.nullIfEmpty(((String)coordsAttr).trim());
+						String coords = AttributeUtils.trimNullIfEmpty((String)coordsAttr);
 						if(coords == null) {
 							messages = MinimalList.add(
 								messages,

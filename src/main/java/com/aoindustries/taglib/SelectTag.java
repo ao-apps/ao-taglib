@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2010, 2011, 2012, 2013, 2015, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2012, 2013, 2015, 2016, 2017, 2019  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -68,18 +68,18 @@ public class SelectTag
 	}
 
 	@Override
-	public void setId(Object id) {
-		this.id = id;
+	public void setId(Object id) throws JspTagException {
+		this.id = AttributeUtils.trimNullIfEmpty(id);
 	}
 
 	@Override
-	public void setName(Object name) {
-		this.name = name;
+	public void setName(Object name) throws JspTagException {
+		this.name = AttributeUtils.nullIfEmpty(name);
 	}
 
 	@Override
-	public void setStyle(Object style) {
-		this.style = style;
+	public void setStyle(Object style) throws JspTagException {
+		this.style = AttributeUtils.trimNullIfEmpty(style);
 	}
 
 	@Override
@@ -88,23 +88,23 @@ public class SelectTag
 	}
 
 	@Override
-	public void setOnchange(Object onchange) {
-		this.onchange = onchange;
+	public void setOnchange(Object onchange) throws JspTagException {
+		this.onchange = AttributeUtils.trimNullIfEmpty(onchange);
 	}
 
 	@Override
-	public void setOnfocus(Object onfocus) {
-		this.onfocus = onfocus;
+	public void setOnfocus(Object onfocus) throws JspTagException {
+		this.onfocus = AttributeUtils.trimNullIfEmpty(onfocus);
 	}
 
 	@Override
-	public void setOnblur(Object onblur) {
-		this.onblur = onblur;
+	public void setOnblur(Object onblur) throws JspTagException {
+		this.onblur = AttributeUtils.trimNullIfEmpty(onblur);
 	}
 
 	@Override
-	public void setOnkeypress(Object onkeypress) {
-		this.onkeypress = onkeypress;
+	public void setOnkeypress(Object onkeypress) throws JspTagException {
+		this.onkeypress = AttributeUtils.trimNullIfEmpty(onkeypress);
 	}
 
 	@Override

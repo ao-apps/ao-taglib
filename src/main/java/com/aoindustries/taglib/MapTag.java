@@ -48,11 +48,7 @@ public class MapTag
 
 	@Override
 	public void setId(Object id) throws JspTagException {
-		try {
-			this.id = Coercion.nullIfEmpty(id);
-		} catch(IOException e) {
-			throw new JspTagException(e);
-		}
+		this.id = AttributeUtils.trimNullIfEmpty(id);
 	}
 
 	@Override

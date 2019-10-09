@@ -57,7 +57,7 @@ final public class TeiUtils {
 			&& o != TagData.REQUEST_TIME_VALUE
 			&& !(o instanceof MediaType)
 		) {
-			String type = Coercion.toString(o);
+			String type = Coercion.toString(o).trim();
 			try {
 				// First allow shortcuts (matching enum names)
 				MediaType mediaType = MediaType.getMediaTypeByName(type);
@@ -95,7 +95,7 @@ final public class TeiUtils {
 			o != null
 			&& o != TagData.REQUEST_TIME_VALUE
 		) {
-			String scope = Coercion.toString(o);
+			String scope = Coercion.toString(o).trim();
 			try {
 				Scope.getScopeId(scope);
 				// Value is OK

@@ -164,7 +164,7 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 
 	private DocType doctype = DocType.strict;
 	public void setDoctype(String doctype) {
-		this.doctype = doctype==null ? null : DocType.valueOf(doctype);
+		this.doctype = doctype==null ? null : DocType.valueOf(doctype.trim());
 	}
 
 	private boolean forceHtml = false;
@@ -174,12 +174,12 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 
 	private String clazz;
 	public void setClazz(String clazz) {
-		this.clazz = clazz;
+		this.clazz = AttributeUtils.trimNullIfEmpty(clazz);
 	}
 
 	private String oldIeClass;
 	public void setOldIeClass(String oldIeClass) {
-		this.oldIeClass = oldIeClass;
+		this.oldIeClass = AttributeUtils.trimNullIfEmpty(oldIeClass);
 	}
 
 	public static void writeDocTypeLine(DocType docType, Writer out) throws IOException {

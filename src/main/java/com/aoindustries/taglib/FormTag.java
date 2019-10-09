@@ -95,18 +95,19 @@ public class FormTag
 
 	@Override
 	public void setMethod(String method) throws JspTagException {
+		method = method.trim();
 		if(!isValidMethod(method)) throw new LocalizedJspTagException(ApplicationResources.accessor, "FormTag.method.invalid", method);
 		this.method = method;
 	}
 
 	@Override
-	public void setId(Object id) {
-		this.id = id;
+	public void setId(Object id) throws JspTagException {
+		this.id = AttributeUtils.trimNullIfEmpty(id);
 	}
 
 	@Override
-	public void setAction(String action) {
-		this.action = action;
+	public void setAction(String action) throws JspTagException {
+		this.action = AttributeUtils.nullIfEmpty(action);
 	}
 
 	@Override
@@ -116,13 +117,13 @@ public class FormTag
 	}
 
 	@Override
-	public void setTarget(Object target) {
-		this.target = target;
+	public void setTarget(Object target) throws JspTagException {
+		this.target = AttributeUtils.trimNullIfEmpty(target);
 	}
 
 	@Override
-	public void setEnctype(Object enctype) {
-		this.enctype = enctype;
+	public void setEnctype(Object enctype) throws JspTagException {
+		this.enctype = AttributeUtils.trimNullIfEmpty(enctype);
 	}
 
 	@Override
@@ -132,21 +133,17 @@ public class FormTag
 
 	@Override
 	public void setClazz(Object clazz) throws JspTagException {
-		try {
-			this.clazz = Coercion.nullIfEmpty(clazz);
-		} catch(IOException e) {
-			throw new JspTagException(e);
-		}
+		this.clazz = AttributeUtils.trimNullIfEmpty(clazz);
 	}
 
 	@Override
-	public void setStyle(Object style) {
-		this.style = style;
+	public void setStyle(Object style) throws JspTagException {
+		this.style = AttributeUtils.trimNullIfEmpty(style);
 	}
 
 	@Override
-	public void setOnsubmit(Object onsubmit) {
-		this.onsubmit = onsubmit;
+	public void setOnsubmit(Object onsubmit) throws JspTagException {
+		this.onsubmit = AttributeUtils.trimNullIfEmpty(onsubmit);
 	}
 
 	@Override

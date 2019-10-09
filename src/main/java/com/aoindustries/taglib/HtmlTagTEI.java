@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2011, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2011, 2016, 2017, 2019  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -38,7 +38,7 @@ public class HtmlTagTEI extends TagExtraInfo {
 			o != null
 			&& o != TagData.REQUEST_TIME_VALUE
 		) {
-			String doctype = (String)o;
+			String doctype = ((String)o).trim();
 			try {
 				HtmlTag.DocType.valueOf(doctype);
 			} catch(IllegalArgumentException e) {

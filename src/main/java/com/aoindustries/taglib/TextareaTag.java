@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2010, 2011, 2013, 2015, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2013, 2015, 2016, 2017, 2019  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -68,13 +68,13 @@ public class TextareaTag
 	}
 
 	@Override
-	public void setName(Object name) {
-		this.name = name;
+	public void setName(Object name) throws JspTagException {
+		this.name = AttributeUtils.nullIfEmpty(name);
 	}
 
 	@Override
-	public void setValue(Object value) {
-		this.value = value;
+	public void setValue(Object value) throws JspTagException {
+		this.value = AttributeUtils.nullIfEmpty(value);
 	}
 
 	@Override
@@ -98,13 +98,13 @@ public class TextareaTag
 	}
 
 	@Override
-	public void setOnchange(Object onchange) {
-		this.onchange = onchange;
+	public void setOnchange(Object onchange) throws JspTagException {
+		this.onchange = AttributeUtils.trimNullIfEmpty(onchange);
 	}
 
 	@Override
-	public void setStyle(Object style) {
-		this.style = style;
+	public void setStyle(Object style) throws JspTagException {
+		this.style = AttributeUtils.trimNullIfEmpty(style);
 	}
 
 	@Override
