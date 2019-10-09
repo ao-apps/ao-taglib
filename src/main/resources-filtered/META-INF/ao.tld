@@ -40,7 +40,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<uri>@{project.url}</uri>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-07T02:59:19-0500" -->
+		<!-- dateModified="2019-10-08T21:41:35-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an &lt;a&gt; tag.
@@ -82,7 +82,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The id of the element.
+					The <a href="https://www.w3schools.com/tags/att_global_id.asp">id of the element</a>.
 					A nested <a href="@{project.url}ao.tld/tag-id">&lt;ao:id&gt;</a> tag will override this value.
 				</p>
 			]]></description>
@@ -334,6 +334,304 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2019-10-08T21:41:35-0500" -->
+		<description><![CDATA[
+			<p class="semanticcms-tag-reference-summary">
+				Renders an <a href="https://www.w3schools.com/tags/tag_area.asp">&lt;area&gt;</a> tag.
+			</p>
+			<p>
+				The body is invoked to support nested tags, but with any output discarded.
+			</p>
+			<p>
+				Any attribute that has no namespace and begins with <code>param.</code> is added to the href as a URL parameter.
+				The parameter name is the part of the attribute name following <code>param.</code>.
+			</p>
+			<p>
+				When a parameter value is <code>null</code> it is not added.
+				If the value is an
+				<a rel="nofollow" href="@{javac.link.javaApi}java/lang/Iterable.html">Iterable</a>,
+				<a rel="nofollow" href="@{javac.link.javaApi}java/util/Iterator.html">Iterator</a>,
+				<a rel="nofollow" href="@{javac.link.javaApi}java/util/Enumeration.html">Enumeration</a>,
+				or array, then each non-null element is coerced to
+				<a rel="nofollow" href="@{javac.link.javaApi}java/lang/String.html">String</a> as a separate
+				parameter in iteration order.  Otherwise, the value itself is
+				coerced to <a rel="nofollow" href="@{javac.link.javaApi}java/lang/String.html">String</a>
+				for the parameter value.
+			</p>
+			<p>
+				Nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a> or
+				<a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a> tags will
+				add parameters after any provided as attributes.
+			</p>
+		]]></description>
+		<name>area</name>
+		<tag-class>com.aoindustries.taglib.AreaTag</tag-class>
+		<tei-class>com.aoindustries.taglib.AreaTagTEI</tei-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					The <a href="https://www.w3schools.com/tags/att_global_id.asp">id of the element</a>.
+					A nested <a href="@{project.url}ao.tld/tag-id">&lt;ao:id&gt;</a> tag will override this value.
+				</p>
+			]]></description>
+			<name>id</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					The <a href="https://www.w3schools.com/tags/att_area_shape.asp">shape of the area</a>.
+					Must be one of <code>"default"</code>, <code>"rect"</code>, <code>"circle"</code>, or <code>"poly"</code>.
+				</p>
+			]]></description>
+			<name>shape</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					The <a href="https://www.w3schools.com/tags/att_area_coords.asp">coordinates of the area</a>.
+					Required except when <code>shape</code> is <code>"default"</code>.
+				</p>
+			]]></description>
+			<name>coords</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p class="semanticcms-tag-reference-summary">
+					The <a href="https://www.w3schools.com/tags/att_area_href.asp">href for the area</a>.
+					The href is modified in several ways to make things much easier to work with.
+				</p>
+				<p>
+					A nested <a href="@{project.url}ao.tld/tag-href">&lt;ao:href&gt;</a> tag will override this value.
+				</p>
+				<p>
+					In order to make relative paths predictable, relative paths are interpreted from
+					the current JSP page, as long as all includes have been done via
+					<a href="@{project.url}ao.tld/tag-include">&lt;ao:include&gt;</a>
+					and any forward via <a href="@{project.url}ao.tld/tag-forward">&lt;ao:forward&gt;</a>.
+				</p>
+				<p>
+					In order to keep paths app-relative, if starts with a /, the context path will be
+					prepended to the path.
+				</p>
+				<p>
+					In order to simplify things behind URL mapping schemes,
+					the href is always written starting with '/'.  This avoids any need to include any
+					<a href="@{project.url}ao.tld/tag-base">&lt;ao:base&gt;</a> tags.
+				</p>
+				<p>
+					URL rewriting is performed as needed via
+					<a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
+				</p>
+				<p>
+					To support paths in different character sets, a Unicode to ASCII URI encoding is performed
+					on every character that is not defined in <a href="https://tools.ietf.org/html/rfc3986#section-2.2">RFC 3986: Reserved Characters</a>.
+					To avoid ambiguity, any dynamic parameters or anchors in the URL must have been correctly encoded by the caller.
+				</p>
+				<p>
+					Any directly nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a>
+					or <a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a>
+					tag will add parameters to the href.
+				</p>
+			]]></description>
+			<name>href</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					When <code>true</code>, generates an absolute URL for the <a href="https://www.w3schools.com/tags/att_area_href.asp">href for the area</a>.
+					Defaults to <code>false</code>.
+				</p>
+			]]></description>
+			<name>absolute</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					When <code>true</code>, will generate a <a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URL</a>.
+					Canonical URLs should be used where per-user response URL rewriting
+					(such as information added when cookies are disabled) should be avoided.
+					Defaults to <code>false</code>.
+				</p>
+			]]></description>
+			<name>canonical</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					If the href represents a local resource, a parameter of "lastModified=#####" may be
+					automatically added with the timestamp of the local resource to the nearest second.
+					May be one of <code>true</code>, <code>false</code>, or <code>auto</code>.
+					Defaults to <code>auto</code>.
+				</p>
+				<p>
+					In auto mode, last modified stamping may be disabled by the client with
+					the <code>X-com-aoindustries-servlet-http-LastModifiedServlet-lastModified: false</code> header.
+				</p>
+				<p>
+					In auto mode, last modified stamping is not performed on
+					<a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URLs</a>.
+				</p>
+			]]></description>
+			<name>addLastModified</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					The <a href="https://www.w3schools.com/tags/att_area_hreflang.asp">hreflang for the area</a>.
+					A nested <a href="@{project.url}ao.tld/tag-hreflang">&lt;ao:hreflang&gt;</a> tag will override this value.
+				</p>
+			]]></description>
+			<name>hreflang</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					The <a href="https://www.w3schools.com/tags/att_area_rel.asp">rel for the area</a>.
+					A nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:rel&gt;</a> tag will override this value.
+				</p>
+			]]></description>
+			<name>rel</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					The <a href="https://www.w3schools.com/tags/att_area_target.asp">target for the area</a>.
+					A nested <a href="@{project.url}ao.tld/tag-target">&lt;ao:target&gt;</a> tag will override this value.
+				</p>
+			]]></description>
+			<name>target</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					The <a href="https://www.w3schools.com/tags/att_area_type.asp">type for the area</a>.
+					A nested <a href="@{project.url}ao.tld/tag-type">&lt;ao:type&gt;</a> tag will override this value.
+				</p>
+			]]></description>
+			<name>type</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					The <a href="https://www.w3schools.com/tags/att_area_alt.asp">alt text for the area</a>.
+					A nested <a href="@{project.url}ao.tld/tag-alt">&lt;ao:alt&gt;</a>
+					tag will override this value.
+				</p>
+			]]></description>
+			<name>alt</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					The <a href="https://www.w3schools.com/tags/att_global_title.asp">title text for the element</a>.
+					A nested <a href="@{project.url}ao.tld/tag-title">&lt;ao:title&gt;</a> tag will override this value.
+				</p>
+			]]></description>
+			<name>title</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					The <a href="https://www.w3schools.com/tags/att_global_class.asp">CSS class for the element</a>.
+					A nested <a href="@{project.url}ao.tld/tag-class">&lt;ao:class&gt;</a> tag will override this value.
+				</p>
+			]]></description>
+			<name>class</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					The <a href="https://www.w3schools.com/tags/att_global_style.asp">CSS style for the element</a>.
+					A nested <a href="@{project.url}ao.tld/tag-style">&lt;ao:style&gt;</a> tag will override this value.
+				</p>
+			]]></description>
+			<name>style</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					A JavaScript <a href="https://www.w3schools.com/tags/ev_onclick.asp">onclick</a> handler.
+					A nested <a href="@{project.url}ao.tld/tag-onclick">&lt;ao:onclick&gt;</a> tag will override this value.
+				</p>
+			]]></description>
+			<name>onclick</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					A JavaScript <a href="https://www.w3schools.com/tags/ev_onmouseover.asp">onmouseover</a> handler.
+					A nested <a href="@{project.url}ao.tld/tag-onmouseover">&lt;ao:onmouseover&gt;</a> tag will override this value.
+				</p>
+			]]></description>
+			<name>onmouseover</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					A JavaScript <a href="https://www.w3schools.com/tags/ev_onmouseout.asp">onmouseout</a> handler.
+					A nested <a href="@{project.url}ao.tld/tag-onmouseout">&lt;ao:onmouseout&gt;</a> tag will override this value.
+				</p>
+			]]></description>
+			<name>onmouseout</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>
+		<dynamic-attributes>true</dynamic-attributes>
+	</tag>
+	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
 		<!-- dateModified="2016-11-08T00:26:39-0600" -->
 		<description><![CDATA[
@@ -578,7 +876,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-07T02:55:46-0500" -->
+		<!-- dateModified="2019-10-08T21:41:35-0500" -->
 		<!-- TODO: param.* dynamic attributes should not do automatic multi-parameter.  Make a params.* dynamic attribute for this purpose. -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
@@ -627,7 +925,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The id of the element.
+					The <a href="https://www.w3schools.com/tags/att_global_id.asp">id of the element</a>.
 					A nested <a href="@{project.url}ao.tld/tag-id">&lt;ao:id&gt;</a>
 					tag will override this value.
 				</p>
@@ -1085,7 +1383,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-07T02:55:46-0500" -->
+		<!-- dateModified="2019-10-08T21:41:35-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an &lt;iframe&gt; tag.
@@ -1118,7 +1416,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The id of the element.
+					The <a href="https://www.w3schools.com/tags/att_global_id.asp">id of the element</a>.
 					A nested <a href="@{project.url}ao.tld/tag-id">&lt;ao:id&gt;</a>
 					tag will override this value.
 				</p>
@@ -1264,7 +1562,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-07T02:55:46-0500" -->
+		<!-- dateModified="2019-10-08T21:41:35-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an &lt;img&gt; tag.
@@ -1309,7 +1607,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The id of the element.
+					The <a href="https://www.w3schools.com/tags/att_global_id.asp">id of the element</a>.
 					A nested <a href="@{project.url}ao.tld/tag-id">&lt;ao:id&gt;</a>
 					tag will override this value.
 				</p>
@@ -1489,6 +1787,35 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					Specifies an image as a <a href="https://www.w3schools.com/tags/att_img_usemap.asp">client-side image-map</a>.
+				</p>
+				<p>
+					The <code>#</code> prefix is optional.
+					If not provided, the <code>#</code> will be automatically added.
+				</p>
+				<p>
+					This is expected to be used along with a <a href="@{project.url}ao.tld/tag-map">&lt;ao:map&gt;</a> tag.
+				</p>
+			]]></description>
+			<name>usemap</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					Specifies an image as a <a href="https://www.w3schools.com/tags/att_img_ismap.asp">server-side image-map</a>.
+				</p>
+			]]></description>
+			<name>ismap</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
 		<dynamic-attributes>true</dynamic-attributes>
 	</tag>
 	<tag>
@@ -1621,7 +1948,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2018-05-24T14:52:09-0500" -->
+		<!-- dateModified="2019-10-08T21:41:35-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an &lt;input&gt; tag.
@@ -1642,7 +1969,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The id of the element.
+					The <a href="https://www.w3schools.com/tags/att_global_id.asp">id of the element</a>.
 					A nested <a href="@{project.url}ao.tld/tag-id">&lt;ao:id&gt;</a>
 					tag will override this value.
 				</p>
@@ -2089,6 +2416,41 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<type>java.lang.Object</type>
 		</attribute>
 		<dynamic-attributes>true</dynamic-attributes>
+	</tag>
+	<tag>
+		<!-- datePublished="2019-10-08T21:41:35-0500" -->
+		<description><![CDATA[
+			<p class="semanticcms-tag-reference-summary">
+				Renders a <a href="https://www.w3schools.com/tags/tag_map.asp">&lt;map&gt;</a> tag.
+			</p>
+			<p>
+				This is expected to be used along with nested <a href="@{project.url}ao.tld/tag-area">&lt;ao:area&gt;</a> tags.
+			</p>
+		]]></description>
+		<name>map</name>
+		<tag-class>com.aoindustries.taglib.MapTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					The required id of the map.
+					Must be provided as either this attribute or a nested <a href="@{project.url}ao.tld/tag-id">&lt;ao:id&gt;</a> tag.
+					A nested <a href="@{project.url}ao.tld/tag-id">&lt;ao:id&gt;</a> tag will override this value.
+				</p>
+				<p>
+					For maximum HTML/XHTML and HTML 4/5 compatibility, this value is
+					written as both <code>id</code> and <code>name</code> attributes.
+				</p>
+				<p>
+					The <code>id</code> of this map should be used as the <code>usemap</code> attribute
+					of an <a href="@{project.url}ao.tld/tag-area">&lt;ao:img&gt;</a> tag.
+				</p>
+			]]></description>
+			<name>id</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
@@ -3283,7 +3645,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2018-05-24T14:52:09-0500" -->
+		<!-- dateModified="2019-10-08T21:41:35-0500" -->
 		<description><![CDATA[
 			<p>
 				Renders a &lt;select&gt; tag.
@@ -3295,7 +3657,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The id of the element.
+					The <a href="https://www.w3schools.com/tags/att_global_id.asp">id of the element</a>.
 					A nested <a href="@{project.url}ao.tld/tag-id">&lt;ao:id&gt;</a>
 					tag will override this value.
 				</p>

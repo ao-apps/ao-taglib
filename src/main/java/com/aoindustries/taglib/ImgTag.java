@@ -30,6 +30,7 @@ import com.aoindustries.net.URIParametersMap;
 import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
+import com.aoindustries.util.StringUtility;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
@@ -66,6 +67,8 @@ public class ImgTag
 	private Object title;
 	private Object clazz;
 	private Object style;
+	private String usemap;
+	private boolean ismap;
 
 	@Override
 	public MediaType getContentType() {
@@ -140,6 +143,15 @@ public class ImgTag
 		this.style = style;
 	}
 
+	public void setUsemap(String usemap) {
+		// TODO: Review taglib for more places where nullIfEmpty would be appropriate
+		this.usemap = StringUtility.nullIfEmpty(usemap);
+	}
+
+	public void setIsmap(boolean ismap) {
+		this.ismap = ismap;
+	}
+
 	@Override
 	public void setDynamicAttribute(String uri, String localName, Object value) throws JspTagException {
 		if(
@@ -196,6 +208,15 @@ public class ImgTag
 			out.write(" style=\"");
 			Coercion.write(style, textInXhtmlAttributeEncoder, out);
 			out.write('"');
+		}
+		if(usemap != null) {
+			out.write(" usemap=\"");
+			if(!usemap.startsWith("#")) out.write('#');
+			textInXhtmlAttributeEncoder.write(usemap, out);
+			out.write('"');
+		}
+		if(ismap) {
+			out.write(" ismap=\"ismap\"");
 		}
 		out.write(" />");
 	}
