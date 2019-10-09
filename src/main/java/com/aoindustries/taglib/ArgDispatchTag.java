@@ -22,8 +22,8 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.lang.LocalizedIllegalArgumentException;
 import com.aoindustries.servlet.http.Dispatcher;
+import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.WildcardPatternMatcher;
 import java.io.Serializable;
@@ -66,11 +66,11 @@ abstract class ArgDispatchTag
 	}
 
 	@Override
-	public void addArg(String name, Object value) throws IllegalArgumentException {
+	public void addArg(String name, Object value) throws JspTagException {
 		if(args==null) {
 			args = new LinkedHashMap<>();
 		} else if(args.containsKey(name)) {
-			throw new LocalizedIllegalArgumentException(accessor, "DispatchTag.addArg.duplicateArgument", name);
+			throw new LocalizedJspTagException(accessor, "DispatchTag.addArg.duplicateArgument", name);
 		}
 		args.put(name, value);
 	}

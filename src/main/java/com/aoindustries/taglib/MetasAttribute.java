@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2011, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2011, 2016, 2017, 2019  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,6 +22,8 @@
  */
 package com.aoindustries.taglib;
 
+import javax.servlet.jsp.JspTagException;
+
 /**
  * Something that captures meta data instead of meta data being written directly
  * where the MetaTag is placed.
@@ -30,5 +32,5 @@ package com.aoindustries.taglib;
  */
 public interface MetasAttribute {
 
-	void addMeta(Meta meta);
+	void addMeta(Meta meta) throws JspTagException;
 }

@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2016, 2017, 2019  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -35,7 +35,6 @@ import com.aoindustries.io.buffer.CharArrayBufferWriter;
 import com.aoindustries.io.buffer.LoggingWriter;
 import com.aoindustries.tempfiles.TempFileContext;
 import com.aoindustries.tempfiles.servlet.ServletTempFileContext;
-import com.aoindustries.util.WrappedException;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -95,7 +94,7 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 					)
 				);
 			} catch(IOException e) {
-				throw new WrappedException(e);
+				throw new ExceptionInInitializerError(e);
 			}
 		} else {
 			log = null;

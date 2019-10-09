@@ -37,7 +37,6 @@ import com.aoindustries.servlet.http.Dispatcher;
 import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
-import com.aoindustries.util.WrappedException;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
@@ -158,11 +157,11 @@ public class ATag
 	}
 
 	@Override
-	public void setClazz(Object clazz) {
+	public void setClazz(Object clazz) throws JspTagException {
 		try {
 			this.clazz = Coercion.nullIfEmpty(clazz);
 		} catch(IOException e) {
-			throw new WrappedException(e);
+			throw new JspTagException(e);
 		}
 	}
 
