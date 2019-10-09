@@ -36,7 +36,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2019-10-09T06:35:47-0500"
+		dateModified="2019-10-09T07:02:53-0500"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -129,6 +129,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 					<li>Attribute settings may now throw <ao:a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/jsp/JspTagException.html">JspTagException</ao:a>.</li>
 					<li>Trimming more attributes, and avoiding writing most attributes when they would be empty.</li>
 					<li><core:link page="ao.tld/tag-iframe" /> now writes both <code>id</code> and <code>name</code> attributes for maximum compatibility.</li>
+					<li><core:link page="ao.tld/function-getLastModified" /> now properly decodes paths</li>
 					<!-- TODO:
 					<li>Support script async and defer attributes</li>
 					<li>Support autofocus and required attributes (textarea, input, ...)</li>
