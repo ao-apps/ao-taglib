@@ -91,6 +91,17 @@ public final class AttributeUtils  {
 	}
 
 	/**
+	 * @see  Coercion#trim(java.lang.Object)
+	 */
+	public static Object trim(Object value) throws JspTagException {
+		try {
+			return Coercion.trim(value);
+		} catch(IOException e) {
+			throw new JspTagException(e);
+		}
+	}
+
+	/**
 	 * @see  Coercion#trimNullIfEmpty(java.lang.Object)
 	 */
 	public static Object trimNullIfEmpty(Object value) throws JspTagException {

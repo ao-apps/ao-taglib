@@ -178,7 +178,7 @@ public class AreaTag
 
 	@Override
 	public void setAlt(Object alt) throws JspTagException {
-		this.alt = AttributeUtils.trimNullIfEmpty(alt);
+		this.alt = AttributeUtils.trim(alt);
 	}
 
 	@Override
@@ -221,6 +221,9 @@ public class AreaTag
 		if(shape == null) throw new AttributeRequiredException("shape");
 		if(!"default".equals(shape)) {
 			if(coords == null) throw new AttributeRequiredException("coords");
+		}
+		if(href != null) {
+			if(alt == null) throw new AttributeRequiredException("alt");
 		}
 		out.write("<area");
 		if(id != null) {
