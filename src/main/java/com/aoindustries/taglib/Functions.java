@@ -35,6 +35,8 @@ import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.StringUtility;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspTagException;
 
@@ -48,19 +50,20 @@ final public class Functions {
 	 *
 	 * @see  LastModifiedServlet#getLastModified(javax.servlet.ServletContext, javax.servlet.http.HttpServletRequest, java.lang.String)
 	 */
-	public static long getLastModified(String url) throws MalformedURLException {
+	public static long getLastModified(String url) throws MalformedURLException, URISyntaxException {
 		HttpServletRequest request = getRequest();
 		// Get the context-relative path (resolves relative paths)
-		String resourcePath = URIResolver.getAbsolutePath(
-			Dispatcher.getCurrentPagePath(request),
-			url
-		);
+		String resourcePath = HttpServletUtil.getAbsolutePath(request, url);
 		if(resourcePath.startsWith("/")) {
-			// TODO: url decode path components except '/' to Unicode?
+			URI resourcePathURI = new URI(
+				URIEncoder.encodeURI(
+					resourcePath
+				)
+			);
 			return LastModifiedServlet.getLastModified(
 				getServletContext(),
 				request,
-				resourcePath
+				resourcePathURI.getPath()
 			);
 		}
 		return 0;
