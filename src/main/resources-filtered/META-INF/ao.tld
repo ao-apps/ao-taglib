@@ -1957,7 +1957,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2019-10-09T19:24:36-0500" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_input.asp">&lt;input&gt;</a> tag.
@@ -1970,6 +1970,34 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<li>As the value attribute</li>
 				<li>Contents of tag body, trimmed.</li>
 			</ol>
+			<p>
+				For <code>type="image"</code>, the src may be provided in one of two ways, in precedence order:
+			</p>
+			<ol>
+				<li>Direct child <a href="@{project.url}ao.tld/tag-src">&lt;ao:src&gt;</a> tag.</li>
+				<li>As the src attribute</li>
+			</ol>
+			<p>
+				Any attribute that has no namespace and begins with <code>param.</code> is added to the src as a URL parameter.
+				The parameter name is the part of the attribute name following <code>param.</code>.
+			</p>
+			<p>
+				When a parameter value is <code>null</code> it is not added.
+				If the value is an
+				<a rel="nofollow" href="@{javac.link.javaApi}java/lang/Iterable.html">Iterable</a>,
+				<a rel="nofollow" href="@{javac.link.javaApi}java/util/Iterator.html">Iterator</a>,
+				<a rel="nofollow" href="@{javac.link.javaApi}java/util/Enumeration.html">Enumeration</a>,
+				or array, then each non-null element is coerced to
+				<a rel="nofollow" href="@{javac.link.javaApi}java/lang/String.html">String</a>
+				as a separate parameter in iteration order.  Otherwise, the value itself is
+				coerced to <a rel="nofollow" href="@{javac.link.javaApi}java/lang/String.html">String</a>
+				for the parameter value.
+			</p>
+			<p>
+				Nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a>
+				or <a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a>
+				tags will add parameters after any provided as attributes.
+			</p>
 		]]></description>
 		<name>input</name>
 		<tag-class>com.aoindustries.taglib.InputTag</tag-class>
@@ -2153,6 +2181,155 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</attribute>
 		<attribute>
 			<description><![CDATA[
+				<p class="semanticcms-tag-reference-summary">
+					The <a href="https://www.w3schools.com/tags/att_input_src.asp">src for the image</a>
+					(only for <code>type="image"</code>).
+					The src is modified in several ways to make things much easier to work with.
+				</p>
+				<p>
+					A nested <a href="@{project.url}ao.tld/tag-src">&lt;ao:src&gt;</a> tag will override this value.
+				</p>
+				<p>
+					In order to make relative paths predictable, relative paths are interpreted from
+					the current JSP page, as long as all includes have been done via
+					<a href="@{project.url}ao.tld/tag-include">&lt;ao:include&gt;</a>
+					and any forward via <a href="@{project.url}ao.tld/tag-forward">&lt;ao:forward&gt;</a>.
+				</p>
+				<p>
+					In order to keep paths app-relative, if starts with a /, the context path will be
+					prepended to the path.
+				</p>
+				<p>
+					In order to simplify things behind URL mapping schemes,
+					the src is always written starting with '/'.  This avoids any need to include any
+					<a href="@{project.url}ao.tld/tag-base">&lt;ao:base&gt;</a> tags.
+				</p>
+				<p>
+					URL rewriting is performed as needed via
+					<a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
+				</p>
+				<p>
+					To support paths in different character sets, a Unicode to ASCII URI encoding is performed
+					on every character that is not defined in <a href="https://tools.ietf.org/html/rfc3986#section-2.2">RFC 3986: Reserved Characters</a>.
+					To avoid ambiguity, any dynamic parameters or anchors in the URL must have been correctly encoded by the caller.
+				</p>
+				<p>
+					Any directly nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a>
+					or <a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a>
+					tag will add parameters to the src.
+				</p>
+			]]></description>
+			<name>src</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					When <code>true</code>, generates an absolute URL for the <a href="https://www.w3schools.com/tags/att_input_src.asp">src for the image</a>,
+					(only for <code>type="image"</code>).
+					Defaults to <code>false</code>.
+				</p>
+			]]></description>
+			<name>absolute</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					When <code>true</code>, will generate a <a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URL</a>.
+					Canonical URLs should be used where per-user response URL rewriting
+					(such as information added when cookies are disabled) should be avoided.
+					Defaults to <code>false</code>.
+				</p>
+			]]></description>
+			<name>canonical</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					If the src represents a local resource, a parameter of "lastModified=#####" may be
+					automatically added with the timestamp of the local resource to the nearest second.
+					May be one of <code>true</code>, <code>false</code>, or <code>auto</code>.
+					Defaults to <code>auto</code>.
+				</p>
+				<p>
+					In auto mode, last modified stamping may be disabled by the client with
+					the <code>X-com-aoindustries-servlet-http-LastModifiedServlet-lastModified: false</code> header.
+				</p>
+				<p>
+					In auto mode, last modified stamping is not performed on
+					<a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URLs</a>.
+				</p>
+			]]></description>
+			<name>addLastModified</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					The optional <a href="https://www.w3schools.com/tags/att_input_width.asp">width for the image</a>,
+					(only for <code>type="image"</code>).
+					A nested <a href="@{project.url}ao.tld/tag-width">&lt;ao:width&gt;</a>
+					tag will override this value.
+				</p>
+			]]></description>
+			<name>width</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					The optional <a href="https://www.w3schools.com/tags/att_input_height.asp">height for the image</a>,
+					(only for <code>type="image"</code>).
+					A nested <a href="@{project.url}ao.tld/tag-height">&lt;ao:height&gt;</a>
+					tag will override this value.
+				</p>
+			]]></description>
+			<name>height</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					The <a href="https://www.w3schools.com/tags/att_input_alt.asp">alt text for the input</a>
+					(only for <code>type="image"</code>).
+					Required when <code>type</code> is <code>"image"</code>.
+					A nested <a href="@{project.url}ao.tld/tag-alt">&lt;ao:alt&gt;</a>
+					tag will override this value.
+				</p>
+			]]></description>
+			<name>alt</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					The <a href="https://www.w3schools.com/tags/att_global_title.asp">title text for the element</a>.
+					A nested <a href="@{project.url}ao.tld/tag-title">&lt;ao:title&gt;</a> tag will override this value.
+				</p>
+			]]></description>
+			<name>title</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_global_class.asp">CSS class for the element</a>.
 					A nested <a href="@{project.url}ao.tld/tag-class">&lt;ao:class&gt;</a>
@@ -2223,6 +2400,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<rtexprvalue>true</rtexprvalue>
 			<type>boolean</type>
 		</attribute>
+		<dynamic-attributes>true</dynamic-attributes>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->

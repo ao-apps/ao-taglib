@@ -28,7 +28,10 @@ import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.buffer.BufferResult;
+import com.aoindustries.net.URIParametersMap;
+import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
+import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
@@ -37,6 +40,7 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import javax.servlet.jsp.JspTagException;
+import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
  * @author  AO Industries, Inc.
@@ -44,6 +48,7 @@ import javax.servlet.jsp.JspTagException;
 public class InputTag
 	extends AutoEncodingBufferedTag
 	implements
+		DynamicAttributes,
 		IdAttribute,
 		TypeAttribute,
 		NameAttribute,
@@ -57,6 +62,12 @@ public class InputTag
 		MaxlengthAttribute,
 		ReadonlyAttribute,
 		DisabledAttribute,
+		SrcAttribute,
+		ParamsAttribute,
+		WidthAttribute,
+		HeightAttribute,
+		AltAttribute,
+		TitleAttribute,
 		ClassAttribute,
 		StyleAttribute,
 		CheckedAttribute,
@@ -189,6 +200,59 @@ public class InputTag
 		this.disabled = disabled;
 	}
 
+	private String src;
+	@Override
+	public void setSrc(String src) throws JspTagException {
+		this.src = AttributeUtils.nullIfEmpty(src);
+	}
+
+	private URIParametersMap params;
+	@Override
+	public void addParam(String name, String value) {
+		if(params==null) params = new URIParametersMap();
+		params.addParameter(name, value);
+	}
+
+	private boolean absolute;
+	public void setAbsolute(boolean absolute) {
+		this.absolute = absolute;
+	}
+
+	private boolean canonical;
+	public void setCanonical(boolean canonical) {
+		this.canonical = canonical;
+	}
+
+	private LastModifiedServlet.AddLastModifiedWhen addLastModified = LastModifiedServlet.AddLastModifiedWhen.AUTO;
+	public void setAddLastModified(String addLastModified) {
+		this.addLastModified = LastModifiedServlet.AddLastModifiedWhen.valueOfLowerName(addLastModified.trim());
+	}
+
+	private Object width;
+	@Override
+	public void setWidth(Object width) throws JspTagException {
+		this.width = AttributeUtils.trimNullIfEmpty(width);
+	}
+
+	private Object height;
+	@Override
+	public void setHeight(Object height) throws JspTagException {
+		this.height = AttributeUtils.trimNullIfEmpty(height);
+	}
+
+
+	private Object alt;
+	@Override
+	public void setAlt(Object alt) throws JspTagException {
+		this.alt = AttributeUtils.trim(alt);
+	}
+
+	private Object title;
+	@Override
+	public void setTitle(Object title) throws JspTagException {
+		this.title = AttributeUtils.trimNullIfEmpty(title);
+	}
+
 	private Object clazz;
 	@Override
 	public Object getClazz() {
@@ -224,9 +288,29 @@ public class InputTag
 	}
 
 	@Override
+	public void setDynamicAttribute(String uri, String localName, Object value) throws JspTagException {
+		if(
+			uri==null
+			&& localName.startsWith(ParamUtils.PARAM_ATTRIBUTE_PREFIX)
+		) {
+			ParamUtils.setDynamicAttribute(this, uri, localName, value);
+		} else {
+			throw new LocalizedJspTagException(
+				accessor,
+				"error.unexpectedDynamicAttribute",
+				localName,
+				ParamUtils.PARAM_ATTRIBUTE_PREFIX+"*"
+			);
+		}
+	}
+
+	@Override
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		if(type==null) throw new AttributeRequiredException("type");
 		if(value==null) setValue(capturedBody.trim());
+		if("image".equals(type)) {
+			if(alt == null) throw new AttributeRequiredException("alt");
+		}
 		out.write("<input");
 		if(id!=null) {
 			out.write(" id=\"");
@@ -289,6 +373,27 @@ public class InputTag
 		}
 		if(readonly) out.write(" readonly=\"readonly\"");
 		if(disabled) out.write(" disabled=\"disabled\"");
+		UrlUtils.writeSrc(getJspContext(), out, src, params, absolute, canonical, addLastModified);
+		if(width != null) {
+			out.write(" width=\"");
+			Coercion.write(width, textInXhtmlAttributeEncoder, out);
+			out.write('"');
+		}
+		if(height != null) {
+			out.write(" height=\"");
+			Coercion.write(height, textInXhtmlAttributeEncoder, out);
+			out.write('"');
+		}
+		if(alt != null) {
+			out.write(" alt=\"");
+			MarkupUtils.writeWithMarkup(alt, MarkupType.TEXT, textInXhtmlAttributeEncoder, out);
+			out.write('"');
+		}
+		if(title != null) {
+			out.write(" title=\"");
+			MarkupUtils.writeWithMarkup(title, MarkupType.TEXT, textInXhtmlAttributeEncoder, out);
+			out.write('"');
+		}
 		if(clazz!=null) {
 			out.write(" class=\"");
 			Coercion.write(clazz, textInXhtmlAttributeEncoder, out);

@@ -34,12 +34,12 @@ public class InputTagTEI extends TagExtraInfo {
 
 	@Override
 	public ValidationMessage[] validate(TagData data) {
-		Object o = data.getAttribute("type");
+		Object typeAttr = data.getAttribute("type");
 		if(
-			o != null
-			&& o != TagData.REQUEST_TIME_VALUE
+			typeAttr != null
+			&& typeAttr != TagData.REQUEST_TIME_VALUE
 		) {
-			String type = Coercion.toString(o).trim();
+			String type = Coercion.toString(typeAttr).trim();
 			if(!InputTag.isValidType(type)) {
 				return new ValidationMessage[] {
 					new ValidationMessage(data.getId(), ApplicationResources.accessor.getMessage("InputTag.type.invalid", type))
