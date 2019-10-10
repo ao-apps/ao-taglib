@@ -36,7 +36,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2019-10-09T07:29:41-0500"
+		dateModified="2019-10-09T19:24:36-0500"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -131,6 +131,20 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 					<li><core:link page="ao.tld/tag-iframe" /> now writes both <code>id</code> and <code>name</code> attributes for maximum compatibility.</li>
 					<li><core:link page="ao.tld/function-getLastModified" /> now properly decodes paths</li>
 					<li>The <code>default</code> attribute of <core:link page="ao.tld/tag-out" /> is now deferred, must use <code>\#{…}</code> instead of <code>\${…}</code>.</li>
+					<li>
+						Added support for <core:link page="ao.tld/tag-input" /> with <code>type="image"</code>:
+						<ol>
+							<li>New <ao:a href="https://www.w3schools.com/tags/att_input_src.asp"><code>src</code> attribute</ao:a></li>
+							<li>New <code>absolute</code> attribute</li>
+							<li>New <ao:a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html"><code>canonical</code> attribute</ao:a></li>
+							<li>New <code>addLastModified</code> attribute</li>
+							<li>New <ao:a href="https://www.w3schools.com/tags/att_input_width.asp"><code>width</code> attribute</ao:a></li>
+							<li>New <ao:a href="https://www.w3schools.com/tags/att_input_height.asp"><code>height</code> attribute</ao:a></li>
+							<li>New <ao:a href="https://www.w3schools.com/tags/att_input_alt.asp"><code>alt</code> attribute</ao:a>, required for <code>type="image"</code></li>
+							<li>New <ao:a href="https://www.w3schools.com/tags/att_global_title.asp"><code>title</code> attribute</ao:a></li>
+							<li>New dynamic attributes <code>param.*</code></li>
+						</ol>
+					</li>
 					<!-- TODO:
 					<li>Support script async and defer attributes</li>
 					<li>Support autofocus and required attributes (textarea, input, ...)</li>

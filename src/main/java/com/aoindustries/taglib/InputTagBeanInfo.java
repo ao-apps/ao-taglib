@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2010, 2011, 2012, 2015, 2016, 2017, 2018  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2012, 2015, 2016, 2017, 2018, 2019  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -56,6 +56,14 @@ public class InputTagBeanInfo extends SimpleBeanInfo {
 					new PropertyDescriptor("maxlength", InputTag.class, null, "setMaxlength"),
 					new PropertyDescriptor("readonly", InputTag.class, null, "setReadonly"),
 					new PropertyDescriptor("disabled", InputTag.class, null, "setDisabled"),
+					new PropertyDescriptor("src", InputTag.class, null, "setSrc"),
+					new PropertyDescriptor("absolute", InputTag.class, null, "setAbsolute"),
+					new PropertyDescriptor("canonical", InputTag.class, null, "setCanonical"),
+					new PropertyDescriptor("addLastModified", InputTag.class, null, "setAddLastModified"),
+					new PropertyDescriptor("width", InputTag.class, null, "setWidth"),
+					new PropertyDescriptor("height", InputTag.class, null, "setHeight"),
+					new PropertyDescriptor("alt", InputTag.class, null, "setAlt"),
+					new PropertyDescriptor("title", InputTag.class, null, "setTitle"),
 					new PropertyDescriptor("class", InputTag.class, "getClazz", "setClazz"),
 					new PropertyDescriptor("style", InputTag.class, null, "setStyle"),
 					new PropertyDescriptor("checked", InputTag.class, null, "setChecked"),
