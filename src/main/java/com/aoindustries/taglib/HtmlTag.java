@@ -44,7 +44,6 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 		return MediaType.XHTML;
 	}
 
-	// TODO: a way to register doctype on the current request
 	private DocType doctype;
 	public void setDoctype(String doctype) {
 		if(doctype == null) {
