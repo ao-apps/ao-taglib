@@ -23,9 +23,11 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.Coercion;
+import com.aoindustries.encoding.MediaEncoder;
 import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
+import com.aoindustries.encoding.servlet.HttpServletResponseEncodingContext;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URIParametersMap;
@@ -35,6 +37,7 @@ import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import java.io.IOException;
 import java.io.Writer;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.DynamicAttributes;
@@ -65,7 +68,7 @@ public class ScriptTag
 
 	@Override
 	public MediaType getOutputType() {
-		return src!=null ? MediaType.XHTML : mediaType;
+		return MediaType.XHTML;
 	}
 
 	@Override
@@ -137,11 +140,7 @@ public class ScriptTag
 
 	@Override
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
-		if(src==null) {
-			// Use default auto encoding
-			// TODO: Do not write type when HTML 5 and javascript
-			MarkupUtils.writeWithMarkup(capturedBody, mediaType.getMarkupType(), out);
-		} else {
+		try {
 			// Write script tag with src attribute, discarding any body
 			PageContext pageContext = (PageContext)getJspContext();
 			Html.DocType doctype = Html.DocType.get(pageContext.getServletContext(), pageContext.getRequest());
@@ -160,7 +159,29 @@ public class ScriptTag
 				out.write('"');
 			}
 			UrlUtils.writeSrc(pageContext, out, src, params, absolute, canonical, addLastModified);
-			out.write("></script>");
+			out.write('>');
+			// Only write body when there is no source (discard body when src provided)
+			if(src == null) {
+				HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
+				boolean writeCdata =
+					mediaType == MediaType.JAVASCRIPT
+					&& Html.Serialization.get(response) == Html.Serialization.XHTML;
+				if(writeCdata) {
+					out.write("\n  // <![CDATA[\n");
+				}
+				MarkupUtils.writeWithMarkup(
+					capturedBody,
+					mediaType.getMarkupType(),
+					MediaEncoder.getInstance(new HttpServletResponseEncodingContext(response), mediaType, getOutputType()),
+					out
+				);
+				if(writeCdata) {
+					out.append("\n  // ]]>\n");
+				}
+			}
+			out.write("</script>");
+		} catch(MediaException err) {
+			throw new JspTagException(err);
 		}
 	}
 }
