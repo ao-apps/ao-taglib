@@ -35,6 +35,7 @@ import com.aoindustries.net.URIParametersMap;
 import com.aoindustries.net.URIParametersUtils;
 import com.aoindustries.net.URIResolver;
 import com.aoindustries.servlet.http.Dispatcher;
+import com.aoindustries.servlet.http.Html;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.i18n.MarkupType;
@@ -167,6 +168,7 @@ public class FormTag
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
 		HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
+		Html.Serialization serialization = Html.Serialization.get(response);
 		out.write("<form method=\"");
 		out.write(method);
 		out.write('"');
@@ -233,7 +235,9 @@ public class FormTag
 					encodeTextInXhtmlAttribute(name, out);
 					out.write("\" value=\"");
 					encodeTextInXhtmlAttribute(value, out);
-					out.write("\" />\n");
+					out.write('"');
+					serialization.writeSelfClose(out);
+					out.write('\n');
 				}
 			}
 		}
@@ -250,7 +254,9 @@ public class FormTag
 					encodeTextInXhtmlAttribute(name, out);
 					out.write("\" value=\"");
 					encodeTextInXhtmlAttribute(paramValue, out);
-					out.write("\" />\n");
+					out.write('"');
+					serialization.writeSelfClose(out);
+					out.write('\n');
 				}
 			}
 		}

@@ -28,6 +28,7 @@ import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URIParametersMap;
+import com.aoindustries.servlet.http.Html;
 import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
@@ -35,6 +36,7 @@ import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspTagException;
+import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
@@ -225,6 +227,8 @@ public class AreaTag
 		if(href != null) {
 			if(alt == null) throw new AttributeRequiredException("alt");
 		}
+		PageContext pageContext = (PageContext)getJspContext();
+		Html.Serialization serialization = Html.Serialization.get(pageContext.getResponse());
 		out.write("<area");
 		if(id != null) {
 			out.write(" id=\"");
@@ -239,7 +243,7 @@ public class AreaTag
 			textInXhtmlAttributeEncoder.write(coords, out);
 			out.write('"');
 		}
-		UrlUtils.writeHref(getJspContext(), out, href, params, absolute, canonical, addLastModified);
+		UrlUtils.writeHref(pageContext, out, href, params, absolute, canonical, addLastModified);
 		if(hreflang != null) {
 			out.write(" hreflang=\"");
 			Coercion.write(hreflang, textInXhtmlAttributeEncoder, out);
@@ -298,6 +302,6 @@ public class AreaTag
 			Coercion.write(onmouseout, javaScriptInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
-		out.write(" />");
+		serialization.writeSelfClose(out);
 	}
 }

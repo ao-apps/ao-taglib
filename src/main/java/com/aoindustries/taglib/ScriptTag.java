@@ -29,12 +29,14 @@ import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextIn
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URIParametersMap;
+import com.aoindustries.servlet.http.Html;
 import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspTagException;
+import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
@@ -137,13 +139,27 @@ public class ScriptTag
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		if(src==null) {
 			// Use default auto encoding
+			// TODO: Do not write type when HTML 5 and javascript
 			MarkupUtils.writeWithMarkup(capturedBody, mediaType.getMarkupType(), out);
 		} else {
 			// Write script tag with src attribute, discarding any body
-			out.write("<script type=\"");
-			encodeTextInXhtmlAttribute(mediaType.getContentType(), out);
-			out.write('"');
-			UrlUtils.writeSrc(getJspContext(), out, src, params, absolute, canonical, addLastModified);
+			PageContext pageContext = (PageContext)getJspContext();
+			Html.DocType doctype = Html.DocType.get(pageContext.getServletContext(), pageContext.getRequest());
+			out.write("<script");
+			String scriptType = mediaType.getContentType();
+			// Do not write type when HTML 5 and javascript
+			if(
+				doctype != Html.DocType.html5
+				|| (
+					!"text/javascript".equalsIgnoreCase(scriptType)
+					&& !"application/javascript".equalsIgnoreCase(scriptType)
+				)
+			) {
+				out.write(" type=\"");
+				encodeTextInXhtmlAttribute(scriptType, out);
+				out.write('"');
+			}
+			UrlUtils.writeSrc(pageContext, out, src, params, absolute, canonical, addLastModified);
 			out.write("></script>");
 		}
 	}

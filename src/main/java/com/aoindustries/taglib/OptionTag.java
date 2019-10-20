@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2010, 2011, 2013, 2015, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2013, 2015, 2016, 2017, 2019  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -27,10 +27,12 @@ import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import static com.aoindustries.encoding.TextInXhtmlEncoder.textInXhtmlEncoder;
 import com.aoindustries.io.buffer.BufferResult;
+import com.aoindustries.servlet.http.Html;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspTagException;
+import javax.servlet.jsp.PageContext;
 
 /**
  * @author  AO Industries, Inc.
@@ -78,11 +80,19 @@ public class OptionTag
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		capturedBody = capturedBody.trim();
 		if(!valueSet) setValue(capturedBody);
+		PageContext pageContext = (PageContext)getJspContext();
+		Html.Serialization serialization = Html.Serialization.get(pageContext.getResponse());
 		out.write("<option value=\"");
 		Coercion.write(value, textInXhtmlAttributeEncoder, out);
 		out.write('"');
-		if(selected) out.write(" selected=\"selected\"");
-		if(disabled) out.write(" disabled=\"disabled\"");
+		if(selected) {
+			out.write(" selected");
+			if(serialization == Html.Serialization.XHTML) out.write("=\"selected\"");
+		}
+		if(disabled) {
+			out.write(" disabled");
+			if(serialization == Html.Serialization.XHTML) out.write("=\"disabled\"");
+		}
 		out.write('>');
 		// Allow text markup from translations
 		MarkupUtils.writeWithMarkup(capturedBody, MarkupType.TEXT, textInXhtmlEncoder, out);

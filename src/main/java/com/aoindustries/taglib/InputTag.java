@@ -29,6 +29,7 @@ import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextIn
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.net.URIParametersMap;
+import com.aoindustries.servlet.http.Html;
 import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
@@ -40,6 +41,7 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import javax.servlet.jsp.JspTagException;
+import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
@@ -311,6 +313,8 @@ public class InputTag
 		if("image".equals(type)) {
 			if(alt == null) throw new AttributeRequiredException("alt");
 		}
+		PageContext pageContext = (PageContext)getJspContext();
+		Html.Serialization serialization = Html.Serialization.get(pageContext.getResponse());
 		out.write("<input");
 		if(id!=null) {
 			out.write(" id=\"");
@@ -371,9 +375,15 @@ public class InputTag
 			out.write(maxlength.toString());
 			out.write('"');
 		}
-		if(readonly) out.write(" readonly=\"readonly\"");
-		if(disabled) out.write(" disabled=\"disabled\"");
-		UrlUtils.writeSrc(getJspContext(), out, src, params, absolute, canonical, addLastModified);
+		if(readonly) {
+			out.write(" readonly");
+			if(serialization == Html.Serialization.XHTML) out.write("=\"readonly\"");
+		}
+		if(disabled) {
+			out.write(" disabled");
+			if(serialization == Html.Serialization.XHTML) out.write("=\"disabled\"");
+		}
+		UrlUtils.writeSrc(pageContext, out, src, params, absolute, canonical, addLastModified);
 		if(width != null) {
 			out.write(" width=\"");
 			Coercion.write(width, textInXhtmlAttributeEncoder, out);
@@ -404,7 +414,10 @@ public class InputTag
 			Coercion.write(style, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
-		if(checked) out.write(" checked=\"checked\"");
+		if(checked) {
+			out.write(" checked");
+			if(serialization == Html.Serialization.XHTML) out.write("=\"checked\"");
+		}
 		if(tabindex >= 1) {
 			out.write(" tabindex=\"");
 			out.write(Integer.toString(tabindex));
@@ -413,6 +426,6 @@ public class InputTag
 		if(!autocomplete) {
 			out.write(" autocomplete=\"off\"");
 		}
-		out.write(" />");
+		serialization.writeSelfClose(out);
 	}
 }

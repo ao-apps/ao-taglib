@@ -29,6 +29,7 @@ import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlA
 import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URIParameters;
 import com.aoindustries.net.URIParametersMap;
+import com.aoindustries.servlet.http.Html;
 import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
@@ -37,6 +38,7 @@ import java.io.Writer;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.jsp.JspTagException;
+import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 import javax.servlet.jsp.tagext.JspTag;
 
@@ -176,8 +178,10 @@ public class LinkTag
 				)
 			);
 		} else {
+			PageContext pageContext = (PageContext)getJspContext();
+			Html.Serialization serialization = Html.Serialization.get(pageContext.getResponse());
 			out.write("<link");
-			UrlUtils.writeHref(getJspContext(), out, href, params, absolute, canonical, addLastModified);
+			UrlUtils.writeHref(pageContext, out, href, params, absolute, canonical, addLastModified);
 			if(hreflang!=null) {
 				out.write(" hreflang=\"");
 				Coercion.write(hreflang, textInXhtmlAttributeEncoder, out);
@@ -203,7 +207,7 @@ public class LinkTag
 				Coercion.write(title, textInXhtmlAttributeEncoder, out);
 				out.write('"');
 			}
-			out.write(" />");
+			serialization.writeSelfClose(out);
 		}
 	}
 }
