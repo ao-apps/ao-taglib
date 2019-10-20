@@ -121,6 +121,7 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 	protected void doTag(Writer out) throws JspException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
 		ServletContext servletContext = pageContext.getServletContext();
+		HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
 		ServletResponse response = pageContext.getResponse();
 
 		// Clear the output buffer
@@ -128,7 +129,7 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 
 		// Set the content type
 		Serialization currentSerialization = serialization;
-		if(currentSerialization == null) currentSerialization = Serialization.select(servletContext, (HttpServletRequest)pageContext.getRequest());
+		if(currentSerialization == null) currentSerialization = Serialization.select(servletContext, request);
 		String contentType = currentSerialization.getContentType();
 		response.setContentType(contentType);
 		final String documentEncoding = Html.ENCODING.name();
@@ -141,7 +142,10 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 		if(!contentType.equals(actualContentType)) throw new JspTagException("Unable to set content type, response already committed? contentType=" + contentType + ", actualContentType=" + actualContentType);
 
 		DocType currentDocType = doctype;
-		if(currentDocType == null) currentDocType = DocType.getDefault(servletContext);
+		if(currentDocType == null) {
+			currentDocType = DocType.get(servletContext, request);
+		}
+		DocType.set(request, currentDocType);
 		currentDocType.appendXmlDeclarationLine(currentSerialization, documentEncoding, out);
 		out.write(currentDocType.getDocTypeLine(currentSerialization));
 		if(oldIeClass!=null) {
