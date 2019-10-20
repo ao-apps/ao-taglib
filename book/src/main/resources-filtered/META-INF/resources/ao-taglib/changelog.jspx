@@ -36,7 +36,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2019-10-20T01:20:39-0500"
+		dateModified="2019-10-20T01:35:11-0500"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -67,6 +67,14 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 						<ao:a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</ao:a>
 						<code>com.aoindustries.servlet.http.Html$Serialization.default</code>
 						that allows an application to control the selection of HTML versus XHTML.
+					</li>
+					<li>
+						<core:link page="ao.tld/tag-html" /> attribute <code>doctype</code> now has a new value <code>default</code> (the default),
+						that defers doctype selection to the application
+						<ao:a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</ao:a>
+						<code>com.aoindustries.servlet.http.Html$DocType.default</code>
+						that allows an application to control the default doctype.  This context-param, when unspecified,
+						defaults to "html5", which results in a breaking change (this tag used to default to "strict").
 					</li>
 					<!-- TODO:
 					<li>Support script async and defer attributes</li>
