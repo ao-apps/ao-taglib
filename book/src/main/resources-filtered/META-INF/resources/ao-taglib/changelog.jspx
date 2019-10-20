@@ -36,7 +36,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2019-10-20T04:25:44-0500"
+		dateModified="2019-10-23T19:30:38-0500"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -58,28 +58,53 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 						<ao:a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Html.html">Html</ao:a> class,
 						along with related constants.
 					</li>
-					<li>Now writing XML declaration when both serving as XHTML and response encoding is not UTF-8.</li>
+					<li>Now writing XML declaration when both serving as XHTML and response encoding is not <code>UTF-8</code>.</li>
 					<li>Now writing HTML or XHTML doctype based on current <code>Serialization</code>.</li>
 					<li>
 						Changed <core:link page="ao.tld/tag-html" /> attribute <code>forceHtml</code> to <code>serialization</code>,
-						which now takes values <code>html</code>, <code>xhtml</code>, or <code>auto</code> (the default).
-						When <code>auto</code> (the default), defers to the application
-						<ao:a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</ao:a>
-						<code>com.aoindustries.servlet.http.Html$Serialization.default</code>
-						that allows an application to control the selection of HTML versus XHTML.
+						which now takes values <code>SGML</code>, <code>XML</code>, or <code>auto</code> (the default).
+						When <code>auto</code>, the following steps are performed to resolve the serialization:
+						<ol>
+							<li>Use the serialization active on the current request.</li>
+							<li>
+								Use the application <ao:a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</ao:a>
+								<code>com.aoindustries.servlet.http.Html$Serialization.default</code>
+								that allows an application to control the selection of HTML versus XHTML.
+							</li>
+							<li>
+								When this context-param is unspecified or <code>auto</code>,
+								determine the serialization based on the client's <code>Accept</code> header.
+							</li>
+						</ol>
 					</li>
 					<li>
-						<core:link page="ao.tld/tag-html" /> attribute <code>doctype</code> now has a new value <code>default</code> (the default),
-						uses the doctype active on the current request.
-						When no doctype active on the request, defers to the application
-						<ao:a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</ao:a>
-						<code>com.aoindustries.servlet.http.Html$DocType.default</code>
-						that allows an application to control the default doctype.  This context-param, when unspecified,
-						defaults to "html5", which results in a breaking change (this tag used to default to "strict").
+						<core:link page="ao.tld/tag-html" /> attribute <code>doctype</code> now has a new value <code>default</code> (the default).
+						When <code>default</code>, the following steps are performed to resolve the doctype:
+						<ol>
+							<li>Use the doctype active on the current request.</li>
+							<li>
+								Use the application <ao:a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</ao:a>
+								<code>com.aoindustries.servlet.http.Html$Doctype.default</code>
+								that allows an application to control the default doctype.
+							</li>
+							<li>
+								When this context-param is unspecified or <code>default</code>,
+								defaults to <code>HTML5</code>, which results in a breaking change
+								(this tag used to default to <code>STRICT</code>).
+							</li>
+						</ol>
 					</li>
 					<li>
 						Now outputting HTML or XHTML based on the current response content type.
 						This should eliminate validator warnings when used as HTML.
+					</li>
+					<li>New tag <core:link page="ao.tld/tag-br" /> that writes a line break in the current serialization.</li>
+					<li>
+						New function <core:link page="ao.tld/function-getSerialization" /> to get the current
+						<ao:a href="https://aoindustries.com/ao-servlet-util/com/aoindustries/servlet/http/Html.Serialization.html">Serialization</ao:a> enum.</li>
+					<li>
+						New function <core:link page="ao.tld/function-getDoctype" /> to get the current
+						<ao:a href="https://aoindustries.com/ao-servlet-util/com/aoindustries/servlet/http/Html.DocType.html">DocType</ao:a> enum.
 					</li>
 					<!-- TODO:
 					<li>Support script async and defer attributes</li>

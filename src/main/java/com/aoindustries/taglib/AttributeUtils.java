@@ -23,6 +23,7 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.Coercion;
+import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import com.aoindustries.util.StringUtility;
 import java.io.IOException;
 import javax.el.ELContext;
@@ -121,6 +122,41 @@ public final class AttributeUtils  {
 			if(value.isEmpty()) value = null;
 		}
 		return value;
+	}
+
+	public static boolean isAllDigits(String value) {
+		for(int i = 0, len = value.length(); i < len; i++) {
+			char ch = value.charAt(i);
+			if(ch < '0' || ch > '9') return false;
+		}
+		return true;
+	}
+
+	public static boolean isZero(String value) {
+		for(int i = 0, len = value.length(); i < len; i++) {
+			char ch = value.charAt(i);
+			if(ch != '0') return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Appends a width style, while automatically appending "px" to any non-zero integer.
+	 *
+	 * @return  {@code true} when printed the style
+	 */
+	public static boolean appendWidthStyle(String width, Appendable out) throws IOException {
+		width = trimNullIfEmpty(width);
+		if(width != null) {
+			out.append("width:");
+			encodeTextInXhtmlAttribute(width, out);
+			if(isAllDigits(width) && !isZero(width)) {
+				out.append("px");
+			}
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**

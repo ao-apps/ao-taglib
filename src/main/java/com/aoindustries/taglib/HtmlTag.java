@@ -24,13 +24,13 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
+import com.aoindustries.servlet.ServletUtil;
 import com.aoindustries.servlet.http.Html;
-import com.aoindustries.servlet.http.Html.DocType;
-import com.aoindustries.servlet.http.Html.Serialization;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Locale;
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
@@ -44,25 +44,25 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 		return MediaType.XHTML;
 	}
 
-	private DocType doctype;
-	public void setDoctype(String doctype) {
-		if(doctype == null) {
-			this.doctype = null;
-		} else {
-			doctype = doctype.trim();
-			this.doctype = (doctype.isEmpty() || "default".equalsIgnoreCase(doctype)) ? null : DocType.valueOf(doctype.toLowerCase(Locale.ROOT));
-		}
-	}
+	// TODO: charset here, WebPage, Page, PageServer, PageTag, Skin, Layout, Theme
 
-	// TODO: Add a way to register the serialization on the current request, or just base on response encoding always?
-	// TODO: Would HtmlTag use this registered value as its default, to be consistent with any pre-processing that assumed this serialization?
-	private Serialization serialization;
+	private Html.Serialization serialization;
 	public void setSerialization(String serialization) {
 		if(serialization == null) {
 			this.serialization = null;
 		} else {
 			serialization = serialization.trim();
-			this.serialization = (serialization.isEmpty() || "auto".equalsIgnoreCase(serialization)) ? null : Serialization.valueOf(serialization.toUpperCase(Locale.ROOT));
+			this.serialization = (serialization.isEmpty() || "auto".equalsIgnoreCase(serialization)) ? null : Html.Serialization.valueOf(serialization.toUpperCase(Locale.ROOT));
+		}
+	}
+
+	private Html.Doctype doctype;
+	public void setDoctype(String doctype) {
+		if(doctype == null) {
+			this.doctype = null;
+		} else {
+			doctype = doctype.trim();
+			this.doctype = (doctype.isEmpty() || "default".equalsIgnoreCase(doctype)) ? null : Html.Doctype.valueOf(doctype.toUpperCase(Locale.ROOT));
 		}
 	}
 
@@ -76,44 +76,38 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 		this.oldIeClass = AttributeUtils.trimNullIfEmpty(oldIeClass);
 	}
 
-	public static void beginHtmlTag(ServletResponse response, Writer out, Serialization serialization, String clazz) throws IOException {
-		out.write("<html");
-		if(serialization == Serialization.XHTML) {
-			out.write(" xmlns=\"http://www.w3.org/1999/xhtml\"");
+	public static void beginHtmlTag(Locale locale, Appendable out, Html.Serialization serialization, String clazz) throws IOException {
+		out.append("<html");
+		if(serialization == Html.Serialization.XML) {
+			out.append(" xmlns=\"http://www.w3.org/1999/xhtml\"");
 		}
 		if(clazz!=null) {
-			out.write(" class=\"");
+			out.append(" class=\"");
 			encodeTextInXhtmlAttribute(clazz, out);
-			out.write('"');
+			out.append('"');
 		}
-		Locale locale = response.getLocale();
-		if(locale!=null) {
-			String language = locale.getLanguage();
-			if(language.length()>0) {
-				String country = locale.getCountry();
-				out.write(" lang=\"");
-				out.write(language);
-				if(country.length()>0) {
-					out.write('-');
-					out.write(country);
-				}
-				out.write('"');
-				if(serialization == Serialization.XHTML) {
-					out.write(" xml:lang=\"");
-					out.write(language);
-					if(country.length()>0) {
-						out.write('-');
-						out.write(country);
-					}
-					out.write('"');
+		if(locale != null) {
+			String lang = locale.toLanguageTag();
+			if(!lang.isEmpty()) {
+				out.append(" lang=\"");
+				encodeTextInXhtmlAttribute(lang, out);
+				out.append('"');
+				if(serialization == Html.Serialization.XML) {
+					out.append(" xml:lang=\"");
+					encodeTextInXhtmlAttribute(lang, out);
+					out.append('"');
 				}
 			}
 		}
-		out.write('>');
+		out.append('>');
 	}
 
-	public static void endHtmlTag(Writer out) throws IOException {
-		out.write("</html>");
+	public static void beginHtmlTag(ServletResponse response, Appendable out, Html.Serialization serialization, String clazz) throws IOException {
+		beginHtmlTag(response.getLocale(), out, serialization, clazz);
+	}
+
+	public static void endHtmlTag(Appendable out) throws IOException {
+		out.append("</html>");
 	}
 
 	@Override
@@ -121,43 +115,60 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 		PageContext pageContext = (PageContext)getJspContext();
 		ServletContext servletContext = pageContext.getServletContext();
 		HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
-		ServletResponse response = pageContext.getResponse();
 
-		// Clear the output buffer
-		response.resetBuffer();
-
-		// Set the content type
-		Serialization currentSerialization = serialization;
-		if(currentSerialization == null) currentSerialization = Serialization.select(servletContext, request);
-		String contentType = currentSerialization.getContentType();
-		response.setContentType(contentType);
-		final String documentEncoding = Html.ENCODING.name();
-		response.setCharacterEncoding(documentEncoding); // Seems required by Jetty, otherwise the response stayed iso-8859-1 and could not handle unicode characters
-		String actualContentType = response.getContentType();
-		if(actualContentType != null) {
-			int semiPos = actualContentType.indexOf(';');
-			if(semiPos != -1) actualContentType = actualContentType.substring(0, semiPos);
-		}
-		if(!contentType.equals(actualContentType)) throw new JspTagException("Unable to set content type, response already committed? contentType=" + contentType + ", actualContentType=" + actualContentType);
-
-		DocType currentDocType = doctype;
-		if(currentDocType == null) {
-			currentDocType = DocType.get(servletContext, request);
-		}
-		DocType.set(request, currentDocType);
-		currentDocType.appendXmlDeclarationLine(currentSerialization, documentEncoding, out);
-		out.write(currentDocType.getDocTypeLine(currentSerialization));
-		if(oldIeClass!=null) {
-			out.write("<!--[if lte IE 8]>");
-			beginHtmlTag(response, out, currentSerialization, clazz==null ? oldIeClass : (clazz + " " + oldIeClass));
-			out.write("<![endif]-->\n"
-					+ "<!--[if gt IE 8]><!-->");
-			beginHtmlTag(response, out, currentSerialization, clazz);
-			out.write("<!--<![endif]-->");
+		Html.Serialization currentSerialization = serialization;
+		Html.Serialization oldSerialization;
+		boolean setSerialization;
+		if(currentSerialization == null) {
+			currentSerialization = Html.Serialization.get(servletContext, request);
+			oldSerialization = null;
+			setSerialization = false;
 		} else {
-			beginHtmlTag(response, out, currentSerialization, clazz);
+			oldSerialization = Html.Serialization.replace(request, currentSerialization);
+			setSerialization = true;
 		}
-		super.doTag(out);
-		endHtmlTag(out);
+		try {
+			Html.Doctype currentDoctype = doctype;
+			Html.Doctype oldDoctype;
+			boolean setDoctype;
+			if(currentDoctype == null) {
+				currentDoctype = Html.Doctype.get(servletContext, request);
+				oldDoctype = null;
+				setDoctype = false;
+			} else {
+				oldDoctype = Html.Doctype.replace(request, currentDoctype);
+				setDoctype = true;
+			}
+			try {
+				ServletResponse response = pageContext.getResponse();
+				// Clear the output buffer
+				response.resetBuffer();
+				// Set the content type
+				final String documentEncoding = Html.ENCODING.name();
+				ServletUtil.setContentType(response, currentSerialization.getContentType(), documentEncoding);
+				// Write doctype
+				currentDoctype.xmlDeclaration(currentSerialization, documentEncoding, out);
+				currentDoctype.doctype(currentSerialization, out);
+				// Write <html>
+				if(oldIeClass!=null) {
+					out.write("<!--[if lte IE 8]>");
+					beginHtmlTag(response, out, currentSerialization, clazz==null ? oldIeClass : (clazz + " " + oldIeClass));
+					out.write("<![endif]-->\n"
+							+ "<!--[if gt IE 8]><!-->");
+					beginHtmlTag(response, out, currentSerialization, clazz);
+					out.write("<!--<![endif]-->");
+				} else {
+					beginHtmlTag(response, out, currentSerialization, clazz);
+				}
+				super.doTag(out);
+				endHtmlTag(out);
+			} catch(ServletException e) {
+				throw new JspTagException(e);
+			} finally {
+				if(setDoctype) Html.Doctype.set(request, oldDoctype);
+			}
+		} finally {
+			if(setSerialization) Html.Serialization.set(request, oldSerialization);
+		}
 	}
 }

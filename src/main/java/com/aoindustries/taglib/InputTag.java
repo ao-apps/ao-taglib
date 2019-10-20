@@ -25,7 +25,6 @@ package com.aoindustries.taglib;
 import com.aoindustries.encoding.Coercion;
 import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaScriptInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.MediaType;
-import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.net.URIParametersMap;
@@ -34,12 +33,14 @@ import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.i18n.MarkupType;
+import com.aoindustries.util.i18n.servlet.MarkupUtils;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.DynamicAttributes;
@@ -314,37 +315,17 @@ public class InputTag
 			if(alt == null) throw new AttributeRequiredException("alt");
 		}
 		PageContext pageContext = (PageContext)getJspContext();
-		Html.Serialization serialization = Html.Serialization.get(pageContext.getResponse());
-		out.write("<input");
-		if(id!=null) {
-			out.write(" id=\"");
-			Coercion.write(id, textInXhtmlAttributeEncoder, out);
-			out.write('"');
-		}
-		out.write(" type=\"");
-		encodeTextInXhtmlAttribute(typeString, out);
-		out.write('"');
-		if(name!=null) {
-			out.write(" name=\"");
-			Coercion.write(name, textInXhtmlAttributeEncoder, out);
-			out.write('"');
-		}
-		out.write(" value=\"");
-		if(
-			"button".equals(type)
-			|| "submit".equals(type)
-		) {
-			// Allow text markup from translations
-			MarkupUtils.writeWithMarkup(value, MarkupType.TEXT, textInXhtmlAttributeEncoder, out);
-		} else {
-			Coercion.write(value, textInXhtmlAttributeEncoder, out);
-		}
-		out.write('"');
-		if(onclick!=null) {
-			out.write(" onclick=\"");
-			Coercion.write(onclick, javaScriptInXhtmlAttributeEncoder, out);
-			out.write('"');
-		}
+		Html html = Html.get(
+			pageContext.getServletContext(),
+			(HttpServletRequest)pageContext.getRequest(),
+			out
+		);
+		Html.Input input = html.input()
+			.id(id)
+			.type(typeString)
+			.name(name)
+			.value(value)
+			.onclick(onclick);
 		if(onchange!=null) {
 			out.write(" onchange=\"");
 			Coercion.write(onchange, javaScriptInXhtmlAttributeEncoder, out);
@@ -375,14 +356,9 @@ public class InputTag
 			out.write(maxlength.toString());
 			out.write('"');
 		}
-		if(readonly) {
-			out.write(" readonly");
-			if(serialization == Html.Serialization.XHTML) out.write("=\"readonly\"");
-		}
-		if(disabled) {
-			out.write(" disabled");
-			if(serialization == Html.Serialization.XHTML) out.write("=\"disabled\"");
-		}
+		input
+			.readonly(readonly)
+			.disabled(disabled);
 		UrlUtils.writeSrc(pageContext, out, src, params, absolute, canonical, addLastModified);
 		if(width != null) {
 			out.write(" width=\"");
@@ -399,33 +375,15 @@ public class InputTag
 			MarkupUtils.writeWithMarkup(alt, MarkupType.TEXT, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
-		if(title != null) {
-			out.write(" title=\"");
-			MarkupUtils.writeWithMarkup(title, MarkupType.TEXT, textInXhtmlAttributeEncoder, out);
-			out.write('"');
-		}
-		if(clazz!=null) {
-			out.write(" class=\"");
-			Coercion.write(clazz, textInXhtmlAttributeEncoder, out);
-			out.write('"');
-		}
-		if(style!=null) {
-			out.write(" style=\"");
-			Coercion.write(style, textInXhtmlAttributeEncoder, out);
-			out.write('"');
-		}
-		if(checked) {
-			out.write(" checked");
-			if(serialization == Html.Serialization.XHTML) out.write("=\"checked\"");
-		}
-		if(tabindex >= 1) {
-			out.write(" tabindex=\"");
-			out.write(Integer.toString(tabindex));
-			out.write('"');
-		}
+		input
+			.title(title)
+			.clazz(clazz)
+			.style(style)
+			.checked(checked)
+			.tabindex((tabindex >= 1) ? tabindex : null);
 		if(!autocomplete) {
 			out.write(" autocomplete=\"off\"");
 		}
-		serialization.writeSelfClose(out);
+		input.__();
 	}
 }

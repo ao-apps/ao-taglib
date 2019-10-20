@@ -25,7 +25,6 @@ package com.aoindustries.taglib;
 import com.aoindustries.encoding.Coercion;
 import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaScriptInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.MediaType;
-import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.net.AnyURI;
@@ -39,6 +38,7 @@ import com.aoindustries.servlet.http.Html;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.i18n.MarkupType;
+import com.aoindustries.util.i18n.servlet.MarkupUtils;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
@@ -167,8 +167,12 @@ public class FormTag
 	@Override
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
-		HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
-		Html.Serialization serialization = Html.Serialization.get(response);
+		HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
+		Html html = Html.get(
+			pageContext.getServletContext(),
+			request,
+			out
+		);
 		out.write("<form method=\"");
 		out.write(method);
 		out.write('"');
@@ -179,14 +183,13 @@ public class FormTag
 		}
 		Map<String,List<String>> actionParams;
 		if(action != null) {
-			HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
 			out.write(" action=\"");
 			String encodedAction = URIResolver.getAbsolutePath(Dispatcher.getCurrentPagePath(request), action);
 			if(encodedAction.startsWith("/")) {
 				String contextPath = request.getContextPath();
 				if(!contextPath.isEmpty()) encodedAction = contextPath + encodedAction;
 			}
-			encodedAction = response.encodeURL(URIEncoder.encodeURI(encodedAction));
+			encodedAction = ((HttpServletResponse)pageContext.getResponse()).encodeURL(URIEncoder.encodeURI(encodedAction));
 			// The action attribute is everything up to the first question mark
 			AnyURI actionURI = new AnyURI(encodedAction);
 			actionParams = URIParametersUtils.of(actionURI.getQueryString()).getParameterMap();
@@ -231,13 +234,7 @@ public class FormTag
 				}
 				String name = entry.getKey();
 				for(String value : entry.getValue()) {
-					out.write("<input type=\"hidden\" name=\"");
-					encodeTextInXhtmlAttribute(name, out);
-					out.write("\" value=\"");
-					encodeTextInXhtmlAttribute(value, out);
-					out.write('"');
-					serialization.writeSelfClose(out);
-					out.write('\n');
+					html.input(Html.Input.Type.HIDDEN).name(name).value(value).__().nl();
 				}
 			}
 		}
@@ -250,13 +247,7 @@ public class FormTag
 				}
 				String name = entry.getKey();
 				for(String paramValue : entry.getValue()) {
-					out.write("<input type=\"hidden\" name=\"");
-					encodeTextInXhtmlAttribute(name, out);
-					out.write("\" value=\"");
-					encodeTextInXhtmlAttribute(paramValue, out);
-					out.write('"');
-					serialization.writeSelfClose(out);
-					out.write('\n');
+					html.input(Html.Input.Type.HIDDEN).name(name).value(paramValue).__().nl();
 				}
 			}
 		}

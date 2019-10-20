@@ -32,7 +32,6 @@ import com.aoindustries.servlet.http.Html;
 import com.aoindustries.servlet.http.HttpServletUtil;
 import java.io.IOException;
 import java.io.Writer;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
@@ -62,8 +61,11 @@ public class BaseTag extends AutoEncodingNullTag {
 				originalLastSlash!=currentLastSlash
 				|| !originalPath.regionMatches(0, currentPath, 0, originalLastSlash)
 			) {
-				ServletResponse response = pageContext.getResponse();
-				Html.Serialization serialization = Html.Serialization.get(response);
+				Html html = Html.get(
+					pageContext.getServletContext(),
+					request,
+					out
+				);
 				out.write("<base href=\"");
 
 				// Note: This does not directly do response encodeURL because URL rewriting would interfere with the intent of the base tag
@@ -75,7 +77,7 @@ public class BaseTag extends AutoEncodingNullTag {
 				EncodeURIFilter encodeURIFilter = EncodeURIFilter.getActiveFilter(request);
 				if(encodeURIFilter != null) {
 					encodeTextInXhtmlAttribute(
-						encodeURIFilter.encode(url, response.getCharacterEncoding()),
+						encodeURIFilter.encode(url, pageContext.getResponse().getCharacterEncoding()),
 						out
 					);
 				} else {
@@ -83,7 +85,7 @@ public class BaseTag extends AutoEncodingNullTag {
 					URIEncoder.encodeURI(url, textInXhtmlAttributeEncoder, out);
 				}
 				out.write('"');
-				serialization.writeSelfClose(out);
+				html.selfClose();
 			}
 		}
 	}
