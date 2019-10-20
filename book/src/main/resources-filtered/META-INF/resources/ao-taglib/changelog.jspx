@@ -36,7 +36,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2019-10-11T16:29:56-0500"
+		dateModified="2019-10-19T22:25:48-0500"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -52,8 +52,15 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 				artifactId="@{documented.artifactId}"
 				scmUrl="@{documented.scm.url}"
 			>
-				<!-- TODO:
 				<ul>
+					<li>
+						Moved <code>HtmlTag.useXhtmlContentType(…)</code> to new
+						<ao:a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Html.html">Html</ao:a> class,
+						along with related constants.
+					</li>
+					<li>Now writing XML declaration when both serving as XHTML and response encoding is not UTF-8.</li>
+					<li>Now writing HTML or XHTML doctype based on current <code>Serialization</code>.</li>
+					<!-- TODO:
 					<li>Support script async and defer attributes</li>
 					<li>Support autofocus and required attributes (textarea, input, ...)</li>
 					<li>Support other nice HTML 5 features of textarea/input)</li>
@@ -65,8 +72,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 
 						nmw-email-taglib might be able to establish a proper context based on the content type of the content for a message, for example.
 					</li>
+					-->
 				</ul>
-				-->
 			</changelog:release>
 		</c:if>
 
