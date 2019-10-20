@@ -1273,7 +1273,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-20T01:03:04-0500" -->
+		<!-- dateModified="2019-10-20T01:20:39-0500" -->
 		<description><![CDATA[
 			<ol>
 				<li>Clears the current output buffer (leaving status code and headers)</li>
@@ -1313,7 +1313,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					When <code>xhtml</code>, forces the content-type to be <code>application/xhtml+xml</code>.
 					When <code>auto</code> (the default), defers to the application
 					<a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</a>
-					<code>com.aoindustries.servlet.http.Html$Serialization.select</code>
+					<code>com.aoindustries.servlet.http.Html$Serialization.default</code>
 					that allows an application to control the selection of HTML versus XHTML.
 				</p>
 				<p>

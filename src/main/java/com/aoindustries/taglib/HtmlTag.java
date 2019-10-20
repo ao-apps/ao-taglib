@@ -54,6 +54,8 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 		}
 	}
 
+	// TODO: Add a way to register the serialization on the current request, or just base on response encoding always?
+	// TODO: Would HtmlTag use this registered value as its default, to be consistent with any pre-processing that assumed this serialization?
 	private Serialization serialization;
 	public void setSerialization(String serialization) {
 		if(serialization == null) {
