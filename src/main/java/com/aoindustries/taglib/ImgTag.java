@@ -27,6 +27,7 @@ import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.net.URIParametersMap;
+import com.aoindustries.servlet.http.Html;
 import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
@@ -34,6 +35,7 @@ import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspTagException;
+import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
@@ -171,7 +173,8 @@ public class ImgTag
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		if(src==null) src = capturedBody.trim().toString();
 		if(usemap == null && alt == null) throw new AttributeRequiredException("alt");
-
+		PageContext pageContext = (PageContext)getJspContext();
+		Html.Serialization serialization = Html.Serialization.get(pageContext.getResponse());
 		out.write("<img");
 		if(id!=null) {
 			out.write(" id=\"");
@@ -216,8 +219,9 @@ public class ImgTag
 			out.write('"');
 		}
 		if(ismap) {
-			out.write(" ismap=\"ismap\"");
+			out.write(" ismap");
+			if(serialization == Html.Serialization.XHTML) out.write("=\"ismap\"");
 		}
-		out.write(" />");
+		serialization.writeSelfClose(out);
 	}
 }

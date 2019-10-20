@@ -36,7 +36,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2019-10-20T02:06:35-0500"
+		dateModified="2019-10-20T04:25:44-0500"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -76,6 +76,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 						<code>com.aoindustries.servlet.http.Html$DocType.default</code>
 						that allows an application to control the default doctype.  This context-param, when unspecified,
 						defaults to "html5", which results in a breaking change (this tag used to default to "strict").
+					</li>
+					<li>
+						Now outputting HTML or XHTML based on the current response content type.
+						This should eliminate validator warnings when used as HTML.
 					</li>
 					<!-- TODO:
 					<li>Support script async and defer attributes</li>

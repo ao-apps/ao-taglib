@@ -28,9 +28,11 @@ import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlA
 import com.aoindustries.net.URIEncoder;
 import com.aoindustries.servlet.filter.EncodeURIFilter;
 import com.aoindustries.servlet.http.Dispatcher;
+import com.aoindustries.servlet.http.Html;
 import com.aoindustries.servlet.http.HttpServletUtil;
 import java.io.IOException;
 import java.io.Writer;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
@@ -60,6 +62,8 @@ public class BaseTag extends AutoEncodingNullTag {
 				originalLastSlash!=currentLastSlash
 				|| !originalPath.regionMatches(0, currentPath, 0, originalLastSlash)
 			) {
+				ServletResponse response = pageContext.getResponse();
+				Html.Serialization serialization = Html.Serialization.get(response);
 				out.write("<base href=\"");
 
 				// Note: This does not directly do response encodeURL because URL rewriting would interfere with the intent of the base tag
@@ -71,14 +75,15 @@ public class BaseTag extends AutoEncodingNullTag {
 				EncodeURIFilter encodeURIFilter = EncodeURIFilter.getActiveFilter(request);
 				if(encodeURIFilter != null) {
 					encodeTextInXhtmlAttribute(
-						encodeURIFilter.encode(url, pageContext.getResponse().getCharacterEncoding()),
+						encodeURIFilter.encode(url, response.getCharacterEncoding()),
 						out
 					);
 				} else {
 					// Encoding US-ASCII
 					URIEncoder.encodeURI(url, textInXhtmlAttributeEncoder, out);
 				}
-				out.write("\" />");
+				out.write('"');
+				serialization.writeSelfClose(out);
 			}
 		}
 	}
