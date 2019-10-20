@@ -44,7 +44,7 @@ public class HtmlTagTEI extends TagExtraInfo {
 			&& doctypeAttr != TagData.REQUEST_TIME_VALUE
 		) {
 			String doctype = ((String)doctypeAttr).trim();
-			if(!doctype.isEmpty()) {
+			if(!doctype.isEmpty() && !"default".equalsIgnoreCase(doctype)) {
 				try {
 					Html.DocType.valueOf(doctype.toLowerCase(Locale.ROOT));
 				} catch(IllegalArgumentException e) {

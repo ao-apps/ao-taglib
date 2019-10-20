@@ -30,6 +30,7 @@ import com.aoindustries.servlet.http.Html.Serialization;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Locale;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
@@ -43,14 +44,14 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 		return MediaType.XHTML;
 	}
 
-	// TODO: context-param configurable default, also a way to register doctype on the current request
-	private DocType doctype = DocType.strict;
+	// TODO: a way to register doctype on the current request
+	private DocType doctype;
 	public void setDoctype(String doctype) {
 		if(doctype == null) {
 			this.doctype = null;
 		} else {
 			doctype = doctype.trim();
-			this.doctype = doctype.isEmpty() ? null : DocType.valueOf(doctype.toLowerCase(Locale.ROOT));
+			this.doctype = (doctype.isEmpty() || "default".equalsIgnoreCase(doctype)) ? null : DocType.valueOf(doctype.toLowerCase(Locale.ROOT));
 		}
 	}
 
@@ -119,6 +120,7 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 	@Override
 	protected void doTag(Writer out) throws JspException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
+		ServletContext servletContext = pageContext.getServletContext();
 		ServletResponse response = pageContext.getResponse();
 
 		// Clear the output buffer
@@ -126,7 +128,7 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 
 		// Set the content type
 		Serialization currentSerialization = serialization;
-		if(currentSerialization == null) currentSerialization = Serialization.select(pageContext.getServletContext(), (HttpServletRequest)pageContext.getRequest());
+		if(currentSerialization == null) currentSerialization = Serialization.select(servletContext, (HttpServletRequest)pageContext.getRequest());
 		String contentType = currentSerialization.getContentType();
 		response.setContentType(contentType);
 		final String documentEncoding = Html.ENCODING.name();
@@ -138,8 +140,10 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 		}
 		if(!contentType.equals(actualContentType)) throw new JspTagException("Unable to set content type, response already committed? contentType=" + contentType + ", actualContentType=" + actualContentType);
 
-		doctype.appendXmlDeclarationLine(currentSerialization, documentEncoding, out);
-		out.write(doctype.getDocTypeLine(currentSerialization));
+		DocType currentDocType = doctype;
+		if(currentDocType == null) currentDocType = DocType.getDefault(servletContext);
+		currentDocType.appendXmlDeclarationLine(currentSerialization, documentEncoding, out);
+		out.write(currentDocType.getDocTypeLine(currentSerialization));
 		if(oldIeClass!=null) {
 			out.write("<!--[if lte IE 8]>");
 			beginHtmlTag(response, out, currentSerialization, clazz==null ? oldIeClass : (clazz + " " + oldIeClass));
