@@ -36,6 +36,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
+import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.JspFragment;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
@@ -83,7 +84,7 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
 				final PageContext pageContext = (PageContext)getJspContext();
 				final ServletRequest request = pageContext.getRequest();
 				final HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
-				final Writer out = pageContext.getOut();
+				final JspWriter out = pageContext.getOut();
 
 				final ThreadEncodingContext parentEncodingContext = ThreadEncodingContext.getCurrentContext(request);
 
@@ -127,9 +128,9 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
 				if(mediaEncoder!=null) {
 					setMediaEncoderOptions(mediaEncoder);
 					// Encode our output.  The encoder guarantees valid output for our parent.
-					MediaWriter mediaWriter = new MediaWriter(mediaEncoder, out);
-					mediaWriter.writePrefix();
+					writeEncoderPrefix(mediaEncoder, out);
 					try {
+						MediaWriter mediaWriter = new MediaWriter(mediaEncoder, out);
 						ThreadEncodingContext.setCurrentContext(
 							request,
 							new ThreadEncodingContext(myOutputType, mediaWriter)
@@ -141,7 +142,7 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
 							ThreadEncodingContext.setCurrentContext(request, parentEncodingContext);
 						}
 					} finally {
-						mediaWriter.writeSuffix();
+						writeEncoderSuffix(mediaEncoder, out);
 					}
 				} else {
 					// If parentValidMediaInput exists and is validating our output type, no additional validation is required
@@ -204,6 +205,10 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
 	protected void setMediaEncoderOptions(MediaEncoder mediaEncoder) {
 	}
 
+	protected void writeEncoderPrefix(MediaEncoder mediaEncoder, JspWriter out) throws JspException, IOException {
+		mediaEncoder.writePrefixTo(out);
+	}
+
 	/**
 	 * Once the out JspWriter has been replaced to output the proper content
 	 * type, this version of invoke is called.
@@ -213,6 +218,10 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
 	 * This default implementation does nothing.
 	 */
 	abstract protected void doTag(Writer out) throws JspTagException, IOException;
+
+	protected void writeEncoderSuffix(MediaEncoder mediaEncoder, JspWriter out) throws JspException, IOException {
+		mediaEncoder.writeSuffixTo(out);
+	}
 
 	/**
 	 * <p>
