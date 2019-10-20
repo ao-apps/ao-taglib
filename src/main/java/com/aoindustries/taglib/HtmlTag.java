@@ -43,15 +43,25 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 		return MediaType.XHTML;
 	}
 
+	// TODO: context-param configurable default, also a way to register doctype on the current request
 	private DocType doctype = DocType.strict;
 	public void setDoctype(String doctype) {
-		this.doctype = doctype==null ? null : DocType.valueOf(doctype.trim());
+		if(doctype == null) {
+			this.doctype = null;
+		} else {
+			doctype = doctype.trim();
+			this.doctype = doctype.isEmpty() ? null : DocType.valueOf(doctype.toLowerCase(Locale.ROOT));
+		}
 	}
 
-	// TODO: Change to an attribute "serialization" with "html", "xhtml", or "auto" (the default)
-	private boolean forceHtml = false;
-	public void setForceHtml(boolean forceHtml) {
-		this.forceHtml = forceHtml;
+	private Serialization serialization;
+	public void setSerialization(String serialization) {
+		if(serialization == null) {
+			this.serialization = null;
+		} else {
+			serialization = serialization.trim();
+			this.serialization = (serialization.isEmpty() || "auto".equalsIgnoreCase(serialization)) ? null : Serialization.valueOf(serialization.toUpperCase(Locale.ROOT));
+		}
 	}
 
 	private String clazz;
@@ -113,8 +123,9 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 		response.resetBuffer();
 
 		// Set the content type
-		Serialization serialization = forceHtml ? Serialization.HTML : Serialization.select(pageContext.getServletContext(), (HttpServletRequest)pageContext.getRequest());
-		String contentType = serialization.getContentType();
+		Serialization currentSerialization = serialization;
+		if(currentSerialization == null) currentSerialization = Serialization.select(pageContext.getServletContext(), (HttpServletRequest)pageContext.getRequest());
+		String contentType = currentSerialization.getContentType();
 		response.setContentType(contentType);
 		final String documentEncoding = Html.ENCODING.name();
 		response.setCharacterEncoding(documentEncoding); // Seems required by Jetty, otherwise the response stayed iso-8859-1 and could not handle unicode characters
@@ -125,17 +136,17 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 		}
 		if(!contentType.equals(actualContentType)) throw new JspTagException("Unable to set content type, response already committed? contentType=" + contentType + ", actualContentType=" + actualContentType);
 
-		doctype.appendXmlDeclarationLine(serialization, documentEncoding, out);
-		out.write(doctype.getDocTypeLine(serialization));
+		doctype.appendXmlDeclarationLine(currentSerialization, documentEncoding, out);
+		out.write(doctype.getDocTypeLine(currentSerialization));
 		if(oldIeClass!=null) {
 			out.write("<!--[if lte IE 8]>");
-			beginHtmlTag(response, out, serialization, clazz==null ? oldIeClass : (clazz + " " + oldIeClass));
+			beginHtmlTag(response, out, currentSerialization, clazz==null ? oldIeClass : (clazz + " " + oldIeClass));
 			out.write("<![endif]-->\n"
 					+ "<!--[if gt IE 8]><!-->");
-			beginHtmlTag(response, out, serialization, clazz);
+			beginHtmlTag(response, out, currentSerialization, clazz);
 			out.write("<!--<![endif]-->");
 		} else {
-			beginHtmlTag(response, out, serialization, clazz);
+			beginHtmlTag(response, out, currentSerialization, clazz);
 		}
 		super.doTag(out);
 		endHtmlTag(out);

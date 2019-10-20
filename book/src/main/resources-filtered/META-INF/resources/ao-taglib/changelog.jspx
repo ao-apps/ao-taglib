@@ -36,7 +36,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2019-10-19T22:25:48-0500"
+		dateModified="2019-10-20T01:03:04-0500"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -60,6 +60,14 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 					</li>
 					<li>Now writing XML declaration when both serving as XHTML and response encoding is not UTF-8.</li>
 					<li>Now writing HTML or XHTML doctype based on current <code>Serialization</code>.</li>
+					<li>
+						Changed <core:link page="ao.tld/tag-html" /> attribute <code>forceHtml</code> to <code>serialization</code>,
+						which now takes values <code>html</code>, <code>xhtml</code>, or <code>auto</code> (the default).
+						When <code>auto</code> (the default), defers to the application
+						<ao:a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</ao:a>
+						<code>com.aoindustries.servlet.http.Html$Serialization.select</code>
+						that allows an application to control the selection of HTML versus XHTML.
+					</li>
 					<!-- TODO:
 					<li>Support script async and defer attributes</li>
 					<li>Support autofocus and required attributes (textarea, input, ...)</li>
