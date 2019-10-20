@@ -31,6 +31,7 @@ import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.servlet.http.Html;
 import java.io.IOException;
 import java.io.Writer;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 
@@ -113,7 +114,10 @@ public class TextareaTag
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		if(value==null) setValue(capturedBody.trim());
 		PageContext pageContext = (PageContext)getJspContext();
-		Html.Serialization serialization = Html.Serialization.get(pageContext.getResponse());
+		Html.Serialization serialization = Html.Serialization.get(
+			pageContext.getServletContext(),
+			(HttpServletRequest)pageContext.getRequest()
+		);
 		out.write("<textarea");
 		if(name!=null) {
 			out.write(" name=\"");
@@ -127,11 +131,11 @@ public class TextareaTag
 		out.write('"');
 		if(readonly) {
 			out.write(" readonly");
-			if(serialization == Html.Serialization.XHTML) out.write("=\"readonly\"");
+			if(serialization == Html.Serialization.XML) out.write("=\"readonly\"");
 		}
 		if(disabled) {
 			out.write(" disabled");
-			if(serialization == Html.Serialization.XHTML) out.write("=\"disabled\"");
+			if(serialization == Html.Serialization.XML) out.write("=\"disabled\"");
 		}
 		if(onchange!=null) {
 			out.write(" onchange=\"");

@@ -29,8 +29,10 @@ import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlA
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.servlet.http.Html;
 import com.aoindustries.util.i18n.MarkupType;
+import com.aoindustries.util.i18n.servlet.MarkupUtils;
 import java.io.IOException;
 import java.io.Writer;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 
@@ -112,7 +114,10 @@ public class SelectTag
 	@Override
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
-		Html.Serialization serialization = Html.Serialization.get(pageContext.getResponse());
+		Html.Serialization serialization = Html.Serialization.get(
+			pageContext.getServletContext(),
+			(HttpServletRequest)pageContext.getRequest()
+		);
 		out.write("<select");
 		if(id!=null) {
 			out.write(" id=\"");
@@ -131,7 +136,7 @@ public class SelectTag
 		}
 		if(disabled) {
 			out.write(" disabled");
-			if(serialization == Html.Serialization.XHTML) out.write("=\"disabled\"");
+			if(serialization == Html.Serialization.XML) out.write("=\"disabled\"");
 		}
 		if(onchange!=null) {
 			out.write(" onchange=\"");

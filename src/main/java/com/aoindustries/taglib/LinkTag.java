@@ -24,7 +24,6 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaType;
-import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URIParameters;
@@ -37,6 +36,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
 import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.DynamicAttributes;
@@ -65,7 +65,7 @@ public class LinkTag
 	private Object hreflang;
 	private Object rel;
 	private Object type;
-	private String media;
+	private String media; // TODO: media to Object
 	private Object title;
 
 	@Override
@@ -179,35 +179,19 @@ public class LinkTag
 			);
 		} else {
 			PageContext pageContext = (PageContext)getJspContext();
-			Html.Serialization serialization = Html.Serialization.get(pageContext.getResponse());
-			out.write("<link");
+			Html html = Html.get(
+				pageContext.getServletContext(),
+				(HttpServletRequest)pageContext.getRequest(),
+				out
+			);
+			Html.Link link = html.link();
 			UrlUtils.writeHref(pageContext, out, href, params, absolute, canonical, addLastModified);
 			if(hreflang!=null) {
 				out.write(" hreflang=\"");
 				Coercion.write(hreflang, textInXhtmlAttributeEncoder, out);
 				out.write('"');
 			}
-			if(rel!=null) {
-				out.write(" rel=\"");
-				Coercion.write(rel, textInXhtmlAttributeEncoder, out);
-				out.write('"');
-			}
-			if(type!=null) {
-				out.write(" type=\"");
-				Coercion.write(type, textInXhtmlAttributeEncoder, out);
-				out.write('"');
-			}
-			if(media!=null) {
-				out.write(" media=\"");
-				encodeTextInXhtmlAttribute(media, out);
-				out.write('"');
-			}
-			if(title!=null) {
-				out.write(" title=\"");
-				Coercion.write(title, textInXhtmlAttributeEncoder, out);
-				out.write('"');
-			}
-			serialization.writeSelfClose(out);
+			link.rel(rel).type(Coercion.toString(type)).media(media).title(title).__();
 		}
 	}
 }

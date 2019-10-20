@@ -24,11 +24,12 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.lang.NullArgumentException;
 import com.aoindustries.net.URIEncoder;
-import com.aoindustries.net.URIResolver;
+import com.aoindustries.servlet.filter.FunctionContext;
 import static com.aoindustries.servlet.filter.FunctionContext.getRequest;
 import static com.aoindustries.servlet.filter.FunctionContext.getResponse;
 import static com.aoindustries.servlet.filter.FunctionContext.getServletContext;
 import com.aoindustries.servlet.http.Dispatcher;
+import com.aoindustries.servlet.http.Html;
 import com.aoindustries.servlet.http.HttpServletUtil;
 import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
@@ -107,6 +108,20 @@ final public class Functions {
 		String prefix = bundleTag.getPrefix();
 		return bundleTag.getAccessor().getMessage(
 			prefix==null || prefix.isEmpty() ? key : prefix.concat(key)
+		);
+	}
+
+	public static Html.Serialization getSerialization() {
+		return Html.Serialization.get(
+			FunctionContext.getServletContext(),
+			FunctionContext.getRequest()
+		);
+	}
+
+	public static Html.Doctype getDoctype() {
+		return Html.Doctype.get(
+			FunctionContext.getServletContext(),
+			FunctionContext.getRequest()
 		);
 	}
 }

@@ -29,6 +29,7 @@ import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.servlet.http.Html;
 import java.io.IOException;
 import java.io.Writer;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.JspTag;
@@ -98,7 +99,11 @@ public class MetaTag
 		} else {
 			// Write the meta tag directly here
 			PageContext pageContext = (PageContext)getJspContext();
-			Html.Serialization serialization = Html.Serialization.get(pageContext.getResponse());
+			Html html = Html.get(
+				pageContext.getServletContext(),
+				(HttpServletRequest)pageContext.getRequest(),
+				out
+			);
 			out.write("<meta");
 			if(name != null) {
 				out.write(" name=\"");
@@ -125,7 +130,7 @@ public class MetaTag
 				Coercion.write(content, textInXhtmlAttributeEncoder, out);
 				out.write('"');
 			}
-			serialization.writeSelfClose(out);
+			html.selfClose();
 		}
 	}
 }

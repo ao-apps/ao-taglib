@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2010, 2011, 2013, 2015, 2016, 2017, 2019  AO Industries, Inc.
+ * Copyright (C) 2019  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -23,7 +23,6 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.servlet.http.Html;
 import java.io.IOException;
 import java.io.Writer;
@@ -34,23 +33,7 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
-public class OptionTag
-	extends AutoEncodingBufferedTag
-	implements
-		ValueAttribute,
-		SelectedAttribute,
-		DisabledAttribute
-{
-
-	private boolean valueSet;
-	private Object value;
-	private boolean selected;
-	private boolean disabled;
-
-	@Override
-	public MediaType getContentType() {
-		return MediaType.TEXT;
-	}
+public class BrTag extends AutoEncodingNullTag {
 
 	@Override
 	public MediaType getOutputType() {
@@ -58,36 +41,21 @@ public class OptionTag
 	}
 
 	@Override
-	public void setValue(Object value) {
-		this.valueSet = true;
-		this.value = value;
-	}
-
-	@Override
-	public void setSelected(boolean selected) {
-		this.selected = selected;
-	}
-
-	@Override
-	public void setDisabled(boolean disabled) {
-		this.disabled = disabled;
-	}
-
-	@Override
-	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
-		capturedBody = capturedBody.trim();
-		// TODO: Should we be setting the value always like this?  Duplicates efforts.
-		// TODO: If not setting value this way, this does not need to buffer
-		if(!valueSet) setValue(capturedBody);
+	protected void doTag(Writer out) throws JspTagException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
-		Html.get(
+		Html.Serialization serialization = Html.Serialization.get(
 			pageContext.getServletContext(),
-			(HttpServletRequest)pageContext.getRequest(),
-			out
-		).option()
-			.value(value)
-			.selected(selected)
-			.disabled(disabled)
-			.innerText(capturedBody);
+			(HttpServletRequest)pageContext.getRequest()
+		);
+		switch(serialization) {
+			case SGML:
+				out.write("<br>");
+				break;
+			case XML:
+				out.write("<br />");
+				break;
+			default:
+				throw new AssertionError();
+		}
 	}
 }

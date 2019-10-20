@@ -38,23 +38,6 @@ public class HtmlTagTEI extends TagExtraInfo {
 	@Override
 	public ValidationMessage[] validate(TagData data) {
 		List<ValidationMessage> messages = MinimalList.emptyList();
-		Object doctypeAttr = data.getAttribute("doctype");
-		if(
-			doctypeAttr != null
-			&& doctypeAttr != TagData.REQUEST_TIME_VALUE
-		) {
-			String doctype = ((String)doctypeAttr).trim();
-			if(!doctype.isEmpty() && !"default".equalsIgnoreCase(doctype)) {
-				try {
-					Html.DocType.valueOf(doctype.toLowerCase(Locale.ROOT));
-				} catch(IllegalArgumentException e) {
-					messages = MinimalList.add(
-						messages,
-						new ValidationMessage(data.getId(), ApplicationResources.accessor.getMessage("HtmlTag.doctype.invalid", doctype))
-					);
-				}
-			}
-		}
 		Object serializationAttr = data.getAttribute("serialization");
 		if(
 			serializationAttr != null
@@ -68,6 +51,23 @@ public class HtmlTagTEI extends TagExtraInfo {
 					messages = MinimalList.add(
 						messages,
 						new ValidationMessage(data.getId(), ApplicationResources.accessor.getMessage("HtmlTag.serialization.invalid", serialization))
+					);
+				}
+			}
+		}
+		Object doctypeAttr = data.getAttribute("doctype");
+		if(
+			doctypeAttr != null
+			&& doctypeAttr != TagData.REQUEST_TIME_VALUE
+		) {
+			String doctype = ((String)doctypeAttr).trim();
+			if(!doctype.isEmpty() && !"default".equalsIgnoreCase(doctype)) {
+				try {
+					Html.Doctype.valueOf(doctype.toUpperCase(Locale.ROOT));
+				} catch(IllegalArgumentException e) {
+					messages = MinimalList.add(
+						messages,
+						new ValidationMessage(data.getId(), ApplicationResources.accessor.getMessage("HtmlTag.doctype.invalid", doctype))
 					);
 				}
 			}

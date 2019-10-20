@@ -26,7 +26,6 @@ import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaEncoder;
 import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
-import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import com.aoindustries.encoding.servlet.HttpServletResponseEncodingContext;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.net.MutableURIParameters;
@@ -35,8 +34,11 @@ import com.aoindustries.servlet.http.Html;
 import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
+import com.aoindustries.util.i18n.servlet.MarkupUtils;
 import java.io.IOException;
 import java.io.Writer;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
@@ -59,6 +61,7 @@ public class ScriptTag
 	private MutableURIParameters params;
 	private boolean absolute;
 	private boolean canonical;
+	// TODO: async, defer, ...
 	private LastModifiedServlet.AddLastModifiedWhen addLastModified = LastModifiedServlet.AddLastModifiedWhen.AUTO;
 
 	@Override
@@ -143,41 +146,29 @@ public class ScriptTag
 		try {
 			// Write script tag with src attribute, discarding any body
 			PageContext pageContext = (PageContext)getJspContext();
-			Html.DocType doctype = Html.DocType.get(pageContext.getServletContext(), pageContext.getRequest());
-			out.write("<script");
-			String scriptType = mediaType.getContentType();
-			// Do not write type when HTML 5 and javascript
-			if(
-				doctype != Html.DocType.html5
-				|| (
-					!"text/javascript".equalsIgnoreCase(scriptType)
-					&& !"application/javascript".equalsIgnoreCase(scriptType)
-				)
-			) {
-				out.write(" type=\"");
-				encodeTextInXhtmlAttribute(scriptType, out);
-				out.write('"');
-			}
+			ServletContext servletContext = pageContext.getServletContext();
+			HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
+			Html html = Html.get(servletContext, request, out);
+			Html.Script script = html.script(mediaType.getContentType());
 			UrlUtils.writeSrc(pageContext, out, src, params, absolute, canonical, addLastModified);
 			out.write('>');
 			// Only write body when there is no source (discard body when src provided)
-			if(src == null) {
+			if(src == null && capturedBody.getLength() != 0) {
+				html.nl();
 				HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
-				boolean writeCdata =
-					mediaType == MediaType.JAVASCRIPT
-					&& Html.Serialization.get(response) == Html.Serialization.XHTML;
-				if(writeCdata) {
-					out.write("\n  // <![CDATA[\n");
-				}
+				script.cdata.start();
+				// TODO: writeWithMarkup appropriate for capturedBody?
+				// TODO: I think this would only work with SegmentedBuffer with a single segment
+				// TODO: We might need a special case in CharArrayWriter if we want this identity match for a single string
+				// TODO: Set back to SegmentedBuffer, if this is the case
 				MarkupUtils.writeWithMarkup(
 					capturedBody,
 					mediaType.getMarkupType(),
 					MediaEncoder.getInstance(new HttpServletResponseEncodingContext(response), mediaType, getOutputType()),
 					out
 				);
-				if(writeCdata) {
-					out.append("\n  // ]]>\n");
-				}
+				html.nl();
+				script.cdata.end();
 			}
 			out.write("</script>");
 		} catch(MediaException err) {

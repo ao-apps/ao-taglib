@@ -33,8 +33,10 @@ import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.i18n.MarkupType;
+import com.aoindustries.util.i18n.servlet.MarkupUtils;
 import java.io.IOException;
 import java.io.Writer;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.DynamicAttributes;
@@ -228,7 +230,11 @@ public class AreaTag
 			if(alt == null) throw new AttributeRequiredException("alt");
 		}
 		PageContext pageContext = (PageContext)getJspContext();
-		Html.Serialization serialization = Html.Serialization.get(pageContext.getResponse());
+		Html html = Html.get(
+			pageContext.getServletContext(),
+			(HttpServletRequest)pageContext.getRequest(),
+			out
+		);
 		out.write("<area");
 		if(id != null) {
 			out.write(" id=\"");
@@ -302,6 +308,6 @@ public class AreaTag
 			Coercion.write(onmouseout, javaScriptInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
-		serialization.writeSelfClose(out);
+		html.selfClose();
 	}
 }
