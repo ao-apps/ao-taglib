@@ -115,9 +115,9 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport {
 			if(mediaEncoder != null) {
 				setMediaEncoderOptions(mediaEncoder);
 				// Encode both our output and the content.  The encoder validates our input and guarantees valid output for our parent.
-				MediaWriter mediaWriter = new MediaWriter(mediaEncoder, out);
-				mediaWriter.writePrefix();
+				writeEncoderPrefix(mediaEncoder, out);
 				try {
+					MediaWriter mediaWriter = new MediaWriter(mediaEncoder, out);
 					ThreadEncodingContext.setCurrentContext(
 						request,
 						new ThreadEncodingContext(myContentType, mediaWriter)
@@ -129,7 +129,7 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport {
 						ThreadEncodingContext.setCurrentContext(request, parentEncodingContext);
 					}
 				} finally {
-					mediaWriter.writeSuffix();
+					writeEncoderSuffix(mediaEncoder, out);
 				}
 			} else {
 				// If parentValidMediaInput exists and is validating our output type, no additional validation is required
@@ -147,7 +147,7 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport {
 						ThreadEncodingContext.setCurrentContext(request, parentEncodingContext);
 					}
 				} else {
-						// Not using an encoder and parent doesn't validate our output, validate our own output.
+					// Not using an encoder and parent doesn't validate our output, validate our own output.
 					MediaValidator validator = MediaValidator.getMediaValidator(myContentType, out);
 					ThreadEncodingContext.setCurrentContext(
 						request,
@@ -172,6 +172,10 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport {
 	protected void setMediaEncoderOptions(MediaEncoder mediaEncoder) {
 	}
 
+	protected void writeEncoderPrefix(MediaEncoder mediaEncoder, JspWriter out) throws JspException, IOException {
+		mediaEncoder.writePrefixTo(out);
+	}
+
 	/**
 	 * Once the out JspWriter has been replaced to output the proper content
 	 * type, this version of invoke is called.
@@ -193,5 +197,9 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport {
 				: out
 			);
 		}
+	}
+
+	protected void writeEncoderSuffix(MediaEncoder mediaEncoder, JspWriter out) throws JspException, IOException {
+		mediaEncoder.writeSuffixTo(out);
 	}
 }

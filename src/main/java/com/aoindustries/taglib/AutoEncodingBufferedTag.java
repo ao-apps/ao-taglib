@@ -248,9 +248,9 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 				if(mediaEncoder!=null) {
 					setMediaEncoderOptions(mediaEncoder);
 					// Encode our output.  The encoder guarantees valid output for our parent.
-					MediaWriter mediaWriter = new MediaWriter(mediaEncoder, out);
-					mediaWriter.writePrefix();
+					writeEncoderPrefix(mediaEncoder, out);
 					try {
+						MediaWriter mediaWriter = new MediaWriter(mediaEncoder, out);
 						ThreadEncodingContext.setCurrentContext(
 							request,
 							new ThreadEncodingContext(myOutputType, mediaWriter)
@@ -262,7 +262,7 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 							ThreadEncodingContext.setCurrentContext(request, parentEncodingContext);
 						}
 					} finally {
-						mediaWriter.writeSuffix();
+						writeEncoderSuffix(mediaEncoder, out);
 					}
 				} else {
 					// If parentValidMediaInput exists and is validating our output type, no additional validation is required
@@ -300,13 +300,6 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 	}
 
 	/**
-	 * Sets the media encoder options.  This is how subclass tag attributes
-	 * can effect the encoding.
-	 */
-	protected void setMediaEncoderOptions(MediaEncoder mediaEncoder) {
-	}
-
-	/**
 	 * Invokes the body.  This is only called when a body exists.  Subclasses may override this to perform
 	 * actions before and/or after invoking the body.  Any overriding implementation should call
 	 * super.invoke(JspFragment,MediaValidator) to invoke the body.
@@ -316,8 +309,23 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 	}
 
 	/**
+	 * Sets the media encoder options.  This is how subclass tag attributes
+	 * can effect the encoding.
+	 */
+	protected void setMediaEncoderOptions(MediaEncoder mediaEncoder) {
+	}
+
+	protected void writeEncoderPrefix(MediaEncoder mediaEncoder, JspWriter out) throws JspException, IOException {
+		mediaEncoder.writePrefixTo(out);
+	}
+
+	/**
 	 * Once the data is captured, this is called.
 	 * type, this version of invoke is called.
 	 */
 	abstract protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException;
+
+	protected void writeEncoderSuffix(MediaEncoder mediaEncoder, JspWriter out) throws JspException, IOException {
+		mediaEncoder.writeSuffixTo(out);
+	}
 }
