@@ -22,6 +22,7 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.servlet.http.Html;
 import javax.servlet.jsp.tagext.TagData;
 import javax.servlet.jsp.tagext.TagExtraInfo;
 import javax.servlet.jsp.tagext.ValidationMessage;
@@ -33,14 +34,14 @@ public class HtmlTagTEI extends TagExtraInfo {
 
 	@Override
 	public ValidationMessage[] validate(TagData data) {
-		Object o = data.getAttribute("doctype");
+		Object doctypeAttr = data.getAttribute("doctype");
 		if(
-			o != null
-			&& o != TagData.REQUEST_TIME_VALUE
+			doctypeAttr != null
+			&& doctypeAttr != TagData.REQUEST_TIME_VALUE
 		) {
-			String doctype = ((String)o).trim();
+			String doctype = ((String)doctypeAttr).trim();
 			try {
-				HtmlTag.DocType.valueOf(doctype);
+				Html.DocType.valueOf(doctype);
 			} catch(IllegalArgumentException e) {
 				return new ValidationMessage[] {
 					new ValidationMessage(data.getId(), ApplicationResources.accessor.getMessage("HtmlTag.doctype.invalid", doctype))
