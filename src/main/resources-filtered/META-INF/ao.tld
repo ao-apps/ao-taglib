@@ -1273,7 +1273,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-20T01:35:11-0500" -->
+		<!-- dateModified="2019-10-20T02:06:35-0500" -->
 		<description><![CDATA[
 			<ol>
 				<li>Clears the current output buffer (leaving status code and headers)</li>
@@ -1301,7 +1301,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					Defaults to <code>default</code>.  <code>none</code> will suppress the output of a doctype.
 				</p>
 				<p>
-					When <code>default</code> (the default), defers to the application
+					When <code>default</code> (the default), uses the doctype active on the current request.
+					When no doctype active on the request, defers to the application
 					<a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</a>
 					<code>com.aoindustries.servlet.http.Html$DocType.default</code>
 					that allows an application to control the default doctype.  This context-param, when unspecified,
