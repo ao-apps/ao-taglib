@@ -1273,11 +1273,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2019-10-20T01:03:04-0500" -->
 		<description><![CDATA[
 			<ol>
 				<li>Clears the current output buffer (leaving status code and headers)</li>
-				<li>Sets the response contentType between html / xhtml based on forceHtml attribute and request headers</li>
+				<li>Sets the response contentType between html / xhtml based on serialization attribute and request headers</li>
 				<li>Writes the <a href="https://www.w3schools.com/tags/tag_doctype.asp">&lt;!DOCTYPE&gt;</a> unless set to "none"</li>
 				<li>
 					Writes the <a href="https://www.w3schools.com/tags/tag_html.asp">&lt;html&gt;</a> tag,
@@ -1309,16 +1309,22 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					If set to <code>true</code>, forces the content-type to be <code>text/html</code>.
-					If set to <code>false</code> (the default), will negotiate content-type based on browser support.
-					This should normally be left with the default value of <code>false</code>.  This is used
-					when the content is known to contain invalid markup and can't be parsed as XML.
+					When <code>html</code>, forces the content-type to be <code>text/html</code>.
+					When <code>xhtml</code>, forces the content-type to be <code>application/xhtml+xml</code>.
+					When <code>auto</code> (the default), defers to the application
+					<a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</a>
+					<code>com.aoindustries.servlet.http.Html$Serialization.select</code>
+					that allows an application to control the selection of HTML versus XHTML.
+				</p>
+				<p>
+					This should normally be left with the default value of <code>auto</code>.  This is used
+					when the content is known to contain invalid markup that can not be parsed as XML.
 				</p>
 			]]></description>
-			<name>forceHtml</name>
+			<name>serialization</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>boolean</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[

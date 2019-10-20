@@ -23,6 +23,9 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.servlet.http.Html;
+import com.aoindustries.util.MinimalList;
+import java.util.List;
+import java.util.Locale;
 import javax.servlet.jsp.tagext.TagData;
 import javax.servlet.jsp.tagext.TagExtraInfo;
 import javax.servlet.jsp.tagext.ValidationMessage;
@@ -34,20 +37,41 @@ public class HtmlTagTEI extends TagExtraInfo {
 
 	@Override
 	public ValidationMessage[] validate(TagData data) {
+		List<ValidationMessage> messages = MinimalList.emptyList();
 		Object doctypeAttr = data.getAttribute("doctype");
 		if(
 			doctypeAttr != null
 			&& doctypeAttr != TagData.REQUEST_TIME_VALUE
 		) {
 			String doctype = ((String)doctypeAttr).trim();
-			try {
-				Html.DocType.valueOf(doctype);
-			} catch(IllegalArgumentException e) {
-				return new ValidationMessage[] {
-					new ValidationMessage(data.getId(), ApplicationResources.accessor.getMessage("HtmlTag.doctype.invalid", doctype))
-				};
+			if(!doctype.isEmpty()) {
+				try {
+					Html.DocType.valueOf(doctype.toLowerCase(Locale.ROOT));
+				} catch(IllegalArgumentException e) {
+					messages = MinimalList.add(
+						messages,
+						new ValidationMessage(data.getId(), ApplicationResources.accessor.getMessage("HtmlTag.doctype.invalid", doctype))
+					);
+				}
 			}
 		}
-		return null;
+		Object serializationAttr = data.getAttribute("serialization");
+		if(
+			serializationAttr != null
+			&& serializationAttr != TagData.REQUEST_TIME_VALUE
+		) {
+			String serialization = ((String)serializationAttr).trim();
+			if(!serialization.isEmpty() && !"auto".equalsIgnoreCase(serialization)) {
+				try {
+					Html.Serialization.valueOf(serialization.toUpperCase(Locale.ROOT));
+				} catch(IllegalArgumentException e) {
+					messages = MinimalList.add(
+						messages,
+						new ValidationMessage(data.getId(), ApplicationResources.accessor.getMessage("HtmlTag.serialization.invalid", serialization))
+					);
+				}
+			}
+		}
+		return messages.isEmpty() ? null : messages.toArray(new ValidationMessage[messages.size()]);
 	}
 }
