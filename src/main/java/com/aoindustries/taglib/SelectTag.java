@@ -29,7 +29,6 @@ import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlA
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.servlet.http.Html;
 import com.aoindustries.util.i18n.MarkupType;
-import com.aoindustries.util.i18n.servlet.MarkupUtils;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
@@ -140,26 +139,26 @@ public class SelectTag
 		}
 		if(onchange!=null) {
 			out.write(" onchange=\"");
-			Coercion.write(onchange, javaScriptInXhtmlAttributeEncoder, out);
+			Coercion.write(onchange, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		if(onfocus!=null) {
 			out.write(" onfocus=\"");
-			Coercion.write(onfocus, javaScriptInXhtmlAttributeEncoder, out);
+			Coercion.write(onfocus, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		if(onblur!=null) {
 			out.write(" onblur=\"");
-			Coercion.write(onblur, javaScriptInXhtmlAttributeEncoder, out);
+			Coercion.write(onblur, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		if(onkeypress!=null) {
 			out.write(" onkeypress=\"");
-			Coercion.write(onkeypress, javaScriptInXhtmlAttributeEncoder, out);
+			Coercion.write(onkeypress, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		out.write('>');
-		MarkupUtils.writeWithMarkup(capturedBody, MarkupType.XHTML, out);
+		Coercion.write(capturedBody, MarkupType.XHTML, out);
 		out.write("</select>");
 	}
 }

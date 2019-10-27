@@ -33,7 +33,6 @@ import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.i18n.MarkupType;
-import com.aoindustries.util.i18n.servlet.MarkupUtils;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Arrays;
@@ -328,22 +327,22 @@ public class InputTag
 			.onclick(onclick);
 		if(onchange!=null) {
 			out.write(" onchange=\"");
-			Coercion.write(onchange, javaScriptInXhtmlAttributeEncoder, out);
+			Coercion.write(onchange, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		if(onfocus!=null) {
 			out.write(" onfocus=\"");
-			Coercion.write(onfocus, javaScriptInXhtmlAttributeEncoder, out);
+			Coercion.write(onfocus, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		if(onblur!=null) {
 			out.write(" onblur=\"");
-			Coercion.write(onblur, javaScriptInXhtmlAttributeEncoder, out);
+			Coercion.write(onblur, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		if(onkeypress!=null) {
 			out.write(" onkeypress=\"");
-			Coercion.write(onkeypress, javaScriptInXhtmlAttributeEncoder, out);
+			Coercion.write(onkeypress, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		if(size!=null) {
@@ -372,7 +371,7 @@ public class InputTag
 		}
 		if(alt != null) {
 			out.write(" alt=\"");
-			MarkupUtils.writeWithMarkup(alt, MarkupType.TEXT, textInXhtmlAttributeEncoder, out);
+			Coercion.write(alt, MarkupType.TEXT, textInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		input

@@ -29,6 +29,7 @@ import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlA
 import static com.aoindustries.encoding.TextInXhtmlEncoder.textInXhtmlEncoder;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.servlet.http.Html;
+import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
@@ -139,7 +140,7 @@ public class TextareaTag
 		}
 		if(onchange!=null) {
 			out.write(" onchange=\"");
-			Coercion.write(onchange, javaScriptInXhtmlAttributeEncoder, out);
+			Coercion.write(onchange, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		if(style!=null) {

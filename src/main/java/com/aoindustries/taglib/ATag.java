@@ -38,7 +38,6 @@ import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.i18n.MarkupType;
-import com.aoindustries.util.i18n.servlet.MarkupUtils;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
@@ -232,7 +231,7 @@ public class ATag
 		}
 		if(title!=null) {
 			out.write(" title=\"");
-			MarkupUtils.writeWithMarkup(title, MarkupType.TEXT, textInXhtmlAttributeEncoder, out);
+			Coercion.write(title, MarkupType.TEXT, textInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		if(clazz!=null) {
@@ -247,17 +246,17 @@ public class ATag
 		}
 		if(onclick!=null) {
 			out.write(" onclick=\"");
-			Coercion.write(onclick, javaScriptInXhtmlAttributeEncoder, out);
+			Coercion.write(onclick, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		if(onmouseover!=null) {
 			out.write(" onmouseover=\"");
-			Coercion.write(onmouseover, javaScriptInXhtmlAttributeEncoder, out);
+			Coercion.write(onmouseover, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		if(onmouseout!=null) {
 			out.write(" onmouseout=\"");
-			Coercion.write(onmouseout, javaScriptInXhtmlAttributeEncoder, out);
+			Coercion.write(onmouseout, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		out.write('>');
@@ -281,7 +280,7 @@ public class ATag
 				URIDecoder.decodeURI(toDecode, textInXhtmlEncoder, out);
 			}
 		} else {
-			MarkupUtils.writeWithMarkup(trimmedBody, MarkupType.XHTML, out);
+			Coercion.write(trimmedBody, MarkupType.XHTML, out);
 		}
 		out.write("</a>");
 	}
