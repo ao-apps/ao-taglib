@@ -126,6 +126,7 @@ public class MetaTag
 				out.write('"');
 			}
 			if(content != null) {
+				// TODO: Might be able to perform markup for some types of content (keywords, description, ...)?
 				out.write(" content=\"");
 				Coercion.write(content, textInXhtmlAttributeEncoder, out);
 				out.write('"');

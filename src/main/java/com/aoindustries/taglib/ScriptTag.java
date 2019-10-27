@@ -34,7 +34,6 @@ import com.aoindustries.servlet.http.Html;
 import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
-import com.aoindustries.util.i18n.servlet.MarkupUtils;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.ServletContext;
@@ -161,10 +160,11 @@ public class ScriptTag
 				// TODO: I think this would only work with SegmentedBuffer with a single segment
 				// TODO: We might need a special case in CharArrayWriter if we want this identity match for a single string
 				// TODO: Set back to SegmentedBuffer, if this is the case
-				MarkupUtils.writeWithMarkup(
+				Coercion.write(
 					capturedBody,
 					mediaType.getMarkupType(),
 					MediaEncoder.getInstance(new HttpServletResponseEncodingContext(response), mediaType, getOutputType()),
+					false,
 					out
 				);
 				html.nl();

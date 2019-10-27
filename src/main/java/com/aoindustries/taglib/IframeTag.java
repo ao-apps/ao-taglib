@@ -31,7 +31,6 @@ import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.i18n.MarkupType;
-import com.aoindustries.util.i18n.servlet.MarkupUtils;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspTagException;
@@ -157,7 +156,7 @@ private Object id;
 		out.write(" frameborder=\"");
 		out.write(frameborder ? '1' : '0');
 		out.write("\">");
-		MarkupUtils.writeWithMarkup(capturedBody, MarkupType.XHTML, out);
+		Coercion.write(capturedBody, MarkupType.XHTML, out);
 		out.write("</iframe>");
 	}
 }

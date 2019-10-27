@@ -38,7 +38,6 @@ import com.aoindustries.servlet.http.Html;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.i18n.MarkupType;
-import com.aoindustries.util.i18n.servlet.MarkupUtils;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
@@ -220,7 +219,7 @@ public class FormTag
 		}
 		if(onsubmit!=null) {
 			out.write(" onsubmit=\"");
-			Coercion.write(onsubmit, javaScriptInXhtmlAttributeEncoder, out);
+			Coercion.write(onsubmit, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		out.write('>');
@@ -252,7 +251,7 @@ public class FormTag
 			}
 		}
 		if(didDiv) out.write("</div>");
-		MarkupUtils.writeWithMarkup(capturedBody, MarkupType.XHTML, out);
+		Coercion.write(capturedBody, MarkupType.XHTML, out);
 		out.write("</form>");
 	}
 }

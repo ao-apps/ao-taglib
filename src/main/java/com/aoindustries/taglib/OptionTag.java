@@ -78,6 +78,7 @@ public class OptionTag
 		capturedBody = capturedBody.trim();
 		// TODO: Should we be setting the value always like this?  Duplicates efforts.
 		// TODO: If not setting value this way, this does not need to buffer
+		// TODO: This has something to do with translator markup added for display, but not value
 		if(!valueSet) setValue(capturedBody);
 		PageContext pageContext = (PageContext)getJspContext();
 		Html.get(
