@@ -22,7 +22,8 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.servlet.http.Html;
+import com.aoindustries.html.Doctype;
+import com.aoindustries.html.Serialization;
 import com.aoindustries.util.MinimalList;
 import java.util.List;
 import java.util.Locale;
@@ -46,7 +47,7 @@ public class HtmlTagTEI extends TagExtraInfo {
 			String serialization = ((String)serializationAttr).trim();
 			if(!serialization.isEmpty() && !"auto".equalsIgnoreCase(serialization)) {
 				try {
-					Html.Serialization.valueOf(serialization.toUpperCase(Locale.ROOT));
+					Serialization.valueOf(serialization.toUpperCase(Locale.ROOT));
 				} catch(IllegalArgumentException e) {
 					messages = MinimalList.add(
 						messages,
@@ -63,7 +64,7 @@ public class HtmlTagTEI extends TagExtraInfo {
 			String doctype = ((String)doctypeAttr).trim();
 			if(!doctype.isEmpty() && !"default".equalsIgnoreCase(doctype)) {
 				try {
-					Html.Doctype.valueOf(doctype.toUpperCase(Locale.ROOT));
+					Doctype.valueOf(doctype.toUpperCase(Locale.ROOT));
 				} catch(IllegalArgumentException e) {
 					messages = MinimalList.add(
 						messages,

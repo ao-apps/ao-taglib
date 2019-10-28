@@ -27,8 +27,8 @@ import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaSc
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import static com.aoindustries.encoding.TextInXhtmlEncoder.textInXhtmlEncoder;
+import com.aoindustries.html.Serialization;
 import com.aoindustries.io.buffer.BufferResult;
-import com.aoindustries.servlet.http.Html;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
@@ -115,7 +115,7 @@ public class TextareaTag
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		if(value==null) setValue(capturedBody.trim());
 		PageContext pageContext = (PageContext)getJspContext();
-		Html.Serialization serialization = Html.Serialization.get(
+		Serialization serialization = Serialization.get(
 			pageContext.getServletContext(),
 			(HttpServletRequest)pageContext.getRequest()
 		);
@@ -132,11 +132,11 @@ public class TextareaTag
 		out.write('"');
 		if(readonly) {
 			out.write(" readonly");
-			if(serialization == Html.Serialization.XML) out.write("=\"readonly\"");
+			if(serialization == Serialization.XML) out.write("=\"readonly\"");
 		}
 		if(disabled) {
 			out.write(" disabled");
-			if(serialization == Html.Serialization.XML) out.write("=\"disabled\"");
+			if(serialization == Serialization.XML) out.write("=\"disabled\"");
 		}
 		if(onchange!=null) {
 			out.write(" onchange=\"");
