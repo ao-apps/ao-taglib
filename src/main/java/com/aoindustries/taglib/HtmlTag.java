@@ -27,6 +27,8 @@ import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextIn
 import com.aoindustries.html.Doctype;
 import com.aoindustries.html.Html;
 import com.aoindustries.html.Serialization;
+import com.aoindustries.html.servlet.DoctypeEE;
+import com.aoindustries.html.servlet.SerializationEE;
 import com.aoindustries.servlet.ServletUtil;
 import java.io.IOException;
 import java.io.Writer;
@@ -122,11 +124,11 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 		Serialization oldSerialization;
 		boolean setSerialization;
 		if(currentSerialization == null) {
-			currentSerialization = Serialization.get(servletContext, request);
+			currentSerialization = SerializationEE.get(servletContext, request);
 			oldSerialization = null;
 			setSerialization = false;
 		} else {
-			oldSerialization = Serialization.replace(request, currentSerialization);
+			oldSerialization = SerializationEE.replace(request, currentSerialization);
 			setSerialization = true;
 		}
 		try {
@@ -134,11 +136,11 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 			Doctype oldDoctype;
 			boolean setDoctype;
 			if(currentDoctype == null) {
-				currentDoctype = Doctype.get(servletContext, request);
+				currentDoctype = DoctypeEE.get(servletContext, request);
 				oldDoctype = null;
 				setDoctype = false;
 			} else {
-				oldDoctype = Doctype.replace(request, currentDoctype);
+				oldDoctype = DoctypeEE.replace(request, currentDoctype);
 				setDoctype = true;
 			}
 			try {
@@ -167,10 +169,10 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 			} catch(ServletException e) {
 				throw new JspTagException(e);
 			} finally {
-				if(setDoctype) Doctype.set(request, oldDoctype);
+				if(setDoctype) DoctypeEE.set(request, oldDoctype);
 			}
 		} finally {
-			if(setSerialization) Serialization.set(request, oldSerialization);
+			if(setSerialization) SerializationEE.set(request, oldSerialization);
 		}
 	}
 }

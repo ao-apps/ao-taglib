@@ -26,6 +26,7 @@ import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.html.Html;
+import com.aoindustries.html.servlet.HtmlEE;
 import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URIParameters;
 import com.aoindustries.net.URIParametersMap;
@@ -179,7 +180,7 @@ public class LinkTag
 			);
 		} else {
 			PageContext pageContext = (PageContext)getJspContext();
-			Html html = Html.get(
+			Html html = HtmlEE.get(
 				pageContext.getServletContext(),
 				(HttpServletRequest)pageContext.getRequest(),
 				out

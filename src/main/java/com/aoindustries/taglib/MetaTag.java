@@ -26,6 +26,7 @@ import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.html.Html;
+import com.aoindustries.html.servlet.HtmlEE;
 import com.aoindustries.io.buffer.BufferResult;
 import java.io.IOException;
 import java.io.Writer;
@@ -99,7 +100,7 @@ public class MetaTag
 		} else {
 			// Write the meta tag directly here
 			PageContext pageContext = (PageContext)getJspContext();
-			Html html = Html.get(
+			Html html = HtmlEE.get(
 				pageContext.getServletContext(),
 				(HttpServletRequest)pageContext.getRequest(),
 				out

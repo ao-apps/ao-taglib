@@ -26,6 +26,7 @@ import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.html.Html;
+import com.aoindustries.html.servlet.HtmlEE;
 import com.aoindustries.net.URIEncoder;
 import com.aoindustries.servlet.filter.EncodeURIFilter;
 import com.aoindustries.servlet.http.Dispatcher;
@@ -61,7 +62,7 @@ public class BaseTag extends AutoEncodingNullTag {
 				originalLastSlash!=currentLastSlash
 				|| !originalPath.regionMatches(0, currentPath, 0, originalLastSlash)
 			) {
-				Html html = Html.get(
+				Html html = HtmlEE.get(
 					pageContext.getServletContext(),
 					request,
 					out

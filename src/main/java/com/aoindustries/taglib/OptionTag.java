@@ -23,7 +23,7 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.html.Html;
+import com.aoindustries.html.servlet.HtmlEE;
 import com.aoindustries.io.buffer.BufferResult;
 import java.io.IOException;
 import java.io.Writer;
@@ -81,7 +81,7 @@ public class OptionTag
 		// TODO: This has something to do with translator markup added for display, but not value
 		if(!valueSet) setValue(capturedBody);
 		PageContext pageContext = (PageContext)getJspContext();
-		Html.get(
+		HtmlEE.get(
 			pageContext.getServletContext(),
 			(HttpServletRequest)pageContext.getRequest(),
 			out

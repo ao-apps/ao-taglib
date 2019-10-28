@@ -27,6 +27,7 @@ import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaSc
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.html.Serialization;
+import com.aoindustries.html.servlet.SerializationEE;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
@@ -113,7 +114,7 @@ public class SelectTag
 	@Override
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
-		Serialization serialization = Serialization.get(
+		Serialization serialization = SerializationEE.get(
 			pageContext.getServletContext(),
 			(HttpServletRequest)pageContext.getRequest()
 		);

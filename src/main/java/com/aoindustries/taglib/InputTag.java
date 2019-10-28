@@ -28,6 +28,7 @@ import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.html.Html;
 import com.aoindustries.html.Input;
+import com.aoindustries.html.servlet.HtmlEE;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.net.URIParametersMap;
 import com.aoindustries.servlet.http.LastModifiedServlet;
@@ -315,7 +316,7 @@ public class InputTag
 			if(alt == null) throw new AttributeRequiredException("alt");
 		}
 		PageContext pageContext = (PageContext)getJspContext();
-		Html html = Html.get(
+		Html html = HtmlEE.get(
 			pageContext.getServletContext(),
 			(HttpServletRequest)pageContext.getRequest(),
 			out
