@@ -26,9 +26,10 @@ import com.aoindustries.encoding.Coercion;
 import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaScriptInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
+import com.aoindustries.html.Html;
+import com.aoindustries.html.Input;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.net.URIParametersMap;
-import com.aoindustries.servlet.http.Html;
 import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
@@ -319,7 +320,7 @@ public class InputTag
 			(HttpServletRequest)pageContext.getRequest(),
 			out
 		);
-		Html.Input input = html.input()
+		Input input = html.input()
 			.id(id)
 			.type(typeString)
 			.name(name)

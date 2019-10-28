@@ -26,6 +26,8 @@ import com.aoindustries.encoding.Coercion;
 import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaScriptInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
+import com.aoindustries.html.Html;
+import com.aoindustries.html.Input;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.net.AnyURI;
 import com.aoindustries.net.MutableURIParameters;
@@ -34,7 +36,6 @@ import com.aoindustries.net.URIParametersMap;
 import com.aoindustries.net.URIParametersUtils;
 import com.aoindustries.net.URIResolver;
 import com.aoindustries.servlet.http.Dispatcher;
-import com.aoindustries.servlet.http.Html;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.i18n.MarkupType;
@@ -233,7 +234,7 @@ public class FormTag
 				}
 				String name = entry.getKey();
 				for(String value : entry.getValue()) {
-					html.input(Html.Input.Type.HIDDEN).name(name).value(value).__().nl();
+					html.input(Input.Type.HIDDEN).name(name).value(value).__().nl();
 				}
 			}
 		}
@@ -246,7 +247,7 @@ public class FormTag
 				}
 				String name = entry.getKey();
 				for(String paramValue : entry.getValue()) {
-					html.input(Html.Input.Type.HIDDEN).name(name).value(paramValue).__().nl();
+					html.input(Input.Type.HIDDEN).name(name).value(paramValue).__().nl();
 				}
 			}
 		}

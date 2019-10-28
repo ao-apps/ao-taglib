@@ -23,8 +23,8 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
+import com.aoindustries.html.Html;
 import com.aoindustries.io.buffer.BufferResult;
-import com.aoindustries.servlet.http.Html;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;

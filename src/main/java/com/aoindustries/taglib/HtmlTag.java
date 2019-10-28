@@ -24,8 +24,10 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
+import com.aoindustries.html.Doctype;
+import com.aoindustries.html.Html;
+import com.aoindustries.html.Serialization;
 import com.aoindustries.servlet.ServletUtil;
-import com.aoindustries.servlet.http.Html;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Locale;
@@ -46,23 +48,23 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 
 	// TODO: charset here, WebPage, Page, PageServer, PageTag, Skin, Layout, Theme
 
-	private Html.Serialization serialization;
+	private Serialization serialization;
 	public void setSerialization(String serialization) {
 		if(serialization == null) {
 			this.serialization = null;
 		} else {
 			serialization = serialization.trim();
-			this.serialization = (serialization.isEmpty() || "auto".equalsIgnoreCase(serialization)) ? null : Html.Serialization.valueOf(serialization.toUpperCase(Locale.ROOT));
+			this.serialization = (serialization.isEmpty() || "auto".equalsIgnoreCase(serialization)) ? null : Serialization.valueOf(serialization.toUpperCase(Locale.ROOT));
 		}
 	}
 
-	private Html.Doctype doctype;
+	private Doctype doctype;
 	public void setDoctype(String doctype) {
 		if(doctype == null) {
 			this.doctype = null;
 		} else {
 			doctype = doctype.trim();
-			this.doctype = (doctype.isEmpty() || "default".equalsIgnoreCase(doctype)) ? null : Html.Doctype.valueOf(doctype.toUpperCase(Locale.ROOT));
+			this.doctype = (doctype.isEmpty() || "default".equalsIgnoreCase(doctype)) ? null : Doctype.valueOf(doctype.toUpperCase(Locale.ROOT));
 		}
 	}
 
@@ -76,9 +78,9 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 		this.oldIeClass = AttributeUtils.trimNullIfEmpty(oldIeClass);
 	}
 
-	public static void beginHtmlTag(Locale locale, Appendable out, Html.Serialization serialization, String clazz) throws IOException {
+	public static void beginHtmlTag(Locale locale, Appendable out, Serialization serialization, String clazz) throws IOException {
 		out.append("<html");
-		if(serialization == Html.Serialization.XML) {
+		if(serialization == Serialization.XML) {
 			out.append(" xmlns=\"http://www.w3.org/1999/xhtml\"");
 		}
 		if(clazz!=null) {
@@ -92,7 +94,7 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 				out.append(" lang=\"");
 				encodeTextInXhtmlAttribute(lang, out);
 				out.append('"');
-				if(serialization == Html.Serialization.XML) {
+				if(serialization == Serialization.XML) {
 					out.append(" xml:lang=\"");
 					encodeTextInXhtmlAttribute(lang, out);
 					out.append('"');
@@ -102,7 +104,7 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 		out.append('>');
 	}
 
-	public static void beginHtmlTag(ServletResponse response, Appendable out, Html.Serialization serialization, String clazz) throws IOException {
+	public static void beginHtmlTag(ServletResponse response, Appendable out, Serialization serialization, String clazz) throws IOException {
 		beginHtmlTag(response.getLocale(), out, serialization, clazz);
 	}
 
@@ -116,27 +118,27 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 		ServletContext servletContext = pageContext.getServletContext();
 		HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
 
-		Html.Serialization currentSerialization = serialization;
-		Html.Serialization oldSerialization;
+		Serialization currentSerialization = serialization;
+		Serialization oldSerialization;
 		boolean setSerialization;
 		if(currentSerialization == null) {
-			currentSerialization = Html.Serialization.get(servletContext, request);
+			currentSerialization = Serialization.get(servletContext, request);
 			oldSerialization = null;
 			setSerialization = false;
 		} else {
-			oldSerialization = Html.Serialization.replace(request, currentSerialization);
+			oldSerialization = Serialization.replace(request, currentSerialization);
 			setSerialization = true;
 		}
 		try {
-			Html.Doctype currentDoctype = doctype;
-			Html.Doctype oldDoctype;
+			Doctype currentDoctype = doctype;
+			Doctype oldDoctype;
 			boolean setDoctype;
 			if(currentDoctype == null) {
-				currentDoctype = Html.Doctype.get(servletContext, request);
+				currentDoctype = Doctype.get(servletContext, request);
 				oldDoctype = null;
 				setDoctype = false;
 			} else {
-				oldDoctype = Html.Doctype.replace(request, currentDoctype);
+				oldDoctype = Doctype.replace(request, currentDoctype);
 				setDoctype = true;
 			}
 			try {
@@ -165,10 +167,10 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 			} catch(ServletException e) {
 				throw new JspTagException(e);
 			} finally {
-				if(setDoctype) Html.Doctype.set(request, oldDoctype);
+				if(setDoctype) Doctype.set(request, oldDoctype);
 			}
 		} finally {
-			if(setSerialization) Html.Serialization.set(request, oldSerialization);
+			if(setSerialization) Serialization.set(request, oldSerialization);
 		}
 	}
 }

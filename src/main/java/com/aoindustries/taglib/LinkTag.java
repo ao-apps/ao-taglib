@@ -25,10 +25,10 @@ package com.aoindustries.taglib;
 import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
+import com.aoindustries.html.Html;
 import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URIParameters;
 import com.aoindustries.net.URIParametersMap;
-import com.aoindustries.servlet.http.Html;
 import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
@@ -184,7 +184,7 @@ public class LinkTag
 				(HttpServletRequest)pageContext.getRequest(),
 				out
 			);
-			Html.Link link = html.link();
+			com.aoindustries.html.Link link = html.link();
 			UrlUtils.writeHref(pageContext, out, href, params, absolute, canonical, addLastModified);
 			if(hreflang!=null) {
 				out.write(" hreflang=\"");

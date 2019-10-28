@@ -25,9 +25,10 @@ package com.aoindustries.taglib;
 import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
+import com.aoindustries.html.Html;
+import com.aoindustries.html.Serialization;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.net.URIParametersMap;
-import com.aoindustries.servlet.http.Html;
 import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
@@ -225,7 +226,7 @@ public class ImgTag
 		}
 		if(ismap) {
 			out.write(" ismap");
-			if(html.serialization == Html.Serialization.XML) out.write("=\"ismap\"");
+			if(html.serialization == Serialization.XML) out.write("=\"ismap\"");
 		}
 		html.selfClose();
 	}

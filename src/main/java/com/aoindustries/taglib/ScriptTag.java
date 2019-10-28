@@ -27,10 +27,11 @@ import com.aoindustries.encoding.MediaEncoder;
 import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.servlet.HttpServletResponseEncodingContext;
+import com.aoindustries.html.Html;
+import com.aoindustries.html.Script;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URIParametersMap;
-import com.aoindustries.servlet.http.Html;
 import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
@@ -148,7 +149,7 @@ public class ScriptTag
 			ServletContext servletContext = pageContext.getServletContext();
 			HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
 			Html html = Html.get(servletContext, request, out);
-			Html.Script script = html.script(mediaType.getContentType());
+			Script script = html.script(mediaType.getContentType());
 			UrlUtils.writeSrc(pageContext, out, src, params, absolute, canonical, addLastModified);
 			out.write('>');
 			// Only write body when there is no source (discard body when src provided)
