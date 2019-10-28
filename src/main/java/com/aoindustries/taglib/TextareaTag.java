@@ -28,6 +28,7 @@ import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import static com.aoindustries.encoding.TextInXhtmlEncoder.textInXhtmlEncoder;
 import com.aoindustries.html.Serialization;
+import com.aoindustries.html.servlet.SerializationEE;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
@@ -115,7 +116,7 @@ public class TextareaTag
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		if(value==null) setValue(capturedBody.trim());
 		PageContext pageContext = (PageContext)getJspContext();
-		Serialization serialization = Serialization.get(
+		Serialization serialization = SerializationEE.get(
 			pageContext.getServletContext(),
 			(HttpServletRequest)pageContext.getRequest()
 		);

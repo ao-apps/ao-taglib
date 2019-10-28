@@ -24,6 +24,7 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.html.Serialization;
+import com.aoindustries.html.servlet.SerializationEE;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
@@ -43,7 +44,7 @@ public class BrTag extends AutoEncodingNullTag {
 	@Override
 	protected void doTag(Writer out) throws JspTagException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
-		Serialization serialization = Serialization.get(
+		Serialization serialization = SerializationEE.get(
 			pageContext.getServletContext(),
 			(HttpServletRequest)pageContext.getRequest()
 		);

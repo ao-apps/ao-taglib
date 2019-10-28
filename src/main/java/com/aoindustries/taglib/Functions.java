@@ -24,6 +24,8 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.html.Doctype;
 import com.aoindustries.html.Serialization;
+import com.aoindustries.html.servlet.DoctypeEE;
+import com.aoindustries.html.servlet.SerializationEE;
 import com.aoindustries.lang.NullArgumentException;
 import com.aoindustries.net.URIEncoder;
 import com.aoindustries.servlet.filter.FunctionContext;
@@ -113,14 +115,14 @@ final public class Functions {
 	}
 
 	public static Serialization getSerialization() {
-		return Serialization.get(
+		return SerializationEE.get(
 			FunctionContext.getServletContext(),
 			FunctionContext.getRequest()
 		);
 	}
 
 	public static Doctype getDoctype() {
-		return Doctype.get(
+		return DoctypeEE.get(
 			FunctionContext.getServletContext(),
 			FunctionContext.getRequest()
 		);

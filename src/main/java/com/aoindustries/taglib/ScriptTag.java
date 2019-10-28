@@ -29,6 +29,7 @@ import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.servlet.HttpServletResponseEncodingContext;
 import com.aoindustries.html.Html;
 import com.aoindustries.html.Script;
+import com.aoindustries.html.servlet.HtmlEE;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URIParametersMap;
@@ -146,9 +147,11 @@ public class ScriptTag
 		try {
 			// Write script tag with src attribute, discarding any body
 			PageContext pageContext = (PageContext)getJspContext();
-			ServletContext servletContext = pageContext.getServletContext();
-			HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
-			Html html = Html.get(servletContext, request, out);
+			Html html = HtmlEE.get(
+				pageContext.getServletContext(),
+				(HttpServletRequest)pageContext.getRequest(),
+				out
+			);
 			Script script = html.script(mediaType.getContentType());
 			UrlUtils.writeSrc(pageContext, out, src, params, absolute, canonical, addLastModified);
 			out.write('>');

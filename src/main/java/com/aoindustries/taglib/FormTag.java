@@ -28,6 +28,7 @@ import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.html.Html;
 import com.aoindustries.html.Input;
+import com.aoindustries.html.servlet.HtmlEE;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.net.AnyURI;
 import com.aoindustries.net.MutableURIParameters;
@@ -168,7 +169,7 @@ public class FormTag
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
 		HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
-		Html html = Html.get(
+		Html html = HtmlEE.get(
 			pageContext.getServletContext(),
 			request,
 			out
