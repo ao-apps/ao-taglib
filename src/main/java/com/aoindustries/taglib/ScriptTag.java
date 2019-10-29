@@ -157,7 +157,6 @@ public class ScriptTag
 			out.write('>');
 			// Only write body when there is no source (discard body when src provided)
 			if(src == null && capturedBody.getLength() != 0) {
-				html.nl();
 				HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
 				script.cdata.start();
 				// TODO: writeWithMarkup appropriate for capturedBody?
