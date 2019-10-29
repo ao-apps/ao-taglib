@@ -114,14 +114,10 @@ public final class AttributeUtils  {
 	}
 
 	/**
-	 * Trims a value, returning {@code null} if empty after trimming.
+	 * @see  StringUtility#trimNullIfEmpty(java.lang.String)
 	 */
 	public static String trimNullIfEmpty(String value) {
-		if(value != null) {
-			value = value.trim();
-			if(value.isEmpty()) value = null;
-		}
-		return value;
+		return StringUtility.trimNullIfEmpty(value);
 	}
 
 	public static boolean isAllDigits(String value) {
