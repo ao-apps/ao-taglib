@@ -1284,6 +1284,18 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2019-10-30T20:50:04-0500" -->
+		<description><![CDATA[
+			<p class="semanticcms-tag-reference-summary">
+				Writes a <a href="https://www.w3schools.com/tags/tag_hr.asp">&lt;hr&gt;</a>
+				tag in the current serialization.
+			</p>
+		]]></description>
+		<name>hr</name>
+		<tag-class>com.aoindustries.taglib.HrTag</tag-class>
+		<body-content>empty</body-content>
+	</tag>
+	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
 		<!-- dateModified="2019-10-27T16:59:13-0500" -->
 		<description><![CDATA[
