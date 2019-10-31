@@ -36,7 +36,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2019-10-27T16:59:13-0500"
+		dateModified="2019-10-30T20:50:04-0500"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -99,6 +99,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 						This should eliminate validator warnings when used as HTML.
 					</li>
 					<li>New tag <core:link page="ao.tld/tag-br" /> that writes a line break in the current serialization.</li>
+					<li>New tag <core:link page="ao.tld/tag-hr" /> that writes a thematic break (horizontal rule) in the current serialization.</li>
 					<li>
 						New function <core:link page="ao.tld/function-getSerialization" /> to get the current
 						<ao:a href="https://aoindustries.com/ao-fluent-html/com/aoindustries/html/Serialization.html">Serialization</ao:a> enum.</li>
