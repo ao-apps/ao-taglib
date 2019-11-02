@@ -76,7 +76,7 @@ public final class AttributeUtils  {
 	/**
 	 * @see  Coercion#nullIfEmpty(java.lang.Object)
 	 */
-	public static <T> T nullIfEmpty(T value) throws JspTagException {
+	public static Object nullIfEmpty(Object value) throws JspTagException {
 		try {
 			return Coercion.nullIfEmpty(value);
 		} catch(IOException e) {
