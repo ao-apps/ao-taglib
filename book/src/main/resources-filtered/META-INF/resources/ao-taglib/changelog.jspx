@@ -36,7 +36,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2019-10-30T20:50:04-0500"
+		dateModified="2019-11-02T16:41:06-0500"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -53,6 +53,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 				scmUrl="@{documented.scm.url}"
 			>
 				<ul>
+					<li>Minimum Java version changed from 1.7 to 1.8.</li>
 					<li>
 						Moved <code>HtmlTag.useXhtmlContentType(…)</code> to new
 						<ao:a href="https://aoindustries.com/ao-fluent-html/apidocs/com/aoindustries/html/Html.html">Html</ao:a> class,
@@ -75,7 +76,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 								When this context-param is unspecified or <code>auto</code>,
 								determine the serialization based on the client's <code>Accept</code> header.
 							</li>
-						</ol>
+-						</ol>
 					</li>
 					<li>
 						<core:link page="ao.tld/tag-html" /> attribute <code>doctype</code> now has a new value <code>default</code> (the default).

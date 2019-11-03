@@ -62,6 +62,7 @@ final public class TeiUtils {
 				// First allow shortcuts (matching enum names)
 				MediaType mediaType = MediaType.getMediaTypeByName(type);
 				if(mediaType == null) {
+					// Return value not used: valdation only:
 					mediaType = MediaType.getMediaTypeForContentType(type);
 				}
 				// Value is OK
