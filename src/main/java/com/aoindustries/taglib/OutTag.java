@@ -68,10 +68,10 @@ public class OutTag
 	private Object getDefault() {
 		if(def == null) return null;
 		if(defValueSet) return defValue;
-		Object value = def.getValue(getJspContext().getELContext());
-		defValue = value;
+		Object _value = def.getValue(getJspContext().getELContext());
+		defValue = _value;
 		defValueSet = true;
-		return value;
+		return _value;
 	}
 
 	/**
@@ -135,9 +135,9 @@ public class OutTag
 		} else if(value!=null) {
 			Coercion.write(value, out);
 		} else {
-			Object defValue = getDefault();
-			if(defValue != null) {
-				Coercion.write(defValue, out);
+			Object _default = getDefault();
+			if(_default != null) {
+				Coercion.write(_default, out);
 			}
 		}
 	}
