@@ -192,7 +192,8 @@ public class LinkTag
 				Coercion.write(hreflang, textInXhtmlAttributeEncoder, out);
 				out.write('"');
 			}
-			link.rel(rel).type(Coercion.toString(type)).media(media).title(title).__();
+			// TODO: These are coerced in both uses, change attribute to String
+			link.rel(Coercion.toString(rel)).type(Coercion.toString(type)).media(media).title(title).__();
 		}
 	}
 }
