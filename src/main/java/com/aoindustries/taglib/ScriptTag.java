@@ -29,6 +29,7 @@ import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.servlet.HttpServletResponseEncodingContext;
 import com.aoindustries.html.Html;
 import com.aoindustries.html.Script;
+import com.aoindustries.html.Serialization;
 import com.aoindustries.html.servlet.HtmlEE;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.net.MutableURIParameters;
@@ -151,13 +152,21 @@ public class ScriptTag
 				(HttpServletRequest)pageContext.getRequest(),
 				out
 			);
-			Script script = html.script(mediaType.getContentType());
+			String type = mediaType.getContentType();
+			Script script = html.script(type);
 			UrlUtils.writeSrc(pageContext, out, src, params, absolute, canonical, addLastModified);
 			out.write('>');
 			// Only write body when there is no source (discard body when src provided)
 			if(src == null && capturedBody.getLength() != 0) {
 				HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
-				script.cdata.start();
+				// TODO: script.cdata again?
+				boolean doCdata =
+					html.serialization == Serialization.XML
+					&& (
+						Script.Type.APPLICATION_JAVASCRIPT.getContentType().equals(type)
+						|| Script.Type.TEXT_JAVASCRIPT.getContentType().equals(type)
+					);
+				if(doCdata) out.write("//<![CDATA[\n");
 				// TODO: writeWithMarkup appropriate for capturedBody?
 				// TODO: I think this would only work with SegmentedBuffer with a single segment
 				// TODO: We might need a special case in CharArrayWriter if we want this identity match for a single string
@@ -170,7 +179,8 @@ public class ScriptTag
 					out
 				);
 				html.nl();
-				script.cdata.end();
+				// TODO: script.cdata again?
+				if(doCdata) out.write("//]]>");
 			}
 			out.write("</script>");
 		} catch(MediaException err) {
