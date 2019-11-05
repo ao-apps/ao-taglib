@@ -23,13 +23,9 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.Coercion;
-import com.aoindustries.encoding.MediaEncoder;
 import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.encoding.servlet.HttpServletResponseEncodingContext;
 import com.aoindustries.html.Html;
-import com.aoindustries.html.Script;
-import com.aoindustries.html.Serialization;
 import com.aoindustries.html.servlet.HtmlEE;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.net.MutableURIParameters;
@@ -40,7 +36,6 @@ import static com.aoindustries.taglib.ApplicationResources.accessor;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.DynamicAttributes;
@@ -144,47 +139,19 @@ public class ScriptTag
 
 	@Override
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
-		try {
-			// Write script tag with src attribute, discarding any body
-			PageContext pageContext = (PageContext)getJspContext();
-			Html html = HtmlEE.get(
-				pageContext.getServletContext(),
-				(HttpServletRequest)pageContext.getRequest(),
-				out
-			);
-			String type = mediaType.getContentType();
-			Script script = html.script(type);
-			UrlUtils.writeSrc(pageContext, out, src, params, absolute, canonical, addLastModified);
-			out.write('>');
+		// Write script tag with src attribute, discarding any body
+		PageContext pageContext = (PageContext)getJspContext();
+		Html html = HtmlEE.get(
+			pageContext.getServletContext(),
+			(HttpServletRequest)pageContext.getRequest(),
+			out
+		);
+		html
+			.script(mediaType.getContentType())
+			// Call getSrc always, since it validates src versus params
+			.src(UrlUtils.getSrc(pageContext, src, params, absolute, canonical, addLastModified))
 			// Only write body when there is no source (discard body when src provided)
-			if(src == null && capturedBody.getLength() != 0) {
-				HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
-				// TODO: script.cdata again?
-				boolean doCdata =
-					html.serialization == Serialization.XML
-					&& (
-						Script.Type.APPLICATION_JAVASCRIPT.getContentType().equals(type)
-						|| Script.Type.TEXT_JAVASCRIPT.getContentType().equals(type)
-					);
-				if(doCdata) out.write("//<![CDATA[\n");
-				// TODO: writeWithMarkup appropriate for capturedBody?
-				// TODO: I think this would only work with SegmentedBuffer with a single segment
-				// TODO: We might need a special case in CharArrayWriter if we want this identity match for a single string
-				// TODO: Set back to SegmentedBuffer, if this is the case
-				Coercion.write(
-					capturedBody,
-					mediaType.getMarkupType(),
-					MediaEncoder.getInstance(new HttpServletResponseEncodingContext(response), mediaType, getOutputType()),
-					false,
-					out
-				);
-				html.nl();
-				// TODO: script.cdata again?
-				if(doCdata) out.write("//]]>");
-			}
-			out.write("</script>");
-		} catch(MediaException err) {
-			throw new JspTagException(err);
-		}
+			.out((src != null) ? null : capturedBody)
+			.__();
 	}
 }
