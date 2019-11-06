@@ -27,7 +27,6 @@ import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaSc
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.html.Html;
-import com.aoindustries.html.Input;
 import com.aoindustries.html.servlet.HtmlEE;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.net.AnyURI;
@@ -235,7 +234,7 @@ public class FormTag
 				}
 				String name = entry.getKey();
 				for(String value : entry.getValue()) {
-					html.input(Input.Type.HIDDEN).name(name).value(value).__().nl();
+					html.input.hidden().name(name).value(value).__().nl();
 				}
 			}
 		}
@@ -248,7 +247,7 @@ public class FormTag
 				}
 				String name = entry.getKey();
 				for(String paramValue : entry.getValue()) {
-					html.input(Input.Type.HIDDEN).name(name).value(paramValue).__().nl();
+					html.input.hidden().name(name).value(paramValue).__().nl();
 				}
 			}
 		}

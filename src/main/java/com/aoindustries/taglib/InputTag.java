@@ -321,7 +321,7 @@ public class InputTag
 			(HttpServletRequest)pageContext.getRequest(),
 			out
 		);
-		Input input = html.input()
+		Input.Dynamic input = html.input()
 			.id(id)
 			.type(typeString)
 			.name(name)
