@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2013, 2015, 2016, 2017, 2019  AO Industries, Inc.
+ * Copyright (C) 2013, 2015, 2016, 2017, 2019, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -28,6 +28,7 @@ import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.Writable;
 import com.aoindustries.util.i18n.BundleLookupMarkup;
 import com.aoindustries.util.i18n.BundleLookupThreadContext;
+import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
 import javax.el.ValueExpression;
@@ -106,33 +107,39 @@ public class OutTag
 		this.mediaType = newMediaType;
 	}
 
+	private MarkupType markupType;
 	private String toStringResult;
 	private BundleLookupMarkup lookupMarkup;
 
 	@Override
 	protected void writePrefix(MediaType containerType, Writer out) throws IOException {
-		Object effectiveValue = value!=null ? value : getDefault();
-		if(
-			!(effectiveValue instanceof Writable)
-			|| ((Writable)effectiveValue).isFastToString()
-		) {
-			toStringResult = Coercion.toString(effectiveValue);
-			// Look for any message markup
-			BundleLookupThreadContext threadContext = BundleLookupThreadContext.getThreadContext(false);
-			if(threadContext!=null) {
+		Object effectiveValue = (value != null) ? value : getDefault();
+		if(effectiveValue != null) {
+			markupType = containerType.getMarkupType();
+			BundleLookupThreadContext threadContext;
+			if(
+				markupType != null
+				&& markupType != MarkupType.NONE
+				&& (threadContext = BundleLookupThreadContext.getThreadContext(false)) != null
+				// Avoid intermediate String from Writable
+				&& (
+					!(effectiveValue instanceof Writable)
+					|| ((Writable)effectiveValue).isFastToString()
+				)
+			) {
+				toStringResult = Coercion.toString(effectiveValue);
+				// Look for any message markup
 				lookupMarkup = threadContext.getLookupMarkup(toStringResult);
-			} else {
-				lookupMarkup = null;
+				if(lookupMarkup != null) lookupMarkup.appendPrefixTo(markupType, out);
 			}
-			if(lookupMarkup!=null) lookupMarkup.appendPrefixTo(containerType.getMarkupType(), out);
 		}
 	}
 
 	@Override
 	protected void doTag(Writer out) throws JspTagException, IOException {
-		if(toStringResult!=null) {
+		if(toStringResult != null) {
 			out.write(toStringResult);
-		} else if(value!=null) {
+		} else if(value != null) {
 			Coercion.write(value, out);
 		} else {
 			Object _default = getDefault();
@@ -144,6 +151,6 @@ public class OutTag
 
 	@Override
 	protected void writeSuffix(MediaType containerType, Writer out) throws IOException {
-		if(lookupMarkup!=null) lookupMarkup.appendSuffixTo(containerType.getMarkupType(), out);
+		if(lookupMarkup != null) lookupMarkup.appendSuffixTo(markupType, out);
 	}
 }

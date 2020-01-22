@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2015, 2016, 2017, 2019  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2015, 2016, 2017, 2019, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -29,6 +29,7 @@ import com.aoindustries.io.Writable;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.util.i18n.BundleLookupMarkup;
 import com.aoindustries.util.i18n.BundleLookupThreadContext;
+import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
 import java.lang.reflect.InvocationTargetException;
@@ -94,6 +95,7 @@ public class WriteTag
 	}
 
 	// One or neither of these values will be set after writePrefix, but not both
+	private MarkupType markupType;
 	private String toStringResult;
 	private BundleLookupMarkup lookupMarkup;
 	private Object value;
@@ -101,7 +103,7 @@ public class WriteTag
 	@Override
 	protected void writePrefix(MediaType containerType, Writer out) throws JspTagException, IOException {
 		try {
-			if(name==null) throw new AttributeRequiredException("name");
+			if(name == null) throw new AttributeRequiredException("name");
 
 			// Find the bean to write
 			Object bean = PropertyUtils.findObject(
@@ -114,44 +116,56 @@ public class WriteTag
 			);
 
 			// Print the value
-			if(bean!=null) {
+			if(bean != null) {
+				markupType = containerType.getMarkupType();
 				// Avoid reflection when possible
 				if("toString".equals(method)) {
+					BundleLookupThreadContext threadContext;
 					if(
-						bean instanceof Writable
-						&& !((Writable)bean).isFastToString()
+						markupType == null
+						|| markupType == MarkupType.NONE
+						|| (threadContext = BundleLookupThreadContext.getThreadContext(false)) == null
+						// Avoid intermediate String from Writable
+						|| (
+							bean instanceof Writable
+							&& !((Writable)bean).isFastToString()
+						)
 					) {
 						// Stream with coercion in doTag
 						value = bean;
 					} else {
 						toStringResult = Coercion.toString(bean);
+						// Look for any message markup
+						lookupMarkup = threadContext.getLookupMarkup(toStringResult);
+						if(lookupMarkup != null) lookupMarkup.appendPrefixTo(markupType, out);
 					}
 				} else {
 					try {
+						BundleLookupThreadContext threadContext;
 						Method refMethod = bean.getClass().getMethod(method);
 						Object retVal = refMethod.invoke(bean);
 						if(
-							retVal instanceof Writable
-							&& !((Writable)retVal).isFastToString()
+							retVal == null
+							|| markupType == null
+							|| markupType == MarkupType.NONE
+							|| (threadContext = BundleLookupThreadContext.getThreadContext(false)) == null
+							// Avoid intermediate String from Writable
+							|| (
+								retVal instanceof Writable
+								&& !((Writable)retVal).isFastToString()
+							)
 						) {
 							// Stream with coercion in doTag
 							value = retVal;
 						} else {
 							toStringResult = Coercion.toString(retVal);
+							// Look for any message markup
+							lookupMarkup = threadContext.getLookupMarkup(toStringResult);
+							if(lookupMarkup != null) lookupMarkup.appendPrefixTo(markupType, out);
 						}
 					} catch(NoSuchMethodException err) {
 						throw new LocalizedJspTagException(ApplicationResources.accessor, "WriteTag.unableToFindMethod", method);
 					}
-				}
-				if(toStringResult!=null) {
-					// Look for any message markup
-					BundleLookupThreadContext threadContext = BundleLookupThreadContext.getThreadContext(false);
-					if(threadContext!=null) {
-						lookupMarkup = threadContext.getLookupMarkup(toStringResult);
-					} else {
-						lookupMarkup = null;
-					}
-					if(lookupMarkup!=null) lookupMarkup.appendPrefixTo(containerType.getMarkupType(), out);
 				}
 			}
 		} catch(IllegalAccessException | InvocationTargetException err) {
@@ -161,15 +175,15 @@ public class WriteTag
 
 	@Override
 	protected void doTag(Writer out) throws JspTagException, IOException {
-		if(toStringResult!=null) {
+		if(toStringResult != null) {
 			out.write(toStringResult);
-		} else if(value!=null) {
+		} else if(value != null) {
 			Coercion.write(value, out);
 		}
 	}
 
 	@Override
 	protected void writeSuffix(MediaType containerType, Writer out) throws IOException {
-		if(lookupMarkup!=null) lookupMarkup.appendSuffixTo(containerType.getMarkupType(), out);
+		if(lookupMarkup != null) lookupMarkup.appendSuffixTo(markupType, out);
 	}
 }
