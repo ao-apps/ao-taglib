@@ -36,7 +36,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2020-01-22T08:42:56-0600"
+		dateModified="2020-01-22T09:02:22-0600"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -76,7 +76,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 								When this context-param is unspecified or <code>auto</code>,
 								determine the serialization based on the client's <code>Accept</code> header.
 							</li>
--						</ol>
+						</ol>
 					</li>
 					<li>
 						<core:link page="ao.tld/tag-html" /> attribute <code>doctype</code> now has a new value <code>default</code> (the default).
