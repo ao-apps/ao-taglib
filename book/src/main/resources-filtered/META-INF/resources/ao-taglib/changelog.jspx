@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 ao-taglib - Making JSP be what it should have been all along.
-Copyright (C) 2016, 2017, 2018, 2019  AO Industries, Inc.
+Copyright (C) 2016, 2017, 2018, 2019, 2020  AO Industries, Inc.
     support@aoindustries.com
     7262 Bull Pen Cir
     Mobile, AL 36695
@@ -36,7 +36,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2019-11-02T16:41:06-0500"
+		dateModified="2020-01-22T08:42:56-0600"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -109,6 +109,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 						<ao:a href="https://aoindustries.com/ao-fluent-html/com/aoindustries/html/Doctype.html">Doctype</ao:a> enum.
 					</li>
 					<li>Added in-context translation markup to script attributes, like <code>onload</code>.</li>
+					<li>Avoiding unnecessary coercion to <code>String</code> when there is no active in-context translation.</li>
 					<!-- TODO:
 					<li>Support script async and defer attributes</li>
 					<li>Support autofocus and required attributes (textarea, input, ...)</li>
