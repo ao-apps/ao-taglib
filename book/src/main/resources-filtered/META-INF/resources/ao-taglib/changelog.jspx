@@ -36,7 +36,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2020-01-22T09:02:22-0600"
+		dateModified="2020-01-22T09:39:11-0600"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -110,6 +110,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 					</li>
 					<li>Added in-context translation markup to script attributes, like <code>onload</code>.</li>
 					<li>Avoiding unnecessary coercion to <code>String</code> when there is no active in-context translation.</li>
+					<li>Avoiding unnecessary coercion to <code>String</code> from <code>char[]</code>.</li>
 					<!-- TODO:
 					<li>Support script async and defer attributes</li>
 					<li>Support autofocus and required attributes (textarea, input, ...)</li>
