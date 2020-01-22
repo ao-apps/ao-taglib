@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.io.Writer;
 import javax.el.ValueExpression;
 import javax.servlet.jsp.JspTagException;
+import org.w3c.dom.Node;
 
 /**
  * @author  AO Industries, Inc.
@@ -126,6 +127,9 @@ public class OutTag
 					!(effectiveValue instanceof Writable)
 					|| ((Writable)effectiveValue).isFastToString()
 				)
+				// Other types that will not be converted to String for bundle lookups
+				&& !(value instanceof char[])
+				&& !(value instanceof Node)
 			) {
 				toStringResult = Coercion.toString(effectiveValue);
 				// Look for any message markup

@@ -36,6 +36,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
+import org.w3c.dom.Node;
 
 /**
  * @author  AO Industries, Inc.
@@ -130,6 +131,9 @@ public class WriteTag
 							bean instanceof Writable
 							&& !((Writable)bean).isFastToString()
 						)
+						// Other types that will not be converted to String for bundle lookups
+						|| value instanceof char[]
+						|| value instanceof Node
 					) {
 						// Stream with coercion in doTag
 						value = bean;
@@ -154,6 +158,9 @@ public class WriteTag
 								retVal instanceof Writable
 								&& !((Writable)retVal).isFastToString()
 							)
+							// Other types that will not be converted to String for bundle lookups
+							|| value instanceof char[]
+							|| value instanceof Node
 						) {
 							// Stream with coercion in doTag
 							value = retVal;
