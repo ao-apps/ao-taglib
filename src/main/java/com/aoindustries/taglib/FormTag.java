@@ -26,6 +26,7 @@ import com.aoindustries.encoding.Coercion;
 import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaScriptInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
+import com.aoindustries.html.Doctype;
 import com.aoindustries.html.Html;
 import com.aoindustries.html.servlet.HtmlEE;
 import com.aoindustries.io.buffer.BufferResult;
@@ -196,6 +197,10 @@ public class FormTag
 			textInXhtmlAttributeEncoder.write(actionURI.setQueryString(null).toString(), out);
 			out.write('"');
 		} else {
+			if(html.doctype != Doctype.HTML5) {
+				// Action required before HTML 5
+				out.write(" action=\"\"");
+			}
 			actionParams = null;
 		}
 		if(target!=null) {
