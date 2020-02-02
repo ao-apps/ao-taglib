@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2013, 2016, 2017, 2019  AO Industries, Inc.
+ * Copyright (C) 2013, 2016, 2017, 2019, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -138,6 +138,7 @@ public final class AttributeUtils  {
 
 	/**
 	 * Appends a width style, while automatically appending "px" to any non-zero integer.
+	 * Encoding for XML attribute context is performed.
 	 *
 	 * @return  {@code true} when printed the style
 	 */
@@ -152,6 +153,26 @@ public final class AttributeUtils  {
 			return true;
 		} else {
 			return false;
+		}
+	}
+
+	/**
+	 * Gets a width style, while automatically appending "px" to any non-zero integer.
+	 * No encoding is performed.
+	 *
+	 * @return  The style or {@code null} when none
+	 */
+	public static String getWidthStyle(String width) {
+		width = trimNullIfEmpty(width);
+		if(width != null) {
+			StringBuilder sb = new StringBuilder();
+			sb.append("width:").append(width);
+			if(isAllDigits(width) && !isZero(width)) {
+				sb.append("px");
+			}
+			return sb.toString();
+		} else {
+			return null;
 		}
 	}
 

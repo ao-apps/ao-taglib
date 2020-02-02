@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2013, 2014, 2015, 2016, 2017, 2019  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2013, 2014, 2015, 2016, 2017, 2019, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,18 +22,14 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaType;
-import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.html.Html;
-import com.aoindustries.html.Serialization;
 import com.aoindustries.html.servlet.HtmlEE;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.net.URIParametersMap;
 import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
-import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
@@ -182,53 +178,19 @@ public class ImgTag
 			(HttpServletRequest)pageContext.getRequest(),
 			out
 		);
-		out.write("<img");
-		if(id!=null) {
-			out.write(" id=\"");
-			Coercion.write(id, textInXhtmlAttributeEncoder, out);
-			out.write('"');
-		}
-		UrlUtils.writeSrc(getJspContext(), out, src, params, absolute, canonical, addLastModified);
-		if(width!=null) {
-			out.write(" width=\"");
-			Coercion.write(width, textInXhtmlAttributeEncoder, out);
-			out.write('"');
-		}
-		if(height!=null) {
-			out.write(" height=\"");
-			Coercion.write(height, textInXhtmlAttributeEncoder, out);
-			out.write('"');
-		}
-		if(alt != null) {
-			out.write(" alt=\"");
-			Coercion.write(alt, MarkupType.TEXT, textInXhtmlAttributeEncoder, false, out);
-			out.write('"');
-		}
-		if(title!=null) {
-			out.write(" title=\"");
-			Coercion.write(title, MarkupType.TEXT, textInXhtmlAttributeEncoder, false, out);
-			out.write('"');
-		}
-		if(clazz!=null) {
-			out.write(" class=\"");
-			Coercion.write(clazz, textInXhtmlAttributeEncoder, out);
-			out.write('"');
-		}
-		if(style!=null) {
-			out.write(" style=\"");
-			Coercion.write(style, textInXhtmlAttributeEncoder, out);
-			out.write('"');
-		}
-		if(usemap != null) {
-			out.write(" usemap=\"");
-			if(!usemap.startsWith("#")) out.write('#');
-			textInXhtmlAttributeEncoder.write(usemap, out);
-			out.write('"');
-		}
-		if(ismap) {
-			out.write(" ismap");
-			if(html.serialization == Serialization.XML) out.write("=\"ismap\"");
-		}
-		html.selfClose();
+		html.img()
+			.id(id)
+			.src(UrlUtils.getSrc(pageContext, src, params, absolute, canonical, addLastModified))
+			// TOOD: width to Integer via Img.width(Integer)
+			.attribute("width", width)
+			// TOOD: height to Integer via Img.height(Integer)
+			.attribute("height", height)
+			.alt(alt)
+			.title(title)
+			.clazz(clazz)
+			.style(style)
+			.usemap(usemap)
+			.ismap(ismap)
+			.__();
 	}
 }
