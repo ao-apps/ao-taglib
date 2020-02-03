@@ -24,7 +24,6 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaType;
-import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.html.Html;
 import com.aoindustries.html.servlet.HtmlEE;
 import com.aoindustries.io.buffer.BufferResult;
@@ -105,34 +104,18 @@ public class MetaTag
 				(HttpServletRequest)pageContext.getRequest(),
 				out
 			);
-			out.write("<meta");
-			if(name != null) {
-				out.write(" name=\"");
-				Coercion.write(name, textInXhtmlAttributeEncoder, out);
-				out.write('"');
-			}
-			if(httpEquiv != null) {
-				out.write(" http-equiv=\"");
-				Coercion.write(httpEquiv, textInXhtmlAttributeEncoder, out);
-				out.write('"');
-			}
-			if(itemprop != null) {
-				out.write(" itemprop=\"");
-				Coercion.write(itemprop, textInXhtmlAttributeEncoder, out);
-				out.write('"');
-			}
-			if(charset != null) {
-				out.write(" charset=\"");
-				Coercion.write(charset, textInXhtmlAttributeEncoder, out);
-				out.write('"');
-			}
-			if(content != null) {
+			html.meta()
+				// TOOD: name to String via Meta.name(String)
+				.attribute("name", name)
+				// TOOD: httpEquiv to String via Meta.httpEquiv(String)
+				.attribute("http-equiv", httpEquiv)
+				// TODO: Create a global "itemprop" in ao-fluent-html
+				.attribute("itemprop", itemprop)
+				// TOOD: charset to String via Meta.charset(String)
+				.attribute("charset", charset)
 				// TODO: Might be able to perform markup for some types of content (keywords, description, ...)?
-				out.write(" content=\"");
-				Coercion.write(content, textInXhtmlAttributeEncoder, out);
-				out.write('"');
-			}
-			html.selfClose();
+				.content(content)
+				.__();
 		}
 	}
 }

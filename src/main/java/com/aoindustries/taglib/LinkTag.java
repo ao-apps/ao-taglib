@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2013, 2015, 2016, 2017, 2019  AO Industries, Inc.
+ * Copyright (C) 2013, 2015, 2016, 2017, 2019, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -24,7 +24,6 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaType;
-import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.html.Html;
 import com.aoindustries.html.servlet.HtmlEE;
 import com.aoindustries.net.MutableURIParameters;
@@ -185,15 +184,16 @@ public class LinkTag
 				(HttpServletRequest)pageContext.getRequest(),
 				out
 			);
-			com.aoindustries.html.Link link = html.link();
-			UrlUtils.writeHref(pageContext, out, href, params, absolute, canonical, addLastModified);
-			if(hreflang!=null) {
-				out.write(" hreflang=\"");
-				Coercion.write(hreflang, textInXhtmlAttributeEncoder, out);
-				out.write('"');
-			}
-			// TODO: These are coerced in both uses, change attribute to String
-			link.rel(Coercion.toString(rel)).type(Coercion.toString(type)).media(media).title(title).__();
+			html.link()
+				.href(UrlUtils.getHref(pageContext, href, params, absolute, canonical, addLastModified))
+				// TODO: hreflang to Link
+				.attribute("hreflang", hreflang)
+				// TODO: These are coerced in both uses, change attribute to String
+				.rel(Coercion.toString(rel))
+				.type(Coercion.toString(type))
+				.media(media)
+				.title(title)
+				.__();
 		}
 	}
 }
