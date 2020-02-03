@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -208,7 +208,7 @@ public class RedirectTag
 				status==HttpServletResponse.SC_MOVED_TEMPORARILY
 				|| status==HttpServletResponse.SC_SEE_OTHER
 			) {
-				response.setHeader("Cache-Control", "no-cache");
+				response.setHeader("cache-control", "no-cache");
 			}
 		}
 	}
