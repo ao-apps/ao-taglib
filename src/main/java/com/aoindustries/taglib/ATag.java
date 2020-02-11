@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -25,6 +25,7 @@ package com.aoindustries.taglib;
 import com.aoindustries.encoding.Coercion;
 import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaScriptInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.MediaType;
+import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import static com.aoindustries.encoding.TextInXhtmlEncoder.textInXhtmlEncoder;
 import com.aoindustries.io.buffer.BufferResult;
@@ -40,6 +41,7 @@ import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
@@ -124,7 +126,7 @@ public class ATag
 
 	@Override
 	public void setHreflang(Object hreflang) throws JspTagException {
-		this.hreflang = AttributeUtils.trimNullIfEmpty(hreflang);
+		this.hreflang = hreflang;
 	}
 
 	@Override
@@ -209,10 +211,17 @@ public class ATag
 			transformed = href;
 		}
 		UrlUtils.writeHref(getJspContext(), out, transformed, params, absolute, canonical, addLastModified);
-		if(hreflang!=null) {
+		if(hreflang instanceof Locale) {
 			out.write(" hreflang=\"");
-			Coercion.write(hreflang, textInXhtmlAttributeEncoder, out);
+			encodeTextInXhtmlAttribute(((Locale)hreflang).toLanguageTag(), out);
 			out.write('"');
+		} else {
+			hreflang = AttributeUtils.trimNullIfEmpty(hreflang);
+			if(hreflang != null) {
+				out.write(" hreflang=\"");
+				Coercion.write(hreflang, textInXhtmlAttributeEncoder, out);
+				out.write('"');
+			}
 		}
 		if(rel!=null) {
 			out.write(" rel=\"");

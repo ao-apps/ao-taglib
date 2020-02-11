@@ -35,6 +35,7 @@ import static com.aoindustries.taglib.ApplicationResources.accessor;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspTagException;
@@ -121,7 +122,7 @@ public class LinkTag
 
 	@Override
 	public void setHreflang(Object hreflang) throws JspTagException {
-		this.hreflang = AttributeUtils.trimNullIfEmpty(hreflang);
+		this.hreflang = hreflang;
 	}
 
 	@Override
@@ -164,13 +165,21 @@ public class LinkTag
 	protected void doTag(Writer out) throws JspTagException, IOException {
 		JspTag parent = findAncestorWithClass(this, LinksAttribute.class);
 		if(parent!=null) {
-			((LinksAttribute)parent).addLink(new Link(
+			String hreflangStr;
+			if(hreflang instanceof Locale) {
+				hreflangStr = ((Locale)hreflang).toLanguageTag();
+			} else {
+				hreflang = AttributeUtils.trimNullIfEmpty(hreflang);
+				hreflangStr = Coercion.toString(hreflang);
+			}
+			((LinksAttribute)parent).addLink(
+				new Link(
 					href,
 					absolute,
 					canonical,
 					params,
 					addLastModified,
-					Coercion.toString(hreflang),
+					hreflangStr,
 					Coercion.toString(rel),
 					Coercion.toString(type),
 					media,
@@ -184,10 +193,15 @@ public class LinkTag
 				(HttpServletRequest)pageContext.getRequest(),
 				out
 			);
-			html.link()
-				.href(UrlUtils.getHref(pageContext, href, params, absolute, canonical, addLastModified))
-				// TODO: hreflang to Link
-				.attribute("hreflang", hreflang)
+			com.aoindustries.html.Link link = html.link()
+				.href(UrlUtils.getHref(pageContext, href, params, absolute, canonical, addLastModified));
+			if(hreflang instanceof Locale) {
+				link.hreflang((Locale)hreflang);
+			} else {
+				hreflang = AttributeUtils.trimNullIfEmpty(hreflang);
+				link.hreflang(Coercion.toString(hreflang));
+			}
+			link
 				// TODO: These are coerced in both uses, change attribute to String
 				.rel(Coercion.toString(rel))
 				.type(Coercion.toString(type))
