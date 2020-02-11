@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2013, 2016, 2017, 2019  AO Industries, Inc.
+ * Copyright (C) 2013, 2016, 2017, 2019, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -24,6 +24,7 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.net.URIParameters;
 import com.aoindustries.servlet.http.LastModifiedServlet;
+import java.util.Locale;
 
 /**
  * Holds the data for a Link tag that is passed between LinkTag and any LinksAttribute parent.
@@ -67,6 +68,32 @@ public class Link {
 		this.title = title;
 	}
 
+	public Link(
+		String href,
+		boolean absolute,
+		boolean canonical,
+		URIParameters params,
+		LastModifiedServlet.AddLastModifiedWhen addLastModified,
+		Locale hreflang,
+		String rel,
+		String type,
+		String media,
+		String title
+	) {
+		this(
+			href,
+			absolute,
+			canonical,
+			params,
+			addLastModified,
+			hreflang == null ? null : hreflang.toLanguageTag(),
+			rel,
+			type,
+			media,
+			title
+		);
+	}
+
 	public String getHref() {
 		return href;
 	}
@@ -87,6 +114,9 @@ public class Link {
 		return addLastModified;
 	}
 
+	/**
+	 * @see  Locale#toLanguageTag()
+	 */
 	public String getHreflang() {
 		return hreflang;
 	}

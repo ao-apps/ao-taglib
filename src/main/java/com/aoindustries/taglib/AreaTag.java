@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2019  AO Industries, Inc.
+ * Copyright (C) 2019, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -23,9 +23,8 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.Coercion;
-import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaScriptInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.MediaType;
-import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
+import com.aoindustries.html.Area;
 import com.aoindustries.html.Html;
 import com.aoindustries.html.servlet.HtmlEE;
 import com.aoindustries.net.MutableURIParameters;
@@ -33,9 +32,9 @@ import com.aoindustries.net.URIParametersMap;
 import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
-import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
@@ -162,7 +161,7 @@ public class AreaTag
 
 	@Override
 	public void setHreflang(Object hreflang) throws JspTagException {
-		this.hreflang = AttributeUtils.trimNullIfEmpty(hreflang);
+		this.hreflang = hreflang;
 	}
 
 	@Override
@@ -235,79 +234,38 @@ public class AreaTag
 			(HttpServletRequest)pageContext.getRequest(),
 			out
 		);
-		out.write("<area");
-		if(id != null) {
-			out.write(" id=\"");
-			Coercion.write(id, textInXhtmlAttributeEncoder, out);
-			out.write('"');
+		Area area = html.area()
+			.id(id)
+			.shape(shape)
+			.coords(coords)
+			.href(UrlUtils.getHref(pageContext, href, params, absolute, canonical, addLastModified));
+		if(hreflang instanceof Locale) {
+			area.hreflang((Locale)hreflang);
+		} else {
+			hreflang = AttributeUtils.trimNullIfEmpty(hreflang);
+			area.hreflang(Coercion.toString(hreflang));
 		}
-		out.write(" shape=\"");
-		textInXhtmlAttributeEncoder.write(shape, out);
-		out.write('"');
-		if(coords != null) {
-			out.write(" coords=\"");
-			textInXhtmlAttributeEncoder.write(coords, out);
-			out.write('"');
-		}
-		UrlUtils.writeHref(pageContext, out, href, params, absolute, canonical, addLastModified);
-		if(hreflang != null) {
-			out.write(" hreflang=\"");
-			Coercion.write(hreflang, textInXhtmlAttributeEncoder, out);
-			out.write('"');
-		}
-		if(rel != null) {
-			out.write(" rel=\"");
-			Coercion.write(rel, textInXhtmlAttributeEncoder, out);
-			out.write('"');
-		}
-		if(type != null) {
-			out.write(" type=\"");
-			Coercion.write(type, textInXhtmlAttributeEncoder, out);
-			out.write('"');
-		}
-		if(target != null) {
-			out.write(" target=\"");
-			Coercion.write(target, textInXhtmlAttributeEncoder, out);
-			out.write('"');
-		}
+		area
+			// TODO: These are coerced in both uses, change attribute to String
+			.rel(Coercion.toString(rel))
+			// TODO: type to Area (or remove entirely since this part of the standard is uncertain and currently unimplemented by all browsers?)
+			.attribute("type", type)
+			// TODO: target to Area
+			.attribute("target", target);
+		// non-existing alt is OK when there is no href (with href: "" stays "")
 		if(
 			alt != null
 			&& (href != null || !Coercion.isEmpty(alt))
 		) {
-			out.write(" alt=\"");
-			Coercion.write(alt, MarkupType.TEXT, textInXhtmlAttributeEncoder, false, out);
-			out.write('"');
+			area.alt(alt);
 		}
-		if(title != null) {
-			out.write(" title=\"");
-			Coercion.write(title, MarkupType.TEXT, textInXhtmlAttributeEncoder, false, out);
-			out.write('"');
-		}
-		if(clazz != null) {
-			out.write(" class=\"");
-			Coercion.write(clazz, textInXhtmlAttributeEncoder, out);
-			out.write('"');
-		}
-		if(style != null) {
-			out.write(" style=\"");
-			Coercion.write(style, textInXhtmlAttributeEncoder, out);
-			out.write('"');
-		}
-		if(onclick != null) {
-			out.write(" onclick=\"");
-			Coercion.write(onclick, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
-			out.write('"');
-		}
-		if(onmouseover != null) {
-			out.write(" onmouseover=\"");
-			Coercion.write(onmouseover, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
-			out.write('"');
-		}
-		if(onmouseout != null) {
-			out.write(" onmouseout=\"");
-			Coercion.write(onmouseout, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
-			out.write('"');
-		}
-		html.selfClose();
+		area
+			.title(title)
+			.clazz(clazz)
+			.style(style)
+			.onclick(onclick)
+			.onmouseover(onmouseover)
+			.onmouseout(onmouseout)
+			.__();
 	}
 }
