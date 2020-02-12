@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2013, 2015, 2016, 2017, 2019  AO Industries, Inc.
+ * Copyright (C) 2013, 2015, 2016, 2017, 2019, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -50,6 +50,7 @@ public class MessageTag
 		MessageArgsAttribute
 {
 
+	private String bundle;
 	private String key;
 	private MediaType mediaType = MediaType.TEXT;
 	private BitSet messageArgsSet;
@@ -58,6 +59,10 @@ public class MessageTag
 	@Override
 	public MediaType getOutputType() {
 		return mediaType;
+	}
+
+	public void setBundle(String bundle) {
+		this.bundle = bundle;
 	}
 
 	public void setKey(String key) {
@@ -159,20 +164,27 @@ public class MessageTag
 
 	@Override
 	protected void writePrefix(MediaType containerType, Writer out) throws JspTagException, IOException {
-		// Find parent bundle
-		PageContext pageContext = (PageContext)getJspContext();
-		BundleTag bundleTag = BundleTag.getBundleTag(pageContext.getRequest());
-		if(bundleTag==null) throw new LocalizedJspTagException(accessor, "error.requiredParentTagNotFound", "bundle");
-		ApplicationResourcesAccessor accessor = bundleTag.getAccessor();
+		ApplicationResourcesAccessor accessor;
+		String combinedKey;
+		if(bundle != null) {
+			accessor = ApplicationResourcesAccessor.getInstance(bundle);
+			combinedKey = key;
+		} else {
+			// Find parent bundle
+			PageContext pageContext = (PageContext)getJspContext();
+			BundleTag bundleTag = BundleTag.getBundleTag(pageContext.getRequest());
+			if(bundleTag==null) throw new LocalizedJspTagException(com.aoindustries.taglib.ApplicationResources.accessor, "error.requiredParentTagNotFound", "bundle");
+			accessor = bundleTag.getAccessor();
+			String prefix = bundleTag.getPrefix();
+			combinedKey = prefix==null || prefix.isEmpty() ? key : prefix.concat(key);
+		}
 		// Lookup the message value
-		String prefix = bundleTag.getPrefix();
-		String combinedKey = prefix==null || prefix.isEmpty() ? key : prefix.concat(key);
 		if(messageArgs==null) {
 			lookupResult = accessor.getMessage(combinedKey);
 		} else {
 			// Error if gap in message args (any not set in range)
 			int firstClear = messageArgsSet.nextClearBit(0);
-			if(firstClear < messageArgs.size()) throw new LocalizedJspTagException(accessor, "MessageTag.argumentMissing", firstClear);
+			if(firstClear < messageArgs.size()) throw new LocalizedJspTagException(com.aoindustries.taglib.ApplicationResources.accessor, "MessageTag.argumentMissing", firstClear);
 			lookupResult = accessor.getMessage(combinedKey, messageArgs.toArray());
 		}
 		// Look for any message markup

@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2013, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2013, 2016, 2017, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -24,17 +24,17 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.util.i18n.ApplicationResourcesAccessor;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import javax.servlet.ServletRequest;
-import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.PageContext;
-import javax.servlet.jsp.tagext.JspFragment;
-import javax.servlet.jsp.tagext.SimpleTagSupport;
+import javax.servlet.jsp.tagext.TagSupport;
+import javax.servlet.jsp.tagext.TryCatchFinally;
 
 /**
  * @author  AO Industries, Inc.
  */
 public class BundleTag
-	extends SimpleTagSupport
+	extends TagSupport
+	implements TryCatchFinally
 {
 
 	/**
@@ -50,9 +50,28 @@ public class BundleTag
 		return (BundleTag)request.getAttribute(REQUEST_ATTRIBUTE_KEY);
 	}
 
+	private static final long serialVersionUID = 1L;
+
 	private String basename;
-	private ApplicationResourcesAccessor accessor; // Set along with basename
+	private transient ApplicationResourcesAccessor accessor; // Set along with basename
 	private String prefix;
+	private transient Object oldRequestValue;
+
+	private void init() {
+		basename = null;
+		accessor = null;
+		prefix = null;
+		oldRequestValue = null;
+	}
+
+	public BundleTag() {
+		init();
+	}
+
+	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+		in.defaultReadObject();
+		this.accessor = basename == null ? null : ApplicationResourcesAccessor.getInstance(basename);
+	}
 
 	public ApplicationResourcesAccessor getAccessor() {
 		return accessor;
@@ -60,7 +79,7 @@ public class BundleTag
 
 	public void setBasename(String basename) {
 		this.basename = basename;
-		this.accessor = ApplicationResourcesAccessor.getInstance(basename);
+		this.accessor = basename == null ? null : ApplicationResourcesAccessor.getInstance(basename);
 	}
 
 	public String getPrefix() {
@@ -72,18 +91,24 @@ public class BundleTag
 	}
 
 	@Override
-	public void doTag() throws JspException, IOException {
-		JspFragment body = getJspBody();
-		if(body!=null) {
-			PageContext pageContext = (PageContext)getJspContext();
-			ServletRequest request = pageContext.getRequest();
-			Object oldRequestValue = request.getAttribute(REQUEST_ATTRIBUTE_KEY);
-			try {
-				request.setAttribute(REQUEST_ATTRIBUTE_KEY, this);
-				body.invoke(null);
-			} finally {
-				request.setAttribute(REQUEST_ATTRIBUTE_KEY, oldRequestValue);
-			}
+	public int doStartTag() {
+		ServletRequest request = pageContext.getRequest();
+		oldRequestValue = request.getAttribute(REQUEST_ATTRIBUTE_KEY);
+		request.setAttribute(REQUEST_ATTRIBUTE_KEY, this);
+		return EVAL_BODY_INCLUDE;
+	}
+
+	@Override
+	public void doCatch(Throwable t) throws Throwable {
+		throw t;
+	}
+
+	@Override
+	public void doFinally() {
+		try {
+			pageContext.getRequest().setAttribute(REQUEST_ATTRIBUTE_KEY, oldRequestValue);
+		} finally {
+			init();
 		}
 	}
 }
