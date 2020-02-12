@@ -36,7 +36,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2020-02-11T16:18:49-0600"
+		dateModified="2020-02-11T20:25:52-0600"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -112,6 +112,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 					<li>Avoiding unnecessary coercion to <code>String</code> when there is no active in-context translation.</li>
 					<li>Avoiding unnecessary coercion to <code>String</code> from <code>char[]</code>.</li>
 					<li><code>hreflang</code> attributes now support <code>Locale</code> instances via <code>Locale.toLanguageTag()</code> instead of <code>Locale.toString()</code>.</li>
+					<li>New tag <core:link page="ao.tld/tag-col" /> that writes a col (column) in the current serialization.</li>
 					<!-- TODO:
 					<li>Support script async and defer attributes</li>
 					<li>Support autofocus and required attributes (textarea, input, ...)</li>
