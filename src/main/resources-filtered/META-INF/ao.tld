@@ -831,6 +831,68 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
+		<!-- datePublished="2020-02-11T20:25:52-0600" -->
+		<description><![CDATA[
+			<p class="semanticcms-tag-reference-summary">
+				Writes a <a href="https://www.w3schools.com/tags/tag_col.asp">&lt;col&gt;</a>
+				tag in the current serialization.
+			</p>
+		]]></description>
+		<name>col</name>
+		<tag-class>com.aoindustries.taglib.ColTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					The <a href="https://www.w3schools.com/tags/att_global_id.asp">id of the element</a>.
+					A nested <a href="@{project.url}ao.tld/tag-id">&lt;ao:id&gt;</a>
+					tag will override this value.
+				</p>
+			]]></description>
+			<name>id</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					The <a href="https://www.w3schools.com/tags/att_col_span.asp">span of the element</a>.
+				</p>
+			]]></description>
+			<name>span</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>int</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					The <a href="https://www.w3schools.com/tags/att_global_class.asp">CSS class for the element</a>.
+					A nested <a href="@{project.url}ao.tld/tag-class">&lt;ao:class&gt;</a>
+					tag will override this value.
+				</p>
+			]]></description>
+			<name>class</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					The <a href="https://www.w3schools.com/tags/att_global_style.asp">CSS style for the element</a>.
+					A nested <a href="@{project.url}ao.tld/tag-style">&lt;ao:style&gt;</a>
+					tag will override this value.
+				</p>
+			]]></description>
+			<name>style</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>
+	</tag>
+	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
 		<!-- dateModified="2019-10-09T00:34:45-0500" -->
 		<description><![CDATA[
