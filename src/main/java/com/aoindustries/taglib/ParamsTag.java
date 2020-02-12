@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2010, 2011, 2012, 2013, 2015, 2016, 2017, 2019  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2012, 2013, 2015, 2016, 2017, 2019, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -48,6 +48,8 @@ public class ParamsTag
 	private WildcardPatternMatcher excludeMatcher = WildcardPatternMatcher.matchNone();
 	private Object values;
 
+	// TODO: Support output when not inside a containing tag? (or implement applet and object tags to avoid errors of params accidentally passed to client)
+
 	@Override
 	public MediaType getOutputType() {
 		return null;
@@ -69,6 +71,7 @@ public class ParamsTag
 
 	@Override
 	protected void doTag(Writer out) throws JspTagException, IOException {
+		// TODO: These supported types match Html.java and Param.java in ao-fluent-html?
 		ParamsAttribute paramsAttribute = AttributeUtils.findAttributeParent("params", this, "params", ParamsAttribute.class);
 		if(values!=null) {
 			if(name==null) {
