@@ -762,7 +762,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		]]></description>
 		<name>bundle</name>
 		<tag-class>com.aoindustries.taglib.BundleTag</tag-class>
-		<body-content>scriptless</body-content>
+		<body-content>JSP</body-content>
 		<attribute>
 			<description><![CDATA[
 				<p>The base name of resource bundle to access.</p>
@@ -2778,7 +2778,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T05:19:23-0500" -->
+		<!-- dateModified="2020-02-12T08:37:09-0600" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Writes a value from the current localization bundle given its key.
@@ -2831,6 +2831,18 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<tag-class>com.aoindustries.taglib.MessageTag</tag-class>
 		<tei-class>com.aoindustries.taglib.MessageTagTEI</tei-class>
 		<body-content>scriptless</body-content>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					The base name of resource bundle to access.
+					When not provided, uses the currently active <a href="@{project.url}ao.tld/tag-bundle">&lt;ao:bundle&gt;</a>.
+				</p>
+			]]></description>
+			<name>bundle</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
 		<attribute>
 			<description><![CDATA[
 				<p>
