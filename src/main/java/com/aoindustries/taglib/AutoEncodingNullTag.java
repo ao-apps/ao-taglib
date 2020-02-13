@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2012, 2013, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2012, 2013, 2016, 2017, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -27,12 +27,12 @@ import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.MediaValidator;
 import com.aoindustries.encoding.MediaWriter;
-import com.aoindustries.encoding.servlet.HttpServletResponseEncodingContext;
+import com.aoindustries.encoding.servlet.EncodingContextEE;
 import com.aoindustries.io.NullWriter;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import java.io.IOException;
 import java.io.Writer;
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
@@ -82,7 +82,7 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
 				// suffix skipped
 			} else {
 				final PageContext pageContext = (PageContext)getJspContext();
-				final ServletRequest request = pageContext.getRequest();
+				final HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
 				final HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
 				final JspWriter out = pageContext.getOut();
 
@@ -124,7 +124,7 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
 				writePrefix(containerContentType, containerValidator);
 
 				// Find the encoder
-				MediaEncoder mediaEncoder = MediaEncoder.getInstance(new HttpServletResponseEncodingContext(response), myOutputType, containerContentType);
+				MediaEncoder mediaEncoder = MediaEncoder.getInstance(new EncodingContextEE(request, response), myOutputType, containerContentType);
 				if(mediaEncoder!=null) {
 					setMediaEncoderOptions(mediaEncoder);
 					// Encode our output.  The encoder guarantees valid output for our parent.

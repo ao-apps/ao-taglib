@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2016, 2017, 2019  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2016, 2017, 2019, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -27,7 +27,7 @@ import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.MediaValidator;
 import com.aoindustries.encoding.MediaWriter;
-import com.aoindustries.encoding.servlet.HttpServletResponseEncodingContext;
+import com.aoindustries.encoding.servlet.EncodingContextEE;
 import com.aoindustries.io.buffer.AutoTempFileWriter;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.io.buffer.BufferWriter;
@@ -42,6 +42,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
@@ -193,7 +194,7 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 	public void doTag() throws JspException, IOException {
 		try {
 			final PageContext pageContext = (PageContext)getJspContext();
-			final ServletRequest request = pageContext.getRequest();
+			final HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
 			final ThreadEncodingContext parentEncodingContext = ThreadEncodingContext.getCurrentContext(request);
 
 			// Capture the body output while validating
@@ -244,7 +245,7 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 					containerContentType = MediaType.getMediaTypeForContentType(responseContentType);
 				}
 				// Find the encoder
-				MediaEncoder mediaEncoder = MediaEncoder.getInstance(new HttpServletResponseEncodingContext(response), myOutputType, containerContentType);
+				MediaEncoder mediaEncoder = MediaEncoder.getInstance(new EncodingContextEE(request, response), myOutputType, containerContentType);
 				if(mediaEncoder!=null) {
 					setMediaEncoderOptions(mediaEncoder);
 					// Encode our output.  The encoder guarantees valid output for our parent.
