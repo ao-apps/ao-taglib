@@ -69,7 +69,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 							<li>Use the serialization active on the current request.</li>
 							<li>
 								Use the application <ao:a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</ao:a>
-								<code>com.aoindustries.html.Serialization.default</code>
+								<code>com.aoindustries.encoding.Serialization.default</code>
 								that allows an application to control the selection of HTML versus XHTML.
 							</li>
 							<li>
@@ -85,7 +85,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 							<li>Use the doctype active on the current request.</li>
 							<li>
 								Use the application <ao:a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</ao:a>
-								<code>com.aoindustries.html.Doctype.default</code>
+								<code>com.aoindustries.encoding.Doctype.default</code>
 								that allows an application to control the default doctype.
 							</li>
 							<li>
@@ -103,10 +103,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 					<li>New tag <core:link page="ao.tld/tag-hr" /> that writes a thematic break (horizontal rule) in the current serialization.</li>
 					<li>
 						New function <core:link page="ao.tld/function-getSerialization" /> to get the current
-						<ao:a href="https://aoindustries.com/ao-fluent-html/com/aoindustries/html/Serialization.html">Serialization</ao:a> enum.</li>
+						<ao:a href="https://aoindustries.com/ao-encoding/com/aoindustries/encoding/Serialization.html">Serialization</ao:a> enum.</li>
 					<li>
 						New function <core:link page="ao.tld/function-getDoctype" /> to get the current
-						<ao:a href="https://aoindustries.com/ao-fluent-html/com/aoindustries/html/Doctype.html">Doctype</ao:a> enum.
+						<ao:a href="https://aoindustries.com/ao-encoding/com/aoindustries/encoding/Doctype.html">Doctype</ao:a> enum.
 					</li>
 					<li>Added in-context translation markup to script attributes, like <code>onload</code>.</li>
 					<li>Avoiding unnecessary coercion to <code>String</code> when there is no active in-context translation.</li>
