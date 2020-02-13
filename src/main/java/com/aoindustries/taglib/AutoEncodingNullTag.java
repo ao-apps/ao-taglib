@@ -124,7 +124,7 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
 				writePrefix(containerContentType, containerValidator);
 
 				// Find the encoder
-				MediaEncoder mediaEncoder = MediaEncoder.getInstance(new EncodingContextEE(request, response), myOutputType, containerContentType);
+				MediaEncoder mediaEncoder = MediaEncoder.getInstance(new EncodingContextEE(pageContext.getServletContext(), request, response), myOutputType, containerContentType);
 				if(mediaEncoder!=null) {
 					setMediaEncoderOptions(mediaEncoder);
 					// Encode our output.  The encoder guarantees valid output for our parent.
