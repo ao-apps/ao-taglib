@@ -111,7 +111,7 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport {
 			}
 			// Find the encoder
 			final MediaType myContentType = getContentType();
-			MediaEncoder mediaEncoder = MediaEncoder.getInstance(new EncodingContextEE(request, response), myContentType, containerContentType);
+			MediaEncoder mediaEncoder = MediaEncoder.getInstance(new EncodingContextEE(pageContext.getServletContext(), request, response), myContentType, containerContentType);
 			if(mediaEncoder != null) {
 				setMediaEncoderOptions(mediaEncoder);
 				// Encode both our output and the content.  The encoder validates our input and guarantees valid output for our parent.
