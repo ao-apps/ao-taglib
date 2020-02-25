@@ -43,6 +43,14 @@ import javax.servlet.jsp.PageContext;
 
 public class HtmlTag extends AutoEncodingFilteredTag {
 
+	/**
+	 * The old Struts XHTML mode page attribute.  To avoiding picking-up a big
+	 * legacy dependency, we've copied the value here instead of depending on
+	 * Globals.  Once we no longer have any code running on old Struts, this
+	 * value may be removed.
+	 */
+	private static final String STRUTS_XHTML_KEY = "org.apache.struts.globals.XHTML";
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.XHTML;
@@ -122,13 +130,17 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 
 		Serialization currentSerialization = serialization;
 		Serialization oldSerialization;
+		Object oldStrutsXhtml;
 		boolean setSerialization;
 		if(currentSerialization == null) {
 			currentSerialization = SerializationEE.get(servletContext, request);
 			oldSerialization = null;
+			oldStrutsXhtml = null;
 			setSerialization = false;
 		} else {
 			oldSerialization = SerializationEE.replace(request, currentSerialization);
+			oldStrutsXhtml = pageContext.getAttribute(STRUTS_XHTML_KEY, PageContext.PAGE_SCOPE);
+			pageContext.setAttribute(STRUTS_XHTML_KEY, Boolean.toString(currentSerialization == Serialization.XML), PageContext.PAGE_SCOPE);
 			setSerialization = true;
 		}
 		try {
@@ -172,7 +184,10 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 				if(setDoctype) DoctypeEE.set(request, oldDoctype);
 			}
 		} finally {
-			if(setSerialization) SerializationEE.set(request, oldSerialization);
+			if(setSerialization) {
+				SerializationEE.set(request, oldSerialization);
+				pageContext.setAttribute(STRUTS_XHTML_KEY, oldStrutsXhtml, PageContext.PAGE_SCOPE);
+			}
 		}
 	}
 }
