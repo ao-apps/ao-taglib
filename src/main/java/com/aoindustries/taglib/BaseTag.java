@@ -23,6 +23,7 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
+import com.aoindustries.html.Html;
 import com.aoindustries.html.servlet.HtmlEE;
 import com.aoindustries.net.URIEncoder;
 import com.aoindustries.servlet.filter.EncodeURIFilter;
@@ -59,6 +60,8 @@ public class BaseTag extends AutoEncodingNullTag {
 				originalLastSlash!=currentLastSlash
 				|| !originalPath.regionMatches(0, currentPath, 0, originalLastSlash)
 			) {
+				Html html = HtmlEE.get(pageContext.getServletContext(), request, out);
+
 				// Note: This does not directly do response encodeURL because URL rewriting would interfere with the intent of the base tag
 
 				String url = HttpServletUtil.getAbsoluteURL(request, currentPath.substring(0, currentLastSlash + 1));
@@ -67,14 +70,17 @@ public class BaseTag extends AutoEncodingNullTag {
 				//       instead of this direct connection between BaseTag and EncodeURIFilter?
 				EncodeURIFilter encodeURIFilter = EncodeURIFilter.getActiveFilter(request);
 				if(encodeURIFilter != null) {
-					url = encodeURIFilter.encode(url, pageContext.getResponse().getCharacterEncoding());
+					url = encodeURIFilter.encode(
+						url,
+						html.doctype,
+						pageContext.getResponse().getCharacterEncoding()
+					);
 				} else {
 					// Encoding US-ASCII
 					// TODO: Implement this in ao:base instead (along with other URL implementations)?
 					url = URIEncoder.encodeURI(url);
 				}
-				HtmlEE.get(pageContext.getServletContext(), request, out)
-					.base__(url);
+				html.base__(url);
 			}
 		}
 	}
