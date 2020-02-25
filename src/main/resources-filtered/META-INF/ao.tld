@@ -1126,7 +1126,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-04-15T19:37:30-0500" -->
+		<!-- dateModified="2020-02-25T13:04:01-0600" -->
 		<description><![CDATA[
 			<div class="semanticcms-tag-reference-summary">
 				<p>
@@ -1225,7 +1225,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					As a result, parameters provided by the client will not be able to interfere with forwards that have optional parameters.
 					Each pattern in the comma-separated list may in the following format:
 				</p>
-				<table class="thinTable">
+				<table class="ao-grid">
 					<tbody>
 						<tr>
 							<td>exact_name</td>
@@ -1947,7 +1947,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-04-15T19:37:30-0500" -->
+		<!-- dateModified="2020-02-25T13:04:01-0600" -->
 		<description><![CDATA[
 			<div class="semanticcms-tag-reference-summary">
 				<p>
@@ -2042,7 +2042,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					As a result, parameters provided by the client will not be able to interfere with includes that have optional parameters.
 					Each pattern in the comma-separated list may in the following format:
 				</p>
-				<table class="thinTable">
+				<table class="ao-grid">
 					<tbody>
 						<tr>
 							<td>exact_name</td>
@@ -3422,7 +3422,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-08-21T03:06:55-0500" -->
+		<!-- dateModified="2020-02-25T13:04:01-0600" -->
 		<description><![CDATA[
 			<p>
 				Adds multiple parameters to its
@@ -3464,7 +3464,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					Each pattern in the comma-separated list may in the following format:
 				</p>
-				<table class="thinTable">
+				<table class="ao-grid">
 					<tbody>
 						<tr>
 							<td>exact_name</td>
