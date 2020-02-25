@@ -23,7 +23,7 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.net.URIParameters;
-import com.aoindustries.servlet.http.LastModifiedServlet;
+import com.aoindustries.servlet.lastmodified.AddLastModified;
 import java.util.Locale;
 
 /**
@@ -37,7 +37,7 @@ public class Link {
 	private final URIParameters params;
 	private final boolean absolute;
 	private final boolean canonical;
-	private final LastModifiedServlet.AddLastModifiedWhen addLastModified;
+	private final AddLastModified addLastModified;
 	private final String hreflang;
 	private final String rel;
 	private final String type;
@@ -49,7 +49,7 @@ public class Link {
 		boolean absolute,
 		boolean canonical,
 		URIParameters params,
-		LastModifiedServlet.AddLastModifiedWhen addLastModified,
+		AddLastModified addLastModified,
 		String hreflang,
 		String rel,
 		String type,
@@ -73,7 +73,7 @@ public class Link {
 		boolean absolute,
 		boolean canonical,
 		URIParameters params,
-		LastModifiedServlet.AddLastModifiedWhen addLastModified,
+		AddLastModified addLastModified,
 		Locale hreflang,
 		String rel,
 		String type,
@@ -110,7 +110,7 @@ public class Link {
 		return params;
 	}
 
-	public LastModifiedServlet.AddLastModifiedWhen getAddLastModified() {
+	public AddLastModified getAddLastModified() {
 		return addLastModified;
 	}
 

@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2013, 2014, 2015, 2016, 2017, 2019  AO Industries, Inc.
+ * Copyright (C) 2013, 2014, 2015, 2016, 2017, 2019, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -24,9 +24,9 @@ package com.aoindustries.taglib;
 
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import com.aoindustries.net.URIParameters;
-import com.aoindustries.servlet.http.HttpServletUtil;
-import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
+import com.aoindustries.servlet.lastmodified.AddLastModified;
+import com.aoindustries.servlet.lastmodified.LastModifiedUtil;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import javax.servlet.jsp.JspContext;
@@ -45,7 +45,7 @@ final public class UrlUtils {
 	 * Adds contextPath to URLs that begin with a slash (/).
 	 * Encodes the URL.
 	 *
-	 * @see #writeHref(javax.servlet.jsp.PageContext, java.lang.Appendable, java.lang.String, com.aoindustries.net.URIParameters, boolean, boolean, com.aoindustries.servlet.http.LastModifiedServlet.AddLastModifiedWhen)
+	 * @see #writeHref(javax.servlet.jsp.PageContext, java.lang.Appendable, java.lang.String, com.aoindustries.net.URIParameters, com.aoindustries.servlet.lastmodified.AddLastModified, boolean, boolean)
 	 *
 	 * @throws JspTagException when parameters provided with null href
 	 */
@@ -53,12 +53,12 @@ final public class UrlUtils {
 		PageContext pageContext,
 		String href,
 		URIParameters params,
+		AddLastModified addLastModified,
 		boolean absolute,
-		boolean canonical,
-		LastModifiedServlet.AddLastModifiedWhen addLastModified
+		boolean canonical
 	) throws JspTagException, MalformedURLException {
 		if(href != null) {
-			return HttpServletUtil.buildURL(pageContext, href, params, absolute, canonical, addLastModified);
+			return LastModifiedUtil.buildURL(pageContext, href, params, addLastModified, absolute, canonical);
 		} else {
 			if(params != null) throw new LocalizedJspTagException(ApplicationResources.accessor, "UrlUtils.paramsWithoutHref");
 			return null;
@@ -70,7 +70,7 @@ final public class UrlUtils {
 	 * Adds contextPath to URLs that begin with a slash (/).
 	 * Encodes the URL.
 	 *
-	 * @see #getHref(javax.servlet.jsp.PageContext, java.lang.String, com.aoindustries.net.URIParameters, boolean, boolean, com.aoindustries.servlet.http.LastModifiedServlet.AddLastModifiedWhen)
+	 * @see #getHref(javax.servlet.jsp.PageContext, java.lang.String, com.aoindustries.net.URIParameters, com.aoindustries.servlet.lastmodified.AddLastModified, boolean, boolean)
 	 *
 	 * @throws JspTagException when parameters provided with null href
 	 */
@@ -80,11 +80,11 @@ final public class UrlUtils {
 		Appendable out,
 		String href,
 		URIParameters params,
+		AddLastModified addLastModified,
 		boolean absolute,
-		boolean canonical,
-		LastModifiedServlet.AddLastModifiedWhen addLastModified
+		boolean canonical
 	) throws JspTagException, IOException {
-		href = getHref(pageContext, href, params, absolute, canonical, addLastModified);
+		href = getHref(pageContext, href, params, addLastModified, absolute, canonical);
 		if(href != null) {
 			out.append(" href=\"");
 			encodeTextInXhtmlAttribute(href, out);
@@ -93,7 +93,7 @@ final public class UrlUtils {
 	}
 
 	/**
-	 * @see  #writeHref(javax.servlet.jsp.PageContext, java.lang.Appendable, java.lang.String, com.aoindustries.net.URIParameters, boolean, boolean, com.aoindustries.servlet.http.LastModifiedServlet.AddLastModifiedWhen)
+	 * @see  #writeHref(javax.servlet.jsp.PageContext, java.lang.Appendable, java.lang.String, com.aoindustries.net.URIParameters, com.aoindustries.servlet.lastmodified.AddLastModified, boolean, boolean)
 	 */
 	// TODO: Still used once converted to ao-fluent-html?
 	public static void writeHref(
@@ -101,18 +101,18 @@ final public class UrlUtils {
 		Appendable out,
 		String href,
 		URIParameters params,
+		AddLastModified addLastModified,
 		boolean absolute,
-		boolean canonical,
-		LastModifiedServlet.AddLastModifiedWhen addLastModified
+		boolean canonical
 	) throws JspTagException, IOException {
 		writeHref(
 			(PageContext)jspContext,
 			out,
 			href,
 			params,
+			addLastModified,
 			absolute,
-			canonical,
-			addLastModified
+			canonical
 		);
 	}
 
@@ -121,7 +121,7 @@ final public class UrlUtils {
 	 * Adds contextPath to URLs that begin with a slash (/).
 	 * Encodes the URL.
 	 *
-	 * @see #writeSrc(javax.servlet.jsp.PageContext, java.lang.Appendable, java.lang.String, com.aoindustries.net.URIParameters, boolean, boolean, com.aoindustries.servlet.http.LastModifiedServlet.AddLastModifiedWhen)
+	 * @see #writeSrc(javax.servlet.jsp.PageContext, java.lang.Appendable, java.lang.String, com.aoindustries.net.URIParameters, com.aoindustries.servlet.lastmodified.AddLastModified, boolean, boolean)
 	 *
 	 * @throws JspTagException when parameters provided with null src
 	 */
@@ -129,12 +129,12 @@ final public class UrlUtils {
 		PageContext pageContext,
 		String src,
 		URIParameters params,
+		AddLastModified addLastModified,
 		boolean absolute,
-		boolean canonical,
-		LastModifiedServlet.AddLastModifiedWhen addLastModified
+		boolean canonical
 	) throws JspTagException, MalformedURLException {
 		if(src != null) {
-			return HttpServletUtil.buildURL(pageContext, src, params, absolute, canonical, addLastModified);
+			return LastModifiedUtil.buildURL(pageContext, src, params, addLastModified, absolute, canonical);
 		} else {
 			if(params != null) throw new LocalizedJspTagException(ApplicationResources.accessor, "UrlUtils.paramsWithoutSrc");
 			return null;
@@ -146,7 +146,7 @@ final public class UrlUtils {
 	 * Adds contextPath to URLs that begin with a slash (/).
 	 * Encodes the URL.
 	 *
-	 * @see #getSrc(javax.servlet.jsp.PageContext, java.lang.String, com.aoindustries.net.URIParameters, boolean, boolean, com.aoindustries.servlet.http.LastModifiedServlet.AddLastModifiedWhen)
+	 * @see #getSrc(javax.servlet.jsp.PageContext, java.lang.String, com.aoindustries.net.URIParameters, com.aoindustries.servlet.lastmodified.AddLastModified, boolean, boolean)
 	 *
 	 * @throws JspTagException when parameters provided with null src
 	 */
@@ -156,11 +156,11 @@ final public class UrlUtils {
 		Appendable out,
 		String src,
 		URIParameters params,
+		AddLastModified addLastModified,
 		boolean absolute,
-		boolean canonical,
-		LastModifiedServlet.AddLastModifiedWhen addLastModified
+		boolean canonical
 	) throws JspTagException, IOException {
-		src = getSrc(pageContext, src, params, absolute, canonical, addLastModified);
+		src = getSrc(pageContext, src, params, addLastModified, absolute, canonical);
 		if(src != null) {
 			out.append(" src=\"");
 			encodeTextInXhtmlAttribute(src, out);
@@ -169,7 +169,7 @@ final public class UrlUtils {
 	}
 
 	/**
-	 * @see  #writeSrc(javax.servlet.jsp.PageContext, java.lang.Appendable, java.lang.String, com.aoindustries.net.URIParameters, boolean, boolean, com.aoindustries.servlet.http.LastModifiedServlet.AddLastModifiedWhen)
+	 * @see  #writeSrc(javax.servlet.jsp.PageContext, java.lang.Appendable, java.lang.String, com.aoindustries.net.URIParameters, com.aoindustries.servlet.lastmodified.AddLastModified, boolean, boolean)
 	 */
 	// TODO: Still used once converted to ao-fluent-html?
 	public static void writeSrc(
@@ -177,18 +177,18 @@ final public class UrlUtils {
 		Appendable out,
 		String src,
 		URIParameters params,
+		AddLastModified addLastModified,
 		boolean absolute,
-		boolean canonical,
-		LastModifiedServlet.AddLastModifiedWhen addLastModified
+		boolean canonical
 	) throws JspTagException, IOException {
 		writeSrc(
 			(PageContext)jspContext,
 			out,
 			src,
 			params,
+			addLastModified,
 			absolute,
-			canonical,
-			addLastModified
+			canonical
 		);
 	}
 

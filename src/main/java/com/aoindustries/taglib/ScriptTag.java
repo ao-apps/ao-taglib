@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2013, 2015, 2016, 2017, 2019  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2013, 2015, 2016, 2017, 2019, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -30,11 +30,12 @@ import com.aoindustries.html.servlet.HtmlEE;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URIParametersMap;
-import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
+import com.aoindustries.servlet.lastmodified.AddLastModified;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
@@ -58,7 +59,7 @@ public class ScriptTag
 	private boolean absolute;
 	private boolean canonical;
 	// TODO: async, defer, ...
-	private LastModifiedServlet.AddLastModifiedWhen addLastModified = LastModifiedServlet.AddLastModifiedWhen.AUTO;
+	private AddLastModified addLastModified = AddLastModified.AUTO;
 
 	@Override
 	public MediaType getContentType() {
@@ -109,7 +110,7 @@ public class ScriptTag
 	}
 
 	public void setAddLastModified(String addLastModified) {
-		this.addLastModified = LastModifiedServlet.AddLastModifiedWhen.valueOfLowerName(addLastModified.trim());
+		this.addLastModified = AddLastModified.valueOfLowerName(addLastModified.trim().toLowerCase(Locale.ROOT));
 	}
 
 	@Override
@@ -149,7 +150,7 @@ public class ScriptTag
 		html
 			.script(mediaType.getContentType())
 			// Call getSrc always, since it validates src versus params
-			.src(UrlUtils.getSrc(pageContext, src, params, absolute, canonical, addLastModified))
+			.src(UrlUtils.getSrc(pageContext, src, params, addLastModified, absolute, canonical))
 			// Only write body when there is no source (discard body when src provided)
 			.out((src != null) ? null : capturedBody)
 			.__();

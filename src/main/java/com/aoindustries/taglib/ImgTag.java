@@ -27,11 +27,12 @@ import com.aoindustries.html.Html;
 import com.aoindustries.html.servlet.HtmlEE;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.net.URIParametersMap;
-import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
+import com.aoindustries.servlet.lastmodified.AddLastModified;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
@@ -60,7 +61,7 @@ public class ImgTag
 	private URIParametersMap params;
 	private boolean absolute;
 	private boolean canonical;
-	private LastModifiedServlet.AddLastModifiedWhen addLastModified = LastModifiedServlet.AddLastModifiedWhen.AUTO;
+	private AddLastModified addLastModified = AddLastModified.AUTO;
 	private Object width;
 	private Object height;
 	private Object alt;
@@ -105,7 +106,7 @@ public class ImgTag
 	}
 
 	public void setAddLastModified(String addLastModified) {
-		this.addLastModified = LastModifiedServlet.AddLastModifiedWhen.valueOfLowerName(addLastModified.trim());
+		this.addLastModified = AddLastModified.valueOfLowerName(addLastModified.trim().toLowerCase(Locale.ROOT));
 	}
 
 	@Override
@@ -180,7 +181,7 @@ public class ImgTag
 		);
 		html.img()
 			.id(id)
-			.src(UrlUtils.getSrc(pageContext, src, params, absolute, canonical, addLastModified))
+			.src(UrlUtils.getSrc(pageContext, src, params, addLastModified, absolute, canonical))
 			// TOOD: width to Integer via Img.width(Integer)
 			.attribute("width", width)
 			// TOOD: height to Integer via Img.height(Integer)
