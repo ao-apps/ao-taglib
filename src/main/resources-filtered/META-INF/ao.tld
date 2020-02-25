@@ -2779,7 +2779,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-02-12T08:37:09-0600" -->
+		<!-- dateModified="2020-02-25T01:42:32-0600" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Writes a value from the current localization bundle given its key.
@@ -2816,7 +2816,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				on its type:
 			</p>
 			<ul>
-				<li><code>javascript</code>, <code>text/javascript</code>, or <code>application/javascript</code> - no validation</li>
+				<li><code>javascript</code>, <code>application/javascript</code>, or <code>text/javascript</code> - no validation</li>
 				<li><code>json</code> or <code>application/json</code> - no validation</li>
 				<li><code>ld_json</code> or <code>application/ld+json</code> - no validation</li>
 				<li><code>text</code> or <code>text/plain</code> - no validation</li>
@@ -3285,7 +3285,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T07:29:41-0500" -->
+		<!-- dateModified="2020-02-25T01:42:32-0600" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Writes the value with proper escaping based on the context of the tag.
@@ -3304,7 +3304,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				on its type:
 			</p>
 			<ul>
-				<li><code>javascript</code>, <code>text/javascript</code>, or <code>application/javascript</code> - no validation</li>
+				<li><code>javascript</code>, <code>application/javascript</code>, or <code>text/javascript</code> - no validation</li>
 				<li><code>json</code> or <code>application/json</code> - no validation</li>
 				<li><code>ld_json</code> or <code>application/ld+json</code> - no validation</li>
 				<li><code>text</code> or <code>text/plain</code> - no validation</li>
@@ -3806,7 +3806,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-02-24T15:53:21-0600" -->
+		<!-- dateModified="2020-02-25T01:42:32-0600" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Manually establishes a <a href="https://www.w3schools.com/tags/tag_script.asp">script context</a> when automatic detection is not possible.
@@ -3857,7 +3857,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					Specifies the <a href="https://www.w3schools.com/tags/att_script_type.asp">type of script</a>.
-					The default is <code>text/javascript</code>, also allows <code>application/javascript</code>
+					The default is <code>application/javascript</code>, also allows <code>text/javascript</code>
 					<code>application/json</code> and <code>application/ld+json</code>.
 					A nested <a href="@{project.url}ao.tld/tag-type">&lt;ao:type&gt;</a>
 					tag will override this value.
@@ -4544,7 +4544,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-04-15T19:37:30-0500" -->
+		<!-- dateModified="2020-02-25T01:42:32-0600" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Writes the bean contents.  Supports data types beyond
@@ -4574,7 +4574,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				on its type:
 			</p>
 			<ul>
-				<li><code>javascript</code> or <code>text/javascript</code> - no validation</li>
+				<li><code>javascript</code>, <code>application/javascript</code>, or <code>text/javascript</code> - no validation</li>
 				<li><code>json</code> or <code>application/json</code> - no validation</li>
 				<li><code>ld_json</code> or <code>application/ld+json</code> - no validation</li>
 				<li><code>text</code> or <code>text/plain</code> - no validation</li>
