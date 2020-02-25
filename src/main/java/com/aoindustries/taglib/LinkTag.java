@@ -29,8 +29,8 @@ import com.aoindustries.html.servlet.HtmlEE;
 import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URIParameters;
 import com.aoindustries.net.URIParametersMap;
-import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
+import com.aoindustries.servlet.lastmodified.AddLastModified;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import java.io.IOException;
 import java.io.Writer;
@@ -62,7 +62,7 @@ public class LinkTag
 	private MutableURIParameters params;
 	private boolean absolute;
 	private boolean canonical;
-	private LastModifiedServlet.AddLastModifiedWhen addLastModified = LastModifiedServlet.AddLastModifiedWhen.AUTO;
+	private AddLastModified addLastModified = AddLastModified.AUTO;
 	private Object hreflang;
 	private Object rel;
 	private Object type;
@@ -117,7 +117,7 @@ public class LinkTag
 	}
 
 	public void setAddLastModified(String addLastModified) {
-		this.addLastModified = LastModifiedServlet.AddLastModifiedWhen.valueOfLowerName(addLastModified.trim());
+		this.addLastModified = AddLastModified.valueOfLowerName(addLastModified.trim().toLowerCase(Locale.ROOT));
 	}
 
 	@Override
@@ -194,7 +194,7 @@ public class LinkTag
 				out
 			);
 			com.aoindustries.html.Link link = html.link()
-				.href(UrlUtils.getHref(pageContext, href, params, absolute, canonical, addLastModified));
+				.href(UrlUtils.getHref(pageContext, href, params, addLastModified, absolute, canonical));
 			if(hreflang instanceof Locale) {
 				link.hreflang((Locale)hreflang);
 			} else {

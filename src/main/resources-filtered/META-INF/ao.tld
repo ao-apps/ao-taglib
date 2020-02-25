@@ -40,7 +40,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<uri>@{project.url}</uri>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-02-24T15:53:21-0600" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_a.asp">&lt;a&gt;</a> tag.
@@ -171,7 +171,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					In auto mode, last modified stamping may be disabled by the client with
-					the <code>X-com-aoindustries-servlet-http-LastModifiedServlet-lastModified: false</code> header.
+					the <code>X-com-aoindustries-servlet-lastmodified-enabled: false</code> header.
 				</p>
 				<p>
 					In auto mode, last modified stamping is not performed on
@@ -335,6 +335,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2019-10-08T21:41:35-0500" -->
+		<!-- dateModified="2020-02-24T15:53:21-0600" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_area.asp">&lt;area&gt;</a> tag.
@@ -484,7 +485,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					In auto mode, last modified stamping may be disabled by the client with
-					the <code>X-com-aoindustries-servlet-http-LastModifiedServlet-lastModified: false</code> header.
+					the <code>X-com-aoindustries-servlet-lastmodified-enabled: false</code> header.
 				</p>
 				<p>
 					In auto mode, last modified stamping is not performed on
@@ -1504,7 +1505,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T05:48:40-0500" -->
+		<!-- dateModified="2020-02-24T15:53:21-0600" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_iframe.asp">&lt;iframe&gt;</a> tag.
@@ -1631,7 +1632,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					In auto mode, last modified stamping may be disabled by the client with
-					the <code>X-com-aoindustries-servlet-http-LastModifiedServlet-lastModified: false</code> header.
+					the <code>X-com-aoindustries-servlet-lastmodified-enabled: false</code> header.
 				</p>
 				<p>
 					In auto mode, last modified stamping is not performed on
@@ -1688,7 +1689,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T06:35:47-0500" -->
+		<!-- dateModified="2020-02-24T15:53:21-0600" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_img.asp">&lt;img&gt;</a> tag.
@@ -1823,7 +1824,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					In auto mode, last modified stamping may be disabled by the client with
-					the <code>X-com-aoindustries-servlet-http-LastModifiedServlet-lastModified: false</code> header.
+					the <code>X-com-aoindustries-servlet-lastmodified-enabled: false</code> header.
 				</p>
 				<p>
 					In auto mode, last modified stamping is not performed on
@@ -2074,7 +2075,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T19:24:36-0500" -->
+		<!-- dateModified="2020-02-24T15:53:21-0600" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_input.asp">&lt;input&gt;</a> tag.
@@ -2378,7 +2379,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					In auto mode, last modified stamping may be disabled by the client with
-					the <code>X-com-aoindustries-servlet-http-LastModifiedServlet-lastModified: false</code> header.
+					the <code>X-com-aoindustries-servlet-lastmodified-enabled: false</code> header.
 				</p>
 				<p>
 					In auto mode, last modified stamping is not performed on
@@ -2521,7 +2522,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-02-24T15:53:21-0600" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				If contained with any
@@ -2647,7 +2648,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					In auto mode, last modified stamping may be disabled by the client with
-					the <code>X-com-aoindustries-servlet-http-LastModifiedServlet-lastModified: false</code> header.
+					the <code>X-com-aoindustries-servlet-lastmodified-enabled: false</code> header.
 				</p>
 				<p>
 					In auto mode, last modified stamping is not performed on
@@ -3566,7 +3567,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-02-03T02:56:16-0600" -->
+		<!-- dateModified="2020-02-24T15:53:21-0600" -->
 		<description><![CDATA[
 			<div class="semanticcms-tag-reference-summary">
 				<p>
@@ -3727,7 +3728,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					In auto mode, last modified stamping may be disabled by the client with
-					the <code>X-com-aoindustries-servlet-http-LastModifiedServlet-lastModified: false</code> header.
+					the <code>X-com-aoindustries-servlet-lastmodified-enabled: false</code> header.
 				</p>
 				<p>
 					In auto mode, last modified stamping is not performed on
@@ -3805,7 +3806,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T05:19:23-0500" -->
+		<!-- dateModified="2020-02-24T15:53:21-0600" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Manually establishes a <a href="https://www.w3schools.com/tags/tag_script.asp">script context</a> when automatic detection is not possible.
@@ -3947,7 +3948,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					In auto mode, last modified stamping may be disabled by the client with
-					the <code>X-com-aoindustries-servlet-http-LastModifiedServlet-lastModified: false</code> header.
+					the <code>X-com-aoindustries-servlet-lastmodified-enabled: false</code> header.
 				</p>
 				<p>
 					In auto mode, last modified stamping is not performed on

@@ -36,7 +36,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2020-02-12T08:37:09-0600"
+		dateModified="2020-02-24T18:58:10-0600"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -178,7 +178,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 							</ul>
 						</li>
 						<li>
-							In auto mode, <ao:a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/LastModifiedServlet.html">last modified stamping</ao:a>
+							In auto mode, <ao:a href="https://aoindustries.com/ao-servlet-last-modified/apidocs/com/aoindustries/servlet/lastmodified/LastModifiedServlet.html">last modified stamping</ao:a>
 							is not performed on <ao:a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URLs</ao:a>.
 						</li>
 					</ol>

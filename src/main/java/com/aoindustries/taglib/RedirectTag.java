@@ -23,14 +23,15 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.servlet.ServletUtil;
-import com.aoindustries.servlet.http.HttpServletUtil;
 import com.aoindustries.servlet.http.Includer;
-import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
+import com.aoindustries.servlet.lastmodified.AddLastModified;
+import com.aoindustries.servlet.lastmodified.LastModifiedUtil;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.WildcardPatternMatcher;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Locale;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -82,7 +83,7 @@ public class RedirectTag
 	private String href;
 	private boolean absolute = true;
 	private boolean canonical;
-	private LastModifiedServlet.AddLastModifiedWhen addLastModified = LastModifiedServlet.AddLastModifiedWhen.AUTO;
+	private AddLastModified addLastModified = AddLastModified.AUTO;
 
 	public void setStatusCode(String statusCode) throws JspTagException {
 		statusCode = statusCode.trim();
@@ -104,7 +105,7 @@ public class RedirectTag
 	}
 
 	public void setAddLastModified(String addLastModified) {
-		this.addLastModified = LastModifiedServlet.AddLastModifiedWhen.valueOfLowerName(addLastModified.trim());
+		this.addLastModified = AddLastModified.valueOfLowerName(addLastModified.trim().toLowerCase(Locale.ROOT));
 	}
 
 	@Override
@@ -171,16 +172,16 @@ public class RedirectTag
 		if(myHref==null) throw new AttributeRequiredException("href");
 
 		// Get the full URL that will be used for the redirect
-		String location = HttpServletUtil.buildRedirectURL(
+		String location = LastModifiedUtil.buildRedirectURL(
 			servletContext,
 			request,
 			response,
 			servletPath,
 			myHref,
 			params,
+			addLastModified,
 			absolute,
-			canonical,
-			addLastModified
+			canonical
 		);
 		boolean isTooLong = location.length()>MAXIMUM_GET_REQUEST_LENGTH;
 		if(!isTooLong || page==null) {

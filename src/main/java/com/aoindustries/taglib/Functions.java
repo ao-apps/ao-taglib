@@ -34,8 +34,9 @@ import static com.aoindustries.servlet.filter.FunctionContext.getResponse;
 import static com.aoindustries.servlet.filter.FunctionContext.getServletContext;
 import com.aoindustries.servlet.http.Dispatcher;
 import com.aoindustries.servlet.http.HttpServletUtil;
-import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
+import com.aoindustries.servlet.lastmodified.AddLastModified;
+import com.aoindustries.servlet.lastmodified.LastModifiedServlet;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.StringUtility;
 import java.net.MalformedURLException;
@@ -80,7 +81,7 @@ final public class Functions {
 			request,
 			Dispatcher.getCurrentPagePath(request),
 			url,
-			LastModifiedServlet.AddLastModifiedWhen.TRUE
+			AddLastModified.TRUE
 		);
 	}
 

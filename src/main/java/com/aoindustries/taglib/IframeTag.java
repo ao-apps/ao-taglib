@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2011, 2012, 2013, 2015, 2016, 2017, 2019  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2015, 2016, 2017, 2019, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -27,12 +27,13 @@ import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.net.URIParametersMap;
-import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
+import com.aoindustries.servlet.lastmodified.AddLastModified;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Locale;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 
@@ -56,7 +57,7 @@ private Object id;
 	private URIParametersMap params;
 	private boolean absolute;
 	private boolean canonical;
-	private LastModifiedServlet.AddLastModifiedWhen addLastModified = LastModifiedServlet.AddLastModifiedWhen.AUTO;
+	private AddLastModified addLastModified = AddLastModified.AUTO;
 	private Object width;
 	private Object height;
 	private boolean frameborder = true;
@@ -96,7 +97,7 @@ private Object id;
 	}
 
 	public void setAddLastModified(String addLastModified) {
-		this.addLastModified = LastModifiedServlet.AddLastModifiedWhen.valueOfLowerName(addLastModified.trim());
+		this.addLastModified = AddLastModified.valueOfLowerName(addLastModified.trim().toLowerCase(Locale.ROOT));
 	}
 
 	@Override
@@ -142,7 +143,7 @@ private Object id;
 			Coercion.write(id, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
-		UrlUtils.writeSrc(getJspContext(), out, src, params, absolute, canonical, addLastModified);
+		UrlUtils.writeSrc(getJspContext(), out, src, params, addLastModified, absolute, canonical);
 		if(width!=null) {
 			out.write(" width=\"");
 			Coercion.write(width, textInXhtmlAttributeEncoder, out);
