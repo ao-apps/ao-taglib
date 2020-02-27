@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2013, 2016, 2017, 2019  AO Industries, Inc.
+ * Copyright (C) 2013, 2016, 2017, 2019, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -45,7 +45,7 @@ abstract class ArgDispatchTag
 	/**
 	 * The prefix for argument attributes.
 	 */
-	private static final String ARG_ATTRIBUTE_PREFIX = Dispatcher.ARG_MAP_REQUEST_ATTRIBUTE_NAME + ".";
+	private static final String ARG_ATTRIBUTE_PREFIX = Dispatcher.ARG_REQUEST_ATTRIBUTE + ".";
 
 	private WildcardPatternMatcher clearParamsMatcher = WildcardPatternMatcher.matchNone();
 	private Map<String,Object> args;

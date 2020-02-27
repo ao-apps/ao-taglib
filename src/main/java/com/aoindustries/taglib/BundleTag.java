@@ -41,13 +41,13 @@ public class BundleTag
 	 * For interaction with nested functions (that have no access to the page context),
 	 * the current BundleTag is stored as a this attribute.
 	 */
-	private static final String REQUEST_ATTRIBUTE_KEY = BundleTag.class.getName()+".current";
+	private static final String REQUEST_ATTRIBUTE = BundleTag.class.getName();
 
 	/**
 	 * Gets the current BundleTag or <code>null</code> if not set.
 	 */
 	public static BundleTag getBundleTag(ServletRequest request) {
-		return (BundleTag)request.getAttribute(REQUEST_ATTRIBUTE_KEY);
+		return (BundleTag)request.getAttribute(REQUEST_ATTRIBUTE);
 	}
 
 	private static final long serialVersionUID = 1L;
@@ -93,8 +93,8 @@ public class BundleTag
 	@Override
 	public int doStartTag() {
 		ServletRequest request = pageContext.getRequest();
-		oldRequestValue = request.getAttribute(REQUEST_ATTRIBUTE_KEY);
-		request.setAttribute(REQUEST_ATTRIBUTE_KEY, this);
+		oldRequestValue = request.getAttribute(REQUEST_ATTRIBUTE);
+		request.setAttribute(REQUEST_ATTRIBUTE, this);
 		return EVAL_BODY_INCLUDE;
 	}
 
@@ -106,7 +106,7 @@ public class BundleTag
 	@Override
 	public void doFinally() {
 		try {
-			pageContext.getRequest().setAttribute(REQUEST_ATTRIBUTE_KEY, oldRequestValue);
+			pageContext.getRequest().setAttribute(REQUEST_ATTRIBUTE, oldRequestValue);
 		} finally {
 			init();
 		}
