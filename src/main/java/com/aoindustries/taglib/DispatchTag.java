@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2012, 2013, 2015, 2016, 2017, 2019  AO Industries, Inc.
+ * Copyright (C) 2012, 2013, 2015, 2016, 2017, 2019, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -70,18 +70,17 @@ abstract public class DispatchTag
 	/**
 	 * Tracks if the request has been forwarded.
 	 */
-	protected static final String REQUEST_FORWARDED_ATTRIBUTE_NAME = DispatchTag.class.getName() + ".requestForwarded";
+	protected static final String FORWARDED_REQUEST_ATTRIBUTE = DispatchTag.class.getName() + ".requestForwarded";
 
 	/**
 	 * Checks if the request has been forwarded.
 	 */
 	public static boolean isForwarded(ServletRequest req) {
-		return req.getAttribute(REQUEST_FORWARDED_ATTRIBUTE_NAME) != null;
+		return req.getAttribute(FORWARDED_REQUEST_ATTRIBUTE) != null;
 	}
 
 	protected static void setForwarded(ServletRequest req, boolean requestForwarded) {
-		req.setAttribute(
-			REQUEST_FORWARDED_ATTRIBUTE_NAME,
+		req.setAttribute(FORWARDED_REQUEST_ATTRIBUTE,
 			requestForwarded ? Boolean.TRUE : null
 		);
 	}
@@ -272,13 +271,13 @@ abstract public class DispatchTag
 				Dispatcher.setDispatchedPage(request, contextRelativePath);
 
 				// Keep old arguments to restore
-				final Object oldArgs = request.getAttribute(Dispatcher.ARG_MAP_REQUEST_ATTRIBUTE_NAME);
+				final Object oldArgs = request.getAttribute(Dispatcher.ARG_REQUEST_ATTRIBUTE);
 				try {
 					final JspWriter out = pageContext.getOut();
 					final HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
 
 					// Set new arguments
-					request.setAttribute(Dispatcher.ARG_MAP_REQUEST_ATTRIBUTE_NAME, getArgs());
+					request.setAttribute(Dispatcher.ARG_REQUEST_ATTRIBUTE, getArgs());
 
 					final WildcardPatternMatcher clearParamsMatcher = getClearParamsMatcher();
 					Map<String,String[]> oldMap = null; // Obtained when first needed
@@ -310,7 +309,7 @@ abstract public class DispatchTag
 					);
 				} finally {
 					// Restore any previous args
-					request.setAttribute(Dispatcher.ARG_MAP_REQUEST_ATTRIBUTE_NAME, oldArgs);
+					request.setAttribute(Dispatcher.ARG_REQUEST_ATTRIBUTE, oldArgs);
 				}
 			} finally {
 				Dispatcher.setDispatchedPage(request, oldDispatchPage);
