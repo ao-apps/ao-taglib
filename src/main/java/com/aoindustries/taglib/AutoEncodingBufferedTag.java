@@ -133,10 +133,10 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 
 	/**
 	 * @see  #newBufferWriter(com.aoindustries.tempfiles.TempFileContext, long)
-	 * @see  ServletTempFileContext#getTempFileContext(javax.servlet.ServletRequest)
+	 * @see  ServletTempFileContext#getInstance(javax.servlet.ServletRequest)
 	 */
 	public static BufferWriter newBufferWriter(ServletRequest request, long tempFileThreshold) {
-		return newBufferWriter(ServletTempFileContext.getTempFileContext(request), tempFileThreshold);
+		return newBufferWriter(ServletTempFileContext.getInstance(request), tempFileThreshold);
 	}
 
 	/**
