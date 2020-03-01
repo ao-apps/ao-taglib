@@ -34,7 +34,7 @@ import com.aoindustries.io.buffer.BufferWriter;
 import com.aoindustries.io.buffer.CharArrayBufferWriter;
 import com.aoindustries.io.buffer.LoggingWriter;
 import com.aoindustries.tempfiles.TempFileContext;
-import com.aoindustries.tempfiles.servlet.ServletTempFileContext;
+import com.aoindustries.tempfiles.servlet.TempFileContextEE;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -133,10 +133,10 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 
 	/**
 	 * @see  #newBufferWriter(com.aoindustries.tempfiles.TempFileContext, long)
-	 * @see  ServletTempFileContext#getInstance(javax.servlet.ServletRequest)
+	 * @see  TempFileContextEE#get(javax.servlet.ServletRequest)
 	 */
 	public static BufferWriter newBufferWriter(ServletRequest request, long tempFileThreshold) {
-		return newBufferWriter(ServletTempFileContext.getInstance(request), tempFileThreshold);
+		return newBufferWriter(TempFileContextEE.get(request), tempFileThreshold);
 	}
 
 	/**
