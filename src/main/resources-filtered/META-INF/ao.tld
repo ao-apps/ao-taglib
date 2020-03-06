@@ -1360,7 +1360,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-27T16:59:13-0500" -->
+		<!-- dateModified="2020-03-06T17:13:47-0600" -->
 		<description><![CDATA[
 			<ol>
 				<li>Clears the current output buffer (leaving status code and headers)</li>
@@ -1372,6 +1372,13 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					<a href="https://www.w3schools.com/tags/att_global_lang.asp">lang</a>,
 					and <a href="https://www.w3.org/International/questions/qa-lang-why">xml:lang</a> attributes based on
 					the locale of the current response.
+				</li>
+				<li>
+					Establishes a page context for <a href="https://aoindustries.com/ao-web-resources/">AO Web Resources</a>,
+					if one is not already present on the current request.  This is useful for using
+					the <a href="https://aoindustries.com/ao-web-resources/taglib/ao-web-resources.tld/">AO Web Resources Taglib</a>
+					within the simplified scope of a standalone JSP page.  Any page context established
+					by this tag is cleaned-up before the tag exits - the scope is limited to nested tags.
 				</li>
 			</ol>
 		]]></description>

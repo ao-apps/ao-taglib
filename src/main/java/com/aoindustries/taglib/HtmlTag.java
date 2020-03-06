@@ -30,6 +30,8 @@ import com.aoindustries.encoding.servlet.DoctypeEE;
 import com.aoindustries.encoding.servlet.SerializationEE;
 import com.aoindustries.html.Html;
 import com.aoindustries.servlet.ServletUtil;
+import com.aoindustries.web.resources.registry.Registry;
+import com.aoindustries.web.resources.servlet.RegistryEE;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Locale;
@@ -50,43 +52,6 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 	 * value may be removed.
 	 */
 	private static final String STRUTS_XHTML_KEY = "org.apache.struts.globals.XHTML";
-
-	@Override
-	public MediaType getContentType() {
-		return MediaType.XHTML;
-	}
-
-	// TODO: charset here, WebPage, Page, PageServer, PageTag, Skin, Layout, Theme
-
-	private Serialization serialization;
-	public void setSerialization(String serialization) {
-		if(serialization == null) {
-			this.serialization = null;
-		} else {
-			serialization = serialization.trim();
-			this.serialization = (serialization.isEmpty() || "auto".equalsIgnoreCase(serialization)) ? null : Serialization.valueOf(serialization.toUpperCase(Locale.ROOT));
-		}
-	}
-
-	private Doctype doctype;
-	public void setDoctype(String doctype) {
-		if(doctype == null) {
-			this.doctype = null;
-		} else {
-			doctype = doctype.trim();
-			this.doctype = (doctype.isEmpty() || "default".equalsIgnoreCase(doctype)) ? null : Doctype.valueOf(doctype.toUpperCase(Locale.ROOT));
-		}
-	}
-
-	private String clazz;
-	public void setClazz(String clazz) {
-		this.clazz = AttributeUtils.trimNullIfEmpty(clazz);
-	}
-
-	private String oldIeClass;
-	public void setOldIeClass(String oldIeClass) {
-		this.oldIeClass = AttributeUtils.trimNullIfEmpty(oldIeClass);
-	}
 
 	public static void beginHtmlTag(Locale locale, Appendable out, Serialization serialization, String clazz) throws IOException {
 		out.append("<html");
@@ -123,6 +88,46 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 	}
 
 	@Override
+	public MediaType getContentType() {
+		return MediaType.XHTML;
+	}
+
+	// TODO: charset here, along with:
+	//       Page (model), Page (Servlet), PageTag, Theme, View
+	//       aoweb-framework: WebPage, WebPageLayout
+	//       aoweb-struts: PageAttributes, Skin
+
+	private Serialization serialization;
+	public void setSerialization(String serialization) {
+		if(serialization == null) {
+			this.serialization = null;
+		} else {
+			serialization = serialization.trim();
+			this.serialization = (serialization.isEmpty() || "auto".equalsIgnoreCase(serialization)) ? null : Serialization.valueOf(serialization.toUpperCase(Locale.ROOT));
+		}
+	}
+
+	private Doctype doctype;
+	public void setDoctype(String doctype) {
+		if(doctype == null) {
+			this.doctype = null;
+		} else {
+			doctype = doctype.trim();
+			this.doctype = (doctype.isEmpty() || "default".equalsIgnoreCase(doctype)) ? null : Doctype.valueOf(doctype.toUpperCase(Locale.ROOT));
+		}
+	}
+
+	private String clazz;
+	public void setClazz(String clazz) {
+		this.clazz = AttributeUtils.trimNullIfEmpty(clazz);
+	}
+
+	private String oldIeClass;
+	public void setOldIeClass(String oldIeClass) {
+		this.oldIeClass = AttributeUtils.trimNullIfEmpty(oldIeClass);
+	}
+
+	@Override
 	protected void doTag(Writer out) throws JspException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
 		ServletContext servletContext = pageContext.getServletContext();
@@ -156,28 +161,39 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 				setDoctype = true;
 			}
 			try {
-				ServletResponse response = pageContext.getResponse();
-				// Clear the output buffer
-				response.resetBuffer();
-				// Set the content type
-				final String documentEncoding = Html.ENCODING.name();
-				ServletUtil.setContentType(response, currentSerialization.getContentType(), documentEncoding);
-				// Write doctype
-				currentDoctype.xmlDeclaration(currentSerialization, documentEncoding, out);
-				currentDoctype.doctype(currentSerialization, out);
-				// Write <html>
-				if(oldIeClass!=null) {
-					out.write("<!--[if lte IE 8]>");
-					beginHtmlTag(response, out, currentSerialization, clazz==null ? oldIeClass : (clazz + " " + oldIeClass));
-					out.write("<![endif]-->\n"
-							+ "<!--[if gt IE 8]><!-->");
-					beginHtmlTag(response, out, currentSerialization, clazz);
-					out.write("<!--<![endif]-->");
-				} else {
-					beginHtmlTag(response, out, currentSerialization, clazz);
+				Registry oldPageRegistry = RegistryEE.Page.get(request);
+				if(oldPageRegistry == null) {
+					// Create a new page-scope registry
+					RegistryEE.Page.set(request, new Registry());
 				}
-				super.doTag(out);
-				endHtmlTag(out);
+				try {
+					ServletResponse response = pageContext.getResponse();
+					// Clear the output buffer
+					response.resetBuffer();
+					// Set the content type
+					final String documentEncoding = Html.ENCODING.name();
+					ServletUtil.setContentType(response, currentSerialization.getContentType(), documentEncoding);
+					// Write doctype
+					currentDoctype.xmlDeclaration(currentSerialization, documentEncoding, out);
+					currentDoctype.doctype(currentSerialization, out);
+					// Write <html>
+					if(oldIeClass!=null) {
+						out.write("<!--[if lte IE 8]>");
+						beginHtmlTag(response, out, currentSerialization, clazz==null ? oldIeClass : (clazz + " " + oldIeClass));
+						out.write("<![endif]-->\n"
+								+ "<!--[if gt IE 8]><!-->");
+						beginHtmlTag(response, out, currentSerialization, clazz);
+						out.write("<!--<![endif]-->");
+					} else {
+						beginHtmlTag(response, out, currentSerialization, clazz);
+					}
+					super.doTag(out);
+					endHtmlTag(out);
+				} finally {
+					if(oldPageRegistry == null) {
+						RegistryEE.Page.set(request, null);
+					}
+				}
 			} catch(ServletException e) {
 				throw new JspTagException(e);
 			} finally {
