@@ -42,8 +42,8 @@ public class AoTldInitializer extends TagReferenceInitializer {
 			"Taglib Reference",
 			"/ao-taglib",
 			"/ao.tld",
-			Maven.properties.getProperty("documented.javac.link.javaApi"),
-			Maven.properties.getProperty("javac.link.javaeeApi.6"),
+			Maven.properties.getProperty("documented.javadoc.link.javase"),
+			Maven.properties.getProperty("javadoc.link.javaee.6"),
 			additionalApiLinks
 		);
 	}
