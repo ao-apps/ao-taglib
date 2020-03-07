@@ -73,7 +73,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 						<ol>
 							<li>Use the serialization active on the current request.</li>
 							<li>
-								Use the application <ao:a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</ao:a>
+								Use the application <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</ao:a>
 								<code>com.aoindustries.encoding.Serialization.default</code>
 								that allows an application to control the selection of HTML versus XHTML.
 							</li>
@@ -89,7 +89,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 						<ol>
 							<li>Use the doctype active on the current request.</li>
 							<li>
-								Use the application <ao:a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</ao:a>
+								Use the application <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</ao:a>
 								<code>com.aoindustries.encoding.Doctype.default</code>
 								that allows an application to control the default doctype.
 							</li>
@@ -224,7 +224,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 					</ol>
 				</li>
 				<li>Added relevant links to <ao:a href="https://www.w3schools.com/">w3schools</ao:a> in <core:link page="ao.tld/" />.</li>
-				<li>Attribute settings may now throw <ao:a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/jsp/JspTagException.html">JspTagException</ao:a>.</li>
+				<li>Attribute settings may now throw <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/jsp/JspTagException.html">JspTagException</ao:a>.</li>
 				<li>Trimming more attributes, and avoiding writing most attributes when they would be empty.</li>
 				<li><core:link page="ao.tld/tag-iframe" /> now writes both <code>id</code> and <code>name</code> attributes for maximum compatibility.</li>
 				<li><core:link page="ao.tld/function-getLastModified" /> now properly decodes paths</li>
