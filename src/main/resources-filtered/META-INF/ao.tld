@@ -4925,14 +4925,14 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</function>
 	<function>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-04-15T19:37:30-0500" -->
+		<!-- dateModified="2020-03-15T12:27:14-05:00" -->
 		<description><![CDATA[
 			<p>
 				Word wraps a <a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</a>.
 			</p>
 		]]></description>
 		<name>wordWrap</name>
-		<function-class>com.aoindustries.util.StringUtility</function-class>
+		<function-class>com.aoindustries.lang.Strings</function-class>
 		<function-signature>java.lang.String wordWrap(java.lang.String,int)</function-signature>
 		<example><![CDATA[<code>${ao:wordWrap(text, width)}</code>]]></example>
 	</function>
