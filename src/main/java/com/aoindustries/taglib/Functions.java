@@ -38,7 +38,7 @@ import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.servlet.lastmodified.AddLastModified;
 import com.aoindustries.servlet.lastmodified.LastModifiedServlet;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
-import com.aoindustries.util.StringUtility;
+import com.aoindustries.lang.Strings;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -97,12 +97,12 @@ final public class Functions {
 	}
 
 	public static String getDecimalTimeLength(Long millis) {
-		return millis==null ? null : StringUtility.getDecimalTimeLengthString(millis);
+		return millis==null ? null : Strings.getDecimalTimeLengthString(millis);
 	}
 
 	public static String join(Iterable<?> iter, String separator) {
 		if(iter==null) return null;
-		return StringUtility.join(iter, separator);
+		return Strings.join(iter, separator);
 	}
 
 	public static String message(String key) throws JspTagException {

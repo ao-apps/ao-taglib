@@ -24,7 +24,7 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.Coercion;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
-import com.aoindustries.util.StringUtility;
+import com.aoindustries.lang.Strings;
 import java.io.IOException;
 import javax.el.ELContext;
 import javax.el.ValueExpression;
@@ -85,10 +85,10 @@ public final class AttributeUtils  {
 	}
 
 	/**
-	 * @see  StringUtility#nullIfEmpty(java.lang.String)
+	 * @see  Strings#nullIfEmpty(java.lang.String)
 	 */
 	public static String nullIfEmpty(String value) {
-		return StringUtility.nullIfEmpty(value);
+		return Strings.nullIfEmpty(value);
 	}
 
 	/**
@@ -114,10 +114,10 @@ public final class AttributeUtils  {
 	}
 
 	/**
-	 * @see  StringUtility#trimNullIfEmpty(java.lang.String)
+	 * @see  Strings#trimNullIfEmpty(java.lang.String)
 	 */
 	public static String trimNullIfEmpty(String value) {
-		return StringUtility.trimNullIfEmpty(value);
+		return Strings.trimNullIfEmpty(value);
 	}
 
 	public static boolean isAllDigits(String value) {
