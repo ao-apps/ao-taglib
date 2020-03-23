@@ -62,12 +62,12 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
  * <p>
  * The tag also has the addition of a separate output type.  Thus, we have three
  * types involved:
+ * </p>
  * <ol>
  * <li>contentType - The characters are validated to this type as they go into the buffer.</li>
  * <li>outputType - Our output characters are validated to this type as they are written.</li>
  * <li>containerContentType - Our output characters are encoded to this type as they are written.</li>
  * </ol>
- * </p>
  *
  * @author  AO Industries, Inc.
  */
