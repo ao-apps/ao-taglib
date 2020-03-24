@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2013, 2016, 2017, 2018  AO Industries, Inc.
+ * Copyright (C) 2013, 2016, 2017, 2018, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,8 +22,8 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.collections.MinimalList;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
-import com.aoindustries.util.MinimalList;
 import java.util.Enumeration;
 import java.util.List;
 import javax.servlet.jsp.tagext.TagData;
