@@ -31,7 +31,7 @@ Making JSP be what it should have been all along.
 * [Changelog](https://aoindustries.com/ao-taglib/changelog)
 * [Taglib Reference](https://aoindustries.com/ao-taglib/ao.tld/)
 * [API Docs](https://aoindustries.com/ao-taglib/apidocs/)
-* [Maven Central Repository](https://search.maven.org/#search%7Cgav%7C1%7Cg:%22com.aoindustries%22%20AND%20a:%22ao-taglib%22)
+* [Maven Central Repository](https://search.maven.org/artifact/com.aoindustries/ao-taglib)
 * [GitHub](https://github.com/aoindustries/ao-taglib)
 
 ## Contact Us
