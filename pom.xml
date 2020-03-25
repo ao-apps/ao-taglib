@@ -35,7 +35,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 	<properties>
 		<javadoc.taglibReference><![CDATA[<li><a target="_top" href="${project.url}ao.tld/">Taglib Reference</a></li>]]></javadoc.taglibReference>
 		<!-- Dependencies -->
-		<org.apache.commons:commons-lang3:version>3.9</org.apache.commons:commons-lang3:version>
+		<org.apache.commons.commons-lang3.version>3.9</org.apache.commons.commons-lang3.version>
 	</properties>
 
 	<name>AO Taglib</name>
@@ -81,7 +81,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 								<link>https://aoindustries.com/ao-web-resources/servlet/apidocs/</link>
 								<link>https://aoindustries.com/aocode-public/apidocs/</link>
 								<link>https://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.4/apidocs/</link>
-								<link>https://commons.apache.org/proper/commons-lang/javadocs/api-${org.apache.commons:commons-lang3:version}/</link>
+								<link>https://commons.apache.org/proper/commons-lang/javadocs/api-${org.apache.commons.commons-lang3.version}/</link>
 							</links>
 						</configuration>
 					</plugin>
@@ -151,7 +151,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 				<groupId>commons-beanutils</groupId><artifactId>commons-beanutils</artifactId><version>1.9.4</version>
 			</dependency>
 			<dependency>
-				<groupId>org.apache.commons</groupId><artifactId>commons-lang3</artifactId><version>${org.apache.commons:commons-lang3:version}</version>
+				<groupId>org.apache.commons</groupId><artifactId>commons-lang3</artifactId><version>${org.apache.commons.commons-lang3.version}</version>
 			</dependency>
 			<!-- Transitive -->
 			<dependency>
