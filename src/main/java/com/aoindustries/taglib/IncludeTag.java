@@ -34,6 +34,7 @@ import javax.servlet.http.HttpServletResponseWrapper;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.JspWriter;
+import org.apache.commons.lang3.NotImplementedException;
 
 /**
  * @author  AO Industries, Inc.
@@ -53,9 +54,8 @@ public class IncludeTag extends ArgDispatchTag {
 				request,
 				new HttpServletResponseWrapper(response) {
 					@Override
-					@SuppressWarnings("deprecation")
 					public ServletOutputStream getOutputStream() throws IOException {
-						throw new com.aoindustries.exception.NotImplementedException("Implement when first needed, and how would we accomplish this?  What would it mean in a JSP context?  Pass-through to original response out and clear previous content?");
+						throw new NotImplementedException("Implement when first needed, and how would we accomplish this?  What would it mean in a JSP context?  Pass-through to original response out and clear previous content?");
 					}
 
 					/**
