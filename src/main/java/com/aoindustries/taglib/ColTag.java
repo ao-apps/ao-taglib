@@ -28,6 +28,7 @@ import com.aoindustries.html.servlet.HtmlEE;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 
@@ -81,6 +82,7 @@ public class ColTag
 		Col col = HtmlEE.get(
 			pageContext.getServletContext(),
 			(HttpServletRequest)pageContext.getRequest(),
+			(HttpServletResponse)pageContext.getResponse(),
 			out
 		).col()
 			.id(id);

@@ -43,6 +43,7 @@ import java.util.LinkedHashSet;
 import java.util.Locale;
 import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.DynamicAttributes;
@@ -320,6 +321,7 @@ public class InputTag
 		Html html = HtmlEE.get(
 			pageContext.getServletContext(),
 			(HttpServletRequest)pageContext.getRequest(),
+			(HttpServletResponse)pageContext.getResponse(),
 			out
 		);
 		Input.Dynamic input = html.input()

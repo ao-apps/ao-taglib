@@ -22,6 +22,7 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.encoding.EncodingContext;
 import com.aoindustries.encoding.MediaEncoder;
 import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
@@ -245,13 +246,14 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 					containerContentType = MediaType.getMediaTypeForContentType(responseContentType);
 				}
 				// Find the encoder
-				MediaEncoder mediaEncoder = MediaEncoder.getInstance(new EncodingContextEE(pageContext.getServletContext(), request, response), myOutputType, containerContentType);
+				EncodingContext encodingContext = new EncodingContextEE(pageContext.getServletContext(), request, response);
+				MediaEncoder mediaEncoder = MediaEncoder.getInstance(encodingContext, myOutputType, containerContentType);
 				if(mediaEncoder!=null) {
 					setMediaEncoderOptions(mediaEncoder);
 					// Encode our output.  The encoder guarantees valid output for our parent.
 					writeEncoderPrefix(mediaEncoder, out);
 					try {
-						MediaWriter mediaWriter = new MediaWriter(mediaEncoder, out);
+						MediaWriter mediaWriter = new MediaWriter(encodingContext, mediaEncoder, out);
 						ThreadEncodingContext.setCurrentContext(
 							request,
 							new ThreadEncodingContext(myOutputType, mediaWriter)

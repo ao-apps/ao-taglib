@@ -32,6 +32,7 @@ import com.aoindustries.servlet.http.HttpServletUtil;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 
@@ -60,7 +61,8 @@ public class BaseTag extends AutoEncodingNullTag {
 				originalLastSlash!=currentLastSlash
 				|| !originalPath.regionMatches(0, currentPath, 0, originalLastSlash)
 			) {
-				Html html = HtmlEE.get(pageContext.getServletContext(), request, out);
+				HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
+				Html html = HtmlEE.get(pageContext.getServletContext(), request, response, out);
 
 				// Note: This does not directly do response encodeURL because URL rewriting would interfere with the intent of the base tag
 
@@ -73,7 +75,7 @@ public class BaseTag extends AutoEncodingNullTag {
 					url = encodeURIFilter.encode(
 						url,
 						html.doctype,
-						pageContext.getResponse().getCharacterEncoding()
+						response.getCharacterEncoding()
 					);
 				} else {
 					// Encoding US-ASCII
