@@ -24,8 +24,8 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.collections.MinimalList;
 import com.aoindustries.encoding.Coercion;
-import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.TagData;
@@ -66,7 +66,7 @@ final public class TeiUtils {
 					mediaType = MediaType.getMediaTypeForContentType(type);
 				}
 				// Value is OK
-			} catch(MediaException err) {
+			} catch(UnsupportedEncodingException err) {
 				messages = MinimalList.add(
 					messages,
 					new ValidationMessage(

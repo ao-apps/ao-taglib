@@ -23,7 +23,6 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.Coercion;
-import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
@@ -31,6 +30,7 @@ import com.aoindustries.util.i18n.ApplicationResourcesAccessor;
 import com.aoindustries.util.i18n.BundleLookupMarkup;
 import com.aoindustries.util.i18n.BundleLookupThreadContext;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.BitSet;
@@ -80,7 +80,7 @@ public class MessageTag
 			if(newMediaType==null) {
 				try {
 					newMediaType = MediaType.getMediaTypeForContentType(typeStr);
-				} catch(MediaException e) {
+				} catch(UnsupportedEncodingException e) {
 					throw new JspTagException(e);
 				}
 			}

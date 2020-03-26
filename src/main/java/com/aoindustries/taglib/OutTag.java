@@ -23,13 +23,13 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.Coercion;
-import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.Writable;
 import com.aoindustries.util.i18n.BundleLookupMarkup;
 import com.aoindustries.util.i18n.BundleLookupThreadContext;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import javax.el.ValueExpression;
 import javax.servlet.jsp.JspTagException;
@@ -100,7 +100,7 @@ public class OutTag
 			if(newMediaType==null) {
 				try {
 					newMediaType = MediaType.getMediaTypeForContentType(typeStr);
-				} catch(MediaException e) {
+				} catch(UnsupportedEncodingException e) {
 					throw new JspTagException(e);
 				}
 			}

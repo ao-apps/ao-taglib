@@ -23,10 +23,10 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.Coercion;
-import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.html.Html;
 import com.aoindustries.html.servlet.HtmlEE;
+import com.aoindustries.io.LocalizedUnsupportedEncodingException;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URIParametersMap;
@@ -34,6 +34,7 @@ import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.servlet.lastmodified.AddLastModified;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
@@ -84,9 +85,9 @@ public class ScriptTag
 				newMediaType != MediaType.JAVASCRIPT
 				&& newMediaType != MediaType.JSON
 				&& newMediaType != MediaType.LD_JSON
-			) throw new MediaException(ApplicationResources.accessor.getMessage("ScriptTag.unsupportedMediaType", newMediaType));
+			) throw new LocalizedUnsupportedEncodingException(ApplicationResources.accessor, "ScriptTag.unsupportedMediaType", newMediaType);
 			this.mediaType = newMediaType;
-		} catch(MediaException e) {
+		} catch(UnsupportedEncodingException e) {
 			throw new JspTagException(e);
 		}
 	}

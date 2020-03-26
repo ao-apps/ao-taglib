@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2016, 2017, 2019  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2016, 2017, 2019, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -23,8 +23,8 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.Coercion;
-import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
+import java.io.UnsupportedEncodingException;
 import javax.servlet.jsp.tagext.TagData;
 import javax.servlet.jsp.tagext.TagExtraInfo;
 import javax.servlet.jsp.tagext.ValidationMessage;
@@ -49,7 +49,7 @@ public class ScriptTagTEI extends TagExtraInfo {
 						new ValidationMessage(data.getId(), ApplicationResources.accessor.getMessage("ScriptTag.unsupportedMediaType", type))
 					};
 				}
-			} catch(MediaException err) {
+			} catch(UnsupportedEncodingException err) {
 				return new ValidationMessage[] {
 					new ValidationMessage(data.getId(), err.getMessage())
 				};

@@ -24,7 +24,6 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.EncodingContext;
 import com.aoindustries.encoding.MediaEncoder;
-import com.aoindustries.encoding.MediaException;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.MediaValidator;
 import com.aoindustries.encoding.MediaWriter;
@@ -46,7 +45,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.JspFragment;
@@ -193,112 +191,108 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 
 	@Override
 	public void doTag() throws JspException, IOException {
-		try {
-			final PageContext pageContext = (PageContext)getJspContext();
-			final HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
-			final ThreadEncodingContext parentEncodingContext = ThreadEncodingContext.getCurrentContext(request);
+		final PageContext pageContext = (PageContext)getJspContext();
+		final HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
+		final ThreadEncodingContext parentEncodingContext = ThreadEncodingContext.getCurrentContext(request);
 
-			// Capture the body output while validating
-			// BufferWriter bufferWriter = new CharArrayBufferWriter(128, getTempFileThreshold());
-			BufferWriter bufferWriter = newBufferWriter(request, getTempFileThreshold());
-			try {
-				if(ENABLE_BUFFER_LOGGING) bufferWriter = new LoggingWriter(bufferWriter, log);
-				JspFragment body = getJspBody();
-				if(body!=null) {
-					final MediaType myContentType = getContentType();
-					MediaValidator captureValidator = MediaValidator.getMediaValidator(myContentType, bufferWriter);
+		// Capture the body output while validating
+		// BufferWriter bufferWriter = new CharArrayBufferWriter(128, getTempFileThreshold());
+		BufferWriter bufferWriter = newBufferWriter(request, getTempFileThreshold());
+		try {
+			if(ENABLE_BUFFER_LOGGING) bufferWriter = new LoggingWriter(bufferWriter, log);
+			JspFragment body = getJspBody();
+			if(body!=null) {
+				final MediaType myContentType = getContentType();
+				MediaValidator captureValidator = MediaValidator.getMediaValidator(myContentType, bufferWriter);
+				ThreadEncodingContext.setCurrentContext(
+					request,
+					new ThreadEncodingContext(myContentType, captureValidator)
+				);
+				try {
+					invoke(body, captureValidator);
+					captureValidator.flush();
+				} finally {
+					// Restore previous encoding context that is used for our output
+					ThreadEncodingContext.setCurrentContext(request, parentEncodingContext);
+				}
+			}
+		} finally {
+			bufferWriter.close();
+		}
+		final BufferResult capturedBody = bufferWriter.getResult();
+		bufferWriter = null; // Done with object, don't need to hold long-term reference
+
+		MediaType myOutputType = getOutputType();
+		if(myOutputType==null) {
+			// No output, error if anything written.
+			doTag(capturedBody, FailOnWriteWriter.getInstance());
+		} else {
+			final HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
+			final JspWriter out = pageContext.getOut();
+
+			// Determine the container's content type
+			MediaType containerContentType;
+			if(parentEncodingContext != null) {
+				// Use the output type of the parent
+				containerContentType = parentEncodingContext.contentType;
+			} else {
+				// Use the content type of the response
+				String responseContentType = response.getContentType();
+				// Default to XHTML: TODO: Is there a better way since can't set content type early in response then reset again...
+				if(responseContentType == null) responseContentType = MediaType.XHTML.getContentType();
+				containerContentType = MediaType.getMediaTypeForContentType(responseContentType);
+			}
+			// Find the encoder
+			EncodingContext encodingContext = new EncodingContextEE(pageContext.getServletContext(), request, response);
+			MediaEncoder mediaEncoder = MediaEncoder.getInstance(encodingContext, myOutputType, containerContentType);
+			if(mediaEncoder!=null) {
+				setMediaEncoderOptions(mediaEncoder);
+				// Encode our output.  The encoder guarantees valid output for our parent.
+				writeEncoderPrefix(mediaEncoder, out);
+				try {
+					MediaWriter mediaWriter = new MediaWriter(encodingContext, mediaEncoder, out);
 					ThreadEncodingContext.setCurrentContext(
 						request,
-						new ThreadEncodingContext(myContentType, captureValidator)
+						new ThreadEncodingContext(myOutputType, mediaWriter)
 					);
 					try {
-						invoke(body, captureValidator);
-						captureValidator.flush();
+						doTag(capturedBody, mediaWriter);
 					} finally {
 						// Restore previous encoding context that is used for our output
 						ThreadEncodingContext.setCurrentContext(request, parentEncodingContext);
 					}
+				} finally {
+					writeEncoderSuffix(mediaEncoder, out);
 				}
-			} finally {
-				bufferWriter.close();
-			}
-			final BufferResult capturedBody = bufferWriter.getResult();
-			bufferWriter = null; // Done with object, don't need to hold long-term reference
-
-			MediaType myOutputType = getOutputType();
-			if(myOutputType==null) {
-				// No output, error if anything written.
-				doTag(capturedBody, FailOnWriteWriter.getInstance());
 			} else {
-				final HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
-				final JspWriter out = pageContext.getOut();
-
-				// Determine the container's content type
-				MediaType containerContentType;
-				if(parentEncodingContext != null) {
-					// Use the output type of the parent
-					containerContentType = parentEncodingContext.contentType;
-				} else {
-					// Use the content type of the response
-					String responseContentType = response.getContentType();
-					// Default to XHTML: TODO: Is there a better way since can't set content type early in response then reset again...
-					if(responseContentType == null) responseContentType = MediaType.XHTML.getContentType();
-					containerContentType = MediaType.getMediaTypeForContentType(responseContentType);
-				}
-				// Find the encoder
-				EncodingContext encodingContext = new EncodingContextEE(pageContext.getServletContext(), request, response);
-				MediaEncoder mediaEncoder = MediaEncoder.getInstance(encodingContext, myOutputType, containerContentType);
-				if(mediaEncoder!=null) {
-					setMediaEncoderOptions(mediaEncoder);
-					// Encode our output.  The encoder guarantees valid output for our parent.
-					writeEncoderPrefix(mediaEncoder, out);
+				// If parentValidMediaInput exists and is validating our output type, no additional validation is required
+				if(
+					parentEncodingContext != null
+					&& parentEncodingContext.validMediaInput.isValidatingMediaInputType(myOutputType)
+				) {
+					ThreadEncodingContext.setCurrentContext(
+						request,
+						new ThreadEncodingContext(myOutputType, parentEncodingContext.validMediaInput)
+					);
 					try {
-						MediaWriter mediaWriter = new MediaWriter(encodingContext, mediaEncoder, out);
-						ThreadEncodingContext.setCurrentContext(
-							request,
-							new ThreadEncodingContext(myOutputType, mediaWriter)
-						);
-						try {
-							doTag(capturedBody, mediaWriter);
-						} finally {
-							// Restore previous encoding context that is used for our output
-							ThreadEncodingContext.setCurrentContext(request, parentEncodingContext);
-						}
+						doTag(capturedBody, out);
 					} finally {
-						writeEncoderSuffix(mediaEncoder, out);
+						ThreadEncodingContext.setCurrentContext(request, parentEncodingContext);
 					}
 				} else {
-					// If parentValidMediaInput exists and is validating our output type, no additional validation is required
-					if(
-						parentEncodingContext != null
-						&& parentEncodingContext.validMediaInput.isValidatingMediaInputType(myOutputType)
-					) {
-						ThreadEncodingContext.setCurrentContext(
-							request,
-							new ThreadEncodingContext(myOutputType, parentEncodingContext.validMediaInput)
-						);
-						try {
-							doTag(capturedBody, out);
-						} finally {
-							ThreadEncodingContext.setCurrentContext(request, parentEncodingContext);
-						}
-					} else {
-						// Not using an encoder and parent doesn't validate our output, validate our own output.
-						MediaValidator validator = MediaValidator.getMediaValidator(myOutputType, out);
-						ThreadEncodingContext.setCurrentContext(
-							request,
-							new ThreadEncodingContext(myOutputType, validator)
-						);
-						try {
-							doTag(capturedBody, validator);
-						} finally {
-							ThreadEncodingContext.setCurrentContext(request, parentEncodingContext);
-						}
+					// Not using an encoder and parent doesn't validate our output, validate our own output.
+					MediaValidator validator = MediaValidator.getMediaValidator(myOutputType, out);
+					ThreadEncodingContext.setCurrentContext(
+						request,
+						new ThreadEncodingContext(myOutputType, validator)
+					);
+					try {
+						doTag(capturedBody, validator);
+					} finally {
+						ThreadEncodingContext.setCurrentContext(request, parentEncodingContext);
 					}
 				}
 			}
-		} catch(MediaException err) {
-			throw new JspTagException(err);
 		}
 	}
 
