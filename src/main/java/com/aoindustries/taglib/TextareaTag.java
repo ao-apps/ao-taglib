@@ -26,10 +26,12 @@ import com.aoindustries.encoding.Coercion;
 import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaScriptInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.Serialization;
+import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import static com.aoindustries.encoding.TextInXhtmlEncoder.textInXhtmlEncoder;
 import com.aoindustries.encoding.servlet.SerializationEE;
 import com.aoindustries.io.buffer.BufferResult;
+import com.aoindustries.lang.Strings;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
@@ -53,7 +55,7 @@ public class TextareaTag
 		StyleAttribute
 {
 
-	private Object name;
+	private String name;
 	private Object value;
 	private int cols;
 	private int rows;
@@ -73,8 +75,8 @@ public class TextareaTag
 	}
 
 	@Override
-	public void setName(Object name) throws JspTagException {
-		this.name = AttributeUtils.nullIfEmpty(name);
+	public void setName(String name) throws JspTagException {
+		this.name = Strings.nullIfEmpty(name);
 	}
 
 	@Override
@@ -123,7 +125,7 @@ public class TextareaTag
 		out.write("<textarea");
 		if(name!=null) {
 			out.write(" name=\"");
-			Coercion.write(name, textInXhtmlAttributeEncoder, out);
+			encodeTextInXhtmlAttribute(name, out);
 			out.write('"');
 		}
 		out.write(" cols=\"");

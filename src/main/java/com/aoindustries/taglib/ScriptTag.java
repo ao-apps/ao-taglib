@@ -22,12 +22,12 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.html.Html;
 import com.aoindustries.html.servlet.HtmlEE;
 import com.aoindustries.io.LocalizedUnsupportedEncodingException;
 import com.aoindustries.io.buffer.BufferResult;
+import com.aoindustries.lang.Strings;
 import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URIParametersMap;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
@@ -74,13 +74,9 @@ public class ScriptTag
 	}
 
 	@Override
-	public void setType(Object type) throws JspTagException {
+	public void setType(String type) throws JspTagException {
 		try {
-			MediaType newMediaType =
-				(type instanceof MediaType)
-				? (MediaType)type
-				: MediaType.getMediaTypeForContentType(Coercion.toString(type).trim())
-			;
+			MediaType newMediaType = MediaType.getMediaTypeForContentType(Strings.trim(type));
 			if(
 				newMediaType != MediaType.JAVASCRIPT
 				&& newMediaType != MediaType.JSON

@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2016, 2017, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -31,5 +31,5 @@ import javax.servlet.jsp.JspTagException;
  */
 public interface NameAttribute {
 
-	void setName(Object name) throws JspTagException;
+	void setName(String name) throws JspTagException;
 }

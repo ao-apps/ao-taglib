@@ -25,6 +25,7 @@ package com.aoindustries.taglib;
 import com.aoindustries.collections.MinimalList;
 import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaType;
+import com.aoindustries.lang.Strings;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import javax.servlet.jsp.JspTagException;
@@ -51,29 +52,30 @@ final public class TeiUtils {
 	 * @see  MediaType#getMediaTypeForContentType(java.lang.String)
 	 */
 	public static List<ValidationMessage> validateMediaType(TagData data, List<ValidationMessage> messages) {
-		Object o = data.getAttribute("type");
+		Object typeAttr = data.getAttribute("type");
 		if(
-			o != null
-			&& o != TagData.REQUEST_TIME_VALUE
-			&& !(o instanceof MediaType)
+			typeAttr != null
+			&& typeAttr != TagData.REQUEST_TIME_VALUE
 		) {
-			String type = Coercion.toString(o).trim();
-			try {
-				// First allow shortcuts (matching enum names)
-				MediaType mediaType = MediaType.getMediaTypeByName(type);
-				if(mediaType == null) {
-					// Return value not used: valdation only:
-					mediaType = MediaType.getMediaTypeForContentType(type);
+			String type = Strings.trimNullIfEmpty((String)typeAttr);
+			if(type != null) {
+				try {
+					// First allow shortcuts (matching enum names)
+					MediaType mediaType = MediaType.getMediaTypeByName(type);
+					if(mediaType == null) {
+						// Return value not used: valdation only:
+						mediaType = MediaType.getMediaTypeForContentType(type);
+					}
+					// Value is OK
+				} catch(UnsupportedEncodingException err) {
+					messages = MinimalList.add(
+						messages,
+						new ValidationMessage(
+							data.getId(),
+							err.getMessage()
+						)
+					);
 				}
-				// Value is OK
-			} catch(UnsupportedEncodingException err) {
-				messages = MinimalList.add(
-					messages,
-					new ValidationMessage(
-						data.getId(),
-						err.getMessage()
-					)
-				);
 			}
 		}
 		return messages;

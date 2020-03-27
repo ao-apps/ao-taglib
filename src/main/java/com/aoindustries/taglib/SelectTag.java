@@ -26,9 +26,11 @@ import com.aoindustries.encoding.Coercion;
 import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaScriptInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.Serialization;
+import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.servlet.SerializationEE;
 import com.aoindustries.io.buffer.BufferResult;
+import com.aoindustries.lang.Strings;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
@@ -52,8 +54,8 @@ public class SelectTag
 		OnkeypressAttribute
 {
 
-	private Object id;
-	private Object name;
+	private String id;
+	private String name;
 	private Object style;
 	private boolean disabled;
 	private Object onchange;
@@ -72,13 +74,13 @@ public class SelectTag
 	}
 
 	@Override
-	public void setId(Object id) throws JspTagException {
-		this.id = AttributeUtils.trimNullIfEmpty(id);
+	public void setId(String id) throws JspTagException {
+		this.id = Strings.trimNullIfEmpty(id);
 	}
 
 	@Override
-	public void setName(Object name) throws JspTagException {
-		this.name = AttributeUtils.nullIfEmpty(name);
+	public void setName(String name) throws JspTagException {
+		this.name = Strings.nullIfEmpty(name);
 	}
 
 	@Override
@@ -121,12 +123,12 @@ public class SelectTag
 		out.write("<select");
 		if(id!=null) {
 			out.write(" id=\"");
-			Coercion.write(id, textInXhtmlAttributeEncoder, out);
+			encodeTextInXhtmlAttribute(id, out);
 			out.write('"');
 		}
 		if(name!=null) {
 			out.write(" name=\"");
-			Coercion.write(name, textInXhtmlAttributeEncoder, out);
+			encodeTextInXhtmlAttribute(name, out);
 			out.write('"');
 		}
 		if(style!=null) {

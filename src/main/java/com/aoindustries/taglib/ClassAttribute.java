@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2016, 2017, 2019  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2016, 2017, 2019, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -35,7 +35,7 @@ public interface ClassAttribute {
 	 * Getter required because without it, we get the exception:
 	 * <pre>Unable to find setter method for attribute: class</pre>
 	 */
-	Object getClazz();
+	String getClazz();
 
-	void setClazz(Object clazz) throws JspTagException;
+	void setClazz(String clazz) throws JspTagException;
 }

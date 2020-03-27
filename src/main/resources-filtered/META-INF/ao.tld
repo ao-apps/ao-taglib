@@ -40,7 +40,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<uri>@{project.url}</uri>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-02-24T15:53:21-0600" -->
+		<!-- dateModified="2020-03-26T22:27:21-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_a.asp">&lt;a&gt;</a> tag.
@@ -89,7 +89,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>id</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -205,7 +205,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>rel</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -217,7 +217,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>type</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -229,7 +229,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>target</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -253,7 +253,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>class</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -335,7 +335,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2019-10-08T21:41:35-0500" -->
-		<!-- dateModified="2020-02-24T15:53:21-0600" -->
+		<!-- dateModified="2020-03-26T22:27:21-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_area.asp">&lt;area&gt;</a> tag.
@@ -379,7 +379,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>id</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -519,7 +519,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>rel</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -531,7 +531,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>target</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -543,7 +543,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>type</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -580,7 +580,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>class</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -634,7 +634,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2016-11-08T00:26:39-0600" -->
+		<!-- dateModified="2020-03-26T22:27:21-05:00" -->
 		<description><![CDATA[
 			<p>
 				Adds an argument to its
@@ -655,7 +655,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>name</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -833,6 +833,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2020-02-11T20:25:52-0600" -->
+		<!-- dateModified="2020-03-26T22:27:21-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Writes a <a href="https://www.w3schools.com/tags/tag_col.asp">&lt;col&gt;</a>
@@ -853,7 +854,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>id</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -877,7 +878,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>class</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -951,7 +952,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-03-26T22:27:21-05:00" -->
 		<!-- TODO: param.* dynamic attributes should not do automatic multi-parameter.  Make a params.* dynamic attribute for this purpose. -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
@@ -1008,7 +1009,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>id</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -1069,7 +1070,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>target</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -1082,7 +1083,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>enctype</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -1094,7 +1095,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>class</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -1512,7 +1513,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-02-24T15:53:21-0600" -->
+		<!-- dateModified="2020-03-26T22:27:21-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_iframe.asp">&lt;iframe&gt;</a> tag.
@@ -1557,7 +1558,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>id</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -1696,7 +1697,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-02-24T15:53:21-0600" -->
+		<!-- dateModified="2020-03-26T22:27:21-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_img.asp">&lt;img&gt;</a> tag.
@@ -1749,7 +1750,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>id</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -1906,7 +1907,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>class</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -2082,7 +2083,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-02-24T15:53:21-0600" -->
+		<!-- dateModified="2020-03-26T22:27:21-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_input.asp">&lt;input&gt;</a> tag.
@@ -2139,7 +2140,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>id</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -2152,7 +2153,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>type</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -2165,7 +2166,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>name</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -2464,7 +2465,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>class</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -2529,7 +2530,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-02-24T15:53:21-0600" -->
+		<!-- dateModified="2020-03-26T22:27:21-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				If contained with any
@@ -2691,7 +2692,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>rel</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -2704,7 +2705,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>type</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -2734,7 +2735,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2019-10-08T21:41:35-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-03-26T22:27:21-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders a <a href="https://www.w3schools.com/tags/tag_map.asp">&lt;map&gt;</a> tag.
@@ -2765,7 +2766,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>id</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 	</tag>
 	<tag>
@@ -2786,7 +2787,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-02-25T01:42:32-0600" -->
+		<!-- dateModified="2020-03-26T22:27:21-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Writes a value from the current localization bundle given its key.
@@ -2934,7 +2935,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>type</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<dynamic-attributes>true</dynamic-attributes>
 	</tag>
@@ -2968,7 +2969,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-03-26T22:27:21-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				If contained with any
@@ -2999,7 +3000,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>name</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -3010,7 +3011,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>httpEquiv</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -3021,7 +3022,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>itemprop</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -3292,7 +3293,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-02-25T01:42:32-0600" -->
+		<!-- dateModified="2020-03-26T22:27:21-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Writes the value with proper escaping based on the context of the tag.
@@ -3369,7 +3370,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>type</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 	</tag>
 	<tag>
@@ -3388,7 +3389,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2016-11-08T00:26:39-0600" -->
+		<!-- dateModified="2020-03-26T22:27:21-05:00" -->
 		<description><![CDATA[
 			<p>
 				Adds a parameter to its
@@ -3410,7 +3411,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>name</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -3429,7 +3430,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-02-25T13:04:01-0600" -->
+		<!-- dateModified="2020-03-26T22:27:21-05:00" -->
 		<description><![CDATA[
 			<p>
 				Adds multiple parameters to its
@@ -3457,7 +3458,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>name</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -3813,7 +3814,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-02-25T01:42:32-0600" -->
+		<!-- dateModified="2020-03-26T22:27:21-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Manually establishes a <a href="https://www.w3schools.com/tags/tag_script.asp">script context</a> when automatic detection is not possible.
@@ -3873,7 +3874,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>type</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -3971,7 +3972,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-03-26T22:27:21-05:00" -->
 		<description><![CDATA[
 			<p>
 				Renders a <a href="https://www.w3schools.com/tags/tag_select.asp">&lt;select&gt;</a> tag.
@@ -3991,7 +3992,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>id</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -4004,7 +4005,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>name</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -4308,7 +4309,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>name</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -4551,7 +4552,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-02-25T01:42:32-0600" -->
+		<!-- dateModified="2020-03-26T22:27:21-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Writes the bean contents.  Supports data types beyond
@@ -4626,7 +4627,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>name</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -4668,7 +4669,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<name>type</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 	</tag>
 	<tag>

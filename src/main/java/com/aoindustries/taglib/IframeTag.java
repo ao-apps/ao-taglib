@@ -24,8 +24,10 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaType;
+import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.buffer.BufferResult;
+import com.aoindustries.lang.Strings;
 import com.aoindustries.net.URIParametersMap;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.servlet.lastmodified.AddLastModified;
@@ -52,7 +54,7 @@ public class IframeTag
 		FrameborderAttribute
 {
 
-private Object id;
+	private String id;
 	private String src;
 	private URIParametersMap params;
 	private boolean absolute;
@@ -73,8 +75,8 @@ private Object id;
 	}
 
 	@Override
-	public void setId(Object id) throws JspTagException {
-		this.id = AttributeUtils.trimNullIfEmpty(id);
+	public void setId(String id) throws JspTagException {
+		this.id = Strings.trimNullIfEmpty(id);
 	}
 
 	@Override
@@ -137,10 +139,11 @@ private Object id;
 		if(src==null) throw new AttributeRequiredException("src");
 		out.write("<iframe");
 		if(id!=null) {
+			// TODO: Include id/name by doctype
 			out.write(" id=\"");
-			Coercion.write(id, textInXhtmlAttributeEncoder, out);
+			encodeTextInXhtmlAttribute(id, out);
 			out.write("\" name=\"");
-			Coercion.write(id, textInXhtmlAttributeEncoder, out);
+			encodeTextInXhtmlAttribute(id, out);
 			out.write('"');
 		}
 		UrlUtils.writeSrc(getJspContext(), out, src, params, addLastModified, absolute, canonical);

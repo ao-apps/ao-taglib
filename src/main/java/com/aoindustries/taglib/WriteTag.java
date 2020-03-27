@@ -25,6 +25,7 @@ package com.aoindustries.taglib;
 import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.Writable;
+import com.aoindustries.lang.Strings;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.util.i18n.BundleLookupMarkup;
 import com.aoindustries.util.i18n.BundleLookupThreadContext;
@@ -49,7 +50,7 @@ public class WriteTag
 {
 
 	private String scope;
-	private Object name;
+	private String name;
 	private String property;
 	private String method = "toString";
 	private MediaType mediaType = MediaType.TEXT;
@@ -64,7 +65,7 @@ public class WriteTag
 	}
 
 	@Override
-	public void setName(Object name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
@@ -77,19 +78,14 @@ public class WriteTag
 	}
 
 	@Override
-	public void setType(Object type) throws JspTagException {
-		MediaType newMediaType;
-		if(type instanceof MediaType) {
-			newMediaType = (MediaType)type;
-		} else {
-			String typeStr = Coercion.toString(type).trim();
-			newMediaType = MediaType.getMediaTypeByName(typeStr);
-			if(newMediaType==null) {
-				try {
-					newMediaType = MediaType.getMediaTypeForContentType(typeStr);
-				} catch(UnsupportedEncodingException e) {
-					throw new JspTagException(e);
-				}
+	public void setType(String type) throws JspTagException {
+		String typeStr = Strings.trim(type);
+		MediaType newMediaType = MediaType.getMediaTypeByName(typeStr);
+		if(newMediaType==null) {
+			try {
+				newMediaType = MediaType.getMediaTypeForContentType(typeStr);
+			} catch(UnsupportedEncodingException e) {
+				throw new JspTagException(e);
 			}
 		}
 		this.mediaType = newMediaType;
@@ -110,7 +106,7 @@ public class WriteTag
 			Object bean = PropertyUtils.findObject(
 				(PageContext)getJspContext(),
 				scope,
-				Coercion.toString(name),
+				name,
 				property,
 				true,
 				false

@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2011, 2012, 2013, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2016, 2017, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -46,6 +46,6 @@ public class EnctypeTag extends AutoEncodingBufferedTag {
 	@Override
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		EnctypeAttribute enctypeAttribute = AttributeUtils.findAttributeParent("enctype", this, "enctype", EnctypeAttribute.class);
-		enctypeAttribute.setEnctype(capturedBody.trim());
+		enctypeAttribute.setEnctype(capturedBody.trim().toString());
 	}
 }

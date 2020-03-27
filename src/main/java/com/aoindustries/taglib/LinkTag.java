@@ -26,6 +26,7 @@ import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.html.Html;
 import com.aoindustries.html.servlet.HtmlEE;
+import com.aoindustries.lang.Strings;
 import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URIParameters;
 import com.aoindustries.net.URIParametersMap;
@@ -65,8 +66,8 @@ public class LinkTag
 	private boolean canonical;
 	private AddLastModified addLastModified = AddLastModified.AUTO;
 	private Object hreflang;
-	private Object rel;
-	private Object type;
+	private String rel;
+	private String type;
 	private String media; // TODO: media to Object
 	private Object title;
 
@@ -127,13 +128,13 @@ public class LinkTag
 	}
 
 	@Override
-	public void setRel(Object rel) throws JspTagException {
-		this.rel = AttributeUtils.trimNullIfEmpty(rel);
+	public void setRel(String rel) throws JspTagException {
+		this.rel = rel;
 	}
 
 	@Override
-	public void setType(Object type) throws JspTagException {
-		this.type = AttributeUtils.trimNullIfEmpty(type);
+	public void setType(String type) throws JspTagException {
+		this.type = Strings.trimNullIfEmpty(type);
 	}
 
 	public void setMedia(String media) {
@@ -181,8 +182,8 @@ public class LinkTag
 					params,
 					addLastModified,
 					hreflangStr,
-					Coercion.toString(rel),
-					Coercion.toString(type),
+					Strings.trimNullIfEmpty(rel),
+					type,
 					media,
 					Coercion.toString(title)
 				)
@@ -204,9 +205,8 @@ public class LinkTag
 				link.hreflang(Coercion.toString(hreflang));
 			}
 			link
-				// TODO: These are coerced in both uses, change attribute to String
-				.rel(Coercion.toString(rel))
-				.type(Coercion.toString(type))
+				.rel(rel)
+				.type(type)
 				.media(media)
 				.title(title)
 				.__();

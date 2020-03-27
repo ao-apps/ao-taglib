@@ -57,7 +57,7 @@ public class ImgTag
 		StyleAttribute
 {
 
-	private Object id;
+	private String id;
 	private String src;
 	private URIParametersMap params;
 	private boolean absolute;
@@ -67,7 +67,7 @@ public class ImgTag
 	private Object height;
 	private Object alt;
 	private Object title;
-	private Object clazz;
+	private String clazz;
 	private Object style;
 	private String usemap;
 	private boolean ismap;
@@ -83,8 +83,8 @@ public class ImgTag
 	}
 
 	@Override
-	public void setId(Object id) throws JspTagException {
-		this.id = AttributeUtils.trimNullIfEmpty(id);
+	public void setId(String id) throws JspTagException {
+		this.id = id;
 	}
 
 	@Override
@@ -131,13 +131,13 @@ public class ImgTag
 	}
 
 	@Override
-	public Object getClazz() {
+	public String getClazz() {
 		return clazz;
 	}
 
 	@Override
-	public void setClazz(Object clazz) throws JspTagException {
-		this.clazz = AttributeUtils.trimNullIfEmpty(clazz);
+	public void setClazz(String clazz) throws JspTagException {
+		this.clazz = clazz;
 	}
 
 	@Override

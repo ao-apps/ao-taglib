@@ -22,8 +22,8 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaType;
+import com.aoindustries.lang.Strings;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.jsp.tagext.TagData;
 import javax.servlet.jsp.tagext.TagExtraInfo;
@@ -36,23 +36,25 @@ public class ScriptTagTEI extends TagExtraInfo {
 
 	@Override
 	public ValidationMessage[] validate(TagData data) {
-		Object o = data.getAttribute("type");
+		Object typeAttr = data.getAttribute("type");
 		if(
-			o != null
-			&& o != TagData.REQUEST_TIME_VALUE
+			typeAttr != null
+			&& typeAttr != TagData.REQUEST_TIME_VALUE
 		) {
-			String type = Coercion.toString(o).trim();
-			try {
-				MediaType mediaType = MediaType.getMediaTypeForContentType(type);
-				if(mediaType!=MediaType.JAVASCRIPT) {
+			String type = Strings.trimNullIfEmpty((String)typeAttr);
+			if(type != null) {
+				try {
+					MediaType mediaType = MediaType.getMediaTypeForContentType(type);
+					if(mediaType!=MediaType.JAVASCRIPT) {
+						return new ValidationMessage[] {
+							new ValidationMessage(data.getId(), ApplicationResources.accessor.getMessage("ScriptTag.unsupportedMediaType", type))
+						};
+					}
+				} catch(UnsupportedEncodingException err) {
 					return new ValidationMessage[] {
-						new ValidationMessage(data.getId(), ApplicationResources.accessor.getMessage("ScriptTag.unsupportedMediaType", type))
+						new ValidationMessage(data.getId(), err.getMessage())
 					};
 				}
-			} catch(UnsupportedEncodingException err) {
-				return new ValidationMessage[] {
-					new ValidationMessage(data.getId(), err.getMessage())
-				};
 			}
 		}
 		return null;

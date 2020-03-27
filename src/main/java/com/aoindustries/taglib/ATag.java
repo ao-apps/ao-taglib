@@ -29,6 +29,7 @@ import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextIn
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import static com.aoindustries.encoding.TextInXhtmlEncoder.textInXhtmlEncoder;
 import com.aoindustries.io.buffer.BufferResult;
+import com.aoindustries.lang.Strings;
 import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URIDecoder;
 import com.aoindustries.net.URIParametersMap;
@@ -69,18 +70,18 @@ public class ATag
 		OnmouseoutAttribute
 {
 
-	private Object id;
+	private String id;
 	private String href;
 	private MutableURIParameters params;
 	private boolean absolute;
 	private boolean canonical;
 	private AddLastModified addLastModified = AddLastModified.AUTO;
 	private Object hreflang;
-	private Object rel;
-	private Object type;
-	private Object target;
+	private String rel;
+	private String type;
+	private String target;
 	private Object title;
-	private Object clazz;
+	private String clazz;
 	private Object style;
 	private Object onclick;
 	private Object onmouseover;
@@ -97,8 +98,8 @@ public class ATag
 	}
 
 	@Override
-	public void setId(Object id) throws JspTagException {
-		this.id = AttributeUtils.trimNullIfEmpty(id);
+	public void setId(String id) throws JspTagException {
+		this.id = Strings.trimNullIfEmpty(id);
 	}
 
 	@Override
@@ -130,18 +131,18 @@ public class ATag
 	}
 
 	@Override
-	public void setRel(Object rel) throws JspTagException {
-		this.rel = AttributeUtils.trimNullIfEmpty(rel);
+	public void setRel(String rel) throws JspTagException {
+		this.rel = Strings.trimNullIfEmpty(rel);
 	}
 
 	@Override
-	public void setType(Object type) throws JspTagException {
-		this.type = AttributeUtils.trimNullIfEmpty(type);
+	public void setType(String type) throws JspTagException {
+		this.type = Strings.trimNullIfEmpty(type);
 	}
 
 	@Override
-	public void setTarget(Object target) throws JspTagException {
-		this.target = AttributeUtils.trimNullIfEmpty(target);
+	public void setTarget(String target) throws JspTagException {
+		this.target = Strings.trimNullIfEmpty(target);
 	}
 
 	@Override
@@ -150,13 +151,13 @@ public class ATag
 	}
 
 	@Override
-	public Object getClazz() {
+	public String getClazz() {
 		return clazz;
 	}
 
 	@Override
-	public void setClazz(Object clazz) throws JspTagException {
-		this.clazz = AttributeUtils.trimNullIfEmpty(clazz);
+	public void setClazz(String clazz) throws JspTagException {
+		this.clazz = Strings.trimNullIfEmpty(clazz);
 	}
 
 	@Override
@@ -201,7 +202,7 @@ public class ATag
 		out.write("<a");
 		if(id!=null) {
 			out.write(" id=\"");
-			Coercion.write(id, textInXhtmlAttributeEncoder, out);
+			encodeTextInXhtmlAttribute(id, out);
 			out.write('"');
 		}
 		String transformed;
@@ -225,17 +226,17 @@ public class ATag
 		}
 		if(rel!=null) {
 			out.write(" rel=\"");
-			Coercion.write(rel, textInXhtmlAttributeEncoder, out);
+			encodeTextInXhtmlAttribute(rel, out);
 			out.write('"');
 		}
 		if(type!=null) {
 			out.write(" type=\"");
-			Coercion.write(type, textInXhtmlAttributeEncoder, out);
+			encodeTextInXhtmlAttribute(type, out);
 			out.write('"');
 		}
 		if(target!=null) {
 			out.write(" target=\"");
-			Coercion.write(target, textInXhtmlAttributeEncoder, out);
+			encodeTextInXhtmlAttribute(target, out);
 			out.write('"');
 		}
 		if(title!=null) {
@@ -245,7 +246,7 @@ public class ATag
 		}
 		if(clazz!=null) {
 			out.write(" class=\"");
-			Coercion.write(clazz, textInXhtmlAttributeEncoder, out);
+			encodeTextInXhtmlAttribute(clazz, out);
 			out.write('"');
 		}
 		if(style!=null) {

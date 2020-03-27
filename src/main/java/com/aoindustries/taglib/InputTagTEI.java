@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2016, 2017, 2019  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2016, 2017, 2019, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,7 +22,7 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.Coercion;
+import com.aoindustries.lang.Strings;
 import javax.servlet.jsp.tagext.TagData;
 import javax.servlet.jsp.tagext.TagExtraInfo;
 import javax.servlet.jsp.tagext.ValidationMessage;
@@ -39,8 +39,8 @@ public class InputTagTEI extends TagExtraInfo {
 			typeAttr != null
 			&& typeAttr != TagData.REQUEST_TIME_VALUE
 		) {
-			String type = Coercion.toString(typeAttr).trim();
-			if(!InputTag.isValidType(type)) {
+			String type = Strings.trimNullIfEmpty((String)typeAttr);
+			if(type != null && !InputTag.isValidType(type)) {
 				return new ValidationMessage[] {
 					new ValidationMessage(data.getId(), ApplicationResources.accessor.getMessage("InputTag.type.invalid", type))
 				};

@@ -26,10 +26,12 @@ import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.Doctype;
 import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaScriptInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.MediaType;
+import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.html.Html;
 import com.aoindustries.html.servlet.HtmlEE;
 import com.aoindustries.io.buffer.BufferResult;
+import com.aoindustries.lang.Strings;
 import com.aoindustries.net.AnyURI;
 import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URIEncoder;
@@ -76,12 +78,12 @@ public class FormTag
 	}
 
 	private String method = "get";
-	private Object id;
+	private String id;
 	private String action;
 	private MutableURIParameters params;
-	private Object target;
-	private Object enctype;
-	private Object clazz;
+	private String target;
+	private String enctype;
+	private String clazz;
 	private Object style;
 	private Object onsubmit;
 
@@ -103,8 +105,8 @@ public class FormTag
 	}
 
 	@Override
-	public void setId(Object id) throws JspTagException {
-		this.id = AttributeUtils.trimNullIfEmpty(id);
+	public void setId(String id) throws JspTagException {
+		this.id = Strings.trimNullIfEmpty(id);
 	}
 
 	@Override
@@ -119,23 +121,23 @@ public class FormTag
 	}
 
 	@Override
-	public void setTarget(Object target) throws JspTagException {
-		this.target = AttributeUtils.trimNullIfEmpty(target);
+	public void setTarget(String target) throws JspTagException {
+		this.target = Strings.trimNullIfEmpty(target);
 	}
 
 	@Override
-	public void setEnctype(Object enctype) throws JspTagException {
-		this.enctype = AttributeUtils.trimNullIfEmpty(enctype);
+	public void setEnctype(String enctype) throws JspTagException {
+		this.enctype = Strings.trimNullIfEmpty(enctype);
 	}
 
 	@Override
-	public Object getClazz() {
+	public String getClazz() {
 		return clazz;
 	}
 
 	@Override
-	public void setClazz(Object clazz) throws JspTagException {
-		this.clazz = AttributeUtils.trimNullIfEmpty(clazz);
+	public void setClazz(String clazz) throws JspTagException {
+		this.clazz = Strings.trimNullIfEmpty(clazz);
 	}
 
 	@Override
@@ -181,7 +183,7 @@ public class FormTag
 		out.write('"');
 		if(id!=null) {
 			out.write(" id=\"");
-			Coercion.write(id, textInXhtmlAttributeEncoder, out);
+			encodeTextInXhtmlAttribute(id, out);
 			out.write('"');
 		}
 		Map<String,List<String>> actionParams;
@@ -207,17 +209,17 @@ public class FormTag
 		}
 		if(target!=null) {
 			out.write(" target=\"");
-			Coercion.write(target, textInXhtmlAttributeEncoder, out);
+			encodeTextInXhtmlAttribute(target, out);
 			out.write('"');
 		}
 		if(enctype!=null) {
 			out.write(" enctype=\"");
-			Coercion.write(enctype, textInXhtmlAttributeEncoder, out);
+			encodeTextInXhtmlAttribute(enctype, out);
 			out.write('"');
 		}
 		if(clazz!=null) {
 			out.write(" class=\"");
-			Coercion.write(clazz, textInXhtmlAttributeEncoder, out);
+			encodeTextInXhtmlAttribute(clazz, out);
 			out.write('"');
 		}
 		if(style!=null) {

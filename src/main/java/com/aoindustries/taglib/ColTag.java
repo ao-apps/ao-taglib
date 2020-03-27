@@ -48,10 +48,10 @@ public class ColTag
 		return MediaType.XHTML;
 	}
 
-	private Object id;
+	private String id;
 	@Override
-	public void setId(Object id) throws JspTagException {
-		this.id = AttributeUtils.trimNullIfEmpty(id);
+	public void setId(String id) throws JspTagException {
+		this.id = id;
 	}
 
 	private int span;
@@ -59,15 +59,15 @@ public class ColTag
 		this.span = span;
 	}
 
-	private Object clazz;
+	private String clazz;
 	@Override
-	public Object getClazz() {
+	public String getClazz() {
 		return clazz;
 	}
 
 	@Override
-	public void setClazz(Object clazz) throws JspTagException {
-		this.clazz = AttributeUtils.trimNullIfEmpty(clazz);
+	public void setClazz(String clazz) throws JspTagException {
+		this.clazz = clazz;
 	}
 
 	private Object style;

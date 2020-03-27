@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2019  AO Industries, Inc.
+ * Copyright (C) 2019, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,9 +22,9 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaType;
-import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
+import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
+import com.aoindustries.lang.Strings;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -39,7 +39,7 @@ public class MapTag
 		IdAttribute
 {
 
-	private Object id;
+	private String id;
 
 	@Override
 	public MediaType getContentType() {
@@ -47,17 +47,18 @@ public class MapTag
 	}
 
 	@Override
-	public void setId(Object id) throws JspTagException {
-		this.id = AttributeUtils.trimNullIfEmpty(id);
+	public void setId(String id) throws JspTagException {
+		this.id = Strings.trimNullIfEmpty(id);
 	}
 
 	@Override
 	protected void doTag(Writer out) throws JspException, IOException {
 		if(id == null) throw new AttributeRequiredException("id");
+		// TODO: Include id/name by doctype
 		out.write("<map id=\"");
-		Coercion.write(id, textInXhtmlAttributeEncoder, out);
+		encodeTextInXhtmlAttribute(id, out);
 		out.write("\" name=\"");
-		Coercion.write(id, textInXhtmlAttributeEncoder, out);
+		encodeTextInXhtmlAttribute(id, out);
 		out.write("\">");
 		super.doTag(out);
 		out.write("</map>");

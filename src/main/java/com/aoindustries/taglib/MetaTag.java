@@ -27,6 +27,7 @@ import com.aoindustries.encoding.MediaType;
 import com.aoindustries.html.Html;
 import com.aoindustries.html.servlet.HtmlEE;
 import com.aoindustries.io.buffer.BufferResult;
+import com.aoindustries.lang.Strings;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
@@ -45,10 +46,10 @@ public class MetaTag
 		ContentAttribute
 {
 
-	private Object name;
-	private Object httpEquiv;
-	private Object itemprop;
-	private Object charset;
+	private String name;
+	private String httpEquiv;
+	private String itemprop;
+	private Object charset; // TODO: Support java Charset, too
 	private Object content;
 
 	@Override
@@ -62,16 +63,16 @@ public class MetaTag
 	}
 
 	@Override
-	public void setName(Object name) throws JspTagException {
-		this.name = AttributeUtils.trimNullIfEmpty(name);
+	public void setName(String name) throws JspTagException {
+		this.name = name;
 	}
 
-	public void setHttpEquiv(Object httpEquiv) throws JspTagException {
-		this.httpEquiv = AttributeUtils.trimNullIfEmpty(httpEquiv);
+	public void setHttpEquiv(String httpEquiv) throws JspTagException {
+		this.httpEquiv = httpEquiv;
 	}
 
-	public void setItemprop(Object itemprop) throws JspTagException {
-		this.itemprop = AttributeUtils.trimNullIfEmpty(itemprop);
+	public void setItemprop(String itemprop) throws JspTagException {
+		this.itemprop = Strings.trimNullIfEmpty(itemprop);
 	}
 
 	public void setCharset(Object charset) throws JspTagException {
@@ -90,9 +91,9 @@ public class MetaTag
 		if(parent!=null) {
 			((MetasAttribute)parent).addMeta(
 				new Meta(
-					Coercion.toString(name),
-					Coercion.toString(httpEquiv),
-					Coercion.toString(itemprop),
+					Strings.trimNullIfEmpty(name),
+					Strings.trim(httpEquiv),
+					itemprop,
 					Coercion.toString(charset),
 					Coercion.toString(content)
 				)
@@ -107,15 +108,12 @@ public class MetaTag
 				out
 			);
 			html.meta()
-				// TOOD: name to String via Meta.name(String)
-				.attribute("name", name)
-				// TOOD: httpEquiv to String via Meta.httpEquiv(String)
-				.attribute("http-equiv", httpEquiv)
+				.name(name)
+				.httpEquiv(httpEquiv)
 				// TODO: Create a global "itemprop" in ao-fluent-html
 				.attribute("itemprop", itemprop)
 				// TOOD: charset to String via Meta.charset(String)
 				.attribute("charset", charset)
-				// TODO: Might be able to perform markup for some types of content (keywords, description, ...)?
 				.content(content)
 				.__();
 		}

@@ -30,6 +30,7 @@ import com.aoindustries.html.Html;
 import com.aoindustries.html.Input;
 import com.aoindustries.html.servlet.HtmlEE;
 import com.aoindustries.io.buffer.BufferResult;
+import com.aoindustries.lang.Strings;
 import com.aoindustries.net.URIParametersMap;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.servlet.lastmodified.AddLastModified;
@@ -124,26 +125,24 @@ public class InputTag
 		return MediaType.XHTML;
 	}
 
-	private Object id;
+	private String id;
 	@Override
-	public void setId(Object id) throws JspTagException {
-		this.id = AttributeUtils.trimNullIfEmpty(id);
+	public void setId(String id) throws JspTagException {
+		this.id = id;
 	}
 
-	private Object type;
-	private String typeString;
+	private String type;
 	@Override
-	public void setType(Object type) throws JspTagException {
-		String typeStr = Coercion.toString(AttributeUtils.trimNullIfEmpty(type));
-		if(!isValidType(typeStr)) throw new LocalizedJspTagException(ApplicationResources.accessor, "InputTag.type.invalid", typeStr);
-		this.type = type;
-		this.typeString = typeStr;
+	public void setType(String type) throws JspTagException {
+		String typeStr = Strings.trimNullIfEmpty(type);
+		if(typeStr != null && !isValidType(typeStr)) throw new LocalizedJspTagException(ApplicationResources.accessor, "InputTag.type.invalid", typeStr);
+		this.type = typeStr;
 	}
 
-	private Object name;
+	private String name;
 	@Override
-	public void setName(Object name) throws JspTagException {
-		this.name = AttributeUtils.nullIfEmpty(name);
+	public void setName(String name) throws JspTagException {
+		this.name = name;
 	}
 
 	private Object value;
@@ -259,15 +258,15 @@ public class InputTag
 		this.title = AttributeUtils.trimNullIfEmpty(title);
 	}
 
-	private Object clazz;
+	private String clazz;
 	@Override
-	public Object getClazz() {
+	public String getClazz() {
 		return clazz;
 	}
 
 	@Override
-	public void setClazz(Object clazz) throws JspTagException {
-		this.clazz = AttributeUtils.trimNullIfEmpty(clazz);
+	public void setClazz(String clazz) throws JspTagException {
+		this.clazz = clazz;
 	}
 
 	private Object style;
@@ -314,7 +313,7 @@ public class InputTag
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		if(type==null) throw new AttributeRequiredException("type");
 		if(value==null) setValue(capturedBody.trim());
-		if("image".equals(type)) {
+		if(Input.Dynamic.Type.IMAGE.toString().equalsIgnoreCase(type)) {
 			if(alt == null) throw new AttributeRequiredException("alt");
 		}
 		PageContext pageContext = (PageContext)getJspContext();
@@ -326,7 +325,7 @@ public class InputTag
 		);
 		Input.Dynamic input = html.input()
 			.id(id)
-			.type(typeString)
+			.type(type)
 			.name(name)
 			.value(value)
 			.onclick(onclick);

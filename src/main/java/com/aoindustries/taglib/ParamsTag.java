@@ -43,7 +43,7 @@ public class ParamsTag
 	implements NameAttribute
 {
 
-	private Object name;
+	private String name;
 	private String exclude = null;
 	private WildcardPatternMatcher excludeMatcher = WildcardPatternMatcher.matchNone();
 	private Object values;
@@ -56,7 +56,7 @@ public class ParamsTag
 	}
 
 	@Override
-	public void setName(Object name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
@@ -136,29 +136,28 @@ public class ParamsTag
 				if(!excludeMatcher.isEmpty()) {
 					throw new LocalizedJspTagException(ApplicationResources.accessor, "ParamsTag.excludesNotAllowedWithName");
 				}
-				final String paramName = Coercion.toString(name);
 				if(values instanceof Iterable<?>) {
 					ParamUtils.addIterableParams(
 						paramsAttribute,
-						paramName,
+						name,
 						(Iterable<?>)values
 					);
 				} else if(values instanceof Iterator<?>) {
 					ParamUtils.addIteratorParams(
 						paramsAttribute,
-						paramName,
+						name,
 						(Iterator<?>)values
 					);
 				} else if(values instanceof Enumeration<?>) {
 					ParamUtils.addEnumerationParams(
 						paramsAttribute,
-						paramName,
+						name,
 						(Enumeration<?>)values
 					);
 				} else if(values.getClass().isArray()) {
 					ParamUtils.addArrayParams(
 						paramsAttribute,
-						paramName,
+						name,
 						values
 					);
 				} else if(

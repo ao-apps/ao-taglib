@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2013, 2015, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2013, 2015, 2016, 2017, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,7 +22,6 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.buffer.BufferResult;
 import java.io.IOException;
@@ -39,7 +38,7 @@ public class ArgTag
 		ValueAttribute
 {
 
-	private Object name;
+	private String name;
 	private Object value;
 
 	@Override
@@ -53,7 +52,7 @@ public class ArgTag
 	}
 
 	@Override
-	public void setName(Object name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
@@ -67,6 +66,6 @@ public class ArgTag
 		ArgsAttribute argsAttribute = AttributeUtils.findAttributeParent("arg", this, "args", ArgsAttribute.class);
 		if(name==null) throw new AttributeRequiredException("name");
 		if(value==null) setValue(capturedBody.trim());
-		argsAttribute.addArg(Coercion.toString(name), value);
+		argsAttribute.addArg(name, value);
 	}
 }

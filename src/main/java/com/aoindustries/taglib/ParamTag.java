@@ -22,7 +22,6 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.buffer.BufferResult;
 import java.io.IOException;
@@ -39,7 +38,7 @@ public class ParamTag
 		ValueAttribute
 {
 
-	private Object name;
+	private String name;
 	private Object value;
 
 	@Override
@@ -55,7 +54,7 @@ public class ParamTag
 	}
 
 	@Override
-	public void setName(Object name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
@@ -70,7 +69,7 @@ public class ParamTag
 		ParamUtils.addParam(
 			"param",
 			this,
-			Coercion.toString(name),
+			name,
 			value!=null ? value : capturedBody.trim()
 		);
 	}

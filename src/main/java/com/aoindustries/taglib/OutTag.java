@@ -25,6 +25,7 @@ package com.aoindustries.taglib;
 import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.Writable;
+import com.aoindustries.lang.Strings;
 import com.aoindustries.util.i18n.BundleLookupMarkup;
 import com.aoindustries.util.i18n.BundleLookupThreadContext;
 import com.aoindustries.util.i18n.MarkupType;
@@ -90,19 +91,14 @@ public class OutTag
 	 * </p>
 	 */
 	@Override
-	public void setType(Object type) throws JspTagException {
-		MediaType newMediaType;
-		if(type instanceof MediaType) {
-			newMediaType = (MediaType)type;
-		} else {
-			String typeStr = Coercion.toString(type).trim();
-			newMediaType = MediaType.getMediaTypeByName(typeStr);
-			if(newMediaType==null) {
-				try {
-					newMediaType = MediaType.getMediaTypeForContentType(typeStr);
-				} catch(UnsupportedEncodingException e) {
-					throw new JspTagException(e);
-				}
+	public void setType(String type) throws JspTagException {
+		String typeStr = Strings.trim(type);
+		MediaType newMediaType = MediaType.getMediaTypeByName(typeStr);
+		if(newMediaType==null) {
+			try {
+				newMediaType = MediaType.getMediaTypeForContentType(typeStr);
+			} catch(UnsupportedEncodingException e) {
+				throw new JspTagException(e);
 			}
 		}
 		this.mediaType = newMediaType;

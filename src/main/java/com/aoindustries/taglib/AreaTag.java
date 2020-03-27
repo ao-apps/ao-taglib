@@ -27,6 +27,7 @@ import com.aoindustries.encoding.MediaType;
 import com.aoindustries.html.Area;
 import com.aoindustries.html.Html;
 import com.aoindustries.html.servlet.HtmlEE;
+import com.aoindustries.lang.Strings;
 import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URIParametersMap;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
@@ -64,7 +65,7 @@ public class AreaTag
 		OnmouseoutAttribute
 {
 
-	private Object id;
+	private String id;
 	private String shape;
 	private String coords;
 	private String href;
@@ -73,12 +74,12 @@ public class AreaTag
 	private boolean canonical;
 	private AddLastModified addLastModified = AddLastModified.AUTO;
 	private Object hreflang;
-	private Object rel;
-	private Object type;
-	private Object target;
+	private String rel;
+	private String type;
+	private String target;
 	private Object alt;
 	private Object title;
-	private Object clazz;
+	private String clazz;
 	private Object style;
 	private Object onclick;
 	private Object onmouseover;
@@ -107,8 +108,8 @@ public class AreaTag
 	}
 
 	@Override
-	public void setId(Object id) throws JspTagException {
-		this.id = AttributeUtils.trimNullIfEmpty(id);
+	public void setId(String id) throws JspTagException {
+		this.id = id;
 	}
 
 	public static boolean isValidShape(String shape) {
@@ -166,18 +167,18 @@ public class AreaTag
 	}
 
 	@Override
-	public void setRel(Object rel) throws JspTagException {
-		this.rel = AttributeUtils.trimNullIfEmpty(rel);
+	public void setRel(String rel) throws JspTagException {
+		this.rel = rel;
 	}
 
 	@Override
-	public void setType(Object type) throws JspTagException {
-		this.type = AttributeUtils.trimNullIfEmpty(type);
+	public void setType(String type) throws JspTagException {
+		this.type = Strings.trimNullIfEmpty(type);
 	}
 
 	@Override
-	public void setTarget(Object target) throws JspTagException {
-		this.target = AttributeUtils.trimNullIfEmpty(target);
+	public void setTarget(String target) throws JspTagException {
+		this.target = Strings.trimNullIfEmpty(target);
 	}
 
 	@Override
@@ -191,13 +192,13 @@ public class AreaTag
 	}
 
 	@Override
-	public Object getClazz() {
+	public String getClazz() {
 		return clazz;
 	}
 
 	@Override
-	public void setClazz(Object clazz) throws JspTagException {
-		this.clazz = AttributeUtils.trimNullIfEmpty(clazz);
+	public void setClazz(String clazz) throws JspTagException {
+		this.clazz = clazz;
 	}
 
 	@Override
@@ -248,8 +249,7 @@ public class AreaTag
 			area.hreflang(Coercion.toString(hreflang));
 		}
 		area
-			// TODO: These are coerced in both uses, change attribute to String
-			.rel(Coercion.toString(rel))
+			.rel(rel)
 			// TODO: type to Area (or remove entirely since this part of the standard is uncertain and currently unimplemented by all browsers?)
 			.attribute("type", type)
 			// TODO: target to Area

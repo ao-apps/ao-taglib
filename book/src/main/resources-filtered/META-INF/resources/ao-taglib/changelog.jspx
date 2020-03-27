@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2020-03-07T06:01:29-0600"
+		dateModified="2020-03-26T22:27:21-05:00"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -125,7 +125,24 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 						<core:link book="/ao-web-resources" page="/index.jspx" />, if one is not
 						already present on the current request.
 					</li>
+					<li>
+						Converted some attributes from <ao:a rel="nofollow" href="@{javadoc.link.javase}java/lang/Object.html">Object</ao:a>
+						to <ao:a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</ao:a>:
+						<ol>
+							<li><code>*.class</code></li>
+							<li><code>*.enctype</code></li>
+							<li><code>*.httpEquiv</code></li>
+							<li><code>*.id</code></li>
+							<li><code>*.itemprop</code></li>
+							<li><code>*.name</code></li>
+							<li><code>*.rel</code></li>
+							<li><code>*.target</code></li>
+							<li><code>*.type</code></li>
+						</ol>
+					</li>
 					<!-- TODO:
+					<li>No more getters on attribute interfaces, unless is used somewhere</li>
+					<li>No more nested tags for simply setting attributes: use jsp:attribute instead</li>
 					<li>Support script async and defer attributes</li>
 					<li>Support autofocus and required attributes (textarea, input, ...)</li>
 					<li>Support other nice HTML 5 features of textarea/input)</li>
