@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2020-03-26T22:27:21-05:00"
+		dateModified="2020-03-27T00:59:46-05:00"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -53,94 +53,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 				artifactId="@{documented.artifactId}"
 				scmUrl="@{project.scm.url}"
 			>
+				<!-- TODO:
 				<ul>
-					<li>Minimum Java version changed from 1.7 to 1.8.</li>
-					<li>
-						Reduced use of property substitutions in <code>pom.xml</code>.
-						This is to help 3rd-party parsers that fail to perform full Maven-compatible substitutions.
-					</li>
-					<li>
-						Moved <code>HtmlTag.useXhtmlContentType(…)</code> to new
-						<ao:a href="https://aoindustries.com/ao-fluent-html/apidocs/com/aoindustries/html/Html.html">Html</ao:a> class,
-						along with related constants.
-					</li>
-					<li>Now writing XML declaration when both serving as XHTML and response encoding is not <code>UTF-8</code>.</li>
-					<li>Now writing HTML or XHTML doctype based on current <code>Serialization</code>.</li>
-					<li>
-						Changed <core:link page="ao.tld/tag-html" /> attribute <code>forceHtml</code> to <code>serialization</code>,
-						which now takes values <code>SGML</code>, <code>XML</code>, or <code>auto</code> (the default).
-						When <code>auto</code>, the following steps are performed to resolve the serialization:
-						<ol>
-							<li>Use the serialization active on the current request.</li>
-							<li>
-								Use the application <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</ao:a>
-								<code>com.aoindustries.encoding.Serialization.default</code>
-								that allows an application to control the selection of HTML versus XHTML.
-							</li>
-							<li>
-								When this context-param is unspecified or <code>auto</code>,
-								determine the serialization based on the client's <code>Accept</code> header.
-							</li>
-						</ol>
-					</li>
-					<li>
-						<core:link page="ao.tld/tag-html" /> attribute <code>doctype</code> now has a new value <code>default</code> (the default).
-						When <code>default</code>, the following steps are performed to resolve the doctype:
-						<ol>
-							<li>Use the doctype active on the current request.</li>
-							<li>
-								Use the application <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</ao:a>
-								<code>com.aoindustries.encoding.Doctype.default</code>
-								that allows an application to control the default doctype.
-							</li>
-							<li>
-								When this context-param is unspecified or <code>default</code>,
-								defaults to <code>HTML5</code>, which results in a breaking change
-								(this tag used to default to <code>STRICT</code>).
-							</li>
-						</ol>
-					</li>
-					<li>
-						Now outputting HTML or XHTML based on the current response content type.
-						This should eliminate validator warnings when used as HTML.
-					</li>
-					<li>New tag <core:link page="ao.tld/tag-br" /> that writes a line break in the current serialization.</li>
-					<li>New tag <core:link page="ao.tld/tag-hr" /> that writes a thematic break (horizontal rule) in the current serialization.</li>
-					<li>
-						New function <core:link page="ao.tld/function-getSerialization" /> to get the current
-						<ao:a href="https://aoindustries.com/ao-encoding/com/aoindustries/encoding/Serialization.html">Serialization</ao:a> enum.</li>
-					<li>
-						New function <core:link page="ao.tld/function-getDoctype" /> to get the current
-						<ao:a href="https://aoindustries.com/ao-encoding/com/aoindustries/encoding/Doctype.html">Doctype</ao:a> enum.
-					</li>
-					<li>Added in-context translation markup to script attributes, like <code>onload</code>.</li>
-					<li>Avoiding unnecessary coercion to <code>String</code> when there is no active in-context translation.</li>
-					<li>Avoiding unnecessary coercion to <code>String</code> from <code>char[]</code>.</li>
-					<li><code>hreflang</code> attributes now support <code>Locale</code> instances via <code>Locale.toLanguageTag()</code> instead of <code>Locale.toString()</code>.</li>
-					<li>New tag <core:link page="ao.tld/tag-col" /> that writes a col (column) in the current serialization.</li>
-					<li><core:link page="ao.tld/tag-bundle" /> implementation changed to <code>TagSupport</code> for compatibility with JSP scripting.</li>
-					<li><core:link page="ao.tld/tag-message" /> has new <code>bundle</code> attribute that allows specifying for one-off.</li>
-					<li>
-						The <core:link page="ao.tld/tag-html" /> now establishes a page context for
-						<core:link book="/ao-web-resources" page="/index.jspx" />, if one is not
-						already present on the current request.
-					</li>
-					<li>
-						Converted some attributes from <ao:a rel="nofollow" href="@{javadoc.link.javase}java/lang/Object.html">Object</ao:a>
-						to <ao:a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</ao:a>:
-						<ol>
-							<li><code>*.class</code></li>
-							<li><code>*.enctype</code></li>
-							<li><code>*.httpEquiv</code></li>
-							<li><code>*.id</code></li>
-							<li><code>*.itemprop</code></li>
-							<li><code>*.name</code></li>
-							<li><code>*.rel</code></li>
-							<li><code>*.target</code></li>
-							<li><code>*.type</code></li>
-						</ol>
-					</li>
-					<!-- TODO:
 					<li>No more getters on attribute interfaces, unless is used somewhere</li>
 					<li>No more nested tags for simply setting attributes: use jsp:attribute instead</li>
 					<li>Support script async and defer attributes</li>
@@ -154,10 +68,108 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 
 						nmw-email-taglib might be able to establish a proper context based on the content type of the content for a message, for example.
 					</li>
-					-->
 				</ul>
+				-->
 			</changelog:release>
 		</c:if>
+
+		<changelog:release
+			projectName="@{documented.name}"
+			version="5.0.0"
+			datePublished="2020-03-27T00:59:46-05:00"
+			groupId="@{project.groupId}"
+			artifactId="@{documented.artifactId}"
+			scmUrl="@{project.scm.url}"
+		>
+			<ul>
+				<li>Minimum Java version changed from 1.7 to 1.8.</li>
+				<li>
+					Reduced use of property substitutions in <code>pom.xml</code>.
+					This is to help 3rd-party parsers that fail to perform full Maven-compatible substitutions.
+				</li>
+				<li>
+					Moved <code>HtmlTag.useXhtmlContentType(…)</code> to new
+					<ao:a href="https://aoindustries.com/ao-fluent-html/apidocs/com/aoindustries/html/Html.html">Html</ao:a> class,
+					along with related constants.
+				</li>
+				<li>Now writing XML declaration when both serving as XHTML and response encoding is not <code>UTF-8</code>.</li>
+				<li>Now writing HTML or XHTML doctype based on current <code>Serialization</code>.</li>
+				<li>
+					Changed <core:link page="ao.tld/tag-html" /> attribute <code>forceHtml</code> to <code>serialization</code>,
+					which now takes values <code>SGML</code>, <code>XML</code>, or <code>auto</code> (the default).
+					When <code>auto</code>, the following steps are performed to resolve the serialization:
+					<ol>
+						<li>Use the serialization active on the current request.</li>
+						<li>
+							Use the application <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</ao:a>
+							<code>com.aoindustries.encoding.Serialization.default</code>
+							that allows an application to control the selection of HTML versus XHTML.
+						</li>
+						<li>
+							When this context-param is unspecified or <code>auto</code>,
+							determine the serialization based on the client's <code>Accept</code> header.
+						</li>
+					</ol>
+				</li>
+				<li>
+					<core:link page="ao.tld/tag-html" /> attribute <code>doctype</code> now has a new value <code>default</code> (the default).
+					When <code>default</code>, the following steps are performed to resolve the doctype:
+					<ol>
+						<li>Use the doctype active on the current request.</li>
+						<li>
+							Use the application <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</ao:a>
+							<code>com.aoindustries.encoding.Doctype.default</code>
+							that allows an application to control the default doctype.
+						</li>
+						<li>
+							When this context-param is unspecified or <code>default</code>,
+							defaults to <code>HTML5</code>, which results in a breaking change
+							(this tag used to default to <code>STRICT</code>).
+						</li>
+					</ol>
+				</li>
+				<li>
+					Now outputting HTML or XHTML based on the current response content type.
+					This should eliminate validator warnings when used as HTML.
+				</li>
+				<li>New tag <core:link page="ao.tld/tag-br" /> that writes a line break in the current serialization.</li>
+				<li>New tag <core:link page="ao.tld/tag-hr" /> that writes a thematic break (horizontal rule) in the current serialization.</li>
+				<li>
+					New function <core:link page="ao.tld/function-getSerialization" /> to get the current
+					<ao:a href="https://aoindustries.com/ao-encoding/com/aoindustries/encoding/Serialization.html">Serialization</ao:a> enum.</li>
+				<li>
+					New function <core:link page="ao.tld/function-getDoctype" /> to get the current
+					<ao:a href="https://aoindustries.com/ao-encoding/com/aoindustries/encoding/Doctype.html">Doctype</ao:a> enum.
+				</li>
+				<li>Added in-context translation markup to script attributes, like <code>onload</code>.</li>
+				<li>Avoiding unnecessary coercion to <code>String</code> when there is no active in-context translation.</li>
+				<li>Avoiding unnecessary coercion to <code>String</code> from <code>char[]</code>.</li>
+				<li><code>hreflang</code> attributes now support <code>Locale</code> instances via <code>Locale.toLanguageTag()</code> instead of <code>Locale.toString()</code>.</li>
+				<li>New tag <core:link page="ao.tld/tag-col" /> that writes a col (column) in the current serialization.</li>
+				<li><core:link page="ao.tld/tag-bundle" /> implementation changed to <code>TagSupport</code> for compatibility with JSP scripting.</li>
+				<li><core:link page="ao.tld/tag-message" /> has new <code>bundle</code> attribute that allows specifying for one-off.</li>
+				<li>
+					The <core:link page="ao.tld/tag-html" /> now establishes a page context for
+					<core:link book="/ao-web-resources" page="/index.jspx" />, if one is not
+					already present on the current request.
+				</li>
+				<li>
+					Converted some attributes from <ao:a rel="nofollow" href="@{javadoc.link.javase}java/lang/Object.html">Object</ao:a>
+					to <ao:a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</ao:a>:
+					<ol>
+						<li><code>*.class</code></li>
+						<li><code>*.enctype</code></li>
+						<li><code>*.httpEquiv</code></li>
+						<li><code>*.id</code></li>
+						<li><code>*.itemprop</code></li>
+						<li><code>*.name</code></li>
+						<li><code>*.rel</code></li>
+						<li><code>*.target</code></li>
+						<li><code>*.type</code></li>
+					</ol>
+				</li>
+			</ul>
+		</changelog:release>
 
 		<changelog:release
 			projectName="@{documented.name}"
