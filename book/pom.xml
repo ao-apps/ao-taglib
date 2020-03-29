@@ -164,6 +164,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 			<groupId>com.aoindustries</groupId><artifactId>ao-lang</artifactId><version>4.1.0${POST-SNAPSHOT}</version>
 		</dependency>
 		<dependency>
+			<!-- Mapping for *.tld -->
+			<groupId>com.aoindustries</groupId><artifactId>ao-mime-mappings</artifactId><version>1.0.0${POST-SNAPSHOT}</version>
+		</dependency>
+		<dependency>
 			<!-- Styles used in ao.tld -->
 			<groupId>com.aoindustries</groupId><artifactId>ao-style</artifactId><version>1.0.0${POST-SNAPSHOT}</version>
 		</dependency>
