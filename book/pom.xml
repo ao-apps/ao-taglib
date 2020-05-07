@@ -29,7 +29,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		<relativePath>../../ao-oss-parent/pom.xml</relativePath>
 	</parent>
 
-	<groupId>com.aoindustries</groupId><artifactId>ao-taglib-book</artifactId><version>5.0.0-SNAPSHOT</version>
+	<groupId>com.aoindustries</groupId><artifactId>ao-taglib-book</artifactId><version>5.0.1-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 
 	<properties>
@@ -73,7 +73,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 						<configuration>
 							<artifactItems>
 								<artifactItem>
-									<groupId>com.aoindustries</groupId><artifactId>ao-taglib</artifactId><version>5.0.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
+									<groupId>com.aoindustries</groupId><artifactId>ao-taglib</artifactId><version>5.0.1-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
 									<type>jar</type>
 									<includes>META-INF/ao.tld</includes>
 								</artifactItem>
@@ -173,7 +173,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.aoindustries</groupId><artifactId>ao-taglib</artifactId><version>5.0.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
+			<groupId>com.aoindustries</groupId><artifactId>ao-taglib</artifactId><version>5.0.1-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
@@ -198,7 +198,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		</dependency>
 		<!-- Dependency for dependencyversion-maven-plugin only -->
 		<dependency>
-			<groupId>com.aoindustries</groupId><artifactId>ao-taglib</artifactId><version>5.0.0-SNAPSHOT</version>
+			<groupId>com.aoindustries</groupId><artifactId>ao-taglib</artifactId><version>5.0.1-SNAPSHOT</version>
 			<type>pom</type>
 			<scope>provided</scope>
 			<optional>true</optional>
