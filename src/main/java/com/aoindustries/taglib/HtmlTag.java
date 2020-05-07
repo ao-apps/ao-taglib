@@ -118,6 +118,13 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 	}
 
 	private String clazz;
+	/**
+	 * Getter required because without it, we get the exception:
+	 * <pre>Unable to find setter method for attribute: class</pre>
+	 */
+	public String getClazz() {
+		return clazz;
+	}
 	public void setClazz(String clazz) {
 		this.clazz = AttributeUtils.trimNullIfEmpty(clazz);
 	}
