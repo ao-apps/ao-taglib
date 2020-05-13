@@ -29,7 +29,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		<relativePath>../ao-oss-parent/pom.xml</relativePath>
 	</parent>
 
-	<groupId>com.aoindustries</groupId><artifactId>ao-taglib</artifactId><version>5.0.1</version>
+	<groupId>com.aoindustries</groupId><artifactId>ao-taglib</artifactId><version>5.0.1-POST-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 
 	<properties>
@@ -47,7 +47,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		<connection>scm:git:git://github.com/aoindustries/ao-taglib.git</connection>
 		<developerConnection>scm:git:git@github.com:aoindustries/ao-taglib.git</developerConnection>
 		<url>https://github.com/aoindustries/ao-taglib</url>
-		<tag>ao-taglib-5.0.1</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<issueManagement>
