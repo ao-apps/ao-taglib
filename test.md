@@ -22,12 +22,12 @@ important because they include much of the tools that would aid someone in
 reverse-engineering the software.
 
 ## Procedure to publish a new release of the software
-1. Update build number in
+1. Update build number in  
    `../summarizer-webservices-database/src/main/resources/com/essentialmining/versions.properties`
 
-1. Add to `ReleaseNotes.txt`
+2. Add to `ReleaseNotes.txt`
 
-1. Update dev database
+3. Update dev database
 
 4. `ant clean`
 
@@ -47,7 +47,7 @@ reverse-engineering the software.
 
 10. Test production, including download and installation of personal and enterprise editions
 
-11. Set build number to "0" for development mode in
+11. Set build number to "0" for development mode in  
     `../summarizer-webservices-database/src/main/resources/com/essentialmining/versions.properties`
 
 12. Commit/push to Git on master branch
