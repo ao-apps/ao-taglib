@@ -25,9 +25,9 @@ reverse-engineering the software.
 1. Update build number in
    `../summarizer-webservices-database/src/main/resources/com/essentialmining/versions.properties`
 
-2. Add to `ReleaseNotes.txt`
+1. Add to `ReleaseNotes.txt`
 
-3. Update dev database
+1. Update dev database
 
 4. `ant clean`
 
@@ -37,9 +37,9 @@ reverse-engineering the software.
 
 7. Commit to Git: status, commit, tag, push, and merge release branch (TODO: Document)
 
-    a. `ant cvs.diff`
-    b. `cvs ...`
-    c. `ant cvs.tag -Dcvs.tag.tag="build_${build.number}"`
+    1. `ant cvs.diff`
+    2. `cvs ...`
+    3. `ant cvs.tag -Dcvs.tag.tag="build_${build.number}"`
 
 8. Update production database
 
