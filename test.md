@@ -22,28 +22,28 @@ important because they include much of the tools that would aid someone in
 reverse-engineering the software.
 
 ## Procedure to publish a new release of the software
-1. Update build number in  
-   `../summarizer-webservices-database/src/main/resources/com/essentialmining/versions.properties`
+1.  Update build number in  
+    `../summarizer-webservices-database/src/main/resources/com/essentialmining/versions.properties`
 
-2. Add to `ReleaseNotes.txt`
+2.  Add to `ReleaseNotes.txt`
 
-3. Update dev database
+3.  Update dev database
 
-4. `ant clean`
+4.  `ant clean`
 
-5. `ant deploy.dev`
+5.  `ant deploy.dev`
 
-6. Test on dev, including download and installation of personal and enterprise editions
+6.  Test on dev, including download and installation of personal and enterprise editions
 
-7. Commit to Git: status, commit, tag, push, and merge release branch (TODO: Document)
+7.  Commit to Git: status, commit, tag, push, and merge release branch (TODO: Document)
 
     1. `ant cvs.diff`
     2. `cvs ...`
     3. `ant cvs.tag -Dcvs.tag.tag="build_${build.number}"`
 
-8. Update production database
+8.  Update production database
 
-9. `ant deploy.production`
+9.  `ant deploy.production`
 
 10. Test production, including download and installation of personal and enterprise editions
 
