@@ -4895,7 +4895,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</function>
 	<function>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-04-15T19:37:30-0500" -->
+		<!-- dateModified="2020-05-29T15:22:51-05:00" -->
 		<description><![CDATA[
 			<p>
 				Joins elements of any
@@ -4905,7 +4905,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		]]></description>
 		<name>join</name>
 		<function-class>com.aoindustries.taglib.Functions</function-class>
-		<function-signature>java.lang.String join(java.lang.Iterable,java.lang.String)</function-signature>
+		<function-signature><![CDATA[java.lang.String join(java.lang.Iterable<?>,java.lang.String)]]></function-signature>
 		<example><![CDATA[<code>${ao:join(iterable, separator)}</code>]]></example>
 	</function>
 	<function>
