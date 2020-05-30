@@ -4854,10 +4854,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</function>
 	<function>
 		<!-- datePublished="2019-10-23T06:32:37-0500" -->
-		<!-- dateModified="2020-05-30T01:03:45-05:00" -->
+		<!-- dateModified="2020-05-30T02:29:24-05:00" -->
 		<description><![CDATA[
 			<p>
-				Gets the current <a href="https://aoindustries.com/ao-fluent-html/com/aoindustries/html/Doctype.html">Doctype</a>.
+				Gets the current <a href="https://aoindustries.com/ao-encoding/apidocs/com/aoindustries/encoding/Doctype.html">Doctype</a>.
 			</p>
 		]]></description>
 		<name>getDoctype</name>
@@ -4867,10 +4867,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</function>
 	<function>
 		<!-- datePublished="2019-10-23T06:32:37-0500" -->
-		<!-- dateModified="2020-05-30T01:03:45-05:00" -->
+		<!-- dateModified="2020-05-30T02:29:24-05:00" -->
 		<description><![CDATA[
 			<p>
-				Gets the current <a href="https://aoindustries.com/ao-fluent-html/com/aoindustries/html/Serialization.html">Serialization</a>.
+				Gets the current <a href="https://aoindustries.com/ao-encoding/apidocs/com/aoindustries/encoding/Serialization.html">Serialization</a>.
 			</p>
 		]]></description>
 		<name>getSerialization</name>
