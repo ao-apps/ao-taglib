@@ -27,9 +27,10 @@ import java.util.Collections;
 
 public class AoTldInitializer extends TagReferenceInitializer {
 
+	@SuppressWarnings("unchecked")
 	public AoTldInitializer() {
 		super(
-			"AO Taglib Reference",
+			Maven.properties.getProperty("project.name") + " Reference",
 			"Taglib Reference",
 			"/ao-taglib",
 			"/ao.tld",
