@@ -117,7 +117,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					URL rewriting is performed as needed via
-					<a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
+					<a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>.
 				</p>
 				<p>
 					To support paths in different character sets, a Unicode to ASCII URI encoding is performed
@@ -431,7 +431,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					URL rewriting is performed as needed via
-					<a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
+					<a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>.
 				</p>
 				<p>
 					To support paths in different character sets, a Unicode to ASCII URI encoding is performed
@@ -1037,7 +1037,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					URL rewriting is performed as needed via
-					<a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
+					<a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>.
 				</p>
 				<p>
 					To support paths in different character sets, a Unicode to ASCII URI encoding is performed
@@ -1586,7 +1586,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					URL rewriting is performed as needed via
-					<a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
+					<a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>.
 				</p>
 				<p>
 					To support paths in different character sets, a Unicode to ASCII URI encoding is performed
@@ -1778,7 +1778,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					URL rewriting is performed as needed via
-					<a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
+					<a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>.
 				</p>
 				<p>
 					To support paths in different character sets, a Unicode to ASCII URI encoding is performed
@@ -2332,7 +2332,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					URL rewriting is performed as needed via
-					<a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
+					<a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>.
 				</p>
 				<p>
 					To support paths in different character sets, a Unicode to ASCII URI encoding is performed
@@ -2602,7 +2602,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					URL rewriting is performed as needed via
-					<a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
+					<a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>.
 				</p>
 				<p>
 					To support paths in different character sets, a Unicode to ASCII URI encoding is performed
@@ -3681,7 +3681,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					URL rewriting is performed as needed via
-					<a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
+					<a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>.
 				</p>
 				<p>
 					To support paths in different character sets, a Unicode to ASCII URI encoding is performed
@@ -3902,7 +3902,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					URL rewriting is performed as needed via
-					<a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
+					<a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>.
 				</p>
 				<p>
 					To support paths in different character sets, a Unicode to ASCII URI encoding is performed
@@ -4125,7 +4125,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				instead of
 				<a rel="nofollow" href="https://docs.oracle.com/cd/A87860_01/doc/java.817/a83726/genlovw3.htm#1008181">&lt;jsp:include&gt;</a>
 				to support
-				<a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#sendError%28int%29">sendError</a>
+				<a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#sendError(int)">sendError</a>
 				inside of includes.
 			</p>
 		]]></description>
@@ -4136,7 +4136,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The status code for
-					<a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#sendError%28int%29">response.sendError</a>.
+					<a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#sendError(int)">response.sendError</a>.
 				</p>
 			]]></description>
 			<name>status</name>
@@ -4460,7 +4460,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 			<p>
 				Depending on context, the URL will be passed through
-				<a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>
+				<a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>
 				to add any URL-based session state.  Session state will never be added to external links.
 			</p>
 			<p>
@@ -4738,9 +4738,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</function>
 	<function>
 		<!-- datePublished="2019-10-02T02:16:44-0500" -->
+		<!-- dateModified="2020-05-30T02:46:48-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
-				<a href="https://aoindustries.com/ao-net-types/apidocs/com/aoindustries/net/URIEncoder.html#encodeURIComponent-java.lang.String-">Encodes a value</a>
+				<a href="https://aoindustries.com/ao-net-types/apidocs/com/aoindustries/net/URIEncoder.html#encodeURIComponent(java.lang.String)">Encodes a value</a>
 				for use in a URI path component, query string, or fragment.
 			</p>
 			<p>
@@ -4754,9 +4755,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</function>
 	<function>
 		<!-- datePublished="2019-10-02T02:16:44-0500" -->
+		<!-- dateModified="2020-05-30T02:46:48-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
-				<a href="https://aoindustries.com/ao-net-types/apidocs/com/aoindustries/net/URIDecoder.html#decodeURIComponent-java.lang.String-">Decodes a value</a>
+				<a href="https://aoindustries.com/ao-net-types/apidocs/com/aoindustries/net/URIDecoder.html#decodeURIComponent(java.lang.String)">Decodes a value</a>
 				from use as a URI path component, query string, or fragment.
 			</p>
 			<p>
@@ -4770,10 +4772,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</function>
 	<function>
 		<!-- datePublished="2019-08-13T18:02:13-0500" -->
-		<!-- dateModified="2019-10-02T02:16:44-0500" -->
+		<!-- dateModified="2020-05-30T02:46:48-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
-				<a href="https://aoindustries.com/ao-net-types/apidocs/com/aoindustries/net/URIEncoder.html#encodeURI-java.lang.String-">Encodes a URI to ASCII format</a>.
+				<a href="https://aoindustries.com/ao-net-types/apidocs/com/aoindustries/net/URIEncoder.html#encodeURI(java.lang.String)">Encodes a URI to ASCII format</a>.
 			</p>
 			<p>
 				Encodes characters in the <a href="https://www.w3.org/TR/html40/appendix/notes.html#non-ascii-chars">recommended <code>UTF-8</code> encoding</a>.
@@ -4786,10 +4788,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</function>
 	<function>
 		<!-- datePublished="2019-08-13T18:02:13-0500" -->
-		<!-- dateModified="2019-10-02T02:16:44-0500" -->
+		<!-- dateModified="2020-05-30T02:46:48-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
-				<a href="https://aoindustries.com/ao-net-types/apidocs/com/aoindustries/net/URIDecoder.html#decodeURI-java.lang.String-">Decodes a URI to Unicode format</a>.
+				<a href="https://aoindustries.com/ao-net-types/apidocs/com/aoindustries/net/URIDecoder.html#decodeURI(java.lang.String)">Decodes a URI to Unicode format</a>.
 			</p>
 			<p>
 				Characters that would decode to <a href="https://tools.ietf.org/html/rfc3986#section-2.2">a reserved character</a> are left percent-encoded to avoid ambiguity.
@@ -4805,14 +4807,14 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</function>
 	<function>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-05-30T02:46:48-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Rewrites a URL to maintain session state or otherwise alter the URL mapping.
 			</p>
 			<p>
-				<a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/ServletUtil.html#encodeURI-java.lang.String-javax.servlet.ServletResponse-">Encodes the URI to ASCII format</a>
-				then passes through <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">HttpServletResponse.encodeURL</a>.
+				<a href="https://aoindustries.com/ao-net-types/apidocs/com/aoindustries/net/URIEncoder.html#encodeURI(java.lang.String)">Encodes the URI to ASCII format</a>
+				then passes through <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>.
 			</p>
 			<p>
 				Encodes characters in the <a href="https://www.w3.org/TR/html40/appendix/notes.html#non-ascii-chars">recommended <code>UTF-8</code> encoding</a>.
@@ -4830,7 +4832,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<p>
 				Generates an absolute URL for the provided context-relative URL.
 				The URL is not automatically
-				<a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL%28java.lang.String%29">response encodeURL</a>.
+				<a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">response encodeURL</a>.
 			</p>
 		]]></description>
 		<name>getAbsoluteURL</name>
