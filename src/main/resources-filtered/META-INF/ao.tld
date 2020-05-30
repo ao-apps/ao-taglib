@@ -1361,7 +1361,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-03-06T17:13:47-0600" -->
+		<!-- dateModified="2020-05-30T01:03:45-05:00" -->
 		<description><![CDATA[
 			<ol>
 				<li>Clears the current output buffer (leaving status code and headers)</li>
@@ -1398,7 +1398,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					<li>Use the serialization active on the current request.</li>
 					<li>
 						Use the application <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</a>
-						<code>com.aoindustries.html.Serialization.default</code>
+						<code>com.aoindustries.encoding.Serialization.default</code>
 						that allows an application to control the selection of HTML versus XHTML.
 					</li>
 					<li>
@@ -1431,7 +1431,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					<li>Use the doctype active on the current request.</li>
 					<li>
 						Use the application <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</a>
-						<code>com.aoindustries.html.Doctype.default</code>
+						<code>com.aoindustries.encoding.Doctype.default</code>
 						that allows an application to control the default doctype.
 					</li>
 					<li>
@@ -4854,7 +4854,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</function>
 	<function>
 		<!-- datePublished="2019-10-23T06:32:37-0500" -->
-		<!-- dateModified="2019-10-27T16:59:13-0500" -->
+		<!-- dateModified="2020-05-30T01:03:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Gets the current <a href="https://aoindustries.com/ao-fluent-html/com/aoindustries/html/Doctype.html">Doctype</a>.
@@ -4862,12 +4862,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		]]></description>
 		<name>getDoctype</name>
 		<function-class>com.aoindustries.taglib.Functions</function-class>
-		<function-signature>com.aoindustries.html.Doctype getDoctype()</function-signature>
+		<function-signature>com.aoindustries.encoding.Doctype getDoctype()</function-signature>
 		<example><![CDATA[<code>${ao:getDoctype()}</code>]]></example>
 	</function>
 	<function>
 		<!-- datePublished="2019-10-23T06:32:37-0500" -->
-		<!-- dateModified="2019-10-27T16:59:13-0500" -->
+		<!-- dateModified="2020-05-30T01:03:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Gets the current <a href="https://aoindustries.com/ao-fluent-html/com/aoindustries/html/Serialization.html">Serialization</a>.
@@ -4875,7 +4875,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		]]></description>
 		<name>getSerialization</name>
 		<function-class>com.aoindustries.taglib.Functions</function-class>
-		<function-signature>com.aoindustries.html.Serialization getSerialization()</function-signature>
+		<function-signature>com.aoindustries.encoding.Serialization getSerialization()</function-signature>
 		<example><![CDATA[<code>${ao:getSerialization()}</code>]]></example>
 	</function>
 	<function>

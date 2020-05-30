@@ -34,11 +34,15 @@ public class AoTldInitializer extends TagReferenceInitializer {
 			"Taglib Reference",
 			"/ao-taglib",
 			"/ao.tld",
+			true,
 			Maven.properties.getProperty("documented.javadoc.link.javase"),
 			Maven.properties.getProperty("documented.javadoc.link.javaee"),
 			// Self
 			Collections.singletonMap("com.aoindustries.taglib", Maven.properties.getProperty("project.url") + "apidocs/"),
 			// Dependencies
+			Collections.singletonMap("com.aoindustries.encoding", "https://aoindustries.com/ao-encoding/apidocs/"),
+			Collections.singletonMap("com.aoindustries.lang", "https://aoindustries.com/ao-lang/apidocs/"),
+			Collections.singletonMap("com.aoindustries.net", "https://aoindustries.com/ao-net-types/apidocs/"),
 			Collections.singletonMap("com.aoindustries.util", "https://aoindustries.com/aocode-public/apidocs/")
 		);
 	}
