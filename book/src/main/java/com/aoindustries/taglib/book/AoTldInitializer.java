@@ -23,11 +23,9 @@
 package com.aoindustries.taglib.book;
 
 import com.semanticcms.tagreference.TagReferenceInitializer;
-import java.util.Collections;
 
 public class AoTldInitializer extends TagReferenceInitializer {
 
-	@SuppressWarnings("unchecked")
 	public AoTldInitializer() {
 		super(
 			Maven.properties.getProperty("project.name") + " Reference",
@@ -38,12 +36,12 @@ public class AoTldInitializer extends TagReferenceInitializer {
 			Maven.properties.getProperty("documented.javadoc.link.javase"),
 			Maven.properties.getProperty("documented.javadoc.link.javaee"),
 			// Self
-			Collections.singletonMap("com.aoindustries.taglib", Maven.properties.getProperty("project.url") + "apidocs/"),
+			"com.aoindustries.taglib", Maven.properties.getProperty("project.url") + "apidocs/",
 			// Dependencies
-			Collections.singletonMap("com.aoindustries.encoding", "https://aoindustries.com/ao-encoding/apidocs/"),
-			Collections.singletonMap("com.aoindustries.lang", "https://aoindustries.com/ao-lang/apidocs/"),
-			Collections.singletonMap("com.aoindustries.net", "https://aoindustries.com/ao-net-types/apidocs/"),
-			Collections.singletonMap("com.aoindustries.util", "https://aoindustries.com/aocode-public/apidocs/")
+			"com.aoindustries.encoding", "https://aoindustries.com/ao-encoding/apidocs/",
+			"com.aoindustries.lang", "https://aoindustries.com/ao-lang/apidocs/",
+			"com.aoindustries.net", "https://aoindustries.com/ao-net-types/apidocs/",
+			"com.aoindustries.util", "https://aoindustries.com/aocode-public/apidocs/"
 		);
 	}
 }
