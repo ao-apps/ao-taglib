@@ -218,8 +218,9 @@ public class RedirectTag
 	 * Dispatch as forward
 	 */
 	@Override
+	@SuppressWarnings("deprecation")
 	void dispatch(RequestDispatcher dispatcher, JspWriter out, HttpServletRequest request, HttpServletResponse response) throws JspException, IOException {
-		boolean oldForwarded = isForwarded(request);
+		Object oldForwarded = request.getAttribute(FORWARDED_REQUEST_ATTRIBUTE);
 		try {
 			setForwarded(request, true);
 			try {
@@ -232,7 +233,7 @@ public class RedirectTag
 			Includer.setPageSkipped(request);
 			throw ServletUtil.SKIP_PAGE_EXCEPTION;
 		} finally {
-			setForwarded(request, oldForwarded);
+			request.setAttribute(FORWARDED_REQUEST_ATTRIBUTE, oldForwarded);
 		}
 	}
 }

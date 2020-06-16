@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -42,8 +42,9 @@ public class ForwardTag extends ArgDispatchTag {
 	 * Dispatch as forward
 	 */
 	@Override
+	@SuppressWarnings("deprecation")
 	void dispatch(RequestDispatcher dispatcher, JspWriter out, HttpServletRequest request, HttpServletResponse response) throws JspException, IOException {
-		boolean oldForwarded = isForwarded(request);
+		Object oldForwarded = request.getAttribute(FORWARDED_REQUEST_ATTRIBUTE);
 		try {
 			setForwarded(request, true);
 			try {
@@ -56,7 +57,7 @@ public class ForwardTag extends ArgDispatchTag {
 			Includer.setPageSkipped(request);
 			throw ServletUtil.SKIP_PAGE_EXCEPTION;
 		} finally {
-			setForwarded(request, oldForwarded);
+			request.setAttribute(FORWARDED_REQUEST_ATTRIBUTE, oldForwarded);
 		}
 	}
 }

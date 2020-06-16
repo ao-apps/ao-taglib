@@ -55,8 +55,6 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 /**
  * The base class for any tag that may call a request dispatcher.
  *
- * TODO: Use "javax.servlet.include.servlet_path" and "javax.servlet.forward.servlet_path" for correct interaction with standard tags.
- *
  * @author  AO Industries, Inc.
  */
 abstract public class DispatchTag
@@ -69,16 +67,28 @@ abstract public class DispatchTag
 
 	/**
 	 * Tracks if the request has been forwarded.
+	 *
+	 * @deprecated  Please use {@link RequestDispatcher#FORWARD_SERVLET_PATH} directly.
 	 */
+	@Deprecated
 	protected static final String FORWARDED_REQUEST_ATTRIBUTE = DispatchTag.class.getName() + ".requestForwarded";
 
 	/**
 	 * Checks if the request has been forwarded.
+	 *
+	 * @deprecated  Please use {@link RequestDispatcher#FORWARD_SERVLET_PATH} directly.
 	 */
+	@Deprecated
 	public static boolean isForwarded(ServletRequest req) {
-		return req.getAttribute(FORWARDED_REQUEST_ATTRIBUTE) != null;
+		return
+			req.getAttribute(FORWARDED_REQUEST_ATTRIBUTE) != null
+			|| req.getAttribute(RequestDispatcher.FORWARD_SERVLET_PATH) != null;
 	}
 
+	/**
+	 * @deprecated  Please use {@link RequestDispatcher#FORWARD_SERVLET_PATH} directly.
+	 */
+	@Deprecated
 	protected static void setForwarded(ServletRequest req, boolean requestForwarded) {
 		req.setAttribute(FORWARDED_REQUEST_ATTRIBUTE,
 			requestForwarded ? Boolean.TRUE : null
