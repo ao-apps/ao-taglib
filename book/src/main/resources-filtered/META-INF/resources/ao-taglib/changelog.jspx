@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2020-06-16T09:01:40-05:00"
+		dateModified="2020-06-16T09:08:27-05:00"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -53,14 +53,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 				artifactId="@{documented.artifactId}"
 				scmUrl="@{project.scm.url}"
 			>
+				<!-- TODO:
 				<ul>
-					<li>Added generics to TLD types and signatures.</li>
-					<li>
-						Improved platform compatibility by falling back to
-						<ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/RequestDispatcher.html#FORWARD_SERVLET_PATH">RequestDispatcher.FORWARD_SERVLET_PATH</ao:a>
-						where appropriate.
-					</li>
-					<!-- TODO:
 					<li>No more getters on attribute interfaces, unless is used somewhere</li>
 					<li>No more nested tags for simply setting attributes: use jsp:attribute instead</li>
 					<li>Support script async and defer attributes</li>
@@ -74,10 +68,28 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 
 						nmw-email-taglib might be able to establish a proper context based on the content type of the content for a message, for example.
 					</li>
-					-->
 				</ul>
+				-->
 			</changelog:release>
 		</c:if>
+
+		<changelog:release
+			projectName="@{documented.name}"
+			version="5.0.2"
+			datePublished="2020-06-16T09:08:27-05:00"
+			groupId="@{project.groupId}"
+			artifactId="@{documented.artifactId}"
+			scmUrl="@{project.scm.url}"
+		>
+			<ul>
+				<li>Added generics to TLD types and signatures.</li>
+				<li>
+					Improved platform compatibility by falling back to
+					<ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/RequestDispatcher.html#FORWARD_SERVLET_PATH">RequestDispatcher.FORWARD_SERVLET_PATH</ao:a>
+					where appropriate.
+				</li>
+			</ul>
+		</changelog:release>
 
 		<changelog:release
 			projectName="@{documented.name}"
