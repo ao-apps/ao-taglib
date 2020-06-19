@@ -50,6 +50,10 @@ import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
+ * <p>
+ * TODO: Have a default value of "true" for input type checkbox and radio?
+ * </p>
+ *
  * @author  AO Industries, Inc.
  */
 public class InputTag
