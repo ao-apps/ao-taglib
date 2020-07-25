@@ -4882,7 +4882,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</function>
 	<function>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2016-11-08T02:37:29-0600" -->
+		<!-- dateModified="2020-07-25T13:24:10-05:00" -->
 		<description><![CDATA[
 			<p>
 				Determines if the current request has been forwarded by a
@@ -4891,7 +4891,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>isForwarded</name>
-		<function-class>com.aoindustries.taglib.DispatchTag</function-class>
+		<function-class>com.aoindustries.taglib.Functions</function-class>
 		<function-signature>boolean isForwarded()</function-signature>
 		<example><![CDATA[<code>${ao:isForwarded()}</code>]]></example>
 	</function>

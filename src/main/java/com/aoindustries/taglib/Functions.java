@@ -27,6 +27,7 @@ import com.aoindustries.encoding.Serialization;
 import com.aoindustries.encoding.servlet.DoctypeEE;
 import com.aoindustries.encoding.servlet.SerializationEE;
 import com.aoindustries.lang.NullArgumentException;
+import com.aoindustries.lang.Strings;
 import com.aoindustries.net.URIEncoder;
 import com.aoindustries.servlet.filter.FunctionContext;
 import static com.aoindustries.servlet.filter.FunctionContext.getRequest;
@@ -38,7 +39,6 @@ import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.servlet.lastmodified.AddLastModified;
 import com.aoindustries.servlet.lastmodified.LastModifiedServlet;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
-import com.aoindustries.lang.Strings;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -98,6 +98,14 @@ final public class Functions {
 
 	public static String getDecimalTimeLength(Long millis) {
 		return millis==null ? null : Strings.getDecimalTimeLengthString(millis);
+	}
+
+	/**
+	 * @see DispatchTag#isForwarded(javax.servlet.ServletRequest)
+	 */
+	@SuppressWarnings("deprecation")
+	public static boolean isForwarded() {
+		return DispatchTag.isForwarded(FunctionContext.getRequest());
 	}
 
 	public static String join(Iterable<?> iter, String separator) {
