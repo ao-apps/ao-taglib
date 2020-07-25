@@ -28,7 +28,7 @@ public class AoTldInitializer extends TagReferenceInitializer {
 
 	public AoTldInitializer() {
 		super(
-			Maven.properties.getProperty("project.name") + " Reference",
+			Maven.properties.getProperty("documented.name") + " Reference",
 			"Taglib Reference",
 			"/ao-taglib",
 			"/ao.tld",
