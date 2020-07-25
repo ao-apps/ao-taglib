@@ -1361,7 +1361,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-05-30T01:03:45-05:00" -->
+		<!-- dateModified="2020-07-25T16:01:11-05:00" -->
 		<description><![CDATA[
 			<ol>
 				<li>Clears the current output buffer (leaving status code and headers)</li>
@@ -1453,17 +1453,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 			]]></description>
 			<name>class</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[
-				<p>
-					An optional <a href="https://www.w3schools.com/tags/att_global_class.asp">CSS class</a> that is added for older versions of IE (before IE 9).
-				</p>
-			]]></description>
-			<name>oldIeClass</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>

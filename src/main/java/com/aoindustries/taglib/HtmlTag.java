@@ -129,11 +129,6 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 		this.clazz = AttributeUtils.trimNullIfEmpty(clazz);
 	}
 
-	private String oldIeClass;
-	public void setOldIeClass(String oldIeClass) {
-		this.oldIeClass = AttributeUtils.trimNullIfEmpty(oldIeClass);
-	}
-
 	@Override
 	protected void doTag(Writer out) throws JspException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
@@ -184,16 +179,7 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 					currentDoctype.xmlDeclaration(currentSerialization, documentEncoding, out);
 					currentDoctype.doctype(currentSerialization, out);
 					// Write <html>
-					if(oldIeClass!=null) {
-						out.write("<!--[if lte IE 8]>");
-						beginHtmlTag(response, out, currentSerialization, clazz==null ? oldIeClass : (clazz + " " + oldIeClass));
-						out.write("<![endif]-->\n"
-								+ "<!--[if gt IE 8]><!-->");
-						beginHtmlTag(response, out, currentSerialization, clazz);
-						out.write("<!--<![endif]-->");
-					} else {
-						beginHtmlTag(response, out, currentSerialization, clazz);
-					}
+					beginHtmlTag(response, out, currentSerialization, clazz);
 					super.doTag(out);
 					endHtmlTag(out);
 				} finally {
