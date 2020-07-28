@@ -34,11 +34,39 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
-public class BrTag extends AutoEncodingNullTag {
+public class BrTag
+	extends AutoEncodingNullTag
+	implements
+		IdAttribute,
+		ClassAttribute,
+		StyleAttribute
+{
 
 	@Override
 	public MediaType getOutputType() {
 		return MediaType.XHTML;
+	}
+
+	private String id;
+	@Override
+	public void setId(String id) throws JspTagException {
+		this.id = id;
+	}
+
+	private String clazz;
+	@Override
+	public String getClazz() {
+		return clazz;
+	}
+	@Override
+	public void setClazz(String clazz) throws JspTagException {
+		this.clazz = clazz;
+	}
+
+	private Object style;
+	@Override
+	public void setStyle(Object style) throws JspTagException {
+		this.style = style;
 	}
 
 	@Override
@@ -49,6 +77,10 @@ public class BrTag extends AutoEncodingNullTag {
 			(HttpServletRequest)pageContext.getRequest(),
 			(HttpServletResponse)pageContext.getResponse(),
 			out
-		).br__();
+		).br()
+			.id(id)
+			.clazz(clazz)
+			.style(style)
+			.__();
 	}
 }

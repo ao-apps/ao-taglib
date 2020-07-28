@@ -741,6 +741,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2019-10-20T05:53:01-0500" -->
+		<!-- dateModified="2020-07-27T19:47:07-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Writes a <a href="https://www.w3schools.com/tags/tag_br.asp">&lt;br&gt;</a>
@@ -750,6 +751,44 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>br</name>
 		<tag-class>com.aoindustries.taglib.BrTag</tag-class>
 		<body-content>empty</body-content>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					The <a href="https://www.w3schools.com/tags/att_global_id.asp">id of the element</a>.
+					A nested <a href="@{project.url}ao.tld/tag-id">&lt;ao:id&gt;</a>
+					tag will override this value.
+				</p>
+			]]></description>
+			<name>id</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					The <a href="https://www.w3schools.com/tags/att_global_class.asp">CSS class for the element</a>.
+					A nested <a href="@{project.url}ao.tld/tag-class">&lt;ao:class&gt;</a> tag will override this value.
+				</p>
+			]]></description>
+			<name>class</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					The <a href="https://www.w3schools.com/tags/att_global_style.asp">CSS style for the element</a>.
+					A nested <a href="@{project.url}ao.tld/tag-style">&lt;ao:style&gt;</a>
+					tag will override this value.
+				</p>
+			]]></description>
+			<name>style</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
@@ -1349,6 +1388,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2019-10-30T20:50:04-0500" -->
+		<!-- dateModified="2020-07-27T19:47:07-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Writes a <a href="https://www.w3schools.com/tags/tag_hr.asp">&lt;hr&gt;</a>
@@ -1358,6 +1398,44 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>hr</name>
 		<tag-class>com.aoindustries.taglib.HrTag</tag-class>
 		<body-content>empty</body-content>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					The <a href="https://www.w3schools.com/tags/att_global_id.asp">id of the element</a>.
+					A nested <a href="@{project.url}ao.tld/tag-id">&lt;ao:id&gt;</a>
+					tag will override this value.
+				</p>
+			]]></description>
+			<name>id</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					The <a href="https://www.w3schools.com/tags/att_global_class.asp">CSS class for the element</a>.
+					A nested <a href="@{project.url}ao.tld/tag-class">&lt;ao:class&gt;</a> tag will override this value.
+				</p>
+			]]></description>
+			<name>class</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					The <a href="https://www.w3schools.com/tags/att_global_style.asp">CSS style for the element</a>.
+					A nested <a href="@{project.url}ao.tld/tag-style">&lt;ao:style&gt;</a>
+					tag will override this value.
+				</p>
+			]]></description>
+			<name>style</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
