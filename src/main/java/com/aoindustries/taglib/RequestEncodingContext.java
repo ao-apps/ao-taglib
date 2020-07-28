@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2012, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2012, 2016, 2017, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -33,15 +33,19 @@ import javax.servlet.ServletRequest;
  *
  * @author  AO Industries, Inc.
  */
-class ThreadEncodingContext {
+// TODO: Reset this on ao-servlet-subrequest sub-requests?
+//       Or done as a registrable subrequest event?  (Remove self from subrequest attributes OnSubrequest)
+//       Or should this just be reset of SemantiCCMS page captures only?
+//       Basically, how do we know when in a new page, and the old tag context is not actually what we want?
+class RequestEncodingContext {
 
-	private static final String CURRENT_CONTEXT_REQUEST_ATTRIBUTE = ThreadEncodingContext.class.getName() + ".currentContext";
+	private static final String CURRENT_CONTEXT_REQUEST_ATTRIBUTE = RequestEncodingContext.class.getName() + ".currentContext";
 
-	static ThreadEncodingContext getCurrentContext(ServletRequest request) {
-		return (ThreadEncodingContext)request.getAttribute(CURRENT_CONTEXT_REQUEST_ATTRIBUTE);
+	static RequestEncodingContext getCurrentContext(ServletRequest request) {
+		return (RequestEncodingContext)request.getAttribute(CURRENT_CONTEXT_REQUEST_ATTRIBUTE);
 	}
 
-	static void setCurrentContext(ServletRequest request, ThreadEncodingContext context) {
+	static void setCurrentContext(ServletRequest request, RequestEncodingContext context) {
 		request.setAttribute(CURRENT_CONTEXT_REQUEST_ATTRIBUTE, context);
 	}
 
@@ -56,7 +60,7 @@ class ThreadEncodingContext {
 	 */
 	final ValidMediaInput validMediaInput;
 
-	ThreadEncodingContext(MediaType contentType, ValidMediaInput validMediaInput) {
+	RequestEncodingContext(MediaType contentType, ValidMediaInput validMediaInput) {
 		this.contentType = contentType;
 		this.validMediaInput = validMediaInput;
 	}

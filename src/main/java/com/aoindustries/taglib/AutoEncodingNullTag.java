@@ -52,19 +52,10 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
 
 	/**
 	 * Gets the output type of this tag.  This is used to determine the correct
-	 * encoder.  If the tag never has any output this should return <code>null</code>.
-	 * When <code>null</code> is returned, any output will result in an error.
+	 * encoder.  If the tag never has any output this should return {@code null}.
+	 * When {@code null} is returned, any output will result in an error.
 	 */
 	public abstract MediaType getOutputType();
-
-	/**
-	 * Is only validating TEXT, which basically means no validation rules.
-	 */
-	/*
-	@Override
-	public boolean isValidatingMediaInputType(MediaType inputType) {
-		return inputType==MediaType.TEXT;
-	}*/
 
 	@Override
 	final public void doTag() throws JspException, IOException {
@@ -85,10 +76,10 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
 			final HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
 			final JspWriter out = pageContext.getOut();
 
-			final ThreadEncodingContext parentEncodingContext = ThreadEncodingContext.getCurrentContext(request);
+			final RequestEncodingContext parentEncodingContext = RequestEncodingContext.getCurrentContext(request);
 
 			// Determine the container's content type
-			MediaType containerContentType;
+			final MediaType containerContentType;
 			if(parentEncodingContext != null) {
 				// Use the output type of the parent
 				containerContentType = parentEncodingContext.contentType;
@@ -101,7 +92,7 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
 			}
 
 			// Determine the validator for the parent type.  This is to make sure prefix and suffix are valid.
-			Writer containerValidator;
+			final Writer containerValidator;
 			if(parentEncodingContext != null) {
 				// Make sure the output is compatibly validated.  It is a bug in the parent to not validate its input consistent with its content type
 				if(!parentEncodingContext.validMediaInput.isValidatingMediaInputType(containerContentType)) {
@@ -131,15 +122,15 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
 				writeEncoderPrefix(mediaEncoder, out);
 				try {
 					MediaWriter mediaWriter = new MediaWriter(encodingContext, mediaEncoder, out);
-					ThreadEncodingContext.setCurrentContext(
+					RequestEncodingContext.setCurrentContext(
 						request,
-						new ThreadEncodingContext(myOutputType, mediaWriter)
+						new RequestEncodingContext(myOutputType, mediaWriter)
 					);
 					try {
 						doTag(mediaWriter);
 					} finally {
 						// Restore previous encoding context that is used for our output
-						ThreadEncodingContext.setCurrentContext(request, parentEncodingContext);
+						RequestEncodingContext.setCurrentContext(request, parentEncodingContext);
 					}
 				} finally {
 					writeEncoderSuffix(mediaEncoder, out);
@@ -150,26 +141,26 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
 					parentEncodingContext != null
 					&& parentEncodingContext.validMediaInput.isValidatingMediaInputType(myOutputType)
 				) {
-					ThreadEncodingContext.setCurrentContext(
+					RequestEncodingContext.setCurrentContext(
 						request,
-						new ThreadEncodingContext(myOutputType, parentEncodingContext.validMediaInput)
+						new RequestEncodingContext(myOutputType, parentEncodingContext.validMediaInput)
 					);
 					try {
 						doTag(out);
 					} finally {
-						ThreadEncodingContext.setCurrentContext(request, parentEncodingContext);
+						RequestEncodingContext.setCurrentContext(request, parentEncodingContext);
 					}
 				} else {
 					// Not using an encoder and parent doesn't validate our output, validate our own output.
 					MediaValidator validator = MediaValidator.getMediaValidator(myOutputType, out);
-					ThreadEncodingContext.setCurrentContext(
+					RequestEncodingContext.setCurrentContext(
 						request,
-						new ThreadEncodingContext(myOutputType, validator)
+						new RequestEncodingContext(myOutputType, validator)
 					);
 					try {
 						doTag(validator);
 					} finally {
-						ThreadEncodingContext.setCurrentContext(request, parentEncodingContext);
+						RequestEncodingContext.setCurrentContext(request, parentEncodingContext);
 					}
 				}
 			}
@@ -183,7 +174,7 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
 	 * <p>
 	 * Writes any prefix in the container's media type.
 	 * The output must be valid for the provided type.
-	 * This will not be called when the output type is <code>null</code>.
+	 * This will not be called when the output type is {@code null}.
 	 * </p>
 	 * <p>
 	 * This default implementation prints nothing.
@@ -224,7 +215,7 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
 	 * <p>
 	 * Writes any suffix in the container's media type.
 	 * The output must be valid for the provided type.
-	 * This will not be called when the output type is <code>null</code>.
+	 * This will not be called when the output type is {@code null}.
 	 * </p>
 	 * <p>
 	 * This default implementation prints nothing.

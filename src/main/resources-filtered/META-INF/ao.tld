@@ -1439,7 +1439,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-07-25T16:01:11-05:00" -->
+		<!-- dateModified="2020-07-27T22:32:46-05:00" -->
 		<description><![CDATA[
 			<ol>
 				<li>Clears the current output buffer (leaving status code and headers)</li>
@@ -1464,7 +1464,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>html</name>
 		<tag-class>com.aoindustries.taglib.HtmlTag</tag-class>
 		<tei-class>com.aoindustries.taglib.HtmlTagTEI</tei-class>
-		<body-content>scriptless</body-content>
+		<body-content>JSP</body-content>
 		<attribute>
 			<description><![CDATA[
 				<p>

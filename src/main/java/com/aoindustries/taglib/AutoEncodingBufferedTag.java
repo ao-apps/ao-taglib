@@ -52,7 +52,7 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 /**
  * <p>
- * The exhibits all of the behavior of <code>AutoEncodingFilteredTag</code> with
+ * The exhibits all of the behavior of {@link AutoEncodingFilteredTag} with
  * the only exception being that it buffers its content instead of using filters.
  * This allows the tag to capture its body.  Character validation is performed
  * as the data goes into the buffer to ensure the captured data is correct for
@@ -153,35 +153,16 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 
 	/**
 	 * Gets the output type of this tag.  This is used to determine the correct
-	 * encoder.  If the tag never has any output this should return <code>null</code>.
-	 * When <code>null</code> is returned, any output will result in an error.
+	 * encoder.  If the tag never has any output this should return {@code null}.
+	 * When {@code null} is returned, any output will result in an error.
 	 */
 	public abstract MediaType getOutputType();
-
-	/**
-	 * The validator is stored to allow nested tags to check if their output
-	 * is already being filtered on this tags input.  When this occurs they
-	 * skip the validation of their own output.
-	 */
-	/*
-	@Override
-	public boolean isValidatingMediaInputType(MediaType inputType) {
-		return inputValidator!=null && inputValidator.isValidatingMediaInputType(inputType);
-	}*/
-
-	/**
-	 * Gets the initial buffer size.  Defaults to 32 characters (the same
-	 * default as <code>CharArrayBuffer</code>.
-	 */
-	public int getInitialBufferSize() {
-		return 32;
-	}
 
 	/**
 	 * Gets the number of characters that may be buffered before switching to the
 	 * use of a temp file.
 	 *
-	 * @return the threshold or <code>Long.MAX_VALUE</code> to never use temp files.
+	 * @return the threshold or {@link Long#MAX_VALUE} to never use temp files.
 	 *
 	 * @see  AutoTempFileWriter#DEFAULT_TEMP_FILE_THRESHOLD
 	 */
@@ -193,7 +174,7 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 	public void doTag() throws JspException, IOException {
 		final PageContext pageContext = (PageContext)getJspContext();
 		final HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
-		final ThreadEncodingContext parentEncodingContext = ThreadEncodingContext.getCurrentContext(request);
+		final RequestEncodingContext parentEncodingContext = RequestEncodingContext.getCurrentContext(request);
 
 		// Capture the body output while validating
 		// BufferWriter bufferWriter = new CharArrayBufferWriter(128, getTempFileThreshold());
@@ -204,16 +185,16 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 			if(body!=null) {
 				final MediaType myContentType = getContentType();
 				MediaValidator captureValidator = MediaValidator.getMediaValidator(myContentType, bufferWriter);
-				ThreadEncodingContext.setCurrentContext(
+				RequestEncodingContext.setCurrentContext(
 					request,
-					new ThreadEncodingContext(myContentType, captureValidator)
+					new RequestEncodingContext(myContentType, captureValidator)
 				);
 				try {
 					invoke(body, captureValidator);
 					captureValidator.flush();
 				} finally {
 					// Restore previous encoding context that is used for our output
-					ThreadEncodingContext.setCurrentContext(request, parentEncodingContext);
+					RequestEncodingContext.setCurrentContext(request, parentEncodingContext);
 				}
 			}
 		} finally {
@@ -231,7 +212,7 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 			final JspWriter out = pageContext.getOut();
 
 			// Determine the container's content type
-			MediaType containerContentType;
+			final MediaType containerContentType;
 			if(parentEncodingContext != null) {
 				// Use the output type of the parent
 				containerContentType = parentEncodingContext.contentType;
@@ -251,15 +232,15 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 				writeEncoderPrefix(mediaEncoder, out);
 				try {
 					MediaWriter mediaWriter = new MediaWriter(encodingContext, mediaEncoder, out);
-					ThreadEncodingContext.setCurrentContext(
+					RequestEncodingContext.setCurrentContext(
 						request,
-						new ThreadEncodingContext(myOutputType, mediaWriter)
+						new RequestEncodingContext(myOutputType, mediaWriter)
 					);
 					try {
 						doTag(capturedBody, mediaWriter);
 					} finally {
 						// Restore previous encoding context that is used for our output
-						ThreadEncodingContext.setCurrentContext(request, parentEncodingContext);
+						RequestEncodingContext.setCurrentContext(request, parentEncodingContext);
 					}
 				} finally {
 					writeEncoderSuffix(mediaEncoder, out);
@@ -270,26 +251,26 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 					parentEncodingContext != null
 					&& parentEncodingContext.validMediaInput.isValidatingMediaInputType(myOutputType)
 				) {
-					ThreadEncodingContext.setCurrentContext(
+					RequestEncodingContext.setCurrentContext(
 						request,
-						new ThreadEncodingContext(myOutputType, parentEncodingContext.validMediaInput)
+						new RequestEncodingContext(myOutputType, parentEncodingContext.validMediaInput)
 					);
 					try {
 						doTag(capturedBody, out);
 					} finally {
-						ThreadEncodingContext.setCurrentContext(request, parentEncodingContext);
+						RequestEncodingContext.setCurrentContext(request, parentEncodingContext);
 					}
 				} else {
 					// Not using an encoder and parent doesn't validate our output, validate our own output.
 					MediaValidator validator = MediaValidator.getMediaValidator(myOutputType, out);
-					ThreadEncodingContext.setCurrentContext(
+					RequestEncodingContext.setCurrentContext(
 						request,
-						new ThreadEncodingContext(myOutputType, validator)
+						new RequestEncodingContext(myOutputType, validator)
 					);
 					try {
 						doTag(capturedBody, validator);
 					} finally {
-						ThreadEncodingContext.setCurrentContext(request, parentEncodingContext);
+						RequestEncodingContext.setCurrentContext(request, parentEncodingContext);
 					}
 				}
 			}

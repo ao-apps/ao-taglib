@@ -33,15 +33,15 @@ import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.JspFragment;
+import javax.servlet.jsp.tagext.SimpleTag;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 /**
  * <p>
- * An implementation of <code>SimpleTag</code> that automatically validates its
+ * An implementation of {@link SimpleTag} that automatically validates its
  * content and automatically encodes its output correctly given its context.
  * It also validates its own output when used in a non-validating context.  For
  * higher performance, it filters the output from its body instead of buffering.
@@ -55,15 +55,15 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
  * <p>
  * In additional to checking that its contents are well behaved, it also is
  * well behaved for its container by properly encoding its output for its
- * context.  To determine its context, it finds its nearest ancestor that also
- * implements <code>ContentTypeJspTag</code>.  It then uses the content type
- * of that tag to perform proper encoding.  If it fails to find any such parent,
- * it uses the content type of the <code>HttpServletResponse</code>.
+ * context.  To determine its context, it uses the content type of the currently
+ * registered {@link RequestEncodingContext} to perform proper encoding.
+ * If it fails to find any such context, it uses the content type of the
+ * {@link HttpServletResponse}.
  * </p>
  * <p>
- * Finally, if no parent <code>ContentTypeJspTag</code> is found, this will
+ * Finally, if no existing {@link RequestEncodingContext} is found, this will
  * validate its own output against the content type of the
- * <code>HttpServletResponse</code> to make sure it is well-behaved.
+ * {@link HttpServletResponse} to make sure it is well-behaved.
  * </p>
  *
  * @author  AO Industries, Inc.
@@ -76,17 +76,6 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport {
 	 */
 	public abstract MediaType getContentType();
 
-	/**
-	 * The validator is stored to allow nested tags to check if their output
-	 * is already being filtered on this tags input.  When this occurs they
-	 * skip the validation of their own output.
-	 */
-	/*
-	@Override
-	public boolean isValidatingMediaInputType(MediaType inputType) {
-		return inputValidator!=null && inputValidator.isValidatingMediaInputType(inputType);
-	}*/
-
 	@Override
 	public void doTag() throws JspException, IOException {
 		final PageContext pageContext = (PageContext)getJspContext();
@@ -94,10 +83,10 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport {
 		final HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
 		final JspWriter out = pageContext.getOut();
 
-		final ThreadEncodingContext parentEncodingContext = ThreadEncodingContext.getCurrentContext(request);
+		final RequestEncodingContext parentEncodingContext = RequestEncodingContext.getCurrentContext(request);
 
 		// Determine the container's content type
-		MediaType containerContentType;
+		final MediaType containerContentType;
 		if(parentEncodingContext != null) {
 			// Use the output type of the parent
 			containerContentType = parentEncodingContext.contentType;
@@ -118,15 +107,15 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport {
 			writeEncoderPrefix(mediaEncoder, out);
 			try {
 				MediaWriter mediaWriter = new MediaWriter(encodingContext, mediaEncoder, out);
-				ThreadEncodingContext.setCurrentContext(
+				RequestEncodingContext.setCurrentContext(
 					request,
-					new ThreadEncodingContext(myContentType, mediaWriter)
+					new RequestEncodingContext(myContentType, mediaWriter)
 				);
 				try {
 					doTag(mediaWriter);
 				} finally {
 					// Restore previous encoding context that is used for our output
-					ThreadEncodingContext.setCurrentContext(request, parentEncodingContext);
+					RequestEncodingContext.setCurrentContext(request, parentEncodingContext);
 				}
 			} finally {
 				writeEncoderSuffix(mediaEncoder, out);
@@ -137,26 +126,26 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport {
 				parentEncodingContext != null
 				&& parentEncodingContext.validMediaInput.isValidatingMediaInputType(myContentType)
 			) {
-				ThreadEncodingContext.setCurrentContext(
+				RequestEncodingContext.setCurrentContext(
 					request,
-					new ThreadEncodingContext(myContentType, parentEncodingContext.validMediaInput)
+					new RequestEncodingContext(myContentType, parentEncodingContext.validMediaInput)
 				);
 				try {
 					doTag(out);
 				} finally {
-					ThreadEncodingContext.setCurrentContext(request, parentEncodingContext);
+					RequestEncodingContext.setCurrentContext(request, parentEncodingContext);
 				}
 			} else {
 				// Not using an encoder and parent doesn't validate our output, validate our own output.
 				MediaValidator validator = MediaValidator.getMediaValidator(myContentType, out);
-				ThreadEncodingContext.setCurrentContext(
+				RequestEncodingContext.setCurrentContext(
 					request,
-					new ThreadEncodingContext(myContentType, validator)
+					new RequestEncodingContext(myContentType, validator)
 				);
 				try {
 					doTag(validator);
 				} finally {
-					ThreadEncodingContext.setCurrentContext(request, parentEncodingContext);
+					RequestEncodingContext.setCurrentContext(request, parentEncodingContext);
 				}
 			}
 		}
@@ -174,13 +163,13 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport {
 	}
 
 	/**
-	 * Once the out JspWriter has been replaced to output the proper content
-	 * type, this version of invoke is called.
+	 * Once the out {@link JspWriter} has been replaced to output the proper content
+	 * type, this version of {@link #doTag()} is called.
 	 * <p>
 	 * This default implementation invokes the jsp body, if present.
 	 * </p>
 	 *
-	 * @param  out  the output.  If passed-through, this will be a <code>JspWriter</code>
+	 * @param  out  the output.  If passed-through, this will be a {@link JspWriter}
 	 */
 	protected void doTag(Writer out) throws JspException, IOException {
 		JspFragment body = getJspBody();

@@ -37,13 +37,14 @@ import java.io.Writer;
 import java.util.Locale;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 
-public class HtmlTag extends AutoEncodingFilteredTag {
+public class HtmlTag extends AutoEncodingFilteredBodyTag {
 
 	/**
 	 * The old Struts XHTML mode page attribute.  To avoiding picking-up a big
@@ -92,12 +93,14 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 		return MediaType.XHTML;
 	}
 
+	private static final long serialVersionUID = 1L;
+
 	// TODO: charset here, along with:
 	//       Page (model), Page (Servlet), PageTag, Theme, View
 	//       aoweb-framework: WebPage, WebPageLayout
 	//       aoweb-struts: PageAttributes, Skin
 
-	private Serialization serialization;
+	private transient Serialization serialization;
 	public void setSerialization(String serialization) {
 		if(serialization == null) {
 			this.serialization = null;
@@ -107,7 +110,7 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 		}
 	}
 
-	private Doctype doctype;
+	private transient Doctype doctype;
 	public void setDoctype(String doctype) {
 		if(doctype == null) {
 			this.doctype = null;
@@ -117,7 +120,7 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 		}
 	}
 
-	private String clazz;
+	private transient String clazz;
 	/**
 	 * Getter required because without it, we get the exception:
 	 * <pre>Unable to find setter method for attribute: class</pre>
@@ -129,31 +132,41 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 		this.clazz = AttributeUtils.trimNullIfEmpty(clazz);
 	}
 
-	@Override
-	protected void doTag(Writer out) throws JspException, IOException {
-		PageContext pageContext = (PageContext)getJspContext();
-		ServletContext servletContext = pageContext.getServletContext();
-		HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
+	// Values that are used in doFinally
+	private transient Serialization oldSerialization;
+	private transient Object oldStrutsXhtml;
+	private transient boolean setSerialization;
+	private transient Doctype oldDoctype;
+	private transient boolean setDoctype;
+	private transient Registry oldPageRegistry;
 
-		Serialization currentSerialization = serialization;
-		Serialization oldSerialization;
-		Object oldStrutsXhtml;
-		boolean setSerialization;
-		if(currentSerialization == null) {
-			currentSerialization = SerializationEE.get(servletContext, request);
-			oldSerialization = null;
-			oldStrutsXhtml = null;
-			setSerialization = false;
-		} else {
-			oldSerialization = SerializationEE.replace(request, currentSerialization);
-			oldStrutsXhtml = pageContext.getAttribute(STRUTS_XHTML_KEY, PageContext.PAGE_SCOPE);
-			pageContext.setAttribute(STRUTS_XHTML_KEY, Boolean.toString(currentSerialization == Serialization.XML), PageContext.PAGE_SCOPE);
-			setSerialization = true;
-		}
+	@Override
+	protected int doStartTag(Writer out) throws JspException, IOException {
+		// Clear values that are used in doFinally
+		oldSerialization = null;
+		oldStrutsXhtml = null;
+		setSerialization = false;
+		oldDoctype = null;
+		setDoctype = false;
+		oldPageRegistry = null;
+
 		try {
+			ServletContext servletContext = pageContext.getServletContext();
+			HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
+
+			Serialization currentSerialization = serialization;
+			if(currentSerialization == null) {
+				currentSerialization = SerializationEE.get(servletContext, request);
+				oldSerialization = null;
+				oldStrutsXhtml = null;
+				setSerialization = false;
+			} else {
+				oldSerialization = SerializationEE.replace(request, currentSerialization);
+				oldStrutsXhtml = pageContext.getAttribute(STRUTS_XHTML_KEY, PageContext.PAGE_SCOPE);
+				pageContext.setAttribute(STRUTS_XHTML_KEY, Boolean.toString(currentSerialization == Serialization.XML), PageContext.PAGE_SCOPE);
+				setSerialization = true;
+			}
 			Doctype currentDoctype = doctype;
-			Doctype oldDoctype;
-			boolean setDoctype;
 			if(currentDoctype == null) {
 				currentDoctype = DoctypeEE.get(servletContext, request);
 				oldDoctype = null;
@@ -162,41 +175,49 @@ public class HtmlTag extends AutoEncodingFilteredTag {
 				oldDoctype = DoctypeEE.replace(request, currentDoctype);
 				setDoctype = true;
 			}
-			try {
-				Registry oldPageRegistry = RegistryEE.Page.get(request);
-				if(oldPageRegistry == null) {
-					// Create a new page-scope registry
-					RegistryEE.Page.set(request, new Registry());
-				}
-				try {
-					ServletResponse response = pageContext.getResponse();
-					// Clear the output buffer
-					response.resetBuffer();
-					// Set the content type
-					final String documentEncoding = Html.ENCODING.name();
-					ServletUtil.setContentType(response, currentSerialization.getContentType(), documentEncoding);
-					// Write doctype
-					currentDoctype.xmlDeclaration(currentSerialization, documentEncoding, out);
-					currentDoctype.doctype(currentSerialization, out);
-					// Write <html>
-					beginHtmlTag(response, out, currentSerialization, clazz);
-					super.doTag(out);
-					endHtmlTag(out);
-				} finally {
-					if(oldPageRegistry == null) {
-						RegistryEE.Page.set(request, null);
-					}
-				}
-			} catch(ServletException e) {
-				throw new JspTagException(e);
-			} finally {
-				if(setDoctype) DoctypeEE.set(request, oldDoctype);
+			oldPageRegistry = RegistryEE.Page.get(request);
+			if(oldPageRegistry == null) {
+				// Create a new page-scope registry
+				RegistryEE.Page.set(request, new Registry());
 			}
-		} finally {
+			ServletResponse response = pageContext.getResponse();
+			// Clear the output buffer
+			response.resetBuffer();
+			// Set the content type
+			final String documentEncoding = Html.ENCODING.name();
+			ServletUtil.setContentType(response, currentSerialization.getContentType(), documentEncoding);
+			// Write doctype
+			currentDoctype.xmlDeclaration(currentSerialization, documentEncoding, out);
+			currentDoctype.doctype(currentSerialization, out);
+			// Write <html>
+			beginHtmlTag(response, out, currentSerialization, clazz);
+			return EVAL_BODY_FILTERED;
+		} catch(ServletException e) {
+			throw new JspTagException(e);
+		}
+	}
+
+	@Override
+	protected int doEndTag(Writer out) throws JspException, IOException {
+		// Write </html>
+		endHtmlTag(out);
+		return EVAL_PAGE;
+	}
+
+	@Override
+	public void doFinally() {
+		try {
+			ServletRequest request = pageContext.getRequest();
 			if(setSerialization) {
 				SerializationEE.set(request, oldSerialization);
 				pageContext.setAttribute(STRUTS_XHTML_KEY, oldStrutsXhtml, PageContext.PAGE_SCOPE);
 			}
+			if(setDoctype) DoctypeEE.set(request, oldDoctype);
+			if(oldPageRegistry == null) {
+				RegistryEE.Page.set(request, null);
+			}
+		} finally {
+			super.doFinally();
 		}
 	}
 }
