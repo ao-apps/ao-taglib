@@ -46,6 +46,7 @@ public class SelectTag
 	implements
 		IdAttribute,
 		NameAttribute,
+		ClassAttribute,
 		StyleAttribute,
 		DisabledAttribute,
 		OnchangeAttribute,
@@ -53,15 +54,6 @@ public class SelectTag
 		OnblurAttribute,
 		OnkeypressAttribute
 {
-
-	private String id;
-	private String name;
-	private Object style;
-	private boolean disabled;
-	private Object onchange;
-	private Object onfocus;
-	private Object onblur;
-	private Object onkeypress;
 
 	@Override
 	public MediaType getContentType() {
@@ -73,41 +65,59 @@ public class SelectTag
 		return MediaType.XHTML;
 	}
 
+	private String id;
 	@Override
 	public void setId(String id) throws JspTagException {
 		this.id = Strings.trimNullIfEmpty(id);
 	}
 
+	private String name;
 	@Override
 	public void setName(String name) throws JspTagException {
 		this.name = Strings.nullIfEmpty(name);
 	}
 
+	private String clazz;
+	@Override
+	public String getClazz() {
+		return clazz;
+	}
+	@Override
+	public void setClazz(String clazz) throws JspTagException {
+		this.clazz = clazz;
+	}
+
+	private Object style;
 	@Override
 	public void setStyle(Object style) throws JspTagException {
 		this.style = AttributeUtils.trimNullIfEmpty(style);
 	}
 
+	private boolean disabled;
 	@Override
 	public void setDisabled(boolean disabled) {
 		this.disabled = disabled;
 	}
 
+	private Object onchange;
 	@Override
 	public void setOnchange(Object onchange) throws JspTagException {
 		this.onchange = AttributeUtils.trimNullIfEmpty(onchange);
 	}
 
+	private Object onfocus;
 	@Override
 	public void setOnfocus(Object onfocus) throws JspTagException {
 		this.onfocus = AttributeUtils.trimNullIfEmpty(onfocus);
 	}
 
+	private Object onblur;
 	@Override
 	public void setOnblur(Object onblur) throws JspTagException {
 		this.onblur = AttributeUtils.trimNullIfEmpty(onblur);
 	}
 
+	private Object onkeypress;
 	@Override
 	public void setOnkeypress(Object onkeypress) throws JspTagException {
 		this.onkeypress = AttributeUtils.trimNullIfEmpty(onkeypress);
@@ -121,17 +131,22 @@ public class SelectTag
 			(HttpServletRequest)pageContext.getRequest()
 		);
 		out.write("<select");
-		if(id!=null) {
+		if(id != null) {
 			out.write(" id=\"");
 			encodeTextInXhtmlAttribute(id, out);
 			out.write('"');
 		}
-		if(name!=null) {
+		if(name != null) {
 			out.write(" name=\"");
 			encodeTextInXhtmlAttribute(name, out);
 			out.write('"');
 		}
-		if(style!=null) {
+		if(clazz != null) {
+			out.write(" class=\"");
+			encodeTextInXhtmlAttribute(clazz, out);
+			out.write('"');
+		}
+		if(style != null) {
 			out.write(" style=\"");
 			Coercion.write(style, textInXhtmlAttributeEncoder, out);
 			out.write('"');
@@ -140,22 +155,22 @@ public class SelectTag
 			out.write(" disabled");
 			if(serialization == Serialization.XML) out.write("=\"disabled\"");
 		}
-		if(onchange!=null) {
+		if(onchange != null) {
 			out.write(" onchange=\"");
 			Coercion.write(onchange, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
-		if(onfocus!=null) {
+		if(onfocus != null) {
 			out.write(" onfocus=\"");
 			Coercion.write(onfocus, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
-		if(onblur!=null) {
+		if(onblur != null) {
 			out.write(" onblur=\"");
 			Coercion.write(onblur, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
-		if(onkeypress!=null) {
+		if(onkeypress != null) {
 			out.write(" onkeypress=\"");
 			Coercion.write(onkeypress, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');

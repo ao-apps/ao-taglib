@@ -3961,7 +3961,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-03-26T22:27:21-05:00" -->
+		<!-- dateModified="2020-07-27T18:49:27-05:00" -->
 		<description><![CDATA[
 			<p>
 				Renders a <a href="https://www.w3schools.com/tags/tag_select.asp">&lt;select&gt;</a> tag.
@@ -3992,6 +3992,18 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 			]]></description>
 			<name>name</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					The <a href="https://www.w3schools.com/tags/att_global_class.asp">CSS class for the element</a>.
+					A nested <a href="@{project.url}ao.tld/tag-class">&lt;ao:class&gt;</a> tag will override this value.
+				</p>
+			]]></description>
+			<name>class</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
