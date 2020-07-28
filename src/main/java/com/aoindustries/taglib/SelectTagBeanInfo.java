@@ -43,15 +43,16 @@ public class SelectTagBeanInfo extends SimpleBeanInfo {
 				props = new PropertyDescriptor[] {
 					// From base class: new PropertyDescriptor("contentType", SelectTag.class, "getContentType", null),
 					// From base class: new PropertyDescriptor("outputType", SelectTag.class, "getOutputType", null),
-					new PropertyDescriptor("id", SelectTag.class, null, "setId"),
-					new PropertyDescriptor("name", SelectTag.class, null, "setName"),
-					new PropertyDescriptor("class", SelectTag.class, "getClazz", "setClazz"),
-					new PropertyDescriptor("style", SelectTag.class, null, "setStyle"),
-					new PropertyDescriptor("disabled", SelectTag.class, null, "setDisabled"),
-					new PropertyDescriptor("onchange", SelectTag.class, null, "setOnchange"),
-					new PropertyDescriptor("onfocus", SelectTag.class, null, "setOnfocus"),
-					new PropertyDescriptor("onblur", SelectTag.class, null, "setOnblur"),
-					new PropertyDescriptor("onkeypress", SelectTag.class, null, "setOnkeypress"),
+					new PropertyDescriptor("id",         SelectTag.class, null,       "setId"),
+					new PropertyDescriptor("name",       SelectTag.class, null,       "setName"),
+					new PropertyDescriptor("class",      SelectTag.class, "getClazz", "setClazz"),
+					new PropertyDescriptor("style",      SelectTag.class, null,       "setStyle"),
+					new PropertyDescriptor("disabled",   SelectTag.class, null,       "setDisabled"),
+					new PropertyDescriptor("size",       SelectTag.class, null,       "setSize"),
+					new PropertyDescriptor("onchange",   SelectTag.class, null,       "setOnchange"),
+					new PropertyDescriptor("onfocus",    SelectTag.class, null,       "setOnfocus"),
+					new PropertyDescriptor("onblur",     SelectTag.class, null,       "setOnblur"),
+					new PropertyDescriptor("onkeypress", SelectTag.class, null,       "setOnkeypress"),
 				};
 				properties = props;
 			}

@@ -49,6 +49,7 @@ public class SelectTag
 		ClassAttribute,
 		StyleAttribute,
 		DisabledAttribute,
+		SizeAttribute,
 		OnchangeAttribute,
 		OnfocusAttribute,
 		OnblurAttribute,
@@ -97,6 +98,12 @@ public class SelectTag
 	@Override
 	public void setDisabled(boolean disabled) {
 		this.disabled = disabled;
+	}
+
+	private Object size;
+	@Override
+	public void setSize(Object size) throws JspTagException {
+		this.size = AttributeUtils.trimNullIfEmpty(size);
 	}
 
 	private Object onchange;
@@ -154,6 +161,11 @@ public class SelectTag
 		if(disabled) {
 			out.write(" disabled");
 			if(serialization == Serialization.XML) out.write("=\"disabled\"");
+		}
+		if(size != null) {
+			out.write(" size=\"");
+			Coercion.write(size, textInXhtmlAttributeEncoder, out);
+			out.write('"');
 		}
 		if(onchange != null) {
 			out.write(" onchange=\"");
