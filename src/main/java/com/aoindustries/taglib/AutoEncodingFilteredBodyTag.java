@@ -30,7 +30,7 @@ import com.aoindustries.encoding.MediaValidator;
 import com.aoindustries.encoding.MediaWriter;
 import com.aoindustries.encoding.servlet.EncodingContextEE;
 import com.aoindustries.io.IoUtils;
-import com.aoindustries.servlet.jsp.LocalizedJspException;
+import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
@@ -40,6 +40,7 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.BodyTagSupport;
@@ -74,7 +75,7 @@ import javax.servlet.jsp.tagext.TryCatchFinally;
  *
  * @author  AO Industries, Inc.
  */
-// TODO: Rename other tags to "...SimpleTag"
+// TODO: Rename other tags to "...SimpleTag" (leave deprecated subclasses at old name)?
 public abstract class AutoEncodingFilteredBodyTag extends BodyTagSupport implements TryCatchFinally {
 
 	private static final Logger logger = Logger.getLogger(AutoEncodingFilteredBodyTag.class.getName());
@@ -166,14 +167,10 @@ public abstract class AutoEncodingFilteredBodyTag extends BodyTagSupport impleme
 				if(logger.isLoggable(Level.FINER)) {
 					logger.finer("Using MediaEncoder: " + mediaEncoder);
 				}
-				if(logger.isLoggable(Level.FINEST)) {
-					logger.finest("Setting encoder options");
-				}
+				logger.finest("Setting encoder options");
 				setMediaEncoderOptions(mediaEncoder);
 				// Encode both our output and the content.  The encoder validates our input and guarantees valid output for our parent.
-				if(logger.isLoggable(Level.FINEST)) {
-					logger.finest("Writing encoder prefix");
-				}
+				logger.finest("Writing encoder prefix");
 				writeEncoderPrefix(mediaEncoder, out);
 				MediaWriter mediaWriter = new MediaWriter(encodingContext, mediaEncoder, out);
 				newEncodingContext = new RequestEncodingContext(myContentType, mediaWriter);
@@ -206,15 +203,15 @@ public abstract class AutoEncodingFilteredBodyTag extends BodyTagSupport impleme
 			bodyUnbuffered = !mode.buffered;
 			return checkStartTagReturn(doStartTag(validatingOut), mode);
 		} catch(IOException e) {
-			throw new JspException(e);
+			throw new JspTagException(e);
 		}
 	}
 
-	private static int checkStartTagReturn(int startTagReturn, Mode mode) throws JspException {
+	private static int checkStartTagReturn(int startTagReturn, Mode mode) throws JspTagException {
 		if(startTagReturn == EVAL_BODY_FILTERED) {
 			return mode.buffered ? EVAL_BODY_BUFFERED : EVAL_BODY_INCLUDE;
 		}
-		if(startTagReturn != SKIP_BODY) throw new LocalizedJspException(
+		if(startTagReturn != SKIP_BODY) throw new LocalizedJspTagException(
 			ApplicationResources.accessor,
 			"AutoEncodingFilteredBodyTag.checkStartTagReturn.invalid",
 			startTagReturn
@@ -282,7 +279,7 @@ public abstract class AutoEncodingFilteredBodyTag extends BodyTagSupport impleme
 	 * </p>
 	 */
 	@Override
-	final public void doInitBody() throws JspException {
+	final public void doInitBody() throws JspTagException {
 		assert mode == Mode.ENCODING || mode == Mode.VALIDATING;
 		// Note: bodyContentImplClass will be null when direct access disabled
 		if(bodyContentImplClass != null) {
@@ -299,7 +296,7 @@ public abstract class AutoEncodingFilteredBodyTag extends BodyTagSupport impleme
 					if(logger.isLoggable(Level.SEVERE)) {
 						logger.severe("Failed to unbuffer BodyContextImpl");
 					}
-					throw new JspException(e);
+					throw new JspTagException(e);
 				}
 			}
 		}
@@ -325,22 +322,10 @@ public abstract class AutoEncodingFilteredBodyTag extends BodyTagSupport impleme
 					logger.finer((mode == Mode.ENCODING ? "Encoded" : "Validated ") + charCount + " buffered " + (charCount == 1 ? "character" : "characters"));
 				}
 			}
-			return checkAfterBodyReturn(doAfterBody(validatingOut));
+			return BodyTagUtils.checkAfterBodyReturn(doAfterBody(validatingOut));
 		} catch(IOException e) {
-			throw new JspException(e);
+			throw new JspTagException(e);
 		}
-	}
-
-	private static int checkAfterBodyReturn(int afterBodyReturn) throws JspException {
-		if(
-			afterBodyReturn != SKIP_BODY
-			&& afterBodyReturn != EVAL_BODY_AGAIN
-		) throw new LocalizedJspException(
-			ApplicationResources.accessor,
-			"AutoEncodingFilteredBodyTag.checkAfterBodyReturn.invalid",
-			afterBodyReturn
-		);
-		return afterBodyReturn;
 	}
 
 	/**
@@ -364,7 +349,7 @@ public abstract class AutoEncodingFilteredBodyTag extends BodyTagSupport impleme
 	@Deprecated
 	public int doEndTag() throws JspException {
 		try {
-			int endTagReturn = checkEndTagReturn(doEndTag(validatingOut));
+			int endTagReturn = BodyTagUtils.checkEndTagReturn(doEndTag(validatingOut));
 			if(mediaEncoder != null) {
 				if(logger.isLoggable(Level.FINEST)) {
 					logger.finest("Writing encoder suffix");
@@ -373,20 +358,8 @@ public abstract class AutoEncodingFilteredBodyTag extends BodyTagSupport impleme
 			}
 			return endTagReturn;
 		} catch(IOException e) {
-			throw new JspException(e);
+			throw new JspTagException(e);
 		}
-	}
-
-	private static int checkEndTagReturn(int endTagReturn) throws JspException {
-		if(
-			endTagReturn != EVAL_PAGE
-			&& endTagReturn != SKIP_PAGE
-		) throw new LocalizedJspException(
-			ApplicationResources.accessor,
-			"AutoEncodingFilteredBodyTag.checkEndTagReturn.invalid",
-			endTagReturn
-		);
-		return endTagReturn;
 	}
 
 	/**
