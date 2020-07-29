@@ -299,9 +299,10 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 
 	/**
 	 * Once the data is captured, this is called.
-	 * type, this version of invoke is called.
 	 */
-	abstract protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException;
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+		// Do nothing by default
+	}
 
 	protected void writeEncoderSuffix(MediaEncoder mediaEncoder, JspWriter out) throws JspException, IOException {
 		mediaEncoder.writeSuffixTo(out);

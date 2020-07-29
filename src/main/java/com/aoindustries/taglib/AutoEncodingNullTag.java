@@ -205,7 +205,9 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
 	 *
 	 * This default implementation does nothing.
 	 */
-	abstract protected void doTag(Writer out) throws JspTagException, IOException;
+	protected void doTag(Writer out) throws JspTagException, IOException {
+		// Do nothing by default
+	}
 
 	protected void writeEncoderSuffix(MediaEncoder mediaEncoder, JspWriter out) throws JspException, IOException {
 		mediaEncoder.writeSuffixTo(out);
