@@ -111,4 +111,13 @@ public class OptionTag
 			.text__(capturedBody);
 		return EVAL_PAGE;
 	}
+
+	@Override
+	public void doFinally() {
+		try {
+			init();
+		} finally {
+			super.doFinally();
+		}
+	}
 }
