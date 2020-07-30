@@ -109,7 +109,7 @@ public class FormTag
 		}
 	}
 
-	private transient String clazz;
+	private String clazz;
 	@Override
 	public String getClazz() {
 		return clazz;
@@ -119,25 +119,25 @@ public class FormTag
 		this.clazz = Strings.trimNullIfEmpty(clazz);
 	}
 
-	private transient Object style;
+	private Object style;
 	@Override
 	public void setStyle(Object style) throws JspTagException {
 		this.style = AttributeUtils.trimNullIfEmpty(style);
 	}
 
-	private transient String action;
+	private String action;
 	@Override
 	public void setAction(String action) throws JspTagException {
 		this.action = AttributeUtils.nullIfEmpty(action);
 	}
 
-	private transient String enctype;
+	private String enctype;
 	@Override
 	public void setEnctype(String enctype) throws JspTagException {
 		this.enctype = Strings.trimNullIfEmpty(enctype);
 	}
 
-	private transient String method;
+	private String method;
 	@Override
 	public void setMethod(String method) throws JspTagException {
 		method = Strings.trimNullIfEmpty(method);
@@ -145,20 +145,20 @@ public class FormTag
 		this.method = method;
 	}
 
-	private transient MutableURIParameters params;
+	private MutableURIParameters params;
 	@Override
 	public void addParam(String name, String value) {
 		if(params == null) params = new URIParametersMap();
 		params.addParameter(name, value);
 	}
 
-	private transient String target;
+	private String target;
 	@Override
 	public void setTarget(String target) throws JspTagException {
 		this.target = Strings.trimNullIfEmpty(target);
 	}
 
-	private transient Object onsubmit;
+	private Object onsubmit;
 	@Override
 	public void setOnsubmit(Object onsubmit) throws JspTagException {
 		this.onsubmit = AttributeUtils.trimNullIfEmpty(onsubmit);

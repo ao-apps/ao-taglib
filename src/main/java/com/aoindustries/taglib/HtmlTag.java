@@ -100,7 +100,7 @@ public class HtmlTag extends AutoEncodingFilteredBodyTag {
 	//       aoweb-framework: WebPage, WebPageLayout
 	//       aoweb-struts: PageAttributes, Skin
 
-	private transient Serialization serialization;
+	private Serialization serialization;
 	public void setSerialization(String serialization) {
 		if(serialization == null) {
 			this.serialization = null;
@@ -110,7 +110,7 @@ public class HtmlTag extends AutoEncodingFilteredBodyTag {
 		}
 	}
 
-	private transient Doctype doctype;
+	private Doctype doctype;
 	public void setDoctype(String doctype) {
 		if(doctype == null) {
 			this.doctype = null;
@@ -120,7 +120,7 @@ public class HtmlTag extends AutoEncodingFilteredBodyTag {
 		}
 	}
 
-	private transient String clazz;
+	private String clazz;
 	/**
 	 * Getter required because without it, we get the exception:
 	 * <pre>Unable to find setter method for attribute: class</pre>
