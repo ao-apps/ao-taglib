@@ -29,10 +29,8 @@ import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.MediaValidator;
 import com.aoindustries.encoding.MediaWriter;
 import com.aoindustries.encoding.servlet.EncodingContextEE;
-import com.aoindustries.io.IoUtils;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import java.io.IOException;
-import java.io.Reader;
 import java.io.Writer;
 import java.lang.reflect.Field;
 import java.util.logging.Level;
@@ -313,14 +311,12 @@ public abstract class AutoEncodingFilteredBodyTag extends BodyTagSupport impleme
 		try {
 			if(!bodyUnbuffered) {
 				assert mode.buffered;
-				long charCount;
-				try (Reader in = bodyContent.getReader()) {
-					charCount = IoUtils.copy(in, validatingOut);
-				}
-				bodyContent.clear();
+				bodyContent.writeOut(validatingOut);
 				if(logger.isLoggable(Level.FINER)) {
+					int charCount = bodyContent.getBufferSize() - bodyContent.getRemaining();
 					logger.finer((mode == Mode.ENCODING ? "Encoded" : "Validated ") + charCount + " buffered " + (charCount == 1 ? "character" : "characters"));
 				}
+				bodyContent.clear();
 			}
 			return BodyTagUtils.checkAfterBodyReturn(doAfterBody(validatingOut));
 		} catch(IOException e) {
