@@ -991,7 +991,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-07-28T03:39:40-05:00" -->
+		<!-- dateModified="2020-07-29T23:37:47-05:00" -->
 		<!-- TODO: param.* dynamic attributes should not do automatic multi-parameter.  Make a params.* dynamic attribute for this purpose. -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
@@ -1026,20 +1026,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The <a href="https://www.w3schools.com/tags/att_form_method.asp">method</a> used, must be either post or get.
-					Defaults to <code>get</code>.
-					A nested <a href="@{project.url}ao.tld/tag-method">&lt;ao:method&gt;</a>
-					tag will override this value.
-				</p>
-			]]></description>
-			<name>method</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[
-				<p>
 					The <a href="https://www.w3schools.com/tags/att_global_id.asp">id of the element</a>.
 					A nested <a href="@{project.url}ao.tld/tag-id">&lt;ao:id&gt;</a>
 					tag will override this value.
@@ -1049,6 +1035,31 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					The <a href="https://www.w3schools.com/tags/att_global_class.asp">CSS class for the element</a>.
+					A nested <a href="@{project.url}ao.tld/tag-class">&lt;ao:class&gt;</a> tag will override this value.
+				</p>
+			]]></description>
+			<name>class</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					The <a href="https://www.w3schools.com/tags/att_global_style.asp">CSS style for the element</a>.
+					A nested <a href="@{project.url}ao.tld/tag-style">&lt;ao:style&gt;</a>
+					tag will override this value.
+				</p>
+			]]></description>
+			<name>style</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -1101,19 +1112,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The <a href="https://www.w3schools.com/tags/att_form_target.asp">target for the form</a>.
-					A nested <a href="@{project.url}ao.tld/tag-target">&lt;ao:target&gt;</a>
-					tag will override this value.
-				</p>
-			]]></description>
-			<name>target</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[
-				<p>
 					The <a href="https://www.w3schools.com/tags/att_form_enctype.asp">enctype for the form</a>.
 					A nested <a href="@{project.url}ao.tld/tag-enctype">&lt;ao:enctype&gt;</a>
 					tag will override this value.
@@ -1127,11 +1125,13 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The <a href="https://www.w3schools.com/tags/att_global_class.asp">CSS class for the element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-class">&lt;ao:class&gt;</a> tag will override this value.
+					The <a href="https://www.w3schools.com/tags/att_form_method.asp">method</a> used, must be either post or get.
+					Defaults to <code>get</code>.
+					A nested <a href="@{project.url}ao.tld/tag-method">&lt;ao:method&gt;</a>
+					tag will override this value.
 				</p>
 			]]></description>
-			<name>class</name>
+			<name>method</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
@@ -1139,15 +1139,15 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The <a href="https://www.w3schools.com/tags/att_global_style.asp">CSS style for the element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-style">&lt;ao:style&gt;</a>
+					The <a href="https://www.w3schools.com/tags/att_form_target.asp">target for the form</a>.
+					A nested <a href="@{project.url}ao.tld/tag-target">&lt;ao:target&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
-			<name>style</name>
+			<name>target</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
