@@ -30,23 +30,18 @@ import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspTagException;
-import javax.servlet.jsp.PageContext;
 
 /**
  * @author  AO Industries, Inc.
  */
 public class OptionTag
-	extends AutoEncodingBufferedTag
+	extends AutoEncodingBufferedBodyTag
 	implements
-		ValueAttribute,
+		// Attributes
+		DisabledAttribute,
 		SelectedAttribute,
-		DisabledAttribute
+		ValueAttribute
 {
-
-	private boolean valueSet;
-	private Object value;
-	private boolean selected;
-	private boolean disabled;
 
 	@Override
 	public MediaType getContentType() {
@@ -58,30 +53,52 @@ public class OptionTag
 		return MediaType.XHTML;
 	}
 
+	private static final long serialVersionUID = 1L;
+
+	private boolean disabled;
+	@Override
+	public void setDisabled(boolean disabled) {
+		this.disabled = disabled;
+	}
+
+	private boolean selected;
+	@Override
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+	}
+
+	private boolean valueSet;
+	private Object value;
 	@Override
 	public void setValue(Object value) {
 		this.valueSet = true;
 		this.value = value;
 	}
 
-	@Override
-	public void setSelected(boolean selected) {
-		this.selected = selected;
+	private transient BufferResult capturedBody;
+
+	private void init() {
+		disabled = false;
+		selected = false;
+		valueSet = false;
+		value = null;
+		capturedBody = null;
 	}
 
 	@Override
-	public void setDisabled(boolean disabled) {
-		this.disabled = disabled;
+	protected int doAfterBody(BufferResult capturedBody, Writer out) throws IOException {
+		assert this.capturedBody == null;
+		assert capturedBody != null;
+		this.capturedBody = capturedBody.trim();
+		return SKIP_BODY;
 	}
 
 	@Override
-	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
-		capturedBody = capturedBody.trim();
+	protected int doEndTag(Writer out) throws JspTagException, IOException {
 		// TODO: Should we be setting the value always like this?  Duplicates efforts.
 		// TODO: If not setting value this way, this does not need to buffer
 		// TODO: This has something to do with translator markup added for display, but not value
-		if(!valueSet) setValue(capturedBody);
-		PageContext pageContext = (PageContext)getJspContext();
+		if(!valueSet) setValue(capturedBody != null ? capturedBody : "");
 		HtmlEE.get(
 			pageContext.getServletContext(),
 			(HttpServletRequest)pageContext.getRequest(),
@@ -92,5 +109,6 @@ public class OptionTag
 			.selected(selected)
 			.disabled(disabled)
 			.text__(capturedBody);
+		return EVAL_PAGE;
 	}
 }
