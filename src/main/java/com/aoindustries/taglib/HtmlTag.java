@@ -140,16 +140,20 @@ public class HtmlTag extends AutoEncodingFilteredBodyTag {
 	private transient boolean setDoctype;
 	private transient Registry oldPageRegistry;
 
-	@Override
-	protected int doStartTag(Writer out) throws JspException, IOException {
-		// Clear values that are used in doFinally
+	private void init() {
+		serialization = null;
+		doctype = null;
+		clazz = null;
 		oldSerialization = null;
 		oldStrutsXhtml = null;
 		setSerialization = false;
 		oldDoctype = null;
 		setDoctype = false;
 		oldPageRegistry = null;
+	}
 
+	@Override
+	protected int doStartTag(Writer out) throws JspException, IOException {
 		try {
 			ServletContext servletContext = pageContext.getServletContext();
 			HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
@@ -207,14 +211,18 @@ public class HtmlTag extends AutoEncodingFilteredBodyTag {
 	@Override
 	public void doFinally() {
 		try {
-			ServletRequest request = pageContext.getRequest();
-			if(setSerialization) {
-				SerializationEE.set(request, oldSerialization);
-				pageContext.setAttribute(STRUTS_XHTML_KEY, oldStrutsXhtml, PageContext.PAGE_SCOPE);
-			}
-			if(setDoctype) DoctypeEE.set(request, oldDoctype);
-			if(oldPageRegistry == null) {
-				RegistryEE.Page.set(request, null);
+			try {
+				ServletRequest request = pageContext.getRequest();
+				if(setSerialization) {
+					SerializationEE.set(request, oldSerialization);
+					pageContext.setAttribute(STRUTS_XHTML_KEY, oldStrutsXhtml, PageContext.PAGE_SCOPE);
+				}
+				if(setDoctype) DoctypeEE.set(request, oldDoctype);
+				if(oldPageRegistry == null) {
+					RegistryEE.Page.set(request, null);
+				}
+			} finally {
+				init();
 			}
 		} finally {
 			super.doFinally();

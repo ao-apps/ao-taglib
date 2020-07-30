@@ -64,10 +64,6 @@ public class BundleTag
 		oldRequestValue = null;
 	}
 
-	public BundleTag() {
-		init();
-	}
-
 	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
 		in.defaultReadObject();
 		this.accessor = basename == null ? null : ApplicationResourcesAccessor.getInstance(basename);

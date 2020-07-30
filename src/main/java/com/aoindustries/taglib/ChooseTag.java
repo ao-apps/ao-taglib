@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2016, 2017, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -24,12 +24,14 @@ package com.aoindustries.taglib;
 
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.TagSupport;
+import javax.servlet.jsp.tagext.TryCatchFinally;
 
 /**
  * @author  AO Industries, Inc.
  */
 public class ChooseTag
 	extends TagSupport
+	implements TryCatchFinally
 {
 
 	private static final long serialVersionUID = 1L;
@@ -42,10 +44,6 @@ public class ChooseTag
 		hasWhen = false;
 		matched = false;
 		hasOtherwise = false;
-	}
-
-	public ChooseTag() {
-		init();
 	}
 
 	@Override
@@ -80,13 +78,19 @@ public class ChooseTag
 
 	@Override
 	public int doEndTag() throws JspTagException {
-		try {
-			if(!hasWhen) {
-				throw new JspTagException("<ao:choose> requires at least one nested <ao:when>");
-			}
-			return EVAL_PAGE;
-		} finally {
-			init();
+		if(!hasWhen) {
+			throw new JspTagException("<ao:choose> requires at least one nested <ao:when>");
 		}
+		return EVAL_PAGE;
+	}
+
+	@Override
+	public void doCatch(Throwable t) throws Throwable {
+		throw t;
+	}
+
+	@Override
+	public void doFinally() {
+		init();
 	}
 }
