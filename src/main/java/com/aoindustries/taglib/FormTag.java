@@ -48,25 +48,28 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
-import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
  * @author  AO Industries, Inc.
  */
 public class FormTag
-	extends AutoEncodingBufferedTag
+	extends AutoEncodingBufferedBodyTag
 	implements
 		DynamicAttributes,
-		MethodAttribute,
+		// Global attributes
 		IdAttribute,
-		ActionAttribute,
-		ParamsAttribute,
-		TargetAttribute,
-		EnctypeAttribute,
 		ClassAttribute,
 		StyleAttribute,
+		// Attributes
+		ActionAttribute,
+		EnctypeAttribute,
+		MethodAttribute,
+		ParamsAttribute,
+		TargetAttribute,
+		// Events
 		OnsubmitAttribute
 {
 
@@ -76,16 +79,6 @@ public class FormTag
 			|| "post".equals(method)
 		;
 	}
-
-	private String method = "get";
-	private String id;
-	private String action;
-	private MutableURIParameters params;
-	private String target;
-	private String enctype;
-	private String clazz;
-	private Object style;
-	private Object onsubmit;
 
 	@Override
 	public MediaType getContentType() {
@@ -97,63 +90,12 @@ public class FormTag
 		return MediaType.XHTML;
 	}
 
-	@Override
-	public void setMethod(String method) throws JspTagException {
-		method = method.trim();
-		if(!isValidMethod(method)) throw new LocalizedJspTagException(ApplicationResources.accessor, "FormTag.method.invalid", method);
-		this.method = method;
-	}
-
-	@Override
-	public void setId(String id) throws JspTagException {
-		this.id = Strings.trimNullIfEmpty(id);
-	}
-
-	@Override
-	public void setAction(String action) throws JspTagException {
-		this.action = AttributeUtils.nullIfEmpty(action);
-	}
-
-	@Override
-	public void addParam(String name, String value) {
-		if(params==null) params = new URIParametersMap();
-		params.addParameter(name, value);
-	}
-
-	@Override
-	public void setTarget(String target) throws JspTagException {
-		this.target = Strings.trimNullIfEmpty(target);
-	}
-
-	@Override
-	public void setEnctype(String enctype) throws JspTagException {
-		this.enctype = Strings.trimNullIfEmpty(enctype);
-	}
-
-	@Override
-	public String getClazz() {
-		return clazz;
-	}
-
-	@Override
-	public void setClazz(String clazz) throws JspTagException {
-		this.clazz = Strings.trimNullIfEmpty(clazz);
-	}
-
-	@Override
-	public void setStyle(Object style) throws JspTagException {
-		this.style = AttributeUtils.trimNullIfEmpty(style);
-	}
-
-	@Override
-	public void setOnsubmit(Object onsubmit) throws JspTagException {
-		this.onsubmit = AttributeUtils.trimNullIfEmpty(onsubmit);
-	}
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	public void setDynamicAttribute(String uri, String localName, Object value) throws JspTagException {
 		if(
-			uri==null
+			uri == null
 			&& localName.startsWith(ParamUtils.PARAM_ATTRIBUTE_PREFIX)
 		) {
 			ParamUtils.setDynamicAttribute(this, uri, localName, value);
@@ -167,9 +109,85 @@ public class FormTag
 		}
 	}
 
+	private transient String clazz;
 	@Override
-	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
-		PageContext pageContext = (PageContext)getJspContext();
+	public String getClazz() {
+		return clazz;
+	}
+	@Override
+	public void setClazz(String clazz) throws JspTagException { // TODO: Remove unnecessary throws
+		this.clazz = Strings.trimNullIfEmpty(clazz);
+	}
+
+	private transient Object style;
+	@Override
+	public void setStyle(Object style) throws JspTagException {
+		this.style = AttributeUtils.trimNullIfEmpty(style);
+	}
+
+	private transient String action;
+	@Override
+	public void setAction(String action) throws JspTagException {
+		this.action = AttributeUtils.nullIfEmpty(action);
+	}
+
+	private transient String enctype;
+	@Override
+	public void setEnctype(String enctype) throws JspTagException {
+		this.enctype = Strings.trimNullIfEmpty(enctype);
+	}
+
+	private transient String method;
+	@Override
+	public void setMethod(String method) throws JspTagException {
+		method = Strings.trimNullIfEmpty(method);
+		if(method != null && !isValidMethod(method)) throw new LocalizedJspTagException(ApplicationResources.accessor, "FormTag.method.invalid", method);
+		this.method = method;
+	}
+
+	private transient MutableURIParameters params;
+	@Override
+	public void addParam(String name, String value) {
+		if(params == null) params = new URIParametersMap();
+		params.addParameter(name, value);
+	}
+
+	private transient String target;
+	@Override
+	public void setTarget(String target) throws JspTagException {
+		this.target = Strings.trimNullIfEmpty(target);
+	}
+
+	private transient Object onsubmit;
+	@Override
+	public void setOnsubmit(Object onsubmit) throws JspTagException {
+		this.onsubmit = AttributeUtils.trimNullIfEmpty(onsubmit);
+	}
+
+	private transient BufferResult capturedBody;
+
+	private void init() {
+		clazz = null;
+		style = null;
+		action = null;
+		enctype = null;
+		method = null;
+		params = null;
+		target = null;
+		onsubmit = null;
+		capturedBody = null;
+	}
+
+	@Override
+	protected int doAfterBody(BufferResult capturedBody, Writer out) throws JspException, IOException {
+		assert this.capturedBody == null;
+		assert capturedBody != null;
+		this.capturedBody = capturedBody;
+		return SKIP_BODY;
+	}
+
+	@Override
+	protected int doEndTag(Writer out) throws JspTagException, IOException {
 		HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
 		HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
 		Html html = HtmlEE.get(
@@ -178,12 +196,20 @@ public class FormTag
 			response,
 			out
 		);
-		out.write("<form method=\"");
-		out.write(method);
-		out.write('"');
-		if(id!=null) {
+		out.write("<form");
+		if(id != null) {
 			out.write(" id=\"");
 			encodeTextInXhtmlAttribute(id, out);
+			out.write('"');
+		}
+		if(clazz != null) {
+			out.write(" class=\"");
+			encodeTextInXhtmlAttribute(clazz, out);
+			out.write('"');
+		}
+		if(style != null) {
+			out.write(" style=\"");
+			Coercion.write(style, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
 		Map<String,List<String>> actionParams;
@@ -207,27 +233,22 @@ public class FormTag
 			}
 			actionParams = null;
 		}
-		if(target!=null) {
-			out.write(" target=\"");
-			encodeTextInXhtmlAttribute(target, out);
-			out.write('"');
-		}
-		if(enctype!=null) {
+		if(enctype != null) {
 			out.write(" enctype=\"");
 			encodeTextInXhtmlAttribute(enctype, out);
 			out.write('"');
 		}
-		if(clazz!=null) {
-			out.write(" class=\"");
-			encodeTextInXhtmlAttribute(clazz, out);
+		if(method != null) {
+			out.write(" method=\"");
+			out.write(method);
 			out.write('"');
 		}
-		if(style!=null) {
-			out.write(" style=\"");
-			Coercion.write(style, textInXhtmlAttributeEncoder, out);
+		if(target != null) {
+			out.write(" target=\"");
+			encodeTextInXhtmlAttribute(target, out);
 			out.write('"');
 		}
-		if(onsubmit!=null) {
+		if(onsubmit != null) {
 			out.write(" onsubmit=\"");
 			Coercion.write(onsubmit, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
@@ -255,7 +276,9 @@ public class FormTag
 					didDiv = true;
 				}
 				String name = entry.getKey();
-				for(String paramValue : entry.getValue()) {
+				List<String> paramValues = entry.getValue();
+				assert !paramValues.isEmpty();
+				for(String paramValue : paramValues) {
 					html.input.hidden().name(name).value(paramValue).__().nl();
 				}
 			}
@@ -263,5 +286,15 @@ public class FormTag
 		if(didDiv) out.write("</div>");
 		Coercion.write(capturedBody, MarkupType.XHTML, out);
 		out.write("</form>");
+		return EVAL_PAGE;
+	}
+
+	@Override
+	public void doFinally() {
+		try {
+			init();
+		} finally {
+			super.doFinally();
+		}
 	}
 }

@@ -36,6 +36,8 @@ import com.aoindustries.tempfiles.TempFileContext;
 import com.aoindustries.tempfiles.servlet.TempFileContextEE;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -66,6 +68,8 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
  * @author  AO Industries, Inc.
  */
 public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
+
+	private static final Logger logger = Logger.getLogger(AutoEncodingBufferedTag.class.getName());
 
 	/**
 	 * Creates an instance of the currently preferred {@link BufferWriter}.
@@ -143,13 +147,12 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 		final RequestEncodingContext parentEncodingContext = RequestEncodingContext.getCurrentContext(request);
 
 		// Capture the body output while validating
-		// BufferWriter bufferWriter = new CharArrayBufferWriter(128, getTempFileThreshold());
-		BufferWriter bufferWriter = newBufferWriter(request, getTempFileThreshold());
+		BufferWriter captureBuffer = newBufferWriter(request, getTempFileThreshold());
 		try {
 			JspFragment body = getJspBody();
-			if(body!=null) {
+			if(body != null) {
 				final MediaType myContentType = getContentType();
-				MediaValidator captureValidator = MediaValidator.getMediaValidator(myContentType, bufferWriter);
+				MediaValidator captureValidator = MediaValidator.getMediaValidator(myContentType, captureBuffer);
 				RequestEncodingContext.setCurrentContext(
 					request,
 					new RequestEncodingContext(myContentType, captureValidator)
@@ -163,15 +166,17 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 				}
 			}
 		} finally {
-			bufferWriter.close();
+			captureBuffer.close();
 		}
-		final BufferResult capturedBody = bufferWriter.getResult();
-		bufferWriter = null; // Done with object, don't need to hold long-term reference
+		final BufferResult capturedBody = captureBuffer.getResult();
+		captureBuffer = null; // Done with object, don't need to hold long-term reference
 
 		MediaType myOutputType = getOutputType();
-		if(myOutputType==null) {
+		if(myOutputType == null) {
 			// No output, error if anything written.
+			// prefix skipped
 			doTag(capturedBody, FailOnWriteWriter.getInstance());
+			// suffix skipped
 		} else {
 			final HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
 			final JspWriter out = pageContext.getOut();
@@ -181,20 +186,33 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 			if(parentEncodingContext != null) {
 				// Use the output type of the parent
 				containerContentType = parentEncodingContext.contentType;
+				if(logger.isLoggable(Level.FINER)) {
+					logger.finer("containerContentType from parentEncodingContext: " + containerContentType);
+				}
+				assert parentEncodingContext.validMediaInput.isValidatingMediaInputType(containerContentType)
+					: "It is a bug in the parent to not validate its input consistent with its content type";
 			} else {
 				// Use the content type of the response
 				String responseContentType = response.getContentType();
 				// Default to XHTML: TODO: Is there a better way since can't set content type early in response then reset again...
 				if(responseContentType == null) responseContentType = MediaType.XHTML.getContentType();
 				containerContentType = MediaType.getMediaTypeForContentType(responseContentType);
+				if(logger.isLoggable(Level.FINER)) {
+					logger.finer("containerContentType from responseContentType: " + containerContentType + " from " + responseContentType);
+				}
 			}
 			// Find the encoder
 			EncodingContext encodingContext = new EncodingContextEE(pageContext.getServletContext(), request, response);
 			MediaEncoder mediaEncoder = MediaEncoder.getInstance(encodingContext, myOutputType, containerContentType);
-			if(mediaEncoder!=null) {
+			if(mediaEncoder != null) {
+				if(logger.isLoggable(Level.FINER)) {
+					logger.finer("Using MediaEncoder: " + mediaEncoder);
+				}
+				logger.finest("Setting encoder options");
 				setMediaEncoderOptions(mediaEncoder);
 				// Encode our output.  The encoder guarantees valid output for our parent.
-				writeEncoderPrefix(mediaEncoder, out);
+				logger.finest("Writing encoder prefix");
+				writeEncoderPrefix(mediaEncoder, out); // TODO: Skip prefix and suffix when empty?
 				try {
 					MediaWriter mediaWriter = new MediaWriter(encodingContext, mediaEncoder, out);
 					RequestEncodingContext.setCurrentContext(
@@ -208,6 +226,7 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 						RequestEncodingContext.setCurrentContext(request, parentEncodingContext);
 					}
 				} finally {
+					logger.finest("Writing encoder suffix");
 					writeEncoderSuffix(mediaEncoder, out);
 				}
 			} else {
@@ -216,6 +235,9 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 					parentEncodingContext != null
 					&& parentEncodingContext.validMediaInput.isValidatingMediaInputType(myOutputType)
 				) {
+					if(logger.isLoggable(Level.FINER)) {
+						logger.finer("Passing-through with validating parent: " + parentEncodingContext.validMediaInput);
+					}
 					RequestEncodingContext.setCurrentContext(
 						request,
 						new RequestEncodingContext(myOutputType, parentEncodingContext.validMediaInput)
@@ -228,6 +250,9 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 				} else {
 					// Not using an encoder and parent doesn't validate our output, validate our own output.
 					MediaValidator validator = MediaValidator.getMediaValidator(myOutputType, out);
+					if(logger.isLoggable(Level.FINER)) {
+						logger.finer("Using MediaValidator: " + validator);
+					}
 					RequestEncodingContext.setCurrentContext(
 						request,
 						new RequestEncodingContext(myOutputType, validator)

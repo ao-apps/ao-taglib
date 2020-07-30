@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2020-07-27T22:32:46-05:00"
+		dateModified="2020-07-29T23:20:37-05:00"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -67,7 +67,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 						Changed several tags from <code>SimpleTag</code> to <code>BodyTag</code> to better interact with
 						legacy JSP that use scriptlets:
 						<ol>
-							<!-- TODO: <li><core:link page="ao.tld/tag-form" /></li> -->
+							<li><core:link page="ao.tld/tag-form" /></li>
 							<li><core:link page="ao.tld/tag-html" /></li>
 							<!-- TODO: Change more/all tags to BodyTag for more flexibility with legacy code -->
 						</ol>

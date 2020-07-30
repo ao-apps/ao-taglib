@@ -30,6 +30,8 @@ import com.aoindustries.encoding.MediaWriter;
 import com.aoindustries.encoding.servlet.EncodingContextEE;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
@@ -70,6 +72,8 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
  */
 public abstract class AutoEncodingFilteredTag extends SimpleTagSupport {
 
+	private static final Logger logger = Logger.getLogger(AutoEncodingFilteredTag.class.getName());
+
 	/**
 	 * Gets the type of data that is contained by this tag.
 	 * This is also the output type.
@@ -90,20 +94,33 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport {
 		if(parentEncodingContext != null) {
 			// Use the output type of the parent
 			containerContentType = parentEncodingContext.contentType;
+			if(logger.isLoggable(Level.FINER)) {
+				logger.finer("containerContentType from parentEncodingContext: " + containerContentType);
+			}
+			assert parentEncodingContext.validMediaInput.isValidatingMediaInputType(containerContentType)
+				: "It is a bug in the parent to not validate its input consistent with its content type";
 		} else {
 			// Use the content type of the response
 			String responseContentType = response.getContentType();
 			// Default to XHTML: TODO: Is there a better way since can't set content type early in response then reset again...
 			if(responseContentType == null) responseContentType = MediaType.XHTML.getContentType();
 			containerContentType = MediaType.getMediaTypeForContentType(responseContentType);
+			if(logger.isLoggable(Level.FINER)) {
+				logger.finer("containerContentType from responseContentType: " + containerContentType + " from " + responseContentType);
+			}
 		}
 		// Find the encoder
 		final MediaType myContentType = getContentType();
 		EncodingContext encodingContext = new EncodingContextEE(pageContext.getServletContext(), request, response);
 		MediaEncoder mediaEncoder = MediaEncoder.getInstance(encodingContext, myContentType, containerContentType);
 		if(mediaEncoder != null) {
+			if(logger.isLoggable(Level.FINER)) {
+				logger.finer("Using MediaEncoder: " + mediaEncoder);
+			}
+			logger.finest("Setting encoder options");
 			setMediaEncoderOptions(mediaEncoder);
 			// Encode both our output and the content.  The encoder validates our input and guarantees valid output for our parent.
+			logger.finest("Writing encoder prefix");
 			writeEncoderPrefix(mediaEncoder, out);
 			try {
 				MediaWriter mediaWriter = new MediaWriter(encodingContext, mediaEncoder, out);
@@ -118,6 +135,7 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport {
 					RequestEncodingContext.setCurrentContext(request, parentEncodingContext);
 				}
 			} finally {
+				logger.finest("Writing encoder suffix");
 				writeEncoderSuffix(mediaEncoder, out);
 			}
 		} else {
@@ -126,6 +144,9 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport {
 				parentEncodingContext != null
 				&& parentEncodingContext.validMediaInput.isValidatingMediaInputType(myContentType)
 			) {
+				if(logger.isLoggable(Level.FINER)) {
+					logger.finer("Passing-through with validating parent: " + parentEncodingContext.validMediaInput);
+				}
 				RequestEncodingContext.setCurrentContext(
 					request,
 					new RequestEncodingContext(myContentType, parentEncodingContext.validMediaInput)
@@ -138,6 +159,9 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport {
 			} else {
 				// Not using an encoder and parent doesn't validate our output, validate our own output.
 				MediaValidator validator = MediaValidator.getMediaValidator(myContentType, out);
+				if(logger.isLoggable(Level.FINER)) {
+					logger.finer("Using MediaValidator: " + validator);
+				}
 				RequestEncodingContext.setCurrentContext(
 					request,
 					new RequestEncodingContext(myContentType, validator)
@@ -173,7 +197,7 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport {
 	 */
 	protected void doTag(Writer out) throws JspException, IOException {
 		JspFragment body = getJspBody();
-		if(body!=null) {
+		if(body != null) {
 			// Check for JspWriter to avoid a JspWriter wrapping a JspWriter
 			body.invoke(
 				(out instanceof JspWriter)

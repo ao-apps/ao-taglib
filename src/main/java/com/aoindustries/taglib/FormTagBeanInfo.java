@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2017, 2018  AO Industries, Inc.
+ * Copyright (C) 2017, 2018, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -44,7 +44,7 @@ public class FormTagBeanInfo extends SimpleBeanInfo {
 					// From base class: new PropertyDescriptor("contentType", FormTag.class, "getContentType", null),
 					// From base class: new PropertyDescriptor("outputType", FormTag.class, "getOutputType", null),
 					new PropertyDescriptor("method", FormTag.class, null, "setMethod"),
-					new PropertyDescriptor("id", FormTag.class, null, "setId"),
+					// From base class: new PropertyDescriptor("id", FormTag.class, "getId", "setId"),
 					new PropertyDescriptor("action", FormTag.class, null, "setAction"),
 					new PropertyDescriptor("target", FormTag.class, null, "setTarget"),
 					new PropertyDescriptor("enctype", FormTag.class, null, "setEnctype"),

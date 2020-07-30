@@ -32,7 +32,6 @@ import com.aoindustries.encoding.servlet.EncodingContextEE;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import java.io.IOException;
 import java.io.Writer;
-import java.lang.reflect.Field;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -97,8 +96,6 @@ public abstract class AutoEncodingFilteredBodyTag extends BodyTagSupport impleme
 	 */
 	public abstract MediaType getContentType();
 
-	private static final long serialVersionUID = 1L;
-
 	private enum Mode {
 		PASSTHROUGH(false),
 		ENCODING(true),
@@ -111,11 +108,23 @@ public abstract class AutoEncodingFilteredBodyTag extends BodyTagSupport impleme
 		}
 	}
 	
+	private static final long serialVersionUID = 1L;
+
 	private transient RequestEncodingContext parentEncodingContext;
 	private transient MediaEncoder mediaEncoder;
+	private transient RequestEncodingContext validatingOutEncodingContext;
 	private transient Writer validatingOut;
 	private transient Mode mode;
 	private transient boolean bodyUnbuffered;
+
+	private void init() {
+		parentEncodingContext = null;
+		mediaEncoder = null;
+		validatingOutEncodingContext = null;
+		validatingOut = null;
+		mode = null;
+		bodyUnbuffered = false;
+	}
 
 	/**
 	 * @deprecated  You should probably be implementing in {@link #doStartTag(java.io.Writer)}
@@ -125,12 +134,6 @@ public abstract class AutoEncodingFilteredBodyTag extends BodyTagSupport impleme
 	@Override
 	@Deprecated
 	public int doStartTag() throws JspException {
-		// Clear fields
-		parentEncodingContext = null;
-		mediaEncoder = null;
-		validatingOut = null;
-		mode = null;
-		bodyUnbuffered = false;
 		try {
 			final HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
 			final HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
@@ -146,6 +149,8 @@ public abstract class AutoEncodingFilteredBodyTag extends BodyTagSupport impleme
 				if(logger.isLoggable(Level.FINER)) {
 					logger.finer("containerContentType from parentEncodingContext: " + containerContentType);
 				}
+				assert parentEncodingContext.validMediaInput.isValidatingMediaInputType(containerContentType)
+					: "It is a bug in the parent to not validate its input consistent with its content type";
 			} else {
 				// Use the content type of the response
 				String responseContentType = response.getContentType();
@@ -157,7 +162,6 @@ public abstract class AutoEncodingFilteredBodyTag extends BodyTagSupport impleme
 				}
 			}
 			// Find the encoder
-			final RequestEncodingContext newEncodingContext;
 			final MediaType myContentType = getContentType();
 			EncodingContext encodingContext = new EncodingContextEE(pageContext.getServletContext(), request, response);
 			mediaEncoder = MediaEncoder.getInstance(encodingContext, myContentType, containerContentType);
@@ -171,7 +175,7 @@ public abstract class AutoEncodingFilteredBodyTag extends BodyTagSupport impleme
 				logger.finest("Writing encoder prefix");
 				writeEncoderPrefix(mediaEncoder, out);
 				MediaWriter mediaWriter = new MediaWriter(encodingContext, mediaEncoder, out);
-				newEncodingContext = new RequestEncodingContext(myContentType, mediaWriter);
+				validatingOutEncodingContext = new RequestEncodingContext(myContentType, mediaWriter);
 				validatingOut = mediaWriter;
 				mode = Mode.ENCODING;
 			} else {
@@ -183,7 +187,7 @@ public abstract class AutoEncodingFilteredBodyTag extends BodyTagSupport impleme
 					if(logger.isLoggable(Level.FINER)) {
 						logger.finer("Passing-through with validating parent: " + parentEncodingContext.validMediaInput);
 					}
-					newEncodingContext = new RequestEncodingContext(myContentType, parentEncodingContext.validMediaInput);
+					validatingOutEncodingContext = new RequestEncodingContext(myContentType, parentEncodingContext.validMediaInput);
 					validatingOut = out;
 					mode = Mode.PASSTHROUGH;
 				} else {
@@ -192,13 +196,13 @@ public abstract class AutoEncodingFilteredBodyTag extends BodyTagSupport impleme
 					if(logger.isLoggable(Level.FINER)) {
 						logger.finer("Using MediaValidator: " + validator);
 					}
-					newEncodingContext = new RequestEncodingContext(myContentType, validator);
+					validatingOutEncodingContext = new RequestEncodingContext(myContentType, validator);
 					validatingOut = validator;
 					mode = Mode.VALIDATING;
 				}
 			}
-			RequestEncodingContext.setCurrentContext(request, newEncodingContext);
 			bodyUnbuffered = !mode.buffered;
+			RequestEncodingContext.setCurrentContext(request, validatingOutEncodingContext);
 			return checkStartTagReturn(doStartTag(validatingOut), mode);
 		} catch(IOException e) {
 			throw new JspTagException(e);
@@ -229,42 +233,11 @@ public abstract class AutoEncodingFilteredBodyTag extends BodyTagSupport impleme
 		return EVAL_BODY_FILTERED;
 	}
 
-	private static final String BODY_CONTENT_IMPL_CLASS = "org.apache.jasper.runtime.BodyContentImpl";
-	private static final String WRITER_FIELD = "writer";
-
-	private static final Class<?> bodyContentImplClass;
-	private static final Field writerField;
-	static {
-		Class<?> clazz;
-		Field field;
-		try {
-			clazz = Class.forName(BODY_CONTENT_IMPL_CLASS);
-			field = clazz.getDeclaredField(WRITER_FIELD);
-			field.setAccessible(true);
-		} catch(RuntimeException | ReflectiveOperationException e) {
-			if(logger.isLoggable(Level.INFO)) {
-				logger.log(
-					Level.INFO,
-					"Cannot get direct access to the "+BODY_CONTENT_IMPL_CLASS+"."+WRITER_FIELD+" field.  "
-					+ "Unbuffering of BodyContent disabled.  "
-					+ "The system will behave correctly, but some optimizations are disabled.",
-					e
-				);
-			}
-			clazz = null;
-			field = null;
-		}
-		bodyContentImplClass = clazz;
-		writerField = field;
-		//System.err.println("DEBUG: bodyContentImplClass="+bodyContentImplClass);
-		//System.err.println("DEBUG: writerField="+writerField);
-	}
-
 	/**
 	 * <p>
 	 * The only way to replace the "out" variable in the generated JSP is to use
 	 * {@link #EVAL_BODY_BUFFERED}.  Without this, any writer given to {@link PageContext#pushBody(java.io.Writer)}
-	 * not used.  We don't actually want to buffer the content, but only want to filter and validate the data
+	 * is not used.  We don't actually want to buffer the content, but only want to filter and validate the data
 	 * on-the-fly.
 	 * </p>
 	 * <p>
@@ -278,26 +251,8 @@ public abstract class AutoEncodingFilteredBodyTag extends BodyTagSupport impleme
 	 */
 	@Override
 	final public void doInitBody() throws JspTagException {
-		assert mode == Mode.ENCODING || mode == Mode.VALIDATING;
-		// Note: bodyContentImplClass will be null when direct access disabled
-		if(bodyContentImplClass != null) {
-			Class<? extends Writer> bodyContentClass = bodyContent.getClass();
-			if(bodyContentClass == bodyContentImplClass) {
-				try {
-					assert writerField.get(bodyContent) == null : "writer must be null since is setup for buffering";
-					writerField.set(bodyContent, validatingOut);
-					bodyUnbuffered = true;
-					if(logger.isLoggable(Level.FINER)) {
-						logger.finer("Successfully unbuffered BodyContextImpl");
-					}
-				} catch(IllegalAccessException e) {
-					if(logger.isLoggable(Level.SEVERE)) {
-						logger.severe("Failed to unbuffer BodyContextImpl");
-					}
-					throw new JspTagException(e);
-				}
-			}
-		}
+		assert mode.buffered;
+		bodyUnbuffered = BodyTagUtils.unbuffer(bodyContent, validatingOut);
 	}
 
 	/**
@@ -318,6 +273,7 @@ public abstract class AutoEncodingFilteredBodyTag extends BodyTagSupport impleme
 				}
 				bodyContent.clear();
 			}
+			RequestEncodingContext.setCurrentContext(pageContext.getRequest(), validatingOutEncodingContext);
 			return BodyTagUtils.checkAfterBodyReturn(doAfterBody(validatingOut));
 		} catch(IOException e) {
 			throw new JspTagException(e);
@@ -345,11 +301,10 @@ public abstract class AutoEncodingFilteredBodyTag extends BodyTagSupport impleme
 	@Deprecated
 	public int doEndTag() throws JspException {
 		try {
+			RequestEncodingContext.setCurrentContext(pageContext.getRequest(), validatingOutEncodingContext);
 			int endTagReturn = BodyTagUtils.checkEndTagReturn(doEndTag(validatingOut));
 			if(mediaEncoder != null) {
-				if(logger.isLoggable(Level.FINEST)) {
-					logger.finest("Writing encoder suffix");
-				}
+				logger.finest("Writing encoder suffix");
 				writeEncoderSuffix(mediaEncoder, pageContext.getOut());
 			}
 			return endTagReturn;
@@ -377,8 +332,12 @@ public abstract class AutoEncodingFilteredBodyTag extends BodyTagSupport impleme
 
 	@Override
 	public void doFinally() {
-		// Restore previous encoding context that is used for our output
-		RequestEncodingContext.setCurrentContext(pageContext.getRequest(), parentEncodingContext);
+		try {
+			// Restore previous encoding context that is used for our output
+			RequestEncodingContext.setCurrentContext(pageContext.getRequest(), parentEncodingContext);
+		} finally {
+			init();
+		}
 	}
 
 	/**

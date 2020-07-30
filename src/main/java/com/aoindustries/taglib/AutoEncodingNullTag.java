@@ -29,9 +29,10 @@ import com.aoindustries.encoding.MediaValidator;
 import com.aoindustries.encoding.MediaWriter;
 import com.aoindustries.encoding.servlet.EncodingContextEE;
 import com.aoindustries.io.NullWriter;
-import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
@@ -50,6 +51,8 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
  */
 public abstract class AutoEncodingNullTag extends SimpleTagSupport {
 
+	private static final Logger logger = Logger.getLogger(AutoEncodingNullTag.class.getName());
+
 	/**
 	 * Gets the output type of this tag.  This is used to determine the correct
 	 * encoder.  If the tag never has any output this should return {@code null}.
@@ -62,10 +65,10 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
 		// The output type cannot be determined until the body of the tag is invoked, because nested tags may
 		// alter the resulting type.  We invoke the body first to accommodate nested tags.
 		JspFragment body = getJspBody();
-		if(body!=null) body.invoke(NullWriter.getInstance());
+		if(body != null) body.invoke(NullWriter.getInstance());
 
 		MediaType myOutputType = getOutputType();
-		if(myOutputType==null) {
+		if(myOutputType == null) {
 			// No output, error if anything written.
 			// prefix skipped
 			doTag(FailOnWriteWriter.getInstance());
@@ -83,31 +86,36 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
 			if(parentEncodingContext != null) {
 				// Use the output type of the parent
 				containerContentType = parentEncodingContext.contentType;
+				if(logger.isLoggable(Level.FINER)) {
+					logger.finer("containerContentType from parentEncodingContext: " + containerContentType);
+				}
+				assert parentEncodingContext.validMediaInput.isValidatingMediaInputType(containerContentType)
+					: "It is a bug in the parent to not validate its input consistent with its content type";
 			} else {
 				// Use the content type of the response
 				String responseContentType = response.getContentType();
 				// Default to XHTML: TODO: Is there a better way since can't set content type early in response then reset again...
 				if(responseContentType == null) responseContentType = MediaType.XHTML.getContentType();
 				containerContentType = MediaType.getMediaTypeForContentType(responseContentType);
+				if(logger.isLoggable(Level.FINER)) {
+					logger.finer("containerContentType from responseContentType: " + containerContentType + " from " + responseContentType);
+				}
 			}
 
 			// Determine the validator for the parent type.  This is to make sure prefix and suffix are valid.
 			final Writer containerValidator;
 			if(parentEncodingContext != null) {
-				// Make sure the output is compatibly validated.  It is a bug in the parent to not validate its input consistent with its content type
-				if(!parentEncodingContext.validMediaInput.isValidatingMediaInputType(containerContentType)) {
-					throw new LocalizedJspTagException(
-						ApplicationResources.accessor,
-						"AutoEncodingFilterTag.parentIncompatibleValidation",
-						parentEncodingContext.validMediaInput.getClass().getName(),
-						containerContentType.getContentType()
-					);
-				}
 				// Already validated
 				containerValidator = out;
+				if(logger.isLoggable(Level.FINER)) {
+					logger.finer("containerValidator from parentEncodingContext: " + containerValidator);
+				}
 			} else {
 				// Need to add validator
 				containerValidator = MediaValidator.getMediaValidator(containerContentType, out);
+				if(logger.isLoggable(Level.FINER)) {
+					logger.finer("containerValidator from containerContentType: " + containerValidator + " from " + containerContentType);
+				}
 			}
 
 			// Write any prefix
@@ -116,9 +124,14 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
 			// Find the encoder
 			EncodingContext encodingContext = new EncodingContextEE(pageContext.getServletContext(), request, response);
 			MediaEncoder mediaEncoder = MediaEncoder.getInstance(encodingContext, myOutputType, containerContentType);
-			if(mediaEncoder!=null) {
+			if(mediaEncoder != null) {
+				if(logger.isLoggable(Level.FINER)) {
+					logger.finer("Using MediaEncoder: " + mediaEncoder);
+				}
+				logger.finest("Setting encoder options");
 				setMediaEncoderOptions(mediaEncoder);
 				// Encode our output.  The encoder guarantees valid output for our parent.
+				logger.finest("Writing encoder prefix");
 				writeEncoderPrefix(mediaEncoder, out);
 				try {
 					MediaWriter mediaWriter = new MediaWriter(encodingContext, mediaEncoder, out);
@@ -133,6 +146,7 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
 						RequestEncodingContext.setCurrentContext(request, parentEncodingContext);
 					}
 				} finally {
+					logger.finest("Writing encoder suffix");
 					writeEncoderSuffix(mediaEncoder, out);
 				}
 			} else {
@@ -141,6 +155,9 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
 					parentEncodingContext != null
 					&& parentEncodingContext.validMediaInput.isValidatingMediaInputType(myOutputType)
 				) {
+					if(logger.isLoggable(Level.FINER)) {
+						logger.finer("Passing-through with validating parent: " + parentEncodingContext.validMediaInput);
+					}
 					RequestEncodingContext.setCurrentContext(
 						request,
 						new RequestEncodingContext(myOutputType, parentEncodingContext.validMediaInput)
@@ -153,6 +170,9 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
 				} else {
 					// Not using an encoder and parent doesn't validate our output, validate our own output.
 					MediaValidator validator = MediaValidator.getMediaValidator(myOutputType, out);
+					if(logger.isLoggable(Level.FINER)) {
+						logger.finer("Using MediaValidator: " + validator);
+					}
 					RequestEncodingContext.setCurrentContext(
 						request,
 						new RequestEncodingContext(myOutputType, validator)

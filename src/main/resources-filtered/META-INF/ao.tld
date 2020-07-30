@@ -991,7 +991,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-03-26T22:27:21-05:00" -->
+		<!-- dateModified="2020-07-28T03:39:40-05:00" -->
 		<!-- TODO: param.* dynamic attributes should not do automatic multi-parameter.  Make a params.* dynamic attribute for this purpose. -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
@@ -1022,7 +1022,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>form</name>
 		<tag-class>com.aoindustries.taglib.FormTag</tag-class>
 		<tei-class>com.aoindustries.taglib.FormTagTEI</tei-class>
-		<body-content>scriptless</body-content>
+		<body-content>JSP</body-content>
 		<attribute>
 			<description><![CDATA[
 				<p>
