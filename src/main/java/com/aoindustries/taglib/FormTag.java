@@ -48,7 +48,6 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 
@@ -179,7 +178,7 @@ public class FormTag
 	}
 
 	@Override
-	protected int doAfterBody(BufferResult capturedBody, Writer out) throws JspException, IOException {
+	protected int doAfterBody(BufferResult capturedBody, Writer out) {
 		assert this.capturedBody == null;
 		assert capturedBody != null;
 		this.capturedBody = capturedBody;
