@@ -32,14 +32,9 @@ import com.aoindustries.io.buffer.AutoTempFileWriter;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.io.buffer.BufferWriter;
 import com.aoindustries.io.buffer.CharArrayBufferWriter;
-import com.aoindustries.io.buffer.LoggingWriter;
 import com.aoindustries.tempfiles.TempFileContext;
 import com.aoindustries.tempfiles.servlet.TempFileContextEE;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.io.Writer;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
@@ -71,35 +66,6 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
  * @author  AO Industries, Inc.
  */
 public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
-
-	/**
-	 * Enables logging of all buffer calls.
-	 */
-	private static final boolean ENABLE_BUFFER_LOGGING = false; // Must be false for production releases
-
-	/**
-	 * Shared log writer.
-	 */
-	private static final Writer log;
-	static {
-		if(ENABLE_BUFFER_LOGGING) {
-			try {
-				File tempFile = File.createTempFile("AutoEncodingBufferedTag.log", null);
-				tempFile.deleteOnExit();
-				log = new BufferedWriter(
-					new OutputStreamWriter(
-						new FileOutputStream(
-							tempFile
-						)
-					)
-				);
-			} catch(IOException e) {
-				throw new ExceptionInInitializerError(e);
-			}
-		} else {
-			log = null;
-		}
-	}
 
 	/**
 	 * Creates an instance of the currently preferred {@link BufferWriter}.
@@ -180,7 +146,6 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 		// BufferWriter bufferWriter = new CharArrayBufferWriter(128, getTempFileThreshold());
 		BufferWriter bufferWriter = newBufferWriter(request, getTempFileThreshold());
 		try {
-			if(ENABLE_BUFFER_LOGGING) bufferWriter = new LoggingWriter(bufferWriter, log);
 			JspFragment body = getJspBody();
 			if(body!=null) {
 				final MediaType myContentType = getContentType();
