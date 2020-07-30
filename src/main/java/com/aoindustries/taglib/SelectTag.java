@@ -36,23 +36,26 @@ import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspTagException;
-import javax.servlet.jsp.PageContext;
+import static javax.servlet.jsp.tagext.Tag.SKIP_BODY;
 
 /**
  * @author  AO Industries, Inc.
  */
 public class SelectTag
-	extends AutoEncodingBufferedTag
+	extends AutoEncodingBufferedBodyTag
 	implements
+		// Global attributes
 		IdAttribute,
-		NameAttribute,
 		ClassAttribute,
 		StyleAttribute,
+		// Attributes
 		DisabledAttribute,
+		NameAttribute,
 		SizeAttribute,
+		// Events
+		OnblurAttribute,
 		OnchangeAttribute,
 		OnfocusAttribute,
-		OnblurAttribute,
 		OnkeypressAttribute
 {
 
@@ -66,17 +69,7 @@ public class SelectTag
 		return MediaType.XHTML;
 	}
 
-	private String id;
-	@Override
-	public void setId(String id) throws JspTagException {
-		this.id = Strings.trimNullIfEmpty(id);
-	}
-
-	private String name;
-	@Override
-	public void setName(String name) throws JspTagException {
-		this.name = Strings.nullIfEmpty(name);
-	}
+	private static final long serialVersionUID = 1L;
 
 	private String clazz;
 	@Override
@@ -100,10 +93,22 @@ public class SelectTag
 		this.disabled = disabled;
 	}
 
+	private String name;
+	@Override
+	public void setName(String name) throws JspTagException {
+		this.name = Strings.nullIfEmpty(name);
+	}
+
 	private Object size;
 	@Override
 	public void setSize(Object size) throws JspTagException {
 		this.size = AttributeUtils.trimNullIfEmpty(size);
+	}
+
+	private Object onblur;
+	@Override
+	public void setOnblur(Object onblur) throws JspTagException {
+		this.onblur = AttributeUtils.trimNullIfEmpty(onblur);
 	}
 
 	private Object onchange;
@@ -118,21 +123,37 @@ public class SelectTag
 		this.onfocus = AttributeUtils.trimNullIfEmpty(onfocus);
 	}
 
-	private Object onblur;
-	@Override
-	public void setOnblur(Object onblur) throws JspTagException {
-		this.onblur = AttributeUtils.trimNullIfEmpty(onblur);
-	}
-
 	private Object onkeypress;
 	@Override
 	public void setOnkeypress(Object onkeypress) throws JspTagException {
 		this.onkeypress = AttributeUtils.trimNullIfEmpty(onkeypress);
 	}
 
+	private transient BufferResult capturedBody;
+
+	private void init() {
+		clazz = null;
+		style = null;
+		disabled = false;
+		name = null;
+		size = null;
+		onblur = null;
+		onchange = null;
+		onfocus = null;
+		onkeypress = null;
+		capturedBody = null;
+	}
+
 	@Override
-	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
-		PageContext pageContext = (PageContext)getJspContext();
+	protected int doAfterBody(BufferResult capturedBody, Writer out) {
+		assert this.capturedBody == null;
+		assert capturedBody != null;
+		this.capturedBody = capturedBody;
+		return SKIP_BODY;
+	}
+
+	@Override
+	protected int doEndTag(Writer out) throws JspTagException, IOException {
 		Serialization serialization = SerializationEE.get(
 			pageContext.getServletContext(),
 			(HttpServletRequest)pageContext.getRequest()
@@ -141,11 +162,6 @@ public class SelectTag
 		if(id != null) {
 			out.write(" id=\"");
 			encodeTextInXhtmlAttribute(id, out);
-			out.write('"');
-		}
-		if(name != null) {
-			out.write(" name=\"");
-			encodeTextInXhtmlAttribute(name, out);
 			out.write('"');
 		}
 		if(clazz != null) {
@@ -162,9 +178,19 @@ public class SelectTag
 			out.write(" disabled");
 			if(serialization == Serialization.XML) out.write("=\"disabled\"");
 		}
+		if(name != null) {
+			out.write(" name=\"");
+			encodeTextInXhtmlAttribute(name, out);
+			out.write('"');
+		}
 		if(size != null) {
 			out.write(" size=\"");
 			Coercion.write(size, textInXhtmlAttributeEncoder, out);
+			out.write('"');
+		}
+		if(onblur != null) {
+			out.write(" onblur=\"");
+			Coercion.write(onblur, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		if(onchange != null) {
@@ -177,11 +203,6 @@ public class SelectTag
 			Coercion.write(onfocus, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
-		if(onblur != null) {
-			out.write(" onblur=\"");
-			Coercion.write(onblur, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
-			out.write('"');
-		}
 		if(onkeypress != null) {
 			out.write(" onkeypress=\"");
 			Coercion.write(onkeypress, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
@@ -190,5 +211,6 @@ public class SelectTag
 		out.write('>');
 		Coercion.write(capturedBody, MarkupType.XHTML, out);
 		out.write("</select>");
+		return EVAL_PAGE;
 	}
 }
