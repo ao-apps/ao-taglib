@@ -44,13 +44,13 @@ public class FormTagBeanInfo extends SimpleBeanInfo {
 					// From base class: new PropertyDescriptor("contentType", FormTag.class, "getContentType", null),
 					// From base class: new PropertyDescriptor("outputType", FormTag.class, "getOutputType", null),
 					// From base class: new PropertyDescriptor("id", FormTag.class, "getId", "setId"),
-					new PropertyDescriptor("class", FormTag.class, "getClazz", "setClazz"),
-					new PropertyDescriptor("style", FormTag.class, null, "setStyle"),
-					new PropertyDescriptor("action", FormTag.class, null, "setAction"),
-					new PropertyDescriptor("enctype", FormTag.class, null, "setEnctype"),
-					new PropertyDescriptor("method", FormTag.class, null, "setMethod"),
-					new PropertyDescriptor("target", FormTag.class, null, "setTarget"),
-					new PropertyDescriptor("onsubmit", FormTag.class, null, "setOnsubmit")
+					new PropertyDescriptor("class",    FormTag.class, "getClazz", "setClazz"),
+					new PropertyDescriptor("style",    FormTag.class, null,       "setStyle"),
+					new PropertyDescriptor("action",   FormTag.class, null,       "setAction"),
+					new PropertyDescriptor("enctype",  FormTag.class, null,       "setEnctype"),
+					new PropertyDescriptor("method",   FormTag.class, null,       "setMethod"),
+					new PropertyDescriptor("target",   FormTag.class, null,       "setTarget"),
+					new PropertyDescriptor("onsubmit", FormTag.class, null,       "setOnsubmit")
 				};
 				properties = props;
 			}

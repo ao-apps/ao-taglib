@@ -42,9 +42,9 @@ public class HtmlTagBeanInfo extends SimpleBeanInfo {
 			if(props == null) {
 				props = new PropertyDescriptor[] {
 					// From base class: new PropertyDescriptor("contentType", HtmlTag.class, "getContentType", null),
-					new PropertyDescriptor("serialization", HtmlTag.class, null, "setSerialization"),
-					new PropertyDescriptor("doctype", HtmlTag.class, null, "setDoctype"),
-					new PropertyDescriptor("class", HtmlTag.class, "getClazz", "setClazz")
+					new PropertyDescriptor("serialization", HtmlTag.class, null,       "setSerialization"),
+					new PropertyDescriptor("doctype",       HtmlTag.class, null,       "setDoctype"),
+					new PropertyDescriptor("class",         HtmlTag.class, "getClazz", "setClazz")
 				};
 				properties = props;
 			}
