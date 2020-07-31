@@ -24,12 +24,14 @@ package com.aoindustries.taglib;
 
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.TagSupport;
+import javax.servlet.jsp.tagext.TryCatchFinally;
 
 /**
  * @author  AO Industries, Inc.
  */
 public class ChooseTag
 	extends TagSupport
+	implements TryCatchFinally
 {
 
 	private static final long serialVersionUID = 1L;
@@ -38,12 +40,10 @@ public class ChooseTag
 	private boolean matched;
 	private boolean hasOtherwise;
 
-	@Override
-	public void release() {
+	private void init() {
 		hasWhen = false;
 		matched = false;
 		hasOtherwise = false;
-		super.release();
 	}
 
 	@Override
@@ -82,5 +82,15 @@ public class ChooseTag
 			throw new JspTagException("<ao:choose> requires at least one nested <ao:when>");
 		}
 		return EVAL_PAGE;
+	}
+
+	@Override
+	public void doCatch(Throwable t) throws Throwable {
+		throw t;
+	}
+
+	@Override
+	public void doFinally() {
+		init();
 	}
 }

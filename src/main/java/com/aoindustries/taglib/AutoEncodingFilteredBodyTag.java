@@ -117,15 +117,13 @@ public abstract class AutoEncodingFilteredBodyTag extends BodyTagSupport impleme
 	private transient Mode mode;
 	private transient boolean bodyUnbuffered;
 
-	@Override
-	public void release() {
+	private void init() {
 		parentEncodingContext = null;
 		mediaEncoder = null;
 		validatingOutEncodingContext = null;
 		validatingOut = null;
 		mode = null;
 		bodyUnbuffered = false;
-		super.release();
 	}
 
 	/**
@@ -334,8 +332,12 @@ public abstract class AutoEncodingFilteredBodyTag extends BodyTagSupport impleme
 
 	@Override
 	public void doFinally() {
-		// Restore previous encoding context that is used for our output
-		RequestEncodingContext.setCurrentContext(pageContext.getRequest(), parentEncodingContext);
+		try {
+			// Restore previous encoding context that is used for our output
+			RequestEncodingContext.setCurrentContext(pageContext.getRequest(), parentEncodingContext);
+		} finally {
+			init();
+		}
 	}
 
 	/**

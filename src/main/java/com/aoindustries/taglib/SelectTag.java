@@ -131,8 +131,7 @@ public class SelectTag
 
 	private transient BufferResult capturedBody;
 
-	@Override
-	public void release() {
+	private void init() {
 		clazz = null;
 		style = null;
 		disabled = false;
@@ -143,7 +142,6 @@ public class SelectTag
 		onfocus = null;
 		onkeypress = null;
 		capturedBody = null;
-		super.release();
 	}
 
 	@Override
@@ -214,5 +212,14 @@ public class SelectTag
 		Coercion.write(capturedBody, MarkupType.XHTML, out);
 		out.write("</select>");
 		return EVAL_PAGE;
+	}
+
+	@Override
+	public void doFinally() {
+		try {
+			init();
+		} finally {
+			super.doFinally();
+		}
 	}
 }

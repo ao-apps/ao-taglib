@@ -57,13 +57,11 @@ public class BundleTag
 	private String prefix;
 	private transient Object oldRequestValue;
 
-	@Override
-	public void release() {
+	private void init() {
 		basename = null;
 		accessor = null;
 		prefix = null;
 		oldRequestValue = null;
-		super.release();
 	}
 
 	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
@@ -103,6 +101,10 @@ public class BundleTag
 
 	@Override
 	public void doFinally() {
-		pageContext.getRequest().setAttribute(REQUEST_ATTRIBUTE, oldRequestValue);
+		try {
+			pageContext.getRequest().setAttribute(REQUEST_ATTRIBUTE, oldRequestValue);
+		} finally {
+			init();
+		}
 	}
 }

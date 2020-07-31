@@ -77,14 +77,12 @@ public class OptionTag
 
 	private transient BufferResult capturedBody;
 
-	@Override
-	public void release() {
+	private void init() {
 		disabled = false;
 		selected = false;
 		valueSet = false;
 		value = null;
 		capturedBody = null;
-		super.release();
 	}
 
 	@Override
@@ -112,5 +110,14 @@ public class OptionTag
 			.disabled(disabled)
 			.text__(capturedBody);
 		return EVAL_PAGE;
+	}
+
+	@Override
+	public void doFinally() {
+		try {
+			init();
+		} finally {
+			super.doFinally();
+		}
 	}
 }
