@@ -44,6 +44,32 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 
+/**
+ * <p>
+ * TODO: Support both filtered and buffered modes, defaulting to filtered
+ * This would allow nested tags while in buffered mode.  Would be a
+ * boolean attribute "buffered", defaulting to false.  A TLD validator
+ * would confirm that attribute-providing tags are not within an
+ * unbuffered parent.  This would also likely converge FilteredBodyTag
+ * and BufferedBodyTag into a single implementation.  Also, all
+ * *Attribute interfaces sould have a "boolean isBuffered()".
+ * </p>
+ * <p>
+ * TODO: Have dir attribute accept a new value "response", which would be
+ * the default.  This would set the dir value based on the current
+ * response locale.  This would be consistent with the current lang
+ * implementation.  "auto" could still be used to override this.
+ * Possibly allow set as empty string to override, too.
+ * </p>
+ * <p>
+ * TODO: Support an open-only mode, which would be the default when there
+ * is no body.  Values "true", "false", "auto" (the default).  When
+ * open-only, the closing &lt;/ao:html&gt; would not be written, and the
+ * request attributes would not be restored.  This would allow the
+ * &lt;ao:html&gt; tag to be used where the header and footer are split
+ * into separate files.  Maybe negate it and call the attribute "close".
+ * </p>
+ */
 public class HtmlTag extends ElementFilteredBodyTag {
 
 	/**
