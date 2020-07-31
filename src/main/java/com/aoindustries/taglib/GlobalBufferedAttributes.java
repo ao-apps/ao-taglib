@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2019, 2020  AO Industries, Inc.
+ * Copyright (C) 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,32 +22,20 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.MediaType;
-import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
-import java.io.IOException;
-import java.io.Writer;
-import javax.servlet.jsp.JspException;
+import com.aoindustries.html.Attributes.Global;
 
 /**
+ * {@linkplain Global Global attributes} when used in a buffered context.
+ * These attributes may be set from nested tags due to the buffering.
+ *
  * @author  AO Industries, Inc.
  */
-public class MapTag extends ElementFilteredTag {
-
-	@Override
-	public MediaType getContentType() {
-		return MediaType.XHTML;
-	}
-
-	@Override
-	protected void doTag(Writer out) throws JspException, IOException {
-		if(id == null) throw new AttributeRequiredException("id");
-		// TODO: Include id/name by doctype
-		out.write("<map");
-		writeGlobalAttributes(out);
-		out.write(" name=\"");
-		encodeTextInXhtmlAttribute(id, out);
-		out.write("\">");
-		super.doTag(out);
-		out.write("</map>");
-	}
+public interface GlobalBufferedAttributes extends
+	GlobalAttributes,
+	// Allow to be set from within nested tags
+	IdAttribute,
+	ClassAttribute,
+	StyleAttribute
+{
+	// No new methods
 }

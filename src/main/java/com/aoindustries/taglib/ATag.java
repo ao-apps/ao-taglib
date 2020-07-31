@@ -52,10 +52,9 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  * @author  AO Industries, Inc.
  */
 public class ATag
-	extends AutoEncodingBufferedTag
+	extends ElementBufferedTag
 	implements
 		DynamicAttributes,
-		IdAttribute,
 		HrefAttribute,
 		ParamsAttribute,
 		HreflangAttribute,
@@ -63,14 +62,11 @@ public class ATag
 		TypeAttribute,
 		TargetAttribute,
 		TitleAttribute,
-		ClassAttribute,
-		StyleAttribute,
 		OnclickAttribute,
 		OnmouseoverAttribute,
 		OnmouseoutAttribute
 {
 
-	private String id;
 	private String href;
 	private MutableURIParameters params;
 	private boolean absolute;
@@ -81,8 +77,6 @@ public class ATag
 	private String type;
 	private String target;
 	private Object title;
-	private String clazz;
-	private Object style;
 	private Object onclick;
 	private Object onmouseover;
 	private Object onmouseout;
@@ -95,11 +89,6 @@ public class ATag
 	@Override
 	public MediaType getOutputType() {
 		return MediaType.XHTML;
-	}
-
-	@Override
-	public void setId(String id) throws JspTagException {
-		this.id = Strings.trimNullIfEmpty(id);
 	}
 
 	@Override
@@ -151,21 +140,6 @@ public class ATag
 	}
 
 	@Override
-	public String getClazz() {
-		return clazz;
-	}
-
-	@Override
-	public void setClazz(String clazz) throws JspTagException {
-		this.clazz = Strings.trimNullIfEmpty(clazz);
-	}
-
-	@Override
-	public void setStyle(Object style) throws JspTagException {
-		this.style = AttributeUtils.trimNullIfEmpty(style);
-	}
-
-	@Override
 	public void setOnclick(Object onclick) throws JspTagException {
 		this.onclick = AttributeUtils.trimNullIfEmpty(onclick);
 	}
@@ -200,11 +174,7 @@ public class ATag
 	@Override
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		out.write("<a");
-		if(id!=null) {
-			out.write(" id=\"");
-			encodeTextInXhtmlAttribute(id, out);
-			out.write('"');
-		}
+		writeGlobalAttributes(out);
 		String transformed;
 		if(URIParser.isScheme(href, "tel")) {
 			transformed = href.replace(' ', '-');
@@ -224,56 +194,46 @@ public class ATag
 				out.write('"');
 			}
 		}
-		if(rel!=null) {
+		if(rel != null) {
 			out.write(" rel=\"");
 			encodeTextInXhtmlAttribute(rel, out);
 			out.write('"');
 		}
-		if(type!=null) {
+		if(type != null) {
 			out.write(" type=\"");
 			encodeTextInXhtmlAttribute(type, out);
 			out.write('"');
 		}
-		if(target!=null) {
+		if(target != null) {
 			out.write(" target=\"");
 			encodeTextInXhtmlAttribute(target, out);
 			out.write('"');
 		}
-		if(title!=null) {
+		if(title != null) {
 			out.write(" title=\"");
 			Coercion.write(title, MarkupType.TEXT, textInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
-		if(clazz!=null) {
-			out.write(" class=\"");
-			encodeTextInXhtmlAttribute(clazz, out);
-			out.write('"');
-		}
-		if(style!=null) {
-			out.write(" style=\"");
-			Coercion.write(style, textInXhtmlAttributeEncoder, out);
-			out.write('"');
-		}
-		if(onclick!=null) {
+		if(onclick != null) {
 			out.write(" onclick=\"");
 			Coercion.write(onclick, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
-		if(onmouseover!=null) {
+		if(onmouseover != null) {
 			out.write(" onmouseover=\"");
 			Coercion.write(onmouseover, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
-		if(onmouseout!=null) {
+		if(onmouseout != null) {
 			out.write(" onmouseout=\"");
 			Coercion.write(onmouseout, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		out.write('>');
 		BufferResult trimmedBody = capturedBody.trim();
-		if(trimmedBody.getLength()==0) {
+		if(trimmedBody.getLength() == 0) {
 			// When the body is empty after trimming, display the href itself
-			if(href!=null) {
+			if(href != null) {
 				PageContext pageContext = (PageContext)getJspContext();
 				HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
 				String toDecode;

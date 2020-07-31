@@ -40,7 +40,7 @@ import javax.servlet.jsp.tagext.JspTag;
  * @author  AO Industries, Inc.
  */
 public class MetaTag
-	extends AutoEncodingBufferedTag
+	extends ElementBufferedTag
 	implements
 		NameAttribute,
 		ContentAttribute
@@ -60,6 +60,18 @@ public class MetaTag
 	@Override
 	public MediaType getOutputType() {
 		return MediaType.XHTML;
+	}
+
+	/**
+	 * Copies all values from the provided meta.
+	 */
+	public void setMeta(Meta meta) throws JspTagException {
+		GlobalAttributesUtil.copy(meta.getGlobal(), this);
+		setName(meta.getName());
+		setHttpEquiv(meta.getHttpEquiv());
+		setItemprop(meta.getItemprop());
+		setCharset(meta.getCharset());
+		setContent(meta.getContent());
 	}
 
 	@Override
@@ -87,10 +99,11 @@ public class MetaTag
 	@Override
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		JspTag parent = findAncestorWithClass(this, MetasAttribute.class);
-		if(content==null) setContent(capturedBody.trim());
-		if(parent!=null) {
+		if(content == null) setContent(capturedBody.trim());
+		if(parent != null) {
 			((MetasAttribute)parent).addMeta(
 				new Meta(
+					GlobalAttributesBuilder.builder().copy(this).build(),
 					Strings.trimNullIfEmpty(name),
 					Strings.trim(httpEquiv),
 					itemprop,
@@ -107,7 +120,7 @@ public class MetaTag
 				(HttpServletResponse)pageContext.getResponse(),
 				out
 			);
-			html.meta()
+			doGlobalAttributes(html.meta())
 				.name(name)
 				.httpEquiv(httpEquiv)
 				// TODO: Create a global "itemprop" in ao-fluent-html

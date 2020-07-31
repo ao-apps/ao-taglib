@@ -46,10 +46,9 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  * @author  AO Industries, Inc.
  */
 public class AreaTag
-	extends AutoEncodingNullTag
+	extends ElementNullTag
 	implements
 		DynamicAttributes,
-		IdAttribute,
 		HrefAttribute,
 		ParamsAttribute,
 		HreflangAttribute,
@@ -58,14 +57,11 @@ public class AreaTag
 		TargetAttribute,
 		AltAttribute,
 		TitleAttribute,
-		ClassAttribute,
-		StyleAttribute,
 		OnclickAttribute,
 		OnmouseoverAttribute,
 		OnmouseoutAttribute
 {
 
-	private String id;
 	private String shape;
 	private String coords;
 	private String href;
@@ -79,8 +75,6 @@ public class AreaTag
 	private String target;
 	private Object alt;
 	private Object title;
-	private String clazz;
-	private Object style;
 	private Object onclick;
 	private Object onmouseover;
 	private Object onmouseout;
@@ -105,11 +99,6 @@ public class AreaTag
 				ParamUtils.PARAM_ATTRIBUTE_PREFIX+"*"
 			);
 		}
-	}
-
-	@Override
-	public void setId(String id) throws JspTagException {
-		this.id = id;
 	}
 
 	public static boolean isValidShape(String shape) {
@@ -192,21 +181,6 @@ public class AreaTag
 	}
 
 	@Override
-	public String getClazz() {
-		return clazz;
-	}
-
-	@Override
-	public void setClazz(String clazz) throws JspTagException {
-		this.clazz = clazz;
-	}
-
-	@Override
-	public void setStyle(Object style) throws JspTagException {
-		this.style = AttributeUtils.trimNullIfEmpty(style);
-	}
-
-	@Override
 	public void setOnclick(Object onclick) throws JspTagException {
 		this.onclick = AttributeUtils.trimNullIfEmpty(onclick);
 	}
@@ -237,8 +211,7 @@ public class AreaTag
 			(HttpServletResponse)pageContext.getResponse(),
 			out
 		);
-		Area area = html.area()
-			.id(id)
+		Area area = doGlobalAttributes(html.area())
 			.shape(shape)
 			.coords(coords)
 			.href(UrlUtils.getHref(pageContext, href, params, addLastModified, absolute, canonical));
@@ -263,8 +236,6 @@ public class AreaTag
 		}
 		area
 			.title(title)
-			.clazz(clazz)
-			.style(style)
 			.onclick(onclick)
 			.onmouseover(onmouseover)
 			.onmouseout(onmouseout)

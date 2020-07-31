@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2013, 2014, 2015, 2016, 2017, 2018, 2019  AO Industries, Inc.
+ * Copyright (C) 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -31,9 +31,9 @@ import java.beans.SimpleBeanInfo;
 /**
  * @author  AO Industries, Inc.
  */
-public class ImgTagBeanInfo extends SimpleBeanInfo {
+public class ElementFilteredBodyTagBeanInfo extends SimpleBeanInfo {
 
-	private static volatile PropertyDescriptor[] properties = null;
+	private static volatile PropertyDescriptor[] properties;
 
 	@Override
 	public PropertyDescriptor[] getPropertyDescriptors () {
@@ -41,21 +41,8 @@ public class ImgTagBeanInfo extends SimpleBeanInfo {
 			PropertyDescriptor[] props = properties;
 			if(props == null) {
 				props = new PropertyDescriptor[] {
-					// From base class: new PropertyDescriptor("contentType", ImgTag.class, "getContentType", null),
-					// From base class: new PropertyDescriptor("outputType", ImgTag.class, "getOutputType", null),
-					new PropertyDescriptor("id", ImgTag.class, null, "setId"),
-					new PropertyDescriptor("src", ImgTag.class, null, "setSrc"),
-					new PropertyDescriptor("absolute", ImgTag.class, null, "setAbsolute"),
-					new PropertyDescriptor("canonical", ImgTag.class, null, "setCanonical"),
-					new PropertyDescriptor("addLastModified", ImgTag.class, null, "setAddLastModified"),
-					new PropertyDescriptor("width", ImgTag.class, null, "setWidth"),
-					new PropertyDescriptor("height", ImgTag.class, null, "setHeight"),
-					new PropertyDescriptor("alt", ImgTag.class, null, "setAlt"),
-					new PropertyDescriptor("title", ImgTag.class, null, "setTitle"),
-					new PropertyDescriptor("class", ImgTag.class, "getClazz", "setClazz"),
-					new PropertyDescriptor("style", ImgTag.class, null, "setStyle"),
-					new PropertyDescriptor("usemap", ImgTag.class, null, "setUsemap"),
-					new PropertyDescriptor("ismap", ImgTag.class, null, "setIsmap")
+					new PropertyDescriptor("class", ElementFilteredBodyTag.class, "getClazz", "setClazz"),
+					new PropertyDescriptor("style", ElementFilteredBodyTag.class, "getStyle", "setStyle"),
 				};
 				properties = props;
 			}
@@ -72,7 +59,7 @@ public class ImgTagBeanInfo extends SimpleBeanInfo {
 	public BeanInfo[] getAdditionalBeanInfo() {
 		try {
 			return new BeanInfo[] {
-				Introspector.getBeanInfo(ImgTag.class.getSuperclass())
+				Introspector.getBeanInfo(ElementFilteredBodyTag.class.getSuperclass())
 			};
 		} catch(IntrospectionException err) {
 			throw new AssertionError(err);

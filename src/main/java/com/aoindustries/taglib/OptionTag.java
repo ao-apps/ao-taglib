@@ -35,7 +35,7 @@ import javax.servlet.jsp.JspTagException;
  * @author  AO Industries, Inc.
  */
 public class OptionTag
-	extends AutoEncodingBufferedBodyTag
+	extends ElementBufferedBodyTag
 	implements
 		// Attributes
 		DisabledAttribute,
@@ -99,12 +99,14 @@ public class OptionTag
 		// TODO: If not setting value this way, this does not need to buffer
 		// TODO: This has something to do with translator markup added for display, but not value
 		if(!valueSet) setValue(capturedBody != null ? capturedBody : "");
-		HtmlEE.get(
-			pageContext.getServletContext(),
-			(HttpServletRequest)pageContext.getRequest(),
-			(HttpServletResponse)pageContext.getResponse(),
-			out
-		).option()
+		doGlobalAttributes(
+			HtmlEE.get(
+				pageContext.getServletContext(),
+				(HttpServletRequest)pageContext.getRequest(),
+				(HttpServletResponse)pageContext.getResponse(),
+				out
+			).option()
+		)
 			.value(value)
 			.selected(selected)
 			.disabled(disabled)

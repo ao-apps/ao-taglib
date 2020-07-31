@@ -49,7 +49,7 @@ import javax.servlet.jsp.tagext.JspTag;
  * @author  AO Industries, Inc.
  */
 public class LinkTag
-	extends AutoEncodingNullTag
+	extends ElementNullTag
 	implements
 		DynamicAttributes,
 		HrefAttribute,
@@ -80,6 +80,7 @@ public class LinkTag
 	 * Copies all values from the provided link.
 	 */
 	public void setLink(Link link) throws JspTagException {
+		GlobalAttributesUtil.copy(link.getGlobal(), this);
 		setHref(link.getHref());
 		setAbsolute(link.getAbsolute());
 		URIParameters linkParams = link.getParams();
@@ -166,7 +167,7 @@ public class LinkTag
 	@Override
 	protected void doTag(Writer out) throws JspTagException, IOException {
 		JspTag parent = findAncestorWithClass(this, LinksAttribute.class);
-		if(parent!=null) {
+		if(parent != null) {
 			String hreflangStr;
 			if(hreflang instanceof Locale) {
 				hreflangStr = ((Locale)hreflang).toLanguageTag();
@@ -176,6 +177,7 @@ public class LinkTag
 			}
 			((LinksAttribute)parent).addLink(
 				new Link(
+					GlobalAttributesBuilder.builder().copy(this).build(),
 					href,
 					absolute,
 					canonical,
@@ -196,8 +198,9 @@ public class LinkTag
 				(HttpServletResponse)pageContext.getResponse(),
 				out
 			);
-			com.aoindustries.html.Link link = html.link()
-				.href(UrlUtils.getHref(pageContext, href, params, addLastModified, absolute, canonical));
+			com.aoindustries.html.Link link = html.link();
+			doGlobalAttributes(link);
+			link.href(UrlUtils.getHref(pageContext, href, params, addLastModified, absolute, canonical));
 			if(hreflang instanceof Locale) {
 				link.hreflang((Locale)hreflang);
 			} else {

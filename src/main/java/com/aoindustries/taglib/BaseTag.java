@@ -39,7 +39,7 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
-public class BaseTag extends AutoEncodingNullTag {
+public class BaseTag extends ElementNullTag {
 
 	@Override
 	public MediaType getOutputType() {
@@ -82,7 +82,9 @@ public class BaseTag extends AutoEncodingNullTag {
 					// TODO: Implement this in ao:base instead (along with other URL implementations)?
 					url = URIEncoder.encodeURI(url);
 				}
-				html.base__(url);
+				doGlobalAttributes(html.base())
+					.href(url)
+					.__();
 			}
 		}
 	}

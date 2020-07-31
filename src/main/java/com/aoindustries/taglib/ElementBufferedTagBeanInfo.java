@@ -31,9 +31,9 @@ import java.beans.SimpleBeanInfo;
 /**
  * @author  AO Industries, Inc.
  */
-public class HrTagBeanInfo extends SimpleBeanInfo {
+public class ElementBufferedTagBeanInfo extends SimpleBeanInfo {
 
-	private static volatile PropertyDescriptor[] properties = null;
+	private static volatile PropertyDescriptor[] properties;
 
 	@Override
 	public PropertyDescriptor[] getPropertyDescriptors () {
@@ -41,10 +41,9 @@ public class HrTagBeanInfo extends SimpleBeanInfo {
 			PropertyDescriptor[] props = properties;
 			if(props == null) {
 				props = new PropertyDescriptor[] {
-					// From base class: new PropertyDescriptor("outputType", HrTag.class, "getOutputType", null),
-					new PropertyDescriptor("id",    HrTag.class, null,       "setId"),
-					new PropertyDescriptor("class", HrTag.class, "getClazz", "setClazz"),
-					new PropertyDescriptor("style", HrTag.class, null,       "setStyle"),
+					new PropertyDescriptor("id",    ElementBufferedTag.class, "getId",    "setId"),
+					new PropertyDescriptor("class", ElementBufferedTag.class, "getClazz", "setClazz"),
+					new PropertyDescriptor("style", ElementBufferedTag.class, "getStyle", "setStyle"),
 				};
 				properties = props;
 			}
@@ -61,7 +60,7 @@ public class HrTagBeanInfo extends SimpleBeanInfo {
 	public BeanInfo[] getAdditionalBeanInfo() {
 		try {
 			return new BeanInfo[] {
-				Introspector.getBeanInfo(HrTag.class.getSuperclass())
+				Introspector.getBeanInfo(ElementBufferedTag.class.getSuperclass())
 			};
 		} catch(IntrospectionException err) {
 			throw new AssertionError(err);

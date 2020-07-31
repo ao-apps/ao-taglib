@@ -57,10 +57,9 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  * @author  AO Industries, Inc.
  */
 public class InputTag
-	extends AutoEncodingBufferedTag
+	extends ElementBufferedTag
 	implements
 		DynamicAttributes,
-		IdAttribute,
 		TypeAttribute,
 		NameAttribute,
 		ValueAttribute,
@@ -79,8 +78,6 @@ public class InputTag
 		HeightAttribute,
 		AltAttribute,
 		TitleAttribute,
-		ClassAttribute,
-		StyleAttribute,
 		CheckedAttribute,
 		TabindexAttribute
 {
@@ -127,12 +124,6 @@ public class InputTag
 	@Override
 	public MediaType getOutputType() {
 		return MediaType.XHTML;
-	}
-
-	private String id;
-	@Override
-	public void setId(String id) throws JspTagException {
-		this.id = id;
 	}
 
 	private String type;
@@ -262,23 +253,6 @@ public class InputTag
 		this.title = AttributeUtils.trimNullIfEmpty(title);
 	}
 
-	private String clazz;
-	@Override
-	public String getClazz() {
-		return clazz;
-	}
-
-	@Override
-	public void setClazz(String clazz) throws JspTagException {
-		this.clazz = clazz;
-	}
-
-	private Object style;
-	@Override
-	public void setStyle(Object style) throws JspTagException {
-		this.style = AttributeUtils.trimNullIfEmpty(style);
-	}
-
 	private boolean checked;
 	@Override
 	public void setChecked(boolean checked) {
@@ -292,6 +266,7 @@ public class InputTag
 	}
 
 	private boolean autocomplete = true;
+	// TODO: Support full set of values from ao-fluent-html
 	public void setAutocomplete(boolean autocomplete) {
 		this.autocomplete = autocomplete;
 	}
@@ -327,38 +302,39 @@ public class InputTag
 			(HttpServletResponse)pageContext.getResponse(),
 			out
 		);
-		Input.Dynamic input = html.input()
-			.id(id)
+		Input.Dynamic input = html.input();
+		doGlobalAttributes(input);
+		input
 			.type(type)
 			.name(name)
 			.value(value)
 			.onclick(onclick);
-		if(onchange!=null) {
+		if(onchange != null) {
 			out.write(" onchange=\"");
 			Coercion.write(onchange, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
-		if(onfocus!=null) {
+		if(onfocus != null) {
 			out.write(" onfocus=\"");
 			Coercion.write(onfocus, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
-		if(onblur!=null) {
+		if(onblur != null) {
 			out.write(" onblur=\"");
 			Coercion.write(onblur, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
-		if(onkeypress!=null) {
+		if(onkeypress != null) {
 			out.write(" onkeypress=\"");
 			Coercion.write(onkeypress, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
-		if(size!=null) {
+		if(size != null) {
 			out.write(" size=\"");
 			Coercion.write(size, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
-		if(maxlength!=null) {
+		if(maxlength != null) {
 			out.write(" maxlength=\"");
 			out.write(maxlength.toString());
 			out.write('"');
@@ -384,13 +360,9 @@ public class InputTag
 		}
 		input
 			.title(title)
-			.clazz(clazz)
-			.style(style)
 			.checked(checked)
-			.tabindex((tabindex >= 1) ? tabindex : null);
-		if(!autocomplete) {
-			out.write(" autocomplete=\"off\"");
-		}
-		input.__();
+			.tabindex((tabindex >= 1) ? tabindex : null)
+			.autocomplete(autocomplete ? null : Input.Autocomplete.OFF)
+			.__();
 	}
 }

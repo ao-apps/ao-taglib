@@ -55,13 +55,9 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  * @author  AO Industries, Inc.
  */
 public class FormTag
-	extends AutoEncodingBufferedBodyTag
+	extends ElementBufferedBodyTag
 	implements
 		DynamicAttributes,
-		// Global attributes
-		IdAttribute,
-		ClassAttribute,
-		StyleAttribute,
 		// Attributes
 		ActionAttribute,
 		EnctypeAttribute,
@@ -108,22 +104,6 @@ public class FormTag
 		}
 	}
 
-	private String clazz;
-	@Override
-	public String getClazz() {
-		return clazz;
-	}
-	@Override
-	public void setClazz(String clazz) throws JspTagException { // TODO: Remove unnecessary throws
-		this.clazz = Strings.trimNullIfEmpty(clazz);
-	}
-
-	private Object style;
-	@Override
-	public void setStyle(Object style) throws JspTagException {
-		this.style = AttributeUtils.trimNullIfEmpty(style);
-	}
-
 	private String action;
 	@Override
 	public void setAction(String action) throws JspTagException {
@@ -166,8 +146,6 @@ public class FormTag
 	private transient BufferResult capturedBody;
 
 	private void init() {
-		clazz = null;
-		style = null;
 		action = null;
 		enctype = null;
 		method = null;
@@ -196,21 +174,7 @@ public class FormTag
 			out
 		);
 		out.write("<form");
-		if(id != null) {
-			out.write(" id=\"");
-			encodeTextInXhtmlAttribute(id, out);
-			out.write('"');
-		}
-		if(clazz != null) {
-			out.write(" class=\"");
-			encodeTextInXhtmlAttribute(clazz, out);
-			out.write('"');
-		}
-		if(style != null) {
-			out.write(" style=\"");
-			Coercion.write(style, textInXhtmlAttributeEncoder, out);
-			out.write('"');
-		}
+		writeGlobalAttributes(out);
 		Map<String,List<String>> actionParams;
 		if(action != null) {
 			out.write(" action=\"");

@@ -22,42 +22,54 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.MediaType;
-import com.aoindustries.html.Col;
-import com.aoindustries.html.servlet.HtmlEE;
-import java.io.IOException;
-import java.io.Writer;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import com.aoindustries.html.Attributes.Global;
+import com.aoindustries.lang.Strings;
 import javax.servlet.jsp.JspTagException;
-import javax.servlet.jsp.PageContext;
 
 /**
+ * Implements {@linkplain Global global attributes} on {@link AutoEncodingFilteredBodyTag}.
+ *
  * @author  AO Industries, Inc.
  */
-public class ColTag extends ElementNullTag {
+abstract public class ElementFilteredBodyTag extends AutoEncodingFilteredBodyTag implements GlobalAttributes {
+
+	private static final long serialVersionUID = 1L;
 
 	@Override
-	public MediaType getOutputType() {
-		return MediaType.XHTML;
+	public void setId(String id) {
+		super.setId(Strings.trimNullIfEmpty(id));
 	}
 
-	private int span;
-	public void setSpan(int span) throws JspTagException {
-		this.span = span;
+	protected String clazz;
+	@Override
+	public String getClazz() {
+		return clazz;
+	}
+	public void setClazz(String clazz) throws JspTagException {
+		this.clazz = Strings.trimNullIfEmpty(clazz);
+	}
+
+	protected Object style;
+	@Override
+	public Object getStyle() {
+		return style;
+	}
+	public void setStyle(Object style) throws JspTagException {
+		this.style = AttributeUtils.trimNullIfEmpty(style);
+	}
+
+	private void init() {
+		id = null;
+		clazz = null;
+		style = null;
 	}
 
 	@Override
-	protected void doTag(Writer out) throws JspTagException, IOException {
-		PageContext pageContext = (PageContext)getJspContext();
-		Col col = HtmlEE.get(
-			pageContext.getServletContext(),
-			(HttpServletRequest)pageContext.getRequest(),
-			(HttpServletResponse)pageContext.getResponse(),
-			out
-		).col();
-		doGlobalAttributes(col);
-		if(span != 0) col.span(span);
-		col.__();
+	public void doFinally() {
+		try {
+			init();
+		} finally {
+			super.doFinally();
+		}
 	}
 }

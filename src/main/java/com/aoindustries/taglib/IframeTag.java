@@ -27,7 +27,6 @@ import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.buffer.BufferResult;
-import com.aoindustries.lang.Strings;
 import com.aoindustries.net.URIParametersMap;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.servlet.lastmodified.AddLastModified;
@@ -43,10 +42,9 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  * @author  AO Industries, Inc.
  */
 public class IframeTag
-	extends AutoEncodingBufferedTag
+	extends ElementBufferedTag
 	implements
 		DynamicAttributes,
-		IdAttribute,
 		SrcAttribute,
 		ParamsAttribute,
 		WidthAttribute,
@@ -54,7 +52,6 @@ public class IframeTag
 		FrameborderAttribute
 {
 
-	private String id;
 	private String src;
 	private URIParametersMap params;
 	private boolean absolute;
@@ -72,11 +69,6 @@ public class IframeTag
 	@Override
 	public MediaType getOutputType() {
 		return MediaType.XHTML;
-	}
-
-	@Override
-	public void setId(String id) throws JspTagException {
-		this.id = Strings.trimNullIfEmpty(id);
 	}
 
 	@Override
@@ -136,23 +128,22 @@ public class IframeTag
 
 	@Override
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
-		if(src==null) throw new AttributeRequiredException("src");
+		if(src == null) throw new AttributeRequiredException("src");
 		out.write("<iframe");
-		if(id!=null) {
-			// TODO: Include id/name by doctype
-			out.write(" id=\"");
-			encodeTextInXhtmlAttribute(id, out);
-			out.write("\" name=\"");
+		writeGlobalAttributes(out);
+		// TODO: Include id/name by doctype
+		if(id != null) {
+			out.write(" name=\"");
 			encodeTextInXhtmlAttribute(id, out);
 			out.write('"');
 		}
 		UrlUtils.writeSrc(getJspContext(), out, src, params, addLastModified, absolute, canonical);
-		if(width!=null) {
+		if(width != null) {
 			out.write(" width=\"");
 			Coercion.write(width, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
-		if(height!=null) {
+		if(height != null) {
 			out.write(" height=\"");
 			Coercion.write(height, textInXhtmlAttributeEncoder, out);
 			out.write('"');

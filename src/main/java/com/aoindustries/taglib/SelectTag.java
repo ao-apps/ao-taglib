@@ -42,12 +42,8 @@ import static javax.servlet.jsp.tagext.Tag.SKIP_BODY;
  * @author  AO Industries, Inc.
  */
 public class SelectTag
-	extends AutoEncodingBufferedBodyTag
+	extends ElementBufferedBodyTag
 	implements
-		// Global attributes
-		IdAttribute,
-		ClassAttribute,
-		StyleAttribute,
 		// Attributes
 		DisabledAttribute,
 		NameAttribute,
@@ -70,22 +66,6 @@ public class SelectTag
 	}
 
 	private static final long serialVersionUID = 1L;
-
-	private String clazz;
-	@Override
-	public String getClazz() {
-		return clazz;
-	}
-	@Override
-	public void setClazz(String clazz) throws JspTagException {
-		this.clazz = clazz;
-	}
-
-	private Object style;
-	@Override
-	public void setStyle(Object style) throws JspTagException {
-		this.style = AttributeUtils.trimNullIfEmpty(style);
-	}
 
 	private boolean disabled;
 	@Override
@@ -132,8 +112,6 @@ public class SelectTag
 	private transient BufferResult capturedBody;
 
 	private void init() {
-		clazz = null;
-		style = null;
 		disabled = false;
 		name = null;
 		size = null;
@@ -159,21 +137,7 @@ public class SelectTag
 			(HttpServletRequest)pageContext.getRequest()
 		);
 		out.write("<select");
-		if(id != null) {
-			out.write(" id=\"");
-			encodeTextInXhtmlAttribute(id, out);
-			out.write('"');
-		}
-		if(clazz != null) {
-			out.write(" class=\"");
-			encodeTextInXhtmlAttribute(clazz, out);
-			out.write('"');
-		}
-		if(style != null) {
-			out.write(" style=\"");
-			Coercion.write(style, textInXhtmlAttributeEncoder, out);
-			out.write('"');
-		}
+		writeGlobalAttributes(out);
 		if(disabled) {
 			out.write(" disabled");
 			if(serialization == Serialization.XML) out.write("=\"disabled\"");

@@ -43,21 +43,17 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  * @author  AO Industries, Inc.
  */
 public class ImgTag
-	extends AutoEncodingBufferedTag
+	extends ElementBufferedTag
 	implements
 		DynamicAttributes,
-		IdAttribute,
 		SrcAttribute,
 		ParamsAttribute,
 		WidthAttribute,
 		HeightAttribute,
 		AltAttribute,
-		TitleAttribute,
-		ClassAttribute,
-		StyleAttribute
+		TitleAttribute
 {
 
-	private String id;
 	private String src;
 	private URIParametersMap params;
 	private boolean absolute;
@@ -67,8 +63,6 @@ public class ImgTag
 	private Object height;
 	private Object alt;
 	private Object title;
-	private String clazz;
-	private Object style;
 	private String usemap;
 	private boolean ismap;
 
@@ -80,11 +74,6 @@ public class ImgTag
 	@Override
 	public MediaType getOutputType() {
 		return MediaType.XHTML;
-	}
-
-	@Override
-	public void setId(String id) throws JspTagException {
-		this.id = id;
 	}
 
 	@Override
@@ -130,21 +119,6 @@ public class ImgTag
 		this.title = AttributeUtils.trimNullIfEmpty(title);
 	}
 
-	@Override
-	public String getClazz() {
-		return clazz;
-	}
-
-	@Override
-	public void setClazz(String clazz) throws JspTagException {
-		this.clazz = clazz;
-	}
-
-	@Override
-	public void setStyle(Object style) throws JspTagException {
-		this.style = AttributeUtils.trimNullIfEmpty(style);
-	}
-
 	public void setUsemap(String usemap) {
 		this.usemap = AttributeUtils.trimNullIfEmpty(usemap);
 	}
@@ -181,8 +155,7 @@ public class ImgTag
 			(HttpServletResponse)pageContext.getResponse(),
 			out
 		);
-		html.img()
-			.id(id)
+		doGlobalAttributes(html.img())
 			.src(UrlUtils.getSrc(pageContext, src, params, addLastModified, absolute, canonical))
 			// TOOD: width to Integer via Img.width(Integer)
 			.attribute("width", width)
@@ -190,8 +163,6 @@ public class ImgTag
 			.attribute("height", height)
 			.alt(alt)
 			.title(title)
-			.clazz(clazz)
-			.style(style)
 			.usemap(usemap)
 			.ismap(ismap)
 			.__();

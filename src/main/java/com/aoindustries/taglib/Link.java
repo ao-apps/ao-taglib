@@ -33,6 +33,7 @@ import java.util.Locale;
  */
 public class Link {
 
+	private final GlobalAttributes global;
 	private final String href;
 	private final URIParameters params;
 	private final boolean absolute;
@@ -45,6 +46,7 @@ public class Link {
 	private final String title;
 
 	public Link(
+		GlobalAttributes global,
 		String href,
 		boolean absolute,
 		boolean canonical,
@@ -56,6 +58,7 @@ public class Link {
 		String media,
 		String title
 	) {
+		this.global = global;
 		this.href = href;
 		this.params = params;
 		this.absolute = absolute;
@@ -68,6 +71,69 @@ public class Link {
 		this.title = title;
 	}
 
+	/**
+	 * @deprecated  Please use {@link #Link(com.aoindustries.taglib.GlobalAttributes, java.lang.String, boolean, boolean, com.aoindustries.net.URIParameters, com.aoindustries.servlet.lastmodified.AddLastModified, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)}
+	 */
+	@Deprecated
+	public Link(
+		String href,
+		boolean absolute,
+		boolean canonical,
+		URIParameters params,
+		AddLastModified addLastModified,
+		String hreflang,
+		String rel,
+		String type,
+		String media,
+		String title
+	) {
+		this(
+			(GlobalAttributes)null,
+			href,
+			absolute,
+			canonical,
+			params,
+			addLastModified,
+			hreflang,
+			rel,
+			type,
+			media,
+			title
+		);
+	}
+
+	public Link(
+		GlobalAttributes global,
+		String href,
+		boolean absolute,
+		boolean canonical,
+		URIParameters params,
+		AddLastModified addLastModified,
+		Locale hreflang,
+		String rel,
+		String type,
+		String media,
+		String title
+	) {
+		this(
+			global,
+			href,
+			absolute,
+			canonical,
+			params,
+			addLastModified,
+			hreflang == null ? null : hreflang.toLanguageTag(),
+			rel,
+			type,
+			media,
+			title
+		);
+	}
+
+	/**
+	 * @deprecated  Please use {@link #Link(com.aoindustries.taglib.GlobalAttributes, java.lang.String, boolean, boolean, com.aoindustries.net.URIParameters, com.aoindustries.servlet.lastmodified.AddLastModified, java.util.Locale, java.lang.String, java.lang.String, java.lang.String, java.lang.String)}
+	 */
+	@Deprecated
 	public Link(
 		String href,
 		boolean absolute,
@@ -81,17 +147,22 @@ public class Link {
 		String title
 	) {
 		this(
+			(GlobalAttributes)null,
 			href,
 			absolute,
 			canonical,
 			params,
 			addLastModified,
-			hreflang == null ? null : hreflang.toLanguageTag(),
+			hreflang,
 			rel,
 			type,
 			media,
 			title
 		);
+	}
+
+	public GlobalAttributes getGlobal() {
+		return global;
 	}
 
 	public String getHref() {
@@ -133,6 +204,7 @@ public class Link {
 		return media;
 	}
 
+	// TODO: Move to GlobalAttributes (or AlmostGlobalAttributes)
 	public String getTitle() {
 		return title;
 	}

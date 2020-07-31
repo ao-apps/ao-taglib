@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2019, 2020  AO Industries, Inc.
+ * Copyright (C) 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,32 +22,44 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.MediaType;
-import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
-import java.io.IOException;
-import java.io.Writer;
-import javax.servlet.jsp.JspException;
+import com.aoindustries.html.Attributes.Global;
+import com.aoindustries.lang.Strings;
+import javax.servlet.jsp.JspTagException;
 
 /**
+ * Implements {@linkplain Global global attributes} on {@link AutoEncodingNullTag}.
+ *
  * @author  AO Industries, Inc.
  */
-public class MapTag extends ElementFilteredTag {
+abstract public class ElementNullTag extends AutoEncodingNullTag implements GlobalBufferedAttributes {
 
+	protected String id;
 	@Override
-	public MediaType getContentType() {
-		return MediaType.XHTML;
+	public String getId() {
+		return id;
+	}
+	@Override
+	public void setId(String id) throws JspTagException {
+		this.id = Strings.trimNullIfEmpty(id);
 	}
 
+	protected String clazz;
 	@Override
-	protected void doTag(Writer out) throws JspException, IOException {
-		if(id == null) throw new AttributeRequiredException("id");
-		// TODO: Include id/name by doctype
-		out.write("<map");
-		writeGlobalAttributes(out);
-		out.write(" name=\"");
-		encodeTextInXhtmlAttribute(id, out);
-		out.write("\">");
-		super.doTag(out);
-		out.write("</map>");
+	public String getClazz() {
+		return clazz;
+	}
+	@Override
+	public void setClazz(String clazz) throws JspTagException {
+		this.clazz = Strings.trimNullIfEmpty(clazz);
+	}
+
+	protected Object style;
+	@Override
+	public Object getStyle() {
+		return style;
+	}
+	@Override
+	public void setStyle(Object style) throws JspTagException {
+		this.style = AttributeUtils.trimNullIfEmpty(style);
 	}
 }

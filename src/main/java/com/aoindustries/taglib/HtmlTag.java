@@ -44,7 +44,7 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 
-public class HtmlTag extends AutoEncodingFilteredBodyTag {
+public class HtmlTag extends ElementFilteredBodyTag {
 
 	/**
 	 * The old Struts XHTML mode page attribute.  To avoiding picking-up a big
@@ -54,16 +54,12 @@ public class HtmlTag extends AutoEncodingFilteredBodyTag {
 	 */
 	private static final String STRUTS_XHTML_KEY = "org.apache.struts.globals.XHTML";
 
-	public static void beginHtmlTag(Locale locale, Appendable out, Serialization serialization, String clazz) throws IOException {
+	public static void beginHtmlTag(Locale locale, Appendable out, Serialization serialization, GlobalAttributes global) throws IOException {
 		out.append("<html");
 		if(serialization == Serialization.XML) {
 			out.append(" xmlns=\"http://www.w3.org/1999/xhtml\"");
 		}
-		if(clazz!=null) {
-			out.append(" class=\"");
-			encodeTextInXhtmlAttribute(clazz, out);
-			out.append('"');
-		}
+		if(global != null) global.appendGlobalAttributes(out);
 		if(locale != null) {
 			String lang = locale.toLanguageTag();
 			if(!lang.isEmpty()) {
@@ -80,6 +76,27 @@ public class HtmlTag extends AutoEncodingFilteredBodyTag {
 		out.append('>');
 	}
 
+	/**
+	 * @deprecated  Please use {@link #beginHtmlTag(java.util.Locale, java.lang.Appendable, com.aoindustries.encoding.Serialization, com.aoindustries.taglib.GlobalAttributes)}
+	 */
+	@Deprecated
+	public static void beginHtmlTag(Locale locale, Appendable out, Serialization serialization, String clazz) throws IOException {
+		beginHtmlTag(
+			locale,
+			out,
+			serialization,
+			GlobalAttributesBuilder.builder().setClazz(clazz).build()
+		);
+	}
+
+	public static void beginHtmlTag(ServletResponse response, Appendable out, Serialization serialization, GlobalAttributes global) throws IOException {
+		beginHtmlTag(response.getLocale(), out, serialization, global);
+	}
+
+	/**
+	 * @deprecated  Please use {@link #beginHtmlTag(javax.servlet.ServletResponse, java.lang.Appendable, com.aoindustries.encoding.Serialization, com.aoindustries.taglib.GlobalAttributes)}
+	 */
+	@Deprecated
 	public static void beginHtmlTag(ServletResponse response, Appendable out, Serialization serialization, String clazz) throws IOException {
 		beginHtmlTag(response.getLocale(), out, serialization, clazz);
 	}
@@ -120,18 +137,6 @@ public class HtmlTag extends AutoEncodingFilteredBodyTag {
 		}
 	}
 
-	private String clazz;
-	/**
-	 * Getter required because without it, we get the exception:
-	 * <pre>Unable to find setter method for attribute: class</pre>
-	 */
-	public String getClazz() {
-		return clazz;
-	}
-	public void setClazz(String clazz) {
-		this.clazz = AttributeUtils.trimNullIfEmpty(clazz);
-	}
-
 	// Values that are used in doFinally
 	private transient Serialization oldSerialization;
 	private transient Object oldStrutsXhtml;
@@ -140,18 +145,15 @@ public class HtmlTag extends AutoEncodingFilteredBodyTag {
 	private transient boolean setDoctype;
 	private transient Registry oldPageRegistry;
 
-	@Override
-	public void release() {
+	private void init() {
 		serialization = null;
 		doctype = null;
-		clazz = null;
 		oldSerialization = null;
 		oldStrutsXhtml = null;
 		setSerialization = false;
 		oldDoctype = null;
 		setDoctype = false;
 		oldPageRegistry = null;
-		super.release();
 	}
 
 	@Override
@@ -196,7 +198,7 @@ public class HtmlTag extends AutoEncodingFilteredBodyTag {
 			currentDoctype.xmlDeclaration(currentSerialization, documentEncoding, out);
 			currentDoctype.doctype(currentSerialization, out);
 			// Write <html>
-			beginHtmlTag(response, out, currentSerialization, clazz);
+			beginHtmlTag(response, out, currentSerialization, this);
 			return EVAL_BODY_FILTERED;
 		} catch(ServletException e) {
 			throw new JspTagException(e);
@@ -213,14 +215,18 @@ public class HtmlTag extends AutoEncodingFilteredBodyTag {
 	@Override
 	public void doFinally() {
 		try {
-			ServletRequest request = pageContext.getRequest();
-			if(setSerialization) {
-				SerializationEE.set(request, oldSerialization);
-				pageContext.setAttribute(STRUTS_XHTML_KEY, oldStrutsXhtml, PageContext.PAGE_SCOPE);
-			}
-			if(setDoctype) DoctypeEE.set(request, oldDoctype);
-			if(oldPageRegistry == null) {
-				RegistryEE.Page.set(request, null);
+			try {
+				ServletRequest request = pageContext.getRequest();
+				if(setSerialization) {
+					SerializationEE.set(request, oldSerialization);
+					pageContext.setAttribute(STRUTS_XHTML_KEY, oldStrutsXhtml, PageContext.PAGE_SCOPE);
+				}
+				if(setDoctype) DoctypeEE.set(request, oldDoctype);
+				if(oldPageRegistry == null) {
+					RegistryEE.Page.set(request, null);
+				}
+			} finally {
+				init();
 			}
 		} finally {
 			super.doFinally();

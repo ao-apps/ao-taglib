@@ -21,7 +21,100 @@ GNU Lesser General Public License for more details.
 You should have received a copy of the GNU Lesser General Public License
 along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<!-- TODO: Consider trying https://github.com/icoloma/tldgen instead of maintaining this file manually -->
+<!DOCTYPE taglib [
+
+<!ENTITY IdAttribute_description "The &lt;a href=&quot;https://www.w3schools.com/tags/att_global_id.asp&quot;&gt;id of the element&lt;/a&gt;.">
+<!ENTITY IdAttribute "<attribute>
+			<description>
+				&lt;p&gt;
+					&IdAttribute_description;
+				&lt;/p&gt;
+			</description>
+			<name>id</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>">
+
+<!ENTITY IdBufferedAttribute_description "&IdAttribute_description;
+					A nested &lt;a href=&quot;@{project.url}ao.tld/tag-id&quot;&gt;<![CDATA[&lt;ao:id&gt;]]>&lt;/a&gt;
+					tag will override this value.">
+<!ENTITY IdBufferedAttribute "<attribute>
+			<description>
+				&lt;p&gt;
+					&IdBufferedAttribute_description;
+				&lt;/p&gt;
+			</description>
+			<name>id</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>">
+
+<!ENTITY ClassAttribute_description "The &lt;a href=&quot;https://www.w3schools.com/tags/att_global_class.asp&quot;&gt;CSS class for the element&lt;/a&gt;.">
+<!ENTITY ClassAttribute "<attribute>
+			<description>
+				&lt;p&gt;
+					&ClassAttribute_description;
+				&lt;/p&gt;
+			</description>
+			<name>class</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>">
+
+<!ENTITY ClassBufferedAttribute_description "&ClassAttribute_description;
+					A nested &lt;a href=&quot;@{project.url}ao.tld/tag-class&quot;&gt;<![CDATA[&lt;ao:class&gt;]]>&lt;/a&gt;
+					tag will override this value.">
+<!ENTITY ClassBufferedAttribute "<attribute>
+			<description>
+				&lt;p&gt;
+					&ClassBufferedAttribute_description;
+				&lt;/p&gt;
+			</description>
+			<name>class</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>">
+
+<!ENTITY StyleAttribute_description "The &lt;a href=&quot;https://www.w3schools.com/tags/att_global_style.asp&quot;&gt;CSS style for the element&lt;/a&gt;.">
+<!ENTITY StyleAttribute "<attribute>
+			<description>
+				&lt;p&gt;
+					&StyleAttribute_description;
+				&lt;/p&gt;
+			</description>
+			<name>style</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>">
+
+<!ENTITY StyleBufferedAttribute_description "&StyleAttribute_description;
+					A nested &lt;a href=&quot;@{project.url}ao.tld/tag-style&quot;&gt;<![CDATA[&lt;ao:style&gt;]]>&lt;/a&gt;
+					tag will override this value.">
+<!ENTITY StyleBufferedAttribute "<attribute>
+			<description>
+				&lt;p&gt;
+					&StyleBufferedAttribute_description;
+				&lt;/p&gt;
+			</description>
+			<name>style</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>
+		</attribute>">
+
+<!ENTITY GlobalAttributes "&IdAttribute;
+		&ClassAttribute;
+		&StyleAttribute;">
+<!ENTITY GlobalBufferedAttributes "&IdBufferedAttribute;
+		&ClassBufferedAttribute;
+		&StyleBufferedAttribute;">
+
+]>
 <taglib xmlns="http://java.sun.com/xml/ns/javaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
@@ -40,7 +133,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<uri>@{project.url}</uri>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-03-26T22:27:21-05:00" -->
+		<!-- dateModified="2020-07-31T01:25:42-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_a.asp">&lt;a&gt;</a> tag.
@@ -79,18 +172,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>a</name>
 		<tag-class>com.aoindustries.taglib.ATag</tag-class>
 		<body-content>scriptless</body-content>
-		<attribute>
-			<description><![CDATA[
-				<p>
-					The <a href="https://www.w3schools.com/tags/att_global_id.asp">id of the element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-id">&lt;ao:id&gt;</a> tag will override this value.
-				</p>
-			]]></description>
-			<name>id</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.String</type>
-		</attribute>
+		&GlobalBufferedAttributes;
 		<attribute>
 			<description><![CDATA[
 				<p class="semanticcms-tag-reference-summary">
@@ -246,30 +328,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The <a href="https://www.w3schools.com/tags/att_global_class.asp">CSS class for the element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-class">&lt;ao:class&gt;</a> tag will override this value.
-				</p>
-			]]></description>
-			<name>class</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[
-				<p>
-					The <a href="https://www.w3schools.com/tags/att_global_style.asp">CSS style for the element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-style">&lt;ao:style&gt;</a> tag will override this value.
-				</p>
-			]]></description>
-			<name>style</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[
-				<p>
 					A JavaScript <a href="https://www.w3schools.com/tags/ev_onclick.asp">onclick</a> handler.
 					A nested <a href="@{project.url}ao.tld/tag-onclick">&lt;ao:onclick&gt;</a> tag will override this value.
 				</p>
@@ -335,7 +393,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2019-10-08T21:41:35-0500" -->
-		<!-- dateModified="2020-03-26T22:27:21-05:00" -->
+		<!-- dateModified="2020-07-31T01:25:42-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_area.asp">&lt;area&gt;</a> tag.
@@ -369,18 +427,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<tag-class>com.aoindustries.taglib.AreaTag</tag-class>
 		<tei-class>com.aoindustries.taglib.AreaTagTEI</tei-class>
 		<body-content>scriptless</body-content>
-		<attribute>
-			<description><![CDATA[
-				<p>
-					The <a href="https://www.w3schools.com/tags/att_global_id.asp">id of the element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-id">&lt;ao:id&gt;</a> tag will override this value.
-				</p>
-			]]></description>
-			<name>id</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.String</type>
-		</attribute>
+		&GlobalBufferedAttributes;
 		<attribute>
 			<description><![CDATA[
 				<p>
@@ -573,30 +620,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The <a href="https://www.w3schools.com/tags/att_global_class.asp">CSS class for the element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-class">&lt;ao:class&gt;</a> tag will override this value.
-				</p>
-			]]></description>
-			<name>class</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[
-				<p>
-					The <a href="https://www.w3schools.com/tags/att_global_style.asp">CSS style for the element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-style">&lt;ao:style&gt;</a> tag will override this value.
-				</p>
-			]]></description>
-			<name>style</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[
-				<p>
 					A JavaScript <a href="https://www.w3schools.com/tags/ev_onclick.asp">onclick</a> handler.
 					A nested <a href="@{project.url}ao.tld/tag-onclick">&lt;ao:onclick&gt;</a> tag will override this value.
 				</p>
@@ -713,7 +736,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-07-31T01:25:42-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Adds a <a href="https://www.w3schools.com/tags/tag_base.asp">&lt;base&gt;</a> tag only when necessary.
@@ -737,11 +760,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		]]></description>
 		<name>base</name>
 		<tag-class>com.aoindustries.taglib.BaseTag</tag-class>
-		<body-content>empty</body-content>
+		<body-content>scriptless</body-content>
+		&GlobalBufferedAttributes;
 	</tag>
 	<tag>
 		<!-- datePublished="2019-10-20T05:53:01-0500" -->
-		<!-- dateModified="2020-07-27T19:47:07-05:00" -->
+		<!-- dateModified="2020-07-31T01:25:42-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Writes a <a href="https://www.w3schools.com/tags/tag_br.asp">&lt;br&gt;</a>
@@ -750,45 +774,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		]]></description>
 		<name>br</name>
 		<tag-class>com.aoindustries.taglib.BrTag</tag-class>
-		<body-content>empty</body-content>
-		<attribute>
-			<description><![CDATA[
-				<p>
-					The <a href="https://www.w3schools.com/tags/att_global_id.asp">id of the element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-id">&lt;ao:id&gt;</a>
-					tag will override this value.
-				</p>
-			]]></description>
-			<name>id</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[
-				<p>
-					The <a href="https://www.w3schools.com/tags/att_global_class.asp">CSS class for the element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-class">&lt;ao:class&gt;</a> tag will override this value.
-				</p>
-			]]></description>
-			<name>class</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[
-				<p>
-					The <a href="https://www.w3schools.com/tags/att_global_style.asp">CSS style for the element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-style">&lt;ao:style&gt;</a>
-					tag will override this value.
-				</p>
-			]]></description>
-			<name>style</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
-		</attribute>
+		<body-content>scriptless</body-content>
+		&GlobalBufferedAttributes;
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
@@ -872,7 +859,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2020-02-11T20:25:52-0600" -->
-		<!-- dateModified="2020-03-26T22:27:21-05:00" -->
+		<!-- dateModified="2020-07-31T01:25:42-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Writes a <a href="https://www.w3schools.com/tags/tag_col.asp">&lt;col&gt;</a>
@@ -881,20 +868,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		]]></description>
 		<name>col</name>
 		<tag-class>com.aoindustries.taglib.ColTag</tag-class>
-		<body-content>empty</body-content>
-		<attribute>
-			<description><![CDATA[
-				<p>
-					The <a href="https://www.w3schools.com/tags/att_global_id.asp">id of the element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-id">&lt;ao:id&gt;</a>
-					tag will override this value.
-				</p>
-			]]></description>
-			<name>id</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.String</type>
-		</attribute>
+		<body-content>scriptless</body-content>
+		&GlobalBufferedAttributes;
 		<attribute>
 			<description><![CDATA[
 				<p>
@@ -905,32 +880,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>int</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[
-				<p>
-					The <a href="https://www.w3schools.com/tags/att_global_class.asp">CSS class for the element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-class">&lt;ao:class&gt;</a>
-					tag will override this value.
-				</p>
-			]]></description>
-			<name>class</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[
-				<p>
-					The <a href="https://www.w3schools.com/tags/att_global_style.asp">CSS style for the element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-style">&lt;ao:style&gt;</a>
-					tag will override this value.
-				</p>
-			]]></description>
-			<name>style</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
 		</attribute>
 	</tag>
 	<tag>
@@ -991,7 +940,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-07-29T23:37:47-05:00" -->
+		<!-- dateModified="2020-07-31T01:25:42-05:00" -->
 		<!-- TODO: param.* dynamic attributes should not do automatic multi-parameter.  Make a params.* dynamic attribute for this purpose. -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
@@ -1023,44 +972,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<tag-class>com.aoindustries.taglib.FormTag</tag-class>
 		<tei-class>com.aoindustries.taglib.FormTagTEI</tei-class>
 		<body-content>JSP</body-content>
-		<attribute>
-			<description><![CDATA[
-				<p>
-					The <a href="https://www.w3schools.com/tags/att_global_id.asp">id of the element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-id">&lt;ao:id&gt;</a>
-					tag will override this value.
-				</p>
-			]]></description>
-			<name>id</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[
-				<p>
-					The <a href="https://www.w3schools.com/tags/att_global_class.asp">CSS class for the element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-class">&lt;ao:class&gt;</a> tag will override this value.
-				</p>
-			]]></description>
-			<name>class</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[
-				<p>
-					The <a href="https://www.w3schools.com/tags/att_global_style.asp">CSS style for the element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-style">&lt;ao:style&gt;</a>
-					tag will override this value.
-				</p>
-			]]></description>
-			<name>style</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
-		</attribute>
+		&GlobalBufferedAttributes;
 		<attribute>
 			<description><![CDATA[
 				<p class="semanticcms-tag-reference-summary">
@@ -1388,7 +1300,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2019-10-30T20:50:04-0500" -->
-		<!-- dateModified="2020-07-27T19:47:07-05:00" -->
+		<!-- dateModified="2020-07-31T01:25:42-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Writes a <a href="https://www.w3schools.com/tags/tag_hr.asp">&lt;hr&gt;</a>
@@ -1397,49 +1309,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		]]></description>
 		<name>hr</name>
 		<tag-class>com.aoindustries.taglib.HrTag</tag-class>
-		<body-content>empty</body-content>
-		<attribute>
-			<description><![CDATA[
-				<p>
-					The <a href="https://www.w3schools.com/tags/att_global_id.asp">id of the element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-id">&lt;ao:id&gt;</a>
-					tag will override this value.
-				</p>
-			]]></description>
-			<name>id</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[
-				<p>
-					The <a href="https://www.w3schools.com/tags/att_global_class.asp">CSS class for the element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-class">&lt;ao:class&gt;</a> tag will override this value.
-				</p>
-			]]></description>
-			<name>class</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[
-				<p>
-					The <a href="https://www.w3schools.com/tags/att_global_style.asp">CSS style for the element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-style">&lt;ao:style&gt;</a>
-					tag will override this value.
-				</p>
-			]]></description>
-			<name>style</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
-		</attribute>
+		<body-content>scriptless</body-content>
+		&GlobalBufferedAttributes;
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-07-27T22:32:46-05:00" -->
+		<!-- dateModified="2020-07-31T01:25:42-05:00" -->
 		<description><![CDATA[
 			<ol>
 				<li>Clears the current output buffer (leaving status code and headers)</li>
@@ -1465,6 +1340,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<tag-class>com.aoindustries.taglib.HtmlTag</tag-class>
 		<tei-class>com.aoindustries.taglib.HtmlTagTEI</tei-class>
 		<body-content>JSP</body-content>
+		&GlobalAttributes;
 		<attribute>
 			<description><![CDATA[
 				<p>
@@ -1524,17 +1400,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
-		<attribute>
-			<description><![CDATA[
-				<p>
-					The <a href="https://www.w3schools.com/tags/att_global_class.asp">CSS class for the element</a>.
-				</p>
-			]]></description>
-			<name>class</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.String</type>
-		</attribute>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
@@ -1580,7 +1445,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-03-26T22:27:21-05:00" -->
+		<!-- dateModified="2020-07-31T01:25:42-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_iframe.asp">&lt;iframe&gt;</a> tag.
@@ -1611,22 +1476,22 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<tag-class>com.aoindustries.taglib.IframeTag</tag-class>
 		<body-content>scriptless</body-content>
 		<attribute>
-			<description><![CDATA[
-				<p>
-					The <a href="https://www.w3schools.com/tags/att_global_id.asp">id of the element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-id">&lt;ao:id&gt;</a>
-					tag will override this value.
-				</p>
-				<p>
+			<description>
+				&lt;p&gt;
+					&IdBufferedAttribute_description;
+				&lt;/p&gt;
+				<![CDATA[<p>
 					For maximum HTML/XHTML and HTML 4/5 compatibility, this value is
 					written as both <code>id</code> and <code>name</code> attributes.
-				</p>
-			]]></description>
+				</p>]]>
+			</description>
 			<name>id</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
+		&ClassBufferedAttribute;
+		&StyleBufferedAttribute;
 		<attribute>
 			<description><![CDATA[
 				<p class="semanticcms-tag-reference-summary">
@@ -1764,7 +1629,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-03-26T22:27:21-05:00" -->
+		<!-- dateModified="2020-07-31T01:25:42-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_img.asp">&lt;img&gt;</a> tag.
@@ -1806,19 +1671,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>img</name>
 		<tag-class>com.aoindustries.taglib.ImgTag</tag-class>
 		<body-content>scriptless</body-content>
-		<attribute>
-			<description><![CDATA[
-				<p>
-					The <a href="https://www.w3schools.com/tags/att_global_id.asp">id of the element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-id">&lt;ao:id&gt;</a>
-					tag will override this value.
-				</p>
-			]]></description>
-			<name>id</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.String</type>
-		</attribute>
+		&GlobalBufferedAttributes;
 		<attribute>
 			<description><![CDATA[
 				<p class="semanticcms-tag-reference-summary">
@@ -1959,32 +1812,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 			]]></description>
 			<name>title</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[
-				<p>
-					The <a href="https://www.w3schools.com/tags/att_global_class.asp">CSS class for the element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-class">&lt;ao:class&gt;</a>
-					tag will override this value.
-				</p>
-			]]></description>
-			<name>class</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[
-				<p>
-					The <a href="https://www.w3schools.com/tags/att_global_style.asp">CSS style for the element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-style">&lt;ao:style&gt;</a>
-					tag will override this value.
-				</p>
-			]]></description>
-			<name>style</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
@@ -2150,7 +1977,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-03-26T22:27:21-05:00" -->
+		<!-- dateModified="2020-07-31T01:25:42-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_input.asp">&lt;input&gt;</a> tag.
@@ -2196,19 +2023,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<tag-class>com.aoindustries.taglib.InputTag</tag-class>
 		<tei-class>com.aoindustries.taglib.InputTagTEI</tei-class>
 		<body-content>scriptless</body-content>
-		<attribute>
-			<description><![CDATA[
-				<p>
-					The <a href="https://www.w3schools.com/tags/att_global_id.asp">id of the element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-id">&lt;ao:id&gt;</a>
-					tag will override this value.
-				</p>
-			]]></description>
-			<name>id</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.String</type>
-		</attribute>
+		&GlobalBufferedAttributes;
 		<attribute>
 			<description><![CDATA[
 				<p>
@@ -2524,32 +2339,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The <a href="https://www.w3schools.com/tags/att_global_class.asp">CSS class for the element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-class">&lt;ao:class&gt;</a>
-					tag will override this value.
-				</p>
-			]]></description>
-			<name>class</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[
-				<p>
-					The <a href="https://www.w3schools.com/tags/att_global_style.asp">CSS style for the element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-style">&lt;ao:style&gt;</a>
-					tag will override this value.
-				</p>
-			]]></description>
-			<name>style</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[
-				<p>
 					The <a href="https://www.w3schools.com/tags/att_input_checked.asp">checked attribute</a>.
 					Accepts values of <code>true</code> or <code>false</code>.
 					A non-empty nested <a href="@{project.url}ao.tld/tag-checked">&lt;ao:checked&gt;</a>
@@ -2597,7 +2386,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-03-26T22:27:21-05:00" -->
+		<!-- dateModified="2020-07-31T01:25:42-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				If contained with any
@@ -2630,6 +2419,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>link</name>
 		<tag-class>com.aoindustries.taglib.LinkTag</tag-class>
 		<body-content>scriptless</body-content>
+		&GlobalBufferedAttributes;
 		<attribute>
 			<description><![CDATA[
 				<p>
@@ -2802,7 +2592,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2019-10-08T21:41:35-0500" -->
-		<!-- dateModified="2020-03-26T22:27:21-05:00" -->
+		<!-- dateModified="2020-07-31T01:25:42-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders a <a href="https://www.w3schools.com/tags/tag_map.asp">&lt;map&gt;</a> tag.
@@ -2835,6 +2625,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
+		&ClassBufferedAttribute;
+		&StyleBufferedAttribute;
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
@@ -3036,7 +2828,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-03-26T22:27:21-05:00" -->
+		<!-- dateModified="2020-07-31T01:25:42-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				If contained with any
@@ -3056,6 +2848,20 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>meta</name>
 		<tag-class>com.aoindustries.taglib.MetaTag</tag-class>
 		<body-content>scriptless</body-content>
+		&GlobalBufferedAttributes;
+		<attribute>
+			<description><![CDATA[
+				<p>
+					An optional meta to copy all the attributes from, as captured by a
+					<a href="@{project.url}apidocs/com/aoindustries/taglib/MetasAttribute.html">MetasAttribute</a>
+					parent tag.
+				</p>
+			]]></description>
+			<name>meta</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>com.aoindustries.taglib.Meta</type>
+		</attribute>
 		<attribute>
 			<description><![CDATA[
 				<p>
@@ -3288,7 +3094,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-07-30T00:13:04-05:00" -->
+		<!-- dateModified="2020-07-31T01:25:42-05:00" -->
 		<description><![CDATA[
 			<p>
 				Renders an <a href="https://www.w3schools.com/tags/tag_option.asp">&lt;option&gt;</a> tag.
@@ -3297,6 +3103,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>option</name>
 		<tag-class>com.aoindustries.taglib.OptionTag</tag-class>
 		<body-content>JSP</body-content>
+		&GlobalBufferedAttributes;
 		<attribute>
 			<description><![CDATA[
 				<p>
@@ -3881,7 +3688,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-03-26T22:27:21-05:00" -->
+		<!-- dateModified="2020-07-31T01:25:42-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Manually establishes a <a href="https://www.w3schools.com/tags/tag_script.asp">script context</a> when automatic detection is not possible.
@@ -3928,6 +3735,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<tag-class>com.aoindustries.taglib.ScriptTag</tag-class>
 		<tei-class>com.aoindustries.taglib.ScriptTagTEI</tei-class>
 		<body-content>scriptless</body-content>
+		&GlobalBufferedAttributes;
 		<attribute>
 			<description><![CDATA[
 				<p>
@@ -4039,7 +3847,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-07-29T23:44:51-05:00" -->
+		<!-- dateModified="2020-07-31T01:25:42-05:00" -->
 		<description><![CDATA[
 			<p>
 				Renders a <a href="https://www.w3schools.com/tags/tag_select.asp">&lt;select&gt;</a> tag.
@@ -4048,44 +3856,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>select</name>
 		<tag-class>com.aoindustries.taglib.SelectTag</tag-class>
 		<body-content>JSP</body-content>
-		<attribute>
-			<description><![CDATA[
-				<p>
-					The <a href="https://www.w3schools.com/tags/att_global_id.asp">id of the element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-id">&lt;ao:id&gt;</a>
-					tag will override this value.
-				</p>
-			]]></description>
-			<name>id</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[
-				<p>
-					The <a href="https://www.w3schools.com/tags/att_global_class.asp">CSS class for the element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-class">&lt;ao:class&gt;</a> tag will override this value.
-				</p>
-			]]></description>
-			<name>class</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[
-				<p>
-					The <a href="https://www.w3schools.com/tags/att_global_style.asp">CSS style for the element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-style">&lt;ao:style&gt;</a>
-					tag will override this value.
-				</p>
-			]]></description>
-			<name>style</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
-		</attribute>
+		&GlobalBufferedAttributes;
 		<attribute>
 			<description><![CDATA[
 				<p>
@@ -4373,7 +4144,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-07-31T01:25:42-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders a <a href="https://www.w3schools.com/tags/tag_textarea.asp">&lt;textarea&gt;</a> tag.
@@ -4390,6 +4161,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>textarea</name>
 		<tag-class>com.aoindustries.taglib.TextareaTag</tag-class>
 		<body-content>scriptless</body-content>
+		&GlobalBufferedAttributes;
 		<attribute>
 			<description><![CDATA[
 				<p>
@@ -4480,19 +4252,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 			]]></description>
 			<name>onchange</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[
-				<p>
-					The <a href="https://www.w3schools.com/tags/att_global_style.asp">CSS style for the element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-style">&lt;ao:style&gt;</a>
-					tag will override this value.
-				</p>
-			]]></description>
-			<name>style</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>

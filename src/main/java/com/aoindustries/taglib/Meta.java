@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2011, 2012, 2013, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2016, 2017, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -31,6 +31,7 @@ import com.aoindustries.lang.NullArgumentException;
  */
 public class Meta {
 
+	private final GlobalAttributes global;
 	private final String name;
 	private final String httpEquiv;
 	private final String itemprop;
@@ -38,17 +39,44 @@ public class Meta {
 	private final String content;
 
 	public Meta(
+		GlobalAttributes global,
 		String name,
 		String httpEquiv,
 		String itemprop,
 		String charset,
 		String content
 	) {
+		this.global = global;
 		this.name = name;
 		this.httpEquiv = httpEquiv;
 		this.itemprop = itemprop;
 		this.charset = charset;
 		this.content = NullArgumentException.checkNotNull(content, "content");
+	}
+
+	/**
+	 * @deprecated  Please use {@link #Meta(com.aoindustries.taglib.GlobalAttributes, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)}
+	 */
+	@Deprecated
+	public Meta(
+		String name,
+		String httpEquiv,
+		String itemprop,
+		String charset,
+		String content
+	) {
+		this(
+			(GlobalAttributes)null,
+			name,
+			httpEquiv,
+			itemprop,
+			charset,
+			content
+		);
+	}
+
+	public GlobalAttributes getGlobal() {
+		return global;
 	}
 
 	public String getName() {
@@ -59,6 +87,7 @@ public class Meta {
 		return httpEquiv;
 	}
 
+	// TODO: Move to GlobalAttributes (or AlmostGlobalAttributes)
 	public String getItemprop() {
 		return itemprop;
 	}

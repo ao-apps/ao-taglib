@@ -31,11 +31,5 @@ import javax.servlet.jsp.JspTagException;
  */
 public interface ClassAttribute {
 
-	/**
-	 * Getter required because without it, we get the exception:
-	 * <pre>Unable to find setter method for attribute: class</pre>
-	 */
-	String getClazz();
-
 	void setClazz(String clazz) throws JspTagException;
 }

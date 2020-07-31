@@ -27,7 +27,6 @@ import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaSc
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.Serialization;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
-import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import static com.aoindustries.encoding.TextInXhtmlEncoder.textInXhtmlEncoder;
 import com.aoindustries.encoding.servlet.SerializationEE;
 import com.aoindustries.io.buffer.BufferResult;
@@ -43,7 +42,7 @@ import javax.servlet.jsp.PageContext;
  * @author  AO Industries, Inc.
  */
 public class TextareaTag
-	extends AutoEncodingBufferedTag
+	extends ElementBufferedTag
 	implements
 		NameAttribute,
 		ValueAttribute,
@@ -51,8 +50,7 @@ public class TextareaTag
 		RowsAttribute,
 		ReadonlyAttribute,
 		DisabledAttribute,
-		OnchangeAttribute,
-		StyleAttribute
+		OnchangeAttribute
 {
 
 	private String name;
@@ -62,7 +60,6 @@ public class TextareaTag
 	private boolean readonly;
 	private boolean disabled;
 	private Object onchange;
-	private Object style;
 
 	@Override
 	public MediaType getContentType() {
@@ -110,20 +107,16 @@ public class TextareaTag
 	}
 
 	@Override
-	public void setStyle(Object style) throws JspTagException {
-		this.style = AttributeUtils.trimNullIfEmpty(style);
-	}
-
-	@Override
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
-		if(value==null) setValue(capturedBody.trim());
+		if(value == null) setValue(capturedBody.trim());
 		PageContext pageContext = (PageContext)getJspContext();
 		Serialization serialization = SerializationEE.get(
 			pageContext.getServletContext(),
 			(HttpServletRequest)pageContext.getRequest()
 		);
 		out.write("<textarea");
-		if(name!=null) {
+		writeGlobalAttributes(out);
+		if(name != null) {
 			out.write(" name=\"");
 			encodeTextInXhtmlAttribute(name, out);
 			out.write('"');
@@ -141,14 +134,9 @@ public class TextareaTag
 			out.write(" disabled");
 			if(serialization == Serialization.XML) out.write("=\"disabled\"");
 		}
-		if(onchange!=null) {
+		if(onchange != null) {
 			out.write(" onchange=\"");
 			Coercion.write(onchange, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
-			out.write('"');
-		}
-		if(style!=null) {
-			out.write(" style=\"");
-			Coercion.write(style, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
 		out.write('>');

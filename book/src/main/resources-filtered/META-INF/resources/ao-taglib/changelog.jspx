@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2020-07-30T20:23:32-05:00"
+		dateModified="2020-07-31T01:25:42-05:00"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -62,7 +62,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 					<li>Added <code>class</code> and <code>size</code> attributes to <core:link page="ao.tld/tag-select" />.</li>
 					<li>Added <code>id</code>, <code>class</code>, and <code>style</code> attributes to <core:link page="ao.tld/tag-br" />.</li>
 					<li>Added <code>id</code>, <code>class</code>, and <code>style</code> attributes to <core:link page="ao.tld/tag-hr" />.</li>
-					<!-- TODO: Add global attributes to all element tags, with a shared implementation similar to ao-fluent-html -->
 					<li>
 						Changed several tags from <code>SimpleTag</code> to <code>BodyTag</code> to better interact with
 						legacy JSP that use scriptlets:
@@ -74,12 +73,15 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 							<!-- TODO: Change more/all tags to BodyTag for more flexibility with legacy code -->
 						</ol>
 					</li>
-					<li>Resetting attributes in <code>release()</code> instead of <code>TryCatchFinally</code>.</li>
+					<li>
+						Added global attributes to all element tags.
+						Minimized the duplication in implementation by using default interface methods, abstract base
+						classes, and XML entities.
+					</li>
 				</ul>
 				<!-- TODO:
 				<ul>
-					<li>No more getters on attribute interfaces, unless is used somewhere</li>
-					<li>No more nested tags for simply setting attributes: use jsp:attribute instead</li>
+					<li>No more nested tags for simply setting attributes: use jsp:attribute instead?</li>
 					<li>Support script async and defer attributes</li>
 					<li>Support autofocus and required attributes (textarea, input, ...)</li>
 					<li>Support other nice HTML 5 features of textarea/input)</li>

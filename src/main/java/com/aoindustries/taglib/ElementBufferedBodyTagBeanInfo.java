@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2015, 2016, 2017, 2018, 2019  AO Industries, Inc.
+ * Copyright (C) 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -31,7 +31,7 @@ import java.beans.SimpleBeanInfo;
 /**
  * @author  AO Industries, Inc.
  */
-public class ATagBeanInfo extends SimpleBeanInfo {
+public class ElementBufferedBodyTagBeanInfo extends SimpleBeanInfo {
 
 	private static volatile PropertyDescriptor[] properties;
 
@@ -41,23 +41,8 @@ public class ATagBeanInfo extends SimpleBeanInfo {
 			PropertyDescriptor[] props = properties;
 			if(props == null) {
 				props = new PropertyDescriptor[] {
-					// From base class: new PropertyDescriptor("contentType", ATag.class, "getContentType", null),
-					// From base class: new PropertyDescriptor("outputType", ATag.class, "getOutputType", null),
-					new PropertyDescriptor("id", ATag.class, null, "setId"),
-					new PropertyDescriptor("href", ATag.class, null, "setHref"),
-					new PropertyDescriptor("absolute", ATag.class, null, "setAbsolute"),
-					new PropertyDescriptor("canonical", ATag.class, null, "setCanonical"),
-					new PropertyDescriptor("addLastModified", ATag.class, null, "setAddLastModified"),
-					new PropertyDescriptor("hreflang", ATag.class, null, "setHreflang"),
-					new PropertyDescriptor("rel", ATag.class, null, "setRel"),
-					new PropertyDescriptor("type", ATag.class, null, "setType"),
-					new PropertyDescriptor("target", ATag.class, null, "setTarget"),
-					new PropertyDescriptor("title", ATag.class, null, "setTitle"),
-					new PropertyDescriptor("class", ATag.class, "getClazz", "setClazz"),
-					new PropertyDescriptor("style", ATag.class, null, "setStyle"),
-					new PropertyDescriptor("onclick", ATag.class, null, "setOnclick"),
-					new PropertyDescriptor("onmouseover", ATag.class, null, "setOnmouseover"),
-					new PropertyDescriptor("onmouseout", ATag.class, null, "setOnmouseout")
+					new PropertyDescriptor("class", ElementBufferedBodyTag.class, "getClazz", "setClazz"),
+					new PropertyDescriptor("style", ElementBufferedBodyTag.class, "getStyle", "setStyle"),
 				};
 				properties = props;
 			}
@@ -74,7 +59,7 @@ public class ATagBeanInfo extends SimpleBeanInfo {
 	public BeanInfo[] getAdditionalBeanInfo() {
 		try {
 			return new BeanInfo[] {
-				Introspector.getBeanInfo(ATag.class.getSuperclass())
+				Introspector.getBeanInfo(ElementBufferedBodyTag.class.getSuperclass())
 			};
 		} catch(IntrospectionException err) {
 			throw new AssertionError(err);

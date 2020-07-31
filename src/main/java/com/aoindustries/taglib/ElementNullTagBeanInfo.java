@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2013, 2015, 2016, 2017, 2018, 2019, 2020  AO Industries, Inc.
+ * Copyright (C) 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -31,7 +31,7 @@ import java.beans.SimpleBeanInfo;
 /**
  * @author  AO Industries, Inc.
  */
-public class HtmlTagBeanInfo extends SimpleBeanInfo {
+public class ElementNullTagBeanInfo extends SimpleBeanInfo {
 
 	private static volatile PropertyDescriptor[] properties;
 
@@ -41,10 +41,9 @@ public class HtmlTagBeanInfo extends SimpleBeanInfo {
 			PropertyDescriptor[] props = properties;
 			if(props == null) {
 				props = new PropertyDescriptor[] {
-					// From base class: new PropertyDescriptor("contentType", HtmlTag.class, "getContentType", null),
-					new PropertyDescriptor("serialization", HtmlTag.class, null,       "setSerialization"),
-					new PropertyDescriptor("doctype",       HtmlTag.class, null,       "setDoctype"),
-					new PropertyDescriptor("class",         HtmlTag.class, "getClazz", "setClazz")
+					new PropertyDescriptor("id",    ElementNullTag.class, "getId",    "setId"),
+					new PropertyDescriptor("class", ElementNullTag.class, "getClazz", "setClazz"),
+					new PropertyDescriptor("style", ElementNullTag.class, "getStyle", "setStyle"),
 				};
 				properties = props;
 			}
@@ -61,7 +60,7 @@ public class HtmlTagBeanInfo extends SimpleBeanInfo {
 	public BeanInfo[] getAdditionalBeanInfo() {
 		try {
 			return new BeanInfo[] {
-				Introspector.getBeanInfo(HtmlTag.class.getSuperclass())
+				Introspector.getBeanInfo(ElementNullTag.class.getSuperclass())
 			};
 		} catch(IntrospectionException err) {
 			throw new AssertionError(err);

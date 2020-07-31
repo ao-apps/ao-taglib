@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2017, 2018, 2020  AO Industries, Inc.
+ * Copyright (C) 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -31,7 +31,7 @@ import java.beans.SimpleBeanInfo;
 /**
  * @author  AO Industries, Inc.
  */
-public class FormTagBeanInfo extends SimpleBeanInfo {
+public class ElementFilteredTagBeanInfo extends SimpleBeanInfo {
 
 	private static volatile PropertyDescriptor[] properties;
 
@@ -41,16 +41,9 @@ public class FormTagBeanInfo extends SimpleBeanInfo {
 			PropertyDescriptor[] props = properties;
 			if(props == null) {
 				props = new PropertyDescriptor[] {
-					// From base class: new PropertyDescriptor("contentType", FormTag.class, "getContentType", null),
-					// From base class: new PropertyDescriptor("outputType", FormTag.class, "getOutputType", null),
-					// From base class: new PropertyDescriptor("id", FormTag.class, "getId", "setId"),
-					new PropertyDescriptor("class",    FormTag.class, "getClazz", "setClazz"),
-					new PropertyDescriptor("style",    FormTag.class, null,       "setStyle"),
-					new PropertyDescriptor("action",   FormTag.class, null,       "setAction"),
-					new PropertyDescriptor("enctype",  FormTag.class, null,       "setEnctype"),
-					new PropertyDescriptor("method",   FormTag.class, null,       "setMethod"),
-					new PropertyDescriptor("target",   FormTag.class, null,       "setTarget"),
-					new PropertyDescriptor("onsubmit", FormTag.class, null,       "setOnsubmit")
+					new PropertyDescriptor("id",    ElementFilteredTag.class, "getId",    "setId"),
+					new PropertyDescriptor("class", ElementFilteredTag.class, "getClazz", "setClazz"),
+					new PropertyDescriptor("style", ElementFilteredTag.class, "getStyle", "setStyle"),
 				};
 				properties = props;
 			}
@@ -67,7 +60,7 @@ public class FormTagBeanInfo extends SimpleBeanInfo {
 	public BeanInfo[] getAdditionalBeanInfo() {
 		try {
 			return new BeanInfo[] {
-				Introspector.getBeanInfo(FormTag.class.getSuperclass())
+				Introspector.getBeanInfo(ElementFilteredTag.class.getSuperclass())
 			};
 		} catch(IntrospectionException err) {
 			throw new AssertionError(err);

@@ -47,7 +47,7 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  * @author  AO Industries, Inc.
  */
 public class ScriptTag
-	extends AutoEncodingBufferedTag
+	extends ElementBufferedTag
 	implements
 		DynamicAttributes,
 		TypeAttribute,
@@ -146,8 +146,7 @@ public class ScriptTag
 			(HttpServletResponse)pageContext.getResponse(),
 			out
 		);
-		html
-			.script(mediaType.getContentType())
+		doGlobalAttributes(html.script(mediaType.getContentType()))
 			// Call getSrc always, since it validates src versus params
 			.src(UrlUtils.getSrc(pageContext, src, params, addLastModified, absolute, canonical))
 			// Only write body when there is no source (discard body when src provided)
