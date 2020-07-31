@@ -72,6 +72,10 @@ public abstract class AutoEncodingBufferedBodyTag extends BodyTagSupport impleme
 
 	private static final Logger logger = Logger.getLogger(AutoEncodingBufferedBodyTag.class.getName());
 
+	public AutoEncodingBufferedBodyTag() {
+		init();
+	}
+
 	/**
 	 * Gets the type of data that is contained by this tag.
 	 */

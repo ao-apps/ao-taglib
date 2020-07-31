@@ -43,6 +43,10 @@ public class OptionTag
 		ValueAttribute
 {
 
+	public OptionTag() {
+		init();
+	}
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.TEXT;

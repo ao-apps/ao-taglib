@@ -55,6 +55,10 @@ public class SelectTag
 		OnkeypressAttribute
 {
 
+	public SelectTag() {
+		init();
+	}
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.XHTML;

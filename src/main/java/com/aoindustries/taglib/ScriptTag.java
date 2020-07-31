@@ -54,11 +54,11 @@ public class ScriptTag
 		ParamsAttribute
 {
 
-	private static final long serialVersionUID = 1L;
-
 	public ScriptTag() {
 		init();
 	}
+
+	private static final long serialVersionUID = 1L;
 
 	private MediaType mediaType;
 

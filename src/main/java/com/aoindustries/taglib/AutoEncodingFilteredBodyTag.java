@@ -90,6 +90,10 @@ public abstract class AutoEncodingFilteredBodyTag extends BodyTagSupport impleme
 		assert EVAL_BODY_FILTERED != EVAL_BODY_BUFFERED;
 	}
 
+	public AutoEncodingFilteredBodyTag() {
+		init();
+	}
+
 	/**
 	 * Gets the type of data that is contained by this tag.
 	 * This is also the output type.

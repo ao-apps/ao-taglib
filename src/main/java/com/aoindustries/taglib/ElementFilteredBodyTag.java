@@ -36,6 +36,10 @@ abstract public class ElementFilteredBodyTag extends AutoEncodingFilteredBodyTag
 
 	private static final long serialVersionUID = 1L;
 
+	public ElementFilteredBodyTag() {
+		init();
+	}
+
 	@Override
 	public void setId(String id) {
 		super.setId(Strings.trimNullIfEmpty(id));

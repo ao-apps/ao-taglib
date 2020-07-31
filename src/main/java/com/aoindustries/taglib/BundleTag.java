@@ -52,6 +52,10 @@ public class BundleTag
 
 	private static final long serialVersionUID = 1L;
 
+	public BundleTag() {
+		init();
+	}
+
 	private String basename;
 	private transient ApplicationResourcesAccessor accessor; // Set along with basename
 	private String prefix;

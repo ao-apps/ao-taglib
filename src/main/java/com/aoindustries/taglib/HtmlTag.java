@@ -131,6 +131,10 @@ public class HtmlTag extends ElementFilteredBodyTag {
 		out.append("</html>");
 	}
 
+	public HtmlTag() {
+		init();
+	}
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.XHTML;

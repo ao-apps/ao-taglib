@@ -36,6 +36,10 @@ abstract public class ElementBufferedBodyTag extends AutoEncodingBufferedBodyTag
 
 	private static final long serialVersionUID = 1L;
 
+	public ElementBufferedBodyTag() {
+		init();
+	}
+
 	@Override
 	public void setId(String id) {
 		super.setId(Strings.trimNullIfEmpty(id));

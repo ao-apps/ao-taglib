@@ -36,6 +36,10 @@ public class ChooseTag
 
 	private static final long serialVersionUID = 1L;
 
+	public ChooseTag() {
+		init();
+	}
+
 	private boolean hasWhen;
 	private boolean matched;
 	private boolean hasOtherwise;

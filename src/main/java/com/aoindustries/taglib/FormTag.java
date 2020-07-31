@@ -77,6 +77,10 @@ public class FormTag
 		;
 	}
 
+	public FormTag() {
+		init();
+	}
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.XHTML;
