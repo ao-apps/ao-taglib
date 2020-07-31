@@ -47,7 +47,7 @@ public class PropertyUtils {
 	/**
 	 * Gets the object given its scope, name, and optional property.
 	 *
-	 * @param  scope  scope should be one of these acceptable values:
+	 * @param  scope  scope must be one of these acceptable values:
 	 *                 <ul>
 	 *                   <li><code>null</code></li>
 	 *                   <li><code>"page"</code></li>
