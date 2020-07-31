@@ -233,13 +233,8 @@ abstract public class DispatchTag
 			}
 
 			// Invoke body first to all nested tags to set attributes
-			final JspFragment body = getJspBody();
-			if(body!=null) {
-				// Discard all nested output, since this will not use the output and this
-				// output could possibly fill the response buffer and prevent the dispatch
-				// from functioning.
-				body.invoke(NullWriter.getInstance());
-			}
+			JspFragment body = getJspBody();
+			if(body != null) invoke(body);
 			// Keep old dispatch page to restore
 			final String oldDispatchPage = Dispatcher.getDispatchedPage(request);
 			try {
@@ -329,6 +324,20 @@ abstract public class DispatchTag
 				Dispatcher.setOriginalPage(request, null);
 			}
 		}
+	}
+
+	/**
+	 * Invokes the body.  This is only called when a body exists.  Subclasses may override this to perform
+	 * actions before and/or after invoking the body.  Any overriding implementation should call
+	 * super.invoke(JspFragment) to invoke the body.
+	 * <p>
+	 * Discards all nested output, since this will not use the output and this
+	 * output could possibly fill the response buffer and prevent the dispatch
+	 * from functioning.
+	 * </p>
+	 */
+	protected void invoke(JspFragment body) throws JspException, IOException {
+		body.invoke(NullWriter.getInstance());
 	}
 
 	abstract void dispatch(RequestDispatcher dispatcher, JspWriter out, HttpServletRequest request, HttpServletResponse response) throws JspException, IOException;

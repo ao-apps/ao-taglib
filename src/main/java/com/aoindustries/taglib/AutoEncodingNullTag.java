@@ -65,7 +65,7 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
 		// The output type cannot be determined until the body of the tag is invoked, because nested tags may
 		// alter the resulting type.  We invoke the body first to accommodate nested tags.
 		JspFragment body = getJspBody();
-		if(body != null) body.invoke(NullWriter.getInstance());
+		if(body != null) invoke(body);
 
 		MediaType myOutputType = getOutputType();
 		if(myOutputType == null) {
@@ -188,6 +188,18 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
 			// Write any suffix
 			writeSuffix(containerContentType, containerValidator);
 		}
+	}
+
+	/**
+	 * Invokes the body.  This is only called when a body exists.  Subclasses may override this to perform
+	 * actions before and/or after invoking the body.  Any overriding implementation should call
+	 * super.invoke(JspFragment) to invoke the body.
+	 * <p>
+	 * Discards all nested output, since this will not use the output.
+	 * </p>
+	 */
+	protected void invoke(JspFragment body) throws JspException, IOException {
+		body.invoke(NullWriter.getInstance());
 	}
 
 	/**
