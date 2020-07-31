@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2016, 2017, 2019, 2020  AO Industries, Inc.
+ * Copyright (C) 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,32 +22,41 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.lang.Strings;
+import com.aoindustries.html.Attributes;
+import com.aoindustries.html.Attributes.Global;
+import com.aoindustries.validation.ValidationResult;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.jsp.tagext.TagData;
+import javax.servlet.jsp.tagext.TagExtraInfo;
 import javax.servlet.jsp.tagext.ValidationMessage;
 
 /**
+ * Validates {@linkplain Global global attributes}.
+ *
  * @author  AO Industries, Inc.
  */
-public class InputTagTEI extends ElementTagTEI {
+public class ElementTagTEI extends TagExtraInfo {
 
 	@Override
+	final public ValidationMessage[] validate(TagData data) {
+		List<ValidationMessage> messages = new ArrayList<>();
+		validate(data, messages);
+		int size = messages.size();
+		return (size == 0) ? null : messages.toArray(new ValidationMessage[size]);
+	}
+
+	/**
+	 * Validates the tag, adding all messages to the provided list.
+	 */
 	protected void validate(TagData data, List<ValidationMessage> messages) {
-		super.validate(data, messages);
-		Object typeAttr = data.getAttribute("type");
-		if(
-			typeAttr != null
-			&& typeAttr != TagData.REQUEST_TIME_VALUE
-		) {
-			String type = Strings.trimNullIfEmpty((String)typeAttr); // TODO: normalizeType
-			if(type != null && !InputTag.isValidType(type)) {
-				messages.add(
-					new ValidationMessage(
-						data.getId(),
-						ApplicationResources.accessor.getMessage("InputTag.type.invalid", type)
-					)
-				);
+		Object o = data.getAttribute("dir");
+		if(o != TagData.REQUEST_TIME_VALUE) {
+			// TODO: Other validation Strings.trimNullIfEmpty (or their normalize* method) for consistency with implementation
+			String dir = Attributes.Enum.Dir.normalize((String)o);
+			ValidationResult validation = Attributes.Enum.Dir.validate(dir);
+			if(!validation.isValid()) {
+				messages.add(new ValidationMessage(data.getId(), validation.toString()));
 			}
 		}
 	}

@@ -39,6 +39,7 @@ public class GlobalAttributesUtil {
 		if(from != null) {
 			to.setId(from.getId());
 			to.setClazz(from.getClazz());
+			to.setDir(from.getDir());
 			to.setStyle(from.getStyle());
 		}
 	}

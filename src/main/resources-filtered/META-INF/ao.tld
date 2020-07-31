@@ -79,6 +79,34 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<type>java.lang.String</type>
 		</attribute>">
 
+<!ENTITY DirAttribute_description "The &lt;a href=&quot;https://www.w3schools.com/tags/att_global_dir.asp&quot;&gt;dir of the element&lt;/a&gt;.">
+<!ENTITY DirAttribute "<attribute>
+			<description>
+				&lt;p&gt;
+					&DirAttribute_description;
+				&lt;/p&gt;
+			</description>
+			<name>dir</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>">
+
+<!ENTITY DirBufferedAttribute_description "&DirAttribute_description;
+					A nested &lt;a href=&quot;@{project.url}ao.tld/tag-dir&quot;&gt;<![CDATA[&lt;ao:dir&gt;]]>&lt;/a&gt;
+					tag will override this value.">
+<!ENTITY DirBufferedAttribute "<attribute>
+			<description>
+				&lt;p&gt;
+					&DirBufferedAttribute_description;
+				&lt;/p&gt;
+			</description>
+			<name>dir</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>">
+
 <!ENTITY StyleAttribute_description "The &lt;a href=&quot;https://www.w3schools.com/tags/att_global_style.asp&quot;&gt;CSS style for the element&lt;/a&gt;.">
 <!ENTITY StyleAttribute "<attribute>
 			<description>
@@ -109,9 +137,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 
 <!ENTITY GlobalAttributes "&IdAttribute;
 		&ClassAttribute;
+		&DirAttribute;
 		&StyleAttribute;">
 <!ENTITY GlobalBufferedAttributes "&IdBufferedAttribute;
 		&ClassBufferedAttribute;
+		&DirBufferedAttribute;
 		&StyleBufferedAttribute;">
 
 ]>
@@ -134,7 +164,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<!-- TODO: Implement validator(s), such as ao:when directly inside ao:choose and similar -->
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-07-31T01:25:42-05:00" -->
+		<!-- dateModified="2020-07-31T10:11:29-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_a.asp">&lt;a&gt;</a> tag.
@@ -172,6 +202,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		]]></description>
 		<name>a</name>
 		<tag-class>com.aoindustries.taglib.ATag</tag-class>
+		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
 		<body-content>scriptless</body-content>
 		&GlobalBufferedAttributes;
 		<attribute>
@@ -394,7 +425,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2019-10-08T21:41:35-0500" -->
-		<!-- dateModified="2020-07-31T01:25:42-05:00" -->
+		<!-- dateModified="2020-07-31T10:11:29-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_area.asp">&lt;area&gt;</a> tag.
@@ -737,7 +768,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-07-31T01:25:42-05:00" -->
+		<!-- dateModified="2020-07-31T10:11:29-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Adds a <a href="https://www.w3schools.com/tags/tag_base.asp">&lt;base&gt;</a> tag only when necessary.
@@ -761,12 +792,13 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		]]></description>
 		<name>base</name>
 		<tag-class>com.aoindustries.taglib.BaseTag</tag-class>
+		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
 		<body-content>scriptless</body-content>
 		&GlobalBufferedAttributes;
 	</tag>
 	<tag>
 		<!-- datePublished="2019-10-20T05:53:01-0500" -->
-		<!-- dateModified="2020-07-31T01:25:42-05:00" -->
+		<!-- dateModified="2020-07-31T10:11:29-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Writes a <a href="https://www.w3schools.com/tags/tag_br.asp">&lt;br&gt;</a>
@@ -775,6 +807,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		]]></description>
 		<name>br</name>
 		<tag-class>com.aoindustries.taglib.BrTag</tag-class>
+		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
 		<body-content>scriptless</body-content>
 		&GlobalBufferedAttributes;
 	</tag>
@@ -860,7 +893,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2020-02-11T20:25:52-0600" -->
-		<!-- dateModified="2020-07-31T01:25:42-05:00" -->
+		<!-- dateModified="2020-07-31T10:11:29-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Writes a <a href="https://www.w3schools.com/tags/tag_col.asp">&lt;col&gt;</a>
@@ -869,6 +902,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		]]></description>
 		<name>col</name>
 		<tag-class>com.aoindustries.taglib.ColTag</tag-class>
+		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
 		<body-content>scriptless</body-content>
 		&GlobalBufferedAttributes;
 		<attribute>
@@ -895,6 +929,19 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		]]></description>
 		<name>content</name>
 		<tag-class>com.aoindustries.taglib.ContentTag</tag-class>
+		<body-content>scriptless</body-content>
+	</tag>
+	<tag>
+		<!-- datePublished="2020-07-31T10:11:29-05:00" -->
+		<description><![CDATA[
+			<p>
+				Provides a <a href="https://www.w3schools.com/tags/att_global_dir.asp">dir attribute</a> to its
+				<a href="@{project.url}apidocs/com/aoindustries/taglib/DirAttribute.html">DirAttribute</a>
+				parent tag.
+			</p>
+		]]></description>
+		<name>dir</name>
+		<tag-class>com.aoindustries.taglib.DirTag</tag-class>
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
@@ -941,7 +988,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-07-31T01:25:42-05:00" -->
+		<!-- dateModified="2020-07-31T10:11:29-05:00" -->
 		<!-- TODO: param.* dynamic attributes should not do automatic multi-parameter.  Make a params.* dynamic attribute for this purpose. -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
@@ -1301,7 +1348,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2019-10-30T20:50:04-0500" -->
-		<!-- dateModified="2020-07-31T01:25:42-05:00" -->
+		<!-- dateModified="2020-07-31T10:11:29-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Writes a <a href="https://www.w3schools.com/tags/tag_hr.asp">&lt;hr&gt;</a>
@@ -1310,12 +1357,13 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		]]></description>
 		<name>hr</name>
 		<tag-class>com.aoindustries.taglib.HrTag</tag-class>
+		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
 		<body-content>scriptless</body-content>
 		&GlobalBufferedAttributes;
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-07-31T01:25:42-05:00" -->
+		<!-- dateModified="2020-07-31T10:11:29-05:00" -->
 		<description><![CDATA[
 			<ol>
 				<li>Clears the current output buffer (leaving status code and headers)</li>
@@ -1446,7 +1494,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-07-31T01:25:42-05:00" -->
+		<!-- dateModified="2020-07-31T10:11:29-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_iframe.asp">&lt;iframe&gt;</a> tag.
@@ -1475,6 +1523,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		]]></description>
 		<name>iframe</name>
 		<tag-class>com.aoindustries.taglib.IframeTag</tag-class>
+		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
 		<body-content>scriptless</body-content>
 		<attribute>
 			<description>
@@ -1492,6 +1541,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<type>java.lang.String</type>
 		</attribute>
 		&ClassBufferedAttribute;
+		&DirBufferedAttribute;
 		&StyleBufferedAttribute;
 		<attribute>
 			<description><![CDATA[
@@ -1630,7 +1680,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-07-31T01:25:42-05:00" -->
+		<!-- dateModified="2020-07-31T10:11:29-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_img.asp">&lt;img&gt;</a> tag.
@@ -1671,6 +1721,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		]]></description>
 		<name>img</name>
 		<tag-class>com.aoindustries.taglib.ImgTag</tag-class>
+		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
 		<body-content>scriptless</body-content>
 		&GlobalBufferedAttributes;
 		<attribute>
@@ -1978,7 +2029,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-07-31T01:25:42-05:00" -->
+		<!-- dateModified="2020-07-31T10:11:29-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_input.asp">&lt;input&gt;</a> tag.
@@ -2387,7 +2438,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-07-31T01:25:42-05:00" -->
+		<!-- dateModified="2020-07-31T10:11:29-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				If contained with any
@@ -2419,6 +2470,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		]]></description>
 		<name>link</name>
 		<tag-class>com.aoindustries.taglib.LinkTag</tag-class>
+		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
 		<body-content>scriptless</body-content>
 		&GlobalBufferedAttributes;
 		<attribute>
@@ -2593,7 +2645,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2019-10-08T21:41:35-0500" -->
-		<!-- dateModified="2020-07-31T01:25:42-05:00" -->
+		<!-- dateModified="2020-07-31T10:11:29-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders a <a href="https://www.w3schools.com/tags/tag_map.asp">&lt;map&gt;</a> tag.
@@ -2604,6 +2656,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		]]></description>
 		<name>map</name>
 		<tag-class>com.aoindustries.taglib.MapTag</tag-class>
+		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
 		<body-content>scriptless</body-content>
 		<attribute>
 			<description><![CDATA[
@@ -2627,6 +2680,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<type>java.lang.String</type>
 		</attribute>
 		&ClassBufferedAttribute;
+		&DirBufferedAttribute;
 		&StyleBufferedAttribute;
 	</tag>
 	<tag>
@@ -2829,7 +2883,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-07-31T01:25:42-05:00" -->
+		<!-- dateModified="2020-07-31T10:11:29-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				If contained with any
@@ -2848,6 +2902,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		]]></description>
 		<name>meta</name>
 		<tag-class>com.aoindustries.taglib.MetaTag</tag-class>
+		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
 		<body-content>scriptless</body-content>
 		&GlobalBufferedAttributes;
 		<attribute>
@@ -3095,7 +3150,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-07-31T01:25:42-05:00" -->
+		<!-- dateModified="2020-07-31T10:11:29-05:00" -->
 		<description><![CDATA[
 			<p>
 				Renders an <a href="https://www.w3schools.com/tags/tag_option.asp">&lt;option&gt;</a> tag.
@@ -3103,6 +3158,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		]]></description>
 		<name>option</name>
 		<tag-class>com.aoindustries.taglib.OptionTag</tag-class>
+		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
 		<body-content>JSP</body-content>
 		&GlobalBufferedAttributes;
 		<attribute>
@@ -3215,7 +3271,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
-			<!-- TODO
+			<!-- TODO: This, and look at other things done deferred-value in jstl
 			<deferred-value>
 				<type>java.lang.Object</type>
 			</deferred-value>
@@ -3689,7 +3745,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-07-31T01:25:42-05:00" -->
+		<!-- dateModified="2020-07-31T10:11:29-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Manually establishes a <a href="https://www.w3schools.com/tags/tag_script.asp">script context</a> when automatic detection is not possible.
@@ -3848,7 +3904,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-07-31T01:25:42-05:00" -->
+		<!-- dateModified="2020-07-31T10:11:29-05:00" -->
 		<description><![CDATA[
 			<p>
 				Renders a <a href="https://www.w3schools.com/tags/tag_select.asp">&lt;select&gt;</a> tag.
@@ -3856,6 +3912,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		]]></description>
 		<name>select</name>
 		<tag-class>com.aoindustries.taglib.SelectTag</tag-class>
+		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
 		<body-content>JSP</body-content>
 		&GlobalBufferedAttributes;
 		<attribute>
@@ -4145,7 +4202,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-07-31T01:25:42-05:00" -->
+		<!-- dateModified="2020-07-31T10:11:29-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders a <a href="https://www.w3schools.com/tags/tag_textarea.asp">&lt;textarea&gt;</a> tag.
@@ -4161,6 +4218,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		]]></description>
 		<name>textarea</name>
 		<tag-class>com.aoindustries.taglib.TextareaTag</tag-class>
+		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
 		<body-content>scriptless</body-content>
 		&GlobalBufferedAttributes;
 		<attribute>

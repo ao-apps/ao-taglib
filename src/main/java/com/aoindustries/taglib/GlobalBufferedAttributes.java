@@ -35,6 +35,7 @@ public interface GlobalBufferedAttributes extends
 	// Allow to be set from within nested tags
 	IdAttribute,
 	ClassAttribute,
+	DirAttribute,
 	StyleAttribute
 {
 	// No new methods

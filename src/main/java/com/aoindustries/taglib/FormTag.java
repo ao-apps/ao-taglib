@@ -68,6 +68,8 @@ public class FormTag
 		OnsubmitAttribute
 {
 
+	// TODO: Allow null here while doing normalizeMethod
+	// TODO: Change to be validateMethod, like validateDir
 	public static boolean isValidMethod(String method) {
 		return
 			"get".equals(method)

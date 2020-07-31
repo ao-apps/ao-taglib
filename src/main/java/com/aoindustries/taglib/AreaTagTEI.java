@@ -22,60 +22,65 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.collections.MinimalList;
 import java.util.List;
 import javax.servlet.jsp.tagext.TagData;
-import javax.servlet.jsp.tagext.TagExtraInfo;
 import javax.servlet.jsp.tagext.ValidationMessage;
 
 /**
  * @author  AO Industries, Inc.
  */
-public class AreaTagTEI extends TagExtraInfo {
+public class AreaTagTEI extends ElementTagTEI {
 
 	@Override
-	public ValidationMessage[] validate(TagData data) {
-		List<ValidationMessage> messages = MinimalList.emptyList();
-
+	protected void validate(TagData data, List<ValidationMessage> messages) {
+		super.validate(data, messages);
 		Object shapeAttr = data.getAttribute("shape");
 		if(shapeAttr == null) {
-			messages = MinimalList.add(
-				messages,
-				new ValidationMessage(data.getId(), ApplicationResources.accessor.getMessage("AttributeRequiredException.message", "shape"))
+			messages.add(
+				new ValidationMessage(
+					data.getId(),
+					ApplicationResources.accessor.getMessage("AttributeRequiredException.message", "shape")
+				)
 			);
 		} else if(shapeAttr != TagData.REQUEST_TIME_VALUE) {
-			String shape = ((String)shapeAttr).trim();
+			String shape = ((String)shapeAttr).trim(); // TODO: normalizeShape
 			if(shape.isEmpty()) {
-				messages = MinimalList.add(
-					messages,
-					new ValidationMessage(data.getId(), ApplicationResources.accessor.getMessage("AttributeRequiredException.message", "shape"))
+				messages.add(
+					new ValidationMessage(
+						data.getId(),
+						ApplicationResources.accessor.getMessage("AttributeRequiredException.message", "shape")
+					)
 				);
 			} else {
 				if(!AreaTag.isValidShape(shape)) {
-					messages = MinimalList.add(
-						messages,
-						new ValidationMessage(data.getId(), ApplicationResources.accessor.getMessage("AreaTag.shape.invalid", shape))
+					messages.add(
+						new ValidationMessage(
+							data.getId(),
+							ApplicationResources.accessor.getMessage("AreaTag.shape.invalid", shape)
+						)
 					);
 				} else if(!"default".equals(shape)) {
 					Object coordsAttr = data.getAttribute("coords");
 					if(coordsAttr == null) {
-						messages = MinimalList.add(
-							messages,
-							new ValidationMessage(data.getId(), ApplicationResources.accessor.getMessage("AttributeRequiredException.message", "coords"))
+						messages.add(
+							new ValidationMessage(
+								data.getId(),
+								ApplicationResources.accessor.getMessage("AttributeRequiredException.message", "coords")
+							)
 						);
 					} else if(coordsAttr != TagData.REQUEST_TIME_VALUE) {
-						String coords = AttributeUtils.trimNullIfEmpty((String)coordsAttr);
+						String coords = AttributeUtils.trimNullIfEmpty((String)coordsAttr); // TODO: normalizeCoords
 						if(coords == null) {
-							messages = MinimalList.add(
-								messages,
-								new ValidationMessage(data.getId(), ApplicationResources.accessor.getMessage("AttributeRequiredException.message", "coords"))
+							messages.add(
+								new ValidationMessage(
+									data.getId(),
+									ApplicationResources.accessor.getMessage("AttributeRequiredException.message", "coords")
+								)
 							);
 						}
 					}
 				}
 			}
 		}
-		int size = messages.size();
-		return (size == 0) ? null : messages.toArray(new ValidationMessage[size]);
 	}
 }

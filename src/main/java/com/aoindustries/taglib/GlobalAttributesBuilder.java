@@ -23,6 +23,7 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.Coercion;
+import com.aoindustries.html.Attributes;
 import com.aoindustries.lang.Strings;
 import java.io.IOException;
 
@@ -38,15 +39,18 @@ public class GlobalAttributesBuilder {
 
 		private final String id;
 		private final String clazz;
+		private final String dir;
 		private final Object style;
 
 		private Instance(
 			String id,
 			String clazz,
+			String dir,
 			Object style
 		) {
 			this.id = id;
 			this.clazz = clazz;
+			this.dir = dir;
 			this.style = style;
 		}
 
@@ -61,6 +65,11 @@ public class GlobalAttributesBuilder {
 		}
 
 		@Override
+		public String getDir() {
+			return dir;
+		}
+
+		@Override
 		public Object getStyle() {
 			return style;
 		}
@@ -68,6 +77,7 @@ public class GlobalAttributesBuilder {
 
 	private String id;
 	private String clazz;
+	private String dir;
 	private Object style;
 
 	private GlobalAttributesBuilder() {}
@@ -82,6 +92,11 @@ public class GlobalAttributesBuilder {
 		return this;
 	}
 
+	public GlobalAttributesBuilder setDir(String dir) {
+		this.dir = Attributes.Enum.Dir.normalize(dir);
+		return this;
+	}
+
 	public GlobalAttributesBuilder setStyle(Object style) throws IOException {
 		this.style = Coercion.trimNullIfEmpty(style);
 		return this;
@@ -93,6 +108,7 @@ public class GlobalAttributesBuilder {
 	public GlobalAttributesBuilder copy(GlobalAttributes global) throws IOException {
 		setId(global.getId());
 		setClazz(global.getClazz());
+		setDir(global.getDir());
 		setStyle(global.getStyle());
 		return this;
 	}
@@ -106,6 +122,7 @@ public class GlobalAttributesBuilder {
 		if(
 			id == null
 			&& clazz == null
+			&& dir == null
 			&& style == null
 		) {
 			return null;
@@ -113,6 +130,7 @@ public class GlobalAttributesBuilder {
 			return new Instance(
 				id,
 				clazz,
+				dir,
 				style
 			);
 		}

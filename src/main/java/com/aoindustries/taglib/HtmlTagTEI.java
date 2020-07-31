@@ -22,36 +22,36 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.collections.MinimalList;
 import com.aoindustries.encoding.Doctype;
 import com.aoindustries.encoding.Serialization;
 import java.util.List;
 import java.util.Locale;
 import javax.servlet.jsp.tagext.TagData;
-import javax.servlet.jsp.tagext.TagExtraInfo;
 import javax.servlet.jsp.tagext.ValidationMessage;
 
 /**
  * @author  AO Industries, Inc.
  */
-public class HtmlTagTEI extends TagExtraInfo {
+public class HtmlTagTEI extends ElementTagTEI {
 
 	@Override
-	public ValidationMessage[] validate(TagData data) {
-		List<ValidationMessage> messages = MinimalList.emptyList();
+	protected void validate(TagData data, List<ValidationMessage> messages) {
+		super.validate(data, messages);
 		Object serializationAttr = data.getAttribute("serialization");
 		if(
 			serializationAttr != null
 			&& serializationAttr != TagData.REQUEST_TIME_VALUE
 		) {
-			String serialization = ((String)serializationAttr).trim();
+			String serialization = ((String)serializationAttr).trim(); // TODO: normalizeSerialization
 			if(!serialization.isEmpty() && !"auto".equalsIgnoreCase(serialization)) {
 				try {
 					Serialization.valueOf(serialization.toUpperCase(Locale.ROOT));
 				} catch(IllegalArgumentException e) {
-					messages = MinimalList.add(
-						messages,
-						new ValidationMessage(data.getId(), ApplicationResources.accessor.getMessage("HtmlTag.serialization.invalid", serialization))
+					messages.add(
+						new ValidationMessage(
+							data.getId(),
+							ApplicationResources.accessor.getMessage("HtmlTag.serialization.invalid", serialization)
+						)
 					);
 				}
 			}
@@ -61,18 +61,19 @@ public class HtmlTagTEI extends TagExtraInfo {
 			doctypeAttr != null
 			&& doctypeAttr != TagData.REQUEST_TIME_VALUE
 		) {
-			String doctype = ((String)doctypeAttr).trim();
+			String doctype = ((String)doctypeAttr).trim(); // TODO: normalizeDoctype
 			if(!doctype.isEmpty() && !"default".equalsIgnoreCase(doctype)) {
 				try {
 					Doctype.valueOf(doctype.toUpperCase(Locale.ROOT));
 				} catch(IllegalArgumentException e) {
-					messages = MinimalList.add(
-						messages,
-						new ValidationMessage(data.getId(), ApplicationResources.accessor.getMessage("HtmlTag.doctype.invalid", doctype))
+					messages.add(
+						new ValidationMessage(
+							data.getId(),
+							ApplicationResources.accessor.getMessage("HtmlTag.doctype.invalid", doctype)
+						)
 					);
 				}
 			}
 		}
-		return messages.isEmpty() ? null : messages.toArray(new ValidationMessage[messages.size()]);
 	}
 }

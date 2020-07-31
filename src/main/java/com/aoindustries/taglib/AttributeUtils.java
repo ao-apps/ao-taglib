@@ -25,7 +25,11 @@ package com.aoindustries.taglib;
 import com.aoindustries.encoding.Coercion;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import com.aoindustries.lang.Strings;
+import com.aoindustries.servlet.jsp.LocalizedJspTagException;
+import com.aoindustries.validation.InvalidResult;
+import com.aoindustries.validation.ValidationResult;
 import java.io.IOException;
+import java.util.function.Function;
 import javax.el.ELContext;
 import javax.el.ValueExpression;
 import javax.servlet.jsp.JspTagException;
@@ -174,6 +178,41 @@ public final class AttributeUtils  {
 		} else {
 			return null;
 		}
+	}
+
+	/**
+	 * Checks a validation result.
+	 *
+	 * @return  The value when valid
+	 * @throws  JspTagException  When invalid, supporting {@link LocalizedJspTagException} when validationResult
+	 *                           is a {@link InvalidResult}
+	 */
+	public static <T> T validate(T value, ValidationResult validationResult) throws JspTagException {
+		if(validationResult.isValid()) {
+			return value;
+		} else {
+			if(validationResult instanceof InvalidResult) {
+				InvalidResult invalidResult = (InvalidResult)validationResult;
+				throw new LocalizedJspTagException(
+					invalidResult.getAccessor(),
+					invalidResult.getKey(),
+					invalidResult.getArgs()
+				);
+			} else {
+				throw new JspTagException(validationResult.toString());
+			}
+		}
+	}
+
+	/**
+	 * Validates a value using the provided validator.
+	 *
+	 * @return  The value when valid
+	 * @throws  JspTagException  When invalid, supporting {@link LocalizedJspTagException} when validationResult
+	 *                           is a {@link InvalidResult}
+	 */
+	public static <T> T validate(T value, Function<? super T,ValidationResult> validator) throws JspTagException {
+		return validate(value, validator.apply(value));
 	}
 
 	/**

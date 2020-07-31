@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2010, 2011, 2016, 2017, 2019  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2016, 2017, 2019, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,29 +22,32 @@
  */
 package com.aoindustries.taglib;
 
+import java.util.List;
 import javax.servlet.jsp.tagext.TagData;
-import javax.servlet.jsp.tagext.TagExtraInfo;
 import javax.servlet.jsp.tagext.ValidationMessage;
 
 /**
  * @author  AO Industries, Inc.
  */
-public class FormTagTEI extends TagExtraInfo {
+public class FormTagTEI extends ElementTagTEI {
 
 	@Override
-	public ValidationMessage[] validate(TagData data) {
+	protected void validate(TagData data, List<ValidationMessage> messages) {
+		super.validate(data, messages);
 		Object o = data.getAttribute("method");
 		if(
 			o != null
 			&& o != TagData.REQUEST_TIME_VALUE
 		) {
-			String method = ((String)o).trim();
+			String method = ((String)o).trim(); // TODO: FormTag.normalizeMethod
 			if(!FormTag.isValidMethod(method)) {
-				return new ValidationMessage[] {
-					new ValidationMessage(data.getId(), ApplicationResources.accessor.getMessage("FormTag.method.invalid", method))
-				};
+				messages.add(
+					new ValidationMessage(
+						data.getId(),
+						ApplicationResources.accessor.getMessage("FormTag.method.invalid", method)
+					)
+				);
 			}
 		}
-		return null;
 	}
 }

@@ -22,6 +22,7 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.html.Attributes;
 import com.aoindustries.html.Attributes.Global;
 import com.aoindustries.lang.Strings;
 import javax.servlet.jsp.JspTagException;
@@ -38,6 +39,7 @@ abstract public class ElementFilteredBodyTag extends AutoEncodingFilteredBodyTag
 	@Override
 	public void setId(String id) {
 		super.setId(Strings.trimNullIfEmpty(id));
+		// TODO: Validate, and TEI
 	}
 
 	protected String clazz;
@@ -47,6 +49,18 @@ abstract public class ElementFilteredBodyTag extends AutoEncodingFilteredBodyTag
 	}
 	public void setClazz(String clazz) throws JspTagException {
 		this.clazz = Strings.trimNullIfEmpty(clazz);
+	}
+
+	protected String dir;
+	@Override
+	public String getDir() {
+		return dir;
+	}
+	public void setDir(String dir) throws JspTagException {
+		this.dir = AttributeUtils.validate(
+			Attributes.Enum.Dir.normalize(dir),
+			Attributes.Enum.Dir::validate
+		);
 	}
 
 	protected Object style;
@@ -61,6 +75,7 @@ abstract public class ElementFilteredBodyTag extends AutoEncodingFilteredBodyTag
 	private void init() {
 		id = null;
 		clazz = null;
+		dir = null;
 		style = null;
 	}
 

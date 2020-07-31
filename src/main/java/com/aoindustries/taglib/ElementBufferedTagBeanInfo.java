@@ -43,6 +43,7 @@ public class ElementBufferedTagBeanInfo extends SimpleBeanInfo {
 				props = new PropertyDescriptor[] {
 					new PropertyDescriptor("id",    ElementBufferedTag.class, "getId",    "setId"),
 					new PropertyDescriptor("class", ElementBufferedTag.class, "getClazz", "setClazz"),
+					new PropertyDescriptor("dir",   ElementBufferedTag.class, "getDir",   "setDir"),
 					new PropertyDescriptor("style", ElementBufferedTag.class, "getStyle", "setStyle"),
 				};
 				properties = props;

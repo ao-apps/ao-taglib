@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2020-07-31T08:54:33-05:00"
+		dateModified="2020-07-31T10:11:29-05:00"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -60,9 +60,18 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 					</li>
 					<li>Removed support or IE 6, 7, 8, and 9 since all are end-of-life.</li>
 					<li>
-						Added global attributes to all element tags.
-						Minimized the duplication in implementation by using default interface methods, abstract base
-						classes, and XML entities.
+						Added <ao:a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes">global attributes</ao:a>
+						to all element tags.
+						<p>
+							Minimized the duplication in implementation by using default interface methods, abstract
+							base classes, and XML entities.
+						</p>
+						<p>
+							Added more global attributes:
+						</p>
+						<ol>
+							<li><code>dir</code></li>
+						</ol>
 					</li>
 					<li>Added <code>size</code> attribute to <core:link page="ao.tld/tag-select" />.</li>
 					<li>

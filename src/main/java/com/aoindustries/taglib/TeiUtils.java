@@ -37,6 +37,7 @@ import javax.servlet.jsp.tagext.ValidationMessage;
  *
  * @author  AO Industries, Inc.
  */
+// TODO: Merge with attributeUtils?
 final public class TeiUtils {
 
 	private TeiUtils() {}
@@ -51,13 +52,14 @@ final public class TeiUtils {
 	 * @see  MediaType#getMediaTypeByName(java.lang.String)
 	 * @see  MediaType#getMediaTypeForContentType(java.lang.String)
 	 */
+	// TODO: Stop using MinimalList - over-optimized
 	public static List<ValidationMessage> validateMediaType(TagData data, List<ValidationMessage> messages) {
 		Object typeAttr = data.getAttribute("type");
 		if(
 			typeAttr != null
 			&& typeAttr != TagData.REQUEST_TIME_VALUE
 		) {
-			String type = Strings.trimNullIfEmpty((String)typeAttr);
+			String type = Strings.trimNullIfEmpty((String)typeAttr); // TODO: normalizeType
 			if(type != null) {
 				try {
 					// First allow shortcuts (matching enum names)
@@ -98,7 +100,7 @@ final public class TeiUtils {
 			o != null
 			&& o != TagData.REQUEST_TIME_VALUE
 		) {
-			String scope = Coercion.toString(o).trim();
+			String scope = Coercion.toString(o).trim(); // TODO: normalizeScope
 			try {
 				Scope.getScopeId(scope);
 				// Value is OK

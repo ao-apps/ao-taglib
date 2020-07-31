@@ -43,6 +43,7 @@ public class ElementNullTagBeanInfo extends SimpleBeanInfo {
 				props = new PropertyDescriptor[] {
 					new PropertyDescriptor("id",    ElementNullTag.class, "getId",    "setId"),
 					new PropertyDescriptor("class", ElementNullTag.class, "getClazz", "setClazz"),
+					new PropertyDescriptor("dir",   ElementNullTag.class, "getDir",   "setDir"),
 					new PropertyDescriptor("style", ElementNullTag.class, "getStyle", "setStyle"),
 				};
 				properties = props;

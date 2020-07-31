@@ -46,12 +46,15 @@ public interface GlobalAttributes {
 	 */
 	String getClazz();
 
+	String getDir();
+
 	Object getStyle();
 
 	default <G extends Global<?>> G doGlobalAttributes(G global) throws IOException {
 		global
 			.id(getId())
 			.clazz(getClazz())
+			.dir(getDir())
 			.style(getStyle());
 		return global;
 	}
@@ -67,6 +70,12 @@ public interface GlobalAttributes {
 		if(clazz != null) {
 			out.write(" class=\"");
 			encodeTextInXhtmlAttribute(clazz, out);
+			out.write('"');
+		}
+		String dir = getDir();
+		if(dir != null) {
+			out.write(" dir=\"");
+			encodeTextInXhtmlAttribute(dir, out);
 			out.write('"');
 		}
 		Object style = getStyle();
@@ -89,6 +98,12 @@ public interface GlobalAttributes {
 		if(clazz != null) {
 			out.append(" class=\"");
 			encodeTextInXhtmlAttribute(clazz, out);
+			out.append('"');
+		}
+		String dir = getDir();
+		if(dir != null) {
+			out.append(" dir=\"");
+			encodeTextInXhtmlAttribute(dir, out);
 			out.append('"');
 		}
 		Object style = getStyle();

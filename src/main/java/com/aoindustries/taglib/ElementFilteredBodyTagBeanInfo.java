@@ -42,6 +42,7 @@ public class ElementFilteredBodyTagBeanInfo extends SimpleBeanInfo {
 			if(props == null) {
 				props = new PropertyDescriptor[] {
 					new PropertyDescriptor("class", ElementFilteredBodyTag.class, "getClazz", "setClazz"),
+					new PropertyDescriptor("dir",   ElementFilteredBodyTag.class, "getDir",   "setDir"),
 					new PropertyDescriptor("style", ElementFilteredBodyTag.class, "getStyle", "setStyle"),
 				};
 				properties = props;
