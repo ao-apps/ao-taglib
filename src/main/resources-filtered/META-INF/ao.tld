@@ -131,6 +131,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tlib-version>
 	<short-name>ao</short-name>
 	<uri>@{project.url}</uri>
+	<!-- TODO: Implement validator(s), such as ao:when directly inside ao:choose and similar -->
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
 		<!-- dateModified="2020-07-31T01:25:42-05:00" -->
