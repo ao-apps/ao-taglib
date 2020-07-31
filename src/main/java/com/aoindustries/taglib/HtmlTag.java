@@ -140,7 +140,8 @@ public class HtmlTag extends AutoEncodingFilteredBodyTag {
 	private transient boolean setDoctype;
 	private transient Registry oldPageRegistry;
 
-	private void init() {
+	@Override
+	public void release() {
 		serialization = null;
 		doctype = null;
 		clazz = null;
@@ -150,6 +151,7 @@ public class HtmlTag extends AutoEncodingFilteredBodyTag {
 		oldDoctype = null;
 		setDoctype = false;
 		oldPageRegistry = null;
+		super.release();
 	}
 
 	@Override
@@ -211,18 +213,14 @@ public class HtmlTag extends AutoEncodingFilteredBodyTag {
 	@Override
 	public void doFinally() {
 		try {
-			try {
-				ServletRequest request = pageContext.getRequest();
-				if(setSerialization) {
-					SerializationEE.set(request, oldSerialization);
-					pageContext.setAttribute(STRUTS_XHTML_KEY, oldStrutsXhtml, PageContext.PAGE_SCOPE);
-				}
-				if(setDoctype) DoctypeEE.set(request, oldDoctype);
-				if(oldPageRegistry == null) {
-					RegistryEE.Page.set(request, null);
-				}
-			} finally {
-				init();
+			ServletRequest request = pageContext.getRequest();
+			if(setSerialization) {
+				SerializationEE.set(request, oldSerialization);
+				pageContext.setAttribute(STRUTS_XHTML_KEY, oldStrutsXhtml, PageContext.PAGE_SCOPE);
+			}
+			if(setDoctype) DoctypeEE.set(request, oldDoctype);
+			if(oldPageRegistry == null) {
+				RegistryEE.Page.set(request, null);
 			}
 		} finally {
 			super.doFinally();

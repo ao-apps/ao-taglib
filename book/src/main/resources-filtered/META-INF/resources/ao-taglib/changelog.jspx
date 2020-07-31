@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2020-07-30T00:13:04-05:00"
+		dateModified="2020-07-30T20:23:32-05:00"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -74,6 +74,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 							<!-- TODO: Change more/all tags to BodyTag for more flexibility with legacy code -->
 						</ol>
 					</li>
+					<li>Resetting attributes in <code>release()</code> instead of <code>TryCatchFinally</code>.</li>
 				</ul>
 				<!-- TODO:
 				<ul>

@@ -106,7 +106,8 @@ public abstract class AutoEncodingBufferedBodyTag extends BodyTagSupport impleme
 	private transient MediaValidator captureValidator;
 	private transient boolean bodyUnbuffered;
 
-	private void init() {
+	@Override
+	public void release() {
 		parentEncodingContext = null;
 		mediaEncoder = null;
 		validatingOutEncodingContext = null;
@@ -114,6 +115,7 @@ public abstract class AutoEncodingBufferedBodyTag extends BodyTagSupport impleme
 		captureBuffer = null;
 		captureValidator = null;
 		bodyUnbuffered = false;
+		super.release();
 	}
 
 	/**
@@ -355,12 +357,8 @@ public abstract class AutoEncodingBufferedBodyTag extends BodyTagSupport impleme
 
 	@Override
 	public void doFinally() {
-		try {
-			// Restore previous encoding context that is used for our output
-			RequestEncodingContext.setCurrentContext(pageContext.getRequest(), parentEncodingContext);
-		} finally {
-			init();
-		}
+		// Restore previous encoding context that is used for our output
+		RequestEncodingContext.setCurrentContext(pageContext.getRequest(), parentEncodingContext);
 	}
 
 	/**
