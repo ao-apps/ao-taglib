@@ -40,14 +40,13 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspTagException;
-import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
  * @author  AO Industries, Inc.
  */
 public class ScriptTag
-	extends ElementBufferedTag
+	extends ElementBufferedBodyTag
 	implements
 		DynamicAttributes,
 		TypeAttribute,
@@ -55,13 +54,13 @@ public class ScriptTag
 		ParamsAttribute
 {
 
-	private MediaType mediaType = MediaType.JAVASCRIPT;
-	private String src;
-	private MutableURIParameters params;
-	private boolean absolute;
-	private boolean canonical;
-	// TODO: async, defer, ...
-	private AddLastModified addLastModified = AddLastModified.AUTO;
+	private static final long serialVersionUID = 1L;
+
+	public ScriptTag() {
+		init();
+	}
+
+	private MediaType mediaType;
 
 	@Override
 	public MediaType getContentType() {
@@ -88,28 +87,35 @@ public class ScriptTag
 		}
 	}
 
+	private String src;
 	@Override
 	public void setSrc(String src) {
 		this.src = AttributeUtils.nullIfEmpty(src);
 	}
 
+	private MutableURIParameters params;
 	@Override
 	public void addParam(String name, String value) {
 		if(params==null) params = new URIParametersMap();
 		params.addParameter(name, value);
 	}
 
+	private boolean absolute;
 	public void setAbsolute(boolean absolute) {
 		this.absolute = absolute;
 	}
 
+	private boolean canonical;
 	public void setCanonical(boolean canonical) {
 		this.canonical = canonical;
 	}
 
+	private AddLastModified addLastModified;
 	public void setAddLastModified(String addLastModified) {
 		this.addLastModified = AddLastModified.valueOfLowerName(addLastModified.trim().toLowerCase(Locale.ROOT));
 	}
+
+	// TODO: async, defer, ...
 
 	@Override
 	public void setDynamicAttribute(String uri, String localName, Object value) throws JspTagException {
@@ -136,10 +142,29 @@ public class ScriptTag
 	//	}
 	//}
 
+	private transient BufferResult capturedBody;
+
+	private void init() {
+		mediaType = MediaType.JAVASCRIPT;
+		src = null;
+		params = null;
+		absolute = false;
+		canonical = false;
+		addLastModified = AddLastModified.AUTO;
+		capturedBody = null;
+	}
+
 	@Override
-	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+	protected int doAfterBody(BufferResult capturedBody, Writer out) {
+		assert this.capturedBody == null;
+		assert capturedBody != null;
+		this.capturedBody = capturedBody;
+		return SKIP_BODY;
+	}
+
+	@Override
+	protected int doEndTag(Writer out) throws JspTagException, IOException {
 		// Write script tag with src attribute, discarding any body
-		PageContext pageContext = (PageContext)getJspContext();
 		Html html = HtmlEE.get(
 			pageContext.getServletContext(),
 			(HttpServletRequest)pageContext.getRequest(),
@@ -152,5 +177,15 @@ public class ScriptTag
 			// Only write body when there is no source (discard body when src provided)
 			.out((src != null) ? null : capturedBody)
 			.__();
+		return EVAL_PAGE;
+	}
+
+	@Override
+	public void doFinally() {
+		try {
+			init();
+		} finally {
+			super.doFinally();
+		}
 	}
 }

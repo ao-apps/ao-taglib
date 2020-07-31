@@ -3745,7 +3745,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-07-31T10:11:29-05:00" -->
+		<!-- dateModified="2020-07-31T16:08:29-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Manually establishes a <a href="https://www.w3schools.com/tags/tag_script.asp">script context</a> when automatic detection is not possible.
@@ -3791,7 +3791,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>script</name>
 		<tag-class>com.aoindustries.taglib.ScriptTag</tag-class>
 		<tei-class>com.aoindustries.taglib.ScriptTagTEI</tei-class>
-		<body-content>scriptless</body-content>
+		<body-content>JSP</body-content>
 		&GlobalBufferedAttributes;
 		<attribute>
 			<description><![CDATA[
