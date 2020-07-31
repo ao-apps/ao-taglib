@@ -88,6 +88,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 				</ul>
 				<!-- TODO:
 				<ul>
+					<li>Why aren't tag descriptions in the NetBeans code assist?  They are for JSTL.  Is it the HTML formatting?  Is the element ordering? -->
 					<li>No more nested tags for simply setting attributes: use jsp:attribute instead?</li>
 					<li>Support script async and defer attributes</li>
 					<li>Support autofocus and required attributes (textarea, input, ...)</li>
