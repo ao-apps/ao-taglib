@@ -46,7 +46,6 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspTagException;
-import javax.servlet.jsp.PageContext;
 
 /**
  * <p>
@@ -56,28 +55,30 @@ import javax.servlet.jsp.PageContext;
  * @author  AO Industries, Inc.
  */
 public class InputTag
-	extends ElementBufferedTag
+	extends ElementBufferedBodyTag
 	implements
-		TypeAttribute,
-		NameAttribute,
-		ValueAttribute,
-		OnclickAttribute,
-		OnchangeAttribute,
-		OnfocusAttribute,
-		OnblurAttribute,
-		OnkeypressAttribute,
-		SizeAttribute,
-		MaxlengthAttribute,
-		ReadonlyAttribute,
+		// Attributes
+		AltAttribute,
+		CheckedAttribute,
 		DisabledAttribute,
+		HeightAttribute,
+		MaxlengthAttribute,
+		NameAttribute,
+		ReadonlyAttribute,
+		SizeAttribute,
 		SrcAttribute,
 		ParamsAttribute,
-		WidthAttribute,
-		HeightAttribute,
-		AltAttribute,
+		TabindexAttribute,
 		TitleAttribute,
-		CheckedAttribute,
-		TabindexAttribute
+		TypeAttribute,
+		WidthAttribute,
+		ValueAttribute,
+		// Events
+		OnblurAttribute,
+		OnchangeAttribute,
+		OnclickAttribute,
+		OnfocusAttribute,
+		OnkeypressAttribute
 {
 
 	private static final Set<String> validTypes = Collections.unmodifiableSet(
@@ -114,6 +115,10 @@ public class InputTag
 		return validTypes.contains(type);
 	}
 
+	public InputTag() {
+		init();
+	}
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.TEXT;
@@ -124,60 +129,36 @@ public class InputTag
 		return MediaType.XHTML;
 	}
 
-	private String type;
+	private static final long serialVersionUID = 1L;
+
+	private Object alt;
 	@Override
-	public void setType(String type) throws JspTagException {
-		String typeStr = Strings.trimNullIfEmpty(type);
-		if(typeStr != null && !isValidType(typeStr)) throw new LocalizedJspTagException(ApplicationResources.accessor, "InputTag.type.invalid", typeStr);
-		this.type = typeStr;
+	public void setAlt(Object alt) throws JspTagException {
+		this.alt = AttributeUtils.trim(alt);
 	}
 
-	private String name;
-	@Override
-	public void setName(String name) throws JspTagException {
-		this.name = name;
+	private boolean autocomplete;
+	// TODO: Support full set of values from ao-fluent-html
+	public void setAutocomplete(boolean autocomplete) {
+		this.autocomplete = autocomplete;
 	}
 
-	private Object value;
+	private boolean checked;
 	@Override
-	public void setValue(Object value) throws JspTagException {
-		this.value = AttributeUtils.nullIfEmpty(value);
+	public void setChecked(boolean checked) {
+		this.checked = checked;
 	}
 
-	private Object onclick;
+	private boolean disabled;
 	@Override
-	public void setOnclick(Object onclick) throws JspTagException {
-		this.onclick = AttributeUtils.trimNullIfEmpty(onclick);
+	public void setDisabled(boolean disabled) {
+		this.disabled = disabled;
 	}
 
-	private Object onchange;
+	private Object height;
 	@Override
-	public void setOnchange(Object onchange) throws JspTagException {
-		this.onchange = AttributeUtils.trimNullIfEmpty(onchange);
-	}
-
-	private Object onfocus;
-	@Override
-	public void setOnfocus(Object onfocus) throws JspTagException {
-		this.onfocus = AttributeUtils.trimNullIfEmpty(onfocus);
-	}
-
-	private Object onblur;
-	@Override
-	public void setOnblur(Object onblur) throws JspTagException {
-		this.onblur = AttributeUtils.trimNullIfEmpty(onblur);
-	}
-
-	private Object onkeypress;
-	@Override
-	public void setOnkeypress(Object onkeypress) throws JspTagException {
-		this.onkeypress = AttributeUtils.trimNullIfEmpty(onkeypress);
-	}
-
-	private Object size;
-	@Override
-	public void setSize(Object size) throws JspTagException {
-		this.size = AttributeUtils.trimNullIfEmpty(size);
+	public void setHeight(Object height) throws JspTagException {
+		this.height = AttributeUtils.trimNullIfEmpty(height);
 	}
 
 	private Integer maxlength;
@@ -186,16 +167,22 @@ public class InputTag
 		this.maxlength = maxlength;
 	}
 
+	private String name;
+	@Override
+	public void setName(String name) throws JspTagException {
+		this.name = name;
+	}
+
 	private boolean readonly;
 	@Override
 	public void setReadonly(boolean readonly) {
 		this.readonly = readonly;
 	}
 
-	private boolean disabled;
+	private Object size;
 	@Override
-	public void setDisabled(boolean disabled) {
-		this.disabled = disabled;
+	public void setSize(Object size) throws JspTagException {
+		this.size = AttributeUtils.trimNullIfEmpty(size);
 	}
 
 	private String src;
@@ -221,40 +208,9 @@ public class InputTag
 		this.canonical = canonical;
 	}
 
-	private AddLastModified addLastModified = AddLastModified.AUTO;
+	private AddLastModified addLastModified;
 	public void setAddLastModified(String addLastModified) {
 		this.addLastModified = AddLastModified.valueOfLowerName(addLastModified.trim().toLowerCase(Locale.ROOT));
-	}
-
-	private Object width;
-	@Override
-	public void setWidth(Object width) throws JspTagException {
-		this.width = AttributeUtils.trimNullIfEmpty(width);
-	}
-
-	private Object height;
-	@Override
-	public void setHeight(Object height) throws JspTagException {
-		this.height = AttributeUtils.trimNullIfEmpty(height);
-	}
-
-
-	private Object alt;
-	@Override
-	public void setAlt(Object alt) throws JspTagException {
-		this.alt = AttributeUtils.trim(alt);
-	}
-
-	private Object title;
-	@Override
-	public void setTitle(Object title) throws JspTagException {
-		this.title = AttributeUtils.trimNullIfEmpty(title);
-	}
-
-	private boolean checked;
-	@Override
-	public void setChecked(boolean checked) {
-		this.checked = checked;
 	}
 
 	private int tabindex;
@@ -263,10 +219,60 @@ public class InputTag
 		this.tabindex = tabindex;
 	}
 
-	private boolean autocomplete = true;
-	// TODO: Support full set of values from ao-fluent-html
-	public void setAutocomplete(boolean autocomplete) {
-		this.autocomplete = autocomplete;
+	private Object title;
+	@Override
+	public void setTitle(Object title) throws JspTagException {
+		this.title = AttributeUtils.trimNullIfEmpty(title);
+	}
+
+	private String type;
+	@Override
+	public void setType(String type) throws JspTagException {
+		String typeStr = Strings.trimNullIfEmpty(type);
+		if(typeStr != null && !isValidType(typeStr)) throw new LocalizedJspTagException(ApplicationResources.accessor, "InputTag.type.invalid", typeStr);
+		this.type = typeStr;
+	}
+
+	private Object width;
+	@Override
+	public void setWidth(Object width) throws JspTagException {
+		this.width = AttributeUtils.trimNullIfEmpty(width);
+	}
+
+	private Object value;
+	@Override
+	public void setValue(Object value) throws JspTagException {
+		this.value = AttributeUtils.nullIfEmpty(value);
+	}
+
+	private Object onblur;
+	@Override
+	public void setOnblur(Object onblur) throws JspTagException {
+		this.onblur = AttributeUtils.trimNullIfEmpty(onblur);
+	}
+
+	private Object onchange;
+	@Override
+	public void setOnchange(Object onchange) throws JspTagException {
+		this.onchange = AttributeUtils.trimNullIfEmpty(onchange);
+	}
+
+	private Object onclick;
+	@Override
+	public void setOnclick(Object onclick) throws JspTagException {
+		this.onclick = AttributeUtils.trimNullIfEmpty(onclick);
+	}
+
+	private Object onfocus;
+	@Override
+	public void setOnfocus(Object onfocus) throws JspTagException {
+		this.onfocus = AttributeUtils.trimNullIfEmpty(onfocus);
+	}
+
+	private Object onkeypress;
+	@Override
+	public void setOnkeypress(Object onkeypress) throws JspTagException {
+		this.onkeypress = AttributeUtils.trimNullIfEmpty(onkeypress);
 	}
 
 	/**
@@ -281,14 +287,51 @@ public class InputTag
 			|| ParamUtils.addDynamicAttribute(uri, localName, value, expectedPatterns, this);
 	}
 
+	private transient BufferResult capturedBody;
+
+	private void init() {
+		alt = null;
+		autocomplete = true;
+		checked = false;
+		disabled = false;
+		height = null;
+		maxlength = null;
+		name = null;
+		readonly = false;
+		size = null;
+		src = null;
+		params = null;
+		absolute = false;
+		canonical = false;
+		addLastModified = AddLastModified.AUTO;
+		tabindex = 0;
+		title = null;
+		type = null;
+		width = null;
+		value = null;
+		onblur = null;
+		onchange = null;
+		onclick = null;
+		onfocus = null;
+		onkeypress = null;
+		capturedBody = null;
+	}
+
 	@Override
-	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
-		if(type==null) throw new AttributeRequiredException("type");
-		if(value==null) setValue(capturedBody.trim());
+	protected int doAfterBody(BufferResult capturedBody, Writer out) {
+		assert this.capturedBody == null;
+		assert capturedBody != null;
+		this.capturedBody = capturedBody;
+		return SKIP_BODY;
+	}
+
+	@Override
+	protected int doEndTag(Writer out) throws JspTagException, IOException {
+		if(type == null) throw new AttributeRequiredException("type");
+		if(value == null && capturedBody != null) setValue(capturedBody.trim());
 		if(Input.Dynamic.Type.IMAGE.toString().equalsIgnoreCase(type)) {
 			if(alt == null) throw new AttributeRequiredException("alt");
 		}
-		PageContext pageContext = (PageContext)getJspContext();
 		Html html = HtmlEE.get(
 			pageContext.getServletContext(),
 			(HttpServletRequest)pageContext.getRequest(),
@@ -297,34 +340,18 @@ public class InputTag
 		);
 		Input.Dynamic input = html.input();
 		GlobalAttributesUtils.doGlobalAttributes(global, input);
+		if(alt != null) {
+			out.write(" alt=\"");
+			Coercion.write(alt, MarkupType.TEXT, textInXhtmlAttributeEncoder, false, out);
+			out.write('"');
+		}
 		input
-			.type(type)
-			.name(name)
-			.value(value)
-			.onclick(onclick);
-		if(onchange != null) {
-			out.write(" onchange=\"");
-			Coercion.write(onchange, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
-			out.write('"');
-		}
-		if(onfocus != null) {
-			out.write(" onfocus=\"");
-			Coercion.write(onfocus, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
-			out.write('"');
-		}
-		if(onblur != null) {
-			out.write(" onblur=\"");
-			Coercion.write(onblur, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
-			out.write('"');
-		}
-		if(onkeypress != null) {
-			out.write(" onkeypress=\"");
-			Coercion.write(onkeypress, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
-			out.write('"');
-		}
-		if(size != null) {
-			out.write(" size=\"");
-			Coercion.write(size, textInXhtmlAttributeEncoder, out);
+			.autocomplete(autocomplete ? null : Input.Autocomplete.OFF)
+			.checked(checked)
+			.disabled(disabled);
+		if(height != null) {
+			out.write(" height=\"");
+			Coercion.write(height, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
 		if(maxlength != null) {
@@ -333,29 +360,46 @@ public class InputTag
 			out.write('"');
 		}
 		input
-			.readonly(readonly)
-			.disabled(disabled);
+			.name(name)
+			.readonly(readonly);
+		if(size != null) {
+			out.write(" size=\"");
+			Coercion.write(size, textInXhtmlAttributeEncoder, out);
+			out.write('"');
+		}
 		UrlUtils.writeSrc(pageContext, out, src, params, addLastModified, absolute, canonical);
+		input
+			.tabindex((tabindex >= 1) ? tabindex : null)
+			.title(title)
+			.type(type);
 		if(width != null) {
 			out.write(" width=\"");
 			Coercion.write(width, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
-		if(height != null) {
-			out.write(" height=\"");
-			Coercion.write(height, textInXhtmlAttributeEncoder, out);
+		input.value(value);
+		if(onblur != null) {
+			out.write(" onblur=\"");
+			Coercion.write(onblur, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
-		if(alt != null) {
-			out.write(" alt=\"");
-			Coercion.write(alt, MarkupType.TEXT, textInXhtmlAttributeEncoder, false, out);
+		if(onchange != null) {
+			out.write(" onchange=\"");
+			Coercion.write(onchange, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
-		input
-			.title(title)
-			.checked(checked)
-			.tabindex((tabindex >= 1) ? tabindex : null)
-			.autocomplete(autocomplete ? null : Input.Autocomplete.OFF)
-			.__();
+		input.onclick(onclick);
+		if(onfocus != null) {
+			out.write(" onfocus=\"");
+			Coercion.write(onfocus, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
+			out.write('"');
+		}
+		if(onkeypress != null) {
+			out.write(" onkeypress=\"");
+			Coercion.write(onkeypress, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
+			out.write('"');
+		}
+		input.__();
+		return EVAL_PAGE;
 	}
 }

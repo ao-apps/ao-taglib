@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2016, 2017, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -31,7 +31,7 @@ import javax.servlet.jsp.JspTagException;
 /**
  * @author  AO Industries, Inc.
  */
-public class OnclickTag extends AutoEncodingBufferedTag {
+public class OnclickTag extends AutoEncodingBufferedBodyTag {
 
 	@Override
 	public MediaType getContentType() {
@@ -43,9 +43,12 @@ public class OnclickTag extends AutoEncodingBufferedTag {
 		return null;
 	}
 
+	private static final long serialVersionUID = 1L;
+
 	@Override
-	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+	protected int doAfterBody(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		OnclickAttribute onclickAttribute = AttributeUtils.findAttributeParent("onclick", this, "onclick", OnclickAttribute.class);
 		onclickAttribute.setOnclick(capturedBody.trim());
+		return SKIP_BODY;
 	}
 }
