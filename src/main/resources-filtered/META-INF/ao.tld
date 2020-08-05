@@ -164,7 +164,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	<!-- TODO: Implement validator(s), such as ao:when directly inside ao:choose and similar -->
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-07-31T10:11:29-05:00" -->
+		<!-- dateModified="2020-08-05T17:48:10-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_a.asp">&lt;a&gt;</a> tag.
@@ -203,7 +203,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>a</name>
 		<tag-class>com.aoindustries.taglib.ATag</tag-class>
 		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
-		<body-content>scriptless</body-content>
+		<body-content>JSP</body-content>
 		&GlobalBufferedAttributes;
 		<attribute>
 			<description><![CDATA[
@@ -324,18 +324,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The <a href="https://www.w3schools.com/tags/att_a_type.asp">type for the link</a>.
-					A nested <a href="@{project.url}ao.tld/tag-type">&lt;ao:type&gt;</a> tag will override this value.
-				</p>
-			]]></description>
-			<name>type</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[
-				<p>
 					The <a href="https://www.w3schools.com/tags/att_a_target.asp">target for the link</a>.
 					A nested <a href="@{project.url}ao.tld/tag-target">&lt;ao:target&gt;</a> tag will override this value.
 				</p>
@@ -360,6 +348,18 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
+					The <a href="https://www.w3schools.com/tags/att_a_type.asp">type for the link</a>.
+					A nested <a href="@{project.url}ao.tld/tag-type">&lt;ao:type&gt;</a> tag will override this value.
+				</p>
+			]]></description>
+			<name>type</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
 					A JavaScript <a href="https://www.w3schools.com/tags/ev_onclick.asp">onclick</a> handler.
 					A nested <a href="@{project.url}ao.tld/tag-onclick">&lt;ao:onclick&gt;</a> tag will override this value.
 				</p>
@@ -372,11 +372,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					A JavaScript <a href="https://www.w3schools.com/tags/ev_onmouseover.asp">onmouseover</a> handler.
-					A nested <a href="@{project.url}ao.tld/tag-onmouseover">&lt;ao:onmouseover&gt;</a> tag will override this value.
+					A JavaScript <a href="https://www.w3schools.com/tags/ev_onmouseout.asp">onmouseout</a> handler.
+					A nested <a href="@{project.url}ao.tld/tag-onmouseout">&lt;ao:onmouseout&gt;</a> tag will override this value.
 				</p>
 			]]></description>
-			<name>onmouseover</name>
+			<name>onmouseout</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
@@ -384,11 +384,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					A JavaScript <a href="https://www.w3schools.com/tags/ev_onmouseout.asp">onmouseout</a> handler.
-					A nested <a href="@{project.url}ao.tld/tag-onmouseout">&lt;ao:onmouseout&gt;</a> tag will override this value.
+					A JavaScript <a href="https://www.w3schools.com/tags/ev_onmouseover.asp">onmouseover</a> handler.
+					A nested <a href="@{project.url}ao.tld/tag-onmouseover">&lt;ao:onmouseover&gt;</a> tag will override this value.
 				</p>
 			]]></description>
-			<name>onmouseout</name>
+			<name>onmouseover</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>

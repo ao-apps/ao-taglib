@@ -29,6 +29,7 @@ import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextIn
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import static com.aoindustries.encoding.TextInXhtmlEncoder.textInXhtmlEncoder;
 import com.aoindustries.io.buffer.BufferResult;
+import com.aoindustries.io.buffer.EmptyResult;
 import com.aoindustries.lang.Strings;
 import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URIDecoder;
@@ -44,39 +45,30 @@ import java.util.List;
 import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspTagException;
-import javax.servlet.jsp.PageContext;
 
 /**
  * @author  AO Industries, Inc.
  */
 public class ATag
-	extends ElementBufferedTag
+	extends ElementBufferedBodyTag
 	implements
+		// Attributes
 		HrefAttribute,
 		ParamsAttribute,
 		HreflangAttribute,
 		RelAttribute,
-		TypeAttribute,
 		TargetAttribute,
 		TitleAttribute,
+		TypeAttribute,
+		// Events
 		OnclickAttribute,
-		OnmouseoverAttribute,
-		OnmouseoutAttribute
+		OnmouseoutAttribute,
+		OnmouseoverAttribute
 {
 
-	private String href;
-	private MutableURIParameters params;
-	private boolean absolute;
-	private boolean canonical;
-	private AddLastModified addLastModified = AddLastModified.AUTO;
-	private Object hreflang;
-	private String rel;
-	private String type;
-	private String target;
-	private Object title;
-	private Object onclick;
-	private Object onmouseover;
-	private Object onmouseout;
+	public ATag() {
+		init();
+	}
 
 	@Override
 	public MediaType getContentType() {
@@ -88,67 +80,82 @@ public class ATag
 		return MediaType.XHTML;
 	}
 
+	private static final long serialVersionUID = 1L;
+
+	private String href;
 	@Override
 	public void setHref(String href) throws JspTagException {
 		this.href = AttributeUtils.nullIfEmpty(href);
 	}
 
+	private MutableURIParameters params;
 	@Override
 	public void addParam(String name, String value) {
 		if(params==null) params = new URIParametersMap();
 		params.addParameter(name, value);
 	}
 
+	private boolean absolute;
 	public void setAbsolute(boolean absolute) {
 		this.absolute = absolute;
 	}
 
+	private boolean canonical;
 	public void setCanonical(boolean canonical) {
 		this.canonical = canonical;
 	}
 
+	private AddLastModified addLastModified;
 	public void setAddLastModified(String addLastModified) {
 		this.addLastModified = AddLastModified.valueOfLowerName(addLastModified.trim().toLowerCase(Locale.ROOT));
 	}
 
+	private Object hreflang;
 	@Override
 	public void setHreflang(Object hreflang) throws JspTagException {
 		this.hreflang = hreflang;
 	}
 
+	private String rel;
 	@Override
 	public void setRel(String rel) throws JspTagException {
 		this.rel = Strings.trimNullIfEmpty(rel);
 	}
 
-	@Override
-	public void setType(String type) throws JspTagException {
-		this.type = Strings.trimNullIfEmpty(type);
-	}
-
+	private String target;
 	@Override
 	public void setTarget(String target) throws JspTagException {
 		this.target = Strings.trimNullIfEmpty(target);
 	}
 
+	private Object title;
 	@Override
 	public void setTitle(Object title) throws JspTagException {
 		this.title = AttributeUtils.trimNullIfEmpty(title);
 	}
 
+	private String type;
+	@Override
+	public void setType(String type) throws JspTagException {
+		this.type = Strings.trimNullIfEmpty(type);
+	}
+
+	private Object onclick;
 	@Override
 	public void setOnclick(Object onclick) throws JspTagException {
 		this.onclick = AttributeUtils.trimNullIfEmpty(onclick);
 	}
 
-	@Override
-	public void setOnmouseover(Object onmouseover) throws JspTagException {
-		this.onmouseover = AttributeUtils.trimNullIfEmpty(onmouseover);
-	}
-
+	private Object onmouseout;
 	@Override
 	public void setOnmouseout(Object onmouseout) throws JspTagException {
 		this.onmouseout = AttributeUtils.trimNullIfEmpty(onmouseout);
+	}
+
+	private Object onmouseover;
+	@Override
+	public void setOnmouseover(Object onmouseover) throws JspTagException {
+		this.onmouseover = AttributeUtils.trimNullIfEmpty(onmouseover);
 	}
 
 	/**
@@ -163,8 +170,35 @@ public class ATag
 			|| ParamUtils.addDynamicAttribute(uri, localName, value, expectedPatterns, this);
 	}
 
+	private transient BufferResult capturedBody;
+
+	private void init() {
+		href = null;
+		params = null;
+		absolute = false;
+		canonical = false;
+		addLastModified = AddLastModified.AUTO;
+		hreflang = null;
+		rel = null;
+		target = null;
+		title = null;
+		type = null;
+		onclick = null;
+		onmouseout = null;
+		onmouseover = null;
+		capturedBody = null;
+	}
+
 	@Override
-	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+	protected int doAfterBody(BufferResult capturedBody, Writer out) {
+		assert this.capturedBody == null;
+		assert capturedBody != null;
+		this.capturedBody = capturedBody;
+		return SKIP_BODY;
+	}
+
+	@Override
+	protected int doEndTag(Writer out) throws JspTagException, IOException {
 		out.write("<a");
 		GlobalAttributesUtils.writeGlobalAttributes(global, out);
 		String transformed;
@@ -173,7 +207,7 @@ public class ATag
 		} else {
 			transformed = href;
 		}
-		UrlUtils.writeHref(getJspContext(), out, transformed, params, addLastModified, absolute, canonical);
+		UrlUtils.writeHref(pageContext, out, transformed, params, addLastModified, absolute, canonical);
 		if(hreflang instanceof Locale) {
 			out.write(" hreflang=\"");
 			encodeTextInXhtmlAttribute(((Locale)hreflang).toLanguageTag(), out);
@@ -191,11 +225,6 @@ public class ATag
 			encodeTextInXhtmlAttribute(rel, out);
 			out.write('"');
 		}
-		if(type != null) {
-			out.write(" type=\"");
-			encodeTextInXhtmlAttribute(type, out);
-			out.write('"');
-		}
 		if(target != null) {
 			out.write(" target=\"");
 			encodeTextInXhtmlAttribute(target, out);
@@ -206,14 +235,14 @@ public class ATag
 			Coercion.write(title, MarkupType.TEXT, textInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
+		if(type != null) {
+			out.write(" type=\"");
+			encodeTextInXhtmlAttribute(type, out);
+			out.write('"');
+		}
 		if(onclick != null) {
 			out.write(" onclick=\"");
 			Coercion.write(onclick, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
-			out.write('"');
-		}
-		if(onmouseover != null) {
-			out.write(" onmouseover=\"");
-			Coercion.write(onmouseover, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		if(onmouseout != null) {
@@ -221,12 +250,16 @@ public class ATag
 			Coercion.write(onmouseout, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
+		if(onmouseover != null) {
+			out.write(" onmouseover=\"");
+			Coercion.write(onmouseover, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
+			out.write('"');
+		}
 		out.write('>');
-		BufferResult trimmedBody = capturedBody.trim();
+		BufferResult trimmedBody = (capturedBody == null) ? EmptyResult.getInstance() : capturedBody.trim();
 		if(trimmedBody.getLength() == 0) {
 			// When the body is empty after trimming, display the href itself
 			if(href != null) {
-				PageContext pageContext = (PageContext)getJspContext();
 				HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
 				String toDecode;
 				if(URIParser.isScheme(href, "mailto")) {
@@ -245,5 +278,6 @@ public class ATag
 			Coercion.write(trimmedBody, MarkupType.XHTML, out);
 		}
 		out.write("</a>");
+		return EVAL_PAGE;
 	}
 }
