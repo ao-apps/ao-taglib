@@ -32,7 +32,7 @@ import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.WildcardPatternMatcher;
 import java.io.IOException;
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.LinkedHashMap;
@@ -181,23 +181,31 @@ abstract public class DispatchTag
 		params.addParameter(name, value);
 	}
 
-	abstract protected String getDynamicAttributeExceptionKey();
+	/**
+	 * Adds a {@linkplain DynamicAttributes dynamic attribute}.
+	 *
+	 * @return  {@code true} when added, or {@code false} when attribute not expected and has not been added.
+	 *
+	 * @see  ParamUtils#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List, com.aoindustries.taglib.ParamsAttribute)
+	 * @see  #setDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object)
+	 */
+	protected boolean addDynamicAttribute(String uri, String localName, Object value, List<String> expectedPatterns) throws JspTagException {
+		return ParamUtils.addDynamicAttribute(uri, localName, value, expectedPatterns, this);
+	}
 
-	abstract protected Serializable[] getDynamicAttributeExceptionArgs(String localName);
-
+	/**
+	 * Sets a {@linkplain DynamicAttributes dynamic attribute}.
+	 *
+	 * @deprecated  You should probably be implementing in {@link #addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List)}
+	 *
+	 * @see  #addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List)
+	 */
 	@Override
+	@Deprecated
 	public void setDynamicAttribute(String uri, String localName, Object value) throws JspTagException {
-		if(
-			uri==null
-			&& localName.startsWith(ParamUtils.PARAM_ATTRIBUTE_PREFIX)
-		) {
-			ParamUtils.setDynamicAttribute(this, uri, localName, value);
-		} else {
-			throw new LocalizedJspTagException(
-				accessor,
-				getDynamicAttributeExceptionKey(),
-				getDynamicAttributeExceptionArgs(localName)
-			);
+		List<String> expectedPatterns = new ArrayList<>();
+		if(!addDynamicAttribute(uri, localName, value, expectedPatterns)) {
+			throw AttributeUtils.newDynamicAttributeFailedException(uri, localName, value, expectedPatterns);
 		}
 	}
 

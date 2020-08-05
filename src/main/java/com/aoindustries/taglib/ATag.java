@@ -36,17 +36,15 @@ import com.aoindustries.net.URIParametersMap;
 import com.aoindustries.net.URIParser;
 import com.aoindustries.net.URIResolver;
 import com.aoindustries.servlet.http.Dispatcher;
-import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.servlet.lastmodified.AddLastModified;
-import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.List;
 import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
-import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
  * @author  AO Industries, Inc.
@@ -54,7 +52,6 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
 public class ATag
 	extends ElementBufferedTag
 	implements
-		DynamicAttributes,
 		HrefAttribute,
 		ParamsAttribute,
 		HreflangAttribute,
@@ -154,27 +151,22 @@ public class ATag
 		this.onmouseout = AttributeUtils.trimNullIfEmpty(onmouseout);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see  ParamUtils#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List, com.aoindustries.taglib.ParamsAttribute)
+	 */
 	@Override
-	public void setDynamicAttribute(String uri, String localName, Object value) throws JspTagException {
-		if(
-			uri==null
-			&& localName.startsWith(ParamUtils.PARAM_ATTRIBUTE_PREFIX)
-		) {
-			ParamUtils.setDynamicAttribute(this, uri, localName, value);
-		} else {
-			throw new LocalizedJspTagException(
-				accessor,
-				"error.unexpectedDynamicAttribute",
-				localName,
-				ParamUtils.PARAM_ATTRIBUTE_PREFIX+"*"
-			);
-		}
+	protected boolean addDynamicAttribute(String uri, String localName, Object value, List<String> expectedPatterns) throws JspTagException {
+		return
+			super.addDynamicAttribute(uri, localName, value, expectedPatterns)
+			|| ParamUtils.addDynamicAttribute(uri, localName, value, expectedPatterns, this);
 	}
 
 	@Override
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		out.write("<a");
-		writeGlobalAttributes(out);
+		GlobalAttributesUtils.writeGlobalAttributes(global, out);
 		String transformed;
 		if(URIParser.isScheme(href, "tel")) {
 			transformed = href.replace(' ', '-');

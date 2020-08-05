@@ -22,17 +22,24 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.html.Attributes;
 import com.aoindustries.html.Attributes.Global;
-import com.aoindustries.lang.Strings;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import javax.servlet.jsp.JspTagException;
+import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
  * Implements {@linkplain Global global attributes} on {@link AutoEncodingBufferedBodyTag}.
  *
  * @author  AO Industries, Inc.
  */
-abstract public class ElementBufferedBodyTag extends AutoEncodingBufferedBodyTag implements GlobalBufferedAttributes {
+abstract public class ElementBufferedBodyTag
+	extends AutoEncodingBufferedBodyTag
+	implements
+		GlobalBufferedAttributes,
+		DynamicAttributes
+{
 
 	private static final long serialVersionUID = 1L;
 
@@ -40,50 +47,86 @@ abstract public class ElementBufferedBodyTag extends AutoEncodingBufferedBodyTag
 		init();
 	}
 
+	protected MutableGlobalAttributes global;
+
 	@Override
 	public void setId(String id) {
-		super.setId(Strings.trimNullIfEmpty(id));
+		global.setId(id);
+		super.setId(global.getId());
 		// TODO: Validate, and TEI
 	}
 
-	protected String clazz;
 	@Override
 	public String getClazz() {
-		return clazz;
+		return global.getClazz();
 	}
 	@Override
-	public void setClazz(String clazz) throws JspTagException {
-		this.clazz = Strings.trimNullIfEmpty(clazz);
+	public void setClazz(String clazz) throws JspTagException { // TODO: This extensive use of JspTagException on setters should probably be IllegalArgumentException
+		global.setClazz(clazz);
 	}
 
-	protected String dir;
+	@Override
+	public Map<String,Object> getData() {
+		return global.getData();
+	}
+	@Override
+	public void setData(Map<? extends String,?> data) throws JspTagException {
+		global.setData(data);
+	}
+	@Override
+	public void addData(String attrName, Object value) throws JspTagException {
+		global.addData(attrName, value);
+	}
+
 	@Override
 	public String getDir() {
-		return dir;
+		return global.getDir();
 	}
 	@Override
 	public void setDir(String dir) throws JspTagException {
-		this.dir = AttributeUtils.validate(
-			Attributes.Enum.Dir.normalize(dir),
-			Attributes.Enum.Dir::validate
-		);
+		global.setDir(dir);
 	}
 
-	protected Object style;
 	@Override
 	public Object getStyle() {
-		return style;
+		return global.getStyle();
 	}
 	@Override
 	public void setStyle(Object style) throws JspTagException {
-		this.style = AttributeUtils.trimNullIfEmpty(style);
+		global.setStyle(style);
+	}
+
+	/**
+	 * Adds a {@linkplain DynamicAttributes dynamic attribute}.
+	 *
+	 * @return  {@code true} when added, or {@code false} when attribute not expected and has not been added.
+	 *
+	 * @see  GlobalAttributesUtils#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List, com.aoindustries.taglib.MutableGlobalAttributes)
+	 * @see  #setDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object)
+	 */
+	protected boolean addDynamicAttribute(String uri, String localName, Object value, List<String> expectedPatterns) throws JspTagException {
+		return GlobalAttributesUtils.addDynamicAttribute(uri, localName, value, expectedPatterns, global);
+	}
+
+	/**
+	 * Sets a {@linkplain DynamicAttributes dynamic attribute}.
+	 *
+	 * @deprecated  You should probably be implementing in {@link #addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List)}
+	 *
+	 * @see  #addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List)
+	 */
+	@Override
+	@Deprecated
+	public void setDynamicAttribute(String uri, String localName, Object value) throws JspTagException {
+		List<String> expectedPatterns = new ArrayList<>();
+		if(!addDynamicAttribute(uri, localName, value, expectedPatterns)) {
+			throw AttributeUtils.newDynamicAttributeFailedException(uri, localName, value, expectedPatterns);
+		}
 	}
 
 	private void init() {
-		id = null;
-		clazz = null;
-		dir = null;
-		style = null;
+		global = new MutableGlobalAttributes();
+		super.setId(null);
 	}
 
 	@Override

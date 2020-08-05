@@ -768,7 +768,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-07-31T10:11:29-05:00" -->
+		<!-- dateModified="2020-08-05T16:09:39-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Adds a <a href="https://www.w3schools.com/tags/tag_base.asp">&lt;base&gt;</a> tag only when necessary.
@@ -795,10 +795,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
 		<body-content>scriptless</body-content>
 		&GlobalBufferedAttributes;
+		<dynamic-attributes>true</dynamic-attributes>
 	</tag>
 	<tag>
 		<!-- datePublished="2019-10-20T05:53:01-0500" -->
-		<!-- dateModified="2020-07-31T10:11:29-05:00" -->
+		<!-- dateModified="2020-08-05T16:09:39-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Writes a <a href="https://www.w3schools.com/tags/tag_br.asp">&lt;br&gt;</a>
@@ -810,6 +811,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
 		<body-content>scriptless</body-content>
 		&GlobalBufferedAttributes;
+		<dynamic-attributes>true</dynamic-attributes>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
@@ -893,7 +895,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2020-02-11T20:25:52-0600" -->
-		<!-- dateModified="2020-07-31T10:11:29-05:00" -->
+		<!-- dateModified="2020-08-05T16:09:39-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Writes a <a href="https://www.w3schools.com/tags/tag_col.asp">&lt;col&gt;</a>
@@ -916,6 +918,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<rtexprvalue>true</rtexprvalue>
 			<type>int</type>
 		</attribute>
+		<dynamic-attributes>true</dynamic-attributes>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
@@ -1348,7 +1351,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2019-10-30T20:50:04-0500" -->
-		<!-- dateModified="2020-07-31T10:11:29-05:00" -->
+		<!-- dateModified="2020-08-05T16:09:39-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Writes a <a href="https://www.w3schools.com/tags/tag_hr.asp">&lt;hr&gt;</a>
@@ -1360,10 +1363,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
 		<body-content>scriptless</body-content>
 		&GlobalBufferedAttributes;
+		<dynamic-attributes>true</dynamic-attributes>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-07-31T10:11:29-05:00" -->
+		<!-- dateModified="2020-08-05T16:09:39-05:00" -->
 		<description><![CDATA[
 			<ol>
 				<li>Clears the current output buffer (leaving status code and headers)</li>
@@ -1449,6 +1453,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
+		<dynamic-attributes>true</dynamic-attributes>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
@@ -2645,7 +2650,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2019-10-08T21:41:35-0500" -->
-		<!-- dateModified="2020-07-31T10:11:29-05:00" -->
+		<!-- dateModified="2020-08-05T16:09:39-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders a <a href="https://www.w3schools.com/tags/tag_map.asp">&lt;map&gt;</a> tag.
@@ -2682,6 +2687,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		&ClassBufferedAttribute;
 		&DirBufferedAttribute;
 		&StyleBufferedAttribute;
+		<dynamic-attributes>true</dynamic-attributes>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
@@ -2883,7 +2889,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-07-31T10:11:29-05:00" -->
+		<!-- dateModified="2020-08-05T16:09:39-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				If contained with any
@@ -2978,6 +2984,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
+		<dynamic-attributes>true</dynamic-attributes>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
@@ -3150,7 +3157,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-07-31T10:11:29-05:00" -->
+		<!-- dateModified="2020-08-05T16:09:39-05:00" -->
 		<description><![CDATA[
 			<p>
 				Renders an <a href="https://www.w3schools.com/tags/tag_option.asp">&lt;option&gt;</a> tag.
@@ -3207,6 +3214,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
+		<dynamic-attributes>true</dynamic-attributes>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-09-25T11:14:02-0500" -->
@@ -3904,7 +3912,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-07-31T10:11:29-05:00" -->
+		<!-- dateModified="2020-08-05T16:09:39-05:00" -->
 		<description><![CDATA[
 			<p>
 				Renders a <a href="https://www.w3schools.com/tags/tag_select.asp">&lt;select&gt;</a> tag.
@@ -4009,6 +4017,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
+		<dynamic-attributes>true</dynamic-attributes>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
@@ -4202,7 +4211,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-07-31T10:11:29-05:00" -->
+		<!-- dateModified="2020-08-05T16:09:39-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders a <a href="https://www.w3schools.com/tags/tag_textarea.asp">&lt;textarea&gt;</a> tag.
@@ -4315,6 +4324,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
+		<dynamic-attributes>true</dynamic-attributes>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->

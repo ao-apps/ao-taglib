@@ -34,20 +34,19 @@ import com.aoindustries.lang.Strings;
 import com.aoindustries.net.URIParametersMap;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.servlet.lastmodified.AddLastModified;
-import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
-import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
  * <p>
@@ -59,7 +58,6 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
 public class InputTag
 	extends ElementBufferedTag
 	implements
-		DynamicAttributes,
 		TypeAttribute,
 		NameAttribute,
 		ValueAttribute,
@@ -271,21 +269,16 @@ public class InputTag
 		this.autocomplete = autocomplete;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see  ParamUtils#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List, com.aoindustries.taglib.ParamsAttribute)
+	 */
 	@Override
-	public void setDynamicAttribute(String uri, String localName, Object value) throws JspTagException {
-		if(
-			uri==null
-			&& localName.startsWith(ParamUtils.PARAM_ATTRIBUTE_PREFIX)
-		) {
-			ParamUtils.setDynamicAttribute(this, uri, localName, value);
-		} else {
-			throw new LocalizedJspTagException(
-				accessor,
-				"error.unexpectedDynamicAttribute",
-				localName,
-				ParamUtils.PARAM_ATTRIBUTE_PREFIX+"*"
-			);
-		}
+	protected boolean addDynamicAttribute(String uri, String localName, Object value, List<String> expectedPatterns) throws JspTagException {
+		return
+			super.addDynamicAttribute(uri, localName, value, expectedPatterns)
+			|| ParamUtils.addDynamicAttribute(uri, localName, value, expectedPatterns, this);
 	}
 
 	@Override
@@ -303,7 +296,7 @@ public class InputTag
 			out
 		);
 		Input.Dynamic input = html.input();
-		doGlobalAttributes(input);
+		GlobalAttributesUtils.doGlobalAttributes(global, input);
 		input
 			.type(type)
 			.name(name)

@@ -26,9 +26,9 @@ import com.aoindustries.servlet.http.Dispatcher;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.WildcardPatternMatcher;
-import java.io.Serializable;
 import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.jsp.JspTagException;
 
@@ -75,29 +75,24 @@ abstract class ArgDispatchTag
 		args.put(name, value);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see  #addArg(java.lang.String, java.lang.Object)
+	 */
 	@Override
-	protected String getDynamicAttributeExceptionKey() {
-		return "error.unexpectedDynamicAttribute2";
-	}
-
-	@Override
-	protected Serializable[] getDynamicAttributeExceptionArgs(String localName) {
-		return new Serializable[] {
-			localName,
-			ARG_ATTRIBUTE_PREFIX+"*",
-			ParamUtils.PARAM_ATTRIBUTE_PREFIX+"*"
-		};
-	}
-
-	@Override
-	public void setDynamicAttribute(String uri, String localName, Object value) throws JspTagException {
-		if(
-			uri==null
+	protected boolean addDynamicAttribute(String uri, String localName, Object value, List<String> expectedPatterns) throws JspTagException {
+		if(super.addDynamicAttribute(uri, localName, value, expectedPatterns)) {
+			return true;
+		} else if(
+			uri == null
 			&& localName.startsWith(ARG_ATTRIBUTE_PREFIX)
 		) {
 			addArg(localName.substring(ARG_ATTRIBUTE_PREFIX.length()), value);
+			return true;
 		} else {
-			super.setDynamicAttribute(uri, localName, value);
+			expectedPatterns.add(ARG_ATTRIBUTE_PREFIX + "*");
+			return false;
 		}
 	}
 }

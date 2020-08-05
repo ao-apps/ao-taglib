@@ -22,13 +22,8 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.Coercion;
-import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
-import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.html.Attributes.Global;
-import com.aoindustries.util.i18n.MarkupType;
-import java.io.IOException;
-import java.io.Writer;
+import java.util.Map;
 
 /**
  * {@linkplain Global Global attributes} when used in a filtered context.
@@ -36,6 +31,8 @@ import java.io.Writer;
  *
  * @author  AO Industries, Inc.
  */
+// TODO: Maybe these getters should not be on this interface?  Or not all Element classes must extend this?
+// TODO: This just doesn't follow the set-only pattern of other attributes.
 public interface GlobalAttributes {
 
 	String getId();
@@ -46,71 +43,12 @@ public interface GlobalAttributes {
 	 */
 	String getClazz();
 
+	/**
+	 * Gets the HTML data attributes or an empty map when there are none.
+	 */
+	Map<String,Object> getData();
+
 	String getDir();
 
 	Object getStyle();
-
-	default <G extends Global<?>> G doGlobalAttributes(G global) throws IOException {
-		global
-			.id(getId())
-			.clazz(getClazz())
-			.dir(getDir())
-			.style(getStyle());
-		return global;
-	}
-
-	default void writeGlobalAttributes(Writer out) throws IOException {
-		String id = getId();
-		if(id != null) {
-			out.write(" id=\"");
-			encodeTextInXhtmlAttribute(id, out);
-			out.write('"');
-		}
-		String clazz = getClazz();
-		if(clazz != null) {
-			out.write(" class=\"");
-			encodeTextInXhtmlAttribute(clazz, out);
-			out.write('"');
-		}
-		String dir = getDir();
-		if(dir != null) {
-			out.write(" dir=\"");
-			encodeTextInXhtmlAttribute(dir, out);
-			out.write('"');
-		}
-		Object style = getStyle();
-		if(style != null) {
-			out.write(" style=\"");
-			// TODO: Review other MarkupType.JAVASCRIPT that should be MarkupType.CSS
-			Coercion.write(style, MarkupType.CSS, textInXhtmlAttributeEncoder, false, out);
-			out.write('"');
-		}
-	}
-
-	default void appendGlobalAttributes(Appendable out) throws IOException {
-		String id = getId();
-		if(id != null) {
-			out.append(" id=\"");
-			encodeTextInXhtmlAttribute(id, out);
-			out.append('"');
-		}
-		String clazz = getClazz();
-		if(clazz != null) {
-			out.append(" class=\"");
-			encodeTextInXhtmlAttribute(clazz, out);
-			out.append('"');
-		}
-		String dir = getDir();
-		if(dir != null) {
-			out.append(" dir=\"");
-			encodeTextInXhtmlAttribute(dir, out);
-			out.append('"');
-		}
-		Object style = getStyle();
-		if(style != null) {
-			out.append(" style=\"");
-			Coercion.append(style, MarkupType.CSS, textInXhtmlAttributeEncoder, false, out);
-			out.append('"');
-		}
-	}
 }

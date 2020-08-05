@@ -82,7 +82,7 @@ public class BaseTag extends ElementNullTag {
 					// TODO: Implement this in ao:base instead (along with other URL implementations)?
 					url = URIEncoder.encodeURI(url);
 				}
-				doGlobalAttributes(html.base())
+				GlobalAttributesUtils.doGlobalAttributes(global, html.base())
 					.href(url)
 					.__();
 			}

@@ -113,19 +113,6 @@ public class RedirectTag
 		return WildcardPatternMatcher.matchAll();
 	}
 
-	@Override
-	protected String getDynamicAttributeExceptionKey() {
-		return "error.unexpectedDynamicAttribute";
-	}
-
-	@Override
-	protected Serializable[] getDynamicAttributeExceptionArgs(String localName) {
-		return new Serializable[] {
-			localName,
-			ParamUtils.PARAM_ATTRIBUTE_PREFIX+"*"
-		};
-	}
-
 	/**
 	 * args will be set to <code>null</code> to simulate initial request conditions of a redirect
 	 * as well as possible.

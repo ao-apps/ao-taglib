@@ -88,7 +88,7 @@ public class Link {
 		String title
 	) {
 		this(
-			(GlobalAttributes)null,
+			ImmutableGlobalAttributes.EMPTY,
 			href,
 			absolute,
 			canonical,
@@ -147,7 +147,7 @@ public class Link {
 		String title
 	) {
 		this(
-			(GlobalAttributes)null,
+			ImmutableGlobalAttributes.EMPTY,
 			href,
 			absolute,
 			canonical,

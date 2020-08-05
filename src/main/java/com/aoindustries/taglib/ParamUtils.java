@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2013, 2015, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2013, 2015, 2016, 2017, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -27,7 +27,9 @@ import com.aoindustries.lang.NullArgumentException;
 import java.lang.reflect.Array;
 import java.util.Enumeration;
 import java.util.Iterator;
+import java.util.List;
 import javax.servlet.jsp.JspTagException;
+import javax.servlet.jsp.tagext.DynamicAttributes;
 import javax.servlet.jsp.tagext.JspTag;
 
 /**
@@ -38,7 +40,7 @@ import javax.servlet.jsp.tagext.JspTag;
 final public class ParamUtils {
 
 	/**
-	 * The prefix for parameter attributes.
+	 * The prefix for <code>param.*</code> dynamic attributes.
 	 */
 	public static final String PARAM_ATTRIBUTE_PREFIX = "param.";
 
@@ -197,52 +199,56 @@ final public class ParamUtils {
 	}
 
 	/**
-	 * Sets the dynamic param.* attributes.
+	 * Adds the <code>param.*</code> {@linkplain DynamicAttributes dynamic attributes}.
 	 * Handles Iterable, Iterator, Enumeration, arrays, and direct coercion.
 	 *
-	 * @throws  JspTagException  if any dynamic parameter other than "param.*" is given
+	 * @return  {@code true} when added, or {@code false} when attribute not expected and has not been added.
+	 *
+	 * @see  DynamicAttributes#setDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object)
 	 */
-	public static void setDynamicAttribute(
-		ParamsAttribute paramsAttribute,
-		String uri,
-		String localName,
-		Object value
-	) throws JspTagException {
-		assert uri==null;
-		assert localName.startsWith(PARAM_ATTRIBUTE_PREFIX);
-		if(value!=null) {
-			String paramName = localName.substring(PARAM_ATTRIBUTE_PREFIX.length());
-			if(value instanceof Iterable<?>) {
-				addIterableParams(
-					paramsAttribute,
-					paramName,
-					(Iterable<?>)value
-				);
-			} else if(value instanceof Iterator<?>) {
-				addIteratorParams(
-					paramsAttribute,
-					paramName,
-					(Iterator<?>)value
-				);
-			} else if(value instanceof Enumeration<?>) {
-				addEnumerationParams(
-					paramsAttribute,
-					paramName,
-					(Enumeration<?>)value
-				);
-			} else if(value.getClass().isArray()) {
-				addArrayParams(
-					paramsAttribute,
-					paramName,
-					value
-				);
-			} else {
-				addParam(
-					paramsAttribute,
-					paramName,
-					Coercion.toString(value)
-				);
+	public static boolean addDynamicAttribute(String uri, String localName, Object value, List<String> expectedPatterns, ParamsAttribute paramsAttribute) throws JspTagException {
+		if(
+			uri == null
+			&& localName.startsWith(ParamUtils.PARAM_ATTRIBUTE_PREFIX)
+		) {
+			if(value != null) {
+				String paramName = localName.substring(PARAM_ATTRIBUTE_PREFIX.length());
+				if(value instanceof Iterable<?>) {
+					addIterableParams(
+						paramsAttribute,
+						paramName,
+						(Iterable<?>)value
+					);
+				} else if(value instanceof Iterator<?>) {
+					addIteratorParams(
+						paramsAttribute,
+						paramName,
+						(Iterator<?>)value
+					);
+				} else if(value instanceof Enumeration<?>) {
+					addEnumerationParams(
+						paramsAttribute,
+						paramName,
+						(Enumeration<?>)value
+					);
+				} else if(value.getClass().isArray()) {
+					addArrayParams(
+						paramsAttribute,
+						paramName,
+						value
+					);
+				} else {
+					addParam(
+						paramsAttribute,
+						paramName,
+						Coercion.toString(value)
+					);
+				}
 			}
+			return true;
+		} else {
+			expectedPatterns.add(ParamUtils.PARAM_ATTRIBUTE_PREFIX + "*");
+			return false;
 		}
 	}
 

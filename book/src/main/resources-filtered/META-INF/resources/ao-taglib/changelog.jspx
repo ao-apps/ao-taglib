@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2020-07-31T16:08:29-05:00"
+		dateModified="2020-08-05T12:18:20-05:00"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -85,6 +85,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 							<li><core:link page="ao.tld/tag-script" /></li>
 							<!-- TODO: Change more/all tags to BodyTag for more flexibility with legacy code -->
 						</ol>
+					</li>
+					<li>
+						Added <ao:a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-*">global attribute <code>data-*</code></ao:a>,
+						with implementations for both HTML attribute and JavaScript property names.
 					</li>
 				</ul>
 				<!-- TODO:

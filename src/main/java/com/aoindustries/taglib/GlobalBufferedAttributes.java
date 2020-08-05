@@ -22,7 +22,10 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.html.Attributes;
 import com.aoindustries.html.Attributes.Global;
+import java.util.Map;
+import javax.servlet.jsp.JspTagException;
 
 /**
  * {@linkplain Global Global attributes} when used in a buffered context.
@@ -35,8 +38,18 @@ public interface GlobalBufferedAttributes extends
 	// Allow to be set from within nested tags
 	IdAttribute,
 	ClassAttribute,
+	DataAttribute,
 	DirAttribute,
 	StyleAttribute
 {
-	// No new methods
+
+	/**
+	 * Replaces all the data with the provided HTML attribute names and values.
+	 * Entries will a {@code null} value are not added.
+	 *
+	 * @throws  JspTagException  When {@code attrName} is not {@linkplain Attributes.Text.Data.data#validate(java.lang.String) valid}
+	 *
+	 * @see  MutableGlobalAttributes#setData(java.util.Map)
+	 */
+	void setData(Map<? extends String,?> data) throws JspTagException;
 }

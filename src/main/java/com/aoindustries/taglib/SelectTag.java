@@ -141,7 +141,7 @@ public class SelectTag
 			(HttpServletRequest)pageContext.getRequest()
 		);
 		out.write("<select");
-		writeGlobalAttributes(out);
+		GlobalAttributesUtils.writeGlobalAttributes(global, out);
 		if(disabled) {
 			out.write(" disabled");
 			if(serialization == Serialization.XML) out.write("=\"disabled\"");

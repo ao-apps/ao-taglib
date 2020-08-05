@@ -44,7 +44,8 @@ public class HrTag extends ElementNullTag {
 	@Override
 	protected void doTag(Writer out) throws JspTagException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
-		doGlobalAttributes(
+		GlobalAttributesUtils.doGlobalAttributes(
+			global,
 			HtmlEE.get(
 				pageContext.getServletContext(),
 				(HttpServletRequest)pageContext.getRequest(),

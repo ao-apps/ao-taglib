@@ -115,7 +115,7 @@ public class TextareaTag
 			(HttpServletRequest)pageContext.getRequest()
 		);
 		out.write("<textarea");
-		writeGlobalAttributes(out);
+		GlobalAttributesUtils.writeGlobalAttributes(global, out);
 		if(name != null) {
 			out.write(" name=\"");
 			encodeTextInXhtmlAttribute(name, out);

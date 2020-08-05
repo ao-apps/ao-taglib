@@ -26,9 +26,11 @@ import com.aoindustries.encoding.Coercion;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import com.aoindustries.lang.Strings;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
+import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.validation.InvalidResult;
 import com.aoindustries.validation.ValidationResult;
 import java.io.IOException;
+import java.util.List;
 import java.util.function.Function;
 import javax.el.ELContext;
 import javax.el.ValueExpression;
@@ -187,6 +189,7 @@ public final class AttributeUtils  {
 	 * @throws  JspTagException  When invalid, supporting {@link LocalizedJspTagException} when validationResult
 	 *                           is a {@link InvalidResult}
 	 */
+	// TODO: Use Attributes version once setters throw IllegalArgumentException instead of JspTagException
 	public static <T> T validate(T value, ValidationResult validationResult) throws JspTagException {
 		if(validationResult.isValid()) {
 			return value;
@@ -211,8 +214,54 @@ public final class AttributeUtils  {
 	 * @throws  JspTagException  When invalid, supporting {@link LocalizedJspTagException} when validationResult
 	 *                           is a {@link InvalidResult}
 	 */
+	// TODO: Use Attributes version once setters throw IllegalArgumentException instead of JspTagException
 	public static <T> T validate(T value, Function<? super T,ValidationResult> validator) throws JspTagException {
 		return validate(value, validator.apply(value));
+	}
+
+	/**
+	 * Creates the exception for dynamic attribute failed.  Does not throw it.
+	 */
+	public static JspTagException newDynamicAttributeFailedException(String uri, String localName, Object value, List<String> expectedPatterns) {
+		if(expectedPatterns == null || expectedPatterns.isEmpty()) {
+			return new LocalizedJspTagException(
+				accessor,
+				"error.unexpectedDynamicAttribute0",
+				localName
+			);
+		} else {
+			int size = expectedPatterns.size();
+			if(size == 1) {
+				return new LocalizedJspTagException(
+					accessor,
+					"error.unexpectedDynamicAttribute1",
+					localName,
+					expectedPatterns.get(0)
+				);
+			} else if(size == 2) {
+				return new LocalizedJspTagException(
+					accessor,
+					"error.unexpectedDynamicAttribute2",
+					localName,
+					expectedPatterns.get(0),
+					expectedPatterns.get(1)
+				);
+			} else {
+				// Quote and comma-separate arbitrary length list here
+				StringBuilder pre = new StringBuilder();
+				for(int i = 0; i < (size - 1); i++) {
+					if(pre.length() != 0) pre.append(", ");
+					pre.append('"').append(expectedPatterns.get(i)).append('"');
+				}
+				return new LocalizedJspTagException(
+					accessor,
+					"error.unexpectedDynamicAttributeN",
+					localName,
+					pre,
+					'"' + expectedPatterns.get(size - 1) + '"'
+				);
+			}
+		}
 	}
 
 	/**

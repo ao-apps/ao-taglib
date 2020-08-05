@@ -40,10 +40,11 @@ public class MapTag extends ElementFilteredTag {
 
 	@Override
 	protected void doTag(Writer out) throws JspException, IOException {
+		String id = global.getId();
 		if(id == null) throw new AttributeRequiredException("id");
 		// TODO: Include id/name by doctype
 		out.write("<map");
-		writeGlobalAttributes(out);
+		GlobalAttributesUtils.writeGlobalAttributes(global, out);
 		out.write(" name=\"");
 		encodeTextInXhtmlAttribute(id, out);
 		out.write("\">");

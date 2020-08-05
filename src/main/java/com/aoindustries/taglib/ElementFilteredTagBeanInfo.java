@@ -43,6 +43,7 @@ public class ElementFilteredTagBeanInfo extends SimpleBeanInfo {
 				props = new PropertyDescriptor[] {
 					new PropertyDescriptor("id",    ElementFilteredTag.class, "getId",    "setId"),
 					new PropertyDescriptor("class", ElementFilteredTag.class, "getClazz", "setClazz"),
+					new PropertyDescriptor("data",  ElementFilteredTag.class, "getData",  null),
 					new PropertyDescriptor("dir",   ElementFilteredTag.class, "getDir",   "setDir"),
 					new PropertyDescriptor("style", ElementFilteredTag.class, "getStyle", "setStyle"),
 				};

@@ -66,7 +66,7 @@ public class MetaTag
 	 * Copies all values from the provided meta.
 	 */
 	public void setMeta(Meta meta) throws JspTagException {
-		GlobalAttributesUtil.copy(meta.getGlobal(), this);
+		GlobalAttributesUtils.copy(meta.getGlobal(), this);
 		setName(meta.getName());
 		setHttpEquiv(meta.getHttpEquiv());
 		setItemprop(meta.getItemprop());
@@ -103,7 +103,7 @@ public class MetaTag
 		if(parent != null) {
 			((MetasAttribute)parent).addMeta(
 				new Meta(
-					GlobalAttributesBuilder.builder().copy(this).build(),
+					global.freeze(),
 					Strings.trimNullIfEmpty(name),
 					Strings.trim(httpEquiv),
 					itemprop,
@@ -120,7 +120,7 @@ public class MetaTag
 				(HttpServletResponse)pageContext.getResponse(),
 				out
 			);
-			doGlobalAttributes(html.meta())
+			GlobalAttributesUtils.doGlobalAttributes(global, html.meta())
 				.name(name)
 				.httpEquiv(httpEquiv)
 				// TODO: Create a global "itemprop" in ao-fluent-html

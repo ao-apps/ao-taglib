@@ -28,15 +28,13 @@ import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextIn
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.net.URIParametersMap;
-import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.servlet.lastmodified.AddLastModified;
-import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.List;
 import java.util.Locale;
 import javax.servlet.jsp.JspTagException;
-import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
  * @author  AO Industries, Inc.
@@ -44,7 +42,6 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
 public class IframeTag
 	extends ElementBufferedTag
 	implements
-		DynamicAttributes,
 		SrcAttribute,
 		ParamsAttribute,
 		WidthAttribute,
@@ -109,29 +106,25 @@ public class IframeTag
 		this.frameborder = frameborder;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see  ParamUtils#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List, com.aoindustries.taglib.ParamsAttribute)
+	 */
 	@Override
-	public void setDynamicAttribute(String uri, String localName, Object value) throws JspTagException {
-		if(
-			uri==null
-			&& localName.startsWith(ParamUtils.PARAM_ATTRIBUTE_PREFIX)
-		) {
-			ParamUtils.setDynamicAttribute(this, uri, localName, value);
-		} else {
-			throw new LocalizedJspTagException(
-				accessor,
-				"error.unexpectedDynamicAttribute",
-				localName,
-				ParamUtils.PARAM_ATTRIBUTE_PREFIX+"*"
-			);
-		}
+	protected boolean addDynamicAttribute(String uri, String localName, Object value, List<String> expectedPatterns) throws JspTagException {
+		return
+			super.addDynamicAttribute(uri, localName, value, expectedPatterns)
+			|| ParamUtils.addDynamicAttribute(uri, localName, value, expectedPatterns, this);
 	}
 
 	@Override
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		if(src == null) throw new AttributeRequiredException("src");
 		out.write("<iframe");
-		writeGlobalAttributes(out);
+		GlobalAttributesUtils.writeGlobalAttributes(global, out);
 		// TODO: Include id/name by doctype
+		String id = global.getId();
 		if(id != null) {
 			out.write(" name=\"");
 			encodeTextInXhtmlAttribute(id, out);

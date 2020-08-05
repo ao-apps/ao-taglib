@@ -85,7 +85,7 @@ public class HtmlTag extends ElementFilteredBodyTag {
 		if(serialization == Serialization.XML) {
 			out.append(" xmlns=\"http://www.w3.org/1999/xhtml\"");
 		}
-		if(global != null) global.appendGlobalAttributes(out);
+		if(global != null) GlobalAttributesUtils.appendGlobalAttributes(global, out);
 		if(locale != null) {
 			String lang = locale.toLanguageTag();
 			if(!lang.isEmpty()) {
@@ -111,7 +111,13 @@ public class HtmlTag extends ElementFilteredBodyTag {
 			locale,
 			out,
 			serialization,
-			GlobalAttributesBuilder.builder().setClazz(clazz).build()
+			ImmutableGlobalAttributes.of(
+				null, // id
+				clazz,
+				null, // data
+				null, // dir
+				null  // style
+			)
 		);
 	}
 

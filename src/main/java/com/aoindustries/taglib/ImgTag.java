@@ -27,17 +27,15 @@ import com.aoindustries.html.Html;
 import com.aoindustries.html.servlet.HtmlEE;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.net.URIParametersMap;
-import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.servlet.lastmodified.AddLastModified;
-import static com.aoindustries.taglib.ApplicationResources.accessor;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.List;
 import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
-import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
  * @author  AO Industries, Inc.
@@ -45,7 +43,6 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
 public class ImgTag
 	extends ElementBufferedTag
 	implements
-		DynamicAttributes,
 		SrcAttribute,
 		ParamsAttribute,
 		WidthAttribute,
@@ -127,21 +124,16 @@ public class ImgTag
 		this.ismap = ismap;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see  ParamUtils#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List, com.aoindustries.taglib.ParamsAttribute)
+	 */
 	@Override
-	public void setDynamicAttribute(String uri, String localName, Object value) throws JspTagException {
-		if(
-			uri==null
-			&& localName.startsWith(ParamUtils.PARAM_ATTRIBUTE_PREFIX)
-		) {
-			ParamUtils.setDynamicAttribute(this, uri, localName, value);
-		} else {
-			throw new LocalizedJspTagException(
-				accessor,
-				"error.unexpectedDynamicAttribute",
-				localName,
-				ParamUtils.PARAM_ATTRIBUTE_PREFIX+"*"
-			);
-		}
+	protected boolean addDynamicAttribute(String uri, String localName, Object value, List<String> expectedPatterns) throws JspTagException {
+		return
+			super.addDynamicAttribute(uri, localName, value, expectedPatterns)
+			|| ParamUtils.addDynamicAttribute(uri, localName, value, expectedPatterns, this);
 	}
 
 	@Override
@@ -155,7 +147,7 @@ public class ImgTag
 			(HttpServletResponse)pageContext.getResponse(),
 			out
 		);
-		doGlobalAttributes(html.img())
+		GlobalAttributesUtils.doGlobalAttributes(global, html.img())
 			.src(UrlUtils.getSrc(pageContext, src, params, addLastModified, absolute, canonical))
 			// TOOD: width to Integer via Img.width(Integer)
 			.attribute("width", width)

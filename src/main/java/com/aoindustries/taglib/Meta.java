@@ -66,7 +66,7 @@ public class Meta {
 		String content
 	) {
 		this(
-			(GlobalAttributes)null,
+			ImmutableGlobalAttributes.EMPTY,
 			name,
 			httpEquiv,
 			itemprop,

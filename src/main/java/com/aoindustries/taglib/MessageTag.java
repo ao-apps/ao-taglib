@@ -124,13 +124,13 @@ public class MessageTag
 				String numSubstring = localName.substring(3);
 				int index = Integer.parseInt(numSubstring);
 				// Do not allow "arg00" in place of "arg0"
-				if(!numSubstring.equals(Integer.toString(index))) throw new LocalizedJspTagException(accessor, "error.unexpectedDynamicAttribute", localName, "arg*");
+				if(!numSubstring.equals(Integer.toString(index))) throw new LocalizedJspTagException(accessor, "error.unexpectedDynamicAttribute1", localName, "arg*");
 				insertMessageArg(localName, index, value);
 			} catch(NumberFormatException err) {
-				throw new LocalizedJspTagException(err, accessor, "error.unexpectedDynamicAttribute", localName, "arg*");
+				throw new LocalizedJspTagException(err, accessor, "error.unexpectedDynamicAttribute1", localName, "arg*");
 			}
 		} else {
-			throw new LocalizedJspTagException(accessor, "error.unexpectedDynamicAttribute", localName, "arg*");
+			throw new LocalizedJspTagException(accessor, "error.unexpectedDynamicAttribute1", localName, "arg*");
 		}
 	}
 

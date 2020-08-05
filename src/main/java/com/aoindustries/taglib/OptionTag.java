@@ -103,7 +103,8 @@ public class OptionTag
 		// TODO: If not setting value this way, this does not need to buffer
 		// TODO: This has something to do with translator markup added for display, but not value
 		if(!valueSet) setValue(capturedBody != null ? capturedBody : "");
-		doGlobalAttributes(
+		GlobalAttributesUtils.doGlobalAttributes(
+			global,
 			HtmlEE.get(
 				pageContext.getServletContext(),
 				(HttpServletRequest)pageContext.getRequest(),

@@ -56,7 +56,7 @@ public class ColTag extends ElementNullTag {
 			(HttpServletResponse)pageContext.getResponse(),
 			out
 		).col();
-		doGlobalAttributes(col);
+		GlobalAttributesUtils.doGlobalAttributes(global, col);
 		if(span != 0) col.span(span);
 		col.__();
 	}

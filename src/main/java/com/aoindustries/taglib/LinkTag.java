@@ -30,9 +30,7 @@ import com.aoindustries.lang.Strings;
 import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URIParameters;
 import com.aoindustries.net.URIParametersMap;
-import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.servlet.lastmodified.AddLastModified;
-import static com.aoindustries.taglib.ApplicationResources.accessor;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
@@ -42,7 +40,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
-import javax.servlet.jsp.tagext.DynamicAttributes;
 import javax.servlet.jsp.tagext.JspTag;
 
 /**
@@ -51,7 +48,6 @@ import javax.servlet.jsp.tagext.JspTag;
 public class LinkTag
 	extends ElementNullTag
 	implements
-		DynamicAttributes,
 		HrefAttribute,
 		ParamsAttribute,
 		HreflangAttribute,
@@ -80,7 +76,7 @@ public class LinkTag
 	 * Copies all values from the provided link.
 	 */
 	public void setLink(Link link) throws JspTagException {
-		GlobalAttributesUtil.copy(link.getGlobal(), this);
+		GlobalAttributesUtils.copy(link.getGlobal(), this);
 		setHref(link.getHref());
 		setAbsolute(link.getAbsolute());
 		URIParameters linkParams = link.getParams();
@@ -147,21 +143,16 @@ public class LinkTag
 		this.title = AttributeUtils.trimNullIfEmpty(title);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see  ParamUtils#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List, com.aoindustries.taglib.ParamsAttribute)
+	 */
 	@Override
-	public void setDynamicAttribute(String uri, String localName, Object value) throws JspTagException {
-		if(
-			uri==null
-			&& localName.startsWith(ParamUtils.PARAM_ATTRIBUTE_PREFIX)
-		) {
-			ParamUtils.setDynamicAttribute(this, uri, localName, value);
-		} else {
-			throw new LocalizedJspTagException(
-				accessor,
-				"error.unexpectedDynamicAttribute",
-				localName,
-				ParamUtils.PARAM_ATTRIBUTE_PREFIX+"*"
-			);
-		}
+	protected boolean addDynamicAttribute(String uri, String localName, Object value, List<String> expectedPatterns) throws JspTagException {
+		return
+			super.addDynamicAttribute(uri, localName, value, expectedPatterns)
+			|| ParamUtils.addDynamicAttribute(uri, localName, value, expectedPatterns, this);
 	}
 
 	@Override
@@ -177,7 +168,7 @@ public class LinkTag
 			}
 			((LinksAttribute)parent).addLink(
 				new Link(
-					GlobalAttributesBuilder.builder().copy(this).build(),
+					global.freeze(),
 					href,
 					absolute,
 					canonical,
@@ -199,7 +190,7 @@ public class LinkTag
 				out
 			);
 			com.aoindustries.html.Link link = html.link();
-			doGlobalAttributes(link);
+			GlobalAttributesUtils.doGlobalAttributes(global, link);
 			link.href(UrlUtils.getHref(pageContext, href, params, addLastModified, absolute, canonical));
 			if(hreflang instanceof Locale) {
 				link.hreflang((Locale)hreflang);

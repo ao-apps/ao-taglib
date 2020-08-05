@@ -31,7 +31,7 @@ import java.beans.SimpleBeanInfo;
 /**
  * @author  AO Industries, Inc.
  */
-public class ElementBufferedTagBeanInfo extends SimpleBeanInfo {
+public class ImmutableGlobalAttributesBeanInfo extends SimpleBeanInfo {
 
 	private static volatile PropertyDescriptor[] properties;
 
@@ -41,11 +41,11 @@ public class ElementBufferedTagBeanInfo extends SimpleBeanInfo {
 			PropertyDescriptor[] props = properties;
 			if(props == null) {
 				props = new PropertyDescriptor[] {
-					new PropertyDescriptor("id",    ElementBufferedTag.class, "getId",    "setId"),
-					new PropertyDescriptor("class", ElementBufferedTag.class, "getClazz", "setClazz"),
-					new PropertyDescriptor("data" , ElementBufferedTag.class, "getData",  "setData"),
-					new PropertyDescriptor("dir",   ElementBufferedTag.class, "getDir",   "setDir"),
-					new PropertyDescriptor("style", ElementBufferedTag.class, "getStyle", "setStyle"),
+					new PropertyDescriptor("id",    ImmutableGlobalAttributesBeanInfo.class, "getId",    null),
+					new PropertyDescriptor("class", ImmutableGlobalAttributesBeanInfo.class, "getClazz", null),
+					new PropertyDescriptor("data",  ImmutableGlobalAttributesBeanInfo.class, "getData",  null),
+					new PropertyDescriptor("dir",   ImmutableGlobalAttributesBeanInfo.class, "getDir",   null),
+					new PropertyDescriptor("style", ImmutableGlobalAttributesBeanInfo.class, "getStyle", null),
 				};
 				properties = props;
 			}
@@ -62,7 +62,7 @@ public class ElementBufferedTagBeanInfo extends SimpleBeanInfo {
 	public BeanInfo[] getAdditionalBeanInfo() {
 		try {
 			return new BeanInfo[] {
-				Introspector.getBeanInfo(ElementBufferedTag.class.getSuperclass())
+				Introspector.getBeanInfo(ImmutableGlobalAttributesBeanInfo.class.getSuperclass())
 			};
 		} catch(IntrospectionException err) {
 			throw new AssertionError(err);

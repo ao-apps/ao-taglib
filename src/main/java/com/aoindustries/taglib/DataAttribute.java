@@ -22,27 +22,23 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.html.Attributes.Global;
+import com.aoindustries.html.Attributes;
 import javax.servlet.jsp.JspTagException;
 
 /**
- * Utilities for working with {@linkplain Global global attributes}.
+ * Something with data-* attributes.
  *
  * @author  AO Industries, Inc.
  */
-public class GlobalAttributesUtil {
+public interface DataAttribute {
 
 	/**
-	 * Copies all global attributes.
+	 * Adds the data with the provided HTML attribute name and value, replacing any attribute that already exists.
+	 * When value is {@code null}, will remove an existing attribute.
+	 *
+	 * @throws  JspTagException  When {@code attrName} is not {@linkplain Attributes.Text.Data.data#validate(java.lang.String) valid}
+	 *
+	 * @see  MutableGlobalAttributes#addData(java.lang.String, java.lang.Object)
 	 */
-	public static void copy(GlobalAttributes from, GlobalBufferedAttributes to) throws JspTagException {
-		if(from != null) {
-			to.setId(from.getId());
-			to.setClazz(from.getClazz());
-			to.setDir(from.getDir());
-			to.setStyle(from.getStyle());
-		}
-	}
-
-	private GlobalAttributesUtil() {}
+	void addData(String attrName, Object value) throws JspTagException;
 }

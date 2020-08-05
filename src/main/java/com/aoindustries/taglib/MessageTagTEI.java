@@ -70,7 +70,7 @@ public class MessageTagTEI extends TagExtraInfo {
 						messages,
 						new ValidationMessage(
 							data.getId(),
-							accessor.getMessage("error.unexpectedDynamicAttribute", attributeName, "arg*")
+							accessor.getMessage("error.unexpectedDynamicAttribute1", attributeName, "arg*")
 						)
 					);
 				}

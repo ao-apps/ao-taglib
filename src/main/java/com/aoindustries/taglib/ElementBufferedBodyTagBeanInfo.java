@@ -42,6 +42,7 @@ public class ElementBufferedBodyTagBeanInfo extends SimpleBeanInfo {
 			if(props == null) {
 				props = new PropertyDescriptor[] {
 					new PropertyDescriptor("class", ElementBufferedBodyTag.class, "getClazz", "setClazz"),
+					new PropertyDescriptor("data",  ElementBufferedBodyTag.class, "getData",  "setData"),
 					new PropertyDescriptor("dir",   ElementBufferedBodyTag.class, "getDir",   "setDir"),
 					new PropertyDescriptor("style", ElementBufferedBodyTag.class, "getStyle", "setStyle"),
 				};
