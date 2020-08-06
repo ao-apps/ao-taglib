@@ -4211,7 +4211,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-08-05T16:09:39-05:00" -->
+		<!-- dateModified="2020-08-05T22:17:19-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders a <a href="https://www.w3schools.com/tags/tag_textarea.asp">&lt;textarea&gt;</a> tag.
@@ -4228,35 +4228,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<name>textarea</name>
 		<tag-class>com.aoindustries.taglib.TextareaTag</tag-class>
 		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
-		<body-content>scriptless</body-content>
+		<body-content>JSP</body-content>
 		&GlobalBufferedAttributes;
-		<attribute>
-			<description><![CDATA[
-				<p>
-					The <a href="https://www.w3schools.com/tags/att_textarea_name.asp">name of the textarea element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-name">&lt;ao:name&gt;</a>
-					tag will override this value.
-				</p>
-			]]></description>
-			<name>name</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.String</type>
-		</attribute>
-		<attribute>
-			<description><![CDATA[
-				<p>
-					The value of the textarea.
-					A nested <a href="@{project.url}ao.tld/tag-value">&lt;ao:value&gt;</a>
-					tag will override this value.
-					If neither is provided, the output of the body is used.
-				</p>
-			]]></description>
-			<name>value</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Object</type>
-		</attribute>
 		<attribute>
 			<description><![CDATA[
 				<p>
@@ -4271,13 +4244,31 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The <a href="https://www.w3schools.com/tags/att_textarea_rows.asp">number of rows</a> for the textarea element.
+					The <a href="https://www.w3schools.com/tags/att_textarea_disabled.asp">disabled attribute</a>.
+					Accepts values of <code>true</code> or <code>false</code>.
+					A non-empty nested <a href="@{project.url}ao.tld/tag-disabled">&lt;ao:disabled&gt;</a>
+					tag will override this value.
+					If disabled is <code>true</code>, will add the attribute as <code>disabled="disabled"</code>,
+					otherwise the attribute is not added.
 				</p>
 			]]></description>
-			<name>rows</name>
-			<required>true</required>
+			<name>disabled</name>
+			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>int</type>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					The <a href="https://www.w3schools.com/tags/att_textarea_name.asp">name of the textarea element</a>.
+					A nested <a href="@{project.url}ao.tld/tag-name">&lt;ao:name&gt;</a>
+					tag will override this value.
+				</p>
+			]]></description>
+			<name>name</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[
@@ -4298,18 +4289,27 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<attribute>
 			<description><![CDATA[
 				<p>
-					The <a href="https://www.w3schools.com/tags/att_textarea_disabled.asp">disabled attribute</a>.
-					Accepts values of <code>true</code> or <code>false</code>.
-					A non-empty nested <a href="@{project.url}ao.tld/tag-disabled">&lt;ao:disabled&gt;</a>
-					tag will override this value.
-					If disabled is <code>true</code>, will add the attribute as <code>disabled="disabled"</code>,
-					otherwise the attribute is not added.
+					The <a href="https://www.w3schools.com/tags/att_textarea_rows.asp">number of rows</a> for the textarea element.
 				</p>
 			]]></description>
-			<name>disabled</name>
+			<name>rows</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>int</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					The value of the textarea.
+					A nested <a href="@{project.url}ao.tld/tag-value">&lt;ao:value&gt;</a>
+					tag will override this value.
+					If neither is provided, the output of the body is used.
+				</p>
+			]]></description>
+			<name>value</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>boolean</type>
+			<type>java.lang.Object</type>
 		</attribute>
 		<attribute>
 			<description><![CDATA[

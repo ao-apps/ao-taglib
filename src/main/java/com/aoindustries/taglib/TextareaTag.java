@@ -36,30 +36,27 @@ import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspTagException;
-import javax.servlet.jsp.PageContext;
 
 /**
  * @author  AO Industries, Inc.
  */
 public class TextareaTag
-	extends ElementBufferedTag
+	extends ElementBufferedBodyTag
 	implements
-		NameAttribute,
-		ValueAttribute,
+		// Attributes
 		ColsAttribute,
-		RowsAttribute,
-		ReadonlyAttribute,
 		DisabledAttribute,
+		NameAttribute,
+		ReadonlyAttribute,
+		RowsAttribute,
+		ValueAttribute,
+		// Events
 		OnchangeAttribute
 {
 
-	private String name;
-	private Object value;
-	private int cols;
-	private int rows;
-	private boolean readonly;
-	private boolean disabled;
-	private Object onchange;
+	public TextareaTag() {
+		init();
+	}
 
 	@Override
 	public MediaType getContentType() {
@@ -71,69 +68,99 @@ public class TextareaTag
 		return MediaType.XHTML;
 	}
 
-	@Override
-	public void setName(String name) throws JspTagException {
-		this.name = Strings.nullIfEmpty(name);
-	}
+	private static final long serialVersionUID = 1L;
 
-	@Override
-	public void setValue(Object value) throws JspTagException {
-		this.value = AttributeUtils.nullIfEmpty(value);
-	}
-
+	private int cols;
 	@Override
 	public void setCols(int cols) {
 		this.cols = cols;
 	}
 
-	@Override
-	public void setRows(int rows) {
-		this.rows = rows;
-	}
-
-	@Override
-	public void setReadonly(boolean readonly) {
-		this.readonly = readonly;
-	}
-
+	private boolean disabled;
 	@Override
 	public void setDisabled(boolean disabled) {
 		this.disabled = disabled;
 	}
 
+	private String name;
+	@Override
+	public void setName(String name) throws JspTagException {
+		this.name = Strings.nullIfEmpty(name);
+	}
+
+	private boolean readonly;
+	@Override
+	public void setReadonly(boolean readonly) {
+		this.readonly = readonly;
+	}
+
+	private int rows;
+	@Override
+	public void setRows(int rows) {
+		this.rows = rows;
+	}
+
+	private Object value;
+	@Override
+	public void setValue(Object value) throws JspTagException {
+		this.value = AttributeUtils.nullIfEmpty(value);
+	}
+
+	private Object onchange;
 	@Override
 	public void setOnchange(Object onchange) throws JspTagException {
 		this.onchange = AttributeUtils.trimNullIfEmpty(onchange);
 	}
 
+	private transient BufferResult capturedBody;
+
+	private void init() {
+		cols = 0;
+		disabled = false;
+		name = null;
+		readonly = false;
+		rows = 0;
+		value = null;
+		onchange = null;
+		capturedBody = null;
+	}
+
 	@Override
-	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
-		if(value == null) setValue(capturedBody.trim());
-		PageContext pageContext = (PageContext)getJspContext();
+	protected int doAfterBody(BufferResult capturedBody, Writer out) {
+		assert this.capturedBody == null;
+		assert capturedBody != null;
+		this.capturedBody = capturedBody;
+		return SKIP_BODY;
+	}
+
+	@Override
+	protected int doEndTag(Writer out) throws JspTagException, IOException {
+		if(value == null && capturedBody != null) setValue(capturedBody.trim());
 		Serialization serialization = SerializationEE.get(
 			pageContext.getServletContext(),
 			(HttpServletRequest)pageContext.getRequest()
 		);
 		out.write("<textarea");
 		GlobalAttributesUtils.writeGlobalAttributes(global, out);
+		out.write(" cols=\"");
+		out.write(Integer.toString(cols));
+		out.write('"');
+		if(disabled) {
+			out.write(" disabled");
+			if(serialization == Serialization.XML) out.write("=\"disabled\"");
+		}
 		if(name != null) {
 			out.write(" name=\"");
 			encodeTextInXhtmlAttribute(name, out);
 			out.write('"');
 		}
-		out.write(" cols=\"");
-		out.write(Integer.toString(cols));
-		out.write("\" rows=\"");
-		out.write(Integer.toString(rows));
-		out.write('"');
 		if(readonly) {
 			out.write(" readonly");
 			if(serialization == Serialization.XML) out.write("=\"readonly\"");
 		}
-		if(disabled) {
-			out.write(" disabled");
-			if(serialization == Serialization.XML) out.write("=\"disabled\"");
-		}
+		out.write(" rows=\"");
+		out.write(Integer.toString(rows));
+		out.write('"');
 		if(onchange != null) {
 			out.write(" onchange=\"");
 			Coercion.write(onchange, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
@@ -142,5 +169,6 @@ public class TextareaTag
 		out.write('>');
 		Coercion.write(value, textInXhtmlEncoder, out);
 		out.write("</textarea>");
+		return EVAL_PAGE;
 	}
 }
