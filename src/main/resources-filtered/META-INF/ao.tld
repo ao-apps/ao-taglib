@@ -4211,7 +4211,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-08-05T22:17:19-05:00" -->
+		<!-- dateModified="2020-08-05T23:08:36-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders a <a href="https://www.w3schools.com/tags/tag_textarea.asp">&lt;textarea&gt;</a> tag.
@@ -4237,7 +4237,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 			]]></description>
 			<name>cols</name>
-			<required>true</required>
+			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>int</type>
 		</attribute>
@@ -4293,7 +4293,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 			]]></description>
 			<name>rows</name>
-			<required>true</required>
+			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>int</type>
 		</attribute>

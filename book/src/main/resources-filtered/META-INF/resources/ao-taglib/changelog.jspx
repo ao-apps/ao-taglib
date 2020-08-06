@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2020-08-05T22:17:19-05:00"
+		dateModified="2020-08-05T23:08:36-05:00"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -94,6 +94,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 							<li><core:link page="ao.tld/tag-textarea" /></li>
 							<!-- TODO: Change more/all tags to BodyTag for more flexibility with legacy code -->
 						</ol>
+					</li>
+					<li>
+						<core:link page="ao.tld/tag-textarea" /> no longer requires <code>cols</code> and
+						<code>rows</code> attributes.
 					</li>
 				</ul>
 				<!-- TODO:

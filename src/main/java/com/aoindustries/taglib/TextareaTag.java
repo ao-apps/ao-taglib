@@ -70,7 +70,7 @@ public class TextareaTag
 
 	private static final long serialVersionUID = 1L;
 
-	private int cols;
+	private Integer cols;
 	@Override
 	public void setCols(int cols) {
 		this.cols = cols;
@@ -94,7 +94,7 @@ public class TextareaTag
 		this.readonly = readonly;
 	}
 
-	private int rows;
+	private Integer rows;
 	@Override
 	public void setRows(int rows) {
 		this.rows = rows;
@@ -115,11 +115,11 @@ public class TextareaTag
 	private transient BufferResult capturedBody;
 
 	private void init() {
-		cols = 0;
+		cols = null;
 		disabled = false;
 		name = null;
 		readonly = false;
-		rows = 0;
+		rows = null;
 		value = null;
 		onchange = null;
 		capturedBody = null;
@@ -142,9 +142,11 @@ public class TextareaTag
 		);
 		out.write("<textarea");
 		GlobalAttributesUtils.writeGlobalAttributes(global, out);
-		out.write(" cols=\"");
-		out.write(Integer.toString(cols));
-		out.write('"');
+		if(cols != null) {
+			out.write(" cols=\"");
+			encodeTextInXhtmlAttribute(cols, out);
+			out.write('"');
+		}
 		if(disabled) {
 			out.write(" disabled");
 			if(serialization == Serialization.XML) out.write("=\"disabled\"");
@@ -158,9 +160,11 @@ public class TextareaTag
 			out.write(" readonly");
 			if(serialization == Serialization.XML) out.write("=\"readonly\"");
 		}
-		out.write(" rows=\"");
-		out.write(Integer.toString(rows));
-		out.write('"');
+		if(rows != null) {
+			out.write(" rows=\"");
+			encodeTextInXhtmlAttribute(rows, out);
+			out.write('"');
+		}
 		if(onchange != null) {
 			out.write(" onchange=\"");
 			Coercion.write(onchange, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
