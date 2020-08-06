@@ -402,4 +402,13 @@ public class InputTag
 		input.__();
 		return EVAL_PAGE;
 	}
+
+	@Override
+	public void doFinally() {
+		try {
+			init();
+		} finally {
+			super.doFinally();
+		}
+	}
 }

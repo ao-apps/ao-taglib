@@ -280,4 +280,13 @@ public class ATag
 		out.write("</a>");
 		return EVAL_PAGE;
 	}
+
+	@Override
+	public void doFinally() {
+		try {
+			init();
+		} finally {
+			super.doFinally();
+		}
+	}
 }

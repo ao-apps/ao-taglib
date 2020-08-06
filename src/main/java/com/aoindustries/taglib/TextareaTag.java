@@ -175,4 +175,13 @@ public class TextareaTag
 		out.write("</textarea>");
 		return EVAL_PAGE;
 	}
+
+	@Override
+	public void doFinally() {
+		try {
+			init();
+		} finally {
+			super.doFinally();
+		}
+	}
 }
