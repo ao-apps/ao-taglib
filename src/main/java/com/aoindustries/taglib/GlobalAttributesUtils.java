@@ -85,18 +85,32 @@ public class GlobalAttributesUtils {
 	}
 
 	public static <G extends Global<?>> G doGlobalAttributes(GlobalAttributes from, G to) throws IOException {
-		to
-			.id(from.getId())
-			.clazz(from.getClazz());
+		// TODO: normalize, then only throw when non-empty/null.  Here and other attributes.
+		// TODO: Once that is done, just do like before:
+		// to
+		//	.id(from.getId())
+		//	.clazz(from.getClazz());
+		// id is not valid in all doctypes
+		String id = from.getId();
+		if(id != null) to.id(id);
+		// class is not valid in all doctypes
+		String clazz = from.getClazz();
+		if(clazz != null) to.clazz(clazz);
 		for(Map.Entry<String,Object> entry : from.getData().entrySet()) {
 			to.data(entry.getKey(), entry.getValue());
 		}
-		to
-			.dir(from.getDir())
-			.style(from.getStyle());
+		// TODO: Once that is done, just do like before:
+		// to
+		//	.dir(from.getDir())
+		//	.style(from.getStyle());
+		to.dir(from.getDir());
+		// style is not valid in all doctypes
+		Object style = Coercion.trimNullIfEmpty(from.getStyle());
+		if(style != null) to.style(style);
 		return to;
 	}
 
+	// TODO: Doctype constraints in id, class, and style like on by ao-fluent-html via doGlobalAttributes?
 	public static void writeGlobalAttributes(GlobalAttributes global, Writer out) throws IOException {
 		String id = global.getId();
 		if(id != null) {
@@ -125,7 +139,7 @@ public class GlobalAttributesUtils {
 			encodeTextInXhtmlAttribute(dir, out);
 			out.write('"');
 		}
-		Object style = global.getStyle();
+		Object style = Coercion.trimNullIfEmpty(global.getStyle());
 		if(style != null) {
 			out.write(" style=\"");
 			// TODO: Review other MarkupType.JAVASCRIPT that should be MarkupType.CSS
@@ -162,7 +176,7 @@ public class GlobalAttributesUtils {
 			encodeTextInXhtmlAttribute(dir, out);
 			out.append('"');
 		}
-		Object style = global.getStyle();
+		Object style = Coercion.trimNullIfEmpty(global.getStyle());
 		if(style != null) {
 			out.append(" style=\"");
 			Coercion.append(style, MarkupType.CSS, textInXhtmlAttributeEncoder, false, out);

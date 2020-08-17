@@ -345,8 +345,9 @@ public class InputTag
 			Coercion.write(alt, MarkupType.TEXT, textInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
+		// autocomplete is not valid in all doctypes
+		if(!autocomplete) input.autocomplete(Input.Autocomplete.OFF);
 		input
-			.autocomplete(autocomplete ? null : Input.Autocomplete.OFF)
 			.checked(checked)
 			.disabled(disabled);
 		if(height != null) {
