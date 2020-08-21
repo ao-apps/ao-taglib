@@ -4746,13 +4746,35 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<example><![CDATA[<code>${ao:encodeURL('../path-to-page.jsp')}</code>]]></example>
 	</function>
 	<function>
-		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-04-15T19:37:30-0500" -->
+		<!-- datePublished="2020-08-21T00:43:37-05:00" -->
 		<description><![CDATA[
 			<p>
-				Generates an absolute URL for the provided context-relative URL.
-				The URL is not automatically
-				<a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">response encodeURL</a>.
+				Resolves a possibly page-relative path to a context-absolute path.
+			</p>
+			<p>
+				<var>path</var>: The absolute URL, context-absolute path, or page-relative path.
+			</p>
+		]]></description>
+		<name>getAbsolutePath</name>
+		<function-class>com.aoindustries.taglib.Functions</function-class>
+		<function-signature>java.lang.String getAbsolutePath(java.lang.String)</function-signature>
+		<example><![CDATA[<code>${ao:getAbsolutePath('../path-to-page.jsp')}</code>]]></example>
+	</function>
+	<function>
+		<!-- datePublished="2016-08-07T16:29:54-0500" -->
+		<!-- dateModified="2020-08-21T00:36:39-05:00" -->
+		<description><![CDATA[
+			<p>
+				Gets an absolute URL for the given path.  This includes
+				protocol, port, context path, and path.
+			</p>
+			<p>
+				<var>path</var>: The path appended to the URL verbatim.  To support page-relative paths, first use
+				<a href="@{project.url}ao.tld/function-getAbsolutePath">${ao:getAbsolutePath()}</a>.
+			</p>
+			<p>
+				No <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">URL rewriting</a> is performed.
+				Please additionally use <a href="@{project.url}ao.tld/function-encodeURL">${ao:encodeURL()}</a>, as-needed.
 			</p>
 		]]></description>
 		<name>getAbsoluteURL</name>

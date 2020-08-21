@@ -90,6 +90,13 @@ final public class Functions {
 	}
 
 	/**
+	 * @see  HttpServletUtil#getAbsolutePath(javax.servlet.http.HttpServletRequest, java.lang.String)
+	 */
+	public static String getAbsolutePath(String relPath) throws MalformedURLException {
+		return HttpServletUtil.getAbsolutePath(getRequest(), relPath);
+	}
+
+	/**
 	 * @see  HttpServletUtil#getAbsoluteURL(javax.servlet.http.HttpServletRequest, java.lang.String)
 	 */
 	public static String getAbsoluteURL(String relPath) {
