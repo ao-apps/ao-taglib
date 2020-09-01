@@ -33,7 +33,6 @@ import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
@@ -171,7 +170,7 @@ public class WriteTag
 					}
 				}
 			}
-		} catch(IllegalAccessException | InvocationTargetException err) {
+		} catch(ReflectiveOperationException err) {
 			throw new JspTagException(err);
 		}
 	}
