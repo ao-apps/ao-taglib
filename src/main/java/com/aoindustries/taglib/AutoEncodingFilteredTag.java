@@ -179,6 +179,7 @@ public abstract class AutoEncodingFilteredTag extends SimpleTagSupport {
 	 * Sets the media encoder options.  This is how subclass tag attributes
 	 * can effect the encoding.
 	 */
+	@SuppressWarnings("NoopMethodInAbstractClass")
 	protected void setMediaEncoderOptions(MediaEncoder mediaEncoder) {
 	}
 

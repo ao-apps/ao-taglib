@@ -214,6 +214,7 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
 	 *
 	 * @see  #getOutputType()
 	 */
+	@SuppressWarnings("NoopMethodInAbstractClass")
 	protected void writePrefix(MediaType containerType, Writer out) throws JspTagException, IOException {
 		// By default, nothing is printed.
 	}
@@ -222,6 +223,7 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
 	 * Sets the media encoder options.  This is how subclass tag attributes
 	 * can effect the encoding.
 	 */
+	@SuppressWarnings("NoopMethodInAbstractClass")
 	protected void setMediaEncoderOptions(MediaEncoder mediaEncoder) {
 	}
 
@@ -237,6 +239,7 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
 	 *
 	 * This default implementation does nothing.
 	 */
+	@SuppressWarnings("NoopMethodInAbstractClass")
 	protected void doTag(Writer out) throws JspTagException, IOException {
 		// Do nothing by default
 	}
@@ -257,6 +260,7 @@ public abstract class AutoEncodingNullTag extends SimpleTagSupport {
 	 *
 	 * @see  #getOutputType()
 	 */
+	@SuppressWarnings("NoopMethodInAbstractClass")
 	protected void writeSuffix(MediaType containerType, Writer out) throws JspTagException, IOException {
 		// By default, nothing is printed.
 	}

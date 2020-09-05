@@ -67,6 +67,7 @@ final public class TeiUtils {
 					if(mediaType == null) {
 						// Return value not used: valdation only:
 						mediaType = MediaType.getMediaTypeForContentType(type);
+						assert mediaType != null;
 					}
 					// Value is OK
 				} catch(UnsupportedEncodingException err) {

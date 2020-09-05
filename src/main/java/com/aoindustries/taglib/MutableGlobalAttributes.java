@@ -43,6 +43,7 @@ public class MutableGlobalAttributes implements GlobalAttributes, Freezable<Glob
 	public MutableGlobalAttributes() {
 	}
 
+	@SuppressWarnings("OverridableMethodCallInConstructor")
 	public MutableGlobalAttributes(GlobalAttributes global) throws IllegalArgumentException {
 		try {
 			setId(global.getId());
@@ -77,7 +78,7 @@ public class MutableGlobalAttributes implements GlobalAttributes, Freezable<Glob
 
 	@Override
 	public Map<String,Object> getData() {
-		return data;
+		return MinimalMap.unmodifiable(data);
 	}
 
 	/**

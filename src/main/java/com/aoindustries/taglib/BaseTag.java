@@ -47,6 +47,7 @@ public class BaseTag extends ElementNullTag {
 	}
 
 	@Override
+	@SuppressWarnings("StringEquality")
 	protected void doTag(Writer out) throws JspTagException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
 		HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();

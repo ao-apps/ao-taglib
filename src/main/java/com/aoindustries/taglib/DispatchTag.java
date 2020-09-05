@@ -223,6 +223,7 @@ abstract public class DispatchTag
 	 * @exception  SkipPageException  If the implementation has handled the request,
 	 *                                must throw SkipPageException.
 	 */
+	@SuppressWarnings("NoopMethodInAbstractClass")
 	protected void doTag(String servletPath) throws IOException, JspTagException, SkipPageException {
 		// Do nothing
 	}

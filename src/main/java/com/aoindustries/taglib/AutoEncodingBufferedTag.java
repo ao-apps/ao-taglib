@@ -170,6 +170,7 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 		}
 		final BufferResult capturedBody = captureBuffer.getResult();
 		captureBuffer = null; // Done with object, don't need to hold long-term reference
+		assert captureBuffer == null; // Avoid NetBeans "unused" warning
 
 		MediaType myOutputType = getOutputType();
 		if(myOutputType == null) {
@@ -280,6 +281,7 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 	 * Sets the media encoder options.  This is how subclass tag attributes
 	 * can effect the encoding.
 	 */
+	@SuppressWarnings("NoopMethodInAbstractClass")
 	protected void setMediaEncoderOptions(MediaEncoder mediaEncoder) {
 	}
 
@@ -290,6 +292,7 @@ public abstract class AutoEncodingBufferedTag extends SimpleTagSupport {
 	/**
 	 * Once the data is captured, this is called.
 	 */
+	@SuppressWarnings("NoopMethodInAbstractClass")
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 		// Do nothing by default
 	}

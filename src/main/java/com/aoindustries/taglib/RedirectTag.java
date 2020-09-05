@@ -30,7 +30,6 @@ import com.aoindustries.servlet.lastmodified.LastModifiedUtil;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.util.WildcardPatternMatcher;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.Locale;
 import java.util.Map;
 import java.util.logging.Level;

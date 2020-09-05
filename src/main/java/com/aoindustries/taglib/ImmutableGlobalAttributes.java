@@ -114,6 +114,7 @@ public class ImmutableGlobalAttributes implements GlobalAttributes {
 	}
 
 	@Override
+	@SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
 	public Map<String,Object> getData() {
 		return data;
 	}

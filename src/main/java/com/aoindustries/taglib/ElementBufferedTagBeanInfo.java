@@ -33,6 +33,7 @@ import java.beans.SimpleBeanInfo;
  */
 public class ElementBufferedTagBeanInfo extends SimpleBeanInfo {
 
+	@SuppressWarnings("VolatileArrayField")
 	private static volatile PropertyDescriptor[] properties;
 
 	@Override
