@@ -23,6 +23,7 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
+import java.lang.reflect.InvocationTargetException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 
@@ -61,6 +62,7 @@ public class PropertyUtils {
 	 *
 	 * @return  the resolved <code>Object</code> or <code>null</code> if not found.
 	 */
+	@SuppressWarnings({"UseSpecificCatch", "TooBroadCatch"})
 	public static Object findObject(PageContext pageContext, String scope, String name, String property, boolean beanRequired, boolean valueRequired) throws JspTagException {
 		try {
 			// Check the name
@@ -96,8 +98,16 @@ public class PropertyUtils {
 					return value;
 				}
 			}
-		} catch(ReflectiveOperationException err) {
-			throw new JspTagException(err);
+		} catch(InvocationTargetException e) {
+			Throwable cause = e.getCause();
+			if(cause instanceof Error) throw (Error)cause;
+			if(cause instanceof RuntimeException) throw (RuntimeException)cause;
+			if(cause instanceof JspTagException) throw (JspTagException)cause;
+			throw new JspTagException(cause == null ? e : cause);
+		} catch(Error | RuntimeException | JspTagException e) {
+			throw e;
+		} catch(Throwable t) {
+			throw new JspTagException(t);
 		}
 	}
 }

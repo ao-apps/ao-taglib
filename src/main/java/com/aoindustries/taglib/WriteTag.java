@@ -33,6 +33,7 @@ import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
@@ -97,6 +98,7 @@ public class WriteTag
 	private Object value;
 
 	@Override
+	@SuppressWarnings({"UseSpecificCatch", "TooBroadCatch"})
 	protected void writePrefix(MediaType containerType, Writer out) throws JspTagException, IOException {
 		try {
 			if(name == null) throw new AttributeRequiredException("name");
@@ -170,8 +172,17 @@ public class WriteTag
 					}
 				}
 			}
-		} catch(ReflectiveOperationException err) {
-			throw new JspTagException(err);
+		} catch(InvocationTargetException e) {
+			Throwable cause = e.getCause();
+			if(cause instanceof Error) throw (Error)cause;
+			if(cause instanceof RuntimeException) throw (RuntimeException)cause;
+			if(cause instanceof JspTagException) throw (JspTagException)cause;
+			if(cause instanceof IOException) throw (IOException)cause;
+			throw new JspTagException(cause == null ? e : cause);
+		} catch(Error | RuntimeException | JspTagException | IOException e) {
+			throw e;
+		} catch(Throwable t) {
+			throw new JspTagException(t);
 		}
 	}
 
