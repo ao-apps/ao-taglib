@@ -22,6 +22,7 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.lang.Throwables;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import java.lang.reflect.InvocationTargetException;
 import javax.servlet.jsp.JspTagException;
@@ -89,25 +90,23 @@ public class PropertyUtils {
 					return bean;
 				} else {
 					// Find the property
-					Object value = org.apache.commons.beanutils.PropertyUtils.getProperty(bean, property);
-					if(valueRequired && value==null) {
-						// null and required
-						if(scope==null) throw new LocalizedJspTagException(ApplicationResources.accessor, "PropertyUtils.value.required.nullScope", property, name);
-						else throw new LocalizedJspTagException(ApplicationResources.accessor, "PropertyUtils.value.required.scope", property, name, scope);
+					try {
+						Object value = org.apache.commons.beanutils.PropertyUtils.getProperty(bean, property);
+						if(valueRequired && value==null) {
+							// null and required
+							if(scope==null) throw new LocalizedJspTagException(ApplicationResources.accessor, "PropertyUtils.value.required.nullScope", property, name);
+							else throw new LocalizedJspTagException(ApplicationResources.accessor, "PropertyUtils.value.required.scope", property, name, scope);
+						}
+						return value;
+					} catch(InvocationTargetException e) {
+						// Unwrap cause for more direct stack traces
+						Throwable cause = e.getCause();
+						throw (cause == null) ? e : cause;
 					}
-					return value;
 				}
 			}
-		} catch(InvocationTargetException e) {
-			Throwable cause = e.getCause();
-			if(cause instanceof Error) throw (Error)cause;
-			if(cause instanceof RuntimeException) throw (RuntimeException)cause;
-			if(cause instanceof JspTagException) throw (JspTagException)cause;
-			throw new JspTagException(cause == null ? e : cause);
-		} catch(Error | RuntimeException | JspTagException e) {
-			throw e;
 		} catch(Throwable t) {
-			throw new JspTagException(t);
+			throw Throwables.wrap(t, JspTagException.class, JspTagException::new);
 		}
 	}
 }

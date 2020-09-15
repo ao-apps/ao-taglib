@@ -26,6 +26,7 @@ import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.io.Writable;
 import com.aoindustries.lang.Strings;
+import com.aoindustries.lang.Throwables;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.util.i18n.BundleLookupMarkup;
 import com.aoindustries.util.i18n.BundleLookupThreadContext;
@@ -169,20 +170,16 @@ public class WriteTag
 						}
 					} catch(NoSuchMethodException err) {
 						throw new LocalizedJspTagException(ApplicationResources.accessor, "WriteTag.unableToFindMethod", method);
+					} catch(InvocationTargetException e) {
+						// Unwrap cause for more direct stack traces
+						Throwable cause = e.getCause();
+						throw (cause == null) ? e : cause;
 					}
 				}
 			}
-		} catch(InvocationTargetException e) {
-			Throwable cause = e.getCause();
-			if(cause instanceof Error) throw (Error)cause;
-			if(cause instanceof RuntimeException) throw (RuntimeException)cause;
-			if(cause instanceof JspTagException) throw (JspTagException)cause;
-			if(cause instanceof IOException) throw (IOException)cause;
-			throw new JspTagException(cause == null ? e : cause);
-		} catch(Error | RuntimeException | JspTagException | IOException e) {
-			throw e;
 		} catch(Throwable t) {
-			throw new JspTagException(t);
+			if(t instanceof IOException) throw (IOException)t;
+			throw Throwables.wrap(t, JspTagException.class, JspTagException::new);
 		}
 	}
 
