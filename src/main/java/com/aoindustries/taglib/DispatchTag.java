@@ -22,6 +22,7 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.collections.AoCollections;
 import com.aoindustries.io.NullWriter;
 import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URIParameters;
@@ -35,7 +36,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.RequestDispatcher;
@@ -109,12 +109,7 @@ abstract public class DispatchTag
 			newMap = params.getParameterMap();
 		}
 		if(oldMap==null) oldMap = request.getParameterMap();
-		Map<String,String[]> newParameters = new LinkedHashMap<>(
-			(
-				newMap.size()
-				+ oldMap.size()
-			)*4/3+1
-		);
+		Map<String,String[]> newParameters = AoCollections.newLinkedHashMap(newMap.size() + oldMap.size());
 		for(Map.Entry<String,List<String>> entry : newMap.entrySet()) {
 			String name = entry.getKey();
 			List<String> newValues = entry.getValue();
