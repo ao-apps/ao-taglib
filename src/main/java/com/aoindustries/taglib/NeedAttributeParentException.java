@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2012, 2013, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2012, 2013, 2016, 2017, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,8 +22,8 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.lang.Throwables;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
-import static com.aoindustries.taglib.ApplicationResources.accessor;
 
 /**
  * @author  AO Industries, Inc.
@@ -36,7 +36,7 @@ public class NeedAttributeParentException extends LocalizedJspTagException {
 	private final String attribute;
 
 	public NeedAttributeParentException(String fromTagName, String attribute) {
-		super(accessor, "NeedAttributeParent.message", fromTagName, attribute);
+		super(ApplicationResources.accessor, "NeedAttributeParent.message", fromTagName, attribute);
 		this.fromTagName = fromTagName;
 		this.attribute = attribute;
 	}
@@ -47,5 +47,13 @@ public class NeedAttributeParentException extends LocalizedJspTagException {
 
 	public String getAttribute() {
 		return attribute;
+	}
+
+	static {
+		Throwables.registerSurrogateFactory(NeedAttributeParentException.class, (template, cause) -> {
+			NeedAttributeParentException newEx = new NeedAttributeParentException(template.fromTagName, template.attribute);
+			newEx.initCause(cause);
+			return newEx;
+		});
 	}
 }

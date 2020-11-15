@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2020-08-05T23:08:36-05:00"
+		dateModified="2020-11-16T19:28:31-06:00"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -98,6 +98,18 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 					<li>
 						<core:link page="ao.tld/tag-textarea" /> no longer requires <code>cols</code> and
 						<code>rows</code> attributes.
+					</li>
+					<li>
+						<p>
+							Now registering exception types for use with <code>Throwables.newSurrogate(…)</code> that supports creating new instances
+							of throwables in order to have caller stack trace.  When wrapped, the original throwable is the
+							cause of the new throwable.  When not wrapped, the original throwable is used directly and
+							caller stack trace is lost.
+						</p>
+						<p>
+							This is used to maintain exception types and states across thread boundaries, such as when an exception cause
+							is obtained from an <code>ExecutionException</code>.
+						</p>
 					</li>
 				</ul>
 				<!-- TODO:
