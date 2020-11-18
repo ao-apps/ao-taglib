@@ -21,4 +21,4 @@
 # along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-com.aoindustries.taglib.JavaeeWebSetStackTraceInitializer
+com.aoindustries.taglib.JavaeeWebSurrogateFactoryInitializer

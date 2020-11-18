@@ -30,9 +30,9 @@ import com.aoindustries.lang.Throwables;
  *
  * @author  AO Industries, Inc.
  *
- * @see  com.aoindustries.servlet.JavaeeWebSetStackTraceInitializer
+ * @see  com.aoindustries.servlet.JavaeeWebSurrogateFactoryInitializer
  */
-public class JavaeeWebSetStackTraceInitializer implements ThrowableSurrogateFactoryInitializer {
+public class JavaeeWebSurrogateFactoryInitializer implements ThrowableSurrogateFactoryInitializer {
 
 	@Override
 	@SuppressWarnings("deprecation")
