@@ -39,7 +39,7 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
-public class BaseTag extends ElementNullTag {
+public class BaseTag extends ElementNullSimpleTag {
 
 	@Override
 	public MediaType getOutputType() {

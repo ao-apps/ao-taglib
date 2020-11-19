@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2011, 2012, 2013, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2016, 2017, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -23,6 +23,7 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
+import com.aoindustries.encoding.taglib.EncodingNullSimpleTag;
 import com.aoindustries.util.i18n.EditableResourceBundle;
 import java.io.IOException;
 import java.io.Writer;
@@ -31,7 +32,7 @@ import javax.servlet.jsp.JspTagException;
 /**
  * Disables the resource editor.
  */
-public class DisableResourceEditorTag extends AutoEncodingNullTag {
+public class DisableResourceEditorTag extends EncodingNullSimpleTag {
 
 	/**
 	 * No output.

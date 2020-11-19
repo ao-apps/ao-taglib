@@ -41,7 +41,7 @@ import javax.servlet.jsp.PageContext;
  * @author  AO Industries, Inc.
  */
 public class ImgTag
-	extends ElementBufferedTag
+	extends ElementBufferedSimpleTag
 	implements
 		SrcAttribute,
 		ParamsAttribute,

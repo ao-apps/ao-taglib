@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2012, 2014, 2015, 2016, 2017, 2019  AO Industries, Inc.
+ * Copyright (C) 2012, 2014, 2015, 2016, 2017, 2019, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -23,6 +23,7 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
+import com.aoindustries.encoding.taglib.EncodingBufferedSimpleTag;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.servlet.ServletUtil;
 import com.aoindustries.servlet.http.Includer;
@@ -36,7 +37,7 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
-public class SendErrorTag extends AutoEncodingBufferedTag {
+public class SendErrorTag extends EncodingBufferedSimpleTag {
 
 	private int status;
 	private String message;

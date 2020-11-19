@@ -31,7 +31,7 @@ import java.beans.SimpleBeanInfo;
 /**
  * @author  AO Industries, Inc.
  */
-public class ElementFilteredTagBeanInfo extends SimpleBeanInfo {
+public class ElementBufferedSimpleTagBeanInfo extends SimpleBeanInfo {
 
 	@SuppressWarnings("VolatileArrayField")
 	private static volatile PropertyDescriptor[] properties;
@@ -42,11 +42,11 @@ public class ElementFilteredTagBeanInfo extends SimpleBeanInfo {
 			PropertyDescriptor[] props = properties;
 			if(props == null) {
 				props = new PropertyDescriptor[] {
-					new PropertyDescriptor("id",    ElementFilteredTag.class, "getId",    "setId"),
-					new PropertyDescriptor("class", ElementFilteredTag.class, "getClazz", "setClazz"),
-					new PropertyDescriptor("data",  ElementFilteredTag.class, "getData",  null),
-					new PropertyDescriptor("dir",   ElementFilteredTag.class, "getDir",   "setDir"),
-					new PropertyDescriptor("style", ElementFilteredTag.class, "getStyle", "setStyle"),
+					new PropertyDescriptor("id",    ElementBufferedSimpleTag.class, "getId",    "setId"),
+					new PropertyDescriptor("class", ElementBufferedSimpleTag.class, "getClazz", "setClazz"),
+					new PropertyDescriptor("data" , ElementBufferedSimpleTag.class, "getData",  "setData"),
+					new PropertyDescriptor("dir",   ElementBufferedSimpleTag.class, "getDir",   "setDir"),
+					new PropertyDescriptor("style", ElementBufferedSimpleTag.class, "getStyle", "setStyle"),
 				};
 				properties = props;
 			}
@@ -63,7 +63,7 @@ public class ElementFilteredTagBeanInfo extends SimpleBeanInfo {
 	public BeanInfo[] getAdditionalBeanInfo() {
 		try {
 			return new BeanInfo[] {
-				Introspector.getBeanInfo(ElementFilteredTag.class.getSuperclass())
+				Introspector.getBeanInfo(ElementBufferedSimpleTag.class.getSuperclass())
 			};
 		} catch(IntrospectionException err) {
 			throw new AssertionError(err);

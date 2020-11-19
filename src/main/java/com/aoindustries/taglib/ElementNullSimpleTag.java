@@ -22,6 +22,7 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.encoding.taglib.EncodingNullSimpleTag;
 import com.aoindustries.html.Attributes.Global;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,12 +31,12 @@ import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
- * Implements {@linkplain Global global attributes} on {@link AutoEncodingNullTag}.
+ * Implements {@linkplain Global global attributes} on {@link EncodingNullSimpleTag}.
  *
  * @author  AO Industries, Inc.
  */
-abstract public class ElementNullTag
-	extends AutoEncodingNullTag
+abstract public class ElementNullSimpleTag
+	extends EncodingNullSimpleTag
 	implements
 		GlobalBufferedAttributes,
 		DynamicAttributes

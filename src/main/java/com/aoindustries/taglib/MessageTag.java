@@ -23,6 +23,7 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
+import com.aoindustries.encoding.taglib.EncodingNullSimpleTag;
 import com.aoindustries.lang.Strings;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
@@ -43,7 +44,7 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  * @author  AO Industries, Inc.
  */
 public class MessageTag
-	extends AutoEncodingNullTag
+	extends EncodingNullSimpleTag
 	implements
 		DynamicAttributes,
 		TypeAttribute,

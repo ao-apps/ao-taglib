@@ -22,6 +22,7 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.encoding.taglib.EncodingBufferedBodyTag;
 import com.aoindustries.html.Attributes.Global;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,12 +31,12 @@ import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
- * Implements {@linkplain Global global attributes} on {@link AutoEncodingBufferedBodyTag}.
+ * Implements {@linkplain Global global attributes} on {@link EncodingBufferedBodyTag}.
  *
  * @author  AO Industries, Inc.
  */
 abstract public class ElementBufferedBodyTag
-	extends AutoEncodingBufferedBodyTag
+	extends EncodingBufferedBodyTag
 	implements
 		GlobalBufferedAttributes,
 		DynamicAttributes

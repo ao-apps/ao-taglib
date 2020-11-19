@@ -46,7 +46,7 @@ import javax.servlet.jsp.PageContext;
  * @author  AO Industries, Inc.
  */
 public class AreaTag
-	extends ElementNullTag
+	extends ElementNullSimpleTag
 	implements
 		HrefAttribute,
 		ParamsAttribute,

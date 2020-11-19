@@ -31,7 +31,7 @@ import javax.servlet.jsp.JspException;
 /**
  * @author  AO Industries, Inc.
  */
-public class MapTag extends ElementFilteredTag {
+public class MapTag extends ElementFilteredSimpleTag {
 
 	@Override
 	public MediaType getContentType() {

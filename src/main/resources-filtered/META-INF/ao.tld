@@ -3001,21 +3001,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
-		<!-- datePublished="2018-05-28T20:11:52-0500" -->
-		<description><![CDATA[
-			<p class="semanticcms-tag-reference-summary">
-				Manually establishes a MySQL context when automatic detection is not possible.
-				The body of this tag is valid for the MySQL command line "mysql".
-			</p>
-			<p>
-				The content type of this tag is <code>text/x+mysql</code>.
-			</p>
-		]]></description>
-		<name>mysql</name>
-		<tag-class>com.aoindustries.taglib.MysqlTag</tag-class>
-		<body-content>scriptless</body-content>
-	</tag>
-	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
 		<!-- dateModified="2019-10-09T00:34:45-0500" -->
 		<description><![CDATA[
@@ -3232,7 +3217,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-03-26T22:27:21-05:00" -->
+		<!-- dateModified="2020-11-18T11:39:31-06:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Writes the value with proper escaping based on the context of the tag.
@@ -3262,10 +3247,15 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<li><code>psql</code> or <code>text/x+psql</code> - must be valid for the PostgreSQL command line "psql"</li>
 				<li><code>sh</code> or <code>text/x+sh</code> - must be valid shell script</li>
 			</ul>
+			<p>
+				This is compatible with <a href="https://aoindustries.com/ao-encoding/taglib/ao-encoding.tld/tag-out">&lt;encoding:out&gt;</a>,
+				with the addition of allowing nested <a href="@{project.url}ao.tld/tag-value">&lt;ao:value&gt;</a> and
+				<a href="@{project.url}ao.tld/tag-type">&lt;ao:type&gt;</a> tags.
+			</p>
 		]]></description>
 		<name>out</name>
 		<tag-class>com.aoindustries.taglib.OutTag</tag-class>
-		<tei-class>com.aoindustries.taglib.OutTagTEI</tei-class>
+		<tei-class>com.aoindustries.encoding.taglib.OutTagTEI</tei-class>
 		<body-content>scriptless</body-content>
 		<attribute>
 			<description><![CDATA[
@@ -3478,21 +3468,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Object</type>
 		</attribute>
-	</tag>
-	<tag>
-		<!-- datePublished="2018-05-28T20:11:52-0500" -->
-		<description><![CDATA[
-			<p class="semanticcms-tag-reference-summary">
-				Manually establishes a PostgreSQL context when automatic detection is not possible.
-				The body of this tag is valid for the PostgreSQL command line "psql".
-			</p>
-			<p>
-				The content type of this tag is <code>text/x+psql</code>.
-			</p>
-		]]></description>
-		<name>psql</name>
-		<tag-class>com.aoindustries.taglib.PsqlTag</tag-class>
-		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
@@ -3753,7 +3728,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-07-31T16:08:29-05:00" -->
+		<!-- dateModified="2020-11-18T11:39:31-06:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Manually establishes a <a href="https://www.w3schools.com/tags/tag_script.asp">script context</a> when automatic detection is not possible.
@@ -3795,6 +3770,14 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				or <a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a>
 				tags will add parameters after any provided as attributes.
 			</p>
+			<p>
+				For simpler scenarios, the following tags are simplier alternatives:
+			</p>
+			<ul>
+				<li><a href="https://aoindustries.com/ao-encoding/taglib/ao-encoding.tld/tag-javascript">&lt;encoding:javascript&gt;</a></li>
+				<li><a href="https://aoindustries.com/ao-encoding/taglib/ao-encoding.tld/tag-json">&lt;encoding:json&gt;</a></li>
+				<li><a href="https://aoindustries.com/ao-encoding/taglib/ao-encoding.tld/tag-ldJson">&lt;encoding:ldJson&gt;</a></li>
+			</ul>
 		]]></description>
 		<name>script</name>
 		<tag-class>com.aoindustries.taglib.ScriptTag</tag-class>
@@ -4087,21 +4070,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</attribute>
 	</tag>
 	<tag>
-		<!-- datePublished="2018-05-28T20:11:52-0500" -->
-		<description><![CDATA[
-			<p class="semanticcms-tag-reference-summary">
-				Manually establishes a shell script context when automatic detection is not possible.
-				The body of this tag is a valid shell script.
-			</p>
-			<p>
-				The content type of this tag is <code>text/x+sh</code>.
-			</p>
-		]]></description>
-		<name>sh</name>
-		<tag-class>com.aoindustries.taglib.ShTag</tag-class>
-		<body-content>scriptless</body-content>
-	</tag>
-	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
 		<!-- dateModified="2019-10-09T00:34:45-0500" -->
 		<description><![CDATA[
@@ -4173,40 +4141,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		]]></description>
 		<name>target</name>
 		<tag-class>com.aoindustries.taglib.TargetTag</tag-class>
-		<body-content>scriptless</body-content>
-	</tag>
-	<tag>
-		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2016-11-08T00:26:39-0600" -->
-		<description><![CDATA[
-			<p class="semanticcms-tag-reference-summary">
-				Manually establishes a plaintext context when automatic detection is not possible.
-				The body of this tag contains any arbitary plain text.
-			</p>
-			<p>
-				In some contexts, such as contained in a JavaScript string, this may be binary transparent.
-			</p>
-			<p>
-				In other contexts, it may result in an error when a character may not
-				be encoded to the container's system.  An example would be a NULL character
-				in an XML document.
-			</p>
-			<p>
-				End of line conversions may also occur in some contexts.
-			</p>
-			<p>
-				When contained in JavaScript, this will automatically be surrounded by
-				double quotes and will be binary transparent through \uxxxx escape codes.
-				The double quotes are automatically added to clearly separate data from
-				code.  Please note that this auto-quoting applies to all forms of data in
-				all tags, not just this text tag.
-			</p>
-			<p>
-				The content type of this tag <code>text/plain</code>.
-			</p>
-		]]></description>
-		<name>text</name>
-		<tag-class>com.aoindustries.taglib.TextTag</tag-class>
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
@@ -4592,43 +4526,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<type>java.lang.String</type>
 		</attribute>
 	</tag>
-	<tag>
-		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2016-11-08T00:26:39-0600" -->
-		<description><![CDATA[
-			<p class="semanticcms-tag-reference-summary">
-				Manually establishes an XHTML attribute context when automatic detection is not possible.
-				The body of this tag contains well-formed XHTML 1.0-compliant attribute.
-			</p>
-			<p>
-				The content type of this tag is <code>application/xhtml+xml+attribute</code>.
-			</p>
-		]]></description>
-		<name>xhtmlAttribute</name>
-		<tag-class>com.aoindustries.taglib.XhtmlAttributeTag</tag-class>
-		<body-content>scriptless</body-content>
-	</tag>
-	<tag>
-		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2016-11-08T00:26:39-0600" -->
-		<description><![CDATA[
-			<p class="semanticcms-tag-reference-summary">
-				Manually establishes an XHTML context when automatic detection is not possible.
-				The body of this tag contains well-formed XHTML 1.0-compliant markup.
-			</p>
-			<p>
-				The content type of this tag is <code>application/xhtml+xml</code>.
-			</p>
-			<p>
-				Note: For performance, this implementation currently only checks character
-				values.  This ensures that no encodings are violated and overall XML validation
-				by the browser should catch problems.
-			</p>
-		]]></description>
-		<name>xhtml</name>
-		<tag-class>com.aoindustries.taglib.XhtmlTag</tag-class>
-		<body-content>scriptless</body-content>
-	</tag>
 	<function>
 		<!-- datePublished="2016-10-26T03:33:31-0500" -->
 		<!-- dateModified="2016-11-08T02:37:29-0600" -->
@@ -4795,32 +4692,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<function-class>com.aoindustries.taglib.Functions</function-class>
 		<function-signature>java.lang.String getDecimalTimeLength(java.lang.Long)</function-signature>
 		<example><![CDATA[<code>${ao:getDecimalTimeLength(timeSpan)}</code>]]></example>
-	</function>
-	<function>
-		<!-- datePublished="2019-10-23T06:32:37-0500" -->
-		<!-- dateModified="2020-05-30T02:29:24-05:00" -->
-		<description><![CDATA[
-			<p>
-				Gets the current <a href="https://aoindustries.com/ao-encoding/apidocs/com/aoindustries/encoding/Doctype.html">Doctype</a>.
-			</p>
-		]]></description>
-		<name>getDoctype</name>
-		<function-class>com.aoindustries.taglib.Functions</function-class>
-		<function-signature>com.aoindustries.encoding.Doctype getDoctype()</function-signature>
-		<example><![CDATA[<code>${ao:getDoctype()}</code>]]></example>
-	</function>
-	<function>
-		<!-- datePublished="2019-10-23T06:32:37-0500" -->
-		<!-- dateModified="2020-05-30T02:29:24-05:00" -->
-		<description><![CDATA[
-			<p>
-				Gets the current <a href="https://aoindustries.com/ao-encoding/apidocs/com/aoindustries/encoding/Serialization.html">Serialization</a>.
-			</p>
-		]]></description>
-		<name>getSerialization</name>
-		<function-class>com.aoindustries.taglib.Functions</function-class>
-		<function-signature>com.aoindustries.encoding.Serialization getSerialization()</function-signature>
-		<example><![CDATA[<code>${ao:getSerialization()}</code>]]></example>
 	</function>
 	<function>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->

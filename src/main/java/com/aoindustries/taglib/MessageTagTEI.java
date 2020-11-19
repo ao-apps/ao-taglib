@@ -38,7 +38,7 @@ public class MessageTagTEI extends TagExtraInfo {
 	@Override
 	public ValidationMessage[] validate(TagData data) {
 		List<ValidationMessage> messages = MinimalList.emptyList();
-		messages = TeiUtils.validateMediaType(data, messages);
+		messages = com.aoindustries.encoding.taglib.TeiUtils.validateMediaType(data, messages);
 
 		// Currently, in servlet 2.5 Tomcat 7, the dynamic attributes are not given to the TagExtraInfo class for validation.
 		// Leaving this logic here just in case a future version of the spec supports this for compile-time validation of attribute names.
@@ -47,7 +47,8 @@ public class MessageTagTEI extends TagExtraInfo {
 			String attributeName = attributeNames.nextElement();
 			if(
 				// Standard attribute names
-				!"key".equals(attributeName)
+				!"bundle".equals(attributeName)
+				&& !"key".equals(attributeName)
 				&& !"type".equals(attributeName)
 			) {
 				// Dynamic "arg#" attributes (along with arg0 through arg3 that are standard for code assist only)

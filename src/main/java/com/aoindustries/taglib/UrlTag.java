@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2016, 2017, 2019  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2016, 2017, 2019, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -23,6 +23,7 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
+import com.aoindustries.encoding.taglib.EncodingBufferedSimpleTag;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URI;
@@ -33,11 +34,11 @@ import javax.servlet.jsp.JspTagException;
 
 /**
  * TODO: Have absolute option, canonical and lastModified, too?
- * TODO: Replace uses of ao:text with this as it is now more appropriate for sending dynamic parameters to JavaScript since it calls encodeURL.
+ * TODO: Replace uses of encoding:text with this as it is now more appropriate for sending dynamic parameters to JavaScript since it calls encodeURL.
  *
  * @author  AO Industries, Inc.
  */
-public class UrlTag extends AutoEncodingBufferedTag implements ParamsAttribute {
+public class UrlTag extends EncodingBufferedSimpleTag implements ParamsAttribute {
 
 	private MutableURIParameters params;
 

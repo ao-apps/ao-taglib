@@ -34,7 +34,7 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
-public class BrTag extends ElementNullTag {
+public class BrTag extends ElementNullSimpleTag {
 
 	@Override
 	public MediaType getOutputType() {

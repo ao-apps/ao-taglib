@@ -46,7 +46,7 @@ import javax.servlet.jsp.tagext.JspTag;
  * @author  AO Industries, Inc.
  */
 public class LinkTag
-	extends ElementNullTag
+	extends ElementNullSimpleTag
 	implements
 		HrefAttribute,
 		ParamsAttribute,

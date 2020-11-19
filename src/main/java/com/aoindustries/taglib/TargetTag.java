@@ -23,6 +23,7 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
+import com.aoindustries.encoding.taglib.EncodingBufferedSimpleTag;
 import com.aoindustries.io.buffer.BufferResult;
 import java.io.IOException;
 import java.io.Writer;
@@ -31,7 +32,7 @@ import javax.servlet.jsp.JspTagException;
 /**
  * @author  AO Industries, Inc.
  */
-public class TargetTag extends AutoEncodingBufferedTag {
+public class TargetTag extends EncodingBufferedSimpleTag {
 
 	@Override
 	public MediaType getContentType() {

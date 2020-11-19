@@ -24,6 +24,7 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaType;
+import com.aoindustries.encoding.taglib.EncodingNullSimpleTag;
 import com.aoindustries.net.URIParameters;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.util.WildcardPatternMatcher;
@@ -39,7 +40,7 @@ import javax.servlet.jsp.JspTagException;
  * @author  AO Industries, Inc.
  */
 public class ParamsTag
-	extends AutoEncodingNullTag
+	extends EncodingNullSimpleTag
 	implements NameAttribute
 {
 

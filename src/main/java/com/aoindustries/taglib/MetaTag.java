@@ -40,7 +40,7 @@ import javax.servlet.jsp.tagext.JspTag;
  * @author  AO Industries, Inc.
  */
 public class MetaTag
-	extends ElementBufferedTag
+	extends ElementBufferedSimpleTag
 	implements
 		NameAttribute,
 		ContentAttribute

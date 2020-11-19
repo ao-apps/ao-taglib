@@ -22,6 +22,7 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.encoding.taglib.EncodingBufferedSimpleTag;
 import com.aoindustries.html.Attributes.Global;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,14 +31,14 @@ import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
- * Implements {@linkplain Global global attributes} on {@link AutoEncodingFilteredTag}.
+ * Implements {@linkplain Global global attributes} on {@link EncodingBufferedSimpleTag}.
  *
  * @author  AO Industries, Inc.
  */
-abstract public class ElementFilteredTag
-	extends AutoEncodingFilteredTag
+abstract public class ElementBufferedSimpleTag
+	extends EncodingBufferedSimpleTag
 	implements
-		GlobalAttributes,
+		GlobalBufferedAttributes,
 		DynamicAttributes
 {
 
@@ -47,6 +48,7 @@ abstract public class ElementFilteredTag
 	public String getId() {
 		return global.getId();
 	}
+	@Override
 	public void setId(String id) throws JspTagException {
 		global.setId(id);
 		// TODO: Validate, and TEI
@@ -56,6 +58,7 @@ abstract public class ElementFilteredTag
 	public String getClazz() {
 		return global.getClazz();
 	}
+	@Override
 	public void setClazz(String clazz) throws JspTagException {
 		global.setClazz(clazz);
 	}
@@ -64,11 +67,20 @@ abstract public class ElementFilteredTag
 	public Map<String,Object> getData() {
 		return global.getData();
 	}
+	@Override
+	public void setData(Map<? extends String,?> data) throws JspTagException {
+		global.setData(data);
+	}
+	@Override
+	public void addData(String attrName, Object value) throws JspTagException {
+		global.addData(attrName, value);
+	}
 
 	@Override
 	public String getDir() {
 		return global.getDir();
 	}
+	@Override
 	public void setDir(String dir) throws JspTagException {
 		global.setDir(dir);
 	}
@@ -77,6 +89,7 @@ abstract public class ElementFilteredTag
 	public Object getStyle() {
 		return global.getStyle();
 	}
+	@Override
 	public void setStyle(Object style) throws JspTagException {
 		global.setStyle(style);
 	}

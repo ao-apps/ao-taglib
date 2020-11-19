@@ -36,7 +36,7 @@ public class WriteTagTEI extends TagExtraInfo {
 	@Override
 	public ValidationMessage[] validate(TagData data) {
 		List<ValidationMessage> messages = MinimalList.emptyList();
-		messages = TeiUtils.validateMediaType(data, messages);
+		messages = com.aoindustries.encoding.taglib.TeiUtils.validateMediaType(data, messages);
 		messages = TeiUtils.validateScope(data, messages);
 		return messages.isEmpty() ? null : messages.toArray(new ValidationMessage[messages.size()]);
 	}

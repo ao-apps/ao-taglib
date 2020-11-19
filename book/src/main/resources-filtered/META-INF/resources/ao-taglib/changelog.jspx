@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2020-11-16T19:28:31-06:00"
+		dateModified="2020-11-19T06:04:20-06:00"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -228,10 +228,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 				<li>New tag <core:link page="ao.tld/tag-br" /> that writes a line break in the current serialization.</li>
 				<li>New tag <core:link page="ao.tld/tag-hr" /> that writes a thematic break (horizontal rule) in the current serialization.</li>
 				<li>
-					New function <core:link page="ao.tld/function-getSerialization" /> to get the current
+					New function <core:link book="/ao-encoding/taglib" page="/ao-encoding.tld/function-getSerialization" /> to get the current
 					<ao:a href="https://aoindustries.com/ao-encoding/com/aoindustries/encoding/Serialization.html">Serialization</ao:a> enum.</li>
 				<li>
-					New function <core:link page="ao.tld/function-getDoctype" /> to get the current
+					New function <core:link book="/ao-encoding/taglib" page="/ao-encoding.tld/function-getDoctype" /> to get the current
 					<ao:a href="https://aoindustries.com/ao-encoding/com/aoindustries/encoding/Doctype.html">Doctype</ao:a> enum.
 				</li>
 				<li>Added in-context translation markup to script attributes, like <code>onload</code>.</li>
@@ -409,9 +409,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 				<li>
 					New tags for encoding in additional contexts:
 					<ul>
-						<li><core:link page="ao.tld/tag-mysql" /> - must be valid for the MySQL command line "mysql"</li>
-						<li><core:link page="ao.tld/tag-psql" /> - must be valid for the PostgreSQL command line "psql"</li>
-						<li><core:link page="ao.tld/tag-sh" /> - must be valid shell script</li>
+						<li><core:link book="/ao-encoding/taglib" page="/ao-encoding.tld/tag-mysql" /> - must be valid for the MySQL command line "mysql"</li>
+						<li><core:link book="/ao-encoding/taglib" page="/ao-encoding.tld/tag-psql" /> - must be valid for the PostgreSQL command line "psql"</li>
+						<li><core:link book="/ao-encoding/taglib" page="/ao-encoding.tld/tag-sh" /> - must be valid shell script</li>
 					</ul>
 				</li>
 			</ul>

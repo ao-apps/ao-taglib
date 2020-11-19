@@ -22,10 +22,6 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.Doctype;
-import com.aoindustries.encoding.Serialization;
-import com.aoindustries.encoding.servlet.DoctypeEE;
-import com.aoindustries.encoding.servlet.SerializationEE;
 import com.aoindustries.lang.NullArgumentException;
 import com.aoindustries.lang.Strings;
 import com.aoindustries.net.URIEncoder;
@@ -127,20 +123,6 @@ final public class Functions {
 		String prefix = bundleTag.getPrefix();
 		return bundleTag.getAccessor().getMessage(
 			prefix==null || prefix.isEmpty() ? key : prefix.concat(key)
-		);
-	}
-
-	public static Serialization getSerialization() {
-		return SerializationEE.get(
-			FunctionContext.getServletContext(),
-			FunctionContext.getRequest()
-		);
-	}
-
-	public static Doctype getDoctype() {
-		return DoctypeEE.get(
-			FunctionContext.getServletContext(),
-			FunctionContext.getRequest()
 		);
 	}
 }

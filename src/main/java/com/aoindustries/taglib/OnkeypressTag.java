@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2010, 2011, 2012, 2013, 2016, 2017, 2019  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2012, 2013, 2016, 2017, 2019, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -23,6 +23,7 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
+import com.aoindustries.encoding.taglib.EncodingBufferedSimpleTag;
 import com.aoindustries.io.buffer.BufferResult;
 import java.io.IOException;
 import java.io.Writer;
@@ -31,7 +32,7 @@ import javax.servlet.jsp.JspTagException;
 /**
  * @author  AO Industries, Inc.
  */
-public class OnkeypressTag extends AutoEncodingBufferedTag {
+public class OnkeypressTag extends EncodingBufferedSimpleTag {
 
 	@Override
 	public MediaType getContentType() {

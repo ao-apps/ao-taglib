@@ -23,6 +23,7 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
+import com.aoindustries.encoding.taglib.EncodingBufferedSimpleTag;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.lang.Strings;
 import java.io.IOException;
@@ -34,7 +35,7 @@ import javax.servlet.jsp.JspTagException;
  *
  * @author  AO Industries, Inc.
  */
-public class WordWrapTag extends AutoEncodingBufferedTag {
+public class WordWrapTag extends EncodingBufferedSimpleTag {
 
 	private int width = 79;
 

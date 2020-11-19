@@ -40,7 +40,7 @@ import javax.servlet.jsp.JspTagException;
  * @author  AO Industries, Inc.
  */
 public class IframeTag
-	extends ElementBufferedTag
+	extends ElementBufferedSimpleTag
 	implements
 		SrcAttribute,
 		ParamsAttribute,
