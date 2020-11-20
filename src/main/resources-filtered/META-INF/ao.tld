@@ -28,7 +28,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 <!ENTITY tld_displayName "@{project.name}">
 <!ENTITY tld_uri "@{project.url}">
 <!ENTITY tld_description "&lt;em&gt;This is the scriptless implementation based on &lt;a rel=&quot;nofollow&quot; href=&quot;@{javadoc.link.javaee}javax/servlet/jsp/tagext/SimpleTagSupport.html&quot;&gt;javax.servlet.jsp.tagext.SimpleTagSupport&lt;/a&gt;.&lt;/em&gt;
-For compatibility with legacy applications that use JSP scriptlets, please use &lt;a href=&quot;@{project.url}&tld;/&quot;&gt;@{project.name} Reference (Legacy)&lt;/a&gt;.">
+For compatibility with legacy applications that use JSP scriptlets, please use &lt;a href=&quot;@{project.url}ao-legacy.tld/&quot;&gt;@{project.name} Reference (Legacy)&lt;/a&gt;.">
 <!ENTITY BodyTag "SimpleTag">
 <!ENTITY JSP "scriptless">
 

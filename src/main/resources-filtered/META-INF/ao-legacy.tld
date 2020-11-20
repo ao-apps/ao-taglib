@@ -28,7 +28,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 <!ENTITY tld_displayName "@{project.name} (Legacy)">
 <!ENTITY tld_uri "@{project.url}legacy">
 <!ENTITY tld_description "&lt;em&gt;This is the legacy implementation for compatibility with applications that use JSP scriptlets.&lt;/em&gt;
-When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}&tld;/&quot;&gt;@{project.name} Reference&lt;/a&gt;.">
+When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}ao.tld/&quot;&gt;@{project.name} Reference&lt;/a&gt;.">
 <!ENTITY BodyTag "BodyTag">
 <!ENTITY JSP "JSP">
 
