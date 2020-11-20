@@ -34,6 +34,7 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
+// TODO: BrBodyTag and BrSimpleTag
 public class BrTag extends ElementNullSimpleTag {
 
 	@Override

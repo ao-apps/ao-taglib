@@ -57,6 +57,7 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
  *
  * @author  AO Industries, Inc.
  */
+// TODO: DispatchBodyTag and DispatchSimpleTag?
 abstract public class DispatchTag
 	extends SimpleTagSupport
 	implements

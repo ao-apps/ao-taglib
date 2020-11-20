@@ -30,6 +30,7 @@ Making JSP be what it should have been all along.
 * [Project Home](https://aoindustries.com/ao-taglib/)
 * [Changelog](https://aoindustries.com/ao-taglib/changelog)
 * [Taglib Reference](https://aoindustries.com/ao-taglib/ao.tld/)
+* [Taglib Reference (Legacy)](https://aoindustries.com/ao-taglib/ao-legacy.tld/)
 * [API Docs](https://aoindustries.com/ao-taglib/apidocs/)
 * [Maven Central Repository](https://search.maven.org/artifact/com.aoindustries/ao-taglib)
 * [GitHub](https://github.com/aoindustries/ao-taglib)

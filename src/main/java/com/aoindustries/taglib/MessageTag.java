@@ -43,6 +43,7 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
 /**
  * @author  AO Industries, Inc.
  */
+// TODO: MessageBodyTag and MessageSimpleTag
 public class MessageTag
 	extends EncodingNullSimpleTag
 	implements

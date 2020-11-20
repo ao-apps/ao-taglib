@@ -23,6 +23,16 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <!DOCTYPE taglib [
 
+<!-- Implementation-specific settings -->
+<!ENTITY tld "ao.tld">
+<!ENTITY tld_displayName "@{project.name}">
+<!ENTITY tld_uri "@{project.url}">
+<!ENTITY tld_description "&lt;em&gt;This is the scriptless implementation based on &lt;a rel=&quot;nofollow&quot; href=&quot;@{javadoc.link.javaee}javax/servlet/jsp/tagext/SimpleTagSupport.html&quot;&gt;javax.servlet.jsp.tagext.SimpleTagSupport&lt;/a&gt;.&lt;/em&gt;
+For compatibility with legacy applications that use JSP scriptlets, please use &lt;a href=&quot;@{project.url}&tld;/&quot;&gt;@{project.name} Reference (Legacy)&lt;/a&gt;.">
+<!ENTITY BodyTag "SimpleTag">
+<!ENTITY JSP "scriptless">
+
+<!-- Everything below this line should be an exact match between both implementations -->
 <!ENTITY IdAttribute_description "The &lt;a href=&quot;https://www.w3schools.com/tags/att_global_id.asp&quot;&gt;id of the element&lt;/a&gt;.">
 <!ENTITY IdAttribute "<attribute>
 			<description>
@@ -37,7 +47,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</attribute>">
 
 <!ENTITY IdBufferedAttribute_description "&IdAttribute_description;
-					A nested &lt;a href=&quot;@{project.url}ao.tld/tag-id&quot;&gt;<![CDATA[&lt;ao:id&gt;]]>&lt;/a&gt;
+					A nested &lt;a href=&quot;@{project.url}&tld;/tag-id&quot;&gt;<![CDATA[&lt;ao:id&gt;]]>&lt;/a&gt;
 					tag will override this value.">
 <!ENTITY IdBufferedAttribute "<attribute>
 			<description>
@@ -65,7 +75,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</attribute>">
 
 <!ENTITY ClassBufferedAttribute_description "&ClassAttribute_description;
-					A nested &lt;a href=&quot;@{project.url}ao.tld/tag-class&quot;&gt;<![CDATA[&lt;ao:class&gt;]]>&lt;/a&gt;
+					A nested &lt;a href=&quot;@{project.url}&tld;/tag-class&quot;&gt;<![CDATA[&lt;ao:class&gt;]]>&lt;/a&gt;
 					tag will override this value.">
 <!ENTITY ClassBufferedAttribute "<attribute>
 			<description>
@@ -93,7 +103,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</attribute>">
 
 <!ENTITY DirBufferedAttribute_description "&DirAttribute_description;
-					A nested &lt;a href=&quot;@{project.url}ao.tld/tag-dir&quot;&gt;<![CDATA[&lt;ao:dir&gt;]]>&lt;/a&gt;
+					A nested &lt;a href=&quot;@{project.url}&tld;/tag-dir&quot;&gt;<![CDATA[&lt;ao:dir&gt;]]>&lt;/a&gt;
 					tag will override this value.">
 <!ENTITY DirBufferedAttribute "<attribute>
 			<description>
@@ -121,7 +131,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		</attribute>">
 
 <!ENTITY StyleBufferedAttribute_description "&StyleAttribute_description;
-					A nested &lt;a href=&quot;@{project.url}ao.tld/tag-style&quot;&gt;<![CDATA[&lt;ao:style&gt;]]>&lt;/a&gt;
+					A nested &lt;a href=&quot;@{project.url}&tld;/tag-style&quot;&gt;<![CDATA[&lt;ao:style&gt;]]>&lt;/a&gt;
 					tag will override this value.">
 <!ENTITY StyleBufferedAttribute "<attribute>
 			<description>
@@ -150,21 +160,23 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
 	version="2.1">
 	<!-- datePublished="2016-08-07T16:29:54-0500" -->
-	<!-- dateModified="2016-11-10T22:19:54-0600" -->
+	<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 	<description><![CDATA[
 		<p>@{description.html}</p>
+		<p>]]>&tld_description;<![CDATA[</p>
+		<p>Both implementations are interoperable and may be used simultaneously under different prefixes.</p>
 	]]></description>
-	<display-name>@{project.name}</display-name>
+	<display-name>&tld_displayName;</display-name>
 	<tlib-version>
 		<!-- Release: @{project.version} -->
 		@{parsedVersion.majorVersion}.@{parsedVersion.minorVersion}.@{parsedVersion.incrementalVersion}
 	</tlib-version>
 	<short-name>ao</short-name>
-	<uri>@{project.url}</uri>
+	<uri>&tld_uri;</uri>
 	<!-- TODO: Implement validator(s), such as ao:when directly inside ao:choose and similar -->
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-08-05T17:48:10-05:00" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_a.asp">&lt;a&gt;</a> tag.
@@ -195,15 +207,15 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				for the parameter value.
 			</p>
 			<p>
-				Nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a> or
-				<a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a> tags will
+				Nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-param">&lt;ao:param&gt;</a> or
+				<a href="@{project.url}]]>&tld;<![CDATA[/tag-params">&lt;ao:params&gt;</a> tags will
 				add parameters after any provided as attributes.
 			</p>
 		]]></description>
 		<name>a</name>
-		<tag-class>com.aoindustries.taglib.ATag</tag-class>
+		<tag-class>com.aoindustries.taglib.A&BodyTag;</tag-class>
 		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
-		<body-content>JSP</body-content>
+		<body-content>&JSP;</body-content>
 		&GlobalBufferedAttributes;
 		<attribute>
 			<description><![CDATA[
@@ -212,13 +224,13 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					The href is modified in several ways to make things much easier to work with.
 				</p>
 				<p>
-					A nested <a href="@{project.url}ao.tld/tag-href">&lt;ao:href&gt;</a> tag will override this value.
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-href">&lt;ao:href&gt;</a> tag will override this value.
 				</p>
 				<p>
 					In order to make relative paths predictable, relative paths are interpreted from
 					the current JSP page, as long as all includes have been done via
-					<a href="@{project.url}ao.tld/tag-include">&lt;ao:include&gt;</a>
-					and any forward via <a href="@{project.url}ao.tld/tag-forward">&lt;ao:forward&gt;</a>.
+					<a href="@{project.url}]]>&tld;<![CDATA[/tag-include">&lt;ao:include&gt;</a>
+					and any forward via <a href="@{project.url}]]>&tld;<![CDATA[/tag-forward">&lt;ao:forward&gt;</a>.
 				</p>
 				<p>
 					In order to keep paths app-relative, if starts with a /, the context path will be
@@ -227,7 +239,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					In order to simplify things behind URL mapping schemes,
 					the href is always written starting with '/'.  This avoids any need to include any
-					<a href="@{project.url}ao.tld/tag-base">&lt;ao:base&gt;</a> tags.
+					<a href="@{project.url}]]>&tld;<![CDATA[/tag-base">&lt;ao:base&gt;</a> tags.
 				</p>
 				<p>
 					URL rewriting is performed as needed via
@@ -239,8 +251,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					To avoid ambiguity, any dynamic parameters or anchors in the URL must have been correctly encoded by the caller.
 				</p>
 				<p>
-					Any directly nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a>
-					or <a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a>
+					Any directly nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-param">&lt;ao:param&gt;</a>
+					or <a href="@{project.url}]]>&tld;<![CDATA[/tag-params">&lt;ao:params&gt;</a>
 					tag will add parameters to the href.
 				</p>
 			]]></description>
@@ -301,7 +313,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_a_hreflang.asp">hreflang for the link</a>.
-					A nested <a href="@{project.url}ao.tld/tag-hreflang">&lt;ao:hreflang&gt;</a> tag will override this value.
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-hreflang">&lt;ao:hreflang&gt;</a> tag will override this value.
 				</p>
 			]]></description>
 			<name>hreflang</name>
@@ -313,7 +325,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_a_rel.asp">rel for the link</a>.
-					A nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:rel&gt;</a> tag will override this value.
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-param">&lt;ao:rel&gt;</a> tag will override this value.
 				</p>
 			]]></description>
 			<name>rel</name>
@@ -325,7 +337,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_a_target.asp">target for the link</a>.
-					A nested <a href="@{project.url}ao.tld/tag-target">&lt;ao:target&gt;</a> tag will override this value.
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-target">&lt;ao:target&gt;</a> tag will override this value.
 				</p>
 			]]></description>
 			<name>target</name>
@@ -337,7 +349,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_global_title.asp">title text for the element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-title">&lt;ao:title&gt;</a> tag will override this value.
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-title">&lt;ao:title&gt;</a> tag will override this value.
 				</p>
 			]]></description>
 			<name>title</name>
@@ -349,7 +361,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_a_type.asp">type for the link</a>.
-					A nested <a href="@{project.url}ao.tld/tag-type">&lt;ao:type&gt;</a> tag will override this value.
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-type">&lt;ao:type&gt;</a> tag will override this value.
 				</p>
 			]]></description>
 			<name>type</name>
@@ -361,7 +373,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					A JavaScript <a href="https://www.w3schools.com/tags/ev_onclick.asp">onclick</a> handler.
-					A nested <a href="@{project.url}ao.tld/tag-onclick">&lt;ao:onclick&gt;</a> tag will override this value.
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-onclick">&lt;ao:onclick&gt;</a> tag will override this value.
 				</p>
 			]]></description>
 			<name>onclick</name>
@@ -373,7 +385,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					A JavaScript <a href="https://www.w3schools.com/tags/ev_onmouseout.asp">onmouseout</a> handler.
-					A nested <a href="@{project.url}ao.tld/tag-onmouseout">&lt;ao:onmouseout&gt;</a> tag will override this value.
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-onmouseout">&lt;ao:onmouseout&gt;</a> tag will override this value.
 				</p>
 			]]></description>
 			<name>onmouseout</name>
@@ -385,7 +397,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					A JavaScript <a href="https://www.w3schools.com/tags/ev_onmouseover.asp">onmouseover</a> handler.
-					A nested <a href="@{project.url}ao.tld/tag-onmouseover">&lt;ao:onmouseover&gt;</a> tag will override this value.
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-onmouseover">&lt;ao:onmouseover&gt;</a> tag will override this value.
 				</p>
 			]]></description>
 			<name>onmouseover</name>
@@ -397,7 +409,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/att_action.asp">action attribute</a> to its
@@ -406,12 +418,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>action</name>
-		<tag-class>com.aoindustries.taglib.ActionTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Action&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/att_alt.asp">alt attribute</a> to its
@@ -420,8 +432,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>alt</name>
-		<tag-class>com.aoindustries.taglib.AltTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Alt&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2019-10-08T21:41:35-0500" -->
@@ -450,8 +462,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				for the parameter value.
 			</p>
 			<p>
-				Nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a> or
-				<a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a> tags will
+				Nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-param">&lt;ao:param&gt;</a> or
+				<a href="@{project.url}]]>&tld;<![CDATA[/tag-params">&lt;ao:params&gt;</a> tags will
 				add parameters after any provided as attributes.
 			</p>
 		]]></description>
@@ -491,13 +503,13 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					The href is modified in several ways to make things much easier to work with.
 				</p>
 				<p>
-					A nested <a href="@{project.url}ao.tld/tag-href">&lt;ao:href&gt;</a> tag will override this value.
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-href">&lt;ao:href&gt;</a> tag will override this value.
 				</p>
 				<p>
 					In order to make relative paths predictable, relative paths are interpreted from
 					the current JSP page, as long as all includes have been done via
-					<a href="@{project.url}ao.tld/tag-include">&lt;ao:include&gt;</a>
-					and any forward via <a href="@{project.url}ao.tld/tag-forward">&lt;ao:forward&gt;</a>.
+					<a href="@{project.url}]]>&tld;<![CDATA[/tag-include">&lt;ao:include&gt;</a>
+					and any forward via <a href="@{project.url}]]>&tld;<![CDATA[/tag-forward">&lt;ao:forward&gt;</a>.
 				</p>
 				<p>
 					In order to keep paths app-relative, if starts with a /, the context path will be
@@ -506,7 +518,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					In order to simplify things behind URL mapping schemes,
 					the href is always written starting with '/'.  This avoids any need to include any
-					<a href="@{project.url}ao.tld/tag-base">&lt;ao:base&gt;</a> tags.
+					<a href="@{project.url}]]>&tld;<![CDATA[/tag-base">&lt;ao:base&gt;</a> tags.
 				</p>
 				<p>
 					URL rewriting is performed as needed via
@@ -518,8 +530,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					To avoid ambiguity, any dynamic parameters or anchors in the URL must have been correctly encoded by the caller.
 				</p>
 				<p>
-					Any directly nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a>
-					or <a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a>
+					Any directly nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-param">&lt;ao:param&gt;</a>
+					or <a href="@{project.url}]]>&tld;<![CDATA[/tag-params">&lt;ao:params&gt;</a>
 					tag will add parameters to the href.
 				</p>
 			]]></description>
@@ -580,7 +592,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_area_hreflang.asp">hreflang for the area</a>.
-					A nested <a href="@{project.url}ao.tld/tag-hreflang">&lt;ao:hreflang&gt;</a> tag will override this value.
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-hreflang">&lt;ao:hreflang&gt;</a> tag will override this value.
 				</p>
 			]]></description>
 			<name>hreflang</name>
@@ -592,7 +604,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_area_rel.asp">rel for the area</a>.
-					A nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:rel&gt;</a> tag will override this value.
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-param">&lt;ao:rel&gt;</a> tag will override this value.
 				</p>
 			]]></description>
 			<name>rel</name>
@@ -604,7 +616,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_area_target.asp">target for the area</a>.
-					A nested <a href="@{project.url}ao.tld/tag-target">&lt;ao:target&gt;</a> tag will override this value.
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-target">&lt;ao:target&gt;</a> tag will override this value.
 				</p>
 			]]></description>
 			<name>target</name>
@@ -616,7 +628,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_area_type.asp">type for the area</a>.
-					A nested <a href="@{project.url}ao.tld/tag-type">&lt;ao:type&gt;</a> tag will override this value.
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-type">&lt;ao:type&gt;</a> tag will override this value.
 				</p>
 			]]></description>
 			<name>type</name>
@@ -628,7 +640,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_area_alt.asp">alt text for the area</a>.
-					A nested <a href="@{project.url}ao.tld/tag-alt">&lt;ao:alt&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-alt">&lt;ao:alt&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -641,7 +653,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_global_title.asp">title text for the element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-title">&lt;ao:title&gt;</a> tag will override this value.
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-title">&lt;ao:title&gt;</a> tag will override this value.
 				</p>
 			]]></description>
 			<name>title</name>
@@ -653,7 +665,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					A JavaScript <a href="https://www.w3schools.com/tags/ev_onclick.asp">onclick</a> handler.
-					A nested <a href="@{project.url}ao.tld/tag-onclick">&lt;ao:onclick&gt;</a> tag will override this value.
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-onclick">&lt;ao:onclick&gt;</a> tag will override this value.
 				</p>
 			]]></description>
 			<name>onclick</name>
@@ -665,7 +677,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					A JavaScript <a href="https://www.w3schools.com/tags/ev_onmouseover.asp">onmouseover</a> handler.
-					A nested <a href="@{project.url}ao.tld/tag-onmouseover">&lt;ao:onmouseover&gt;</a> tag will override this value.
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-onmouseover">&lt;ao:onmouseover&gt;</a> tag will override this value.
 				</p>
 			]]></description>
 			<name>onmouseover</name>
@@ -677,7 +689,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					A JavaScript <a href="https://www.w3schools.com/tags/ev_onmouseout.asp">onmouseout</a> handler.
-					A nested <a href="@{project.url}ao.tld/tag-onmouseout">&lt;ao:onmouseout&gt;</a> tag will override this value.
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-onmouseout">&lt;ao:onmouseout&gt;</a> tag will override this value.
 				</p>
 			]]></description>
 			<name>onmouseout</name>
@@ -689,7 +701,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-03-26T22:27:21-05:00" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Adds an argument to its
@@ -698,13 +710,13 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>arg</name>
-		<tag-class>com.aoindustries.taglib.ArgTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Arg&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 		<attribute>
 			<description><![CDATA[
 				<p>
 					The name of argument tag.
-					A nested <a href="@{project.url}ao.tld/tag-name">&lt;ao:name&gt;</a> tag will override this value.
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-name">&lt;ao:name&gt;</a> tag will override this value.
 				</p>
 			]]></description>
 			<name>name</name>
@@ -716,7 +728,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The value of the parameter.
-					A nested <a href="@{project.url}ao.tld/tag-value">&lt;ao:value&gt;</a> tag will override this value.
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-value">&lt;ao:value&gt;</a> tag will override this value.
 					If neither is provided, the output of the body is used with whitespace trimmed.
 				</p>
 			]]></description>
@@ -819,8 +831,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<description><![CDATA[
 			<p>
 				Sets the bundle used by any nested
-				<a href="@{project.url}ao.tld/tag-message">&lt;ao:message&gt;</a> tags
-				or <a href="@{project.url}ao.tld/function-message">functions</a>.
+				<a href="@{project.url}]]>&tld;<![CDATA[/tag-message">&lt;ao:message&gt;</a> tags
+				or <a href="@{project.url}]]>&tld;<![CDATA[/function-message">functions</a>.
 			</p>
 		]]></description>
 		<name>bundle</name>
@@ -839,8 +851,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The prefix applied to any nested
-					<a href="@{project.url}ao.tld/tag-message">&lt;ao:message&gt;</a> tag
-					or <a href="@{project.url}ao.tld/function-message">function</a> keys.
+					<a href="@{project.url}]]>&tld;<![CDATA[/tag-message">&lt;ao:message&gt;</a> tag
+					or <a href="@{project.url}]]>&tld;<![CDATA[/function-message">function</a> keys.
 				</p>
 			]]></description>
 			<name>prefix</name>
@@ -851,7 +863,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_checked.asp">checked attribute</a> to its
@@ -862,8 +874,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>checked</name>
-		<tag-class>com.aoindustries.taglib.CheckedTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Checked&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-09-25T11:14:02-0500" -->
@@ -881,7 +893,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_class.asp">class attribute</a> to its
@@ -890,8 +902,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>class</name>
-		<tag-class>com.aoindustries.taglib.ClassTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Class&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2020-02-11T20:25:52-0600" -->
@@ -922,7 +934,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_content.asp">content attribute</a> to its
@@ -931,11 +943,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>content</name>
-		<tag-class>com.aoindustries.taglib.ContentTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Content&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2020-07-31T10:11:29-05:00" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_global_dir.asp">dir attribute</a> to its
@@ -944,8 +957,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>dir</name>
-		<tag-class>com.aoindustries.taglib.DirTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Dir&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
@@ -961,7 +974,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_disabled.asp">disabled attribute</a> to its
@@ -972,12 +985,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>disabled</name>
-		<tag-class>com.aoindustries.taglib.DisabledTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Disabled&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/att_enctype.asp">enctype attribute</a> to its
@@ -986,12 +999,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>enctype</name>
-		<tag-class>com.aoindustries.taglib.EnctypeTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Enctype&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-07-31T10:11:29-05:00" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<!-- TODO: param.* dynamic attributes should not do automatic multi-parameter.  Make a params.* dynamic attribute for this purpose. -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
@@ -1014,15 +1027,15 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				for the parameter value.
 			</p>
 			<p>
-				Nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a>
-				or <a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a>
+				Nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-param">&lt;ao:param&gt;</a>
+				or <a href="@{project.url}]]>&tld;<![CDATA[/tag-params">&lt;ao:params&gt;</a>
 				tags will add parameters after any provided as attributes.
 			</p>
 		]]></description>
 		<name>form</name>
-		<tag-class>com.aoindustries.taglib.FormTag</tag-class>
+		<tag-class>com.aoindustries.taglib.Form&BodyTag;</tag-class>
 		<tei-class>com.aoindustries.taglib.FormTagTEI</tei-class>
-		<body-content>JSP</body-content>
+		<body-content>&JSP;</body-content>
 		&GlobalBufferedAttributes;
 		<attribute>
 			<description><![CDATA[
@@ -1031,13 +1044,13 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					The action is modified in several ways to make things much easier to work with.
 				</p>
 				<p>
-					A nested <a href="@{project.url}ao.tld/tag-action">&lt;ao:action&gt;</a> tag will override this value.
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-action">&lt;ao:action&gt;</a> tag will override this value.
 				</p>
 				<p>
 					In order to make relative paths predictable, relative paths are interpreted from
 					the current JSP page, as long as all includes have been done via
-					<a href="@{project.url}ao.tld/tag-include">&lt;ao:include&gt;</a>
-					and any forward via <a href="@{project.url}ao.tld/tag-forward">&lt;ao:forward&gt;</a>.
+					<a href="@{project.url}]]>&tld;<![CDATA[/tag-include">&lt;ao:include&gt;</a>
+					and any forward via <a href="@{project.url}]]>&tld;<![CDATA[/tag-forward">&lt;ao:forward&gt;</a>.
 				</p>
 				<p>
 					In order to keep paths app-relative, if starts with a /, the context path will be
@@ -1046,7 +1059,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					In order to simplify things behind URL mapping schemes,
 					the action is always written starting with '/'.  This avoids any need to include any
-					<a href="@{project.url}ao.tld/tag-base">&lt;ao:base&gt;</a> tags.
+					<a href="@{project.url}]]>&tld;<![CDATA[/tag-base">&lt;ao:base&gt;</a> tags.
 				</p>
 				<p>
 					URL rewriting is performed as needed via
@@ -1058,8 +1071,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					To avoid ambiguity, any dynamic parameters or anchors in the URL must have been correctly encoded by the caller.
 				</p>
 				<p>
-					Any directly nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a>
-					or <a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a>
+					Any directly nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-param">&lt;ao:param&gt;</a>
+					or <a href="@{project.url}]]>&tld;<![CDATA[/tag-params">&lt;ao:params&gt;</a>
 					tag will add parameters to the action.
 				</p>
 				<p>
@@ -1076,7 +1089,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_form_enctype.asp">enctype for the form</a>.
-					A nested <a href="@{project.url}ao.tld/tag-enctype">&lt;ao:enctype&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-enctype">&lt;ao:enctype&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -1090,7 +1103,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_form_method.asp">method</a> used, must be either post or get.
 					Defaults to <code>get</code>.
-					A nested <a href="@{project.url}ao.tld/tag-method">&lt;ao:method&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-method">&lt;ao:method&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -1103,7 +1116,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_form_target.asp">target for the form</a>.
-					A nested <a href="@{project.url}ao.tld/tag-target">&lt;ao:target&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-target">&lt;ao:target&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -1116,7 +1129,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					A JavaScript <a href="https://www.w3schools.com/tags/ev_onsubmit.asp">onsubmit</a> handler.
-					A nested <a href="@{project.url}ao.tld/tag-onsubmit">&lt;ao:onsubmit&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-onsubmit">&lt;ao:onsubmit&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -1166,8 +1179,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				for the parameter value.
 			</p>
 			<p>
-				Nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a>
-				or <a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a>
+				Nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-param">&lt;ao:param&gt;</a>
+				or <a href="@{project.url}]]>&tld;<![CDATA[/tag-params">&lt;ao:params&gt;</a>
 				tags will add parameters after any provided as attributes.
 				If parameters are not cleared, nested parameters are added before request parameters.
 			</p>
@@ -1186,7 +1199,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				name and JSP <a rel="nofollow" href="https://docs.oracle.com/cd/E19226-01/820-7627/gjddd/">Expression Language</a> name will match precisely.
 			</p>
 			<p>
-				Nested <a href="@{project.url}ao.tld/tag-arg">&lt;ao:arg&gt;</a>
+				Nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-arg">&lt;ao:arg&gt;</a>
 				tags may also be used to pass arguments.
 			</p>
 			<p>
@@ -1200,10 +1213,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The page that will be forwarded to.
-					A nested <a href="@{project.url}ao.tld/tag-page">&lt;ao:page&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-page">&lt;ao:page&gt;</a>
 					tag will override this value.
 					The page is required, must be set in attribute or nested
-					<a href="@{project.url}ao.tld/tag-page">&lt;ao:page&gt;</a> tag.
+					<a href="@{project.url}]]>&tld;<![CDATA[/tag-page">&lt;ao:page&gt;</a> tag.
 				</p>
 				<p>
 					Security Note: page must be a trusted value since it can access any resource available via
@@ -1211,7 +1224,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					It would be incorrect to use a value that can be manipulated by a client in any way.
 				</p>
 				<p>
-					Recommend use of <a href="@{project.url}ao.tld/tag-base">&lt;ao:base&gt;</a>
+					Recommend use of <a href="@{project.url}]]>&tld;<![CDATA[/tag-base">&lt;ao:base&gt;</a>
 					on target page to have relative paths interpreted from the forwarded-to page.
 				</p>
 			]]></description>
@@ -1261,7 +1274,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_frame_frameborder.asp">frameborder attribute</a> to its
@@ -1272,8 +1285,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>frameborder</name>
-		<tag-class>com.aoindustries.taglib.FrameborderTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Frameborder&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
@@ -1337,7 +1350,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_height.asp">height attribute</a> to its
@@ -1346,8 +1359,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>height</name>
-		<tag-class>com.aoindustries.taglib.HeightTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Height&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2019-10-30T20:50:04-0500" -->
@@ -1367,7 +1380,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-08-05T16:09:39-05:00" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<ol>
 				<li>Clears the current output buffer (leaving status code and headers)</li>
@@ -1390,9 +1403,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</ol>
 		]]></description>
 		<name>html</name>
-		<tag-class>com.aoindustries.taglib.HtmlTag</tag-class>
+		<tag-class>com.aoindustries.taglib.Html&BodyTag;</tag-class>
 		<tei-class>com.aoindustries.taglib.HtmlTagTEI</tei-class>
-		<body-content>JSP</body-content>
+		<body-content>&JSP;</body-content>
 		&GlobalAttributes;
 		<attribute>
 			<description><![CDATA[
@@ -1457,7 +1470,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/att_href.asp">href attribute</a> to its
@@ -1466,12 +1479,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>href</name>
-		<tag-class>com.aoindustries.taglib.HrefTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Href&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/att_hreflang.asp">hreflang attribute</a> to its
@@ -1480,12 +1493,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>hreflang</name>
-		<tag-class>com.aoindustries.taglib.HreflangTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Hreflang&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/att_id.asp">id attribute</a> to its
@@ -1494,12 +1507,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>id</name>
-		<tag-class>com.aoindustries.taglib.IdTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Id&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-07-31T10:11:29-05:00" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_iframe.asp">&lt;iframe&gt;</a> tag.
@@ -1521,15 +1534,15 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				for the parameter value.
 			</p>
 			<p>
-				Nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a>
-				or <a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a>
+				Nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-param">&lt;ao:param&gt;</a>
+				or <a href="@{project.url}]]>&tld;<![CDATA[/tag-params">&lt;ao:params&gt;</a>
 				tags will add parameters after any provided as attributes.
 			</p>
 		]]></description>
 		<name>iframe</name>
-		<tag-class>com.aoindustries.taglib.IframeTag</tag-class>
+		<tag-class>com.aoindustries.taglib.Iframe&BodyTag;</tag-class>
 		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
-		<body-content>scriptless</body-content>
+		<body-content>&JSP;</body-content>
 		<attribute>
 			<description>
 				&lt;p&gt;
@@ -1555,13 +1568,13 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					The src is modified in several ways to make things much easier to work with.
 				</p>
 				<p>
-					A nested <a href="@{project.url}ao.tld/tag-src">&lt;ao:src&gt;</a> tag will override this value.
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-src">&lt;ao:src&gt;</a> tag will override this value.
 				</p>
 				<p>
 					In order to make relative paths predictable, relative paths are interpreted from
 					the current JSP page, as long as all includes have been done via
-					<a href="@{project.url}ao.tld/tag-include">&lt;ao:include&gt;</a>
-					and any forward via <a href="@{project.url}ao.tld/tag-forward">&lt;ao:forward&gt;</a>.
+					<a href="@{project.url}]]>&tld;<![CDATA[/tag-include">&lt;ao:include&gt;</a>
+					and any forward via <a href="@{project.url}]]>&tld;<![CDATA[/tag-forward">&lt;ao:forward&gt;</a>.
 				</p>
 				<p>
 					In order to keep paths app-relative, if starts with a /, the context path will be
@@ -1570,7 +1583,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					In order to simplify things behind URL mapping schemes,
 					the src is always written starting with '/'.  This avoids any need to include any
-					<a href="@{project.url}ao.tld/tag-base">&lt;ao:base&gt;</a> tags.
+					<a href="@{project.url}]]>&tld;<![CDATA[/tag-base">&lt;ao:base&gt;</a> tags.
 				</p>
 				<p>
 					URL rewriting is performed as needed via
@@ -1582,8 +1595,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					To avoid ambiguity, any dynamic parameters or anchors in the URL must have been correctly encoded by the caller.
 				</p>
 				<p>
-					Any directly nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a>
-					or <a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a>
+					Any directly nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-param">&lt;ao:param&gt;</a>
+					or <a href="@{project.url}]]>&tld;<![CDATA[/tag-params">&lt;ao:params&gt;</a>
 					tag will add parameters to the src.
 				</p>
 			]]></description>
@@ -1644,7 +1657,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_iframe_width.asp">width for the frame</a>.
-					A nested <a href="@{project.url}ao.tld/tag-width">&lt;ao:width&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-width">&lt;ao:width&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -1657,7 +1670,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_iframe_height.asp">height for the frame</a>.
-					A nested <a href="@{project.url}ao.tld/tag-height">&lt;ao:height&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-height">&lt;ao:height&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -1671,7 +1684,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_iframe_frameborder.asp">frameborder attribute</a>.
 					Accepts values of <code>true</code> or <code>false</code>.
-					A non-empty nested <a href="@{project.url}ao.tld/tag-frameborder">&lt;ao:frameborder&gt;</a>
+					A non-empty nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-frameborder">&lt;ao:frameborder&gt;</a>
 					tag will override this value.
 					Defaults to <code>true</code>.
 				</p>
@@ -1685,7 +1698,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-07-31T10:11:29-05:00" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_img.asp">&lt;img&gt;</a> tag.
@@ -1694,13 +1707,13 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				The src may be provided in one of three ways, in precedence order:
 			</p>
 			<ol>
-				<li>Direct child <a href="@{project.url}ao.tld/tag-src">&lt;ao:src&gt;</a> tag.</li>
+				<li>Direct child <a href="@{project.url}]]>&tld;<![CDATA[/tag-src">&lt;ao:src&gt;</a> tag.</li>
 				<li>As the src attribute</li>
 				<li>Contents of tag body, trimmed.</li>
 			</ol>
 			<p>
 				Also, when <code>usemap</code> is not set, the alt value is required either as an attribute or a nested
-				<a href="@{project.url}ao.tld/tag-alt">&lt;ao:alt&gt;</a> tag.
+				<a href="@{project.url}]]>&tld;<![CDATA[/tag-alt">&lt;ao:alt&gt;</a> tag.
 			</p>
 			<p>
 				Any attribute that has no namespace and begins with <code>param.</code> is added to the src as a URL parameter.
@@ -1719,15 +1732,15 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				for the parameter value.
 			</p>
 			<p>
-				Nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a>
-				or <a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a>
+				Nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-param">&lt;ao:param&gt;</a>
+				or <a href="@{project.url}]]>&tld;<![CDATA[/tag-params">&lt;ao:params&gt;</a>
 				tags will add parameters after any provided as attributes.
 			</p>
 		]]></description>
 		<name>img</name>
-		<tag-class>com.aoindustries.taglib.ImgTag</tag-class>
+		<tag-class>com.aoindustries.taglib.Img&BodyTag;</tag-class>
 		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
-		<body-content>scriptless</body-content>
+		<body-content>&JSP;</body-content>
 		&GlobalBufferedAttributes;
 		<attribute>
 			<description><![CDATA[
@@ -1736,13 +1749,13 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					The src is modified in several ways to make things much easier to work with.
 				</p>
 				<p>
-					A nested <a href="@{project.url}ao.tld/tag-src">&lt;ao:src&gt;</a> tag will override this value.
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-src">&lt;ao:src&gt;</a> tag will override this value.
 				</p>
 				<p>
 					In order to make relative paths predictable, relative paths are interpreted from
 					the current JSP page, as long as all includes have been done via
-					<a href="@{project.url}ao.tld/tag-include">&lt;ao:include&gt;</a>
-					and any forward via <a href="@{project.url}ao.tld/tag-forward">&lt;ao:forward&gt;</a>.
+					<a href="@{project.url}]]>&tld;<![CDATA[/tag-include">&lt;ao:include&gt;</a>
+					and any forward via <a href="@{project.url}]]>&tld;<![CDATA[/tag-forward">&lt;ao:forward&gt;</a>.
 				</p>
 				<p>
 					In order to keep paths app-relative, if starts with a /, the context path will be
@@ -1751,7 +1764,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					In order to simplify things behind URL mapping schemes,
 					the src is always written starting with '/'.  This avoids any need to include any
-					<a href="@{project.url}ao.tld/tag-base">&lt;ao:base&gt;</a> tags.
+					<a href="@{project.url}]]>&tld;<![CDATA[/tag-base">&lt;ao:base&gt;</a> tags.
 				</p>
 				<p>
 					URL rewriting is performed as needed via
@@ -1763,8 +1776,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					To avoid ambiguity, any dynamic parameters or anchors in the URL must have been correctly encoded by the caller.
 				</p>
 				<p>
-					Any directly nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a>
-					or <a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a>
+					Any directly nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-param">&lt;ao:param&gt;</a>
+					or <a href="@{project.url}]]>&tld;<![CDATA[/tag-params">&lt;ao:params&gt;</a>
 					tag will add parameters to the src.
 				</p>
 			]]></description>
@@ -1825,7 +1838,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The optional <a href="https://www.w3schools.com/tags/att_img_width.asp">width for the image</a>.
-					A nested <a href="@{project.url}ao.tld/tag-width">&lt;ao:width&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-width">&lt;ao:width&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -1838,7 +1851,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The optional <a href="https://www.w3schools.com/tags/att_img_height.asp">height for the image</a>.
-					A nested <a href="@{project.url}ao.tld/tag-height">&lt;ao:height&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-height">&lt;ao:height&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -1851,7 +1864,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_img_alt.asp">alt text for the image</a>.
-					A nested <a href="@{project.url}ao.tld/tag-alt">&lt;ao:alt&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-alt">&lt;ao:alt&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -1864,7 +1877,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_global_title.asp">title text for the element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-title">&lt;ao:title&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-title">&lt;ao:title&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -1883,7 +1896,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					If not provided, the <code>#</code> will be automatically added.
 				</p>
 				<p>
-					This is expected to be used along with a <a href="@{project.url}ao.tld/tag-map">&lt;ao:map&gt;</a> tag.
+					This is expected to be used along with a <a href="@{project.url}]]>&tld;<![CDATA[/tag-map">&lt;ao:map&gt;</a> tag.
 				</p>
 			]]></description>
 			<name>usemap</name>
@@ -1942,8 +1955,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				for the parameter value.
 			</p>
 			<p>
-				Nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a>
-				or <a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a>
+				Nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-param">&lt;ao:param&gt;</a>
+				or <a href="@{project.url}]]>&tld;<![CDATA[/tag-params">&lt;ao:params&gt;</a>
 				tags will add parameters after any provided as attributes.
 				If parameters are not cleared, nested parameters are added before request parameters.
 			</p>
@@ -1963,7 +1976,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				name and JSP <a rel="nofollow" href="https://docs.oracle.com/cd/E19226-01/820-7627/gjddd/">Expression Language</a> name will match precisely.
 			</p>
 			<p>
-				Nested <a href="@{project.url}ao.tld/tag-arg">&lt;ao:arg&gt;</a> tags may also be used to pass arguments.
+				Nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-arg">&lt;ao:arg&gt;</a> tags may also be used to pass arguments.
 			</p>
 			<p>
 				It is an error for the same argument name to be used twice (including when set as <code>null</code>).
@@ -1976,10 +1989,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The page that will be included.
-					A nested <a href="@{project.url}ao.tld/tag-page">&lt;ao:page&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-page">&lt;ao:page&gt;</a>
 					tag will override this value.
 					The page is required, must be set in attribute or nested
-					<a href="@{project.url}ao.tld/tag-page">&lt;ao:page&gt;</a> tag.
+					<a href="@{project.url}]]>&tld;<![CDATA[/tag-page">&lt;ao:page&gt;</a> tag.
 				</p>
 				<p>
 					Security Note: page must be a trusted value since it can access any resource available via
@@ -2034,7 +2047,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-08-05T16:51:40-05:00" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_input.asp">&lt;input&gt;</a> tag.
@@ -2043,7 +2056,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				The value may be provided in one of three ways, in precedence order:
 			</p>
 			<ol>
-				<li>Direct child <a href="@{project.url}ao.tld/tag-value">&lt;ao:value&gt;</a> tag.</li>
+				<li>Direct child <a href="@{project.url}]]>&tld;<![CDATA[/tag-value">&lt;ao:value&gt;</a> tag.</li>
 				<li>As the value attribute</li>
 				<li>Contents of tag body, trimmed.</li>
 			</ol>
@@ -2051,7 +2064,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				For <code>type="image"</code>, the src may be provided in one of two ways, in precedence order:
 			</p>
 			<ol>
-				<li>Direct child <a href="@{project.url}ao.tld/tag-src">&lt;ao:src&gt;</a> tag.</li>
+				<li>Direct child <a href="@{project.url}]]>&tld;<![CDATA[/tag-src">&lt;ao:src&gt;</a> tag.</li>
 				<li>As the src attribute</li>
 			</ol>
 			<p>
@@ -2071,15 +2084,15 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				for the parameter value.
 			</p>
 			<p>
-				Nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a>
-				or <a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a>
+				Nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-param">&lt;ao:param&gt;</a>
+				or <a href="@{project.url}]]>&tld;<![CDATA[/tag-params">&lt;ao:params&gt;</a>
 				tags will add parameters after any provided as attributes.
 			</p>
 		]]></description>
 		<name>input</name>
-		<tag-class>com.aoindustries.taglib.InputTag</tag-class>
+		<tag-class>com.aoindustries.taglib.Input&BodyTag;</tag-class>
 		<tei-class>com.aoindustries.taglib.InputTagTEI</tei-class>
-		<body-content>JSP</body-content>
+		<body-content>&JSP;</body-content>
 		&GlobalBufferedAttributes;
 		<attribute>
 			<description><![CDATA[
@@ -2087,7 +2100,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					The <a href="https://www.w3schools.com/tags/att_input_alt.asp">alt text for the input</a>
 					(only for <code>type="image"</code>).
 					Required when <code>type</code> is <code>"image"</code>.
-					A nested <a href="@{project.url}ao.tld/tag-alt">&lt;ao:alt&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-alt">&lt;ao:alt&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -2117,7 +2130,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_input_checked.asp">checked attribute</a>.
 					Accepts values of <code>true</code> or <code>false</code>.
-					A non-empty nested <a href="@{project.url}ao.tld/tag-checked">&lt;ao:checked&gt;</a>
+					A non-empty nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-checked">&lt;ao:checked&gt;</a>
 					tag will override this value.
 					If checked is <code>true</code>, will add the attribute as <code>checked="checked"</code>,
 					otherwise the attribute is not added.
@@ -2133,7 +2146,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_input_disabled.asp">disabled attribute</a>.
 					Accepts values of <code>true</code> or <code>false</code>.
-					A non-empty nested <a href="@{project.url}ao.tld/tag-disabled">&lt;ao:disabled&gt;</a>
+					A non-empty nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-disabled">&lt;ao:disabled&gt;</a>
 					tag will override this value.
 					If disabled is <code>true</code>, will add the attribute as <code>disabled="disabled"</code>,
 					otherwise the attribute is not added.
@@ -2149,7 +2162,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					The optional <a href="https://www.w3schools.com/tags/att_input_height.asp">height for the image</a>,
 					(only for <code>type="image"</code>).
-					A nested <a href="@{project.url}ao.tld/tag-height">&lt;ao:height&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-height">&lt;ao:height&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -2162,7 +2175,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_input_maxlength.asp">maxlength of the input element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-maxlength">&lt;ao:maxlength&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-maxlength">&lt;ao:maxlength&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -2175,7 +2188,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_input_name.asp">name of the input element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-name">&lt;ao:name&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-name">&lt;ao:name&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -2189,7 +2202,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_input_readonly.asp">readonly attribute</a>.
 					Accepts values of <code>true</code> or <code>false</code>.
-					A non-empty nested <a href="@{project.url}ao.tld/tag-readonly">&lt;ao:readonly&gt;</a>
+					A non-empty nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-readonly">&lt;ao:readonly&gt;</a>
 					tag will override this value.
 					If readonly is <code>true</code>, will add the attribute as <code>readonly="readonly"</code>,
 					otherwise the attribute is not added.
@@ -2204,7 +2217,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_input_size.asp">size of the input element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-size">&lt;ao:size&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-size">&lt;ao:size&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -2221,13 +2234,13 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					The src is modified in several ways to make things much easier to work with.
 				</p>
 				<p>
-					A nested <a href="@{project.url}ao.tld/tag-src">&lt;ao:src&gt;</a> tag will override this value.
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-src">&lt;ao:src&gt;</a> tag will override this value.
 				</p>
 				<p>
 					In order to make relative paths predictable, relative paths are interpreted from
 					the current JSP page, as long as all includes have been done via
-					<a href="@{project.url}ao.tld/tag-include">&lt;ao:include&gt;</a>
-					and any forward via <a href="@{project.url}ao.tld/tag-forward">&lt;ao:forward&gt;</a>.
+					<a href="@{project.url}]]>&tld;<![CDATA[/tag-include">&lt;ao:include&gt;</a>
+					and any forward via <a href="@{project.url}]]>&tld;<![CDATA[/tag-forward">&lt;ao:forward&gt;</a>.
 				</p>
 				<p>
 					In order to keep paths app-relative, if starts with a /, the context path will be
@@ -2236,7 +2249,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					In order to simplify things behind URL mapping schemes,
 					the src is always written starting with '/'.  This avoids any need to include any
-					<a href="@{project.url}ao.tld/tag-base">&lt;ao:base&gt;</a> tags.
+					<a href="@{project.url}]]>&tld;<![CDATA[/tag-base">&lt;ao:base&gt;</a> tags.
 				</p>
 				<p>
 					URL rewriting is performed as needed via
@@ -2248,8 +2261,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					To avoid ambiguity, any dynamic parameters or anchors in the URL must have been correctly encoded by the caller.
 				</p>
 				<p>
-					Any directly nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a>
-					or <a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a>
+					Any directly nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-param">&lt;ao:param&gt;</a>
+					or <a href="@{project.url}]]>&tld;<![CDATA[/tag-params">&lt;ao:params&gt;</a>
 					tag will add parameters to the src.
 				</p>
 			]]></description>
@@ -2312,7 +2325,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					The optional tabindex value.  Defaults to <code>0</code>.
 					If value is <code>&gt;= 1</code>, will add <a href="https://www.w3schools.com/tags/att_global_tabindex.asp">tabindex attribute</a>.
-					A non-empty nested <a href="@{project.url}ao.tld/tag-tabindex">&lt;ao:tabindex&gt;</a>
+					A non-empty nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-tabindex">&lt;ao:tabindex&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -2325,7 +2338,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_global_title.asp">title text for the element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-title">&lt;ao:title&gt;</a> tag will override this value.
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-title">&lt;ao:title&gt;</a> tag will override this value.
 				</p>
 			]]></description>
 			<name>title</name>
@@ -2337,7 +2350,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_input_type.asp">type of input element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-type">&lt;ao:type&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-type">&lt;ao:type&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -2351,7 +2364,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					The optional <a href="https://www.w3schools.com/tags/att_input_width.asp">width for the image</a>,
 					(only for <code>type="image"</code>).
-					A nested <a href="@{project.url}ao.tld/tag-width">&lt;ao:width&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-width">&lt;ao:width&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -2364,7 +2377,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_input_value.asp">value of the input element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-value">&lt;ao:value&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-value">&lt;ao:value&gt;</a>
 					tag will override this value.
 					If neither is provided, the output of the body is used with whitespace trimmed.
 				</p>
@@ -2378,7 +2391,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					A JavaScript <a href="https://www.w3schools.com/tags/ev_onblur.asp">onblur</a> handler.
-					A nested <a href="@{project.url}ao.tld/tag-onblur">&lt;ao:onblur&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-onblur">&lt;ao:onblur&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -2391,7 +2404,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					A JavaScript <a href="https://www.w3schools.com/tags/ev_onchange.asp">onchange</a> handler.
-					A nested <a href="@{project.url}ao.tld/tag-onchange">&lt;ao:onchange&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-onchange">&lt;ao:onchange&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -2404,7 +2417,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					A JavaScript <a href="https://www.w3schools.com/tags/ev_onclick.asp">onclick</a> handler.
-					A nested <a href="@{project.url}ao.tld/tag-onclick">&lt;ao:onclick&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-onclick">&lt;ao:onclick&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -2417,7 +2430,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					A JavaScript <a href="https://www.w3schools.com/tags/ev_onfocus.asp">onfocus</a> handler.
-					A nested <a href="@{project.url}ao.tld/tag-onfocus">&lt;ao:onfocus&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-onfocus">&lt;ao:onfocus&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -2430,7 +2443,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					A JavaScript <a href="https://www.w3schools.com/tags/ev_onkeypress.asp">onkeypress</a> handler.
-					A nested <a href="@{project.url}ao.tld/tag-onkeypress">&lt;ao:onkeypress&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-onkeypress">&lt;ao:onkeypress&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -2468,8 +2481,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				for the parameter value.
 			</p>
 			<p>
-				Nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a>
-				or <a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a>
+				Nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-param">&lt;ao:param&gt;</a>
+				or <a href="@{project.url}]]>&tld;<![CDATA[/tag-params">&lt;ao:params&gt;</a>
 				tags will add parameters after any provided as attributes.
 			</p>
 		]]></description>
@@ -2498,13 +2511,13 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					The href is modified in several ways to make things much easier to work with.
 				</p>
 				<p>
-					A nested <a href="@{project.url}ao.tld/tag-href">&lt;ao:href&gt;</a> tag will override this value.
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-href">&lt;ao:href&gt;</a> tag will override this value.
 				</p>
 				<p>
 					In order to make relative paths predictable, relative paths are interpreted from
 					the current JSP page, as long as all includes have been done via
-					<a href="@{project.url}ao.tld/tag-include">&lt;ao:include&gt;</a>
-					and any forward via <a href="@{project.url}ao.tld/tag-forward">&lt;ao:forward&gt;</a>.
+					<a href="@{project.url}]]>&tld;<![CDATA[/tag-include">&lt;ao:include&gt;</a>
+					and any forward via <a href="@{project.url}]]>&tld;<![CDATA[/tag-forward">&lt;ao:forward&gt;</a>.
 				</p>
 				<p>
 					In order to keep paths app-relative, if starts with a /, the context path will be
@@ -2513,7 +2526,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					In order to simplify things behind URL mapping schemes,
 					the href is always written starting with '/'.  This avoids any need to include any
-					<a href="@{project.url}ao.tld/tag-base">&lt;ao:base&gt;</a> tags.
+					<a href="@{project.url}]]>&tld;<![CDATA[/tag-base">&lt;ao:base&gt;</a> tags.
 				</p>
 				<p>
 					URL rewriting is performed as needed via
@@ -2525,8 +2538,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					To avoid ambiguity, any dynamic parameters or anchors in the URL must have been correctly encoded by the caller.
 				</p>
 				<p>
-					Any directly nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a>
-					or <a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a>
+					Any directly nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-param">&lt;ao:param&gt;</a>
+					or <a href="@{project.url}]]>&tld;<![CDATA[/tag-params">&lt;ao:params&gt;</a>
 					tag will add parameters to the href.
 				</p>
 			]]></description>
@@ -2587,7 +2600,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_link_hreflang.asp">hreflang for the link</a>.
-					A nested <a href="@{project.url}ao.tld/tag-hreflang">&lt;ao:hreflang&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-hreflang">&lt;ao:hreflang&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -2600,7 +2613,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_link_rel.asp">rel for the link</a>.
-					A nested <a href="@{project.url}ao.tld/tag-rel">&lt;ao:rel&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-rel">&lt;ao:rel&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -2613,7 +2626,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_link_type.asp">type for the link</a>.
-					A nested <a href="@{project.url}ao.tld/tag-type">&lt;ao:type&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-type">&lt;ao:type&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -2637,7 +2650,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_global_title.asp">title for the link</a>.
-					A nested <a href="@{project.url}ao.tld/tag-title">&lt;ao:title&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-title">&lt;ao:title&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -2650,25 +2663,25 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2019-10-08T21:41:35-0500" -->
-		<!-- dateModified="2020-08-05T16:09:39-05:00" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders a <a href="https://www.w3schools.com/tags/tag_map.asp">&lt;map&gt;</a> tag.
 			</p>
 			<p>
-				This is expected to be used along with nested <a href="@{project.url}ao.tld/tag-area">&lt;ao:area&gt;</a> tags.
+				This is expected to be used along with nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-area">&lt;ao:area&gt;</a> tags.
 			</p>
 		]]></description>
 		<name>map</name>
-		<tag-class>com.aoindustries.taglib.MapTag</tag-class>
+		<tag-class>com.aoindustries.taglib.Map&BodyTag;</tag-class>
 		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
-		<body-content>scriptless</body-content>
+		<body-content>&JSP;</body-content>
 		<attribute>
 			<description><![CDATA[
 				<p>
 					The required <a href="https://www.w3schools.com/tags/att_map_name.asp">id (and name) of the map</a>.
-					Must be provided as either this attribute or a nested <a href="@{project.url}ao.tld/tag-id">&lt;ao:id&gt;</a> tag.
-					A nested <a href="@{project.url}ao.tld/tag-id">&lt;ao:id&gt;</a> tag will override this value.
+					Must be provided as either this attribute or a nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-id">&lt;ao:id&gt;</a> tag.
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-id">&lt;ao:id&gt;</a> tag will override this value.
 				</p>
 				<p>
 					For maximum HTML/XHTML and HTML 4/5 compatibility, this value is
@@ -2676,7 +2689,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				</p>
 				<p>
 					The <code>id</code> of this map should be used as the <code>usemap</code> attribute
-					of an <a href="@{project.url}ao.tld/tag-area">&lt;ao:img&gt;</a> tag.
+					of an <a href="@{project.url}]]>&tld;<![CDATA[/tag-area">&lt;ao:img&gt;</a> tag.
 				</p>
 			]]></description>
 			<name>id</name>
@@ -2691,7 +2704,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_maxlength.asp">maxlength attribute</a> to its
@@ -2702,8 +2715,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>maxlength</name>
-		<tag-class>com.aoindustries.taglib.MaxlengthTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Maxlength&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
@@ -2721,14 +2734,14 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 			<p>
 				Additionally, message substitution arguments may be provided by
-				nested <a href="@{project.url}ao.tld/tag-messageArg">&lt;ao:messageArg&gt;</a>
+				nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-messageArg">&lt;ao:messageArg&gt;</a>
 				tags.
 			</p>
 			<p>
 				These additional arguments will first fill-in any gap in the numeric ranges
 				provided by "arg###" attributes.  Because the first argument is zero, if
 				<code>arg1="Second" arg2="Third"</code>, then the first nested
-				<a href="@{project.url}ao.tld/tag-messageArg">&lt;ao:messageArg&gt;</a>
+				<a href="@{project.url}]]>&tld;<![CDATA[/tag-messageArg">&lt;ao:messageArg&gt;</a>
 				would be applied filling the spot of <code>arg0</code>.
 			</p>
 			<p>
@@ -2736,7 +2749,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				all provided as "arg###" attritutes.
 			</p>
 			<p>
-				This tag must be nested inside a <a href="@{project.url}ao.tld/tag-bundle">&lt;ao:bundle&gt;</a> tag.
+				This tag must be nested inside a <a href="@{project.url}]]>&tld;<![CDATA[/tag-bundle">&lt;ao:bundle&gt;</a> tag.
 			</p>
 			<p>
 				The content type depends on the value provided to the type attribute, and
@@ -2764,7 +2777,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The base name of resource bundle to access.
-					When not provided, uses the currently active <a href="@{project.url}ao.tld/tag-bundle">&lt;ao:bundle&gt;</a>.
+					When not provided, uses the currently active <a href="@{project.url}]]>&tld;<![CDATA[/tag-bundle">&lt;ao:bundle&gt;</a>.
 				</p>
 			]]></description>
 			<name>bundle</name>
@@ -2848,7 +2861,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					Specifies the type of content contained in the value.
 					Defaults to <code>text/plain</code>.
-					A nested <a href="@{project.url}ao.tld/tag-type">&lt;ao:type&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-type">&lt;ao:type&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -2861,7 +2874,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2016-11-08T00:26:39-0600" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Adds a message argument to its
@@ -2870,13 +2883,13 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>messageArg</name>
-		<tag-class>com.aoindustries.taglib.MessageArgTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.MessageArg&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 		<attribute>
 			<description><![CDATA[
 				<p>
 					The value of the parameter.
-					A nested <a href="@{project.url}ao.tld/tag-value">&lt;ao:value&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-value">&lt;ao:value&gt;</a>
 					tag will override this value.
 					If neither is provided, the output of the body is used with whitespace trimmed.
 				</p>
@@ -2889,7 +2902,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-08-05T16:09:39-05:00" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				If contained with any
@@ -2901,15 +2914,15 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				The content may be provided in one of three ways, in precedence order:
 			</p>
 			<ol>
-				<li>Direct child <a href="@{project.url}ao.tld/tag-content">&lt;ao:content&gt;</a> tag.</li>
+				<li>Direct child <a href="@{project.url}]]>&tld;<![CDATA[/tag-content">&lt;ao:content&gt;</a> tag.</li>
 				<li>As the content attribute</li>
 				<li>Contents of tag body, trimmed.</li>
 			</ol>
 		]]></description>
 		<name>meta</name>
-		<tag-class>com.aoindustries.taglib.MetaTag</tag-class>
+		<tag-class>com.aoindustries.taglib.Meta&BodyTag;</tag-class>
 		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
-		<body-content>scriptless</body-content>
+		<body-content>&JSP;</body-content>
 		&GlobalBufferedAttributes;
 		<attribute>
 			<description><![CDATA[
@@ -2928,7 +2941,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_meta_name.asp">name of the meta element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-name">&lt;ao:name&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-name">&lt;ao:name&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -2974,7 +2987,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_meta_content.asp">content of the meta data</a>.
-					A nested <a href="@{project.url}ao.tld/tag-value">&lt;ao:content&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-value">&lt;ao:content&gt;</a>
 					tag will override this value.
 					If neither is provided, the output of the body is used with whitespace trimmed.
 				</p>
@@ -2988,7 +3001,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_method.asp">method attribute</a> to its
@@ -2997,12 +3010,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>method</name>
-		<tag-class>com.aoindustries.taglib.MethodTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Method&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_name.asp">name attribute</a> to its
@@ -3011,12 +3024,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>name</name>
-		<tag-class>com.aoindustries.taglib.NameTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Name&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/ev_onblur.asp">onblur</a> script to its
@@ -3025,12 +3038,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>onblur</name>
-		<tag-class>com.aoindustries.taglib.OnblurTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Onblur&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/ev_onchange.asp">onchange</a> script to its
@@ -3039,12 +3052,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>onchange</name>
-		<tag-class>com.aoindustries.taglib.OnchangeTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Onchange&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-08-05T16:51:40-05:00" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/ev_onclick.asp">onclick</a> script to its
@@ -3053,12 +3066,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>onclick</name>
-		<tag-class>com.aoindustries.taglib.OnclickTag</tag-class>
-		<body-content>JSP</body-content>
+		<tag-class>com.aoindustries.taglib.Onclick&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/ev_onfocus.asp">onfocus</a> script to its
@@ -3067,12 +3080,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>onfocus</name>
-		<tag-class>com.aoindustries.taglib.OnfocusTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Onfocus&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/ev_onkeypress.asp">onkeypress</a> script to its
@@ -3081,12 +3094,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>onkeypress</name>
-		<tag-class>com.aoindustries.taglib.OnkeypressTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Onkeypress&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/ev_onload.asp">onload</a> script to its
@@ -3095,12 +3108,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>onload</name>
-		<tag-class>com.aoindustries.taglib.OnloadTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Onload&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/ev_onmouseout.asp">onmouseout</a> script to its
@@ -3109,12 +3122,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>onmouseout</name>
-		<tag-class>com.aoindustries.taglib.OnmouseoutTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Onmouseout&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/ev_onmouseover.asp">onmouseover</a> script to its
@@ -3123,12 +3136,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>onmouseover</name>
-		<tag-class>com.aoindustries.taglib.OnmouseoverTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Onmouseover&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/ev_onsubmit.asp">onsubmit</a> script to its
@@ -3137,28 +3150,28 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>onsubmit</name>
-		<tag-class>com.aoindustries.taglib.OnsubmitTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Onsubmit&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-08-05T16:09:39-05:00" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Renders an <a href="https://www.w3schools.com/tags/tag_option.asp">&lt;option&gt;</a> tag.
 			</p>
 		]]></description>
 		<name>option</name>
-		<tag-class>com.aoindustries.taglib.OptionTag</tag-class>
+		<tag-class>com.aoindustries.taglib.Option&BodyTag;</tag-class>
 		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
-		<body-content>JSP</body-content>
+		<body-content>&JSP;</body-content>
 		&GlobalBufferedAttributes;
 		<attribute>
 			<description><![CDATA[
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_option_disabled.asp">disabled attribute</a>.
 					Accepts values of <code>true</code> or <code>false</code>.
-					A non-empty nested <a href="@{project.url}ao.tld/tag-disabled">&lt;ao:disabled&gt;</a>
+					A non-empty nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-disabled">&lt;ao:disabled&gt;</a>
 					tag will override this value.
 					If disabled is <code>true</code>, will add the attribute as <code>disabled="disabled"</code>,
 					otherwise the attribute is not added.
@@ -3174,7 +3187,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_option_selected.asp">selected attribute</a>.
 					Accepts values of <code>true</code> or <code>false</code>.
-					A non-empty nested <a href="@{project.url}ao.tld/tag-selected">&lt;ao:selected&gt;</a>
+					A non-empty nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-selected">&lt;ao:selected&gt;</a>
 					tag will override this value.
 					If selected is <code>true</code>, will add the attribute as <code>selected="selected"</code>,
 					otherwise the attribute is not added.
@@ -3189,7 +3202,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_option_value.asp">value of the option</a>.
-					A nested <a href="@{project.url}ao.tld/tag-value">&lt;ao:value&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-value">&lt;ao:value&gt;</a>
 					tag will override this value.
 					If neither is provided, the output of the body is used with whitespace trimmed.
 				</p>
@@ -3249,8 +3262,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</ul>
 			<p>
 				This is compatible with <a href="https://aoindustries.com/ao-encoding/taglib/ao-encoding.tld/tag-out">&lt;encoding:out&gt;</a>,
-				with the addition of allowing nested <a href="@{project.url}ao.tld/tag-value">&lt;ao:value&gt;</a> and
-				<a href="@{project.url}ao.tld/tag-type">&lt;ao:type&gt;</a> tags.
+				with the addition of allowing nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-value">&lt;ao:value&gt;</a> and
+				<a href="@{project.url}]]>&tld;<![CDATA[/tag-type">&lt;ao:type&gt;</a> tags.
 			</p>
 		]]></description>
 		<name>out</name>
@@ -3261,7 +3274,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The value to be written.
-					A nested <a href="@{project.url}ao.tld/tag-value">&lt;ao:value&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-value">&lt;ao:value&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -3292,7 +3305,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					Specifies the type of content contained in the value.
 					Defaults to <code>text/plain</code>.
-					A nested <a href="@{project.url}ao.tld/tag-type">&lt;ao:type&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-type">&lt;ao:type&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -3304,7 +3317,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2016-11-08T00:26:39-0600" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a page to its
@@ -3313,12 +3326,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>page</name>
-		<tag-class>com.aoindustries.taglib.PageTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Page&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-03-26T22:27:21-05:00" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Adds a parameter to its
@@ -3327,13 +3340,13 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>param</name>
-		<tag-class>com.aoindustries.taglib.ParamTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Param&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 		<attribute>
 			<description><![CDATA[
 				<p>
 					The name of parameter tag.
-					A nested <a href="@{project.url}ao.tld/tag-name">&lt;ao:name&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-name">&lt;ao:name&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -3346,7 +3359,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The value of the parameter.
-					A nested <a href="@{project.url}ao.tld/tag-value">&lt;ao:value&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-value">&lt;ao:value&gt;</a>
 					tag will override this value.
 					If neither is provided, the output of the body is used with whitespace trimmed.
 				</p>
@@ -3374,7 +3387,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The name of parameter to add.
-					A nested <a href="@{project.url}ao.tld/tag-name">&lt;ao:name&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-name">&lt;ao:name&gt;</a>
 					tag will override this value.
 				</p>
 				<p>
@@ -3471,7 +3484,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Provides a <a href="https://www.w3schools.com/tags/att_readonly.asp">readonly attribute</a> to its
@@ -3484,8 +3497,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>readonly</name>
-		<tag-class>com.aoindustries.taglib.ReadonlyTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Readonly&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
@@ -3501,7 +3514,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					Redirects inside of standard
 					<a rel="nofollow" href="https://docs.oracle.com/cd/A87860_01/doc/java.817/a83726/genlovw3.htm#1008181">&lt;jsp:include&gt;</a>
 					tags will be silently lost.
-					Use <a href="@{project.url}ao.tld/tag-include">&lt;ao:include&gt;</a>
+					Use <a href="@{project.url}]]>&tld;<![CDATA[/tag-include">&lt;ao:include&gt;</a>
 					instead of <a rel="nofollow" href="https://docs.oracle.com/cd/A87860_01/doc/java.817/a83726/genlovw3.htm#1008181">&lt;jsp:include&gt;</a>
 					to support redirects inside of includes.
 				</p>
@@ -3523,8 +3536,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				for the parameter value.
 			</p>
 			<p>
-				Nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a>
-				or <a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a>
+				Nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-param">&lt;ao:param&gt;</a>
+				or <a href="@{project.url}]]>&tld;<![CDATA[/tag-params">&lt;ao:params&gt;</a>
 				tags will add parameters after any provided as attributes.
 			</p>
 			<p>
@@ -3572,7 +3585,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					The href is modified in several ways to make things much easier to work with.
 				</p>
 				<p>
-					A nested <a href="@{project.url}ao.tld/tag-href">&lt;ao:href&gt;</a> tag will override this value.
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-href">&lt;ao:href&gt;</a> tag will override this value.
 				</p>
 				<p>
 					When not provided as attribute or a nested tag, defaults to the value for "page".
@@ -3581,8 +3594,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					In order to make relative paths predictable, relative paths are interpreted from
 					the current JSP page, as long as all includes have been done via
-					<a href="@{project.url}ao.tld/tag-include">&lt;ao:include&gt;</a>
-					and any forward via <a href="@{project.url}ao.tld/tag-forward">&lt;ao:forward&gt;</a>.
+					<a href="@{project.url}]]>&tld;<![CDATA[/tag-include">&lt;ao:include&gt;</a>
+					and any forward via <a href="@{project.url}]]>&tld;<![CDATA[/tag-forward">&lt;ao:forward&gt;</a>.
 				</p>
 				<p>
 					In order to keep paths app-relative, if starts with a /, the context path will be
@@ -3591,7 +3604,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					In order to simplify things behind URL mapping schemes,
 					the href is always written starting with '/'.  This avoids any need to include any
-					<a href="@{project.url}ao.tld/tag-base">&lt;ao:base&gt;</a> tags.
+					<a href="@{project.url}]]>&tld;<![CDATA[/tag-base">&lt;ao:base&gt;</a> tags.
 				</p>
 				<p>
 					URL rewriting is performed as needed via
@@ -3603,8 +3616,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					To avoid ambiguity, any dynamic parameters or anchors in the URL must have been correctly encoded by the caller.
 				</p>
 				<p>
-					Any directly nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a>
-					or <a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a>
+					Any directly nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-param">&lt;ao:param&gt;</a>
+					or <a href="@{project.url}]]>&tld;<![CDATA[/tag-params">&lt;ao:params&gt;</a>
 					tag will add parameters to the href.
 				</p>
 			]]></description>
@@ -3668,14 +3681,14 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					The page that will be forwarded to when the GET request URL length is exceeded.
 					It is recommended to provide the page for any redirect within a web application,
 					such as 303 redirect-after-post.
-					A nested <a href="@{project.url}ao.tld/tag-page">&lt;ao:page&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-page">&lt;ao:page&gt;</a>
 					tag will override this value.
 				</p>
 				<p>
 					When forward is performed instead of redirect, the original request parameters are hidden.
 					Only the parameters provided in the redirect are passed-on to the target page.
 					Also, any arguments to the current JSP page are not passed-on (see
-					<a href="@{project.url}ao.tld/tag-include">&lt;ao:include&gt;</a>).
+					<a href="@{project.url}]]>&tld;<![CDATA[/tag-include">&lt;ao:include&gt;</a>).
 				</p>
 				<p>
 					Security Note: page must be a trusted value since it can access any resource available via
@@ -3683,7 +3696,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					It would be incorrect to use a value that can be manipulated by a client in any way.
 				</p>
 				<p>
-					Recommend use of <a href="@{project.url}ao.tld/tag-include">&lt;ao:base&gt;</a>
+					Recommend use of <a href="@{project.url}]]>&tld;<![CDATA[/tag-include">&lt;ao:base&gt;</a>
 					on target page to have relative paths interpreted from the forwarded-to page.
 				</p>
 				<p>
@@ -3702,7 +3715,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_rel.asp">rel attribute</a> to its
@@ -3711,8 +3724,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>rel</name>
-		<tag-class>com.aoindustries.taglib.RelTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Rel&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
@@ -3728,7 +3741,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-18T11:39:31-06:00" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Manually establishes a <a href="https://www.w3schools.com/tags/tag_script.asp">script context</a> when automatic detection is not possible.
@@ -3766,8 +3779,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				for the parameter value.
 			</p>
 			<p>
-				Nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a>
-				or <a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a>
+				Nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-param">&lt;ao:param&gt;</a>
+				or <a href="@{project.url}]]>&tld;<![CDATA[/tag-params">&lt;ao:params&gt;</a>
 				tags will add parameters after any provided as attributes.
 			</p>
 			<p>
@@ -3780,9 +3793,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</ul>
 		]]></description>
 		<name>script</name>
-		<tag-class>com.aoindustries.taglib.ScriptTag</tag-class>
+		<tag-class>com.aoindustries.taglib.Script&BodyTag;</tag-class>
 		<tei-class>com.aoindustries.taglib.ScriptTagTEI</tei-class>
-		<body-content>JSP</body-content>
+		<body-content>&JSP;</body-content>
 		&GlobalBufferedAttributes;
 		<attribute>
 			<description><![CDATA[
@@ -3790,7 +3803,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					Specifies the <a href="https://www.w3schools.com/tags/att_script_type.asp">type of script</a>.
 					The default is <code>application/javascript</code>, also allows <code>text/javascript</code>
 					<code>application/json</code> and <code>application/ld+json</code>.
-					A nested <a href="@{project.url}ao.tld/tag-type">&lt;ao:type&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-type">&lt;ao:type&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -3806,13 +3819,13 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					The src is modified in several ways to make things much easier to work with.
 				</p>
 				<p>
-					A nested <a href="@{project.url}ao.tld/tag-src">&lt;ao:src&gt;</a> tag will override this value.
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-src">&lt;ao:src&gt;</a> tag will override this value.
 				</p>
 				<p>
 					In order to make relative paths predictable, relative paths are interpreted from
 					the current JSP page, as long as all includes have been done via
-					<a href="@{project.url}ao.tld/tag-include">&lt;ao:include&gt;</a>
-					and any forward via <a href="@{project.url}ao.tld/tag-forward">&lt;ao:forward&gt;</a>.
+					<a href="@{project.url}]]>&tld;<![CDATA[/tag-include">&lt;ao:include&gt;</a>
+					and any forward via <a href="@{project.url}]]>&tld;<![CDATA[/tag-forward">&lt;ao:forward&gt;</a>.
 				</p>
 				<p>
 					In order to keep paths app-relative, if starts with a /, the context path will be
@@ -3821,7 +3834,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					In order to simplify things behind URL mapping schemes,
 					the src is always written starting with '/'.  This avoids any need to include any
-					<a href="@{project.url}ao.tld/tag-base">&lt;ao:base&gt;</a> tags.
+					<a href="@{project.url}]]>&tld;<![CDATA[/tag-base">&lt;ao:base&gt;</a> tags.
 				</p>
 				<p>
 					URL rewriting is performed as needed via
@@ -3833,8 +3846,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					To avoid ambiguity, any dynamic parameters or anchors in the URL must have been correctly encoded by the caller.
 				</p>
 				<p>
-					Any directly nested <a href="@{project.url}ao.tld/tag-param">&lt;ao:param&gt;</a>
-					or <a href="@{project.url}ao.tld/tag-params">&lt;ao:params&gt;</a>
+					Any directly nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-param">&lt;ao:param&gt;</a>
+					or <a href="@{project.url}]]>&tld;<![CDATA[/tag-params">&lt;ao:params&gt;</a>
 					tag will add parameters to the src.
 				</p>
 			]]></description>
@@ -3895,23 +3908,23 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-08-05T16:09:39-05:00" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Renders a <a href="https://www.w3schools.com/tags/tag_select.asp">&lt;select&gt;</a> tag.
 			</p>
 		]]></description>
 		<name>select</name>
-		<tag-class>com.aoindustries.taglib.SelectTag</tag-class>
+		<tag-class>com.aoindustries.taglib.Select&BodyTag;</tag-class>
 		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
-		<body-content>JSP</body-content>
+		<body-content>&JSP;</body-content>
 		&GlobalBufferedAttributes;
 		<attribute>
 			<description><![CDATA[
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_select_disabled.asp">disabled attribute</a>.
 					Accepts values of <code>true</code> or <code>false</code>.
-					A non-empty nested <a href="@{project.url}ao.tld/tag-disabled">&lt;ao:disabled&gt;</a>
+					A non-empty nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-disabled">&lt;ao:disabled&gt;</a>
 					tag will override this value.
 					If disabled is <code>true</code>, will add the attribute as <code>disabled="disabled"</code>,
 					otherwise the attribute is not added.
@@ -3926,7 +3939,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_select_name.asp">name of the select element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-name">&lt;ao:name&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-name">&lt;ao:name&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -3939,7 +3952,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_select_size.asp">size of the select element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-size">&lt;ao:size&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-size">&lt;ao:size&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -3952,7 +3965,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					A JavaScript <a href="https://www.w3schools.com/tags/ev_onblur.asp">onblur</a> handler.
-					A nested <a href="@{project.url}ao.tld/tag-onblur">&lt;ao:onblur&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-onblur">&lt;ao:onblur&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -3965,7 +3978,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					A JavaScript <a href="https://www.w3schools.com/tags/ev_onchange.asp">onchange</a> handler.
-					A nested <a href="@{project.url}ao.tld/tag-onchange">&lt;ao:onchange&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-onchange">&lt;ao:onchange&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -3978,7 +3991,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					A JavaScript <a href="https://www.w3schools.com/tags/ev_onfocus.asp">onfocus</a> handler.
-					A nested <a href="@{project.url}ao.tld/tag-onfocus">&lt;ao:onfocus&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-onfocus">&lt;ao:onfocus&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -3991,7 +4004,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					A JavaScript <a href="https://www.w3schools.com/tags/ev_onkeypress.asp">onkeypress</a> handler.
-					A nested <a href="@{project.url}ao.tld/tag-onkeypress">&lt;ao:onkeypress&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-onkeypress">&lt;ao:onkeypress&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -4004,7 +4017,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Provides a <a href="https://www.w3schools.com/tags/att_selected.asp">selected attribute</a> to its
@@ -4017,12 +4030,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>selected</name>
-		<tag-class>com.aoindustries.taglib.SelectedTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Selected&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-04-15T19:37:30-0500" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Returns an error status.
@@ -4034,7 +4047,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				Errors sent inside of standard
 				<a rel="nofollow" href="https://docs.oracle.com/cd/A87860_01/doc/java.817/a83726/genlovw3.htm#1008181">&lt;jsp:include&gt;</a>
 				tags will be silently lost.
-				Use <a href="@{project.url}ao.tld/tag-include">&lt;ao:include&gt;</a>
+				Use <a href="@{project.url}]]>&tld;<![CDATA[/tag-include">&lt;ao:include&gt;</a>
 				instead of
 				<a rel="nofollow" href="https://docs.oracle.com/cd/A87860_01/doc/java.817/a83726/genlovw3.htm#1008181">&lt;jsp:include&gt;</a>
 				to support
@@ -4043,8 +4056,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>sendError</name>
-		<tag-class>com.aoindustries.taglib.SendErrorTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.SendError&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 		<attribute>
 			<description><![CDATA[
 				<p>
@@ -4071,7 +4084,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_size.asp">size attribute</a> to its
@@ -4080,12 +4093,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>size</name>
-		<tag-class>com.aoindustries.taglib.SizeTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Size&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_src.asp">src attribute</a> to its
@@ -4094,12 +4107,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>src</name>
-		<tag-class>com.aoindustries.taglib.SrcTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Src&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_style.asp">style attribute</a> to its
@@ -4108,12 +4121,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>style</name>
-		<tag-class>com.aoindustries.taglib.StyleTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Style&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Provides a <a href="https://www.w3schools.com/tags/att_tabindex.asp">tabindex attribute</a> to its
@@ -4126,12 +4139,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>tabindex</name>
-		<tag-class>com.aoindustries.taglib.TabindexTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Tabindex&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_target.asp">target attribute</a> to its
@@ -4140,12 +4153,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>target</name>
-		<tag-class>com.aoindustries.taglib.TargetTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Target&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-08-05T23:08:36-05:00" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders a <a href="https://www.w3schools.com/tags/tag_textarea.asp">&lt;textarea&gt;</a> tag.
@@ -4154,15 +4167,14 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				The value may be provided in one of three ways, in precedence order:
 			</p>
 			<ol>
-				<li>Direct child <a href="@{project.url}ao.tld/tag-value">&lt;ao:value&gt;</a> tag.</li>
+				<li>Direct child <a href="@{project.url}]]>&tld;<![CDATA[/tag-value">&lt;ao:value&gt;</a> tag.</li>
 				<li>As the value attribute</li>
 				<li>Contents of tag body.</li>
 			</ol>
 		]]></description>
 		<name>textarea</name>
-		<tag-class>com.aoindustries.taglib.TextareaTag</tag-class>
-		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
-		<body-content>JSP</body-content>
+		<tag-class>com.aoindustries.taglib.Textarea&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 		&GlobalBufferedAttributes;
 		<attribute>
 			<description><![CDATA[
@@ -4180,7 +4192,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_textarea_disabled.asp">disabled attribute</a>.
 					Accepts values of <code>true</code> or <code>false</code>.
-					A non-empty nested <a href="@{project.url}ao.tld/tag-disabled">&lt;ao:disabled&gt;</a>
+					A non-empty nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-disabled">&lt;ao:disabled&gt;</a>
 					tag will override this value.
 					If disabled is <code>true</code>, will add the attribute as <code>disabled="disabled"</code>,
 					otherwise the attribute is not added.
@@ -4195,7 +4207,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_textarea_name.asp">name of the textarea element</a>.
-					A nested <a href="@{project.url}ao.tld/tag-name">&lt;ao:name&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-name">&lt;ao:name&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -4209,7 +4221,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					The <a href="https://www.w3schools.com/tags/att_textarea_readonly.asp">readonly attribute</a>.
 					Accepts values of <code>true</code> or <code>false</code>.
-					A non-empty nested <a href="@{project.url}ao.tld/tag-readonly">&lt;ao:readonly&gt;</a>
+					A non-empty nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-readonly">&lt;ao:readonly&gt;</a>
 					tag will override this value.
 					If readonly is <code>true</code>, will add the attribute as <code>readonly="readonly"</code>,
 					otherwise the attribute is not added.
@@ -4235,7 +4247,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					The value of the textarea.
-					A nested <a href="@{project.url}ao.tld/tag-value">&lt;ao:value&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-value">&lt;ao:value&gt;</a>
 					tag will override this value.
 					If neither is provided, the output of the body is used.
 				</p>
@@ -4249,7 +4261,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<description><![CDATA[
 				<p>
 					A JavaScript <a href="https://www.w3schools.com/tags/ev_onchange.asp">onchange</a> handler.
-					A nested <a href="@{project.url}ao.tld/tag-onchange">&lt;ao:onchange&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-onchange">&lt;ao:onchange&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -4262,7 +4274,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_title.asp">title attribute</a> to its
@@ -4271,12 +4283,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>title</name>
-		<tag-class>com.aoindustries.taglib.TitleTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Title&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_type.asp">type attribute</a> to its
@@ -4285,12 +4297,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>type</name>
-		<tag-class>com.aoindustries.taglib.TypeTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Type&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-04-15T19:37:30-0500" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Manually establishes a URL context when automatic detection is not possible.
@@ -4323,12 +4335,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>url</name>
-		<tag-class>com.aoindustries.taglib.UrlTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Url&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_value.asp">value attribute</a> to its
@@ -4337,8 +4349,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>value</name>
-		<tag-class>com.aoindustries.taglib.ValueTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Value&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-09-25T11:14:02-0500" -->
@@ -4368,7 +4380,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2019-10-09T00:34:45-0500" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_width.asp">width attribute</a> to its
@@ -4377,20 +4389,20 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 		]]></description>
 		<name>width</name>
-		<tag-class>com.aoindustries.taglib.WidthTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.Width&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2016-11-08T00:26:39-0600" -->
+		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
 		<description><![CDATA[
 			<p>
 				Word wraps the textual content.
 			</p>
 		]]></description>
 		<name>wordWrap</name>
-		<tag-class>com.aoindustries.taglib.WordWrapTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>com.aoindustries.taglib.WordWrap&BodyTag;</tag-class>
+		<body-content>&JSP;</body-content>
 		<attribute>
 			<description><![CDATA[
 				<p>
@@ -4474,7 +4486,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 					not specified, the value of this bean itself will be used.
 				</p>
 				<p>
-					A nested <a href="@{project.url}ao.tld/tag-name">&lt;ao:name&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-name">&lt;ao:name&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -4516,7 +4528,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 				<p>
 					Specifies the type of content contained in the bean.
 					Defaults to <code>text/plain</code>.
-					A nested <a href="@{project.url}ao.tld/tag-type">&lt;ao:type&gt;</a>
+					A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-type">&lt;ao:type&gt;</a>
 					tag will override this value.
 				</p>
 			]]></description>
@@ -4667,11 +4679,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			</p>
 			<p>
 				<var>path</var>: The path appended to the URL verbatim.  To support page-relative paths, first use
-				<a href="@{project.url}ao.tld/function-getAbsolutePath">${ao:getAbsolutePath()}</a>.
+				<a href="@{project.url}]]>&tld;<![CDATA[/function-getAbsolutePath">${ao:getAbsolutePath()}</a>.
 			</p>
 			<p>
 				No <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">URL rewriting</a> is performed.
-				Please additionally use <a href="@{project.url}ao.tld/function-encodeURL">${ao:encodeURL()}</a>, as-needed.
+				Please additionally use <a href="@{project.url}]]>&tld;<![CDATA[/function-encodeURL">${ao:encodeURL()}</a>, as-needed.
 			</p>
 		]]></description>
 		<name>getAbsoluteURL</name>
@@ -4699,8 +4711,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 		<description><![CDATA[
 			<p>
 				Determines if the current request has been forwarded by a
-				<a href="@{project.url}ao.tld/tag-forward">&lt;ao:forward&gt;</a> or
-				<a href="@{project.url}ao.tld/tag-redirect">&lt;ao:redirect&gt;</a> tag.
+				<a href="@{project.url}]]>&tld;<![CDATA[/tag-forward">&lt;ao:forward&gt;</a> or
+				<a href="@{project.url}]]>&tld;<![CDATA[/tag-redirect">&lt;ao:redirect&gt;</a> tag.
 			</p>
 		]]></description>
 		<name>isForwarded</name>
@@ -4731,7 +4743,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 			<p>
 				Gets a value from the current localization bundle given its key.
 				No parameters may be provided.
-				Must be nested inside a <a href="@{project.url}ao.tld/tag-bundle">&lt;ao:bundle&gt;</a>
+				Must be nested inside a <a href="@{project.url}]]>&tld;<![CDATA[/tag-bundle">&lt;ao:bundle&gt;</a>
 				tag.
 			</p>
 		]]></description>

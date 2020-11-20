@@ -45,6 +45,7 @@ import javax.servlet.jsp.tagext.JspTag;
 /**
  * @author  AO Industries, Inc.
  */
+// TODO: LinkBodyTag and LinkSimpleTag
 public class LinkTag
 	extends ElementNullSimpleTag
 	implements

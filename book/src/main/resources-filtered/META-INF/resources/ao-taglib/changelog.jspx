@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2020-11-19T06:04:20-06:00"
+		dateModified="2020-11-19T20:09:21-06:00"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -80,36 +80,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 					</li>
 					<li>Added <code>size</code> attribute to <core:link page="ao.tld/tag-select" />.</li>
 					<li>
-						Changed several tags from <code>SimpleTag</code> to <code>BodyTag</code> to better interact with
-						legacy JSP that use scriptlets:
-						<ol>
-							<li><core:link page="ao.tld/tag-a" /></li>
-							<li><core:link page="ao.tld/tag-form" /></li>
-							<li><core:link page="ao.tld/tag-html" /></li>
-							<li><core:link page="ao.tld/tag-input" /></li>
-							<li><core:link page="ao.tld/tag-onclick" /></li>
-							<li><core:link page="ao.tld/tag-option" /></li>
-							<li><core:link page="ao.tld/tag-select" /></li>
-							<li><core:link page="ao.tld/tag-script" /></li>
-							<li><core:link page="ao.tld/tag-textarea" /></li>
-							<!-- TODO: Change more/all tags to BodyTag for more flexibility with legacy code -->
-						</ol>
+						Added <core:link page="ao-encoding-legacy.tld/">alternate implementation</core:link> compatible
+						with legacy JSP that use scriptlets.
 					</li>
 					<li>
 						<core:link page="ao.tld/tag-textarea" /> no longer requires <code>cols</code> and
 						<code>rows</code> attributes.
-					</li>
-					<li>
-						<p>
-							Now registering exception types for use with <code>Throwables.newSurrogate(…)</code> that supports creating new instances
-							of throwables in order to have caller stack trace.  When wrapped, the original throwable is the
-							cause of the new throwable.  When not wrapped, the original throwable is used directly and
-							caller stack trace is lost.
-						</p>
-						<p>
-							This is used to maintain exception types and states across thread boundaries, such as when an exception cause
-							is obtained from an <code>ExecutionException</code>.
-						</p>
 					</li>
 				</ul>
 				<!-- TODO:

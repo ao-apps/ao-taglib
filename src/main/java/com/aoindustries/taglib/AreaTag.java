@@ -45,6 +45,7 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
+// TODO: AreaBodyTag and AreaSimpleTag
 public class AreaTag
 	extends ElementNullSimpleTag
 	implements

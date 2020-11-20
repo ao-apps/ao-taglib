@@ -39,6 +39,7 @@ import org.apache.commons.lang3.NotImplementedException;
 /**
  * @author  AO Industries, Inc.
  */
+// TODO: IncludeBodyTag and IncludeSimpleTag?
 public class IncludeTag extends ArgDispatchTag {
 
 	/**

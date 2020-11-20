@@ -31,6 +31,15 @@ import javax.servlet.jsp.tagext.ValidationMessage;
  */
 public class FormTagTEI extends ElementTagTEI {
 
+	// TODO: Allow null here while doing normalizeMethod
+	// TODO: Change to be validateMethod, like validateDir
+	public static boolean isValidMethod(String method) {
+		return
+			"get".equals(method)
+			|| "post".equals(method)
+		;
+	}
+
 	@Override
 	protected void validate(TagData data, List<ValidationMessage> messages) {
 		super.validate(data, messages);
@@ -39,8 +48,8 @@ public class FormTagTEI extends ElementTagTEI {
 			o != null
 			&& o != TagData.REQUEST_TIME_VALUE
 		) {
-			String method = ((String)o).trim(); // TODO: FormTag.normalizeMethod
-			if(!FormTag.isValidMethod(method)) {
+			String method = ((String)o).trim(); // TODO: normalizeMethod
+			if(!isValidMethod(method)) {
 				messages.add(
 					new ValidationMessage(
 						data.getId(),

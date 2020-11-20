@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2016, 2017, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,17 +22,13 @@
  */
 package com.aoindustries.taglib;
 
-import java.io.IOException;
 import javax.el.ValueExpression;
-import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 /**
  * @author  AO Industries, Inc.
  */
-public class AssertTag
-	extends SimpleTagSupport
-{
+public class AssertTag extends SimpleTagSupport {
 
 	private boolean test;
 	public void setTest(boolean test) {
@@ -45,7 +41,7 @@ public class AssertTag
 	}
 
 	@Override
-	public void doTag() throws JspException, IOException {
+	public void doTag() {
 		if(!test) {
 			if(message != null) {
 				throw new AssertionError(

@@ -48,6 +48,7 @@ import javax.servlet.jsp.SkipPageException;
 /**
  * @author  AO Industries, Inc.
  */
+// TODO: RedirectBodyTag and RedirectSimpleTag?
 public class RedirectTag
 	extends DispatchTag
 	implements HrefAttribute

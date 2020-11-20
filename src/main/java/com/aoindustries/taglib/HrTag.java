@@ -34,6 +34,7 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
+// TODO: HrBodyTag and HrSimpleTag
 public class HrTag extends ElementNullSimpleTag {
 
 	@Override

@@ -1,0 +1,204 @@
+/*
+ * ao-taglib - Making JSP be what it should have been all along.
+ * Copyright (C) 2010, 2011, 2013, 2015, 2016, 2017, 2019, 2020  AO Industries, Inc.
+ *     support@aoindustries.com
+ *     7262 Bull Pen Cir
+ *     Mobile, AL 36695
+ *
+ * This file is part of ao-taglib.
+ *
+ * ao-taglib is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ao-taglib is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
+ */
+package com.aoindustries.taglib;
+
+import com.aoindustries.encoding.Coercion;
+import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaScriptInXhtmlAttributeEncoder;
+import com.aoindustries.encoding.MediaType;
+import com.aoindustries.encoding.Serialization;
+import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
+import static com.aoindustries.encoding.TextInXhtmlEncoder.textInXhtmlEncoder;
+import com.aoindustries.encoding.servlet.SerializationEE;
+import com.aoindustries.io.buffer.BufferResult;
+import com.aoindustries.lang.Strings;
+import com.aoindustries.util.i18n.MarkupType;
+import java.io.IOException;
+import java.io.Writer;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.jsp.JspTagException;
+
+/**
+ * @author  AO Industries, Inc.
+ */
+public class TextareaSimpleTag extends ElementBufferedSimpleTag
+	implements
+		// Attributes
+		ColsAttribute,
+		DisabledAttribute,
+		NameAttribute,
+		ReadonlyAttribute,
+		RowsAttribute,
+		ValueAttribute,
+		// Events
+		OnchangeAttribute
+{
+
+	public TextareaSimpleTag() {
+		init();
+	}
+
+	@Override
+	public MediaType getContentType() {
+		return MediaType.TEXT;
+	}
+
+	@Override
+	public MediaType getOutputType() {
+		return MediaType.XHTML;
+	}
+
+/* BodyTag only:
+	private static final long serialVersionUID = 1L;
+/**/
+
+	private Integer cols;
+	@Override
+	public void setCols(int cols) {
+		this.cols = cols;
+	}
+
+	private boolean disabled;
+	@Override
+	public void setDisabled(boolean disabled) {
+		this.disabled = disabled;
+	}
+
+	private String name;
+	@Override
+	public void setName(String name) throws JspTagException {
+		this.name = Strings.nullIfEmpty(name);
+	}
+
+	private boolean readonly;
+	@Override
+	public void setReadonly(boolean readonly) {
+		this.readonly = readonly;
+	}
+
+	private Integer rows;
+	@Override
+	public void setRows(int rows) {
+		this.rows = rows;
+	}
+
+	private Object value;
+	@Override
+	public void setValue(Object value) throws JspTagException {
+		this.value = AttributeUtils.nullIfEmpty(value);
+	}
+
+	private Object onchange;
+	@Override
+	public void setOnchange(Object onchange) throws JspTagException {
+		this.onchange = AttributeUtils.trimNullIfEmpty(onchange);
+	}
+
+/* BodyTag only:
+	private transient BufferResult capturedBody;
+/**/
+
+	private void init() {
+		cols = null;
+		disabled = false;
+		name = null;
+		readonly = false;
+		rows = null;
+		value = null;
+		onchange = null;
+/* BodyTag only:
+		capturedBody = null;
+/**/
+	}
+
+/* BodyTag only:
+	@Override
+	protected int doAfterBody(BufferResult capturedBody, Writer out) {
+		assert this.capturedBody == null;
+		assert capturedBody != null;
+		this.capturedBody = capturedBody;
+		return SKIP_BODY;
+	}
+/**/
+
+	@Override
+/* BodyTag only:
+	protected int doEndTag(Writer out) throws JspTagException, IOException {
+/**/
+/* SimpleTag only: */
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+		javax.servlet.jsp.PageContext pageContext = (javax.servlet.jsp.PageContext)getJspContext();
+/**/
+		if(value == null && capturedBody != null) setValue(capturedBody.trim());
+		Serialization serialization = SerializationEE.get(
+			pageContext.getServletContext(),
+			(HttpServletRequest)pageContext.getRequest()
+		);
+		out.write("<textarea");
+		GlobalAttributesUtils.writeGlobalAttributes(global, out);
+		if(cols != null) {
+			out.write(" cols=\"");
+			encodeTextInXhtmlAttribute(cols, out);
+			out.write('"');
+		}
+		if(disabled) {
+			out.write(" disabled");
+			if(serialization == Serialization.XML) out.write("=\"disabled\"");
+		}
+		if(name != null) {
+			out.write(" name=\"");
+			encodeTextInXhtmlAttribute(name, out);
+			out.write('"');
+		}
+		if(readonly) {
+			out.write(" readonly");
+			if(serialization == Serialization.XML) out.write("=\"readonly\"");
+		}
+		if(rows != null) {
+			out.write(" rows=\"");
+			encodeTextInXhtmlAttribute(rows, out);
+			out.write('"');
+		}
+		if(onchange != null) {
+			out.write(" onchange=\"");
+			Coercion.write(onchange, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
+			out.write('"');
+		}
+		out.write('>');
+		Coercion.write(value, textInXhtmlEncoder, out);
+		out.write("</textarea>");
+/* BodyTag only:
+		return EVAL_PAGE;
+/**/
+	}
+
+/* BodyTag only:
+	@Override
+	public void doFinally() {
+		try {
+			init();
+		} finally {
+			super.doFinally();
+		}
+	}
+/**/
+}

@@ -39,6 +39,7 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
+// TODO: BaseBodyTag and BaseSimpleTag
 public class BaseTag extends ElementNullSimpleTag {
 
 	@Override

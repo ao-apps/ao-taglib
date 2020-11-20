@@ -45,6 +45,7 @@ import org.w3c.dom.Node;
  * @author  AO Industries, Inc.
  */
 // TODO: Remove or deprecate?  This is old struts-style, and obsoleted by JSTL + EL.
+// TODO: WriteBodyTag and WriteSimpleTag
 public class WriteTag
 	extends EncodingNullSimpleTag
 	implements

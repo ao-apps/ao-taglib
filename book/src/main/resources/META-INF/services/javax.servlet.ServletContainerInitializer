@@ -22,3 +22,4 @@
 #
 
 com.aoindustries.taglib.book.AoTldInitializer
+com.aoindustries.taglib.book.AoLegacyTldInitializer

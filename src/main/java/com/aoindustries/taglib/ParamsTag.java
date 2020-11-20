@@ -39,6 +39,7 @@ import javax.servlet.jsp.JspTagException;
 /**
  * @author  AO Industries, Inc.
  */
+// TODO: ParamsBodyTag and ParamsSimpleTag
 public class ParamsTag
 	extends EncodingNullSimpleTag
 	implements NameAttribute

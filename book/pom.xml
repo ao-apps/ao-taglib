@@ -92,7 +92,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 								<artifactItem>
 									<groupId>com.aoindustries</groupId><artifactId>ao-taglib</artifactId><version>6.0.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
 									<type>jar</type>
-									<includes>META-INF/ao.tld</includes>
+									<includes>
+										META-INF/ao.tld,
+										META-INF/ao-legacy.tld
+									</includes>
 								</artifactItem>
 							</artifactItems>
 						</configuration>
@@ -110,6 +113,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 									<directory>${project.build.directory}/dependency/META-INF</directory>
 									<includes>
 										<include>ao.tld</include>
+										<include>ao-legacy.tld</include>
 									</includes>
 								</resource>
 							</resources>
@@ -290,7 +294,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
-			<!-- Styles used in ao.tld -->
+			<!-- Styles used in ao.tld and ao-legacy.tld -->
 			<groupId>com.aoindustries</groupId><artifactId>ao-style</artifactId>
 			<scope>runtime</scope>
 		</dependency>

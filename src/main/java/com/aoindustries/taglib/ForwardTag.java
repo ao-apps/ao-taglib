@@ -36,6 +36,7 @@ import javax.servlet.jsp.JspWriter;
 /**
  * @author  AO Industries, Inc.
  */
+// TODO: ForwardBodyTag and ForwardSimpleTag?
 public class ForwardTag extends ArgDispatchTag {
 
 	/**
