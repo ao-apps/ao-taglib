@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2020-11-19T20:09:21-06:00"
+		dateModified="2020-11-21T12:11:43-06:00"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -80,7 +80,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 					</li>
 					<li>Added <code>size</code> attribute to <core:link page="ao.tld/tag-select" />.</li>
 					<li>
-						Added <core:link page="ao-encoding-legacy.tld/">alternate implementation</core:link> compatible
+						Added <core:link page="ao-legacy.tld/">alternate implementation</core:link> compatible
 						with legacy JSP that use scriptlets.
 					</li>
 					<li>
