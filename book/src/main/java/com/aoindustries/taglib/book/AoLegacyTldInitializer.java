@@ -37,8 +37,10 @@ public class AoLegacyTldInitializer extends TagReferenceInitializer {
 			Maven.properties.getProperty("documented.javadoc.link.javaee"),
 			// Self
 			"com.aoindustries.taglib", Maven.properties.getProperty("project.url") + "apidocs/",
+			"com.aoindustries.taglib.legacy", Maven.properties.getProperty("project.url") + "apidocs/",
 			// Dependencies
 			"com.aoindustries.encoding.taglib", "https://aoindustries.com/ao-encoding/taglib/apidocs/",
+			"com.aoindustries.encoding.taglib.legacy", "https://aoindustries.com/ao-encoding/taglib/apidocs/",
 			"com.aoindustries.lang", "https://aoindustries.com/ao-lang/apidocs/",
 			"com.aoindustries.net", "https://aoindustries.com/ao-net-types/apidocs/"
 		);

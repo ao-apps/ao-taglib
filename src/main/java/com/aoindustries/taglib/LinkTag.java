@@ -47,7 +47,7 @@ import javax.servlet.jsp.tagext.JspTag;
  */
 // TODO: LinkBodyTag and LinkSimpleTag
 public class LinkTag
-	extends ElementNullSimpleTag
+	extends ElementNullTag
 	implements
 		HrefAttribute,
 		ParamsAttribute,

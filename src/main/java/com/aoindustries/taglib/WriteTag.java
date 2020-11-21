@@ -24,7 +24,7 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.encoding.taglib.EncodingNullSimpleTag;
+import com.aoindustries.encoding.taglib.EncodingNullTag;
 import com.aoindustries.io.Writable;
 import com.aoindustries.lang.Strings;
 import com.aoindustries.lang.Throwables;
@@ -46,8 +46,7 @@ import org.w3c.dom.Node;
  */
 // TODO: Remove or deprecate?  This is old struts-style, and obsoleted by JSTL + EL.
 // TODO: WriteBodyTag and WriteSimpleTag
-public class WriteTag
-	extends EncodingNullSimpleTag
+public class WriteTag extends EncodingNullTag
 	implements
 		NameAttribute,
 		TypeAttribute

@@ -23,7 +23,7 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.encoding.taglib.EncodingNullSimpleTag;
+import com.aoindustries.encoding.taglib.EncodingNullTag;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.util.ErrorPrinter;
 import java.io.IOException;
@@ -34,7 +34,7 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
-public class GetStackTracesTag extends EncodingNullSimpleTag {
+public class GetStackTracesTag extends EncodingNullTag {
 
 	private String scope;
 	private String name;

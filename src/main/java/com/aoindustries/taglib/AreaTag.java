@@ -47,7 +47,7 @@ import javax.servlet.jsp.PageContext;
  */
 // TODO: AreaBodyTag and AreaSimpleTag
 public class AreaTag
-	extends ElementNullSimpleTag
+	extends ElementNullTag
 	implements
 		HrefAttribute,
 		ParamsAttribute,

@@ -35,7 +35,7 @@ import javax.servlet.jsp.PageContext;
  * @author  AO Industries, Inc.
  */
 // TODO: HrBodyTag and HrSimpleTag
-public class HrTag extends ElementNullSimpleTag {
+public class HrTag extends ElementNullTag {
 
 	@Override
 	public MediaType getOutputType() {

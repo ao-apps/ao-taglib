@@ -36,7 +36,7 @@ import javax.servlet.jsp.PageContext;
  * @author  AO Industries, Inc.
  */
 // TODO: ColBodyTag and ColSimpleTag
-public class ColTag extends ElementNullSimpleTag {
+public class ColTag extends ElementNullTag {
 
 	@Override
 	public MediaType getOutputType() {

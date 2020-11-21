@@ -22,11 +22,11 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.taglib.EncodingNullSimpleTag;
+import com.aoindustries.encoding.taglib.EncodingNullTag;
 
 /**
- * @deprecated  Please use {@link EncodingNullSimpleTag}.
+ * @deprecated  Please use {@link EncodingNullTag}.
  */
 @Deprecated
-public abstract class AutoEncodingNullTag extends EncodingNullSimpleTag {
+public abstract class AutoEncodingNullTag extends EncodingNullTag {
 }

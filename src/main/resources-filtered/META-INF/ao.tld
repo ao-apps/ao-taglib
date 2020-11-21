@@ -29,7 +29,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 <!ENTITY tld_uri "@{project.url}">
 <!ENTITY tld_description "&lt;em&gt;This is the scriptless implementation based on &lt;a rel=&quot;nofollow&quot; href=&quot;@{javadoc.link.javaee}javax/servlet/jsp/tagext/SimpleTagSupport.html&quot;&gt;javax.servlet.jsp.tagext.SimpleTagSupport&lt;/a&gt;.&lt;/em&gt;
 For compatibility with legacy applications that use JSP scriptlets, please use &lt;a href=&quot;@{project.url}ao-legacy.tld/&quot;&gt;@{project.name} Reference (Legacy)&lt;/a&gt;.">
-<!ENTITY BodyTag "SimpleTag">
+<!ENTITY package "com.aoindustries.taglib">
 <!ENTITY JSP "scriptless">
 
 <!-- Everything below this line should be an exact match between both implementations -->
@@ -160,7 +160,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
 	version="2.1">
 	<!-- datePublished="2016-08-07T16:29:54-0500" -->
-	<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+	<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 	<description><![CDATA[
 		<p>@{description.html}</p>
 		<p>]]>&tld_description;<![CDATA[</p>
@@ -176,7 +176,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	<!-- TODO: Implement validator(s), such as ao:when directly inside ao:choose and similar -->
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_a.asp">&lt;a&gt;</a> tag.
@@ -213,7 +213,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>a</name>
-		<tag-class>com.aoindustries.taglib.A&BodyTag;</tag-class>
+		<tag-class>&package;.ATag</tag-class>
 		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
 		<body-content>&JSP;</body-content>
 		&GlobalBufferedAttributes;
@@ -409,7 +409,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/att_action.asp">action attribute</a> to its
@@ -418,12 +418,12 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>action</name>
-		<tag-class>com.aoindustries.taglib.Action&BodyTag;</tag-class>
+		<tag-class>&package;.ActionTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/att_alt.asp">alt attribute</a> to its
@@ -432,7 +432,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>alt</name>
-		<tag-class>com.aoindustries.taglib.Alt&BodyTag;</tag-class>
+		<tag-class>&package;.AltTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
@@ -701,7 +701,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Adds an argument to its
@@ -710,7 +710,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>arg</name>
-		<tag-class>com.aoindustries.taglib.Arg&BodyTag;</tag-class>
+		<tag-class>&package;.ArgTag</tag-class>
 		<body-content>&JSP;</body-content>
 		<attribute>
 			<description><![CDATA[
@@ -863,7 +863,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_checked.asp">checked attribute</a> to its
@@ -874,7 +874,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>checked</name>
-		<tag-class>com.aoindustries.taglib.Checked&BodyTag;</tag-class>
+		<tag-class>&package;.CheckedTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
@@ -893,7 +893,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_class.asp">class attribute</a> to its
@@ -902,7 +902,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>class</name>
-		<tag-class>com.aoindustries.taglib.Class&BodyTag;</tag-class>
+		<tag-class>&package;.ClassTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
@@ -934,7 +934,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_content.asp">content attribute</a> to its
@@ -943,12 +943,12 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>content</name>
-		<tag-class>com.aoindustries.taglib.Content&BodyTag;</tag-class>
+		<tag-class>&package;.ContentTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2020-07-31T10:11:29-05:00" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_global_dir.asp">dir attribute</a> to its
@@ -957,7 +957,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>dir</name>
-		<tag-class>com.aoindustries.taglib.Dir&BodyTag;</tag-class>
+		<tag-class>&package;.DirTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
@@ -974,7 +974,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_disabled.asp">disabled attribute</a> to its
@@ -985,12 +985,12 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>disabled</name>
-		<tag-class>com.aoindustries.taglib.Disabled&BodyTag;</tag-class>
+		<tag-class>&package;.DisabledTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/att_enctype.asp">enctype attribute</a> to its
@@ -999,12 +999,12 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>enctype</name>
-		<tag-class>com.aoindustries.taglib.Enctype&BodyTag;</tag-class>
+		<tag-class>&package;.EnctypeTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<!-- TODO: param.* dynamic attributes should not do automatic multi-parameter.  Make a params.* dynamic attribute for this purpose. -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
@@ -1033,7 +1033,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>form</name>
-		<tag-class>com.aoindustries.taglib.Form&BodyTag;</tag-class>
+		<tag-class>&package;.FormTag</tag-class>
 		<tei-class>com.aoindustries.taglib.FormTagTEI</tei-class>
 		<body-content>&JSP;</body-content>
 		&GlobalBufferedAttributes;
@@ -1274,7 +1274,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_frame_frameborder.asp">frameborder attribute</a> to its
@@ -1285,7 +1285,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>frameborder</name>
-		<tag-class>com.aoindustries.taglib.Frameborder&BodyTag;</tag-class>
+		<tag-class>&package;.FrameborderTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
@@ -1350,7 +1350,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_height.asp">height attribute</a> to its
@@ -1359,7 +1359,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>height</name>
-		<tag-class>com.aoindustries.taglib.Height&BodyTag;</tag-class>
+		<tag-class>&package;.HeightTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
@@ -1380,7 +1380,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<ol>
 				<li>Clears the current output buffer (leaving status code and headers)</li>
@@ -1403,7 +1403,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</ol>
 		]]></description>
 		<name>html</name>
-		<tag-class>com.aoindustries.taglib.Html&BodyTag;</tag-class>
+		<tag-class>&package;.HtmlTag</tag-class>
 		<tei-class>com.aoindustries.taglib.HtmlTagTEI</tei-class>
 		<body-content>&JSP;</body-content>
 		&GlobalAttributes;
@@ -1470,7 +1470,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/att_href.asp">href attribute</a> to its
@@ -1479,12 +1479,12 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>href</name>
-		<tag-class>com.aoindustries.taglib.Href&BodyTag;</tag-class>
+		<tag-class>&package;.HrefTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/att_hreflang.asp">hreflang attribute</a> to its
@@ -1493,12 +1493,12 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>hreflang</name>
-		<tag-class>com.aoindustries.taglib.Hreflang&BodyTag;</tag-class>
+		<tag-class>&package;.HreflangTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/att_id.asp">id attribute</a> to its
@@ -1507,12 +1507,12 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>id</name>
-		<tag-class>com.aoindustries.taglib.Id&BodyTag;</tag-class>
+		<tag-class>&package;.IdTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_iframe.asp">&lt;iframe&gt;</a> tag.
@@ -1540,7 +1540,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>iframe</name>
-		<tag-class>com.aoindustries.taglib.Iframe&BodyTag;</tag-class>
+		<tag-class>&package;.IframeTag</tag-class>
 		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
 		<body-content>&JSP;</body-content>
 		<attribute>
@@ -1698,7 +1698,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_img.asp">&lt;img&gt;</a> tag.
@@ -1738,7 +1738,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>img</name>
-		<tag-class>com.aoindustries.taglib.Img&BodyTag;</tag-class>
+		<tag-class>&package;.ImgTag</tag-class>
 		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
 		<body-content>&JSP;</body-content>
 		&GlobalBufferedAttributes;
@@ -2047,7 +2047,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_input.asp">&lt;input&gt;</a> tag.
@@ -2090,7 +2090,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>input</name>
-		<tag-class>com.aoindustries.taglib.Input&BodyTag;</tag-class>
+		<tag-class>&package;.InputTag</tag-class>
 		<tei-class>com.aoindustries.taglib.InputTagTEI</tei-class>
 		<body-content>&JSP;</body-content>
 		&GlobalBufferedAttributes;
@@ -2663,7 +2663,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2019-10-08T21:41:35-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders a <a href="https://www.w3schools.com/tags/tag_map.asp">&lt;map&gt;</a> tag.
@@ -2673,7 +2673,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>map</name>
-		<tag-class>com.aoindustries.taglib.Map&BodyTag;</tag-class>
+		<tag-class>&package;.MapTag</tag-class>
 		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
 		<body-content>&JSP;</body-content>
 		<attribute>
@@ -2704,7 +2704,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_maxlength.asp">maxlength attribute</a> to its
@@ -2715,7 +2715,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>maxlength</name>
-		<tag-class>com.aoindustries.taglib.Maxlength&BodyTag;</tag-class>
+		<tag-class>&package;.MaxlengthTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
@@ -2874,7 +2874,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Adds a message argument to its
@@ -2883,7 +2883,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>messageArg</name>
-		<tag-class>com.aoindustries.taglib.MessageArg&BodyTag;</tag-class>
+		<tag-class>&package;.MessageArgTag</tag-class>
 		<body-content>&JSP;</body-content>
 		<attribute>
 			<description><![CDATA[
@@ -2902,7 +2902,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				If contained with any
@@ -2920,7 +2920,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</ol>
 		]]></description>
 		<name>meta</name>
-		<tag-class>com.aoindustries.taglib.Meta&BodyTag;</tag-class>
+		<tag-class>&package;.MetaTag</tag-class>
 		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
 		<body-content>&JSP;</body-content>
 		&GlobalBufferedAttributes;
@@ -3001,7 +3001,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_method.asp">method attribute</a> to its
@@ -3010,12 +3010,12 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>method</name>
-		<tag-class>com.aoindustries.taglib.Method&BodyTag;</tag-class>
+		<tag-class>&package;.MethodTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_name.asp">name attribute</a> to its
@@ -3024,12 +3024,12 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>name</name>
-		<tag-class>com.aoindustries.taglib.Name&BodyTag;</tag-class>
+		<tag-class>&package;.NameTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/ev_onblur.asp">onblur</a> script to its
@@ -3038,12 +3038,12 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>onblur</name>
-		<tag-class>com.aoindustries.taglib.Onblur&BodyTag;</tag-class>
+		<tag-class>&package;.OnblurTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/ev_onchange.asp">onchange</a> script to its
@@ -3052,12 +3052,12 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>onchange</name>
-		<tag-class>com.aoindustries.taglib.Onchange&BodyTag;</tag-class>
+		<tag-class>&package;.OnchangeTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/ev_onclick.asp">onclick</a> script to its
@@ -3066,12 +3066,12 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>onclick</name>
-		<tag-class>com.aoindustries.taglib.Onclick&BodyTag;</tag-class>
+		<tag-class>&package;.OnclickTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/ev_onfocus.asp">onfocus</a> script to its
@@ -3080,12 +3080,12 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>onfocus</name>
-		<tag-class>com.aoindustries.taglib.Onfocus&BodyTag;</tag-class>
+		<tag-class>&package;.OnfocusTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/ev_onkeypress.asp">onkeypress</a> script to its
@@ -3094,12 +3094,12 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>onkeypress</name>
-		<tag-class>com.aoindustries.taglib.Onkeypress&BodyTag;</tag-class>
+		<tag-class>&package;.OnkeypressTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/ev_onload.asp">onload</a> script to its
@@ -3108,12 +3108,12 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>onload</name>
-		<tag-class>com.aoindustries.taglib.Onload&BodyTag;</tag-class>
+		<tag-class>&package;.OnloadTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/ev_onmouseout.asp">onmouseout</a> script to its
@@ -3122,12 +3122,12 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>onmouseout</name>
-		<tag-class>com.aoindustries.taglib.Onmouseout&BodyTag;</tag-class>
+		<tag-class>&package;.OnmouseoutTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/ev_onmouseover.asp">onmouseover</a> script to its
@@ -3136,12 +3136,12 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>onmouseover</name>
-		<tag-class>com.aoindustries.taglib.Onmouseover&BodyTag;</tag-class>
+		<tag-class>&package;.OnmouseoverTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/ev_onsubmit.asp">onsubmit</a> script to its
@@ -3150,19 +3150,19 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>onsubmit</name>
-		<tag-class>com.aoindustries.taglib.Onsubmit&BodyTag;</tag-class>
+		<tag-class>&package;.OnsubmitTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Renders an <a href="https://www.w3schools.com/tags/tag_option.asp">&lt;option&gt;</a> tag.
 			</p>
 		]]></description>
 		<name>option</name>
-		<tag-class>com.aoindustries.taglib.Option&BodyTag;</tag-class>
+		<tag-class>&package;.OptionTag</tag-class>
 		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
 		<body-content>&JSP;</body-content>
 		&GlobalBufferedAttributes;
@@ -3317,7 +3317,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a page to its
@@ -3326,12 +3326,12 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>page</name>
-		<tag-class>com.aoindustries.taglib.Page&BodyTag;</tag-class>
+		<tag-class>&package;.PageTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Adds a parameter to its
@@ -3340,7 +3340,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>param</name>
-		<tag-class>com.aoindustries.taglib.Param&BodyTag;</tag-class>
+		<tag-class>&package;.ParamTag</tag-class>
 		<body-content>&JSP;</body-content>
 		<attribute>
 			<description><![CDATA[
@@ -3484,7 +3484,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Provides a <a href="https://www.w3schools.com/tags/att_readonly.asp">readonly attribute</a> to its
@@ -3497,7 +3497,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>readonly</name>
-		<tag-class>com.aoindustries.taglib.Readonly&BodyTag;</tag-class>
+		<tag-class>&package;.ReadonlyTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
@@ -3715,7 +3715,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_rel.asp">rel attribute</a> to its
@@ -3724,7 +3724,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>rel</name>
-		<tag-class>com.aoindustries.taglib.Rel&BodyTag;</tag-class>
+		<tag-class>&package;.RelTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
@@ -3741,7 +3741,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Manually establishes a <a href="https://www.w3schools.com/tags/tag_script.asp">script context</a> when automatic detection is not possible.
@@ -3793,7 +3793,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</ul>
 		]]></description>
 		<name>script</name>
-		<tag-class>com.aoindustries.taglib.Script&BodyTag;</tag-class>
+		<tag-class>&package;.ScriptTag</tag-class>
 		<tei-class>com.aoindustries.taglib.ScriptTagTEI</tei-class>
 		<body-content>&JSP;</body-content>
 		&GlobalBufferedAttributes;
@@ -3908,14 +3908,14 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Renders a <a href="https://www.w3schools.com/tags/tag_select.asp">&lt;select&gt;</a> tag.
 			</p>
 		]]></description>
 		<name>select</name>
-		<tag-class>com.aoindustries.taglib.Select&BodyTag;</tag-class>
+		<tag-class>&package;.SelectTag</tag-class>
 		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
 		<body-content>&JSP;</body-content>
 		&GlobalBufferedAttributes;
@@ -4017,7 +4017,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Provides a <a href="https://www.w3schools.com/tags/att_selected.asp">selected attribute</a> to its
@@ -4030,12 +4030,12 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>selected</name>
-		<tag-class>com.aoindustries.taglib.Selected&BodyTag;</tag-class>
+		<tag-class>&package;.SelectedTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Returns an error status.
@@ -4056,7 +4056,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>sendError</name>
-		<tag-class>com.aoindustries.taglib.SendError&BodyTag;</tag-class>
+		<tag-class>&package;.SendErrorTag</tag-class>
 		<body-content>&JSP;</body-content>
 		<attribute>
 			<description><![CDATA[
@@ -4084,7 +4084,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_size.asp">size attribute</a> to its
@@ -4093,12 +4093,12 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>size</name>
-		<tag-class>com.aoindustries.taglib.Size&BodyTag;</tag-class>
+		<tag-class>&package;.SizeTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_src.asp">src attribute</a> to its
@@ -4107,12 +4107,12 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>src</name>
-		<tag-class>com.aoindustries.taglib.Src&BodyTag;</tag-class>
+		<tag-class>&package;.SrcTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_style.asp">style attribute</a> to its
@@ -4121,12 +4121,12 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>style</name>
-		<tag-class>com.aoindustries.taglib.Style&BodyTag;</tag-class>
+		<tag-class>&package;.StyleTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Provides a <a href="https://www.w3schools.com/tags/att_tabindex.asp">tabindex attribute</a> to its
@@ -4139,12 +4139,12 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>tabindex</name>
-		<tag-class>com.aoindustries.taglib.Tabindex&BodyTag;</tag-class>
+		<tag-class>&package;.TabindexTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_target.asp">target attribute</a> to its
@@ -4153,12 +4153,12 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>target</name>
-		<tag-class>com.aoindustries.taglib.Target&BodyTag;</tag-class>
+		<tag-class>&package;.TargetTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders a <a href="https://www.w3schools.com/tags/tag_textarea.asp">&lt;textarea&gt;</a> tag.
@@ -4173,7 +4173,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</ol>
 		]]></description>
 		<name>textarea</name>
-		<tag-class>com.aoindustries.taglib.Textarea&BodyTag;</tag-class>
+		<tag-class>&package;.TextareaTag</tag-class>
 		<body-content>&JSP;</body-content>
 		&GlobalBufferedAttributes;
 		<attribute>
@@ -4274,7 +4274,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_title.asp">title attribute</a> to its
@@ -4283,12 +4283,12 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>title</name>
-		<tag-class>com.aoindustries.taglib.Title&BodyTag;</tag-class>
+		<tag-class>&package;.TitleTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_type.asp">type attribute</a> to its
@@ -4297,12 +4297,12 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>type</name>
-		<tag-class>com.aoindustries.taglib.Type&BodyTag;</tag-class>
+		<tag-class>&package;.TypeTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Manually establishes a URL context when automatic detection is not possible.
@@ -4335,12 +4335,12 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>url</name>
-		<tag-class>com.aoindustries.taglib.Url&BodyTag;</tag-class>
+		<tag-class>&package;.UrlTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_value.asp">value attribute</a> to its
@@ -4349,7 +4349,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>value</name>
-		<tag-class>com.aoindustries.taglib.Value&BodyTag;</tag-class>
+		<tag-class>&package;.ValueTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
@@ -4380,7 +4380,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_width.asp">width attribute</a> to its
@@ -4389,19 +4389,19 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>width</name>
-		<tag-class>com.aoindustries.taglib.Width&BodyTag;</tag-class>
+		<tag-class>&package;.WidthTag</tag-class>
 		<body-content>&JSP;</body-content>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-19T20:09:21-06:00" -->
+		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
 		<description><![CDATA[
 			<p>
 				Word wraps the textual content.
 			</p>
 		]]></description>
 		<name>wordWrap</name>
-		<tag-class>com.aoindustries.taglib.WordWrap&BodyTag;</tag-class>
+		<tag-class>&package;.WordWrapTag</tag-class>
 		<body-content>&JSP;</body-content>
 		<attribute>
 			<description><![CDATA[

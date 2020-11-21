@@ -23,7 +23,7 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.encoding.taglib.EncodingNullSimpleTag;
+import com.aoindustries.encoding.taglib.EncodingNullTag;
 import com.aoindustries.util.i18n.EditableResourceBundle;
 import java.io.IOException;
 import java.io.Writer;
@@ -32,7 +32,7 @@ import javax.servlet.jsp.JspTagException;
 /**
  * Disables the resource editor.
  */
-public class DisableResourceEditorTag extends EncodingNullSimpleTag {
+public class DisableResourceEditorTag extends EncodingNullTag {
 
 	/**
 	 * No output.

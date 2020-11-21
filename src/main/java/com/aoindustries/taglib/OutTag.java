@@ -27,7 +27,7 @@ package com.aoindustries.taglib;
  */
 // TODO: OutBodyTag and OutSimpleTag
 public class OutTag
-	extends com.aoindustries.encoding.taglib.OutSimpleTag
+	extends com.aoindustries.encoding.taglib.OutTag
 	implements
 		ValueAttribute,
 		TypeAttribute

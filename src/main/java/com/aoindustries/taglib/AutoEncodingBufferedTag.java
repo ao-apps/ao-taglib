@@ -22,11 +22,11 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.taglib.EncodingBufferedSimpleTag;
+import com.aoindustries.encoding.taglib.EncodingBufferedTag;
 
 /**
- * @deprecated  Please use {@link EncodingBufferedSimpleTag}.
+ * @deprecated  Please use {@link EncodingBufferedTag}.
  */
 @Deprecated
-public abstract class AutoEncodingBufferedTag extends EncodingBufferedSimpleTag {
+public abstract class AutoEncodingBufferedTag extends EncodingBufferedTag {
 }

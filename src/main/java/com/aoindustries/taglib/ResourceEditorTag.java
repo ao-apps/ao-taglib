@@ -25,7 +25,7 @@ package com.aoindustries.taglib;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.TextInJavaScriptEncoder;
 import com.aoindustries.encoding.TextInXhtmlEncoder;
-import com.aoindustries.encoding.taglib.EncodingNullSimpleTag;
+import com.aoindustries.encoding.taglib.EncodingNullTag;
 import com.aoindustries.util.i18n.EditableResourceBundle;
 import java.io.IOException;
 import java.io.Writer;
@@ -39,7 +39,7 @@ import javax.servlet.jsp.JspTagException;
  *
  * @author  AO Industries, Inc.
  */
-public class ResourceEditorTag extends EncodingNullSimpleTag {
+public class ResourceEditorTag extends EncodingNullTag {
 
 	public ResourceEditorTag() {
 	}

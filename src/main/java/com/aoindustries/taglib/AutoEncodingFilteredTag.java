@@ -22,11 +22,11 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.taglib.EncodingFilteredSimpleTag;
+import com.aoindustries.encoding.taglib.EncodingFilteredTag;
 
 /**
- * @deprecated  Please use {@link EncodingFilteredSimpleTag}.
+ * @deprecated  Please use {@link EncodingFilteredTag}.
  */
 @Deprecated
-public abstract class AutoEncodingFilteredTag extends EncodingFilteredSimpleTag {
+public abstract class AutoEncodingFilteredTag extends EncodingFilteredTag {
 }
