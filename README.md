@@ -35,6 +35,9 @@ Making JSP be what it should have been all along.
 * [Maven Central Repository](https://search.maven.org/artifact/com.aoindustries/ao-taglib)
 * [GitHub](https://github.com/aoindustries/ao-taglib)
 
+## Related Projects
+* [AO Encoding Taglib](https://github.com/aoindustries/ao-encoding-taglib)
+
 ## Contact Us
 For questions or support, please [contact us](https://aoindustries.com/contact):
 

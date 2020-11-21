@@ -34,7 +34,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		title="@{documented.name}"
 		description="@{documented.description}"
 		datePublished="2016-10-17T00:09:00-0500"
-		dateModified="2020-11-19T20:09:21-06:00"
+		dateModified="2020-11-20T22:09:34-06:00"
 	>
 		<core:child page="changelog.jspx" />
 		<core:child page="ao.tld/" />
@@ -66,5 +66,10 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 				<li><ao:a href="@{project.scm.url}">GitHub</ao:a></li>
 			</ul>
 		</section:nav>
+		<section:aside label="Related Projects">
+			<ul>
+				<li><core:link book="/ao-encoding/taglib" page="/index.jspx" /></li>
+			</ul>
+		</section:aside>
 	</core:page>
 </jsp:root>
