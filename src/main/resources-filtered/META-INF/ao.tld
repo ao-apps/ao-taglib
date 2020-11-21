@@ -2752,9 +2752,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 				This tag must be nested inside a <a href="@{project.url}]]>&tld;<![CDATA[/tag-bundle">&lt;ao:bundle&gt;</a> tag.
 			</p>
 			<p>
-				The content type depends on the value provided to the type attribute, and
-				defaults to <code>text/plain</code>.  The content is checked for well-formedness based
-				on its type:
+				The content type depends on the value provided to the type attribute, and defaults to <code>text/plain</code>.
+				The content is checked for well-formedness based on its type:
 			</p>
 			<ul>
 				<li><code>javascript</code>, <code>application/javascript</code>, or <code>text/javascript</code> - no validation</li>
@@ -3244,9 +3243,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 				such as for HTML snippets.
 			</p>
 			<p>
-				The content type depends on the value provided to the type attribute, and
-				defaults to <code>text/plain</code>.  The content is checked for well-formedness based
-				on its type:
+				The content type depends on the value provided to the type attribute, and defaults to <code>text/plain</code>.
+				The content is checked for well-formedness based on its type:
 			</p>
 			<ul>
 				<li><code>javascript</code>, <code>application/javascript</code>, or <code>text/javascript</code> - no validation</li>
@@ -4443,9 +4441,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 				not found.
 			</p>
 			<p>
-				The content type depends on the value provided to the type attribute, and
-				defaults to <code>text/plain</code>.  The content is checked for well-formedness based
-				on its type:
+				The content type depends on the value provided to the type attribute, and defaults to <code>text/plain</code>.
+				The content is checked for well-formedness based on its type:
 			</p>
 			<ul>
 				<li><code>javascript</code>, <code>application/javascript</code>, or <code>text/javascript</code> - no validation</li>
