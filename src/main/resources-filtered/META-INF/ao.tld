@@ -31,6 +31,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 For compatibility with legacy applications that use JSP scriptlets, please use &lt;a href=&quot;@{project.url}ao-legacy.tld/&quot;&gt;@{project.name} Reference (Legacy)&lt;/a&gt;.">
 <!ENTITY package "com.aoindustries.taglib">
 <!ENTITY JSP "scriptless">
+<!ENTITY aoEncodingTld "ao-encoding.tld">
 
 <!-- Everything below this line should be an exact match between both implementations -->
 <!ENTITY IdAttribute_description "The &lt;a href=&quot;https://www.w3schools.com/tags/att_global_id.asp&quot;&gt;id of the element&lt;/a&gt;.">
@@ -3229,7 +3230,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-18T11:39:31-06:00" -->
+		<!-- dateModified="2020-11-22T22:39:33-06:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Writes the value with proper escaping based on the context of the tag.
@@ -3259,15 +3260,15 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 				<li><code>sh</code> or <code>text/x+sh</code> - must be valid shell script</li>
 			</ul>
 			<p>
-				This is compatible with <a href="https://aoindustries.com/ao-encoding/taglib/ao-encoding.tld/tag-out">&lt;encoding:out&gt;</a>,
+				This is compatible with <a href="https://aoindustries.com/ao-encoding/taglib/]]>&aoEncodingTld;<![CDATA[/tag-out">&lt;encoding:out&gt;</a>,
 				with the addition of allowing nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-value">&lt;ao:value&gt;</a> and
 				<a href="@{project.url}]]>&tld;<![CDATA[/tag-type">&lt;ao:type&gt;</a> tags.
 			</p>
 		]]></description>
 		<name>out</name>
-		<tag-class>com.aoindustries.taglib.OutTag</tag-class>
+		<tag-class>&package;.OutTag</tag-class>
 		<tei-class>com.aoindustries.encoding.taglib.OutTagTEI</tei-class>
-		<body-content>scriptless</body-content>
+		<body-content>&JSP;</body-content>
 		<attribute>
 			<description><![CDATA[
 				<p>
@@ -3739,7 +3740,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
+		<!-- dateModified="2020-11-22T22:39:33-06:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Manually establishes a <a href="https://www.w3schools.com/tags/tag_script.asp">script context</a> when automatic detection is not possible.
@@ -3785,9 +3786,9 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 				For simpler scenarios, the following tags are simplier alternatives:
 			</p>
 			<ul>
-				<li><a href="https://aoindustries.com/ao-encoding/taglib/ao-encoding.tld/tag-javascript">&lt;encoding:javascript&gt;</a></li>
-				<li><a href="https://aoindustries.com/ao-encoding/taglib/ao-encoding.tld/tag-json">&lt;encoding:json&gt;</a></li>
-				<li><a href="https://aoindustries.com/ao-encoding/taglib/ao-encoding.tld/tag-ldJson">&lt;encoding:ldJson&gt;</a></li>
+				<li><a href="https://aoindustries.com/ao-encoding/taglib/]]>&aoEncodingTld;<![CDATA[/tag-javascript">&lt;encoding:javascript&gt;</a></li>
+				<li><a href="https://aoindustries.com/ao-encoding/taglib/]]>&aoEncodingTld;<![CDATA[/tag-json">&lt;encoding:json&gt;</a></li>
+				<li><a href="https://aoindustries.com/ao-encoding/taglib/]]>&aoEncodingTld;<![CDATA[/tag-ldJson">&lt;encoding:ldJson&gt;</a></li>
 			</ul>
 		]]></description>
 		<name>script</name>

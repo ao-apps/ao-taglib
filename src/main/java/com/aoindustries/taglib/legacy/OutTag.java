@@ -20,18 +20,21 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.taglib;
+package com.aoindustries.taglib.legacy;
+
+import com.aoindustries.taglib.TypeAttribute;
+import com.aoindustries.taglib.ValueAttribute;
 
 /**
  * @author  AO Industries, Inc.
  */
-public class OutTag extends com.aoindustries.encoding.taglib.OutTag
+public class OutTag extends com.aoindustries.encoding.taglib.legacy.OutTag
 	implements
 		ValueAttribute,
 		TypeAttribute
 {
 
-/* BodyTag only:
+/* BodyTag only: */
 	private static final long serialVersionUID = 1L;
 /**/
 
