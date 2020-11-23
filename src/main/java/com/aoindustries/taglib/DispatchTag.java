@@ -196,8 +196,8 @@ abstract public class DispatchTag
 	 *
 	 * @see  #addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List)
 	 */
-	@Override
 	@Deprecated
+	@Override
 	public void setDynamicAttribute(String uri, String localName, Object value) throws JspTagException {
 		List<String> expectedPatterns = new ArrayList<>();
 		if(!addDynamicAttribute(uri, localName, value, expectedPatterns)) {
@@ -224,9 +224,15 @@ abstract public class DispatchTag
 		// Do nothing
 	}
 
+	/**
+	 * @deprecated  You should probably be implementing in {@link #dispatch(javax.servlet.RequestDispatcher, javax.servlet.jsp.JspWriter, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)}
+	 *
+	 * @see  #dispatch(javax.servlet.RequestDispatcher, javax.servlet.jsp.JspWriter, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
+	@Deprecated
 	@Override
 	@SuppressWarnings("unchecked")
-	final public void doTag() throws JspException, IOException {
+	public void doTag() throws JspException, IOException {
 		final PageContext pageContext = (PageContext)getJspContext();
 		final HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
 		// Track original page when first accessed

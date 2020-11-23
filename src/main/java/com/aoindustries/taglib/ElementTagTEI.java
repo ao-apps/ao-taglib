@@ -38,6 +38,12 @@ import javax.servlet.jsp.tagext.ValidationMessage;
  */
 public class ElementTagTEI extends TagExtraInfo {
 
+	/**
+	 * @deprecated  You should probably be implementing in {@link #validate(javax.servlet.jsp.tagext.TagData, java.util.List)}
+	 *
+	 * @see  #validate(javax.servlet.jsp.tagext.TagData, java.util.List)
+	 */
+	@Deprecated
 	@Override
 	final public ValidationMessage[] validate(TagData data) {
 		List<ValidationMessage> messages = new ArrayList<>();
