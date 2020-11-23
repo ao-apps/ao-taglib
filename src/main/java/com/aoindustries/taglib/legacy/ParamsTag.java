@@ -20,13 +20,18 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.taglib;
+package com.aoindustries.taglib.legacy;
 
 import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.encoding.taglib.EncodingNullTag;
+import com.aoindustries.encoding.taglib.legacy.EncodingNullBodyTag;
 import com.aoindustries.net.URIParameters;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
+import com.aoindustries.taglib.ApplicationResources;
+import com.aoindustries.taglib.AttributeUtils;
+import com.aoindustries.taglib.NameAttribute;
+import com.aoindustries.taglib.ParamUtils;
+import com.aoindustries.taglib.ParamsAttribute;
 import com.aoindustries.util.WildcardPatternMatcher;
 import java.io.IOException;
 import java.io.Writer;
@@ -40,7 +45,7 @@ import javax.servlet.jsp.JspTagException;
  * @author  AO Industries, Inc.
  */
 // TODO: Support output when not inside a containing tag? (or implement applet and object tags to avoid errors of params accidentally passed to client)
-public class ParamsTag extends EncodingNullTag
+public class ParamsTag extends EncodingNullBodyTag
 	implements NameAttribute
 {
 
@@ -53,7 +58,7 @@ public class ParamsTag extends EncodingNullTag
 		return null;
 	}
 
-/* BodyTag only:
+/* BodyTag only: */
 	private static final long serialVersionUID = 1L;
 /**/
 
@@ -83,10 +88,10 @@ public class ParamsTag extends EncodingNullTag
 	}
 
 	@Override
-/* BodyTag only:
+/* BodyTag only: */
 	protected int doEndTag(Writer out) throws JspTagException, IOException {
 /**/
-/* SimpleTag only: */
+/* SimpleTag only:
 	protected void doTag(Writer out) throws JspTagException, IOException {
 /**/
 		// TODO: These supported types match Html.java and Param.java in ao-fluent-html?
@@ -188,12 +193,12 @@ public class ParamsTag extends EncodingNullTag
 				}
 			}
 		}
-/* BodyTag only:
+/* BodyTag only: */
 		return EVAL_PAGE;
 /**/
 	}
 
-/* BodyTag only:
+/* BodyTag only: */
 	@Override
 	public void doFinally() {
 		try {

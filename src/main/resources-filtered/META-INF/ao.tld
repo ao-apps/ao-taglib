@@ -438,7 +438,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2019-10-08T21:41:35-0500" -->
-		<!-- dateModified="2020-07-31T10:11:29-05:00" -->
+		<!-- dateModified="2020-11-23T00:11:37-06:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_area.asp">&lt;area&gt;</a> tag.
@@ -469,9 +469,9 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>area</name>
-		<tag-class>com.aoindustries.taglib.AreaTag</tag-class>
+		<tag-class>&package;.AreaTag</tag-class>
 		<tei-class>com.aoindustries.taglib.AreaTagTEI</tei-class>
-		<body-content>scriptless</body-content>
+		<body-content>&JSP;</body-content>
 		&GlobalBufferedAttributes;
 		<attribute>
 			<description><![CDATA[
@@ -781,7 +781,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-08-05T16:09:39-05:00" -->
+		<!-- dateModified="2020-11-23T00:11:37-06:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Adds a <a href="https://www.w3schools.com/tags/tag_base.asp">&lt;base&gt;</a> tag only when necessary.
@@ -804,15 +804,15 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>base</name>
-		<tag-class>com.aoindustries.taglib.BaseTag</tag-class>
+		<tag-class>&package;.BaseTag</tag-class>
 		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
-		<body-content>scriptless</body-content>
+		<body-content>&JSP;</body-content>
 		&GlobalBufferedAttributes;
 		<dynamic-attributes>true</dynamic-attributes>
 	</tag>
 	<tag>
 		<!-- datePublished="2019-10-20T05:53:01-0500" -->
-		<!-- dateModified="2020-08-05T16:09:39-05:00" -->
+		<!-- dateModified="2020-11-23T00:11:37-06:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Writes a <a href="https://www.w3schools.com/tags/tag_br.asp">&lt;br&gt;</a>
@@ -820,9 +820,9 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>br</name>
-		<tag-class>com.aoindustries.taglib.BrTag</tag-class>
+		<tag-class>&package;.BrTag</tag-class>
 		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
-		<body-content>scriptless</body-content>
+		<body-content>&JSP;</body-content>
 		&GlobalBufferedAttributes;
 		<dynamic-attributes>true</dynamic-attributes>
 	</tag>
@@ -908,7 +908,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2020-02-11T20:25:52-0600" -->
-		<!-- dateModified="2020-08-05T16:09:39-05:00" -->
+		<!-- dateModified="2020-11-23T00:11:37-06:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Writes a <a href="https://www.w3schools.com/tags/tag_col.asp">&lt;col&gt;</a>
@@ -916,9 +916,9 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>col</name>
-		<tag-class>com.aoindustries.taglib.ColTag</tag-class>
+		<tag-class>&package;.ColTag</tag-class>
 		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
-		<body-content>scriptless</body-content>
+		<body-content>&JSP;</body-content>
 		&GlobalBufferedAttributes;
 		<attribute>
 			<description><![CDATA[
@@ -1365,7 +1365,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2019-10-30T20:50:04-0500" -->
-		<!-- dateModified="2020-08-05T16:09:39-05:00" -->
+		<!-- dateModified="2020-11-23T00:11:37-06:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Writes a <a href="https://www.w3schools.com/tags/tag_hr.asp">&lt;hr&gt;</a>
@@ -1373,9 +1373,9 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>hr</name>
-		<tag-class>com.aoindustries.taglib.HrTag</tag-class>
+		<tag-class>&package;.HrTag</tag-class>
 		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
-		<body-content>scriptless</body-content>
+		<body-content>&JSP;</body-content>
 		&GlobalBufferedAttributes;
 		<dynamic-attributes>true</dynamic-attributes>
 	</tag>
@@ -2457,7 +2457,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-07-31T10:11:29-05:00" -->
+		<!-- dateModified="2020-11-23T00:11:37-06:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				If contained with any
@@ -2488,9 +2488,9 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>link</name>
-		<tag-class>com.aoindustries.taglib.LinkTag</tag-class>
+		<tag-class>&package;.LinkTag</tag-class>
 		<tei-class>com.aoindustries.taglib.ElementTagTEI</tei-class>
-		<body-content>scriptless</body-content>
+		<body-content>&JSP;</body-content>
 		&GlobalBufferedAttributes;
 		<attribute>
 			<description><![CDATA[
@@ -2721,7 +2721,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-03-26T22:27:21-05:00" -->
+		<!-- dateModified="2020-11-23T00:11:37-06:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Writes a value from the current localization bundle given its key.
@@ -2770,9 +2770,9 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</ul>
 		]]></description>
 		<name>message</name>
-		<tag-class>com.aoindustries.taglib.MessageTag</tag-class>
+		<tag-class>&package;.MessageTag</tag-class>
 		<tei-class>com.aoindustries.taglib.MessageTagTEI</tei-class>
-		<body-content>scriptless</body-content>
+		<body-content>&JSP;</body-content>
 		<attribute>
 			<description><![CDATA[
 				<p>
@@ -3371,7 +3371,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-03-26T22:27:21-05:00" -->
+		<!-- dateModified="2020-11-23T00:11:37-06:00" -->
 		<description><![CDATA[
 			<p>
 				Adds multiple parameters to its
@@ -3380,8 +3380,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</p>
 		]]></description>
 		<name>params</name>
-		<tag-class>com.aoindustries.taglib.ParamsTag</tag-class>
-		<body-content>scriptless</body-content>
+		<tag-class>&package;.ParamsTag</tag-class>
+		<body-content>&JSP;</body-content>
 		<attribute>
 			<description><![CDATA[
 				<p>
@@ -4417,7 +4417,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2020-03-26T22:27:21-05:00" -->
+		<!-- dateModified="2020-11-22T23:18:17-06:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Writes the bean contents.  Supports data types beyond
@@ -4459,9 +4459,9 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			</ul>
 		]]></description>
 		<name>write</name>
-		<tag-class>com.aoindustries.taglib.WriteTag</tag-class>
+		<tag-class>&package;.WriteTag</tag-class>
 		<tei-class>com.aoindustries.taglib.WriteTagTEI</tei-class>
-		<body-content>scriptless</body-content>
+		<body-content>&JSP;</body-content>
 		<attribute>
 			<description><![CDATA[
 				<p>

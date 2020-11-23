@@ -31,6 +31,14 @@ import javax.servlet.jsp.tagext.ValidationMessage;
  */
 public class AreaTagTEI extends ElementTagTEI {
 
+	public static boolean isValidShape(String shape) {
+		return
+			"default".equals(shape)
+			|| "rect".equals(shape)
+			|| "circle".equals(shape)
+			|| "poly".equals(shape);
+	}
+
 	@Override
 	protected void validate(TagData data, List<ValidationMessage> messages) {
 		super.validate(data, messages);
@@ -52,7 +60,7 @@ public class AreaTagTEI extends ElementTagTEI {
 					)
 				);
 			} else {
-				if(!AreaTag.isValidShape(shape)) {
+				if(!isValidShape(shape)) {
 					messages.add(
 						new ValidationMessage(
 							data.getId(),

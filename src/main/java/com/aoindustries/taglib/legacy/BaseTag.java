@@ -20,7 +20,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.taglib;
+package com.aoindustries.taglib.legacy;
 
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.html.Html;
@@ -29,33 +29,33 @@ import com.aoindustries.net.URIEncoder;
 import com.aoindustries.servlet.filter.EncodeURIFilter;
 import com.aoindustries.servlet.http.Dispatcher;
 import com.aoindustries.servlet.http.HttpServletUtil;
+import com.aoindustries.taglib.GlobalAttributesUtils;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspTagException;
-import javax.servlet.jsp.PageContext;
 
 /**
  * @author  AO Industries, Inc.
  */
-public class BaseTag extends ElementNullTag {
+public class BaseTag extends ElementNullBodyTag {
 
 	@Override
 	public MediaType getOutputType() {
 		return MediaType.XHTML;
 	}
 
-/* BodyTag only:
+/* BodyTag only: */
 	private static final long serialVersionUID = 1L;
 /**/
 
 	@Override
 	@SuppressWarnings("StringEquality")
-/* BodyTag only:
+/* BodyTag only: */
 	protected int doEndTag(Writer out) throws JspTagException, IOException {
 /**/
-/* SimpleTag only: */
+/* SimpleTag only:
 	protected void doTag(Writer out) throws JspTagException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
 /**/
@@ -97,7 +97,7 @@ public class BaseTag extends ElementNullTag {
 					.__();
 			}
 		}
-/* BodyTag only:
+/* BodyTag only: */
 		return EVAL_PAGE;
 /**/
 	}

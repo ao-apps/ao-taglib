@@ -20,13 +20,16 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.taglib;
+package com.aoindustries.taglib.legacy;
 
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.encoding.taglib.EncodingNullTag;
+import com.aoindustries.encoding.taglib.legacy.EncodingNullBodyTag;
 import com.aoindustries.lang.Strings;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
+import com.aoindustries.taglib.BundleTag;
+import com.aoindustries.taglib.MessageArgsAttribute;
+import com.aoindustries.taglib.TypeAttribute;
 import com.aoindustries.util.i18n.ApplicationResourcesAccessor;
 import com.aoindustries.util.i18n.BundleLookupMarkup;
 import com.aoindustries.util.i18n.BundleLookupThreadContext;
@@ -37,13 +40,12 @@ import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.List;
 import javax.servlet.jsp.JspTagException;
-import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
  * @author  AO Industries, Inc.
  */
-public class MessageTag extends EncodingNullTag
+public class MessageTag extends EncodingNullBodyTag
 	implements
 		DynamicAttributes,
 		TypeAttribute,
@@ -59,7 +61,7 @@ public class MessageTag extends EncodingNullTag
 		return mediaType;
 	}
 
-/* BodyTag only:
+/* BodyTag only: */
 	private static final long serialVersionUID = 1L;
 /**/
 
@@ -183,7 +185,7 @@ public class MessageTag extends EncodingNullTag
 			combinedKey = key;
 		} else {
 			// Find parent bundle
-/* SimpleTag only: */
+/* SimpleTag only:
 			PageContext pageContext = (PageContext)getJspContext();
 /**/
 			BundleTag bundleTag = BundleTag.getBundleTag(pageContext.getRequest());
@@ -210,14 +212,14 @@ public class MessageTag extends EncodingNullTag
 	}
 
 	@Override
-/* BodyTag only:
+/* BodyTag only: */
 	protected int doEndTag(Writer out) throws JspTagException, IOException {
 /**/
-/* SimpleTag only: */
+/* SimpleTag only:
 	protected void doTag(Writer out) throws JspTagException, IOException {
 /**/
 		out.write(lookupResult);
-/* BodyTag only:
+/* BodyTag only: */
 		return EVAL_PAGE;
 /**/
 	}
@@ -227,7 +229,7 @@ public class MessageTag extends EncodingNullTag
 		if(lookupMarkup!=null) lookupMarkup.appendSuffixTo(containerType.getMarkupType(), out);
 	}
 
-/* BodyTag only:
+/* BodyTag only: */
 	@Override
 	public void doFinally() {
 		try {

@@ -20,7 +20,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.taglib;
+package com.aoindustries.taglib.legacy;
 
 import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaType;
@@ -32,7 +32,24 @@ import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URIParametersMap;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.servlet.lastmodified.AddLastModified;
+import com.aoindustries.taglib.AltAttribute;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
+import com.aoindustries.taglib.AreaTagTEI;
+import com.aoindustries.taglib.AttributeRequiredException;
+import com.aoindustries.taglib.AttributeUtils;
+import com.aoindustries.taglib.GlobalAttributesUtils;
+import com.aoindustries.taglib.HrefAttribute;
+import com.aoindustries.taglib.HreflangAttribute;
+import com.aoindustries.taglib.OnclickAttribute;
+import com.aoindustries.taglib.OnmouseoutAttribute;
+import com.aoindustries.taglib.OnmouseoverAttribute;
+import com.aoindustries.taglib.ParamUtils;
+import com.aoindustries.taglib.ParamsAttribute;
+import com.aoindustries.taglib.RelAttribute;
+import com.aoindustries.taglib.TargetAttribute;
+import com.aoindustries.taglib.TitleAttribute;
+import com.aoindustries.taglib.TypeAttribute;
+import com.aoindustries.taglib.UrlUtils;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
@@ -40,12 +57,11 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspTagException;
-import javax.servlet.jsp.PageContext;
 
 /**
  * @author  AO Industries, Inc.
  */
-public class AreaTag extends ElementNullTag
+public class AreaTag extends ElementNullBodyTag
 	implements
 		// Attributes
 		HrefAttribute,
@@ -71,7 +87,7 @@ public class AreaTag extends ElementNullTag
 		return MediaType.XHTML;
 	}
 
-/* BodyTag only:
+/* BodyTag only: */
 	private static final long serialVersionUID = 1L;
 /**/
 
@@ -209,10 +225,10 @@ public class AreaTag extends ElementNullTag
 	}
 
 	@Override
-/* BodyTag only:
+/* BodyTag only: */
 	protected int doEndTag(Writer out) throws JspTagException, IOException {
 /**/
-/* SimpleTag only: */
+/* SimpleTag only:
 	protected void doTag(Writer out) throws JspTagException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
 /**/
@@ -258,12 +274,12 @@ public class AreaTag extends ElementNullTag
 			.onmouseover(onmouseover)
 			.onmouseout(onmouseout)
 			.__();
-/* BodyTag only:
+/* BodyTag only: */
 		return EVAL_PAGE;
 /**/
 	}
 
-/* BodyTag only:
+/* BodyTag only: */
 	@Override
 	public void doFinally() {
 		try {

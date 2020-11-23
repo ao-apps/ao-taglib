@@ -20,15 +20,20 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.taglib;
+package com.aoindustries.taglib.legacy;
 
 import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.encoding.taglib.EncodingNullTag;
+import com.aoindustries.encoding.taglib.legacy.EncodingNullBodyTag;
 import com.aoindustries.io.Writable;
 import com.aoindustries.lang.Strings;
 import com.aoindustries.lang.Throwables;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
+import com.aoindustries.taglib.ApplicationResources;
+import com.aoindustries.taglib.AttributeRequiredException;
+import com.aoindustries.taglib.NameAttribute;
+import com.aoindustries.taglib.PropertyUtils;
+import com.aoindustries.taglib.TypeAttribute;
 import com.aoindustries.util.i18n.BundleLookupMarkup;
 import com.aoindustries.util.i18n.BundleLookupThreadContext;
 import com.aoindustries.util.i18n.MarkupType;
@@ -38,14 +43,13 @@ import java.io.Writer;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import javax.servlet.jsp.JspTagException;
-import javax.servlet.jsp.PageContext;
 import org.w3c.dom.Node;
 
 /**
  * @author  AO Industries, Inc.
  */
 // TODO: Remove or deprecate?  This is old struts-style, and obsoleted by JSTL + EL.
-public class WriteTag extends EncodingNullTag
+public class WriteTag extends EncodingNullBodyTag
 	implements
 		NameAttribute,
 		TypeAttribute
@@ -60,7 +64,7 @@ public class WriteTag extends EncodingNullTag
 		return mediaType;
 	}
 
-/* BodyTag only:
+/* BodyTag only: */
 	private static final long serialVersionUID = 1L;
 /**/
 
@@ -122,7 +126,7 @@ public class WriteTag extends EncodingNullTag
 	@SuppressWarnings({"UseSpecificCatch", "TooBroadCatch"})
 	protected void writePrefix(MediaType containerType, Writer out) throws JspTagException, IOException {
 		try {
-/* SimpleTag only: */
+/* SimpleTag only:
 			PageContext pageContext = (PageContext)getJspContext();
 /**/
 			if(name == null) throw new AttributeRequiredException("name");
@@ -207,10 +211,10 @@ public class WriteTag extends EncodingNullTag
 	}
 
 	@Override
-/* BodyTag only:
+/* BodyTag only: */
 	protected int doEndTag(Writer out) throws JspTagException, IOException {
 /**/
-/* SimpleTag only: */
+/* SimpleTag only:
 	protected void doTag(Writer out) throws JspTagException, IOException {
 /**/
 		if(toStringResult != null) {
@@ -218,7 +222,7 @@ public class WriteTag extends EncodingNullTag
 		} else if(value != null) {
 			Coercion.write(value, out);
 		}
-/* BodyTag only:
+/* BodyTag only: */
 		return EVAL_PAGE;
 /**/
 	}
@@ -228,7 +232,7 @@ public class WriteTag extends EncodingNullTag
 		if(lookupMarkup != null) lookupMarkup.appendSuffixTo(markupType, out);
 	}
 
-/* BodyTag only:
+/* BodyTag only: */
 	@Override
 	public void doFinally() {
 		try {

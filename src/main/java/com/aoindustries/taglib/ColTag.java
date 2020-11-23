@@ -35,22 +35,38 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
-// TODO: ColBodyTag and ColSimpleTag
 public class ColTag extends ElementNullTag {
+
+	public ColTag() {
+		init();
+	}
 
 	@Override
 	public MediaType getOutputType() {
 		return MediaType.XHTML;
 	}
 
+/* BodyTag only:
+	private static final long serialVersionUID = 1L;
+/**/
+
 	private int span;
 	public void setSpan(int span) throws JspTagException {
 		this.span = span;
 	}
 
+	private void init() {
+		span = 0;
+	}
+
 	@Override
+/* BodyTag only:
+	protected int doEndTag(Writer out) throws JspTagException, IOException {
+/**/
+/* SimpleTag only: */
 	protected void doTag(Writer out) throws JspTagException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
+/**/
 		Col col = HtmlEE.get(
 			pageContext.getServletContext(),
 			(HttpServletRequest)pageContext.getRequest(),
@@ -60,5 +76,19 @@ public class ColTag extends ElementNullTag {
 		GlobalAttributesUtils.doGlobalAttributes(global, col);
 		if(span != 0) col.span(span);
 		col.__();
+/* BodyTag only:
+		return EVAL_PAGE;
+/**/
 	}
+
+/* BodyTag only:
+	@Override
+	public void doFinally() {
+		try {
+			init();
+		} finally {
+			super.doFinally();
+		}
+	}
+/**/
 }

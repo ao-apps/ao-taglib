@@ -34,7 +34,6 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
-// TODO: BrBodyTag and BrSimpleTag
 public class BrTag extends ElementNullTag {
 
 	@Override
@@ -42,9 +41,18 @@ public class BrTag extends ElementNullTag {
 		return MediaType.XHTML;
 	}
 
+/* BodyTag only:
+	private static final long serialVersionUID = 1L;
+/**/
+
 	@Override
+/* BodyTag only:
+	protected int doEndTag(Writer out) throws JspTagException, IOException {
+/**/
+/* SimpleTag only: */
 	protected void doTag(Writer out) throws JspTagException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
+/**/
 		GlobalAttributesUtils.doGlobalAttributes(
 			global,
 			HtmlEE.get(
@@ -54,5 +62,8 @@ public class BrTag extends ElementNullTag {
 				out
 			).br()
 		).__();
+/* BodyTag only:
+		return EVAL_PAGE;
+/**/
 	}
 }

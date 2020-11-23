@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2019, 2020  AO Industries, Inc.
+ * Copyright (C) 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -20,50 +20,75 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.taglib;
+package com.aoindustries.taglib.legacy;
 
 import com.aoindustries.encoding.MediaType;
+import com.aoindustries.html.Col;
 import com.aoindustries.html.servlet.HtmlEE;
+import com.aoindustries.taglib.GlobalAttributesUtils;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspTagException;
-import javax.servlet.jsp.PageContext;
 
 /**
  * @author  AO Industries, Inc.
  */
-public class HrTag extends ElementNullTag {
+public class ColTag extends ElementNullBodyTag {
+
+	public ColTag() {
+		init();
+	}
 
 	@Override
 	public MediaType getOutputType() {
 		return MediaType.XHTML;
 	}
 
-/* BodyTag only:
+/* BodyTag only: */
 	private static final long serialVersionUID = 1L;
 /**/
 
+	private int span;
+	public void setSpan(int span) throws JspTagException {
+		this.span = span;
+	}
+
+	private void init() {
+		span = 0;
+	}
+
 	@Override
-/* BodyTag only:
+/* BodyTag only: */
 	protected int doEndTag(Writer out) throws JspTagException, IOException {
 /**/
-/* SimpleTag only: */
+/* SimpleTag only:
 	protected void doTag(Writer out) throws JspTagException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
 /**/
-		GlobalAttributesUtils.doGlobalAttributes(
-			global,
-			HtmlEE.get(
-				pageContext.getServletContext(),
-				(HttpServletRequest)pageContext.getRequest(),
-				(HttpServletResponse)pageContext.getResponse(),
-				out
-			).hr()
-		).__();
-/* BodyTag only:
+		Col col = HtmlEE.get(
+			pageContext.getServletContext(),
+			(HttpServletRequest)pageContext.getRequest(),
+			(HttpServletResponse)pageContext.getResponse(),
+			out
+		).col();
+		GlobalAttributesUtils.doGlobalAttributes(global, col);
+		if(span != 0) col.span(span);
+		col.__();
+/* BodyTag only: */
 		return EVAL_PAGE;
 /**/
 	}
+
+/* BodyTag only: */
+	@Override
+	public void doFinally() {
+		try {
+			init();
+		} finally {
+			super.doFinally();
+		}
+	}
+/**/
 }

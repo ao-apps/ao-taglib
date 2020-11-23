@@ -45,10 +45,9 @@ import javax.servlet.jsp.tagext.JspTag;
 /**
  * @author  AO Industries, Inc.
  */
-// TODO: LinkBodyTag and LinkSimpleTag
-public class LinkTag
-	extends ElementNullTag
+public class LinkTag extends ElementNullTag
 	implements
+		// Attributes
 		HrefAttribute,
 		ParamsAttribute,
 		HreflangAttribute,
@@ -57,21 +56,18 @@ public class LinkTag
 		TitleAttribute
 {
 
-	private String href;
-	private MutableURIParameters params;
-	private boolean absolute;
-	private boolean canonical;
-	private AddLastModified addLastModified = AddLastModified.AUTO;
-	private Object hreflang;
-	private String rel;
-	private String type;
-	private String media; // TODO: media to Object
-	private Object title;
+	public LinkTag() {
+		init();
+	}
 
 	@Override
 	public MediaType getOutputType() {
 		return MediaType.XHTML;
 	}
+
+/* BodyTag only:
+	private static final long serialVersionUID = 1L;
+/**/
 
 	/**
 	 * Copies all values from the provided link.
@@ -97,48 +93,58 @@ public class LinkTag
 		setTitle(link.getTitle());
 	}
 
+	private String href;
 	@Override
 	public void setHref(String href) {
 		this.href = AttributeUtils.nullIfEmpty(href);
 	}
 
+	private MutableURIParameters params;
 	@Override
 	public void addParam(String name, String value) {
 		if(params==null) params = new URIParametersMap();
 		params.addParameter(name, value);
 	}
 
+	private boolean absolute;
 	public void setAbsolute(boolean absolute) {
 		this.absolute = absolute;
 	}
 
+	private boolean canonical;
 	public void setCanonical(boolean canonical) {
 		this.canonical = canonical;
 	}
 
+	private AddLastModified addLastModified;
 	public void setAddLastModified(String addLastModified) {
 		this.addLastModified = AddLastModified.valueOfLowerName(addLastModified.trim().toLowerCase(Locale.ROOT));
 	}
 
+	private Object hreflang;
 	@Override
 	public void setHreflang(Object hreflang) throws JspTagException {
 		this.hreflang = hreflang;
 	}
 
+	private String rel;
 	@Override
 	public void setRel(String rel) throws JspTagException {
 		this.rel = rel;
 	}
 
+	private String type;
 	@Override
 	public void setType(String type) throws JspTagException {
 		this.type = Strings.trimNullIfEmpty(type);
 	}
 
+	private String media; // TODO: media to Object
 	public void setMedia(String media) {
 		this.media = AttributeUtils.trimNullIfEmpty(media);
 	}
 
+	private Object title;
 	@Override
 	public void setTitle(Object title) throws JspTagException {
 		this.title = AttributeUtils.trimNullIfEmpty(title);
@@ -156,8 +162,27 @@ public class LinkTag
 			|| ParamUtils.addDynamicAttribute(uri, localName, value, expectedPatterns, this);
 	}
 
+	private void init() {
+		href = null;
+		params = null;
+		absolute = false;
+		canonical = false;
+		addLastModified = AddLastModified.AUTO;
+		hreflang = null;
+		rel = null;
+		type = null;
+		media = null;
+		title = null;
+	}
+
 	@Override
+/* BodyTag only:
+	protected int doEndTag(Writer out) throws JspTagException, IOException {
+/**/
+/* SimpleTag only: */
 	protected void doTag(Writer out) throws JspTagException, IOException {
+		PageContext pageContext = (PageContext)getJspContext();
+/**/
 		JspTag parent = findAncestorWithClass(this, LinksAttribute.class);
 		if(parent != null) {
 			String hreflangStr;
@@ -183,7 +208,6 @@ public class LinkTag
 				)
 			);
 		} else {
-			PageContext pageContext = (PageContext)getJspContext();
 			Html html = HtmlEE.get(
 				pageContext.getServletContext(),
 				(HttpServletRequest)pageContext.getRequest(),
@@ -206,5 +230,19 @@ public class LinkTag
 				.title(title)
 				.__();
 		}
+/* BodyTag only:
+		return EVAL_PAGE;
+/**/
 	}
+
+/* BodyTag only:
+	@Override
+	public void doFinally() {
+		try {
+			init();
+		} finally {
+			super.doFinally();
+		}
+	}
+/**/
 }
