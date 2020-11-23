@@ -33,7 +33,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 <!ENTITY JSP "JSP">
 <!ENTITY aoEncodingTld "ao-encoding-legacy.tld">
 
-<!-- Everything below this line should be an exact match between both implementations -->
+<!-- <common> -->
 <!ENTITY IdAttribute_description "The &lt;a href=&quot;https://www.w3schools.com/tags/att_global_id.asp&quot;&gt;id of the element&lt;/a&gt;.">
 <!ENTITY IdAttribute "<attribute>
 			<description>
@@ -162,6 +162,9 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 	version="2.1">
 	<!-- datePublished="2016-08-07T16:29:54-0500" -->
 	<!-- dateModified="2020-11-21T02:21:23-06:00" -->
+<!-- </common> -->
+	<!-- allowRobots="false" -->
+<!-- <common> -->
 	<description><![CDATA[
 		<p>@{description.html}</p>
 		<p>]]>&tld_description;<![CDATA[</p>
@@ -4803,3 +4806,4 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 		<example><![CDATA[<code>${ao:round(a)}</code>]]></example>
 	</function>
 </taglib>
+<!-- </common> -->
