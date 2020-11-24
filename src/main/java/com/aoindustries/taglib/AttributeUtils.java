@@ -26,6 +26,7 @@ import com.aoindustries.encoding.Coercion;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import com.aoindustries.lang.Strings;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
+import com.aoindustries.servlet.jsp.tagext.JspTagUtils;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.validation.InvalidResult;
 import com.aoindustries.validation.ValidationResult;
@@ -36,7 +37,6 @@ import javax.el.ELContext;
 import javax.el.ValueExpression;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.JspTag;
-import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 /**
  * @author  AO Industries, Inc.
@@ -50,9 +50,9 @@ public final class AttributeUtils  {
 	 * @exception  NeedAttributeParentException  if parent not found
 	 */
 	public static <T> T findAttributeParent(String fromTagName, JspTag from, String attribute, Class<? extends T> clazz) throws NeedAttributeParentException {
-		T parent = clazz.cast(SimpleTagSupport.findAncestorWithClass(from, clazz));
-		if(parent==null) throw new NeedAttributeParentException(fromTagName, attribute);
-		return parent;
+		return JspTagUtils.findAncestor(from, clazz).orElseThrow(
+			() -> new NeedAttributeParentException(fromTagName, attribute)
+		);
 	}
 
 	/**

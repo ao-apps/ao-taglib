@@ -30,6 +30,7 @@ import com.aoindustries.lang.Strings;
 import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URIParameters;
 import com.aoindustries.net.URIParametersMap;
+import com.aoindustries.servlet.jsp.tagext.JspTagUtils;
 import com.aoindustries.servlet.lastmodified.AddLastModified;
 import com.aoindustries.taglib.AttributeUtils;
 import com.aoindustries.taglib.GlobalAttributesUtils;
@@ -48,10 +49,10 @@ import java.io.Writer;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspTagException;
-import javax.servlet.jsp.tagext.JspTag;
 
 /**
  * @author  AO Industries, Inc.
@@ -194,8 +195,8 @@ public class LinkTag extends ElementNullBodyTag
 	protected void doTag(Writer out) throws JspTagException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
 /**/
-		JspTag parent = findAncestorWithClass(this, LinksAttribute.class);
-		if(parent != null) {
+		Optional<LinksAttribute> parent = JspTagUtils.findAncestor(this, LinksAttribute.class);
+		if(parent.isPresent()) {
 			String hreflangStr;
 			if(hreflang instanceof Locale) {
 				hreflangStr = ((Locale)hreflang).toLanguageTag();
@@ -203,7 +204,7 @@ public class LinkTag extends ElementNullBodyTag
 				hreflang = AttributeUtils.trimNullIfEmpty(hreflang);
 				hreflangStr = Coercion.toString(hreflang);
 			}
-			((LinksAttribute)parent).addLink(
+			parent.get().addLink(
 				new Link(
 					global.freeze(),
 					href,

@@ -28,13 +28,14 @@ import com.aoindustries.html.Html;
 import com.aoindustries.html.servlet.HtmlEE;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.lang.Strings;
+import com.aoindustries.servlet.jsp.tagext.JspTagUtils;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
-import javax.servlet.jsp.tagext.JspTag;
 
 /**
  * @author  AO Industries, Inc.
@@ -135,10 +136,10 @@ public class MetaTag extends ElementBufferedTag
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
 /**/
-		JspTag parent = findAncestorWithClass(this, MetasAttribute.class);
-		if(content == null) setContent((capturedBody == null) ? "" : capturedBody.trim());
-		if(parent != null) {
-			((MetasAttribute)parent).addMeta(
+		Optional<MetasAttribute> parent = JspTagUtils.findAncestor(this, MetasAttribute.class);
+		if(content == null) setContent((capturedBody == null) ? "" : capturedBody.trim()); // TODO: Just initialize capturedBody to EmptyResult to simplify this, all tags
+		if(parent.isPresent()) {
+			parent.get().addMeta(
 				new Meta(
 					global.freeze(),
 					Strings.trimNullIfEmpty(name),
