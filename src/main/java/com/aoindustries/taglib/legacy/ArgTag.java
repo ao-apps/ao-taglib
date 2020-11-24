@@ -25,6 +25,7 @@ package com.aoindustries.taglib.legacy;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.taglib.legacy.EncodingBufferedBodyTag;
 import com.aoindustries.io.buffer.BufferResult;
+import static com.aoindustries.taglib.ArgTag.TAG_NAME;
 import com.aoindustries.taglib.ArgsAttribute;
 import com.aoindustries.taglib.AttributeRequiredException;
 import com.aoindustries.taglib.AttributeUtils;
@@ -42,6 +43,10 @@ public class ArgTag extends EncodingBufferedBodyTag
 		NameAttribute,
 		ValueAttribute
 {
+
+/* SimpleTag only:
+	public static final String TAG_NAME = "<ao:arg>";
+/**/
 
 	public ArgTag() {
 		init();
@@ -85,10 +90,10 @@ public class ArgTag extends EncodingBufferedBodyTag
 /* SimpleTag only:
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		ArgsAttribute argsAttribute = AttributeUtils.findAttributeParent("arg", this, "args", ArgsAttribute.class);
 		if(name==null) throw new AttributeRequiredException("name");
 		if(value==null) setValue(capturedBody.trim());
-		argsAttribute.addArg(name, value);
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "args", ArgsAttribute.class)
+			.addArg(name, value);
 /* BodyTag only: */
 		return SKIP_BODY;
 /**/

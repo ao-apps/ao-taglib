@@ -34,6 +34,10 @@ import javax.servlet.jsp.JspTagException;
  */
 public class OnfocusTag extends EncodingBufferedTag {
 
+/* SimpleTag only: */
+	public static final String TAG_NAME = "<ao:onfocus>";
+/**/
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.JAVASCRIPT;
@@ -55,8 +59,8 @@ public class OnfocusTag extends EncodingBufferedTag {
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		OnfocusAttribute onfocusAttribute = AttributeUtils.findAttributeParent("onfocus", this, "onfocus", OnfocusAttribute.class);
-		onfocusAttribute.setOnfocus(capturedBody.trim());
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "onfocus", OnfocusAttribute.class)
+			.setOnfocus(capturedBody.trim());
 /* BodyTag only:
 		return SKIP_BODY;
 /**/

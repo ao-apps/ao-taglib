@@ -35,6 +35,10 @@ import javax.servlet.jsp.JspTagException;
  */
 public class FrameborderTag extends EncodingBufferedTag {
 
+/* SimpleTag only: */
+	public static final String TAG_NAME = "<ao:frameborder>";
+/**/
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.TEXT;
@@ -56,7 +60,7 @@ public class FrameborderTag extends EncodingBufferedTag {
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		FrameborderAttribute frameborderAttribute = AttributeUtils.findAttributeParent("frameborder", this, "frameborder", FrameborderAttribute.class);
+		FrameborderAttribute frameborderAttribute = AttributeUtils.requireAttributeParent(TAG_NAME, this, "frameborder", FrameborderAttribute.class);
 		String value = capturedBody.trim().toString();
 		if(!value.isEmpty()) {
 			if("true".equals(value)) frameborderAttribute.setFrameborder(true);

@@ -26,6 +26,7 @@ import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.taglib.legacy.EncodingBufferedBodyTag;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.taglib.AttributeUtils;
+import static com.aoindustries.taglib.MessageArgTag.TAG_NAME;
 import com.aoindustries.taglib.MessageArgsAttribute;
 import com.aoindustries.taglib.ValueAttribute;
 import java.io.IOException;
@@ -38,6 +39,10 @@ import javax.servlet.jsp.JspTagException;
 public class MessageArgTag extends EncodingBufferedBodyTag
 	implements ValueAttribute
 {
+
+/* SimpleTag only:
+	public static final String TAG_NAME = "<ao:messageArg>";
+/**/
 
 	public MessageArgTag() {
 		init();
@@ -91,9 +96,9 @@ public class MessageArgTag extends EncodingBufferedBodyTag
 /* SimpleTag only:
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		MessageArgsAttribute messageArgsAttribute = AttributeUtils.findAttributeParent("messageArg", this, "messageArgs", MessageArgsAttribute.class);
 		if(value == null) setValue((capturedBody == null) ? "" : capturedBody.trim());
-		messageArgsAttribute.addMessageArg(value);
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "messageArgs", MessageArgsAttribute.class)
+			.addMessageArg(value);
 /* BodyTag only: */
 		return EVAL_PAGE;
 /**/

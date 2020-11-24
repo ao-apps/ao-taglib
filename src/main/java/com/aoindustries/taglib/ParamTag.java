@@ -39,6 +39,10 @@ public class ParamTag extends EncodingBufferedTag
 		ValueAttribute
 {
 
+/* SimpleTag only: */
+	public static final String TAG_NAME = "<ao:param>";
+/**/
+
 	public ParamTag() {
 		init();
 	}
@@ -100,7 +104,7 @@ public class ParamTag extends EncodingBufferedTag
 /**/
 		if(name == null) throw new AttributeRequiredException("name");
 		ParamUtils.addParam(
-			"param",
+			TAG_NAME,
 			this,
 			name,
 			(value != null) ? value : (capturedBody == null) ? "" : capturedBody.trim()

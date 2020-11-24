@@ -27,6 +27,7 @@ import com.aoindustries.encoding.taglib.legacy.EncodingBufferedBodyTag;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.taglib.AttributeUtils;
 import com.aoindustries.taglib.OnmouseoverAttribute;
+import static com.aoindustries.taglib.OnmouseoverTag.TAG_NAME;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspTagException;
@@ -35,6 +36,10 @@ import javax.servlet.jsp.JspTagException;
  * @author  AO Industries, Inc.
  */
 public class OnmouseoverTag extends EncodingBufferedBodyTag {
+
+/* SimpleTag only:
+	public static final String TAG_NAME = "<ao:onmouseover>";
+/**/
 
 	@Override
 	public MediaType getContentType() {
@@ -57,8 +62,8 @@ public class OnmouseoverTag extends EncodingBufferedBodyTag {
 /* SimpleTag only:
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		OnmouseoverAttribute onmouseoverAttribute = AttributeUtils.findAttributeParent("onmouseover", this, "onmouseover", OnmouseoverAttribute.class);
-		onmouseoverAttribute.setOnmouseover(capturedBody.trim());
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "onmouseover", OnmouseoverAttribute.class)
+			.setOnmouseover(capturedBody.trim());
 /* BodyTag only: */
 		return SKIP_BODY;
 /**/

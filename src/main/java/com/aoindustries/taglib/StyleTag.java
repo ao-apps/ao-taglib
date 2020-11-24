@@ -34,6 +34,10 @@ import javax.servlet.jsp.JspTagException;
  */
 public class StyleTag extends EncodingBufferedTag {
 
+/* SimpleTag only: */
+	public static final String TAG_NAME = "<ao:style>";
+/**/
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.TEXT; // TODO: MediaType.CSS
@@ -58,8 +62,8 @@ public class StyleTag extends EncodingBufferedTag {
 		// TODO: Support <ao:style> without parent, which would be much like <ao:script> (context for nested <ao:out>, for example)
 		// TODO: How to disambiguate, since style is a global attribute, it will often/usually be in a parent?
 		// TODO: However, <ao:html> does is not StyleAttribute, so maybe is OK without explicit disambiguation.
-		StyleAttribute styleAttribute = AttributeUtils.findAttributeParent("style", this, "style", StyleAttribute.class);
-		styleAttribute.setStyle(capturedBody.trim());
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "style", StyleAttribute.class)
+			.setStyle(capturedBody.trim());
 /* BodyTag only:
 		return SKIP_BODY;
 /**/

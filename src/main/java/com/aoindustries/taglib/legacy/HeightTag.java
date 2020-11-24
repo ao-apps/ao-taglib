@@ -27,6 +27,7 @@ import com.aoindustries.encoding.taglib.legacy.EncodingBufferedBodyTag;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.taglib.AttributeUtils;
 import com.aoindustries.taglib.HeightAttribute;
+import static com.aoindustries.taglib.HeightTag.TAG_NAME;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspTagException;
@@ -35,6 +36,10 @@ import javax.servlet.jsp.JspTagException;
  * @author  AO Industries, Inc.
  */
 public class HeightTag extends EncodingBufferedBodyTag {
+
+/* SimpleTag only:
+	public static final String TAG_NAME = "<ao:height>";
+/**/
 
 	@Override
 	public MediaType getContentType() {
@@ -57,8 +62,8 @@ public class HeightTag extends EncodingBufferedBodyTag {
 /* SimpleTag only:
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		HeightAttribute heightAttribute = AttributeUtils.findAttributeParent("height", this, "height", HeightAttribute.class);
-		heightAttribute.setHeight(capturedBody.trim());
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "height", HeightAttribute.class)
+			.setHeight(capturedBody.trim());
 /* BodyTag only: */
 		return SKIP_BODY;
 /**/

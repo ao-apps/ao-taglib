@@ -26,6 +26,7 @@ import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.taglib.legacy.EncodingBufferedBodyTag;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.taglib.AltAttribute;
+import static com.aoindustries.taglib.AltTag.TAG_NAME;
 import com.aoindustries.taglib.AttributeUtils;
 import java.io.IOException;
 import java.io.Writer;
@@ -35,6 +36,10 @@ import javax.servlet.jsp.JspTagException;
  * @author  AO Industries, Inc.
  */
 public class AltTag extends EncodingBufferedBodyTag {
+
+/* SimpleTag only:
+	public static final String TAG_NAME = "<ao:alt>";
+/**/
 
 	@Override
 	public MediaType getContentType() {
@@ -57,8 +62,8 @@ public class AltTag extends EncodingBufferedBodyTag {
 /* SimpleTag only:
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		AltAttribute altAttribute = AttributeUtils.findAttributeParent("alt", this, "alt", AltAttribute.class);
-		altAttribute.setAlt(capturedBody.trim());
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "alt", AltAttribute.class)
+			.setAlt(capturedBody.trim());
 /* BodyTag only: */
 		return SKIP_BODY;
 /**/

@@ -35,6 +35,10 @@ import javax.servlet.jsp.JspTagException;
  */
 public class DisabledTag extends EncodingBufferedTag {
 
+/* SimpleTag only: */
+	public static final String TAG_NAME = "<ao:disabled>";
+/**/
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.TEXT;
@@ -56,7 +60,7 @@ public class DisabledTag extends EncodingBufferedTag {
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		DisabledAttribute disabledAttribute = AttributeUtils.findAttributeParent("disabled", this, "disabled", DisabledAttribute.class);
+		DisabledAttribute disabledAttribute = AttributeUtils.requireAttributeParent(TAG_NAME, this, "disabled", DisabledAttribute.class);
 		String value = capturedBody.trim().toString();
 		if(!value.isEmpty()) {
 			if("true".equals(value)) disabledAttribute.setDisabled(true);

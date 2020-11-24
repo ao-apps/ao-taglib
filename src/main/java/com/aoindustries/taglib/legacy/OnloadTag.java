@@ -27,6 +27,7 @@ import com.aoindustries.encoding.taglib.legacy.EncodingBufferedBodyTag;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.taglib.AttributeUtils;
 import com.aoindustries.taglib.OnloadAttribute;
+import static com.aoindustries.taglib.OnloadTag.TAG_NAME;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspTagException;
@@ -35,6 +36,10 @@ import javax.servlet.jsp.JspTagException;
  * @author  AO Industries, Inc.
  */
 public class OnloadTag extends EncodingBufferedBodyTag {
+
+/* SimpleTag only:
+	public static final String TAG_NAME = "<ao:onload>";
+/**/
 
 	@Override
 	public MediaType getContentType() {
@@ -57,8 +62,8 @@ public class OnloadTag extends EncodingBufferedBodyTag {
 /* SimpleTag only:
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		OnloadAttribute onloadAttribute = AttributeUtils.findAttributeParent("onload", this, "onload", OnloadAttribute.class);
-		onloadAttribute.setOnload(capturedBody.trim());
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "onload", OnloadAttribute.class)
+			.setOnload(capturedBody.trim());
 /* BodyTag only: */
 		return SKIP_BODY;
 /**/

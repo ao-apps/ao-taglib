@@ -29,6 +29,7 @@ import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.taglib.ApplicationResources;
 import com.aoindustries.taglib.AttributeUtils;
 import com.aoindustries.taglib.ReadonlyAttribute;
+import static com.aoindustries.taglib.ReadonlyTag.TAG_NAME;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspTagException;
@@ -37,6 +38,10 @@ import javax.servlet.jsp.JspTagException;
  * @author  AO Industries, Inc.
  */
 public class ReadonlyTag extends EncodingBufferedBodyTag {
+
+/* SimpleTag only:
+	public static final String TAG_NAME = "<ao:readonly>";
+/**/
 
 	@Override
 	public MediaType getContentType() {
@@ -59,11 +64,11 @@ public class ReadonlyTag extends EncodingBufferedBodyTag {
 /* SimpleTag only:
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		ReadonlyAttribute ReadonlyAttribute = AttributeUtils.findAttributeParent("readonly", this, "readonly", ReadonlyAttribute.class);
+		ReadonlyAttribute readonlyAttribute = AttributeUtils.requireAttributeParent(TAG_NAME, this, "readonly", ReadonlyAttribute.class);
 		String value = capturedBody.trim().toString();
 		if(!value.isEmpty()) {
-			if("true".equals(value)) ReadonlyAttribute.setReadonly(true);
-			else if("false".equals(value)) ReadonlyAttribute.setReadonly(false);
+			if("true".equals(value)) readonlyAttribute.setReadonly(true);
+			else if("false".equals(value)) readonlyAttribute.setReadonly(false);
 			else throw new LocalizedJspTagException(ApplicationResources.accessor, "ReadonlyTag.invalidValue", value);
 		}
 /* BodyTag only: */

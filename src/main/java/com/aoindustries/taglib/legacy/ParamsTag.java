@@ -32,6 +32,7 @@ import com.aoindustries.taglib.AttributeUtils;
 import com.aoindustries.taglib.NameAttribute;
 import com.aoindustries.taglib.ParamUtils;
 import com.aoindustries.taglib.ParamsAttribute;
+import static com.aoindustries.taglib.ParamsTag.TAG_NAME;
 import com.aoindustries.util.WildcardPatternMatcher;
 import java.io.IOException;
 import java.io.Writer;
@@ -48,6 +49,10 @@ import javax.servlet.jsp.JspTagException;
 public class ParamsTag extends EncodingNullBodyTag
 	implements NameAttribute
 {
+
+/* SimpleTag only:
+	public static final String TAG_NAME = "<ao:params>";
+/**/
 
 	public ParamsTag() {
 		init();
@@ -95,7 +100,7 @@ public class ParamsTag extends EncodingNullBodyTag
 	protected void doTag(Writer out) throws JspTagException, IOException {
 /**/
 		// TODO: These supported types match Html.java and Param.java in ao-fluent-html?
-		ParamsAttribute paramsAttribute = AttributeUtils.findAttributeParent("params", this, "params", ParamsAttribute.class);
+		ParamsAttribute paramsAttribute = AttributeUtils.requireAttributeParent(TAG_NAME, this, "params", ParamsAttribute.class);
 		if(values!=null) {
 			if(name==null) {
 				if(values instanceof Map<?,?>) {

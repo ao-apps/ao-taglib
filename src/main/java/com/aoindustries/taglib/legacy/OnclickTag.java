@@ -27,6 +27,7 @@ import com.aoindustries.encoding.taglib.legacy.EncodingBufferedBodyTag;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.taglib.AttributeUtils;
 import com.aoindustries.taglib.OnclickAttribute;
+import static com.aoindustries.taglib.OnclickTag.TAG_NAME;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspTagException;
@@ -35,6 +36,10 @@ import javax.servlet.jsp.JspTagException;
  * @author  AO Industries, Inc.
  */
 public class OnclickTag extends EncodingBufferedBodyTag {
+
+/* SimpleTag only:
+	public static final String TAG_NAME = "<ao:onclick>";
+/**/
 
 	@Override
 	public MediaType getContentType() {
@@ -57,8 +62,8 @@ public class OnclickTag extends EncodingBufferedBodyTag {
 /* SimpleTag only:
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		OnclickAttribute onclickAttribute = AttributeUtils.findAttributeParent("onclick", this, "onclick", OnclickAttribute.class);
-		onclickAttribute.setOnclick(capturedBody.trim());
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "onclick", OnclickAttribute.class)
+			.setOnclick(capturedBody.trim());
 /* BodyTag only: */
 		return SKIP_BODY;
 /**/

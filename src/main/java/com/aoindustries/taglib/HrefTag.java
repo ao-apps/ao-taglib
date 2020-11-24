@@ -34,6 +34,10 @@ import javax.servlet.jsp.JspTagException;
  */
 public class HrefTag extends EncodingBufferedTag {
 
+/* SimpleTag only: */
+	public static final String TAG_NAME = "<ao:href>";
+/**/
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.URL; // TODO: Does this work with whitepace around the URL that will be trimmed?  Compare to ImgTag
@@ -55,8 +59,8 @@ public class HrefTag extends EncodingBufferedTag {
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		HrefAttribute hrefAttribute = AttributeUtils.findAttributeParent("href", this, "href", HrefAttribute.class);
-		hrefAttribute.setHref(capturedBody.trim().toString());
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "href", HrefAttribute.class)
+			.setHref(capturedBody.trim().toString());
 /* BodyTag only:
 		return SKIP_BODY;
 /**/

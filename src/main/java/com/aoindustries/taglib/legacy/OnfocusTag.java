@@ -27,6 +27,7 @@ import com.aoindustries.encoding.taglib.legacy.EncodingBufferedBodyTag;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.taglib.AttributeUtils;
 import com.aoindustries.taglib.OnfocusAttribute;
+import static com.aoindustries.taglib.OnfocusTag.TAG_NAME;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspTagException;
@@ -35,6 +36,10 @@ import javax.servlet.jsp.JspTagException;
  * @author  AO Industries, Inc.
  */
 public class OnfocusTag extends EncodingBufferedBodyTag {
+
+/* SimpleTag only:
+	public static final String TAG_NAME = "<ao:onfocus>";
+/**/
 
 	@Override
 	public MediaType getContentType() {
@@ -57,8 +62,8 @@ public class OnfocusTag extends EncodingBufferedBodyTag {
 /* SimpleTag only:
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		OnfocusAttribute onfocusAttribute = AttributeUtils.findAttributeParent("onfocus", this, "onfocus", OnfocusAttribute.class);
-		onfocusAttribute.setOnfocus(capturedBody.trim());
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "onfocus", OnfocusAttribute.class)
+			.setOnfocus(capturedBody.trim());
 /* BodyTag only: */
 		return SKIP_BODY;
 /**/

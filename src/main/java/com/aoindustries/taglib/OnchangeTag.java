@@ -34,6 +34,10 @@ import javax.servlet.jsp.JspTagException;
  */
 public class OnchangeTag extends EncodingBufferedTag {
 
+/* SimpleTag only: */
+	public static final String TAG_NAME = "<ao:onchange>";
+/**/
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.JAVASCRIPT;
@@ -55,8 +59,8 @@ public class OnchangeTag extends EncodingBufferedTag {
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		OnchangeAttribute onchangeAttribute = AttributeUtils.findAttributeParent("onchange", this, "onchange", OnchangeAttribute.class);
-		onchangeAttribute.setOnchange(capturedBody.trim());
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "onchange", OnchangeAttribute.class)
+			.setOnchange(capturedBody.trim());
 /* BodyTag only:
 		return SKIP_BODY;
 /**/

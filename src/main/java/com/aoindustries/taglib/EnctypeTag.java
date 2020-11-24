@@ -34,6 +34,10 @@ import javax.servlet.jsp.JspTagException;
  */
 public class EnctypeTag extends EncodingBufferedTag {
 
+/* SimpleTag only: */
+	public static final String TAG_NAME = "<ao:enctype>";
+/**/
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.TEXT;
@@ -55,8 +59,8 @@ public class EnctypeTag extends EncodingBufferedTag {
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		EnctypeAttribute enctypeAttribute = AttributeUtils.findAttributeParent("enctype", this, "enctype", EnctypeAttribute.class);
-		enctypeAttribute.setEnctype(capturedBody.trim().toString());
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "enctype", EnctypeAttribute.class)
+			.setEnctype(capturedBody.trim().toString());
 /* BodyTag only:
 		return SKIP_BODY;
 /**/

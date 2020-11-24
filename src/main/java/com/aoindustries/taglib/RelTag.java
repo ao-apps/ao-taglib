@@ -34,6 +34,10 @@ import javax.servlet.jsp.JspTagException;
  */
 public class RelTag extends EncodingBufferedTag {
 
+/* SimpleTag only: */
+	public static final String TAG_NAME = "<ao:rel>";
+/**/
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.TEXT;
@@ -55,8 +59,8 @@ public class RelTag extends EncodingBufferedTag {
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		RelAttribute relAttribute = AttributeUtils.findAttributeParent("rel", this, "rel", RelAttribute.class);
-		relAttribute.setRel(capturedBody.trim().toString());
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "rel", RelAttribute.class)
+			.setRel(capturedBody.trim().toString());
 /* BodyTag only:
 		return SKIP_BODY;
 /**/

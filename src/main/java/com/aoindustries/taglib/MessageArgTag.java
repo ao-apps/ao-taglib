@@ -36,6 +36,10 @@ public class MessageArgTag extends EncodingBufferedTag
 	implements ValueAttribute
 {
 
+/* SimpleTag only: */
+	public static final String TAG_NAME = "<ao:messageArg>";
+/**/
+
 	public MessageArgTag() {
 		init();
 	}
@@ -88,9 +92,9 @@ public class MessageArgTag extends EncodingBufferedTag
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		MessageArgsAttribute messageArgsAttribute = AttributeUtils.findAttributeParent("messageArg", this, "messageArgs", MessageArgsAttribute.class);
 		if(value == null) setValue((capturedBody) == null ? "" : capturedBody.trim());
-		messageArgsAttribute.addMessageArg(value);
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "messageArgs", MessageArgsAttribute.class)
+			.addMessageArg(value);
 /* BodyTag only:
 		return EVAL_PAGE;
 /**/

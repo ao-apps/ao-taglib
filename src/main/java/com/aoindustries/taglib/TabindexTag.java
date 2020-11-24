@@ -34,6 +34,10 @@ import javax.servlet.jsp.JspTagException;
  */
 public class TabindexTag extends EncodingBufferedTag {
 
+/* SimpleTag only: */
+	public static final String TAG_NAME = "<ao:tabindex>";
+/**/
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.TEXT;
@@ -55,7 +59,7 @@ public class TabindexTag extends EncodingBufferedTag {
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		TabindexAttribute tabindexAttribute = AttributeUtils.findAttributeParent("tabindex", this, "tabindex", TabindexAttribute.class);
+		TabindexAttribute tabindexAttribute = AttributeUtils.requireAttributeParent(TAG_NAME, this, "tabindex", TabindexAttribute.class);
 		String value = capturedBody.trim().toString();
 		if(!value.isEmpty()) {
 			tabindexAttribute.setTabindex(Integer.parseInt(value));

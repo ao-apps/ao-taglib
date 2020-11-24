@@ -27,6 +27,7 @@ import com.aoindustries.encoding.taglib.legacy.EncodingBufferedBodyTag;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.taglib.AttributeUtils;
 import com.aoindustries.taglib.SizeAttribute;
+import static com.aoindustries.taglib.SizeTag.TAG_NAME;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspTagException;
@@ -35,6 +36,10 @@ import javax.servlet.jsp.JspTagException;
  * @author  AO Industries, Inc.
  */
 public class SizeTag extends EncodingBufferedBodyTag {
+
+/* SimpleTag only:
+	public static final String TAG_NAME = "<ao:size>";
+/**/
 
 	@Override
 	public MediaType getContentType() {
@@ -57,8 +62,8 @@ public class SizeTag extends EncodingBufferedBodyTag {
 /* SimpleTag only:
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		SizeAttribute sizeAttribute = AttributeUtils.findAttributeParent("size", this, "size", SizeAttribute.class);
-		sizeAttribute.setSize(capturedBody.trim());
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "size", SizeAttribute.class)
+			.setSize(capturedBody.trim());
 /* BodyTag only: */
 		return SKIP_BODY;
 /**/

@@ -34,6 +34,10 @@ import javax.servlet.jsp.JspTagException;
  */
 public class MaxlengthTag extends EncodingBufferedTag {
 
+/* SimpleTag only: */
+	public static final String TAG_NAME = "<ao:maxlength>";
+/**/
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.TEXT;
@@ -55,9 +59,9 @@ public class MaxlengthTag extends EncodingBufferedTag {
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		MaxlengthAttribute maxlengthAttribute = AttributeUtils.findAttributeParent("maxlength", this, "maxlength", MaxlengthAttribute.class);
 		String trimmedMaxlength = capturedBody.trim().toString();
-		maxlengthAttribute.setMaxlength(trimmedMaxlength.isEmpty() ? null : Integer.valueOf(trimmedMaxlength));
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "maxlength", MaxlengthAttribute.class)
+			.setMaxlength(trimmedMaxlength.isEmpty() ? null : Integer.valueOf(trimmedMaxlength));
 /* BodyTag only:
 		return SKIP_BODY;
 /**/

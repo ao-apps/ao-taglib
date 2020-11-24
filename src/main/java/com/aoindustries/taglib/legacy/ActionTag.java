@@ -26,6 +26,7 @@ import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.taglib.legacy.EncodingBufferedBodyTag;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.taglib.ActionAttribute;
+import static com.aoindustries.taglib.ActionTag.TAG_NAME;
 import com.aoindustries.taglib.AttributeUtils;
 import java.io.IOException;
 import java.io.Writer;
@@ -35,6 +36,10 @@ import javax.servlet.jsp.JspTagException;
  * @author  AO Industries, Inc.
  */
 public class ActionTag extends EncodingBufferedBodyTag {
+
+/* SimpleTag only:
+	public static final String TAG_NAME = "<ao:action>";
+/**/
 
 	@Override
 	public MediaType getContentType() {
@@ -57,8 +62,8 @@ public class ActionTag extends EncodingBufferedBodyTag {
 /* SimpleTag only:
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		ActionAttribute actionAttribute = AttributeUtils.findAttributeParent("action", this, "action", ActionAttribute.class);
-		actionAttribute.setAction(capturedBody.trim().toString());
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "action", ActionAttribute.class)
+			.setAction(capturedBody.trim().toString());
 /* BodyTag only: */
 		return SKIP_BODY;
 /**/

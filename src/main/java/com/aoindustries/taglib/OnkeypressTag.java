@@ -34,6 +34,10 @@ import javax.servlet.jsp.JspTagException;
  */
 public class OnkeypressTag extends EncodingBufferedTag {
 
+/* SimpleTag only: */
+	public static final String TAG_NAME = "<ao:onkeypress>";
+/**/
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.JAVASCRIPT;
@@ -55,8 +59,8 @@ public class OnkeypressTag extends EncodingBufferedTag {
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		OnkeypressAttribute onkeypressAttribute = AttributeUtils.findAttributeParent("onkeypress", this, "onkeypress", OnkeypressAttribute.class);
-		onkeypressAttribute.setOnkeypress(capturedBody.trim());
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "onkeypress", OnkeypressAttribute.class)
+			.setOnkeypress(capturedBody.trim());
 /* BodyTag only:
 		return SKIP_BODY;
 /**/

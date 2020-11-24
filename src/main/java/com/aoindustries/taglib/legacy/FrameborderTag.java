@@ -29,6 +29,7 @@ import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.taglib.ApplicationResources;
 import com.aoindustries.taglib.AttributeUtils;
 import com.aoindustries.taglib.FrameborderAttribute;
+import static com.aoindustries.taglib.FrameborderTag.TAG_NAME;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspTagException;
@@ -37,6 +38,10 @@ import javax.servlet.jsp.JspTagException;
  * @author  AO Industries, Inc.
  */
 public class FrameborderTag extends EncodingBufferedBodyTag {
+
+/* SimpleTag only:
+	public static final String TAG_NAME = "<ao:frameborder>";
+/**/
 
 	@Override
 	public MediaType getContentType() {
@@ -59,7 +64,7 @@ public class FrameborderTag extends EncodingBufferedBodyTag {
 /* SimpleTag only:
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		FrameborderAttribute frameborderAttribute = AttributeUtils.findAttributeParent("frameborder", this, "frameborder", FrameborderAttribute.class);
+		FrameborderAttribute frameborderAttribute = AttributeUtils.requireAttributeParent(TAG_NAME, this, "frameborder", FrameborderAttribute.class);
 		String value = capturedBody.trim().toString();
 		if(!value.isEmpty()) {
 			if("true".equals(value)) frameborderAttribute.setFrameborder(true);

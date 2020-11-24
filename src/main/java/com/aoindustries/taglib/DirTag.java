@@ -34,6 +34,10 @@ import javax.servlet.jsp.JspTagException;
  */
 public class DirTag extends EncodingBufferedTag {
 
+/* SimpleTag only: */
+	public static final String TAG_NAME = "<ao:dir>";
+/**/
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.TEXT;
@@ -55,8 +59,8 @@ public class DirTag extends EncodingBufferedTag {
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		DirAttribute dirAttribute = AttributeUtils.findAttributeParent("dir", this, "dir", DirAttribute.class);
-		dirAttribute.setDir(capturedBody.trim().toString());
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "dir", DirAttribute.class)
+			.setDir(capturedBody.trim().toString());
 /* BodyTag only:
 		return SKIP_BODY;
 /**/

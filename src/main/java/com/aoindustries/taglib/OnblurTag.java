@@ -34,6 +34,10 @@ import javax.servlet.jsp.JspTagException;
  */
 public class OnblurTag extends EncodingBufferedTag {
 
+/* SimpleTag only: */
+	public static final String TAG_NAME = "<ao:onblur>";
+/**/
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.JAVASCRIPT;
@@ -55,8 +59,8 @@ public class OnblurTag extends EncodingBufferedTag {
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		OnblurAttribute onblurAttribute = AttributeUtils.findAttributeParent("onblur", this, "onblur", OnblurAttribute.class);
-		onblurAttribute.setOnblur(capturedBody.trim());
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "onblur", OnblurAttribute.class)
+			.setOnblur(capturedBody.trim());
 /* BodyTag only:
 		return SKIP_BODY;
 /**/

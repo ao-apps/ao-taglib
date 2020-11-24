@@ -53,7 +53,7 @@ final public class ParamUtils {
 	 * @param  name         the name of the parameter (required)
 	 * @param  value        the value of the parameter, will be coerced to String
 	 *
-	 * @see  AttributeUtils#findAttributeParent(java.lang.String, javax.servlet.jsp.tagext.JspTag, java.lang.String, java.lang.Class)
+	 * @see  AttributeUtils#requireAttributeParent(java.lang.String, javax.servlet.jsp.tagext.JspTag, java.lang.String, java.lang.Class)
 	 */
 	public static void addParam(
 		String fromTagName,
@@ -62,7 +62,7 @@ final public class ParamUtils {
 		Object value
 	) throws JspTagException {
 		addParam(
-			AttributeUtils.findAttributeParent(fromTagName, from, "params", ParamsAttribute.class),
+			AttributeUtils.requireAttributeParent(fromTagName, from, "params", ParamsAttribute.class),
 			name,
 			value
 		);

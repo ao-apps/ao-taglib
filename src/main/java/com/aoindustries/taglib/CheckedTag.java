@@ -35,6 +35,10 @@ import javax.servlet.jsp.JspTagException;
  */
 public class CheckedTag extends EncodingBufferedTag {
 
+/* SimpleTag only: */
+	public static final String TAG_NAME = "<ao:checked>";
+/**/
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.TEXT;
@@ -56,7 +60,7 @@ public class CheckedTag extends EncodingBufferedTag {
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		CheckedAttribute checkedAttribute = AttributeUtils.findAttributeParent("checked", this, "checked", CheckedAttribute.class);
+		CheckedAttribute checkedAttribute = AttributeUtils.requireAttributeParent(TAG_NAME, this, "checked", CheckedAttribute.class);
 		String value = capturedBody.trim().toString();
 		if(!value.isEmpty()) {
 			if("true".equals(value)) checkedAttribute.setChecked(true);

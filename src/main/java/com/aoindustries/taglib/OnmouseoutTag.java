@@ -34,6 +34,10 @@ import javax.servlet.jsp.JspTagException;
  */
 public class OnmouseoutTag extends EncodingBufferedTag {
 
+/* SimpleTag only: */
+	public static final String TAG_NAME = "<ao:onmouseout>";
+/**/
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.JAVASCRIPT;
@@ -55,8 +59,8 @@ public class OnmouseoutTag extends EncodingBufferedTag {
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		OnmouseoutAttribute onmouseoutAttribute = AttributeUtils.findAttributeParent("onmouseout", this, "onmouseout", OnmouseoutAttribute.class);
-		onmouseoutAttribute.setOnmouseout(capturedBody.trim());
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "onmouseout", OnmouseoutAttribute.class)
+			.setOnmouseout(capturedBody.trim());
 /* BodyTag only:
 		return SKIP_BODY;
 /**/

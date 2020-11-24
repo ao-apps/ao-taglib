@@ -27,6 +27,7 @@ import com.aoindustries.encoding.taglib.legacy.EncodingBufferedBodyTag;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.taglib.AttributeUtils;
 import com.aoindustries.taglib.StyleAttribute;
+import static com.aoindustries.taglib.StyleTag.TAG_NAME;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspTagException;
@@ -35,6 +36,10 @@ import javax.servlet.jsp.JspTagException;
  * @author  AO Industries, Inc.
  */
 public class StyleTag extends EncodingBufferedBodyTag {
+
+/* SimpleTag only:
+	public static final String TAG_NAME = "<ao:style>";
+/**/
 
 	@Override
 	public MediaType getContentType() {
@@ -60,8 +65,8 @@ public class StyleTag extends EncodingBufferedBodyTag {
 		// TODO: Support <ao:style> without parent, which would be much like <ao:script> (context for nested <ao:out>, for example)
 		// TODO: How to disambiguate, since style is a global attribute, it will often/usually be in a parent?
 		// TODO: However, <ao:html> does is not StyleAttribute, so maybe is OK without explicit disambiguation.
-		StyleAttribute styleAttribute = AttributeUtils.findAttributeParent("style", this, "style", StyleAttribute.class);
-		styleAttribute.setStyle(capturedBody.trim());
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "style", StyleAttribute.class)
+			.setStyle(capturedBody.trim());
 /* BodyTag only: */
 		return SKIP_BODY;
 /**/

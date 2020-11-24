@@ -27,6 +27,7 @@ import com.aoindustries.encoding.taglib.legacy.EncodingBufferedBodyTag;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.taglib.AttributeUtils;
 import com.aoindustries.taglib.TypeAttribute;
+import static com.aoindustries.taglib.TypeTag.TAG_NAME;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspTagException;
@@ -35,6 +36,10 @@ import javax.servlet.jsp.JspTagException;
  * @author  AO Industries, Inc.
  */
 public class TypeTag extends EncodingBufferedBodyTag {
+
+/* SimpleTag only:
+	public static final String TAG_NAME = "<ao:type>";
+/**/
 
 	@Override
 	public MediaType getContentType() {
@@ -57,8 +62,8 @@ public class TypeTag extends EncodingBufferedBodyTag {
 /* SimpleTag only:
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		TypeAttribute typeAttribute = AttributeUtils.findAttributeParent("type", this, "type", TypeAttribute.class);
-		typeAttribute.setType(capturedBody.trim().toString());
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "type", TypeAttribute.class)
+			.setType(capturedBody.trim().toString());
 /* BodyTag only: */
 		return SKIP_BODY;
 /**/

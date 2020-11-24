@@ -35,6 +35,10 @@ import javax.servlet.jsp.JspTagException;
  */
 public class ReadonlyTag extends EncodingBufferedTag {
 
+/* SimpleTag only: */
+	public static final String TAG_NAME = "<ao:readonly>";
+/**/
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.TEXT;
@@ -56,11 +60,11 @@ public class ReadonlyTag extends EncodingBufferedTag {
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		ReadonlyAttribute ReadonlyAttribute = AttributeUtils.findAttributeParent("readonly", this, "readonly", ReadonlyAttribute.class);
+		ReadonlyAttribute readonlyAttribute = AttributeUtils.requireAttributeParent(TAG_NAME, this, "readonly", ReadonlyAttribute.class);
 		String value = capturedBody.trim().toString();
 		if(!value.isEmpty()) {
-			if("true".equals(value)) ReadonlyAttribute.setReadonly(true);
-			else if("false".equals(value)) ReadonlyAttribute.setReadonly(false);
+			if("true".equals(value)) readonlyAttribute.setReadonly(true);
+			else if("false".equals(value)) readonlyAttribute.setReadonly(false);
 			else throw new LocalizedJspTagException(ApplicationResources.accessor, "ReadonlyTag.invalidValue", value);
 		}
 /* BodyTag only:

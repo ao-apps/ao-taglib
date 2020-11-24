@@ -27,6 +27,7 @@ import com.aoindustries.encoding.taglib.legacy.EncodingBufferedBodyTag;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.taglib.AttributeUtils;
 import com.aoindustries.taglib.MethodAttribute;
+import static com.aoindustries.taglib.MethodTag.TAG_NAME;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspTagException;
@@ -35,6 +36,10 @@ import javax.servlet.jsp.JspTagException;
  * @author  AO Industries, Inc.
  */
 public class MethodTag extends EncodingBufferedBodyTag {
+
+/* SimpleTag only:
+	public static final String TAG_NAME = "<ao:method>";
+/**/
 
 	@Override
 	public MediaType getContentType() {
@@ -57,8 +62,8 @@ public class MethodTag extends EncodingBufferedBodyTag {
 /* SimpleTag only:
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		MethodAttribute methodAttribute = AttributeUtils.findAttributeParent("method", this, "method", MethodAttribute.class);
-		methodAttribute.setMethod(capturedBody.trim().toString());
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "method", MethodAttribute.class)
+			.setMethod(capturedBody.trim().toString());
 /* BodyTag only: */
 		return SKIP_BODY;
 /**/

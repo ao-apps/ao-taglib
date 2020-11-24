@@ -34,6 +34,10 @@ import javax.servlet.jsp.JspTagException;
  */
 public class OnclickTag extends EncodingBufferedTag {
 
+/* SimpleTag only: */
+	public static final String TAG_NAME = "<ao:onclick>";
+/**/
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.JAVASCRIPT;
@@ -55,8 +59,8 @@ public class OnclickTag extends EncodingBufferedTag {
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		OnclickAttribute onclickAttribute = AttributeUtils.findAttributeParent("onclick", this, "onclick", OnclickAttribute.class);
-		onclickAttribute.setOnclick(capturedBody.trim());
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "onclick", OnclickAttribute.class)
+			.setOnclick(capturedBody.trim());
 /* BodyTag only:
 		return SKIP_BODY;
 /**/

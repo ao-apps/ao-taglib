@@ -34,6 +34,10 @@ import javax.servlet.jsp.JspTagException;
  */
 public class AltTag extends EncodingBufferedTag {
 
+/* SimpleTag only: */
+	public static final String TAG_NAME = "<ao:alt>";
+/**/
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.TEXT;
@@ -55,8 +59,8 @@ public class AltTag extends EncodingBufferedTag {
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		AltAttribute altAttribute = AttributeUtils.findAttributeParent("alt", this, "alt", AltAttribute.class);
-		altAttribute.setAlt(capturedBody.trim());
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "alt", AltAttribute.class)
+			.setAlt(capturedBody.trim());
 /* BodyTag only:
 		return SKIP_BODY;
 /**/

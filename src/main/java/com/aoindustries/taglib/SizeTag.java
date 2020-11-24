@@ -34,6 +34,10 @@ import javax.servlet.jsp.JspTagException;
  */
 public class SizeTag extends EncodingBufferedTag {
 
+/* SimpleTag only: */
+	public static final String TAG_NAME = "<ao:size>";
+/**/
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.TEXT;
@@ -55,8 +59,8 @@ public class SizeTag extends EncodingBufferedTag {
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		SizeAttribute sizeAttribute = AttributeUtils.findAttributeParent("size", this, "size", SizeAttribute.class);
-		sizeAttribute.setSize(capturedBody.trim());
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "size", SizeAttribute.class)
+			.setSize(capturedBody.trim());
 /* BodyTag only:
 		return SKIP_BODY;
 /**/

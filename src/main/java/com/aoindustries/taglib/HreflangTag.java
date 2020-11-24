@@ -34,6 +34,10 @@ import javax.servlet.jsp.JspTagException;
  */
 public class HreflangTag extends EncodingBufferedTag {
 
+/* SimpleTag only: */
+	public static final String TAG_NAME = "<ao:hreflang>";
+/**/
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.TEXT;
@@ -55,8 +59,8 @@ public class HreflangTag extends EncodingBufferedTag {
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		HreflangAttribute hreflangAttribute = AttributeUtils.findAttributeParent("hreflang", this, "hreflang", HreflangAttribute.class);
-		hreflangAttribute.setHreflang(capturedBody.trim());
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "hreflang", HreflangAttribute.class)
+			.setHreflang(capturedBody.trim());
 /* BodyTag only:
 		return SKIP_BODY;
 /**/

@@ -48,11 +48,21 @@ public final class AttributeUtils  {
 	 *
 	 * @return  the parent tag
 	 * @exception  NeedAttributeParentException  if parent not found
+	 *
+	 * @see  JspTagUtils#findAncestor(javax.servlet.jsp.tagext.JspTag, java.lang.Class)
 	 */
-	public static <T> T findAttributeParent(String fromTagName, JspTag from, String attribute, Class<? extends T> clazz) throws NeedAttributeParentException {
+	public static <T> T requireAttributeParent(String fromTagName, JspTag from, String attribute, Class<? extends T> clazz) throws NeedAttributeParentException {
 		return JspTagUtils.findAncestor(from, clazz).orElseThrow(
 			() -> new NeedAttributeParentException(fromTagName, attribute)
 		);
+	}
+
+	/**
+	 * @deprecated  Please use {@link #requireAttributeParent(java.lang.String, javax.servlet.jsp.tagext.JspTag, java.lang.String, java.lang.Class)}.
+	 */
+	@Deprecated
+	public static <T> T findAttributeParent(String fromTagName, JspTag from, String attribute, Class<? extends T> clazz) throws NeedAttributeParentException {
+		return requireAttributeParent(fromTagName, from, attribute, clazz);
 	}
 
 	/**

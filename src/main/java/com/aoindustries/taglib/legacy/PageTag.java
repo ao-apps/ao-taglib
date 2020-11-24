@@ -27,6 +27,7 @@ import com.aoindustries.encoding.taglib.legacy.EncodingBufferedBodyTag;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.taglib.AttributeUtils;
 import com.aoindustries.taglib.PageAttribute;
+import static com.aoindustries.taglib.PageTag.TAG_NAME;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspTagException;
@@ -35,6 +36,10 @@ import javax.servlet.jsp.JspTagException;
  * @author  AO Industries, Inc.
  */
 public class PageTag extends EncodingBufferedBodyTag {
+
+/* SimpleTag only:
+	public static final String TAG_NAME = "<ao:page>";
+/**/
 
 	@Override
 	public MediaType getContentType() {
@@ -57,8 +62,8 @@ public class PageTag extends EncodingBufferedBodyTag {
 /* SimpleTag only:
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		PageAttribute pageAttribute = AttributeUtils.findAttributeParent("page", this, "page", PageAttribute.class);
-		pageAttribute.setPage(capturedBody.trim().toString());
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "page", PageAttribute.class)
+			.setPage(capturedBody.trim().toString());
 /* BodyTag only: */
 		return SKIP_BODY;
 /**/

@@ -34,6 +34,10 @@ import javax.servlet.jsp.JspTagException;
  */
 public class OnmouseoverTag extends EncodingBufferedTag {
 
+/* SimpleTag only: */
+	public static final String TAG_NAME = "<ao:onmouseover>";
+/**/
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.JAVASCRIPT;
@@ -51,12 +55,13 @@ public class OnmouseoverTag extends EncodingBufferedTag {
 	@Override
 /* BodyTag only:
 	protected int doAfterBody(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+	TODO: These uses of doAfterBody should be doEndTag, since when no body would not set attribute versus SimpleTag version
 /**/
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		OnmouseoverAttribute onmouseoverAttribute = AttributeUtils.findAttributeParent("onmouseover", this, "onmouseover", OnmouseoverAttribute.class);
-		onmouseoverAttribute.setOnmouseover(capturedBody.trim());
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "onmouseover", OnmouseoverAttribute.class)
+			.setOnmouseover(capturedBody.trim());
 /* BodyTag only:
 		return SKIP_BODY;
 /**/

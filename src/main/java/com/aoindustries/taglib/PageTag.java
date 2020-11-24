@@ -34,6 +34,10 @@ import javax.servlet.jsp.JspTagException;
  */
 public class PageTag extends EncodingBufferedTag {
 
+/* SimpleTag only: */
+	public static final String TAG_NAME = "<ao:page>";
+/**/
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.TEXT;
@@ -55,8 +59,8 @@ public class PageTag extends EncodingBufferedTag {
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		PageAttribute pageAttribute = AttributeUtils.findAttributeParent("page", this, "page", PageAttribute.class);
-		pageAttribute.setPage(capturedBody.trim().toString());
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "page", PageAttribute.class)
+			.setPage(capturedBody.trim().toString());
 /* BodyTag only:
 		return SKIP_BODY;
 /**/

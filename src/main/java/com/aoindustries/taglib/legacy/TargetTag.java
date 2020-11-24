@@ -27,6 +27,7 @@ import com.aoindustries.encoding.taglib.legacy.EncodingBufferedBodyTag;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.taglib.AttributeUtils;
 import com.aoindustries.taglib.TargetAttribute;
+import static com.aoindustries.taglib.TargetTag.TAG_NAME;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspTagException;
@@ -35,6 +36,10 @@ import javax.servlet.jsp.JspTagException;
  * @author  AO Industries, Inc.
  */
 public class TargetTag extends EncodingBufferedBodyTag {
+
+/* SimpleTag only:
+	public static final String TAG_NAME = "<ao:target>";
+/**/
 
 	@Override
 	public MediaType getContentType() {
@@ -57,8 +62,8 @@ public class TargetTag extends EncodingBufferedBodyTag {
 /* SimpleTag only:
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		TargetAttribute targetAttribute = AttributeUtils.findAttributeParent("target", this, "target", TargetAttribute.class);
-		targetAttribute.setTarget(capturedBody.trim().toString());
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "target", TargetAttribute.class)
+			.setTarget(capturedBody.trim().toString());
 /* BodyTag only: */
 		return SKIP_BODY;
 /**/

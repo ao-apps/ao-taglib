@@ -34,6 +34,10 @@ import javax.servlet.jsp.JspTagException;
  */
 public class IdTag extends EncodingBufferedTag {
 
+/* SimpleTag only: */
+	public static final String TAG_NAME = "<ao:id>";
+/**/
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.TEXT;
@@ -55,8 +59,8 @@ public class IdTag extends EncodingBufferedTag {
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		IdAttribute idAttribute = AttributeUtils.findAttributeParent("id", this, "id", IdAttribute.class);
-		idAttribute.setId(capturedBody.trim().toString());
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "id", IdAttribute.class)
+			.setId(capturedBody.trim().toString());
 /* BodyTag only:
 		return SKIP_BODY;
 /**/

@@ -34,6 +34,10 @@ import javax.servlet.jsp.JspTagException;
  */
 public class OnloadTag extends EncodingBufferedTag {
 
+/* SimpleTag only: */
+	public static final String TAG_NAME = "<ao:onload>";
+/**/
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.JAVASCRIPT;
@@ -55,8 +59,8 @@ public class OnloadTag extends EncodingBufferedTag {
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		OnloadAttribute onloadAttribute = AttributeUtils.findAttributeParent("onload", this, "onload", OnloadAttribute.class);
-		onloadAttribute.setOnload(capturedBody.trim());
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "onload", OnloadAttribute.class)
+			.setOnload(capturedBody.trim());
 /* BodyTag only:
 		return SKIP_BODY;
 /**/

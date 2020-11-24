@@ -27,6 +27,7 @@ import com.aoindustries.encoding.taglib.legacy.EncodingBufferedBodyTag;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.taglib.AttributeRequiredException;
 import com.aoindustries.taglib.NameAttribute;
+import static com.aoindustries.taglib.ParamTag.TAG_NAME;
 import com.aoindustries.taglib.ParamUtils;
 import com.aoindustries.taglib.ValueAttribute;
 import java.io.IOException;
@@ -42,6 +43,10 @@ public class ParamTag extends EncodingBufferedBodyTag
 		NameAttribute,
 		ValueAttribute
 {
+
+/* SimpleTag only:
+	public static final String TAG_NAME = "<ao:param>";
+/**/
 
 	public ParamTag() {
 		init();
@@ -104,7 +109,7 @@ public class ParamTag extends EncodingBufferedBodyTag
 /**/
 		if(name == null) throw new AttributeRequiredException("name");
 		ParamUtils.addParam(
-			"param",
+			TAG_NAME,
 			this,
 			name,
 			(value != null) ? value : (capturedBody == null) ? "" : capturedBody.trim()

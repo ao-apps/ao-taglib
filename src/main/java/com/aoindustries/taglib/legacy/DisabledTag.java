@@ -29,6 +29,7 @@ import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.taglib.ApplicationResources;
 import com.aoindustries.taglib.AttributeUtils;
 import com.aoindustries.taglib.DisabledAttribute;
+import static com.aoindustries.taglib.DisabledTag.TAG_NAME;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspTagException;
@@ -37,6 +38,10 @@ import javax.servlet.jsp.JspTagException;
  * @author  AO Industries, Inc.
  */
 public class DisabledTag extends EncodingBufferedBodyTag {
+
+/* SimpleTag only:
+	public static final String TAG_NAME = "<ao:disabled>";
+/**/
 
 	@Override
 	public MediaType getContentType() {
@@ -59,7 +64,7 @@ public class DisabledTag extends EncodingBufferedBodyTag {
 /* SimpleTag only:
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		DisabledAttribute disabledAttribute = AttributeUtils.findAttributeParent("disabled", this, "disabled", DisabledAttribute.class);
+		DisabledAttribute disabledAttribute = AttributeUtils.requireAttributeParent(TAG_NAME, this, "disabled", DisabledAttribute.class);
 		String value = capturedBody.trim().toString();
 		if(!value.isEmpty()) {
 			if("true".equals(value)) disabledAttribute.setDisabled(true);

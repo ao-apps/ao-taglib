@@ -29,6 +29,7 @@ import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.taglib.ApplicationResources;
 import com.aoindustries.taglib.AttributeUtils;
 import com.aoindustries.taglib.SelectedAttribute;
+import static com.aoindustries.taglib.SelectedTag.TAG_NAME;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspTagException;
@@ -37,6 +38,10 @@ import javax.servlet.jsp.JspTagException;
  * @author  AO Industries, Inc.
  */
 public class SelectedTag extends EncodingBufferedBodyTag {
+
+/* SimpleTag only:
+	public static final String TAG_NAME = "<ao:selected>";
+/**/
 
 	@Override
 	public MediaType getContentType() {
@@ -59,7 +64,7 @@ public class SelectedTag extends EncodingBufferedBodyTag {
 /* SimpleTag only:
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		SelectedAttribute selected = AttributeUtils.findAttributeParent("selected", this, "selected", SelectedAttribute.class);
+		SelectedAttribute selected = AttributeUtils.requireAttributeParent(TAG_NAME, this, "selected", SelectedAttribute.class);
 		String value = capturedBody.trim().toString();
 		if(!value.isEmpty()) {
 			if("true".equals(value)) selected.setSelected(true);

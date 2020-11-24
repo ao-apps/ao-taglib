@@ -34,6 +34,10 @@ import javax.servlet.jsp.JspTagException;
  */
 public class SrcTag extends EncodingBufferedTag {
 
+/* SimpleTag only: */
+	public static final String TAG_NAME = "<ao:src>";
+/**/
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.URL; // TODO: Does this work with whitepace around the URL that will be trimmed?  Compare to ImgTag
@@ -55,8 +59,8 @@ public class SrcTag extends EncodingBufferedTag {
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		SrcAttribute srcAttribute = AttributeUtils.findAttributeParent("src", this, "src", SrcAttribute.class);
-		srcAttribute.setSrc(capturedBody.trim().toString());
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "src", SrcAttribute.class)
+			.setSrc(capturedBody.trim().toString());
 /* BodyTag only:
 		return SKIP_BODY;
 /**/

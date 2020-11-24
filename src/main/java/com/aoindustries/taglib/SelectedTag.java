@@ -35,6 +35,10 @@ import javax.servlet.jsp.JspTagException;
  */
 public class SelectedTag extends EncodingBufferedTag {
 
+/* SimpleTag only: */
+	public static final String TAG_NAME = "<ao:selected>";
+/**/
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.TEXT;
@@ -56,7 +60,7 @@ public class SelectedTag extends EncodingBufferedTag {
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		SelectedAttribute selected = AttributeUtils.findAttributeParent("selected", this, "selected", SelectedAttribute.class);
+		SelectedAttribute selected = AttributeUtils.requireAttributeParent(TAG_NAME, this, "selected", SelectedAttribute.class);
 		String value = capturedBody.trim().toString();
 		if(!value.isEmpty()) {
 			if("true".equals(value)) selected.setSelected(true);

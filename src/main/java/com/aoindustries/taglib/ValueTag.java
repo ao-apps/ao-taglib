@@ -34,6 +34,10 @@ import javax.servlet.jsp.JspTagException;
  */
 public class ValueTag extends EncodingBufferedTag {
 
+/* SimpleTag only: */
+	public static final String TAG_NAME = "<ao:value>";
+/**/
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.TEXT;
@@ -55,8 +59,8 @@ public class ValueTag extends EncodingBufferedTag {
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		ValueAttribute valueAttribute = AttributeUtils.findAttributeParent("value", this, "value", ValueAttribute.class);
-		valueAttribute.setValue(capturedBody);
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "value", ValueAttribute.class)
+			.setValue(capturedBody);
 /* BodyTag only:
 		return SKIP_BODY;
 /**/

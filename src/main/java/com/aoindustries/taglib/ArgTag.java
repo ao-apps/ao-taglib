@@ -38,6 +38,10 @@ public class ArgTag extends EncodingBufferedTag
 		ValueAttribute
 {
 
+/* SimpleTag only: */
+	public static final String TAG_NAME = "<ao:arg>";
+/**/
+
 	public ArgTag() {
 		init();
 	}
@@ -80,10 +84,10 @@ public class ArgTag extends EncodingBufferedTag
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		ArgsAttribute argsAttribute = AttributeUtils.findAttributeParent("arg", this, "args", ArgsAttribute.class);
 		if(name==null) throw new AttributeRequiredException("name");
 		if(value==null) setValue(capturedBody.trim());
-		argsAttribute.addArg(name, value);
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "args", ArgsAttribute.class)
+			.addArg(name, value);
 /* BodyTag only:
 		return SKIP_BODY;
 /**/

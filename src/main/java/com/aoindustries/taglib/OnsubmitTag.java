@@ -34,6 +34,10 @@ import javax.servlet.jsp.JspTagException;
  */
 public class OnsubmitTag extends EncodingBufferedTag {
 
+/* SimpleTag only: */
+	public static final String TAG_NAME = "<ao:onsubmit>";
+/**/
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.JAVASCRIPT;
@@ -55,8 +59,8 @@ public class OnsubmitTag extends EncodingBufferedTag {
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		OnsubmitAttribute onsubmitAttribute = AttributeUtils.findAttributeParent("onsubmit", this, "onsubmit", OnsubmitAttribute.class);
-		onsubmitAttribute.setOnsubmit(capturedBody.trim());
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "onsubmit", OnsubmitAttribute.class)
+			.setOnsubmit(capturedBody.trim());
 /* BodyTag only:
 		return SKIP_BODY;
 /**/

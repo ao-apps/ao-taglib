@@ -34,6 +34,10 @@ import javax.servlet.jsp.JspTagException;
  */
 public class MethodTag extends EncodingBufferedTag {
 
+/* SimpleTag only: */
+	public static final String TAG_NAME = "<ao:method>";
+/**/
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.TEXT;
@@ -55,8 +59,8 @@ public class MethodTag extends EncodingBufferedTag {
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		MethodAttribute methodAttribute = AttributeUtils.findAttributeParent("method", this, "method", MethodAttribute.class);
-		methodAttribute.setMethod(capturedBody.trim().toString());
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "method", MethodAttribute.class)
+			.setMethod(capturedBody.trim().toString());
 /* BodyTag only:
 		return SKIP_BODY;
 /**/

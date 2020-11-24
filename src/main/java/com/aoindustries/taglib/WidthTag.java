@@ -34,6 +34,10 @@ import javax.servlet.jsp.JspTagException;
  */
 public class WidthTag extends EncodingBufferedTag {
 
+/* SimpleTag only: */
+	public static final String TAG_NAME = "<ao:width>";
+/**/
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.TEXT;
@@ -55,8 +59,8 @@ public class WidthTag extends EncodingBufferedTag {
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		WidthAttribute widthAttribute = AttributeUtils.findAttributeParent("width", this, "width", WidthAttribute.class);
-		widthAttribute.setWidth(capturedBody.trim());
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "width", WidthAttribute.class)
+			.setWidth(capturedBody.trim());
 /* BodyTag only:
 		return SKIP_BODY;
 /**/

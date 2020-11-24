@@ -34,6 +34,10 @@ import javax.servlet.jsp.JspTagException;
  */
 public class TargetTag extends EncodingBufferedTag {
 
+/* SimpleTag only: */
+	public static final String TAG_NAME = "<ao:target>";
+/**/
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.TEXT;
@@ -55,8 +59,8 @@ public class TargetTag extends EncodingBufferedTag {
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		TargetAttribute targetAttribute = AttributeUtils.findAttributeParent("target", this, "target", TargetAttribute.class);
-		targetAttribute.setTarget(capturedBody.trim().toString());
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "target", TargetAttribute.class)
+			.setTarget(capturedBody.trim().toString());
 /* BodyTag only:
 		return SKIP_BODY;
 /**/

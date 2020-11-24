@@ -34,6 +34,10 @@ import javax.servlet.jsp.JspTagException;
  */
 public class TypeTag extends EncodingBufferedTag {
 
+/* SimpleTag only: */
+	public static final String TAG_NAME = "<ao:type>";
+/**/
+
 	@Override
 	public MediaType getContentType() {
 		return MediaType.TEXT;
@@ -55,8 +59,8 @@ public class TypeTag extends EncodingBufferedTag {
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		TypeAttribute typeAttribute = AttributeUtils.findAttributeParent("type", this, "type", TypeAttribute.class);
-		typeAttribute.setType(capturedBody.trim().toString());
+		AttributeUtils.requireAttributeParent(TAG_NAME, this, "type", TypeAttribute.class)
+			.setType(capturedBody.trim().toString());
 /* BodyTag only:
 		return SKIP_BODY;
 /**/
