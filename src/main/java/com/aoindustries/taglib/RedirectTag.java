@@ -122,7 +122,7 @@ public class RedirectTag extends DispatchTag
 	}
 
 	@Override
-	protected void doTag(String servletPath) throws IOException, JspTagException, SkipPageException {
+	protected void doTag(String servletPath) throws IOException, JspException, SkipPageException {
 		final int status;
 		if(statusCode==null) throw new AttributeRequiredException("statusCode");
 		if(

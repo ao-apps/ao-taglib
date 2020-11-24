@@ -31,6 +31,7 @@ import com.aoindustries.taglib.MutableGlobalAttributes;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 
@@ -121,7 +122,7 @@ abstract public class ElementNullBodyTag extends EncodingNullBodyTag
 	 */
 	@Deprecated
 	@Override
-	public void setDynamicAttribute(String uri, String localName, Object value) throws JspTagException {
+	public void setDynamicAttribute(String uri, String localName, Object value) throws JspException {
 		List<String> expectedPatterns = new ArrayList<>();
 		if(!addDynamicAttribute(uri, localName, value, expectedPatterns)) {
 			throw AttributeUtils.newDynamicAttributeFailedException(uri, localName, value, expectedPatterns);

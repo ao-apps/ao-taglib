@@ -30,7 +30,7 @@ import com.aoindustries.taglib.TabindexAttribute;
 import static com.aoindustries.taglib.TabindexTag.TAG_NAME;
 import java.io.IOException;
 import java.io.Writer;
-import javax.servlet.jsp.JspTagException;
+import javax.servlet.jsp.JspException;
 
 /**
  * @author  AO Industries, Inc.
@@ -57,10 +57,10 @@ public class TabindexTag extends EncodingBufferedBodyTag {
 
 	@Override
 /* BodyTag only: */
-	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
 /* SimpleTag only:
-	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
 		TabindexAttribute tabindexAttribute = AttributeUtils.requireAttributeParent(TAG_NAME, this, "tabindex", TabindexAttribute.class);
 		String value = capturedBody.trim().toString();

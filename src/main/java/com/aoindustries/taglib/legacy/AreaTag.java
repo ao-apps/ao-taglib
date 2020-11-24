@@ -56,6 +56,7 @@ import java.util.List;
 import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 
 /**
@@ -226,10 +227,10 @@ public class AreaTag extends ElementNullBodyTag
 
 	@Override
 /* BodyTag only: */
-	protected int doEndTag(Writer out) throws JspTagException, IOException {
+	protected int doEndTag(Writer out) throws JspException, IOException {
 /**/
 /* SimpleTag only:
-	protected void doTag(Writer out) throws JspTagException, IOException {
+	protected void doTag(Writer out) throws JspException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
 /**/
 		if(shape == null) throw new AttributeRequiredException("shape");

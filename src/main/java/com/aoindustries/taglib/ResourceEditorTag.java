@@ -29,7 +29,7 @@ import com.aoindustries.encoding.taglib.EncodingNullTag;
 import com.aoindustries.util.i18n.EditableResourceBundle;
 import java.io.IOException;
 import java.io.Writer;
-import javax.servlet.jsp.JspTagException;
+import javax.servlet.jsp.JspException;
 
 /**
  * Allows editing of the website resource bundles through the website itself.
@@ -50,7 +50,7 @@ public class ResourceEditorTag extends EncodingNullTag {
 	}
 
 	@Override
-	protected void doTag(Writer out) throws JspTagException, IOException {
+	protected void doTag(Writer out) throws JspException, IOException {
 		out.write("<div style=\"font-size:smaller\">");
 		EditableResourceBundle.printEditableResourceBundleLookups(
 			TextInJavaScriptEncoder.textInJavaScriptEncoder,

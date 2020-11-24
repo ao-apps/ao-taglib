@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2020-11-21T12:11:43-06:00"
+		dateModified="2020-11-24T12:46:17-06:00"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -86,6 +86,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 					<li>
 						<core:link page="ao.tld/tag-textarea" /> no longer requires <code>cols</code> and
 						<code>rows</code> attributes.
+					</li>
+					<li>
+						Cleaned-up use of <code>JspTagException</code> versus <code>JspException</code>.  Generally,
+						methods declare <code>throws JspException</code> while actually throwing instances of
+						<code>JspTagException</code>.  The exceptions to this are attribute setters and private
+						implemententation methods that both declare and throw <code>JspTagException</code>.
 					</li>
 				</ul>
 				<!-- TODO:

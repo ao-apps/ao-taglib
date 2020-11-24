@@ -37,6 +37,7 @@ import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 import org.w3c.dom.Node;
@@ -120,7 +121,7 @@ public class WriteTag extends EncodingNullTag
 
 	@Override
 	@SuppressWarnings({"UseSpecificCatch", "TooBroadCatch"})
-	protected void writePrefix(MediaType containerType, Writer out) throws JspTagException, IOException {
+	protected void writePrefix(MediaType containerType, Writer out) throws JspException, IOException {
 		try {
 /* SimpleTag only: */
 			PageContext pageContext = (PageContext)getJspContext();
@@ -208,10 +209,10 @@ public class WriteTag extends EncodingNullTag
 
 	@Override
 /* BodyTag only:
-	protected int doEndTag(Writer out) throws JspTagException, IOException {
+	protected int doEndTag(Writer out) throws JspException, IOException {
 /**/
 /* SimpleTag only: */
-	protected void doTag(Writer out) throws JspTagException, IOException {
+	protected void doTag(Writer out) throws JspException, IOException {
 /**/
 		if(toStringResult != null) {
 			out.write(toStringResult);
@@ -224,7 +225,7 @@ public class WriteTag extends EncodingNullTag
 	}
 
 	@Override
-	protected void writeSuffix(MediaType containerType, Writer out) throws IOException {
+	protected void writeSuffix(MediaType containerType, Writer out) throws JspException, IOException {
 		if(lookupMarkup != null) lookupMarkup.appendSuffixTo(markupType, out);
 	}
 

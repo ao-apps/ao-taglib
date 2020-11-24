@@ -27,7 +27,7 @@ import com.aoindustries.encoding.taglib.EncodingBufferedTag;
 import com.aoindustries.io.buffer.BufferResult;
 import java.io.IOException;
 import java.io.Writer;
-import javax.servlet.jsp.JspTagException;
+import javax.servlet.jsp.JspException;
 
 /**
  * @author  AO Industries, Inc.
@@ -54,10 +54,10 @@ public class OnchangeTag extends EncodingBufferedTag {
 
 	@Override
 /* BodyTag only:
-	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
 /* SimpleTag only: */
-	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
 		AttributeUtils.requireAttributeParent(TAG_NAME, this, "onchange", OnchangeAttribute.class)
 			.setOnchange(capturedBody.trim());

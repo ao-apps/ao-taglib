@@ -27,7 +27,7 @@ import com.aoindustries.encoding.taglib.EncodingBufferedTag;
 import com.aoindustries.io.buffer.BufferResult;
 import java.io.IOException;
 import java.io.Writer;
-import javax.servlet.jsp.JspTagException;
+import javax.servlet.jsp.JspException;
 
 /**
  * @author  AO Industries, Inc.
@@ -54,10 +54,10 @@ public class StyleTag extends EncodingBufferedTag {
 
 	@Override
 /* BodyTag only:
-	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
 /* SimpleTag only: */
-	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
 		// TODO: Support <ao:style> without parent, which would be much like <ao:script> (context for nested <ao:out>, for example)
 		// TODO: How to disambiguate, since style is a global attribute, it will often/usually be in a parent?

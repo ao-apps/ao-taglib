@@ -22,6 +22,7 @@
  */
 package com.aoindustries.taglib;
 
+import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.TagSupport;
 import javax.servlet.jsp.tagext.TryCatchFinally;
@@ -50,7 +51,7 @@ public class ChooseTag extends TagSupport implements TryCatchFinally {
 	}
 
 	@Override
-	public int doStartTag() {
+	public int doStartTag() throws JspException {
 		return EVAL_BODY_INCLUDE;
 	}
 
@@ -80,7 +81,7 @@ public class ChooseTag extends TagSupport implements TryCatchFinally {
 	}
 
 	@Override
-	public int doEndTag() throws JspTagException {
+	public int doEndTag() throws JspException {
 		if(!hasWhen) {
 			throw new JspTagException(TAG_NAME + " requires at least one nested " + WhenTag.TAG_NAME);
 		}

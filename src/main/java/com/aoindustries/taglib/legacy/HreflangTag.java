@@ -30,7 +30,7 @@ import com.aoindustries.taglib.HreflangAttribute;
 import static com.aoindustries.taglib.HreflangTag.TAG_NAME;
 import java.io.IOException;
 import java.io.Writer;
-import javax.servlet.jsp.JspTagException;
+import javax.servlet.jsp.JspException;
 
 /**
  * @author  AO Industries, Inc.
@@ -57,10 +57,10 @@ public class HreflangTag extends EncodingBufferedBodyTag {
 
 	@Override
 /* BodyTag only: */
-	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
 /* SimpleTag only:
-	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
 		AttributeUtils.requireAttributeParent(TAG_NAME, this, "hreflang", HreflangAttribute.class)
 			.setHreflang(capturedBody.trim());

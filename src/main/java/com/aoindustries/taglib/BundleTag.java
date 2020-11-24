@@ -26,6 +26,7 @@ import com.aoindustries.util.i18n.ApplicationResourcesAccessor;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import javax.servlet.ServletRequest;
+import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 import javax.servlet.jsp.tagext.TryCatchFinally;
 
@@ -91,7 +92,7 @@ public class BundleTag
 	}
 
 	@Override
-	public int doStartTag() {
+	public int doStartTag() throws JspException {
 		ServletRequest request = pageContext.getRequest();
 		oldRequestValue = request.getAttribute(REQUEST_ATTRIBUTE);
 		request.setAttribute(REQUEST_ATTRIBUTE, this);

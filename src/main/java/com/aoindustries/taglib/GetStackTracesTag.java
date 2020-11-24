@@ -28,7 +28,7 @@ import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.util.ErrorPrinter;
 import java.io.IOException;
 import java.io.Writer;
-import javax.servlet.jsp.JspTagException;
+import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
 /**
@@ -58,7 +58,7 @@ public class GetStackTracesTag extends EncodingNullTag {
 	}
 
 	@Override
-	protected void doTag(Writer out) throws JspTagException, IOException {
+	protected void doTag(Writer out) throws JspException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
 		// Find the Throwable to display
 		Object value = PropertyUtils.findObject(pageContext, scope, name, property, true, true);

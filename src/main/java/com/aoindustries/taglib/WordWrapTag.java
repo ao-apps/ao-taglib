@@ -28,7 +28,7 @@ import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.lang.Strings;
 import java.io.IOException;
 import java.io.Writer;
-import javax.servlet.jsp.JspTagException;
+import javax.servlet.jsp.JspException;
 
 /**
  * @see Strings#wordWrap(java.lang.String, int, java.lang.Appendable)
@@ -66,10 +66,10 @@ public class WordWrapTag extends EncodingBufferedTag {
 
 	@Override
 /* BodyTag only:
-	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
 /* SimpleTag only: */
-	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
 		Strings.wordWrap(capturedBody.toString(), width, out);
 /* BodyTag only:

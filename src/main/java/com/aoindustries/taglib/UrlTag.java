@@ -30,7 +30,7 @@ import com.aoindustries.net.URI;
 import com.aoindustries.net.URIParametersMap;
 import java.io.IOException;
 import java.io.Writer;
-import javax.servlet.jsp.JspTagException;
+import javax.servlet.jsp.JspException;
 
 /**
  * TODO: Have absolute option, canonical and lastModified, too?
@@ -71,10 +71,10 @@ public class UrlTag extends EncodingBufferedTag implements ParamsAttribute {
 
 	@Override
 /* BodyTag only:
-	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
 /* SimpleTag only: */
-	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+	protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
 		URI url = new URI(capturedBody.trim().toString()).addParameters(params);
 		/* TODO: Prefix context path?

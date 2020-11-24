@@ -36,6 +36,7 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.List;
+import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.DynamicAttributes;
@@ -125,7 +126,7 @@ public class MessageTag extends EncodingNullTag
 	}
 
 	@Override
-	public void setDynamicAttribute(String uri, String localName, Object value) throws JspTagException {
+	public void setDynamicAttribute(String uri, String localName, Object value) throws JspException {
 		if(uri==null && localName.startsWith("arg")) {
 			try {
 				String numSubstring = localName.substring(3);
@@ -175,7 +176,7 @@ public class MessageTag extends EncodingNullTag
 	}
 
 	@Override
-	protected void writePrefix(MediaType containerType, Writer out) throws JspTagException, IOException {
+	protected void writePrefix(MediaType containerType, Writer out) throws JspException, IOException {
 		ApplicationResourcesAccessor accessor;
 		String combinedKey;
 		if(bundle != null) {
@@ -211,10 +212,10 @@ public class MessageTag extends EncodingNullTag
 
 	@Override
 /* BodyTag only:
-	protected int doEndTag(Writer out) throws JspTagException, IOException {
+	protected int doEndTag(Writer out) throws JspException, IOException {
 /**/
 /* SimpleTag only: */
-	protected void doTag(Writer out) throws JspTagException, IOException {
+	protected void doTag(Writer out) throws JspException, IOException {
 /**/
 		out.write(lookupResult);
 /* BodyTag only:
@@ -223,7 +224,7 @@ public class MessageTag extends EncodingNullTag
 	}
 
 	@Override
-	protected void writeSuffix(MediaType containerType, Writer out) throws IOException {
+	protected void writeSuffix(MediaType containerType, Writer out) throws JspException, IOException {
 		if(lookupMarkup!=null) lookupMarkup.appendSuffixTo(containerType.getMarkupType(), out);
 	}
 

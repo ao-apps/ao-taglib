@@ -27,7 +27,7 @@ import com.aoindustries.encoding.taglib.EncodingNullTag;
 import com.aoindustries.util.i18n.EditableResourceBundle;
 import java.io.IOException;
 import java.io.Writer;
-import javax.servlet.jsp.JspTagException;
+import javax.servlet.jsp.JspException;
 
 /**
  * Disables the resource editor.
@@ -43,7 +43,7 @@ public class DisableResourceEditorTag extends EncodingNullTag {
 	}
 
 	@Override
-	protected void doTag(Writer out) throws JspTagException, IOException {
+	protected void doTag(Writer out) throws JspException, IOException {
 		EditableResourceBundle.resetRequest(false, null, false);
 	}
 }

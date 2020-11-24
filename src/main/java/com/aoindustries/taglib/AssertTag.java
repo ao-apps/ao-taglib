@@ -22,7 +22,9 @@
  */
 package com.aoindustries.taglib;
 
+import java.io.IOException;
 import javax.el.ValueExpression;
+import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 /**
@@ -41,7 +43,7 @@ public class AssertTag extends SimpleTagSupport {
 	}
 
 	@Override
-	public void doTag() {
+	public void doTag() throws JspException, IOException {
 		if(!test) {
 			if(message != null) {
 				throw new AssertionError(

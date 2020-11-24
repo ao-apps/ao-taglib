@@ -197,7 +197,7 @@ abstract public class DispatchTag extends SimpleTagSupport
 	 */
 	@Deprecated
 	@Override
-	public void setDynamicAttribute(String uri, String localName, Object value) throws JspTagException {
+	public void setDynamicAttribute(String uri, String localName, Object value) throws JspException {
 		List<String> expectedPatterns = new ArrayList<>();
 		if(!addDynamicAttribute(uri, localName, value, expectedPatterns)) {
 			throw AttributeUtils.newDynamicAttributeFailedException(uri, localName, value, expectedPatterns);
@@ -219,7 +219,7 @@ abstract public class DispatchTag extends SimpleTagSupport
 	 *                                must throw SkipPageException.
 	 */
 	@SuppressWarnings("NoopMethodInAbstractClass")
-	protected void doTag(String servletPath) throws IOException, JspTagException, SkipPageException {
+	protected void doTag(String servletPath) throws IOException, JspException, SkipPageException {
 		// Do nothing
 	}
 

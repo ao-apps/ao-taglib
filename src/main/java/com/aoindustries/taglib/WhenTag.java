@@ -23,6 +23,7 @@
 package com.aoindustries.taglib;
 
 import javax.el.ValueExpression;
+import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.JspTag;
 import javax.servlet.jsp.tagext.TagSupport;
@@ -42,7 +43,7 @@ public class WhenTag extends TagSupport {
 	}
 
 	@Override
-	public int doStartTag() throws JspTagException {
+	public int doStartTag() throws JspException {
 		JspTag parent = getParent();
 		if(!(parent instanceof ChooseTag)) {
 			throw new JspTagException(TAG_NAME + " must be directly nested within " + ChooseTag.TAG_NAME);
