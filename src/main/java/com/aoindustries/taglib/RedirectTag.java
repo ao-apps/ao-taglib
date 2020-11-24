@@ -49,8 +49,7 @@ import javax.servlet.jsp.SkipPageException;
  * @author  AO Industries, Inc.
  */
 // TODO: RedirectBodyTag and RedirectSimpleTag?
-public class RedirectTag
-	extends DispatchTag
+public class RedirectTag extends DispatchTag
 	implements HrefAttribute
 {
 
@@ -59,7 +58,7 @@ public class RedirectTag
 	/**
 	 * The maximum length of a URL allowed for redirect.
 	 *
-	 * Matching limit of Internet Explorer: http://support.microsoft.com/kb/208427
+	 * Matching limit of Internet Explorer: <a href="http://support.microsoft.com/kb/208427">http://support.microsoft.com/kb/208427</a>
 	 *
 	 * @see <a href="http://www.boutell.com/newfaq/misc/urllength.html">WWW FAQs: What is the maximum length of a URL?</a>
 	 */

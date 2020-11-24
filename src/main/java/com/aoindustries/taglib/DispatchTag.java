@@ -58,8 +58,7 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
  * @author  AO Industries, Inc.
  */
 // TODO: DispatchBodyTag and DispatchSimpleTag?
-abstract public class DispatchTag
-	extends SimpleTagSupport
+abstract public class DispatchTag extends SimpleTagSupport
 	implements
 		DynamicAttributes,
 		PageAttribute,
@@ -348,6 +347,8 @@ abstract public class DispatchTag
 	 * </p>
 	 */
 	protected void invoke(JspFragment body) throws JspException, IOException {
+		// TODO: Should other places that invoke body with NullWriter also setup RequestEncodingContext.DISCARD explicitly?  Parent tag for this?
+		//       Use EncodingNullTag with null output type?
 		body.invoke(NullWriter.getInstance());
 	}
 
