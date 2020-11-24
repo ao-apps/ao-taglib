@@ -108,41 +108,24 @@ public class MetaTag extends ElementBufferedBodyTag
 		this.content = AttributeUtils.nullIfEmpty(content);
 	}
 
-/* BodyTag only: */
-	private transient BufferResult capturedBody;
-/**/
-
 	private void init() {
 		name = null;
 		httpEquiv = null;
 		itemprop = null;
 		charset = null;
 		content = null;
-/* BodyTag only: */
-		capturedBody = null;
-/**/
 	}
-
-/* BodyTag only: */
-	@Override
-	protected int doAfterBody(BufferResult capturedBody, Writer out) {
-		assert this.capturedBody == null;
-		assert capturedBody != null;
-		this.capturedBody = capturedBody;
-		return SKIP_BODY;
-	}
-/**/
 
 	@Override
 /* BodyTag only: */
-	protected int doEndTag(Writer out) throws JspTagException, IOException {
+	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
 /* SimpleTag only:
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
 /**/
 		Optional<MetasAttribute> parent = JspTagUtils.findAncestor(this, MetasAttribute.class);
-		if(content == null) setContent((capturedBody == null) ? "" : capturedBody.trim()); // TODO: Just initialize capturedBody to EmptyResult to simplify this, all tags
+		if(content == null) setContent(capturedBody.trim());
 		if(parent.isPresent()) {
 			parent.get().addMeta(
 				new Meta(

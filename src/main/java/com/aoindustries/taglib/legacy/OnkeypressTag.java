@@ -57,7 +57,7 @@ public class OnkeypressTag extends EncodingBufferedBodyTag {
 
 	@Override
 /* BodyTag only: */
-	protected int doAfterBody(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
 /* SimpleTag only:
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
@@ -65,7 +65,7 @@ public class OnkeypressTag extends EncodingBufferedBodyTag {
 		AttributeUtils.requireAttributeParent(TAG_NAME, this, "onkeypress", OnkeypressAttribute.class)
 			.setOnkeypress(capturedBody.trim());
 /* BodyTag only: */
-		return SKIP_BODY;
+		return EVAL_PAGE;
 /**/
 	}
 }

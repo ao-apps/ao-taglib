@@ -64,35 +64,18 @@ public class MessageArgTag extends EncodingBufferedTag
 		this.value = value;
 	}
 
-/* BodyTag only:
-	private transient BufferResult capturedBody;
-/**/
-
 	private void init() {
 		value = null;
-/* BodyTag only:
-		capturedBody = null;
-/**/
 	}
-
-/* BodyTag only:
-	@Override
-	protected int doAfterBody(BufferResult capturedBody, Writer out) {
-		assert this.capturedBody == null;
-		assert capturedBody != null;
-		this.capturedBody = capturedBody;
-		return SKIP_BODY;
-	}
-/**/
 
 	@Override
 /* BodyTag only:
-	protected int doEndTag(Writer out) throws JspTagException, IOException {
+	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
-		if(value == null) setValue((capturedBody) == null ? "" : capturedBody.trim());
+		if(value == null) setValue(capturedBody.trim());
 		AttributeUtils.requireAttributeParent(TAG_NAME, this, "messageArgs", MessageArgsAttribute.class)
 			.addMessageArg(value);
 /* BodyTag only:

@@ -29,7 +29,6 @@ import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextIn
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import static com.aoindustries.encoding.TextInXhtmlEncoder.textInXhtmlEncoder;
 import com.aoindustries.io.buffer.BufferResult;
-import com.aoindustries.io.buffer.EmptyResult;
 import com.aoindustries.lang.Strings;
 import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URIDecoder;
@@ -172,10 +171,6 @@ public class ATag extends ElementBufferedTag
 			|| ParamUtils.addDynamicAttribute(uri, localName, value, expectedPatterns, this);
 	}
 
-/* BodyTag only:
-	private transient BufferResult capturedBody;
-/**/
-
 	private void init() {
 		href = null;
 		params = null;
@@ -190,24 +185,11 @@ public class ATag extends ElementBufferedTag
 		onclick = null;
 		onmouseout = null;
 		onmouseover = null;
-/* BodyTag only:
-		capturedBody = null;
-/**/
 	}
-
-/* BodyTag only:
-	@Override
-	protected int doAfterBody(BufferResult capturedBody, Writer out) {
-		assert this.capturedBody == null;
-		assert capturedBody != null;
-		this.capturedBody = capturedBody;
-		return SKIP_BODY;
-	}
-/**/
 
 	@Override
 /* BodyTag only:
-	protected int doEndTag(Writer out) throws JspTagException, IOException {
+	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
@@ -270,8 +252,8 @@ public class ATag extends ElementBufferedTag
 			out.write('"');
 		}
 		out.write('>');
-		BufferResult trimmedBody = (capturedBody == null) ? EmptyResult.getInstance() : capturedBody.trim();
-		if(trimmedBody.getLength() == 0) {
+		BufferResult trimmedBody = capturedBody.trim();
+		if(trimmedBody.getLength() == 0) { // TODO: Make a BufferResult.isEmpty() that defaults to getLength() == 0, but provides a chance at optimizations
 			// When the body is empty after trimming, display the href itself
 			if(href != null) {
 				HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();

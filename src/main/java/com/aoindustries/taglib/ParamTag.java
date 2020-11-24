@@ -73,31 +73,14 @@ public class ParamTag extends EncodingBufferedTag
 		this.value = value;
 	}
 
-/* BodyTag only:
-	private transient BufferResult capturedBody;
-/**/
-
 	private void init() {
 		name = null;
 		value = null;
-/* BodyTag only:
-		capturedBody = null;
-/**/
 	}
-
-/* BodyTag only:
-	@Override
-	protected int doAfterBody(BufferResult capturedBody, Writer out) {
-		assert this.capturedBody == null;
-		assert capturedBody != null;
-		this.capturedBody = capturedBody;
-		return SKIP_BODY;
-	}
-/**/
 
 	@Override
 /* BodyTag only:
-	protected int doEndTag(Writer out) throws JspTagException, IOException {
+	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
@@ -107,7 +90,7 @@ public class ParamTag extends EncodingBufferedTag
 			TAG_NAME,
 			this,
 			name,
-			(value != null) ? value : (capturedBody == null) ? "" : capturedBody.trim()
+			(value != null) ? value : capturedBody.trim()
 		);
 /* BodyTag only:
 		return EVAL_PAGE;

@@ -54,8 +54,7 @@ public class OnmouseoverTag extends EncodingBufferedTag {
 
 	@Override
 /* BodyTag only:
-	protected int doAfterBody(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
-	TODO: These uses of doAfterBody should be doEndTag, since when no body would not set attribute versus SimpleTag version
+	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
@@ -63,7 +62,7 @@ public class OnmouseoverTag extends EncodingBufferedTag {
 		AttributeUtils.requireAttributeParent(TAG_NAME, this, "onmouseover", OnmouseoverAttribute.class)
 			.setOnmouseover(capturedBody.trim());
 /* BodyTag only:
-		return SKIP_BODY;
+		return EVAL_PAGE;
 /**/
 	}
 }

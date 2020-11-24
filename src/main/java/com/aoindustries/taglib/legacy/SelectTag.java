@@ -122,10 +122,6 @@ public class SelectTag extends ElementBufferedBodyTag
 		this.onkeypress = AttributeUtils.trimNullIfEmpty(onkeypress);
 	}
 
-/* BodyTag only: */
-	private transient BufferResult capturedBody;
-/**/
-
 	private void init() {
 		disabled = false;
 		name = null;
@@ -134,24 +130,11 @@ public class SelectTag extends ElementBufferedBodyTag
 		onchange = null;
 		onfocus = null;
 		onkeypress = null;
-/* BodyTag only: */
-		capturedBody = null;
-/**/
 	}
-
-/* BodyTag only: */
-	@Override
-	protected int doAfterBody(BufferResult capturedBody, Writer out) {
-		assert this.capturedBody == null;
-		assert capturedBody != null;
-		this.capturedBody = capturedBody;
-		return SKIP_BODY;
-	}
-/**/
 
 	@Override
 /* BodyTag only: */
-	protected int doEndTag(Writer out) throws JspTagException, IOException {
+	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
 /* SimpleTag only:
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {

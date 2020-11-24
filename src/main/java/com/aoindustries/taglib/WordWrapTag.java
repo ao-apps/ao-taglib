@@ -66,14 +66,14 @@ public class WordWrapTag extends EncodingBufferedTag {
 
 	@Override
 /* BodyTag only:
-	protected int doAfterBody(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
 		Strings.wordWrap(capturedBody.toString(), width, out);
 /* BodyTag only:
-		return SKIP_BODY;
+		return EVAL_PAGE;
 /**/
 	}
 

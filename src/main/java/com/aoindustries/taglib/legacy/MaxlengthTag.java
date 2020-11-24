@@ -57,7 +57,7 @@ public class MaxlengthTag extends EncodingBufferedBodyTag {
 
 	@Override
 /* BodyTag only: */
-	protected int doAfterBody(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
+	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
 /* SimpleTag only:
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
@@ -66,7 +66,7 @@ public class MaxlengthTag extends EncodingBufferedBodyTag {
 		AttributeUtils.requireAttributeParent(TAG_NAME, this, "maxlength", MaxlengthAttribute.class)
 			.setMaxlength(trimmedMaxlength.isEmpty() ? null : Integer.valueOf(trimmedMaxlength));
 /* BodyTag only: */
-		return SKIP_BODY;
+		return EVAL_PAGE;
 /**/
 	}
 }

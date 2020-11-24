@@ -114,10 +114,6 @@ public class TextareaTag extends ElementBufferedTag
 		this.onchange = AttributeUtils.trimNullIfEmpty(onchange);
 	}
 
-/* BodyTag only:
-	private transient BufferResult capturedBody;
-/**/
-
 	private void init() {
 		cols = null;
 		disabled = false;
@@ -126,30 +122,17 @@ public class TextareaTag extends ElementBufferedTag
 		rows = null;
 		value = null;
 		onchange = null;
-/* BodyTag only:
-		capturedBody = null;
-/**/
 	}
-
-/* BodyTag only:
-	@Override
-	protected int doAfterBody(BufferResult capturedBody, Writer out) {
-		assert this.capturedBody == null;
-		assert capturedBody != null;
-		this.capturedBody = capturedBody;
-		return SKIP_BODY;
-	}
-/**/
 
 	@Override
 /* BodyTag only:
-	protected int doEndTag(Writer out) throws JspTagException, IOException {
+	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
 /**/
-		if(value == null && capturedBody != null) setValue(capturedBody.trim());
+		if(value == null) setValue(capturedBody.trim());
 		Serialization serialization = SerializationEE.get(
 			pageContext.getServletContext(),
 			(HttpServletRequest)pageContext.getRequest()

@@ -84,43 +84,26 @@ public class OptionTag extends ElementBufferedBodyTag
 		this.value = value;
 	}
 
-/* BodyTag only: */
-	private transient BufferResult capturedBody;
-/**/
-
 	private void init() {
 		disabled = false;
 		selected = false;
 		valueSet = false;
 		value = null;
-/* BodyTag only: */
-		capturedBody = null;
-/**/
 	}
-
-/* BodyTag only: */
-	@Override
-	protected int doAfterBody(BufferResult capturedBody, Writer out) {
-		assert this.capturedBody == null;
-		assert capturedBody != null;
-		this.capturedBody = capturedBody;
-		return SKIP_BODY;
-	}
-/**/
 
 	@Override
 /* BodyTag only: */
-	protected int doEndTag(Writer out) throws JspTagException, IOException {
+	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
 /* SimpleTag only:
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
 /**/
-		if(capturedBody != null) capturedBody = capturedBody.trim();
+		capturedBody = capturedBody.trim();
 		// TODO: Should we be setting the value always like this?  Duplicates efforts.
 		// TODO: If not setting value this way, this does not need to buffer
 		// TODO: This has something to do with translator markup added for display, but not value
-		if(!valueSet) setValue(capturedBody != null ? capturedBody : "");
+		if(!valueSet) setValue(capturedBody);
 		GlobalAttributesUtils.doGlobalAttributes(
 			global,
 			HtmlEE.get(

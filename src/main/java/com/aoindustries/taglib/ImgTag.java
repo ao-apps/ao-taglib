@@ -144,10 +144,6 @@ public class ImgTag extends ElementBufferedTag
 			|| ParamUtils.addDynamicAttribute(uri, localName, value, expectedPatterns, this);
 	}
 
-/* BodyTag only:
-	private transient BufferResult capturedBody;
-/**/
-
 	private void init() {
 		src = null;
 		params = null;
@@ -160,30 +156,17 @@ public class ImgTag extends ElementBufferedTag
 		title = null;
 		usemap = null;
 		ismap = false;
-/* BodyTag only:
-		capturedBody = null;
-/**/
 	}
-
-/* BodyTag only:
-	@Override
-	protected int doAfterBody(BufferResult capturedBody, Writer out) {
-		assert this.capturedBody == null;
-		assert capturedBody != null;
-		this.capturedBody = capturedBody;
-		return SKIP_BODY;
-	}
-/**/
 
 	@Override
 /* BodyTag only:
-	protected int doEndTag(Writer out) throws JspTagException, IOException {
+	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 /**/
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspTagException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
 /**/
-		if(src == null && capturedBody != null) src = capturedBody.trim().toString(); // TODO: Validate here?
+		if(src == null) src = capturedBody.trim().toString(); // TODO: Validate here?
 		if(usemap == null && alt == null) throw new AttributeRequiredException("alt");
 		Html html = HtmlEE.get(
 			pageContext.getServletContext(),
