@@ -29,10 +29,9 @@ import javax.servlet.jsp.tagext.TryCatchFinally;
 /**
  * @author  AO Industries, Inc.
  */
-public class ChooseTag
-	extends TagSupport
-	implements TryCatchFinally
-{
+public class ChooseTag extends TagSupport implements TryCatchFinally {
+
+	public static final String TAG_NAME = "<ao:choose>";
 
 	private static final long serialVersionUID = 1L;
 
@@ -57,7 +56,7 @@ public class ChooseTag
 
 	void onWhen() throws JspTagException {
 		if(hasOtherwise) {
-			throw new JspTagException("<ao:when> may not follow <ao:otherwise>");
+			throw new JspTagException(WhenTag.TAG_NAME + " may not follow " + OtherwiseTag.TAG_NAME);
 		} else {
 			hasWhen = true;
 		}
@@ -74,7 +73,7 @@ public class ChooseTag
 
 	void onOtherwise() throws JspTagException {
 		if(hasOtherwise) {
-			throw new JspTagException("Only one <ao:otherwise> allowed");
+			throw new JspTagException("Only one " + OtherwiseTag.TAG_NAME + " allowed");
 		} else {
 			hasOtherwise = true;
 		}
@@ -83,7 +82,7 @@ public class ChooseTag
 	@Override
 	public int doEndTag() throws JspTagException {
 		if(!hasWhen) {
-			throw new JspTagException("<ao:choose> requires at least one nested <ao:when>");
+			throw new JspTagException(TAG_NAME + " requires at least one nested " + WhenTag.TAG_NAME);
 		}
 		return EVAL_PAGE;
 	}

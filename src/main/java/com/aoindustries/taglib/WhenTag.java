@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2016, 2017, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -30,9 +30,9 @@ import javax.servlet.jsp.tagext.TagSupport;
 /**
  * @author  AO Industries, Inc.
  */
-public class WhenTag
-	extends TagSupport
-{
+public class WhenTag extends TagSupport {
+
+	public static final String TAG_NAME = "<ao:when>";
 
 	private static final long serialVersionUID = 1L;
 
@@ -45,7 +45,7 @@ public class WhenTag
 	public int doStartTag() throws JspTagException {
 		JspTag parent = getParent();
 		if(!(parent instanceof ChooseTag)) {
-			throw new JspTagException("<ao:when> must be directly nested within <ao:choose>");
+			throw new JspTagException(TAG_NAME + " must be directly nested within " + ChooseTag.TAG_NAME);
 		}
 		ChooseTag chooseTag = (ChooseTag)parent;
 		chooseTag.onWhen();
