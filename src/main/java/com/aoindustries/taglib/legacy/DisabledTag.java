@@ -67,8 +67,8 @@ public class DisabledTag extends EncodingBufferedBodyTag {
 		DisabledAttribute disabledAttribute = AttributeUtils.requireAttributeParent(TAG_NAME, this, "disabled", DisabledAttribute.class);
 		String value = capturedBody.trim().toString();
 		if(!value.isEmpty()) {
-			if("true".equals(value)) disabledAttribute.setDisabled(true);
-			else if("false".equals(value)) disabledAttribute.setDisabled(false);
+			if("true".equalsIgnoreCase(value)) disabledAttribute.setDisabled(true);
+			else if("false".equalsIgnoreCase(value)) disabledAttribute.setDisabled(false);
 			else throw new LocalizedJspTagException(ApplicationResources.accessor, "DisabledTag.invalidValue", value);
 		}
 /* BodyTag only: */

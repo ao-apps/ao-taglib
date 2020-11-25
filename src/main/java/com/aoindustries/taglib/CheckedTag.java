@@ -63,8 +63,8 @@ public class CheckedTag extends EncodingBufferedTag {
 		CheckedAttribute checkedAttribute = AttributeUtils.requireAttributeParent(TAG_NAME, this, "checked", CheckedAttribute.class);
 		String value = capturedBody.trim().toString();
 		if(!value.isEmpty()) {
-			if("true".equals(value)) checkedAttribute.setChecked(true);
-			else if("false".equals(value)) checkedAttribute.setChecked(false);
+			if("true".equalsIgnoreCase(value)) checkedAttribute.setChecked(true);
+			else if("false".equalsIgnoreCase(value)) checkedAttribute.setChecked(false);
 			else throw new LocalizedJspTagException(ApplicationResources.accessor, "CheckedTag.invalidValue", value);
 		}
 /* BodyTag only:

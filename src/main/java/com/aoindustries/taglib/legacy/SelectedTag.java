@@ -67,8 +67,8 @@ public class SelectedTag extends EncodingBufferedBodyTag {
 		SelectedAttribute selected = AttributeUtils.requireAttributeParent(TAG_NAME, this, "selected", SelectedAttribute.class);
 		String value = capturedBody.trim().toString();
 		if(!value.isEmpty()) {
-			if("true".equals(value)) selected.setSelected(true);
-			else if("false".equals(value)) selected.setSelected(false);
+			if("true".equalsIgnoreCase(value)) selected.setSelected(true);
+			else if("false".equalsIgnoreCase(value)) selected.setSelected(false);
 			else throw new LocalizedJspTagException(ApplicationResources.accessor, "SelectedTag.invalidValue", value);
 		}
 /* BodyTag only: */

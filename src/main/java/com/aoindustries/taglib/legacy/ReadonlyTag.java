@@ -67,8 +67,8 @@ public class ReadonlyTag extends EncodingBufferedBodyTag {
 		ReadonlyAttribute readonlyAttribute = AttributeUtils.requireAttributeParent(TAG_NAME, this, "readonly", ReadonlyAttribute.class);
 		String value = capturedBody.trim().toString();
 		if(!value.isEmpty()) {
-			if("true".equals(value)) readonlyAttribute.setReadonly(true);
-			else if("false".equals(value)) readonlyAttribute.setReadonly(false);
+			if("true".equalsIgnoreCase(value)) readonlyAttribute.setReadonly(true);
+			else if("false".equalsIgnoreCase(value)) readonlyAttribute.setReadonly(false);
 			else throw new LocalizedJspTagException(ApplicationResources.accessor, "ReadonlyTag.invalidValue", value);
 		}
 /* BodyTag only: */

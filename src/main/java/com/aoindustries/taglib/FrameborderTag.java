@@ -63,8 +63,8 @@ public class FrameborderTag extends EncodingBufferedTag {
 		FrameborderAttribute frameborderAttribute = AttributeUtils.requireAttributeParent(TAG_NAME, this, "frameborder", FrameborderAttribute.class);
 		String value = capturedBody.trim().toString();
 		if(!value.isEmpty()) {
-			if("true".equals(value)) frameborderAttribute.setFrameborder(true);
-			else if("false".equals(value)) frameborderAttribute.setFrameborder(false);
+			if("true".equalsIgnoreCase(value)) frameborderAttribute.setFrameborder(true);
+			else if("false".equalsIgnoreCase(value)) frameborderAttribute.setFrameborder(false);
 			else throw new LocalizedJspTagException(ApplicationResources.accessor, "FrameborderTag.invalidValue", value);
 		}
 /* BodyTag only:
