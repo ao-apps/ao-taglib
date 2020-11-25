@@ -74,7 +74,7 @@ public class LinkTag extends ElementNullTag
 	/**
 	 * Copies all values from the provided link.
 	 */
-	public void setLink(Link link) throws JspTagException {
+	public void setLink(Link link) {
 		GlobalAttributesUtils.copy(link.getGlobal(), this);
 		setHref(link.getHref());
 		setAbsolute(link.getAbsolute());
@@ -98,7 +98,7 @@ public class LinkTag extends ElementNullTag
 	private String href;
 	@Override
 	public void setHref(String href) {
-		this.href = AttributeUtils.nullIfEmpty(href);
+		this.href = Strings.nullIfEmpty(href);
 	}
 
 	private MutableURIParameters params;
@@ -125,30 +125,30 @@ public class LinkTag extends ElementNullTag
 
 	private Object hreflang;
 	@Override
-	public void setHreflang(Object hreflang) throws JspTagException {
+	public void setHreflang(Object hreflang) {
 		this.hreflang = hreflang;
 	}
 
 	private String rel;
 	@Override
-	public void setRel(String rel) throws JspTagException {
+	public void setRel(String rel) {
 		this.rel = rel;
 	}
 
 	private String type;
 	@Override
-	public void setType(String type) throws JspTagException {
+	public void setType(String type) {
 		this.type = Strings.trimNullIfEmpty(type);
 	}
 
 	private String media; // TODO: media to Object
 	public void setMedia(String media) {
-		this.media = AttributeUtils.trimNullIfEmpty(media);
+		this.media = Strings.trimNullIfEmpty(media);
 	}
 
 	private Object title;
 	@Override
-	public void setTitle(Object title) throws JspTagException {
+	public void setTitle(Object title) {
 		this.title = AttributeUtils.trimNullIfEmpty(title);
 	}
 

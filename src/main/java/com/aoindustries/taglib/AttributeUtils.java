@@ -24,13 +24,14 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.Coercion;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
+import com.aoindustries.html.Attributes;
 import com.aoindustries.lang.Strings;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.servlet.jsp.tagext.JspTagUtils;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
-import com.aoindustries.validation.InvalidResult;
 import com.aoindustries.validation.ValidationResult;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.util.List;
 import java.util.function.Function;
 import javax.el.ELContext;
@@ -92,46 +93,52 @@ public final class AttributeUtils  {
 	/**
 	 * @see  Coercion#nullIfEmpty(java.lang.Object)
 	 */
-	public static Object nullIfEmpty(Object value) throws JspTagException {
+	public static Object nullIfEmpty(Object value) throws UncheckedIOException {
 		try {
 			return Coercion.nullIfEmpty(value);
 		} catch(IOException e) {
-			throw new JspTagException(e);
+			throw new UncheckedIOException(e);
 		}
 	}
 
 	/**
-	 * @see  Strings#nullIfEmpty(java.lang.String)
+	 * @deprecated  Please use {@link Strings#nullIfEmpty(java.lang.String)} directly.
 	 */
+	@Deprecated
 	public static String nullIfEmpty(String value) {
 		return Strings.nullIfEmpty(value);
 	}
 
 	/**
 	 * @see  Coercion#trim(java.lang.Object)
+	 *
+	 * @throws UncheckedIOException
 	 */
-	public static Object trim(Object value) throws JspTagException {
+	public static Object trim(Object value) throws UncheckedIOException {
 		try {
 			return Coercion.trim(value);
 		} catch(IOException e) {
-			throw new JspTagException(e);
+			throw new UncheckedIOException(e);
 		}
 	}
 
 	/**
 	 * @see  Coercion#trimNullIfEmpty(java.lang.Object)
+	 *
+	 * @throws UncheckedIOException
 	 */
-	public static Object trimNullIfEmpty(Object value) throws JspTagException {
+	public static Object trimNullIfEmpty(Object value) throws UncheckedIOException {
 		try {
 			return Coercion.trimNullIfEmpty(value);
 		} catch(IOException e) {
-			throw new JspTagException(e);
+			throw new UncheckedIOException(e);
 		}
 	}
 
 	/**
-	 * @see  Strings#trimNullIfEmpty(java.lang.String)
+	 * @deprecated  Please use {@link Strings#trimNullIfEmpty(java.lang.String)} directly.
 	 */
+	@Deprecated
 	public static String trimNullIfEmpty(String value) {
 		return Strings.trimNullIfEmpty(value);
 	}
@@ -159,7 +166,7 @@ public final class AttributeUtils  {
 	 * @return  {@code true} when printed the style
 	 */
 	public static boolean appendWidthStyle(String width, Appendable out) throws IOException {
-		width = trimNullIfEmpty(width);
+		width = Strings.trimNullIfEmpty(width);
 		if(width != null) {
 			out.append("width:");
 			encodeTextInXhtmlAttribute(width, out);
@@ -179,7 +186,7 @@ public final class AttributeUtils  {
 	 * @return  The style or {@code null} when none
 	 */
 	public static String getWidthStyle(String width) {
-		width = trimNullIfEmpty(width);
+		width = Strings.trimNullIfEmpty(width);
 		if(width != null) {
 			StringBuilder sb = new StringBuilder();
 			sb.append("width:").append(width);
@@ -193,40 +200,19 @@ public final class AttributeUtils  {
 	}
 
 	/**
-	 * Checks a validation result.
-	 *
-	 * @return  The value when valid
-	 * @throws  JspTagException  When invalid, supporting {@link LocalizedJspTagException} when validationResult
-	 *                           is a {@link InvalidResult}
+	 * @deprecated  Please use {@link Attributes#validate(java.lang.Object, com.aoindustries.validation.ValidationResult)} instead.
 	 */
-	// TODO: Use Attributes version once setters throw IllegalArgumentException instead of JspTagException
-	public static <T> T validate(T value, ValidationResult validationResult) throws JspTagException {
-		if(validationResult.isValid()) {
-			return value;
-		} else {
-			if(validationResult instanceof InvalidResult) {
-				InvalidResult invalidResult = (InvalidResult)validationResult;
-				throw new LocalizedJspTagException(
-					invalidResult.getAccessor(),
-					invalidResult.getKey(),
-					invalidResult.getArgs()
-				);
-			} else {
-				throw new JspTagException(validationResult.toString());
-			}
-		}
+	@Deprecated
+	public static <T> T validate(T value, ValidationResult validationResult) throws IllegalArgumentException {
+		return Attributes.validate(value, validationResult);
 	}
 
 	/**
-	 * Validates a value using the provided validator.
-	 *
-	 * @return  The value when valid
-	 * @throws  JspTagException  When invalid, supporting {@link LocalizedJspTagException} when validationResult
-	 *                           is a {@link InvalidResult}
+	 * @deprecated  Please use {@link Attributes#validate(java.lang.Object, java.util.function.Function)} instead.
 	 */
-	// TODO: Use Attributes version once setters throw IllegalArgumentException instead of JspTagException
-	public static <T> T validate(T value, Function<? super T,ValidationResult> validator) throws JspTagException {
-		return validate(value, validator.apply(value));
+	@Deprecated
+	public static <T> T validate(T value, Function<? super T,ValidationResult> validator) throws IllegalArgumentException {
+		return Attributes.validate(value, validator);
 	}
 
 	/**

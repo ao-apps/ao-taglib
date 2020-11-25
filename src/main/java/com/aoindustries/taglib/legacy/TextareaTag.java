@@ -45,7 +45,6 @@ import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.JspTagException;
 
 /**
  * @author  AO Industries, Inc.
@@ -95,7 +94,7 @@ public class TextareaTag extends ElementBufferedBodyTag
 
 	private String name;
 	@Override
-	public void setName(String name) throws JspTagException {
+	public void setName(String name) {
 		this.name = Strings.nullIfEmpty(name);
 	}
 
@@ -113,13 +112,13 @@ public class TextareaTag extends ElementBufferedBodyTag
 
 	private Object value;
 	@Override
-	public void setValue(Object value) throws JspTagException {
+	public void setValue(Object value) {
 		this.value = AttributeUtils.nullIfEmpty(value);
 	}
 
 	private Object onchange;
 	@Override
-	public void setOnchange(Object onchange) throws JspTagException {
+	public void setOnchange(Object onchange) {
 		this.onchange = AttributeUtils.trimNullIfEmpty(onchange);
 	}
 

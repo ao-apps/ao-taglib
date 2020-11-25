@@ -27,6 +27,7 @@ import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextIn
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.html.Attributes;
 import com.aoindustries.html.Attributes.Global;
+import com.aoindustries.lang.Throwables;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
@@ -54,29 +55,34 @@ public class GlobalAttributesUtils {
 	 *
 	 * @see  DynamicAttributes#setDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object)
 	 */
+	@SuppressWarnings({"UseSpecificCatch", "TooBroadCatch"})
 	public static boolean addDynamicAttribute(String uri, String localName, Object value, List<String> expectedPatterns, MutableGlobalAttributes global) throws JspTagException {
-		if(localName.startsWith(Attributes.Text.Data.data.ATTRIBUTE_PREFIX)) {
-			global.addData(localName, value);
-			return true;
-		} else if(localName.startsWith(DATASET_ATTRIBUTE_PREFIX)) {
-			global.addData(
-				Attributes.Text.Data.dataset.toAttrName(
-					localName.substring(DATASET_ATTRIBUTE_PREFIX.length())
-				),
-				value
-			);
-			return true;
-		} else {
-			expectedPatterns.add(Attributes.Text.Data.data.ATTRIBUTE_PREFIX + "*");
-			expectedPatterns.add(GlobalAttributesUtils.DATASET_ATTRIBUTE_PREFIX + "*");
-			return false;
+		try {
+			if(localName.startsWith(Attributes.Text.Data.data.ATTRIBUTE_PREFIX)) {
+				global.addData(localName, value);
+				return true;
+			} else if(localName.startsWith(DATASET_ATTRIBUTE_PREFIX)) {
+				global.addData(
+					Attributes.Text.Data.dataset.toAttrName(
+						localName.substring(DATASET_ATTRIBUTE_PREFIX.length())
+					),
+					value
+				);
+				return true;
+			} else {
+				expectedPatterns.add(Attributes.Text.Data.data.ATTRIBUTE_PREFIX + "*");
+				expectedPatterns.add(GlobalAttributesUtils.DATASET_ATTRIBUTE_PREFIX + "*");
+				return false;
+			}
+		} catch(Throwable t) {
+			throw Throwables.wrap(t, JspTagException.class, JspTagException::new);
 		}
 	}
 
 	/**
 	 * Copies all global attributes.
 	 */
-	public static void copy(GlobalAttributes from, GlobalBufferedAttributes to) throws JspTagException {
+	public static void copy(GlobalAttributes from, GlobalBufferedAttributes to) {
 		to.setId(from.getId());
 		to.setClazz(from.getClazz());
 		to.setData(from.getData());

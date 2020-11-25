@@ -23,7 +23,6 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.html.Attributes;
-import javax.servlet.jsp.JspTagException;
 
 /**
  * Something with data-* attributes.
@@ -36,9 +35,9 @@ public interface DataAttribute {
 	 * Adds the data with the provided HTML attribute name and value, replacing any attribute that already exists.
 	 * When value is {@code null}, will remove an existing attribute.
 	 *
-	 * @throws  JspTagException  When {@code attrName} is not {@linkplain Attributes.Text.Data.data#validate(java.lang.String) valid}
+	 * @throws  IllegalArgumentException  When {@code attrName} is not {@linkplain Attributes.Text.Data.data#validate(java.lang.String) valid}
 	 *
 	 * @see  MutableGlobalAttributes#addData(java.lang.String, java.lang.Object)
 	 */
-	void addData(String attrName, Object value) throws JspTagException;
+	void addData(String attrName, Object value) throws IllegalArgumentException;
 }

@@ -24,6 +24,7 @@ package com.aoindustries.taglib.legacy;
 
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.taglib.legacy.EncodingNullBodyTag;
+import com.aoindustries.lang.LocalizedIllegalArgumentException;
 import com.aoindustries.lang.Strings;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
@@ -40,7 +41,6 @@ import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.List;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
@@ -78,14 +78,14 @@ public class MessageTag extends EncodingNullBodyTag
 
 	private MediaType mediaType;
 	@Override
-	public void setType(String type) throws JspTagException {
+	public void setType(String type) {
 		String typeStr = Strings.trim(type);
 		MediaType newMediaType = MediaType.getMediaTypeByName(typeStr);
 		if(newMediaType==null) {
 			try {
 				newMediaType = MediaType.getMediaTypeForContentType(typeStr);
 			} catch(UnsupportedEncodingException e) {
-				throw new JspTagException(e);
+				throw new IllegalArgumentException(e);
 			}
 		}
 		this.mediaType = newMediaType;
@@ -111,19 +111,19 @@ public class MessageTag extends EncodingNullBodyTag
 		}
 	}
 
-	public void setArg0(Object value) throws JspTagException {
+	public void setArg0(Object value) {
 		insertMessageArg("arg0", 0, value);
 	}
 
-	public void setArg1(Object value) throws JspTagException {
+	public void setArg1(Object value) {
 		insertMessageArg("arg1", 1, value);
 	}
 
-	public void setArg2(Object value) throws JspTagException {
+	public void setArg2(Object value) {
 		insertMessageArg("arg2", 2, value);
 	}
 
-	public void setArg3(Object value) throws JspTagException {
+	public void setArg3(Object value) {
 		insertMessageArg("arg3", 3, value);
 	}
 
@@ -144,14 +144,14 @@ public class MessageTag extends EncodingNullBodyTag
 		}
 	}
 
-	private void insertMessageArg(String localName, int index, Object value) throws JspTagException {
+	private void insertMessageArg(String localName, int index, Object value) throws IllegalArgumentException {
 		// Create lists on first use
 		if(messageArgs==null) {
 			messageArgsSet = new BitSet();
 			messageArgs = new ArrayList<>();
 		}
 		// Must not already be set
-		if(messageArgsSet.get(index)) throw new LocalizedJspTagException(accessor, "MessageTag.duplicateArgument", localName);
+		if(messageArgsSet.get(index)) throw new LocalizedIllegalArgumentException(accessor, "MessageTag.duplicateArgument", localName);
 		messageArgsSet.set(index);
 		if(index>=messageArgs.size()) {
 			while(messageArgs.size() < index) {

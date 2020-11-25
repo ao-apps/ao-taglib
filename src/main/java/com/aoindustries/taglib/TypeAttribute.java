@@ -22,8 +22,6 @@
  */
 package com.aoindustries.taglib;
 
-import javax.servlet.jsp.JspTagException;
-
 /**
  * Something with a type attribute.
  *
@@ -31,5 +29,5 @@ import javax.servlet.jsp.JspTagException;
  */
 public interface TypeAttribute {
 
-	void setType(String type) throws JspTagException;
+	void setType(String type);
 }

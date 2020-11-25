@@ -22,8 +22,6 @@
  */
 package com.aoindustries.taglib;
 
-import javax.servlet.jsp.JspTagException;
-
 /**
  * Something with an enctype attribute.
  *
@@ -31,5 +29,5 @@ import javax.servlet.jsp.JspTagException;
  */
 public interface EnctypeAttribute {
 
-	void setEnctype(String enctype) throws JspTagException;
+	void setEnctype(String enctype);
 }

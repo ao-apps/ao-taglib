@@ -27,7 +27,6 @@ import com.aoindustries.html.Attributes;
 import com.aoindustries.lang.Freezable;
 import com.aoindustries.lang.Strings;
 import java.util.Map;
-import javax.servlet.jsp.JspTagException;
 
 /**
  * Builder for {@link GlobalAttributes} instances.
@@ -44,16 +43,12 @@ public class MutableGlobalAttributes implements GlobalAttributes, Freezable<Glob
 	}
 
 	@SuppressWarnings("OverridableMethodCallInConstructor")
-	public MutableGlobalAttributes(GlobalAttributes global) throws IllegalArgumentException {
-		try {
-			setId(global.getId());
-			setClazz(global.getClazz());
-			setData(global.getData());
-			setDir(global.getDir());
-			setStyle(global.getStyle());
-		} catch(JspTagException e) {
-			throw new IllegalArgumentException(e);
-		}
+	public MutableGlobalAttributes(GlobalAttributes global) {
+		setId(global.getId());
+		setClazz(global.getClazz());
+		setData(global.getData());
+		setDir(global.getDir());
+		setStyle(global.getStyle());
 	}
 
 	@Override
@@ -85,15 +80,15 @@ public class MutableGlobalAttributes implements GlobalAttributes, Freezable<Glob
 	 * Replaces all the data with the provided HTML attribute names and values.
 	 * Entries will a {@code null} value are not added.
 	 *
-	 * @throws  JspTagException  When {@code attrName} is not {@linkplain Attributes.Text.Data.data#validate(java.lang.String) valid}
+	 * @throws  IllegalArgumentException  When {@code attrName} is not {@linkplain Attributes.Text.Data.data#validate(java.lang.String) valid}
 	 *
 	 * @see  GlobalBufferedAttributes#setData(java.util.Map)
 	 */
-	public MutableGlobalAttributes setData(Map<? extends String,?> data) throws JspTagException {
+	public MutableGlobalAttributes setData(Map<? extends String,?> data) throws IllegalArgumentException {
 		Map<String,Object> newData = MinimalMap.emptyMap();
 		if(data != null) {
 			for(Map.Entry<? extends String,?> entry : data.entrySet()) {
-				String attrName = AttributeUtils.validate(entry.getKey(), Attributes.Text.Data.data::validate);
+				String attrName = Attributes.validate(entry.getKey(), Attributes.Text.Data.data::validate);
 				Object value = entry.getValue();
 				if(value != null) {
 					newData = MinimalMap.put(newData, attrName, value);
@@ -108,13 +103,13 @@ public class MutableGlobalAttributes implements GlobalAttributes, Freezable<Glob
 	 * Adds all the data with the provided HTML attribute names and values, replacing any attributes that already exist.
 	 * Entries with a {@code null} value will remove any existing attribute.
 	 *
-	 * @throws  JspTagException  When {@code attrName} is not {@linkplain Attributes.Text.Data.data#validate(java.lang.String) valid}
+	 * @throws  IllegalArgumentException  When {@code attrName} is not {@linkplain Attributes.Text.Data.data#validate(java.lang.String) valid}
 	 */
-	public MutableGlobalAttributes addData(Map<? extends String,?> data) throws JspTagException {
+	public MutableGlobalAttributes addData(Map<? extends String,?> data) throws IllegalArgumentException {
 		if(data != null) {
 			Map<String,Object> newData = this.data;
 			for(Map.Entry<? extends String,?> entry : data.entrySet()) {
-				String attrName = AttributeUtils.validate(entry.getKey(), Attributes.Text.Data.data::validate);
+				String attrName = Attributes.validate(entry.getKey(), Attributes.Text.Data.data::validate);
 				Object value = entry.getValue();
 				newData =
 					(value == null)
@@ -130,12 +125,12 @@ public class MutableGlobalAttributes implements GlobalAttributes, Freezable<Glob
 	 * Adds the data with the provided HTML attribute name and value, replacing any attribute that already exists.
 	 * When value is {@code null}, will remove an existing attribute.
 	 *
-	 * @throws  JspTagException  When {@code attrName} is not {@linkplain Attributes.Text.Data.data#validate(java.lang.String) valid}
+	 * @throws  IllegalArgumentException  When {@code attrName} is not {@linkplain Attributes.Text.Data.data#validate(java.lang.String) valid}
 	 *
 	 * @see  DataAttribute#addData(java.lang.String, java.lang.Object)
 	 */
-	public MutableGlobalAttributes addData(String attrName, Object value) throws JspTagException {
-		AttributeUtils.validate(attrName, Attributes.Text.Data.data::validate);
+	public MutableGlobalAttributes addData(String attrName, Object value) throws IllegalArgumentException {
+		Attributes.validate(attrName, Attributes.Text.Data.data::validate);
 		this.data =
 			(data == null)
 			? MinimalMap.remove(this.data, attrName)
@@ -171,8 +166,8 @@ public class MutableGlobalAttributes implements GlobalAttributes, Freezable<Glob
 		return dir;
 	}
 
-	public MutableGlobalAttributes setDir(String dir) throws JspTagException {
-		this.dir = AttributeUtils.validate(
+	public MutableGlobalAttributes setDir(String dir) throws IllegalArgumentException {
+		this.dir = Attributes.validate(
 			Attributes.Enum.Dir.dir.normalize(dir),
 			Attributes.Enum.Dir.dir::validate
 		);
@@ -184,7 +179,7 @@ public class MutableGlobalAttributes implements GlobalAttributes, Freezable<Glob
 		return style;
 	}
 
-	public MutableGlobalAttributes setStyle(Object style) throws JspTagException {
+	public MutableGlobalAttributes setStyle(Object style) throws IllegalArgumentException {
 		this.style = AttributeUtils.trimNullIfEmpty(style); // TODO: .normalize()
 		return this;
 	}

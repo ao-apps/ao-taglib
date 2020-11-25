@@ -31,7 +31,6 @@ import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.JspTagException;
 
 /**
  * @author  AO Industries, Inc.
@@ -52,7 +51,7 @@ public class ColTag extends ElementNullBodyTag {
 /**/
 
 	private int span;
-	public void setSpan(int span) throws JspTagException {
+	public void setSpan(int span) {
 		this.span = span;
 	}
 

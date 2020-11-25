@@ -92,14 +92,14 @@ public class WriteTag extends EncodingNullBodyTag
 
 	private MediaType mediaType;
 	@Override
-	public void setType(String type) throws JspTagException {
+	public void setType(String type) {
 		String typeStr = Strings.trim(type);
 		MediaType newMediaType = MediaType.getMediaTypeByName(typeStr);
 		if(newMediaType==null) {
 			try {
 				newMediaType = MediaType.getMediaTypeForContentType(typeStr);
 			} catch(UnsupportedEncodingException e) {
-				throw new JspTagException(e);
+				throw new IllegalArgumentException(e);
 			}
 		}
 		this.mediaType = newMediaType;

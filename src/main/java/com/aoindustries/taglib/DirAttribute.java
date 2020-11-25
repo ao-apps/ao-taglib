@@ -22,8 +22,6 @@
  */
 package com.aoindustries.taglib;
 
-import javax.servlet.jsp.JspTagException;
-
 /**
  * Something with a dir attribute.
  *
@@ -33,5 +31,5 @@ import javax.servlet.jsp.JspTagException;
 // TODO: Put all into a big Attributes class like in ao-fluent-html?
 public interface DirAttribute {
 
-	void setDir(String dir) throws JspTagException;
+	void setDir(String dir);
 }

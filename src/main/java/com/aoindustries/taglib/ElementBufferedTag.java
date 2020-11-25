@@ -49,7 +49,7 @@ abstract public class ElementBufferedTag extends EncodingBufferedTag
 		return global.getId();
 	}
 	@Override
-	public void setId(String id) throws JspTagException {
+	public void setId(String id) {
 		global.setId(id);
 		// TODO: Validate, and TEI
 	}
@@ -59,7 +59,7 @@ abstract public class ElementBufferedTag extends EncodingBufferedTag
 		return global.getClazz();
 	}
 	@Override
-	public void setClazz(String clazz) throws JspTagException {
+	public void setClazz(String clazz) {
 		global.setClazz(clazz);
 	}
 
@@ -68,11 +68,11 @@ abstract public class ElementBufferedTag extends EncodingBufferedTag
 		return global.getData();
 	}
 	@Override
-	public void setData(Map<? extends String,?> data) throws JspTagException {
+	public void setData(Map<? extends String,?> data) {
 		global.setData(data);
 	}
 	@Override
-	public void addData(String attrName, Object value) throws JspTagException {
+	public void addData(String attrName, Object value) {
 		global.addData(attrName, value);
 	}
 
@@ -81,7 +81,7 @@ abstract public class ElementBufferedTag extends EncodingBufferedTag
 		return global.getDir();
 	}
 	@Override
-	public void setDir(String dir) throws JspTagException {
+	public void setDir(String dir) {
 		global.setDir(dir);
 	}
 
@@ -90,7 +90,7 @@ abstract public class ElementBufferedTag extends EncodingBufferedTag
 		return global.getStyle();
 	}
 	@Override
-	public void setStyle(Object style) throws JspTagException {
+	public void setStyle(Object style) {
 		global.setStyle(style);
 	}
 

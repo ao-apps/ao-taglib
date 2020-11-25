@@ -41,7 +41,6 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.JspTagException;
 
 /**
  * @author  AO Industries, Inc.
@@ -69,7 +68,7 @@ public class MetaTag extends ElementBufferedBodyTag
 	/**
 	 * Copies all values from the provided meta.
 	 */
-	public void setMeta(Meta meta) throws JspTagException {
+	public void setMeta(Meta meta) {
 		GlobalAttributesUtils.copy(meta.getGlobal(), this);
 		setName(meta.getName());
 		setHttpEquiv(meta.getHttpEquiv());
@@ -84,28 +83,28 @@ public class MetaTag extends ElementBufferedBodyTag
 
 	private String name;
 	@Override
-	public void setName(String name) throws JspTagException {
+	public void setName(String name) {
 		this.name = name;
 	}
 
 	private String httpEquiv;
-	public void setHttpEquiv(String httpEquiv) throws JspTagException {
+	public void setHttpEquiv(String httpEquiv) {
 		this.httpEquiv = httpEquiv;
 	}
 
 	private String itemprop;
-	public void setItemprop(String itemprop) throws JspTagException {
+	public void setItemprop(String itemprop) {
 		this.itemprop = Strings.trimNullIfEmpty(itemprop);
 	}
 
 	private Object charset; // TODO: Support java Charset, too
-	public void setCharset(Object charset) throws JspTagException {
+	public void setCharset(Object charset) {
 		this.charset = AttributeUtils.trimNullIfEmpty(charset);
 	}
 
 	private Object content;
 	@Override
-	public void setContent(Object content) throws JspTagException {
+	public void setContent(Object content) {
 		this.content = AttributeUtils.nullIfEmpty(content);
 	}
 

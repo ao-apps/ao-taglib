@@ -48,7 +48,7 @@ abstract public class ElementFilteredTag extends EncodingFilteredTag
 	public String getId() {
 		return global.getId();
 	}
-	public void setId(String id) throws JspTagException {
+	public void setId(String id) {
 		global.setId(id);
 		// TODO: Validate, and TEI
 	}
@@ -57,7 +57,7 @@ abstract public class ElementFilteredTag extends EncodingFilteredTag
 	public String getClazz() {
 		return global.getClazz();
 	}
-	public void setClazz(String clazz) throws JspTagException {
+	public void setClazz(String clazz) {
 		global.setClazz(clazz);
 	}
 
@@ -70,7 +70,7 @@ abstract public class ElementFilteredTag extends EncodingFilteredTag
 	public String getDir() {
 		return global.getDir();
 	}
-	public void setDir(String dir) throws JspTagException {
+	public void setDir(String dir) {
 		global.setDir(dir);
 	}
 
@@ -78,7 +78,7 @@ abstract public class ElementFilteredTag extends EncodingFilteredTag
 	public Object getStyle() {
 		return global.getStyle();
 	}
-	public void setStyle(Object style) throws JspTagException {
+	public void setStyle(Object style) {
 		global.setStyle(style);
 	}
 

@@ -66,7 +66,7 @@ abstract public class ElementNullBodyTag extends EncodingNullBodyTag
 		return global.getClazz();
 	}
 	@Override
-	public void setClazz(String clazz) throws JspTagException {
+	public void setClazz(String clazz) {
 		global.setClazz(clazz);
 	}
 
@@ -75,11 +75,11 @@ abstract public class ElementNullBodyTag extends EncodingNullBodyTag
 		return global.getData();
 	}
 	@Override
-	public void setData(Map<? extends String,?> data) throws JspTagException {
+	public void setData(Map<? extends String,?> data) {
 		global.setData(data);
 	}
 	@Override
-	public void addData(String attrName, Object value) throws JspTagException {
+	public void addData(String attrName, Object value) {
 		global.addData(attrName, value);
 	}
 
@@ -88,7 +88,7 @@ abstract public class ElementNullBodyTag extends EncodingNullBodyTag
 		return global.getDir();
 	}
 	@Override
-	public void setDir(String dir) throws JspTagException {
+	public void setDir(String dir) {
 		global.setDir(dir);
 	}
 
@@ -97,7 +97,7 @@ abstract public class ElementNullBodyTag extends EncodingNullBodyTag
 		return global.getStyle();
 	}
 	@Override
-	public void setStyle(Object style) throws JspTagException {
+	public void setStyle(Object style) {
 		global.setStyle(style);
 	}
 

@@ -22,6 +22,7 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.lang.Strings;
 import java.util.List;
 import javax.servlet.jsp.tagext.TagData;
 import javax.servlet.jsp.tagext.ValidationMessage;
@@ -77,7 +78,7 @@ public class AreaTagTEI extends ElementTagTEI {
 							)
 						);
 					} else if(coordsAttr != TagData.REQUEST_TIME_VALUE) {
-						String coords = AttributeUtils.trimNullIfEmpty((String)coordsAttr); // TODO: normalizeCoords
+						String coords = Strings.trimNullIfEmpty((String)coordsAttr); // TODO: normalizeCoords
 						if(coords == null) {
 							messages.add(
 								new ValidationMessage(

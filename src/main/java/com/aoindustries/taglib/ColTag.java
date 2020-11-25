@@ -30,7 +30,6 @@ import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 
 /**
@@ -52,7 +51,7 @@ public class ColTag extends ElementNullTag {
 /**/
 
 	private int span;
-	public void setSpan(int span) throws JspTagException {
+	public void setSpan(int span) {
 		this.span = span;
 	}
 

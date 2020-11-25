@@ -27,10 +27,10 @@ import com.aoindustries.encoding.MediaType;
 import com.aoindustries.html.Area;
 import com.aoindustries.html.Html;
 import com.aoindustries.html.servlet.HtmlEE;
+import com.aoindustries.lang.LocalizedIllegalArgumentException;
 import com.aoindustries.lang.Strings;
 import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URIParametersMap;
-import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.servlet.lastmodified.AddLastModified;
 import com.aoindustries.taglib.AltAttribute;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
@@ -93,12 +93,10 @@ public class AreaTag extends ElementNullBodyTag
 /**/
 
 	private String shape;
-	public void setShape(String shape) throws JspTagException {
+	public void setShape(String shape) {
 		shape = shape.trim();
-		if(shape.isEmpty()) {
-			throw new AttributeRequiredException("shape");
-		} else if(!AreaTagTEI.isValidShape(shape)) {
-			throw new LocalizedJspTagException(
+		if(!AreaTagTEI.isValidShape(shape)) {
+			throw new LocalizedIllegalArgumentException(
 				accessor,
 				"AreaTag.shape.invalid",
 				shape
@@ -109,13 +107,13 @@ public class AreaTag extends ElementNullBodyTag
 
 	private String coords;
 	public void setCoords(String coords) {
-		this.coords = AttributeUtils.trimNullIfEmpty(coords);
+		this.coords = Strings.trimNullIfEmpty(coords);
 	}
 
 	private String href;
 	@Override
-	public void setHref(String href) throws JspTagException {
-		this.href = AttributeUtils.nullIfEmpty(href);
+	public void setHref(String href) {
+		this.href = Strings.nullIfEmpty(href);
 	}
 
 	private MutableURIParameters params;
@@ -142,55 +140,55 @@ public class AreaTag extends ElementNullBodyTag
 
 	private Object hreflang;
 	@Override
-	public void setHreflang(Object hreflang) throws JspTagException {
+	public void setHreflang(Object hreflang) {
 		this.hreflang = hreflang;
 	}
 
 	private String rel;
 	@Override
-	public void setRel(String rel) throws JspTagException {
+	public void setRel(String rel) {
 		this.rel = rel;
 	}
 
 	private String type;
 	@Override
-	public void setType(String type) throws JspTagException {
+	public void setType(String type) {
 		this.type = Strings.trimNullIfEmpty(type);
 	}
 
 	private String target;
 	@Override
-	public void setTarget(String target) throws JspTagException {
+	public void setTarget(String target) {
 		this.target = Strings.trimNullIfEmpty(target);
 	}
 
 	private Object alt;
 	@Override
-	public void setAlt(Object alt) throws JspTagException {
+	public void setAlt(Object alt) {
 		this.alt = AttributeUtils.trim(alt);
 	}
 
 	private Object title;
 	@Override
-	public void setTitle(Object title) throws JspTagException {
+	public void setTitle(Object title) {
 		this.title = AttributeUtils.trimNullIfEmpty(title);
 	}
 
 	private Object onclick;
 	@Override
-	public void setOnclick(Object onclick) throws JspTagException {
+	public void setOnclick(Object onclick) {
 		this.onclick = AttributeUtils.trimNullIfEmpty(onclick);
 	}
 
 	private Object onmouseover;
 	@Override
-	public void setOnmouseover(Object onmouseover) throws JspTagException {
+	public void setOnmouseover(Object onmouseover) {
 		this.onmouseover = AttributeUtils.trimNullIfEmpty(onmouseover);
 	}
 
 	private Object onmouseout;
 	@Override
-	public void setOnmouseout(Object onmouseout) throws JspTagException {
+	public void setOnmouseout(Object onmouseout) {
 		this.onmouseout = AttributeUtils.trimNullIfEmpty(onmouseout);
 	}
 

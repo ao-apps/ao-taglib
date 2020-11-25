@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2014, 2016, 2017, 2019  AO Industries, Inc.
+ * Copyright (C) 2014, 2016, 2017, 2019, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,8 +22,6 @@
  */
 package com.aoindustries.taglib;
 
-import javax.servlet.jsp.JspTagException;
-
 /**
  * Something with a tabindex attribute.
  *
@@ -31,5 +29,5 @@ import javax.servlet.jsp.JspTagException;
  */
 public interface TabindexAttribute {
 
-	void setTabindex(int tabindex) throws JspTagException;
+	void setTabindex(int tabindex);
 }

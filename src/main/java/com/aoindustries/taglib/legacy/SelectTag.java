@@ -45,7 +45,6 @@ import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.JspTagException;
 
 /**
  * @author  AO Industries, Inc.
@@ -89,37 +88,37 @@ public class SelectTag extends ElementBufferedBodyTag
 
 	private String name;
 	@Override
-	public void setName(String name) throws JspTagException {
+	public void setName(String name) {
 		this.name = Strings.nullIfEmpty(name);
 	}
 
 	private Object size;
 	@Override
-	public void setSize(Object size) throws JspTagException {
+	public void setSize(Object size) {
 		this.size = AttributeUtils.trimNullIfEmpty(size);
 	}
 
 	private Object onblur;
 	@Override
-	public void setOnblur(Object onblur) throws JspTagException {
+	public void setOnblur(Object onblur) {
 		this.onblur = AttributeUtils.trimNullIfEmpty(onblur);
 	}
 
 	private Object onchange;
 	@Override
-	public void setOnchange(Object onchange) throws JspTagException {
+	public void setOnchange(Object onchange) {
 		this.onchange = AttributeUtils.trimNullIfEmpty(onchange);
 	}
 
 	private Object onfocus;
 	@Override
-	public void setOnfocus(Object onfocus) throws JspTagException {
+	public void setOnfocus(Object onfocus) {
 		this.onfocus = AttributeUtils.trimNullIfEmpty(onfocus);
 	}
 
 	private Object onkeypress;
 	@Override
-	public void setOnkeypress(Object onkeypress) throws JspTagException {
+	public void setOnkeypress(Object onkeypress) {
 		this.onkeypress = AttributeUtils.trimNullIfEmpty(onkeypress);
 	}
 

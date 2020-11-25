@@ -26,6 +26,7 @@ import com.aoindustries.encoding.MediaType;
 import com.aoindustries.html.Html;
 import com.aoindustries.html.servlet.HtmlEE;
 import com.aoindustries.io.buffer.BufferResult;
+import com.aoindustries.lang.Strings;
 import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URIParametersMap;
 import com.aoindustries.servlet.lastmodified.AddLastModified;
@@ -83,8 +84,8 @@ public class ImgTag extends ElementBufferedBodyTag
 
 	private String src;
 	@Override
-	public void setSrc(String src) throws JspTagException {
-		this.src = AttributeUtils.nullIfEmpty(src);
+	public void setSrc(String src) {
+		this.src = Strings.nullIfEmpty(src);
 	}
 
 	private MutableURIParameters params;
@@ -111,31 +112,31 @@ public class ImgTag extends ElementBufferedBodyTag
 
 	private Object width;
 	@Override
-	public void setWidth(Object width) throws JspTagException {
+	public void setWidth(Object width) {
 		this.width = AttributeUtils.trimNullIfEmpty(width);
 	}
 
 	private Object height;
 	@Override
-	public void setHeight(Object height) throws JspTagException {
+	public void setHeight(Object height) {
 		this.height = AttributeUtils.trimNullIfEmpty(height);
 	}
 
 	private Object alt;
 	@Override
-	public void setAlt(Object alt) throws JspTagException {
+	public void setAlt(Object alt) {
 		this.alt = AttributeUtils.trim(alt);
 	}
 
 	private Object title;
 	@Override
-	public void setTitle(Object title) throws JspTagException {
+	public void setTitle(Object title) {
 		this.title = AttributeUtils.trimNullIfEmpty(title);
 	}
 
 	private String usemap;
 	public void setUsemap(String usemap) {
-		this.usemap = AttributeUtils.trimNullIfEmpty(usemap);
+		this.usemap = Strings.trimNullIfEmpty(usemap);
 	}
 
 	private boolean ismap;

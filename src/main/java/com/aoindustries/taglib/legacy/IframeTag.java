@@ -27,6 +27,7 @@ import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.buffer.BufferResult;
+import com.aoindustries.lang.Strings;
 import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URIParametersMap;
 import com.aoindustries.servlet.lastmodified.AddLastModified;
@@ -81,8 +82,8 @@ public class IframeTag extends ElementBufferedBodyTag
 
 	private String src;
 	@Override
-	public void setSrc(String src) throws JspTagException {
-		this.src = AttributeUtils.nullIfEmpty(src);
+	public void setSrc(String src) {
+		this.src = Strings.nullIfEmpty(src);
 	}
 
 	private MutableURIParameters params;
@@ -109,13 +110,13 @@ public class IframeTag extends ElementBufferedBodyTag
 
 	private Object width;
 	@Override
-	public void setWidth(Object width) throws JspTagException {
+	public void setWidth(Object width) {
 		this.width = AttributeUtils.trimNullIfEmpty(width);
 	}
 
 	private Object height;
 	@Override
-	public void setHeight(Object height) throws JspTagException {
+	public void setHeight(Object height) {
 		this.height = AttributeUtils.trimNullIfEmpty(height);
 	}
 

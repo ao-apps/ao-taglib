@@ -86,8 +86,8 @@ public class ATag extends ElementBufferedTag
 
 	private String href;
 	@Override
-	public void setHref(String href) throws JspTagException {
-		this.href = AttributeUtils.nullIfEmpty(href);
+	public void setHref(String href) {
+		this.href = Strings.nullIfEmpty(href);
 	}
 
 	private MutableURIParameters params;
@@ -114,49 +114,49 @@ public class ATag extends ElementBufferedTag
 
 	private Object hreflang;
 	@Override
-	public void setHreflang(Object hreflang) throws JspTagException {
+	public void setHreflang(Object hreflang) {
 		this.hreflang = hreflang;
 	}
 
 	private String rel;
 	@Override
-	public void setRel(String rel) throws JspTagException {
+	public void setRel(String rel) {
 		this.rel = Strings.trimNullIfEmpty(rel);
 	}
 
 	private String target;
 	@Override
-	public void setTarget(String target) throws JspTagException {
+	public void setTarget(String target) {
 		this.target = Strings.trimNullIfEmpty(target);
 	}
 
 	private Object title;
 	@Override
-	public void setTitle(Object title) throws JspTagException {
+	public void setTitle(Object title) {
 		this.title = AttributeUtils.trimNullIfEmpty(title);
 	}
 
 	private String type;
 	@Override
-	public void setType(String type) throws JspTagException {
+	public void setType(String type) {
 		this.type = Strings.trimNullIfEmpty(type);
 	}
 
 	private Object onclick;
 	@Override
-	public void setOnclick(Object onclick) throws JspTagException {
+	public void setOnclick(Object onclick) {
 		this.onclick = AttributeUtils.trimNullIfEmpty(onclick);
 	}
 
 	private Object onmouseout;
 	@Override
-	public void setOnmouseout(Object onmouseout) throws JspTagException {
+	public void setOnmouseout(Object onmouseout) {
 		this.onmouseout = AttributeUtils.trimNullIfEmpty(onmouseout);
 	}
 
 	private Object onmouseover;
 	@Override
-	public void setOnmouseover(Object onmouseover) throws JspTagException {
+	public void setOnmouseover(Object onmouseover) {
 		this.onmouseover = AttributeUtils.trimNullIfEmpty(onmouseover);
 	}
 

@@ -40,8 +40,13 @@ public class PropertyUtils {
 
 	/**
 	 * Sets an attribute in the provided textual scope.
+	 *
+	 * @see  Scope#getScopeId(java.lang.String)
+	 *
+	 * @deprecated  Appears to be unused as of ao-taglib-6.0.0
 	 */
-	public static void setAttribute(PageContext pageContext, String scope, String name, Object value) throws JspTagException {
+	@Deprecated
+	public static void setAttribute(PageContext pageContext, String scope, String name, Object value) throws IllegalArgumentException {
 		pageContext.setAttribute(name, value, Scope.getScopeId(scope));
 	}
 

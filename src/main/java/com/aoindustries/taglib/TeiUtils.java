@@ -25,7 +25,6 @@ package com.aoindustries.taglib;
 import com.aoindustries.collections.MinimalList;
 import com.aoindustries.encoding.Coercion;
 import java.util.List;
-import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.TagData;
 import javax.servlet.jsp.tagext.TagExtraInfo;
 import javax.servlet.jsp.tagext.ValidationMessage;
@@ -61,7 +60,7 @@ final public class TeiUtils {
 			try {
 				Scope.getScopeId(scope);
 				// Value is OK
-			} catch(JspTagException err) {
+			} catch(IllegalArgumentException err) {
 				messages = MinimalList.add(
 					messages,
 					new ValidationMessage(

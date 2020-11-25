@@ -73,7 +73,7 @@ public class ScriptTag extends ElementBufferedTag
 
 	private MediaType mediaType;
 	@Override
-	public void setType(String type) throws JspTagException {
+	public void setType(String type) {
 		try {
 			MediaType newMediaType = MediaType.getMediaTypeForContentType(Strings.trim(type));
 			if(
@@ -83,14 +83,14 @@ public class ScriptTag extends ElementBufferedTag
 			) throw new LocalizedUnsupportedEncodingException(ApplicationResources.accessor, "ScriptTag.unsupportedMediaType", newMediaType);
 			this.mediaType = newMediaType;
 		} catch(UnsupportedEncodingException e) {
-			throw new JspTagException(e);
+			throw new IllegalArgumentException(e);
 		}
 	}
 
 	private String src;
 	@Override
 	public void setSrc(String src) {
-		this.src = AttributeUtils.nullIfEmpty(src);
+		this.src = Strings.nullIfEmpty(src);
 	}
 
 	private MutableURIParameters params;

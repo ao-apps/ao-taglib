@@ -31,6 +31,7 @@ import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlA
 import com.aoindustries.html.Html;
 import com.aoindustries.html.servlet.HtmlEE;
 import com.aoindustries.io.buffer.BufferResult;
+import com.aoindustries.lang.LocalizedIllegalArgumentException;
 import com.aoindustries.lang.Strings;
 import com.aoindustries.net.AnyURI;
 import com.aoindustries.net.MutableURIParameters;
@@ -39,7 +40,6 @@ import com.aoindustries.net.URIParametersMap;
 import com.aoindustries.net.URIParametersUtils;
 import com.aoindustries.net.URIResolver;
 import com.aoindustries.servlet.http.Dispatcher;
-import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.taglib.ActionAttribute;
 import com.aoindustries.taglib.ApplicationResources;
 import com.aoindustries.taglib.AttributeUtils;
@@ -96,21 +96,21 @@ public class FormTag extends ElementBufferedBodyTag
 
 	private String action;
 	@Override
-	public void setAction(String action) throws JspTagException {
-		this.action = AttributeUtils.nullIfEmpty(action);
+	public void setAction(String action) {
+		this.action = Strings.nullIfEmpty(action);
 	}
 
 	private String enctype;
 	@Override
-	public void setEnctype(String enctype) throws JspTagException {
+	public void setEnctype(String enctype) {
 		this.enctype = Strings.trimNullIfEmpty(enctype);
 	}
 
 	private String method;
 	@Override
-	public void setMethod(String method) throws JspTagException {
+	public void setMethod(String method) {
 		method = Strings.trimNullIfEmpty(method);
-		if(method != null && !FormTagTEI.isValidMethod(method)) throw new LocalizedJspTagException(ApplicationResources.accessor, "FormTag.method.invalid", method);
+		if(method != null && !FormTagTEI.isValidMethod(method)) throw new LocalizedIllegalArgumentException(ApplicationResources.accessor, "FormTag.method.invalid", method);
 		this.method = method;
 	}
 
@@ -123,13 +123,13 @@ public class FormTag extends ElementBufferedBodyTag
 
 	private String target;
 	@Override
-	public void setTarget(String target) throws JspTagException {
+	public void setTarget(String target) {
 		this.target = Strings.trimNullIfEmpty(target);
 	}
 
 	private Object onsubmit;
 	@Override
-	public void setOnsubmit(Object onsubmit) throws JspTagException {
+	public void setOnsubmit(Object onsubmit) {
 		this.onsubmit = AttributeUtils.trimNullIfEmpty(onsubmit);
 	}
 

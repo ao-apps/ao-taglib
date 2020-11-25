@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2013, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2013, 2016, 2017, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,8 +22,7 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.servlet.jsp.LocalizedJspTagException;
-import javax.servlet.jsp.JspTagException;
+import com.aoindustries.lang.LocalizedIllegalArgumentException;
 import javax.servlet.jsp.PageContext;
 
 /**
@@ -46,14 +45,14 @@ final public class Scope {
 	/**
 	 * Gets the PageContext scope value for the textual scope name.
 	 *
-	 * @exception  JspTagException  if invalid scope
+	 * @exception  IllegalArgumentException  if invalid scope
 	 */
-	public static int getScopeId(String scope) throws JspTagException {
+	public static int getScopeId(String scope) throws IllegalArgumentException {
 		if(scope==null || PAGE.equals(scope)) return PageContext.PAGE_SCOPE;
 		else if(REQUEST.equals(scope)) return PageContext.REQUEST_SCOPE;
 		else if(SESSION.equals(scope)) return PageContext.SESSION_SCOPE;
 		else if(APPLICATION.equals(scope)) return PageContext.APPLICATION_SCOPE;
-		else throw new LocalizedJspTagException(ApplicationResources.accessor, "Scope.scope.invalid", scope);
+		else throw new LocalizedIllegalArgumentException(ApplicationResources.accessor, "Scope.scope.invalid", scope);
 	}
 
 	/** Make no instances */

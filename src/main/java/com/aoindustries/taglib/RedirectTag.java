@@ -22,9 +22,10 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.lang.LocalizedIllegalArgumentException;
+import com.aoindustries.lang.Strings;
 import com.aoindustries.servlet.ServletUtil;
 import com.aoindustries.servlet.http.Includer;
-import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.servlet.lastmodified.AddLastModified;
 import com.aoindustries.servlet.lastmodified.LastModifiedUtil;
 import static com.aoindustries.taglib.ApplicationResources.accessor;
@@ -84,15 +85,15 @@ public class RedirectTag extends DispatchTag
 	private boolean canonical;
 	private AddLastModified addLastModified = AddLastModified.AUTO;
 
-	public void setStatusCode(String statusCode) throws JspTagException {
+	public void setStatusCode(String statusCode) {
 		statusCode = statusCode.trim();
-		if(!isValidStatusCode(statusCode)) throw new LocalizedJspTagException(ApplicationResources.accessor, "RedirectTag.statusCode.invalid", statusCode);
+		if(!isValidStatusCode(statusCode)) throw new LocalizedIllegalArgumentException(ApplicationResources.accessor, "RedirectTag.statusCode.invalid", statusCode);
 		this.statusCode = statusCode;
 	}
 
 	@Override
 	public void setHref(String href) {
-		this.href = AttributeUtils.nullIfEmpty(href);
+		this.href = Strings.nullIfEmpty(href);
 	}
 
 	public void setAbsolute(boolean absolute) {

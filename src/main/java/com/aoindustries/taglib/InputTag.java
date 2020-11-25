@@ -30,10 +30,10 @@ import com.aoindustries.html.Html;
 import com.aoindustries.html.Input;
 import com.aoindustries.html.servlet.HtmlEE;
 import com.aoindustries.io.buffer.BufferResult;
+import com.aoindustries.lang.LocalizedIllegalArgumentException;
 import com.aoindustries.lang.Strings;
 import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URIParametersMap;
-import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.servlet.lastmodified.AddLastModified;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
@@ -99,7 +99,7 @@ public class InputTag extends ElementBufferedTag
 
 	private Object alt;
 	@Override
-	public void setAlt(Object alt) throws JspTagException {
+	public void setAlt(Object alt) {
 		this.alt = AttributeUtils.trim(alt);
 	}
 
@@ -123,7 +123,7 @@ public class InputTag extends ElementBufferedTag
 
 	private Object height;
 	@Override
-	public void setHeight(Object height) throws JspTagException {
+	public void setHeight(Object height) {
 		this.height = AttributeUtils.trimNullIfEmpty(height);
 	}
 
@@ -135,7 +135,7 @@ public class InputTag extends ElementBufferedTag
 
 	private String name;
 	@Override
-	public void setName(String name) throws JspTagException {
+	public void setName(String name) {
 		this.name = name;
 	}
 
@@ -147,14 +147,14 @@ public class InputTag extends ElementBufferedTag
 
 	private Object size;
 	@Override
-	public void setSize(Object size) throws JspTagException {
+	public void setSize(Object size) {
 		this.size = AttributeUtils.trimNullIfEmpty(size);
 	}
 
 	private String src;
 	@Override
-	public void setSrc(String src) throws JspTagException {
-		this.src = AttributeUtils.nullIfEmpty(src);
+	public void setSrc(String src) {
+		this.src = Strings.nullIfEmpty(src);
 	}
 
 	private MutableURIParameters params;
@@ -187,57 +187,57 @@ public class InputTag extends ElementBufferedTag
 
 	private Object title;
 	@Override
-	public void setTitle(Object title) throws JspTagException {
+	public void setTitle(Object title) {
 		this.title = AttributeUtils.trimNullIfEmpty(title);
 	}
 
 	private String type;
 	@Override
-	public void setType(String type) throws JspTagException {
+	public void setType(String type) {
 		String typeStr = Strings.trimNullIfEmpty(type);
-		if(typeStr != null && !InputTagTEI.isValidType(typeStr)) throw new LocalizedJspTagException(ApplicationResources.accessor, "InputTag.type.invalid", typeStr);
+		if(typeStr != null && !InputTagTEI.isValidType(typeStr)) throw new LocalizedIllegalArgumentException(ApplicationResources.accessor, "InputTag.type.invalid", typeStr);
 		this.type = typeStr;
 	}
 
 	private Object width;
 	@Override
-	public void setWidth(Object width) throws JspTagException {
+	public void setWidth(Object width) {
 		this.width = AttributeUtils.trimNullIfEmpty(width);
 	}
 
 	private Object value;
 	@Override
-	public void setValue(Object value) throws JspTagException {
+	public void setValue(Object value) {
 		this.value = AttributeUtils.nullIfEmpty(value);
 	}
 
 	private Object onblur;
 	@Override
-	public void setOnblur(Object onblur) throws JspTagException {
+	public void setOnblur(Object onblur) {
 		this.onblur = AttributeUtils.trimNullIfEmpty(onblur);
 	}
 
 	private Object onchange;
 	@Override
-	public void setOnchange(Object onchange) throws JspTagException {
+	public void setOnchange(Object onchange) {
 		this.onchange = AttributeUtils.trimNullIfEmpty(onchange);
 	}
 
 	private Object onclick;
 	@Override
-	public void setOnclick(Object onclick) throws JspTagException {
+	public void setOnclick(Object onclick) {
 		this.onclick = AttributeUtils.trimNullIfEmpty(onclick);
 	}
 
 	private Object onfocus;
 	@Override
-	public void setOnfocus(Object onfocus) throws JspTagException {
+	public void setOnfocus(Object onfocus) {
 		this.onfocus = AttributeUtils.trimNullIfEmpty(onfocus);
 	}
 
 	private Object onkeypress;
 	@Override
-	public void setOnkeypress(Object onkeypress) throws JspTagException {
+	public void setOnkeypress(Object onkeypress) {
 		this.onkeypress = AttributeUtils.trimNullIfEmpty(onkeypress);
 	}
 
