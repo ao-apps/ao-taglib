@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2020-11-25T00:56:06-06:00"
+		dateModified="2020-11-25T01:43:18-06:00"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -53,49 +53,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 				artifactId="@{documented.artifactId}"
 				scmUrl="@{project.scm.url}"
 			>
-				<ul>
-					<li>
-						Fixed implementation of <core:link page="ao.tld/function-isForwarded" />.
-						This function was broken by the last release's improved platform compatibility.
-					</li>
-					<li>Removed support or IE 6, 7, 8, and 9 since all are end-of-life.</li>
-					<li>
-						Added <ao:a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes">global attributes</ao:a>
-						to all element tags.
-						<p>
-							Minimized the duplication in implementation by using default interface methods, abstract
-							base classes, and XML entities.
-						</p>
-						<p>
-							Added more global attributes:
-						</p>
-						<ol>
-							<li><code>dir</code></li>
-							<li>
-								Added <ao:a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-*">global attribute <code>data-*</code></ao:a>,
-								with implementations for both HTML attribute and JavaScript property names.
-							</li>
-							<!-- TODO: New tags ao:data and/or ao:dataset to set from nested tags -->
-						</ol>
-					</li>
-					<li>Added <code>size</code> attribute to <core:link page="ao.tld/tag-select" />.</li>
-					<li>
-						Added <core:link page="ao-legacy.tld/">alternate implementation</core:link> compatible
-						with legacy JSP that use scriptlets.
-					</li>
-					<li>
-						<core:link page="ao.tld/tag-textarea" /> no longer requires <code>cols</code> and
-						<code>rows</code> attributes.
-					</li>
-					<li>
-						Cleaned-up use of <code>JspTagException</code> versus <code>JspException</code>.  Generally,
-						methods declare <code>throws JspException</code> while actually throwing instances of
-						<code>JspTagException</code>.  The exception to this is private implemententation methods that
-						both declare and throw <code>JspTagException</code>.
-					</li>
-					<li>Attribute setters now throw <code>IllegalArgumentException</code> instead of <code>JspTagException</code>.</li>
-					<li>Case-insensitive boolean parsing.</li>
-				</ul>
 				<!-- TODO:
 				<ul>
 					<li>Why aren't tag descriptions in the NetBeans code assist?  They are for JSTL.  Is it the HTML formatting?  Is the element ordering?</li>
@@ -107,6 +64,59 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 				-->
 			</changelog:release>
 		</c:if>
+
+		<changelog:release
+			projectName="@{documented.name}"
+			version="6.0.0"
+			datePublished="2020-11-25T01:43:18-06:00"
+			groupId="@{project.groupId}"
+			artifactId="@{documented.artifactId}"
+			scmUrl="@{project.scm.url}"
+		>
+			<ul>
+				<li>
+					Fixed implementation of <core:link page="ao.tld/function-isForwarded" />.
+					This function was broken by the last release's improved platform compatibility.
+				</li>
+				<li>Removed support or IE 6, 7, 8, and 9 since all are end-of-life.</li>
+				<li>
+					Added <ao:a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes">global attributes</ao:a>
+					to all element tags.
+					<p>
+						Minimized the duplication in implementation by using default interface methods, abstract
+						base classes, and XML entities.
+					</p>
+					<p>
+						Added more global attributes:
+					</p>
+					<ol>
+						<li><code>dir</code></li>
+						<li>
+							Added <ao:a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-*">global attribute <code>data-*</code></ao:a>,
+							with implementations for both HTML attribute and JavaScript property names.
+						</li>
+						<!-- TODO: New tags ao:data and/or ao:dataset to set from nested tags -->
+					</ol>
+				</li>
+				<li>Added <code>size</code> attribute to <core:link page="ao.tld/tag-select" />.</li>
+				<li>
+					Added <core:link page="ao-legacy.tld/">alternate implementation</core:link> compatible
+					with legacy JSP that use scriptlets.
+				</li>
+				<li>
+					<core:link page="ao.tld/tag-textarea" /> no longer requires <code>cols</code> and
+					<code>rows</code> attributes.
+				</li>
+				<li>
+					Cleaned-up use of <code>JspTagException</code> versus <code>JspException</code>.  Generally,
+					methods declare <code>throws JspException</code> while actually throwing instances of
+					<code>JspTagException</code>.  The exception to this is private implemententation methods that
+					both declare and throw <code>JspTagException</code>.
+				</li>
+				<li>Attribute setters now throw <code>IllegalArgumentException</code> instead of <code>JspTagException</code>.</li>
+				<li>Case-insensitive boolean parsing.</li>
+			</ul>
+		</changelog:release>
 
 		<changelog:release
 			projectName="@{documented.name}"
