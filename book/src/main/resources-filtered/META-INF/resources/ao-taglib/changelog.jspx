@@ -103,14 +103,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 					<li>Support script async and defer attributes</li>
 					<li>Support autofocus and required attributes (textarea, input, ...)</li>
 					<li>Support other nice HTML 5 features of textarea/input)</li>
-					<li>
-						Split ao-taglib into ao-encoding-taglib, which would then be usable as a compatibility base for other auto-encoding taglibs,
-						without depending on the full ao-taglib itself.  The encoding taglib would probably be short name "encode:", which
-						means tags like <code><![CDATA[&lt;encode:encode type="…"&gt;]]></code>
-						and <code><![CDATA[&lt;encode:text&gt;]]></code>
-
-						nmw-email-taglib might be able to establish a proper context based on the content type of the content for a message, for example.
-					</li>
 				</ul>
 				-->
 			</changelog:release>
