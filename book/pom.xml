@@ -79,6 +79,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 						<dependency>org.glassfish.web:jstl-impl</dependency>
 					</usedDependencies>
 					<ignoredUnusedDeclaredDependencies>
+						<dependency>com.aoindustries:ao-taglib:jar</dependency><!-- Required because is both :jar and :pom? -->
 						<!-- Dependency for dependencyversion-maven-plugin only -->
 						<dependency>com.aoindustries:ao-taglib:pom</dependency>
 					</ignoredUnusedDeclaredDependencies>
