@@ -242,8 +242,6 @@ public class InputTag extends ElementBufferedTag
 	}
 
 	/**
-	 * {@inheritDoc}
-	 *
 	 * @see  ParamUtils#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List, com.aoindustries.taglib.ParamsAttribute)
 	 */
 	@Override

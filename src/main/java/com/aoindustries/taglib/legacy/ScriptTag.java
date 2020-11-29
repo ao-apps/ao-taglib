@@ -124,8 +124,6 @@ public class ScriptTag extends ElementBufferedBodyTag
 	// TODO: async, defer, ...
 
 	/**
-	 * {@inheritDoc}
-	 *
 	 * @see  ParamUtils#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List, com.aoindustries.taglib.ParamsAttribute)
 	 */
 	@Override

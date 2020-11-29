@@ -76,8 +76,6 @@ abstract class ArgDispatchTag extends DispatchTag
 	}
 
 	/**
-	 * {@inheritDoc}
-	 *
 	 * @see  #addArg(java.lang.String, java.lang.Object)
 	 */
 	@Override
