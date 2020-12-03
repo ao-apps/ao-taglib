@@ -31,6 +31,7 @@ import com.aoindustries.lang.Strings;
 import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URIParametersMap;
 import com.aoindustries.servlet.lastmodified.AddLastModified;
+import static com.aoindustries.taglib.Resources.RESOURCES;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
@@ -80,7 +81,7 @@ public class ScriptTag extends ElementBufferedTag
 				newMediaType != MediaType.JAVASCRIPT
 				&& newMediaType != MediaType.JSON
 				&& newMediaType != MediaType.LD_JSON
-			) throw new LocalizedUnsupportedEncodingException(ApplicationResources.accessor, "ScriptTag.unsupportedMediaType", newMediaType);
+			) throw new LocalizedUnsupportedEncodingException(RESOURCES, "ScriptTag.unsupportedMediaType", newMediaType);
 			this.mediaType = newMediaType;
 		} catch(UnsupportedEncodingException e) {
 			throw new IllegalArgumentException(e);

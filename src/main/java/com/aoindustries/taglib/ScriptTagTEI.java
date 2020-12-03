@@ -24,6 +24,7 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.lang.Strings;
+import static com.aoindustries.taglib.Resources.RESOURCES;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import javax.servlet.jsp.tagext.TagData;
@@ -47,10 +48,9 @@ public class ScriptTagTEI extends ElementTagTEI {
 				try {
 					MediaType mediaType = MediaType.getMediaTypeForContentType(type);
 					if(mediaType != MediaType.JAVASCRIPT) {
-						messages.add(
-							new ValidationMessage(
+						messages.add(new ValidationMessage(
 								data.getId(),
-								ApplicationResources.accessor.getMessage("ScriptTag.unsupportedMediaType", type)
+								RESOURCES.getMessage("ScriptTag.unsupportedMediaType", type)
 							)
 						);
 					}

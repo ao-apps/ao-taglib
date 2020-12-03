@@ -27,10 +27,9 @@ import com.aoindustries.encoding.taglib.EncodingNullTag;
 import com.aoindustries.lang.LocalizedIllegalArgumentException;
 import com.aoindustries.lang.Strings;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
-import static com.aoindustries.taglib.ApplicationResources.accessor;
-import com.aoindustries.util.i18n.ApplicationResourcesAccessor;
 import com.aoindustries.util.i18n.BundleLookupMarkup;
 import com.aoindustries.util.i18n.BundleLookupThreadContext;
+import com.aoindustries.util.i18n.Resources;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
@@ -40,6 +39,7 @@ import java.util.List;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.DynamicAttributes;
+import static com.aoindustries.taglib.Resources.RESOURCES;
 
 /**
  * @author  AO Industries, Inc.
@@ -132,13 +132,13 @@ public class MessageTag extends EncodingNullTag
 				String numSubstring = localName.substring(3);
 				int index = Integer.parseInt(numSubstring);
 				// Do not allow "arg00" in place of "arg0"
-				if(!numSubstring.equals(Integer.toString(index))) throw new LocalizedJspTagException(accessor, "error.unexpectedDynamicAttribute1", localName, "arg*");
+				if(!numSubstring.equals(Integer.toString(index))) throw new LocalizedJspTagException(RESOURCES, "error.unexpectedDynamicAttribute1", localName, "arg*");
 				insertMessageArg(localName, index, value);
 			} catch(NumberFormatException err) {
-				throw new LocalizedJspTagException(err, accessor, "error.unexpectedDynamicAttribute1", localName, "arg*");
+				throw new LocalizedJspTagException(err, RESOURCES, "error.unexpectedDynamicAttribute1", localName, "arg*");
 			}
 		} else {
-			throw new LocalizedJspTagException(accessor, "error.unexpectedDynamicAttribute1", localName, "arg*");
+			throw new LocalizedJspTagException(RESOURCES, "error.unexpectedDynamicAttribute1", localName, "arg*");
 		}
 	}
 
@@ -149,7 +149,7 @@ public class MessageTag extends EncodingNullTag
 			messageArgs = new ArrayList<>();
 		}
 		// Must not already be set
-		if(messageArgsSet.get(index)) throw new LocalizedIllegalArgumentException(accessor, "MessageTag.duplicateArgument", localName);
+		if(messageArgsSet.get(index)) throw new LocalizedIllegalArgumentException(RESOURCES, "MessageTag.duplicateArgument", localName);
 		messageArgsSet.set(index);
 		if(index>=messageArgs.size()) {
 			while(messageArgs.size() < index) {
@@ -176,11 +176,12 @@ public class MessageTag extends EncodingNullTag
 	}
 
 	@Override
+	@SuppressWarnings("deprecation")
 	protected void writePrefix(MediaType containerType, Writer out) throws JspException, IOException {
-		ApplicationResourcesAccessor accessor;
+		Resources resources;
 		String combinedKey;
 		if(bundle != null) {
-			accessor = ApplicationResourcesAccessor.getInstance(bundle);
+			resources = Resources.getResources(bundle);
 			combinedKey = key;
 		} else {
 			// Find parent bundle
@@ -188,19 +189,19 @@ public class MessageTag extends EncodingNullTag
 			PageContext pageContext = (PageContext)getJspContext();
 /**/
 			BundleTag bundleTag = BundleTag.getBundleTag(pageContext.getRequest());
-			if(bundleTag==null) throw new LocalizedJspTagException(com.aoindustries.taglib.ApplicationResources.accessor, "error.requiredParentTagNotFound", "bundle");
-			accessor = bundleTag.getAccessor();
+			if(bundleTag==null) throw new LocalizedJspTagException(RESOURCES, "error.requiredParentTagNotFound", "bundle");
+			resources = bundleTag.getResources();
 			String prefix = bundleTag.getPrefix();
 			combinedKey = prefix==null || prefix.isEmpty() ? key : prefix.concat(key);
 		}
 		// Lookup the message value
 		if(messageArgs==null) {
-			lookupResult = accessor.getMessage(combinedKey);
+			lookupResult = resources.getMessage(combinedKey);
 		} else {
 			// Error if gap in message args (any not set in range)
 			int firstClear = messageArgsSet.nextClearBit(0);
-			if(firstClear < messageArgs.size()) throw new LocalizedJspTagException(com.aoindustries.taglib.ApplicationResources.accessor, "MessageTag.argumentMissing", firstClear);
-			lookupResult = accessor.getMessage(combinedKey, messageArgs.toArray());
+			if(firstClear < messageArgs.size()) throw new LocalizedJspTagException(RESOURCES, "MessageTag.argumentMissing", firstClear);
+			lookupResult = resources.getMessage(combinedKey, messageArgs.toArray());
 		}
 		// Look for any message markup
 		BundleLookupThreadContext threadContext = BundleLookupThreadContext.getThreadContext(false);

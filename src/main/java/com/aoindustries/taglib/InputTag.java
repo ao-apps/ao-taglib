@@ -35,6 +35,7 @@ import com.aoindustries.lang.Strings;
 import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URIParametersMap;
 import com.aoindustries.servlet.lastmodified.AddLastModified;
+import static com.aoindustries.taglib.Resources.RESOURCES;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
@@ -195,7 +196,7 @@ public class InputTag extends ElementBufferedTag
 	@Override
 	public void setType(String type) {
 		String typeStr = Strings.trimNullIfEmpty(type);
-		if(typeStr != null && !InputTagTEI.isValidType(typeStr)) throw new LocalizedIllegalArgumentException(ApplicationResources.accessor, "InputTag.type.invalid", typeStr);
+		if(typeStr != null && !InputTagTEI.isValidType(typeStr)) throw new LocalizedIllegalArgumentException(RESOURCES, "InputTag.type.invalid", typeStr);
 		this.type = typeStr;
 	}
 

@@ -31,10 +31,10 @@ import com.aoindustries.lang.Strings;
 import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URIParametersMap;
 import com.aoindustries.servlet.lastmodified.AddLastModified;
-import com.aoindustries.taglib.ApplicationResources;
 import com.aoindustries.taglib.GlobalAttributesUtils;
 import com.aoindustries.taglib.ParamUtils;
 import com.aoindustries.taglib.ParamsAttribute;
+import static com.aoindustries.taglib.Resources.RESOURCES;
 import com.aoindustries.taglib.SrcAttribute;
 import com.aoindustries.taglib.TypeAttribute;
 import com.aoindustries.taglib.UrlUtils;
@@ -86,7 +86,7 @@ public class ScriptTag extends ElementBufferedBodyTag
 				newMediaType != MediaType.JAVASCRIPT
 				&& newMediaType != MediaType.JSON
 				&& newMediaType != MediaType.LD_JSON
-			) throw new LocalizedUnsupportedEncodingException(ApplicationResources.accessor, "ScriptTag.unsupportedMediaType", newMediaType);
+			) throw new LocalizedUnsupportedEncodingException(RESOURCES, "ScriptTag.unsupportedMediaType", newMediaType);
 			this.mediaType = newMediaType;
 		} catch(UnsupportedEncodingException e) {
 			throw new IllegalArgumentException(e);

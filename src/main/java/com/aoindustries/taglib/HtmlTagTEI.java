@@ -24,6 +24,7 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.Doctype;
 import com.aoindustries.encoding.Serialization;
+import static com.aoindustries.taglib.Resources.RESOURCES;
 import java.util.List;
 import java.util.Locale;
 import javax.servlet.jsp.tagext.TagData;
@@ -50,7 +51,7 @@ public class HtmlTagTEI extends ElementTagTEI {
 					messages.add(
 						new ValidationMessage(
 							data.getId(),
-							ApplicationResources.accessor.getMessage("HtmlTag.serialization.invalid", serialization)
+							RESOURCES.getMessage("HtmlTag.serialization.invalid", serialization)
 						)
 					);
 				}
@@ -69,7 +70,7 @@ public class HtmlTagTEI extends ElementTagTEI {
 					messages.add(
 						new ValidationMessage(
 							data.getId(),
-							ApplicationResources.accessor.getMessage("HtmlTag.doctype.invalid", doctype)
+							RESOURCES.getMessage("HtmlTag.doctype.invalid", doctype)
 						)
 					);
 				}

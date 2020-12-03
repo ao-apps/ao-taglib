@@ -33,7 +33,6 @@ import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URIParametersMap;
 import com.aoindustries.servlet.lastmodified.AddLastModified;
 import com.aoindustries.taglib.AltAttribute;
-import static com.aoindustries.taglib.ApplicationResources.accessor;
 import com.aoindustries.taglib.AreaTagTEI;
 import com.aoindustries.taglib.AttributeRequiredException;
 import com.aoindustries.taglib.AttributeUtils;
@@ -46,6 +45,7 @@ import com.aoindustries.taglib.OnmouseoverAttribute;
 import com.aoindustries.taglib.ParamUtils;
 import com.aoindustries.taglib.ParamsAttribute;
 import com.aoindustries.taglib.RelAttribute;
+import static com.aoindustries.taglib.Resources.RESOURCES;
 import com.aoindustries.taglib.TargetAttribute;
 import com.aoindustries.taglib.TitleAttribute;
 import com.aoindustries.taglib.TypeAttribute;
@@ -97,7 +97,7 @@ public class AreaTag extends ElementNullBodyTag
 		shape = shape.trim();
 		if(!AreaTagTEI.isValidShape(shape)) {
 			throw new LocalizedIllegalArgumentException(
-				accessor,
+				RESOURCES,
 				"AreaTag.shape.invalid",
 				shape
 			);

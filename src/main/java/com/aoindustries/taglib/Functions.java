@@ -34,7 +34,7 @@ import com.aoindustries.servlet.http.HttpServletUtil;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.servlet.lastmodified.AddLastModified;
 import com.aoindustries.servlet.lastmodified.LastModifiedServlet;
-import static com.aoindustries.taglib.ApplicationResources.accessor;
+import static com.aoindustries.taglib.Resources.RESOURCES;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -119,9 +119,9 @@ final public class Functions {
 	public static String message(String key) throws JspTagException {
 		NullArgumentException.checkNotNull(key, "key");
 		BundleTag bundleTag = BundleTag.getBundleTag(getRequest());
-		if(bundleTag==null) throw new LocalizedJspTagException(accessor, "error.requiredParentTagNotFound", "bundle");
+		if(bundleTag==null) throw new LocalizedJspTagException(RESOURCES, "error.requiredParentTagNotFound", "bundle");
 		String prefix = bundleTag.getPrefix();
-		return bundleTag.getAccessor().getMessage(
+		return bundleTag.getResources().getMessage(
 			prefix==null || prefix.isEmpty() ? key : prefix.concat(key)
 		);
 	}

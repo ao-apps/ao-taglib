@@ -27,6 +27,7 @@ import com.aoindustries.net.URIParameters;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.servlet.lastmodified.AddLastModified;
 import com.aoindustries.servlet.lastmodified.LastModifiedUtil;
+import static com.aoindustries.taglib.Resources.RESOURCES;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import javax.servlet.jsp.JspContext;
@@ -60,7 +61,7 @@ final public class UrlUtils {
 		if(href != null) {
 			return LastModifiedUtil.buildURL(pageContext, href, params, addLastModified, absolute, canonical);
 		} else {
-			if(params != null) throw new LocalizedJspTagException(ApplicationResources.accessor, "UrlUtils.paramsWithoutHref");
+			if(params != null) throw new LocalizedJspTagException(RESOURCES, "UrlUtils.paramsWithoutHref");
 			return null;
 		}
 	}
@@ -136,7 +137,7 @@ final public class UrlUtils {
 		if(src != null) {
 			return LastModifiedUtil.buildURL(pageContext, src, params, addLastModified, absolute, canonical);
 		} else {
-			if(params != null) throw new LocalizedJspTagException(ApplicationResources.accessor, "UrlUtils.paramsWithoutSrc");
+			if(params != null) throw new LocalizedJspTagException(RESOURCES, "UrlUtils.paramsWithoutSrc");
 			return null;
 		}
 	}

@@ -26,6 +26,7 @@ import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.taglib.EncodingBufferedTag;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
+import static com.aoindustries.taglib.Resources.RESOURCES;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -65,7 +66,7 @@ public class CheckedTag extends EncodingBufferedTag {
 		if(!value.isEmpty()) {
 			if("true".equalsIgnoreCase(value)) checkedAttribute.setChecked(true);
 			else if("false".equalsIgnoreCase(value)) checkedAttribute.setChecked(false);
-			else throw new LocalizedJspTagException(ApplicationResources.accessor, "CheckedTag.invalidValue", value);
+			else throw new LocalizedJspTagException(RESOURCES, "CheckedTag.invalidValue", value);
 		}
 /* BodyTag only:
 		return EVAL_PAGE;

@@ -30,7 +30,7 @@ import com.aoindustries.net.URIParametersMap;
 import com.aoindustries.net.URIResolver;
 import com.aoindustries.servlet.http.Dispatcher;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
-import static com.aoindustries.taglib.ApplicationResources.accessor;
+import static com.aoindustries.taglib.Resources.RESOURCES;
 import com.aoindustries.util.WildcardPatternMatcher;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -270,7 +270,7 @@ abstract public class DispatchTag extends SimpleTagSupport
 					);
 					// Find dispatcher
 					dispatcher = pageContext.getServletContext().getRequestDispatcher(contextRelativePath);
-					if(dispatcher==null) throw new LocalizedJspTagException(accessor, "DispatchTag.dispatcherNotFound", contextRelativePath);
+					if(dispatcher==null) throw new LocalizedJspTagException(RESOURCES, "DispatchTag.dispatcherNotFound", contextRelativePath);
 				}
 
 				// Call any subclass hook to handle the request before being dispatched.  If the request should not

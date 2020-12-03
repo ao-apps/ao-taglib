@@ -22,7 +22,7 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.util.i18n.ApplicationResourcesAccessor;
+import com.aoindustries.util.i18n.Resources;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import javax.servlet.ServletRequest;
@@ -58,29 +58,39 @@ public class BundleTag
 	}
 
 	private String basename;
-	private transient ApplicationResourcesAccessor accessor; // Set along with basename
+	private transient Resources resources; // Set along with basename
 	private String prefix;
 	private transient Object oldRequestValue;
 
 	private void init() {
 		basename = null;
-		accessor = null;
+		resources = null;
 		prefix = null;
 		oldRequestValue = null;
 	}
 
+	@SuppressWarnings("deprecation")
 	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
 		in.defaultReadObject();
-		this.accessor = basename == null ? null : ApplicationResourcesAccessor.getInstance(basename);
+		this.resources = basename == null ? null : Resources.getResources(basename);
 	}
 
-	public ApplicationResourcesAccessor getAccessor() {
-		return accessor;
+	public Resources getResources() {
+		return resources;
 	}
 
+	/**
+	 * @deprecated  Please use {@link #getResources()} directly.
+	 */
+	@Deprecated
+	public com.aoindustries.util.i18n.ApplicationResourcesAccessor getAccessor() {
+		return resources;
+	}
+
+	@SuppressWarnings("deprecation")
 	public void setBasename(String basename) {
 		this.basename = basename;
-		this.accessor = basename == null ? null : ApplicationResourcesAccessor.getInstance(basename);
+		this.resources = basename == null ? null : Resources.getResources(basename);
 	}
 
 	public String getPrefix() {

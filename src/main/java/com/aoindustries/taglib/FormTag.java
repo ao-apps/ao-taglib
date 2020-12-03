@@ -40,6 +40,7 @@ import com.aoindustries.net.URIParametersMap;
 import com.aoindustries.net.URIParametersUtils;
 import com.aoindustries.net.URIResolver;
 import com.aoindustries.servlet.http.Dispatcher;
+import static com.aoindustries.taglib.Resources.RESOURCES;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
@@ -100,7 +101,7 @@ public class FormTag extends ElementBufferedTag
 	@Override
 	public void setMethod(String method) {
 		method = Strings.trimNullIfEmpty(method);
-		if(method != null && !FormTagTEI.isValidMethod(method)) throw new LocalizedIllegalArgumentException(ApplicationResources.accessor, "FormTag.method.invalid", method);
+		if(method != null && !FormTagTEI.isValidMethod(method)) throw new LocalizedIllegalArgumentException(RESOURCES, "FormTag.method.invalid", method);
 		this.method = method;
 	}
 

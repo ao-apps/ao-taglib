@@ -23,6 +23,7 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.lang.Strings;
+import static com.aoindustries.taglib.Resources.RESOURCES;
 import java.util.List;
 import javax.servlet.jsp.tagext.TagData;
 import javax.servlet.jsp.tagext.ValidationMessage;
@@ -48,7 +49,7 @@ public class AreaTagTEI extends ElementTagTEI {
 			messages.add(
 				new ValidationMessage(
 					data.getId(),
-					ApplicationResources.accessor.getMessage("AttributeRequiredException.message", "shape")
+					RESOURCES.getMessage("AttributeRequiredException.message", "shape")
 				)
 			);
 		} else if(shapeAttr != TagData.REQUEST_TIME_VALUE) {
@@ -57,7 +58,7 @@ public class AreaTagTEI extends ElementTagTEI {
 				messages.add(
 					new ValidationMessage(
 						data.getId(),
-						ApplicationResources.accessor.getMessage("AttributeRequiredException.message", "shape")
+						RESOURCES.getMessage("AttributeRequiredException.message", "shape")
 					)
 				);
 			} else {
@@ -65,7 +66,7 @@ public class AreaTagTEI extends ElementTagTEI {
 					messages.add(
 						new ValidationMessage(
 							data.getId(),
-							ApplicationResources.accessor.getMessage("AreaTag.shape.invalid", shape)
+							RESOURCES.getMessage("AreaTag.shape.invalid", shape)
 						)
 					);
 				} else if(!"default".equals(shape)) {
@@ -74,7 +75,7 @@ public class AreaTagTEI extends ElementTagTEI {
 						messages.add(
 							new ValidationMessage(
 								data.getId(),
-								ApplicationResources.accessor.getMessage("AttributeRequiredException.message", "coords")
+								RESOURCES.getMessage("AttributeRequiredException.message", "coords")
 							)
 						);
 					} else if(coordsAttr != TagData.REQUEST_TIME_VALUE) {
@@ -83,7 +84,7 @@ public class AreaTagTEI extends ElementTagTEI {
 							messages.add(
 								new ValidationMessage(
 									data.getId(),
-									ApplicationResources.accessor.getMessage("AttributeRequiredException.message", "coords")
+									RESOURCES.getMessage("AttributeRequiredException.message", "coords")
 								)
 							);
 						}

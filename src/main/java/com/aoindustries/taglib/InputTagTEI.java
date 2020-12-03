@@ -23,6 +23,7 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.lang.Strings;
+import static com.aoindustries.taglib.Resources.RESOURCES;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashSet;
@@ -83,7 +84,7 @@ public class InputTagTEI extends ElementTagTEI {
 				messages.add(
 					new ValidationMessage(
 						data.getId(),
-						ApplicationResources.accessor.getMessage("InputTag.type.invalid", type)
+						RESOURCES.getMessage("InputTag.type.invalid", type)
 					)
 				);
 			}

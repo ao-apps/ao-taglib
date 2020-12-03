@@ -28,7 +28,7 @@ import com.aoindustries.html.Attributes;
 import com.aoindustries.lang.Strings;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.servlet.jsp.tagext.JspTagUtils;
-import static com.aoindustries.taglib.ApplicationResources.accessor;
+import static com.aoindustries.taglib.Resources.RESOURCES;
 import com.aoindustries.validation.ValidationResult;
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -112,7 +112,7 @@ public final class AttributeUtils  {
 	/**
 	 * @see  Coercion#trim(java.lang.Object)
 	 *
-	 * @throws UncheckedIOException
+	 * @throws  UncheckedIOException  when an underlying {@link IOException} occurs.
 	 */
 	public static Object trim(Object value) throws UncheckedIOException {
 		try {
@@ -125,7 +125,7 @@ public final class AttributeUtils  {
 	/**
 	 * @see  Coercion#trimNullIfEmpty(java.lang.Object)
 	 *
-	 * @throws UncheckedIOException
+	 * @throws  UncheckedIOException  when an underlying {@link IOException} occurs.
 	 */
 	public static Object trimNullIfEmpty(Object value) throws UncheckedIOException {
 		try {
@@ -221,7 +221,7 @@ public final class AttributeUtils  {
 	public static JspTagException newDynamicAttributeFailedException(String uri, String localName, Object value, List<String> expectedPatterns) {
 		if(expectedPatterns == null || expectedPatterns.isEmpty()) {
 			return new LocalizedJspTagException(
-				accessor,
+				RESOURCES,
 				"error.unexpectedDynamicAttribute0",
 				localName
 			);
@@ -229,14 +229,14 @@ public final class AttributeUtils  {
 			int size = expectedPatterns.size();
 			if(size == 1) {
 				return new LocalizedJspTagException(
-					accessor,
+					RESOURCES,
 					"error.unexpectedDynamicAttribute1",
 					localName,
 					expectedPatterns.get(0)
 				);
 			} else if(size == 2) {
 				return new LocalizedJspTagException(
-					accessor,
+					RESOURCES,
 					"error.unexpectedDynamicAttribute2",
 					localName,
 					expectedPatterns.get(0),
@@ -250,7 +250,7 @@ public final class AttributeUtils  {
 					pre.append('"').append(expectedPatterns.get(i)).append('"');
 				}
 				return new LocalizedJspTagException(
-					accessor,
+					RESOURCES,
 					"error.unexpectedDynamicAttributeN",
 					localName,
 					pre,

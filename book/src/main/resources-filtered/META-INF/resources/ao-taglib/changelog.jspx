@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2020-11-25T07:09:05-06:00"
+		dateModified="2020-12-01T11:38:37-06:00"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -53,6 +53,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 				artifactId="@{documented.artifactId}"
 				scmUrl="@{project.scm.url}"
 			>
+				<ul>
+					<li>
+						Split development-only classes into a new sub-project in <code>devel/</code>.  This
+						sub-project is used development only and is never deployed to artifact repositories.
+					</li>
+				</ul>
 				<!-- TODO:
 				<ul>
 					<li>Why aren't tag descriptions in the NetBeans code assist?  They are for JSTL.  Is it the HTML formatting?  Is the element ordering?</li>

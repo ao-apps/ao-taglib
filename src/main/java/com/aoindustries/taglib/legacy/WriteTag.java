@@ -29,10 +29,10 @@ import com.aoindustries.io.Writable;
 import com.aoindustries.lang.Strings;
 import com.aoindustries.lang.Throwables;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
-import com.aoindustries.taglib.ApplicationResources;
 import com.aoindustries.taglib.AttributeRequiredException;
 import com.aoindustries.taglib.NameAttribute;
 import com.aoindustries.taglib.PropertyUtils;
+import static com.aoindustries.taglib.Resources.RESOURCES;
 import com.aoindustries.taglib.TypeAttribute;
 import com.aoindustries.util.i18n.BundleLookupMarkup;
 import com.aoindustries.util.i18n.BundleLookupThreadContext;
@@ -197,7 +197,7 @@ public class WriteTag extends EncodingNullBodyTag
 							if(lookupMarkup != null) lookupMarkup.appendPrefixTo(markupType, out);
 						}
 					} catch(NoSuchMethodException err) {
-						throw new LocalizedJspTagException(ApplicationResources.accessor, "WriteTag.unableToFindMethod", method);
+						throw new LocalizedJspTagException(RESOURCES, "WriteTag.unableToFindMethod", method);
 					} catch(InvocationTargetException e) {
 						// Unwrap cause for more direct stack traces
 						Throwable cause = e.getCause();
