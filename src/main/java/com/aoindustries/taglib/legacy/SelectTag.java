@@ -162,22 +162,22 @@ public class SelectTag extends ElementBufferedBodyTag
 		}
 		if(onblur != null) {
 			out.write(" onblur=\"");
-			Coercion.write(onblur, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
+			Coercion.write(onblur, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		if(onchange != null) {
 			out.write(" onchange=\"");
-			Coercion.write(onchange, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
+			Coercion.write(onchange, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		if(onfocus != null) {
 			out.write(" onfocus=\"");
-			Coercion.write(onfocus, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
+			Coercion.write(onfocus, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		if(onkeypress != null) {
 			out.write(" onkeypress=\"");
-			Coercion.write(onkeypress, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
+			Coercion.write(onkeypress, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		out.write('>');

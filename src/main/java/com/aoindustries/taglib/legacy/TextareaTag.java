@@ -172,7 +172,7 @@ public class TextareaTag extends ElementBufferedBodyTag
 		}
 		if(onchange != null) {
 			out.write(" onchange=\"");
-			Coercion.write(onchange, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
+			Coercion.write(onchange, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		out.write('>');

@@ -199,7 +199,7 @@ public class FormTag extends ElementBufferedTag
 		}
 		if(onsubmit != null) {
 			out.write(" onsubmit=\"");
-			Coercion.write(onsubmit, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
+			Coercion.write(onsubmit, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		out.write('>');

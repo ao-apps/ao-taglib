@@ -227,7 +227,7 @@ public class ATag extends ElementBufferedTag
 		}
 		if(title != null) {
 			out.write(" title=\"");
-			Coercion.write(title, MarkupType.TEXT, textInXhtmlAttributeEncoder, false, out);
+			Coercion.write(title, MarkupType.TEXT, true, textInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		if(type != null) {
@@ -237,17 +237,17 @@ public class ATag extends ElementBufferedTag
 		}
 		if(onclick != null) {
 			out.write(" onclick=\"");
-			Coercion.write(onclick, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
+			Coercion.write(onclick, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		if(onmouseout != null) {
 			out.write(" onmouseout=\"");
-			Coercion.write(onmouseout, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
+			Coercion.write(onmouseout, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		if(onmouseover != null) {
 			out.write(" onmouseover=\"");
-			Coercion.write(onmouseover, MarkupType.JAVASCRIPT, javaScriptInXhtmlAttributeEncoder, false, out);
+			Coercion.write(onmouseover, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		out.write('>');

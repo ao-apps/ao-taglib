@@ -149,7 +149,7 @@ public class GlobalAttributesUtils {
 		if(style != null) {
 			out.write(" style=\"");
 			// TODO: Review other MarkupType.JAVASCRIPT that should be MarkupType.CSS
-			Coercion.write(style, MarkupType.CSS, textInXhtmlAttributeEncoder, false, out);
+			Coercion.write(style, MarkupType.CSS, true, textInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 	}
@@ -185,7 +185,7 @@ public class GlobalAttributesUtils {
 		Object style = Coercion.trimNullIfEmpty(global.getStyle());
 		if(style != null) {
 			out.append(" style=\"");
-			Coercion.append(style, MarkupType.CSS, textInXhtmlAttributeEncoder, false, out);
+			Coercion.append(style, MarkupType.CSS, true, textInXhtmlAttributeEncoder, false, out);
 			out.append('"');
 		}
 	}
