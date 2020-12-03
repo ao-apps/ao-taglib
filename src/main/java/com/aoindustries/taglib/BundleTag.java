@@ -22,7 +22,7 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.util.i18n.Resources;
+import com.aoindustries.i18n.Resources;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import javax.servlet.ServletRequest;

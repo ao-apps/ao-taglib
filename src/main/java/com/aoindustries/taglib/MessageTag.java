@@ -24,12 +24,13 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.taglib.EncodingNullTag;
+import com.aoindustries.i18n.Resources;
 import com.aoindustries.lang.LocalizedIllegalArgumentException;
 import com.aoindustries.lang.Strings;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
+import static com.aoindustries.taglib.Resources.RESOURCES;
 import com.aoindustries.util.i18n.BundleLookupMarkup;
 import com.aoindustries.util.i18n.BundleLookupThreadContext;
-import com.aoindustries.util.i18n.Resources;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
@@ -39,7 +40,6 @@ import java.util.List;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.DynamicAttributes;
-import static com.aoindustries.taglib.Resources.RESOURCES;
 
 /**
  * @author  AO Industries, Inc.

@@ -27,8 +27,8 @@ package com.aoindustries.taglib;
  */
 final public class Resources {
 
-	public static final com.aoindustries.util.i18n.Resources RESOURCES =
-		com.aoindustries.util.i18n.Resources.getResources(Resources.class);
+	public static final com.aoindustries.i18n.Resources RESOURCES =
+		com.aoindustries.i18n.Resources.getResources(Resources.class.getPackage());
 
 	/**
 	 * Make no instances.
