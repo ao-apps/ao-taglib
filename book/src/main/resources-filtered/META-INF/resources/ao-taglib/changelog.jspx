@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2020-12-02T11:55:06-06:00"
+		dateModified="2020-12-03T09:13:05-06:00"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-taglib:pom.version}" />
@@ -83,6 +83,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 								validation.
 							</li>
 						</ol>
+					</li>
+					<li>
+						New function <core:link page="ao.tld/function-isRtl" /> that determines if
+						<ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletResponse.html#getLocale()">the response locale</ao:a>
+						is <ao:a href="../ao-lang/apidocs/com/aoindustries/util/i18n/Locales.html#isRightToLeft(java.util.Locale)">a right-to-left language</ao:a>.
 					</li>
 				</ul>
 				<!-- TODO:

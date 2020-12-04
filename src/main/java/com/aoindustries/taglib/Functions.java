@@ -35,6 +35,7 @@ import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.servlet.lastmodified.AddLastModified;
 import com.aoindustries.servlet.lastmodified.LastModifiedServlet;
 import static com.aoindustries.taglib.Resources.RESOURCES;
+import com.aoindustries.util.i18n.Locales;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -109,6 +110,10 @@ final public class Functions {
 	@SuppressWarnings("deprecation")
 	public static boolean isForwarded() {
 		return DispatchTag.isForwarded(FunctionContext.getRequest());
+	}
+
+	public static boolean isRtl() {
+		return Locales.isRightToLeft(FunctionContext.getResponse().getLocale());
 	}
 
 	public static String join(Iterable<?> iter, String separator) {
