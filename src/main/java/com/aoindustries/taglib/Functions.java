@@ -23,8 +23,10 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.lang.NullArgumentException;
+import com.aoindustries.lang.Projects;
 import com.aoindustries.lang.Strings;
 import com.aoindustries.net.URIEncoder;
+import com.aoindustries.servlet.ServletContextCache;
 import com.aoindustries.servlet.filter.FunctionContext;
 import static com.aoindustries.servlet.filter.FunctionContext.getRequest;
 import static com.aoindustries.servlet.filter.FunctionContext.getResponse;
@@ -35,15 +37,29 @@ import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.servlet.lastmodified.AddLastModified;
 import com.aoindustries.servlet.lastmodified.LastModifiedServlet;
 import static com.aoindustries.taglib.Resources.RESOURCES;
+import com.aoindustries.util.Tuple2;
 import com.aoindustries.util.i18n.Locales;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Date;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspTagException;
 
 final public class Functions {
 
+	private static final Logger logger = Logger.getLogger(Functions.class.getName());
+
+	/**
+	 * Make no instances.
+	 */
 	private Functions() {
 	}
 
@@ -102,6 +118,122 @@ final public class Functions {
 
 	public static String getDecimalTimeLength(Long millis) {
 		return millis==null ? null : Strings.getDecimalTimeLengthString(millis);
+	}
+
+	/**
+	 * Application-scope cached key.
+	 */
+	private static final String RESOURCE_PROJECT_VERSIONS_APPLICATION_KEY =
+		Functions.class.getName() + ".getProjectVersion.resourceProjectVersions";
+
+	/**
+	 * A distinct String instance used to represent not found, since {@link ConcurrentHashMap} does not support
+	 * {@code null} values.
+	 */
+	@SuppressWarnings("RedundantStringConstructorCall")
+	private static final String NOT_FOUND = new String("<<<NOT_FOUND>>>");
+
+	private static final ConcurrentMap<Tuple2<String,String>,String> classPathProjectVersions = new ConcurrentHashMap<>();
+
+	@SuppressWarnings("StringEquality")
+	public static String getProjectVersion(String lib, String groupId, String artifactId, String def) throws IOException {
+		ServletContext servletContext = getServletContext();
+		HttpServletRequest request = getRequest();
+		// Make lib relative to the current page
+		String absLib = HttpServletUtil.getAbsolutePath(request, lib);
+		String resourceName;
+		{
+			StringBuilder sb = new StringBuilder();
+			sb.append(absLib);
+			int len = sb.length();
+			if(len == 0 || sb.charAt(len - 1) != '/') sb.append('/');
+			sb.append("META-INF/maven/").append(groupId).append('/').append(artifactId).append("/pom.properties");
+			resourceName = sb.toString();
+		}
+		// Find the current resource modified time
+		long lastModified = ServletContextCache.getLastModified(servletContext, resourceName);
+		if(logger.isLoggable(Level.FINER)) {
+			logger.finer(
+				  "lib.........: \"" + lib + "\"\n"
+				+ "groupId.....: \"" + groupId + "\"\n"
+				+ "artifactId..: \"" + artifactId + "\"\n"
+				+ "def.........: \"" + def + "\"\n"
+				+ "absLib......: \"" + absLib + "\"\n"
+				+ "resourceName: \"" + resourceName + "\"\n"
+				+ "lastModified: \"" + (lastModified == 0 ? "Unknown" : new Date(lastModified)) + "\"\n"
+			);
+		}
+		if(lastModified != 0) {
+			// Get the application-scope cache
+			@SuppressWarnings("unchecked")
+			ConcurrentMap<String,Tuple2<Long,String>> resourceProjectVersions =
+				(ConcurrentHashMap)servletContext.getAttribute(RESOURCE_PROJECT_VERSIONS_APPLICATION_KEY);
+			if(resourceProjectVersions == null) {
+				// ok if created twice due to race condition - it's just a cache
+				resourceProjectVersions = new ConcurrentHashMap<>();
+				servletContext.setAttribute(RESOURCE_PROJECT_VERSIONS_APPLICATION_KEY, resourceProjectVersions);
+			}
+			// Find any cache entry
+			Tuple2<Long,String> cached = resourceProjectVersions.get(resourceName);
+			String result;
+			if(cached != null && cached.getElement1() == lastModified) {
+				result = cached.getElement2();
+				if(logger.isLoggable(Level.FINER)) {
+					logger.finer(
+						  "Found in resourceProjectVersions cache: version \"" + result
+						+ "\" from \"" + resourceName + '"'
+					);
+				}
+				if(result == NOT_FOUND) result = null;
+			} else {
+				try (InputStream in = servletContext.getResourceAsStream(resourceName)) {
+					result = Projects.readVersion(resourceName, in, groupId, artifactId);
+				}
+				if(logger.isLoggable(Level.FINE)) {
+					logger.fine(
+						  "Store in resourceProjectVersions cache: version \"" + ((result == null) ? NOT_FOUND : result)
+						+ "\" from \"" + resourceName + '"'
+					);
+				}
+				// Cache result
+				resourceProjectVersions.put(
+					resourceName,
+					new Tuple2<>(
+						lastModified,
+						(result == null) ? NOT_FOUND : result
+					)
+				);
+			}
+			// Return if found
+			if(result != null) return result;
+		}
+		// Check for cached in classpath (cached found or not found)
+		Tuple2<String,String> classPathKey = new Tuple2<>(groupId, artifactId);
+		String result = classPathProjectVersions.get(classPathKey);
+		if(result != null) {
+			if(logger.isLoggable(Level.FINER)) {
+				logger.finer(
+					  "Found in classPathProjectVersions cache: version \"" + result
+					+ "\" from \"" + groupId + ':' + artifactId + '"'
+				);
+			}
+		} else {
+			// Search classpath
+			result = Projects.getVersion(groupId, artifactId);
+			if(logger.isLoggable(Level.FINE)) {
+				logger.fine(
+					  "Store in classPathProjectVersions cache: version \"" + ((result == null) ? NOT_FOUND : result)
+					+ "\" from \"" + groupId + ':' + artifactId + '"'
+				);
+			}
+			// Store result as permanent cache entry
+			classPathProjectVersions.put(
+				classPathKey,
+				(result == null) ? NOT_FOUND : result
+			);
+		}
+		// Return default if not found
+		return (result == null) ? def : result;
 	}
 
 	/**

@@ -4707,6 +4707,53 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 		<example><![CDATA[<code>${ao:getDecimalTimeLength(timeSpan)}</code>]]></example>
 	</function>
 	<function>
+		<!-- datePublished="2020-12-06T14:08:58-06:00" -->
+		<description><![CDATA[
+			<p class="semanticcms-tag-reference-summary">
+				Gets the version of a Maven project given its groupId and artifactId.
+			</p>
+			<p>
+				Searches in the following order:
+			</p>
+			<ol>
+				<li>
+					<p>
+						Look for a web resource <code>META-INF/maven/<var>groupId</var>/<var>artifactId</var>/pom.properties</code>,
+						relative to the given <var>lib</var> directory (which itself is interpreted relative to the current
+						page.
+					</p>
+					<p>
+						This is for dependencies that have been
+						<a href="https://maven.apache.org/plugins/maven-war-plugin/overlays.html">expanded into the project as overlays</a>.
+					</p>
+				</li>
+				<li>
+					<p>
+						Next searches the application classpath via
+						<a href="https://aoindustries.com/ao-lang/apidocs/com/aoindustries/lang/Projects.html#getVersion(java.lang.String,java.lang.String)">Projects.getVersion(String groupId, String artifactId)</a>.
+					</p>
+					<p>
+						This is for dependencies that have been included as dependencies, most likely in the
+						<code>WEB-INF/lib</code> folder.
+					</p>
+				</li>
+				<li>
+					<p>
+						Finally, if not found, returns the provided default value.  This default value will typically be
+						set via a build-time filter, such as <code>@{project.version}</code>.
+					</p>
+					<p>
+						This is to fallback to build-time dependencies when no runtime version information can be found.
+					</p>
+				</li>
+			</ol>
+		]]></description>
+		<name>getProjectVersion</name>
+		<function-class>com.aoindustries.taglib.Functions</function-class>
+		<function-signature>java.lang.String getProjectVersion(java.lang.String,java.lang.String,java.lang.String,java.lang.String)</function-signature>
+		<example><![CDATA[<code>${ao:getProjectVersion(lib, groupId, artifactId, def)}</code>]]></example>
+	</function>
+	<function>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
 		<!-- dateModified="2020-07-25T13:24:10-05:00" -->
 		<description><![CDATA[
