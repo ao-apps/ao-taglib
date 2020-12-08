@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2020-12-07T03:41:04-06:00"
+		dateModified="2020-12-07T19:47:01-06:00"
 	>
 		<c:if test="${fn:endsWith('@{project.version}', '-SNAPSHOT') and !fn:endsWith('@{project.version}', '-POST-SNAPSHOT')}">
 			<changelog:release
@@ -47,47 +47,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 				artifactId="@{documented.artifactId}"
 				scmUrl="@{project.scm.url}"
 			>
-				<ul>
-					<li>
-						Split development-only classes into a new sub-project in <code>devel/</code>.  This
-						sub-project is used development only and is never deployed to artifact repositories.
-					</li>
-					<li>
-						<p>
-							Reverted a previous change made on 2020-03-01 that was released in version 5.0.0 on 2020-03-27.
-							Encoding of in-context translation lookup markups is required after all.
-						</p>
-						<p>
-							One example is the lookup IDs added inside alt attributes like
-							<code><![CDATA[alt="&amp;lt;##&amp;lt;value&amp;gt;##&amp;gt;"]]></code>.  With this bug, this was
-							incorrectly written as <code><![CDATA[alt="&lt;##&lt;value&gt;##&gt;"]]></code>, which fails
-							XML validation.
-						</p>
-						<p>
-							This bug is unlikely to affect production systems for two reasons:
-						</p>
-						<ol>
-							<li>
-								Lookup markups are only performed when in-context translations are enabled, which is only
-								when in development mode.
-							</li>
-							<li>
-								Most production sites are served in SGML mode, where browsers will handle the incorrect
-								HTML formatting.  XML mode is used in development specifically for this stricter
-								validation.
-							</li>
-						</ol>
-					</li>
-					<li>
-						New function <core:link page="ao.tld/function-isRtl" /> that determines if
-						<ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletResponse.html#getLocale()">the response locale</ao:a>
-						is <ao:a href="../ao-lang/apidocs/com/aoindustries/util/i18n/Locales.html#isRightToLeft(java.util.Locale)">a right-to-left language</ao:a>.
-					</li>
-					<li>
-						New function <core:link page="ao.tld/function-getProjectVersion" /> that gets the version of a
-						Maven project given its groupId and artifactId.
-					</li>
-				</ul>
 				<!-- TODO:
 				<ul>
 					<li>Why aren't tag descriptions in the NetBeans code assist?  They are for JSTL.  Is it the HTML formatting?  Is the element ordering?</li>
@@ -99,6 +58,57 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 				-->
 			</changelog:release>
 		</c:if>
+
+		<changelog:release
+			projectName="@{documented.name}"
+			version="6.1.0"
+			datePublished="2020-12-07T19:47:01-06:00"
+			groupId="@{project.groupId}"
+			artifactId="@{documented.artifactId}"
+			scmUrl="@{project.scm.url}"
+		>
+			<ul>
+				<li>
+					Split development-only classes into a new sub-project in <code>devel/</code>.  This
+					sub-project is used development only and is never deployed to artifact repositories.
+				</li>
+				<li>
+					<p>
+						Reverted a previous change made on 2020-03-01 that was released in version 5.0.0 on 2020-03-27.
+						Encoding of in-context translation lookup markups is required after all.
+					</p>
+					<p>
+						One example is the lookup IDs added inside alt attributes like
+						<code><![CDATA[alt="&amp;lt;##&amp;lt;value&amp;gt;##&amp;gt;"]]></code>.  With this bug, this was
+						incorrectly written as <code><![CDATA[alt="&lt;##&lt;value&gt;##&gt;"]]></code>, which fails
+						XML validation.
+					</p>
+					<p>
+						This bug is unlikely to affect production systems for two reasons:
+					</p>
+					<ol>
+						<li>
+							Lookup markups are only performed when in-context translations are enabled, which is only
+							when in development mode.
+						</li>
+						<li>
+							Most production sites are served in SGML mode, where browsers will handle the incorrect
+							HTML formatting.  XML mode is used in development specifically for this stricter
+							validation.
+						</li>
+					</ol>
+				</li>
+				<li>
+					New function <core:link page="ao.tld/function-isRtl" /> that determines if
+					<ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletResponse.html#getLocale()">the response locale</ao:a>
+					is <ao:a href="../ao-lang/apidocs/com/aoindustries/util/i18n/Locales.html#isRightToLeft(java.util.Locale)">a right-to-left language</ao:a>.
+				</li>
+				<li>
+					New function <core:link page="ao.tld/function-getProjectVersion" /> that gets the version of a
+					Maven project given its groupId and artifactId.
+				</li>
+			</ul>
+		</changelog:release>
 
 		<changelog:release
 			projectName="@{documented.name}"
