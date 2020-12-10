@@ -29,7 +29,7 @@ import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.taglib.AttributeUtils;
 import com.aoindustries.taglib.ReadonlyAttribute;
 import static com.aoindustries.taglib.ReadonlyTag.TAG_NAME;
-import static com.aoindustries.taglib.Resources.RESOURCES;
+import static com.aoindustries.taglib.Resources.PACKAGE_RESOURCES;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -69,7 +69,7 @@ public class ReadonlyTag extends EncodingBufferedBodyTag {
 		if(!value.isEmpty()) {
 			if("true".equalsIgnoreCase(value)) readonlyAttribute.setReadonly(true);
 			else if("false".equalsIgnoreCase(value)) readonlyAttribute.setReadonly(false);
-			else throw new LocalizedJspTagException(RESOURCES, "ReadonlyTag.invalidValue", value);
+			else throw new LocalizedJspTagException(PACKAGE_RESOURCES, "ReadonlyTag.invalidValue", value);
 		}
 /* BodyTag only: */
 		return EVAL_PAGE;

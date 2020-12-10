@@ -28,7 +28,7 @@ import com.aoindustries.html.Attributes;
 import com.aoindustries.lang.Strings;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.servlet.jsp.tagext.JspTagUtils;
-import static com.aoindustries.taglib.Resources.RESOURCES;
+import static com.aoindustries.taglib.Resources.PACKAGE_RESOURCES;
 import com.aoindustries.validation.ValidationResult;
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -221,7 +221,7 @@ public final class AttributeUtils  {
 	public static JspTagException newDynamicAttributeFailedException(String uri, String localName, Object value, List<String> expectedPatterns) {
 		if(expectedPatterns == null || expectedPatterns.isEmpty()) {
 			return new LocalizedJspTagException(
-				RESOURCES,
+				PACKAGE_RESOURCES,
 				"error.unexpectedDynamicAttribute0",
 				localName
 			);
@@ -229,14 +229,14 @@ public final class AttributeUtils  {
 			int size = expectedPatterns.size();
 			if(size == 1) {
 				return new LocalizedJspTagException(
-					RESOURCES,
+					PACKAGE_RESOURCES,
 					"error.unexpectedDynamicAttribute1",
 					localName,
 					expectedPatterns.get(0)
 				);
 			} else if(size == 2) {
 				return new LocalizedJspTagException(
-					RESOURCES,
+					PACKAGE_RESOURCES,
 					"error.unexpectedDynamicAttribute2",
 					localName,
 					expectedPatterns.get(0),
@@ -250,7 +250,7 @@ public final class AttributeUtils  {
 					pre.append('"').append(expectedPatterns.get(i)).append('"');
 				}
 				return new LocalizedJspTagException(
-					RESOURCES,
+					PACKAGE_RESOURCES,
 					"error.unexpectedDynamicAttributeN",
 					localName,
 					pre,

@@ -24,7 +24,7 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.lang.Throwables;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
-import static com.aoindustries.taglib.Resources.RESOURCES;
+import static com.aoindustries.taglib.Resources.PACKAGE_RESOURCES;
 
 /**
  * @author  AO Industries, Inc.
@@ -37,7 +37,7 @@ public class NeedAttributeParentException extends LocalizedJspTagException {
 	private final String attribute;
 
 	public NeedAttributeParentException(String fromTagName, String attribute) {
-		super(RESOURCES, "NeedAttributeParent.message", fromTagName, attribute);
+		super(PACKAGE_RESOURCES, "NeedAttributeParent.message", fromTagName, attribute);
 		this.fromTagName = fromTagName;
 		this.attribute = attribute;
 	}

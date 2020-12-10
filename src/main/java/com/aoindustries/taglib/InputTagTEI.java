@@ -23,7 +23,7 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.lang.Strings;
-import static com.aoindustries.taglib.Resources.RESOURCES;
+import static com.aoindustries.taglib.Resources.PACKAGE_RESOURCES;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashSet;
@@ -81,10 +81,9 @@ public class InputTagTEI extends ElementTagTEI {
 		) {
 			String type = Strings.trimNullIfEmpty((String)typeAttr); // TODO: normalizeType
 			if(type != null && !isValidType(type)) {
-				messages.add(
-					new ValidationMessage(
+				messages.add(new ValidationMessage(
 						data.getId(),
-						RESOURCES.getMessage("InputTag.type.invalid", type)
+						PACKAGE_RESOURCES.getMessage("InputTag.type.invalid", type)
 					)
 				);
 			}

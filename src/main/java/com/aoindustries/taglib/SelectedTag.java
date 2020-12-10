@@ -26,7 +26,7 @@ import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.taglib.EncodingBufferedTag;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
-import static com.aoindustries.taglib.Resources.RESOURCES;
+import static com.aoindustries.taglib.Resources.PACKAGE_RESOURCES;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -66,7 +66,7 @@ public class SelectedTag extends EncodingBufferedTag {
 		if(!value.isEmpty()) {
 			if("true".equalsIgnoreCase(value)) selected.setSelected(true);
 			else if("false".equalsIgnoreCase(value)) selected.setSelected(false);
-			else throw new LocalizedJspTagException(RESOURCES, "SelectedTag.invalidValue", value);
+			else throw new LocalizedJspTagException(PACKAGE_RESOURCES, "SelectedTag.invalidValue", value);
 		}
 /* BodyTag only:
 		return EVAL_PAGE;

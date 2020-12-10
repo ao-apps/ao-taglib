@@ -45,7 +45,7 @@ import com.aoindustries.taglib.OnmouseoverAttribute;
 import com.aoindustries.taglib.ParamUtils;
 import com.aoindustries.taglib.ParamsAttribute;
 import com.aoindustries.taglib.RelAttribute;
-import static com.aoindustries.taglib.Resources.RESOURCES;
+import static com.aoindustries.taglib.Resources.PACKAGE_RESOURCES;
 import com.aoindustries.taglib.TargetAttribute;
 import com.aoindustries.taglib.TitleAttribute;
 import com.aoindustries.taglib.TypeAttribute;
@@ -97,7 +97,7 @@ public class AreaTag extends ElementNullBodyTag
 		shape = shape.trim();
 		if(!AreaTagTEI.isValidShape(shape)) {
 			throw new LocalizedIllegalArgumentException(
-				RESOURCES,
+				PACKAGE_RESOURCES,
 				"AreaTag.shape.invalid",
 				shape
 			);

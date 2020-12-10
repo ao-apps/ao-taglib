@@ -23,7 +23,7 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.lang.LocalizedIllegalArgumentException;
-import static com.aoindustries.taglib.Resources.RESOURCES;
+import static com.aoindustries.taglib.Resources.PACKAGE_RESOURCES;
 import javax.servlet.jsp.PageContext;
 
 /**
@@ -53,7 +53,7 @@ final public class Scope {
 		else if(REQUEST.equals(scope)) return PageContext.REQUEST_SCOPE;
 		else if(SESSION.equals(scope)) return PageContext.SESSION_SCOPE;
 		else if(APPLICATION.equals(scope)) return PageContext.APPLICATION_SCOPE;
-		else throw new LocalizedIllegalArgumentException(RESOURCES, "Scope.scope.invalid", scope);
+		else throw new LocalizedIllegalArgumentException(PACKAGE_RESOURCES, "Scope.scope.invalid", scope);
 	}
 
 	/** Make no instances */

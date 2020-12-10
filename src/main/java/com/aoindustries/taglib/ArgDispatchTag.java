@@ -24,7 +24,7 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.lang.LocalizedIllegalArgumentException;
 import com.aoindustries.servlet.http.Dispatcher;
-import static com.aoindustries.taglib.Resources.RESOURCES;
+import static com.aoindustries.taglib.Resources.PACKAGE_RESOURCES;
 import com.aoindustries.util.WildcardPatternMatcher;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -70,7 +70,7 @@ abstract class ArgDispatchTag extends DispatchTag
 		if(args==null) {
 			args = new LinkedHashMap<>();
 		} else if(args.containsKey(name)) {
-			throw new LocalizedIllegalArgumentException(RESOURCES, "DispatchTag.addArg.duplicateArgument", name);
+			throw new LocalizedIllegalArgumentException(PACKAGE_RESOURCES, "DispatchTag.addArg.duplicateArgument", name);
 		}
 		args.put(name, value);
 	}

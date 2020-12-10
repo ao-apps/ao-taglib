@@ -32,7 +32,7 @@ import com.aoindustries.lang.Strings;
 import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URIParametersMap;
 import com.aoindustries.servlet.lastmodified.AddLastModified;
-import static com.aoindustries.taglib.Resources.RESOURCES;
+import static com.aoindustries.taglib.Resources.PACKAGE_RESOURCES;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
@@ -81,7 +81,7 @@ public class AreaTag extends ElementNullTag
 		shape = shape.trim();
 		if(!AreaTagTEI.isValidShape(shape)) {
 			throw new LocalizedIllegalArgumentException(
-				RESOURCES,
+				PACKAGE_RESOURCES,
 				"AreaTag.shape.invalid",
 				shape
 			);

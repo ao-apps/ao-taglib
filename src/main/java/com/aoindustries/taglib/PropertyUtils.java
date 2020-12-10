@@ -24,7 +24,7 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.lang.Throwables;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
-import static com.aoindustries.taglib.Resources.RESOURCES;
+import static com.aoindustries.taglib.Resources.PACKAGE_RESOURCES;
 import java.lang.reflect.InvocationTargetException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
@@ -84,8 +84,8 @@ public class PropertyUtils {
 			if(bean==null) {
 				if(beanRequired) {
 					// null and required
-					if(scope==null) throw new LocalizedJspTagException(RESOURCES, "PropertyUtils.bean.required.nullScope", name);
-					else throw new LocalizedJspTagException(RESOURCES, "PropertyUtils.bean.required.scope", name, scope);
+					if(scope==null) throw new LocalizedJspTagException(PACKAGE_RESOURCES, "PropertyUtils.bean.required.nullScope", name);
+					else throw new LocalizedJspTagException(PACKAGE_RESOURCES, "PropertyUtils.bean.required.scope", name, scope);
 				} else {
 					// null and not required
 					return null;
@@ -100,8 +100,8 @@ public class PropertyUtils {
 						Object value = org.apache.commons.beanutils.PropertyUtils.getProperty(bean, property);
 						if(valueRequired && value==null) {
 							// null and required
-							if(scope==null) throw new LocalizedJspTagException(RESOURCES, "PropertyUtils.value.required.nullScope", property, name);
-							else throw new LocalizedJspTagException(RESOURCES, "PropertyUtils.value.required.scope", property, name, scope);
+							if(scope==null) throw new LocalizedJspTagException(PACKAGE_RESOURCES, "PropertyUtils.value.required.nullScope", property, name);
+							else throw new LocalizedJspTagException(PACKAGE_RESOURCES, "PropertyUtils.value.required.scope", property, name, scope);
 						}
 						return value;
 					} catch(InvocationTargetException e) {

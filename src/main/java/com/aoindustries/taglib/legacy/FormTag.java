@@ -49,7 +49,7 @@ import com.aoindustries.taglib.MethodAttribute;
 import com.aoindustries.taglib.OnsubmitAttribute;
 import com.aoindustries.taglib.ParamUtils;
 import com.aoindustries.taglib.ParamsAttribute;
-import static com.aoindustries.taglib.Resources.RESOURCES;
+import static com.aoindustries.taglib.Resources.PACKAGE_RESOURCES;
 import com.aoindustries.taglib.TargetAttribute;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
@@ -110,7 +110,7 @@ public class FormTag extends ElementBufferedBodyTag
 	@Override
 	public void setMethod(String method) {
 		method = Strings.trimNullIfEmpty(method);
-		if(method != null && !FormTagTEI.isValidMethod(method)) throw new LocalizedIllegalArgumentException(RESOURCES, "FormTag.method.invalid", method);
+		if(method != null && !FormTagTEI.isValidMethod(method)) throw new LocalizedIllegalArgumentException(PACKAGE_RESOURCES, "FormTag.method.invalid", method);
 		this.method = method;
 	}
 

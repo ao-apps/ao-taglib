@@ -23,7 +23,7 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.lang.Strings;
-import static com.aoindustries.taglib.Resources.RESOURCES;
+import static com.aoindustries.taglib.Resources.PACKAGE_RESOURCES;
 import java.util.List;
 import javax.servlet.jsp.tagext.TagData;
 import javax.servlet.jsp.tagext.ValidationMessage;
@@ -46,45 +46,40 @@ public class AreaTagTEI extends ElementTagTEI {
 		super.validate(data, messages);
 		Object shapeAttr = data.getAttribute("shape");
 		if(shapeAttr == null) {
-			messages.add(
-				new ValidationMessage(
+			messages.add(new ValidationMessage(
 					data.getId(),
-					RESOURCES.getMessage("AttributeRequiredException.message", "shape")
+					PACKAGE_RESOURCES.getMessage("AttributeRequiredException.message", "shape")
 				)
 			);
 		} else if(shapeAttr != TagData.REQUEST_TIME_VALUE) {
 			String shape = ((String)shapeAttr).trim(); // TODO: normalizeShape
 			if(shape.isEmpty()) {
-				messages.add(
-					new ValidationMessage(
+				messages.add(new ValidationMessage(
 						data.getId(),
-						RESOURCES.getMessage("AttributeRequiredException.message", "shape")
+						PACKAGE_RESOURCES.getMessage("AttributeRequiredException.message", "shape")
 					)
 				);
 			} else {
 				if(!isValidShape(shape)) {
-					messages.add(
-						new ValidationMessage(
+					messages.add(new ValidationMessage(
 							data.getId(),
-							RESOURCES.getMessage("AreaTag.shape.invalid", shape)
+							PACKAGE_RESOURCES.getMessage("AreaTag.shape.invalid", shape)
 						)
 					);
 				} else if(!"default".equals(shape)) {
 					Object coordsAttr = data.getAttribute("coords");
 					if(coordsAttr == null) {
-						messages.add(
-							new ValidationMessage(
+						messages.add(new ValidationMessage(
 								data.getId(),
-								RESOURCES.getMessage("AttributeRequiredException.message", "coords")
+								PACKAGE_RESOURCES.getMessage("AttributeRequiredException.message", "coords")
 							)
 						);
 					} else if(coordsAttr != TagData.REQUEST_TIME_VALUE) {
 						String coords = Strings.trimNullIfEmpty((String)coordsAttr); // TODO: normalizeCoords
 						if(coords == null) {
-							messages.add(
-								new ValidationMessage(
+							messages.add(new ValidationMessage(
 									data.getId(),
-									RESOURCES.getMessage("AttributeRequiredException.message", "coords")
+									PACKAGE_RESOURCES.getMessage("AttributeRequiredException.message", "coords")
 								)
 							);
 						}

@@ -26,7 +26,7 @@ import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.taglib.EncodingBufferedTag;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
-import static com.aoindustries.taglib.Resources.RESOURCES;
+import static com.aoindustries.taglib.Resources.PACKAGE_RESOURCES;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -66,7 +66,7 @@ public class ReadonlyTag extends EncodingBufferedTag {
 		if(!value.isEmpty()) {
 			if("true".equalsIgnoreCase(value)) readonlyAttribute.setReadonly(true);
 			else if("false".equalsIgnoreCase(value)) readonlyAttribute.setReadonly(false);
-			else throw new LocalizedJspTagException(RESOURCES, "ReadonlyTag.invalidValue", value);
+			else throw new LocalizedJspTagException(PACKAGE_RESOURCES, "ReadonlyTag.invalidValue", value);
 		}
 /* BodyTag only:
 		return EVAL_PAGE;

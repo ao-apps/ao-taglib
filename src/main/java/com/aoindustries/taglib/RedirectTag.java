@@ -28,7 +28,7 @@ import com.aoindustries.servlet.ServletUtil;
 import com.aoindustries.servlet.http.Includer;
 import com.aoindustries.servlet.lastmodified.AddLastModified;
 import com.aoindustries.servlet.lastmodified.LastModifiedUtil;
-import static com.aoindustries.taglib.Resources.RESOURCES;
+import static com.aoindustries.taglib.Resources.PACKAGE_RESOURCES;
 import com.aoindustries.util.WildcardPatternMatcher;
 import java.io.IOException;
 import java.util.Locale;
@@ -87,7 +87,7 @@ public class RedirectTag extends DispatchTag
 
 	public void setStatusCode(String statusCode) {
 		statusCode = statusCode.trim();
-		if(!isValidStatusCode(statusCode)) throw new LocalizedIllegalArgumentException(RESOURCES, "RedirectTag.statusCode.invalid", statusCode);
+		if(!isValidStatusCode(statusCode)) throw new LocalizedIllegalArgumentException(PACKAGE_RESOURCES, "RedirectTag.statusCode.invalid", statusCode);
 		this.statusCode = statusCode;
 	}
 
@@ -175,8 +175,7 @@ public class RedirectTag extends DispatchTag
 			if(isTooLong) {
 				// Warn about location too long
 				if(logger.isLoggable(Level.WARNING)) {
-					logger.warning(
-						RESOURCES.getMessage(
+					logger.warning(PACKAGE_RESOURCES.getMessage(
 							"RedirectTag.locationTooLongWarning",
 							MAXIMUM_GET_REQUEST_LENGTH,
 							location.length(),

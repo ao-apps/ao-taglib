@@ -29,7 +29,7 @@ import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.taglib.AttributeUtils;
 import com.aoindustries.taglib.FrameborderAttribute;
 import static com.aoindustries.taglib.FrameborderTag.TAG_NAME;
-import static com.aoindustries.taglib.Resources.RESOURCES;
+import static com.aoindustries.taglib.Resources.PACKAGE_RESOURCES;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -69,7 +69,7 @@ public class FrameborderTag extends EncodingBufferedBodyTag {
 		if(!value.isEmpty()) {
 			if("true".equalsIgnoreCase(value)) frameborderAttribute.setFrameborder(true);
 			else if("false".equalsIgnoreCase(value)) frameborderAttribute.setFrameborder(false);
-			else throw new LocalizedJspTagException(RESOURCES, "FrameborderTag.invalidValue", value);
+			else throw new LocalizedJspTagException(PACKAGE_RESOURCES, "FrameborderTag.invalidValue", value);
 		}
 /* BodyTag only: */
 		return EVAL_PAGE;

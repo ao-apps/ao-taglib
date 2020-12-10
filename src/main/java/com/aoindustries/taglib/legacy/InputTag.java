@@ -53,7 +53,7 @@ import com.aoindustries.taglib.OnkeypressAttribute;
 import com.aoindustries.taglib.ParamUtils;
 import com.aoindustries.taglib.ParamsAttribute;
 import com.aoindustries.taglib.ReadonlyAttribute;
-import static com.aoindustries.taglib.Resources.RESOURCES;
+import static com.aoindustries.taglib.Resources.PACKAGE_RESOURCES;
 import com.aoindustries.taglib.SizeAttribute;
 import com.aoindustries.taglib.SrcAttribute;
 import com.aoindustries.taglib.TabindexAttribute;
@@ -221,7 +221,7 @@ public class InputTag extends ElementBufferedBodyTag
 	@Override
 	public void setType(String type) {
 		String typeStr = Strings.trimNullIfEmpty(type);
-		if(typeStr != null && !InputTagTEI.isValidType(typeStr)) throw new LocalizedIllegalArgumentException(RESOURCES, "InputTag.type.invalid", typeStr);
+		if(typeStr != null && !InputTagTEI.isValidType(typeStr)) throw new LocalizedIllegalArgumentException(PACKAGE_RESOURCES, "InputTag.type.invalid", typeStr);
 		this.type = typeStr;
 	}
 

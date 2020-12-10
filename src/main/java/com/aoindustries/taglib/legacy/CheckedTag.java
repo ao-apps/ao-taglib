@@ -29,7 +29,7 @@ import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.taglib.AttributeUtils;
 import com.aoindustries.taglib.CheckedAttribute;
 import static com.aoindustries.taglib.CheckedTag.TAG_NAME;
-import static com.aoindustries.taglib.Resources.RESOURCES;
+import static com.aoindustries.taglib.Resources.PACKAGE_RESOURCES;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -69,7 +69,7 @@ public class CheckedTag extends EncodingBufferedBodyTag {
 		if(!value.isEmpty()) {
 			if("true".equalsIgnoreCase(value)) checkedAttribute.setChecked(true);
 			else if("false".equalsIgnoreCase(value)) checkedAttribute.setChecked(false);
-			else throw new LocalizedJspTagException(RESOURCES, "CheckedTag.invalidValue", value);
+			else throw new LocalizedJspTagException(PACKAGE_RESOURCES, "CheckedTag.invalidValue", value);
 		}
 /* BodyTag only: */
 		return EVAL_PAGE;
