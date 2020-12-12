@@ -258,6 +258,7 @@ public class HtmlTag extends ElementFilteredTag {
 	 * value may be removed.
 	 */
 	// Java 9: module-private
+	// Matches nmw-email-taglib:ContentTag.java
 	public static final String STRUTS_XHTML_KEY = "org.apache.struts.globals.XHTML";
 
 	public static void beginHtmlTag(Locale locale, Appendable out, Serialization serialization, GlobalAttributes global) throws IOException {
