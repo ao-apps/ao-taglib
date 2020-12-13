@@ -1015,7 +1015,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 					<li>When "markup", both lookup tracking and full markup are performed.</li>
 				</ol>
 			]]></description>
-			<name>scope</name>
+			<name>mode</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>

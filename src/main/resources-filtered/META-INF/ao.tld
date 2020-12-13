@@ -1015,7 +1015,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 					<li>When "markup", both lookup tracking and full markup are performed.</li>
 				</ol>
 			]]></description>
-			<name>scope</name>
+			<name>mode</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
