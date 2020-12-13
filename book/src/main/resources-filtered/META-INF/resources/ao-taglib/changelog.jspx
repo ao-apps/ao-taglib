@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2020-12-12T18:34:37-06:00"
+		dateModified="2020-12-12T22:36:12-06:00"
 	>
 		<c:if test="${fn:endsWith('@{project.version}', '-SNAPSHOT') and !fn:endsWith('@{project.version}', '-POST-SNAPSHOT')}">
 			<changelog:release
@@ -49,6 +49,18 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 			>
 				<ul>
 					<li>Updated dependencies.</li>
+					<li><core:link page="ao.tld/tag-disableResourceEditor" /> improvements:
+						<ol>
+							<li>
+								New "scope" attribute that allows the in-context translator to be disabled only in the
+								tag body.
+							</li>
+							<li>
+								New "mode" attribute that provides the new mode used when disabling the in-context
+								translator.
+							</li>
+						</ol>
+					</li>
 				</ul>
 				<!-- TODO:
 				<ul>

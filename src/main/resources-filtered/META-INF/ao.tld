@@ -966,7 +966,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2016-11-08T00:26:39-0600" -->
+		<!-- dateModified="2020-12-12T22:36:12-06:00" -->
 		<description><![CDATA[
 			<p>
 				Disables the resource editor for this request.
@@ -974,7 +974,52 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 		]]></description>
 		<name>disableResourceEditor</name>
 		<tag-class>com.aoindustries.taglib.DisableResourceEditorTag</tag-class>
-		<body-content>empty</body-content>
+		<tei-class>com.aoindustries.taglib.DisableResourceEditorTagTEI</tei-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					Specifies the scope over which the in-context resource editor is disabled.
+					Defaults to "auto".
+				</p>
+				<ol>
+					<li>
+						When "auto" (the default), will be "body" when has tag body or "request" when there is no tag
+						body.  This provides compatibility with previous releases that did not support body and always
+						disabled for the entire request.
+					</li>
+					<li>
+						When "body", the resource editor is only disabled in the tag body.  The original settings, if
+						any, are restored.
+					</li>
+					<li>
+						When "request", the resource editor is left disabled.  The original settings are not restored.
+					</li>
+				</ol>
+			]]></description>
+			<name>scope</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					The mode to use when disabling the in-context resource editor.
+					Defaults to "disabled".
+				</p>
+				<ol>
+					<li>When "disabled" (the default), the editor is completely disabled, no lookup tracking and no markup.</li>
+					<li>When "lookup", lookup tracking is still performed, but no markup is performed.</li>
+					<li>When "noscript", both lookup tracking and markup are performed, but without any scripts.</li>
+					<li>When "markup", both lookup tracking and full markup are performed.</li>
+				</ol>
+			]]></description>
+			<name>scope</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->

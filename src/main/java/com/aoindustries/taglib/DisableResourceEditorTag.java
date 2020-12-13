@@ -22,28 +22,121 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.MediaType;
-import com.aoindustries.encoding.taglib.EncodingNullTag;
+import com.aoindustries.i18n.Resources;
+import com.aoindustries.lang.LocalizedIllegalArgumentException;
+import com.aoindustries.lang.Strings;
 import com.aoindustries.util.i18n.EditableResourceBundle;
-import java.io.IOException;
-import java.io.Writer;
+import java.util.Locale;
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.tagext.TagSupport;
+import javax.servlet.jsp.tagext.TryCatchFinally;
 
 /**
  * Disables the resource editor.
  */
-public class DisableResourceEditorTag extends EncodingNullTag {
+public class DisableResourceEditorTag extends TagSupport implements TryCatchFinally {
+
+	static final Resources RESOURCES = Resources.getResources(DisableResourceEditorTag.class);
 
 	/**
-	 * No output.
+	 * Scope used for automatic determination.
 	 */
-	@Override
-	public MediaType getOutputType() {
-		return null;
+	private static final String AUTO = "auto";
+
+	/**
+	 * Scope used for body content.
+	 */
+	private static final String BODY = "body";
+
+	public static boolean isValidScope(String scope) {
+		scope = Strings.trimNullIfEmpty(scope);
+		return
+			scope == null
+			|| scope.equalsIgnoreCase(AUTO)
+			|| scope.equalsIgnoreCase(BODY)
+			|| scope.equalsIgnoreCase(Scope.REQUEST);
+	}
+
+	public DisableResourceEditorTag() {
+		init();
+	}
+
+	private static final long serialVersionUID = 1L;
+
+	private String scope;
+	public void setScope(String scope) {
+		scope = Strings.trimNullIfEmpty(scope);
+		if(scope == null || scope.equalsIgnoreCase(AUTO)) {
+			this.scope = null;
+		} else if(scope.equalsIgnoreCase(BODY)) {
+			this.scope = BODY;
+		} else if(scope.equalsIgnoreCase(Scope.REQUEST)) {
+			this.scope = Scope.REQUEST;
+		} else {
+			throw new LocalizedIllegalArgumentException(RESOURCES, "scope.invalid", scope);
+		}
+	}
+
+	private EditableResourceBundle.ThreadSettings.Mode mode;
+	public void setMode(String mode) {
+		mode = Strings.trimNullIfEmpty(mode);
+		this.mode = (mode == null)
+			? EditableResourceBundle.ThreadSettings.Mode.DISABLED
+			: EditableResourceBundle.ThreadSettings.Mode.valueOf(mode.toUpperCase(Locale.ROOT));
+	}
+
+	private transient EditableResourceBundle.ThreadSettings oldThreadSettings;
+	private transient boolean hasBody;
+
+	private void init() {
+		scope = null;
+		mode = EditableResourceBundle.ThreadSettings.Mode.DISABLED;
+		oldThreadSettings = null;
+		hasBody = false;
 	}
 
 	@Override
-	protected void doTag(Writer out) throws JspException, IOException {
-		EditableResourceBundle.removeThreadSettings();
+	public int doStartTag() throws JspException {
+		oldThreadSettings = EditableResourceBundle.getThreadSettings();
+		if(oldThreadSettings != null) {
+			EditableResourceBundle.ThreadSettings newThreadSettings = oldThreadSettings.setMode(mode);
+			if(newThreadSettings != oldThreadSettings) {
+				EditableResourceBundle.setThreadSettings(newThreadSettings);
+			} else {
+				// Unchanged
+				oldThreadSettings = null;
+			}
+		}
+		return EVAL_BODY_INCLUDE;
+	}
+
+	@Override
+	public int doAfterBody() throws JspException {
+		hasBody = true;
+		return SKIP_BODY;
+	}
+
+	@Override
+	public void doCatch(Throwable t) throws Throwable {
+		throw t;
+	}
+
+	@Override
+	@SuppressWarnings("StringEquality") // Exact string instances are used in setScope
+	public void doFinally() {
+		try {
+			if(
+				oldThreadSettings != null
+				&& (
+					(scope == null && hasBody) // Auto mode, with body
+					|| scope == BODY // Body mode
+				)
+			) {
+				// Restore old settings
+				EditableResourceBundle.setThreadSettings(oldThreadSettings);
+			}
+		} finally {
+			init();
+		}
 	}
 }
