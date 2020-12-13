@@ -32,6 +32,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 <!ENTITY package "com.aoindustries.taglib.legacy">
 <!ENTITY JSP "JSP">
 <!ENTITY aoEncodingTld "ao-encoding-legacy.tld">
+<!ENTITY nmwEmailTld "nmw-email-legacy.tld">
 
 <!-- <common> -->
 <!ENTITY IdAttribute_description "The &lt;a href=&quot;https://www.w3schools.com/tags/att_global_id.asp&quot;&gt;id of the element&lt;/a&gt;.">
@@ -161,7 +162,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
 	version="2.1">
 	<!-- datePublished="2016-08-07T16:29:54-0500" -->
-	<!-- dateModified="2020-11-21T02:21:23-06:00" -->
+	<!-- dateModified="2020-12-13T08:01:13-06:00" -->
 <!-- </common> -->
 	<!-- allowRobots="false" -->
 <!-- <common> -->
@@ -169,6 +170,27 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 		<p>@{description.html}</p>
 		<p>]]>&tld_description;<![CDATA[</p>
 		<p>Both implementations are interoperable and may be used simultaneously under different prefixes.</p>
+		<hr />
+		<p>
+			This taglib is part of an extensible suite of interoperable, context-aware,
+			<a href="https://aoindustries.com/ao-encoding/">auto-encoding</a> taglibs.
+			All auto-encoding tags generate correct output for their context, provide context information for nested
+			tags, and validate the output of nested tags.  For example,
+			<a href="@{project.url}]]>&tld;<![CDATA[/tag-message">&lt;ao:message&gt;</a> within
+			<a href="https://aoindustries.com/ao-encoding/taglib/]]>&aoEncodingTld;<![CDATA[/tag-psql">&lt;encoding:psql&gt;</a> will write its output
+			encoded as <a href="https://aoindustries.com/ao-encoding/apidocs/com/aoindustries/encoding/MediaType.html#PSQL">PSQL</a>.
+		</p>
+		<p>
+			This suite includes, but is not limited to:
+		</p>
+		<ul>
+			<li><a href="https://aoindustries.com/ao-encoding/taglib/]]>&aoEncodingTld;<![CDATA[/">AO Encoding Taglib</a></li>
+			<li><a href="@{project.url}]]>&tld;<![CDATA[/">AO Taglib</a> (this taglib)</li>
+			<li><a href="https://aoindustries.com/aoweb-struts/core/aoweb-struts-skin.tld/">AOWeb Struts Core Skin Taglib</a></li>
+			<li><a href="https://oss.newmediaworks.com/email-taglib/]]>&nmwEmailTld;<![CDATA[/">NMW Email Taglib</a></li>
+			<!-- TODO: nmw-payment-taglib -->
+			<!-- TODO: nmw-persistence-taglib once open-source, and many others -->
+		</ul>
 	]]></description>
 	<display-name>&tld_displayName;</display-name>
 	<tlib-version>
