@@ -151,7 +151,7 @@ public class WriteTag extends EncodingNullBodyTag
 					if(
 						markupType == null
 						|| markupType == MarkupType.NONE
-						|| (threadContext = BundleLookupThreadContext.getThreadContext(false)) == null
+						|| (threadContext = BundleLookupThreadContext.getThreadContext()) == null
 						// Avoid intermediate String from Writable
 						|| (
 							bean instanceof Writable
@@ -178,7 +178,7 @@ public class WriteTag extends EncodingNullBodyTag
 							retVal == null
 							|| markupType == null
 							|| markupType == MarkupType.NONE
-							|| (threadContext = BundleLookupThreadContext.getThreadContext(false)) == null
+							|| (threadContext = BundleLookupThreadContext.getThreadContext()) == null
 							// Avoid intermediate String from Writable
 							|| (
 								retVal instanceof Writable

@@ -204,7 +204,7 @@ public class MessageTag extends EncodingNullTag
 			lookupResult = resources.getMessage(combinedKey, messageArgs.toArray());
 		}
 		// Look for any message markup
-		BundleLookupThreadContext threadContext = BundleLookupThreadContext.getThreadContext(false);
+		BundleLookupThreadContext threadContext = BundleLookupThreadContext.getThreadContext();
 		if(threadContext!=null) {
 			lookupMarkup = threadContext.getLookupMarkup(lookupResult);
 		}

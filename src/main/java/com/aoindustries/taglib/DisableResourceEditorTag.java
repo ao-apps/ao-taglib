@@ -44,6 +44,6 @@ public class DisableResourceEditorTag extends EncodingNullTag {
 
 	@Override
 	protected void doTag(Writer out) throws JspException, IOException {
-		EditableResourceBundle.resetRequest(false, null, false);
+		EditableResourceBundle.removeThreadSettings();
 	}
 }

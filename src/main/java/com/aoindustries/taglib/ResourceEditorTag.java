@@ -23,13 +23,17 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
+import com.aoindustries.encoding.Serialization;
 import com.aoindustries.encoding.TextInJavaScriptEncoder;
 import com.aoindustries.encoding.TextInXhtmlEncoder;
+import com.aoindustries.encoding.servlet.SerializationEE;
 import com.aoindustries.encoding.taglib.EncodingNullTag;
 import com.aoindustries.util.i18n.EditableResourceBundle;
 import java.io.IOException;
 import java.io.Writer;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.PageContext;
 
 /**
  * Allows editing of the website resource bundles through the website itself.
@@ -51,11 +55,16 @@ public class ResourceEditorTag extends EncodingNullTag {
 
 	@Override
 	protected void doTag(Writer out) throws JspException, IOException {
+		PageContext pageContext = (PageContext)getJspContext();
 		out.write("<div style=\"font-size:smaller\">");
 		EditableResourceBundle.printEditableResourceBundleLookups(
 			TextInJavaScriptEncoder.textInJavaScriptEncoder,
 			TextInXhtmlEncoder.textInXhtmlEncoder,
 			out,
+			SerializationEE.get(
+				pageContext.getServletContext(),
+				(HttpServletRequest)pageContext.getRequest()
+			) == Serialization.XML,
 			3,
 			false
 		);
