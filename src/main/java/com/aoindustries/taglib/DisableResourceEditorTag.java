@@ -98,14 +98,12 @@ public class DisableResourceEditorTag extends TagSupport implements TryCatchFina
 	@Override
 	public int doStartTag() throws JspException {
 		oldThreadSettings = EditableResourceBundle.getThreadSettings();
-		if(oldThreadSettings != null) {
-			EditableResourceBundle.ThreadSettings newThreadSettings = oldThreadSettings.setMode(mode);
-			if(newThreadSettings != oldThreadSettings) {
-				EditableResourceBundle.setThreadSettings(newThreadSettings);
-			} else {
-				// Unchanged
-				oldThreadSettings = null;
-			}
+		EditableResourceBundle.ThreadSettings newThreadSettings = oldThreadSettings.setMode(mode);
+		if(newThreadSettings != oldThreadSettings) {
+			EditableResourceBundle.setThreadSettings(newThreadSettings);
+		} else {
+			// Unchanged
+			oldThreadSettings = null;
 		}
 		return EVAL_BODY_INCLUDE;
 	}
