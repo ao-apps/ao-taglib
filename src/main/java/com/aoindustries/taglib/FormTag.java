@@ -30,6 +30,7 @@ import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextIn
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.html.Html;
 import com.aoindustries.html.servlet.HtmlEE;
+import com.aoindustries.i18n.Resources;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.lang.LocalizedIllegalArgumentException;
 import com.aoindustries.lang.Strings;
@@ -40,7 +41,6 @@ import com.aoindustries.net.URIParametersMap;
 import com.aoindustries.net.URIParametersUtils;
 import com.aoindustries.net.URIResolver;
 import com.aoindustries.servlet.http.Dispatcher;
-import static com.aoindustries.taglib.Resources.PACKAGE_RESOURCES;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
@@ -66,6 +66,10 @@ public class FormTag extends ElementBufferedTag
 		// Events
 		OnsubmitAttribute
 {
+
+/* SimpleTag only: */
+	public static final Resources RESOURCES = Resources.getResources(FormTag.class);
+/**/
 
 	public FormTag() {
 		init();
@@ -101,7 +105,7 @@ public class FormTag extends ElementBufferedTag
 	@Override
 	public void setMethod(String method) {
 		method = Strings.trimNullIfEmpty(method);
-		if(method != null && !FormTagTEI.isValidMethod(method)) throw new LocalizedIllegalArgumentException(PACKAGE_RESOURCES, "FormTag.method.invalid", method);
+		if(method != null && !FormTagTEI.isValidMethod(method)) throw new LocalizedIllegalArgumentException(RESOURCES, "method.invalid", method);
 		this.method = method;
 	}
 

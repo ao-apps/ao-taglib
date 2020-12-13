@@ -22,7 +22,6 @@
  */
 package com.aoindustries.taglib;
 
-import static com.aoindustries.taglib.Resources.PACKAGE_RESOURCES;
 import javax.servlet.jsp.tagext.TagData;
 import javax.servlet.jsp.tagext.TagExtraInfo;
 import javax.servlet.jsp.tagext.ValidationMessage;
@@ -42,7 +41,7 @@ public class RedirectTagTEI extends TagExtraInfo {
 			String statusCode = ((String)o).trim(); // TODO: normalizeStatusCode
 			if(!RedirectTag.isValidStatusCode(statusCode)) {
 				return new ValidationMessage[] {
-					new ValidationMessage(data.getId(), PACKAGE_RESOURCES.getMessage("RedirectTag.statusCode.invalid", statusCode))
+					new ValidationMessage(data.getId(), RedirectTag.RESOURCES.getMessage("statusCode.invalid", statusCode))
 				};
 			}
 		}

@@ -24,8 +24,8 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.taglib.EncodingNullTag;
+import com.aoindustries.i18n.Resources;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
-import static com.aoindustries.taglib.Resources.PACKAGE_RESOURCES;
 import com.aoindustries.util.ErrorPrinter;
 import java.io.IOException;
 import java.io.Writer;
@@ -36,6 +36,8 @@ import javax.servlet.jsp.PageContext;
  * @author  AO Industries, Inc.
  */
 public class GetStackTracesTag extends EncodingNullTag {
+
+	private static final Resources RESOURCES = Resources.getResources(GetStackTracesTag.class);
 
 	private String scope;
 	private String name;
@@ -63,7 +65,7 @@ public class GetStackTracesTag extends EncodingNullTag {
 		PageContext pageContext = (PageContext)getJspContext();
 		// Find the Throwable to display
 		Object value = PropertyUtils.findObject(pageContext, scope, name, property, true, true);
-		if(!(value instanceof Throwable)) throw new LocalizedJspTagException(PACKAGE_RESOURCES, "GetStackTracesTag.notThrowable", (value == null) ? null : value.getClass().getName());
+		if(!(value instanceof Throwable)) throw new LocalizedJspTagException(RESOURCES, "notThrowable", (value == null) ? null : value.getClass().getName());
 		Throwable throwable = (Throwable)value;
 
 		// Print the stack traces

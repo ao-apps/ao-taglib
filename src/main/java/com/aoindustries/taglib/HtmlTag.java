@@ -29,6 +29,7 @@ import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextIn
 import com.aoindustries.encoding.servlet.DoctypeEE;
 import com.aoindustries.encoding.servlet.SerializationEE;
 import com.aoindustries.html.Html;
+import com.aoindustries.i18n.Resources;
 import com.aoindustries.servlet.ServletUtil;
 import com.aoindustries.web.resources.registry.Registry;
 import com.aoindustries.web.resources.servlet.RegistryEE;
@@ -71,8 +72,12 @@ import javax.servlet.jsp.PageContext;
  */
 public class HtmlTag extends ElementFilteredTag {
 
+/* SimpleTag only: */
+	public static final Resources RESOURCES = Resources.getResources(HtmlTag.class);
+/**/
+
 /* BodyTag only:
-	public HtmlBodyTag() {
+	public HtmlTag() {
 		init();
 	}
 /**/

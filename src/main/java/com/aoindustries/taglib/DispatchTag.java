@@ -23,6 +23,7 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.collections.AoCollections;
+import com.aoindustries.i18n.Resources;
 import com.aoindustries.io.NullWriter;
 import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URIParameters;
@@ -30,7 +31,6 @@ import com.aoindustries.net.URIParametersMap;
 import com.aoindustries.net.URIResolver;
 import com.aoindustries.servlet.http.Dispatcher;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
-import static com.aoindustries.taglib.Resources.PACKAGE_RESOURCES;
 import com.aoindustries.util.WildcardPatternMatcher;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -64,6 +64,8 @@ abstract public class DispatchTag extends SimpleTagSupport
 		PageAttribute,
 		ParamsAttribute
 {
+
+	private static final Resources RESOURCES = Resources.getResources(DispatchTag.class);
 
 	/**
 	 * Tracks if the request has been forwarded.
@@ -270,7 +272,7 @@ abstract public class DispatchTag extends SimpleTagSupport
 					);
 					// Find dispatcher
 					dispatcher = pageContext.getServletContext().getRequestDispatcher(contextRelativePath);
-					if(dispatcher==null) throw new LocalizedJspTagException(PACKAGE_RESOURCES, "DispatchTag.dispatcherNotFound", contextRelativePath);
+					if(dispatcher == null) throw new LocalizedJspTagException(RESOURCES, "dispatcherNotFound", contextRelativePath);
 				}
 
 				// Call any subclass hook to handle the request before being dispatched.  If the request should not

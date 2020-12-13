@@ -73,6 +73,10 @@ import javax.servlet.jsp.PageContext;
  */
 public class HtmlTag extends ElementFilteredBodyTag {
 
+/* SimpleTag only:
+	public static final Resources RESOURCES = Resources.getResources(HtmlTag.class);
+/**/
+
 /* BodyTag only: */
 	public HtmlTag() {
 		init();

@@ -36,7 +36,6 @@ import com.aoindustries.servlet.http.HttpServletUtil;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.servlet.lastmodified.AddLastModified;
 import com.aoindustries.servlet.lastmodified.LastModifiedServlet;
-import static com.aoindustries.taglib.Resources.PACKAGE_RESOURCES;
 import com.aoindustries.util.Tuple2;
 import com.aoindustries.util.i18n.Locales;
 import java.io.IOException;
@@ -256,7 +255,9 @@ final public class Functions {
 	public static String message(String key) throws JspTagException {
 		NullArgumentException.checkNotNull(key, "key");
 		BundleTag bundleTag = BundleTag.getBundleTag(getRequest());
-		if(bundleTag==null) throw new LocalizedJspTagException(PACKAGE_RESOURCES, "error.requiredParentTagNotFound", "bundle");
+		if(bundleTag == null) {
+			throw new LocalizedJspTagException(MessageTag.RESOURCES, "requiredParentTagNotFound", "bundle");
+		}
 		String prefix = bundleTag.getPrefix();
 		return bundleTag.getResources().getMessage(
 			prefix==null || prefix.isEmpty() ? key : prefix.concat(key)

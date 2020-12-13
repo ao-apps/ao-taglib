@@ -24,7 +24,6 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.Doctype;
 import com.aoindustries.encoding.Serialization;
-import static com.aoindustries.taglib.Resources.PACKAGE_RESOURCES;
 import java.util.List;
 import java.util.Locale;
 import javax.servlet.jsp.tagext.TagData;
@@ -48,9 +47,10 @@ public class HtmlTagTEI extends ElementTagTEI {
 				try {
 					Serialization.valueOf(serialization.toUpperCase(Locale.ROOT));
 				} catch(IllegalArgumentException e) {
-					messages.add(new ValidationMessage(
+					messages.add(
+						new ValidationMessage(
 							data.getId(),
-							PACKAGE_RESOURCES.getMessage("HtmlTag.serialization.invalid", serialization)
+							HtmlTag.RESOURCES.getMessage("serialization.invalid", serialization)
 						)
 					);
 				}
@@ -66,9 +66,10 @@ public class HtmlTagTEI extends ElementTagTEI {
 				try {
 					Doctype.valueOf(doctype.toUpperCase(Locale.ROOT));
 				} catch(IllegalArgumentException e) {
-					messages.add(new ValidationMessage(
+					messages.add(
+						new ValidationMessage(
 							data.getId(),
-							PACKAGE_RESOURCES.getMessage("HtmlTag.doctype.invalid", doctype)
+							HtmlTag.RESOURCES.getMessage("doctype.invalid", doctype)
 						)
 					);
 				}

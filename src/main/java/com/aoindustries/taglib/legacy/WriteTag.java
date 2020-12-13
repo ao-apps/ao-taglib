@@ -32,8 +32,8 @@ import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.taglib.AttributeRequiredException;
 import com.aoindustries.taglib.NameAttribute;
 import com.aoindustries.taglib.PropertyUtils;
-import static com.aoindustries.taglib.Resources.PACKAGE_RESOURCES;
 import com.aoindustries.taglib.TypeAttribute;
+import static com.aoindustries.taglib.WriteTag.RESOURCES;
 import com.aoindustries.util.i18n.BundleLookupMarkup;
 import com.aoindustries.util.i18n.BundleLookupThreadContext;
 import com.aoindustries.util.i18n.MarkupType;
@@ -55,6 +55,10 @@ public class WriteTag extends EncodingNullBodyTag
 		NameAttribute,
 		TypeAttribute
 {
+
+/* SimpleTag only:
+	public static final Resources RESOURCES = Resources.getResources(WriteTag.class);
+/**/
 
 	public WriteTag() {
 		init();
@@ -197,7 +201,7 @@ public class WriteTag extends EncodingNullBodyTag
 							if(lookupMarkup != null) lookupMarkup.appendPrefixTo(markupType, out);
 						}
 					} catch(NoSuchMethodException err) {
-						throw new LocalizedJspTagException(PACKAGE_RESOURCES, "WriteTag.unableToFindMethod", method);
+						throw new LocalizedJspTagException(RESOURCES, "unableToFindMethod", method);
 					} catch(InvocationTargetException e) {
 						// Unwrap cause for more direct stack traces
 						Throwable cause = e.getCause();

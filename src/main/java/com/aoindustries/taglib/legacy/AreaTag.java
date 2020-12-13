@@ -33,6 +33,7 @@ import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URIParametersMap;
 import com.aoindustries.servlet.lastmodified.AddLastModified;
 import com.aoindustries.taglib.AltAttribute;
+import static com.aoindustries.taglib.AreaTag.RESOURCES;
 import com.aoindustries.taglib.AreaTagTEI;
 import com.aoindustries.taglib.AttributeRequiredException;
 import com.aoindustries.taglib.AttributeUtils;
@@ -45,7 +46,6 @@ import com.aoindustries.taglib.OnmouseoverAttribute;
 import com.aoindustries.taglib.ParamUtils;
 import com.aoindustries.taglib.ParamsAttribute;
 import com.aoindustries.taglib.RelAttribute;
-import static com.aoindustries.taglib.Resources.PACKAGE_RESOURCES;
 import com.aoindustries.taglib.TargetAttribute;
 import com.aoindustries.taglib.TitleAttribute;
 import com.aoindustries.taglib.TypeAttribute;
@@ -79,6 +79,10 @@ public class AreaTag extends ElementNullBodyTag
 		OnmouseoutAttribute
 {
 
+/* SimpleTag only:
+	public static final Resources RESOURCES = Resources.getResources(AreaTag.class);
+/**/
+
 	public AreaTag() {
 		init();
 	}
@@ -96,11 +100,7 @@ public class AreaTag extends ElementNullBodyTag
 	public void setShape(String shape) {
 		shape = shape.trim();
 		if(!AreaTagTEI.isValidShape(shape)) {
-			throw new LocalizedIllegalArgumentException(
-				PACKAGE_RESOURCES,
-				"AreaTag.shape.invalid",
-				shape
-			);
+			throw new LocalizedIllegalArgumentException(RESOURCES, "shape.invalid", shape);
 		}
 		this.shape = shape;
 	}

@@ -31,8 +31,8 @@ import com.aoindustries.taglib.AttributeUtils;
 import com.aoindustries.taglib.NameAttribute;
 import com.aoindustries.taglib.ParamUtils;
 import com.aoindustries.taglib.ParamsAttribute;
+import static com.aoindustries.taglib.ParamsTag.RESOURCES;
 import static com.aoindustries.taglib.ParamsTag.TAG_NAME;
-import static com.aoindustries.taglib.Resources.PACKAGE_RESOURCES;
 import com.aoindustries.util.WildcardPatternMatcher;
 import java.io.IOException;
 import java.io.Writer;
@@ -51,6 +51,8 @@ public class ParamsTag extends EncodingNullBodyTag
 {
 
 /* SimpleTag only:
+	public static final Resources RESOURCES = Resources.getResources(ParamsTag.class);
+
 	public static final String TAG_NAME = "<ao:params>";
 /**/
 
@@ -157,12 +159,12 @@ public class ParamsTag extends EncodingNullBodyTag
 						}
 					}
 				} else {
-					throw new LocalizedJspTagException(PACKAGE_RESOURCES, "ParamsTag.mapRequiredWithName");
+					throw new LocalizedJspTagException(RESOURCES, "mapRequiredWithName");
 				}
 			} else {
 				// Exclude not allowed
 				if(!excludeMatcher.isEmpty()) {
-					throw new LocalizedJspTagException(PACKAGE_RESOURCES, "ParamsTag.excludesNotAllowedWithName");
+					throw new LocalizedJspTagException(RESOURCES, "excludesNotAllowedWithName");
 				}
 				if(values instanceof Iterable<?>) {
 					ParamUtils.addIterableParams(
@@ -192,9 +194,9 @@ public class ParamsTag extends EncodingNullBodyTag
 					values instanceof Map<?,?>
 					|| values instanceof URIParameters
 				) {
-					throw new LocalizedJspTagException(PACKAGE_RESOURCES, "ParamsTag.mapWithNameNotAllowed");
+					throw new LocalizedJspTagException(RESOURCES, "mapWithNameNotAllowed");
 				} else {
-					throw new LocalizedJspTagException(PACKAGE_RESOURCES, "ParamsTag.values.unexpectedType", values.getClass().getName());
+					throw new LocalizedJspTagException(RESOURCES, "values.unexpectedType", values.getClass().getName());
 				}
 			}
 		}

@@ -29,13 +29,13 @@ import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlA
 import com.aoindustries.html.Html;
 import com.aoindustries.html.Input;
 import com.aoindustries.html.servlet.HtmlEE;
+import com.aoindustries.i18n.Resources;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.lang.LocalizedIllegalArgumentException;
 import com.aoindustries.lang.Strings;
 import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URIParametersMap;
 import com.aoindustries.servlet.lastmodified.AddLastModified;
-import static com.aoindustries.taglib.Resources.PACKAGE_RESOURCES;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
@@ -79,6 +79,10 @@ public class InputTag extends ElementBufferedTag
 		OnfocusAttribute,
 		OnkeypressAttribute
 {
+
+/* SimpleTag only: */
+	public static final Resources RESOURCES = Resources.getResources(InputTag.class);
+/**/
 
 	public InputTag() {
 		init();
@@ -196,7 +200,7 @@ public class InputTag extends ElementBufferedTag
 	@Override
 	public void setType(String type) {
 		String typeStr = Strings.trimNullIfEmpty(type);
-		if(typeStr != null && !InputTagTEI.isValidType(typeStr)) throw new LocalizedIllegalArgumentException(PACKAGE_RESOURCES, "InputTag.type.invalid", typeStr);
+		if(typeStr != null && !InputTagTEI.isValidType(typeStr)) throw new LocalizedIllegalArgumentException(RESOURCES, "type.invalid", typeStr);
 		this.type = typeStr;
 	}
 

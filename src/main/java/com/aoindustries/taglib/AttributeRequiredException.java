@@ -22,21 +22,23 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.i18n.Resources;
 import com.aoindustries.lang.Throwables;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
-import static com.aoindustries.taglib.Resources.PACKAGE_RESOURCES;
 
 /**
  * @author  AO Industries, Inc.
  */
 public class AttributeRequiredException extends LocalizedJspTagException {
 
+	static final Resources RESOURCES = Resources.getResources(AttributeRequiredException.class);
+
 	private static final long serialVersionUID = 2L;
 
 	private final String attribute;
 
 	public AttributeRequiredException(String attribute) {
-		super(PACKAGE_RESOURCES, "AttributeRequiredException.message", attribute);
+		super(RESOURCES, "message", attribute);
 		this.attribute = attribute;
 	}
 

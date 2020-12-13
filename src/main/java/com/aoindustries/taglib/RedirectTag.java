@@ -22,13 +22,13 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.i18n.Resources;
 import com.aoindustries.lang.LocalizedIllegalArgumentException;
 import com.aoindustries.lang.Strings;
 import com.aoindustries.servlet.ServletUtil;
 import com.aoindustries.servlet.http.Includer;
 import com.aoindustries.servlet.lastmodified.AddLastModified;
 import com.aoindustries.servlet.lastmodified.LastModifiedUtil;
-import static com.aoindustries.taglib.Resources.PACKAGE_RESOURCES;
 import com.aoindustries.util.WildcardPatternMatcher;
 import java.io.IOException;
 import java.util.Locale;
@@ -55,6 +55,8 @@ public class RedirectTag extends DispatchTag
 {
 
 	private static final Logger logger = Logger.getLogger(RedirectTag.class.getName());
+
+	static final Resources RESOURCES = Resources.getResources(RedirectTag.class);
 
 	/**
 	 * The maximum length of a URL allowed for redirect.
@@ -87,7 +89,7 @@ public class RedirectTag extends DispatchTag
 
 	public void setStatusCode(String statusCode) {
 		statusCode = statusCode.trim();
-		if(!isValidStatusCode(statusCode)) throw new LocalizedIllegalArgumentException(PACKAGE_RESOURCES, "RedirectTag.statusCode.invalid", statusCode);
+		if(!isValidStatusCode(statusCode)) throw new LocalizedIllegalArgumentException(RESOURCES, "statusCode.invalid", statusCode);
 		this.statusCode = statusCode;
 	}
 
@@ -175,8 +177,9 @@ public class RedirectTag extends DispatchTag
 			if(isTooLong) {
 				// Warn about location too long
 				if(logger.isLoggable(Level.WARNING)) {
-					logger.warning(PACKAGE_RESOURCES.getMessage(
-							"RedirectTag.locationTooLongWarning",
+					logger.warning(
+						RESOURCES.getMessage(
+							"locationTooLongWarning",
 							MAXIMUM_GET_REQUEST_LENGTH,
 							location.length(),
 							location.substring(0, 100)

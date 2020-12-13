@@ -24,9 +24,9 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.taglib.EncodingBufferedTag;
+import com.aoindustries.i18n.Resources;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
-import static com.aoindustries.taglib.Resources.PACKAGE_RESOURCES;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -37,6 +37,8 @@ import javax.servlet.jsp.JspException;
 public class ReadonlyTag extends EncodingBufferedTag {
 
 /* SimpleTag only: */
+	public static final Resources RESOURCES = Resources.getResources(ReadonlyTag.class);
+
 	public static final String TAG_NAME = "<ao:readonly>";
 /**/
 
@@ -66,7 +68,7 @@ public class ReadonlyTag extends EncodingBufferedTag {
 		if(!value.isEmpty()) {
 			if("true".equalsIgnoreCase(value)) readonlyAttribute.setReadonly(true);
 			else if("false".equalsIgnoreCase(value)) readonlyAttribute.setReadonly(false);
-			else throw new LocalizedJspTagException(PACKAGE_RESOURCES, "ReadonlyTag.invalidValue", value);
+			else throw new LocalizedJspTagException(RESOURCES, "invalidValue", value);
 		}
 /* BodyTag only:
 		return EVAL_PAGE;

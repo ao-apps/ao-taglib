@@ -28,8 +28,8 @@ import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.taglib.AttributeUtils;
 import com.aoindustries.taglib.DisabledAttribute;
+import static com.aoindustries.taglib.DisabledTag.RESOURCES;
 import static com.aoindustries.taglib.DisabledTag.TAG_NAME;
-import static com.aoindustries.taglib.Resources.PACKAGE_RESOURCES;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -40,6 +40,8 @@ import javax.servlet.jsp.JspException;
 public class DisabledTag extends EncodingBufferedBodyTag {
 
 /* SimpleTag only:
+	public static final Resources RESOURCES = Resources.getResources(DisabledTag.class);
+
 	public static final String TAG_NAME = "<ao:disabled>";
 /**/
 
@@ -69,7 +71,7 @@ public class DisabledTag extends EncodingBufferedBodyTag {
 		if(!value.isEmpty()) {
 			if("true".equalsIgnoreCase(value)) disabledAttribute.setDisabled(true);
 			else if("false".equalsIgnoreCase(value)) disabledAttribute.setDisabled(false);
-			else throw new LocalizedJspTagException(PACKAGE_RESOURCES, "DisabledTag.invalidValue", value);
+			else throw new LocalizedJspTagException(RESOURCES, "invalidValue", value);
 		}
 /* BodyTag only: */
 		return EVAL_PAGE;

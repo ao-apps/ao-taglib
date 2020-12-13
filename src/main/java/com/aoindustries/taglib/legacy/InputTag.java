@@ -42,6 +42,7 @@ import com.aoindustries.taglib.CheckedAttribute;
 import com.aoindustries.taglib.DisabledAttribute;
 import com.aoindustries.taglib.GlobalAttributesUtils;
 import com.aoindustries.taglib.HeightAttribute;
+import static com.aoindustries.taglib.InputTag.RESOURCES;
 import com.aoindustries.taglib.InputTagTEI;
 import com.aoindustries.taglib.MaxlengthAttribute;
 import com.aoindustries.taglib.NameAttribute;
@@ -53,7 +54,6 @@ import com.aoindustries.taglib.OnkeypressAttribute;
 import com.aoindustries.taglib.ParamUtils;
 import com.aoindustries.taglib.ParamsAttribute;
 import com.aoindustries.taglib.ReadonlyAttribute;
-import static com.aoindustries.taglib.Resources.PACKAGE_RESOURCES;
 import com.aoindustries.taglib.SizeAttribute;
 import com.aoindustries.taglib.SrcAttribute;
 import com.aoindustries.taglib.TabindexAttribute;
@@ -104,6 +104,10 @@ public class InputTag extends ElementBufferedBodyTag
 		OnfocusAttribute,
 		OnkeypressAttribute
 {
+
+/* SimpleTag only:
+	public static final Resources RESOURCES = Resources.getResources(InputTag.class);
+/**/
 
 	public InputTag() {
 		init();
@@ -221,7 +225,7 @@ public class InputTag extends ElementBufferedBodyTag
 	@Override
 	public void setType(String type) {
 		String typeStr = Strings.trimNullIfEmpty(type);
-		if(typeStr != null && !InputTagTEI.isValidType(typeStr)) throw new LocalizedIllegalArgumentException(PACKAGE_RESOURCES, "InputTag.type.invalid", typeStr);
+		if(typeStr != null && !InputTagTEI.isValidType(typeStr)) throw new LocalizedIllegalArgumentException(RESOURCES, "type.invalid", typeStr);
 		this.type = typeStr;
 	}
 

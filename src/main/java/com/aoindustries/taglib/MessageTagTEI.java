@@ -23,7 +23,6 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.collections.MinimalList;
-import static com.aoindustries.taglib.Resources.PACKAGE_RESOURCES;
 import java.util.Enumeration;
 import java.util.List;
 import javax.servlet.jsp.tagext.TagData;
@@ -70,7 +69,7 @@ public class MessageTagTEI extends TagExtraInfo {
 					messages = MinimalList.add(messages,
 						new ValidationMessage(
 							data.getId(),
-							PACKAGE_RESOURCES.getMessage("error.unexpectedDynamicAttribute1", attributeName, "arg*")
+							AttributeUtils.RESOURCES.getMessage("unexpectedDynamicAttribute1", attributeName, "arg*")
 						)
 					);
 				}

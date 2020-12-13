@@ -22,7 +22,6 @@
  */
 package com.aoindustries.taglib;
 
-import static com.aoindustries.taglib.Resources.PACKAGE_RESOURCES;
 import java.util.List;
 import javax.servlet.jsp.tagext.TagData;
 import javax.servlet.jsp.tagext.ValidationMessage;
@@ -51,9 +50,10 @@ public class FormTagTEI extends ElementTagTEI {
 		) {
 			String method = ((String)o).trim(); // TODO: normalizeMethod
 			if(!isValidMethod(method)) {
-				messages.add(new ValidationMessage(
+				messages.add(
+					new ValidationMessage(
 						data.getId(),
-						PACKAGE_RESOURCES.getMessage("FormTag.method.invalid", method)
+						FormTag.RESOURCES.getMessage("method.invalid", method)
 					)
 				);
 			}

@@ -28,8 +28,8 @@ import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.servlet.jsp.LocalizedJspTagException;
 import com.aoindustries.taglib.AttributeUtils;
 import com.aoindustries.taglib.FrameborderAttribute;
+import static com.aoindustries.taglib.FrameborderTag.RESOURCES;
 import static com.aoindustries.taglib.FrameborderTag.TAG_NAME;
-import static com.aoindustries.taglib.Resources.PACKAGE_RESOURCES;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -40,6 +40,8 @@ import javax.servlet.jsp.JspException;
 public class FrameborderTag extends EncodingBufferedBodyTag {
 
 /* SimpleTag only:
+	public static final Resources RESOURCES = Resources.getResources(FrameborderTag.class);
+
 	public static final String TAG_NAME = "<ao:frameborder>";
 /**/
 
@@ -69,7 +71,7 @@ public class FrameborderTag extends EncodingBufferedBodyTag {
 		if(!value.isEmpty()) {
 			if("true".equalsIgnoreCase(value)) frameborderAttribute.setFrameborder(true);
 			else if("false".equalsIgnoreCase(value)) frameborderAttribute.setFrameborder(false);
-			else throw new LocalizedJspTagException(PACKAGE_RESOURCES, "FrameborderTag.invalidValue", value);
+			else throw new LocalizedJspTagException(RESOURCES, "invalidValue", value);
 		}
 /* BodyTag only: */
 		return EVAL_PAGE;
