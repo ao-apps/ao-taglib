@@ -334,7 +334,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 				<groupId>com.aoindustries</groupId><artifactId>ao-web-resources-servlet</artifactId><version>0.1.0${POST-SNAPSHOT}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.aoindustries</groupId><artifactId>aocode-public</artifactId><version>4.7.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
+				<groupId>com.aoindustries</groupId><artifactId>aocode-public</artifactId><version>4.7.0${POST-SNAPSHOT}</version>
 			</dependency>
 			<dependency>
 				<groupId>commons-beanutils</groupId><artifactId>commons-beanutils</artifactId><version>${commons-beanutils.version}</version>
