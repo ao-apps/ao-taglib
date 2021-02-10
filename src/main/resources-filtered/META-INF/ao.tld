@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 ao-taglib - Making JSP be what it should have been all along.
-Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014, 2016, 2017, 2018, 2019, 2020  AO Industries, Inc.
+Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021  AO Industries, Inc.
 	support@aoindustries.com
 	7262 Bull Pen Cir
 	Mobile, AL 36695
@@ -33,6 +33,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 <!ENTITY JSP "scriptless">
 <!ENTITY aoEncodingTld "ao-encoding.tld">
 <!ENTITY nmwEmailTld "nmw-email.tld">
+<!ENTITY nmwPaymentTld "nmw-payment.tld">
 
 <!-- <common> -->
 <!ENTITY IdAttribute_description "The &lt;a href=&quot;https://www.w3schools.com/tags/att_global_id.asp&quot;&gt;id of the element&lt;/a&gt;.">
@@ -162,7 +163,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
 	version="2.1">
 	<!-- datePublished="2016-08-07T16:29:54-0500" -->
-	<!-- dateModified="2020-12-13T08:01:13-06:00" -->
+	<!-- dateModified="2021-02-07T23:29:56-06:00" -->
 <!-- </common> -->
 	<!-- allowRobots="auto" -->
 <!-- <common> -->
@@ -188,7 +189,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			<li><a href="@{project.url}]]>&tld;<![CDATA[/">AO Taglib</a> (this taglib)</li>
 			<li><a href="https://aoindustries.com/aoweb-struts/core/aoweb-struts-skin.tld/">AOWeb Struts Core Skin Taglib</a></li>
 			<li><a href="https://oss.newmediaworks.com/email-taglib/]]>&nmwEmailTld;<![CDATA[/">NMW Email Taglib</a></li>
-			<!-- TODO: nmw-payment-taglib -->
+			<li><a href="https://oss.newmediaworks.com/payment-taglib/]]>&nmwPaymentTld;<![CDATA[/">NMW Payment Taglib</a></li>
 			<!-- TODO: nmw-persistence-taglib once open-source, and many others -->
 		</ul>
 	]]></description>
