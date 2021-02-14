@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2010, 2011, 2013, 2015, 2016, 2017, 2019, 2020  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2013, 2015, 2016, 2017, 2019, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,7 +22,6 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.Doctype;
 import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaScriptInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.MediaType;
@@ -41,6 +40,7 @@ import com.aoindustries.net.URIParametersMap;
 import com.aoindustries.net.URIParametersUtils;
 import com.aoindustries.net.URIResolver;
 import com.aoindustries.servlet.http.Dispatcher;
+import com.aoindustries.util.i18n.MarkupCoercion;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
@@ -203,7 +203,7 @@ public class FormTag extends ElementBufferedTag
 		}
 		if(onsubmit != null) {
 			out.write(" onsubmit=\"");
-			Coercion.write(onsubmit, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
+			MarkupCoercion.write(onsubmit, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		out.write('>');
@@ -237,7 +237,7 @@ public class FormTag extends ElementBufferedTag
 			}
 		}
 		if(didDiv) out.write("</div>");
-		Coercion.write(capturedBody, MarkupType.XHTML, out);
+		MarkupCoercion.write(capturedBody, MarkupType.XHTML, out);
 		out.write("</form>");
 /* BodyTag only:
 		return EVAL_PAGE;

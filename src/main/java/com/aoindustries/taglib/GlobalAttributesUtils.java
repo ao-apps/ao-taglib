@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2020  AO Industries, Inc.
+ * Copyright (C) 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,12 +22,13 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.Coercion;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.html.Attributes;
 import com.aoindustries.html.Attributes.Global;
+import com.aoindustries.lang.Coercion;
 import com.aoindustries.lang.Throwables;
+import com.aoindustries.util.i18n.MarkupCoercion;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
@@ -149,7 +150,7 @@ public class GlobalAttributesUtils {
 		if(style != null) {
 			out.write(" style=\"");
 			// TODO: Review other MarkupType.JAVASCRIPT that should be MarkupType.CSS
-			Coercion.write(style, MarkupType.CSS, true, textInXhtmlAttributeEncoder, false, out);
+			MarkupCoercion.write(style, MarkupType.CSS, true, textInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 	}
@@ -185,7 +186,7 @@ public class GlobalAttributesUtils {
 		Object style = Coercion.trimNullIfEmpty(global.getStyle());
 		if(style != null) {
 			out.append(" style=\"");
-			Coercion.append(style, MarkupType.CSS, true, textInXhtmlAttributeEncoder, false, out);
+			MarkupCoercion.append(style, MarkupType.CSS, true, textInXhtmlAttributeEncoder, false, out);
 			out.append('"');
 		}
 	}

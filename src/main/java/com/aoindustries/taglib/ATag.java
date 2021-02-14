@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2020  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,13 +22,13 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.Coercion;
 import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaScriptInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import static com.aoindustries.encoding.TextInXhtmlEncoder.textInXhtmlEncoder;
 import com.aoindustries.io.buffer.BufferResult;
+import com.aoindustries.lang.Coercion;
 import com.aoindustries.lang.Strings;
 import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URIDecoder;
@@ -37,6 +37,7 @@ import com.aoindustries.net.URIParser;
 import com.aoindustries.net.URIResolver;
 import com.aoindustries.servlet.http.Dispatcher;
 import com.aoindustries.servlet.lastmodified.AddLastModified;
+import com.aoindustries.util.i18n.MarkupCoercion;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
@@ -227,7 +228,7 @@ public class ATag extends ElementBufferedTag
 		}
 		if(title != null) {
 			out.write(" title=\"");
-			Coercion.write(title, MarkupType.TEXT, true, textInXhtmlAttributeEncoder, false, out);
+			MarkupCoercion.write(title, MarkupType.TEXT, true, textInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		if(type != null) {
@@ -237,17 +238,17 @@ public class ATag extends ElementBufferedTag
 		}
 		if(onclick != null) {
 			out.write(" onclick=\"");
-			Coercion.write(onclick, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
+			MarkupCoercion.write(onclick, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		if(onmouseout != null) {
 			out.write(" onmouseout=\"");
-			Coercion.write(onmouseout, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
+			MarkupCoercion.write(onmouseout, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		if(onmouseover != null) {
 			out.write(" onmouseover=\"");
-			Coercion.write(onmouseover, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
+			MarkupCoercion.write(onmouseover, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		out.write('>');
@@ -270,7 +271,7 @@ public class ATag extends ElementBufferedTag
 				URIDecoder.decodeURI(toDecode, textInXhtmlEncoder, out);
 			}
 		} else {
-			Coercion.write(trimmedBody, MarkupType.XHTML, out);
+			MarkupCoercion.write(trimmedBody, MarkupType.XHTML, out);
 		}
 		out.write("</a>");
 /* BodyTag only:

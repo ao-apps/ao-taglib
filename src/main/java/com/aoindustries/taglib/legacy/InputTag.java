@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2020  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,7 +22,6 @@
  */
 package com.aoindustries.taglib.legacy;
 
-import com.aoindustries.encoding.Coercion;
 import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaScriptInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
@@ -30,6 +29,7 @@ import com.aoindustries.html.Html;
 import com.aoindustries.html.Input;
 import com.aoindustries.html.servlet.HtmlEE;
 import com.aoindustries.io.buffer.BufferResult;
+import com.aoindustries.lang.Coercion;
 import com.aoindustries.lang.LocalizedIllegalArgumentException;
 import com.aoindustries.lang.Strings;
 import com.aoindustries.net.MutableURIParameters;
@@ -62,6 +62,7 @@ import com.aoindustries.taglib.TypeAttribute;
 import com.aoindustries.taglib.UrlUtils;
 import com.aoindustries.taglib.ValueAttribute;
 import com.aoindustries.taglib.WidthAttribute;
+import com.aoindustries.util.i18n.MarkupCoercion;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
@@ -331,7 +332,7 @@ public class InputTag extends ElementBufferedBodyTag
 		GlobalAttributesUtils.doGlobalAttributes(global, input);
 		if(alt != null) {
 			out.write(" alt=\"");
-			Coercion.write(alt, MarkupType.TEXT, true, textInXhtmlAttributeEncoder, false, out);
+			MarkupCoercion.write(alt, MarkupType.TEXT, true, textInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		// autocomplete is not valid in all doctypes
@@ -370,23 +371,23 @@ public class InputTag extends ElementBufferedBodyTag
 		input.value(value);
 		if(onblur != null) {
 			out.write(" onblur=\"");
-			Coercion.write(onblur, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
+			MarkupCoercion.write(onblur, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		if(onchange != null) {
 			out.write(" onchange=\"");
-			Coercion.write(onchange, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
+			MarkupCoercion.write(onchange, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		input.onclick(onclick);
 		if(onfocus != null) {
 			out.write(" onfocus=\"");
-			Coercion.write(onfocus, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
+			MarkupCoercion.write(onfocus, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		if(onkeypress != null) {
 			out.write(" onkeypress=\"");
-			Coercion.write(onkeypress, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
+			MarkupCoercion.write(onkeypress, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
 			out.write('"');
 		}
 		input.__();

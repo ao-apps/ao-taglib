@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2019, 2020  AO Industries, Inc.
+ * Copyright (C) 2019, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,12 +22,12 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.html.Area;
 import com.aoindustries.html.Html;
 import com.aoindustries.html.servlet.HtmlEE;
 import com.aoindustries.i18n.Resources;
+import com.aoindustries.lang.Coercion;
 import com.aoindustries.lang.LocalizedIllegalArgumentException;
 import com.aoindustries.lang.Strings;
 import com.aoindustries.net.MutableURIParameters;

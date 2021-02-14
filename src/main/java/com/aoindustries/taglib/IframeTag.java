@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2011, 2012, 2013, 2015, 2016, 2017, 2019, 2020  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2015, 2016, 2017, 2019, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,15 +22,16 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.io.buffer.BufferResult;
+import com.aoindustries.lang.Coercion;
 import com.aoindustries.lang.Strings;
 import com.aoindustries.net.MutableURIParameters;
 import com.aoindustries.net.URIParametersMap;
 import com.aoindustries.servlet.lastmodified.AddLastModified;
+import com.aoindustries.util.i18n.MarkupCoercion;
 import com.aoindustries.util.i18n.MarkupType;
 import java.io.IOException;
 import java.io.Writer;
@@ -150,10 +151,10 @@ public class IframeTag extends ElementBufferedTag
 		out.write("<iframe");
 		GlobalAttributesUtils.writeGlobalAttributes(global, out);
 		// TODO: Include id/name by doctype
-		String id = global.getId();
-		if(id != null) {
+		String _id = global.getId();
+		if(_id != null) {
 			out.write(" name=\"");
-			encodeTextInXhtmlAttribute(id, out);
+			encodeTextInXhtmlAttribute(_id, out);
 			out.write('"');
 		}
 		UrlUtils.writeSrc(pageContext, out, src, params, addLastModified, absolute, canonical);
@@ -170,7 +171,7 @@ public class IframeTag extends ElementBufferedTag
 		out.write(" frameborder=\"");
 		out.write(frameborder ? '1' : '0');
 		out.write("\">");
-		Coercion.write(capturedBody, MarkupType.XHTML, out);
+		MarkupCoercion.write(capturedBody, MarkupType.XHTML, out);
 		out.write("</iframe>");
 /* BodyTag only:
 		return EVAL_PAGE;
