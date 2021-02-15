@@ -83,7 +83,7 @@ public class LinkTag extends ElementNullTag
 			for(Map.Entry<String,List<String>> entry : linkParams.getParameterMap().entrySet()) {
 				String paramName = entry.getKey();
 				for(String paramValue : entry.getValue()) {
-					addParam(paramName, paramValue);
+					addParam(paramName, (Object)paramValue);
 				}
 			}
 		}
