@@ -118,7 +118,7 @@ public class AreaTag extends ElementNullBodyTag
 
 	private MutableURIParameters params;
 	@Override
-	public void addParam(String name, String value) {
+	public void addParam(String name, Object value) {
 		if(params == null) params = new URIParametersMap();
 		params.add(name, value);
 	}

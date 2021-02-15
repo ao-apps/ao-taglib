@@ -22,7 +22,6 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.lang.Coercion;
 import com.aoindustries.lang.NullArgumentException;
 import java.lang.reflect.Array;
 import java.util.Enumeration;
@@ -47,11 +46,16 @@ final public class ParamUtils {
 	/**
 	 * Adds one parameter to the first parent of the given tag that implements <code>ParamsAttribute</code>.
 	 * If value is null, the parameter is not added.
+	 * <p>
+	 * The conversion to string may be deferred, or the value may be streamed instead of being
+	 * converted to a string.  It is incorrect to change the state of the provided value; doing
+	 * so may or may not affect the value of the resulting parameter.
+	 * </p>
 	 * 
 	 * @param  fromTagName  the name of the tag searching from
 	 * @param  from         the tag to search from
 	 * @param  name         the name of the parameter (required)
-	 * @param  value        the value of the parameter, will be coerced to String
+	 * @param  value        the value of the parameter
 	 *
 	 * @see  AttributeUtils#requireAttributeParent(java.lang.String, javax.servlet.jsp.tagext.JspTag, java.lang.String, java.lang.Class)
 	 */
@@ -71,10 +75,15 @@ final public class ParamUtils {
 	/**
 	 * Adds one parameter to the given <code>ParamsAttribute</code> parent tag.
 	 * If value is null, the parameter is not added.
+	 * <p>
+	 * The conversion to string may be deferred, or the value may be streamed instead of being
+	 * converted to a string.  It is incorrect to change the state of the provided value; doing
+	 * so may or may not affect the value of the resulting parameter.
+	 * </p>
 	 * 
 	 * @param  paramsAttribute  the parent tag that will receive the parameters
 	 * @param  name             the name of the parameter (required)
-	 * @param  value            the value of the parameter, will be coerced to String
+	 * @param  value            the value of the parameter
 	 */
 	public static void addParam(
 		ParamsAttribute paramsAttribute,
@@ -82,18 +91,18 @@ final public class ParamUtils {
 		Object value
 	) throws JspTagException {
 		NullArgumentException.checkNotNull(name, "name");
-		if(value!=null) {
-			paramsAttribute.addParam(
-				name,
-				Coercion.toString(value)
-			);
-		}
+		if(value != null) paramsAttribute.addParam(name, value);
 	}
 
 	/**
 	 * Adds a set of parameters to the given <code>ParamsAttribute</code> parent tag.
 	 * If value is null, no parameters are added.
 	 * If any element is null, the parameter is not added for the element.
+	 * <p>
+	 * The conversion to string may be deferred, or the value may be streamed instead of being
+	 * converted to a string.  It is incorrect to change the state of the provided value; doing
+	 * so may or may not affect the value of the resulting parameter.
+	 * </p>
 	 * 
 	 * @param  paramsAttribute  the parent tag that will receive the parameters
 	 * @param  name             the name of the parameter (required)
@@ -104,12 +113,8 @@ final public class ParamUtils {
 		Iterable<?> values
 	) throws JspTagException {
 		NullArgumentException.checkNotNull(name, "name");
-		if(values!=null) {
-			addIteratorParams(
-				paramsAttribute,
-				name,
-				values.iterator()
-			);
+		if(values != null) {
+			addIteratorParams(paramsAttribute, name, values.iterator());
 		}
 	}
 
@@ -117,6 +122,11 @@ final public class ParamUtils {
 	 * Adds a set of parameters to the given <code>ParamsAttribute</code> parent tag.
 	 * If value is null, no parameters are added.
 	 * If any element is null, the parameter is not added for the element.
+	 * <p>
+	 * The conversion to string may be deferred, or the value may be streamed instead of being
+	 * converted to a string.  It is incorrect to change the state of the provided value; doing
+	 * so may or may not affect the value of the resulting parameter.
+	 * </p>
 	 * 
 	 * @param  paramsAttribute  the parent tag that will receive the parameters
 	 * @param  name             the name of the parameter (required)
@@ -127,16 +137,9 @@ final public class ParamUtils {
 		Iterator<?> values
 	) throws JspTagException {
 		NullArgumentException.checkNotNull(name, "name");
-		if(values!=null) {
+		if(values != null) {
 			while(values.hasNext()) {
-				Object elem = values.next();
-				if(elem!=null) {
-					addParam(
-						paramsAttribute,
-						name,
-						Coercion.toString(elem)
-					);
-				}
+				addParam(paramsAttribute, name, values.next());
 			}
 		}
 	}
@@ -145,6 +148,11 @@ final public class ParamUtils {
 	 * Adds a set of parameters to the given <code>ParamsAttribute</code> parent tag.
 	 * If value is null, no parameters are added.
 	 * If any element is null, the parameter is not added for the element.
+	 * <p>
+	 * The conversion to string may be deferred, or the value may be streamed instead of being
+	 * converted to a string.  It is incorrect to change the state of the provided value; doing
+	 * so may or may not affect the value of the resulting parameter.
+	 * </p>
 	 * 
 	 * @param  paramsAttribute  the parent tag that will receive the parameters
 	 * @param  name             the name of the parameter (required)
@@ -155,16 +163,9 @@ final public class ParamUtils {
 		Enumeration<?> values
 	) throws JspTagException {
 		NullArgumentException.checkNotNull(name, "name");
-		if(values!=null) {
+		if(values != null) {
 			while(values.hasMoreElements()) {
-				Object elem = values.nextElement();
-				if(elem!=null) {
-					addParam(
-						paramsAttribute,
-						name,
-						Coercion.toString(elem)
-					);
-				}
+				addParam(paramsAttribute, name, values.nextElement());
 			}
 		}
 	}
@@ -173,6 +174,11 @@ final public class ParamUtils {
 	 * Adds an array of parameters to the given <code>ParamsAttribute</code> parent tag.
 	 * If value is null, no parameters are added.
 	 * If any element is null, the parameter is not added for the element.
+	 * <p>
+	 * The conversion to string may be deferred, or the value may be streamed instead of being
+	 * converted to a string.  It is incorrect to change the state of the provided value; doing
+	 * so may or may not affect the value of the resulting parameter.
+	 * </p>
 	 * 
 	 * @param  paramsAttribute  the parent tag that will receive the parameters
 	 * @param  name             the name of the parameter (required)
@@ -183,17 +189,10 @@ final public class ParamUtils {
 		Object values
 	) throws JspTagException {
 		NullArgumentException.checkNotNull(name, "name");
-		if(values!=null) {
+		if(values != null) {
 			int len = Array.getLength(values);
-			for(int c=0; c<len; c++) {
-				Object elem = Array.get(values, c);
-				if(elem!=null) {
-					addParam(
-						paramsAttribute,
-						name,
-						Coercion.toString(elem)
-					);
-				}
+			for(int c = 0; c < len; c++) {
+				addParam(paramsAttribute, name, Array.get(values, c));
 			}
 		}
 	}
@@ -201,6 +200,11 @@ final public class ParamUtils {
 	/**
 	 * Adds the <code>param.*</code> {@linkplain DynamicAttributes dynamic attributes}.
 	 * Handles Iterable, Iterator, Enumeration, arrays, and direct coercion.
+	 * <p>
+	 * The conversion to string may be deferred, or the value may be streamed instead of being
+	 * converted to a string.  It is incorrect to change the state of the provided value; doing
+	 * so may or may not affect the value of the resulting parameter.
+	 * </p>
 	 *
 	 * @return  {@code true} when added, or {@code false} when attribute not expected and has not been added.
 	 *
@@ -238,11 +242,7 @@ final public class ParamUtils {
 						value
 					);
 				} else {
-					addParam(
-						paramsAttribute,
-						paramName,
-						Coercion.toString(value)
-					);
+					addParam(paramsAttribute, paramName, value);
 				}
 			}
 			return true;

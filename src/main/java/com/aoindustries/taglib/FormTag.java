@@ -111,7 +111,7 @@ public class FormTag extends ElementBufferedTag
 
 	private MutableURIParameters params;
 	@Override
-	public void addParam(String name, String value) {
+	public void addParam(String name, Object value) {
 		if(params == null) params = new URIParametersMap();
 		params.add(name, value);
 	}

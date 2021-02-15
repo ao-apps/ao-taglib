@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2016, 2017, 2019, 2020  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2016, 2017, 2019, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,6 +22,8 @@
  */
 package com.aoindustries.taglib;
 
+import com.aoindustries.lang.Coercion;
+
 /**
  * Something with a set of parameters.
  *
@@ -29,5 +31,28 @@ package com.aoindustries.taglib;
  */
 public interface ParamsAttribute {
 
-	void addParam(String name, String value);
+	/**
+	 * Adds a parameter.
+	 * <p>
+	 * The conversion to string may be deferred, or the value may be streamed instead of being
+	 * converted to a string.  It is incorrect to change the state of the provided value; doing
+	 * so may or may not affect the value of the resulting parameter.
+	 * </p>
+	 * <p>
+	 * Default method is for backward compatibility only.
+	 * Implementations should override this version.
+	 * </p>
+	 */
+	// TODO: Remove default in a major release, once no "addParam(String,String)" is completely unused.
+	default void addParam(String name, Object value) {
+		addParam(name, (value == null) ? null : Coercion.toString(value));
+	}
+
+	/**
+	 * @deprecated  Use {@link #addParam(java.lang.String, java.lang.Object)} instead.
+	 */
+	@Deprecated
+	default void addParam(String name, String value) {
+		addParam(name, (Object)value);
+	}
 }
