@@ -122,7 +122,7 @@ public class FormTag extends ElementBufferedBodyTag
 	@Override
 	public void addParam(String name, String value) {
 		if(params == null) params = new URIParametersMap();
-		params.addParameter(name, value);
+		params.add(name, value);
 	}
 
 	private String target;

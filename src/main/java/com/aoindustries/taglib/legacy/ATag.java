@@ -107,8 +107,8 @@ public class ATag extends ElementBufferedBodyTag
 	private MutableURIParameters params;
 	@Override
 	public void addParam(String name, String value) {
-		if(params==null) params = new URIParametersMap();
-		params.addParameter(name, value);
+		if(params == null) params = new URIParametersMap();
+		params.add(name, value);
 	}
 
 	private boolean absolute;
