@@ -23,8 +23,8 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.html.Html;
-import com.aoindustries.html.servlet.HtmlEE;
+import com.aoindustries.html.Document;
+import com.aoindustries.html.servlet.DocumentEE;
 import com.aoindustries.lang.Coercion;
 import com.aoindustries.lang.Strings;
 import com.aoindustries.net.MutableURIParameters;
@@ -208,13 +208,13 @@ public class LinkTag extends ElementNullTag
 				)
 			);
 		} else {
-			Html html = HtmlEE.get(
+			Document document = DocumentEE.get(
 				pageContext.getServletContext(),
 				(HttpServletRequest)pageContext.getRequest(),
 				(HttpServletResponse)pageContext.getResponse(),
 				out
 			);
-			com.aoindustries.html.Link link = html.link();
+			com.aoindustries.html.Link link = document.link();
 			GlobalAttributesUtils.doGlobalAttributes(global, link);
 			link.href(UrlUtils.getHref(pageContext, href, params, addLastModified, absolute, canonical));
 			if(hreflang instanceof Locale) {

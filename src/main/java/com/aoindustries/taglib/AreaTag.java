@@ -24,8 +24,8 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.html.Area;
-import com.aoindustries.html.Html;
-import com.aoindustries.html.servlet.HtmlEE;
+import com.aoindustries.html.Document;
+import com.aoindustries.html.servlet.DocumentEE;
 import com.aoindustries.i18n.Resources;
 import com.aoindustries.lang.Coercion;
 import com.aoindustries.lang.LocalizedIllegalArgumentException;
@@ -220,13 +220,13 @@ public class AreaTag extends ElementNullTag
 		if(href != null) {
 			if(alt == null) throw new AttributeRequiredException("alt");
 		}
-		Html html = HtmlEE.get(
+		Document document = DocumentEE.get(
 			pageContext.getServletContext(),
 			(HttpServletRequest)pageContext.getRequest(),
 			(HttpServletResponse)pageContext.getResponse(),
 			out
 		);
-		Area area = GlobalAttributesUtils.doGlobalAttributes(global, html.area())
+		Area area = GlobalAttributesUtils.doGlobalAttributes(global, document.area())
 			.shape(shape)
 			.coords(coords)
 			.href(UrlUtils.getHref(pageContext, href, params, addLastModified, absolute, canonical));

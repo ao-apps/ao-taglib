@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2013, 2015, 2016, 2017, 2019, 2020  AO Industries, Inc.
+ * Copyright (C) 2013, 2015, 2016, 2017, 2019, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -23,8 +23,8 @@
 package com.aoindustries.taglib.legacy;
 
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.html.Html;
-import com.aoindustries.html.servlet.HtmlEE;
+import com.aoindustries.html.Document;
+import com.aoindustries.html.servlet.DocumentEE;
 import com.aoindustries.net.URIEncoder;
 import com.aoindustries.servlet.filter.EncodeURIFilter;
 import com.aoindustries.servlet.http.Dispatcher;
@@ -72,7 +72,7 @@ public class BaseTag extends ElementNullBodyTag {
 				|| !originalPath.regionMatches(0, currentPath, 0, originalLastSlash)
 			) {
 				HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
-				Html html = HtmlEE.get(pageContext.getServletContext(), request, response, out);
+				Document document = DocumentEE.get(pageContext.getServletContext(), request, response, out);
 
 				// Note: This does not directly do response encodeURL because URL rewriting would interfere with the intent of the base tag
 
@@ -84,7 +84,7 @@ public class BaseTag extends ElementNullBodyTag {
 				if(encodeURIFilter != null) {
 					url = encodeURIFilter.encode(
 						url,
-						html.doctype,
+						document.doctype,
 						response.getCharacterEncoding()
 					);
 				} else {
@@ -92,7 +92,7 @@ public class BaseTag extends ElementNullBodyTag {
 					// TODO: Implement this in ao:base instead (along with other URL implementations)?
 					url = URIEncoder.encodeURI(url);
 				}
-				GlobalAttributesUtils.doGlobalAttributes(global, html.base())
+				GlobalAttributesUtils.doGlobalAttributes(global, document.base())
 					.href(url)
 					.__();
 			}

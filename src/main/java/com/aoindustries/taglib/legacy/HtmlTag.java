@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2011, 2012, 2013, 2015, 2016, 2017, 2019, 2020  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2015, 2016, 2017, 2019, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -27,7 +27,7 @@ import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.Serialization;
 import com.aoindustries.encoding.servlet.DoctypeEE;
 import com.aoindustries.encoding.servlet.SerializationEE;
-import com.aoindustries.html.Html;
+import com.aoindustries.html.Document;
 import com.aoindustries.servlet.ServletUtil;
 import static com.aoindustries.taglib.HtmlTag.STRUTS_XHTML_KEY;
 import static com.aoindustries.taglib.HtmlTag.beginHtmlTag;
@@ -194,7 +194,7 @@ public class HtmlTag extends ElementFilteredBodyTag {
 					// Clear the output buffer
 					response.resetBuffer();
 					// Set the content type
-					final String documentEncoding = Html.ENCODING.name();
+					final String documentEncoding = Document.ENCODING.name();
 					try {
 						ServletUtil.setContentType(response, currentSerialization.getContentType(), documentEncoding);
 					} catch(ServletException e) {

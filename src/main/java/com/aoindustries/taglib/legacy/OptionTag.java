@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2010, 2011, 2013, 2015, 2016, 2017, 2019, 2020  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2013, 2015, 2016, 2017, 2019, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -23,7 +23,7 @@
 package com.aoindustries.taglib.legacy;
 
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.html.servlet.HtmlEE;
+import com.aoindustries.html.servlet.DocumentEE;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.taglib.DisabledAttribute;
 import com.aoindustries.taglib.GlobalAttributesUtils;
@@ -104,9 +104,8 @@ public class OptionTag extends ElementBufferedBodyTag
 		// TODO: If not setting value this way, this does not need to buffer
 		// TODO: This has something to do with translator markup added for display, but not value
 		if(!valueSet) setValue(capturedBody);
-		GlobalAttributesUtils.doGlobalAttributes(
-			global,
-			HtmlEE.get(
+		GlobalAttributesUtils.doGlobalAttributes(global,
+			DocumentEE.get(
 				pageContext.getServletContext(),
 				(HttpServletRequest)pageContext.getRequest(),
 				(HttpServletResponse)pageContext.getResponse(),

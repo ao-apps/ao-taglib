@@ -23,8 +23,8 @@
 package com.aoindustries.taglib.legacy;
 
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.html.Html;
-import com.aoindustries.html.servlet.HtmlEE;
+import com.aoindustries.html.Document;
+import com.aoindustries.html.servlet.DocumentEE;
 import com.aoindustries.io.LocalizedUnsupportedEncodingException;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.lang.Strings;
@@ -163,13 +163,13 @@ public class ScriptTag extends ElementBufferedBodyTag
 		PageContext pageContext = (PageContext)getJspContext();
 /**/
 		// Write script tag with src attribute, discarding any body
-		Html html = HtmlEE.get(
+		Document document = DocumentEE.get(
 			pageContext.getServletContext(),
 			(HttpServletRequest)pageContext.getRequest(),
 			(HttpServletResponse)pageContext.getResponse(),
 			out
 		);
-		GlobalAttributesUtils.doGlobalAttributes(global, html.script(mediaType.getContentType()))
+		GlobalAttributesUtils.doGlobalAttributes(global, document.script(mediaType.getContentType()))
 			// Call getSrc always, since it validates src versus params
 			.src(UrlUtils.getSrc(pageContext, src, params, addLastModified, absolute, canonical))
 			// Only write body when there is no source (discard body when src provided)

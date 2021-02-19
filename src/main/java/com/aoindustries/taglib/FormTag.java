@@ -27,8 +27,8 @@ import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaSc
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
-import com.aoindustries.html.Html;
-import com.aoindustries.html.servlet.HtmlEE;
+import com.aoindustries.html.Document;
+import com.aoindustries.html.servlet.DocumentEE;
 import com.aoindustries.i18n.Resources;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.lang.LocalizedIllegalArgumentException;
@@ -157,7 +157,7 @@ public class FormTag extends ElementBufferedTag
 /**/
 		HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
 		HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
-		Html html = HtmlEE.get(
+		Document document = DocumentEE.get(
 			pageContext.getServletContext(),
 			request,
 			response,
@@ -180,7 +180,7 @@ public class FormTag extends ElementBufferedTag
 			textInXhtmlAttributeEncoder.write(actionURI.setQueryString(null).toString(), out);
 			out.write('"');
 		} else {
-			if(html.doctype != Doctype.HTML5) {
+			if(document.doctype != Doctype.HTML5) {
 				// Action required before HTML 5
 				out.write(" action=\"\"");
 			}
@@ -217,7 +217,7 @@ public class FormTag extends ElementBufferedTag
 				}
 				String name = entry.getKey();
 				for(String value : entry.getValue()) {
-					html.input.hidden().name(name).value(value).__().nl();
+					document.input.hidden().name(name).value(value).__().nl();
 				}
 			}
 		}
@@ -232,7 +232,7 @@ public class FormTag extends ElementBufferedTag
 				List<String> paramValues = entry.getValue();
 				assert !paramValues.isEmpty();
 				for(String paramValue : paramValues) {
-					html.input.hidden().name(name).value(paramValue).__().nl();
+					document.input.hidden().name(name).value(paramValue).__().nl();
 				}
 			}
 		}

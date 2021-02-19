@@ -23,8 +23,8 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.html.Html;
-import com.aoindustries.html.servlet.HtmlEE;
+import com.aoindustries.html.Document;
+import com.aoindustries.html.servlet.DocumentEE;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.lang.Coercion;
 import com.aoindustries.lang.Strings;
@@ -134,13 +134,13 @@ public class MetaTag extends ElementBufferedTag
 			);
 		} else {
 			// Write the meta tag directly here
-			Html html = HtmlEE.get(
+			Document document = DocumentEE.get(
 				pageContext.getServletContext(),
 				(HttpServletRequest)pageContext.getRequest(),
 				(HttpServletResponse)pageContext.getResponse(),
 				out
 			);
-			GlobalAttributesUtils.doGlobalAttributes(global, html.meta())
+			GlobalAttributesUtils.doGlobalAttributes(global, document.meta())
 				.name(name)
 				.httpEquiv(httpEquiv)
 				// TODO: Create a global "itemprop" in ao-fluent-html

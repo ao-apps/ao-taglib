@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2021-02-15T07:02:14-06:00"
+		dateModified="2021-02-19T05:52:12-06:00"
 	>
 		<c:if test="${fn:endsWith('@{project.version}', '-SNAPSHOT') and !fn:endsWith('@{project.version}', '-POST-SNAPSHOT')}">
 			<changelog:release
@@ -47,6 +47,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 				artifactId="@{documented.artifactId}"
 				scmUrl="@{project.scm.url}"
 			>
+				<ul>
+					<li>Updated dependencies.</li>
+				</ul>
 				<!-- TODO:
 				<ul>
 					<li>Why aren't tag descriptions in the NetBeans code assist?  They are for JSTL.  Is it the HTML formatting?  Is the element ordering?</li>
@@ -255,7 +258,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 				</li>
 				<li>
 					Moved <code>HtmlTag.useXhtmlContentType(…)</code> to new
-					<ao:a href="https://aoindustries.com/ao-fluent-html/apidocs/com/aoindustries/html/Html.html">Html</ao:a> class,
+					<ao:a href="https://aoindustries.com/ao-fluent-html/apidocs/com/aoindustries/html/Document.html">Html</ao:a> class,
 					along with related constants.
 				</li>
 				<li>Now writing XML declaration when both serving as XHTML and response encoding is not <code>UTF-8</code>.</li>

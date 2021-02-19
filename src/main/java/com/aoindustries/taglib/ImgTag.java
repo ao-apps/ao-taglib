@@ -23,8 +23,8 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.html.Html;
-import com.aoindustries.html.servlet.HtmlEE;
+import com.aoindustries.html.Document;
+import com.aoindustries.html.servlet.DocumentEE;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.lang.Strings;
 import com.aoindustries.net.MutableURIParameters;
@@ -168,13 +168,13 @@ public class ImgTag extends ElementBufferedTag
 /**/
 		if(src == null) src = capturedBody.trim().toString(); // TODO: Validate here?
 		if(usemap == null && alt == null) throw new AttributeRequiredException("alt");
-		Html html = HtmlEE.get(
+		Document document = DocumentEE.get(
 			pageContext.getServletContext(),
 			(HttpServletRequest)pageContext.getRequest(),
 			(HttpServletResponse)pageContext.getResponse(),
 			out
 		);
-		GlobalAttributesUtils.doGlobalAttributes(global, html.img())
+		GlobalAttributesUtils.doGlobalAttributes(global, document.img())
 			.src(UrlUtils.getSrc(pageContext, src, params, addLastModified, absolute, canonical))
 			// TOOD: width to Integer via Img.width(Integer)
 			.attribute("width", width)
