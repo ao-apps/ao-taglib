@@ -328,7 +328,7 @@ public class InputTag extends ElementBufferedBodyTag
 			(HttpServletResponse)pageContext.getResponse(),
 			out
 		);
-		Input.Dynamic input = document.input();
+		Input.Dynamic<?> input = document.input().dynamic();
 		GlobalAttributesUtils.doGlobalAttributes(global, input);
 		if(alt != null) {
 			out.write(" alt=\"");

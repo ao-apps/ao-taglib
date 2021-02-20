@@ -214,7 +214,7 @@ public class LinkTag extends ElementNullTag
 				(HttpServletResponse)pageContext.getResponse(),
 				out
 			);
-			com.aoindustries.html.Link link = document.link();
+			com.aoindustries.html.Link<?> link = document.link();
 			GlobalAttributesUtils.doGlobalAttributes(global, link);
 			link.href(UrlUtils.getHref(pageContext, href, params, addLastModified, absolute, canonical));
 			if(hreflang instanceof Locale) {

@@ -217,7 +217,7 @@ public class FormTag extends ElementBufferedTag
 				}
 				String name = entry.getKey();
 				for(String value : entry.getValue()) {
-					document.input.hidden().name(name).value(value).__().nl();
+					document.input().hidden().name(name).value(value).__().nl();
 				}
 			}
 		}
@@ -232,7 +232,7 @@ public class FormTag extends ElementBufferedTag
 				List<String> paramValues = entry.getValue();
 				assert !paramValues.isEmpty();
 				for(String paramValue : paramValues) {
-					document.input.hidden().name(name).value(paramValue).__().nl();
+					document.input().hidden().name(name).value(paramValue).__().nl();
 				}
 			}
 		}

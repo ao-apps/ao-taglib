@@ -226,7 +226,7 @@ public class AreaTag extends ElementNullTag
 			(HttpServletResponse)pageContext.getResponse(),
 			out
 		);
-		Area area = GlobalAttributesUtils.doGlobalAttributes(global, document.area())
+		Area<?> area = GlobalAttributesUtils.doGlobalAttributes(global, document.area())
 			.shape(shape)
 			.coords(coords)
 			.href(UrlUtils.getHref(pageContext, href, params, addLastModified, absolute, canonical));
