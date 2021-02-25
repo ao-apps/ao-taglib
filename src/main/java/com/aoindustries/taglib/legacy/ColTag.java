@@ -67,11 +67,12 @@ public class ColTag extends ElementNullBodyTag {
 	protected void doTag(Writer out) throws JspException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
 /**/
-		Col col = DocumentEE.get(
+		Col<?> col = DocumentEE.get(
 			pageContext.getServletContext(),
 			(HttpServletRequest)pageContext.getRequest(),
 			(HttpServletResponse)pageContext.getResponse(),
-			out
+			out,
+			false // Do not add extra indentation to JSP
 		).col();
 		GlobalAttributesUtils.doGlobalAttributes(global, col);
 		if(span != 0) col.span(span);

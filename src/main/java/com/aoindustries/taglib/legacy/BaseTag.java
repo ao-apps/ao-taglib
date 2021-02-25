@@ -72,7 +72,13 @@ public class BaseTag extends ElementNullBodyTag {
 				|| !originalPath.regionMatches(0, currentPath, 0, originalLastSlash)
 			) {
 				HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
-				Document document = DocumentEE.get(pageContext.getServletContext(), request, response, out);
+				Document document = DocumentEE.get(
+					pageContext.getServletContext(),
+					request,
+					response,
+					out,
+					false // Do not add extra indentation to JSP
+				);
 
 				// Note: This does not directly do response encodeURL because URL rewriting would interfere with the intent of the base tag
 

@@ -138,7 +138,8 @@ public class MetaTag extends ElementBufferedTag
 				pageContext.getServletContext(),
 				(HttpServletRequest)pageContext.getRequest(),
 				(HttpServletResponse)pageContext.getResponse(),
-				out
+				out,
+				false // Do not add extra indentation to JSP
 			);
 			GlobalAttributesUtils.doGlobalAttributes(global, document.meta())
 				.name(name)

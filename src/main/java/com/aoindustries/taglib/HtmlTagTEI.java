@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2011, 2016, 2017, 2019, 2020  AO Industries, Inc.
+ * Copyright (C) 2011, 2016, 2017, 2019, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -73,6 +73,26 @@ public class HtmlTagTEI extends ElementTagTEI {
 						)
 					);
 				}
+			}
+		}
+		Object indentAttr = data.getAttribute("indent");
+		if(
+			indentAttr != null
+			&& indentAttr != TagData.REQUEST_TIME_VALUE
+		) {
+			String indent = ((String)indentAttr).trim(); // TODO: normalizeIndent
+			if(
+				!indent.isEmpty()
+				&& !"auto".equalsIgnoreCase(indent)
+				&& !"true".equalsIgnoreCase(indent)
+				&& !"false".equalsIgnoreCase(indent)
+			) {
+				messages.add(
+					new ValidationMessage(
+						data.getId(),
+						HtmlTag.RESOURCES.getMessage("indent.invalid", indent)
+					)
+				);
 			}
 		}
 	}

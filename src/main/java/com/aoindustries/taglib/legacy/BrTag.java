@@ -53,12 +53,14 @@ public class BrTag extends ElementNullBodyTag {
 	protected void doTag(Writer out) throws JspException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
 /**/
-		GlobalAttributesUtils.doGlobalAttributes(global,
+		GlobalAttributesUtils.doGlobalAttributes(
+			global,
 			DocumentEE.get(
 				pageContext.getServletContext(),
 				(HttpServletRequest)pageContext.getRequest(),
 				(HttpServletResponse)pageContext.getResponse(),
-				out
+				out,
+				false // Do not add extra indentation to JSP
 			).br()
 		).__();
 /* BodyTag only: */

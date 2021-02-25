@@ -104,12 +104,14 @@ public class OptionTag extends ElementBufferedBodyTag
 		// TODO: If not setting value this way, this does not need to buffer
 		// TODO: This has something to do with translator markup added for display, but not value
 		if(!valueSet) setValue(capturedBody);
-		GlobalAttributesUtils.doGlobalAttributes(global,
+		GlobalAttributesUtils.doGlobalAttributes(
+			global,
 			DocumentEE.get(
 				pageContext.getServletContext(),
 				(HttpServletRequest)pageContext.getRequest(),
 				(HttpServletResponse)pageContext.getResponse(),
-				out
+				out,
+				false // Do not add extra indentation to JSP
 			).option()
 		)
 			.value(value)

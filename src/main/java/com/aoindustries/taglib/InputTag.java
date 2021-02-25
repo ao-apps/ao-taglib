@@ -301,7 +301,8 @@ public class InputTag extends ElementBufferedTag
 			pageContext.getServletContext(),
 			(HttpServletRequest)pageContext.getRequest(),
 			(HttpServletResponse)pageContext.getResponse(),
-			out
+			out,
+			false // Do not add extra indentation to JSP
 		);
 		Input.Dynamic<?> input = document.input().dynamic();
 		GlobalAttributesUtils.doGlobalAttributes(global, input);

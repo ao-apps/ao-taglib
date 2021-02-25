@@ -224,7 +224,8 @@ public class AreaTag extends ElementNullTag
 			pageContext.getServletContext(),
 			(HttpServletRequest)pageContext.getRequest(),
 			(HttpServletResponse)pageContext.getResponse(),
-			out
+			out,
+			false // Do not add extra indentation to JSP
 		);
 		Area<?> area = GlobalAttributesUtils.doGlobalAttributes(global, document.area())
 			.shape(shape)

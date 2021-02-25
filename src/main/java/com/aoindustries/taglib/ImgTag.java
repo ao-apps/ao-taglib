@@ -172,7 +172,8 @@ public class ImgTag extends ElementBufferedTag
 			pageContext.getServletContext(),
 			(HttpServletRequest)pageContext.getRequest(),
 			(HttpServletResponse)pageContext.getResponse(),
-			out
+			out,
+			false // Do not add extra indentation to JSP
 		);
 		GlobalAttributesUtils.doGlobalAttributes(global, document.img())
 			.src(UrlUtils.getSrc(pageContext, src, params, addLastModified, absolute, canonical))

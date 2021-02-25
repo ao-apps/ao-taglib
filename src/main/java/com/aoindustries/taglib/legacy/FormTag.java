@@ -170,7 +170,8 @@ public class FormTag extends ElementBufferedBodyTag
 			pageContext.getServletContext(),
 			request,
 			response,
-			out
+			out,
+			false // Do not add extra indentation to JSP
 		);
 		out.write("<form");
 		GlobalAttributesUtils.writeGlobalAttributes(global, out);
