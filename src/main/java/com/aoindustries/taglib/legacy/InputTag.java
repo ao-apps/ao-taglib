@@ -26,7 +26,7 @@ import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaSc
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import com.aoindustries.html.Document;
-import com.aoindustries.html.Input;
+import com.aoindustries.html.INPUT;
 import com.aoindustries.html.servlet.DocumentEE;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.lang.Coercion;
@@ -319,7 +319,7 @@ public class InputTag extends ElementBufferedBodyTag
 /**/
 		if(type == null) throw new AttributeRequiredException("type");
 		if(value == null) setValue(capturedBody.trim()); // TODO: Distinguish between empty and null, track valueSet boolean for when is set to null?
-		if(Input.Dynamic.Type.IMAGE.toString().equalsIgnoreCase(type)) {
+		if(INPUT.Dynamic.Type.IMAGE.toString().equalsIgnoreCase(type)) {
 			if(alt == null) throw new AttributeRequiredException("alt");
 		}
 		Document document = DocumentEE.get(
@@ -329,7 +329,7 @@ public class InputTag extends ElementBufferedBodyTag
 			out,
 			false // Do not add extra indentation to JSP
 		);
-		Input.Dynamic<?> input = document.input().dynamic();
+		INPUT.Dynamic<?> input = document.input().dynamic();
 		GlobalAttributesUtils.doGlobalAttributes(global, input);
 		if(alt != null) {
 			out.write(" alt=\"");
@@ -337,7 +337,7 @@ public class InputTag extends ElementBufferedBodyTag
 			out.write('"');
 		}
 		// autocomplete is not valid in all doctypes
-		if(!autocomplete) input.autocomplete(Input.Autocomplete.OFF);
+		if(!autocomplete) input.autocomplete(INPUT.Autocomplete.OFF);
 		input
 			.checked(checked)
 			.disabled(disabled);

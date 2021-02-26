@@ -23,7 +23,7 @@
 package com.aoindustries.taglib.legacy;
 
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.html.Area;
+import com.aoindustries.html.AREA;
 import com.aoindustries.html.Document;
 import com.aoindustries.html.servlet.DocumentEE;
 import com.aoindustries.lang.Coercion;
@@ -243,7 +243,7 @@ public class AreaTag extends ElementNullBodyTag
 			out,
 			false // Do not add extra indentation to JSP
 		);
-		Area<?> area = GlobalAttributesUtils.doGlobalAttributes(global, document.area())
+		AREA<?> area = GlobalAttributesUtils.doGlobalAttributes(global, document.area())
 			.shape(shape)
 			.coords(coords)
 			.href(UrlUtils.getHref(pageContext, href, params, addLastModified, absolute, canonical));

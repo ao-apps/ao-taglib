@@ -24,6 +24,7 @@ package com.aoindustries.taglib.legacy;
 
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.html.Document;
+import com.aoindustries.html.LINK;
 import com.aoindustries.html.servlet.DocumentEE;
 import com.aoindustries.lang.Coercion;
 import com.aoindustries.lang.Strings;
@@ -226,7 +227,7 @@ public class LinkTag extends ElementNullBodyTag
 				out,
 				false // Do not add extra indentation to JSP
 			);
-			com.aoindustries.html.Link<?> link = document.link();
+			LINK<?> link = document.link();
 			GlobalAttributesUtils.doGlobalAttributes(global, link);
 			link.href(UrlUtils.getHref(pageContext, href, params, addLastModified, absolute, canonical));
 			if(hreflang instanceof Locale) {
