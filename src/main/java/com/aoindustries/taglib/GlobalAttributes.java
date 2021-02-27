@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2020  AO Industries, Inc.
+ * Copyright (C) 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,11 +22,10 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.html.Attributes.Global;
 import java.util.Map;
 
 /**
- * {@linkplain Global Global attributes} when used in a filtered context.
+ * {@linkplain com.aoindustries.html.GlobalAttributes Global attributes} when used in a filtered context.
  * These attributes may not be set from nested tags due to the lack of buffering.
  *
  * @author  AO Industries, Inc.

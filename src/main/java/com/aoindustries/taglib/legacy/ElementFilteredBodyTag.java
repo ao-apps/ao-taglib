@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2020  AO Industries, Inc.
+ * Copyright (C) 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -23,7 +23,6 @@
 package com.aoindustries.taglib.legacy;
 
 import com.aoindustries.encoding.taglib.legacy.EncodingFilteredBodyTag;
-import com.aoindustries.html.Attributes.Global;
 import com.aoindustries.taglib.AttributeUtils;
 import com.aoindustries.taglib.GlobalAttributes;
 import com.aoindustries.taglib.GlobalAttributesUtils;
@@ -36,7 +35,7 @@ import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
- * Implements {@linkplain Global global attributes} on {@link EncodingFilteredBodyTag}.
+ * Implements {@linkplain com.aoindustries.html.GlobalAttributes global attributes} on {@link EncodingFilteredBodyTag}.
  *
  * @author  AO Industries, Inc.
  */

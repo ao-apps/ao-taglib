@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2020  AO Industries, Inc.
+ * Copyright (C) 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,8 +22,7 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.html.Attributes;
-import com.aoindustries.html.Attributes.Global;
+import com.aoindustries.html.attributes.Enum.Dir;
 import com.aoindustries.validation.ValidationResult;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +31,7 @@ import javax.servlet.jsp.tagext.TagExtraInfo;
 import javax.servlet.jsp.tagext.ValidationMessage;
 
 /**
- * Validates {@linkplain Global global attributes}.
+ * Validates {@linkplain com.aoindustries.html.GlobalAttributes global attributes}.
  *
  * @author  AO Industries, Inc.
  */
@@ -59,8 +58,8 @@ public class ElementTagTEI extends TagExtraInfo {
 		Object o = data.getAttribute("dir");
 		if(o != TagData.REQUEST_TIME_VALUE) {
 			// TODO: Other validation Strings.trimNullIfEmpty (or their normalize* method) for consistency with implementation
-			String dir = Attributes.Enum.Dir.dir.normalize((String)o);
-			ValidationResult validation = Attributes.Enum.Dir.dir.validate(dir);
+			String dir = Dir.dir.normalize((String)o);
+			ValidationResult validation = Dir.dir.validate(dir);
 			if(!validation.isValid()) {
 				messages.add(new ValidationMessage(data.getId(), validation.toString()));
 			}

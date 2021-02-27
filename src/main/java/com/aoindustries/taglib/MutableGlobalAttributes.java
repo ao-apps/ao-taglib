@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2020  AO Industries, Inc.
+ * Copyright (C) 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -24,6 +24,8 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.collections.MinimalMap;
 import com.aoindustries.html.Attributes;
+import com.aoindustries.html.attributes.Enum.Dir;
+import com.aoindustries.html.attributes.Text.Data;
 import com.aoindustries.lang.Freezable;
 import com.aoindustries.lang.Strings;
 import java.util.Map;
@@ -80,7 +82,7 @@ public class MutableGlobalAttributes implements GlobalAttributes, Freezable<Glob
 	 * Replaces all the data with the provided HTML attribute names and values.
 	 * Entries will a {@code null} value are not added.
 	 *
-	 * @throws  IllegalArgumentException  When {@code attrName} is not {@linkplain Attributes.Text.Data.data#validate(java.lang.String) valid}
+	 * @throws  IllegalArgumentException  When {@code attrName} is not {@linkplain Data.data#validate(java.lang.String) valid}
 	 *
 	 * @see  GlobalBufferedAttributes#setData(java.util.Map)
 	 */
@@ -88,7 +90,7 @@ public class MutableGlobalAttributes implements GlobalAttributes, Freezable<Glob
 		Map<String,Object> newData = MinimalMap.emptyMap();
 		if(data != null) {
 			for(Map.Entry<? extends String,?> entry : data.entrySet()) {
-				String attrName = Attributes.validate(entry.getKey(), Attributes.Text.Data.data::validate);
+				String attrName = Attributes.validate(entry.getKey(), Data.data::validate);
 				Object value = entry.getValue();
 				if(value != null) {
 					newData = MinimalMap.put(newData, attrName, value);
@@ -103,13 +105,13 @@ public class MutableGlobalAttributes implements GlobalAttributes, Freezable<Glob
 	 * Adds all the data with the provided HTML attribute names and values, replacing any attributes that already exist.
 	 * Entries with a {@code null} value will remove any existing attribute.
 	 *
-	 * @throws  IllegalArgumentException  When {@code attrName} is not {@linkplain Attributes.Text.Data.data#validate(java.lang.String) valid}
+	 * @throws  IllegalArgumentException  When {@code attrName} is not {@linkplain Data.data#validate(java.lang.String) valid}
 	 */
 	public MutableGlobalAttributes addData(Map<? extends String,?> data) throws IllegalArgumentException {
 		if(data != null) {
 			Map<String,Object> newData = this.data;
 			for(Map.Entry<? extends String,?> entry : data.entrySet()) {
-				String attrName = Attributes.validate(entry.getKey(), Attributes.Text.Data.data::validate);
+				String attrName = Attributes.validate(entry.getKey(), Data.data::validate);
 				Object value = entry.getValue();
 				newData =
 					(value == null)
@@ -125,12 +127,12 @@ public class MutableGlobalAttributes implements GlobalAttributes, Freezable<Glob
 	 * Adds the data with the provided HTML attribute name and value, replacing any attribute that already exists.
 	 * When value is {@code null}, will remove an existing attribute.
 	 *
-	 * @throws  IllegalArgumentException  When {@code attrName} is not {@linkplain Attributes.Text.Data.data#validate(java.lang.String) valid}
+	 * @throws  IllegalArgumentException  When {@code attrName} is not {@linkplain Data.data#validate(java.lang.String) valid}
 	 *
 	 * @see  DataAttribute#addData(java.lang.String, java.lang.Object)
 	 */
 	public MutableGlobalAttributes addData(String attrName, Object value) throws IllegalArgumentException {
-		Attributes.validate(attrName, Attributes.Text.Data.data::validate);
+		Attributes.validate(attrName, Data.data::validate);
 		this.data =
 			(data == null)
 			? MinimalMap.remove(this.data, attrName)
@@ -168,8 +170,8 @@ public class MutableGlobalAttributes implements GlobalAttributes, Freezable<Glob
 
 	public MutableGlobalAttributes setDir(String dir) throws IllegalArgumentException {
 		this.dir = Attributes.validate(
-			Attributes.Enum.Dir.dir.normalize(dir),
-			Attributes.Enum.Dir.dir::validate
+			Dir.dir.normalize(dir),
+			Dir.dir::validate
 		);
 		return this;
 	}

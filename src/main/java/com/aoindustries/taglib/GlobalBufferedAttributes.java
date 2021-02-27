@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2020  AO Industries, Inc.
+ * Copyright (C) 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,12 +22,11 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.html.Attributes;
-import com.aoindustries.html.Attributes.Global;
+import com.aoindustries.html.attributes.Text.Data;
 import java.util.Map;
 
 /**
- * {@linkplain Global Global attributes} when used in a buffered context.
+ * {@linkplain com.aoindustries.html.GlobalAttributes Global attributes} when used in a buffered context.
  * These attributes may be set from nested tags due to the buffering.
  *
  * @author  AO Industries, Inc.
@@ -46,7 +45,7 @@ public interface GlobalBufferedAttributes extends
 	 * Replaces all the data with the provided HTML attribute names and values.
 	 * Entries will a {@code null} value are not added.
 	 *
-	 * @throws  IllegalArgumentException  When {@code attrName} is not {@linkplain Attributes.Text.Data.data#validate(java.lang.String) valid}
+	 * @throws  IllegalArgumentException  When {@code attrName} is not {@linkplain Data.data#validate(java.lang.String) valid}
 	 *
 	 * @see  MutableGlobalAttributes#setData(java.util.Map)
 	 */

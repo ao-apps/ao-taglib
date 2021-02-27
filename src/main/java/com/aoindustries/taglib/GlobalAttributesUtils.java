@@ -24,8 +24,7 @@ package com.aoindustries.taglib;
 
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
-import com.aoindustries.html.Attributes;
-import com.aoindustries.html.Attributes.Global;
+import com.aoindustries.html.attributes.Text.Data;
 import com.aoindustries.lang.Coercion;
 import com.aoindustries.lang.Throwables;
 import com.aoindustries.util.i18n.MarkupCoercion;
@@ -38,7 +37,7 @@ import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
- * Utilities for working with {@linkplain Global global attributes}.
+ * Utilities for working with {@linkplain com.aoindustries.html.GlobalAttributes global attributes}.
  *
  * @author  AO Industries, Inc.
  */
@@ -59,19 +58,19 @@ public class GlobalAttributesUtils {
 	@SuppressWarnings({"UseSpecificCatch", "TooBroadCatch"})
 	public static boolean addDynamicAttribute(String uri, String localName, Object value, List<String> expectedPatterns, MutableGlobalAttributes global) throws JspTagException {
 		try {
-			if(localName.startsWith(Attributes.Text.Data.data.ATTRIBUTE_PREFIX)) {
+			if(localName.startsWith(Data.data.ATTRIBUTE_PREFIX)) {
 				global.addData(localName, value);
 				return true;
 			} else if(localName.startsWith(DATASET_ATTRIBUTE_PREFIX)) {
 				global.addData(
-					Attributes.Text.Data.dataset.toAttrName(
+					Data.dataset.toAttrName(
 						localName.substring(DATASET_ATTRIBUTE_PREFIX.length())
 					),
 					value
 				);
 				return true;
 			} else {
-				expectedPatterns.add(Attributes.Text.Data.data.ATTRIBUTE_PREFIX + "*");
+				expectedPatterns.add(Data.data.ATTRIBUTE_PREFIX + "*");
 				expectedPatterns.add(GlobalAttributesUtils.DATASET_ATTRIBUTE_PREFIX + "*");
 				return false;
 			}
@@ -91,7 +90,7 @@ public class GlobalAttributesUtils {
 		to.setStyle(from.getStyle());
 	}
 
-	public static <G extends Global<?>> G doGlobalAttributes(GlobalAttributes from, G to) throws IOException {
+	public static <G extends com.aoindustries.html.GlobalAttributes<?>> G doGlobalAttributes(GlobalAttributes from, G to) throws IOException {
 		// TODO: normalize, then only throw when non-empty/null.  Here and other attributes.
 		// TODO: Once that is done, just do like before:
 		// to
@@ -134,7 +133,7 @@ public class GlobalAttributesUtils {
 		for(Map.Entry<String,Object> entry : global.getData().entrySet()) {
 			out.write(' ');
 			String attrName = entry.getKey();
-			assert Attributes.Text.Data.data.validate(attrName).isValid();
+			assert Data.data.validate(attrName).isValid();
 			out.write(attrName);
 			out.write("=\"");
 			encodeTextInXhtmlAttribute(entry.getValue(), out);
@@ -171,7 +170,7 @@ public class GlobalAttributesUtils {
 		for(Map.Entry<String,Object> entry : global.getData().entrySet()) {
 			out.append(' ');
 			String attrName = entry.getKey();
-			assert Attributes.Text.Data.data.validate(attrName).isValid();
+			assert Data.data.validate(attrName).isValid();
 			out.append(attrName);
 			out.append("=\"");
 			encodeTextInXhtmlAttribute(entry.getValue(), out);
