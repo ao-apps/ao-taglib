@@ -143,7 +143,7 @@ public class TextareaTag extends ElementBufferedTag
 		if(cols != null) {
 			out.write(" cols=\"");
 			encodeTextInXhtmlAttribute(cols, out);
-			out.write('"');
+			out.append('"');
 		}
 		if(disabled) {
 			out.write(" disabled");
@@ -152,7 +152,7 @@ public class TextareaTag extends ElementBufferedTag
 		if(name != null) {
 			out.write(" name=\"");
 			encodeTextInXhtmlAttribute(name, out);
-			out.write('"');
+			out.append('"');
 		}
 		if(readonly) {
 			out.write(" readonly");
@@ -161,14 +161,14 @@ public class TextareaTag extends ElementBufferedTag
 		if(rows != null) {
 			out.write(" rows=\"");
 			encodeTextInXhtmlAttribute(rows, out);
-			out.write('"');
+			out.append('"');
 		}
 		if(onchange != null) {
 			out.write(" onchange=\"");
 			MarkupCoercion.write(onchange, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
-			out.write('"');
+			out.append('"');
 		}
-		out.write('>');
+		out.append('>');
 		Coercion.write(value, textInXhtmlEncoder, out);
 		out.write("</textarea>");
 /* BodyTag only:

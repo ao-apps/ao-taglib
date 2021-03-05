@@ -179,7 +179,7 @@ public class FormTag extends ElementBufferedTag
 			AnyURI actionURI = new AnyURI(encodedAction);
 			actionParams = URIParametersUtils.of(actionURI.getQueryString()).getParameterMap();
 			textInXhtmlAttributeEncoder.write(actionURI.setQueryString(null).toString(), out);
-			out.write('"');
+			out.append('"');
 		} else {
 			if(document.doctype != Doctype.HTML5) {
 				// Action required before HTML 5
@@ -190,24 +190,24 @@ public class FormTag extends ElementBufferedTag
 		if(enctype != null) {
 			out.write(" enctype=\"");
 			encodeTextInXhtmlAttribute(enctype, out);
-			out.write('"');
+			out.append('"');
 		}
 		if(method != null) {
 			out.write(" method=\"");
 			out.write(method);
-			out.write('"');
+			out.append('"');
 		}
 		if(target != null) {
 			out.write(" target=\"");
 			encodeTextInXhtmlAttribute(target, out);
-			out.write('"');
+			out.append('"');
 		}
 		if(onsubmit != null) {
 			out.write(" onsubmit=\"");
 			MarkupCoercion.write(onsubmit, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
-			out.write('"');
+			out.append('"');
 		}
-		out.write('>');
+		out.append('>');
 		// Automatically add URL request parameters as hidden fields to support custom URL rewritten parameters in GET requests.
 		boolean didDiv = false;
 		if(actionParams != null && !actionParams.isEmpty()) {

@@ -122,35 +122,34 @@ public class GlobalAttributesUtils {
 		if(id != null) {
 			out.write(" id=\"");
 			encodeTextInXhtmlAttribute(id, out);
-			out.write('"');
+			out.append('"');
 		}
 		String clazz = global.getClazz();
 		if(clazz != null) {
 			out.write(" class=\"");
 			encodeTextInXhtmlAttribute(clazz, out);
-			out.write('"');
+			out.append('"');
 		}
 		for(Map.Entry<String,Object> entry : global.getData().entrySet()) {
-			out.write(' ');
 			String attrName = entry.getKey();
 			assert Data.data.validate(attrName).isValid();
-			out.write(attrName);
+			out.append(' ').write(attrName);
 			out.write("=\"");
 			encodeTextInXhtmlAttribute(entry.getValue(), out);
-			out.write('"');
+			out.append('"');
 		}
 		String dir = global.getDir();
 		if(dir != null) {
 			out.write(" dir=\"");
 			encodeTextInXhtmlAttribute(dir, out);
-			out.write('"');
+			out.append('"');
 		}
 		Object style = Coercion.trimNullIfEmpty(global.getStyle());
 		if(style != null) {
 			out.write(" style=\"");
 			// TODO: Review other MarkupType.JAVASCRIPT that should be MarkupType.CSS
 			MarkupCoercion.write(style, MarkupType.CSS, true, textInXhtmlAttributeEncoder, false, out);
-			out.write('"');
+			out.append('"');
 		}
 	}
 

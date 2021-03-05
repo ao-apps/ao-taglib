@@ -309,7 +309,7 @@ public class InputTag extends ElementBufferedTag
 		if(alt != null) {
 			out.write(" alt=\"");
 			MarkupCoercion.write(alt, MarkupType.TEXT, true, textInXhtmlAttributeEncoder, false, out);
-			out.write('"');
+			out.append('"');
 		}
 		// autocomplete is not valid in all doctypes
 		if(!autocomplete) input.autocomplete(INPUT.Autocomplete.OFF);
@@ -319,12 +319,12 @@ public class InputTag extends ElementBufferedTag
 		if(height != null) {
 			out.write(" height=\"");
 			Coercion.write(height, textInXhtmlAttributeEncoder, out);
-			out.write('"');
+			out.append('"');
 		}
 		if(maxlength != null) {
 			out.write(" maxlength=\"");
 			out.write(maxlength.toString());
-			out.write('"');
+			out.append('"');
 		}
 		input
 			.name(name)
@@ -332,7 +332,7 @@ public class InputTag extends ElementBufferedTag
 		if(size != null) {
 			out.write(" size=\"");
 			Coercion.write(size, textInXhtmlAttributeEncoder, out);
-			out.write('"');
+			out.append('"');
 		}
 		UrlUtils.writeSrc(pageContext, out, src, params, addLastModified, absolute, canonical);
 		input
@@ -342,29 +342,29 @@ public class InputTag extends ElementBufferedTag
 		if(width != null) {
 			out.write(" width=\"");
 			Coercion.write(width, textInXhtmlAttributeEncoder, out);
-			out.write('"');
+			out.append('"');
 		}
 		input.value(value);
 		if(onblur != null) {
 			out.write(" onblur=\"");
 			MarkupCoercion.write(onblur, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
-			out.write('"');
+			out.append('"');
 		}
 		if(onchange != null) {
 			out.write(" onchange=\"");
 			MarkupCoercion.write(onchange, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
-			out.write('"');
+			out.append('"');
 		}
 		input.onclick(onclick);
 		if(onfocus != null) {
 			out.write(" onfocus=\"");
 			MarkupCoercion.write(onfocus, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
-			out.write('"');
+			out.append('"');
 		}
 		if(onkeypress != null) {
 			out.write(" onkeypress=\"");
 			MarkupCoercion.write(onkeypress, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
-			out.write('"');
+			out.append('"');
 		}
 		input.__();
 /* BodyTag only:

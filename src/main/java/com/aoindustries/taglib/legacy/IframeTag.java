@@ -164,22 +164,21 @@ public class IframeTag extends ElementBufferedBodyTag
 		if(_id != null) {
 			out.write(" name=\"");
 			encodeTextInXhtmlAttribute(_id, out);
-			out.write('"');
+			out.append('"');
 		}
 		UrlUtils.writeSrc(pageContext, out, src, params, addLastModified, absolute, canonical);
 		if(width != null) {
 			out.write(" width=\"");
 			Coercion.write(width, textInXhtmlAttributeEncoder, out);
-			out.write('"');
+			out.append('"');
 		}
 		if(height != null) {
 			out.write(" height=\"");
 			Coercion.write(height, textInXhtmlAttributeEncoder, out);
-			out.write('"');
+			out.append('"');
 		}
 		out.write(" frameborder=\"");
-		out.write(frameborder ? '1' : '0');
-		out.write("\">");
+		out.append(frameborder ? '1' : '0').write("\">");
 		MarkupCoercion.write(capturedBody, MarkupType.XHTML, out);
 		out.write("</iframe>");
 /* BodyTag only: */

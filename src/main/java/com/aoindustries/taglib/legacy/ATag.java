@@ -220,51 +220,51 @@ public class ATag extends ElementBufferedBodyTag
 		if(hreflang instanceof Locale) {
 			out.write(" hreflang=\"");
 			encodeTextInXhtmlAttribute(((Locale)hreflang).toLanguageTag(), out);
-			out.write('"');
+			out.append('"');
 		} else {
 			hreflang = AttributeUtils.trimNullIfEmpty(hreflang);
 			if(hreflang != null) {
 				out.write(" hreflang=\"");
 				Coercion.write(hreflang, textInXhtmlAttributeEncoder, out);
-				out.write('"');
+				out.append('"');
 			}
 		}
 		if(rel != null) {
 			out.write(" rel=\"");
 			encodeTextInXhtmlAttribute(rel, out);
-			out.write('"');
+			out.append('"');
 		}
 		if(target != null) {
 			out.write(" target=\"");
 			encodeTextInXhtmlAttribute(target, out);
-			out.write('"');
+			out.append('"');
 		}
 		if(title != null) {
 			out.write(" title=\"");
 			MarkupCoercion.write(title, MarkupType.TEXT, true, textInXhtmlAttributeEncoder, false, out);
-			out.write('"');
+			out.append('"');
 		}
 		if(type != null) {
 			out.write(" type=\"");
 			encodeTextInXhtmlAttribute(type, out);
-			out.write('"');
+			out.append('"');
 		}
 		if(onclick != null) {
 			out.write(" onclick=\"");
 			MarkupCoercion.write(onclick, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
-			out.write('"');
+			out.append('"');
 		}
 		if(onmouseout != null) {
 			out.write(" onmouseout=\"");
 			MarkupCoercion.write(onmouseout, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
-			out.write('"');
+			out.append('"');
 		}
 		if(onmouseover != null) {
 			out.write(" onmouseover=\"");
 			MarkupCoercion.write(onmouseover, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
-			out.write('"');
+			out.append('"');
 		}
-		out.write('>');
+		out.append('>');
 		BufferResult trimmedBody = capturedBody.trim();
 		if(trimmedBody.getLength() == 0) { // TODO: Make a BufferResult.isEmpty() that defaults to getLength() == 0, but provides a chance at optimizations
 			// When the body is empty after trimming, display the href itself

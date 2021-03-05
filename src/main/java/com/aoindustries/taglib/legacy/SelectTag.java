@@ -154,34 +154,34 @@ public class SelectTag extends ElementBufferedBodyTag
 		if(name != null) {
 			out.write(" name=\"");
 			encodeTextInXhtmlAttribute(name, out);
-			out.write('"');
+			out.append('"');
 		}
 		if(size != null) {
 			out.write(" size=\"");
 			Coercion.write(size, textInXhtmlAttributeEncoder, out);
-			out.write('"');
+			out.append('"');
 		}
 		if(onblur != null) {
 			out.write(" onblur=\"");
 			MarkupCoercion.write(onblur, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
-			out.write('"');
+			out.append('"');
 		}
 		if(onchange != null) {
 			out.write(" onchange=\"");
 			MarkupCoercion.write(onchange, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
-			out.write('"');
+			out.append('"');
 		}
 		if(onfocus != null) {
 			out.write(" onfocus=\"");
 			MarkupCoercion.write(onfocus, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
-			out.write('"');
+			out.append('"');
 		}
 		if(onkeypress != null) {
 			out.write(" onkeypress=\"");
 			MarkupCoercion.write(onkeypress, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
-			out.write('"');
+			out.append('"');
 		}
-		out.write('>');
+		out.append('>');
 		MarkupCoercion.write(capturedBody, MarkupType.XHTML, out);
 		out.write("</select>");
 /* BodyTag only: */
