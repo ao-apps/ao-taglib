@@ -183,7 +183,8 @@ public class ImgTag extends ElementBufferedBodyTag
 			(HttpServletRequest)pageContext.getRequest(),
 			(HttpServletResponse)pageContext.getResponse(),
 			out,
-			false // Do not add extra indentation to JSP
+			false, // Do not add extra newlines to JSP
+			false  // Do not add extra indentation to JSP
 		);
 		GlobalAttributesUtils.doGlobalAttributes(global, document.img())
 			.src(UrlUtils.getSrc(pageContext, src, params, addLastModified, absolute, canonical))

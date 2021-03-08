@@ -171,7 +171,8 @@ public class FormTag extends ElementBufferedBodyTag
 			request,
 			response,
 			out,
-			false // Do not add extra indentation to JSP
+			false, // Do not add extra newlines to JSP
+			false  // Do not add extra indentation to JSP
 		);
 		out.write("<form");
 		GlobalAttributesUtils.writeGlobalAttributes(global, out);
@@ -222,12 +223,12 @@ public class FormTag extends ElementBufferedBodyTag
 		if(actionParams != null && !actionParams.isEmpty()) {
 			for(Map.Entry<String,List<String>> entry : actionParams.entrySet()) {
 				if(!didDiv) {
-					out.write("<div>\n");
+					out.write("<div>\n"); // TODO: This div not required in HTML 5
 					didDiv = true;
 				}
 				String name = entry.getKey();
 				for(String value : entry.getValue()) {
-					document.input().hidden().name(name).value(value).__().nl();
+					document.input().hidden().name(name).value(value).__().autoNl();
 				}
 			}
 		}
@@ -242,7 +243,7 @@ public class FormTag extends ElementBufferedBodyTag
 				List<String> paramValues = entry.getValue();
 				assert !paramValues.isEmpty();
 				for(String paramValue : paramValues) {
-					document.input().hidden().name(name).value(paramValue).__().nl();
+					document.input().hidden().name(name).value(paramValue).__().autoNl();
 				}
 			}
 		}

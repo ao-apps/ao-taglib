@@ -77,7 +77,8 @@ public class BaseTag extends ElementNullTag {
 					request,
 					response,
 					out,
-					false // Do not add extra indentation to JSP
+					false, // Do not add extra newlines to JSP
+					false  // Do not add extra indentation to JSP
 				);
 
 				// Note: This does not directly do response encodeURL because URL rewriting would interfere with the intent of the base tag

@@ -72,7 +72,8 @@ public class ColTag extends ElementNullBodyTag {
 			(HttpServletRequest)pageContext.getRequest(),
 			(HttpServletResponse)pageContext.getResponse(),
 			out,
-			false // Do not add extra indentation to JSP
+			false, // Do not add extra newlines to JSP
+			false  // Do not add extra indentation to JSP
 		).col();
 		GlobalAttributesUtils.doGlobalAttributes(global, col);
 		if(span != 0) col.span(span);

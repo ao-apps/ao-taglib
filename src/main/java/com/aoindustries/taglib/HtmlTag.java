@@ -118,6 +118,24 @@ public class HtmlTag extends ElementFilteredTag {
 		}
 	}
 
+	private Boolean autonli;
+	public void setAutonli(String autonli) {
+		if(autonli == null) {
+			this.autonli = null;
+		} else {
+			autonli = autonli.trim();
+			if(autonli.isEmpty() || "auto".equalsIgnoreCase(autonli)) {
+				this.autonli = null;
+			} else if("true".equalsIgnoreCase(autonli)) {
+				this.autonli = true;
+			} else if("false".equalsIgnoreCase(autonli)) {
+				this.autonli = false;
+			} else {
+				throw new LocalizedIllegalArgumentException(RESOURCES, "autonli.invalid", autonli);
+			}
+		}
+	}
+
 	private Boolean indent;
 	public void setIndent(String indent) {
 		if(indent == null) {
@@ -143,6 +161,8 @@ public class HtmlTag extends ElementFilteredTag {
 	private transient boolean setSerialization;
 	private transient Doctype oldDoctype;
 	private transient boolean setDoctype;
+	private transient Boolean oldAutonli;
+	private transient boolean setAutonli;
 	private transient Boolean oldIndent;
 	private transient boolean setIndent;
 	private transient Registry oldPageRegistry;
@@ -150,12 +170,15 @@ public class HtmlTag extends ElementFilteredTag {
 	private void init() {
 		serialization = null;
 		doctype = null;
+		autonli = null;
 		indent = null;
 		oldSerialization = null;
 		oldStrutsXhtml = null;
 		setSerialization = false;
 		oldDoctype = null;
 		setDoctype = false;
+		oldAutonli = null;
+		setAutonli = false;
 		oldIndent = null;
 		setIndent = false;
 		oldPageRegistry = null;
@@ -174,6 +197,8 @@ public class HtmlTag extends ElementFilteredTag {
 		boolean setSerialization;
 		Doctype oldDoctype;
 		boolean setDoctype;
+		Boolean oldAutonli;
+		boolean setAutonli;
 		Boolean oldIndent;
 		boolean setIndent;
 		Registry oldPageRegistry;
@@ -208,40 +233,51 @@ public class HtmlTag extends ElementFilteredTag {
 /* SimpleTag only: */
 			try {
 /**/
-				if(indent == null) {
-					DocumentEE.getIndent(servletContext, request); // Gets or sets the request attribute for "auto"
-					oldIndent = null;
-					setIndent = false;
+				if(autonli == null) {
+					DocumentEE.getAutonli(servletContext, request); // Gets or sets the request attribute for "auto"
+					oldAutonli = null;
+					setAutonli = false;
 				} else {
-					oldIndent = DocumentEE.replaceIndent(request, indent);
-					setIndent = true;
+					oldAutonli = DocumentEE.replaceAutonli(request, autonli);
+					setAutonli = true;
 				}
 /* SimpleTag only: */
 				try {
 /**/
-					oldPageRegistry = RegistryEE.Page.get(request);
-					if(oldPageRegistry == null) {
-						// Create a new page-scope registry
-						RegistryEE.Page.set(request, new Registry());
+					if(indent == null) {
+						DocumentEE.getIndent(servletContext, request); // Gets or sets the request attribute for "auto"
+						oldIndent = null;
+						setIndent = false;
+					} else {
+						oldIndent = DocumentEE.replaceIndent(request, indent);
+						setIndent = true;
 					}
 /* SimpleTag only: */
 					try {
 /**/
-						ServletResponse response = pageContext.getResponse();
-						// Clear the output buffer
-						response.resetBuffer();
-						// Set the content type
-						final String documentEncoding = Document.ENCODING.name();
-						try {
-							ServletUtil.setContentType(response, currentSerialization.getContentType(), documentEncoding);
-						} catch(ServletException e) {
-							throw new JspTagException(e);
+						oldPageRegistry = RegistryEE.Page.get(request);
+						if(oldPageRegistry == null) {
+							// Create a new page-scope registry
+							RegistryEE.Page.set(request, new Registry());
 						}
-						// Write doctype
-						currentDoctype.xmlDeclaration(currentSerialization, documentEncoding, out);
-						currentDoctype.doctype(currentSerialization, out);
-						// Write <html>
-						beginHtmlTag(response, out, currentSerialization, this);
+/* SimpleTag only: */
+						try {
+/**/
+							ServletResponse response = pageContext.getResponse();
+							// Clear the output buffer
+							response.resetBuffer();
+							// Set the content type
+							final String documentEncoding = Document.ENCODING.name();
+							try {
+								ServletUtil.setContentType(response, currentSerialization.getContentType(), documentEncoding);
+							} catch(ServletException e) {
+								throw new JspTagException(e);
+							}
+							// Write doctype
+							currentDoctype.xmlDeclaration(currentSerialization, documentEncoding, out);
+							currentDoctype.doctype(currentSerialization, out);
+							// Write <html>
+							beginHtmlTag(response, out, currentSerialization, this);
 /* BodyTag only:
 		return EVAL_BODY_FILTERED;
 	}
@@ -250,10 +286,10 @@ public class HtmlTag extends ElementFilteredTag {
 	protected int doEndTag(Writer out) throws JspException, IOException {
 /**/
 /* SimpleTag only: */
-						super.doTag(out);
+							super.doTag(out);
 /**/
-						// Write </html>
-						endHtmlTag(out);
+							// Write </html>
+							endHtmlTag(out);
 /* BodyTag only:
 		return EVAL_PAGE;
 	}
@@ -265,16 +301,21 @@ public class HtmlTag extends ElementFilteredTag {
 				javax.servlet.ServletRequest request = pageContext.getRequest();
 /**/
 /* SimpleTag only: */
+						} finally {
+/**/
+							if(oldPageRegistry == null) {
+								RegistryEE.Page.set(request, null);
+							}
+/* SimpleTag only: */
+						}
 					} finally {
 /**/
-						if(oldPageRegistry == null) {
-							RegistryEE.Page.set(request, null);
-						}
+						if(setIndent) DocumentEE.setIndent(request, oldIndent);
 /* SimpleTag only: */
 					}
 				} finally {
 /**/
-					if(setIndent) DocumentEE.setIndent(request, oldIndent);
+					if(setAutonli) DocumentEE.setAutonli(request, oldAutonli);
 /* SimpleTag only: */
 				}
 			} finally {
