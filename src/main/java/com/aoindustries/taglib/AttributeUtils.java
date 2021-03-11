@@ -214,7 +214,7 @@ public final class AttributeUtils  {
 	 * @deprecated  Please use {@link Attributes#validate(java.lang.Object, java.util.function.Function)} instead.
 	 */
 	@Deprecated
-	public static <T> T validate(T value, Function<? super T,ValidationResult> validator) throws IllegalArgumentException {
+	public static <T> T validate(T value, Function<? super T, ValidationResult> validator) throws IllegalArgumentException {
 		return Attributes.validate(value, validator);
 	}
 

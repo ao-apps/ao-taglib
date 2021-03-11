@@ -103,7 +103,7 @@ public class OptionTag extends ElementBufferedTag
 		if(!valueSet) setValue(capturedBody);
 		GlobalAttributesUtils.doGlobalAttributes(
 			global,
-			DocumentEE.get(
+			new DocumentEE(
 				pageContext.getServletContext(),
 				(HttpServletRequest)pageContext.getRequest(),
 				(HttpServletResponse)pageContext.getResponse(),

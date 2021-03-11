@@ -45,7 +45,7 @@ public interface GlobalAttributes {
 	/**
 	 * Gets the HTML data attributes or an empty map when there are none.
 	 */
-	Map<String,Object> getData();
+	Map<String, Object> getData();
 
 	String getDir();
 

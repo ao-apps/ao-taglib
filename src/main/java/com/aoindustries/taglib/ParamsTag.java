@@ -100,9 +100,9 @@ public class ParamsTag extends EncodingNullTag
 		ParamsAttribute paramsAttribute = AttributeUtils.requireAttributeParent(TAG_NAME, this, "params", ParamsAttribute.class);
 		if(values!=null) {
 			if(name==null) {
-				if(values instanceof Map<?,?>) {
+				if(values instanceof Map<?, ?>) {
 					// Get from Map with exclude
-					for(Map.Entry<?,?> entry : ((Map<?,?>)values).entrySet()) {
+					for(Map.Entry<?, ?> entry : ((Map<?, ?>)values).entrySet()) {
 						Object entryKey = entry.getKey();
 						if(entryKey != null) {
 							String paramName = Coercion.toString(entryKey);
@@ -186,7 +186,7 @@ public class ParamsTag extends EncodingNullTag
 						values
 					);
 				} else if(
-					values instanceof Map<?,?>
+					values instanceof Map<?, ?>
 					|| values instanceof URIParameters
 				) {
 					throw new LocalizedJspTagException(RESOURCES, "mapWithNameNotAllowed");

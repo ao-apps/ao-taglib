@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2020  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -132,7 +132,7 @@ final public class Functions {
 	@SuppressWarnings("RedundantStringConstructorCall")
 	private static final String NOT_FOUND = new String("<<<NOT_FOUND>>>");
 
-	private static final ConcurrentMap<Tuple2<String,String>,String> classPathProjectVersions = new ConcurrentHashMap<>();
+	private static final ConcurrentMap<Tuple2<String, String>, String> classPathProjectVersions = new ConcurrentHashMap<>();
 
 	@SuppressWarnings("StringEquality")
 	public static String getProjectVersion(String lib, String groupId, String artifactId, String def) throws IOException {
@@ -165,7 +165,7 @@ final public class Functions {
 		if(lastModified != 0) {
 			// Get the application-scope cache
 			@SuppressWarnings("unchecked")
-			ConcurrentMap<String,Tuple2<Long,String>> resourceProjectVersions =
+			ConcurrentMap<String, Tuple2<Long, String>> resourceProjectVersions =
 				(ConcurrentHashMap)servletContext.getAttribute(RESOURCE_PROJECT_VERSIONS_APPLICATION_KEY);
 			if(resourceProjectVersions == null) {
 				// ok if created twice due to race condition - it's just a cache
@@ -173,7 +173,7 @@ final public class Functions {
 				servletContext.setAttribute(RESOURCE_PROJECT_VERSIONS_APPLICATION_KEY, resourceProjectVersions);
 			}
 			// Find any cache entry
-			Tuple2<Long,String> cached = resourceProjectVersions.get(resourceName);
+			Tuple2<Long, String> cached = resourceProjectVersions.get(resourceName);
 			String result;
 			if(cached != null && cached.getElement1() == lastModified) {
 				result = cached.getElement2();
@@ -207,7 +207,7 @@ final public class Functions {
 			if(result != null) return result;
 		}
 		// Check for cached in classpath (cached found or not found)
-		Tuple2<String,String> classPathKey = new Tuple2<>(groupId, artifactId);
+		Tuple2<String, String> classPathKey = new Tuple2<>(groupId, artifactId);
 		String result = classPathProjectVersions.get(classPathKey);
 		if(result != null) {
 			if(logger.isLoggable(Level.FINER)) {

@@ -63,11 +63,11 @@ abstract public class ElementNullTag extends EncodingNullTag
 	}
 
 	@Override
-	public Map<String,Object> getData() {
+	public Map<String, Object> getData() {
 		return global.getData();
 	}
 	@Override
-	public void setData(Map<? extends String,?> data) {
+	public void setData(Map<? extends String, ?> data) {
 		global.setData(data);
 	}
 	@Override

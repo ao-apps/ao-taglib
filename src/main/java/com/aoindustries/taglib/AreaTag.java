@@ -24,7 +24,6 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.html.AREA;
-import com.aoindustries.html.Document;
 import com.aoindustries.html.servlet.DocumentEE;
 import com.aoindustries.i18n.Resources;
 import com.aoindustries.lang.Coercion;
@@ -220,7 +219,7 @@ public class AreaTag extends ElementNullTag
 		if(href != null) {
 			if(alt == null) throw new AttributeRequiredException("alt");
 		}
-		Document document = DocumentEE.get(
+		DocumentEE document = new DocumentEE(
 			pageContext.getServletContext(),
 			(HttpServletRequest)pageContext.getRequest(),
 			(HttpServletResponse)pageContext.getResponse(),
@@ -228,7 +227,7 @@ public class AreaTag extends ElementNullTag
 			false, // Do not add extra newlines to JSP
 			false  // Do not add extra indentation to JSP
 		);
-		AREA<?> area = GlobalAttributesUtils.doGlobalAttributes(global, document.area())
+		AREA<?, ?> area = GlobalAttributesUtils.doGlobalAttributes(global, document.area())
 			.shape(shape)
 			.coords(coords)
 			.href(UrlUtils.getHref(pageContext, href, params, addLastModified, absolute, canonical));

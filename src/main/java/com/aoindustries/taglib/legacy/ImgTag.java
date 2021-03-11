@@ -23,7 +23,6 @@
 package com.aoindustries.taglib.legacy;
 
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.html.Document;
 import com.aoindustries.html.servlet.DocumentEE;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.lang.Strings;
@@ -178,7 +177,7 @@ public class ImgTag extends ElementBufferedBodyTag
 /**/
 		if(src == null) src = capturedBody.trim().toString(); // TODO: Validate here?
 		if(usemap == null && alt == null) throw new AttributeRequiredException("alt");
-		Document document = DocumentEE.get(
+		DocumentEE document = new DocumentEE(
 			pageContext.getServletContext(),
 			(HttpServletRequest)pageContext.getRequest(),
 			(HttpServletResponse)pageContext.getResponse(),

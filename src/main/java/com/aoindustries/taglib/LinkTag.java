@@ -23,7 +23,6 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.html.Document;
 import com.aoindustries.html.LINK;
 import com.aoindustries.html.servlet.DocumentEE;
 import com.aoindustries.lang.Coercion;
@@ -81,7 +80,7 @@ public class LinkTag extends ElementNullTag
 		setAbsolute(link.getAbsolute());
 		URIParameters linkParams = link.getParams();
 		if(linkParams != null) {
-			for(Map.Entry<String,List<String>> entry : linkParams.getParameterMap().entrySet()) {
+			for(Map.Entry<String, List<String>> entry : linkParams.getParameterMap().entrySet()) {
 				String paramName = entry.getKey();
 				for(String paramValue : entry.getValue()) {
 					addParam(paramName, (Object)paramValue);
@@ -209,7 +208,7 @@ public class LinkTag extends ElementNullTag
 				)
 			);
 		} else {
-			Document document = DocumentEE.get(
+			DocumentEE document = new DocumentEE(
 				pageContext.getServletContext(),
 				(HttpServletRequest)pageContext.getRequest(),
 				(HttpServletResponse)pageContext.getResponse(),
@@ -217,7 +216,7 @@ public class LinkTag extends ElementNullTag
 				false, // Do not add extra newlines to JSP
 				false  // Do not add extra indentation to JSP
 			);
-			LINK<?> link = document.link();
+			LINK<?, ?> link = document.link();
 			GlobalAttributesUtils.doGlobalAttributes(global, link);
 			link.href(UrlUtils.getHref(pageContext, href, params, addLastModified, absolute, canonical));
 			if(hreflang instanceof Locale) {

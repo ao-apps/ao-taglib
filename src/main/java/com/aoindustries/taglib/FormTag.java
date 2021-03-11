@@ -27,7 +27,6 @@ import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaSc
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
-import com.aoindustries.html.Document;
 import com.aoindustries.html.servlet.DocumentEE;
 import com.aoindustries.i18n.Resources;
 import com.aoindustries.io.buffer.BufferResult;
@@ -157,7 +156,7 @@ public class FormTag extends ElementBufferedTag
 /**/
 		HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
 		HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
-		Document document = DocumentEE.get(
+		DocumentEE document = new DocumentEE(
 			pageContext.getServletContext(),
 			request,
 			response,
@@ -167,7 +166,7 @@ public class FormTag extends ElementBufferedTag
 		);
 		out.write("<form");
 		GlobalAttributesUtils.writeGlobalAttributes(global, out);
-		Map<String,List<String>> actionParams;
+		Map<String, List<String>> actionParams;
 		if(action != null) {
 			out.write(" action=\"");
 			String encodedAction = URIResolver.getAbsolutePath(Dispatcher.getCurrentPagePath(request), action);
@@ -212,7 +211,7 @@ public class FormTag extends ElementBufferedTag
 		// Automatically add URL request parameters as hidden fields to support custom URL rewritten parameters in GET requests.
 		boolean didDiv = false;
 		if(actionParams != null && !actionParams.isEmpty()) {
-			for(Map.Entry<String,List<String>> entry : actionParams.entrySet()) {
+			for(Map.Entry<String, List<String>> entry : actionParams.entrySet()) {
 				if(!didDiv) {
 					out.write("<div>\n"); // TODO: This div not required in HTML 5
 					didDiv = true;
@@ -225,7 +224,7 @@ public class FormTag extends ElementBufferedTag
 		}
 		// Write any parameters as hidden fields
 		if(params != null) {
-			for(Map.Entry<String,List<String>> entry : params.getParameterMap().entrySet()) {
+			for(Map.Entry<String, List<String>> entry : params.getParameterMap().entrySet()) {
 				if(!didDiv) {
 					out.write("<div>\n");
 					didDiv = true;

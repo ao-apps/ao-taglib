@@ -69,7 +69,7 @@ abstract public class ElementFilteredBodyTag extends EncodingFilteredBodyTag
 	}
 
 	@Override
-	public Map<String,Object> getData() {
+	public Map<String, Object> getData() {
 		return global.getData();
 	}
 

@@ -25,7 +25,6 @@ package com.aoindustries.taglib.legacy;
 import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaScriptInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
-import com.aoindustries.html.Document;
 import com.aoindustries.html.INPUT;
 import com.aoindustries.html.servlet.DocumentEE;
 import com.aoindustries.io.buffer.BufferResult;
@@ -322,7 +321,7 @@ public class InputTag extends ElementBufferedBodyTag
 		if(INPUT.Dynamic.Type.IMAGE.toString().equalsIgnoreCase(type)) {
 			if(alt == null) throw new AttributeRequiredException("alt");
 		}
-		Document document = DocumentEE.get(
+		DocumentEE document = new DocumentEE(
 			pageContext.getServletContext(),
 			(HttpServletRequest)pageContext.getRequest(),
 			(HttpServletResponse)pageContext.getResponse(),
@@ -330,7 +329,7 @@ public class InputTag extends ElementBufferedBodyTag
 			false, // Do not add extra newlines to JSP
 			false  // Do not add extra indentation to JSP
 		);
-		INPUT.Dynamic<?> input = document.input().dynamic();
+		INPUT.Dynamic<?, ?> input = document.input().dynamic();
 		GlobalAttributesUtils.doGlobalAttributes(global, input);
 		if(alt != null) {
 			out.write(" alt=\"");

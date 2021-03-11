@@ -28,7 +28,7 @@ import com.aoindustries.encoding.Serialization;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import com.aoindustries.encoding.servlet.DoctypeEE;
 import com.aoindustries.encoding.servlet.SerializationEE;
-import com.aoindustries.html.Document;
+import com.aoindustries.html.AnyDocument;
 import com.aoindustries.html.servlet.DocumentEE;
 import com.aoindustries.i18n.Resources;
 import com.aoindustries.lang.LocalizedIllegalArgumentException;
@@ -267,7 +267,7 @@ public class HtmlTag extends ElementFilteredTag {
 							// Clear the output buffer
 							response.resetBuffer();
 							// Set the content type
-							final String documentEncoding = Document.ENCODING.name();
+							final String documentEncoding = AnyDocument.ENCODING.name();
 							try {
 								ServletUtil.setContentType(response, currentSerialization.getContentType(), documentEncoding);
 							} catch(ServletException e) {
@@ -391,7 +391,7 @@ public class HtmlTag extends ElementFilteredTag {
 		);
 	}
 
-	// TODO: Move to Document class
+	// TODO: Move to Document or DocumentEE class (or HTML_factory)?
 	public static void beginHtmlTag(ServletResponse response, Appendable out, Serialization serialization, GlobalAttributes global) throws IOException {
 		beginHtmlTag(response.getLocale(), out, serialization, global);
 	}

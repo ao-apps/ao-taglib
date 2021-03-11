@@ -49,5 +49,5 @@ public interface GlobalBufferedAttributes extends
 	 *
 	 * @see  MutableGlobalAttributes#setData(java.util.Map)
 	 */
-	void setData(Map<? extends String,?> data) throws IllegalArgumentException;
+	void setData(Map<? extends String, ?> data) throws IllegalArgumentException;
 }

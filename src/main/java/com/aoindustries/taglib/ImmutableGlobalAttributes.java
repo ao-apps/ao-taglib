@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2020  AO Industries, Inc.
+ * Copyright (C) 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -45,7 +45,7 @@ public class ImmutableGlobalAttributes implements GlobalAttributes {
 	public static ImmutableGlobalAttributes of(
 		String id,
 		String clazz,
-		Map<String,Object> data,
+		Map<String, Object> data,
 		String dir,
 		Object style
 	) {
@@ -85,14 +85,14 @@ public class ImmutableGlobalAttributes implements GlobalAttributes {
 
 	private final String id;
 	private final String clazz;
-	private final Map<String,Object> data;
+	private final Map<String, Object> data;
 	private final String dir;
 	private final Object style;
 
 	private ImmutableGlobalAttributes(
 		String id,
 		String clazz,
-		Map<String,Object> data,
+		Map<String, Object> data,
 		String dir,
 		Object style
 	) {
@@ -115,7 +115,7 @@ public class ImmutableGlobalAttributes implements GlobalAttributes {
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
-	public Map<String,Object> getData() {
+	public Map<String, Object> getData() {
 		return data;
 	}
 

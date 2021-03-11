@@ -101,18 +101,18 @@ abstract public class DispatchTag extends SimpleTagSupport
 	public static HttpServletRequest getParameterAlteredRequest(
 		HttpServletRequest request,
 		URIParameters params,
-		Map<String,String[]> oldMap,
+		Map<String, String[]> oldMap,
 		WildcardPatternMatcher clearParamsMatcher
 	) {
-		final Map<String,List<String>> newMap;
+		final Map<String, List<String>> newMap;
 		if(params==null) {
 			newMap = Collections.emptyMap();
 		} else {
 			newMap = params.getParameterMap();
 		}
 		if(oldMap==null) oldMap = request.getParameterMap();
-		Map<String,String[]> newParameters = AoCollections.newLinkedHashMap(newMap.size() + oldMap.size());
-		for(Map.Entry<String,List<String>> entry : newMap.entrySet()) {
+		Map<String, String[]> newParameters = AoCollections.newLinkedHashMap(newMap.size() + oldMap.size());
+		for(Map.Entry<String, List<String>> entry : newMap.entrySet()) {
 			String name = entry.getKey();
 			List<String> newValues = entry.getValue();
 			String[] oldValues = clearParamsMatcher.isMatch(name) ? null : oldMap.get(name);
@@ -130,14 +130,14 @@ abstract public class DispatchTag extends SimpleTagSupport
 			newParameters.put(name, merged);
 		}
 		// Add any old parameters that were not merged
-		for(Map.Entry<String,String[]> entry : oldMap.entrySet()) {
+		for(Map.Entry<String, String[]> entry : oldMap.entrySet()) {
 			String name = entry.getKey();
 			if(
 				!newMap.containsKey(name)
 				&& !clearParamsMatcher.isMatch(name)
 			) newParameters.put(name, entry.getValue());
 		}
-		final Map<String,String[]> parameters = Collections.unmodifiableMap(newParameters);
+		final Map<String, String[]> parameters = Collections.unmodifiableMap(newParameters);
 		return new HttpServletRequestWrapper(request) {
 			@Override
 			public String getParameter(String name) {
@@ -146,7 +146,7 @@ abstract public class DispatchTag extends SimpleTagSupport
 			}
 
 			@Override
-			public Map<String,String[]> getParameterMap() {
+			public Map<String, String[]> getParameterMap() {
 				return parameters;
 			}
 
@@ -209,7 +209,7 @@ abstract public class DispatchTag extends SimpleTagSupport
 	/**
 	 * Gets the arguments that will be passed on dispatch.  For no arguments, return null.
 	 */
-	abstract protected Map<String,?> getArgs();
+	abstract protected Map<String, ?> getArgs();
 
 	/**
 	 * Subclass hook to intercept request after servlet paths have been determined
@@ -297,7 +297,7 @@ abstract public class DispatchTag extends SimpleTagSupport
 					request.setAttribute(Dispatcher.ARG_REQUEST_ATTRIBUTE, getArgs());
 
 					final WildcardPatternMatcher clearParamsMatcher = getClearParamsMatcher();
-					Map<String,String[]> oldMap = null; // Obtained when first needed
+					Map<String, String[]> oldMap = null; // Obtained when first needed
 
 					// If no parameters have been added
 					if(params==null) {

@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2013, 2016, 2017, 2019, 2020  AO Industries, Inc.
+ * Copyright (C) 2013, 2016, 2017, 2019, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -50,7 +50,7 @@ abstract class ArgDispatchTag extends DispatchTag
 	private static final String ARG_ATTRIBUTE_PREFIX = Dispatcher.ARG_REQUEST_ATTRIBUTE + ".";
 
 	private WildcardPatternMatcher clearParamsMatcher = WildcardPatternMatcher.matchNone();
-	private Map<String,Object> args;
+	private Map<String, Object> args;
 
 	public void setClearParams(String clearParams) {
 		this.clearParamsMatcher = WildcardPatternMatcher.compile(clearParams);
@@ -62,7 +62,7 @@ abstract class ArgDispatchTag extends DispatchTag
 	}
 
 	@Override
-	protected Map<String,?> getArgs() {
+	protected Map<String, ?> getArgs() {
 		if(args==null) return Collections.emptyMap();
 		return Collections.unmodifiableMap(args);
 	}

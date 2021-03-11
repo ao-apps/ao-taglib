@@ -37,7 +37,7 @@ public class MutableGlobalAttributes implements GlobalAttributes, Freezable<Glob
 
 	private String id;
 	private String clazz;
-	private Map<String,Object> data = MinimalMap.emptyMap();
+	private Map<String, Object> data = MinimalMap.emptyMap();
 	private String dir;
 	private Object style;
 
@@ -74,7 +74,7 @@ public class MutableGlobalAttributes implements GlobalAttributes, Freezable<Glob
 	}
 
 	@Override
-	public Map<String,Object> getData() {
+	public Map<String, Object> getData() {
 		return MinimalMap.unmodifiable(data);
 	}
 
@@ -86,10 +86,10 @@ public class MutableGlobalAttributes implements GlobalAttributes, Freezable<Glob
 	 *
 	 * @see  GlobalBufferedAttributes#setData(java.util.Map)
 	 */
-	public MutableGlobalAttributes setData(Map<? extends String,?> data) throws IllegalArgumentException {
-		Map<String,Object> newData = MinimalMap.emptyMap();
+	public MutableGlobalAttributes setData(Map<? extends String, ?> data) throws IllegalArgumentException {
+		Map<String, Object> newData = MinimalMap.emptyMap();
 		if(data != null) {
-			for(Map.Entry<? extends String,?> entry : data.entrySet()) {
+			for(Map.Entry<? extends String, ?> entry : data.entrySet()) {
 				String attrName = Attributes.validate(entry.getKey(), Data.data::validate);
 				Object value = entry.getValue();
 				if(value != null) {
@@ -107,10 +107,10 @@ public class MutableGlobalAttributes implements GlobalAttributes, Freezable<Glob
 	 *
 	 * @throws  IllegalArgumentException  When {@code attrName} is not {@linkplain Data.data#validate(java.lang.String) valid}
 	 */
-	public MutableGlobalAttributes addData(Map<? extends String,?> data) throws IllegalArgumentException {
+	public MutableGlobalAttributes addData(Map<? extends String, ?> data) throws IllegalArgumentException {
 		if(data != null) {
-			Map<String,Object> newData = this.data;
-			for(Map.Entry<? extends String,?> entry : data.entrySet()) {
+			Map<String, Object> newData = this.data;
+			for(Map.Entry<? extends String, ?> entry : data.entrySet()) {
 				String attrName = Attributes.validate(entry.getKey(), Data.data::validate);
 				Object value = entry.getValue();
 				newData =
@@ -145,7 +145,7 @@ public class MutableGlobalAttributes implements GlobalAttributes, Freezable<Glob
 	 */
 	public MutableGlobalAttributes removeData(Iterable<? extends String> attrNames) {
 		if(attrNames != null) {
-			Map<String,Object> newData = this.data;
+			Map<String, Object> newData = this.data;
 			// TODO: MinimalMap.removeAll
 			for(String key : attrNames) {
 				newData = MinimalMap.remove(newData, key);

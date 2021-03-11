@@ -23,7 +23,6 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.html.Document;
 import com.aoindustries.html.servlet.DocumentEE;
 import com.aoindustries.i18n.Resources;
 import com.aoindustries.io.LocalizedUnsupportedEncodingException;
@@ -158,7 +157,7 @@ public class ScriptTag extends ElementBufferedTag
 		PageContext pageContext = (PageContext)getJspContext();
 /**/
 		// Write script tag with src attribute, discarding any body
-		Document document = DocumentEE.get(
+		DocumentEE document = new DocumentEE(
 			pageContext.getServletContext(),
 			(HttpServletRequest)pageContext.getRequest(),
 			(HttpServletResponse)pageContext.getResponse(),

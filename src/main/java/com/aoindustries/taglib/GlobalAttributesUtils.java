@@ -102,7 +102,7 @@ public class GlobalAttributesUtils {
 		// class is not valid in all doctypes
 		String clazz = from.getClazz();
 		if(clazz != null) to.clazz(clazz);
-		for(Map.Entry<String,Object> entry : from.getData().entrySet()) {
+		for(Map.Entry<String, Object> entry : from.getData().entrySet()) {
 			to.data(entry.getKey(), entry.getValue());
 		}
 		// TODO: Once that is done, just do like before:
@@ -130,7 +130,7 @@ public class GlobalAttributesUtils {
 			encodeTextInXhtmlAttribute(clazz, out);
 			out.append('"');
 		}
-		for(Map.Entry<String,Object> entry : global.getData().entrySet()) {
+		for(Map.Entry<String, Object> entry : global.getData().entrySet()) {
 			String attrName = entry.getKey();
 			assert Data.data.validate(attrName).isValid();
 			out.append(' ').write(attrName);
@@ -166,7 +166,7 @@ public class GlobalAttributesUtils {
 			encodeTextInXhtmlAttribute(clazz, out);
 			out.append('"');
 		}
-		for(Map.Entry<String,Object> entry : global.getData().entrySet()) {
+		for(Map.Entry<String, Object> entry : global.getData().entrySet()) {
 			out.append(' ');
 			String attrName = entry.getKey();
 			assert Data.data.validate(attrName).isValid();

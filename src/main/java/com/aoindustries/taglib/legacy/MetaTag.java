@@ -23,7 +23,6 @@
 package com.aoindustries.taglib.legacy;
 
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.html.Document;
 import com.aoindustries.html.servlet.DocumentEE;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.lang.Coercion;
@@ -139,7 +138,7 @@ public class MetaTag extends ElementBufferedBodyTag
 			);
 		} else {
 			// Write the meta tag directly here
-			Document document = DocumentEE.get(
+			DocumentEE document = new DocumentEE(
 				pageContext.getServletContext(),
 				(HttpServletRequest)pageContext.getRequest(),
 				(HttpServletResponse)pageContext.getResponse(),

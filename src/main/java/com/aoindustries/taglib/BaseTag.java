@@ -23,7 +23,6 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.html.Document;
 import com.aoindustries.html.servlet.DocumentEE;
 import com.aoindustries.net.URIEncoder;
 import com.aoindustries.servlet.filter.EncodeURIFilter;
@@ -72,7 +71,7 @@ public class BaseTag extends ElementNullTag {
 				|| !originalPath.regionMatches(0, currentPath, 0, originalLastSlash)
 			) {
 				HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
-				Document document = DocumentEE.get(
+				DocumentEE document = new DocumentEE(
 					pageContext.getServletContext(),
 					request,
 					response,

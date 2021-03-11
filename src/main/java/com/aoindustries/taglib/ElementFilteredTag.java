@@ -61,7 +61,7 @@ abstract public class ElementFilteredTag extends EncodingFilteredTag
 	}
 
 	@Override
-	public Map<String,Object> getData() {
+	public Map<String, Object> getData() {
 		return global.getData();
 	}
 

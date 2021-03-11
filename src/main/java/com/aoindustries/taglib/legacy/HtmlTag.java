@@ -27,7 +27,7 @@ import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.Serialization;
 import com.aoindustries.encoding.servlet.DoctypeEE;
 import com.aoindustries.encoding.servlet.SerializationEE;
-import com.aoindustries.html.Document;
+import com.aoindustries.html.AnyDocument;
 import com.aoindustries.html.servlet.DocumentEE;
 import com.aoindustries.lang.LocalizedIllegalArgumentException;
 import com.aoindustries.servlet.ServletUtil;
@@ -269,7 +269,7 @@ public class HtmlTag extends ElementFilteredBodyTag {
 							// Clear the output buffer
 							response.resetBuffer();
 							// Set the content type
-							final String documentEncoding = Document.ENCODING.name();
+							final String documentEncoding = AnyDocument.ENCODING.name();
 							try {
 								ServletUtil.setContentType(response, currentSerialization.getContentType(), documentEncoding);
 							} catch(ServletException e) {
