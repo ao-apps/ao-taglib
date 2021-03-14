@@ -25,7 +25,7 @@ package com.aoindustries.taglib;
 import java.util.Map;
 
 /**
- * {@linkplain com.aoindustries.html.GlobalAttributes Global attributes} when used in a filtered context.
+ * {@linkplain com.aoindustries.html.any.GlobalAttributes Global attributes} when used in a filtered context.
  * These attributes may not be set from nested tags due to the lack of buffering.
  *
  * @author  AO Industries, Inc.

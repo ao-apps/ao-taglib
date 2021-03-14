@@ -31,7 +31,7 @@ import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
- * Implements {@linkplain com.aoindustries.html.GlobalAttributes global attributes} on {@link EncodingNullTag}.
+ * Implements {@linkplain com.aoindustries.html.any.GlobalAttributes global attributes} on {@link EncodingNullTag}.
  *
  * @author  AO Industries, Inc.
  */

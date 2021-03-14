@@ -24,7 +24,7 @@ package com.aoindustries.taglib;
 
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
-import com.aoindustries.html.attributes.Text.Data;
+import com.aoindustries.html.any.attributes.Text.Data;
 import com.aoindustries.lang.Coercion;
 import com.aoindustries.lang.Throwables;
 import com.aoindustries.util.i18n.MarkupCoercion;
@@ -37,7 +37,7 @@ import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
- * Utilities for working with {@linkplain com.aoindustries.html.GlobalAttributes global attributes}.
+ * Utilities for working with {@linkplain com.aoindustries.html.any.GlobalAttributes global attributes}.
  *
  * @author  AO Industries, Inc.
  */
@@ -90,7 +90,7 @@ public class GlobalAttributesUtils {
 		to.setStyle(from.getStyle());
 	}
 
-	public static <G extends com.aoindustries.html.GlobalAttributes<?>> G doGlobalAttributes(GlobalAttributes from, G to) throws IOException {
+	public static <G extends com.aoindustries.html.any.GlobalAttributes<?>> G doGlobalAttributes(GlobalAttributes from, G to) throws IOException {
 		// TODO: normalize, then only throw when non-empty/null.  Here and other attributes.
 		// TODO: Once that is done, just do like before:
 		// to

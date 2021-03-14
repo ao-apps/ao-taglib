@@ -23,9 +23,9 @@
 package com.aoindustries.taglib;
 
 import com.aoindustries.collections.MinimalMap;
-import com.aoindustries.html.Attributes;
-import com.aoindustries.html.attributes.Enum.Dir;
-import com.aoindustries.html.attributes.Text.Data;
+import com.aoindustries.html.any.Attributes;
+import com.aoindustries.html.any.attributes.Enum.Dir;
+import com.aoindustries.html.any.attributes.Text.Data;
 import com.aoindustries.lang.Freezable;
 import com.aoindustries.lang.Strings;
 import java.util.Map;

@@ -22,7 +22,7 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.html.attributes.Enum.Dir;
+import com.aoindustries.html.any.attributes.Enum.Dir;
 import com.aoindustries.validation.ValidationResult;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +31,7 @@ import javax.servlet.jsp.tagext.TagExtraInfo;
 import javax.servlet.jsp.tagext.ValidationMessage;
 
 /**
- * Validates {@linkplain com.aoindustries.html.GlobalAttributes global attributes}.
+ * Validates {@linkplain com.aoindustries.html.any.GlobalAttributes global attributes}.
  *
  * @author  AO Industries, Inc.
  */

@@ -23,8 +23,8 @@
 package com.aoindustries.taglib.legacy;
 
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.html.LINK;
 import com.aoindustries.html.servlet.DocumentEE;
+import com.aoindustries.html.servlet.LINK;
 import com.aoindustries.lang.Coercion;
 import com.aoindustries.lang.Strings;
 import com.aoindustries.net.MutableURIParameters;
@@ -227,7 +227,7 @@ public class LinkTag extends ElementNullBodyTag
 				false, // Do not add extra newlines to JSP
 				false  // Do not add extra indentation to JSP
 			);
-			LINK<?, ?> link = document.link();
+			LINK<?> link = document.link();
 			GlobalAttributesUtils.doGlobalAttributes(global, link);
 			link.href(UrlUtils.getHref(pageContext, href, params, addLastModified, absolute, canonical));
 			if(hreflang instanceof Locale) {
@@ -241,7 +241,7 @@ public class LinkTag extends ElementNullBodyTag
 				.type(type)
 				.media(media)
 				.title(title)
-				.__();
+			.__();
 		}
 /* BodyTag only: */
 		return EVAL_PAGE;

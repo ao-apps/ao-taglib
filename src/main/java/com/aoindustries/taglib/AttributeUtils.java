@@ -23,7 +23,7 @@
 package com.aoindustries.taglib;
 
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
-import com.aoindustries.html.Attributes;
+import com.aoindustries.html.any.Attributes;
 import com.aoindustries.i18n.Resources;
 import com.aoindustries.lang.Coercion;
 import com.aoindustries.lang.Strings;

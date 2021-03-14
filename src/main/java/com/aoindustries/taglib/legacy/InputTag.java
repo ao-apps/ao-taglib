@@ -25,8 +25,9 @@ package com.aoindustries.taglib.legacy;
 import static com.aoindustries.encoding.JavaScriptInXhtmlAttributeEncoder.javaScriptInXhtmlAttributeEncoder;
 import com.aoindustries.encoding.MediaType;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
-import com.aoindustries.html.INPUT;
+import com.aoindustries.html.any.AnyINPUT;
 import com.aoindustries.html.servlet.DocumentEE;
+import com.aoindustries.html.servlet.INPUT;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.lang.Coercion;
 import com.aoindustries.lang.LocalizedIllegalArgumentException;
@@ -329,7 +330,7 @@ public class InputTag extends ElementBufferedBodyTag
 			false, // Do not add extra newlines to JSP
 			false  // Do not add extra indentation to JSP
 		);
-		INPUT.Dynamic<?, ?> input = document.input().dynamic();
+		INPUT.Dynamic<?> input = document.input().dynamic();
 		GlobalAttributesUtils.doGlobalAttributes(global, input);
 		if(alt != null) {
 			out.write(" alt=\"");
@@ -337,7 +338,7 @@ public class InputTag extends ElementBufferedBodyTag
 			out.append('"');
 		}
 		// autocomplete is not valid in all doctypes
-		if(!autocomplete) input.autocomplete(INPUT.Autocomplete.OFF);
+		if(!autocomplete) input.autocomplete(AnyINPUT.Autocomplete.OFF);
 		input
 			.checked(checked)
 			.disabled(disabled);

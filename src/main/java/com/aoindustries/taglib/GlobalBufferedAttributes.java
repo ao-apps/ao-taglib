@@ -22,11 +22,11 @@
  */
 package com.aoindustries.taglib;
 
-import com.aoindustries.html.attributes.Text.Data;
+import com.aoindustries.html.any.attributes.Text.Data;
 import java.util.Map;
 
 /**
- * {@linkplain com.aoindustries.html.GlobalAttributes Global attributes} when used in a buffered context.
+ * {@linkplain com.aoindustries.html.any.GlobalAttributes Global attributes} when used in a buffered context.
  * These attributes may be set from nested tags due to the buffering.
  *
  * @author  AO Industries, Inc.

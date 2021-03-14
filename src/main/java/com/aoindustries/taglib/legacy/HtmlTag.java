@@ -27,7 +27,7 @@ import com.aoindustries.encoding.MediaType;
 import com.aoindustries.encoding.Serialization;
 import com.aoindustries.encoding.servlet.DoctypeEE;
 import com.aoindustries.encoding.servlet.SerializationEE;
-import com.aoindustries.html.AnyDocument;
+import com.aoindustries.html.any.AnyDocument;
 import com.aoindustries.html.servlet.DocumentEE;
 import com.aoindustries.lang.LocalizedIllegalArgumentException;
 import com.aoindustries.servlet.ServletUtil;

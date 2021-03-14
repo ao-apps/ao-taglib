@@ -23,7 +23,7 @@
 package com.aoindustries.taglib.legacy;
 
 import com.aoindustries.encoding.MediaType;
-import com.aoindustries.html.COL;
+import com.aoindustries.html.servlet.COL;
 import com.aoindustries.html.servlet.DocumentEE;
 import com.aoindustries.taglib.GlobalAttributesUtils;
 import java.io.IOException;
@@ -67,7 +67,7 @@ public class ColTag extends ElementNullBodyTag {
 	protected void doTag(Writer out) throws JspException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
 /**/
-		COL<?, ?> col = new DocumentEE(
+		COL<?> col = new DocumentEE(
 			pageContext.getServletContext(),
 			(HttpServletRequest)pageContext.getRequest(),
 			(HttpServletResponse)pageContext.getResponse(),
