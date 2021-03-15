@@ -1452,7 +1452,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-0500" -->
-		<!-- dateModified="2021-03-06T23:34:43-06:00" -->
+		<!-- dateModified="2021-03-14T23:13:17-05:00" -->
 		<description><![CDATA[
 			<ol>
 				<li>Clears the current output buffer (leaving status code and headers)</li>
@@ -1549,7 +1549,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 					<li>Use the autonli setting active on the current request.</li>
 					<li>
 						Use the application <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</a>
-						<code>com.aoindustries.html.Document.autonli</code>
+						<code>com.aoindustries.html.servlet.DocumentEE.autonli</code>
 						that allows an application to control the default autonli setting.
 					</li>
 					<li>
@@ -1574,7 +1574,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 					<li>Use the indent setting active on the current request.</li>
 					<li>
 						Use the application <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</a>
-						<code>com.aoindustries.html.Document.indent</code>
+						<code>com.aoindustries.html.servlet.DocumentEE.indent</code>
 						that allows an application to control the default indent setting.
 					</li>
 					<li>
