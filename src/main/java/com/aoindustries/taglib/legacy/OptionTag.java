@@ -118,7 +118,7 @@ public class OptionTag extends ElementBufferedBodyTag
 			.value(value)
 			.selected(selected)
 			.disabled(disabled)
-			.text__(capturedBody);
+			.__(capturedBody);
 /* BodyTag only: */
 		return EVAL_PAGE;
 /**/
