@@ -212,8 +212,8 @@ public class FormTag extends ElementBufferedTag
 		boolean didDiv = false;
 		if(actionParams != null && !actionParams.isEmpty()) {
 			for(Map.Entry<String, List<String>> entry : actionParams.entrySet()) {
-				if(!didDiv) {
-					out.write("<div>\n"); // TODO: This div not required in HTML 5
+				if(!didDiv && document.doctype != Doctype.HTML5) {
+					out.write("<div>\n");
 					didDiv = true;
 				}
 				String name = entry.getKey();
@@ -225,7 +225,7 @@ public class FormTag extends ElementBufferedTag
 		// Write any parameters as hidden fields
 		if(params != null) {
 			for(Map.Entry<String, List<String>> entry : params.getParameterMap().entrySet()) {
-				if(!didDiv) {
+				if(!didDiv && document.doctype != Doctype.HTML5) {
 					out.write("<div>\n");
 					didDiv = true;
 				}
