@@ -152,7 +152,7 @@ public class MetaTag extends ElementBufferedBodyTag
 				// TODO: Create a global "itemprop" in ao-fluent-html
 				.attribute("itemprop", itemprop)
 				// TOOD: charset to String via Meta.charset(String)
-				.attribute("charset", charset)
+				.charset(Coercion.toString(charset))
 				.content(content)
 				.__();
 		}

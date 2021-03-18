@@ -241,8 +241,7 @@ public class AreaTag extends ElementNullTag
 			.rel(rel)
 			// TODO: type to Area (or remove entirely since this part of the standard is uncertain and currently unimplemented by all browsers?)
 			.attribute("type", type)
-			// TODO: target to Area
-			.attribute("target", target);
+			.target(target);
 		// non-existing alt is OK when there is no href (with href: "" stays "")
 		if(
 			alt != null
