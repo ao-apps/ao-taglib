@@ -24,6 +24,7 @@ package com.aoindustries.taglib;
 
 import com.aoindustries.encoding.MediaType;
 import com.aoindustries.html.servlet.DocumentEE;
+import com.aoindustries.html.servlet.META;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.lang.Coercion;
 import com.aoindustries.lang.Strings;
@@ -141,13 +142,17 @@ public class MetaTag extends ElementBufferedTag
 				false, // Do not add extra newlines to JSP
 				false  // Do not add extra indentation to JSP
 			);
-			GlobalAttributesUtils.doGlobalAttributes(global, document.meta())
-				.name(name)
+			META<?> meta = document.meta();
+			GlobalAttributesUtils.doGlobalAttributes(global, meta);
+			meta.name(name)
 				.httpEquiv(httpEquiv)
 				// TODO: Create a global "itemprop" in ao-fluent-html
-				.attribute("itemprop", itemprop)
+				.attribute("itemprop", itemprop);
+			if(charset != null) {
 				// TOOD: charset to String via Meta.charset(String)
-				.charset(Coercion.toString(charset))
+				meta.charset(Coercion.toString(charset));
+			}
+			meta
 				.content(content)
 				.__();
 		}
