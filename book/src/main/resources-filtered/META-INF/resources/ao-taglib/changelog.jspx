@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2021-03-21T11:10:06-05:00"
+		dateModified="2021-03-21T21:22:46-05:00"
 	>
 		<c:if test="${fn:endsWith('@{project.version}', '-SNAPSHOT') and !fn:endsWith('@{project.version}', '-POST-SNAPSHOT')}">
 			<changelog:release
@@ -56,14 +56,24 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 					<li>Support other nice HTML 5 features of textarea/input)</li>
 				</ul>
 				-->
-				<ul>
-					<li>
-						Bug fix: Only pass charset to underlying API when non-null, since it is doctype dependent.
-						Passing a null value fails on non-HTML5 doctypes.
-					</li>
-				</ul>
 			</changelog:release>
 		</c:if>
+
+		<changelog:release
+			projectName="@{documented.name}"
+			version="6.4.1"
+			datePublished="2021-03-21T21:22:46-05:00"
+			groupId="@{project.groupId}"
+			artifactId="@{documented.artifactId}"
+			scmUrl="@{project.scm.url}"
+		>
+			<ul>
+				<li>
+					Bug fix: Only pass charset to underlying API when non-null, since it is doctype dependent.
+					Passing a null value fails on non-HTML5 doctypes.
+				</li>
+			</ul>
+		</changelog:release>
 
 		<changelog:release
 			projectName="@{documented.name}"
