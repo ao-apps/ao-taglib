@@ -36,8 +36,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		title="@{documented.name} Changelog"
 		shortTitle="Changelog"
 		tocLevels="1"
-		datePublished="2016-10-29T22:02:09-0500"
-		dateModified="2021-03-21T21:22:46-05:00"
+		datePublished="2016-10-29T22:02:09-05:00"
+		dateModified="2021-05-22T13:07:02-05:00"
 	>
 		<c:if test="${fn:endsWith('@{project.version}', '-SNAPSHOT') and !fn:endsWith('@{project.version}', '-POST-SNAPSHOT')}">
 			<changelog:release
@@ -56,6 +56,9 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 					<li>Support other nice HTML 5 features of textarea/input)</li>
 				</ul>
 				-->
+				<ul>
+					<li>Updated to <ao:a rel="nofollow" href="https://www.oracle.com/java/technologies/javaee/javaeetechnologies.html#javaee7">Java™ EE 7 Web Profile</ao:a> (Servlet 3.1, JSP 2.3, EL 3.0, and JSTL 1.2).</li>
+				</ul>
 			</changelog:release>
 		</c:if>
 
@@ -370,7 +373,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		<changelog:release
 			projectName="@{documented.name}"
 			version="4.0.0"
-			datePublished="2019-10-11T16:29:56-0500"
+			datePublished="2019-10-11T16:29:56-05:00"
 			groupId="@{project.groupId}"
 			artifactId="@{documented.artifactId}"
 			scmUrl="@{project.scm.url}"
@@ -474,7 +477,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		<changelog:release
 			projectName="@{documented.name}"
 			version="3.0.1"
-			datePublished="2019-06-19T07:52:13-0500"
+			datePublished="2019-06-19T07:52:13-05:00"
 			groupId="@{project.groupId}"
 			artifactId="@{documented.artifactId}"
 			scmUrl="@{project.scm.url}"
@@ -492,7 +495,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		<changelog:release
 			projectName="@{documented.name}"
 			version="3.0.0"
-			datePublished="2019-04-19T03:50:55-0500"
+			datePublished="2019-04-19T03:50:55-05:00"
 			groupId="@{project.groupId}"
 			artifactId="@{documented.artifactId}"
 			scmUrl="@{project.scm.url}"
@@ -523,7 +526,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		<changelog:release
 			projectName="@{documented.name}"
 			version="2.3.1"
-			datePublished="2017-07-19T19:49:50-0500"
+			datePublished="2017-07-19T19:49:50-05:00"
 			groupId="@{project.groupId}"
 			artifactId="@{documented.artifactId}"
 			scmUrl="@{project.scm.url}"
@@ -537,7 +540,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		<changelog:release
 			projectName="@{documented.name}"
 			version="2.3.0"
-			datePublished="2016-11-15T15:53:43-0600"
+			datePublished="2016-11-15T15:53:43-06:00"
 			groupId="@{project.groupId}"
 			artifactId="@{documented.artifactId}"
 			scmUrl="@{project.scm.url}"
@@ -561,7 +564,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		<changelog:release
 			projectName="@{documented.name}"
 			version="2.2.0"
-			datePublished="2016-10-20T18:03:00-0500"
+			datePublished="2016-10-20T18:03:00-05:00"
 			groupId="@{project.groupId}"
 			artifactId="@{documented.artifactId}"
 			scmUrl="@{project.scm.url}"
@@ -576,7 +579,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		<changelog:release
 			projectName="@{documented.name}"
 			version="2.1.0"
-			datePublished="2016-10-11T23:49:00-0500"
+			datePublished="2016-10-11T23:49:00-05:00"
 			groupId="@{project.groupId}"
 			artifactId="@{documented.artifactId}"
 			scmUrl="@{project.scm.url}"
@@ -589,7 +592,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		<changelog:release
 			projectName="@{documented.name}"
 			version="2.0.1"
-			datePublished="2016-10-08T01:18:00-0500"
+			datePublished="2016-10-08T01:18:00-05:00"
 			groupId="@{project.groupId}"
 			artifactId="@{documented.artifactId}"
 			scmUrl="@{project.scm.url}"
@@ -603,7 +606,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		<changelog:release
 			projectName="@{documented.name}"
 			version="2.0.0"
-			datePublished="2016-10-04T19:58:00-0500"
+			datePublished="2016-10-04T19:58:00-05:00"
 			groupId="@{project.groupId}"
 			artifactId="@{documented.artifactId}"
 			scmUrl="@{project.scm.url}"
@@ -628,7 +631,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		<changelog:release
 			projectName="@{documented.name}"
 			version="1.4"
-			datePublished="2016-09-11T15:31:00-0500"
+			datePublished="2016-09-11T15:31:00-05:00"
 			groupId="@{project.groupId}"
 			artifactId="@{documented.artifactId}"
 			scmUrl="@{project.scm.url}"
@@ -645,7 +648,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		<changelog:release
 			projectName="@{documented.name}"
 			version="1.3.1"
-			datePublished="2016-09-02T17:01:00-0500"
+			datePublished="2016-09-02T17:01:00-05:00"
 			groupId="@{project.groupId}"
 			artifactId="@{documented.artifactId}"
 			scmUrl="@{project.scm.url}"
@@ -658,7 +661,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		<changelog:release
 			projectName="@{documented.name}"
 			version="1.3"
-			datePublished="2016-08-28T20:29:00-0500"
+			datePublished="2016-08-28T20:29:00-05:00"
 			groupId="@{project.groupId}"
 			artifactId="@{documented.artifactId}"
 			scmUrl="@{project.scm.url}"
@@ -672,7 +675,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		<changelog:release
 			projectName="@{documented.name}"
 			version="1.2"
-			datePublished="2016-08-19T14:29:00-0500"
+			datePublished="2016-08-19T14:29:00-05:00"
 			groupId="@{project.groupId}"
 			artifactId="@{documented.artifactId}"
 			scmUrl="@{project.scm.url}"
@@ -688,7 +691,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		<changelog:release
 			projectName="@{documented.name}"
 			version="1.1"
-			datePublished="2016-08-07T23:32:00-0500"
+			datePublished="2016-08-07T23:32:00-05:00"
 			groupId="@{project.groupId}"
 			artifactId="@{documented.artifactId}"
 			scmUrl="@{project.scm.url}"
@@ -702,7 +705,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		<changelog:release
 			projectName="@{documented.name}"
 			version="1.0"
-			datePublished="2016-08-07T16:31:00-0500"
+			datePublished="2016-08-07T16:31:00-05:00"
 			groupId="@{project.groupId}"
 			artifactId="@{documented.artifactId}"
 			scmUrl="@{project.scm.url}"
