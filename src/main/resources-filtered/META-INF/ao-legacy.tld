@@ -163,7 +163,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
 	version="2.1">
 	<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-	<!-- dateModified="2021-02-07T23:29:56-06:00" -->
+	<!-- dateModified="2021-06-01T03:18:06-05:00" -->
 <!-- </common> -->
 	<!-- allowRobots="false" -->
 <!-- <common> -->
@@ -174,18 +174,18 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 		<hr />
 		<p>
 			This taglib is part of an extensible suite of interoperable, context-aware,
-			<a href="https://aoindustries.com/ao-encoding/">auto-encoding</a> taglibs.
+			<a href="https://oss.aoapps.com/encoding/">auto-encoding</a> taglibs.
 			All auto-encoding tags generate correct output for their context, provide context information for nested
 			tags, and validate the output of nested tags.  For example,
 			<a href="@{project.url}]]>&tld;<![CDATA[/tag-message">&lt;ao:message&gt;</a> within
-			<a href="https://aoindustries.com/ao-encoding/taglib/]]>&aoEncodingTld;<![CDATA[/tag-psql">&lt;encoding:psql&gt;</a> will write its output
-			encoded as <a href="https://aoindustries.com/ao-encoding/apidocs/com/aoindustries/encoding/MediaType.html#PSQL">PSQL</a>.
+			<a href="https://oss.aoapps.com/encoding/taglib/]]>&aoEncodingTld;<![CDATA[/tag-psql">&lt;encoding:psql&gt;</a> will write its output
+			encoded as <a href="https://oss.aoapps.com/encoding/apidocs/com/aoindustries/encoding/MediaType.html#PSQL">PSQL</a>.
 		</p>
 		<p>
 			This suite includes, but is not limited to:
 		</p>
 		<ul>
-			<li><a href="https://aoindustries.com/ao-encoding/taglib/]]>&aoEncodingTld;<![CDATA[/">AO Encoding Taglib</a></li>
+			<li><a href="https://oss.aoapps.com/encoding/taglib/]]>&aoEncodingTld;<![CDATA[/">AO Encoding Taglib</a></li>
 			<li><a href="@{project.url}]]>&tld;<![CDATA[/">AO Taglib</a> (this taglib)</li>
 			<li><a href="https://aoindustries.com/aoweb-struts/core/aoweb-struts-skin.tld/">AOWeb Struts Core Skin Taglib</a></li>
 			<li><a href="https://oss.newmediaworks.com/email-taglib/]]>&nmwEmailTld;<![CDATA[/">NMW Email Taglib</a></li>
@@ -203,7 +203,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 	<!-- TODO: Implement validator(s), such as ao:when directly inside ao:choose and similar -->
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
+		<!-- dateModified="2021-06-01T03:18:06-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_a.asp">&lt;a&gt;</a> tag.
@@ -303,7 +303,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 		<attribute>
 			<description><![CDATA[
 				<p>
-					When <code>true</code>, will generate a <a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URL</a>.
+					When <code>true</code>, will generate a <a href="https://oss.aoapps.com/servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URL</a>.
 					Canonical URLs should be used where per-user response URL rewriting
 					(such as information added when cookies are disabled) should be avoided.
 					Defaults to <code>false</code>.
@@ -328,7 +328,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 				</p>
 				<p>
 					In auto mode, last modified stamping is not performed on
-					<a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URLs</a>.
+					<a href="https://oss.aoapps.com/servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URLs</a>.
 				</p>
 			]]></description>
 			<name>addLastModified</name>
@@ -464,7 +464,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 	</tag>
 	<tag>
 		<!-- datePublished="2019-10-08T21:41:35-05:00" -->
-		<!-- dateModified="2020-11-23T00:11:37-06:00" -->
+		<!-- dateModified="2021-06-01T03:18:06-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_area.asp">&lt;area&gt;</a> tag.
@@ -582,7 +582,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 		<attribute>
 			<description><![CDATA[
 				<p>
-					When <code>true</code>, will generate a <a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URL</a>.
+					When <code>true</code>, will generate a <a href="https://oss.aoapps.com/servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URL</a>.
 					Canonical URLs should be used where per-user response URL rewriting
 					(such as information added when cookies are disabled) should be avoided.
 					Defaults to <code>false</code>.
@@ -607,7 +607,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 				</p>
 				<p>
 					In auto mode, last modified stamping is not performed on
-					<a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URLs</a>.
+					<a href="https://oss.aoapps.com/servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URLs</a>.
 				</p>
 			]]></description>
 			<name>addLastModified</name>
@@ -1362,13 +1362,13 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2019-04-15T19:37:30-05:00" -->
+		<!-- dateModified="2021-06-01T03:18:06-05:00" -->
 		<description><![CDATA[
 			<p>
 				Gets a detailed report of a
 				<a rel="nofollow" href="@{javadoc.link.javase}java/lang/Throwable.html">Throwable</a>
 				as generated by
-				<a href="https://aoindustries.com/aocode-public/apidocs/com/aoindustries/util/ErrorPrinter.html">ErrorPrinter</a>.
+				<a href="https://oss.aoapps.com/hodgepodge/apidocs/com/aoindustries/util/ErrorPrinter.html">ErrorPrinter</a>.
 			</p>
 			<p>
 				The content type of this tag is <code>text/plain</code>.
@@ -1452,7 +1452,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-03-14T23:13:17-05:00" -->
+		<!-- dateModified="2021-06-01T03:18:06-05:00" -->
 		<description><![CDATA[
 			<ol>
 				<li>Clears the current output buffer (leaving status code and headers)</li>
@@ -1466,9 +1466,9 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 					the locale of the current response.
 				</li>
 				<li>
-					Establishes a page context for <a href="https://aoindustries.com/ao-web-resources/">AO Web Resources</a>,
+					Establishes a page context for <a href="https://oss.aoapps.com/web-resources/">AO Web Resources</a>,
 					if one is not already present on the current request.  This is useful for using
-					the <a href="https://aoindustries.com/ao-web-resources/taglib/ao-web-resources.tld/">AO Web Resources Taglib</a>
+					the <a href="https://oss.aoapps.com/web-resources/taglib/ao-web-resources.tld/">AO Web Resources Taglib</a>
 					within the simplified scope of a standalone JSP page.  Any page context established
 					by this tag is cleaned-up before the tag exits - the scope is limited to nested tags.
 				</li>
@@ -1634,7 +1634,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
+		<!-- dateModified="2021-06-01T03:18:06-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_iframe.asp">&lt;iframe&gt;</a> tag.
@@ -1742,7 +1742,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 		<attribute>
 			<description><![CDATA[
 				<p>
-					When <code>true</code>, will generate a <a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URL</a>.
+					When <code>true</code>, will generate a <a href="https://oss.aoapps.com/servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URL</a>.
 					Canonical URLs should be used where per-user response URL rewriting
 					(such as information added when cookies are disabled) should be avoided.
 					Defaults to <code>false</code>.
@@ -1767,7 +1767,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 				</p>
 				<p>
 					In auto mode, last modified stamping is not performed on
-					<a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URLs</a>.
+					<a href="https://oss.aoapps.com/servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URLs</a>.
 				</p>
 			]]></description>
 			<name>addLastModified</name>
@@ -1820,7 +1820,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
+		<!-- dateModified="2021-06-01T03:18:06-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_img.asp">&lt;img&gt;</a> tag.
@@ -1923,7 +1923,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 		<attribute>
 			<description><![CDATA[
 				<p>
-					When <code>true</code>, will generate a <a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URL</a>.
+					When <code>true</code>, will generate a <a href="https://oss.aoapps.com/servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URL</a>.
 					Canonical URLs should be used where per-user response URL rewriting
 					(such as information added when cookies are disabled) should be avoided.
 					Defaults to <code>false</code>.
@@ -1948,7 +1948,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 				</p>
 				<p>
 					In auto mode, last modified stamping is not performed on
-					<a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URLs</a>.
+					<a href="https://oss.aoapps.com/servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URLs</a>.
 				</p>
 			]]></description>
 			<name>addLastModified</name>
@@ -2169,7 +2169,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2020-11-21T02:21:23-06:00" -->
+		<!-- dateModified="2021-06-01T03:18:06-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_input.asp">&lt;input&gt;</a> tag.
@@ -2409,7 +2409,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 		<attribute>
 			<description><![CDATA[
 				<p>
-					When <code>true</code>, will generate a <a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URL</a>.
+					When <code>true</code>, will generate a <a href="https://oss.aoapps.com/servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URL</a>.
 					Canonical URLs should be used where per-user response URL rewriting
 					(such as information added when cookies are disabled) should be avoided.
 					Defaults to <code>false</code>.
@@ -2434,7 +2434,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 				</p>
 				<p>
 					In auto mode, last modified stamping is not performed on
-					<a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URLs</a>.
+					<a href="https://oss.aoapps.com/servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URLs</a>.
 				</p>
 			]]></description>
 			<name>addLastModified</name>
@@ -2578,7 +2578,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2020-11-23T00:11:37-06:00" -->
+		<!-- dateModified="2021-06-01T03:18:06-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				If contained with any
@@ -2685,7 +2685,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 		<attribute>
 			<description><![CDATA[
 				<p>
-					When <code>true</code>, will generate a <a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URL</a>.
+					When <code>true</code>, will generate a <a href="https://oss.aoapps.com/servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URL</a>.
 					Canonical URLs should be used where per-user response URL rewriting
 					(such as information added when cookies are disabled) should be avoided.
 					Defaults to <code>false</code>.
@@ -2710,7 +2710,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 				</p>
 				<p>
 					In auto mode, last modified stamping is not performed on
-					<a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URLs</a>.
+					<a href="https://oss.aoapps.com/servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URLs</a>.
 				</p>
 			]]></description>
 			<name>addLastModified</name>
@@ -3351,7 +3351,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2020-11-22T22:39:33-06:00" -->
+		<!-- dateModified="2021-06-01T03:18:06-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Writes the value with proper escaping based on the context of the tag.
@@ -3381,7 +3381,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 				<li><code>sh</code> or <code>text/x+sh</code> - must be valid shell script</li>
 			</ul>
 			<p>
-				This is compatible with <a href="https://aoindustries.com/ao-encoding/taglib/]]>&aoEncodingTld;<![CDATA[/tag-out">&lt;encoding:out&gt;</a>,
+				This is compatible with <a href="https://oss.aoapps.com/encoding/taglib/]]>&aoEncodingTld;<![CDATA[/tag-out">&lt;encoding:out&gt;</a>,
 				with the addition of allowing nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-value">&lt;ao:value&gt;</a> and
 				<a href="@{project.url}]]>&tld;<![CDATA[/tag-type">&lt;ao:type&gt;</a> tags.
 			</p>
@@ -3492,7 +3492,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2020-11-23T00:11:37-06:00" -->
+		<!-- dateModified="2021-06-01T03:18:06-05:00" -->
 		<description><![CDATA[
 			<p>
 				Adds multiple parameters to its
@@ -3513,7 +3513,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 				<p>
 					When provided, the values may not contain a
 					<a rel="nofollow" href="@{javadoc.link.javase}java/util/Map.html">Map</a>
-					or <a href="https://aoindustries.com/ao-net-types/apidocs/com/aoindustries/net/URIParameters.html">URIParameters</a>.
+					or <a href="https://oss.aoapps.com/net-types/apidocs/com/aoindustries/net/URIParameters.html">URIParameters</a>.
 					When provided, the exclude attribute may not be provided.
 				</p>
 			]]></description>
@@ -3527,7 +3527,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 				<p>
 					Optionally excludes all elements of a
 					<a rel="nofollow" href="@{javadoc.link.javase}java/util/Map.html">Map</a>
-					or <a href="https://aoindustries.com/ao-net-types/apidocs/com/aoindustries/net/URIParameters.html">URIParameters</a>
+					or <a href="https://oss.aoapps.com/net-types/apidocs/com/aoindustries/net/URIParameters.html">URIParameters</a>
 					that match any of the comma-separated patterns.
 					May not be used in conjunction with the name attribute.
 				</p>
@@ -3578,7 +3578,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 				<p>
 					When name is not provided, requires
 					<a rel="nofollow" href="@{javadoc.link.javase}java/util/Map.html">Map</a>
-					or <a href="https://aoindustries.com/ao-net-types/apidocs/com/aoindustries/net/URIParameters.html">URIParameters</a>,
+					or <a href="https://oss.aoapps.com/net-types/apidocs/com/aoindustries/net/URIParameters.html">URIParameters</a>,
 					where the parameter name is the map key coerced to <a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</a>
 					and the value (or set of values) is the map value.  Each of the entry values may be
 					<a rel="nofollow" href="@{javadoc.link.javase}java/lang/Iterable.html">Iterable</a>,
@@ -3589,7 +3589,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 				<p>
 					When obtaining values from a
 					<a rel="nofollow" href="@{javadoc.link.javase}java/util/Map.html">Map</a>
-					or <a href="https://aoindustries.com/ao-net-types/apidocs/com/aoindustries/net/URIParameters.html">URIParameters</a>,
+					or <a href="https://oss.aoapps.com/net-types/apidocs/com/aoindustries/net/URIParameters.html">URIParameters</a>,
 					parameters may be excluded with the "exclude" attribute.
 				</p>
 				<p>
@@ -3622,7 +3622,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2020-02-24T15:53:21-06:00" -->
+		<!-- dateModified="2021-06-01T03:18:06-05:00" -->
 		<description><![CDATA[
 			<div class="semanticcms-tag-reference-summary">
 				<p>
@@ -3762,7 +3762,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 		<attribute>
 			<description><![CDATA[
 				<p>
-					When <code>true</code>, will generate a <a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URL</a>.
+					When <code>true</code>, will generate a <a href="https://oss.aoapps.com/servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URL</a>.
 					Canonical URLs should be used where per-user response URL rewriting
 					(such as information added when cookies are disabled) should be avoided.
 					Defaults to <code>false</code>.
@@ -3787,7 +3787,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 				</p>
 				<p>
 					In auto mode, last modified stamping is not performed on
-					<a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URLs</a>.
+					<a href="https://oss.aoapps.com/servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URLs</a>.
 				</p>
 			]]></description>
 			<name>addLastModified</name>
@@ -3861,7 +3861,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2020-11-22T22:39:33-06:00" -->
+		<!-- dateModified="2021-06-01T03:18:06-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Manually establishes a <a href="https://www.w3schools.com/tags/tag_script.asp">script context</a> when automatic detection is not possible.
@@ -3907,9 +3907,9 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 				For simpler scenarios, the following tags are simplier alternatives:
 			</p>
 			<ul>
-				<li><a href="https://aoindustries.com/ao-encoding/taglib/]]>&aoEncodingTld;<![CDATA[/tag-javascript">&lt;encoding:javascript&gt;</a></li>
-				<li><a href="https://aoindustries.com/ao-encoding/taglib/]]>&aoEncodingTld;<![CDATA[/tag-json">&lt;encoding:json&gt;</a></li>
-				<li><a href="https://aoindustries.com/ao-encoding/taglib/]]>&aoEncodingTld;<![CDATA[/tag-ldJson">&lt;encoding:ldJson&gt;</a></li>
+				<li><a href="https://oss.aoapps.com/encoding/taglib/]]>&aoEncodingTld;<![CDATA[/tag-javascript">&lt;encoding:javascript&gt;</a></li>
+				<li><a href="https://oss.aoapps.com/encoding/taglib/]]>&aoEncodingTld;<![CDATA[/tag-json">&lt;encoding:json&gt;</a></li>
+				<li><a href="https://oss.aoapps.com/encoding/taglib/]]>&aoEncodingTld;<![CDATA[/tag-ldJson">&lt;encoding:ldJson&gt;</a></li>
 			</ul>
 		]]></description>
 		<name>script</name>
@@ -3991,7 +3991,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 		<attribute>
 			<description><![CDATA[
 				<p>
-					When <code>true</code>, will generate a <a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URL</a>.
+					When <code>true</code>, will generate a <a href="https://oss.aoapps.com/servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URL</a>.
 					Canonical URLs should be used where per-user response URL rewriting
 					(such as information added when cookies are disabled) should be avoided.
 					Defaults to <code>false</code>.
@@ -4016,7 +4016,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 				</p>
 				<p>
 					In auto mode, last modified stamping is not performed on
-					<a href="https://aoindustries.com/ao-servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URLs</a>.
+					<a href="https://oss.aoapps.com/servlet-util/apidocs/com/aoindustries/servlet/http/Canonical.html">Canonical URLs</a>.
 				</p>
 			]]></description>
 			<name>addLastModified</name>
@@ -4686,10 +4686,10 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 	</function>
 	<function>
 		<!-- datePublished="2019-10-02T02:16:44-05:00" -->
-		<!-- dateModified="2020-05-30T02:46:48-05:00" -->
+		<!-- dateModified="2021-06-01T03:18:06-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
-				<a href="https://aoindustries.com/ao-net-types/apidocs/com/aoindustries/net/URIEncoder.html#encodeURIComponent(java.lang.String)">Encodes a value</a>
+				<a href="https://oss.aoapps.com/net-types/apidocs/com/aoindustries/net/URIEncoder.html#encodeURIComponent(java.lang.String)">Encodes a value</a>
 				for use in a URI path component, query string, or fragment.
 			</p>
 			<p>
@@ -4703,10 +4703,10 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 	</function>
 	<function>
 		<!-- datePublished="2019-10-02T02:16:44-05:00" -->
-		<!-- dateModified="2020-05-30T02:46:48-05:00" -->
+		<!-- dateModified="2021-06-01T03:18:06-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
-				<a href="https://aoindustries.com/ao-net-types/apidocs/com/aoindustries/net/URIDecoder.html#decodeURIComponent(java.lang.String)">Decodes a value</a>
+				<a href="https://oss.aoapps.com/net-types/apidocs/com/aoindustries/net/URIDecoder.html#decodeURIComponent(java.lang.String)">Decodes a value</a>
 				from use as a URI path component, query string, or fragment.
 			</p>
 			<p>
@@ -4720,10 +4720,10 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 	</function>
 	<function>
 		<!-- datePublished="2019-08-13T18:02:13-05:00" -->
-		<!-- dateModified="2020-05-30T02:46:48-05:00" -->
+		<!-- dateModified="2021-06-01T03:18:06-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
-				<a href="https://aoindustries.com/ao-net-types/apidocs/com/aoindustries/net/URIEncoder.html#encodeURI(java.lang.String)">Encodes a URI to ASCII format</a>.
+				<a href="https://oss.aoapps.com/net-types/apidocs/com/aoindustries/net/URIEncoder.html#encodeURI(java.lang.String)">Encodes a URI to ASCII format</a>.
 			</p>
 			<p>
 				Encodes characters in the <a href="https://www.w3.org/TR/html40/appendix/notes.html#non-ascii-chars">recommended <code>UTF-8</code> encoding</a>.
@@ -4736,10 +4736,10 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 	</function>
 	<function>
 		<!-- datePublished="2019-08-13T18:02:13-05:00" -->
-		<!-- dateModified="2020-05-30T02:46:48-05:00" -->
+		<!-- dateModified="2021-06-01T03:18:06-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
-				<a href="https://aoindustries.com/ao-net-types/apidocs/com/aoindustries/net/URIDecoder.html#decodeURI(java.lang.String)">Decodes a URI to Unicode format</a>.
+				<a href="https://oss.aoapps.com/net-types/apidocs/com/aoindustries/net/URIDecoder.html#decodeURI(java.lang.String)">Decodes a URI to Unicode format</a>.
 			</p>
 			<p>
 				Characters that would decode to <a href="https://tools.ietf.org/html/rfc3986#section-2.2">a reserved character</a> are left percent-encoded to avoid ambiguity.
@@ -4755,13 +4755,13 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 	</function>
 	<function>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2020-05-30T02:46:48-05:00" -->
+		<!-- dateModified="2021-06-01T03:18:06-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Rewrites a URL to maintain session state or otherwise alter the URL mapping.
 			</p>
 			<p>
-				<a href="https://aoindustries.com/ao-net-types/apidocs/com/aoindustries/net/URIEncoder.html#encodeURI(java.lang.String)">Encodes the URI to ASCII format</a>
+				<a href="https://oss.aoapps.com/net-types/apidocs/com/aoindustries/net/URIEncoder.html#encodeURI(java.lang.String)">Encodes the URI to ASCII format</a>
 				then passes through <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>.
 			</p>
 			<p>
@@ -4826,6 +4826,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 	</function>
 	<function>
 		<!-- datePublished="2020-12-06T14:08:58-06:00" -->
+		<!-- dateModified="2021-06-01T03:18:06-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Gets the version of a Maven project given its groupId and artifactId.
@@ -4848,7 +4849,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 				<li>
 					<p>
 						Next searches the application classpath via
-						<a href="https://aoindustries.com/ao-lang/apidocs/com/aoindustries/lang/Projects.html#getVersion(java.lang.String,java.lang.String)">Projects.getVersion(String groupId, String artifactId)</a>.
+						<a href="https://oss.aoapps.com/lang/apidocs/com/aoindustries/lang/Projects.html#getVersion(java.lang.String,java.lang.String)">Projects.getVersion(String groupId, String artifactId)</a>.
 					</p>
 					<p>
 						This is for dependencies that have been included as dependencies, most likely in the
@@ -4888,10 +4889,11 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 	</function>
 	<function>
 		<!-- datePublished="2020-12-03T20:49:12-06:00" -->
+		<!-- dateModified="2021-06-01T03:18:06-05:00" -->
 		<description><![CDATA[
 			<p>
 				Determines if <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletResponse.html#getLocale()">the response locale</a>
-				is <a href="https://aoindustries.com/ao-lang/apidocs/com/aoindustries/util/i18n/Locales.html#isRightToLeft(java.util.Locale)">a right-to-left language</a>.
+				is <a href="https://oss.aoapps.com/lang/apidocs/com/aoindustries/util/i18n/Locales.html#isRightToLeft(java.util.Locale)">a right-to-left language</a>.
 			</p>
 		]]></description>
 		<name>isRtl</name>

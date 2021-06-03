@@ -95,7 +95,7 @@ public class HtmlTag extends ElementFilteredTag {
 
 	// TODO: charset here, along with:
 	//       Page (model), Page (Servlet), PageTag, Theme, View
-	//       aoweb-framework: WebPage, WebPageLayout
+	//       ao-web-framework: WebPage, WebPageLayout
 	//       aoweb-struts: PageAttributes, Skin
 
 	private Serialization serialization;

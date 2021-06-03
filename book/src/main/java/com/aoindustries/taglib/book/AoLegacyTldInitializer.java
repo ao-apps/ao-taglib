@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2016, 2017, 2019, 2020  AO Industries, Inc.
+ * Copyright (C) 2016, 2017, 2019, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -30,7 +30,7 @@ public class AoLegacyTldInitializer extends TagReferenceInitializer {
 		super(
 			Maven.properties.getProperty("documented.name") + " Reference (Legacy)",
 			"Taglib Reference (Legacy)",
-			"/ao-taglib",
+			"/taglib",
 			"/ao-legacy.tld",
 			true,
 			Maven.properties.getProperty("documented.javadoc.link.javase"),
@@ -39,10 +39,10 @@ public class AoLegacyTldInitializer extends TagReferenceInitializer {
 			"com.aoindustries.taglib", Maven.properties.getProperty("project.url") + "apidocs/",
 			"com.aoindustries.taglib.legacy", Maven.properties.getProperty("project.url") + "apidocs/",
 			// Dependencies
-			"com.aoindustries.encoding.taglib", "https://aoindustries.com/ao-encoding/taglib/apidocs/",
-			"com.aoindustries.encoding.taglib.legacy", "https://aoindustries.com/ao-encoding/taglib/apidocs/",
-			"com.aoindustries.lang", "https://aoindustries.com/ao-lang/apidocs/",
-			"com.aoindustries.net", "https://aoindustries.com/ao-net-types/apidocs/"
+			"com.aoindustries.encoding.taglib", "https://oss.aoapps.com/encoding/taglib/apidocs/",
+			"com.aoindustries.encoding.taglib.legacy", "https://oss.aoapps.com/encoding/taglib/apidocs/",
+			"com.aoindustries.lang", "https://oss.aoapps.com/lang/apidocs/",
+			"com.aoindustries.net", "https://oss.aoapps.com/net-types/apidocs/"
 		);
 	}
 }
