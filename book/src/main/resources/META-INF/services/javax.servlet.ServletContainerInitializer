@@ -1,6 +1,6 @@
 #
 # ao-taglib - Making JSP be what it should have been all along.
-# Copyright (C) 2016, 2020  AO Industries, Inc.
+# Copyright (C) 2016, 2020, 2021  AO Industries, Inc.
 #     support@aoindustries.com
 #     7262 Bull Pen Cir
 #     Mobile, AL 36695
@@ -21,5 +21,5 @@
 # along with ao-taglib.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-com.aoindustries.taglib.book.AoTldInitializer
-com.aoindustries.taglib.book.AoLegacyTldInitializer
+com.aoapps.taglib.book.AoTldInitializer
+com.aoapps.taglib.book.AoLegacyTldInitializer
