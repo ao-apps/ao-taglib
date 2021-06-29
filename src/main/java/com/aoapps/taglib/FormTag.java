@@ -45,6 +45,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
@@ -67,7 +68,7 @@ public class FormTag extends ElementBufferedTag
 {
 
 /* SimpleTag only: */
-	public static final Resources RESOURCES = Resources.getResources(FormTag.class);
+	public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, FormTag.class);
 /**/
 
 	public FormTag() {

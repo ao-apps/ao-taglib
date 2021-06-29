@@ -38,6 +38,7 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
@@ -65,7 +66,7 @@ abstract public class DispatchTag extends SimpleTagSupport
 		ParamsAttribute
 {
 
-	private static final Resources RESOURCES = Resources.getResources(DispatchTag.class);
+	private static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, DispatchTag.class);
 
 	/**
 	 * Tracks if the request has been forwarded.
@@ -214,9 +215,9 @@ abstract public class DispatchTag extends SimpleTagSupport
 	/**
 	 * Subclass hook to intercept request after servlet paths have been determined
 	 * and before dispatch is called.
-	 * 
+	 *
 	 * This default implementation does nothing.
-	 * 
+	 *
 	 * @exception  SkipPageException  If the implementation has handled the request,
 	 *                                must throw SkipPageException.
 	 */

@@ -36,6 +36,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
 import java.util.Locale;
+import java.util.ResourceBundle;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
@@ -63,7 +64,7 @@ public class AreaTag extends ElementNullTag
 {
 
 /* SimpleTag only: */
-	public static final Resources RESOURCES = Resources.getResources(AreaTag.class);
+	public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, AreaTag.class);
 /**/
 
 	public AreaTag() {

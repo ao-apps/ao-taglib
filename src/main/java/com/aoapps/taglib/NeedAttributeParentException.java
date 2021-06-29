@@ -25,13 +25,14 @@ package com.aoapps.taglib;
 import com.aoapps.lang.Throwables;
 import com.aoapps.lang.i18n.Resources;
 import com.aoapps.servlet.jsp.LocalizedJspTagException;
+import java.util.ResourceBundle;
 
 /**
  * @author  AO Industries, Inc.
  */
 public class NeedAttributeParentException extends LocalizedJspTagException {
 
-	private static final Resources RESOURCES = Resources.getResources(NeedAttributeParentException.class);
+	private static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, NeedAttributeParentException.class);
 
 	private static final long serialVersionUID = 1L;
 

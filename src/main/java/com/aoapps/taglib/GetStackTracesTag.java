@@ -29,6 +29,7 @@ import com.aoapps.lang.util.ErrorPrinter;
 import com.aoapps.servlet.jsp.LocalizedJspTagException;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ResourceBundle;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
@@ -37,7 +38,7 @@ import javax.servlet.jsp.PageContext;
  */
 public class GetStackTracesTag extends EncodingNullTag {
 
-	private static final Resources RESOURCES = Resources.getResources(GetStackTracesTag.class);
+	private static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, GetStackTracesTag.class);
 
 	private String scope;
 	private String name;

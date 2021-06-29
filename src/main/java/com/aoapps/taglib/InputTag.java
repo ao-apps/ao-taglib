@@ -42,6 +42,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
 import java.util.Locale;
+import java.util.ResourceBundle;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
@@ -82,7 +83,7 @@ public class InputTag extends ElementBufferedTag
 {
 
 /* SimpleTag only: */
-	public static final Resources RESOURCES = Resources.getResources(InputTag.class);
+	public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, InputTag.class);
 /**/
 
 	public InputTag() {

@@ -79,7 +79,7 @@ public class AreaTag extends ElementNullBodyTag
 {
 
 /* SimpleTag only:
-	public static final Resources RESOURCES = Resources.getResources(AreaTag.class);
+	public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, AreaTag.class);
 /**/
 
 	public AreaTag() {

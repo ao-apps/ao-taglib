@@ -40,7 +40,7 @@ import javax.servlet.jsp.JspException;
 public class ReadonlyTag extends EncodingBufferedBodyTag {
 
 /* SimpleTag only:
-	public static final Resources RESOURCES = Resources.getResources(ReadonlyTag.class);
+	public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, ReadonlyTag.class);
 
 	public static final String TAG_NAME = "<ao:readonly>";
 /**/

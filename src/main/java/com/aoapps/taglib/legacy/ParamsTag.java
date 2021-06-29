@@ -51,7 +51,7 @@ public class ParamsTag extends EncodingNullBodyTag
 {
 
 /* SimpleTag only:
-	public static final Resources RESOURCES = Resources.getResources(ParamsTag.class);
+	public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, ParamsTag.class);
 
 	public static final String TAG_NAME = "<ao:params>";
 /**/

@@ -27,6 +27,7 @@ import com.aoapps.lang.LocalizedIllegalArgumentException;
 import com.aoapps.lang.Strings;
 import com.aoapps.lang.i18n.Resources;
 import java.util.Locale;
+import java.util.ResourceBundle;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 import javax.servlet.jsp.tagext.TryCatchFinally;
@@ -36,7 +37,7 @@ import javax.servlet.jsp.tagext.TryCatchFinally;
  */
 public class DisableResourceEditorTag extends TagSupport implements TryCatchFinally {
 
-	static final Resources RESOURCES = Resources.getResources(DisableResourceEditorTag.class);
+	static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, DisableResourceEditorTag.class);
 
 	/**
 	 * Scope used for automatic determination.

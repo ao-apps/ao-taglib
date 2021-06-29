@@ -38,6 +38,7 @@ import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ResourceBundle;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
@@ -54,7 +55,7 @@ public class WriteTag extends EncodingNullTag
 {
 
 /* SimpleTag only: */
-	public static final Resources RESOURCES = Resources.getResources(WriteTag.class);
+	public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, WriteTag.class);
 /**/
 
 	public WriteTag() {

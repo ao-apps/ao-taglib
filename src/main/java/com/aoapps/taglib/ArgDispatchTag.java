@@ -30,6 +30,7 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 import javax.servlet.jsp.JspTagException;
 
 /**
@@ -42,7 +43,7 @@ abstract class ArgDispatchTag extends DispatchTag
 	implements ArgsAttribute
 {
 
-	private static final Resources RESOURCES = Resources.getResources(ArgDispatchTag.class);
+	private static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, ArgDispatchTag.class);
 
 	/**
 	 * The prefix for argument attributes.

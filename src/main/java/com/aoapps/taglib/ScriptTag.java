@@ -36,6 +36,7 @@ import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.List;
 import java.util.Locale;
+import java.util.ResourceBundle;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
@@ -54,7 +55,7 @@ public class ScriptTag extends ElementBufferedTag
 {
 
 /* SimpleTag only: */
-	public static final Resources RESOURCES = Resources.getResources(ScriptTag.class);
+	public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, ScriptTag.class);
 /**/
 
 	public ScriptTag() {

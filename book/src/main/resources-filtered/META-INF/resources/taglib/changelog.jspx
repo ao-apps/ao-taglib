@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-05:00"
-		dateModified="2021-06-03T22:53:21-05:00"
+		dateModified="2021-06-27T16:13:41-05:00"
 	>
 		<c:if test="${fn:endsWith('@{project.version}', '-SNAPSHOT') and !fn:endsWith('@{project.version}', '-POST-SNAPSHOT')}">
 			<changelog:release
@@ -59,6 +59,12 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 				-->
 				<ul>
 					<li>Updated to <ao:a rel="nofollow" href="https://www.oracle.com/java/technologies/javaee/javaeetechnologies.html#javaee7">Java™ EE 7 Web Profile</ao:a> (Servlet 3.1, JSP 2.3, EL 3.0, and JSTL 1.2).</li>
+					<li>
+						Now supports Java 9+ modules.  Due to still having filename-based automatic module dependencies,
+						*-SNAPSHOT versions include <code>module-info.class</code> while releases include the
+						<code>Automatic-Module-Name</code> manifest entry.  To minimize the difference between these
+						modes, <code>module-info.java</code> does not perform any transitive requires.
+					</li>
 					<li>Maven artifact relocated from <code>com.aoindustries:ao-taglib</code> to <code>com.aoapps:ao-taglib</code>.</li>
 					<li>Package renamed from <code>com.aoindustries.taglib</code> to <code>com.aoapps.taglib</code>.</li>
 					<li>Taglib URL changed to <code>https://oss.aoapps.com/taglib/</code> to match project URL.</li>
@@ -180,7 +186,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 				<li>
 					New function <core:link page="ao.tld/function-isRtl" /> that determines if
 					<ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletResponse.html#getLocale()">the response locale</ao:a>
-					is <ao:a href="https://oss.aoapps.com/lang/apidocs/com/aoapps/lang/i18n/Locales.html#isRightToLeft(java.util.Locale)">a right-to-left language</ao:a>.
+					is <ao:a href="https://oss.aoapps.com/lang/apidocs/com.aoapps.lang/com/aoapps/lang/i18n/Locales.html#isRightToLeft(java.util.Locale)">a right-to-left language</ao:a>.
 				</li>
 				<li>
 					New function <core:link page="ao.tld/function-getProjectVersion" /> that gets the version of a
@@ -292,7 +298,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 				</li>
 				<li>
 					Moved <code>HtmlTag.useXhtmlContentType(…)</code> to new
-					<ao:a href="https://oss.aoapps.com/fluent-html/apidocs/com/aoapps/html/Document.html">Html</ao:a> class,
+					<ao:a href="https://oss.aoapps.com/fluent-html/apidocs/com.aoapps.html/com/aoapps/html/Document.html">Html</ao:a> class,
 					along with related constants.
 				</li>
 				<li>Now writing XML declaration when both serving as XHTML and response encoding is not <code>UTF-8</code>.</li>
@@ -402,11 +408,11 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 					</ol>
 				</li>
 				<li>
-					<core:link page="ao.tld/tag-base" /> uses <ao:a href="https://oss.aoapps.com/servlet-filter/apidocs/com/aoapps/servlet/filter/EncodeURIFilter.html">EncodeURIFilter</ao:a>
+					<core:link page="ao.tld/tag-base" /> uses <ao:a href="https://oss.aoapps.com/servlet-filter/apidocs/com.aoapps.servlet.filter/com/aoapps/servlet/filter/EncodeURIFilter.html">EncodeURIFilter</ao:a>
 					for final character encoding, or encodes to <a href="https://tools.ietf.org/html/rfc3986">RFC 3986 URI</a> US-ASCII format
 					when the filter is not active.
 				</li>
-				<li>Added <ao:a href="https://oss.aoapps.com/servlet-util/apidocs/com/aoapps/servlet/http/Canonical.html">Canonical URL</ao:a> support:
+				<li>Added <ao:a href="https://oss.aoapps.com/servlet-util/apidocs/com.aoapps.servlet.util/com/aoapps/servlet/http/Canonical.html">Canonical URL</ao:a> support:
 					<ol>
 						<li><code>UrlUtils</code> updated with new <code>canonical</code> parameters.</li>
 						<li>New <code>canonical</code> attribute on:
@@ -420,8 +426,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 							</ul>
 						</li>
 						<li>
-							In auto mode, <ao:a href="https://oss.aoapps.com/servlet-last-modified/apidocs/com/aoapps/servlet/lastmodified/LastModifiedServlet.html">last modified stamping</ao:a>
-							is not performed on <ao:a href="https://oss.aoapps.com/servlet-util/apidocs/com/aoapps/servlet/http/Canonical.html">Canonical URLs</ao:a>.
+							In auto mode, <ao:a href="https://oss.aoapps.com/servlet-last-modified/apidocs/com.aoapps.servlet.lastmodified/com/aoapps/servlet/lastmodified/LastModifiedServlet.html">last modified stamping</ao:a>
+							is not performed on <ao:a href="https://oss.aoapps.com/servlet-util/apidocs/com.aoapps.servlet.util/com/aoapps/servlet/http/Canonical.html">Canonical URLs</ao:a>.
 						</li>
 					</ol>
 				</li>
@@ -466,7 +472,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 					<ol>
 						<li>New <ao:a href="https://www.w3schools.com/tags/att_input_src.asp"><code>src</code> attribute</ao:a></li>
 						<li>New <code>absolute</code> attribute</li>
-						<li>New <ao:a href="https://oss.aoapps.com/servlet-util/apidocs/com/aoapps/servlet/http/Canonical.html"><code>canonical</code> attribute</ao:a></li>
+						<li>New <ao:a href="https://oss.aoapps.com/servlet-util/apidocs/com.aoapps.servlet.util/com/aoapps/servlet/http/Canonical.html"><code>canonical</code> attribute</ao:a></li>
 						<li>New <code>addLastModified</code> attribute</li>
 						<li>New <ao:a href="https://www.w3schools.com/tags/att_input_width.asp"><code>width</code> attribute</ao:a></li>
 						<li>New <ao:a href="https://www.w3schools.com/tags/att_input_height.asp"><code>height</code> attribute</ao:a></li>
@@ -507,8 +513,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 			<ul>
 				<li>Minimum Java version changed from 1.6 to 1.7.</li>
 				<li>
-					Deprecated <ao:a href="https://oss.aoapps.com/servlet-filter/apidocs/com/aoapps/servlet/filter/TempFileContext.html">TempFileContext</ao:a>
-					in favor of new <ao:a href="https://oss.aoapps.com/tempfiles/servlet/apidocs/com/aoapps/tempfiles/servlet/ServletTempFileContext.html">ServletTempFileContext</ao:a>
+					Deprecated <ao:a href="https://oss.aoapps.com/servlet-filter/apidocs/com.aoapps.servlet.filter/com/aoapps/servlet/filter/TempFileContext.html">TempFileContext</ao:a>
+					in favor of new <ao:a href="https://oss.aoapps.com/tempfiles/servlet/apidocs/com.aoapps.tempfiles/com/aoapps/tempfiles/servlet/ServletTempFileContext.html">ServletTempFileContext</ao:a>
 					that does not require <code>web.xml</code> configuration, supports additional scopes (application and session),
 					and registers a shutdown hook to delete on JVM exit.
 				</li>

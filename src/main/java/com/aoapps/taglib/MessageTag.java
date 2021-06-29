@@ -36,6 +36,7 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.List;
+import java.util.ResourceBundle;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.DynamicAttributes;
@@ -51,7 +52,7 @@ public class MessageTag extends EncodingNullTag
 {
 
 /* SimpleTag only: */
-	public static final Resources RESOURCES = Resources.getResources(MessageTag.class);
+	public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, MessageTag.class);
 /**/
 
 	public MessageTag() {

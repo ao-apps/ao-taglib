@@ -30,6 +30,7 @@ import com.aoapps.servlet.lastmodified.AddLastModified;
 import com.aoapps.servlet.lastmodified.LastModifiedUtil;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.ResourceBundle;
 import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
@@ -41,7 +42,7 @@ import javax.servlet.jsp.PageContext;
  */
 final public class UrlUtils {
 
-	private static final Resources RESOURCES = Resources.getResources(UrlUtils.class);
+	private static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, UrlUtils.class);
 
 	/**
 	 * Gets an href attribute value with parameters.

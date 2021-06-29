@@ -35,6 +35,7 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 import javax.servlet.jsp.JspException;
 
 /**
@@ -46,7 +47,7 @@ public class ParamsTag extends EncodingNullTag
 {
 
 /* SimpleTag only: */
-	public static final Resources RESOURCES = Resources.getResources(ParamsTag.class);
+	public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, ParamsTag.class);
 
 	public static final String TAG_NAME = "<ao:params>";
 /**/

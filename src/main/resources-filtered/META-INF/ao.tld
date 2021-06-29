@@ -163,7 +163,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
 	version="2.1">
 	<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-	<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+	<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 <!-- </common> -->
 	<!-- allowRobots="auto" -->
 <!-- <common> -->
@@ -179,7 +179,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			tags, and validate the output of nested tags.  For example,
 			<a href="@{project.url}]]>&tld;<![CDATA[/tag-message">&lt;ao:message&gt;</a> within
 			<a href="https://oss.aoapps.com/encoding/taglib/]]>&aoEncodingTld;<![CDATA[/tag-psql">&lt;encoding:psql&gt;</a> will write its output
-			encoded as <a href="https://oss.aoapps.com/encoding/apidocs/com/aoapps/encoding/MediaType.html#PSQL">PSQL</a>.
+			encoded as <a href="https://oss.aoapps.com/encoding/apidocs/com.aoapps.encoding/com/aoapps/encoding/MediaType.html#PSQL">PSQL</a>.
 		</p>
 		<p>
 			This suite includes, but is not limited to:
@@ -203,7 +203,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	<!-- TODO: Implement validator(s), such as ao:when directly inside ao:choose and similar -->
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_a.asp">&lt;a&gt;</a> tag.
@@ -303,7 +303,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 		<attribute>
 			<description><![CDATA[
 				<p>
-					When <code>true</code>, will generate a <a href="https://oss.aoapps.com/servlet-util/apidocs/com/aoapps/servlet/http/Canonical.html">Canonical URL</a>.
+					When <code>true</code>, will generate a <a href="https://oss.aoapps.com/servlet-util/apidocs/com.aoapps.servlet.util/com/aoapps/servlet/http/Canonical.html">Canonical URL</a>.
 					Canonical URLs should be used where per-user response URL rewriting
 					(such as information added when cookies are disabled) should be avoided.
 					Defaults to <code>false</code>.
@@ -328,7 +328,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 				</p>
 				<p>
 					In auto mode, last modified stamping is not performed on
-					<a href="https://oss.aoapps.com/servlet-util/apidocs/com/aoapps/servlet/http/Canonical.html">Canonical URLs</a>.
+					<a href="https://oss.aoapps.com/servlet-util/apidocs/com.aoapps.servlet.util/com/aoapps/servlet/http/Canonical.html">Canonical URLs</a>.
 				</p>
 			]]></description>
 			<name>addLastModified</name>
@@ -436,11 +436,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/att_action.asp">action attribute</a> to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/ActionAttribute.html">ActionAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/ActionAttribute.html">ActionAttribute</a>
 				parent tag.
 			</p>
 		]]></description>
@@ -450,11 +450,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/att_alt.asp">alt attribute</a> to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/AltAttribute.html">AltAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/AltAttribute.html">AltAttribute</a>
 				parent tag.
 			</p>
 		]]></description>
@@ -464,7 +464,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2019-10-08T21:41:35-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_area.asp">&lt;area&gt;</a> tag.
@@ -582,7 +582,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 		<attribute>
 			<description><![CDATA[
 				<p>
-					When <code>true</code>, will generate a <a href="https://oss.aoapps.com/servlet-util/apidocs/com/aoapps/servlet/http/Canonical.html">Canonical URL</a>.
+					When <code>true</code>, will generate a <a href="https://oss.aoapps.com/servlet-util/apidocs/com.aoapps.servlet.util/com/aoapps/servlet/http/Canonical.html">Canonical URL</a>.
 					Canonical URLs should be used where per-user response URL rewriting
 					(such as information added when cookies are disabled) should be avoided.
 					Defaults to <code>false</code>.
@@ -607,7 +607,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 				</p>
 				<p>
 					In auto mode, last modified stamping is not performed on
-					<a href="https://oss.aoapps.com/servlet-util/apidocs/com/aoapps/servlet/http/Canonical.html">Canonical URLs</a>.
+					<a href="https://oss.aoapps.com/servlet-util/apidocs/com.aoapps.servlet.util/com/aoapps/servlet/http/Canonical.html">Canonical URLs</a>.
 				</p>
 			]]></description>
 			<name>addLastModified</name>
@@ -728,11 +728,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Adds an argument to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/ArgsAttribute.html">ArgsAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/ArgsAttribute.html">ArgsAttribute</a>
 				parent tag.
 			</p>
 		]]></description>
@@ -890,11 +890,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_checked.asp">checked attribute</a> to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/CheckedAttribute.html">CheckedAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/CheckedAttribute.html">CheckedAttribute</a>
 				parent tag.
 				The body, after trimming, must contain either <code>true</code>, <code>false</code>, or be empty.
 				If empty, the checked attribute of the parent tag is not overridden.
@@ -920,11 +920,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_class.asp">class attribute</a> to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/ClassAttribute.html">ClassAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/ClassAttribute.html">ClassAttribute</a>
 				parent tag.
 			</p>
 		]]></description>
@@ -961,11 +961,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_content.asp">content attribute</a> to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/ContentAttribute.html">ContentAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/ContentAttribute.html">ContentAttribute</a>
 				parent tag.
 			</p>
 		]]></description>
@@ -975,11 +975,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2020-07-31T10:11:29-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_global_dir.asp">dir attribute</a> to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/DirAttribute.html">DirAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/DirAttribute.html">DirAttribute</a>
 				parent tag.
 			</p>
 		]]></description>
@@ -1046,11 +1046,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_disabled.asp">disabled attribute</a> to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/DisabledAttribute.html">DisabledAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/DisabledAttribute.html">DisabledAttribute</a>
 				parent tag.
 				The body, after trimming, must contain either <code>true</code>, <code>false</code>, or be empty.
 				If empty, the disabled attribute of the parent tag is not overridden.
@@ -1062,11 +1062,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/att_enctype.asp">enctype attribute</a> to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/EnctypeAttribute.html">EnctypeAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/EnctypeAttribute.html">EnctypeAttribute</a>
 				parent tag.
 			</p>
 		]]></description>
@@ -1346,11 +1346,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_frame_frameborder.asp">frameborder attribute</a> to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/FrameborderAttribute.html">FrameborderAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/FrameborderAttribute.html">FrameborderAttribute</a>
 				parent tag.
 				The body, after trimming, must contain either <code>true</code>, <code>false</code>, or be empty.
 				If empty, the frameborder attribute of the parent tag is not overridden.
@@ -1362,13 +1362,13 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Gets a detailed report of a
 				<a rel="nofollow" href="@{javadoc.link.javase}java/lang/Throwable.html">Throwable</a>
 				as generated by
-				<a href="https://oss.aoapps.com/lang/apidocs/com/aoapps/lang/util/ErrorPrinter.html">ErrorPrinter</a>.
+				<a href="https://oss.aoapps.com/lang/apidocs/com.aoapps.lang/com/aoapps/lang/util/ErrorPrinter.html">ErrorPrinter</a>.
 			</p>
 			<p>
 				The content type of this tag is <code>text/plain</code>.
@@ -1422,11 +1422,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_height.asp">height attribute</a> to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/HeightAttribute.html">HeightAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/HeightAttribute.html">HeightAttribute</a>
 				parent tag.
 			</p>
 		]]></description>
@@ -1592,11 +1592,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/att_href.asp">href attribute</a> to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/HrefAttribute.html">HrefAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/HrefAttribute.html">HrefAttribute</a>
 				parent tag.
 			</p>
 		]]></description>
@@ -1606,11 +1606,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/att_hreflang.asp">hreflang attribute</a> to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/HreflangAttribute.html">HreflangAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/HreflangAttribute.html">HreflangAttribute</a>
 				parent tag.
 			</p>
 		]]></description>
@@ -1620,11 +1620,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/att_id.asp">id attribute</a> to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/IdAttribute.html">IdAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/IdAttribute.html">IdAttribute</a>
 				parent tag.
 			</p>
 		]]></description>
@@ -1634,7 +1634,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_iframe.asp">&lt;iframe&gt;</a> tag.
@@ -1742,7 +1742,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 		<attribute>
 			<description><![CDATA[
 				<p>
-					When <code>true</code>, will generate a <a href="https://oss.aoapps.com/servlet-util/apidocs/com/aoapps/servlet/http/Canonical.html">Canonical URL</a>.
+					When <code>true</code>, will generate a <a href="https://oss.aoapps.com/servlet-util/apidocs/com.aoapps.servlet.util/com/aoapps/servlet/http/Canonical.html">Canonical URL</a>.
 					Canonical URLs should be used where per-user response URL rewriting
 					(such as information added when cookies are disabled) should be avoided.
 					Defaults to <code>false</code>.
@@ -1767,7 +1767,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 				</p>
 				<p>
 					In auto mode, last modified stamping is not performed on
-					<a href="https://oss.aoapps.com/servlet-util/apidocs/com/aoapps/servlet/http/Canonical.html">Canonical URLs</a>.
+					<a href="https://oss.aoapps.com/servlet-util/apidocs/com.aoapps.servlet.util/com/aoapps/servlet/http/Canonical.html">Canonical URLs</a>.
 				</p>
 			]]></description>
 			<name>addLastModified</name>
@@ -1820,7 +1820,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_img.asp">&lt;img&gt;</a> tag.
@@ -1923,7 +1923,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 		<attribute>
 			<description><![CDATA[
 				<p>
-					When <code>true</code>, will generate a <a href="https://oss.aoapps.com/servlet-util/apidocs/com/aoapps/servlet/http/Canonical.html">Canonical URL</a>.
+					When <code>true</code>, will generate a <a href="https://oss.aoapps.com/servlet-util/apidocs/com.aoapps.servlet.util/com/aoapps/servlet/http/Canonical.html">Canonical URL</a>.
 					Canonical URLs should be used where per-user response URL rewriting
 					(such as information added when cookies are disabled) should be avoided.
 					Defaults to <code>false</code>.
@@ -1948,7 +1948,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 				</p>
 				<p>
 					In auto mode, last modified stamping is not performed on
-					<a href="https://oss.aoapps.com/servlet-util/apidocs/com/aoapps/servlet/http/Canonical.html">Canonical URLs</a>.
+					<a href="https://oss.aoapps.com/servlet-util/apidocs/com.aoapps.servlet.util/com/aoapps/servlet/http/Canonical.html">Canonical URLs</a>.
 				</p>
 			]]></description>
 			<name>addLastModified</name>
@@ -2169,7 +2169,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_input.asp">&lt;input&gt;</a> tag.
@@ -2409,7 +2409,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 		<attribute>
 			<description><![CDATA[
 				<p>
-					When <code>true</code>, will generate a <a href="https://oss.aoapps.com/servlet-util/apidocs/com/aoapps/servlet/http/Canonical.html">Canonical URL</a>.
+					When <code>true</code>, will generate a <a href="https://oss.aoapps.com/servlet-util/apidocs/com.aoapps.servlet.util/com/aoapps/servlet/http/Canonical.html">Canonical URL</a>.
 					Canonical URLs should be used where per-user response URL rewriting
 					(such as information added when cookies are disabled) should be avoided.
 					Defaults to <code>false</code>.
@@ -2434,7 +2434,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 				</p>
 				<p>
 					In auto mode, last modified stamping is not performed on
-					<a href="https://oss.aoapps.com/servlet-util/apidocs/com/aoapps/servlet/http/Canonical.html">Canonical URLs</a>.
+					<a href="https://oss.aoapps.com/servlet-util/apidocs/com.aoapps.servlet.util/com/aoapps/servlet/http/Canonical.html">Canonical URLs</a>.
 				</p>
 			]]></description>
 			<name>addLastModified</name>
@@ -2578,11 +2578,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				If contained with any
-				<a href="@{project.url}apidocs/com/aoapps/taglib/LinksAttribute.html">LinksAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/LinksAttribute.html">LinksAttribute</a>
 				parent, adds the link data to the parent tag.
 				Otherwise, renders a <a href="https://www.w3schools.com/tags/tag_link.asp">&lt;link&gt;</a> tag.
 			</p>
@@ -2617,7 +2617,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			<description><![CDATA[
 				<p>
 					An optional link to copy all the attributes from, as captured by a
-					<a href="@{project.url}apidocs/com/aoapps/taglib/LinksAttribute.html">LinksAttribute</a>
+					<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/LinksAttribute.html">LinksAttribute</a>
 					parent tag.
 				</p>
 			]]></description>
@@ -2685,7 +2685,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 		<attribute>
 			<description><![CDATA[
 				<p>
-					When <code>true</code>, will generate a <a href="https://oss.aoapps.com/servlet-util/apidocs/com/aoapps/servlet/http/Canonical.html">Canonical URL</a>.
+					When <code>true</code>, will generate a <a href="https://oss.aoapps.com/servlet-util/apidocs/com.aoapps.servlet.util/com/aoapps/servlet/http/Canonical.html">Canonical URL</a>.
 					Canonical URLs should be used where per-user response URL rewriting
 					(such as information added when cookies are disabled) should be avoided.
 					Defaults to <code>false</code>.
@@ -2710,7 +2710,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 				</p>
 				<p>
 					In auto mode, last modified stamping is not performed on
-					<a href="https://oss.aoapps.com/servlet-util/apidocs/com/aoapps/servlet/http/Canonical.html">Canonical URLs</a>.
+					<a href="https://oss.aoapps.com/servlet-util/apidocs/com.aoapps.servlet.util/com/aoapps/servlet/http/Canonical.html">Canonical URLs</a>.
 				</p>
 			]]></description>
 			<name>addLastModified</name>
@@ -2826,11 +2826,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_maxlength.asp">maxlength attribute</a> to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/MaxlengthAttribute.html">MaxlengthAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/MaxlengthAttribute.html">MaxlengthAttribute</a>
 				parent tag.
 				The body is trimmed.  If empty is sets the maxlength to <code>null</code>.  Otherwise
 				it must be a valid integer.
@@ -2995,11 +2995,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Adds a message argument to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/MessageArgsAttribute.html">MessageArgsAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/MessageArgsAttribute.html">MessageArgsAttribute</a>
 				parent tag.
 			</p>
 		]]></description>
@@ -3023,11 +3023,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				If contained with any
-				<a href="@{project.url}apidocs/com/aoapps/taglib/MetasAttribute.html">MetasAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/MetasAttribute.html">MetasAttribute</a>
 				parent, adds the meta data to the parent tag.
 				Otherwise, renders a <a href="https://www.w3schools.com/tags/tag_meta.asp">&lt;meta&gt;</a> tag.
 			</p>
@@ -3049,7 +3049,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			<description><![CDATA[
 				<p>
 					An optional meta to copy all the attributes from, as captured by a
-					<a href="@{project.url}apidocs/com/aoapps/taglib/MetasAttribute.html">MetasAttribute</a>
+					<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/MetasAttribute.html">MetasAttribute</a>
 					parent tag.
 				</p>
 			]]></description>
@@ -3122,11 +3122,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_method.asp">method attribute</a> to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/MethodAttribute.html">MethodAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/MethodAttribute.html">MethodAttribute</a>
 				parent tag.
 			</p>
 		]]></description>
@@ -3136,11 +3136,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_name.asp">name attribute</a> to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/NameAttribute.html">NameAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/NameAttribute.html">NameAttribute</a>
 				parent tag.
 			</p>
 		]]></description>
@@ -3150,11 +3150,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/ev_onblur.asp">onblur</a> script to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/OnblurAttribute.html">OnblurAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/OnblurAttribute.html">OnblurAttribute</a>
 				parent tag.
 			</p>
 		]]></description>
@@ -3164,11 +3164,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/ev_onchange.asp">onchange</a> script to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/OnchangeAttribute.html">OnchangeAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/OnchangeAttribute.html">OnchangeAttribute</a>
 				parent tag.
 			</p>
 		]]></description>
@@ -3178,11 +3178,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/ev_onclick.asp">onclick</a> script to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/OnclickAttribute.html">OnclickAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/OnclickAttribute.html">OnclickAttribute</a>
 				parent tag.
 			</p>
 		]]></description>
@@ -3192,11 +3192,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/ev_onfocus.asp">onfocus</a> script to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/OnfocusAttribute.html">OnfocusAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/OnfocusAttribute.html">OnfocusAttribute</a>
 				parent tag.
 			</p>
 		]]></description>
@@ -3206,11 +3206,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/ev_onkeypress.asp">onkeypress</a> script to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/OnkeypressAttribute.html">OnkeypressAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/OnkeypressAttribute.html">OnkeypressAttribute</a>
 				parent tag.
 			</p>
 		]]></description>
@@ -3220,11 +3220,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/ev_onload.asp">onload</a> script to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/OnloadAttribute.html">OnloadAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/OnloadAttribute.html">OnloadAttribute</a>
 				parent tag.
 			</p>
 		]]></description>
@@ -3234,11 +3234,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/ev_onmouseout.asp">onmouseout</a> script to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/OnmouseoutAttribute.html">OnmouseoutAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/OnmouseoutAttribute.html">OnmouseoutAttribute</a>
 				parent tag.
 			</p>
 		]]></description>
@@ -3248,11 +3248,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/ev_onmouseover.asp">onmouseover</a> script to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/OnmouseoverAttribute.html">OnmouseoverAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/OnmouseoverAttribute.html">OnmouseoverAttribute</a>
 				parent tag.
 			</p>
 		]]></description>
@@ -3262,11 +3262,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/ev_onsubmit.asp">onsubmit</a> script to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/OnsubmitAttribute.html">OnsubmitAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/OnsubmitAttribute.html">OnsubmitAttribute</a>
 				parent tag.
 			</p>
 		]]></description>
@@ -3437,11 +3437,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a page to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/PageAttribute.html">PageAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/PageAttribute.html">PageAttribute</a>
 				parent tag.
 			</p>
 		]]></description>
@@ -3451,11 +3451,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Adds a parameter to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/ParamsAttribute.html">ParamsAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/ParamsAttribute.html">ParamsAttribute</a>
 				parent tag.
 			</p>
 		]]></description>
@@ -3492,11 +3492,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Adds multiple parameters to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/ParamsAttribute.html">ParamsAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/ParamsAttribute.html">ParamsAttribute</a>
 				parent tag.
 			</p>
 		]]></description>
@@ -3513,7 +3513,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 				<p>
 					When provided, the values may not contain a
 					<a rel="nofollow" href="@{javadoc.link.javase}java/util/Map.html">Map</a>
-					or <a href="https://oss.aoapps.com/net-types/apidocs/com/aoapps/net/URIParameters.html">URIParameters</a>.
+					or <a href="https://oss.aoapps.com/net-types/apidocs/com.aoapps.net.types/com/aoapps/net/URIParameters.html">URIParameters</a>.
 					When provided, the exclude attribute may not be provided.
 				</p>
 			]]></description>
@@ -3527,7 +3527,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 				<p>
 					Optionally excludes all elements of a
 					<a rel="nofollow" href="@{javadoc.link.javase}java/util/Map.html">Map</a>
-					or <a href="https://oss.aoapps.com/net-types/apidocs/com/aoapps/net/URIParameters.html">URIParameters</a>
+					or <a href="https://oss.aoapps.com/net-types/apidocs/com.aoapps.net.types/com/aoapps/net/URIParameters.html">URIParameters</a>
 					that match any of the comma-separated patterns.
 					May not be used in conjunction with the name attribute.
 				</p>
@@ -3578,7 +3578,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 				<p>
 					When name is not provided, requires
 					<a rel="nofollow" href="@{javadoc.link.javase}java/util/Map.html">Map</a>
-					or <a href="https://oss.aoapps.com/net-types/apidocs/com/aoapps/net/URIParameters.html">URIParameters</a>,
+					or <a href="https://oss.aoapps.com/net-types/apidocs/com.aoapps.net.types/com/aoapps/net/URIParameters.html">URIParameters</a>,
 					where the parameter name is the map key coerced to <a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</a>
 					and the value (or set of values) is the map value.  Each of the entry values may be
 					<a rel="nofollow" href="@{javadoc.link.javase}java/lang/Iterable.html">Iterable</a>,
@@ -3589,7 +3589,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 				<p>
 					When obtaining values from a
 					<a rel="nofollow" href="@{javadoc.link.javase}java/util/Map.html">Map</a>
-					or <a href="https://oss.aoapps.com/net-types/apidocs/com/aoapps/net/URIParameters.html">URIParameters</a>,
+					or <a href="https://oss.aoapps.com/net-types/apidocs/com.aoapps.net.types/com/aoapps/net/URIParameters.html">URIParameters</a>,
 					parameters may be excluded with the "exclude" attribute.
 				</p>
 				<p>
@@ -3604,11 +3604,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Provides a <a href="https://www.w3schools.com/tags/att_readonly.asp">readonly attribute</a> to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/ReadonlyAttribute.html">ReadonlyAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/ReadonlyAttribute.html">ReadonlyAttribute</a>
 				parent tag.
 			</p>
 			<p>
@@ -3622,7 +3622,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<div class="semanticcms-tag-reference-summary">
 				<p>
@@ -3762,7 +3762,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 		<attribute>
 			<description><![CDATA[
 				<p>
-					When <code>true</code>, will generate a <a href="https://oss.aoapps.com/servlet-util/apidocs/com/aoapps/servlet/http/Canonical.html">Canonical URL</a>.
+					When <code>true</code>, will generate a <a href="https://oss.aoapps.com/servlet-util/apidocs/com.aoapps.servlet.util/com/aoapps/servlet/http/Canonical.html">Canonical URL</a>.
 					Canonical URLs should be used where per-user response URL rewriting
 					(such as information added when cookies are disabled) should be avoided.
 					Defaults to <code>false</code>.
@@ -3787,7 +3787,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 				</p>
 				<p>
 					In auto mode, last modified stamping is not performed on
-					<a href="https://oss.aoapps.com/servlet-util/apidocs/com/aoapps/servlet/http/Canonical.html">Canonical URLs</a>.
+					<a href="https://oss.aoapps.com/servlet-util/apidocs/com.aoapps.servlet.util/com/aoapps/servlet/http/Canonical.html">Canonical URLs</a>.
 				</p>
 			]]></description>
 			<name>addLastModified</name>
@@ -3835,11 +3835,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_rel.asp">rel attribute</a> to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/RelAttribute.html">RelAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/RelAttribute.html">RelAttribute</a>
 				parent tag.
 			</p>
 		]]></description>
@@ -3861,7 +3861,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Manually establishes a <a href="https://www.w3schools.com/tags/tag_script.asp">script context</a> when automatic detection is not possible.
@@ -3991,7 +3991,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 		<attribute>
 			<description><![CDATA[
 				<p>
-					When <code>true</code>, will generate a <a href="https://oss.aoapps.com/servlet-util/apidocs/com/aoapps/servlet/http/Canonical.html">Canonical URL</a>.
+					When <code>true</code>, will generate a <a href="https://oss.aoapps.com/servlet-util/apidocs/com.aoapps.servlet.util/com/aoapps/servlet/http/Canonical.html">Canonical URL</a>.
 					Canonical URLs should be used where per-user response URL rewriting
 					(such as information added when cookies are disabled) should be avoided.
 					Defaults to <code>false</code>.
@@ -4016,7 +4016,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 				</p>
 				<p>
 					In auto mode, last modified stamping is not performed on
-					<a href="https://oss.aoapps.com/servlet-util/apidocs/com/aoapps/servlet/http/Canonical.html">Canonical URLs</a>.
+					<a href="https://oss.aoapps.com/servlet-util/apidocs/com.aoapps.servlet.util/com/aoapps/servlet/http/Canonical.html">Canonical URLs</a>.
 				</p>
 			]]></description>
 			<name>addLastModified</name>
@@ -4137,11 +4137,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Provides a <a href="https://www.w3schools.com/tags/att_selected.asp">selected attribute</a> to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/SelectedAttribute.html">SelectedAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/SelectedAttribute.html">SelectedAttribute</a>
 				parent tag.
 			</p>
 			<p>
@@ -4204,11 +4204,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_size.asp">size attribute</a> to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/SizeAttribute.html">SizeAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/SizeAttribute.html">SizeAttribute</a>
 				parent tag.
 			</p>
 		]]></description>
@@ -4218,11 +4218,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_src.asp">src attribute</a> to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/SrcAttribute.html">SrcAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/SrcAttribute.html">SrcAttribute</a>
 				parent tag.
 			</p>
 		]]></description>
@@ -4232,11 +4232,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_style.asp">style attribute</a> to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/StyleAttribute.html">StyleAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/StyleAttribute.html">StyleAttribute</a>
 				parent tag.
 			</p>
 		]]></description>
@@ -4246,11 +4246,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Provides a <a href="https://www.w3schools.com/tags/att_tabindex.asp">tabindex attribute</a> to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/TabindexAttribute.html">TabindexAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/TabindexAttribute.html">TabindexAttribute</a>
 				parent tag.
 			</p>
 			<p>
@@ -4264,11 +4264,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_target.asp">target attribute</a> to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/TargetAttribute.html">TargetAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/TargetAttribute.html">TargetAttribute</a>
 				parent tag.
 			</p>
 		]]></description>
@@ -4394,11 +4394,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_title.asp">title attribute</a> to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/TitleAttribute.html">TitleAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/TitleAttribute.html">TitleAttribute</a>
 				parent tag.
 			</p>
 		]]></description>
@@ -4408,11 +4408,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_type.asp">type attribute</a> to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/TypeAttribute.html">TypeAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/TypeAttribute.html">TypeAttribute</a>
 				parent tag.
 			</p>
 		]]></description>
@@ -4460,11 +4460,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_value.asp">value attribute</a> to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/ValueAttribute.html">ValueAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/ValueAttribute.html">ValueAttribute</a>
 				parent tag.
 			</p>
 		]]></description>
@@ -4501,11 +4501,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_width.asp">width attribute</a> to its
-				<a href="@{project.url}apidocs/com/aoapps/taglib/WidthAttribute.html">WidthAttribute</a>
+				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/WidthAttribute.html">WidthAttribute</a>
 				parent tag.
 			</p>
 		]]></description>
@@ -4687,10 +4687,10 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</function>
 	<function>
 		<!-- datePublished="2019-10-02T02:16:44-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
-				<a href="https://oss.aoapps.com/net-types/apidocs/com/aoapps/net/URIEncoder.html#encodeURIComponent(java.lang.String)">Encodes a value</a>
+				<a href="https://oss.aoapps.com/net-types/apidocs/com.aoapps.net.types/com/aoapps/net/URIEncoder.html#encodeURIComponent(java.lang.String)">Encodes a value</a>
 				for use in a URI path component, query string, or fragment.
 			</p>
 			<p>
@@ -4704,10 +4704,10 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</function>
 	<function>
 		<!-- datePublished="2019-10-02T02:16:44-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
-				<a href="https://oss.aoapps.com/net-types/apidocs/com/aoapps/net/URIDecoder.html#decodeURIComponent(java.lang.String)">Decodes a value</a>
+				<a href="https://oss.aoapps.com/net-types/apidocs/com.aoapps.net.types/com/aoapps/net/URIDecoder.html#decodeURIComponent(java.lang.String)">Decodes a value</a>
 				from use as a URI path component, query string, or fragment.
 			</p>
 			<p>
@@ -4721,10 +4721,10 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</function>
 	<function>
 		<!-- datePublished="2019-08-13T18:02:13-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
-				<a href="https://oss.aoapps.com/net-types/apidocs/com/aoapps/net/URIEncoder.html#encodeURI(java.lang.String)">Encodes a URI to ASCII format</a>.
+				<a href="https://oss.aoapps.com/net-types/apidocs/com.aoapps.net.types/com/aoapps/net/URIEncoder.html#encodeURI(java.lang.String)">Encodes a URI to ASCII format</a>.
 			</p>
 			<p>
 				Encodes characters in the <a href="https://www.w3.org/TR/html40/appendix/notes.html#non-ascii-chars">recommended <code>UTF-8</code> encoding</a>.
@@ -4737,10 +4737,10 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</function>
 	<function>
 		<!-- datePublished="2019-08-13T18:02:13-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
-				<a href="https://oss.aoapps.com/net-types/apidocs/com/aoapps/net/URIDecoder.html#decodeURI(java.lang.String)">Decodes a URI to Unicode format</a>.
+				<a href="https://oss.aoapps.com/net-types/apidocs/com.aoapps.net.types/com/aoapps/net/URIDecoder.html#decodeURI(java.lang.String)">Decodes a URI to Unicode format</a>.
 			</p>
 			<p>
 				Characters that would decode to <a href="https://tools.ietf.org/html/rfc3986#section-2.2">a reserved character</a> are left percent-encoded to avoid ambiguity.
@@ -4756,13 +4756,13 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</function>
 	<function>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Rewrites a URL to maintain session state or otherwise alter the URL mapping.
 			</p>
 			<p>
-				<a href="https://oss.aoapps.com/net-types/apidocs/com/aoapps/net/URIEncoder.html#encodeURI(java.lang.String)">Encodes the URI to ASCII format</a>
+				<a href="https://oss.aoapps.com/net-types/apidocs/com.aoapps.net.types/com/aoapps/net/URIEncoder.html#encodeURI(java.lang.String)">Encodes the URI to ASCII format</a>
 				then passes through <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>.
 			</p>
 			<p>
@@ -4828,7 +4828,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</function>
 	<function>
 		<!-- datePublished="2020-12-06T14:08:58-06:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Gets the version of a Maven project given its groupId and artifactId.
@@ -4851,7 +4851,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 				<li>
 					<p>
 						Next searches the application classpath via
-						<a href="https://oss.aoapps.com/lang/apidocs/com/aoapps/lang/Projects.html#getVersion(java.lang.String,java.lang.String)">Projects.getVersion(String groupId, String artifactId)</a>.
+						<a href="https://oss.aoapps.com/lang/apidocs/com.aoapps.lang/com/aoapps/lang/Projects.html#getVersion(java.lang.String,java.lang.String)">Projects.getVersion(String groupId, String artifactId)</a>.
 					</p>
 					<p>
 						This is for dependencies that have been included as dependencies, most likely in the
@@ -4891,11 +4891,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</function>
 	<function>
 		<!-- datePublished="2020-12-03T20:49:12-06:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
 		<description><![CDATA[
 			<p>
 				Determines if <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletResponse.html#getLocale()">the response locale</a>
-				is <a href="https://oss.aoapps.com/lang/apidocs/com/aoapps/lang/i18n/Locales.html#isRightToLeft(java.util.Locale)">a right-to-left language</a>.
+				is <a href="https://oss.aoapps.com/lang/apidocs/com.aoapps.lang/com/aoapps/lang/i18n/Locales.html#isRightToLeft(java.util.Locale)">a right-to-left language</a>.
 			</p>
 		]]></description>
 		<name>isRtl</name>

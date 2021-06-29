@@ -59,7 +59,7 @@ public class ScriptTag extends ElementBufferedBodyTag
 {
 
 /* SimpleTag only:
-	public static final Resources RESOURCES = Resources.getResources(ScriptTag.class);
+	public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, ScriptTag.class);
 /**/
 
 	public ScriptTag() {

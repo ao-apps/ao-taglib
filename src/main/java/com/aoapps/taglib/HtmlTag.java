@@ -38,6 +38,7 @@ import com.aoapps.web.resources.servlet.RegistryEE;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Locale;
+import java.util.ResourceBundle;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletResponse;
@@ -75,7 +76,7 @@ import javax.servlet.jsp.PageContext;
 public class HtmlTag extends ElementFilteredTag {
 
 /* SimpleTag only: */
-	public static final Resources RESOURCES = Resources.getResources(HtmlTag.class);
+	public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, HtmlTag.class);
 /**/
 
 /* BodyTag only:

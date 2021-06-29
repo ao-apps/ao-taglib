@@ -24,6 +24,7 @@ package com.aoapps.taglib;
 
 import com.aoapps.lang.LocalizedIllegalArgumentException;
 import com.aoapps.lang.i18n.Resources;
+import java.util.ResourceBundle;
 import javax.servlet.jsp.PageContext;
 
 /**
@@ -33,7 +34,7 @@ import javax.servlet.jsp.PageContext;
  */
 final public class Scope {
 
-	private static final Resources RESOURCES = Resources.getResources(Scope.class);
+	private static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, Scope.class);
 
 	/**
 	 * The set of allowed scope names.

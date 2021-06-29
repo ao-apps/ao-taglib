@@ -33,6 +33,7 @@ import com.aoapps.servlet.lastmodified.LastModifiedUtil;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -56,7 +57,7 @@ public class RedirectTag extends DispatchTag
 
 	private static final Logger logger = Logger.getLogger(RedirectTag.class.getName());
 
-	static final Resources RESOURCES = Resources.getResources(RedirectTag.class);
+	static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, RedirectTag.class);
 
 	/**
 	 * The maximum length of a URL allowed for redirect.

@@ -26,6 +26,7 @@ import com.aoapps.lang.Throwables;
 import com.aoapps.lang.i18n.Resources;
 import com.aoapps.servlet.jsp.LocalizedJspTagException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ResourceBundle;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 
@@ -36,7 +37,7 @@ import javax.servlet.jsp.PageContext;
  */
 public class PropertyUtils {
 
-	private static final Resources RESOURCES = Resources.getResources(PropertyUtils.class);
+	private static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, PropertyUtils.class);
 
 	private PropertyUtils() {
 	}

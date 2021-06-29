@@ -33,6 +33,7 @@ import com.aoapps.servlet.jsp.tagext.JspTagUtils;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.function.Function;
 import javax.el.ELContext;
 import javax.el.ValueExpression;
@@ -44,7 +45,7 @@ import javax.servlet.jsp.tagext.JspTag;
  */
 public final class AttributeUtils  {
 
-	public static final Resources RESOURCES = Resources.getResources(AttributeUtils.class);
+	public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, AttributeUtils.class);
 
 	/**
 	 * Finds the attribute parent tag of the provided class (or subclass).

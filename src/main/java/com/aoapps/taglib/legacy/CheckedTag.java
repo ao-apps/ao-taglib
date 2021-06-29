@@ -40,7 +40,7 @@ import javax.servlet.jsp.JspException;
 public class CheckedTag extends EncodingBufferedBodyTag {
 
 /* SimpleTag only:
-	public static final Resources RESOURCES = Resources.getResources(CheckedTag.class);
+	public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, CheckedTag.class);
 
 	public static final String TAG_NAME = "<ao:checked>";
 /**/

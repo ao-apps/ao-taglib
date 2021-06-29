@@ -79,14 +79,6 @@ public class BundleTag
 		return resources;
 	}
 
-	/**
-	 * @deprecated  Please use {@link #getResources()} directly.
-	 */
-	@Deprecated
-	public com.aoapps.util.i18n.ApplicationResourcesAccessor getAccessor() {
-		return resources;
-	}
-
 	@SuppressWarnings("deprecation")
 	public void setBasename(String basename) {
 		this.basename = basename;

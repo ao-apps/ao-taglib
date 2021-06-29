@@ -29,6 +29,7 @@ import com.aoapps.lang.i18n.Resources;
 import com.aoapps.servlet.jsp.LocalizedJspTagException;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ResourceBundle;
 import javax.servlet.jsp.JspException;
 
 /**
@@ -37,7 +38,7 @@ import javax.servlet.jsp.JspException;
 public class CheckedTag extends EncodingBufferedTag {
 
 /* SimpleTag only: */
-	public static final Resources RESOURCES = Resources.getResources(CheckedTag.class);
+	public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, CheckedTag.class);
 
 	public static final String TAG_NAME = "<ao:checked>";
 /**/
