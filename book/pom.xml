@@ -145,6 +145,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 					<dependency>
 						<groupId>com.aoapps</groupId><artifactId>ao-taglib</artifactId><version>7.0.0${POST-SNAPSHOT}</version>
 						<type>jar</type>
+						<exclusions><exclusion><groupId>*</groupId><artifactId>*</artifactId></exclusion></exclusions>
 					</dependency>
 				</dependencies>
 			</plugin>
