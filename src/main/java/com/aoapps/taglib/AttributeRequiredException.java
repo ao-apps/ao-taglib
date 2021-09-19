@@ -32,7 +32,7 @@ import java.util.ResourceBundle;
  */
 public class AttributeRequiredException extends LocalizedJspTagException {
 
-	static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, AttributeRequiredException.class);
+	static final Resources RESOURCES = Resources.getResources(AttributeRequiredException.class, ResourceBundle::getBundle);
 
 	private static final long serialVersionUID = 2L;
 

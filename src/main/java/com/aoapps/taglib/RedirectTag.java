@@ -57,7 +57,7 @@ public class RedirectTag extends DispatchTag
 
 	private static final Logger logger = Logger.getLogger(RedirectTag.class.getName());
 
-	static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, RedirectTag.class);
+	static final Resources RESOURCES = Resources.getResources(RedirectTag.class, ResourceBundle::getBundle);
 
 	/**
 	 * The maximum length of a URL allowed for redirect.

@@ -42,7 +42,7 @@ import javax.servlet.jsp.PageContext;
  */
 final public class UrlUtils {
 
-	private static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, UrlUtils.class);
+	private static final Resources RESOURCES = Resources.getResources(UrlUtils.class, ResourceBundle::getBundle);
 
 	/**
 	 * Gets an href attribute value with parameters.

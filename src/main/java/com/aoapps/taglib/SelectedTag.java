@@ -38,7 +38,7 @@ import javax.servlet.jsp.JspException;
 public class SelectedTag extends EncodingBufferedTag {
 
 /* SimpleTag only: */
-	public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, SelectedTag.class);
+	public static final Resources RESOURCES = Resources.getResources(SelectedTag.class, ResourceBundle::getBundle);
 
 	public static final String TAG_NAME = "<ao:selected>";
 /**/

@@ -66,7 +66,7 @@ abstract public class DispatchTag extends SimpleTagSupport
 		ParamsAttribute
 {
 
-	private static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, DispatchTag.class);
+	private static final Resources RESOURCES = Resources.getResources(DispatchTag.class, ResourceBundle::getBundle);
 
 	/**
 	 * Tracks if the request has been forwarded.

@@ -38,7 +38,7 @@ import javax.servlet.jsp.JspException;
 public class DisabledTag extends EncodingBufferedTag {
 
 /* SimpleTag only: */
-	public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, DisabledTag.class);
+	public static final Resources RESOURCES = Resources.getResources(DisabledTag.class, ResourceBundle::getBundle);
 
 	public static final String TAG_NAME = "<ao:disabled>";
 /**/

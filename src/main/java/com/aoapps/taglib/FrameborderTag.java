@@ -38,7 +38,7 @@ import javax.servlet.jsp.JspException;
 public class FrameborderTag extends EncodingBufferedTag {
 
 /* SimpleTag only: */
-	public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, FrameborderTag.class);
+	public static final Resources RESOURCES = Resources.getResources(FrameborderTag.class, ResourceBundle::getBundle);
 
 	public static final String TAG_NAME = "<ao:frameborder>";
 /**/
