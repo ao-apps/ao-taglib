@@ -83,7 +83,7 @@ public class InputTag extends ElementBufferedTag
 {
 
 /* SimpleTag only: */
-	public static final Resources RESOURCES = Resources.getResources(InputTag.class, ResourceBundle::getBundle);
+	public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, InputTag.class);
 /**/
 
 	public InputTag() {

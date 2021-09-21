@@ -55,7 +55,7 @@ public class ScriptTag extends ElementBufferedTag
 {
 
 /* SimpleTag only: */
-	public static final Resources RESOURCES = Resources.getResources(ScriptTag.class, ResourceBundle::getBundle);
+	public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, ScriptTag.class);
 /**/
 
 	public ScriptTag() {

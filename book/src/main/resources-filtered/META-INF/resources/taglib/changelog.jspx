@@ -58,7 +58,6 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 				</ul>
 				-->
 				<ul>
-					<li>Updated dependencies.</li>
 					<li>value attributes no longer convert empty string to null, and thus <code>value=""</code> now works as expected.</li>
 				</ul>
 			</changelog:release>

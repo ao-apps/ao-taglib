@@ -68,7 +68,7 @@ public class FormTag extends ElementBufferedTag
 {
 
 /* SimpleTag only: */
-	public static final Resources RESOURCES = Resources.getResources(FormTag.class, ResourceBundle::getBundle);
+	public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, FormTag.class);
 /**/
 
 	public FormTag() {

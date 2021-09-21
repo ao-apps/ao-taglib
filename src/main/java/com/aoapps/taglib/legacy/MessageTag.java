@@ -55,7 +55,7 @@ public class MessageTag extends EncodingNullBodyTag
 {
 
 /* SimpleTag only:
-	public static final Resources RESOURCES = Resources.getResources(MessageTag.class, ResourceBundle::getBundle);
+	public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, MessageTag.class);
 /**/
 
 	public MessageTag() {

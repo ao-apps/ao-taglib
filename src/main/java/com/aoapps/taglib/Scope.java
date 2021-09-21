@@ -34,7 +34,7 @@ import javax.servlet.jsp.PageContext;
  */
 final public class Scope {
 
-	private static final Resources RESOURCES = Resources.getResources(Scope.class, ResourceBundle::getBundle);
+	private static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, Scope.class);
 
 	/**
 	 * The set of allowed scope names.

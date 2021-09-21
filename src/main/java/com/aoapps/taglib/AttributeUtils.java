@@ -45,7 +45,7 @@ import javax.servlet.jsp.tagext.JspTag;
  */
 public final class AttributeUtils  {
 
-	public static final Resources RESOURCES = Resources.getResources(AttributeUtils.class, ResourceBundle::getBundle);
+	public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, AttributeUtils.class);
 
 	/**
 	 * Finds the attribute parent tag of the provided class (or subclass).

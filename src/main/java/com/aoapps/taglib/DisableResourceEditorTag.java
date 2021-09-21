@@ -37,7 +37,7 @@ import javax.servlet.jsp.tagext.TryCatchFinally;
  */
 public class DisableResourceEditorTag extends TagSupport implements TryCatchFinally {
 
-	static final Resources RESOURCES = Resources.getResources(DisableResourceEditorTag.class, ResourceBundle::getBundle);
+	static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, DisableResourceEditorTag.class);
 
 	/**
 	 * Scope used for automatic determination.

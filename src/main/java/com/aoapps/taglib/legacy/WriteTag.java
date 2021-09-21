@@ -57,7 +57,7 @@ public class WriteTag extends EncodingNullBodyTag
 {
 
 /* SimpleTag only:
-	public static final Resources RESOURCES = Resources.getResources(WriteTag.class, ResourceBundle::getBundle);
+	public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, WriteTag.class);
 /**/
 
 	public WriteTag() {

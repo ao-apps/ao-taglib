@@ -38,7 +38,7 @@ import javax.servlet.jsp.PageContext;
  */
 public class GetStackTracesTag extends EncodingNullTag {
 
-	private static final Resources RESOURCES = Resources.getResources(GetStackTracesTag.class, ResourceBundle::getBundle);
+	private static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, GetStackTracesTag.class);
 
 	private String scope;
 	private String name;

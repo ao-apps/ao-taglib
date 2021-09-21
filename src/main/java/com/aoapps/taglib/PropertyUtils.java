@@ -37,7 +37,7 @@ import javax.servlet.jsp.PageContext;
  */
 public class PropertyUtils {
 
-	private static final Resources RESOURCES = Resources.getResources(PropertyUtils.class, ResourceBundle::getBundle);
+	private static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, PropertyUtils.class);
 
 	private PropertyUtils() {
 	}

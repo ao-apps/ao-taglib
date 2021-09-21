@@ -43,7 +43,7 @@ abstract class ArgDispatchTag extends DispatchTag
 	implements ArgsAttribute
 {
 
-	private static final Resources RESOURCES = Resources.getResources(ArgDispatchTag.class, ResourceBundle::getBundle);
+	private static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, ArgDispatchTag.class);
 
 	/**
 	 * The prefix for argument attributes.
