@@ -370,7 +370,7 @@ public class InputTag extends ElementBufferedBodyTag
 			Coercion.write(width, textInXhtmlAttributeEncoder, out);
 			out.append('"');
 		}
-		input.value(value);
+		input.value(value == null ? "" : value);
 		if(onblur != null) {
 			out.write(" onblur=\"");
 			MarkupCoercion.write(onblur, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
