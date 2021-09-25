@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-05:00"
-		dateModified="2021-09-25T03:26:20-05:00"
+		dateModified="2021-09-25T16:06:57-05:00"
 	>
 		<c:if test="${fn:endsWith('@{project.version}', '-SNAPSHOT') and !fn:endsWith('@{project.version}', '-POST-SNAPSHOT')}">
 			<changelog:release
@@ -73,6 +73,13 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 							<li><core:link page="ao.tld/tag-src" /></li>
 							<li><core:link page="ao.tld/tag-url" /></li>
 						</ul>
+					</li>
+					<li>
+						<core:link page="ao.tld/tag-url" /> now supports param.* dynamic attributes.
+					</li>
+					<li>
+						<core:link page="ao.tld/tag-url" /> now performs the same set of URL manipulations as the various
+						URL attributes, such as <core:link page="ao.tld/tag-a"><![CDATA[&lt;ao:a href="…" /&gt;]]></core:link>.
 					</li>
 				</ul>
 			</changelog:release>

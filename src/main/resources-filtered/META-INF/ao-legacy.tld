@@ -4413,12 +4413,13 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-09-25T03:26:20-05:00" -->
+		<!-- dateModified="2021-09-25T16:06:57-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Manually establishes a URL context when automatic detection is not possible.
 				The body of this tag, after trimming, is valid <a href="https://tools.ietf.org/html/rfc3986">RFC 3986 URI</a>
 				or <a href="https://tools.ietf.org/html/rfc3987">RFC 3987 IRI</a>.
+				The URL is modified in several ways to make things much easier to work with.
 			</p>
 			<p>
 				Before the first ? symbol, may contain characters in any language.  This
@@ -4433,8 +4434,17 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 				this tag.
 			</p>
 			<p>
-				It may be a relative or absolute URL.  If starts with a /, the context
-				path will be prepended to the path.
+				In order to make relative paths predictable, relative paths are interpreted from
+				the current JSP page.
+			</p>
+			<p>
+				In order to keep paths app-relative, if starts with a /, the context path will be
+				prepended to the path.
+			</p>
+			<p>
+				In order to simplify things behind URL mapping schemes,
+				the href is always written starting with '/'.  This avoids any need to include any
+				<a href="@{project.url}]]>&tld;<![CDATA[/tag-base">&lt;ao:base&gt;</a> tags.
 			</p>
 			<p>
 				Depending on context, the URL will be passed through
@@ -4447,9 +4457,25 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 				To avoid ambiguity, any dynamic parameters or anchors in the URL must have been correctly encoded by the caller.
 			</p>
 			<p>
-				Any directly nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-param">&lt;ao:param&gt;</a>
-				or <a href="@{project.url}]]>&tld;<![CDATA[/tag-params">&lt;ao:params&gt;</a>
-				tag will add parameters to the URL.
+				Any attribute that has no namespace and begins with <code>param.</code> is added to the URL as a parameter.
+				The parameter name is the part of the attribute name following <code>param.</code>.
+			</p>
+			<p>
+				When a parameter value is <code>null</code> it is not added.
+				If the value is an
+				<a rel="nofollow" href="@{javadoc.link.javase}java/lang/Iterable.html">Iterable</a>,
+				<a rel="nofollow" href="@{javadoc.link.javase}java/util/Iterator.html">Iterator</a>,
+				<a rel="nofollow" href="@{javadoc.link.javase}java/util/Enumeration.html">Enumeration</a>,
+				or array, then each non-null element is coerced to
+				<a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</a> as a separate
+				parameter in iteration order.  Otherwise, the value itself is
+				coerced to <a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</a>
+				for the parameter value.
+			</p>
+			<p>
+				Nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-param">&lt;ao:param&gt;</a> or
+				<a href="@{project.url}]]>&tld;<![CDATA[/tag-params">&lt;ao:params&gt;</a> tags will
+				add parameters after any provided as attributes.
 			</p>
 			<p>
 				The content type of this tag is <code>text/url</code>.
@@ -4462,6 +4488,55 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 		<name>url</name>
 		<tag-class>&package;.UrlTag</tag-class>
 		<body-content>&JSP;</body-content>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					When <code>true</code>, generates an absolute URL.
+					Defaults to <code>false</code>.
+				</p>
+			]]></description>
+			<name>absolute</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					When <code>true</code>, will generate a <a href="https://oss.aoapps.com/servlet-util/apidocs/com.aoapps.servlet.util/com/aoapps/servlet/http/Canonical.html">Canonical URL</a>.
+					Canonical URLs should be used where per-user response URL rewriting
+					(such as information added when cookies are disabled) should be avoided.
+					Defaults to <code>false</code>.
+				</p>
+			]]></description>
+			<name>canonical</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					If the URL represents a local resource, a parameter of "lastModified=#####" may be
+					automatically added with the timestamp of the local resource to the nearest second.
+					May be one of <code>true</code>, <code>false</code>, or <code>auto</code>.
+					Defaults to <code>auto</code>.
+				</p>
+				<p>
+					In auto mode, last modified stamping may be disabled by the client with
+					the <code>X-com-aoapps-servlet-lastmodified-enabled: false</code> header.
+				</p>
+				<p>
+					In auto mode, last modified stamping is not performed on
+					<a href="https://oss.aoapps.com/servlet-util/apidocs/com.aoapps.servlet.util/com/aoapps/servlet/http/Canonical.html">Canonical URLs</a>.
+				</p>
+			]]></description>
+			<name>addLastModified</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<dynamic-attributes>true</dynamic-attributes>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
