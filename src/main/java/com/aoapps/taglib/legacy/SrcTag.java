@@ -43,7 +43,7 @@ public class SrcTag extends EncodingBufferedBodyTag {
 
 	@Override
 	public MediaType getContentType() {
-		return MediaType.URL; // TODO: Does this work with whitepace around the URL that will be trimmed?  Compare to ImgTag
+		return MediaType.URL;
 	}
 
 	@Override
@@ -62,8 +62,9 @@ public class SrcTag extends EncodingBufferedBodyTag {
 /* SimpleTag only:
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
+		assert capturedBody.trim() == capturedBody : "URLs should have already been trimmed";
 		AttributeUtils.requireAttributeParent(TAG_NAME, this, "src", SrcAttribute.class)
-			.setSrc(capturedBody.trim().toString());
+			.setSrc(capturedBody.toString());
 /* BodyTag only: */
 		return EVAL_PAGE;
 /**/

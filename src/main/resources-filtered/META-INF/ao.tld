@@ -4404,11 +4404,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-09-24T19:19:37-05:00" -->
+		<!-- dateModified="2021-09-25T02:39:59-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Manually establishes a URL context when automatic detection is not possible.
-				The body of this tag contains a Uniform Resource Identifier (URI or URL).
+				The body of this tag, after trimming, contains a valid Uniform Resource Identifier (URI or URL).
 			</p>
 			<p>
 				Before the first ? symbol, may contain characters in any language.  This
@@ -4430,6 +4430,11 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 				Depending on context, the URL will be passed through
 				<a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>
 				to add any URL-based session state.  Session state will never be added to external links.
+			</p>
+			<p>
+				Any directly nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-param">&lt;ao:param&gt;</a>
+				or <a href="@{project.url}]]>&tld;<![CDATA[/tag-params">&lt;ao:params&gt;</a>
+				tag will add parameters to the URL.
 			</p>
 			<p>
 				The content type of this tag is <code>text/url</code>.

@@ -59,8 +59,9 @@ public class ActionTag extends EncodingBufferedTag {
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
+		assert capturedBody.trim() == capturedBody : "URLs should have already been trimmed";
 		AttributeUtils.requireAttributeParent(TAG_NAME, this, "action", ActionAttribute.class)
-			.setAction(capturedBody.trim().toString());
+			.setAction(capturedBody.toString());
 /* BodyTag only:
 		return EVAL_PAGE;
 /**/

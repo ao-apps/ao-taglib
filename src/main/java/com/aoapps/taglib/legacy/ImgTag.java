@@ -69,7 +69,7 @@ public class ImgTag extends ElementBufferedBodyTag
 
 	@Override
 	public MediaType getContentType() {
-		return MediaType.TEXT; // TODO: Can't be MediaType.URL due to value used after trimming.  Compare to HrefTag, SrcTag, and UrlTag
+		return MediaType.URL;
 	}
 
 	@Override
@@ -175,7 +175,8 @@ public class ImgTag extends ElementBufferedBodyTag
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
 /**/
-		if(src == null) src = capturedBody.trim().toString(); // TODO: Validate here?
+		assert capturedBody.trim() == capturedBody : "URLs should have already been trimmed";
+		if(src == null) src = capturedBody.toString(); // TODO: Validate here?
 		if(usemap == null && alt == null) throw new AttributeRequiredException("alt");
 		DocumentEE document = new DocumentEE(
 			pageContext.getServletContext(),

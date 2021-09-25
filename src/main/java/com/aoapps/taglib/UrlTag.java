@@ -49,7 +49,7 @@ public class UrlTag extends EncodingBufferedTag implements ParamsAttribute {
 
 	@Override
 	public MediaType getContentType() {
-		return MediaType.URL; // TODO: Does this work with whitepace around the URL that will be trimmed?  Compare to ImgTag
+		return MediaType.URL;
 	}
 
 	@Override
@@ -80,7 +80,8 @@ public class UrlTag extends EncodingBufferedTag implements ParamsAttribute {
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
 /**/
-		String url = new URI(capturedBody.trim().toString()).addParameters(params).toString();
+		assert capturedBody.trim() == capturedBody : "URLs should have already been trimmed";
+		String url = new URI(capturedBody.toString()).addParameters(params).toString();
 		if(url.startsWith("/")) {
 			HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
 			URIEncoder.encodeURI(request.getContextPath(), out);

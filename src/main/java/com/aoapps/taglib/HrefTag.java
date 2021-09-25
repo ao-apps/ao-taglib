@@ -40,7 +40,7 @@ public class HrefTag extends EncodingBufferedTag {
 
 	@Override
 	public MediaType getContentType() {
-		return MediaType.URL; // TODO: Does this work with whitepace around the URL that will be trimmed?  Compare to ImgTag
+		return MediaType.URL;
 	}
 
 	@Override
@@ -59,8 +59,9 @@ public class HrefTag extends EncodingBufferedTag {
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
+		assert capturedBody.trim() == capturedBody : "URLs should have already been trimmed";
 		AttributeUtils.requireAttributeParent(TAG_NAME, this, "href", HrefAttribute.class)
-			.setHref(capturedBody.trim().toString());
+			.setHref(capturedBody.toString());
 /* BodyTag only:
 		return EVAL_PAGE;
 /**/
