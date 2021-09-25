@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-05:00"
-		dateModified="2021-09-24T19:19:37-05:00"
+		dateModified="2021-09-25T03:26:20-05:00"
 	>
 		<c:if test="${fn:endsWith('@{project.version}', '-SNAPSHOT') and !fn:endsWith('@{project.version}', '-POST-SNAPSHOT')}">
 			<changelog:release
@@ -61,6 +61,18 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 					<li>
 						<core:link page="ao.tld/tag-url" /> now correctly adds context path when URL begins
 						with "/".  This is the behavior that was documented, and it is now properly implemented.
+					</li>
+					<li>
+						URLs provided in tag bodies now support both
+						<ao:a href="https://tools.ietf.org/html/rfc3986">RFC 3986 URI</ao:a>
+						and <ao:a href="https://tools.ietf.org/html/rfc3987">RFC 3987 IRI</ao:a>:
+						<ul>
+							<li><core:link page="ao.tld/tag-action" /></li>
+							<li><core:link page="ao.tld/tag-href" /></li>
+							<li><core:link page="ao.tld/tag-img" /></li>
+							<li><core:link page="ao.tld/tag-src" /></li>
+							<li><core:link page="ao.tld/tag-url" /></li>
+						</ul>
 					</li>
 				</ul>
 			</changelog:release>

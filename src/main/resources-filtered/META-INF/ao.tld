@@ -203,7 +203,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	<!-- TODO: Implement validator(s), such as ao:when directly inside ao:choose and similar -->
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-08-20T09:38:43-05:00" -->
+		<!-- dateModified="2021-09-24T19:45:20-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_a.asp">&lt;a&gt;</a> tag.
@@ -434,12 +434,14 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
+		<!-- dateModified="2021-09-25T03:26:20-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/att_action.asp">action attribute</a> to its
 				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/ActionAttribute.html">ActionAttribute</a>
 				parent tag.
+				The body of this tag, after trimming, is valid <a href="https://tools.ietf.org/html/rfc3986">RFC 3986 URI</a>
+				or <a href="https://tools.ietf.org/html/rfc3987">RFC 3987 IRI</a>.
 			</p>
 		]]></description>
 		<name>action</name>
@@ -1586,12 +1588,14 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
+		<!-- dateModified="2021-09-25T03:26:20-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides an <a href="https://www.w3schools.com/tags/att_href.asp">href attribute</a> to its
 				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/HrefAttribute.html">HrefAttribute</a>
 				parent tag.
+				The body of this tag, after trimming, is valid <a href="https://tools.ietf.org/html/rfc3986">RFC 3986 URI</a>
+				or <a href="https://tools.ietf.org/html/rfc3987">RFC 3987 IRI</a>.
 			</p>
 		]]></description>
 		<name>href</name>
@@ -1812,7 +1816,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-08-20T09:38:43-05:00" -->
+		<!-- dateModified="2021-09-25T03:26:20-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Renders an <a href="https://www.w3schools.com/tags/tag_img.asp">&lt;img&gt;</a> tag.
@@ -1823,7 +1827,10 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			<ol>
 				<li>Direct child <a href="@{project.url}]]>&tld;<![CDATA[/tag-src">&lt;ao:src&gt;</a> tag.</li>
 				<li>As the src attribute</li>
-				<li>Contents of tag body, trimmed.</li>
+				<li>
+					The body of this tag, after trimming, is valid <a href="https://tools.ietf.org/html/rfc3986">RFC 3986 URI</a>
+					or <a href="https://tools.ietf.org/html/rfc3987">RFC 3987 IRI</a>.
+				</li>
 			</ol>
 			<p>
 				Also, when <code>usemap</code> is not set, the alt value is required either as an attribute or a nested
@@ -4200,12 +4207,14 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
+		<!-- dateModified="2021-09-25T03:26:20-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_src.asp">src attribute</a> to its
 				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/SrcAttribute.html">SrcAttribute</a>
 				parent tag.
+				The body of this tag, after trimming, is valid <a href="https://tools.ietf.org/html/rfc3986">RFC 3986 URI</a>
+				or <a href="https://tools.ietf.org/html/rfc3987">RFC 3987 IRI</a>.
 			</p>
 		]]></description>
 		<name>src</name>
@@ -4404,11 +4413,12 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-09-25T02:39:59-05:00" -->
+		<!-- dateModified="2021-09-25T03:26:20-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Manually establishes a URL context when automatic detection is not possible.
-				The body of this tag, after trimming, contains a valid Uniform Resource Identifier (URI or URL).
+				The body of this tag, after trimming, is valid <a href="https://tools.ietf.org/html/rfc3986">RFC 3986 URI</a>
+				or <a href="https://tools.ietf.org/html/rfc3987">RFC 3987 IRI</a>.
 			</p>
 			<p>
 				Before the first ? symbol, may contain characters in any language.  This
@@ -4432,13 +4442,17 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 				to add any URL-based session state.  Session state will never be added to external links.
 			</p>
 			<p>
+				To support paths in different character sets, a Unicode to ASCII URI encoding is performed
+				on every character that is not defined in <a href="https://tools.ietf.org/html/rfc3986#section-2.2">RFC 3986: Reserved Characters</a>.
+				To avoid ambiguity, any dynamic parameters or anchors in the URL must have been correctly encoded by the caller.
+			</p>
+			<p>
 				Any directly nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-param">&lt;ao:param&gt;</a>
 				or <a href="@{project.url}]]>&tld;<![CDATA[/tag-params">&lt;ao:params&gt;</a>
 				tag will add parameters to the URL.
 			</p>
 			<p>
 				The content type of this tag is <code>text/url</code>.
-				Must be valid URL-encoded characters only.
 			</p>
 			<p>
 				To establish a URL context less URL manipulation, see also
