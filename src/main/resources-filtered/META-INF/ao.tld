@@ -4404,7 +4404,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2021-09-24T19:19:37-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Manually establishes a URL context when automatic detection is not possible.
@@ -4434,6 +4434,10 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 			<p>
 				The content type of this tag is <code>text/url</code>.
 				Must be valid URL-encoded characters only.
+			</p>
+			<p>
+				To establish a URL context less URL manipulation, see also
+				<a href="https://oss.aoapps.com/encoding/taglib/]]>&aoEncodingTld;<![CDATA[/tag-url">&lt;encoding:url&gt;</a>.
 			</p>
 		]]></description>
 		<name>url</name>

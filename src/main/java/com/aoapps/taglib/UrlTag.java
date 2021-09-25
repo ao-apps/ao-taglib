@@ -27,10 +27,13 @@ import com.aoapps.encoding.taglib.EncodingBufferedTag;
 import com.aoapps.io.buffer.BufferResult;
 import com.aoapps.net.MutableURIParameters;
 import com.aoapps.net.URI;
+import com.aoapps.net.URIEncoder;
 import com.aoapps.net.URIParametersMap;
 import java.io.IOException;
 import java.io.Writer;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.PageContext;
 
 /**
  * TODO: Have absolute option, canonical and lastModified, too?
@@ -75,14 +78,14 @@ public class UrlTag extends EncodingBufferedTag implements ParamsAttribute {
 /**/
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+		PageContext pageContext = (PageContext)getJspContext();
 /**/
-		URI url = new URI(capturedBody.trim().toString()).addParameters(params);
-		/* TODO: Prefix context path?
+		String url = new URI(capturedBody.trim().toString()).addParameters(params).toString();
 		if(url.startsWith("/")) {
 			HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
-			out.write(URIEncoder.encodeURI(request.getContextPath()));
-		}*/
-		out.write(url.toString());
+			URIEncoder.encodeURI(request.getContextPath(), out);
+		}
+		out.write(url);
 /* BodyTag only:
 		return SKIP_PAGE;
 /**/
