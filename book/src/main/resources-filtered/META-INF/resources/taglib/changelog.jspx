@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-05:00"
-		dateModified="2021-09-25T21:48:15-05:00"
+		dateModified="2021-09-25T23:27:50-05:00"
 	>
 		<c:if test="${fn:endsWith('@{project.version}', '-SNAPSHOT') and !fn:endsWith('@{project.version}', '-POST-SNAPSHOT')}">
 			<changelog:release
@@ -75,8 +75,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 				</li>
 				<li>
 					URLs provided in tag bodies now support both
-					<ao:a href="https://tools.ietf.org/html/rfc3986">RFC 3986 URI</ao:a>
-					and <ao:a href="https://tools.ietf.org/html/rfc3987">RFC 3987 IRI</ao:a>:
+					<ao:a href="https://datatracker.ietf.org/doc/html/rfc3986">RFC 3986 URI</ao:a>
+					and <ao:a href="https://datatracker.ietf.org/doc/html/rfc3987">RFC 3987 IRI</ao:a>:
 					<ul>
 						<li><core:link page="ao.tld/tag-action" /></li>
 						<li><core:link page="ao.tld/tag-href" /></li>
@@ -467,7 +467,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 				</li>
 				<li>
 					<core:link page="ao.tld/tag-base" /> uses <ao:a href="https://oss.aoapps.com/servlet-filter/apidocs/com.aoapps.servlet.filter/com/aoapps/servlet/filter/EncodeURIFilter.html">EncodeURIFilter</ao:a>
-					for final character encoding, or encodes to <a href="https://tools.ietf.org/html/rfc3986">RFC 3986 URI</a> US-ASCII format
+					for final character encoding, or encodes to <a href="https://datatracker.ietf.org/doc/html/rfc3986">RFC 3986 URI</a> US-ASCII format
 					when the filter is not active.
 				</li>
 				<li>Added <ao:a href="https://oss.aoapps.com/servlet-util/apidocs/com.aoapps.servlet.util/com/aoapps/servlet/http/Canonical.html">Canonical URL</ao:a> support:
@@ -501,7 +501,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 				<li>
 					Added new <code>absolute</code> attribute to <core:link page="ao.tld/tag-redirect" />,
 					defaulting to <code>true</code> for compatibility with the requirements prior to
-					<ao:a href="https://tools.ietf.org/html/rfc7231#section-7.1.2">RFC 7231: 7.1.2. Location</ao:a>.
+					<ao:a href="https://datatracker.ietf.org/doc/html/rfc7231#section-7.1.2">RFC 7231: 7.1.2. Location</ao:a>.
 				</li>
 				<li>
 					Added <ao:a href="https://www.w3schools.com/tags/tag_map.asp">image map</ao:a> support:
