@@ -30,6 +30,7 @@ import com.aoapps.encoding.servlet.SerializationEE;
 import com.aoapps.html.any.AnyDocument;
 import com.aoapps.html.servlet.DocumentEE;
 import com.aoapps.lang.LocalizedIllegalArgumentException;
+import com.aoapps.lang.attribute.Attribute;
 import com.aoapps.servlet.ServletUtil;
 import static com.aoapps.taglib.HtmlTag.RESOURCES;
 import static com.aoapps.taglib.HtmlTag.STRUTS_XHTML_KEY;
@@ -46,7 +47,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
-import javax.servlet.jsp.PageContext;
 
 /**
  * <p>
@@ -159,8 +159,8 @@ public class HtmlTag extends ElementFilteredBodyTag {
 /* BodyTag only: */
 	// Values that are used in doFinally
 	private transient Serialization oldSerialization;
-	private transient Object oldStrutsXhtml;
 	private transient boolean setSerialization;
+	private transient Attribute.OldValue oldStrutsXhtml;
 	private transient Doctype oldDoctype;
 	private transient boolean setDoctype;
 	private transient Boolean oldAutonli;
@@ -175,8 +175,8 @@ public class HtmlTag extends ElementFilteredBodyTag {
 		autonli = null;
 		indent = null;
 		oldSerialization = null;
-		oldStrutsXhtml = null;
 		setSerialization = false;
+		oldStrutsXhtml = null;
 		oldDoctype = null;
 		setDoctype = false;
 		oldAutonli = null;
@@ -195,8 +195,8 @@ public class HtmlTag extends ElementFilteredBodyTag {
 	protected void doTag(Writer out) throws JspException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
 		Serialization oldSerialization;
-		Object oldStrutsXhtml;
 		boolean setSerialization;
+		Attributes.Backup oldStrutsXhtml;
 		Doctype oldDoctype;
 		boolean setDoctype;
 		Boolean oldAutonli;
@@ -212,13 +212,14 @@ public class HtmlTag extends ElementFilteredBodyTag {
 		if(currentSerialization == null) {
 			currentSerialization = SerializationEE.get(servletContext, request);
 			oldSerialization = null;
-			oldStrutsXhtml = null;
 			setSerialization = false;
+			oldStrutsXhtml = null;
 		} else {
 			oldSerialization = SerializationEE.replace(request, currentSerialization);
-			oldStrutsXhtml = pageContext.getAttribute(STRUTS_XHTML_KEY, PageContext.PAGE_SCOPE);
-			pageContext.setAttribute(STRUTS_XHTML_KEY, Boolean.toString(currentSerialization == Serialization.XML), PageContext.PAGE_SCOPE);
 			setSerialization = true;
+			oldStrutsXhtml = STRUTS_XHTML_KEY.context(pageContext).init(
+				Boolean.toString(currentSerialization == Serialization.XML)
+			);
 		}
 /* SimpleTag only:
 		try {
@@ -327,10 +328,8 @@ public class HtmlTag extends ElementFilteredBodyTag {
 			}
 		} finally {
 /**/
-			if(setSerialization) {
-				SerializationEE.set(request, oldSerialization);
-				pageContext.setAttribute(STRUTS_XHTML_KEY, oldStrutsXhtml, PageContext.PAGE_SCOPE);
-			}
+			if(setSerialization) SerializationEE.set(request, oldSerialization);
+			if(oldStrutsXhtml != null) oldStrutsXhtml.close();
 /* BodyTag only: */
 			} finally {
 				init();

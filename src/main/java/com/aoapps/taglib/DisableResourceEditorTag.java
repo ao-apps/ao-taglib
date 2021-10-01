@@ -26,6 +26,7 @@ import com.aoapps.hodgepodge.i18n.EditableResourceBundle;
 import com.aoapps.lang.LocalizedIllegalArgumentException;
 import com.aoapps.lang.Strings;
 import com.aoapps.lang.i18n.Resources;
+import com.aoapps.servlet.attribute.ScopeEE;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.servlet.jsp.JspException;
@@ -55,7 +56,7 @@ public class DisableResourceEditorTag extends TagSupport implements TryCatchFina
 			scope == null
 			|| scope.equalsIgnoreCase(AUTO)
 			|| scope.equalsIgnoreCase(BODY)
-			|| scope.equalsIgnoreCase(Scope.REQUEST);
+			|| scope.equalsIgnoreCase(ScopeEE.Page.SCOPE_REQUEST);
 	}
 
 	public DisableResourceEditorTag() {
@@ -71,8 +72,8 @@ public class DisableResourceEditorTag extends TagSupport implements TryCatchFina
 			this.scope = null;
 		} else if(scope.equalsIgnoreCase(BODY)) {
 			this.scope = BODY;
-		} else if(scope.equalsIgnoreCase(Scope.REQUEST)) {
-			this.scope = Scope.REQUEST;
+		} else if(scope.equalsIgnoreCase(ScopeEE.Page.SCOPE_REQUEST)) {
+			this.scope = ScopeEE.Page.SCOPE_REQUEST;
 		} else {
 			throw new LocalizedIllegalArgumentException(RESOURCES, "scope.invalid", scope);
 		}

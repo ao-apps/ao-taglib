@@ -22,7 +22,9 @@
  */
 package com.aoapps.taglib;
 
+import com.aoapps.lang.attribute.Attribute;
 import com.aoapps.lang.i18n.Resources;
+import com.aoapps.servlet.attribute.ScopeEE;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import javax.servlet.ServletRequest;
@@ -42,13 +44,14 @@ public class BundleTag
 	 * For interaction with nested functions (that have no access to the page context),
 	 * the current BundleTag is stored as a this attribute.
 	 */
-	private static final String REQUEST_ATTRIBUTE = BundleTag.class.getName();
+	private static final ScopeEE.Request.Attribute<BundleTag> REQUEST_ATTRIBUTE =
+		ScopeEE.REQUEST.attribute(BundleTag.class.getName());
 
 	/**
 	 * Gets the current BundleTag or <code>null</code> if not set.
 	 */
 	public static BundleTag getBundleTag(ServletRequest request) {
-		return (BundleTag)request.getAttribute(REQUEST_ATTRIBUTE);
+		return REQUEST_ATTRIBUTE.context(request).get();
 	}
 
 	private static final long serialVersionUID = 1L;
@@ -60,7 +63,7 @@ public class BundleTag
 	private String basename;
 	private transient Resources resources; // Set along with basename
 	private String prefix;
-	private transient Object oldRequestValue;
+	private transient Attribute.OldValue oldRequestValue;
 
 	private void init() {
 		basename = null;
@@ -96,8 +99,7 @@ public class BundleTag
 	@Override
 	public int doStartTag() throws JspException {
 		ServletRequest request = pageContext.getRequest();
-		oldRequestValue = request.getAttribute(REQUEST_ATTRIBUTE);
-		request.setAttribute(REQUEST_ATTRIBUTE, this);
+		oldRequestValue = REQUEST_ATTRIBUTE.context(request).init(this);
 		return EVAL_BODY_INCLUDE;
 	}
 
@@ -109,7 +111,7 @@ public class BundleTag
 	@Override
 	public void doFinally() {
 		try {
-			pageContext.getRequest().setAttribute(REQUEST_ATTRIBUTE, oldRequestValue);
+			if(oldRequestValue != null) oldRequestValue.close();
 		} finally {
 			init();
 		}

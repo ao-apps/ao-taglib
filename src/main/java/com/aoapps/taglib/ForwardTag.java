@@ -22,6 +22,7 @@
  */
 package com.aoapps.taglib;
 
+import com.aoapps.lang.attribute.Attribute;
 import com.aoapps.servlet.ServletUtil;
 import com.aoapps.servlet.http.Includer;
 import java.io.IOException;
@@ -45,9 +46,7 @@ public class ForwardTag extends ArgDispatchTag {
 	@Override
 	@SuppressWarnings("deprecation")
 	void dispatch(RequestDispatcher dispatcher, JspWriter out, HttpServletRequest request, HttpServletResponse response) throws JspException, IOException {
-		Object oldForwarded = request.getAttribute(FORWARDED_REQUEST_ATTRIBUTE);
-		try {
-			setForwarded(request, true);
+		try (Attribute.OldValue oldForwarded = FORWARDED_REQUEST_ATTRIBUTE.context(request).init(true)) {
 			try {
 				// Clear the previous JSP out buffer
 				out.clear();
@@ -57,8 +56,6 @@ public class ForwardTag extends ArgDispatchTag {
 			}
 			Includer.setPageSkipped(request);
 			throw ServletUtil.SKIP_PAGE_EXCEPTION;
-		} finally {
-			request.setAttribute(FORWARDED_REQUEST_ATTRIBUTE, oldForwarded);
 		}
 	}
 }

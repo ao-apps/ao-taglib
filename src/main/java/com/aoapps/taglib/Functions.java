@@ -28,6 +28,7 @@ import com.aoapps.lang.Projects;
 import com.aoapps.lang.Strings;
 import com.aoapps.lang.i18n.Locales;
 import com.aoapps.net.URIEncoder;
+import com.aoapps.servlet.attribute.ScopeEE;
 import com.aoapps.servlet.ServletContextCache;
 import com.aoapps.servlet.filter.FunctionContext;
 import static com.aoapps.servlet.filter.FunctionContext.getRequest;
@@ -122,8 +123,8 @@ final public class Functions {
 	/**
 	 * Application-scope cached key.
 	 */
-	private static final String RESOURCE_PROJECT_VERSIONS_APPLICATION_KEY =
-		Functions.class.getName() + ".getProjectVersion.resourceProjectVersions";
+	private static final ScopeEE.Application.Attribute<ConcurrentMap<String, Tuple2<Long, String>>> RESOURCE_PROJECT_VERSIONS_APPLICATION_KEY =
+		ScopeEE.APPLICATION.attribute(Functions.class.getName() + ".getProjectVersion.resourceProjectVersions");
 
 	/**
 	 * A distinct String instance used to represent not found, since {@link ConcurrentHashMap} does not support
@@ -164,14 +165,9 @@ final public class Functions {
 		}
 		if(lastModified != 0) {
 			// Get the application-scope cache
-			@SuppressWarnings("unchecked")
 			ConcurrentMap<String, Tuple2<Long, String>> resourceProjectVersions =
-				(ConcurrentHashMap)servletContext.getAttribute(RESOURCE_PROJECT_VERSIONS_APPLICATION_KEY);
-			if(resourceProjectVersions == null) {
-				// ok if created twice due to race condition - it's just a cache
-				resourceProjectVersions = new ConcurrentHashMap<>();
-				servletContext.setAttribute(RESOURCE_PROJECT_VERSIONS_APPLICATION_KEY, resourceProjectVersions);
-			}
+				RESOURCE_PROJECT_VERSIONS_APPLICATION_KEY.context(servletContext)
+					.computeIfAbsent(__ -> new ConcurrentHashMap<>());
 			// Find any cache entry
 			Tuple2<Long, String> cached = resourceProjectVersions.get(resourceName);
 			String result;

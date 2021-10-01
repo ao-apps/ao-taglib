@@ -24,12 +24,14 @@ package com.aoapps.taglib;
 
 import com.aoapps.collections.AoCollections;
 import com.aoapps.hodgepodge.util.WildcardPatternMatcher;
+import com.aoapps.lang.attribute.Attribute;
 import com.aoapps.lang.i18n.Resources;
 import com.aoapps.lang.io.NullWriter;
 import com.aoapps.net.MutableURIParameters;
 import com.aoapps.net.URIParameters;
 import com.aoapps.net.URIParametersMap;
 import com.aoapps.net.URIResolver;
+import com.aoapps.servlet.attribute.ScopeEE;
 import com.aoapps.servlet.http.Dispatcher;
 import com.aoapps.servlet.jsp.LocalizedJspTagException;
 import java.io.IOException;
@@ -71,31 +73,22 @@ abstract public class DispatchTag extends SimpleTagSupport
 	/**
 	 * Tracks if the request has been forwarded.
 	 *
-	 * @deprecated  Please use {@link RequestDispatcher#FORWARD_SERVLET_PATH} directly.
+	 * @deprecated  Please use {@link com.aoapps.servlet.attribute.ScopeEE.Request#FORWARD_SERVLET_PATH} directly.
 	 */
 	@Deprecated
-	protected static final String FORWARDED_REQUEST_ATTRIBUTE = DispatchTag.class.getName() + ".requestForwarded";
+	protected static final ScopeEE.Request.Attribute<Boolean> FORWARDED_REQUEST_ATTRIBUTE =
+		ScopeEE.REQUEST.attribute(DispatchTag.class.getName() + ".requestForwarded");
 
 	/**
 	 * Checks if the request has been forwarded.
 	 *
-	 * @deprecated  Please use {@link RequestDispatcher#FORWARD_SERVLET_PATH} directly.
+	 * @deprecated  Please use {@link com.aoapps.servlet.attribute.ScopeEE.Request#FORWARD_SERVLET_PATH} directly.
 	 */
 	@Deprecated
 	public static boolean isForwarded(ServletRequest req) {
 		return
-			req.getAttribute(FORWARDED_REQUEST_ATTRIBUTE) != null
-			|| req.getAttribute(RequestDispatcher.FORWARD_SERVLET_PATH) != null;
-	}
-
-	/**
-	 * @deprecated  Please use {@link RequestDispatcher#FORWARD_SERVLET_PATH} directly.
-	 */
-	@Deprecated
-	protected static void setForwarded(ServletRequest req, boolean requestForwarded) {
-		req.setAttribute(FORWARDED_REQUEST_ATTRIBUTE,
-			requestForwarded ? Boolean.TRUE : null
-		);
+			FORWARDED_REQUEST_ATTRIBUTE.context(req).get() != null
+			|| ScopeEE.Request.FORWARD_SERVLET_PATH.context(req).get() != null;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -288,14 +281,10 @@ abstract public class DispatchTag extends SimpleTagSupport
 				// Store as new relative path source
 				Dispatcher.setDispatchedPage(request, contextRelativePath);
 
-				// Keep old arguments to restore
-				final Object oldArgs = request.getAttribute(Dispatcher.ARG_REQUEST_ATTRIBUTE);
-				try {
+				// Push new arguments
+				try (Attribute.OldValue oldArgs = Dispatcher.ARG_REQUEST_ATTRIBUTE.context(request).init(getArgs())) {
 					final JspWriter out = pageContext.getOut();
 					final HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
-
-					// Set new arguments
-					request.setAttribute(Dispatcher.ARG_REQUEST_ATTRIBUTE, getArgs());
 
 					final WildcardPatternMatcher clearParamsMatcher = getClearParamsMatcher();
 					Map<String, String[]> oldMap = null; // Obtained when first needed
@@ -325,9 +314,6 @@ abstract public class DispatchTag extends SimpleTagSupport
 						getParameterAlteredRequest(request, params, oldMap, clearParamsMatcher),
 						response
 					);
-				} finally {
-					// Restore any previous args
-					request.setAttribute(Dispatcher.ARG_REQUEST_ATTRIBUTE, oldArgs);
 				}
 			} finally {
 				Dispatcher.setDispatchedPage(request, oldDispatchPage);

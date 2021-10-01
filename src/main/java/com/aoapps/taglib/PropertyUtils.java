@@ -22,11 +22,15 @@
  */
 package com.aoapps.taglib;
 
+import com.aoapps.lang.LocalizedIllegalArgumentException;
 import com.aoapps.lang.Throwables;
 import com.aoapps.lang.i18n.Resources;
+import com.aoapps.servlet.attribute.AttributeEE;
+import com.aoapps.servlet.attribute.ScopeEE;
 import com.aoapps.servlet.jsp.LocalizedJspTagException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ResourceBundle;
+import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 
@@ -45,26 +49,25 @@ public class PropertyUtils {
 	/**
 	 * Sets an attribute in the provided textual scope.
 	 *
-	 * @see  Scope#getScopeId(java.lang.String)
-	 *
-	 * @deprecated  Appears to be unused as of ao-taglib-6.0.0
+	 * @see  com.aoapps.servlet.attribute.ScopeEE.Page#getScopeId(java.lang.String)
 	 */
-	@Deprecated
-	public static void setAttribute(PageContext pageContext, String scope, String name, Object value) throws IllegalArgumentException {
-		pageContext.setAttribute(name, value, Scope.getScopeId(scope));
+	public static <T> void setAttribute(ScopeEE.Page.Attribute<T> attribute, JspContext jspContext, String scope, T value) throws LocalizedIllegalArgumentException {
+		attribute.context(jspContext).set(ScopeEE.Page.getScopeId(scope), value);
+	}
+
+	/**
+	 * Sets an attribute in the provided textual scope.
+	 *
+	 * @see  com.aoapps.servlet.attribute.ScopeEE.Page#getScopeId(java.lang.String)
+	 */
+	public static void setAttribute(PageContext pageContext, String scope, String name, Object value) throws LocalizedIllegalArgumentException {
+		setAttribute(ScopeEE.PAGE.attribute(name), pageContext, scope, value);
 	}
 
 	/**
 	 * Gets the object given its scope, name, and optional property.
 	 *
-	 * @param  scope  scope must be one of these acceptable values:
-	 *                 <ul>
-	 *                   <li><code>null</code></li>
-	 *                   <li><code>"page"</code></li>
-	 *                   <li><code>"request"</code></li>
-	 *                   <li><code>"session"</code></li>
-	 *                   <li><code>"application"</code></li>
-	 *                 </ul>
+	 * @param  scope  See {@link com.aoapps.servlet.attribute.ScopeEE.Page#getScopeId(java.lang.String)}
 	 * @param beanRequired when <code>true</code>, this method will not return <code>null</code>, instead it will
 	 *                     throw a <code>JspTagException</code> with an appropriate localized message.
 	 * @param valueRequired when <code>true</code>, this method will not return <code>null</code>, instead it will
@@ -73,40 +76,45 @@ public class PropertyUtils {
 	 * @return  the resolved <code>Object</code> or <code>null</code> if not found.
 	 */
 	@SuppressWarnings({"UseSpecificCatch", "TooBroadCatch"})
-	public static Object findObject(PageContext pageContext, String scope, String name, String property, boolean beanRequired, boolean valueRequired) throws JspTagException {
+	public static <T> T findObject(ScopeEE.Page.Attribute<T> attribute, JspContext jspContext, String scope, String property, boolean beanRequired, boolean valueRequired) throws JspTagException {
 		try {
 			// Check the name
-			if(name==null) throw new AttributeRequiredException("name");
+			if(attribute == null) throw new AttributeRequiredException("name");
+			AttributeEE.Page<T> attrEE = attribute.context(jspContext);
 
 			// Find the bean
 			Object bean;
-			if(scope==null) bean = pageContext.findAttribute(name);
-			else bean = pageContext.getAttribute(name, Scope.getScopeId(scope));
+			if(scope == null) bean = attrEE.find();
+			else bean = attrEE.get(ScopeEE.Page.getScopeId(scope));
 
 			// Check required
-			if(bean==null) {
+			if(bean == null) {
 				if(beanRequired) {
 					// null and required
-					if(scope == null) throw new LocalizedJspTagException(RESOURCES, "bean.required.nullScope", name);
-					else throw new LocalizedJspTagException(RESOURCES, "bean.required.scope", name, scope);
+					if(scope == null) throw new LocalizedJspTagException(RESOURCES, "bean.required.nullScope", attribute.getName());
+					else throw new LocalizedJspTagException(RESOURCES, "bean.required.scope", attribute.getName(), scope);
 				} else {
 					// null and not required
 					return null;
 				}
 			} else {
-				if(property==null) {
+				if(property == null) {
 					// No property lookup, use the bean directly
-					return bean;
+					@SuppressWarnings("unchecked")
+					T t = (T)bean;
+					return t;
 				} else {
 					// Find the property
 					try {
 						Object value = org.apache.commons.beanutils.PropertyUtils.getProperty(bean, property);
 						if(valueRequired && value==null) {
 							// null and required
-							if(scope == null) throw new LocalizedJspTagException(RESOURCES, "value.required.nullScope", property, name);
-							else throw new LocalizedJspTagException(RESOURCES, "value.required.scope", property, name, scope);
+							if(scope == null) throw new LocalizedJspTagException(RESOURCES, "value.required.nullScope", property, attribute.getName());
+							else throw new LocalizedJspTagException(RESOURCES, "value.required.scope", property, attribute.getName(), scope);
 						}
-						return value;
+						@SuppressWarnings("unchecked")
+						T t = (T)value;
+						return t;
 					} catch(InvocationTargetException e) {
 						// Unwrap cause for more direct stack traces
 						Throwable cause = e.getCause();
@@ -117,5 +125,20 @@ public class PropertyUtils {
 		} catch(Throwable t) {
 			throw Throwables.wrap(t, JspTagException.class, JspTagException::new);
 		}
+	}
+
+	/**
+	 * Gets the object given its scope, name, and optional property.
+	 *
+	 * @param  scope  See {@link com.aoapps.servlet.attribute.ScopeEE.Page#getScopeId(java.lang.String)}
+	 * @param beanRequired when <code>true</code>, this method will not return <code>null</code>, instead it will
+	 *                     throw a <code>JspTagException</code> with an appropriate localized message.
+	 * @param valueRequired when <code>true</code>, this method will not return <code>null</code>, instead it will
+	 *                      throw a <code>JspTagException</code> with an appropriate localized message.
+	 *
+	 * @return  the resolved <code>Object</code> or <code>null</code> if not found.
+	 */
+	public static Object findObject(PageContext pageContext, String scope, String name, String property, boolean beanRequired, boolean valueRequired) throws JspTagException {
+		return findObject(ScopeEE.PAGE.attribute(name), pageContext, scope, property, beanRequired, valueRequired);
 	}
 }

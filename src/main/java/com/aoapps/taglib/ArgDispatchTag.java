@@ -48,7 +48,7 @@ abstract class ArgDispatchTag extends DispatchTag
 	/**
 	 * The prefix for argument attributes.
 	 */
-	private static final String ARG_ATTRIBUTE_PREFIX = Dispatcher.ARG_REQUEST_ATTRIBUTE + ".";
+	private static final String ARG_ATTRIBUTE_PREFIX = Dispatcher.ARG_REQUEST_ATTRIBUTE.getName() + ".";
 
 	private WildcardPatternMatcher clearParamsMatcher = WildcardPatternMatcher.matchNone();
 	private Map<String, Object> args;

@@ -62,7 +62,7 @@ public class DisableResourceEditorTagTEI extends TagExtraInfo {
 				} catch(IllegalArgumentException e) {
 					messages = MinimalList.add(
 						messages,
-						new ValidationMessage(data.getId(), e.toString())
+						new ValidationMessage(data.getId(), e.getLocalizedMessage())
 					);
 				}
 			}

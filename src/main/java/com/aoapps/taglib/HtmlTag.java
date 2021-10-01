@@ -31,7 +31,9 @@ import com.aoapps.encoding.servlet.SerializationEE;
 import com.aoapps.html.any.AnyDocument;
 import com.aoapps.html.servlet.DocumentEE;
 import com.aoapps.lang.LocalizedIllegalArgumentException;
+import com.aoapps.lang.attribute.Attribute;
 import com.aoapps.lang.i18n.Resources;
+import com.aoapps.servlet.attribute.ScopeEE;
 import com.aoapps.servlet.ServletUtil;
 import com.aoapps.web.resources.registry.Registry;
 import com.aoapps.web.resources.servlet.RegistryEE;
@@ -158,8 +160,8 @@ public class HtmlTag extends ElementFilteredTag {
 /* BodyTag only:
 	// Values that are used in doFinally
 	private transient Serialization oldSerialization;
-	private transient Object oldStrutsXhtml;
 	private transient boolean setSerialization;
+	private transient Attributes.Backup oldStrutsXhtml;
 	private transient Doctype oldDoctype;
 	private transient boolean setDoctype;
 	private transient Boolean oldAutonli;
@@ -174,8 +176,8 @@ public class HtmlTag extends ElementFilteredTag {
 		autonli = null;
 		indent = null;
 		oldSerialization = null;
-		oldStrutsXhtml = null;
 		setSerialization = false;
+		oldStrutsXhtml = null;
 		oldDoctype = null;
 		setDoctype = false;
 		oldAutonli = null;
@@ -194,8 +196,8 @@ public class HtmlTag extends ElementFilteredTag {
 	protected void doTag(Writer out) throws JspException, IOException {
 		PageContext pageContext = (PageContext)getJspContext();
 		Serialization oldSerialization;
-		Object oldStrutsXhtml;
 		boolean setSerialization;
+		Attribute.OldValue oldStrutsXhtml;
 		Doctype oldDoctype;
 		boolean setDoctype;
 		Boolean oldAutonli;
@@ -211,13 +213,14 @@ public class HtmlTag extends ElementFilteredTag {
 		if(currentSerialization == null) {
 			currentSerialization = SerializationEE.get(servletContext, request);
 			oldSerialization = null;
-			oldStrutsXhtml = null;
 			setSerialization = false;
+			oldStrutsXhtml = null;
 		} else {
 			oldSerialization = SerializationEE.replace(request, currentSerialization);
-			oldStrutsXhtml = pageContext.getAttribute(STRUTS_XHTML_KEY, PageContext.PAGE_SCOPE);
-			pageContext.setAttribute(STRUTS_XHTML_KEY, Boolean.toString(currentSerialization == Serialization.XML), PageContext.PAGE_SCOPE);
 			setSerialization = true;
+			oldStrutsXhtml = STRUTS_XHTML_KEY.context(pageContext).init(
+				Boolean.toString(currentSerialization == Serialization.XML)
+			);
 		}
 /* SimpleTag only: */
 		try {
@@ -326,10 +329,8 @@ public class HtmlTag extends ElementFilteredTag {
 			}
 		} finally {
 /**/
-			if(setSerialization) {
-				SerializationEE.set(request, oldSerialization);
-				pageContext.setAttribute(STRUTS_XHTML_KEY, oldStrutsXhtml, PageContext.PAGE_SCOPE);
-			}
+			if(setSerialization) SerializationEE.set(request, oldSerialization);
+			if(oldStrutsXhtml != null) oldStrutsXhtml.close();
 /* BodyTag only:
 			} finally {
 				init();
@@ -342,14 +343,15 @@ public class HtmlTag extends ElementFilteredTag {
 
 	// <editor-fold desc="Static Utilities">
 	/**
-	 * The old Struts XHTML mode page attribute.  To avoiding picking-up a big
+	 * The old Struts 1 XHTML mode page attribute.  To avoiding picking-up a big
 	 * legacy dependency, we've copied the value here instead of depending on
 	 * Globals.  Once we no longer have any code running on old Struts, this
 	 * value may be removed.
 	 */
 	// Java 9: module-private
 	// Matches nmw-email-taglib:ContentTag.java
-	public static final String STRUTS_XHTML_KEY = "org.apache.struts.globals.XHTML";
+	public static final ScopeEE.Page.Attribute<String> STRUTS_XHTML_KEY =
+		ScopeEE.PAGE.attribute("org.apache.struts.globals.XHTML");
 
 	public static void beginHtmlTag(Locale locale, Appendable out, Serialization serialization, GlobalAttributes global) throws IOException {
 		out.append("<html");

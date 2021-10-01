@@ -24,6 +24,8 @@ package com.aoapps.taglib;
 
 import com.aoapps.collections.MinimalList;
 import com.aoapps.lang.Coercion;
+import com.aoapps.lang.LocalizedIllegalArgumentException;
+import com.aoapps.servlet.attribute.ScopeEE;
 import java.util.List;
 import javax.servlet.jsp.tagext.TagData;
 import javax.servlet.jsp.tagext.TagExtraInfo;
@@ -43,12 +45,12 @@ final public class TeiUtils {
 	 * Checks that a scope is a valid.
 	 *
 	 * @see  Scope for supported values.
-	 * 
+	 *
 	 * @param  messages  the list of messages to add to, maybe <code>null</code>
-	 * 
+	 *
 	 * @return  the list of messages.  A new list will have been created if the <code>message</code> parameter was <code>null</code>
-	 * 
-	 * @see Scope#getScopeId(java.lang.String)
+	 *
+	 * @see com.aoapps.servlet.attribute.ScopeEE.Page#getScopeId(java.lang.String)
 	 */
 	public static List<ValidationMessage> validateScope(TagData data, List<ValidationMessage> messages) {
 		Object o = data.getAttribute("scope");
@@ -58,14 +60,14 @@ final public class TeiUtils {
 		) {
 			String scope = Coercion.toString(o).trim(); // TODO: normalizeScope
 			try {
-				Scope.getScopeId(scope);
+				ScopeEE.Page.getScopeId(scope);
 				// Value is OK
-			} catch(IllegalArgumentException err) {
+			} catch(LocalizedIllegalArgumentException err) {
 				messages = MinimalList.add(
 					messages,
 					new ValidationMessage(
 						data.getId(),
-						err.getMessage()
+						err.getLocalizedMessage()
 					)
 				);
 			}

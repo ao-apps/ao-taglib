@@ -23,40 +23,53 @@
 package com.aoapps.taglib;
 
 import com.aoapps.lang.LocalizedIllegalArgumentException;
-import com.aoapps.lang.i18n.Resources;
-import java.util.ResourceBundle;
+import com.aoapps.servlet.attribute.ScopeEE;
 import javax.servlet.jsp.PageContext;
 
 /**
  * Scope constants.
  *
  * @author  AO Industries, Inc.
+ *
+ * @deprecated  Please use {@link com.aoapps.servlet.attribute.ScopeEE.Page} instead.
  */
+@Deprecated
 final public class Scope {
 
-	private static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, Scope.class);
-
 	/**
-	 * The set of allowed scope names.
+	 * @deprecated  Please use {@link com.aoapps.servlet.attribute.ScopeEE.Page#SCOPE_PAGE} instead.
 	 */
-	public static final String
-		PAGE = "page",
-		REQUEST = "request",
-		SESSION = "session",
-		APPLICATION = "application"
-	;
+	@Deprecated
+	public static final String PAGE = ScopeEE.Page.SCOPE_PAGE;
 
 	/**
-	 * Gets the PageContext scope value for the textual scope name.
+	 * @deprecated  Please use {@link com.aoapps.servlet.attribute.ScopeEE.Page#SCOPE_REQUEST} instead.
+	 */
+	@Deprecated
+	public static final String REQUEST = ScopeEE.Page.SCOPE_REQUEST;
+
+	/**
+	 * @deprecated  Please use {@link com.aoapps.servlet.attribute.ScopeEE.Page#SCOPE_SESSION} instead.
+	 */
+	@Deprecated
+	public static final String SESSION = ScopeEE.Page.SCOPE_SESSION;
+
+	/**
+	 * @deprecated  Please use {@link com.aoapps.servlet.attribute.ScopeEE.Page#SCOPE_APPLICATION} instead.
+	 */
+	@Deprecated
+	public static final String APPLICATION = ScopeEE.Page.SCOPE_APPLICATION;
+
+	/**
+	 * Gets the {@link PageContext} scope value for the textual scope name.
 	 *
-	 * @exception  IllegalArgumentException  if invalid scope
+	 * @throws  LocalizedIllegalArgumentException  if invalid scope
+	 *
+	 * @deprecated  Please use {@link com.aoapps.servlet.attribute.ScopeEE.Page#getScopeId(java.lang.String)} instead.
 	 */
-	public static int getScopeId(String scope) throws IllegalArgumentException {
-		if(scope==null || PAGE.equals(scope)) return PageContext.PAGE_SCOPE;
-		else if(REQUEST.equals(scope)) return PageContext.REQUEST_SCOPE;
-		else if(SESSION.equals(scope)) return PageContext.SESSION_SCOPE;
-		else if(APPLICATION.equals(scope)) return PageContext.APPLICATION_SCOPE;
-		else throw new LocalizedIllegalArgumentException(RESOURCES, "scope.invalid", scope);
+	@Deprecated
+	public static int getScopeId(String scope) throws LocalizedIllegalArgumentException {
+		return ScopeEE.Page.getScopeId(scope);
 	}
 
 	/** Make no instances */
