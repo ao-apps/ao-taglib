@@ -39,7 +39,7 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  *
  * @author  AO Industries, Inc.
  */
-abstract public class ElementNullBodyTag extends EncodingNullBodyTag
+public abstract class ElementNullBodyTag extends EncodingNullBodyTag
 	implements
 		GlobalBufferedAttributes,
 		DynamicAttributes

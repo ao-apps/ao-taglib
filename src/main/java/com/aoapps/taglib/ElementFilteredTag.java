@@ -35,7 +35,7 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  *
  * @author  AO Industries, Inc.
  */
-abstract public class ElementFilteredTag extends EncodingFilteredTag
+public abstract class ElementFilteredTag extends EncodingFilteredTag
 	implements
 		GlobalAttributes,
 		DynamicAttributes

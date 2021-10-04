@@ -44,7 +44,7 @@ public class ElementTagTEI extends TagExtraInfo {
 	 */
 	@Deprecated
 	@Override
-	final public ValidationMessage[] validate(TagData data) {
+	public final ValidationMessage[] validate(TagData data) {
 		List<ValidationMessage> messages = new ArrayList<>();
 		validate(data, messages);
 		int size = messages.size();

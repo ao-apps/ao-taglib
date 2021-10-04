@@ -40,7 +40,7 @@ import javax.servlet.jsp.PageContext;
  *
  * @author  AO Industries, Inc.
  */
-final public class UrlUtils {
+public final class UrlUtils {
 
 	private static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, UrlUtils.class);
 

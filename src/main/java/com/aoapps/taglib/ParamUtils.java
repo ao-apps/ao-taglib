@@ -36,7 +36,7 @@ import javax.servlet.jsp.tagext.JspTag;
  *
  * @author  AO Industries, Inc.
  */
-final public class ParamUtils {
+public final class ParamUtils {
 
 	/**
 	 * The prefix for <code>param.*</code> dynamic attributes.

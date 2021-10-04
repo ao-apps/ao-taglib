@@ -37,7 +37,7 @@ import javax.servlet.jsp.tagext.ValidationMessage;
  * @author  AO Industries, Inc.
  */
 // TODO: Merge with attributeUtils?
-final public class TeiUtils {
+public final class TeiUtils {
 
 	private TeiUtils() {}
 

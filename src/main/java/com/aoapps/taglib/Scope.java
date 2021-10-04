@@ -34,7 +34,7 @@ import javax.servlet.jsp.PageContext;
  * @deprecated  Please use {@link com.aoapps.servlet.attribute.ScopeEE.Page} instead.
  */
 @Deprecated
-final public class Scope {
+public final class Scope {
 
 	/**
 	 * @deprecated  Please use {@link com.aoapps.servlet.attribute.ScopeEE.Page#SCOPE_PAGE} instead.

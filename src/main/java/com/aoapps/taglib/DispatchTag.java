@@ -61,7 +61,7 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
  * @author  AO Industries, Inc.
  */
 // TODO: DispatchBodyTag and DispatchSimpleTag?
-abstract public class DispatchTag extends SimpleTagSupport
+public abstract class DispatchTag extends SimpleTagSupport
 	implements
 		DynamicAttributes,
 		PageAttribute,
@@ -164,7 +164,7 @@ abstract public class DispatchTag extends SimpleTagSupport
 		this.page = page;
 	}
 
-	abstract protected WildcardPatternMatcher getClearParamsMatcher();
+	protected abstract WildcardPatternMatcher getClearParamsMatcher();
 
 	@Override
 	public void addParam(String name, Object value) {
@@ -203,7 +203,7 @@ abstract public class DispatchTag extends SimpleTagSupport
 	/**
 	 * Gets the arguments that will be passed on dispatch.  For no arguments, return null.
 	 */
-	abstract protected Map<String, ?> getArgs();
+	protected abstract Map<String, ?> getArgs();
 
 	/**
 	 * Subclass hook to intercept request after servlet paths have been determined

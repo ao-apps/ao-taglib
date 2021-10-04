@@ -53,7 +53,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspTagException;
 
-final public class Functions {
+public final class Functions {
 
 	private static final Logger logger = Logger.getLogger(Functions.class.getName());
 

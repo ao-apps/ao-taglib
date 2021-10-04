@@ -35,7 +35,7 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  *
  * @author  AO Industries, Inc.
  */
-abstract public class ElementBufferedTag extends EncodingBufferedTag
+public abstract class ElementBufferedTag extends EncodingBufferedTag
 	implements
 		GlobalBufferedAttributes,
 		DynamicAttributes

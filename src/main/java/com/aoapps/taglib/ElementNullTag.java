@@ -35,7 +35,7 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  *
  * @author  AO Industries, Inc.
  */
-abstract public class ElementNullTag extends EncodingNullTag
+public abstract class ElementNullTag extends EncodingNullTag
 	implements
 		GlobalBufferedAttributes,
 		DynamicAttributes
