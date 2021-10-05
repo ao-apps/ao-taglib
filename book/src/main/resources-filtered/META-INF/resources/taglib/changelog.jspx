@@ -755,7 +755,7 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 				<li>Allowing ao-taglib style "arg" maps to be passed through Dispatcher for non-taglib use.</li>
 				<li>args passed unmodifiable.</li>
 				<li>Now throws an exception if cannot set the response content type.</li>
-				<li><![CDATA[Passing args as Map&lt;String,?&gt; instead of forcing Map&lt;String,Object&gt;]]></li>
+				<li><![CDATA[Passing args as Map&lt;String, ?&gt; instead of forcing Map&lt;String, Object&gt;]]></li>
 			</ul>
 		</changelog:release>
 
