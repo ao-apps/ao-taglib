@@ -33,26 +33,24 @@ import java.beans.SimpleBeanInfo;
  */
 public class ElementNullBodyTagBeanInfo extends SimpleBeanInfo {
 
-	@SuppressWarnings("VolatileArrayField")
-	private static volatile PropertyDescriptor[] properties;
+	private static final PropertyDescriptor[] properties;
+	static {
+		try {
+			properties = new PropertyDescriptor[] {
+				new PropertyDescriptor("class", ElementNullBodyTag.class, "getClazz", "setClazz"),
+				new PropertyDescriptor("data",  ElementNullBodyTag.class, "getData",  "setData"),
+				new PropertyDescriptor("dir",   ElementNullBodyTag.class, "getDir",   "setDir"),
+				new PropertyDescriptor("style", ElementNullBodyTag.class, "getStyle", "setStyle"),
+			};
+		} catch(IntrospectionException err) {
+			throw new ExceptionInInitializerError(err);
+		}
+	}
 
 	@Override
+	@SuppressWarnings("ReturnOfCollectionOrArrayField") // Not copying array for performance
 	public PropertyDescriptor[] getPropertyDescriptors () {
-		try {
-			PropertyDescriptor[] props = properties;
-			if(props == null) {
-				props = new PropertyDescriptor[] {
-					new PropertyDescriptor("class", ElementNullBodyTag.class, "getClazz", "setClazz"),
-					new PropertyDescriptor("data",  ElementNullBodyTag.class, "getData",  "setData"),
-					new PropertyDescriptor("dir",   ElementNullBodyTag.class, "getDir",   "setDir"),
-					new PropertyDescriptor("style", ElementNullBodyTag.class, "getStyle", "setStyle"),
-				};
-				properties = props;
-			}
-			return props; // Not copying array for performance
-		} catch(IntrospectionException err) {
-			throw new AssertionError(err);
-		}
+		return properties;
 	}
 
 	/**

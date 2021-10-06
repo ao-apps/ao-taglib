@@ -33,27 +33,25 @@ import java.beans.SimpleBeanInfo;
  */
 public class MutableGlobalAttributesBeanInfo extends SimpleBeanInfo {
 
-	@SuppressWarnings("VolatileArrayField")
-	private static volatile PropertyDescriptor[] properties;
+	private static final PropertyDescriptor[] properties;
+	static {
+		try {
+			properties = new PropertyDescriptor[] {
+				new PropertyDescriptor("id",    MutableGlobalAttributes.class, "getId",    "setId"),
+				new PropertyDescriptor("class", MutableGlobalAttributes.class, "getClazz", "setClazz"),
+				new PropertyDescriptor("data",  MutableGlobalAttributes.class, "getData",  "setData"),
+				new PropertyDescriptor("dir",   MutableGlobalAttributes.class, "getDir",   "setDir"),
+				new PropertyDescriptor("style", MutableGlobalAttributes.class, "getStyle", "setStyle"),
+			};
+		} catch(IntrospectionException err) {
+			throw new ExceptionInInitializerError(err);
+		}
+	}
 
 	@Override
+	@SuppressWarnings("ReturnOfCollectionOrArrayField") // Not copying array for performance
 	public PropertyDescriptor[] getPropertyDescriptors () {
-		try {
-			PropertyDescriptor[] props = properties;
-			if(props == null) {
-				props = new PropertyDescriptor[] {
-					new PropertyDescriptor("id",    MutableGlobalAttributes.class, "getId",    "setId"),
-					new PropertyDescriptor("class", MutableGlobalAttributes.class, "getClazz", "setClazz"),
-					new PropertyDescriptor("data",  MutableGlobalAttributes.class, "getData",  "setData"),
-					new PropertyDescriptor("dir",   MutableGlobalAttributes.class, "getDir",   "setDir"),
-					new PropertyDescriptor("style", MutableGlobalAttributes.class, "getStyle", "setStyle"),
-				};
-				properties = props;
-			}
-			return props; // Not copying array for performance
-		} catch(IntrospectionException err) {
-			throw new AssertionError(err);
-		}
+		return properties;
 	}
 
 	/**
