@@ -47,7 +47,7 @@ public abstract class ElementNullBodyTag extends EncodingNullBodyTag
 
 	private static final long serialVersionUID = 1L;
 
-	public ElementNullBodyTag() {
+	protected ElementNullBodyTag() {
 		init();
 	}
 

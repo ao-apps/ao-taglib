@@ -47,7 +47,7 @@ public abstract class ElementFilteredBodyTag extends EncodingFilteredBodyTag
 
 	private static final long serialVersionUID = 1L;
 
-	public ElementFilteredBodyTag() {
+	protected ElementFilteredBodyTag() {
 		init();
 	}
 

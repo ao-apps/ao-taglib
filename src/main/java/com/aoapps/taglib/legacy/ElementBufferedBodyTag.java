@@ -47,7 +47,7 @@ public abstract class ElementBufferedBodyTag extends EncodingBufferedBodyTag
 
 	private static final long serialVersionUID = 1L;
 
-	public ElementBufferedBodyTag() {
+	protected ElementBufferedBodyTag() {
 		init();
 	}
 
