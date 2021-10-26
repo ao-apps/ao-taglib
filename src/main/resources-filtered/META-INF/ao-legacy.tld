@@ -1307,7 +1307,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 					Optionally clears all parameters that match any of the comma-separated patterns.
 					This is so that only those added by nested tags are forwarded.
 					As a result, parameters provided by the client will not be able to interfere with forwards that have optional parameters.
-					Each pattern in the comma-separated list may in the following format:
+					Each pattern in the comma-separated list may be in the following format:
 				</p>
 				<table class="ao-grid">
 					<tbody>
@@ -2131,7 +2131,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 					Optionally clears all parameters that match any of the comma-separated patterns.
 					This is so that only those added by nested tags are included.
 					As a result, parameters provided by the client will not be able to interfere with includes that have optional parameters.
-					Each pattern in the comma-separated list may in the following format:
+					Each pattern in the comma-separated list may be in the following format:
 				</p>
 				<table class="ao-grid">
 					<tbody>
@@ -3485,7 +3485,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
+		<!-- dateModified="2021-10-25T18:37:50-05:00" -->
 		<description><![CDATA[
 			<p>
 				Adds multiple parameters to its
@@ -3525,7 +3525,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
 					May not be used in conjunction with the name attribute.
 				</p>
 				<p>
-					Each pattern in the comma-separated list may in the following format:
+					Each pattern in the comma-separated list may be in the following format:
 				</p>
 				<table class="ao-grid">
 					<tbody>
