@@ -29,5 +29,8 @@ along with ao-taglib.  If not, see <http://www.gnu.org/licenses />.
 	<jsp:directive.page language="java" pageEncoding="UTF-8" />
 	<jsp:directive.page session="false" />
 	<!-- Redirect the Taglib URI -->
-	<ao:redirect page="index.jspx" statusCode="301" />
+	<ao:redirect page="index.jspx" statusCode="301">
+		<!-- Include all request parameters -->
+		<ao:params values="${paramValues}" />
+	</ao:redirect>
 </jsp:root>
