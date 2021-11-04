@@ -207,8 +207,9 @@ public class WriteTag extends EncodingNullTag
 					}
 				}
 			}
+		} catch(IOException e) {
+			throw e;
 		} catch(Throwable t) {
-			if(t instanceof IOException) throw (IOException)t;
 			throw Throwables.wrap(t, JspTagException.class, JspTagException::new);
 		}
 	}
