@@ -295,7 +295,7 @@ public class InputTag extends ElementBufferedTag
 /**/
 		if(type == null) throw new AttributeRequiredException("type");
 		if(value == null) setValue(capturedBody.trim()); // TODO: Distinguish between empty and null, track valueSet boolean for when is set to null?
-		if(INPUT.Dynamic.Type.IMAGE.toString().equalsIgnoreCase(type)) {
+		if(AnyINPUT.Dynamic.Type.IMAGE.toString().equalsIgnoreCase(type)) {
 			if(alt == null) throw new AttributeRequiredException("alt");
 		}
 		DocumentEE document = new DocumentEE(
