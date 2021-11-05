@@ -41,7 +41,10 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  *
  * @author  AO Industries, Inc.
  */
-public class GlobalAttributesUtils {
+public abstract class GlobalAttributesUtils {
+
+	/** Make no instances. */
+	private GlobalAttributesUtils() {throw new AssertionError();}
 
 	/**
 	 * The prefix for <code>dataset.*</code> dynamic attributes.
@@ -188,6 +191,4 @@ public class GlobalAttributesUtils {
 			out.append('"');
 		}
 	}
-
-	private GlobalAttributesUtils() {}
 }

@@ -34,7 +34,10 @@ import javax.servlet.jsp.PageContext;
  * @deprecated  Please use {@link com.aoapps.servlet.attribute.ScopeEE.Page} instead.
  */
 @Deprecated
-public final class Scope {
+public abstract class Scope {
+
+	/** Make no instances. */
+	private Scope() {throw new AssertionError();}
 
 	/**
 	 * @deprecated  Please use {@link com.aoapps.servlet.attribute.ScopeEE.Page#SCOPE_PAGE} instead.
@@ -70,9 +73,5 @@ public final class Scope {
 	@Deprecated
 	public static int getScopeId(String scope) throws LocalizedIllegalArgumentException {
 		return ScopeEE.Page.getScopeId(scope);
-	}
-
-	/** Make no instances */
-	private Scope() {
 	}
 }

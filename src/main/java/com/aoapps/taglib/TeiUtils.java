@@ -37,9 +37,10 @@ import javax.servlet.jsp.tagext.ValidationMessage;
  * @author  AO Industries, Inc.
  */
 // TODO: Merge with attributeUtils?
-public final class TeiUtils {
+public abstract class TeiUtils {
 
-	private TeiUtils() {}
+	/** Make no instances. */
+	private TeiUtils() {throw new AssertionError();}
 
 	/**
 	 * Checks that a scope is a valid.

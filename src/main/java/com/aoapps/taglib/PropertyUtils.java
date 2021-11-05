@@ -39,12 +39,12 @@ import javax.servlet.jsp.PageContext;
  *
  * @author  AO Industries, Inc.
  */
-public class PropertyUtils {
+public abstract class PropertyUtils {
+
+	/** Make no instances. */
+	private PropertyUtils() {throw new AssertionError();}
 
 	private static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, PropertyUtils.class);
-
-	private PropertyUtils() {
-	}
 
 	/**
 	 * Sets an attribute in the provided textual scope.

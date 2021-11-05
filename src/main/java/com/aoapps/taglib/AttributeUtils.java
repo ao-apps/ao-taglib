@@ -43,7 +43,10 @@ import javax.servlet.jsp.tagext.JspTag;
 /**
  * @author  AO Industries, Inc.
  */
-public final class AttributeUtils  {
+public abstract class AttributeUtils  {
+
+	/** Make no instances. */
+	private AttributeUtils() {throw new AssertionError();}
 
 	public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, AttributeUtils.class);
 
@@ -258,11 +261,5 @@ public final class AttributeUtils  {
 				);
 			}
 		}
-	}
-
-	/**
-	 * Make no instances.
-	 */
-	private AttributeUtils() {
 	}
 }

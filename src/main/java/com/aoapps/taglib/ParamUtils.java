@@ -36,7 +36,10 @@ import javax.servlet.jsp.tagext.JspTag;
  *
  * @author  AO Industries, Inc.
  */
-public final class ParamUtils {
+public abstract class ParamUtils {
+
+	/** Make no instances. */
+	private ParamUtils() {throw new AssertionError();}
 
 	/**
 	 * The prefix for <code>param.*</code> dynamic attributes.
@@ -51,7 +54,7 @@ public final class ParamUtils {
 	 * converted to a string.  It is incorrect to change the state of the provided value; doing
 	 * so may or may not affect the value of the resulting parameter.
 	 * </p>
-	 * 
+	 *
 	 * @param  fromTagName  the name of the tag searching from
 	 * @param  from         the tag to search from
 	 * @param  name         the name of the parameter (required)
@@ -80,7 +83,7 @@ public final class ParamUtils {
 	 * converted to a string.  It is incorrect to change the state of the provided value; doing
 	 * so may or may not affect the value of the resulting parameter.
 	 * </p>
-	 * 
+	 *
 	 * @param  paramsAttribute  the parent tag that will receive the parameters
 	 * @param  name             the name of the parameter (required)
 	 * @param  value            the value of the parameter
@@ -103,7 +106,7 @@ public final class ParamUtils {
 	 * converted to a string.  It is incorrect to change the state of the provided value; doing
 	 * so may or may not affect the value of the resulting parameter.
 	 * </p>
-	 * 
+	 *
 	 * @param  paramsAttribute  the parent tag that will receive the parameters
 	 * @param  name             the name of the parameter (required)
 	 */
@@ -127,7 +130,7 @@ public final class ParamUtils {
 	 * converted to a string.  It is incorrect to change the state of the provided value; doing
 	 * so may or may not affect the value of the resulting parameter.
 	 * </p>
-	 * 
+	 *
 	 * @param  paramsAttribute  the parent tag that will receive the parameters
 	 * @param  name             the name of the parameter (required)
 	 */
@@ -153,7 +156,7 @@ public final class ParamUtils {
 	 * converted to a string.  It is incorrect to change the state of the provided value; doing
 	 * so may or may not affect the value of the resulting parameter.
 	 * </p>
-	 * 
+	 *
 	 * @param  paramsAttribute  the parent tag that will receive the parameters
 	 * @param  name             the name of the parameter (required)
 	 */
@@ -179,7 +182,7 @@ public final class ParamUtils {
 	 * converted to a string.  It is incorrect to change the state of the provided value; doing
 	 * so may or may not affect the value of the resulting parameter.
 	 * </p>
-	 * 
+	 *
 	 * @param  paramsAttribute  the parent tag that will receive the parameters
 	 * @param  name             the name of the parameter (required)
 	 */
@@ -250,11 +253,5 @@ public final class ParamUtils {
 			expectedPatterns.add(ParamUtils.PARAM_ATTRIBUTE_PREFIX + "*");
 			return false;
 		}
-	}
-
-	/**
-	 * Make no instances.
-	 */
-	private ParamUtils() {
 	}
 }

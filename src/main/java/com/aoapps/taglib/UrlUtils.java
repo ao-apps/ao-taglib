@@ -40,7 +40,10 @@ import javax.servlet.jsp.PageContext;
  *
  * @author  AO Industries, Inc.
  */
-public final class UrlUtils {
+public abstract class UrlUtils {
+
+	/** Make no instances. */
+	private UrlUtils() {throw new AssertionError();}
 
 	private static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, UrlUtils.class);
 
@@ -194,11 +197,5 @@ public final class UrlUtils {
 			absolute,
 			canonical
 		);
-	}
-
-	/**
-	 * Make no instances.
-	 */
-	private UrlUtils() {
 	}
 }

@@ -28,8 +28,8 @@ import com.aoapps.lang.Projects;
 import com.aoapps.lang.Strings;
 import com.aoapps.lang.i18n.Locales;
 import com.aoapps.net.URIEncoder;
-import com.aoapps.servlet.attribute.ScopeEE;
 import com.aoapps.servlet.ServletContextCache;
+import com.aoapps.servlet.attribute.ScopeEE;
 import com.aoapps.servlet.filter.FunctionContext;
 import static com.aoapps.servlet.filter.FunctionContext.getRequest;
 import static com.aoapps.servlet.filter.FunctionContext.getResponse;
@@ -53,15 +53,12 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspTagException;
 
-public final class Functions {
+public abstract class Functions {
+
+	/** Make no instances. */
+	private Functions() {throw new AssertionError();}
 
 	private static final Logger logger = Logger.getLogger(Functions.class.getName());
-
-	/**
-	 * Make no instances.
-	 */
-	private Functions() {
-	}
 
 	/**
 	 * Gets the lastModified or {@code 0} when not known.

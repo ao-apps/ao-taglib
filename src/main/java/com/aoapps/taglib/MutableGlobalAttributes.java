@@ -42,6 +42,7 @@ public class MutableGlobalAttributes implements GlobalAttributes, Freezable<Glob
 	private Object style;
 
 	public MutableGlobalAttributes() {
+		// Do nothing
 	}
 
 	@SuppressWarnings("OverridableMethodCallInConstructor")

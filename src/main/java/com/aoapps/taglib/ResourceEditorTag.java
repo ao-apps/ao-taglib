@@ -45,9 +45,6 @@ import javax.servlet.jsp.PageContext;
  */
 public class ResourceEditorTag extends EncodingNullTag {
 
-	public ResourceEditorTag() {
-	}
-
 	@Override
 	public MediaType getOutputType() {
 		return MediaType.XHTML;
