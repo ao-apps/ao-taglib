@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2010, 2011, 2012, 2013, 2015, 2016, 2017, 2019, 2020, 2021  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2012, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -75,10 +75,10 @@ public class ParamsTag extends EncodingNullBodyTag
 		this.name = name;
 	}
 
-	private String exclude;
+//	private String exclude;
 	private WildcardPatternMatcher excludeMatcher;
 	public void setExclude(String exclude) {
-		this.exclude = exclude;
+//		this.exclude = exclude;
 		this.excludeMatcher = WildcardPatternMatcher.compile(exclude);
 	}
 
@@ -89,7 +89,7 @@ public class ParamsTag extends EncodingNullBodyTag
 
 	private void init() {
 		name = null;
-		exclude = null;
+//		exclude = null;
 		excludeMatcher = WildcardPatternMatcher.matchNone();
 		values = null;
 	}
