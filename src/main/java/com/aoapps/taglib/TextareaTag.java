@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2010, 2011, 2013, 2015, 2016, 2017, 2019, 2020, 2021  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,20 +22,15 @@
  */
 package com.aoapps.taglib;
 
-import static com.aoapps.encoding.JavaScriptInXhtmlAttributeEncoder.javaScriptInXhtmlAttributeEncoder;
 import com.aoapps.encoding.MediaType;
-import com.aoapps.encoding.Serialization;
-import static com.aoapps.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
-import static com.aoapps.encoding.TextInXhtmlEncoder.textInXhtmlEncoder;
-import com.aoapps.encoding.servlet.SerializationEE;
-import com.aoapps.hodgepodge.i18n.MarkupCoercion;
-import com.aoapps.hodgepodge.i18n.MarkupType;
+import com.aoapps.html.servlet.DocumentEE;
+import com.aoapps.html.servlet.TEXTAREA;
 import com.aoapps.io.buffer.BufferResult;
-import com.aoapps.lang.Coercion;
 import com.aoapps.lang.Strings;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
@@ -134,43 +129,24 @@ public class TextareaTag extends ElementBufferedTag
 		PageContext pageContext = (PageContext)getJspContext();
 /**/
 		if(value == null) setValue(capturedBody.trim());
-		Serialization serialization = SerializationEE.get(
+		DocumentEE document = new DocumentEE(
 			pageContext.getServletContext(),
-			(HttpServletRequest)pageContext.getRequest()
+			(HttpServletRequest)pageContext.getRequest(),
+			(HttpServletResponse)pageContext.getResponse(),
+			out,
+			false, // Do not add extra newlines to JSP
+			false  // Do not add extra indentation to JSP
 		);
-		out.write("<textarea");
-		GlobalAttributesUtils.writeGlobalAttributes(global, out);
-		if(cols != null) {
-			out.write(" cols=\"");
-			encodeTextInXhtmlAttribute(cols, out);
-			out.append('"');
-		}
-		if(disabled) {
-			out.write(" disabled");
-			if(serialization == Serialization.XML) out.write("=\"disabled\"");
-		}
-		if(name != null) {
-			out.write(" name=\"");
-			encodeTextInXhtmlAttribute(name, out);
-			out.append('"');
-		}
-		if(readonly) {
-			out.write(" readonly");
-			if(serialization == Serialization.XML) out.write("=\"readonly\"");
-		}
-		if(rows != null) {
-			out.write(" rows=\"");
-			encodeTextInXhtmlAttribute(rows, out);
-			out.append('"');
-		}
-		if(onchange != null) {
-			out.write(" onchange=\"");
-			MarkupCoercion.write(onchange, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
-			out.append('"');
-		}
-		out.append('>');
-		Coercion.write(value, textInXhtmlEncoder, out);
-		out.write("</textarea>");
+		TEXTAREA<?> textarea = document.textarea();
+		GlobalAttributesUtils.doGlobalAttributes(global, textarea);
+		textarea
+			.cols(cols)
+			.disabled(disabled)
+			.name(name)
+			.readonly(readonly)
+			.rows(rows)
+			.onchange(onchange)
+		.__(value);
 /* BodyTag only:
 		return EVAL_PAGE;
 /**/

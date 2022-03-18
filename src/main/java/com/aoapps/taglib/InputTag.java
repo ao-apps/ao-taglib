@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -308,30 +308,25 @@ public class InputTag extends ElementBufferedTag
 		);
 		INPUT.Dynamic<?> input = document.input().dynamic();
 		GlobalAttributesUtils.doGlobalAttributes(global, input);
-		if(alt != null) {
-			out.write(" alt=\"");
-			MarkupCoercion.write(alt, MarkupType.TEXT, true, textInXhtmlAttributeEncoder, false, out);
-			out.append('"');
-		}
+		input.alt(alt);
 		// autocomplete is not valid in all doctypes
+		// TODO: Allow more autocomplete values as String instead of boolean
 		if(!autocomplete) input.autocomplete(AnyINPUT.Autocomplete.OFF);
 		input
 			.checked(checked)
 			.disabled(disabled);
 		if(height != null) {
+			// TODO: ao-fluent-html attribute as Integer
 			out.write(" height=\"");
 			Coercion.write(height, textInXhtmlAttributeEncoder, out);
 			out.append('"');
 		}
-		if(maxlength != null) {
-			out.write(" maxlength=\"");
-			out.write(maxlength.toString());
-			out.append('"');
-		}
 		input
+			.maxlength(maxlength)
 			.name(name)
 			.readonly(readonly);
 		if(size != null) {
+			// TODO: ao-fluent-html attribute as Integer
 			out.write(" size=\"");
 			Coercion.write(size, textInXhtmlAttributeEncoder, out);
 			out.append('"');
@@ -342,33 +337,19 @@ public class InputTag extends ElementBufferedTag
 			.title(title)
 			.type(type);
 		if(width != null) {
+			// TODO: ao-fluent-html attribute as Integer
 			out.write(" width=\"");
 			Coercion.write(width, textInXhtmlAttributeEncoder, out);
 			out.append('"');
 		}
-		input.value(value == null ? "" : value);
-		if(onblur != null) {
-			out.write(" onblur=\"");
-			MarkupCoercion.write(onblur, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
-			out.append('"');
-		}
-		if(onchange != null) {
-			out.write(" onchange=\"");
-			MarkupCoercion.write(onchange, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
-			out.append('"');
-		}
-		input.onclick(onclick);
-		if(onfocus != null) {
-			out.write(" onfocus=\"");
-			MarkupCoercion.write(onfocus, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
-			out.append('"');
-		}
-		if(onkeypress != null) {
-			out.write(" onkeypress=\"");
-			MarkupCoercion.write(onkeypress, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
-			out.append('"');
-		}
-		input.__();
+		input
+			.value(value == null ? "" : value)
+			.onblur(onblur)
+			.onchange(onchange)
+			.onclick(onclick)
+			.onfocus(onfocus)
+			.onkeypress(onkeypress)
+		.__();
 /* BodyTag only:
 		return EVAL_PAGE;
 /**/
