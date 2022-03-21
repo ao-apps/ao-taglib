@@ -296,7 +296,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
 					<ol>
 						<li><code>dir</code></li>
 						<li>
-							Added <ao:a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-*">global attribute <code>data-*</code></ao:a>,
+							Added <ao:a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-%2A">global attribute <code>data-*</code></ao:a>,
 							with implementations for both HTML attribute and JavaScript property names.
 						</li>
 						<!-- TODO: New tags ao:data and/or ao:dataset to set from nested tags -->
