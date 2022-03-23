@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2011, 2012, 2013, 2015, 2016, 2017, 2019, 2020, 2021  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -33,8 +33,8 @@ import com.aoapps.html.servlet.DocumentEE;
 import com.aoapps.lang.LocalizedIllegalArgumentException;
 import com.aoapps.lang.attribute.Attribute;
 import com.aoapps.lang.i18n.Resources;
-import com.aoapps.servlet.attribute.ScopeEE;
 import com.aoapps.servlet.ServletUtil;
+import com.aoapps.servlet.attribute.ScopeEE;
 import com.aoapps.web.resources.registry.Registry;
 import com.aoapps.web.resources.servlet.RegistryEE;
 import java.io.IOException;

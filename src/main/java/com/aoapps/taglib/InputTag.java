@@ -22,11 +22,8 @@
  */
 package com.aoapps.taglib;
 
-import static com.aoapps.encoding.JavaScriptInXhtmlAttributeEncoder.javaScriptInXhtmlAttributeEncoder;
 import com.aoapps.encoding.MediaType;
 import static com.aoapps.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
-import com.aoapps.hodgepodge.i18n.MarkupCoercion;
-import com.aoapps.hodgepodge.i18n.MarkupType;
 import com.aoapps.html.any.AnyINPUT;
 import com.aoapps.html.servlet.DocumentEE;
 import com.aoapps.html.servlet.INPUT;
