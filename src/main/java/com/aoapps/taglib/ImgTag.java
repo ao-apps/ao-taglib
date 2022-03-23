@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -168,6 +168,11 @@ public class ImgTag extends ElementBufferedTag
 		assert capturedBody.trim() == capturedBody : "URLs should have already been trimmed";
 		if(src == null) src = capturedBody.toString(); // TODO: Validate here?
 		if(usemap == null && alt == null) throw new AttributeRequiredException("alt");
+		// Automatically prefix '#' if missing
+		if(usemap != null) {
+			assert !usemap.isEmpty() : "empty converted to null in setUsemap method";
+			if(usemap.charAt(0) != '#') usemap = '#' + usemap;
+		}
 		DocumentEE document = new DocumentEE(
 			pageContext.getServletContext(),
 			(HttpServletRequest)pageContext.getRequest(),
