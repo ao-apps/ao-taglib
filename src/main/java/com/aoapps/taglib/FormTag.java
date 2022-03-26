@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2010, 2011, 2013, 2015, 2016, 2017, 2019, 2020, 2021  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -165,6 +165,7 @@ public class FormTag extends ElementBufferedTag
 			false, // Do not add extra newlines to JSP
 			false  // Do not add extra indentation to JSP
 		);
+		Doctype doctype = document.encodingContext.getDoctype();
 		out.write("<form");
 		GlobalAttributesUtils.writeGlobalAttributes(global, out);
 		Map<String, List<String>> actionParams;
@@ -182,7 +183,7 @@ public class FormTag extends ElementBufferedTag
 			textInXhtmlAttributeEncoder.write(actionURI.setQueryString(null).toString(), out);
 			out.append('"');
 		} else {
-			if(document.doctype != Doctype.HTML5) {
+			if(doctype != Doctype.HTML5) {
 				// Action required before HTML 5
 				out.write(" action=\"\"");
 			}
@@ -213,7 +214,7 @@ public class FormTag extends ElementBufferedTag
 		boolean didDiv = false;
 		if(actionParams != null && !actionParams.isEmpty()) {
 			for(Map.Entry<String, List<String>> entry : actionParams.entrySet()) {
-				if(!didDiv && document.doctype != Doctype.HTML5) {
+				if(!didDiv && doctype != Doctype.HTML5) {
 					out.write("<div>\n");
 					didDiv = true;
 				}
@@ -226,7 +227,7 @@ public class FormTag extends ElementBufferedTag
 		// Write any parameters as hidden fields
 		if(params != null) {
 			for(Map.Entry<String, List<String>> entry : params.getParameterMap().entrySet()) {
-				if(!didDiv && document.doctype != Doctype.HTML5) {
+				if(!didDiv && doctype != Doctype.HTML5) {
 					out.write("<div>\n");
 					didDiv = true;
 				}
