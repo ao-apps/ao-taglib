@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2011, 2012, 2013, 2015, 2016, 2017, 2019, 2020, 2021  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -72,6 +72,12 @@ import javax.servlet.jsp.JspTagException;
  * request attributes would not be restored.  This would allow the
  * &lt;ao:html&gt; tag to be used where the header and footer are split
  * into separate files.  Maybe negate it and call the attribute "close".
+ * </p>
+ * <p>
+ * TODO: Implement GlobalAttributes, but beware this would make ScriptTag always thing its inside a StyleAttribute.
+ *       Could workaround this issue by making a StyleUnexpectedAttribute, which would override StyleAttribute with a
+ *       set of deprecated methods, then StyleTag would ignore its StyleAttribute parent tag if it is actually a
+ *       StyleUnexpectedAttribute.
  * </p>
  */
 public class HtmlTag extends ElementFilteredBodyTag {
@@ -196,7 +202,7 @@ public class HtmlTag extends ElementFilteredBodyTag {
 		PageContext pageContext = (PageContext)getJspContext();
 		Serialization oldSerialization;
 		boolean setSerialization;
-		Attributes.Backup oldStrutsXhtml;
+		Attribute.OldValue oldStrutsXhtml;
 		Doctype oldDoctype;
 		boolean setDoctype;
 		Boolean oldAutonli;

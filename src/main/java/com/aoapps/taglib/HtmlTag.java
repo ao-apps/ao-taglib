@@ -74,6 +74,12 @@ import javax.servlet.jsp.PageContext;
  * &lt;ao:html&gt; tag to be used where the header and footer are split
  * into separate files.  Maybe negate it and call the attribute "close".
  * </p>
+ * <p>
+ * TODO: Implement GlobalAttributes, but beware this would make ScriptTag always thing its inside a StyleAttribute.
+ *       Could workaround this issue by making a StyleUnexpectedAttribute, which would override StyleAttribute with a
+ *       set of deprecated methods, then StyleTag would ignore its StyleAttribute parent tag if it is actually a
+ *       StyleUnexpectedAttribute.
+ * </p>
  */
 public class HtmlTag extends ElementFilteredTag {
 
@@ -161,7 +167,7 @@ public class HtmlTag extends ElementFilteredTag {
 	// Values that are used in doFinally
 	private transient Serialization oldSerialization;
 	private transient boolean setSerialization;
-	private transient Attributes.Backup oldStrutsXhtml;
+	private transient Attribute.OldValue oldStrutsXhtml;
 	private transient Doctype oldDoctype;
 	private transient boolean setDoctype;
 	private transient Boolean oldAutonli;

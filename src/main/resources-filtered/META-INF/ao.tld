@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 ao-taglib - Making JSP be what it should have been all along.
-Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021  AO Industries, Inc.
+Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021, 2022  AO Industries, Inc.
 	support@aoindustries.com
 	7262 Bull Pen Cir
 	Mobile, AL 36695
@@ -2835,7 +2835,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2022-03-25T17:25:18-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Writes a value from the current localization bundle given its key.
@@ -2871,6 +2871,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 				The content is checked for well-formedness based on its type:
 			</p>
 			<ul>
+				<li><code>css</code> or <code>text/css</code> - must be well-formed CSS content. (Note: Currently only checks character values.)</li>
 				<li><code>javascript</code>, <code>application/javascript</code>, or <code>text/javascript</code> - no validation</li>
 				<li><code>json</code> or <code>application/json</code> - no validation</li>
 				<li><code>ld_json</code> or <code>application/ld+json</code> - no validation</li>
@@ -3344,7 +3345,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2022-03-25T17:25:18-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Writes the value with proper escaping based on the context of the tag.
@@ -3362,6 +3363,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 				The content is checked for well-formedness based on its type:
 			</p>
 			<ul>
+				<li><code>css</code> or <code>text/css</code> - must be well-formed CSS content. (Note: Currently only checks character values.)</li>
 				<li><code>javascript</code>, <code>application/javascript</code>, or <code>text/javascript</code> - no validation</li>
 				<li><code>json</code> or <code>application/json</code> - no validation</li>
 				<li><code>ld_json</code> or <code>application/ld+json</code> - no validation</li>
@@ -4223,17 +4225,38 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-16T12:55:45-05:00" -->
+		<!-- dateModified="2022-03-25T17:25:18-05:00" -->
 		<description><![CDATA[
 			<p>
 				Provides a <a href="https://www.w3schools.com/tags/att_style.asp">style attribute</a> to its
 				<a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/StyleAttribute.html">StyleAttribute</a>
-				parent tag.
+				parent tag, if present, otherwise manually establishes a <a href="https://www.w3schools.com/tags/tag_style.asp">style context</a>.
+				The body of this tag contains a CSS.
 			</p>
 		]]></description>
 		<name>style</name>
 		<tag-class>&package;.StyleTag</tag-class>
 		<body-content>&JSP;</body-content>
+		<attribute>
+			<description><![CDATA[
+				<p>
+					Forces the creation of a manual <a href="https://www.w3schools.com/tags/tag_style.asp">style context</a>
+					even when within a <a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/StyleAttribute.html">StyleAttribute</a>
+					parent tag.
+				</p>
+				<p>
+					At this time, the <a href="@{project.url}]]>&tld;<![CDATA[/tag-html">&lt;ao:html&gt;</a> tag does
+					not implement <a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/StyleAttribute.html">StyleAttribute</a>,
+					so this should not be required when the style is within the <code>&lt;head&gt;</code>.  However,
+					inlining a stylesheet within some other tags, such as <a href="@{project.url}]]>&tld;<![CDATA[/tag-form">&lt;ao:form&gt;</a>,
+					will require <code>forceElement="true"</code>.
+				</p>
+			]]></description>
+			<name>forceElement</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
@@ -4413,7 +4436,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-09-25T23:27:50-05:00" -->
+		<!-- dateModified="2022-03-25T17:25:18-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Manually establishes a URL context when automatic detection is not possible.
@@ -4476,6 +4499,10 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 				Nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-param">&lt;ao:param&gt;</a> or
 				<a href="@{project.url}]]>&tld;<![CDATA[/tag-params">&lt;ao:params&gt;</a> tags will
 				add parameters after any provided as attributes.
+			</p>
+			<p>
+				When in a CSS context, such as nested within <a href="@{project.url}]]>&tld;<![CDATA[/tag-style">&lt;ao:style&gt;</a>,
+				the URL is surrounded by <code>url("…")</code> and fully encoded as a <a href="https://www.w3.org/TR/CSS2/syndata.html#uri">CSS URL</a>.
 			</p>
 			<p>
 				The content type of this tag is <code>text/url</code>.
@@ -4619,7 +4646,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 	</tag>
 	<tag>
 		<!-- datePublished="2016-08-07T16:29:54-05:00" -->
-		<!-- dateModified="2021-06-03T22:53:21-05:00" -->
+		<!-- dateModified="2022-03-25T17:25:18-05:00" -->
 		<description><![CDATA[
 			<p class="semanticcms-tag-reference-summary">
 				Writes the bean contents.  Supports data types beyond
@@ -4648,6 +4675,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 				The content is checked for well-formedness based on its type:
 			</p>
 			<ul>
+				<li><code>css</code> or <code>text/css</code> - must be well-formed CSS content. (Note: Currently only checks character values.)</li>
 				<li><code>javascript</code>, <code>application/javascript</code>, or <code>text/javascript</code> - no validation</li>
 				<li><code>json</code> or <code>application/json</code> - no validation</li>
 				<li><code>ld_json</code> or <code>application/ld+json</code> - no validation</li>

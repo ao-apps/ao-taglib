@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2016, 2017, 2020, 2021  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2016, 2017, 2020, 2021, 2022  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -24,10 +24,16 @@ package com.aoapps.taglib;
 
 import com.aoapps.encoding.MediaType;
 import com.aoapps.encoding.taglib.EncodingBufferedTag;
+import com.aoapps.html.servlet.DocumentEE;
 import com.aoapps.io.buffer.BufferResult;
+import com.aoapps.servlet.jsp.tagext.JspTagUtils;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Optional;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.PageContext;
 
 /**
  * @author  AO Industries, Inc.
@@ -38,19 +44,36 @@ public class StyleTag extends EncodingBufferedTag {
 	public static final String TAG_NAME = "<ao:style>";
 /**/
 
+	public StyleTag() {
+		init();
+	}
+
 	@Override
 	public MediaType getContentType() {
-		return MediaType.TEXT; // TODO: MediaType.CSS
+		return MediaType.CSS;
 	}
 
 	@Override
 	public MediaType getOutputType() {
-		return null;
+		Optional<StyleAttribute> styleAttribute = forceElement
+			? Optional.empty()
+			: JspTagUtils.findAncestor(this, StyleAttribute.class);
+		return styleAttribute.isPresent() ? null : MediaType.XHTML;
 	}
 
 /* BodyTag only:
 	private static final long serialVersionUID = 1L;
 /**/
+
+	private boolean forceElement;
+	public void setForceElement(boolean forceElement) {
+		this.forceElement = forceElement;
+	}
+
+
+	private void init() {
+		forceElement = false;
+	}
 
 	@Override
 /* BodyTag only:
@@ -58,14 +81,40 @@ public class StyleTag extends EncodingBufferedTag {
 /**/
 /* SimpleTag only: */
 	protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+		PageContext pageContext = (PageContext)getJspContext();
 /**/
-		// TODO: Support <ao:style> without parent, which would be much like <ao:script> (context for nested <ao:out>, for example)
-		// TODO: How to disambiguate, since style is a global attribute, it will often/usually be in a parent?
-		// TODO: However, <ao:html> does is not StyleAttribute, so maybe is OK without explicit disambiguation.
-		AttributeUtils.requireAttributeParent(TAG_NAME, this, "style", StyleAttribute.class)
-			.setStyle(capturedBody.trim());
+		Optional<StyleAttribute> styleAttribute = forceElement
+			? Optional.empty()
+			: JspTagUtils.findAncestor(this, StyleAttribute.class);
+		if(styleAttribute.isPresent()) {
+			styleAttribute.get().setStyle(capturedBody.trim());
+		} else {
+			// Write style tag with src attribute
+			DocumentEE document = new DocumentEE(
+				pageContext.getServletContext(),
+				(HttpServletRequest)pageContext.getRequest(),
+				(HttpServletResponse)pageContext.getResponse(),
+				out,
+				false, // Do not add extra newlines to JSP
+				false  // Do not add extra indentation to JSP
+			);
+			document.style()
+				.out(capturedBody)
+			.__();
+		}
 /* BodyTag only:
 		return EVAL_PAGE;
 /**/
 	}
+
+/* BodyTag only:
+	@Override
+	public void doFinally() {
+		try {
+			init();
+		} finally {
+			super.doFinally();
+		}
+	}
+/**/
 }

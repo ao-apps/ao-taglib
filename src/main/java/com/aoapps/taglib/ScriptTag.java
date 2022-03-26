@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2013, 2015, 2016, 2017, 2019, 2020, 2021  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -171,7 +171,7 @@ public class ScriptTag extends ElementBufferedTag
 			.src(UrlUtils.getSrc(pageContext, src, params, addLastModified, absolute, canonical))
 			// Only write body when there is no source (discard body when src provided)
 			.out((src != null) ? null : capturedBody)
-			.__();
+		.__();
 /* BodyTag only:
 		return EVAL_PAGE;
 /**/
