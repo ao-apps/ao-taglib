@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2011, 2012, 2013, 2015, 2016, 2017, 2019, 2020, 2021  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -179,7 +179,7 @@ public class IframeTag extends ElementBufferedBodyTag
 		}
 		out.write(" frameborder=\"");
 		out.append(frameborder ? '1' : '0').write("\">");
-		MarkupCoercion.write(capturedBody, MarkupType.XHTML, out);
+		MarkupCoercion.write(capturedBody, MarkupType.XHTML, out, true);
 		out.write("</iframe>");
 /* BodyTag only: */
 		return EVAL_PAGE;

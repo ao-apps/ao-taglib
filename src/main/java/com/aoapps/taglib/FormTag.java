@@ -240,7 +240,7 @@ public class FormTag extends ElementBufferedTag
 			}
 		}
 		if(didDiv) out.write("</div>");
-		MarkupCoercion.write(capturedBody, MarkupType.XHTML, out);
+		MarkupCoercion.write(capturedBody, MarkupType.XHTML, out, true);
 		out.write("</form>");
 /* BodyTag only:
 		return EVAL_PAGE;
