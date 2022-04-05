@@ -22,7 +22,7 @@
  */
 package com.aoapps.taglib;
 
-import static com.aoapps.encoding.CssInXhtmlAttributeEncoder.cssInXhtmlAttributeEncoder;
+import static com.aoapps.encoding.StyleInXhtmlAttributeEncoder.styleInXhtmlAttributeEncoder;
 import static com.aoapps.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import com.aoapps.hodgepodge.i18n.MarkupCoercion;
 import com.aoapps.hodgepodge.i18n.MarkupType;
@@ -150,7 +150,7 @@ public final class GlobalAttributesUtils {
 		Object style = Coercion.trimNullIfEmpty(global.getStyle());
 		if(style != null) {
 			out.write(" style=\"");
-			MarkupCoercion.write(style, MarkupType.CSS, true, cssInXhtmlAttributeEncoder, false, out);
+			MarkupCoercion.write(style, MarkupType.CSS, true, styleInXhtmlAttributeEncoder, false, out);
 			out.append('"');
 		}
 	}
@@ -186,7 +186,7 @@ public final class GlobalAttributesUtils {
 		Object style = Coercion.trimNullIfEmpty(global.getStyle());
 		if(style != null) {
 			out.append(" style=\"");
-			MarkupCoercion.append(style, MarkupType.CSS, true, cssInXhtmlAttributeEncoder, false, out);
+			MarkupCoercion.append(style, MarkupType.CSS, true, styleInXhtmlAttributeEncoder, false, out);
 			out.append('"');
 		}
 	}
