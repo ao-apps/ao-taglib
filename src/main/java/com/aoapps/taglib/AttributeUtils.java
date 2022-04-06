@@ -171,7 +171,7 @@ public final class AttributeUtils  {
 	 *
 	 * @return  {@code true} when printed the style
 	 */
-	// TODO: Version that takes MediaWriter that does not encode for use with streaming style attributes
+	// TODO: Version that takes StyleWriter or StyleDocumentWriter that does not encode for use with streaming style attributes
 	public static boolean appendWidthStyle(String width, Appendable out) throws IOException {
 		width = Strings.trimNullIfEmpty(width);
 		if(width != null) {

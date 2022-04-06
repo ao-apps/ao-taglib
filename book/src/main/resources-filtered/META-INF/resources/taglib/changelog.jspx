@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T22:02:09-05:00"
-		dateModified="2022-03-25T17:25:18-05:00"
+		dateModified="2022-04-05T01:40:09-05:00"
 	>
 		<c:if test="${fn:endsWith('@{project.version}', '-SNAPSHOT') and !fn:endsWith('@{project.version}', '-POST-SNAPSHOT')}">
 			<changelog:release
@@ -617,8 +617,8 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
 				<li>
 					New tags for encoding in additional contexts:
 					<ul>
-						<li><core:link book="/encoding/taglib" page="/ao-encoding.tld/tag-mysql" /> - must be valid for the MySQL command line "mysql"</li>
-						<li><core:link book="/encoding/taglib" page="/ao-encoding.tld/tag-psql" /> - must be valid for the PostgreSQL command line "psql"</li>
+						<li><core:link book="/encoding/taglib" page="/ao-encoding.tld/tag-mysql" /> - must be valid MySQL command "mysql" input</li>
+						<li><core:link book="/encoding/taglib" page="/ao-encoding.tld/tag-psql" /> - must be valid PostgreSQL command "psql" input</li>
 						<li><core:link book="/encoding/taglib" page="/ao-encoding.tld/tag-sh" /> - must be valid shell script</li>
 					</ul>
 				</li>
