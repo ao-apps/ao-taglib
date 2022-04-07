@@ -23,7 +23,7 @@
 package com.aoapps.taglib;
 
 import com.aoapps.encoding.Doctype;
-import static com.aoapps.encoding.JavaScriptInXhtmlAttributeEncoder.javaScriptInXhtmlAttributeEncoder;
+import static com.aoapps.encoding.JavaScriptInXhtmlAttributeEncoder.javascriptInXhtmlAttributeEncoder;
 import com.aoapps.encoding.MediaType;
 import static com.aoapps.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoapps.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
@@ -206,7 +206,7 @@ public class FormTag extends ElementBufferedTag
 		}
 		if(onsubmit != null) {
 			out.write(" onsubmit=\"");
-			MarkupCoercion.write(onsubmit, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
+			MarkupCoercion.write(onsubmit, MarkupType.JAVASCRIPT, true, javascriptInXhtmlAttributeEncoder, false, out);
 			out.append('"');
 		}
 		out.append('>');

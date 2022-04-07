@@ -22,7 +22,7 @@
  */
 package com.aoapps.taglib;
 
-import static com.aoapps.encoding.JavaScriptInXhtmlAttributeEncoder.javaScriptInXhtmlAttributeEncoder;
+import static com.aoapps.encoding.JavaScriptInXhtmlAttributeEncoder.javascriptInXhtmlAttributeEncoder;
 import com.aoapps.encoding.MediaType;
 import static com.aoapps.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoapps.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
@@ -238,17 +238,17 @@ public class ATag extends ElementBufferedTag
 		}
 		if(onclick != null) {
 			out.write(" onclick=\"");
-			MarkupCoercion.write(onclick, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
+			MarkupCoercion.write(onclick, MarkupType.JAVASCRIPT, true, javascriptInXhtmlAttributeEncoder, false, out);
 			out.append('"');
 		}
 		if(onmouseout != null) {
 			out.write(" onmouseout=\"");
-			MarkupCoercion.write(onmouseout, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
+			MarkupCoercion.write(onmouseout, MarkupType.JAVASCRIPT, true, javascriptInXhtmlAttributeEncoder, false, out);
 			out.append('"');
 		}
 		if(onmouseover != null) {
 			out.write(" onmouseover=\"");
-			MarkupCoercion.write(onmouseover, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
+			MarkupCoercion.write(onmouseover, MarkupType.JAVASCRIPT, true, javascriptInXhtmlAttributeEncoder, false, out);
 			out.append('"');
 		}
 		out.append('>');

@@ -22,7 +22,7 @@
  */
 package com.aoapps.taglib;
 
-import static com.aoapps.encoding.JavaScriptInXhtmlAttributeEncoder.javaScriptInXhtmlAttributeEncoder;
+import static com.aoapps.encoding.JavaScriptInXhtmlAttributeEncoder.javascriptInXhtmlAttributeEncoder;
 import com.aoapps.encoding.MediaType;
 import com.aoapps.encoding.Serialization;
 import static com.aoapps.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
@@ -155,22 +155,22 @@ public class SelectTag extends ElementBufferedTag
 		}
 		if(onblur != null) {
 			out.write(" onblur=\"");
-			MarkupCoercion.write(onblur, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
+			MarkupCoercion.write(onblur, MarkupType.JAVASCRIPT, true, javascriptInXhtmlAttributeEncoder, false, out);
 			out.append('"');
 		}
 		if(onchange != null) {
 			out.write(" onchange=\"");
-			MarkupCoercion.write(onchange, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
+			MarkupCoercion.write(onchange, MarkupType.JAVASCRIPT, true, javascriptInXhtmlAttributeEncoder, false, out);
 			out.append('"');
 		}
 		if(onfocus != null) {
 			out.write(" onfocus=\"");
-			MarkupCoercion.write(onfocus, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
+			MarkupCoercion.write(onfocus, MarkupType.JAVASCRIPT, true, javascriptInXhtmlAttributeEncoder, false, out);
 			out.append('"');
 		}
 		if(onkeypress != null) {
 			out.write(" onkeypress=\"");
-			MarkupCoercion.write(onkeypress, MarkupType.JAVASCRIPT, true, javaScriptInXhtmlAttributeEncoder, false, out);
+			MarkupCoercion.write(onkeypress, MarkupType.JAVASCRIPT, true, javascriptInXhtmlAttributeEncoder, false, out);
 			out.append('"');
 		}
 		out.append('>');
