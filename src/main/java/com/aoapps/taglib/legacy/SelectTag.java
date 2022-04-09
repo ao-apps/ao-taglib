@@ -163,26 +163,59 @@ public class SelectTag extends ElementBufferedBodyTag
 		}
 		if(onblur != null) {
 			out.write(" onblur=\"");
-			MarkupCoercion.write(onblur, MarkupType.JAVASCRIPT, true, javascriptInXhtmlAttributeEncoder, false, out);
+			MarkupCoercion.write(
+				onblur,
+				MarkupType.JAVASCRIPT,
+				true,
+				javascriptInXhtmlAttributeEncoder,
+				false,
+				out
+			);
 			out.append('"');
 		}
 		if(onchange != null) {
 			out.write(" onchange=\"");
-			MarkupCoercion.write(onchange, MarkupType.JAVASCRIPT, true, javascriptInXhtmlAttributeEncoder, false, out);
+			MarkupCoercion.write(
+				onchange,
+				MarkupType.JAVASCRIPT,
+				true,
+				javascriptInXhtmlAttributeEncoder,
+				false,
+				out
+			);
 			out.append('"');
 		}
 		if(onfocus != null) {
 			out.write(" onfocus=\"");
-			MarkupCoercion.write(onfocus, MarkupType.JAVASCRIPT, true, javascriptInXhtmlAttributeEncoder, false, out);
+			MarkupCoercion.write(
+				onfocus,
+				MarkupType.JAVASCRIPT,
+				true,
+				javascriptInXhtmlAttributeEncoder,
+				false,
+				out
+			);
 			out.append('"');
 		}
 		if(onkeypress != null) {
 			out.write(" onkeypress=\"");
-			MarkupCoercion.write(onkeypress, MarkupType.JAVASCRIPT, true, javascriptInXhtmlAttributeEncoder, false, out);
+			MarkupCoercion.write(
+				onkeypress,
+				MarkupType.JAVASCRIPT,
+				true,
+				javascriptInXhtmlAttributeEncoder,
+				false,
+				out
+			);
 			out.append('"');
 		}
 		out.append('>');
-		MarkupCoercion.write(capturedBody, MarkupType.XHTML, out, true);
+		MarkupCoercion.write(
+			capturedBody,
+			MarkupType.XHTML,
+			out,
+			true
+		);
 		out.write("</select>");
 /* BodyTag only: */
 		return EVAL_PAGE;

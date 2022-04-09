@@ -150,7 +150,14 @@ public final class GlobalAttributesUtils {
 		Object style = Coercion.trimNullIfEmpty(global.getStyle());
 		if(style != null) {
 			out.write(" style=\"");
-			MarkupCoercion.write(style, MarkupType.CSS, true, styleInXhtmlAttributeEncoder, false, out);
+			MarkupCoercion.write(
+				style,
+				MarkupType.CSS,
+				true,
+				styleInXhtmlAttributeEncoder,
+				false,
+				out
+			);
 			out.append('"');
 		}
 	}
@@ -186,7 +193,14 @@ public final class GlobalAttributesUtils {
 		Object style = Coercion.trimNullIfEmpty(global.getStyle());
 		if(style != null) {
 			out.append(" style=\"");
-			MarkupCoercion.append(style, MarkupType.CSS, true, styleInXhtmlAttributeEncoder, false, out);
+			MarkupCoercion.append(
+				style,
+				MarkupType.CSS,
+				true,
+				styleInXhtmlAttributeEncoder,
+				false,
+				out
+			);
 			out.append('"');
 		}
 	}

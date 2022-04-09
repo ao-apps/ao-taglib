@@ -179,7 +179,12 @@ public class IframeTag extends ElementBufferedBodyTag
 		}
 		out.write(" frameborder=\"");
 		out.append(frameborder ? '1' : '0').write("\">");
-		MarkupCoercion.write(capturedBody, MarkupType.XHTML, out, true);
+		MarkupCoercion.write(
+			capturedBody,
+			MarkupType.XHTML,
+			out,
+			true
+		);
 		out.write("</iframe>");
 /* BodyTag only: */
 		return EVAL_PAGE;

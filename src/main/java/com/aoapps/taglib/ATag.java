@@ -228,7 +228,14 @@ public class ATag extends ElementBufferedTag
 		}
 		if(title != null) {
 			out.write(" title=\"");
-			MarkupCoercion.write(title, MarkupType.TEXT, true, textInXhtmlAttributeEncoder, false, out);
+			MarkupCoercion.write(
+				title,
+				MarkupType.TEXT,
+				true,
+				textInXhtmlAttributeEncoder,
+				false,
+				out
+			);
 			out.append('"');
 		}
 		if(type != null) {
@@ -238,17 +245,38 @@ public class ATag extends ElementBufferedTag
 		}
 		if(onclick != null) {
 			out.write(" onclick=\"");
-			MarkupCoercion.write(onclick, MarkupType.JAVASCRIPT, true, javascriptInXhtmlAttributeEncoder, false, out);
+			MarkupCoercion.write(
+				onclick,
+				MarkupType.JAVASCRIPT,
+				true,
+				javascriptInXhtmlAttributeEncoder,
+				false,
+				out
+			);
 			out.append('"');
 		}
 		if(onmouseout != null) {
 			out.write(" onmouseout=\"");
-			MarkupCoercion.write(onmouseout, MarkupType.JAVASCRIPT, true, javascriptInXhtmlAttributeEncoder, false, out);
+			MarkupCoercion.write(
+				onmouseout,
+				MarkupType.JAVASCRIPT,
+				true,
+				javascriptInXhtmlAttributeEncoder,
+				false,
+				out
+			);
 			out.append('"');
 		}
 		if(onmouseover != null) {
 			out.write(" onmouseover=\"");
-			MarkupCoercion.write(onmouseover, MarkupType.JAVASCRIPT, true, javascriptInXhtmlAttributeEncoder, false, out);
+			MarkupCoercion.write(
+				onmouseover,
+				MarkupType.JAVASCRIPT,
+				true,
+				javascriptInXhtmlAttributeEncoder,
+				false,
+				out
+			);
 			out.append('"');
 		}
 		out.append('>');
@@ -271,7 +299,12 @@ public class ATag extends ElementBufferedTag
 				URIDecoder.decodeURI(toDecode, textInXhtmlEncoder, out);
 			}
 		} else {
-			MarkupCoercion.write(trimmedBody, MarkupType.XHTML, out, true);
+			MarkupCoercion.write(
+				trimmedBody,
+				MarkupType.XHTML,
+				out,
+				true
+			);
 		}
 		out.write("</a>");
 /* BodyTag only:

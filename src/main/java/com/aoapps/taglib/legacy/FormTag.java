@@ -214,7 +214,14 @@ public class FormTag extends ElementBufferedBodyTag
 		}
 		if(onsubmit != null) {
 			out.write(" onsubmit=\"");
-			MarkupCoercion.write(onsubmit, MarkupType.JAVASCRIPT, true, javascriptInXhtmlAttributeEncoder, false, out);
+			MarkupCoercion.write(
+				onsubmit,
+				MarkupType.JAVASCRIPT,
+				true,
+				javascriptInXhtmlAttributeEncoder,
+				false,
+				out
+			);
 			out.append('"');
 		}
 		out.append('>');
@@ -248,7 +255,12 @@ public class FormTag extends ElementBufferedBodyTag
 			}
 		}
 		if(didDiv) out.write("</div>");
-		MarkupCoercion.write(capturedBody, MarkupType.XHTML, out, true);
+		MarkupCoercion.write(
+			capturedBody,
+			MarkupType.XHTML,
+			out,
+			true
+		);
 		out.write("</form>");
 /* BodyTag only: */
 		return EVAL_PAGE;

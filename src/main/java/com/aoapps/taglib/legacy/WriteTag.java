@@ -149,12 +149,12 @@ public class WriteTag extends EncodingNullBodyTag
 			// Print the value
 			if(bean != null) {
 				markupType = containerType.getMarkupType();
+				assert markupType != null;
 				// Avoid reflection when possible
 				if("toString".equals(method)) {
 					BundleLookupThreadContext threadContext;
 					if(
-						markupType == null
-						|| markupType == MarkupType.NONE
+						markupType == MarkupType.NONE
 						|| (threadContext = BundleLookupThreadContext.getThreadContext()) == null
 						// Avoid intermediate String from Writable
 						|| (
@@ -180,7 +180,6 @@ public class WriteTag extends EncodingNullBodyTag
 						Object retVal = refMethod.invoke(bean);
 						if(
 							retVal == null
-							|| markupType == null
 							|| markupType == MarkupType.NONE
 							|| (threadContext = BundleLookupThreadContext.getThreadContext()) == null
 							// Avoid intermediate String from Writable
