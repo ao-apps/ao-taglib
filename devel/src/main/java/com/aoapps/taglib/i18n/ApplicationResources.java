@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2013, 2015, 2016, 2017, 2020, 2021  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2013, 2015, 2016, 2017, 2020, 2021, 2022  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -28,10 +28,12 @@ import java.io.File;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.concurrent.ThreadSafe;
 
 /**
  * @author  AO Industries, Inc.
  */
+@ThreadSafe
 public final class ApplicationResources extends EditableResourceBundle {
 
 	static final EditableResourceBundleSet bundleSet = new EditableResourceBundleSet(
