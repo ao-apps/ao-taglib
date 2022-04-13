@@ -92,7 +92,7 @@ public final class ParamUtils {
 		ParamsAttribute paramsAttribute,
 		String name,
 		Object value
-	) throws JspTagException {
+	) {
 		NullArgumentException.checkNotNull(name, "name");
 		if(value != null) paramsAttribute.addParam(name, value);
 	}
@@ -114,7 +114,7 @@ public final class ParamUtils {
 		ParamsAttribute paramsAttribute,
 		String name,
 		Iterable<?> values
-	) throws JspTagException {
+	) {
 		NullArgumentException.checkNotNull(name, "name");
 		if(values != null) {
 			addIteratorParams(paramsAttribute, name, values.iterator());
@@ -138,7 +138,7 @@ public final class ParamUtils {
 		ParamsAttribute paramsAttribute,
 		String name,
 		Iterator<?> values
-	) throws JspTagException {
+	) {
 		NullArgumentException.checkNotNull(name, "name");
 		if(values != null) {
 			while(values.hasNext()) {
