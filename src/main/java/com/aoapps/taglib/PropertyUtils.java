@@ -20,6 +20,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
  */
+
 package com.aoapps.taglib;
 
 import com.aoapps.lang.LocalizedIllegalArgumentException;
