@@ -1,22 +1,42 @@
+# Since version 2.23 (released in August 2019), git-blame has a feature
+# to ignore or bypass certain commits.
+#
+# This file contains a list of commits that are not likely what you
+# are looking for in a blame, such as mass reformatting or renaming.
+# You can set this file as a default ignore file for blame by running
+# the following command.
+#
+# $ git config blame.ignoreRevsFile .git-blame-ignore-revs
+
 # Significant manual code formatting clean-up…
 982371250534de918131ea255dd06a44e6bbe1f6
+
 # Added missing spaces after comma
 1ab527e482ff3102c65d481d53ea7774f582fde1
+
 # Column aligned whitespace.
 a7a1aeaf9ba9d8cc7f4fde12e96977818e0ddee5
+
 # Testing Github formatting of this Markdown
 # 53d68d967e584229b58b008e09d7aaf3828005ef
+
 # Removed extraneous space at end of line.
 923f2293c5ebfb4fdb19aaf3bb200fba37227cd1
+
 # Converted remaining four-space indents to our standard tab indent.
 66ca5698aec67ccf68ac747cab0d0150914be7c6
+
 # Converted remaining four-space indents to our standard tab indent.
 cc6dc06ca2307374f61c5e5cdf2cdf7754cd6b46
+
 # Removed extraneous space at end of line.
 0e37cc7016afba59be1fa229cbe360dd123ea664
+
 # Converted remaining four-space indents to our standard tab indent.
 01d2fc28728058acc79b39c905c20a27d90a8419
+
 # Converted remaining four-space indents to our standard tab indent.
 51aa5f52dfabce5705b9c51d52a6b5b5fc351416
+
 # Auto temp file more places.
 a797579b8c31e446e35430e1b423c1d98266ee61
