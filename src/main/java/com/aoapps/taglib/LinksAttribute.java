@@ -31,5 +31,5 @@ package com.aoapps.taglib;
  */
 public interface LinksAttribute {
 
-	void addLink(Link link);
+  void addLink(Link link);
 }

@@ -33,24 +33,24 @@ import javax.servlet.http.HttpServletResponseWrapper;
  */
 public class NoEncodeUrlResponseWrapper extends HttpServletResponseWrapper {
 
-	public NoEncodeUrlResponseWrapper(HttpServletResponse response) {
-		super(response);
-	}
+  public NoEncodeUrlResponseWrapper(HttpServletResponse response) {
+    super(response);
+  }
 
-	/**
-	 * Do not encode URL, since that will be done automatically and selectively by tag context.
-	 */
-	@Override
-	public String encodeURL(String url) {
-		return url;
-	}
+  /**
+   * Do not encode URL, since that will be done automatically and selectively by tag context.
+   */
+  @Override
+  public String encodeURL(String url) {
+    return url;
+  }
 
-	/**
-	 * Do not encode URL, since that will be done automatically and selectively by tag context.
-	 */
-	@Override
-	@Deprecated
-	public String encodeUrl(String url) {
-		return url;
-	}
+  /**
+   * Do not encode URL, since that will be done automatically and selectively by tag context.
+   */
+  @Override
+  @Deprecated
+  public String encodeUrl(String url) {
+    return url;
+  }
 }

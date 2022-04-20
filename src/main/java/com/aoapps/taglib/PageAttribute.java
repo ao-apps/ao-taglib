@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface PageAttribute {
 
-	void setPage(String page);
+  void setPage(String page);
 }

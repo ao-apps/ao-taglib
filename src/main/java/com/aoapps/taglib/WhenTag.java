@@ -34,31 +34,31 @@ import javax.servlet.jsp.tagext.TagSupport;
  */
 public class WhenTag extends TagSupport {
 
-	public static final String TAG_NAME = "<ao:when>";
+  public static final String TAG_NAME = "<ao:when>";
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	private ValueExpression test;
-	public void setTest(ValueExpression test) {
-		this.test = test;
-	}
+  private ValueExpression test;
+  public void setTest(ValueExpression test) {
+    this.test = test;
+  }
 
-	@Override
-	public int doStartTag() throws JspException {
-		JspTag parent = getParent();
-		if(!(parent instanceof ChooseTag)) {
-			throw new JspTagException(TAG_NAME + " must be directly nested within " + ChooseTag.TAG_NAME);
-		}
-		ChooseTag chooseTag = (ChooseTag)parent;
-		chooseTag.onWhen();
-		if(chooseTag.getMatched()) {
-			return SKIP_BODY;
-		}
-		Boolean matched = (Boolean)test.getValue(pageContext.getELContext());
-		if(matched != null && matched) {
-			chooseTag.setMatched();
-			return EVAL_BODY_INCLUDE;
-		}
-		return SKIP_BODY;
-	}
+  @Override
+  public int doStartTag() throws JspException {
+    JspTag parent = getParent();
+    if (!(parent instanceof ChooseTag)) {
+      throw new JspTagException(TAG_NAME + " must be directly nested within " + ChooseTag.TAG_NAME);
+    }
+    ChooseTag chooseTag = (ChooseTag)parent;
+    chooseTag.onWhen();
+    if (chooseTag.getMatched()) {
+      return SKIP_BODY;
+    }
+    Boolean matched = (Boolean)test.getValue(pageContext.getELContext());
+    if (matched != null && matched) {
+      chooseTag.setMatched();
+      return EVAL_BODY_INCLUDE;
+    }
+    return SKIP_BODY;
+  }
 }

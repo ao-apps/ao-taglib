@@ -33,22 +33,22 @@ import java.util.Map;
  * @author  AO Industries, Inc.
  */
 public interface GlobalBufferedAttributes extends
-	GlobalAttributes,
-	// Allow to be set from within nested tags
-	IdAttribute,
-	ClassAttribute,
-	DataAttribute,
-	DirAttribute,
-	StyleAttribute
+  GlobalAttributes,
+  // Allow to be set from within nested tags
+  IdAttribute,
+  ClassAttribute,
+  DataAttribute,
+  DirAttribute,
+  StyleAttribute
 {
 
-	/**
-	 * Replaces all the data with the provided HTML attribute names and values.
-	 * Entries will a {@code null} value are not added.
-	 *
-	 * @throws  IllegalArgumentException  When {@code attrName} is not {@linkplain Data.data#validate(java.lang.String) valid}
-	 *
-	 * @see  MutableGlobalAttributes#setData(java.util.Map)
-	 */
-	void setData(Map<? extends String, ?> data) throws IllegalArgumentException;
+  /**
+   * Replaces all the data with the provided HTML attribute names and values.
+   * Entries will a {@code null} value are not added.
+   *
+   * @throws  IllegalArgumentException  When {@code attrName} is not {@linkplain Data.data#validate(java.lang.String) valid}
+   *
+   * @see  MutableGlobalAttributes#setData(java.util.Map)
+   */
+  void setData(Map<? extends String, ?> data) throws IllegalArgumentException;
 }

@@ -34,37 +34,37 @@ import java.beans.SimpleBeanInfo;
  */
 public class ElementBufferedBodyTagBeanInfo extends SimpleBeanInfo {
 
-	private static final PropertyDescriptor[] properties;
-	static {
-		try {
-			properties = new PropertyDescriptor[] {
-				new PropertyDescriptor("class", ElementBufferedBodyTag.class, "getClazz", "setClazz"),
-				new PropertyDescriptor("data",  ElementBufferedBodyTag.class, "getData",  "setData"),
-				new PropertyDescriptor("dir",   ElementBufferedBodyTag.class, "getDir",   "setDir"),
-				new PropertyDescriptor("style", ElementBufferedBodyTag.class, "getStyle", "setStyle"),
-			};
-		} catch(IntrospectionException err) {
-			throw new ExceptionInInitializerError(err);
-		}
-	}
+  private static final PropertyDescriptor[] properties;
+  static {
+    try {
+      properties = new PropertyDescriptor[] {
+        new PropertyDescriptor("class", ElementBufferedBodyTag.class, "getClazz", "setClazz"),
+        new PropertyDescriptor("data",  ElementBufferedBodyTag.class, "getData",  "setData"),
+        new PropertyDescriptor("dir",   ElementBufferedBodyTag.class, "getDir",   "setDir"),
+        new PropertyDescriptor("style", ElementBufferedBodyTag.class, "getStyle", "setStyle"),
+      };
+    } catch (IntrospectionException err) {
+      throw new ExceptionInInitializerError(err);
+    }
+  }
 
-	@Override
-	@SuppressWarnings("ReturnOfCollectionOrArrayField") // Not copying array for performance
-	public PropertyDescriptor[] getPropertyDescriptors () {
-		return properties;
-	}
+  @Override
+  @SuppressWarnings("ReturnOfCollectionOrArrayField") // Not copying array for performance
+  public PropertyDescriptor[] getPropertyDescriptors () {
+    return properties;
+  }
 
-	/**
-	 * Include base class.
-	 */
-	@Override
-	public BeanInfo[] getAdditionalBeanInfo() {
-		try {
-			return new BeanInfo[] {
-				Introspector.getBeanInfo(ElementBufferedBodyTag.class.getSuperclass())
-			};
-		} catch(IntrospectionException err) {
-			throw new AssertionError(err);
-		}
-	}
+  /**
+   * Include base class.
+   */
+  @Override
+  public BeanInfo[] getAdditionalBeanInfo() {
+    try {
+      return new BeanInfo[] {
+        Introspector.getBeanInfo(ElementBufferedBodyTag.class.getSuperclass())
+      };
+    } catch (IntrospectionException err) {
+      throw new AssertionError(err);
+    }
+  }
 }

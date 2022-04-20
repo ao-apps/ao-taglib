@@ -37,99 +37,101 @@ import javax.servlet.jsp.PageContext;
  * @author  AO Industries, Inc.
  */
 public class OptionTag extends ElementBufferedTag
-	implements
-		// Attributes
-		DisabledAttribute,
-		SelectedAttribute,
-		ValueAttribute
+  implements
+    // Attributes
+    DisabledAttribute,
+    SelectedAttribute,
+    ValueAttribute
 {
 
-	public OptionTag() {
-		init();
-	}
+  public OptionTag() {
+    init();
+  }
 
-	@Override
-	public MediaType getContentType() {
-		return MediaType.TEXT;
-	}
+  @Override
+  public MediaType getContentType() {
+    return MediaType.TEXT;
+  }
 
-	@Override
-	public MediaType getOutputType() {
-		return MediaType.XHTML;
-	}
+  @Override
+  public MediaType getOutputType() {
+    return MediaType.XHTML;
+  }
 
 /* BodyTag only:
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 /**/
 
-	private boolean disabled;
-	@Override
-	public void setDisabled(boolean disabled) {
-		this.disabled = disabled;
-	}
+  private boolean disabled;
+  @Override
+  public void setDisabled(boolean disabled) {
+    this.disabled = disabled;
+  }
 
-	private boolean selected;
-	@Override
-	public void setSelected(boolean selected) {
-		this.selected = selected;
-	}
+  private boolean selected;
+  @Override
+  public void setSelected(boolean selected) {
+    this.selected = selected;
+  }
 
-	private boolean valueSet;
-	private Object value;
-	@Override
-	public void setValue(Object value) {
-		this.valueSet = true;
-		this.value = value;
-	}
+  private boolean valueSet;
+  private Object value;
+  @Override
+  public void setValue(Object value) {
+    this.valueSet = true;
+    this.value = value;
+  }
 
-	private void init() {
-		disabled = false;
-		selected = false;
-		valueSet = false;
-		value = null;
-	}
+  private void init() {
+    disabled = false;
+    selected = false;
+    valueSet = false;
+    value = null;
+  }
 
-	@Override
+  @Override
 /* BodyTag only:
-	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+  protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
 /* SimpleTag only: */
-	protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-		PageContext pageContext = (PageContext)getJspContext();
+  protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+    PageContext pageContext = (PageContext)getJspContext();
 /**/
-		capturedBody = capturedBody.trim();
-		// TODO: Should we be setting the value always like this?  Duplicates efforts.
-		// TODO: If not setting value this way, this does not need to buffer
-		// TODO: This has something to do with translator markup added for display, but not value
-		if(!valueSet) setValue(capturedBody);
-		GlobalAttributesUtils.doGlobalAttributes(
-			global,
-			new DocumentEE(
-				pageContext.getServletContext(),
-				(HttpServletRequest)pageContext.getRequest(),
-				(HttpServletResponse)pageContext.getResponse(),
-				out,
-				false, // Do not add extra newlines to JSP
-				false  // Do not add extra indentation to JSP
-			).option()
-		)
-			.value(value)
-			.selected(selected)
-			.disabled(disabled)
-			.__(capturedBody);
+    capturedBody = capturedBody.trim();
+    // TODO: Should we be setting the value always like this?  Duplicates efforts.
+    // TODO: If not setting value this way, this does not need to buffer
+    // TODO: This has something to do with translator markup added for display, but not value
+    if (!valueSet) {
+      setValue(capturedBody);
+    }
+    GlobalAttributesUtils.doGlobalAttributes(
+      global,
+      new DocumentEE(
+        pageContext.getServletContext(),
+        (HttpServletRequest)pageContext.getRequest(),
+        (HttpServletResponse)pageContext.getResponse(),
+        out,
+        false, // Do not add extra newlines to JSP
+        false  // Do not add extra indentation to JSP
+      ).option()
+    )
+      .value(value)
+      .selected(selected)
+      .disabled(disabled)
+      .__(capturedBody);
 /* BodyTag only:
-		return EVAL_PAGE;
+    return EVAL_PAGE;
 /**/
-	}
+  }
 
 /* BodyTag only:
-	@Override
-	public void doFinally() {
-		try {
-			init();
-		} finally {
-			super.doFinally();
-		}
-	}
+  @Override
+  public void doFinally() {
+    try {
+      init();
+    } finally {
+      super.doFinally();
+    }
+  }
 /**/
 }

@@ -35,20 +35,20 @@ import java.util.Map;
 // TODO: This just doesn't follow the set-only pattern of other attributes.
 public interface GlobalAttributes {
 
-	String getId();
+  String getId();
 
-	/**
-	 * Getter required because without it, we get the exception:
-	 * <pre>Unable to find setter method for attribute: class</pre>
-	 */
-	String getClazz();
+  /**
+   * Getter required because without it, we get the exception:
+   * <pre>Unable to find setter method for attribute: class</pre>
+   */
+  String getClazz();
 
-	/**
-	 * Gets the HTML data attributes or an empty map when there are none.
-	 */
-	Map<String, Object> getData();
+  /**
+   * Gets the HTML data attributes or an empty map when there are none.
+   */
+  Map<String, Object> getData();
 
-	String getDir();
+  String getDir();
 
-	Object getStyle();
+  Object getStyle();
 }

@@ -37,57 +37,57 @@ import javax.servlet.jsp.tagext.ValidationMessage;
  */
 public class InputTagTEI extends ElementTagTEI {
 
-	private static final Set<String> validTypes = Collections.unmodifiableSet(
-		new LinkedHashSet<>(
-			Arrays.asList(
-				// From http://www.w3schools.com/tags/att_input_type.asp
-				"button",
-				"checkbox",
-				"color",
-				"date",
-				"datetime-local",
-				"email",
-				"file",
-				"hidden",
-				"image",
-				"month",
-				"number",
-				"password",
-				"radio",
-				"range",
-				"reset",
-				"search",
-				"submit",
-				"tel",
-				"text",
-				"time",
-				"url",
-				"week"
-			)
-		)
-	);
+  private static final Set<String> validTypes = Collections.unmodifiableSet(
+    new LinkedHashSet<>(
+      Arrays.asList(
+        // From http://www.w3schools.com/tags/att_input_type.asp
+        "button",
+        "checkbox",
+        "color",
+        "date",
+        "datetime-local",
+        "email",
+        "file",
+        "hidden",
+        "image",
+        "month",
+        "number",
+        "password",
+        "radio",
+        "range",
+        "reset",
+        "search",
+        "submit",
+        "tel",
+        "text",
+        "time",
+        "url",
+        "week"
+      )
+    )
+  );
 
-	public static boolean isValidType(String type) {
-		return validTypes.contains(type);
-	}
+  public static boolean isValidType(String type) {
+    return validTypes.contains(type);
+  }
 
-	@Override
-	protected void validate(TagData data, List<ValidationMessage> messages) {
-		super.validate(data, messages);
-		Object typeAttr = data.getAttribute("type");
-		if(
-			typeAttr != null
-			&& typeAttr != TagData.REQUEST_TIME_VALUE
-		) {
-			String type = Strings.trimNullIfEmpty((String)typeAttr); // TODO: normalizeType
-			if(type != null && !isValidType(type)) {
-				messages.add(
-					new ValidationMessage(
-						data.getId(),
-						InputTag.RESOURCES.getMessage("type.invalid", type)
-					)
-				);
-			}
-		}
-	}
+  @Override
+  protected void validate(TagData data, List<ValidationMessage> messages) {
+    super.validate(data, messages);
+    Object typeAttr = data.getAttribute("type");
+    if (
+      typeAttr != null
+      && typeAttr != TagData.REQUEST_TIME_VALUE
+    ) {
+      String type = Strings.trimNullIfEmpty((String)typeAttr); // TODO: normalizeType
+      if (type != null && !isValidType(type)) {
+        messages.add(
+          new ValidationMessage(
+            data.getId(),
+            InputTag.RESOURCES.getMessage("type.invalid", type)
+          )
+        );
+      }
+    }
+  }
 }

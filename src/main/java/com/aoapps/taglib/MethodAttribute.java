@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface MethodAttribute {
 
-	void setMethod(String method);
+  void setMethod(String method);
 }

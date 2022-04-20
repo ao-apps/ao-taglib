@@ -39,37 +39,37 @@ import javax.servlet.jsp.JspException;
 public class TabindexTag extends EncodingBufferedBodyTag {
 
 /* SimpleTag only:
-	public static final String TAG_NAME = "<ao:tabindex>";
+  public static final String TAG_NAME = "<ao:tabindex>";
 /**/
 
-	@Override
-	public MediaType getContentType() {
-		return MediaType.TEXT;
-	}
+  @Override
+  public MediaType getContentType() {
+    return MediaType.TEXT;
+  }
 
-	@Override
-	public MediaType getOutputType() {
-		return null;
-	}
+  @Override
+  public MediaType getOutputType() {
+    return null;
+  }
 
 /* BodyTag only: */
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 /**/
 
-	@Override
+  @Override
 /* BodyTag only: */
-	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+  protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
 /* SimpleTag only:
-	protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+  protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
-		TabindexAttribute tabindexAttribute = AttributeUtils.requireAttributeParent(TAG_NAME, this, "tabindex", TabindexAttribute.class);
-		String value = capturedBody.trim().toString();
-		if(!value.isEmpty()) {
-			tabindexAttribute.setTabindex(Integer.parseInt(value));
-		}
+    TabindexAttribute tabindexAttribute = AttributeUtils.requireAttributeParent(TAG_NAME, this, "tabindex", TabindexAttribute.class);
+    String value = capturedBody.trim().toString();
+    if (!value.isEmpty()) {
+      tabindexAttribute.setTabindex(Integer.parseInt(value));
+    }
 /* BodyTag only: */
-		return EVAL_PAGE;
+    return EVAL_PAGE;
 /**/
-	}
+  }
 }

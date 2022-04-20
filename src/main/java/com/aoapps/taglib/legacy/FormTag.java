@@ -65,217 +65,225 @@ import javax.servlet.jsp.JspTagException;
  * @author  AO Industries, Inc.
  */
 public class FormTag extends ElementBufferedBodyTag
-	implements
-		// Attributes
-		ActionAttribute,
-		EnctypeAttribute,
-		MethodAttribute,
-		ParamsAttribute,
-		TargetAttribute,
-		// Events
-		OnsubmitAttribute
+  implements
+    // Attributes
+    ActionAttribute,
+    EnctypeAttribute,
+    MethodAttribute,
+    ParamsAttribute,
+    TargetAttribute,
+    // Events
+    OnsubmitAttribute
 {
 
 /* SimpleTag only:
-	public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, FormTag.class);
+  public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, FormTag.class);
 /**/
 
-	public FormTag() {
-		init();
-	}
+  public FormTag() {
+    init();
+  }
 
-	@Override
-	public MediaType getContentType() {
-		return MediaType.XHTML;
-	}
+  @Override
+  public MediaType getContentType() {
+    return MediaType.XHTML;
+  }
 
-	@Override
-	public MediaType getOutputType() {
-		return MediaType.XHTML;
-	}
+  @Override
+  public MediaType getOutputType() {
+    return MediaType.XHTML;
+  }
 
 /* BodyTag only: */
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 /**/
 
-	private String action;
-	@Override
-	public void setAction(String action) {
-		this.action = Strings.nullIfEmpty(action);
-	}
+  private String action;
+  @Override
+  public void setAction(String action) {
+    this.action = Strings.nullIfEmpty(action);
+  }
 
-	private String enctype;
-	@Override
-	public void setEnctype(String enctype) {
-		this.enctype = Strings.trimNullIfEmpty(enctype);
-	}
+  private String enctype;
+  @Override
+  public void setEnctype(String enctype) {
+    this.enctype = Strings.trimNullIfEmpty(enctype);
+  }
 
-	private String method;
-	@Override
-	public void setMethod(String method) {
-		method = Strings.trimNullIfEmpty(method);
-		if(method != null && !FormTagTEI.isValidMethod(method)) throw new LocalizedIllegalArgumentException(RESOURCES, "method.invalid", method);
-		this.method = method;
-	}
+  private String method;
+  @Override
+  public void setMethod(String method) {
+    method = Strings.trimNullIfEmpty(method);
+    if (method != null && !FormTagTEI.isValidMethod(method)) {
+      throw new LocalizedIllegalArgumentException(RESOURCES, "method.invalid", method);
+    }
+    this.method = method;
+  }
 
-	private MutableURIParameters params;
-	@Override
-	public void addParam(String name, Object value) {
-		if(params == null) params = new URIParametersMap();
-		params.add(name, value);
-	}
+  private MutableURIParameters params;
+  @Override
+  public void addParam(String name, Object value) {
+    if (params == null) {
+      params = new URIParametersMap();
+    }
+    params.add(name, value);
+  }
 
-	private String target;
-	@Override
-	public void setTarget(String target) {
-		this.target = Strings.trimNullIfEmpty(target);
-	}
+  private String target;
+  @Override
+  public void setTarget(String target) {
+    this.target = Strings.trimNullIfEmpty(target);
+  }
 
-	private Object onsubmit;
-	@Override
-	public void setOnsubmit(Object onsubmit) {
-		this.onsubmit = AttributeUtils.trimNullIfEmpty(onsubmit);
-	}
+  private Object onsubmit;
+  @Override
+  public void setOnsubmit(Object onsubmit) {
+    this.onsubmit = AttributeUtils.trimNullIfEmpty(onsubmit);
+  }
 
-	/**
-	 * @see  ParamUtils#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List, com.aoapps.taglib.ParamsAttribute)
-	 */
-	@Override
-	protected boolean addDynamicAttribute(String uri, String localName, Object value, List<String> expectedPatterns) throws JspTagException {
-		return
-			super.addDynamicAttribute(uri, localName, value, expectedPatterns)
-			|| ParamUtils.addDynamicAttribute(uri, localName, value, expectedPatterns, this);
-	}
+  /**
+   * @see  ParamUtils#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List, com.aoapps.taglib.ParamsAttribute)
+   */
+  @Override
+  protected boolean addDynamicAttribute(String uri, String localName, Object value, List<String> expectedPatterns) throws JspTagException {
+    return
+      super.addDynamicAttribute(uri, localName, value, expectedPatterns)
+      || ParamUtils.addDynamicAttribute(uri, localName, value, expectedPatterns, this);
+  }
 
-	private void init() {
-		action = null;
-		enctype = null;
-		method = null;
-		params = null;
-		target = null;
-		onsubmit = null;
-	}
+  private void init() {
+    action = null;
+    enctype = null;
+    method = null;
+    params = null;
+    target = null;
+    onsubmit = null;
+  }
 
-	@Override
+  @Override
 /* BodyTag only: */
-	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+  protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
 /* SimpleTag only:
-	protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-		PageContext pageContext = (PageContext)getJspContext();
+  protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+    PageContext pageContext = (PageContext)getJspContext();
 /**/
-		HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
-		HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
-		DocumentEE document = new DocumentEE(
-			pageContext.getServletContext(),
-			request,
-			response,
-			out,
-			false, // Do not add extra newlines to JSP
-			false  // Do not add extra indentation to JSP
-		);
-		Doctype doctype = document.encodingContext.getDoctype();
-		out.write("<form");
-		GlobalAttributesUtils.writeGlobalAttributes(global, out);
-		Map<String, List<String>> actionParams;
-		if(action != null) {
-			out.write(" action=\"");
-			String encodedAction = URIResolver.getAbsolutePath(Dispatcher.getCurrentPagePath(request), action);
-			if(encodedAction.startsWith("/")) {
-				String contextPath = request.getContextPath();
-				if(!contextPath.isEmpty()) encodedAction = contextPath + encodedAction;
-			}
-			encodedAction = response.encodeURL(URIEncoder.encodeURI(encodedAction));
-			// The action attribute is everything up to the first question mark
-			AnyURI actionURI = new AnyURI(encodedAction);
-			actionParams = URIParametersUtils.of(actionURI.getQueryString()).getParameterMap();
-			textInXhtmlAttributeEncoder.write(actionURI.setQueryString(null).toString(), out);
-			out.append('"');
-		} else {
-			if(doctype != Doctype.HTML5) {
-				// Action required before HTML 5
-				out.write(" action=\"\"");
-			}
-			actionParams = null;
-		}
-		if(enctype != null) {
-			out.write(" enctype=\"");
-			encodeTextInXhtmlAttribute(enctype, out);
-			out.append('"');
-		}
-		if(method != null) {
-			out.write(" method=\"");
-			out.write(method);
-			out.append('"');
-		}
-		if(target != null) {
-			out.write(" target=\"");
-			encodeTextInXhtmlAttribute(target, out);
-			out.append('"');
-		}
-		if(onsubmit != null) {
-			out.write(" onsubmit=\"");
-			MarkupCoercion.write(
-				onsubmit,
-				MarkupType.JAVASCRIPT,
-				true,
-				javascriptInXhtmlAttributeEncoder,
-				false,
-				out
-			);
-			out.append('"');
-		}
-		out.append('>');
-		// Automatically add URL request parameters as hidden fields to support custom URL rewritten parameters in GET requests.
-		boolean didDiv = false;
-		if(actionParams != null && !actionParams.isEmpty()) {
-			for(Map.Entry<String, List<String>> entry : actionParams.entrySet()) {
-				if(!didDiv && doctype != Doctype.HTML5) {
-					out.write("<div>\n");
-					didDiv = true;
-				}
-				String name = entry.getKey();
-				for(String value : entry.getValue()) {
-					document.input().hidden().name(name).value(value).__().autoNl();
-				}
-			}
-		}
-		// Write any parameters as hidden fields
-		if(params != null) {
-			for(Map.Entry<String, List<String>> entry : params.getParameterMap().entrySet()) {
-				if(!didDiv && doctype != Doctype.HTML5) {
-					out.write("<div>\n");
-					didDiv = true;
-				}
-				String name = entry.getKey();
-				List<String> paramValues = entry.getValue();
-				assert !paramValues.isEmpty();
-				for(String paramValue : paramValues) {
-					document.input().hidden().name(name).value(paramValue).__().autoNl();
-				}
-			}
-		}
-		if(didDiv) out.write("</div>");
-		MarkupCoercion.write(
-			capturedBody,
-			MarkupType.XHTML,
-			out,
-			true
-		);
-		out.write("</form>");
+    HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
+    HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
+    DocumentEE document = new DocumentEE(
+      pageContext.getServletContext(),
+      request,
+      response,
+      out,
+      false, // Do not add extra newlines to JSP
+      false  // Do not add extra indentation to JSP
+    );
+    Doctype doctype = document.encodingContext.getDoctype();
+    out.write("<form");
+    GlobalAttributesUtils.writeGlobalAttributes(global, out);
+    Map<String, List<String>> actionParams;
+    if (action != null) {
+      out.write(" action=\"");
+      String encodedAction = URIResolver.getAbsolutePath(Dispatcher.getCurrentPagePath(request), action);
+      if (encodedAction.startsWith("/")) {
+        String contextPath = request.getContextPath();
+        if (!contextPath.isEmpty()) {
+          encodedAction = contextPath + encodedAction;
+        }
+      }
+      encodedAction = response.encodeURL(URIEncoder.encodeURI(encodedAction));
+      // The action attribute is everything up to the first question mark
+      AnyURI actionURI = new AnyURI(encodedAction);
+      actionParams = URIParametersUtils.of(actionURI.getQueryString()).getParameterMap();
+      textInXhtmlAttributeEncoder.write(actionURI.setQueryString(null).toString(), out);
+      out.append('"');
+    } else {
+      if (doctype != Doctype.HTML5) {
+        // Action required before HTML 5
+        out.write(" action=\"\"");
+      }
+      actionParams = null;
+    }
+    if (enctype != null) {
+      out.write(" enctype=\"");
+      encodeTextInXhtmlAttribute(enctype, out);
+      out.append('"');
+    }
+    if (method != null) {
+      out.write(" method=\"");
+      out.write(method);
+      out.append('"');
+    }
+    if (target != null) {
+      out.write(" target=\"");
+      encodeTextInXhtmlAttribute(target, out);
+      out.append('"');
+    }
+    if (onsubmit != null) {
+      out.write(" onsubmit=\"");
+      MarkupCoercion.write(
+        onsubmit,
+        MarkupType.JAVASCRIPT,
+        true,
+        javascriptInXhtmlAttributeEncoder,
+        false,
+        out
+      );
+      out.append('"');
+    }
+    out.append('>');
+    // Automatically add URL request parameters as hidden fields to support custom URL rewritten parameters in GET requests.
+    boolean didDiv = false;
+    if (actionParams != null && !actionParams.isEmpty()) {
+      for (Map.Entry<String, List<String>> entry : actionParams.entrySet()) {
+        if (!didDiv && doctype != Doctype.HTML5) {
+          out.write("<div>\n");
+          didDiv = true;
+        }
+        String name = entry.getKey();
+        for (String value : entry.getValue()) {
+          document.input().hidden().name(name).value(value).__().autoNl();
+        }
+      }
+    }
+    // Write any parameters as hidden fields
+    if (params != null) {
+      for (Map.Entry<String, List<String>> entry : params.getParameterMap().entrySet()) {
+        if (!didDiv && doctype != Doctype.HTML5) {
+          out.write("<div>\n");
+          didDiv = true;
+        }
+        String name = entry.getKey();
+        List<String> paramValues = entry.getValue();
+        assert !paramValues.isEmpty();
+        for (String paramValue : paramValues) {
+          document.input().hidden().name(name).value(paramValue).__().autoNl();
+        }
+      }
+    }
+    if (didDiv) {
+      out.write("</div>");
+    }
+    MarkupCoercion.write(
+      capturedBody,
+      MarkupType.XHTML,
+      out,
+      true
+    );
+    out.write("</form>");
 /* BodyTag only: */
-		return EVAL_PAGE;
+    return EVAL_PAGE;
 /**/
-	}
+  }
 
 /* BodyTag only: */
-	@Override
-	public void doFinally() {
-		try {
-			init();
-		} finally {
-			super.doFinally();
-		}
-	}
+  @Override
+  public void doFinally() {
+    try {
+      init();
+    } finally {
+      super.doFinally();
+    }
+  }
 /**/
 }

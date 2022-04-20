@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface MessageArgsAttribute {
 
-	void addMessageArg(Object value);
+  void addMessageArg(Object value);
 }

@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface OnfocusAttribute {
 
-	void setOnfocus(Object onfocus);
+  void setOnfocus(Object onfocus);
 }

@@ -32,13 +32,13 @@ import com.aoapps.html.any.attributes.Text.Data;
  */
 public interface DataAttribute {
 
-	/**
-	 * Adds the data with the provided HTML attribute name and value, replacing any attribute that already exists.
-	 * When value is {@code null}, will remove an existing attribute.
-	 *
-	 * @throws  IllegalArgumentException  When {@code attrName} is not {@linkplain Data.data#validate(java.lang.String) valid}
-	 *
-	 * @see  MutableGlobalAttributes#addData(java.lang.String, java.lang.Object)
-	 */
-	void addData(String attrName, Object value) throws IllegalArgumentException;
+  /**
+   * Adds the data with the provided HTML attribute name and value, replacing any attribute that already exists.
+   * When value is {@code null}, will remove an existing attribute.
+   *
+   * @throws  IllegalArgumentException  When {@code attrName} is not {@linkplain Data.data#validate(java.lang.String) valid}
+   *
+   * @see  MutableGlobalAttributes#addData(java.lang.String, java.lang.Object)
+   */
+  void addData(String attrName, Object value) throws IllegalArgumentException;
 }

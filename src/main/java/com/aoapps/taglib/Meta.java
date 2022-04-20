@@ -32,72 +32,72 @@ import com.aoapps.lang.NullArgumentException;
  */
 public class Meta {
 
-	private final GlobalAttributes global;
-	private final String name;
-	private final String httpEquiv;
-	private final String itemprop;
-	private final String charset;
-	private final String content;
+  private final GlobalAttributes global;
+  private final String name;
+  private final String httpEquiv;
+  private final String itemprop;
+  private final String charset;
+  private final String content;
 
-	public Meta(
-		GlobalAttributes global,
-		String name,
-		String httpEquiv,
-		String itemprop,
-		String charset,
-		String content
-	) {
-		this.global = global;
-		this.name = name;
-		this.httpEquiv = httpEquiv;
-		this.itemprop = itemprop;
-		this.charset = charset;
-		this.content = NullArgumentException.checkNotNull(content, "content");
-	}
+  public Meta(
+    GlobalAttributes global,
+    String name,
+    String httpEquiv,
+    String itemprop,
+    String charset,
+    String content
+  ) {
+    this.global = global;
+    this.name = name;
+    this.httpEquiv = httpEquiv;
+    this.itemprop = itemprop;
+    this.charset = charset;
+    this.content = NullArgumentException.checkNotNull(content, "content");
+  }
 
-	/**
-	 * @deprecated  Please use {@link #Meta(com.aoapps.taglib.GlobalAttributes, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)}
-	 */
-	@Deprecated
-	public Meta(
-		String name,
-		String httpEquiv,
-		String itemprop,
-		String charset,
-		String content
-	) {
-		this(
-			ImmutableGlobalAttributes.EMPTY,
-			name,
-			httpEquiv,
-			itemprop,
-			charset,
-			content
-		);
-	}
+  /**
+   * @deprecated  Please use {@link #Meta(com.aoapps.taglib.GlobalAttributes, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)}
+   */
+  @Deprecated
+  public Meta(
+    String name,
+    String httpEquiv,
+    String itemprop,
+    String charset,
+    String content
+  ) {
+    this(
+      ImmutableGlobalAttributes.EMPTY,
+      name,
+      httpEquiv,
+      itemprop,
+      charset,
+      content
+    );
+  }
 
-	public GlobalAttributes getGlobal() {
-		return global;
-	}
+  public GlobalAttributes getGlobal() {
+    return global;
+  }
 
-	public String getName() {
-		return name;
-	}
+  public String getName() {
+    return name;
+  }
 
-	public String getHttpEquiv() {
-		return httpEquiv;
-	}
+  public String getHttpEquiv() {
+    return httpEquiv;
+  }
 
-	// TODO: Move to GlobalAttributes (or AlmostGlobalAttributes)
-	public String getItemprop() {
-		return itemprop;
-	}
+  // TODO: Move to GlobalAttributes (or AlmostGlobalAttributes)
+  public String getItemprop() {
+    return itemprop;
+  }
 
-	public String getCharset() {
-		return charset;
-	}
+  public String getCharset() {
+    return charset;
+  }
 
-	public String getContent() {
-		return content;
-	}
+  public String getContent() {
+    return content;
+  }
 }

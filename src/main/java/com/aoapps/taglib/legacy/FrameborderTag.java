@@ -41,41 +41,45 @@ import javax.servlet.jsp.JspException;
 public class FrameborderTag extends EncodingBufferedBodyTag {
 
 /* SimpleTag only:
-	public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, FrameborderTag.class);
+  public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, FrameborderTag.class);
 
-	public static final String TAG_NAME = "<ao:frameborder>";
+  public static final String TAG_NAME = "<ao:frameborder>";
 /**/
 
-	@Override
-	public MediaType getContentType() {
-		return MediaType.TEXT;
-	}
+  @Override
+  public MediaType getContentType() {
+    return MediaType.TEXT;
+  }
 
-	@Override
-	public MediaType getOutputType() {
-		return null;
-	}
+  @Override
+  public MediaType getOutputType() {
+    return null;
+  }
 
 /* BodyTag only: */
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 /**/
 
-	@Override
+  @Override
 /* BodyTag only: */
-	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+  protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
 /* SimpleTag only:
-	protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+  protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
-		FrameborderAttribute frameborderAttribute = AttributeUtils.requireAttributeParent(TAG_NAME, this, "frameborder", FrameborderAttribute.class);
-		String value = capturedBody.trim().toString();
-		if(!value.isEmpty()) {
-			if("true".equalsIgnoreCase(value)) frameborderAttribute.setFrameborder(true);
-			else if("false".equalsIgnoreCase(value)) frameborderAttribute.setFrameborder(false);
-			else throw new LocalizedJspTagException(RESOURCES, "invalidValue", value);
-		}
+    FrameborderAttribute frameborderAttribute = AttributeUtils.requireAttributeParent(TAG_NAME, this, "frameborder", FrameborderAttribute.class);
+    String value = capturedBody.trim().toString();
+    if (!value.isEmpty()) {
+      if ("true".equalsIgnoreCase(value)) {
+        frameborderAttribute.setFrameborder(true);
+      } else if ("false".equalsIgnoreCase(value)) {
+        frameborderAttribute.setFrameborder(false);
+      } else {
+        throw new LocalizedJspTagException(RESOURCES, "invalidValue", value);
+      }
+    }
 /* BodyTag only: */
-		return EVAL_PAGE;
+    return EVAL_PAGE;
 /**/
-	}
+  }
 }

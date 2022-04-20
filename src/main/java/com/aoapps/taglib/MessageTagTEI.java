@@ -35,47 +35,47 @@ import javax.servlet.jsp.tagext.ValidationMessage;
  */
 public class MessageTagTEI extends TagExtraInfo {
 
-	@Override
-	public ValidationMessage[] validate(TagData data) {
-		List<ValidationMessage> messages = MinimalList.emptyList();
-		messages = com.aoapps.encoding.taglib.TeiUtils.validateMediaType(data, messages);
+  @Override
+  public ValidationMessage[] validate(TagData data) {
+    List<ValidationMessage> messages = MinimalList.emptyList();
+    messages = com.aoapps.encoding.taglib.TeiUtils.validateMediaType(data, messages);
 
-		// Currently, in servlet 2.5 Tomcat 7, the dynamic attributes are not given to the TagExtraInfo class for validation.
-		// Leaving this logic here just in case a future version of the spec supports this for compile-time validation of attribute names.
-		Enumeration<String> attributeNames = data.getAttributes();
-		while(attributeNames.hasMoreElements()) {
-			String attributeName = attributeNames.nextElement();
-			if(
-				// Standard attribute names
-				!"bundle".equals(attributeName)
-				&& !"key".equals(attributeName)
-				&& !"type".equals(attributeName)
-			) {
-				// Dynamic "arg#" attributes (along with arg0 through arg3 that are standard for code assist only)
-				boolean isArg = false;
-				if(attributeName.startsWith("arg")) {
-					try {
-						String numSubstring = attributeName.substring(3);
-						// Do not allow "arg00" in place of "arg0"
-						int index = Integer.parseInt(numSubstring);
-						if(numSubstring.equals(Integer.toString(index))) {
-							// All OK
-							isArg = true;
-						}
-					} catch(NumberFormatException e) {
-						// isArg remains false
-					}
-				}
-				if(!isArg) {
-					messages = MinimalList.add(messages,
-						new ValidationMessage(
-							data.getId(),
-							AttributeUtils.RESOURCES.getMessage("unexpectedDynamicAttribute1", attributeName, "arg*")
-						)
-					);
-				}
-			}
-		}
-		return messages.isEmpty() ? null : messages.toArray(new ValidationMessage[messages.size()]);
-	}
+    // Currently, in servlet 2.5 Tomcat 7, the dynamic attributes are not given to the TagExtraInfo class for validation.
+    // Leaving this logic here just in case a future version of the spec supports this for compile-time validation of attribute names.
+    Enumeration<String> attributeNames = data.getAttributes();
+    while (attributeNames.hasMoreElements()) {
+      String attributeName = attributeNames.nextElement();
+      if (
+        // Standard attribute names
+        !"bundle".equals(attributeName)
+        && !"key".equals(attributeName)
+        && !"type".equals(attributeName)
+      ) {
+        // Dynamic "arg#" attributes (along with arg0 through arg3 that are standard for code assist only)
+        boolean isArg = false;
+        if (attributeName.startsWith("arg")) {
+          try {
+            String numSubstring = attributeName.substring(3);
+            // Do not allow "arg00" in place of "arg0"
+            int index = Integer.parseInt(numSubstring);
+            if (numSubstring.equals(Integer.toString(index))) {
+              // All OK
+              isArg = true;
+            }
+          } catch (NumberFormatException e) {
+            // isArg remains false
+          }
+        }
+        if (!isArg) {
+          messages = MinimalList.add(messages,
+            new ValidationMessage(
+              data.getId(),
+              AttributeUtils.RESOURCES.getMessage("unexpectedDynamicAttribute1", attributeName, "arg*")
+            )
+          );
+        }
+      }
+    }
+    return messages.isEmpty() ? null : messages.toArray(new ValidationMessage[messages.size()]);
+  }
 }

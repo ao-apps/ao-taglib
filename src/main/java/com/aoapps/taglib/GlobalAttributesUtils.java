@@ -44,165 +44,173 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  */
 public final class GlobalAttributesUtils {
 
-	/** Make no instances. */
-	private GlobalAttributesUtils() {throw new AssertionError();}
+  /** Make no instances. */
+  private GlobalAttributesUtils() {
+    throw new AssertionError();
+  }
 
-	/**
-	 * The prefix for <code>dataset.*</code> dynamic attributes.
-	 */
-	public static final String DATASET_ATTRIBUTE_PREFIX = "dataset.";
+  /**
+   * The prefix for <code>dataset.*</code> dynamic attributes.
+   */
+  public static final String DATASET_ATTRIBUTE_PREFIX = "dataset.";
 
-	/**
-	 * Adds the <code>data-*</code> and <code>dataset.*</code> {@linkplain DynamicAttributes dynamic attributes}.
-	 *
-	 * @return  {@code true} when added, or {@code false} when attribute not expected and has not been added.
-	 *
-	 * @see  DynamicAttributes#setDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object)
-	 */
-	@SuppressWarnings({"UseSpecificCatch", "TooBroadCatch"})
-	public static boolean addDynamicAttribute(String uri, String localName, Object value, List<String> expectedPatterns, MutableGlobalAttributes global) throws JspTagException {
-		try {
-			if(localName.startsWith(Data.data.ATTRIBUTE_PREFIX)) {
-				global.addData(localName, value);
-				return true;
-			} else if(localName.startsWith(DATASET_ATTRIBUTE_PREFIX)) {
-				global.addData(
-					Data.dataset.toAttrName(
-						localName.substring(DATASET_ATTRIBUTE_PREFIX.length())
-					),
-					value
-				);
-				return true;
-			} else {
-				expectedPatterns.add(Data.data.ATTRIBUTE_PREFIX + "*");
-				expectedPatterns.add(GlobalAttributesUtils.DATASET_ATTRIBUTE_PREFIX + "*");
-				return false;
-			}
-		} catch(Throwable t) {
-			throw Throwables.wrap(t, JspTagException.class, JspTagException::new);
-		}
-	}
+  /**
+   * Adds the <code>data-*</code> and <code>dataset.*</code> {@linkplain DynamicAttributes dynamic attributes}.
+   *
+   * @return  {@code true} when added, or {@code false} when attribute not expected and has not been added.
+   *
+   * @see  DynamicAttributes#setDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object)
+   */
+  @SuppressWarnings({"UseSpecificCatch", "TooBroadCatch"})
+  public static boolean addDynamicAttribute(String uri, String localName, Object value, List<String> expectedPatterns, MutableGlobalAttributes global) throws JspTagException {
+    try {
+      if (localName.startsWith(Data.data.ATTRIBUTE_PREFIX)) {
+        global.addData(localName, value);
+        return true;
+      } else if (localName.startsWith(DATASET_ATTRIBUTE_PREFIX)) {
+        global.addData(
+          Data.dataset.toAttrName(
+            localName.substring(DATASET_ATTRIBUTE_PREFIX.length())
+          ),
+          value
+        );
+        return true;
+      } else {
+        expectedPatterns.add(Data.data.ATTRIBUTE_PREFIX + "*");
+        expectedPatterns.add(GlobalAttributesUtils.DATASET_ATTRIBUTE_PREFIX + "*");
+        return false;
+      }
+    } catch (Throwable t) {
+      throw Throwables.wrap(t, JspTagException.class, JspTagException::new);
+    }
+  }
 
-	/**
-	 * Copies all global attributes.
-	 */
-	public static void copy(GlobalAttributes from, GlobalBufferedAttributes to) {
-		to.setId(from.getId());
-		to.setClazz(from.getClazz());
-		to.setData(from.getData());
-		to.setDir(from.getDir());
-		to.setStyle(from.getStyle());
-	}
+  /**
+   * Copies all global attributes.
+   */
+  public static void copy(GlobalAttributes from, GlobalBufferedAttributes to) {
+    to.setId(from.getId());
+    to.setClazz(from.getClazz());
+    to.setData(from.getData());
+    to.setDir(from.getDir());
+    to.setStyle(from.getStyle());
+  }
 
-	public static <G extends com.aoapps.html.any.GlobalAttributes<?>> G doGlobalAttributes(GlobalAttributes from, G to) throws IOException {
-		// TODO: normalize, then only throw when non-empty/null.  Here and other attributes.
-		// TODO: Once that is done, just do like before:
-		// to
-		//	.id(from.getId())
-		//	.clazz(from.getClazz());
-		// id is not valid in all doctypes
-		String id = from.getId();
-		if(id != null) to.id(id);
-		// class is not valid in all doctypes
-		String clazz = from.getClazz();
-		if(clazz != null) to.clazz(clazz);
-		for(Map.Entry<String, Object> entry : from.getData().entrySet()) {
-			to.data(entry.getKey(), entry.getValue());
-		}
-		// TODO: Once that is done, just do like before:
-		// to
-		//	.dir(from.getDir())
-		//	.style(from.getStyle());
-		to.dir(from.getDir());
-		// style is not valid in all doctypes
-		Object style = Coercion.trimNullIfEmpty(from.getStyle());
-		if(style != null) to.style(style);
-		return to;
-	}
+  public static <G extends com.aoapps.html.any.GlobalAttributes<?>> G doGlobalAttributes(GlobalAttributes from, G to) throws IOException {
+    // TODO: normalize, then only throw when non-empty/null.  Here and other attributes.
+    // TODO: Once that is done, just do like before:
+    // to
+    //  .id(from.getId())
+    //  .clazz(from.getClazz());
+    // id is not valid in all doctypes
+    String id = from.getId();
+    if (id != null) {
+      to.id(id);
+    }
+    // class is not valid in all doctypes
+    String clazz = from.getClazz();
+    if (clazz != null) {
+      to.clazz(clazz);
+    }
+    for (Map.Entry<String, Object> entry : from.getData().entrySet()) {
+      to.data(entry.getKey(), entry.getValue());
+    }
+    // TODO: Once that is done, just do like before:
+    // to
+    //  .dir(from.getDir())
+    //  .style(from.getStyle());
+    to.dir(from.getDir());
+    // style is not valid in all doctypes
+    Object style = Coercion.trimNullIfEmpty(from.getStyle());
+    if (style != null) {
+      to.style(style);
+    }
+    return to;
+  }
 
-	// TODO: Doctype constraints in id, class, and style like on by ao-fluent-html via doGlobalAttributes?
-	public static void writeGlobalAttributes(GlobalAttributes global, Writer out) throws IOException {
-		String id = global.getId();
-		if(id != null) {
-			out.write(" id=\"");
-			encodeTextInXhtmlAttribute(id, out);
-			out.append('"');
-		}
-		String clazz = global.getClazz();
-		if(clazz != null) {
-			out.write(" class=\"");
-			encodeTextInXhtmlAttribute(clazz, out);
-			out.append('"');
-		}
-		for(Map.Entry<String, Object> entry : global.getData().entrySet()) {
-			String attrName = entry.getKey();
-			assert Data.data.validate(attrName).isValid();
-			out.append(' ').write(attrName);
-			out.write("=\"");
-			encodeTextInXhtmlAttribute(entry.getValue(), out);
-			out.append('"');
-		}
-		String dir = global.getDir();
-		if(dir != null) {
-			out.write(" dir=\"");
-			encodeTextInXhtmlAttribute(dir, out);
-			out.append('"');
-		}
-		Object style = Coercion.trimNullIfEmpty(global.getStyle());
-		if(style != null) {
-			out.write(" style=\"");
-			MarkupCoercion.write(
-				style,
-				MarkupType.CSS,
-				true,
-				styleInXhtmlAttributeEncoder,
-				false,
-				out
-			);
-			out.append('"');
-		}
-	}
+  // TODO: Doctype constraints in id, class, and style like on by ao-fluent-html via doGlobalAttributes?
+  public static void writeGlobalAttributes(GlobalAttributes global, Writer out) throws IOException {
+    String id = global.getId();
+    if (id != null) {
+      out.write(" id=\"");
+      encodeTextInXhtmlAttribute(id, out);
+      out.append('"');
+    }
+    String clazz = global.getClazz();
+    if (clazz != null) {
+      out.write(" class=\"");
+      encodeTextInXhtmlAttribute(clazz, out);
+      out.append('"');
+    }
+    for (Map.Entry<String, Object> entry : global.getData().entrySet()) {
+      String attrName = entry.getKey();
+      assert Data.data.validate(attrName).isValid();
+      out.append(' ').write(attrName);
+      out.write("=\"");
+      encodeTextInXhtmlAttribute(entry.getValue(), out);
+      out.append('"');
+    }
+    String dir = global.getDir();
+    if (dir != null) {
+      out.write(" dir=\"");
+      encodeTextInXhtmlAttribute(dir, out);
+      out.append('"');
+    }
+    Object style = Coercion.trimNullIfEmpty(global.getStyle());
+    if (style != null) {
+      out.write(" style=\"");
+      MarkupCoercion.write(
+        style,
+        MarkupType.CSS,
+        true,
+        styleInXhtmlAttributeEncoder,
+        false,
+        out
+      );
+      out.append('"');
+    }
+  }
 
-	public static void appendGlobalAttributes(GlobalAttributes global, Appendable out) throws IOException {
-		String id = global.getId();
-		if(id != null) {
-			out.append(" id=\"");
-			encodeTextInXhtmlAttribute(id, out);
-			out.append('"');
-		}
-		String clazz = global.getClazz();
-		if(clazz != null) {
-			out.append(" class=\"");
-			encodeTextInXhtmlAttribute(clazz, out);
-			out.append('"');
-		}
-		for(Map.Entry<String, Object> entry : global.getData().entrySet()) {
-			out.append(' ');
-			String attrName = entry.getKey();
-			assert Data.data.validate(attrName).isValid();
-			out.append(attrName);
-			out.append("=\"");
-			encodeTextInXhtmlAttribute(entry.getValue(), out);
-			out.append('"');
-		}
-		String dir = global.getDir();
-		if(dir != null) {
-			out.append(" dir=\"");
-			encodeTextInXhtmlAttribute(dir, out);
-			out.append('"');
-		}
-		Object style = Coercion.trimNullIfEmpty(global.getStyle());
-		if(style != null) {
-			out.append(" style=\"");
-			MarkupCoercion.append(
-				style,
-				MarkupType.CSS,
-				true,
-				styleInXhtmlAttributeEncoder,
-				false,
-				out
-			);
-			out.append('"');
-		}
-	}
+  public static void appendGlobalAttributes(GlobalAttributes global, Appendable out) throws IOException {
+    String id = global.getId();
+    if (id != null) {
+      out.append(" id=\"");
+      encodeTextInXhtmlAttribute(id, out);
+      out.append('"');
+    }
+    String clazz = global.getClazz();
+    if (clazz != null) {
+      out.append(" class=\"");
+      encodeTextInXhtmlAttribute(clazz, out);
+      out.append('"');
+    }
+    for (Map.Entry<String, Object> entry : global.getData().entrySet()) {
+      out.append(' ');
+      String attrName = entry.getKey();
+      assert Data.data.validate(attrName).isValid();
+      out.append(attrName);
+      out.append("=\"");
+      encodeTextInXhtmlAttribute(entry.getValue(), out);
+      out.append('"');
+    }
+    String dir = global.getDir();
+    if (dir != null) {
+      out.append(" dir=\"");
+      encodeTextInXhtmlAttribute(dir, out);
+      out.append('"');
+    }
+    Object style = Coercion.trimNullIfEmpty(global.getStyle());
+    if (style != null) {
+      out.append(" style=\"");
+      MarkupCoercion.append(
+        style,
+        MarkupType.CSS,
+        true,
+        styleInXhtmlAttributeEncoder,
+        false,
+        out
+      );
+      out.append('"');
+    }
+  }
 }

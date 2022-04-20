@@ -34,38 +34,38 @@ import java.beans.SimpleBeanInfo;
  */
 public class ElementFilteredTagBeanInfo extends SimpleBeanInfo {
 
-	private static final PropertyDescriptor[] properties;
-	static {
-		try {
-			properties = new PropertyDescriptor[] {
-				new PropertyDescriptor("id",    ElementFilteredTag.class, "getId",    "setId"),
-				new PropertyDescriptor("class", ElementFilteredTag.class, "getClazz", "setClazz"),
-				new PropertyDescriptor("data",  ElementFilteredTag.class, "getData",  null),
-				new PropertyDescriptor("dir",   ElementFilteredTag.class, "getDir",   "setDir"),
-				new PropertyDescriptor("style", ElementFilteredTag.class, "getStyle", "setStyle"),
-			};
-		} catch(IntrospectionException err) {
-			throw new ExceptionInInitializerError(err);
-		}
-	}
+  private static final PropertyDescriptor[] properties;
+  static {
+    try {
+      properties = new PropertyDescriptor[] {
+        new PropertyDescriptor("id",    ElementFilteredTag.class, "getId",    "setId"),
+        new PropertyDescriptor("class", ElementFilteredTag.class, "getClazz", "setClazz"),
+        new PropertyDescriptor("data",  ElementFilteredTag.class, "getData",  null),
+        new PropertyDescriptor("dir",   ElementFilteredTag.class, "getDir",   "setDir"),
+        new PropertyDescriptor("style", ElementFilteredTag.class, "getStyle", "setStyle"),
+      };
+    } catch (IntrospectionException err) {
+      throw new ExceptionInInitializerError(err);
+    }
+  }
 
-	@Override
-	@SuppressWarnings("ReturnOfCollectionOrArrayField") // Not copying array for performance
-	public PropertyDescriptor[] getPropertyDescriptors () {
-		return properties;
-	}
+  @Override
+  @SuppressWarnings("ReturnOfCollectionOrArrayField") // Not copying array for performance
+  public PropertyDescriptor[] getPropertyDescriptors () {
+    return properties;
+  }
 
-	/**
-	 * Include base class.
-	 */
-	@Override
-	public BeanInfo[] getAdditionalBeanInfo() {
-		try {
-			return new BeanInfo[] {
-				Introspector.getBeanInfo(ElementFilteredTag.class.getSuperclass())
-			};
-		} catch(IntrospectionException err) {
-			throw new AssertionError(err);
-		}
-	}
+  /**
+   * Include base class.
+   */
+  @Override
+  public BeanInfo[] getAdditionalBeanInfo() {
+    try {
+      return new BeanInfo[] {
+        Introspector.getBeanInfo(ElementFilteredTag.class.getSuperclass())
+      };
+    } catch (IntrospectionException err) {
+      throw new AssertionError(err);
+    }
+  }
 }

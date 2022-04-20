@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface OnblurAttribute {
 
-	void setOnblur(Object onblur);
+  void setOnblur(Object onblur);
 }

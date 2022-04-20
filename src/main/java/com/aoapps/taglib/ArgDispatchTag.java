@@ -41,60 +41,62 @@ import javax.servlet.jsp.JspTagException;
  */
 // TODO: ArgDispatchBodyTag and ArgDispatchSimpleTag?
 abstract class ArgDispatchTag extends DispatchTag
-	implements ArgsAttribute
+  implements ArgsAttribute
 {
 
-	private static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, ArgDispatchTag.class);
+  private static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, ArgDispatchTag.class);
 
-	/**
-	 * The prefix for argument attributes.
-	 */
-	private static final String ARG_ATTRIBUTE_PREFIX = Dispatcher.ARG_REQUEST_ATTRIBUTE.getName() + ".";
+  /**
+   * The prefix for argument attributes.
+   */
+  private static final String ARG_ATTRIBUTE_PREFIX = Dispatcher.ARG_REQUEST_ATTRIBUTE.getName() + ".";
 
-	private WildcardPatternMatcher clearParamsMatcher = WildcardPatternMatcher.matchNone();
-	private Map<String, Object> args;
+  private WildcardPatternMatcher clearParamsMatcher = WildcardPatternMatcher.matchNone();
+  private Map<String, Object> args;
 
-	public void setClearParams(String clearParams) {
-		this.clearParamsMatcher = WildcardPatternMatcher.compile(clearParams);
-	}
+  public void setClearParams(String clearParams) {
+    this.clearParamsMatcher = WildcardPatternMatcher.compile(clearParams);
+  }
 
-	@Override
-	protected WildcardPatternMatcher getClearParamsMatcher() {
-		return clearParamsMatcher;
-	}
+  @Override
+  protected WildcardPatternMatcher getClearParamsMatcher() {
+    return clearParamsMatcher;
+  }
 
-	@Override
-	protected Map<String, ?> getArgs() {
-		if(args==null) return Collections.emptyMap();
-		return Collections.unmodifiableMap(args);
-	}
+  @Override
+  protected Map<String, ?> getArgs() {
+    if (args == null) {
+      return Collections.emptyMap();
+    }
+    return Collections.unmodifiableMap(args);
+  }
 
-	@Override
-	public void addArg(String name, Object value) {
-		if(args==null) {
-			args = new LinkedHashMap<>();
-		} else if(args.containsKey(name)) {
-			throw new LocalizedIllegalArgumentException(RESOURCES, "addArg.duplicateArgument", name);
-		}
-		args.put(name, value);
-	}
+  @Override
+  public void addArg(String name, Object value) {
+    if (args == null) {
+      args = new LinkedHashMap<>();
+    } else if (args.containsKey(name)) {
+      throw new LocalizedIllegalArgumentException(RESOURCES, "addArg.duplicateArgument", name);
+    }
+    args.put(name, value);
+  }
 
-	/**
-	 * @see  #addArg(java.lang.String, java.lang.Object)
-	 */
-	@Override
-	protected boolean addDynamicAttribute(String uri, String localName, Object value, List<String> expectedPatterns) throws JspTagException {
-		if(super.addDynamicAttribute(uri, localName, value, expectedPatterns)) {
-			return true;
-		} else if(
-			uri == null
-			&& localName.startsWith(ARG_ATTRIBUTE_PREFIX)
-		) {
-			addArg(localName.substring(ARG_ATTRIBUTE_PREFIX.length()), value);
-			return true;
-		} else {
-			expectedPatterns.add(ARG_ATTRIBUTE_PREFIX + "*");
-			return false;
-		}
-	}
+  /**
+   * @see  #addArg(java.lang.String, java.lang.Object)
+   */
+  @Override
+  protected boolean addDynamicAttribute(String uri, String localName, Object value, List<String> expectedPatterns) throws JspTagException {
+    if (super.addDynamicAttribute(uri, localName, value, expectedPatterns)) {
+      return true;
+    } else if (
+      uri == null
+      && localName.startsWith(ARG_ATTRIBUTE_PREFIX)
+    ) {
+      addArg(localName.substring(ARG_ATTRIBUTE_PREFIX.length()), value);
+      return true;
+    } else {
+      expectedPatterns.add(ARG_ATTRIBUTE_PREFIX + "*");
+      return false;
+    }
+  }
 }

@@ -38,54 +38,54 @@ import javax.servlet.jsp.JspException;
  */
 public class WordWrapTag extends EncodingBufferedTag {
 
-	public WordWrapTag() {
-		init();
-	}
+  public WordWrapTag() {
+    init();
+  }
 
-	@Override
-	public MediaType getContentType() {
-		return MediaType.TEXT;
-	}
+  @Override
+  public MediaType getContentType() {
+    return MediaType.TEXT;
+  }
 
-	@Override
-	public MediaType getOutputType() {
-		return MediaType.TEXT;
-	}
+  @Override
+  public MediaType getOutputType() {
+    return MediaType.TEXT;
+  }
 
 /* BodyTag only:
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 /**/
 
-	private int width;
-	public void setWidth(int width) {
-		this.width = width;
-	}
+  private int width;
+  public void setWidth(int width) {
+    this.width = width;
+  }
 
-	private void init() {
-		width = 79;
-	}
+  private void init() {
+    width = 79;
+  }
 
-	@Override
+  @Override
 /* BodyTag only:
-	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+  protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
 /* SimpleTag only: */
-	protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+  protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
-		Strings.wordWrap(capturedBody.toString(), width, out);
+    Strings.wordWrap(capturedBody.toString(), width, out);
 /* BodyTag only:
-		return EVAL_PAGE;
+    return EVAL_PAGE;
 /**/
-	}
+  }
 
 /* BodyTag only:
-	@Override
-	public void doFinally() {
-		try {
-			init();
-		} finally {
-			super.doFinally();
-		}
-	}
+  @Override
+  public void doFinally() {
+    try {
+      init();
+    } finally {
+      super.doFinally();
+    }
+  }
 /**/
 }

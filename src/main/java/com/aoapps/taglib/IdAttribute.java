@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface IdAttribute {
 
-	void setId(String id);
+  void setId(String id);
 }

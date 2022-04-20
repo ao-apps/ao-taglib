@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface AltAttribute {
 
-	void setAlt(Object alt);
+  void setAlt(Object alt);
 }

@@ -33,18 +33,18 @@ import javax.servlet.jsp.tagext.TagSupport;
  */
 public class OtherwiseTag extends TagSupport {
 
-	public static final String TAG_NAME = "<ao:otherwise>";
+  public static final String TAG_NAME = "<ao:otherwise>";
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	@Override
-	public int doStartTag() throws JspException {
-		JspTag parent = getParent();
-		if(!(parent instanceof ChooseTag)) {
-			throw new JspTagException(TAG_NAME + " must be directly nested within " + ChooseTag.TAG_NAME);
-		}
-		ChooseTag chooseTag = (ChooseTag)parent;
-		chooseTag.onOtherwise();
-		return chooseTag.getMatched() ? SKIP_BODY : EVAL_BODY_INCLUDE;
-	}
+  @Override
+  public int doStartTag() throws JspException {
+    JspTag parent = getParent();
+    if (!(parent instanceof ChooseTag)) {
+      throw new JspTagException(TAG_NAME + " must be directly nested within " + ChooseTag.TAG_NAME);
+    }
+    ChooseTag chooseTag = (ChooseTag)parent;
+    chooseTag.onOtherwise();
+    return chooseTag.getMatched() ? SKIP_BODY : EVAL_BODY_INCLUDE;
+  }
 }

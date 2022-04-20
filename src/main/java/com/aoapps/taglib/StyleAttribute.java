@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface StyleAttribute {
 
-	void setStyle(Object style);
+  void setStyle(Object style);
 }

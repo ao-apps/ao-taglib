@@ -54,168 +54,177 @@ import javax.servlet.jsp.JspTagException;
  * @author  AO Industries, Inc.
  */
 public class ImgTag extends ElementBufferedBodyTag
-	implements
-		// Attributes
-		SrcAttribute,
-		ParamsAttribute,
-		WidthAttribute,
-		HeightAttribute,
-		AltAttribute,
-		TitleAttribute
+  implements
+    // Attributes
+    SrcAttribute,
+    ParamsAttribute,
+    WidthAttribute,
+    HeightAttribute,
+    AltAttribute,
+    TitleAttribute
 {
 
-	public ImgTag() {
-		init();
-	}
+  public ImgTag() {
+    init();
+  }
 
-	@Override
-	public MediaType getContentType() {
-		return MediaType.URL;
-	}
+  @Override
+  public MediaType getContentType() {
+    return MediaType.URL;
+  }
 
-	@Override
-	public MediaType getOutputType() {
-		return MediaType.XHTML;
-	}
+  @Override
+  public MediaType getOutputType() {
+    return MediaType.XHTML;
+  }
 
 /* BodyTag only: */
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 /**/
 
-	private String src;
-	@Override
-	public void setSrc(String src) {
-		this.src = Strings.nullIfEmpty(src);
-	}
+  private String src;
+  @Override
+  public void setSrc(String src) {
+    this.src = Strings.nullIfEmpty(src);
+  }
 
-	private MutableURIParameters params;
-	@Override
-	public void addParam(String name, Object value) {
-		if(params == null) params = new URIParametersMap();
-		params.add(name, value);
-	}
+  private MutableURIParameters params;
+  @Override
+  public void addParam(String name, Object value) {
+    if (params == null) {
+      params = new URIParametersMap();
+    }
+    params.add(name, value);
+  }
 
-	private boolean absolute;
-	public void setAbsolute(boolean absolute) {
-		this.absolute = absolute;
-	}
+  private boolean absolute;
+  public void setAbsolute(boolean absolute) {
+    this.absolute = absolute;
+  }
 
-	private boolean canonical;
-	public void setCanonical(boolean canonical) {
-		this.canonical = canonical;
-	}
+  private boolean canonical;
+  public void setCanonical(boolean canonical) {
+    this.canonical = canonical;
+  }
 
-	private AddLastModified addLastModified;
-	public void setAddLastModified(String addLastModified) {
-		this.addLastModified = AddLastModified.valueOfLowerName(addLastModified.trim().toLowerCase(Locale.ROOT));
-	}
+  private AddLastModified addLastModified;
+  public void setAddLastModified(String addLastModified) {
+    this.addLastModified = AddLastModified.valueOfLowerName(addLastModified.trim().toLowerCase(Locale.ROOT));
+  }
 
-	private Object width;
-	@Override
-	public void setWidth(Object width) {
-		this.width = AttributeUtils.trimNullIfEmpty(width);
-	}
+  private Object width;
+  @Override
+  public void setWidth(Object width) {
+    this.width = AttributeUtils.trimNullIfEmpty(width);
+  }
 
-	private Object height;
-	@Override
-	public void setHeight(Object height) {
-		this.height = AttributeUtils.trimNullIfEmpty(height);
-	}
+  private Object height;
+  @Override
+  public void setHeight(Object height) {
+    this.height = AttributeUtils.trimNullIfEmpty(height);
+  }
 
-	private Object alt;
-	@Override
-	public void setAlt(Object alt) {
-		this.alt = AttributeUtils.trim(alt);
-	}
+  private Object alt;
+  @Override
+  public void setAlt(Object alt) {
+    this.alt = AttributeUtils.trim(alt);
+  }
 
-	private Object title;
-	@Override
-	public void setTitle(Object title) {
-		this.title = AttributeUtils.trimNullIfEmpty(title);
-	}
+  private Object title;
+  @Override
+  public void setTitle(Object title) {
+    this.title = AttributeUtils.trimNullIfEmpty(title);
+  }
 
-	private String usemap;
-	public void setUsemap(String usemap) {
-		this.usemap = Strings.trimNullIfEmpty(usemap);
-	}
+  private String usemap;
+  public void setUsemap(String usemap) {
+    this.usemap = Strings.trimNullIfEmpty(usemap);
+  }
 
-	private boolean ismap;
-	public void setIsmap(boolean ismap) {
-		this.ismap = ismap;
-	}
+  private boolean ismap;
+  public void setIsmap(boolean ismap) {
+    this.ismap = ismap;
+  }
 
-	/**
-	 * @see  ParamUtils#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List, com.aoapps.taglib.ParamsAttribute)
-	 */
-	@Override
-	protected boolean addDynamicAttribute(String uri, String localName, Object value, List<String> expectedPatterns) throws JspTagException {
-		return
-			super.addDynamicAttribute(uri, localName, value, expectedPatterns)
-			|| ParamUtils.addDynamicAttribute(uri, localName, value, expectedPatterns, this);
-	}
+  /**
+   * @see  ParamUtils#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List, com.aoapps.taglib.ParamsAttribute)
+   */
+  @Override
+  protected boolean addDynamicAttribute(String uri, String localName, Object value, List<String> expectedPatterns) throws JspTagException {
+    return
+      super.addDynamicAttribute(uri, localName, value, expectedPatterns)
+      || ParamUtils.addDynamicAttribute(uri, localName, value, expectedPatterns, this);
+  }
 
-	private void init() {
-		src = null;
-		params = null;
-		absolute = false;
-		canonical = false;
-		addLastModified = AddLastModified.AUTO;
-		width = null;
-		height = null;
-		alt = null;
-		title = null;
-		usemap = null;
-		ismap = false;
-	}
+  private void init() {
+    src = null;
+    params = null;
+    absolute = false;
+    canonical = false;
+    addLastModified = AddLastModified.AUTO;
+    width = null;
+    height = null;
+    alt = null;
+    title = null;
+    usemap = null;
+    ismap = false;
+  }
 
-	@Override
+  @Override
 /* BodyTag only: */
-	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+  protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
 /* SimpleTag only:
-	protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-		PageContext pageContext = (PageContext)getJspContext();
+  protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+    PageContext pageContext = (PageContext)getJspContext();
 /**/
-		assert capturedBody.trim() == capturedBody : "URLs should have already been trimmed";
-		if(src == null) src = capturedBody.toString(); // TODO: Validate here?
-		if(usemap == null && alt == null) throw new AttributeRequiredException("alt");
-		// Automatically prefix '#' if missing
-		if(usemap != null) {
-			assert !usemap.isEmpty() : "empty converted to null in setUsemap method";
-			if(usemap.charAt(0) != '#') usemap = '#' + usemap;
-		}
-		DocumentEE document = new DocumentEE(
-			pageContext.getServletContext(),
-			(HttpServletRequest)pageContext.getRequest(),
-			(HttpServletResponse)pageContext.getResponse(),
-			out,
-			false, // Do not add extra newlines to JSP
-			false  // Do not add extra indentation to JSP
-		);
-		GlobalAttributesUtils.doGlobalAttributes(global, document.img())
-			.src(UrlUtils.getSrc(pageContext, src, params, addLastModified, absolute, canonical))
-			// TOOD: width to Integer via Img.width(Integer)
-			.attribute("width", width)
-			// TOOD: height to Integer via Img.height(Integer)
-			.attribute("height", height)
-			.alt(alt)
-			.title(title)
-			.usemap(usemap)
-			.ismap(ismap)
-			.__();
+    assert capturedBody.trim() == capturedBody : "URLs should have already been trimmed";
+    if (src == null) {
+      // TODO: Validate here?
+      src = capturedBody.toString();
+    }
+    if (usemap == null && alt == null) {
+      throw new AttributeRequiredException("alt");
+    }
+    // Automatically prefix '#' if missing
+    if (usemap != null) {
+      assert !usemap.isEmpty() : "empty converted to null in setUsemap method";
+      if (usemap.charAt(0) != '#') {
+        usemap = '#' + usemap;
+      }
+    }
+    DocumentEE document = new DocumentEE(
+      pageContext.getServletContext(),
+      (HttpServletRequest)pageContext.getRequest(),
+      (HttpServletResponse)pageContext.getResponse(),
+      out,
+      false, // Do not add extra newlines to JSP
+      false  // Do not add extra indentation to JSP
+    );
+    GlobalAttributesUtils.doGlobalAttributes(global, document.img())
+      .src(UrlUtils.getSrc(pageContext, src, params, addLastModified, absolute, canonical))
+      // TOOD: width to Integer via Img.width(Integer)
+      .attribute("width", width)
+      // TOOD: height to Integer via Img.height(Integer)
+      .attribute("height", height)
+      .alt(alt)
+      .title(title)
+      .usemap(usemap)
+      .ismap(ismap)
+      .__();
 /* BodyTag only: */
-		return EVAL_PAGE;
+    return EVAL_PAGE;
 /**/
-	}
+  }
 
 /* BodyTag only: */
-	@Override
-	public void doFinally() {
-		try {
-			init();
-		} finally {
-			super.doFinally();
-		}
-	}
+  @Override
+  public void doFinally() {
+    try {
+      init();
+    } finally {
+      super.doFinally();
+    }
+  }
 /**/
 }

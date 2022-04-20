@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface RelAttribute {
 
-	void setRel(String rel);
+  void setRel(String rel);
 }

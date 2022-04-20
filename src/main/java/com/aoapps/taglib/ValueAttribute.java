@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface ValueAttribute {
 
-	void setValue(Object value);
+  void setValue(Object value);
 }

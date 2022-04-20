@@ -33,10 +33,10 @@ import javax.servlet.jsp.tagext.ValidationMessage;
  */
 public class GetStackTracesTagTEI extends TagExtraInfo {
 
-	@Override
-	public ValidationMessage[] validate(TagData data) {
-		List<ValidationMessage> messages = null;
-		messages = TeiUtils.validateScope(data, messages);
-		return messages==null ? null : messages.toArray(new ValidationMessage[messages.size()]);
-	}
+  @Override
+  public ValidationMessage[] validate(TagData data) {
+    List<ValidationMessage> messages = null;
+    messages = TeiUtils.validateScope(data, messages);
+    return messages == null ? null : messages.toArray(new ValidationMessage[messages.size()]);
+  }
 }

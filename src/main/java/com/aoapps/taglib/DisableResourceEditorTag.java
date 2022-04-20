@@ -39,105 +39,105 @@ import javax.servlet.jsp.tagext.TryCatchFinally;
  */
 public class DisableResourceEditorTag extends TagSupport implements TryCatchFinally {
 
-	static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, DisableResourceEditorTag.class);
+  static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, DisableResourceEditorTag.class);
 
-	/**
-	 * Scope used for automatic determination.
-	 */
-	private static final String AUTO = "auto";
+  /**
+   * Scope used for automatic determination.
+   */
+  private static final String AUTO = "auto";
 
-	/**
-	 * Scope used for body content.
-	 */
-	private static final String BODY = "body";
+  /**
+   * Scope used for body content.
+   */
+  private static final String BODY = "body";
 
-	public static boolean isValidScope(String scope) {
-		scope = Strings.trimNullIfEmpty(scope);
-		return
-			scope == null
-			|| scope.equalsIgnoreCase(AUTO)
-			|| scope.equalsIgnoreCase(BODY)
-			|| scope.equalsIgnoreCase(ScopeEE.Page.SCOPE_REQUEST);
-	}
+  public static boolean isValidScope(String scope) {
+    scope = Strings.trimNullIfEmpty(scope);
+    return
+      scope == null
+      || scope.equalsIgnoreCase(AUTO)
+      || scope.equalsIgnoreCase(BODY)
+      || scope.equalsIgnoreCase(ScopeEE.Page.SCOPE_REQUEST);
+  }
 
-	public DisableResourceEditorTag() {
-		init();
-	}
+  public DisableResourceEditorTag() {
+    init();
+  }
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	private String scope;
-	public void setScope(String scope) {
-		scope = Strings.trimNullIfEmpty(scope);
-		if(scope == null || scope.equalsIgnoreCase(AUTO)) {
-			this.scope = null;
-		} else if(scope.equalsIgnoreCase(BODY)) {
-			this.scope = BODY;
-		} else if(scope.equalsIgnoreCase(ScopeEE.Page.SCOPE_REQUEST)) {
-			this.scope = ScopeEE.Page.SCOPE_REQUEST;
-		} else {
-			throw new LocalizedIllegalArgumentException(RESOURCES, "scope.invalid", scope);
-		}
-	}
+  private String scope;
+  public void setScope(String scope) {
+    scope = Strings.trimNullIfEmpty(scope);
+    if (scope == null || scope.equalsIgnoreCase(AUTO)) {
+      this.scope = null;
+    } else if (scope.equalsIgnoreCase(BODY)) {
+      this.scope = BODY;
+    } else if (scope.equalsIgnoreCase(ScopeEE.Page.SCOPE_REQUEST)) {
+      this.scope = ScopeEE.Page.SCOPE_REQUEST;
+    } else {
+      throw new LocalizedIllegalArgumentException(RESOURCES, "scope.invalid", scope);
+    }
+  }
 
-	private EditableResourceBundle.ThreadSettings.Mode mode;
-	public void setMode(String mode) {
-		mode = Strings.trimNullIfEmpty(mode);
-		this.mode = (mode == null)
-			? EditableResourceBundle.ThreadSettings.Mode.DISABLED
-			: EditableResourceBundle.ThreadSettings.Mode.valueOf(mode.toUpperCase(Locale.ROOT));
-	}
+  private EditableResourceBundle.ThreadSettings.Mode mode;
+  public void setMode(String mode) {
+    mode = Strings.trimNullIfEmpty(mode);
+    this.mode = (mode == null)
+      ? EditableResourceBundle.ThreadSettings.Mode.DISABLED
+      : EditableResourceBundle.ThreadSettings.Mode.valueOf(mode.toUpperCase(Locale.ROOT));
+  }
 
-	private transient EditableResourceBundle.ThreadSettings oldThreadSettings;
-	private transient boolean hasBody;
+  private transient EditableResourceBundle.ThreadSettings oldThreadSettings;
+  private transient boolean hasBody;
 
-	private void init() {
-		scope = null;
-		mode = EditableResourceBundle.ThreadSettings.Mode.DISABLED;
-		oldThreadSettings = null;
-		hasBody = false;
-	}
+  private void init() {
+    scope = null;
+    mode = EditableResourceBundle.ThreadSettings.Mode.DISABLED;
+    oldThreadSettings = null;
+    hasBody = false;
+  }
 
-	@Override
-	public int doStartTag() throws JspException {
-		oldThreadSettings = EditableResourceBundle.getThreadSettings();
-		EditableResourceBundle.ThreadSettings newThreadSettings = oldThreadSettings.setMode(mode);
-		if(newThreadSettings != oldThreadSettings) {
-			EditableResourceBundle.setThreadSettings(newThreadSettings);
-		} else {
-			// Unchanged
-			oldThreadSettings = null;
-		}
-		return EVAL_BODY_INCLUDE;
-	}
+  @Override
+  public int doStartTag() throws JspException {
+    oldThreadSettings = EditableResourceBundle.getThreadSettings();
+    EditableResourceBundle.ThreadSettings newThreadSettings = oldThreadSettings.setMode(mode);
+    if (newThreadSettings != oldThreadSettings) {
+      EditableResourceBundle.setThreadSettings(newThreadSettings);
+    } else {
+      // Unchanged
+      oldThreadSettings = null;
+    }
+    return EVAL_BODY_INCLUDE;
+  }
 
-	@Override
-	public int doAfterBody() throws JspException {
-		hasBody = true;
-		return SKIP_BODY;
-	}
+  @Override
+  public int doAfterBody() throws JspException {
+    hasBody = true;
+    return SKIP_BODY;
+  }
 
-	@Override
-	public void doCatch(Throwable t) throws Throwable {
-		throw t;
-	}
+  @Override
+  public void doCatch(Throwable t) throws Throwable {
+    throw t;
+  }
 
-	@Override
-	@SuppressWarnings("StringEquality") // Exact string instances are used in setScope
-	public void doFinally() {
-		try {
-			if(
-				oldThreadSettings != null
-				&& (
-					(scope == null && hasBody) // Auto mode, with body
-					|| scope == BODY // Body mode
-				)
-			) {
-				// Restore old settings
-				EditableResourceBundle.setThreadSettings(oldThreadSettings);
-			}
-		} finally {
-			init();
-		}
-	}
+  @Override
+  @SuppressWarnings("StringEquality") // Exact string instances are used in setScope
+  public void doFinally() {
+    try {
+      if (
+        oldThreadSettings != null
+        && (
+          (scope == null && hasBody) // Auto mode, with body
+          || scope == BODY // Body mode
+        )
+      ) {
+        // Restore old settings
+        EditableResourceBundle.setThreadSettings(oldThreadSettings);
+      }
+    } finally {
+      init();
+    }
+  }
 }

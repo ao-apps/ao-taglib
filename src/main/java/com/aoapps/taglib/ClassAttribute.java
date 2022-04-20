@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface ClassAttribute {
 
-	void setClazz(String clazz);
+  void setClazz(String clazz);
 }

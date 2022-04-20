@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface SrcAttribute {
 
-	void setSrc(String src);
+  void setSrc(String src);
 }

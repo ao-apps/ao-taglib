@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface OnsubmitAttribute {
 
-	void setOnsubmit(Object onsubmit);
+  void setOnsubmit(Object onsubmit);
 }

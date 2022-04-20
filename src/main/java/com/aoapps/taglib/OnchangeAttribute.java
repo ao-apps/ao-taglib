@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface OnchangeAttribute {
 
-	void setOnchange(Object onchange);
+  void setOnchange(Object onchange);
 }

@@ -40,77 +40,79 @@ import javax.servlet.jsp.JspException;
  */
 // TODO: Support output when not inside a containing tag? (or implement applet and object tags to avoid errors of params accidentally passed to client)
 public class ParamTag extends EncodingBufferedBodyTag
-	implements
-		NameAttribute,
-		ValueAttribute
+  implements
+    NameAttribute,
+    ValueAttribute
 {
 
 /* SimpleTag only:
-	public static final String TAG_NAME = "<ao:param>";
+  public static final String TAG_NAME = "<ao:param>";
 /**/
 
-	public ParamTag() {
-		init();
-	}
+  public ParamTag() {
+    init();
+  }
 
-	@Override
-	public MediaType getContentType() {
-		return MediaType.TEXT;
-	}
+  @Override
+  public MediaType getContentType() {
+    return MediaType.TEXT;
+  }
 
-	@Override
-	public MediaType getOutputType() {
-		return null;
-	}
+  @Override
+  public MediaType getOutputType() {
+    return null;
+  }
 
 /* BodyTag only: */
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 /**/
 
-	private String name;
-	@Override
-	public void setName(String name) {
-		this.name = name;
-	}
+  private String name;
+  @Override
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	private Object value;
-	@Override
-	public void setValue(Object value) {
-		this.value = value;
-	}
+  private Object value;
+  @Override
+  public void setValue(Object value) {
+    this.value = value;
+  }
 
-	private void init() {
-		name = null;
-		value = null;
-	}
+  private void init() {
+    name = null;
+    value = null;
+  }
 
-	@Override
+  @Override
 /* BodyTag only: */
-	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+  protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
 /* SimpleTag only:
-	protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+  protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
-		if(name == null) throw new AttributeRequiredException("name");
-		ParamUtils.addParam(
-			TAG_NAME,
-			this,
-			name,
-			(value != null) ? value : capturedBody.trim()
-		);
+    if (name == null) {
+      throw new AttributeRequiredException("name");
+    }
+    ParamUtils.addParam(
+      TAG_NAME,
+      this,
+      name,
+      (value != null) ? value : capturedBody.trim()
+    );
 /* BodyTag only: */
-		return EVAL_PAGE;
+    return EVAL_PAGE;
 /**/
-	}
+  }
 
 /* BodyTag only: */
-	@Override
-	public void doFinally() {
-		try {
-			init();
-		} finally {
-			super.doFinally();
-		}
-	}
+  @Override
+  public void doFinally() {
+    try {
+      init();
+    } finally {
+      super.doFinally();
+    }
+  }
 /**/
 }

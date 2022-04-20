@@ -50,123 +50,125 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  */
 public class UrlTag extends EncodingBufferedTag implements ParamsAttribute, DynamicAttributes {
 
-	public UrlTag() {
-		init();
-	}
+  public UrlTag() {
+    init();
+  }
 
-	@Override
-	public MediaType getContentType() {
-		return MediaType.URL;
-	}
+  @Override
+  public MediaType getContentType() {
+    return MediaType.URL;
+  }
 
-	@Override
-	public MediaType getOutputType() {
-		return MediaType.URL;
-	}
+  @Override
+  public MediaType getOutputType() {
+    return MediaType.URL;
+  }
 
 /* BodyTag only:
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 /**/
 
-	private MutableURIParameters params;
-	@Override
-	public void addParam(String name, Object value) {
-		if(params == null) params = new URIParametersMap();
-		params.add(name, value);
-	}
+  private MutableURIParameters params;
+  @Override
+  public void addParam(String name, Object value) {
+    if (params == null) {
+      params = new URIParametersMap();
+    }
+    params.add(name, value);
+  }
 
-	private boolean absolute;
-	public void setAbsolute(boolean absolute) {
-		this.absolute = absolute;
-	}
+  private boolean absolute;
+  public void setAbsolute(boolean absolute) {
+    this.absolute = absolute;
+  }
 
-	private boolean canonical;
-	public void setCanonical(boolean canonical) {
-		this.canonical = canonical;
-	}
+  private boolean canonical;
+  public void setCanonical(boolean canonical) {
+    this.canonical = canonical;
+  }
 
-	private AddLastModified addLastModified;
-	public void setAddLastModified(String addLastModified) {
-		this.addLastModified = AddLastModified.valueOfLowerName(addLastModified.trim().toLowerCase(Locale.ROOT));
-	}
+  private AddLastModified addLastModified;
+  public void setAddLastModified(String addLastModified) {
+    this.addLastModified = AddLastModified.valueOfLowerName(addLastModified.trim().toLowerCase(Locale.ROOT));
+  }
 
 /* BodyTag only:
-	private Canonical c;
+  private Canonical c;
 /**/
 
-	/**
-	 * @see  ParamUtils#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List, com.aoapps.taglib.ParamsAttribute)
-	 */
-	@Override
-	public void setDynamicAttribute(String uri, String localName, Object value) throws JspException {
-		List<String> expectedPatterns = new ArrayList<>();
-		if(!ParamUtils.addDynamicAttribute(uri, localName, value, expectedPatterns, this)) {
-			throw AttributeUtils.newDynamicAttributeFailedException(uri, localName, value, expectedPatterns);
-		}
-	}
+  /**
+   * @see  ParamUtils#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List, com.aoapps.taglib.ParamsAttribute)
+   */
+  @Override
+  public void setDynamicAttribute(String uri, String localName, Object value) throws JspException {
+    List<String> expectedPatterns = new ArrayList<>();
+    if (!ParamUtils.addDynamicAttribute(uri, localName, value, expectedPatterns, this)) {
+      throw AttributeUtils.newDynamicAttributeFailedException(uri, localName, value, expectedPatterns);
+    }
+  }
 
-	private void init() {
-		params = null;
-		absolute = false;
-		canonical = false;
-		addLastModified = AddLastModified.AUTO;
+  private void init() {
+    params = null;
+    absolute = false;
+    canonical = false;
+    addLastModified = AddLastModified.AUTO;
 /* BodyTag only:
-		if(c != null) {
-			c.close();
-			c = null;
-		}
+    if (c != null) {
+      c.close();
+      c = null;
+    }
 /**/
-	}
+  }
 
 /* BodyTag only:
-	@Override
-	protected int doStartTag(Writer out) throws JspException, IOException {
-		c = Canonical.set(canonical);
-		return super.doStartTag(out);
-	}
+  @Override
+  protected int doStartTag(Writer out) throws JspException, IOException {
+    c = Canonical.set(canonical);
+    return super.doStartTag(out);
+  }
 
-	@Override
-	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+  @Override
+  protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
 /* SimpleTag only: */
-	@Deprecated
-	@Override
-	public void doTag() throws JspException, IOException {
-		try (Canonical c = Canonical.set(canonical)) {
-			super.doTag();
-		}
-	}
+  @Deprecated
+  @Override
+  public void doTag() throws JspException, IOException {
+    try (Canonical c = Canonical.set(canonical)) {
+      super.doTag();
+    }
+  }
 
-	@Override
-	protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-		PageContext pageContext = (PageContext)getJspContext();
+  @Override
+  protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+    PageContext pageContext = (PageContext)getJspContext();
 /**/
-		assert capturedBody.trim() == capturedBody : "URLs should have already been trimmed";
-		out.write(
-			LastModifiedUtil.buildURL(
-				pageContext.getServletContext(),
-				(HttpServletRequest)pageContext.getRequest(),
-				new NoEncodeUrlResponseWrapper((HttpServletResponse)pageContext.getResponse()),
-				capturedBody.toString(),
-				params,
-				addLastModified,
-				absolute,
-				canonical
-			)
-		);
+    assert capturedBody.trim() == capturedBody : "URLs should have already been trimmed";
+    out.write(
+      LastModifiedUtil.buildURL(
+        pageContext.getServletContext(),
+        (HttpServletRequest)pageContext.getRequest(),
+        new NoEncodeUrlResponseWrapper((HttpServletResponse)pageContext.getResponse()),
+        capturedBody.toString(),
+        params,
+        addLastModified,
+        absolute,
+        canonical
+      )
+    );
 /* BodyTag only:
-		return SKIP_PAGE;
+    return SKIP_PAGE;
 /**/
-	}
+  }
 
 /* BodyTag only:
-	@Override
-	public void doFinally() {
-		try {
-			init();
-		} finally {
-			super.doFinally();
-		}
-	}
+  @Override
+  public void doFinally() {
+    try {
+      init();
+    } finally {
+      super.doFinally();
+    }
+  }
 /**/
 }

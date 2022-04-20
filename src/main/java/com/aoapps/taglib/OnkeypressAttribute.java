@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface OnkeypressAttribute {
 
-	void setOnkeypress(Object onkeypress);
+  void setOnkeypress(Object onkeypress);
 }

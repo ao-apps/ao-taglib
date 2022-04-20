@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface WidthAttribute {
 
-	void setWidth(Object width);
+  void setWidth(Object width);
 }

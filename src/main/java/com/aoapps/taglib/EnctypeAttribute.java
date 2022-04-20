@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface EnctypeAttribute {
 
-	void setEnctype(String enctype);
+  void setEnctype(String enctype);
 }

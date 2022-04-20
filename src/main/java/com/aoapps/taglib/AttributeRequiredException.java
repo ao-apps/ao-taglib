@@ -33,26 +33,26 @@ import java.util.ResourceBundle;
  */
 public class AttributeRequiredException extends LocalizedJspTagException {
 
-	static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, AttributeRequiredException.class);
+  static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, AttributeRequiredException.class);
 
-	private static final long serialVersionUID = 2L;
+  private static final long serialVersionUID = 2L;
 
-	private final String attribute;
+  private final String attribute;
 
-	public AttributeRequiredException(String attribute) {
-		super(RESOURCES, "message", attribute);
-		this.attribute = attribute;
-	}
+  public AttributeRequiredException(String attribute) {
+    super(RESOURCES, "message", attribute);
+    this.attribute = attribute;
+  }
 
-	public String getAttribute() {
-		return attribute;
-	}
+  public String getAttribute() {
+    return attribute;
+  }
 
-	static {
-		Throwables.registerSurrogateFactory(AttributeRequiredException.class, (template, cause) -> {
-			AttributeRequiredException newEx = new AttributeRequiredException(template.attribute);
-			newEx.initCause(cause);
-			return newEx;
-		});
-	}
+  static {
+    Throwables.registerSurrogateFactory(AttributeRequiredException.class, (template, cause) -> {
+      AttributeRequiredException newEx = new AttributeRequiredException(template.attribute);
+      newEx.initCause(cause);
+      return newEx;
+    });
+  }
 }

@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface NameAttribute {
 
-	void setName(String name);
+  void setName(String name);
 }

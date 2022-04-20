@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface ReadonlyAttribute {
 
-	void setReadonly(boolean readonly);
+  void setReadonly(boolean readonly);
 }

@@ -37,84 +37,86 @@ import javax.servlet.jsp.tagext.TryCatchFinally;
  * @author  AO Industries, Inc.
  */
 public class BundleTag
-	extends TagSupport
-	implements TryCatchFinally
+  extends TagSupport
+  implements TryCatchFinally
 {
 
-	/**
-	 * For interaction with nested functions (that have no access to the page context),
-	 * the current BundleTag is stored as a this attribute.
-	 */
-	private static final ScopeEE.Request.Attribute<BundleTag> REQUEST_ATTRIBUTE =
-		ScopeEE.REQUEST.attribute(BundleTag.class.getName());
+  /**
+   * For interaction with nested functions (that have no access to the page context),
+   * the current BundleTag is stored as a this attribute.
+   */
+  private static final ScopeEE.Request.Attribute<BundleTag> REQUEST_ATTRIBUTE =
+    ScopeEE.REQUEST.attribute(BundleTag.class.getName());
 
-	/**
-	 * Gets the current BundleTag or <code>null</code> if not set.
-	 */
-	public static BundleTag getBundleTag(ServletRequest request) {
-		return REQUEST_ATTRIBUTE.context(request).get();
-	}
+  /**
+   * Gets the current BundleTag or <code>null</code> if not set.
+   */
+  public static BundleTag getBundleTag(ServletRequest request) {
+    return REQUEST_ATTRIBUTE.context(request).get();
+  }
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	public BundleTag() {
-		init();
-	}
+  public BundleTag() {
+    init();
+  }
 
-	private String basename;
-	private transient Resources resources; // Set along with basename
-	private String prefix;
-	private transient Attribute.OldValue oldRequestValue;
+  private String basename;
+  private transient Resources resources; // Set along with basename
+  private String prefix;
+  private transient Attribute.OldValue oldRequestValue;
 
-	private void init() {
-		basename = null;
-		resources = null;
-		prefix = null;
-		oldRequestValue = null;
-	}
+  private void init() {
+    basename = null;
+    resources = null;
+    prefix = null;
+    oldRequestValue = null;
+  }
 
-	@SuppressWarnings("deprecation")
-	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
-		in.defaultReadObject();
-		this.resources = basename == null ? null : Resources.getResources(basename);
-	}
+  @SuppressWarnings("deprecation")
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    in.defaultReadObject();
+    this.resources = basename == null ? null : Resources.getResources(basename);
+  }
 
-	public Resources getResources() {
-		return resources;
-	}
+  public Resources getResources() {
+    return resources;
+  }
 
-	@SuppressWarnings("deprecation")
-	public void setBasename(String basename) {
-		this.basename = basename;
-		this.resources = basename == null ? null : Resources.getResources(basename);
-	}
+  @SuppressWarnings("deprecation")
+  public void setBasename(String basename) {
+    this.basename = basename;
+    this.resources = basename == null ? null : Resources.getResources(basename);
+  }
 
-	public String getPrefix() {
-		return prefix;
-	}
+  public String getPrefix() {
+    return prefix;
+  }
 
-	public void setPrefix(String prefix) {
-		this.prefix = prefix;
-	}
+  public void setPrefix(String prefix) {
+    this.prefix = prefix;
+  }
 
-	@Override
-	public int doStartTag() throws JspException {
-		ServletRequest request = pageContext.getRequest();
-		oldRequestValue = REQUEST_ATTRIBUTE.context(request).init(this);
-		return EVAL_BODY_INCLUDE;
-	}
+  @Override
+  public int doStartTag() throws JspException {
+    ServletRequest request = pageContext.getRequest();
+    oldRequestValue = REQUEST_ATTRIBUTE.context(request).init(this);
+    return EVAL_BODY_INCLUDE;
+  }
 
-	@Override
-	public void doCatch(Throwable t) throws Throwable {
-		throw t;
-	}
+  @Override
+  public void doCatch(Throwable t) throws Throwable {
+    throw t;
+  }
 
-	@Override
-	public void doFinally() {
-		try {
-			if(oldRequestValue != null) oldRequestValue.close();
-		} finally {
-			init();
-		}
-	}
+  @Override
+  public void doFinally() {
+    try {
+      if (oldRequestValue != null) {
+        oldRequestValue.close();
+      }
+    } finally {
+      init();
+    }
+  }
 }

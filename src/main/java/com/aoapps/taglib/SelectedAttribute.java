@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface SelectedAttribute {
 
-	void setSelected(boolean selected);
+  void setSelected(boolean selected);
 }

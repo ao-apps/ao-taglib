@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface SizeAttribute {
 
-	void setSize(Object size);
+  void setSize(Object size);
 }

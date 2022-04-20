@@ -32,20 +32,20 @@ import javax.servlet.jsp.tagext.ValidationMessage;
  */
 public class RedirectTagTEI extends TagExtraInfo {
 
-	@Override
-	public ValidationMessage[] validate(TagData data) {
-		Object o = data.getAttribute("statusCode");
-		if(
-			o != null
-			&& o != TagData.REQUEST_TIME_VALUE
-		) {
-			String statusCode = ((String)o).trim(); // TODO: normalizeStatusCode
-			if(!RedirectTag.isValidStatusCode(statusCode)) {
-				return new ValidationMessage[] {
-					new ValidationMessage(data.getId(), RedirectTag.RESOURCES.getMessage("statusCode.invalid", statusCode))
-				};
-			}
-		}
-		return null;
-	}
+  @Override
+  public ValidationMessage[] validate(TagData data) {
+    Object o = data.getAttribute("statusCode");
+    if (
+      o != null
+      && o != TagData.REQUEST_TIME_VALUE
+    ) {
+      String statusCode = ((String)o).trim(); // TODO: normalizeStatusCode
+      if (!RedirectTag.isValidStatusCode(statusCode)) {
+        return new ValidationMessage[] {
+          new ValidationMessage(data.getId(), RedirectTag.RESOURCES.getMessage("statusCode.invalid", statusCode))
+        };
+      }
+    }
+    return null;
+  }
 }

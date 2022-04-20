@@ -41,22 +41,22 @@ import javax.servlet.jsp.JspWriter;
 // TODO: ForwardBodyTag and ForwardSimpleTag?
 public class ForwardTag extends ArgDispatchTag {
 
-	/**
-	 * Dispatch as forward
-	 */
-	@Override
-	@SuppressWarnings("deprecation")
-	void dispatch(RequestDispatcher dispatcher, JspWriter out, HttpServletRequest request, HttpServletResponse response) throws JspException, IOException {
-		try (Attribute.OldValue oldForwarded = FORWARDED_REQUEST_ATTRIBUTE.context(request).init(true)) {
-			try {
-				// Clear the previous JSP out buffer
-				out.clear();
-				dispatcher.forward(request, response);
-			} catch(ServletException e) {
-				throw new JspTagException(e);
-			}
-			Includer.setPageSkipped(request);
-			throw ServletUtil.SKIP_PAGE_EXCEPTION;
-		}
-	}
+  /**
+   * Dispatch as forward
+   */
+  @Override
+  @SuppressWarnings("deprecation")
+  void dispatch(RequestDispatcher dispatcher, JspWriter out, HttpServletRequest request, HttpServletResponse response) throws JspException, IOException {
+    try (Attribute.OldValue oldForwarded = FORWARDED_REQUEST_ATTRIBUTE.context(request).init(true)) {
+      try {
+        // Clear the previous JSP out buffer
+        out.clear();
+        dispatcher.forward(request, response);
+      } catch (ServletException e) {
+        throw new JspTagException(e);
+      }
+      Includer.setPageSkipped(request);
+      throw ServletUtil.SKIP_PAGE_EXCEPTION;
+    }
+  }
 }

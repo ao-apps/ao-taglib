@@ -35,32 +35,32 @@ import javax.servlet.jsp.tagext.ValidationMessage;
  */
 public class ScriptTagTEI extends ElementTagTEI {
 
-	@Override
-	protected void validate(TagData data, List<ValidationMessage> messages) {
-		super.validate(data, messages);
-		Object typeAttr = data.getAttribute("type");
-		if(
-			typeAttr != null
-			&& typeAttr != TagData.REQUEST_TIME_VALUE
-		) {
-			String type = Strings.trimNullIfEmpty((String)typeAttr); // TODO: normalizeType
-			if(type != null) {
-				try {
-					MediaType mediaType = MediaType.getMediaTypeForContentType(type);
-					if(mediaType != MediaType.JAVASCRIPT) {
-						messages.add(
-							new ValidationMessage(
-								data.getId(),
-								ScriptTag.RESOURCES.getMessage("unsupportedMediaType", type)
-							)
-						);
-					}
-				} catch(UnsupportedEncodingException err) {
-					messages.add(
-						new ValidationMessage(data.getId(), err.getMessage())
-					);
-				}
-			}
-		}
-	}
+  @Override
+  protected void validate(TagData data, List<ValidationMessage> messages) {
+    super.validate(data, messages);
+    Object typeAttr = data.getAttribute("type");
+    if (
+      typeAttr != null
+      && typeAttr != TagData.REQUEST_TIME_VALUE
+    ) {
+      String type = Strings.trimNullIfEmpty((String)typeAttr); // TODO: normalizeType
+      if (type != null) {
+        try {
+          MediaType mediaType = MediaType.getMediaTypeForContentType(type);
+          if (mediaType != MediaType.JAVASCRIPT) {
+            messages.add(
+              new ValidationMessage(
+                data.getId(),
+                ScriptTag.RESOURCES.getMessage("unsupportedMediaType", type)
+              )
+            );
+          }
+        } catch (UnsupportedEncodingException err) {
+          messages.add(
+            new ValidationMessage(data.getId(), err.getMessage())
+          );
+        }
+      }
+    }
+  }
 }

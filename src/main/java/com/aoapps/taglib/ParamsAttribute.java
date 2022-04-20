@@ -32,28 +32,28 @@ import com.aoapps.lang.Coercion;
  */
 public interface ParamsAttribute {
 
-	/**
-	 * Adds a parameter.
-	 * <p>
-	 * The conversion to string may be deferred, or the value may be streamed instead of being
-	 * converted to a string.  It is incorrect to change the state of the provided value; doing
-	 * so may or may not affect the value of the resulting parameter.
-	 * </p>
-	 * <p>
-	 * Default method is for backward compatibility only.
-	 * Implementations should override this version.
-	 * </p>
-	 */
-	// TODO: Remove default in a major release, once no "addParam(String,String)" is completely unused.
-	default void addParam(String name, Object value) {
-		addParam(name, (value == null) ? null : Coercion.toString(value));
-	}
+  /**
+   * Adds a parameter.
+   * <p>
+   * The conversion to string may be deferred, or the value may be streamed instead of being
+   * converted to a string.  It is incorrect to change the state of the provided value; doing
+   * so may or may not affect the value of the resulting parameter.
+   * </p>
+   * <p>
+   * Default method is for backward compatibility only.
+   * Implementations should override this version.
+   * </p>
+   */
+  // TODO: Remove default in a major release, once no "addParam(String,String)" is completely unused.
+  default void addParam(String name, Object value) {
+    addParam(name, (value == null) ? null : Coercion.toString(value));
+  }
 
-	/**
-	 * @deprecated  Use {@link #addParam(java.lang.String, java.lang.Object)} instead.
-	 */
-	@Deprecated
-	default void addParam(String name, String value) {
-		addParam(name, (Object)value);
-	}
+  /**
+   * @deprecated  Use {@link #addParam(java.lang.String, java.lang.Object)} instead.
+   */
+  @Deprecated
+  default void addParam(String name, String value) {
+    addParam(name, (Object)value);
+  }
 }

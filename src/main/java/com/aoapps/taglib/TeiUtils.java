@@ -40,40 +40,42 @@ import javax.servlet.jsp.tagext.ValidationMessage;
 // TODO: Merge with attributeUtils?
 public final class TeiUtils {
 
-	/** Make no instances. */
-	private TeiUtils() {throw new AssertionError();}
+  /** Make no instances. */
+  private TeiUtils() {
+    throw new AssertionError();
+  }
 
-	/**
-	 * Checks that a scope is a valid.
-	 *
-	 * @see  Scope for supported values.
-	 *
-	 * @param  messages  the list of messages to add to, maybe <code>null</code>
-	 *
-	 * @return  the list of messages.  A new list will have been created if the <code>message</code> parameter was <code>null</code>
-	 *
-	 * @see com.aoapps.servlet.attribute.ScopeEE.Page#getScopeId(java.lang.String)
-	 */
-	public static List<ValidationMessage> validateScope(TagData data, List<ValidationMessage> messages) {
-		Object o = data.getAttribute("scope");
-		if(
-			o != null
-			&& o != TagData.REQUEST_TIME_VALUE
-		) {
-			String scope = Coercion.toString(o).trim(); // TODO: normalizeScope
-			try {
-				ScopeEE.Page.getScopeId(scope);
-				// Value is OK
-			} catch(LocalizedIllegalArgumentException err) {
-				messages = MinimalList.add(
-					messages,
-					new ValidationMessage(
-						data.getId(),
-						err.getLocalizedMessage()
-					)
-				);
-			}
-		}
-		return messages;
-	}
+  /**
+   * Checks that a scope is a valid.
+   *
+   * @see  Scope for supported values.
+   *
+   * @param  messages  the list of messages to add to, maybe <code>null</code>
+   *
+   * @return  the list of messages.  A new list will have been created if the <code>message</code> parameter was <code>null</code>
+   *
+   * @see com.aoapps.servlet.attribute.ScopeEE.Page#getScopeId(java.lang.String)
+   */
+  public static List<ValidationMessage> validateScope(TagData data, List<ValidationMessage> messages) {
+    Object o = data.getAttribute("scope");
+    if (
+      o != null
+      && o != TagData.REQUEST_TIME_VALUE
+    ) {
+      String scope = Coercion.toString(o).trim(); // TODO: normalizeScope
+      try {
+        ScopeEE.Page.getScopeId(scope);
+        // Value is OK
+      } catch (LocalizedIllegalArgumentException err) {
+        messages = MinimalList.add(
+          messages,
+          new ValidationMessage(
+            data.getId(),
+            err.getLocalizedMessage()
+          )
+        );
+      }
+    }
+    return messages;
+  }
 }

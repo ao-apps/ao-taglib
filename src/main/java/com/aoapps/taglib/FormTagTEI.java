@@ -32,32 +32,32 @@ import javax.servlet.jsp.tagext.ValidationMessage;
  */
 public class FormTagTEI extends ElementTagTEI {
 
-	// TODO: Allow null here while doing normalizeMethod
-	// TODO: Change to be validateMethod, like validateDir
-	public static boolean isValidMethod(String method) {
-		return
-			"get".equals(method)
-			|| "post".equals(method)
-		;
-	}
+  // TODO: Allow null here while doing normalizeMethod
+  // TODO: Change to be validateMethod, like validateDir
+  public static boolean isValidMethod(String method) {
+    return
+      "get".equals(method)
+      || "post".equals(method)
+    ;
+  }
 
-	@Override
-	protected void validate(TagData data, List<ValidationMessage> messages) {
-		super.validate(data, messages);
-		Object o = data.getAttribute("method");
-		if(
-			o != null
-			&& o != TagData.REQUEST_TIME_VALUE
-		) {
-			String method = ((String)o).trim(); // TODO: normalizeMethod
-			if(!isValidMethod(method)) {
-				messages.add(
-					new ValidationMessage(
-						data.getId(),
-						FormTag.RESOURCES.getMessage("method.invalid", method)
-					)
-				);
-			}
-		}
-	}
+  @Override
+  protected void validate(TagData data, List<ValidationMessage> messages) {
+    super.validate(data, messages);
+    Object o = data.getAttribute("method");
+    if (
+      o != null
+      && o != TagData.REQUEST_TIME_VALUE
+    ) {
+      String method = ((String)o).trim(); // TODO: normalizeMethod
+      if (!isValidMethod(method)) {
+        messages.add(
+          new ValidationMessage(
+            data.getId(),
+            FormTag.RESOURCES.getMessage("method.invalid", method)
+          )
+        );
+      }
+    }
+  }
 }

@@ -37,36 +37,36 @@ import javax.servlet.jsp.JspException;
  */
 public class BrTag extends ElementNullBodyTag {
 
-	@Override
-	public MediaType getOutputType() {
-		return MediaType.XHTML;
-	}
+  @Override
+  public MediaType getOutputType() {
+    return MediaType.XHTML;
+  }
 
 /* BodyTag only: */
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 /**/
 
-	@Override
+  @Override
 /* BodyTag only: */
-	protected int doEndTag(Writer out) throws JspException, IOException {
+  protected int doEndTag(Writer out) throws JspException, IOException {
 /**/
 /* SimpleTag only:
-	protected void doTag(Writer out) throws JspException, IOException {
-		PageContext pageContext = (PageContext)getJspContext();
+  protected void doTag(Writer out) throws JspException, IOException {
+    PageContext pageContext = (PageContext)getJspContext();
 /**/
-		GlobalAttributesUtils.doGlobalAttributes(
-			global,
-			new DocumentEE(
-				pageContext.getServletContext(),
-				(HttpServletRequest)pageContext.getRequest(),
-				(HttpServletResponse)pageContext.getResponse(),
-				out,
-				false, // Do not add extra newlines to JSP
-				false  // Do not add extra indentation to JSP
-			).br()
-		).__();
+    GlobalAttributesUtils.doGlobalAttributes(
+      global,
+      new DocumentEE(
+        pageContext.getServletContext(),
+        (HttpServletRequest)pageContext.getRequest(),
+        (HttpServletResponse)pageContext.getResponse(),
+        out,
+        false, // Do not add extra newlines to JSP
+        false  // Do not add extra indentation to JSP
+      ).br()
+    ).__();
 /* BodyTag only: */
-		return EVAL_PAGE;
+    return EVAL_PAGE;
 /**/
-	}
+  }
 }

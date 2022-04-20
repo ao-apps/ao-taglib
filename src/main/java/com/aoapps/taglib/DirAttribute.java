@@ -32,5 +32,5 @@ package com.aoapps.taglib;
 // TODO: Put all into a big Attributes class like in ao-fluent-html?
 public interface DirAttribute {
 
-	void setDir(String dir);
+  void setDir(String dir);
 }

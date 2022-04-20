@@ -33,69 +33,69 @@ import javax.servlet.jsp.tagext.TryCatchFinally;
  */
 public class ChooseTag extends TagSupport implements TryCatchFinally {
 
-	public static final String TAG_NAME = "<ao:choose>";
+  public static final String TAG_NAME = "<ao:choose>";
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	public ChooseTag() {
-		init();
-	}
+  public ChooseTag() {
+    init();
+  }
 
-	private boolean hasWhen;
-	private boolean matched;
-	private boolean hasOtherwise;
+  private boolean hasWhen;
+  private boolean matched;
+  private boolean hasOtherwise;
 
-	private void init() {
-		hasWhen = false;
-		matched = false;
-		hasOtherwise = false;
-	}
+  private void init() {
+    hasWhen = false;
+    matched = false;
+    hasOtherwise = false;
+  }
 
-	@Override
-	public int doStartTag() throws JspException {
-		return EVAL_BODY_INCLUDE;
-	}
+  @Override
+  public int doStartTag() throws JspException {
+    return EVAL_BODY_INCLUDE;
+  }
 
-	void onWhen() throws JspTagException {
-		if(hasOtherwise) {
-			throw new JspTagException(WhenTag.TAG_NAME + " may not follow " + OtherwiseTag.TAG_NAME);
-		} else {
-			hasWhen = true;
-		}
-	}
+  void onWhen() throws JspTagException {
+    if (hasOtherwise) {
+      throw new JspTagException(WhenTag.TAG_NAME + " may not follow " + OtherwiseTag.TAG_NAME);
+    } else {
+      hasWhen = true;
+    }
+  }
 
-	boolean getMatched() {
-		return matched;
-	}
+  boolean getMatched() {
+    return matched;
+  }
 
-	void setMatched() {
-		assert !matched;
-		matched = true;
-	}
+  void setMatched() {
+    assert !matched;
+    matched = true;
+  }
 
-	void onOtherwise() throws JspTagException {
-		if(hasOtherwise) {
-			throw new JspTagException("Only one " + OtherwiseTag.TAG_NAME + " allowed");
-		} else {
-			hasOtherwise = true;
-		}
-	}
+  void onOtherwise() throws JspTagException {
+    if (hasOtherwise) {
+      throw new JspTagException("Only one " + OtherwiseTag.TAG_NAME + " allowed");
+    } else {
+      hasOtherwise = true;
+    }
+  }
 
-	@Override
-	public int doEndTag() throws JspException {
-		if(!hasWhen) {
-			throw new JspTagException(TAG_NAME + " requires at least one nested " + WhenTag.TAG_NAME);
-		}
-		return EVAL_PAGE;
-	}
+  @Override
+  public int doEndTag() throws JspException {
+    if (!hasWhen) {
+      throw new JspTagException(TAG_NAME + " requires at least one nested " + WhenTag.TAG_NAME);
+    }
+    return EVAL_PAGE;
+  }
 
-	@Override
-	public void doCatch(Throwable t) throws Throwable {
-		throw t;
-	}
+  @Override
+  public void doCatch(Throwable t) throws Throwable {
+    throw t;
+  }
 
-	@Override
-	public void doFinally() {
-		init();
-	}
+  @Override
+  public void doFinally() {
+    init();
+  }
 }

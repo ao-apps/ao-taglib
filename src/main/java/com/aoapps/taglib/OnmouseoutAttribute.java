@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface OnmouseoutAttribute {
 
-	void setOnmouseout(Object onmouseout);
+  void setOnmouseout(Object onmouseout);
 }

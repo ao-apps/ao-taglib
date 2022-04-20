@@ -36,167 +36,167 @@ import java.util.Map;
  */
 public class MutableGlobalAttributes implements GlobalAttributes, Freezable<GlobalAttributes> {
 
-	private String id;
-	private String clazz;
-	private Map<String, Object> data = MinimalMap.emptyMap();
-	private String dir;
-	private Object style;
+  private String id;
+  private String clazz;
+  private Map<String, Object> data = MinimalMap.emptyMap();
+  private String dir;
+  private Object style;
 
-	public MutableGlobalAttributes() {
-		// Do nothing
-	}
+  public MutableGlobalAttributes() {
+    // Do nothing
+  }
 
-	@SuppressWarnings("OverridableMethodCallInConstructor")
-	public MutableGlobalAttributes(GlobalAttributes global) {
-		setId(global.getId());
-		setClazz(global.getClazz());
-		setData(global.getData());
-		setDir(global.getDir());
-		setStyle(global.getStyle());
-	}
+  @SuppressWarnings("OverridableMethodCallInConstructor")
+  public MutableGlobalAttributes(GlobalAttributes global) {
+    setId(global.getId());
+    setClazz(global.getClazz());
+    setData(global.getData());
+    setDir(global.getDir());
+    setStyle(global.getStyle());
+  }
 
-	@Override
-	public String getId() {
-		return id;
-	}
+  @Override
+  public String getId() {
+    return id;
+  }
 
-	public MutableGlobalAttributes setId(String id) {
-		this.id = Strings.trimNullIfEmpty(id); // TODO: normalize and validate
-		return this;
-	}
+  public MutableGlobalAttributes setId(String id) {
+    this.id = Strings.trimNullIfEmpty(id); // TODO: normalize and validate
+    return this;
+  }
 
-	@Override
-	public String getClazz() {
-		return clazz;
-	}
+  @Override
+  public String getClazz() {
+    return clazz;
+  }
 
-	public MutableGlobalAttributes setClazz(String clazz) {
-		this.clazz = Strings.trimNullIfEmpty(clazz);
-		return this;
-	}
+  public MutableGlobalAttributes setClazz(String clazz) {
+    this.clazz = Strings.trimNullIfEmpty(clazz);
+    return this;
+  }
 
-	@Override
-	public Map<String, Object> getData() {
-		return MinimalMap.unmodifiable(data);
-	}
+  @Override
+  public Map<String, Object> getData() {
+    return MinimalMap.unmodifiable(data);
+  }
 
-	/**
-	 * Replaces all the data with the provided HTML attribute names and values.
-	 * Entries will a {@code null} value are not added.
-	 *
-	 * @throws  IllegalArgumentException  When {@code attrName} is not {@linkplain Data.data#validate(java.lang.String) valid}
-	 *
-	 * @see  GlobalBufferedAttributes#setData(java.util.Map)
-	 */
-	public MutableGlobalAttributes setData(Map<? extends String, ?> data) throws IllegalArgumentException {
-		Map<String, Object> newData = MinimalMap.emptyMap();
-		if(data != null) {
-			for(Map.Entry<? extends String, ?> entry : data.entrySet()) {
-				String attrName = Attributes.validate(entry.getKey(), Data.data::validate);
-				Object value = entry.getValue();
-				if(value != null) {
-					newData = MinimalMap.put(newData, attrName, value);
-				}
-			}
-		}
-		this.data = newData;
-		return this;
-	}
+  /**
+   * Replaces all the data with the provided HTML attribute names and values.
+   * Entries will a {@code null} value are not added.
+   *
+   * @throws  IllegalArgumentException  When {@code attrName} is not {@linkplain Data.data#validate(java.lang.String) valid}
+   *
+   * @see  GlobalBufferedAttributes#setData(java.util.Map)
+   */
+  public MutableGlobalAttributes setData(Map<? extends String, ?> data) throws IllegalArgumentException {
+    Map<String, Object> newData = MinimalMap.emptyMap();
+    if (data != null) {
+      for (Map.Entry<? extends String, ?> entry : data.entrySet()) {
+        String attrName = Attributes.validate(entry.getKey(), Data.data::validate);
+        Object value = entry.getValue();
+        if (value != null) {
+          newData = MinimalMap.put(newData, attrName, value);
+        }
+      }
+    }
+    this.data = newData;
+    return this;
+  }
 
-	/**
-	 * Adds all the data with the provided HTML attribute names and values, replacing any attributes that already exist.
-	 * Entries with a {@code null} value will remove any existing attribute.
-	 *
-	 * @throws  IllegalArgumentException  When {@code attrName} is not {@linkplain Data.data#validate(java.lang.String) valid}
-	 */
-	public MutableGlobalAttributes addData(Map<? extends String, ?> data) throws IllegalArgumentException {
-		if(data != null) {
-			Map<String, Object> newData = this.data;
-			for(Map.Entry<? extends String, ?> entry : data.entrySet()) {
-				String attrName = Attributes.validate(entry.getKey(), Data.data::validate);
-				Object value = entry.getValue();
-				newData =
-					(value == null)
-					? MinimalMap.remove(newData, attrName)
-					: MinimalMap.put(newData, attrName, value);
-			}
-			this.data = newData;
-		}
-		return this;
-	}
+  /**
+   * Adds all the data with the provided HTML attribute names and values, replacing any attributes that already exist.
+   * Entries with a {@code null} value will remove any existing attribute.
+   *
+   * @throws  IllegalArgumentException  When {@code attrName} is not {@linkplain Data.data#validate(java.lang.String) valid}
+   */
+  public MutableGlobalAttributes addData(Map<? extends String, ?> data) throws IllegalArgumentException {
+    if (data != null) {
+      Map<String, Object> newData = this.data;
+      for (Map.Entry<? extends String, ?> entry : data.entrySet()) {
+        String attrName = Attributes.validate(entry.getKey(), Data.data::validate);
+        Object value = entry.getValue();
+        newData =
+          (value == null)
+          ? MinimalMap.remove(newData, attrName)
+          : MinimalMap.put(newData, attrName, value);
+      }
+      this.data = newData;
+    }
+    return this;
+  }
 
-	/**
-	 * Adds the data with the provided HTML attribute name and value, replacing any attribute that already exists.
-	 * When value is {@code null}, will remove an existing attribute.
-	 *
-	 * @throws  IllegalArgumentException  When {@code attrName} is not {@linkplain Data.data#validate(java.lang.String) valid}
-	 *
-	 * @see  DataAttribute#addData(java.lang.String, java.lang.Object)
-	 */
-	public MutableGlobalAttributes addData(String attrName, Object value) throws IllegalArgumentException {
-		Attributes.validate(attrName, Data.data::validate);
-		this.data =
-			(data == null)
-			? MinimalMap.remove(this.data, attrName)
-			: MinimalMap.put(this.data, attrName, value);
-		return this;
-	}
+  /**
+   * Adds the data with the provided HTML attribute name and value, replacing any attribute that already exists.
+   * When value is {@code null}, will remove an existing attribute.
+   *
+   * @throws  IllegalArgumentException  When {@code attrName} is not {@linkplain Data.data#validate(java.lang.String) valid}
+   *
+   * @see  DataAttribute#addData(java.lang.String, java.lang.Object)
+   */
+  public MutableGlobalAttributes addData(String attrName, Object value) throws IllegalArgumentException {
+    Attributes.validate(attrName, Data.data::validate);
+    this.data =
+      (data == null)
+      ? MinimalMap.remove(this.data, attrName)
+      : MinimalMap.put(this.data, attrName, value);
+    return this;
+  }
 
-	/**
-	 * Removes the data with the provided HTML attribute names.
-	 */
-	public MutableGlobalAttributes removeData(Iterable<? extends String> attrNames) {
-		if(attrNames != null) {
-			Map<String, Object> newData = this.data;
-			// TODO: MinimalMap.removeAll
-			for(String key : attrNames) {
-				newData = MinimalMap.remove(newData, key);
-			}
-			this.data = newData;
-		}
-		return this;
-	}
+  /**
+   * Removes the data with the provided HTML attribute names.
+   */
+  public MutableGlobalAttributes removeData(Iterable<? extends String> attrNames) {
+    if (attrNames != null) {
+      Map<String, Object> newData = this.data;
+      // TODO: MinimalMap.removeAll
+      for (String key : attrNames) {
+        newData = MinimalMap.remove(newData, key);
+      }
+      this.data = newData;
+    }
+    return this;
+  }
 
-	/**
-	 * Removes the data with the provided HTML attribute name.
-	 */
-	public MutableGlobalAttributes removeData(String attrName) {
-		this.data = MinimalMap.remove(this.data, attrName);
-		return this;
-	}
+  /**
+   * Removes the data with the provided HTML attribute name.
+   */
+  public MutableGlobalAttributes removeData(String attrName) {
+    this.data = MinimalMap.remove(this.data, attrName);
+    return this;
+  }
 
-	@Override
-	public String getDir() {
-		return dir;
-	}
+  @Override
+  public String getDir() {
+    return dir;
+  }
 
-	public MutableGlobalAttributes setDir(String dir) throws IllegalArgumentException {
-		this.dir = Attributes.validate(
-			Dir.dir.normalize(dir),
-			Dir.dir::validate
-		);
-		return this;
-	}
+  public MutableGlobalAttributes setDir(String dir) throws IllegalArgumentException {
+    this.dir = Attributes.validate(
+      Dir.dir.normalize(dir),
+      Dir.dir::validate
+    );
+    return this;
+  }
 
-	@Override
-	public Object getStyle() {
-		return style;
-	}
+  @Override
+  public Object getStyle() {
+    return style;
+  }
 
-	public MutableGlobalAttributes setStyle(Object style) throws IllegalArgumentException {
-		this.style = AttributeUtils.trimNullIfEmpty(style); // TODO: .normalize()
-		return this;
-	}
+  public MutableGlobalAttributes setStyle(Object style) throws IllegalArgumentException {
+    this.style = AttributeUtils.trimNullIfEmpty(style); // TODO: .normalize()
+    return this;
+  }
 
-	/**
-	 * Gets an immutable, thread-safe instance.
-	 *
-	 * @return  The instance or {@link ImmutableGlobalAttributes#EMPTY} when empty.
-	 *
-	 * @see  ImmutableGlobalAttributes#of(com.aoapps.taglib.GlobalAttributes)
-	 */
-	@Override
-	public GlobalAttributes freeze() {
-		return ImmutableGlobalAttributes.of(this);
-	}
+  /**
+   * Gets an immutable, thread-safe instance.
+   *
+   * @return  The instance or {@link ImmutableGlobalAttributes#EMPTY} when empty.
+   *
+   * @see  ImmutableGlobalAttributes#of(com.aoapps.taglib.GlobalAttributes)
+   */
+  @Override
+  public GlobalAttributes freeze() {
+    return ImmutableGlobalAttributes.of(this);
+  }
 }

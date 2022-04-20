@@ -34,74 +34,78 @@ import javax.servlet.jsp.JspException;
  * @author  AO Industries, Inc.
  */
 public class ArgTag extends EncodingBufferedTag
-	implements
-		NameAttribute,
-		ValueAttribute
+  implements
+    NameAttribute,
+    ValueAttribute
 {
 
 /* SimpleTag only: */
-	public static final String TAG_NAME = "<ao:arg>";
+  public static final String TAG_NAME = "<ao:arg>";
 /**/
 
-	public ArgTag() {
-		init();
-	}
+  public ArgTag() {
+    init();
+  }
 
-	@Override
-	public MediaType getContentType() {
-		return MediaType.TEXT;
-	}
+  @Override
+  public MediaType getContentType() {
+    return MediaType.TEXT;
+  }
 
-	@Override
-	public MediaType getOutputType() {
-		return null;
-	}
+  @Override
+  public MediaType getOutputType() {
+    return null;
+  }
 
 /* BodyTag only:
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 /**/
 
-	private String name;
-	@Override
-	public void setName(String name) {
-		this.name = name;
-	}
+  private String name;
+  @Override
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	private Object value;
-	@Override
-	public void setValue(Object value) {
-		this.value = value;
-	}
+  private Object value;
+  @Override
+  public void setValue(Object value) {
+    this.value = value;
+  }
 
-	private void init() {
-		name = null;
-		value = null;
-	}
+  private void init() {
+    name = null;
+    value = null;
+  }
 
-	@Override
+  @Override
 /* BodyTag only:
-	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+  protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
 /* SimpleTag only: */
-	protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+  protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
-		if(name==null) throw new AttributeRequiredException("name");
-		if(value==null) setValue(capturedBody.trim());
-		AttributeUtils.requireAttributeParent(TAG_NAME, this, "args", ArgsAttribute.class)
-			.addArg(name, value);
+    if (name == null) {
+      throw new AttributeRequiredException("name");
+    }
+    if (value == null) {
+      setValue(capturedBody.trim());
+    }
+    AttributeUtils.requireAttributeParent(TAG_NAME, this, "args", ArgsAttribute.class)
+      .addArg(name, value);
 /* BodyTag only:
-		return EVAL_PAGE;
+    return EVAL_PAGE;
 /**/
-	}
+  }
 
 /* BodyTag only:
-	@Override
-	public void doFinally() {
-		try {
-			init();
-		} finally {
-			super.doFinally();
-		}
-	}
+  @Override
+  public void doFinally() {
+    try {
+      init();
+    } finally {
+      super.doFinally();
+    }
+  }
 /**/
 }

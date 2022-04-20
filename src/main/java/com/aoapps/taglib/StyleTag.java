@@ -42,80 +42,80 @@ import javax.servlet.jsp.PageContext;
 public class StyleTag extends EncodingBufferedTag {
 
 /* SimpleTag only: */
-	public static final String TAG_NAME = "<ao:style>";
+  public static final String TAG_NAME = "<ao:style>";
 /**/
 
-	public StyleTag() {
-		init();
-	}
+  public StyleTag() {
+    init();
+  }
 
-	@Override
-	public MediaType getContentType() {
-		return MediaType.CSS;
-	}
+  @Override
+  public MediaType getContentType() {
+    return MediaType.CSS;
+  }
 
-	@Override
-	public MediaType getOutputType() {
-		Optional<StyleAttribute> styleAttribute = forceElement
-			? Optional.empty()
-			: JspTagUtils.findAncestor(this, StyleAttribute.class);
-		return styleAttribute.isPresent() ? null : MediaType.XHTML;
-	}
+  @Override
+  public MediaType getOutputType() {
+    Optional<StyleAttribute> styleAttribute = forceElement
+      ? Optional.empty()
+      : JspTagUtils.findAncestor(this, StyleAttribute.class);
+    return styleAttribute.isPresent() ? null : MediaType.XHTML;
+  }
 
 /* BodyTag only:
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 /**/
 
-	private boolean forceElement;
-	public void setForceElement(boolean forceElement) {
-		this.forceElement = forceElement;
-	}
+  private boolean forceElement;
+  public void setForceElement(boolean forceElement) {
+    this.forceElement = forceElement;
+  }
 
 
-	private void init() {
-		forceElement = false;
-	}
+  private void init() {
+    forceElement = false;
+  }
 
-	@Override
+  @Override
 /* BodyTag only:
-	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+  protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
 /* SimpleTag only: */
-	protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-		PageContext pageContext = (PageContext)getJspContext();
+  protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+    PageContext pageContext = (PageContext)getJspContext();
 /**/
-		Optional<StyleAttribute> styleAttribute = forceElement
-			? Optional.empty()
-			: JspTagUtils.findAncestor(this, StyleAttribute.class);
-		if(styleAttribute.isPresent()) {
-			styleAttribute.get().setStyle(capturedBody.trim());
-		} else {
-			// Write style tag with src attribute
-			DocumentEE document = new DocumentEE(
-				pageContext.getServletContext(),
-				(HttpServletRequest)pageContext.getRequest(),
-				(HttpServletResponse)pageContext.getResponse(),
-				out,
-				false, // Do not add extra newlines to JSP
-				false  // Do not add extra indentation to JSP
-			);
-			document.style()
-				.out(capturedBody)
-			.__();
-		}
+    Optional<StyleAttribute> styleAttribute = forceElement
+      ? Optional.empty()
+      : JspTagUtils.findAncestor(this, StyleAttribute.class);
+    if (styleAttribute.isPresent()) {
+      styleAttribute.get().setStyle(capturedBody.trim());
+    } else {
+      // Write style tag with src attribute
+      DocumentEE document = new DocumentEE(
+        pageContext.getServletContext(),
+        (HttpServletRequest)pageContext.getRequest(),
+        (HttpServletResponse)pageContext.getResponse(),
+        out,
+        false, // Do not add extra newlines to JSP
+        false  // Do not add extra indentation to JSP
+      );
+      document.style()
+        .out(capturedBody)
+      .__();
+    }
 /* BodyTag only:
-		return EVAL_PAGE;
+    return EVAL_PAGE;
 /**/
-	}
+  }
 
 /* BodyTag only:
-	@Override
-	public void doFinally() {
-		try {
-			init();
-		} finally {
-			super.doFinally();
-		}
-	}
+  @Override
+  public void doFinally() {
+    try {
+      init();
+    } finally {
+      super.doFinally();
+    }
+  }
 /**/
 }

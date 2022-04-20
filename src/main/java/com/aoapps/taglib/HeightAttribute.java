@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface HeightAttribute {
 
-	void setHeight(Object height);
+  void setHeight(Object height);
 }

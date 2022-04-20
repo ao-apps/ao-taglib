@@ -43,160 +43,166 @@ import javax.servlet.jsp.PageContext;
  */
 public final class UrlUtils {
 
-	/** Make no instances. */
-	private UrlUtils() {throw new AssertionError();}
+  /** Make no instances. */
+  private UrlUtils() {
+    throw new AssertionError();
+  }
 
-	private static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, UrlUtils.class);
+  private static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, UrlUtils.class);
 
-	/**
-	 * Gets an href attribute value with parameters.
-	 * Adds contextPath to URLs that begin with a slash (/).
-	 * Encodes the URL.
-	 *
-	 * @see #writeHref(javax.servlet.jsp.PageContext, java.lang.Appendable, java.lang.String, com.aoapps.net.URIParameters, com.aoapps.servlet.lastmodified.AddLastModified, boolean, boolean)
-	 *
-	 * @throws JspTagException when parameters provided with null href
-	 */
-	public static String getHref(
-		PageContext pageContext,
-		String href,
-		URIParameters params,
-		AddLastModified addLastModified,
-		boolean absolute,
-		boolean canonical
-	) throws JspTagException, MalformedURLException {
-		if(href != null) {
-			return LastModifiedUtil.buildURL(pageContext, href, params, addLastModified, absolute, canonical);
-		} else {
-			if(params != null) throw new LocalizedJspTagException(RESOURCES, "paramsWithoutHref");
-			return null;
-		}
-	}
+  /**
+   * Gets an href attribute value with parameters.
+   * Adds contextPath to URLs that begin with a slash (/).
+   * Encodes the URL.
+   *
+   * @see #writeHref(javax.servlet.jsp.PageContext, java.lang.Appendable, java.lang.String, com.aoapps.net.URIParameters, com.aoapps.servlet.lastmodified.AddLastModified, boolean, boolean)
+   *
+   * @throws JspTagException when parameters provided with null href
+   */
+  public static String getHref(
+    PageContext pageContext,
+    String href,
+    URIParameters params,
+    AddLastModified addLastModified,
+    boolean absolute,
+    boolean canonical
+  ) throws JspTagException, MalformedURLException {
+    if (href != null) {
+      return LastModifiedUtil.buildURL(pageContext, href, params, addLastModified, absolute, canonical);
+    } else {
+      if (params != null) {
+        throw new LocalizedJspTagException(RESOURCES, "paramsWithoutHref");
+      }
+      return null;
+    }
+  }
 
-	/**
-	 * Writes an href attribute with parameters.
-	 * Adds contextPath to URLs that begin with a slash (/).
-	 * Encodes the URL.
-	 *
-	 * @see #getHref(javax.servlet.jsp.PageContext, java.lang.String, com.aoapps.net.URIParameters, com.aoapps.servlet.lastmodified.AddLastModified, boolean, boolean)
-	 *
-	 * @throws JspTagException when parameters provided with null href
-	 */
-	// TODO: Still used once converted to ao-fluent-html?
-	public static void writeHref(
-		PageContext pageContext,
-		Appendable out,
-		String href,
-		URIParameters params,
-		AddLastModified addLastModified,
-		boolean absolute,
-		boolean canonical
-	) throws JspTagException, IOException {
-		href = getHref(pageContext, href, params, addLastModified, absolute, canonical);
-		if(href != null) {
-			out.append(" href=\"");
-			encodeTextInXhtmlAttribute(href, out);
-			out.append('"');
-		}
-	}
+  /**
+   * Writes an href attribute with parameters.
+   * Adds contextPath to URLs that begin with a slash (/).
+   * Encodes the URL.
+   *
+   * @see #getHref(javax.servlet.jsp.PageContext, java.lang.String, com.aoapps.net.URIParameters, com.aoapps.servlet.lastmodified.AddLastModified, boolean, boolean)
+   *
+   * @throws JspTagException when parameters provided with null href
+   */
+  // TODO: Still used once converted to ao-fluent-html?
+  public static void writeHref(
+    PageContext pageContext,
+    Appendable out,
+    String href,
+    URIParameters params,
+    AddLastModified addLastModified,
+    boolean absolute,
+    boolean canonical
+  ) throws JspTagException, IOException {
+    href = getHref(pageContext, href, params, addLastModified, absolute, canonical);
+    if (href != null) {
+      out.append(" href=\"");
+      encodeTextInXhtmlAttribute(href, out);
+      out.append('"');
+    }
+  }
 
-	/**
-	 * @see  #writeHref(javax.servlet.jsp.PageContext, java.lang.Appendable, java.lang.String, com.aoapps.net.URIParameters, com.aoapps.servlet.lastmodified.AddLastModified, boolean, boolean)
-	 */
-	// TODO: Still used once converted to ao-fluent-html?
-	public static void writeHref(
-		JspContext jspContext,
-		Appendable out,
-		String href,
-		URIParameters params,
-		AddLastModified addLastModified,
-		boolean absolute,
-		boolean canonical
-	) throws JspTagException, IOException {
-		writeHref(
-			(PageContext)jspContext,
-			out,
-			href,
-			params,
-			addLastModified,
-			absolute,
-			canonical
-		);
-	}
+  /**
+   * @see  #writeHref(javax.servlet.jsp.PageContext, java.lang.Appendable, java.lang.String, com.aoapps.net.URIParameters, com.aoapps.servlet.lastmodified.AddLastModified, boolean, boolean)
+   */
+  // TODO: Still used once converted to ao-fluent-html?
+  public static void writeHref(
+    JspContext jspContext,
+    Appendable out,
+    String href,
+    URIParameters params,
+    AddLastModified addLastModified,
+    boolean absolute,
+    boolean canonical
+  ) throws JspTagException, IOException {
+    writeHref(
+      (PageContext)jspContext,
+      out,
+      href,
+      params,
+      addLastModified,
+      absolute,
+      canonical
+    );
+  }
 
-	/**
-	 * Gets a src attribute value with parameters.
-	 * Adds contextPath to URLs that begin with a slash (/).
-	 * Encodes the URL.
-	 *
-	 * @see #writeSrc(javax.servlet.jsp.PageContext, java.lang.Appendable, java.lang.String, com.aoapps.net.URIParameters, com.aoapps.servlet.lastmodified.AddLastModified, boolean, boolean)
-	 *
-	 * @throws JspTagException when parameters provided with null src
-	 */
-	public static String getSrc(
-		PageContext pageContext,
-		String src,
-		URIParameters params,
-		AddLastModified addLastModified,
-		boolean absolute,
-		boolean canonical
-	) throws JspTagException, MalformedURLException {
-		if(src != null) {
-			return LastModifiedUtil.buildURL(pageContext, src, params, addLastModified, absolute, canonical);
-		} else {
-			if(params != null) throw new LocalizedJspTagException(RESOURCES, "paramsWithoutSrc");
-			return null;
-		}
-	}
+  /**
+   * Gets a src attribute value with parameters.
+   * Adds contextPath to URLs that begin with a slash (/).
+   * Encodes the URL.
+   *
+   * @see #writeSrc(javax.servlet.jsp.PageContext, java.lang.Appendable, java.lang.String, com.aoapps.net.URIParameters, com.aoapps.servlet.lastmodified.AddLastModified, boolean, boolean)
+   *
+   * @throws JspTagException when parameters provided with null src
+   */
+  public static String getSrc(
+    PageContext pageContext,
+    String src,
+    URIParameters params,
+    AddLastModified addLastModified,
+    boolean absolute,
+    boolean canonical
+  ) throws JspTagException, MalformedURLException {
+    if (src != null) {
+      return LastModifiedUtil.buildURL(pageContext, src, params, addLastModified, absolute, canonical);
+    } else {
+      if (params != null) {
+        throw new LocalizedJspTagException(RESOURCES, "paramsWithoutSrc");
+      }
+      return null;
+    }
+  }
 
-	/**
-	 * Writes a src attribute with parameters.
-	 * Adds contextPath to URLs that begin with a slash (/).
-	 * Encodes the URL.
-	 *
-	 * @see #getSrc(javax.servlet.jsp.PageContext, java.lang.String, com.aoapps.net.URIParameters, com.aoapps.servlet.lastmodified.AddLastModified, boolean, boolean)
-	 *
-	 * @throws JspTagException when parameters provided with null src
-	 */
-	// TODO: Still used once converted to ao-fluent-html?
-	public static void writeSrc(
-		PageContext pageContext,
-		Appendable out,
-		String src,
-		URIParameters params,
-		AddLastModified addLastModified,
-		boolean absolute,
-		boolean canonical
-	) throws JspTagException, IOException {
-		src = getSrc(pageContext, src, params, addLastModified, absolute, canonical);
-		if(src != null) {
-			out.append(" src=\"");
-			encodeTextInXhtmlAttribute(src, out);
-			out.append('"');
-		}
-	}
+  /**
+   * Writes a src attribute with parameters.
+   * Adds contextPath to URLs that begin with a slash (/).
+   * Encodes the URL.
+   *
+   * @see #getSrc(javax.servlet.jsp.PageContext, java.lang.String, com.aoapps.net.URIParameters, com.aoapps.servlet.lastmodified.AddLastModified, boolean, boolean)
+   *
+   * @throws JspTagException when parameters provided with null src
+   */
+  // TODO: Still used once converted to ao-fluent-html?
+  public static void writeSrc(
+    PageContext pageContext,
+    Appendable out,
+    String src,
+    URIParameters params,
+    AddLastModified addLastModified,
+    boolean absolute,
+    boolean canonical
+  ) throws JspTagException, IOException {
+    src = getSrc(pageContext, src, params, addLastModified, absolute, canonical);
+    if (src != null) {
+      out.append(" src=\"");
+      encodeTextInXhtmlAttribute(src, out);
+      out.append('"');
+    }
+  }
 
-	/**
-	 * @see  #writeSrc(javax.servlet.jsp.PageContext, java.lang.Appendable, java.lang.String, com.aoapps.net.URIParameters, com.aoapps.servlet.lastmodified.AddLastModified, boolean, boolean)
-	 */
-	// TODO: Still used once converted to ao-fluent-html?
-	public static void writeSrc(
-		JspContext jspContext,
-		Appendable out,
-		String src,
-		URIParameters params,
-		AddLastModified addLastModified,
-		boolean absolute,
-		boolean canonical
-	) throws JspTagException, IOException {
-		writeSrc(
-			(PageContext)jspContext,
-			out,
-			src,
-			params,
-			addLastModified,
-			absolute,
-			canonical
-		);
-	}
+  /**
+   * @see  #writeSrc(javax.servlet.jsp.PageContext, java.lang.Appendable, java.lang.String, com.aoapps.net.URIParameters, com.aoapps.servlet.lastmodified.AddLastModified, boolean, boolean)
+   */
+  // TODO: Still used once converted to ao-fluent-html?
+  public static void writeSrc(
+    JspContext jspContext,
+    Appendable out,
+    String src,
+    URIParameters params,
+    AddLastModified addLastModified,
+    boolean absolute,
+    boolean canonical
+  ) throws JspTagException, IOException {
+    writeSrc(
+      (PageContext)jspContext,
+      out,
+      src,
+      params,
+      addLastModified,
+      absolute,
+      canonical
+    );
+  }
 }

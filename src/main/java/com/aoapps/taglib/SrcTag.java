@@ -36,35 +36,35 @@ import javax.servlet.jsp.JspException;
 public class SrcTag extends EncodingBufferedTag {
 
 /* SimpleTag only: */
-	public static final String TAG_NAME = "<ao:src>";
+  public static final String TAG_NAME = "<ao:src>";
 /**/
 
-	@Override
-	public MediaType getContentType() {
-		return MediaType.URL;
-	}
+  @Override
+  public MediaType getContentType() {
+    return MediaType.URL;
+  }
 
-	@Override
-	public MediaType getOutputType() {
-		return null;
-	}
+  @Override
+  public MediaType getOutputType() {
+    return null;
+  }
 
 /* BodyTag only:
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 /**/
 
-	@Override
+  @Override
 /* BodyTag only:
-	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+  protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
 /* SimpleTag only: */
-	protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+  protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
-		assert capturedBody.trim() == capturedBody : "URLs should have already been trimmed";
-		AttributeUtils.requireAttributeParent(TAG_NAME, this, "src", SrcAttribute.class)
-			.setSrc(capturedBody.toString());
+    assert capturedBody.trim() == capturedBody : "URLs should have already been trimmed";
+    AttributeUtils.requireAttributeParent(TAG_NAME, this, "src", SrcAttribute.class)
+      .setSrc(capturedBody.toString());
 /* BodyTag only:
-		return EVAL_PAGE;
+    return EVAL_PAGE;
 /**/
-	}
+  }
 }

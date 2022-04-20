@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface ArgsAttribute {
 
-	void addArg(String name, Object value);
+  void addArg(String name, Object value);
 }

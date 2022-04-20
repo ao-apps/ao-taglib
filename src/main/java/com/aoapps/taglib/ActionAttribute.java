@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface ActionAttribute {
 
-	void setAction(String action);
+  void setAction(String action);
 }

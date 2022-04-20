@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface DisabledAttribute {
 
-	void setDisabled(boolean disabled);
+  void setDisabled(boolean disabled);
 }

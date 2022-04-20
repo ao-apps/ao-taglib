@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface ContentAttribute {
 
-	void setContent(Object content);
+  void setContent(Object content);
 }

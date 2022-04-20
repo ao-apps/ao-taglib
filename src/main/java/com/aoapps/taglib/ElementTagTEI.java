@@ -38,32 +38,32 @@ import javax.servlet.jsp.tagext.ValidationMessage;
  */
 public class ElementTagTEI extends TagExtraInfo {
 
-	/**
-	 * @deprecated  You should probably be implementing in {@link #validate(javax.servlet.jsp.tagext.TagData, java.util.List)}
-	 *
-	 * @see  #validate(javax.servlet.jsp.tagext.TagData, java.util.List)
-	 */
-	@Deprecated
-	@Override
-	public final ValidationMessage[] validate(TagData data) {
-		List<ValidationMessage> messages = new ArrayList<>();
-		validate(data, messages);
-		int size = messages.size();
-		return (size == 0) ? null : messages.toArray(new ValidationMessage[size]);
-	}
+  /**
+   * @deprecated  You should probably be implementing in {@link #validate(javax.servlet.jsp.tagext.TagData, java.util.List)}
+   *
+   * @see  #validate(javax.servlet.jsp.tagext.TagData, java.util.List)
+   */
+  @Deprecated
+  @Override
+  public final ValidationMessage[] validate(TagData data) {
+    List<ValidationMessage> messages = new ArrayList<>();
+    validate(data, messages);
+    int size = messages.size();
+    return (size == 0) ? null : messages.toArray(new ValidationMessage[size]);
+  }
 
-	/**
-	 * Validates the tag, adding all messages to the provided list.
-	 */
-	protected void validate(TagData data, List<ValidationMessage> messages) {
-		Object o = data.getAttribute("dir");
-		if(o != TagData.REQUEST_TIME_VALUE) {
-			// TODO: Other validation Strings.trimNullIfEmpty (or their normalize* method) for consistency with implementation
-			String dir = Dir.dir.normalize((String)o);
-			ValidationResult validation = Dir.dir.validate(dir);
-			if(!validation.isValid()) {
-				messages.add(new ValidationMessage(data.getId(), validation.toString()));
-			}
-		}
-	}
+  /**
+   * Validates the tag, adding all messages to the provided list.
+   */
+  protected void validate(TagData data, List<ValidationMessage> messages) {
+    Object o = data.getAttribute("dir");
+    if (o != TagData.REQUEST_TIME_VALUE) {
+      // TODO: Other validation Strings.trimNullIfEmpty (or their normalize* method) for consistency with implementation
+      String dir = Dir.dir.normalize((String)o);
+      ValidationResult validation = Dir.dir.validate(dir);
+      if (!validation.isValid()) {
+        messages.add(new ValidationMessage(data.getId(), validation.toString()));
+      }
+    }
+  }
 }

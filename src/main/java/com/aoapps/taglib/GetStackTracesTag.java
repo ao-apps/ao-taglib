@@ -39,38 +39,40 @@ import javax.servlet.jsp.PageContext;
  */
 public class GetStackTracesTag extends EncodingNullTag {
 
-	private static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, GetStackTracesTag.class);
+  private static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, GetStackTracesTag.class);
 
-	private String scope;
-	private String name;
-	private String property;
+  private String scope;
+  private String name;
+  private String property;
 
-	@Override
-	public MediaType getOutputType() {
-		return MediaType.TEXT;
-	}
+  @Override
+  public MediaType getOutputType() {
+    return MediaType.TEXT;
+  }
 
-	public void setScope(String scope) {
-		this.scope = scope;
-	}
+  public void setScope(String scope) {
+    this.scope = scope;
+  }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	public void setProperty(String property) {
-		this.property = property;
-	}
+  public void setProperty(String property) {
+    this.property = property;
+  }
 
-	@Override
-	protected void doTag(Writer out) throws JspException, IOException {
-		PageContext pageContext = (PageContext)getJspContext();
-		// Find the Throwable to display
-		Object value = PropertyUtils.findObject(pageContext, scope, name, property, true, true);
-		if(!(value instanceof Throwable)) throw new LocalizedJspTagException(RESOURCES, "notThrowable", (value == null) ? null : value.getClass().getName());
-		Throwable throwable = (Throwable)value;
+  @Override
+  protected void doTag(Writer out) throws JspException, IOException {
+    PageContext pageContext = (PageContext)getJspContext();
+    // Find the Throwable to display
+    Object value = PropertyUtils.findObject(pageContext, scope, name, property, true, true);
+    if (!(value instanceof Throwable)) {
+      throw new LocalizedJspTagException(RESOURCES, "notThrowable", (value == null) ? null : value.getClass().getName());
+    }
+    Throwable throwable = (Throwable)value;
 
-		// Print the stack traces
-		ErrorPrinter.printStackTraces(throwable, out);
-	}
+    // Print the stack traces
+    ErrorPrinter.printStackTraces(throwable, out);
+  }
 }

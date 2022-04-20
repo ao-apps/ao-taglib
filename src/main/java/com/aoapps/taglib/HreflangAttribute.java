@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface HreflangAttribute {
 
-	void setHreflang(Object hreflang);
+  void setHreflang(Object hreflang);
 }

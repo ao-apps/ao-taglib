@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface FrameborderAttribute {
 
-	void setFrameborder(boolean frameborder);
+  void setFrameborder(boolean frameborder);
 }

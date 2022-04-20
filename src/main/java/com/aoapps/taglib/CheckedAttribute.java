@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface CheckedAttribute {
 
-	void setChecked(boolean checked);
+  void setChecked(boolean checked);
 }

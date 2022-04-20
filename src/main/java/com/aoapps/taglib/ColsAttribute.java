@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface ColsAttribute {
 
-	void setCols(int cols);
+  void setCols(int cols);
 }

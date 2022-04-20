@@ -37,76 +37,76 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  * @author  AO Industries, Inc.
  */
 public abstract class ElementFilteredTag extends EncodingFilteredTag
-	implements
-		GlobalAttributes,
-		DynamicAttributes
+  implements
+    GlobalAttributes,
+    DynamicAttributes
 {
 
-	protected final MutableGlobalAttributes global = new MutableGlobalAttributes();
+  protected final MutableGlobalAttributes global = new MutableGlobalAttributes();
 
-	@Override
-	public String getId() {
-		return global.getId();
-	}
-	public void setId(String id) {
-		global.setId(id);
-		// TODO: Validate, and TEI
-	}
+  @Override
+  public String getId() {
+    return global.getId();
+  }
+  public void setId(String id) {
+    global.setId(id);
+    // TODO: Validate, and TEI
+  }
 
-	@Override
-	public String getClazz() {
-		return global.getClazz();
-	}
-	public void setClazz(String clazz) {
-		global.setClazz(clazz);
-	}
+  @Override
+  public String getClazz() {
+    return global.getClazz();
+  }
+  public void setClazz(String clazz) {
+    global.setClazz(clazz);
+  }
 
-	@Override
-	public Map<String, Object> getData() {
-		return global.getData();
-	}
+  @Override
+  public Map<String, Object> getData() {
+    return global.getData();
+  }
 
-	@Override
-	public String getDir() {
-		return global.getDir();
-	}
-	public void setDir(String dir) {
-		global.setDir(dir);
-	}
+  @Override
+  public String getDir() {
+    return global.getDir();
+  }
+  public void setDir(String dir) {
+    global.setDir(dir);
+  }
 
-	@Override
-	public Object getStyle() {
-		return global.getStyle();
-	}
-	public void setStyle(Object style) {
-		global.setStyle(style);
-	}
+  @Override
+  public Object getStyle() {
+    return global.getStyle();
+  }
+  public void setStyle(Object style) {
+    global.setStyle(style);
+  }
 
-	/**
-	 * Adds a {@linkplain DynamicAttributes dynamic attribute}.
-	 *
-	 * @return  {@code true} when added, or {@code false} when attribute not expected and has not been added.
-	 *
-	 * @see  GlobalAttributesUtils#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List, com.aoapps.taglib.MutableGlobalAttributes)
-	 * @see  #setDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object)
-	 */
-	protected boolean addDynamicAttribute(String uri, String localName, Object value, List<String> expectedPatterns) throws JspTagException {
-		return GlobalAttributesUtils.addDynamicAttribute(uri, localName, value, expectedPatterns, global);
-	}
+  /**
+   * Adds a {@linkplain DynamicAttributes dynamic attribute}.
+   *
+   * @return  {@code true} when added, or {@code false} when attribute not expected and has not been added.
+   *
+   * @see  GlobalAttributesUtils#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List, com.aoapps.taglib.MutableGlobalAttributes)
+   * @see  #setDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object)
+   */
+  protected boolean addDynamicAttribute(String uri, String localName, Object value, List<String> expectedPatterns) throws JspTagException {
+    return GlobalAttributesUtils.addDynamicAttribute(uri, localName, value, expectedPatterns, global);
+  }
 
-	/**
-	 * Sets a {@linkplain DynamicAttributes dynamic attribute}.
-	 *
-	 * @deprecated  You should probably be implementing in {@link #addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List)}
-	 *
-	 * @see  #addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List)
-	 */
-	@Deprecated
-	@Override
-	public void setDynamicAttribute(String uri, String localName, Object value) throws JspException {
-		List<String> expectedPatterns = new ArrayList<>();
-		if(!addDynamicAttribute(uri, localName, value, expectedPatterns)) {
-			throw AttributeUtils.newDynamicAttributeFailedException(uri, localName, value, expectedPatterns);
-		}
-	}
+  /**
+   * Sets a {@linkplain DynamicAttributes dynamic attribute}.
+   *
+   * @deprecated  You should probably be implementing in {@link #addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List)}
+   *
+   * @see  #addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List)
+   */
+  @Deprecated
+  @Override
+  public void setDynamicAttribute(String uri, String localName, Object value) throws JspException {
+    List<String> expectedPatterns = new ArrayList<>();
+    if (!addDynamicAttribute(uri, localName, value, expectedPatterns)) {
+      throw AttributeUtils.newDynamicAttributeFailedException(uri, localName, value, expectedPatterns);
+    }
+  }
 }

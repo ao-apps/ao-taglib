@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface TabindexAttribute {
 
-	void setTabindex(int tabindex);
+  void setTabindex(int tabindex);
 }

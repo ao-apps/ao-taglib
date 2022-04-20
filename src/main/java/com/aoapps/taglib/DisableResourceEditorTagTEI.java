@@ -36,39 +36,39 @@ import javax.servlet.jsp.tagext.ValidationMessage;
  */
 public class DisableResourceEditorTagTEI extends TagExtraInfo {
 
-	@Override
-	public ValidationMessage[] validate(TagData data) {
-		List<ValidationMessage> messages = MinimalList.emptyList();
+  @Override
+  public ValidationMessage[] validate(TagData data) {
+    List<ValidationMessage> messages = MinimalList.emptyList();
 
-		Object scopeAttr = data.getAttribute("scope");
-		if(scopeAttr != null && scopeAttr != TagData.REQUEST_TIME_VALUE) {
-			String scope = (String)scopeAttr;
-			if(!DisableResourceEditorTag.isValidScope(scope)) {
-				messages = MinimalList.add(
-					messages,
-					new ValidationMessage(
-						data.getId(),
-						DisableResourceEditorTag.RESOURCES.getMessage("scope.invalid", scope)
-					)
-				);
-			}
-		}
+    Object scopeAttr = data.getAttribute("scope");
+    if (scopeAttr != null && scopeAttr != TagData.REQUEST_TIME_VALUE) {
+      String scope = (String)scopeAttr;
+      if (!DisableResourceEditorTag.isValidScope(scope)) {
+        messages = MinimalList.add(
+          messages,
+          new ValidationMessage(
+            data.getId(),
+            DisableResourceEditorTag.RESOURCES.getMessage("scope.invalid", scope)
+          )
+        );
+      }
+    }
 
-		Object modeAttr = data.getAttribute("mode");
-		if(modeAttr != null && modeAttr != TagData.REQUEST_TIME_VALUE) {
-			String mode = Strings.trimNullIfEmpty((String)modeAttr);
-			if(mode != null) {
-				try {
-					EditableResourceBundle.ThreadSettings.Mode.valueOf(mode);
-				} catch(IllegalArgumentException e) {
-					messages = MinimalList.add(
-						messages,
-						new ValidationMessage(data.getId(), e.getLocalizedMessage())
-					);
-				}
-			}
-		}
+    Object modeAttr = data.getAttribute("mode");
+    if (modeAttr != null && modeAttr != TagData.REQUEST_TIME_VALUE) {
+      String mode = Strings.trimNullIfEmpty((String)modeAttr);
+      if (mode != null) {
+        try {
+          EditableResourceBundle.ThreadSettings.Mode.valueOf(mode);
+        } catch (IllegalArgumentException e) {
+          messages = MinimalList.add(
+            messages,
+            new ValidationMessage(data.getId(), e.getLocalizedMessage())
+          );
+        }
+      }
+    }
 
-		return messages.isEmpty() ? null : messages.toArray(new ValidationMessage[messages.size()]);
-	}
+    return messages.isEmpty() ? null : messages.toArray(new ValidationMessage[messages.size()]);
+  }
 }

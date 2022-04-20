@@ -31,5 +31,5 @@ package com.aoapps.taglib;
  */
 public interface MetasAttribute {
 
-	void addMeta(Meta meta);
+  void addMeta(Meta meta);
 }

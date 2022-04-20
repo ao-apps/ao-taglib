@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface OnmouseoverAttribute {
 
-	void setOnmouseover(Object onmouseover);
+  void setOnmouseover(Object onmouseover);
 }

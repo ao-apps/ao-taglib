@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface MaxlengthAttribute {
 
-	void setMaxlength(Integer maxlength);
+  void setMaxlength(Integer maxlength);
 }

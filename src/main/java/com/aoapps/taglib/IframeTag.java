@@ -46,151 +46,155 @@ import javax.servlet.jsp.PageContext;
  * @author  AO Industries, Inc.
  */
 public class IframeTag extends ElementBufferedTag
-	implements
-		// Attributes
-		SrcAttribute,
-		ParamsAttribute,
-		WidthAttribute,
-		HeightAttribute,
-		FrameborderAttribute
+  implements
+    // Attributes
+    SrcAttribute,
+    ParamsAttribute,
+    WidthAttribute,
+    HeightAttribute,
+    FrameborderAttribute
 {
 
-	public IframeTag() {
-		init();
-	}
+  public IframeTag() {
+    init();
+  }
 
-	@Override
-	public MediaType getContentType() {
-		return MediaType.XHTML;
-	}
+  @Override
+  public MediaType getContentType() {
+    return MediaType.XHTML;
+  }
 
-	@Override
-	public MediaType getOutputType() {
-		return MediaType.XHTML;
-	}
+  @Override
+  public MediaType getOutputType() {
+    return MediaType.XHTML;
+  }
 
 /* BodyTag only:
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 /**/
 
-	private String src;
-	@Override
-	public void setSrc(String src) {
-		this.src = Strings.nullIfEmpty(src);
-	}
+  private String src;
+  @Override
+  public void setSrc(String src) {
+    this.src = Strings.nullIfEmpty(src);
+  }
 
-	private MutableURIParameters params;
-	@Override
-	public void addParam(String name, Object value) {
-		if(params == null) params = new URIParametersMap();
-		params.add(name, value);
-	}
+  private MutableURIParameters params;
+  @Override
+  public void addParam(String name, Object value) {
+    if (params == null) {
+      params = new URIParametersMap();
+    }
+    params.add(name, value);
+  }
 
-	private boolean absolute;
-	public void setAbsolute(boolean absolute) {
-		this.absolute = absolute;
-	}
+  private boolean absolute;
+  public void setAbsolute(boolean absolute) {
+    this.absolute = absolute;
+  }
 
-	private boolean canonical;
-	public void setCanonical(boolean canonical) {
-		this.canonical = canonical;
-	}
+  private boolean canonical;
+  public void setCanonical(boolean canonical) {
+    this.canonical = canonical;
+  }
 
-	private AddLastModified addLastModified;
-	public void setAddLastModified(String addLastModified) {
-		this.addLastModified = AddLastModified.valueOfLowerName(addLastModified.trim().toLowerCase(Locale.ROOT));
-	}
+  private AddLastModified addLastModified;
+  public void setAddLastModified(String addLastModified) {
+    this.addLastModified = AddLastModified.valueOfLowerName(addLastModified.trim().toLowerCase(Locale.ROOT));
+  }
 
-	private Object width;
-	@Override
-	public void setWidth(Object width) {
-		this.width = AttributeUtils.trimNullIfEmpty(width);
-	}
+  private Object width;
+  @Override
+  public void setWidth(Object width) {
+    this.width = AttributeUtils.trimNullIfEmpty(width);
+  }
 
-	private Object height;
-	@Override
-	public void setHeight(Object height) {
-		this.height = AttributeUtils.trimNullIfEmpty(height);
-	}
+  private Object height;
+  @Override
+  public void setHeight(Object height) {
+    this.height = AttributeUtils.trimNullIfEmpty(height);
+  }
 
-	private boolean frameborder;
-	@Override
-	public void setFrameborder(boolean frameborder) {
-		this.frameborder = frameborder;
-	}
+  private boolean frameborder;
+  @Override
+  public void setFrameborder(boolean frameborder) {
+    this.frameborder = frameborder;
+  }
 
-	/**
-	 * @see  ParamUtils#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List, com.aoapps.taglib.ParamsAttribute)
-	 */
-	@Override
-	protected boolean addDynamicAttribute(String uri, String localName, Object value, List<String> expectedPatterns) throws JspTagException {
-		return
-			super.addDynamicAttribute(uri, localName, value, expectedPatterns)
-			|| ParamUtils.addDynamicAttribute(uri, localName, value, expectedPatterns, this);
-	}
+  /**
+   * @see  ParamUtils#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List, com.aoapps.taglib.ParamsAttribute)
+   */
+  @Override
+  protected boolean addDynamicAttribute(String uri, String localName, Object value, List<String> expectedPatterns) throws JspTagException {
+    return
+      super.addDynamicAttribute(uri, localName, value, expectedPatterns)
+      || ParamUtils.addDynamicAttribute(uri, localName, value, expectedPatterns, this);
+  }
 
-	private void init() {
-		src = null;
-		params = null;
-		absolute = false;
-		canonical = false;
-		addLastModified = AddLastModified.AUTO;
-		width = null;
-		height = null;
-		frameborder = true;
-	}
+  private void init() {
+    src = null;
+    params = null;
+    absolute = false;
+    canonical = false;
+    addLastModified = AddLastModified.AUTO;
+    width = null;
+    height = null;
+    frameborder = true;
+  }
 
-	@Override
+  @Override
 /* BodyTag only:
-	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+  protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
 /* SimpleTag only: */
-	protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-		PageContext pageContext = (PageContext)getJspContext();
+  protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+    PageContext pageContext = (PageContext)getJspContext();
 /**/
-		if(src == null) throw new AttributeRequiredException("src");
-		out.write("<iframe");
-		GlobalAttributesUtils.writeGlobalAttributes(global, out);
-		// TODO: Include id/name by doctype
-		String _id = global.getId();
-		if(_id != null) {
-			out.write(" name=\"");
-			encodeTextInXhtmlAttribute(_id, out);
-			out.append('"');
-		}
-		UrlUtils.writeSrc(pageContext, out, src, params, addLastModified, absolute, canonical);
-		if(width != null) {
-			out.write(" width=\"");
-			Coercion.write(width, textInXhtmlAttributeEncoder, out);
-			out.append('"');
-		}
-		if(height != null) {
-			out.write(" height=\"");
-			Coercion.write(height, textInXhtmlAttributeEncoder, out);
-			out.append('"');
-		}
-		out.write(" frameborder=\"");
-		out.append(frameborder ? '1' : '0').write("\">");
-		MarkupCoercion.write(
-			capturedBody,
-			MarkupType.XHTML,
-			out,
-			true
-		);
-		out.write("</iframe>");
+    if (src == null) {
+      throw new AttributeRequiredException("src");
+    }
+    out.write("<iframe");
+    GlobalAttributesUtils.writeGlobalAttributes(global, out);
+    // TODO: Include id/name by doctype
+    String _id = global.getId();
+    if (_id != null) {
+      out.write(" name=\"");
+      encodeTextInXhtmlAttribute(_id, out);
+      out.append('"');
+    }
+    UrlUtils.writeSrc(pageContext, out, src, params, addLastModified, absolute, canonical);
+    if (width != null) {
+      out.write(" width=\"");
+      Coercion.write(width, textInXhtmlAttributeEncoder, out);
+      out.append('"');
+    }
+    if (height != null) {
+      out.write(" height=\"");
+      Coercion.write(height, textInXhtmlAttributeEncoder, out);
+      out.append('"');
+    }
+    out.write(" frameborder=\"");
+    out.append(frameborder ? '1' : '0').write("\">");
+    MarkupCoercion.write(
+      capturedBody,
+      MarkupType.XHTML,
+      out,
+      true
+    );
+    out.write("</iframe>");
 /* BodyTag only:
-		return EVAL_PAGE;
+    return EVAL_PAGE;
 /**/
-	}
+  }
 
 /* BodyTag only:
-	@Override
-	public void doFinally() {
-		try {
-			init();
-		} finally {
-			super.doFinally();
-		}
-	}
+  @Override
+  public void doFinally() {
+    try {
+      init();
+    } finally {
+      super.doFinally();
+    }
+  }
 /**/
 }

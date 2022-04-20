@@ -33,32 +33,32 @@ import java.util.ResourceBundle;
  */
 public class NeedAttributeParentException extends LocalizedJspTagException {
 
-	private static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, NeedAttributeParentException.class);
+  private static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, NeedAttributeParentException.class);
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	private final String fromTagName;
-	private final String attribute;
+  private final String fromTagName;
+  private final String attribute;
 
-	public NeedAttributeParentException(String fromTagName, String attribute) {
-		super(RESOURCES, "message", fromTagName, attribute);
-		this.fromTagName = fromTagName;
-		this.attribute = attribute;
-	}
+  public NeedAttributeParentException(String fromTagName, String attribute) {
+    super(RESOURCES, "message", fromTagName, attribute);
+    this.fromTagName = fromTagName;
+    this.attribute = attribute;
+  }
 
-	public String getFromTagName() {
-		return fromTagName;
-	}
+  public String getFromTagName() {
+    return fromTagName;
+  }
 
-	public String getAttribute() {
-		return attribute;
-	}
+  public String getAttribute() {
+    return attribute;
+  }
 
-	static {
-		Throwables.registerSurrogateFactory(NeedAttributeParentException.class, (template, cause) -> {
-			NeedAttributeParentException newEx = new NeedAttributeParentException(template.fromTagName, template.attribute);
-			newEx.initCause(cause);
-			return newEx;
-		});
-	}
+  static {
+    Throwables.registerSurrogateFactory(NeedAttributeParentException.class, (template, cause) -> {
+      NeedAttributeParentException newEx = new NeedAttributeParentException(template.fromTagName, template.attribute);
+      newEx.initCause(cause);
+      return newEx;
+    });
+  }
 }

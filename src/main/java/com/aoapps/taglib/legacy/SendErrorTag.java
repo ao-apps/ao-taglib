@@ -38,75 +38,77 @@ import javax.servlet.jsp.JspException;
  */
 public class SendErrorTag extends EncodingBufferedBodyTag {
 
-	public SendErrorTag() {
-		init();
-	}
+  public SendErrorTag() {
+    init();
+  }
 
-	@Override
-	public MediaType getContentType() {
-		return MediaType.TEXT;
-	}
+  @Override
+  public MediaType getContentType() {
+    return MediaType.TEXT;
+  }
 
-	@Override
-	public MediaType getOutputType() {
-		return null;
-	}
+  @Override
+  public MediaType getOutputType() {
+    return null;
+  }
 
 /* BodyTag only: */
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 /**/
 
-	private int status;
-	public void setStatus(int status) {
-		this.status = status;
-	}
+  private int status;
+  public void setStatus(int status) {
+    this.status = status;
+  }
 
-	private String message;
-	public void setMessage(String message) {
-		this.message = message;
-	}
+  private String message;
+  public void setMessage(String message) {
+    this.message = message;
+  }
 
-	private void init() {
-		status = 0;
-		message = null;
-	}
+  private void init() {
+    status = 0;
+    message = null;
+  }
 
-	@Override
+  @Override
 /* BodyTag only: */
-	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+  protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
 /* SimpleTag only:
-	protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-		PageContext pageContext = (PageContext)getJspContext();
+  protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+    PageContext pageContext = (PageContext)getJspContext();
 /**/
-		if(message == null) message = capturedBody.trim().toString();
+    if (message == null) {
+      message = capturedBody.trim().toString();
+    }
 
-		HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
-		HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
+    HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
+    HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
 
-		if(message == null || message.isEmpty()) {
-			Includer.sendError(request, response, status);
-		} else {
-			Includer.sendError(request, response, status, message);
-		}
+    if (message == null || message.isEmpty()) {
+      Includer.sendError(request, response, status);
+    } else {
+      Includer.sendError(request, response, status, message);
+    }
 
-		Includer.setPageSkipped(request);
+    Includer.setPageSkipped(request);
 /* BodyTag only: */
-		return SKIP_PAGE;
+    return SKIP_PAGE;
 /**/
 /* SimpleTag only:
-		throw com.aoapps.servlet.ServletUtil.SKIP_PAGE_EXCEPTION;
+    throw com.aoapps.servlet.ServletUtil.SKIP_PAGE_EXCEPTION;
 /**/
-	}
+  }
 
 /* BodyTag only: */
-	@Override
-	public void doFinally() {
-		try {
-			init();
-		} finally {
-			super.doFinally();
-		}
-	}
+  @Override
+  public void doFinally() {
+    try {
+      init();
+    } finally {
+      super.doFinally();
+    }
+  }
 /**/
 }

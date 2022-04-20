@@ -27,21 +27,21 @@ import com.semanticcms.tagreference.TagReferenceInitializer;
 
 public class AoTldInitializer extends TagReferenceInitializer {
 
-	public AoTldInitializer() {
-		super(
-			Maven.properties.getProperty("documented.name") + " Reference",
-			"Taglib Reference",
-			"/taglib",
-			"/ao.tld",
-			true,
-			Maven.properties.getProperty("documented.javadoc.link.javase"),
-			Maven.properties.getProperty("documented.javadoc.link.javaee"),
-			// Self
-			"com.aoapps.taglib", Maven.properties.getProperty("project.url") + "apidocs/com.aoapps.taglib/",
-			// Dependencies
-			"com.aoapps.encoding.taglib", "https://oss.aoapps.com/encoding/taglib/apidocs/com.aoapps.encoding.taglib/",
-			"com.aoapps.lang", "https://oss.aoapps.com/lang/apidocs/com.aoapps.lang/",
-			"com.aoapps.net", "https://oss.aoapps.com/net-types/apidocs/com.aoapps.net.types/"
-		);
-	}
+  public AoTldInitializer() {
+    super(
+      Maven.properties.getProperty("documented.name") + " Reference",
+      "Taglib Reference",
+      "/taglib",
+      "/ao.tld",
+      true,
+      Maven.properties.getProperty("documented.javadoc.link.javase"),
+      Maven.properties.getProperty("documented.javadoc.link.javaee"),
+      // Self
+      "com.aoapps.taglib", Maven.properties.getProperty("project.url") + "apidocs/com.aoapps.taglib/",
+      // Dependencies
+      "com.aoapps.encoding.taglib", "https://oss.aoapps.com/encoding/taglib/apidocs/com.aoapps.encoding.taglib/",
+      "com.aoapps.lang", "https://oss.aoapps.com/lang/apidocs/com.aoapps.lang/",
+      "com.aoapps.net", "https://oss.aoapps.com/net-types/apidocs/com.aoapps.net.types/"
+    );
+  }
 }

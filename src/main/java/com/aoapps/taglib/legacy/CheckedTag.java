@@ -41,41 +41,45 @@ import javax.servlet.jsp.JspException;
 public class CheckedTag extends EncodingBufferedBodyTag {
 
 /* SimpleTag only:
-	public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, CheckedTag.class);
+  public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, CheckedTag.class);
 
-	public static final String TAG_NAME = "<ao:checked>";
+  public static final String TAG_NAME = "<ao:checked>";
 /**/
 
-	@Override
-	public MediaType getContentType() {
-		return MediaType.TEXT;
-	}
+  @Override
+  public MediaType getContentType() {
+    return MediaType.TEXT;
+  }
 
-	@Override
-	public MediaType getOutputType() {
-		return null;
-	}
+  @Override
+  public MediaType getOutputType() {
+    return null;
+  }
 
 /* BodyTag only: */
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 /**/
 
-	@Override
+  @Override
 /* BodyTag only: */
-	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+  protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
 /* SimpleTag only:
-	protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+  protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
-		CheckedAttribute checkedAttribute = AttributeUtils.requireAttributeParent(TAG_NAME, this, "checked", CheckedAttribute.class);
-		String value = capturedBody.trim().toString();
-		if(!value.isEmpty()) {
-			if("true".equalsIgnoreCase(value)) checkedAttribute.setChecked(true);
-			else if("false".equalsIgnoreCase(value)) checkedAttribute.setChecked(false);
-			else throw new LocalizedJspTagException(RESOURCES, "invalidValue", value);
-		}
+    CheckedAttribute checkedAttribute = AttributeUtils.requireAttributeParent(TAG_NAME, this, "checked", CheckedAttribute.class);
+    String value = capturedBody.trim().toString();
+    if (!value.isEmpty()) {
+      if ("true".equalsIgnoreCase(value)) {
+        checkedAttribute.setChecked(true);
+      } else if ("false".equalsIgnoreCase(value)) {
+        checkedAttribute.setChecked(false);
+      } else {
+        throw new LocalizedJspTagException(RESOURCES, "invalidValue", value);
+      }
+    }
 /* BodyTag only: */
-		return EVAL_PAGE;
+    return EVAL_PAGE;
 /**/
-	}
+  }
 }

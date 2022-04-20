@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface OnclickAttribute {
 
-	void setOnclick(Object onclick);
+  void setOnclick(Object onclick);
 }

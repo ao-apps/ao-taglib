@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface HrefAttribute {
 
-	void setHref(String href);
+  void setHref(String href);
 }

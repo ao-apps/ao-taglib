@@ -22,799 +22,799 @@ You should have received a copy of the GNU Lesser General Public License
 along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
 -->
 <jsp:root
-	xmlns:ao="https://oss.aoapps.com/taglib/"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:changelog="https://semanticcms.com/changelog/taglib/"
-	xmlns:core="https://semanticcms.com/core/taglib/"
-	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-	xmlns:jsp="http://java.sun.com/JSP/Page"
-	version="2.1"
+  xmlns:ao="https://oss.aoapps.com/taglib/"
+  xmlns:c="http://java.sun.com/jsp/jstl/core"
+  xmlns:changelog="https://semanticcms.com/changelog/taglib/"
+  xmlns:core="https://semanticcms.com/core/taglib/"
+  xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+  xmlns:jsp="http://java.sun.com/JSP/Page"
+  version="2.1"
 >
-	<jsp:directive.page language="java" pageEncoding="UTF-8" />
-	<jsp:directive.page session="false" />
-	<core:page
-		title="@{documented.name} Changelog"
-		shortTitle="Changelog"
-		tocLevels="1"
-		datePublished="2016-10-29T22:02:09-05:00"
-		dateModified="2022-04-05T01:40:09-05:00"
-	>
-		<c:if test="${fn:endsWith('@{project.version}', '-SNAPSHOT') and !fn:endsWith('@{project.version}', '-POST-SNAPSHOT')}">
-			<changelog:release
-				projectName="@{documented.name}"
-				version="@{project.version}"
-				groupId="@{project.groupId}"
-				artifactId="@{documented.artifactId}"
-				repository="@{nexusUrl}content/repositories/snapshots/"
-				scmUrl="@{project.scm.url}"
-			>
-				<!-- TODO:
-				<ul>
-					<li>Why aren't tag descriptions in the NetBeans code assist?  They are for JSTL.  Is it the HTML formatting?  Is the element ordering?</li>
-					<li>No more nested tags for simply setting attributes: use jsp:attribute instead?</li>
-					<li>Support script async and defer attributes</li>
-					<li>Support autofocus and required attributes (textarea, input, ...)</li>
-					<li>Support other nice HTML 5 features of textarea/input)</li>
-				</ul>
-				-->
-				<ul>
-					<li>More use of <core:link book="/fluent-html/servlet" page="/index.jspx" /> as underlying implementation.</li>
-					<li>Implemented <ao:a href="https://www.w3.org/TR/CSS2/syndata.html#characters">CSS encoding</ao:a>:
-						<ol>
-							<li>
-								<core:link page="ao.tld/tag-style" /> may now be used outside the scope of a
-								<ao:a href="apidocs/com.aoapps.taglib/com/aoapps/taglib/StyleAttribute.html">StyleAttribute</ao:a>
-								(or with the new <code>forceElement="true"</code> attribute) to manually establish
-								a <ao:a href="https://www.w3schools.com/tags/tag_style.asp">style context</ao:a>.  Under
-								the usual case of being within an XHTML container context, this will result in the expected
-								<code><![CDATA[&lt;code&gt;]]></code> element.
-							</li>
-							<li>
-								Tags that generate plaintext output, such as the default type on
-								<core:link page="ao.tld/tag-message" />, <core:link page="ao.tld/tag-out" />, and
-								<core:link page="ao.tld/tag-write" />, will have the plaintext content surrounded by
-								<code>"…"</code> and fully encoded as a <ao:a href="https://www.w3.org/TR/CSS2/syndata.html#strings">CSS string</ao:a>.
-							</li>
-						</ol>
-					</li>
-				</ul>
-			</changelog:release>
-		</c:if>
+  <jsp:directive.page language="java" pageEncoding="UTF-8" />
+  <jsp:directive.page session="false" />
+  <core:page
+    title="@{documented.name} Changelog"
+    shortTitle="Changelog"
+    tocLevels="1"
+    datePublished="2016-10-29T22:02:09-05:00"
+    dateModified="2022-04-05T01:40:09-05:00"
+  >
+    <c:if test="${fn:endsWith('@{project.version}', '-SNAPSHOT') and !fn:endsWith('@{project.version}', '-POST-SNAPSHOT')}">
+      <changelog:release
+        projectName="@{documented.name}"
+        version="@{project.version}"
+        groupId="@{project.groupId}"
+        artifactId="@{documented.artifactId}"
+        repository="@{nexusUrl}content/repositories/snapshots/"
+        scmUrl="@{project.scm.url}"
+      >
+        <!-- TODO:
+        <ul>
+          <li>Why aren't tag descriptions in the NetBeans code assist?  They are for JSTL.  Is it the HTML formatting?  Is the element ordering?</li>
+          <li>No more nested tags for simply setting attributes: use jsp:attribute instead?</li>
+          <li>Support script async and defer attributes</li>
+          <li>Support autofocus and required attributes (textarea, input, ...)</li>
+          <li>Support other nice HTML 5 features of textarea/input)</li>
+        </ul>
+        -->
+        <ul>
+          <li>More use of <core:link book="/fluent-html/servlet" page="/index.jspx" /> as underlying implementation.</li>
+          <li>Implemented <ao:a href="https://www.w3.org/TR/CSS2/syndata.html#characters">CSS encoding</ao:a>:
+            <ol>
+              <li>
+                <core:link page="ao.tld/tag-style" /> may now be used outside the scope of a
+                <ao:a href="apidocs/com.aoapps.taglib/com/aoapps/taglib/StyleAttribute.html">StyleAttribute</ao:a>
+                (or with the new <code>forceElement="true"</code> attribute) to manually establish
+                a <ao:a href="https://www.w3schools.com/tags/tag_style.asp">style context</ao:a>.  Under
+                the usual case of being within an XHTML container context, this will result in the expected
+                <code><![CDATA[&lt;code&gt;]]></code> element.
+              </li>
+              <li>
+                Tags that generate plaintext output, such as the default type on
+                <core:link page="ao.tld/tag-message" />, <core:link page="ao.tld/tag-out" />, and
+                <core:link page="ao.tld/tag-write" />, will have the plaintext content surrounded by
+                <code>"…"</code> and fully encoded as a <ao:a href="https://www.w3.org/TR/CSS2/syndata.html#strings">CSS string</ao:a>.
+              </li>
+            </ol>
+          </li>
+        </ul>
+      </changelog:release>
+    </c:if>
 
-		<changelog:release
-			projectName="@{documented.name}"
-			version="7.1.1"
-			datePublished="2021-10-15T22:51:54-05:00"
-			groupId="@{project.groupId}"
-			artifactId="@{documented.artifactId}"
-			scmUrl="@{project.scm.url}"
-		>
-			<ul>
-				<li>Updated dependencies.</li>
-			</ul>
-		</changelog:release>
+    <changelog:release
+      projectName="@{documented.name}"
+      version="7.1.1"
+      datePublished="2021-10-15T22:51:54-05:00"
+      groupId="@{project.groupId}"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>Updated dependencies.</li>
+      </ul>
+    </changelog:release>
 
-		<changelog:release
-			projectName="@{documented.name}"
-			version="7.1.0"
-			datePublished="2021-09-25T21:48:15-05:00"
-			groupId="@{project.groupId}"
-			artifactId="@{documented.artifactId}"
-			scmUrl="@{project.scm.url}"
-		>
-			<ul>
-				<li>
-					<core:link page="ao.tld/tag-url" /> now correctly adds context path when URL begins
-					with "/".  This is the behavior that was documented, and it is now properly implemented.
-				</li>
-				<li>
-					URLs provided in tag bodies now support both
-					<ao:a href="https://datatracker.ietf.org/doc/html/rfc3986">RFC 3986 URI</ao:a>
-					and <ao:a href="https://datatracker.ietf.org/doc/html/rfc3987">RFC 3987 IRI</ao:a>:
-					<ul>
-						<li><core:link page="ao.tld/tag-action" /></li>
-						<li><core:link page="ao.tld/tag-href" /></li>
-						<li><core:link page="ao.tld/tag-img" /></li>
-						<li><core:link page="ao.tld/tag-src" /></li>
-						<li><core:link page="ao.tld/tag-url" /></li>
-					</ul>
-				</li>
-				<li>
-					<core:link page="ao.tld/tag-url" /> now supports param.* dynamic attributes.
-				</li>
-				<li>
-					<core:link page="ao.tld/tag-url" /> now performs the same set of URL manipulations as the various
-					URL attributes, such as <core:link page="ao.tld/tag-a"><![CDATA[&lt;ao:a href="…" /&gt;]]></core:link>.
-				</li>
-			</ul>
-		</changelog:release>
+    <changelog:release
+      projectName="@{documented.name}"
+      version="7.1.0"
+      datePublished="2021-09-25T21:48:15-05:00"
+      groupId="@{project.groupId}"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>
+          <core:link page="ao.tld/tag-url" /> now correctly adds context path when URL begins
+          with "/".  This is the behavior that was documented, and it is now properly implemented.
+        </li>
+        <li>
+          URLs provided in tag bodies now support both
+          <ao:a href="https://datatracker.ietf.org/doc/html/rfc3986">RFC 3986 URI</ao:a>
+          and <ao:a href="https://datatracker.ietf.org/doc/html/rfc3987">RFC 3987 IRI</ao:a>:
+          <ul>
+            <li><core:link page="ao.tld/tag-action" /></li>
+            <li><core:link page="ao.tld/tag-href" /></li>
+            <li><core:link page="ao.tld/tag-img" /></li>
+            <li><core:link page="ao.tld/tag-src" /></li>
+            <li><core:link page="ao.tld/tag-url" /></li>
+          </ul>
+        </li>
+        <li>
+          <core:link page="ao.tld/tag-url" /> now supports param.* dynamic attributes.
+        </li>
+        <li>
+          <core:link page="ao.tld/tag-url" /> now performs the same set of URL manipulations as the various
+          URL attributes, such as <core:link page="ao.tld/tag-a"><![CDATA[&lt;ao:a href="…" /&gt;]]></core:link>.
+        </li>
+      </ul>
+    </changelog:release>
 
-		<changelog:release
-			projectName="@{documented.name}"
-			version="7.0.1"
-			datePublished="2021-09-21T18:43:07-05:00"
-			groupId="@{project.groupId}"
-			artifactId="@{documented.artifactId}"
-			scmUrl="@{project.scm.url}"
-		>
-			<ul>
-				<li>value attributes no longer convert empty string to null, and thus <code>value=""</code> now works as expected.</li>
-			</ul>
-		</changelog:release>
+    <changelog:release
+      projectName="@{documented.name}"
+      version="7.0.1"
+      datePublished="2021-09-21T18:43:07-05:00"
+      groupId="@{project.groupId}"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>value attributes no longer convert empty string to null, and thus <code>value=""</code> now works as expected.</li>
+      </ul>
+    </changelog:release>
 
-		<changelog:release
-			projectName="@{documented.name}"
-			version="7.0.0"
-			datePublished="2021-07-06T00:50:55-05:00"
-			groupId="@{project.groupId}"
-			artifactId="@{documented.artifactId}"
-			scmUrl="@{project.scm.url}"
-		>
-			<ul>
-				<li>Updated to <ao:a rel="nofollow" href="https://www.oracle.com/java/technologies/javaee/javaeetechnologies.html#javaee7">Java™ EE 7 Web Profile</ao:a> (Servlet 3.1, JSP 2.3, EL 3.0, and JSTL 1.2).</li>
-				<li>
-					Now supports Java 9+ modules.  Due to still having filename-based automatic module dependencies,
-					*-SNAPSHOT versions include <code>module-info.class</code> while releases include the
-					<code>Automatic-Module-Name</code> manifest entry.  To minimize the difference between these
-					modes, <code>module-info.java</code> does not perform any transitive requires.
-				</li>
-				<li>Maven artifact relocated from <code>com.aoindustries:ao-taglib</code> to <code>com.aoapps:ao-taglib</code>.</li>
-				<li>Package renamed from <code>com.aoindustries.taglib</code> to <code>com.aoapps.taglib</code>.</li>
-				<li>Taglib URL changed to <code>https://oss.aoapps.com/taglib/</code> to match project URL.</li>
-			</ul>
-		</changelog:release>
+    <changelog:release
+      projectName="@{documented.name}"
+      version="7.0.0"
+      datePublished="2021-07-06T00:50:55-05:00"
+      groupId="@{project.groupId}"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>Updated to <ao:a rel="nofollow" href="https://www.oracle.com/java/technologies/javaee/javaeetechnologies.html#javaee7">Java™ EE 7 Web Profile</ao:a> (Servlet 3.1, JSP 2.3, EL 3.0, and JSTL 1.2).</li>
+        <li>
+          Now supports Java 9+ modules.  Due to still having filename-based automatic module dependencies,
+          *-SNAPSHOT versions include <code>module-info.class</code> while releases include the
+          <code>Automatic-Module-Name</code> manifest entry.  To minimize the difference between these
+          modes, <code>module-info.java</code> does not perform any transitive requires.
+        </li>
+        <li>Maven artifact relocated from <code>com.aoindustries:ao-taglib</code> to <code>com.aoapps:ao-taglib</code>.</li>
+        <li>Package renamed from <code>com.aoindustries.taglib</code> to <code>com.aoapps.taglib</code>.</li>
+        <li>Taglib URL changed to <code>https://oss.aoapps.com/taglib/</code> to match project URL.</li>
+      </ul>
+    </changelog:release>
 
-		<changelog:release
-			projectName="@{documented.name}"
-			version="6.4.1"
-			datePublished="2021-03-21T21:22:46-05:00"
-			groupId="com.aoindustries"
-			artifactId="@{documented.artifactId}"
-			scmUrl="@{project.scm.url}"
-		>
-			<ul>
-				<li>
-					Bug fix: Only pass charset to underlying API when non-null, since it is doctype dependent.
-					Passing a null value fails on non-HTML5 doctypes.
-				</li>
-			</ul>
-		</changelog:release>
+    <changelog:release
+      projectName="@{documented.name}"
+      version="6.4.1"
+      datePublished="2021-03-21T21:22:46-05:00"
+      groupId="com.aoindustries"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>
+          Bug fix: Only pass charset to underlying API when non-null, since it is doctype dependent.
+          Passing a null value fails on non-HTML5 doctypes.
+        </li>
+      </ul>
+    </changelog:release>
 
-		<changelog:release
-			projectName="@{documented.name}"
-			version="6.4.0"
-			datePublished="2021-03-18T04:13:31-05:00"
-			groupId="com.aoindustries"
-			artifactId="@{documented.artifactId}"
-			scmUrl="@{project.scm.url}"
-		>
-			<ul>
-				<li>Updated dependencies.</li>
-				<li>Implemented automatic newline and tab indentation.</li>
-			</ul>
-		</changelog:release>
+    <changelog:release
+      projectName="@{documented.name}"
+      version="6.4.0"
+      datePublished="2021-03-18T04:13:31-05:00"
+      groupId="com.aoindustries"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>Updated dependencies.</li>
+        <li>Implemented automatic newline and tab indentation.</li>
+      </ul>
+    </changelog:release>
 
-		<changelog:release
-			projectName="@{documented.name}"
-			version="6.3.0"
-			datePublished="2021-02-15T07:02:14-06:00"
-			groupId="com.aoindustries"
-			artifactId="@{documented.artifactId}"
-			scmUrl="@{project.scm.url}"
-		>
-			<ul>
-				<li>
-					<code>ParamsAttribute</code> now accepts parameter values as <code>Object</code> instead of <code>String</code>.
-					The conversion to string may be deferred, or the value may be streamed instead of being
-					converted to a string.
-				</li>
-			</ul>
-		</changelog:release>
+    <changelog:release
+      projectName="@{documented.name}"
+      version="6.3.0"
+      datePublished="2021-02-15T07:02:14-06:00"
+      groupId="com.aoindustries"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>
+          <code>ParamsAttribute</code> now accepts parameter values as <code>Object</code> instead of <code>String</code>.
+          The conversion to string may be deferred, or the value may be streamed instead of being
+          converted to a string.
+        </li>
+      </ul>
+    </changelog:release>
 
-		<changelog:release
-			projectName="@{documented.name}"
-			version="6.2.0"
-			datePublished="2020-12-13T02:20:01-06:00"
-			groupId="com.aoindustries"
-			artifactId="@{documented.artifactId}"
-			scmUrl="@{project.scm.url}"
-		>
-			<ul>
-				<li>Updated dependencies.</li>
-				<li><core:link page="ao.tld/tag-disableResourceEditor" /> improvements:
-					<ol>
-						<li>
-							New "scope" attribute that allows the in-context translator to be disabled only in the
-							tag body.
-						</li>
-						<li>
-							New "mode" attribute that provides the new mode used when disabling the in-context
-							translator.
-						</li>
-					</ol>
-				</li>
-			</ul>
-		</changelog:release>
+    <changelog:release
+      projectName="@{documented.name}"
+      version="6.2.0"
+      datePublished="2020-12-13T02:20:01-06:00"
+      groupId="com.aoindustries"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>Updated dependencies.</li>
+        <li><core:link page="ao.tld/tag-disableResourceEditor" /> improvements:
+          <ol>
+            <li>
+              New "scope" attribute that allows the in-context translator to be disabled only in the
+              tag body.
+            </li>
+            <li>
+              New "mode" attribute that provides the new mode used when disabling the in-context
+              translator.
+            </li>
+          </ol>
+        </li>
+      </ul>
+    </changelog:release>
 
-		<changelog:release
-			projectName="@{documented.name}"
-			version="6.1.0"
-			datePublished="2020-12-07T19:47:01-06:00"
-			groupId="com.aoindustries"
-			artifactId="@{documented.artifactId}"
-			scmUrl="@{project.scm.url}"
-		>
-			<ul>
-				<li>
-					Split development-only classes into a new sub-project in <code>devel/</code>.  This
-					sub-project is used only for development and is never deployed to artifact repositories.
-				</li>
-				<li>
-					<p>
-						Reverted a previous change made on 2020-03-01 that was released in version 5.0.0 on 2020-03-27.
-						Encoding of in-context translation lookup markups is required after all.
-					</p>
-					<p>
-						One example is the lookup IDs added inside alt attributes like
-						<code><![CDATA[alt="&amp;lt;##&amp;lt;value&amp;gt;##&amp;gt;"]]></code>.  With this bug, this was
-						incorrectly written as <code><![CDATA[alt="&lt;##&lt;value&gt;##&gt;"]]></code>, which fails
-						XML validation.
-					</p>
-					<p>
-						This bug is unlikely to affect production systems for two reasons:
-					</p>
-					<ol>
-						<li>
-							Lookup markups are only performed when in-context translations are enabled, which is only
-							when in development mode.
-						</li>
-						<li>
-							Most production sites are served in SGML mode, where browsers will handle the incorrect
-							HTML formatting.  XML mode is used in development specifically for this stricter
-							validation.
-						</li>
-					</ol>
-				</li>
-				<li>
-					New function <core:link page="ao.tld/function-isRtl" /> that determines if
-					<ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletResponse.html#getLocale()">the response locale</ao:a>
-					is <ao:a href="https://oss.aoapps.com/lang/apidocs/com.aoapps.lang/com/aoapps/lang/i18n/Locales.html#isRightToLeft(java.util.Locale)">a right-to-left language</ao:a>.
-				</li>
-				<li>
-					New function <core:link page="ao.tld/function-getProjectVersion" /> that gets the version of a
-					Maven project given its groupId and artifactId.
-				</li>
-			</ul>
-		</changelog:release>
+    <changelog:release
+      projectName="@{documented.name}"
+      version="6.1.0"
+      datePublished="2020-12-07T19:47:01-06:00"
+      groupId="com.aoindustries"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>
+          Split development-only classes into a new sub-project in <code>devel/</code>.  This
+          sub-project is used only for development and is never deployed to artifact repositories.
+        </li>
+        <li>
+          <p>
+            Reverted a previous change made on 2020-03-01 that was released in version 5.0.0 on 2020-03-27.
+            Encoding of in-context translation lookup markups is required after all.
+          </p>
+          <p>
+            One example is the lookup IDs added inside alt attributes like
+            <code><![CDATA[alt="&amp;lt;##&amp;lt;value&amp;gt;##&amp;gt;"]]></code>.  With this bug, this was
+            incorrectly written as <code><![CDATA[alt="&lt;##&lt;value&gt;##&gt;"]]></code>, which fails
+            XML validation.
+          </p>
+          <p>
+            This bug is unlikely to affect production systems for two reasons:
+          </p>
+          <ol>
+            <li>
+              Lookup markups are only performed when in-context translations are enabled, which is only
+              when in development mode.
+            </li>
+            <li>
+              Most production sites are served in SGML mode, where browsers will handle the incorrect
+              HTML formatting.  XML mode is used in development specifically for this stricter
+              validation.
+            </li>
+          </ol>
+        </li>
+        <li>
+          New function <core:link page="ao.tld/function-isRtl" /> that determines if
+          <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletResponse.html#getLocale()">the response locale</ao:a>
+          is <ao:a href="https://oss.aoapps.com/lang/apidocs/com.aoapps.lang/com/aoapps/lang/i18n/Locales.html#isRightToLeft(java.util.Locale)">a right-to-left language</ao:a>.
+        </li>
+        <li>
+          New function <core:link page="ao.tld/function-getProjectVersion" /> that gets the version of a
+          Maven project given its groupId and artifactId.
+        </li>
+      </ul>
+    </changelog:release>
 
-		<changelog:release
-			projectName="@{documented.name}"
-			version="6.0.0"
-			datePublished="2020-11-25T01:43:18-06:00"
-			groupId="com.aoindustries"
-			artifactId="@{documented.artifactId}"
-			scmUrl="@{project.scm.url}"
-		>
-			<ul>
-				<li>
-					Fixed implementation of <core:link page="ao.tld/function-isForwarded" />.
-					This function was broken by the last release's improved platform compatibility.
-				</li>
-				<li>Removed support for IE 6, 7, 8, and 9 since all are end-of-life.</li>
-				<li>
-					Added <ao:a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes">global attributes</ao:a>
-					to all element tags.
-					<p>
-						Minimized the duplication in implementation by using default interface methods, abstract
-						base classes, and XML entities.
-					</p>
-					<p>
-						Added more global attributes:
-					</p>
-					<ol>
-						<li><code>dir</code></li>
-						<li>
-							Added <ao:a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-%2A">global attribute <code>data-*</code></ao:a>,
-							with implementations for both HTML attribute and JavaScript property names.
-						</li>
-						<!-- TODO: New tags ao:data and/or ao:dataset to set from nested tags -->
-					</ol>
-				</li>
-				<li>Added <code>size</code> attribute to <core:link page="ao.tld/tag-select" />.</li>
-				<li>
-					Added <core:link page="ao-legacy.tld/">alternate implementation</core:link> compatible
-					with legacy JSP that use scriptlets.
-				</li>
-				<li>
-					<core:link page="ao.tld/tag-textarea" /> no longer requires <code>cols</code> and
-					<code>rows</code> attributes.
-				</li>
-				<li>
-					Cleaned-up use of <code>JspTagException</code> versus <code>JspException</code>.  Generally,
-					methods declare <code>throws JspException</code> while actually throwing instances of
-					<code>JspTagException</code>.  The exception to this is private implementation methods that
-					both declare and throw <code>JspTagException</code>.
-				</li>
-				<li>Attribute setters now throw <code>IllegalArgumentException</code> instead of <code>JspTagException</code>.</li>
-				<li>Case-insensitive boolean parsing.</li>
-			</ul>
-		</changelog:release>
+    <changelog:release
+      projectName="@{documented.name}"
+      version="6.0.0"
+      datePublished="2020-11-25T01:43:18-06:00"
+      groupId="com.aoindustries"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>
+          Fixed implementation of <core:link page="ao.tld/function-isForwarded" />.
+          This function was broken by the last release's improved platform compatibility.
+        </li>
+        <li>Removed support for IE 6, 7, 8, and 9 since all are end-of-life.</li>
+        <li>
+          Added <ao:a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes">global attributes</ao:a>
+          to all element tags.
+          <p>
+            Minimized the duplication in implementation by using default interface methods, abstract
+            base classes, and XML entities.
+          </p>
+          <p>
+            Added more global attributes:
+          </p>
+          <ol>
+            <li><code>dir</code></li>
+            <li>
+              Added <ao:a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-%2A">global attribute <code>data-*</code></ao:a>,
+              with implementations for both HTML attribute and JavaScript property names.
+            </li>
+            <!-- TODO: New tags ao:data and/or ao:dataset to set from nested tags -->
+          </ol>
+        </li>
+        <li>Added <code>size</code> attribute to <core:link page="ao.tld/tag-select" />.</li>
+        <li>
+          Added <core:link page="ao-legacy.tld/">alternate implementation</core:link> compatible
+          with legacy JSP that use scriptlets.
+        </li>
+        <li>
+          <core:link page="ao.tld/tag-textarea" /> no longer requires <code>cols</code> and
+          <code>rows</code> attributes.
+        </li>
+        <li>
+          Cleaned-up use of <code>JspTagException</code> versus <code>JspException</code>.  Generally,
+          methods declare <code>throws JspException</code> while actually throwing instances of
+          <code>JspTagException</code>.  The exception to this is private implementation methods that
+          both declare and throw <code>JspTagException</code>.
+        </li>
+        <li>Attribute setters now throw <code>IllegalArgumentException</code> instead of <code>JspTagException</code>.</li>
+        <li>Case-insensitive boolean parsing.</li>
+      </ul>
+    </changelog:release>
 
-		<changelog:release
-			projectName="@{documented.name}"
-			version="5.0.2"
-			datePublished="2020-06-16T09:08:27-05:00"
-			groupId="com.aoindustries"
-			artifactId="@{documented.artifactId}"
-			scmUrl="@{project.scm.url}"
-		>
-			<ul>
-				<li>Added generics to TLD types and signatures.</li>
-				<li>
-					Improved platform compatibility by falling back to
-					<ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/RequestDispatcher.html#FORWARD_SERVLET_PATH">RequestDispatcher.FORWARD_SERVLET_PATH</ao:a>
-					where appropriate.
-				</li>
-			</ul>
-		</changelog:release>
+    <changelog:release
+      projectName="@{documented.name}"
+      version="5.0.2"
+      datePublished="2020-06-16T09:08:27-05:00"
+      groupId="com.aoindustries"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>Added generics to TLD types and signatures.</li>
+        <li>
+          Improved platform compatibility by falling back to
+          <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/RequestDispatcher.html#FORWARD_SERVLET_PATH">RequestDispatcher.FORWARD_SERVLET_PATH</ao:a>
+          where appropriate.
+        </li>
+      </ul>
+    </changelog:release>
 
-		<changelog:release
-			projectName="@{documented.name}"
-			version="5.0.1"
-			datePublished="2020-05-13T18:05:24-05:00"
-			groupId="com.aoindustries"
-			artifactId="@{documented.artifactId}"
-			scmUrl="@{project.scm.url}"
-		>
-			<ul>
-				<li>
-					Fixed <core:link page="ao.tld/tag-html" /> attribute <code>class</code>, getter
-					was required in implementation due to the presence of <code>java.lang.Object.getClass()</code>.
-				</li>
-			</ul>
-		</changelog:release>
+    <changelog:release
+      projectName="@{documented.name}"
+      version="5.0.1"
+      datePublished="2020-05-13T18:05:24-05:00"
+      groupId="com.aoindustries"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>
+          Fixed <core:link page="ao.tld/tag-html" /> attribute <code>class</code>, getter
+          was required in implementation due to the presence of <code>java.lang.Object.getClass()</code>.
+        </li>
+      </ul>
+    </changelog:release>
 
-		<changelog:release
-			projectName="@{documented.name}"
-			version="5.0.0"
-			datePublished="2020-03-27T00:59:46-05:00"
-			groupId="com.aoindustries"
-			artifactId="@{documented.artifactId}"
-			scmUrl="@{project.scm.url}"
-		>
-			<ul>
-				<li>Minimum Java version changed from 1.7 to 1.8.</li>
-				<li>
-					Reduced use of property substitutions in <code>pom.xml</code>.
-					This is to help 3rd-party parsers that fail to perform full Maven-compatible substitutions.
-				</li>
-				<li>
-					Moved <code>HtmlTag.useXhtmlContentType(…)</code> to new
-					<ao:a href="https://oss.aoapps.com/fluent-html/apidocs/com.aoapps.html/com/aoapps/html/Document.html">Html</ao:a> class,
-					along with related constants.
-				</li>
-				<li>Now writing XML declaration when both serving as XHTML and response encoding is not <code>UTF-8</code>.</li>
-				<li>Now writing HTML or XHTML doctype based on current <code>Serialization</code>.</li>
-				<li>
-					Changed <core:link page="ao.tld/tag-html" /> attribute <code>forceHtml</code> to <code>serialization</code>,
-					which now takes values <code>SGML</code>, <code>XML</code>, or <code>auto</code> (the default).
-					When <code>auto</code>, the following steps are performed to resolve the serialization:
-					<ol>
-						<li>Use the serialization active on the current request.</li>
-						<li>
-							Use the application <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</ao:a>
-							<code>com.aoindustries.encoding.Serialization.default</code>
-							that allows an application to control the selection of HTML versus XHTML.
-						</li>
-						<li>
-							When this context-param is unspecified or <code>auto</code>,
-							determine the serialization based on the client's <code>Accept</code> header.
-						</li>
-					</ol>
-				</li>
-				<li>
-					<core:link page="ao.tld/tag-html" /> attribute <code>doctype</code> now has a new value <code>default</code> (the default).
-					When <code>default</code>, the following steps are performed to resolve the doctype:
-					<ol>
-						<li>Use the doctype active on the current request.</li>
-						<li>
-							Use the application <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</ao:a>
-							<code>com.aoindustries.encoding.Doctype.default</code>
-							that allows an application to control the default doctype.
-						</li>
-						<li>
-							When this context-param is unspecified or <code>default</code>,
-							defaults to <code>HTML5</code>, which results in a breaking change
-							(this tag used to default to <code>STRICT</code>).
-						</li>
-					</ol>
-				</li>
-				<li>
-					Now outputting HTML or XHTML based on the current response content type.
-					This should eliminate validator warnings when used as HTML.
-				</li>
-				<li>New tag <core:link page="ao.tld/tag-br" /> that writes a line break in the current serialization.</li>
-				<li>New tag <core:link page="ao.tld/tag-hr" /> that writes a thematic break (horizontal rule) in the current serialization.</li>
-				<li>
-					New function <core:link book="/encoding/taglib" page="/ao-encoding.tld/function-getSerialization" /> to get the current
-					<ao:a href="https://oss.aoapps.com/encoding/com/aoapps/encoding/Serialization.html">Serialization</ao:a> enum.</li>
-				<li>
-					New function <core:link book="/encoding/taglib" page="/ao-encoding.tld/function-getDoctype" /> to get the current
-					<ao:a href="https://oss.aoapps.com/encoding/com/aoapps/encoding/Doctype.html">Doctype</ao:a> enum.
-				</li>
-				<li>Added in-context translation markup to script attributes, like <code>onload</code>.</li>
-				<li>Avoiding unnecessary coercion to <code>String</code> when there is no active in-context translation.</li>
-				<li>Avoiding unnecessary coercion to <code>String</code> from <code>char[]</code>.</li>
-				<li><code>hreflang</code> attributes now support <code>Locale</code> instances via <code>Locale.toLanguageTag()</code> instead of <code>Locale.toString()</code>.</li>
-				<li>New tag <core:link page="ao.tld/tag-col" /> that writes a col (column) in the current serialization.</li>
-				<li><core:link page="ao.tld/tag-bundle" /> implementation changed to <code>TagSupport</code> for compatibility with JSP scripting.</li>
-				<li><core:link page="ao.tld/tag-message" /> has new <code>bundle</code> attribute that allows specifying for one-off.</li>
-				<li>
-					The <core:link page="ao.tld/tag-html" /> now establishes a page context for
-					<core:link book="/web-resources" page="/index.jspx" />, if one is not
-					already present on the current request.
-				</li>
-				<li>
-					Converted some attributes from <ao:a rel="nofollow" href="@{javadoc.link.javase}java/lang/Object.html">Object</ao:a>
-					to <ao:a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</ao:a>:
-					<ol>
-						<li><code>*.class</code></li>
-						<li><code>*.enctype</code></li>
-						<li><code>*.httpEquiv</code></li>
-						<li><code>*.id</code></li>
-						<li><code>*.itemprop</code></li>
-						<li><code>*.name</code></li>
-						<li><code>*.rel</code></li>
-						<li><code>*.target</code></li>
-						<li><code>*.type</code></li>
-					</ol>
-				</li>
-			</ul>
-		</changelog:release>
+    <changelog:release
+      projectName="@{documented.name}"
+      version="5.0.0"
+      datePublished="2020-03-27T00:59:46-05:00"
+      groupId="com.aoindustries"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>Minimum Java version changed from 1.7 to 1.8.</li>
+        <li>
+          Reduced use of property substitutions in <code>pom.xml</code>.
+          This is to help 3rd-party parsers that fail to perform full Maven-compatible substitutions.
+        </li>
+        <li>
+          Moved <code>HtmlTag.useXhtmlContentType(…)</code> to new
+          <ao:a href="https://oss.aoapps.com/fluent-html/apidocs/com.aoapps.html/com/aoapps/html/Document.html">Html</ao:a> class,
+          along with related constants.
+        </li>
+        <li>Now writing XML declaration when both serving as XHTML and response encoding is not <code>UTF-8</code>.</li>
+        <li>Now writing HTML or XHTML doctype based on current <code>Serialization</code>.</li>
+        <li>
+          Changed <core:link page="ao.tld/tag-html" /> attribute <code>forceHtml</code> to <code>serialization</code>,
+          which now takes values <code>SGML</code>, <code>XML</code>, or <code>auto</code> (the default).
+          When <code>auto</code>, the following steps are performed to resolve the serialization:
+          <ol>
+            <li>Use the serialization active on the current request.</li>
+            <li>
+              Use the application <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</ao:a>
+              <code>com.aoindustries.encoding.Serialization.default</code>
+              that allows an application to control the selection of HTML versus XHTML.
+            </li>
+            <li>
+              When this context-param is unspecified or <code>auto</code>,
+              determine the serialization based on the client's <code>Accept</code> header.
+            </li>
+          </ol>
+        </li>
+        <li>
+          <core:link page="ao.tld/tag-html" /> attribute <code>doctype</code> now has a new value <code>default</code> (the default).
+          When <code>default</code>, the following steps are performed to resolve the doctype:
+          <ol>
+            <li>Use the doctype active on the current request.</li>
+            <li>
+              Use the application <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</ao:a>
+              <code>com.aoindustries.encoding.Doctype.default</code>
+              that allows an application to control the default doctype.
+            </li>
+            <li>
+              When this context-param is unspecified or <code>default</code>,
+              defaults to <code>HTML5</code>, which results in a breaking change
+              (this tag used to default to <code>STRICT</code>).
+            </li>
+          </ol>
+        </li>
+        <li>
+          Now outputting HTML or XHTML based on the current response content type.
+          This should eliminate validator warnings when used as HTML.
+        </li>
+        <li>New tag <core:link page="ao.tld/tag-br" /> that writes a line break in the current serialization.</li>
+        <li>New tag <core:link page="ao.tld/tag-hr" /> that writes a thematic break (horizontal rule) in the current serialization.</li>
+        <li>
+          New function <core:link book="/encoding/taglib" page="/ao-encoding.tld/function-getSerialization" /> to get the current
+          <ao:a href="https://oss.aoapps.com/encoding/com/aoapps/encoding/Serialization.html">Serialization</ao:a> enum.</li>
+        <li>
+          New function <core:link book="/encoding/taglib" page="/ao-encoding.tld/function-getDoctype" /> to get the current
+          <ao:a href="https://oss.aoapps.com/encoding/com/aoapps/encoding/Doctype.html">Doctype</ao:a> enum.
+        </li>
+        <li>Added in-context translation markup to script attributes, like <code>onload</code>.</li>
+        <li>Avoiding unnecessary coercion to <code>String</code> when there is no active in-context translation.</li>
+        <li>Avoiding unnecessary coercion to <code>String</code> from <code>char[]</code>.</li>
+        <li><code>hreflang</code> attributes now support <code>Locale</code> instances via <code>Locale.toLanguageTag()</code> instead of <code>Locale.toString()</code>.</li>
+        <li>New tag <core:link page="ao.tld/tag-col" /> that writes a col (column) in the current serialization.</li>
+        <li><core:link page="ao.tld/tag-bundle" /> implementation changed to <code>TagSupport</code> for compatibility with JSP scripting.</li>
+        <li><core:link page="ao.tld/tag-message" /> has new <code>bundle</code> attribute that allows specifying for one-off.</li>
+        <li>
+          The <core:link page="ao.tld/tag-html" /> now establishes a page context for
+          <core:link book="/web-resources" page="/index.jspx" />, if one is not
+          already present on the current request.
+        </li>
+        <li>
+          Converted some attributes from <ao:a rel="nofollow" href="@{javadoc.link.javase}java/lang/Object.html">Object</ao:a>
+          to <ao:a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</ao:a>:
+          <ol>
+            <li><code>*.class</code></li>
+            <li><code>*.enctype</code></li>
+            <li><code>*.httpEquiv</code></li>
+            <li><code>*.id</code></li>
+            <li><code>*.itemprop</code></li>
+            <li><code>*.name</code></li>
+            <li><code>*.rel</code></li>
+            <li><code>*.target</code></li>
+            <li><code>*.type</code></li>
+          </ol>
+        </li>
+      </ul>
+    </changelog:release>
 
-		<changelog:release
-			projectName="@{documented.name}"
-			version="4.0.0"
-			datePublished="2019-10-11T16:29:56-05:00"
-			groupId="com.aoindustries"
-			artifactId="@{documented.artifactId}"
-			scmUrl="@{project.scm.url}"
-		>
-			<ul>
-				<li>
-					Case-insensitive matching of URL schemes.  Previously, URL schemes were matched case-sensitive,
-					while the spec is case-insensitive.  This has been OK given we only use lower-case schemes within our
-					code and tools, but this is now a correct implementation.
-				</li>
-				<li><core:link page="ao.tld/tag-a" /> now displays URL in more human-readable, but still unambiguous, format.</li>
-				<li>
-					Implementation changed from encoding URI in response encoding to <code>UTF-8</code> per
-					<ao:a href="https://www.w3.org/TR/html40/appendix/notes.html#non-ascii-chars">B.2.1 Non-ASCII characters in URI attribute values</ao:a>.
-				</li>
-				<li>New functions for encoding/decoding URI:
-					<ol>
-						<li><code><core:link page="ao.tld/function-encodeURIComponent" /></code></li>
-						<li><code><core:link page="ao.tld/function-decodeURIComponent" /></code></li>
-						<li><code><core:link page="ao.tld/function-encodeURI" /></code></li>
-						<li><code><core:link page="ao.tld/function-decodeURI" /></code></li>
-					</ol>
-				</li>
-				<li>
-					<core:link page="ao.tld/tag-base" /> uses <ao:a href="https://oss.aoapps.com/servlet-filter/apidocs/com.aoapps.servlet.filter/com/aoapps/servlet/filter/EncodeURIFilter.html">EncodeURIFilter</ao:a>
-					for final character encoding, or encodes to <a href="https://datatracker.ietf.org/doc/html/rfc3986">RFC 3986 URI</a> US-ASCII format
-					when the filter is not active.
-				</li>
-				<li>Added <ao:a href="https://oss.aoapps.com/servlet-util/apidocs/com.aoapps.servlet.util/com/aoapps/servlet/http/Canonical.html">Canonical URL</ao:a> support:
-					<ol>
-						<li><code>UrlUtils</code> updated with new <code>canonical</code> parameters.</li>
-						<li>New <code>canonical</code> attribute on:
-							<ul>
-								<li><core:link page="ao.tld/tag-a" /></li>
-								<li><core:link page="ao.tld/tag-iframe" /></li>
-								<li><core:link page="ao.tld/tag-img" /></li>
-								<li><core:link page="ao.tld/tag-link" /></li>
-								<li><core:link page="ao.tld/tag-redirect" /></li>
-								<li><core:link page="ao.tld/tag-script" /></li>
-							</ul>
-						</li>
-						<li>
-							In auto mode, <ao:a href="https://oss.aoapps.com/servlet-last-modified/apidocs/com.aoapps.servlet.lastmodified/com/aoapps/servlet/lastmodified/LastModifiedServlet.html">last modified stamping</ao:a>
-							is not performed on <ao:a href="https://oss.aoapps.com/servlet-util/apidocs/com.aoapps.servlet.util/com/aoapps/servlet/http/Canonical.html">Canonical URLs</ao:a>.
-						</li>
-					</ol>
-				</li>
-				<li>Renamed all <code>hrefAbsolute</code> and <code>srcAbsolute</code> attributes to <code>absolute</code> on:
-					<ul>
-						<li><core:link page="ao.tld/tag-a" /></li>
-						<li><core:link page="ao.tld/tag-iframe" /></li>
-						<li><core:link page="ao.tld/tag-img" /></li>
-						<li><core:link page="ao.tld/tag-link" /></li>
-						<li><core:link page="ao.tld/tag-script" /></li>
-					</ul>
-				</li>
-				<li>
-					Added new <code>absolute</code> attribute to <core:link page="ao.tld/tag-redirect" />,
-					defaulting to <code>true</code> for compatibility with the requirements prior to
-					<ao:a href="https://datatracker.ietf.org/doc/html/rfc7231#section-7.1.2">RFC 7231: 7.1.2. Location</ao:a>.
-				</li>
-				<li>
-					Added <ao:a href="https://www.w3schools.com/tags/tag_map.asp">image map</ao:a> support:
-					<ol>
-						<li>
-							Added new <code><ao:a href="https://www.w3schools.com/tags/att_img_usemap.asp">usemap</ao:a></code>
-							and <code><ao:a href="https://www.w3schools.com/tags/att_img_ismap.asp">ismap</ao:a></code>
-							attributes to <core:link page="ao.tld/tag-img" />
-						</li>
-						<li>
-							<code>alt</code> attribute of <core:link page="ao.tld/tag-img" /> is now optional when
-							<code>usemap</code> provided.
-						</li>
-						<li>Added new <core:link page="ao.tld/tag-map" /> tag</li>
-						<li>Added new <core:link page="ao.tld/tag-area" /> tag</li>
-					</ol>
-				</li>
-				<li>Added relevant links to <ao:a href="https://www.w3schools.com/">w3schools</ao:a> in <core:link page="ao.tld/" />.</li>
-				<li>Attribute settings may now throw <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/jsp/JspTagException.html">JspTagException</ao:a>.</li>
-				<li>Trimming more attributes, and avoiding writing most attributes when they would be empty.</li>
-				<li><core:link page="ao.tld/tag-iframe" /> now writes both <code>id</code> and <code>name</code> attributes for maximum compatibility.</li>
-				<li><core:link page="ao.tld/function-getLastModified" /> now properly decodes paths</li>
-				<li>The <code>default</code> attribute of <core:link page="ao.tld/tag-out" /> is now deferred, must use <code>\#{…}</code> instead of <code>\${…}</code>.</li>
-				<li>
-					Added support for <core:link page="ao.tld/tag-input" /> with <code>type="image"</code>:
-					<ol>
-						<li>New <ao:a href="https://www.w3schools.com/tags/att_input_src.asp"><code>src</code> attribute</ao:a></li>
-						<li>New <code>absolute</code> attribute</li>
-						<li>New <ao:a href="https://oss.aoapps.com/servlet-util/apidocs/com.aoapps.servlet.util/com/aoapps/servlet/http/Canonical.html"><code>canonical</code> attribute</ao:a></li>
-						<li>New <code>addLastModified</code> attribute</li>
-						<li>New <ao:a href="https://www.w3schools.com/tags/att_input_width.asp"><code>width</code> attribute</ao:a></li>
-						<li>New <ao:a href="https://www.w3schools.com/tags/att_input_height.asp"><code>height</code> attribute</ao:a></li>
-						<li>New <ao:a href="https://www.w3schools.com/tags/att_input_alt.asp"><code>alt</code> attribute</ao:a>, required for <code>type="image"</code></li>
-						<li>New <ao:a href="https://www.w3schools.com/tags/att_global_title.asp"><code>title</code> attribute</ao:a></li>
-						<li>New dynamic attributes <code>param.*</code></li>
-					</ol>
-				</li>
-			</ul>
-		</changelog:release>
+    <changelog:release
+      projectName="@{documented.name}"
+      version="4.0.0"
+      datePublished="2019-10-11T16:29:56-05:00"
+      groupId="com.aoindustries"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>
+          Case-insensitive matching of URL schemes.  Previously, URL schemes were matched case-sensitive,
+          while the spec is case-insensitive.  This has been OK given we only use lower-case schemes within our
+          code and tools, but this is now a correct implementation.
+        </li>
+        <li><core:link page="ao.tld/tag-a" /> now displays URL in more human-readable, but still unambiguous, format.</li>
+        <li>
+          Implementation changed from encoding URI in response encoding to <code>UTF-8</code> per
+          <ao:a href="https://www.w3.org/TR/html40/appendix/notes.html#non-ascii-chars">B.2.1 Non-ASCII characters in URI attribute values</ao:a>.
+        </li>
+        <li>New functions for encoding/decoding URI:
+          <ol>
+            <li><code><core:link page="ao.tld/function-encodeURIComponent" /></code></li>
+            <li><code><core:link page="ao.tld/function-decodeURIComponent" /></code></li>
+            <li><code><core:link page="ao.tld/function-encodeURI" /></code></li>
+            <li><code><core:link page="ao.tld/function-decodeURI" /></code></li>
+          </ol>
+        </li>
+        <li>
+          <core:link page="ao.tld/tag-base" /> uses <ao:a href="https://oss.aoapps.com/servlet-filter/apidocs/com.aoapps.servlet.filter/com/aoapps/servlet/filter/EncodeURIFilter.html">EncodeURIFilter</ao:a>
+          for final character encoding, or encodes to <a href="https://datatracker.ietf.org/doc/html/rfc3986">RFC 3986 URI</a> US-ASCII format
+          when the filter is not active.
+        </li>
+        <li>Added <ao:a href="https://oss.aoapps.com/servlet-util/apidocs/com.aoapps.servlet.util/com/aoapps/servlet/http/Canonical.html">Canonical URL</ao:a> support:
+          <ol>
+            <li><code>UrlUtils</code> updated with new <code>canonical</code> parameters.</li>
+            <li>New <code>canonical</code> attribute on:
+              <ul>
+                <li><core:link page="ao.tld/tag-a" /></li>
+                <li><core:link page="ao.tld/tag-iframe" /></li>
+                <li><core:link page="ao.tld/tag-img" /></li>
+                <li><core:link page="ao.tld/tag-link" /></li>
+                <li><core:link page="ao.tld/tag-redirect" /></li>
+                <li><core:link page="ao.tld/tag-script" /></li>
+              </ul>
+            </li>
+            <li>
+              In auto mode, <ao:a href="https://oss.aoapps.com/servlet-last-modified/apidocs/com.aoapps.servlet.lastmodified/com/aoapps/servlet/lastmodified/LastModifiedServlet.html">last modified stamping</ao:a>
+              is not performed on <ao:a href="https://oss.aoapps.com/servlet-util/apidocs/com.aoapps.servlet.util/com/aoapps/servlet/http/Canonical.html">Canonical URLs</ao:a>.
+            </li>
+          </ol>
+        </li>
+        <li>Renamed all <code>hrefAbsolute</code> and <code>srcAbsolute</code> attributes to <code>absolute</code> on:
+          <ul>
+            <li><core:link page="ao.tld/tag-a" /></li>
+            <li><core:link page="ao.tld/tag-iframe" /></li>
+            <li><core:link page="ao.tld/tag-img" /></li>
+            <li><core:link page="ao.tld/tag-link" /></li>
+            <li><core:link page="ao.tld/tag-script" /></li>
+          </ul>
+        </li>
+        <li>
+          Added new <code>absolute</code> attribute to <core:link page="ao.tld/tag-redirect" />,
+          defaulting to <code>true</code> for compatibility with the requirements prior to
+          <ao:a href="https://datatracker.ietf.org/doc/html/rfc7231#section-7.1.2">RFC 7231: 7.1.2. Location</ao:a>.
+        </li>
+        <li>
+          Added <ao:a href="https://www.w3schools.com/tags/tag_map.asp">image map</ao:a> support:
+          <ol>
+            <li>
+              Added new <code><ao:a href="https://www.w3schools.com/tags/att_img_usemap.asp">usemap</ao:a></code>
+              and <code><ao:a href="https://www.w3schools.com/tags/att_img_ismap.asp">ismap</ao:a></code>
+              attributes to <core:link page="ao.tld/tag-img" />
+            </li>
+            <li>
+              <code>alt</code> attribute of <core:link page="ao.tld/tag-img" /> is now optional when
+              <code>usemap</code> provided.
+            </li>
+            <li>Added new <core:link page="ao.tld/tag-map" /> tag</li>
+            <li>Added new <core:link page="ao.tld/tag-area" /> tag</li>
+          </ol>
+        </li>
+        <li>Added relevant links to <ao:a href="https://www.w3schools.com/">w3schools</ao:a> in <core:link page="ao.tld/" />.</li>
+        <li>Attribute settings may now throw <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/jsp/JspTagException.html">JspTagException</ao:a>.</li>
+        <li>Trimming more attributes, and avoiding writing most attributes when they would be empty.</li>
+        <li><core:link page="ao.tld/tag-iframe" /> now writes both <code>id</code> and <code>name</code> attributes for maximum compatibility.</li>
+        <li><core:link page="ao.tld/function-getLastModified" /> now properly decodes paths</li>
+        <li>The <code>default</code> attribute of <core:link page="ao.tld/tag-out" /> is now deferred, must use <code>\#{…}</code> instead of <code>\${…}</code>.</li>
+        <li>
+          Added support for <core:link page="ao.tld/tag-input" /> with <code>type="image"</code>:
+          <ol>
+            <li>New <ao:a href="https://www.w3schools.com/tags/att_input_src.asp"><code>src</code> attribute</ao:a></li>
+            <li>New <code>absolute</code> attribute</li>
+            <li>New <ao:a href="https://oss.aoapps.com/servlet-util/apidocs/com.aoapps.servlet.util/com/aoapps/servlet/http/Canonical.html"><code>canonical</code> attribute</ao:a></li>
+            <li>New <code>addLastModified</code> attribute</li>
+            <li>New <ao:a href="https://www.w3schools.com/tags/att_input_width.asp"><code>width</code> attribute</ao:a></li>
+            <li>New <ao:a href="https://www.w3schools.com/tags/att_input_height.asp"><code>height</code> attribute</ao:a></li>
+            <li>New <ao:a href="https://www.w3schools.com/tags/att_input_alt.asp"><code>alt</code> attribute</ao:a>, required for <code>type="image"</code></li>
+            <li>New <ao:a href="https://www.w3schools.com/tags/att_global_title.asp"><code>title</code> attribute</ao:a></li>
+            <li>New dynamic attributes <code>param.*</code></li>
+          </ol>
+        </li>
+      </ul>
+    </changelog:release>
 
-		<changelog:release
-			projectName="@{documented.name}"
-			version="3.0.1"
-			datePublished="2019-06-19T07:52:13-05:00"
-			groupId="com.aoindustries"
-			artifactId="@{documented.artifactId}"
-			scmUrl="@{project.scm.url}"
-		>
-			<ul>
-				<li>Using managed dependencies:
-					<ol>
-						<li>This project uses managed dependencies.</li>
-						<li>This project's managed dependencies may also be imported by other projects.</li>
-					</ol>
-				</li>
-			</ul>
-		</changelog:release>
+    <changelog:release
+      projectName="@{documented.name}"
+      version="3.0.1"
+      datePublished="2019-06-19T07:52:13-05:00"
+      groupId="com.aoindustries"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>Using managed dependencies:
+          <ol>
+            <li>This project uses managed dependencies.</li>
+            <li>This project's managed dependencies may also be imported by other projects.</li>
+          </ol>
+        </li>
+      </ul>
+    </changelog:release>
 
-		<changelog:release
-			projectName="@{documented.name}"
-			version="3.0.0"
-			datePublished="2019-04-19T03:50:55-05:00"
-			groupId="com.aoindustries"
-			artifactId="@{documented.artifactId}"
-			scmUrl="@{project.scm.url}"
-		>
-			<ul>
-				<li>Minimum Java version changed from 1.6 to 1.7.</li>
-				<li>
-					Deprecated <ao:a href="https://oss.aoapps.com/servlet-filter/apidocs/com.aoapps.servlet.filter/com/aoapps/servlet/filter/TempFileContext.html">TempFileContext</ao:a>
-					in favor of new <ao:a href="https://oss.aoapps.com/tempfiles/servlet/apidocs/com.aoapps.tempfiles/com/aoapps/tempfiles/servlet/ServletTempFileContext.html">ServletTempFileContext</ao:a>
-					that does not require <code>web.xml</code> configuration, supports additional scopes (application and session),
-					and registers a shutdown hook to delete on JVM exit.
-				</li>
-				<li>
-					Allowing all attributes to have runtime expressions with <code><![CDATA[&lt;rtexprvalue&gt;true&lt;/rtexprvalue&gt;]]></code>.
-					There is no compelling reason to disable the runtime expressions, and disabling them can hinder developer options.
-				</li>
-				<li>
-					New tags for encoding in additional contexts:
-					<ul>
-						<li><core:link book="/encoding/taglib" page="/ao-encoding.tld/tag-mysql" /> - must be valid MySQL command "mysql" input</li>
-						<li><core:link book="/encoding/taglib" page="/ao-encoding.tld/tag-psql" /> - must be valid PostgreSQL command "psql" input</li>
-						<li><core:link book="/encoding/taglib" page="/ao-encoding.tld/tag-sh" /> - must be valid shell script</li>
-					</ul>
-				</li>
-			</ul>
-		</changelog:release>
+    <changelog:release
+      projectName="@{documented.name}"
+      version="3.0.0"
+      datePublished="2019-04-19T03:50:55-05:00"
+      groupId="com.aoindustries"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>Minimum Java version changed from 1.6 to 1.7.</li>
+        <li>
+          Deprecated <ao:a href="https://oss.aoapps.com/servlet-filter/apidocs/com.aoapps.servlet.filter/com/aoapps/servlet/filter/TempFileContext.html">TempFileContext</ao:a>
+          in favor of new <ao:a href="https://oss.aoapps.com/tempfiles/servlet/apidocs/com.aoapps.tempfiles/com/aoapps/tempfiles/servlet/ServletTempFileContext.html">ServletTempFileContext</ao:a>
+          that does not require <code>web.xml</code> configuration, supports additional scopes (application and session),
+          and registers a shutdown hook to delete on JVM exit.
+        </li>
+        <li>
+          Allowing all attributes to have runtime expressions with <code><![CDATA[&lt;rtexprvalue&gt;true&lt;/rtexprvalue&gt;]]></code>.
+          There is no compelling reason to disable the runtime expressions, and disabling them can hinder developer options.
+        </li>
+        <li>
+          New tags for encoding in additional contexts:
+          <ul>
+            <li><core:link book="/encoding/taglib" page="/ao-encoding.tld/tag-mysql" /> - must be valid MySQL command "mysql" input</li>
+            <li><core:link book="/encoding/taglib" page="/ao-encoding.tld/tag-psql" /> - must be valid PostgreSQL command "psql" input</li>
+            <li><core:link book="/encoding/taglib" page="/ao-encoding.tld/tag-sh" /> - must be valid shell script</li>
+          </ul>
+        </li>
+      </ul>
+    </changelog:release>
 
-		<changelog:release
-			projectName="@{documented.name}"
-			version="2.3.1"
-			datePublished="2017-07-19T19:49:50-05:00"
-			groupId="com.aoindustries"
-			artifactId="@{documented.artifactId}"
-			scmUrl="@{project.scm.url}"
-		>
-			<ul>
-				<li>Updated dependencies.</li>
-				<li>Added <code>class</code> attribute to <core:link page="ao.tld/tag-form" /> tag.</li>
-			</ul>
-		</changelog:release>
+    <changelog:release
+      projectName="@{documented.name}"
+      version="2.3.1"
+      datePublished="2017-07-19T19:49:50-05:00"
+      groupId="com.aoindustries"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>Updated dependencies.</li>
+        <li>Added <code>class</code> attribute to <core:link page="ao.tld/tag-form" /> tag.</li>
+      </ul>
+    </changelog:release>
 
-		<changelog:release
-			projectName="@{documented.name}"
-			version="2.3.0"
-			datePublished="2016-11-15T15:53:43-06:00"
-			groupId="com.aoindustries"
-			artifactId="@{documented.artifactId}"
-			scmUrl="@{project.scm.url}"
-		>
-			<ul>
-				<li>Not encoding anchors. To avoid ambiguity, anchors must be encoded by the caller, such as already done for parameters.</li>
-				<li>New <core:link book="/parent" page="/index.jspx" /> POM to simplify <code>pom.xml</code> files.</li>
-				<li>Project documentation moved to per-project book in <ao:a href="https://semanticcms.com/">SemanticCMS</ao:a> format.</li>
-				<li>Added changelog as top-level project link.</li>
-				<li>Added itemprop for semantic microdata.</li>
-				<li>
-					Taglib tlib-version is now set automatically during build.
-					Unfortunately, we cannot include "-SNAPSHOT" on snapshot builds due to the requirement of "Dewey decimal"
-					for taglib versions.  The unambiguous full version is annotated via comment.
-				</li>
-				<li>Taglib URL changed to <code>https://aoindustries.com/ao-taglib/</code> to match project URL.</li>
-				<li>Added support for XML DOM Node in toString type coercion.</li>
-			</ul>
-		</changelog:release>
+    <changelog:release
+      projectName="@{documented.name}"
+      version="2.3.0"
+      datePublished="2016-11-15T15:53:43-06:00"
+      groupId="com.aoindustries"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>Not encoding anchors. To avoid ambiguity, anchors must be encoded by the caller, such as already done for parameters.</li>
+        <li>New <core:link book="/parent" page="/index.jspx" /> POM to simplify <code>pom.xml</code> files.</li>
+        <li>Project documentation moved to per-project book in <ao:a href="https://semanticcms.com/">SemanticCMS</ao:a> format.</li>
+        <li>Added changelog as top-level project link.</li>
+        <li>Added itemprop for semantic microdata.</li>
+        <li>
+          Taglib tlib-version is now set automatically during build.
+          Unfortunately, we cannot include "-SNAPSHOT" on snapshot builds due to the requirement of "Dewey decimal"
+          for taglib versions.  The unambiguous full version is annotated via comment.
+        </li>
+        <li>Taglib URL changed to <code>https://aoindustries.com/ao-taglib/</code> to match project URL.</li>
+        <li>Added support for XML DOM Node in toString type coercion.</li>
+      </ul>
+    </changelog:release>
 
-		<changelog:release
-			projectName="@{documented.name}"
-			version="2.2.0"
-			datePublished="2016-10-20T18:03:00-05:00"
-			groupId="com.aoindustries"
-			artifactId="@{documented.artifactId}"
-			scmUrl="@{project.scm.url}"
-		>
-			<ul>
-				<li>Improved Javadoc formatting.</li>
-				<li>Improved README formatting.</li>
-				<li>Added support for application/json and application/ld+json encoding.</li>
-			</ul>
-		</changelog:release>
+    <changelog:release
+      projectName="@{documented.name}"
+      version="2.2.0"
+      datePublished="2016-10-20T18:03:00-05:00"
+      groupId="com.aoindustries"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>Improved Javadoc formatting.</li>
+        <li>Improved README formatting.</li>
+        <li>Added support for application/json and application/ld+json encoding.</li>
+      </ul>
+    </changelog:release>
 
-		<changelog:release
-			projectName="@{documented.name}"
-			version="2.1.0"
-			datePublished="2016-10-11T23:49:00-05:00"
-			groupId="com.aoindustries"
-			artifactId="@{documented.artifactId}"
-			scmUrl="@{project.scm.url}"
-		>
-			<ul>
-				<li>Added autocomplete attribute on input tags.</li>
-			</ul>
-		</changelog:release>
+    <changelog:release
+      projectName="@{documented.name}"
+      version="2.1.0"
+      datePublished="2016-10-11T23:49:00-05:00"
+      groupId="com.aoindustries"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>Added autocomplete attribute on input tags.</li>
+      </ul>
+    </changelog:release>
 
-		<changelog:release
-			projectName="@{documented.name}"
-			version="2.0.1"
-			datePublished="2016-10-08T01:18:00-05:00"
-			groupId="com.aoindustries"
-			artifactId="@{documented.artifactId}"
-			scmUrl="@{project.scm.url}"
-		>
-			<ul>
-				<li>Updated beanutils version.</li>
-				<li>Restored runtime expression properties used by some projects.</li>
-			</ul>
-		</changelog:release>
+    <changelog:release
+      projectName="@{documented.name}"
+      version="2.0.1"
+      datePublished="2016-10-08T01:18:00-05:00"
+      groupId="com.aoindustries"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>Updated beanutils version.</li>
+        <li>Restored runtime expression properties used by some projects.</li>
+      </ul>
+    </changelog:release>
 
-		<changelog:release
-			projectName="@{documented.name}"
-			version="2.0.0"
-			datePublished="2016-10-04T19:58:00-05:00"
-			groupId="com.aoindustries"
-			artifactId="@{documented.artifactId}"
-			scmUrl="@{project.scm.url}"
-		>
-			<ul>
-				<li>Using request object instead of ThreadLocals to support asynchronous and concurrent request processing.</li>
-				<li>Set rtexprvalue to false where seems reasonable to do so.</li>
-				<li>Removed unnecessary and unused attribute getters.</li>
-				<li>Newer taglib version to enable deferred expressions.</li>
-				<li>New helper for deferred expressions.</li>
-				<li>Some attributes changed to deferred expressions where evaluation is not always necessary.</li>
-				<li>New ao:choose, ao:when, and ao:otherwise tag implementations to support deferred expressions.</li>
-				<li>Each lock object now a small empty class to help identify lock contention.
-					<p>
-						The lock contention profiler in NetBeans is just showing "java.lang.Object" all over, and can't seem to
-						get from the lock object id to the actual object in the heap dump using OQL (id not found).
-					</p>
-				</li>
-			</ul>
-		</changelog:release>
+    <changelog:release
+      projectName="@{documented.name}"
+      version="2.0.0"
+      datePublished="2016-10-04T19:58:00-05:00"
+      groupId="com.aoindustries"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>Using request object instead of ThreadLocals to support asynchronous and concurrent request processing.</li>
+        <li>Set rtexprvalue to false where seems reasonable to do so.</li>
+        <li>Removed unnecessary and unused attribute getters.</li>
+        <li>Newer taglib version to enable deferred expressions.</li>
+        <li>New helper for deferred expressions.</li>
+        <li>Some attributes changed to deferred expressions where evaluation is not always necessary.</li>
+        <li>New ao:choose, ao:when, and ao:otherwise tag implementations to support deferred expressions.</li>
+        <li>Each lock object now a small empty class to help identify lock contention.
+          <p>
+            The lock contention profiler in NetBeans is just showing "java.lang.Object" all over, and can't seem to
+            get from the lock object id to the actual object in the heap dump using OQL (id not found).
+          </p>
+        </li>
+      </ul>
+    </changelog:release>
 
-		<changelog:release
-			projectName="@{documented.name}"
-			version="1.4"
-			datePublished="2016-09-11T15:31:00-05:00"
-			groupId="com.aoindustries"
-			artifactId="@{documented.artifactId}"
-			scmUrl="@{project.scm.url}"
-		>
-			<ul>
-				<li>Minor fixes for Jetty compatibility.</li>
-				<li>Added optional title attribute to links.</li>
-				<li>Removed unnecessary exceptions from constructors.</li>
-				<li>Short name set to "ao" as it is commonly used.</li>
-				<li>May now provide link data object.</li>
-			</ul>
-		</changelog:release>
+    <changelog:release
+      projectName="@{documented.name}"
+      version="1.4"
+      datePublished="2016-09-11T15:31:00-05:00"
+      groupId="com.aoindustries"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>Minor fixes for Jetty compatibility.</li>
+        <li>Added optional title attribute to links.</li>
+        <li>Removed unnecessary exceptions from constructors.</li>
+        <li>Short name set to "ao" as it is commonly used.</li>
+        <li>May now provide link data object.</li>
+      </ul>
+    </changelog:release>
 
-		<changelog:release
-			projectName="@{documented.name}"
-			version="1.3.1"
-			datePublished="2016-09-02T17:01:00-05:00"
-			groupId="com.aoindustries"
-			artifactId="@{documented.artifactId}"
-			scmUrl="@{project.scm.url}"
-		>
-			<ul>
-				<li>Improved Maven configuration for Java EE 6 dependencies.</li>
-			</ul>
-		</changelog:release>
+    <changelog:release
+      projectName="@{documented.name}"
+      version="1.3.1"
+      datePublished="2016-09-02T17:01:00-05:00"
+      groupId="com.aoindustries"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>Improved Maven configuration for Java EE 6 dependencies.</li>
+      </ul>
+    </changelog:release>
 
-		<changelog:release
-			projectName="@{documented.name}"
-			version="1.3"
-			datePublished="2016-08-28T20:29:00-05:00"
-			groupId="com.aoindustries"
-			artifactId="@{documented.artifactId}"
-			scmUrl="@{project.scm.url}"
-		>
-			<ul>
-				<li>Efficient way to check if objects are empty.</li>
-				<li>Handling empty class from JSP EL.</li>
-			</ul>
-		</changelog:release>
+    <changelog:release
+      projectName="@{documented.name}"
+      version="1.3"
+      datePublished="2016-08-28T20:29:00-05:00"
+      groupId="com.aoindustries"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>Efficient way to check if objects are empty.</li>
+        <li>Handling empty class from JSP EL.</li>
+      </ul>
+    </changelog:release>
 
-		<changelog:release
-			projectName="@{documented.name}"
-			version="1.2"
-			datePublished="2016-08-19T14:29:00-05:00"
-			groupId="com.aoindustries"
-			artifactId="@{documented.artifactId}"
-			scmUrl="@{project.scm.url}"
-		>
-			<ul>
-				<li>Allowing ao-taglib style "arg" maps to be passed through Dispatcher for non-taglib use.</li>
-				<li>args passed unmodifiable.</li>
-				<li>Now throws an exception if cannot set the response content type.</li>
-				<li><![CDATA[Passing args as Map&lt;String, ?&gt; instead of forcing Map&lt;String, Object&gt;]]></li>
-			</ul>
-		</changelog:release>
+    <changelog:release
+      projectName="@{documented.name}"
+      version="1.2"
+      datePublished="2016-08-19T14:29:00-05:00"
+      groupId="com.aoindustries"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>Allowing ao-taglib style "arg" maps to be passed through Dispatcher for non-taglib use.</li>
+        <li>args passed unmodifiable.</li>
+        <li>Now throws an exception if cannot set the response content type.</li>
+        <li><![CDATA[Passing args as Map&lt;String, ?&gt; instead of forcing Map&lt;String, Object&gt;]]></li>
+      </ul>
+    </changelog:release>
 
-		<changelog:release
-			projectName="@{documented.name}"
-			version="1.1"
-			datePublished="2016-08-07T23:32:00-05:00"
-			groupId="com.aoindustries"
-			artifactId="@{documented.artifactId}"
-			scmUrl="@{project.scm.url}"
-		>
-			<ul>
-				<li>The beanutils dependency is now optional due to its limited scope in older components.</li>
-				<li>Reverted to Java 1.6 for Android and Java EE 6 compatibility.</li>
-			</ul>
-		</changelog:release>
+    <changelog:release
+      projectName="@{documented.name}"
+      version="1.1"
+      datePublished="2016-08-07T23:32:00-05:00"
+      groupId="com.aoindustries"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>The beanutils dependency is now optional due to its limited scope in older components.</li>
+        <li>Reverted to Java 1.6 for Android and Java EE 6 compatibility.</li>
+      </ul>
+    </changelog:release>
 
-		<changelog:release
-			projectName="@{documented.name}"
-			version="1.0"
-			datePublished="2016-08-07T16:31:00-05:00"
-			groupId="com.aoindustries"
-			artifactId="@{documented.artifactId}"
-			scmUrl="@{project.scm.url}"
-		>
-			<ul>
-				<li>Project moved to GitHub and Maven.</li>
-			</ul>
-		</changelog:release>
-	</core:page>
+    <changelog:release
+      projectName="@{documented.name}"
+      version="1.0"
+      datePublished="2016-08-07T16:31:00-05:00"
+      groupId="com.aoindustries"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>Project moved to GitHub and Maven.</li>
+      </ul>
+    </changelog:release>
+  </core:page>
 </jsp:root>

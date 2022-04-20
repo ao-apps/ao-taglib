@@ -36,34 +36,34 @@ import javax.servlet.jsp.JspException;
 public class HreflangTag extends EncodingBufferedTag {
 
 /* SimpleTag only: */
-	public static final String TAG_NAME = "<ao:hreflang>";
+  public static final String TAG_NAME = "<ao:hreflang>";
 /**/
 
-	@Override
-	public MediaType getContentType() {
-		return MediaType.TEXT;
-	}
+  @Override
+  public MediaType getContentType() {
+    return MediaType.TEXT;
+  }
 
-	@Override
-	public MediaType getOutputType() {
-		return null;
-	}
+  @Override
+  public MediaType getOutputType() {
+    return null;
+  }
 
 /* BodyTag only:
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 /**/
 
-	@Override
+  @Override
 /* BodyTag only:
-	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+  protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
 /* SimpleTag only: */
-	protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+  protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
-		AttributeUtils.requireAttributeParent(TAG_NAME, this, "hreflang", HreflangAttribute.class)
-			.setHreflang(capturedBody.trim());
+    AttributeUtils.requireAttributeParent(TAG_NAME, this, "hreflang", HreflangAttribute.class)
+      .setHreflang(capturedBody.trim());
 /* BodyTag only:
-		return EVAL_PAGE;
+    return EVAL_PAGE;
 /**/
-	}
+  }
 }

@@ -36,43 +36,45 @@ import javax.servlet.jsp.JspException;
  */
 public class MapTag extends ElementFilteredBodyTag {
 
-	@Override
-	public MediaType getContentType() {
-		return MediaType.XHTML;
-	}
+  @Override
+  public MediaType getContentType() {
+    return MediaType.XHTML;
+  }
 
 /* BodyTag only: */
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 /**/
 
-	@Override
+  @Override
 /* BodyTag only: */
-	protected int doStartTag(Writer out) throws JspException, IOException {
+  protected int doStartTag(Writer out) throws JspException, IOException {
 /**/
 /* SimpleTag only:
-	protected void doTag(Writer out) throws JspException, IOException {
+  protected void doTag(Writer out) throws JspException, IOException {
 /**/
-		String _id = global.getId();
-		if(_id == null) throw new AttributeRequiredException("id");
-		// TODO: Include id/name by doctype
-		out.write("<map");
-		GlobalAttributesUtils.writeGlobalAttributes(global, out);
-		out.write(" name=\"");
-		encodeTextInXhtmlAttribute(_id, out);
-		out.write("\">");
+    String _id = global.getId();
+    if (_id == null) {
+      throw new AttributeRequiredException("id");
+    }
+    // TODO: Include id/name by doctype
+    out.write("<map");
+    GlobalAttributesUtils.writeGlobalAttributes(global, out);
+    out.write(" name=\"");
+    encodeTextInXhtmlAttribute(_id, out);
+    out.write("\">");
 /* BodyTag only: */
-		return EVAL_BODY_FILTERED;
-	}
+    return EVAL_BODY_FILTERED;
+  }
 
-	@Override
-	protected int doEndTag(Writer out) throws JspException, IOException {
+  @Override
+  protected int doEndTag(Writer out) throws JspException, IOException {
 /**/
 /* SimpleTag only:
-		super.doTag(out);
+    super.doTag(out);
 /**/
-		out.write("</map>");
+    out.write("</map>");
 /* BodyTag only: */
-		return EVAL_PAGE;
+    return EVAL_PAGE;
 /**/
-	}
+  }
 }

@@ -66,274 +66,279 @@ import javax.servlet.jsp.JspTagException;
  * @author  AO Industries, Inc.
  */
 public class ATag extends ElementBufferedBodyTag
-	implements
-		// Attributes
-		HrefAttribute,
-		ParamsAttribute,
-		HreflangAttribute,
-		RelAttribute,
-		TargetAttribute,
-		TitleAttribute,
-		TypeAttribute,
-		// Events
-		OnclickAttribute,
-		OnmouseoutAttribute,
-		OnmouseoverAttribute
+  implements
+    // Attributes
+    HrefAttribute,
+    ParamsAttribute,
+    HreflangAttribute,
+    RelAttribute,
+    TargetAttribute,
+    TitleAttribute,
+    TypeAttribute,
+    // Events
+    OnclickAttribute,
+    OnmouseoutAttribute,
+    OnmouseoverAttribute
 {
 
-	public ATag() {
-		init();
-	}
+  public ATag() {
+    init();
+  }
 
-	@Override
-	public MediaType getContentType() {
-		return MediaType.XHTML;
-	}
+  @Override
+  public MediaType getContentType() {
+    return MediaType.XHTML;
+  }
 
-	@Override
-	public MediaType getOutputType() {
-		return MediaType.XHTML;
-	}
+  @Override
+  public MediaType getOutputType() {
+    return MediaType.XHTML;
+  }
 
 /* BodyTag only: */
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 /**/
 
-	private String href;
-	@Override
-	public void setHref(String href) {
-		this.href = Strings.nullIfEmpty(href);
-	}
+  private String href;
+  @Override
+  public void setHref(String href) {
+    this.href = Strings.nullIfEmpty(href);
+  }
 
-	private MutableURIParameters params;
-	@Override
-	public void addParam(String name, Object value) {
-		if(params == null) params = new URIParametersMap();
-		params.add(name, value);
-	}
+  private MutableURIParameters params;
+  @Override
+  public void addParam(String name, Object value) {
+    if (params == null) {
+      params = new URIParametersMap();
+    }
+    params.add(name, value);
+  }
 
-	private boolean absolute;
-	public void setAbsolute(boolean absolute) {
-		this.absolute = absolute;
-	}
+  private boolean absolute;
+  public void setAbsolute(boolean absolute) {
+    this.absolute = absolute;
+  }
 
-	private boolean canonical;
-	public void setCanonical(boolean canonical) {
-		this.canonical = canonical;
-	}
+  private boolean canonical;
+  public void setCanonical(boolean canonical) {
+    this.canonical = canonical;
+  }
 
-	private AddLastModified addLastModified;
-	public void setAddLastModified(String addLastModified) {
-		this.addLastModified = AddLastModified.valueOfLowerName(addLastModified.trim().toLowerCase(Locale.ROOT));
-	}
+  private AddLastModified addLastModified;
+  public void setAddLastModified(String addLastModified) {
+    this.addLastModified = AddLastModified.valueOfLowerName(addLastModified.trim().toLowerCase(Locale.ROOT));
+  }
 
-	private Object hreflang;
-	@Override
-	public void setHreflang(Object hreflang) {
-		this.hreflang = hreflang;
-	}
+  private Object hreflang;
+  @Override
+  public void setHreflang(Object hreflang) {
+    this.hreflang = hreflang;
+  }
 
-	private String rel;
-	@Override
-	public void setRel(String rel) {
-		this.rel = Strings.trimNullIfEmpty(rel);
-	}
+  private String rel;
+  @Override
+  public void setRel(String rel) {
+    this.rel = Strings.trimNullIfEmpty(rel);
+  }
 
-	private String target;
-	@Override
-	public void setTarget(String target) {
-		this.target = Strings.trimNullIfEmpty(target);
-	}
+  private String target;
+  @Override
+  public void setTarget(String target) {
+    this.target = Strings.trimNullIfEmpty(target);
+  }
 
-	private Object title;
-	@Override
-	public void setTitle(Object title) {
-		this.title = AttributeUtils.trimNullIfEmpty(title);
-	}
+  private Object title;
+  @Override
+  public void setTitle(Object title) {
+    this.title = AttributeUtils.trimNullIfEmpty(title);
+  }
 
-	private String type;
-	@Override
-	public void setType(String type) {
-		this.type = Strings.trimNullIfEmpty(type);
-	}
+  private String type;
+  @Override
+  public void setType(String type) {
+    this.type = Strings.trimNullIfEmpty(type);
+  }
 
-	private Object onclick;
-	@Override
-	public void setOnclick(Object onclick) {
-		this.onclick = AttributeUtils.trimNullIfEmpty(onclick);
-	}
+  private Object onclick;
+  @Override
+  public void setOnclick(Object onclick) {
+    this.onclick = AttributeUtils.trimNullIfEmpty(onclick);
+  }
 
-	private Object onmouseout;
-	@Override
-	public void setOnmouseout(Object onmouseout) {
-		this.onmouseout = AttributeUtils.trimNullIfEmpty(onmouseout);
-	}
+  private Object onmouseout;
+  @Override
+  public void setOnmouseout(Object onmouseout) {
+    this.onmouseout = AttributeUtils.trimNullIfEmpty(onmouseout);
+  }
 
-	private Object onmouseover;
-	@Override
-	public void setOnmouseover(Object onmouseover) {
-		this.onmouseover = AttributeUtils.trimNullIfEmpty(onmouseover);
-	}
+  private Object onmouseover;
+  @Override
+  public void setOnmouseover(Object onmouseover) {
+    this.onmouseover = AttributeUtils.trimNullIfEmpty(onmouseover);
+  }
 
-	/**
-	 * @see  ParamUtils#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List, com.aoapps.taglib.ParamsAttribute)
-	 */
-	@Override
-	protected boolean addDynamicAttribute(String uri, String localName, Object value, List<String> expectedPatterns) throws JspTagException {
-		return
-			super.addDynamicAttribute(uri, localName, value, expectedPatterns)
-			|| ParamUtils.addDynamicAttribute(uri, localName, value, expectedPatterns, this);
-	}
+  /**
+   * @see  ParamUtils#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List, com.aoapps.taglib.ParamsAttribute)
+   */
+  @Override
+  protected boolean addDynamicAttribute(String uri, String localName, Object value, List<String> expectedPatterns) throws JspTagException {
+    return
+      super.addDynamicAttribute(uri, localName, value, expectedPatterns)
+      || ParamUtils.addDynamicAttribute(uri, localName, value, expectedPatterns, this);
+  }
 
-	private void init() {
-		href = null;
-		params = null;
-		absolute = false;
-		canonical = false;
-		addLastModified = AddLastModified.AUTO;
-		hreflang = null;
-		rel = null;
-		target = null;
-		title = null;
-		type = null;
-		onclick = null;
-		onmouseout = null;
-		onmouseover = null;
-	}
+  private void init() {
+    href = null;
+    params = null;
+    absolute = false;
+    canonical = false;
+    addLastModified = AddLastModified.AUTO;
+    hreflang = null;
+    rel = null;
+    target = null;
+    title = null;
+    type = null;
+    onclick = null;
+    onmouseout = null;
+    onmouseover = null;
+  }
 
-	@Override
+  @Override
 /* BodyTag only: */
-	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+  protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
 /* SimpleTag only:
-	protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-		PageContext pageContext = (PageContext)getJspContext();
+  protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+    PageContext pageContext = (PageContext)getJspContext();
 /**/
-		out.write("<a");
-		GlobalAttributesUtils.writeGlobalAttributes(global, out);
-		String transformed;
-		if(URIParser.isScheme(href, "tel")) {
-			transformed = href.replace(' ', '-');
-		} else {
-			transformed = href;
-		}
-		UrlUtils.writeHref(pageContext, out, transformed, params, addLastModified, absolute, canonical);
-		if(hreflang instanceof Locale) {
-			out.write(" hreflang=\"");
-			encodeTextInXhtmlAttribute(((Locale)hreflang).toLanguageTag(), out);
-			out.append('"');
-		} else {
-			hreflang = AttributeUtils.trimNullIfEmpty(hreflang);
-			if(hreflang != null) {
-				out.write(" hreflang=\"");
-				Coercion.write(hreflang, textInXhtmlAttributeEncoder, out);
-				out.append('"');
-			}
-		}
-		if(rel != null) {
-			out.write(" rel=\"");
-			encodeTextInXhtmlAttribute(rel, out);
-			out.append('"');
-		}
-		if(target != null) {
-			out.write(" target=\"");
-			encodeTextInXhtmlAttribute(target, out);
-			out.append('"');
-		}
-		if(title != null) {
-			out.write(" title=\"");
-			MarkupCoercion.write(
-				title,
-				MarkupType.TEXT,
-				true,
-				textInXhtmlAttributeEncoder,
-				false,
-				out
-			);
-			out.append('"');
-		}
-		if(type != null) {
-			out.write(" type=\"");
-			encodeTextInXhtmlAttribute(type, out);
-			out.append('"');
-		}
-		if(onclick != null) {
-			out.write(" onclick=\"");
-			MarkupCoercion.write(
-				onclick,
-				MarkupType.JAVASCRIPT,
-				true,
-				javascriptInXhtmlAttributeEncoder,
-				false,
-				out
-			);
-			out.append('"');
-		}
-		if(onmouseout != null) {
-			out.write(" onmouseout=\"");
-			MarkupCoercion.write(
-				onmouseout,
-				MarkupType.JAVASCRIPT,
-				true,
-				javascriptInXhtmlAttributeEncoder,
-				false,
-				out
-			);
-			out.append('"');
-		}
-		if(onmouseover != null) {
-			out.write(" onmouseover=\"");
-			MarkupCoercion.write(
-				onmouseover,
-				MarkupType.JAVASCRIPT,
-				true,
-				javascriptInXhtmlAttributeEncoder,
-				false,
-				out
-			);
-			out.append('"');
-		}
-		out.append('>');
-		BufferResult trimmedBody = capturedBody.trim();
-		if(trimmedBody.getLength() == 0) { // TODO: Make a BufferResult.isEmpty() that defaults to getLength() == 0, but provides a chance at optimizations
-			// When the body is empty after trimming, display the href itself
-			if(href != null) {
-				HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
-				String toDecode;
-				if(URIParser.isScheme(href, "mailto")) {
-					toDecode = href.substring("mailto:".length());
-				} else if(URIParser.isScheme(href, "telnet")) {
-					toDecode = href.substring("telnet:".length());
-				} else if(URIParser.isScheme(href, "tel")) {
-					toDecode = href.substring("tel:".length());
-				} else {
-					toDecode = URIResolver.getAbsolutePath(Dispatcher.getCurrentPagePath(request), href);
-				}
-				// Decode to get a human-readable (but still unambiguous) display
-				URIDecoder.decodeURI(toDecode, textInXhtmlEncoder, out);
-			}
-		} else {
-			MarkupCoercion.write(
-				trimmedBody,
-				MarkupType.XHTML,
-				out,
-				true
-			);
-		}
-		out.write("</a>");
+    out.write("<a");
+    GlobalAttributesUtils.writeGlobalAttributes(global, out);
+    String transformed;
+    if (URIParser.isScheme(href, "tel")) {
+      transformed = href.replace(' ', '-');
+    } else {
+      transformed = href;
+    }
+    UrlUtils.writeHref(pageContext, out, transformed, params, addLastModified, absolute, canonical);
+    if (hreflang instanceof Locale) {
+      out.write(" hreflang=\"");
+      encodeTextInXhtmlAttribute(((Locale)hreflang).toLanguageTag(), out);
+      out.append('"');
+    } else {
+      hreflang = AttributeUtils.trimNullIfEmpty(hreflang);
+      if (hreflang != null) {
+        out.write(" hreflang=\"");
+        Coercion.write(hreflang, textInXhtmlAttributeEncoder, out);
+        out.append('"');
+      }
+    }
+    if (rel != null) {
+      out.write(" rel=\"");
+      encodeTextInXhtmlAttribute(rel, out);
+      out.append('"');
+    }
+    if (target != null) {
+      out.write(" target=\"");
+      encodeTextInXhtmlAttribute(target, out);
+      out.append('"');
+    }
+    if (title != null) {
+      out.write(" title=\"");
+      MarkupCoercion.write(
+        title,
+        MarkupType.TEXT,
+        true,
+        textInXhtmlAttributeEncoder,
+        false,
+        out
+      );
+      out.append('"');
+    }
+    if (type != null) {
+      out.write(" type=\"");
+      encodeTextInXhtmlAttribute(type, out);
+      out.append('"');
+    }
+    if (onclick != null) {
+      out.write(" onclick=\"");
+      MarkupCoercion.write(
+        onclick,
+        MarkupType.JAVASCRIPT,
+        true,
+        javascriptInXhtmlAttributeEncoder,
+        false,
+        out
+      );
+      out.append('"');
+    }
+    if (onmouseout != null) {
+      out.write(" onmouseout=\"");
+      MarkupCoercion.write(
+        onmouseout,
+        MarkupType.JAVASCRIPT,
+        true,
+        javascriptInXhtmlAttributeEncoder,
+        false,
+        out
+      );
+      out.append('"');
+    }
+    if (onmouseover != null) {
+      out.write(" onmouseover=\"");
+      MarkupCoercion.write(
+        onmouseover,
+        MarkupType.JAVASCRIPT,
+        true,
+        javascriptInXhtmlAttributeEncoder,
+        false,
+        out
+      );
+      out.append('"');
+    }
+    out.append('>');
+    BufferResult trimmedBody = capturedBody.trim();
+    if (
+      // TODO: Make a BufferResult.isEmpty() that defaults to getLength() == 0, but provides a chance at optimizations
+      trimmedBody.getLength() == 0
+    ) {
+      // When the body is empty after trimming, display the href itself
+      if (href != null) {
+        HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
+        String toDecode;
+        if (URIParser.isScheme(href, "mailto")) {
+          toDecode = href.substring("mailto:".length());
+        } else if (URIParser.isScheme(href, "telnet")) {
+          toDecode = href.substring("telnet:".length());
+        } else if (URIParser.isScheme(href, "tel")) {
+          toDecode = href.substring("tel:".length());
+        } else {
+          toDecode = URIResolver.getAbsolutePath(Dispatcher.getCurrentPagePath(request), href);
+        }
+        // Decode to get a human-readable (but still unambiguous) display
+        URIDecoder.decodeURI(toDecode, textInXhtmlEncoder, out);
+      }
+    } else {
+      MarkupCoercion.write(
+        trimmedBody,
+        MarkupType.XHTML,
+        out,
+        true
+      );
+    }
+    out.write("</a>");
 /* BodyTag only: */
-		return EVAL_PAGE;
+    return EVAL_PAGE;
 /**/
-	}
+  }
 
 /* BodyTag only: */
-	@Override
-	public void doFinally() {
-		try {
-			init();
-		} finally {
-			super.doFinally();
-		}
-	}
+  @Override
+  public void doFinally() {
+    try {
+      init();
+    } finally {
+      super.doFinally();
+    }
+  }
 /**/
 }

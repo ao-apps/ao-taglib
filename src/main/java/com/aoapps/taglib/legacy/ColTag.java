@@ -38,60 +38,62 @@ import javax.servlet.jsp.JspException;
  */
 public class ColTag extends ElementNullBodyTag {
 
-	public ColTag() {
-		init();
-	}
+  public ColTag() {
+    init();
+  }
 
-	@Override
-	public MediaType getOutputType() {
-		return MediaType.XHTML;
-	}
+  @Override
+  public MediaType getOutputType() {
+    return MediaType.XHTML;
+  }
 
 /* BodyTag only: */
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 /**/
 
-	private int span;
-	public void setSpan(int span) {
-		this.span = span;
-	}
+  private int span;
+  public void setSpan(int span) {
+    this.span = span;
+  }
 
-	private void init() {
-		span = 0;
-	}
+  private void init() {
+    span = 0;
+  }
 
-	@Override
+  @Override
 /* BodyTag only: */
-	protected int doEndTag(Writer out) throws JspException, IOException {
+  protected int doEndTag(Writer out) throws JspException, IOException {
 /**/
 /* SimpleTag only:
-	protected void doTag(Writer out) throws JspException, IOException {
-		PageContext pageContext = (PageContext)getJspContext();
+  protected void doTag(Writer out) throws JspException, IOException {
+    PageContext pageContext = (PageContext)getJspContext();
 /**/
-		COL<?> col = new DocumentEE(
-			pageContext.getServletContext(),
-			(HttpServletRequest)pageContext.getRequest(),
-			(HttpServletResponse)pageContext.getResponse(),
-			out,
-			false, // Do not add extra newlines to JSP
-			false  // Do not add extra indentation to JSP
-		).col();
-		GlobalAttributesUtils.doGlobalAttributes(global, col);
-		if(span != 0) col.span(span);
-		col.__();
+    COL<?> col = new DocumentEE(
+      pageContext.getServletContext(),
+      (HttpServletRequest)pageContext.getRequest(),
+      (HttpServletResponse)pageContext.getResponse(),
+      out,
+      false, // Do not add extra newlines to JSP
+      false  // Do not add extra indentation to JSP
+    ).col();
+    GlobalAttributesUtils.doGlobalAttributes(global, col);
+    if (span != 0) {
+      col.span(span);
+    }
+    col.__();
 /* BodyTag only: */
-		return EVAL_PAGE;
+    return EVAL_PAGE;
 /**/
-	}
+  }
 
 /* BodyTag only: */
-	@Override
-	public void doFinally() {
-		try {
-			init();
-		} finally {
-			super.doFinally();
-		}
-	}
+  @Override
+  public void doFinally() {
+    try {
+      init();
+    } finally {
+      super.doFinally();
+    }
+  }
 /**/
 }

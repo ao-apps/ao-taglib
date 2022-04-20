@@ -41,71 +41,74 @@ import javax.servlet.jsp.JspException;
  */
 public class BaseTag extends ElementNullBodyTag {
 
-	@Override
-	public MediaType getOutputType() {
-		return MediaType.XHTML;
-	}
+  @Override
+  public MediaType getOutputType() {
+    return MediaType.XHTML;
+  }
 
 /* BodyTag only: */
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 /**/
 
-	@Override
-	@SuppressWarnings("StringEquality")
+  @Override
+  @SuppressWarnings("StringEquality")
 /* BodyTag only: */
-	protected int doEndTag(Writer out) throws JspException, IOException {
+  protected int doEndTag(Writer out) throws JspException, IOException {
 /**/
 /* SimpleTag only:
-	protected void doTag(Writer out) throws JspException, IOException {
-		PageContext pageContext = (PageContext)getJspContext();
+  protected void doTag(Writer out) throws JspException, IOException {
+    PageContext pageContext = (PageContext)getJspContext();
 /**/
-		HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
-		String originalPath = Dispatcher.getOriginalPagePath(request); // Before forward
-		String currentPath = request.getServletPath(); // After forward
-		if(originalPath != currentPath) { // Quick check for common case (string identity equals intentional)
-			// When the paths do not match, request has been forwarded to a different directory and base is required
-			int originalLastSlash = originalPath.lastIndexOf('/');
-			int currentLastSlash = currentPath.lastIndexOf('/');
-			// Only include base when in different directories
-			if(
-				originalLastSlash!=currentLastSlash
-				|| !originalPath.regionMatches(0, currentPath, 0, originalLastSlash)
-			) {
-				HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
-				DocumentEE document = new DocumentEE(
-					pageContext.getServletContext(),
-					request,
-					response,
-					out,
-					false, // Do not add extra newlines to JSP
-					false  // Do not add extra indentation to JSP
-				);
+    HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
+    String originalPath = Dispatcher.getOriginalPagePath(request); // Before forward
+    String currentPath = request.getServletPath(); // After forward
+    if (
+      // Quick check for common case (string identity equals intentional)
+      originalPath != currentPath
+    ) {
+      // When the paths do not match, request has been forwarded to a different directory and base is required
+      int originalLastSlash = originalPath.lastIndexOf('/');
+      int currentLastSlash = currentPath.lastIndexOf('/');
+      // Only include base when in different directories
+      if (
+        originalLastSlash != currentLastSlash
+        || !originalPath.regionMatches(0, currentPath, 0, originalLastSlash)
+      ) {
+        HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
+        DocumentEE document = new DocumentEE(
+          pageContext.getServletContext(),
+          request,
+          response,
+          out,
+          false, // Do not add extra newlines to JSP
+          false  // Do not add extra indentation to JSP
+        );
 
-				// Note: This does not directly do response encodeURL because URL rewriting would interfere with the intent of the base tag
+        // Note: This does not directly do response encodeURL because URL rewriting would interfere with the intent of the base tag
 
-				String url = HttpServletUtil.getAbsoluteURL(request, currentPath.substring(0, currentLastSlash + 1));
+        String url = HttpServletUtil.getAbsoluteURL(request, currentPath.substring(0, currentLastSlash + 1));
 
-				// TODO: Should we create a registry for things that want to modify the base URL,
-				//       instead of this direct connection between BaseTag and EncodeURIFilter?
-				EncodeURIFilter encodeURIFilter = EncodeURIFilter.getActiveFilter(request);
-				if(encodeURIFilter != null) {
-					url = encodeURIFilter.encode(
-						url,
-						document.encodingContext.getDoctype(),
-						response.getCharacterEncoding()
-					);
-				} else {
-					// Encoding US-ASCII
-					// TODO: Implement this in ao:base instead (along with other URL implementations)?
-					url = URIEncoder.encodeURI(url);
-				}
-				GlobalAttributesUtils.doGlobalAttributes(global, document.base())
-					.href(url)
-					.__();
-			}
-		}
+        // TODO: Should we create a registry for things that want to modify the base URL,
+        //       instead of this direct connection between BaseTag and EncodeURIFilter?
+        EncodeURIFilter encodeURIFilter = EncodeURIFilter.getActiveFilter(request);
+        if (encodeURIFilter != null) {
+          url = encodeURIFilter.encode(
+            url,
+            document.encodingContext.getDoctype(),
+            response.getCharacterEncoding()
+          );
+        } else {
+          // Encoding US-ASCII
+          // TODO: Implement this in ao:base instead (along with other URL implementations)?
+          url = URIEncoder.encodeURI(url);
+        }
+        GlobalAttributesUtils.doGlobalAttributes(global, document.base())
+          .href(url)
+          .__();
+      }
+    }
 /* BodyTag only: */
-		return EVAL_PAGE;
+    return EVAL_PAGE;
 /**/
-	}
+  }
 }

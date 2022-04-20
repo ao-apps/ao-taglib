@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface OnloadAttribute {
 
-	void setOnload(Object onload);
+  void setOnload(Object onload);
 }

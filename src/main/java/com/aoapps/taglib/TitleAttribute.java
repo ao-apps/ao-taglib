@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface TitleAttribute {
 
-	void setTitle(Object title);
+  void setTitle(Object title);
 }

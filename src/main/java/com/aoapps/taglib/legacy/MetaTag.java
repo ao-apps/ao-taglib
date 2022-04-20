@@ -47,134 +47,136 @@ import javax.servlet.jsp.JspException;
  * @author  AO Industries, Inc.
  */
 public class MetaTag extends ElementBufferedBodyTag
-	implements
-		NameAttribute,
-		ContentAttribute
+  implements
+    NameAttribute,
+    ContentAttribute
 {
 
-	public MetaTag() {
-		init();
-	}
+  public MetaTag() {
+    init();
+  }
 
-	@Override
-	public MediaType getContentType() {
-		return MediaType.TEXT;
-	}
+  @Override
+  public MediaType getContentType() {
+    return MediaType.TEXT;
+  }
 
-	@Override
-	public MediaType getOutputType() {
-		return MediaType.XHTML;
-	}
+  @Override
+  public MediaType getOutputType() {
+    return MediaType.XHTML;
+  }
 
-	/**
-	 * Copies all values from the provided meta.
-	 */
-	public void setMeta(Meta meta) {
-		GlobalAttributesUtils.copy(meta.getGlobal(), this);
-		setName(meta.getName());
-		setHttpEquiv(meta.getHttpEquiv());
-		setItemprop(meta.getItemprop());
-		setCharset(meta.getCharset());
-		setContent(meta.getContent());
-	}
+  /**
+   * Copies all values from the provided meta.
+   */
+  public void setMeta(Meta meta) {
+    GlobalAttributesUtils.copy(meta.getGlobal(), this);
+    setName(meta.getName());
+    setHttpEquiv(meta.getHttpEquiv());
+    setItemprop(meta.getItemprop());
+    setCharset(meta.getCharset());
+    setContent(meta.getContent());
+  }
 
 /* BodyTag only: */
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 /**/
 
-	private String name;
-	@Override
-	public void setName(String name) {
-		this.name = name;
-	}
+  private String name;
+  @Override
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	private String httpEquiv;
-	public void setHttpEquiv(String httpEquiv) {
-		this.httpEquiv = httpEquiv;
-	}
+  private String httpEquiv;
+  public void setHttpEquiv(String httpEquiv) {
+    this.httpEquiv = httpEquiv;
+  }
 
-	private String itemprop;
-	public void setItemprop(String itemprop) {
-		this.itemprop = Strings.trimNullIfEmpty(itemprop);
-	}
+  private String itemprop;
+  public void setItemprop(String itemprop) {
+    this.itemprop = Strings.trimNullIfEmpty(itemprop);
+  }
 
-	private Object charset; // TODO: Support java Charset, too
-	public void setCharset(Object charset) {
-		this.charset = AttributeUtils.trimNullIfEmpty(charset);
-	}
+  private Object charset; // TODO: Support java Charset, too
+  public void setCharset(Object charset) {
+    this.charset = AttributeUtils.trimNullIfEmpty(charset);
+  }
 
-	private Object content;
-	@Override
-	public void setContent(Object content) {
-		this.content = AttributeUtils.nullIfEmpty(content);
-	}
+  private Object content;
+  @Override
+  public void setContent(Object content) {
+    this.content = AttributeUtils.nullIfEmpty(content);
+  }
 
-	private void init() {
-		name = null;
-		httpEquiv = null;
-		itemprop = null;
-		charset = null;
-		content = null;
-	}
+  private void init() {
+    name = null;
+    httpEquiv = null;
+    itemprop = null;
+    charset = null;
+    content = null;
+  }
 
-	@Override
+  @Override
 /* BodyTag only: */
-	protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+  protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
 /**/
 /* SimpleTag only:
-	protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-		PageContext pageContext = (PageContext)getJspContext();
+  protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+    PageContext pageContext = (PageContext)getJspContext();
 /**/
-		Optional<MetasAttribute> parent = JspTagUtils.findAncestor(this, MetasAttribute.class);
-		if(content == null) setContent(capturedBody.trim());
-		if(parent.isPresent()) {
-			parent.get().addMeta(
-				new Meta(
-					global.freeze(),
-					Strings.trimNullIfEmpty(name),
-					Strings.trim(httpEquiv),
-					itemprop,
-					Coercion.toString(charset),
-					Coercion.toString(content)
-				)
-			);
-		} else {
-			// Write the meta tag directly here
-			DocumentEE document = new DocumentEE(
-				pageContext.getServletContext(),
-				(HttpServletRequest)pageContext.getRequest(),
-				(HttpServletResponse)pageContext.getResponse(),
-				out,
-				false, // Do not add extra newlines to JSP
-				false  // Do not add extra indentation to JSP
-			);
-			META<?> meta = document.meta();
-			GlobalAttributesUtils.doGlobalAttributes(global, meta);
-			meta.name(name)
-				.httpEquiv(httpEquiv)
-				// TODO: Create a global "itemprop" in ao-fluent-html
-				.attribute("itemprop", itemprop);
-			if(charset != null) {
-				// TOOD: charset to String via Meta.charset(String)
-				meta.charset(Coercion.toString(charset));
-			}
-			meta
-				.content(content)
-				.__();
-		}
+    Optional<MetasAttribute> parent = JspTagUtils.findAncestor(this, MetasAttribute.class);
+    if (content == null) {
+      setContent(capturedBody.trim());
+    }
+    if (parent.isPresent()) {
+      parent.get().addMeta(
+        new Meta(
+          global.freeze(),
+          Strings.trimNullIfEmpty(name),
+          Strings.trim(httpEquiv),
+          itemprop,
+          Coercion.toString(charset),
+          Coercion.toString(content)
+        )
+      );
+    } else {
+      // Write the meta tag directly here
+      DocumentEE document = new DocumentEE(
+        pageContext.getServletContext(),
+        (HttpServletRequest)pageContext.getRequest(),
+        (HttpServletResponse)pageContext.getResponse(),
+        out,
+        false, // Do not add extra newlines to JSP
+        false  // Do not add extra indentation to JSP
+      );
+      META<?> meta = document.meta();
+      GlobalAttributesUtils.doGlobalAttributes(global, meta);
+      meta.name(name)
+        .httpEquiv(httpEquiv)
+        // TODO: Create a global "itemprop" in ao-fluent-html
+        .attribute("itemprop", itemprop);
+      if (charset != null) {
+        // TOOD: charset to String via Meta.charset(String)
+        meta.charset(Coercion.toString(charset));
+      }
+      meta
+        .content(content)
+        .__();
+    }
 /* BodyTag only: */
-		return EVAL_PAGE;
+    return EVAL_PAGE;
 /**/
-	}
+  }
 
 /* BodyTag only: */
-	@Override
-	public void doFinally() {
-		try {
-			init();
-		} finally {
-			super.doFinally();
-		}
-	}
+  @Override
+  public void doFinally() {
+    try {
+      init();
+    } finally {
+      super.doFinally();
+    }
+  }
 /**/
 }

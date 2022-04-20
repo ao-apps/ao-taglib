@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface RowsAttribute {
 
-	void setRows(int rows);
+  void setRows(int rows);
 }

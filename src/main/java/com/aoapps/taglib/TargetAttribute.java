@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface TargetAttribute {
 
-	void setTarget(String target);
+  void setTarget(String target);
 }

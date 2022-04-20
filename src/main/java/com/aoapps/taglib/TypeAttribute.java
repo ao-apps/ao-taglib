@@ -30,5 +30,5 @@ package com.aoapps.taglib;
  */
 public interface TypeAttribute {
 
-	void setType(String type);
+  void setType(String type);
 }

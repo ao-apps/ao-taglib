@@ -27,13 +27,13 @@ package com.aoapps.taglib;
  * @author  AO Industries, Inc.
  */
 public class OutTag extends com.aoapps.encoding.taglib.OutTag
-	implements
-		ValueAttribute,
-		TypeAttribute
+  implements
+    ValueAttribute,
+    TypeAttribute
 {
 
 /* BodyTag only:
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 /**/
 
 }

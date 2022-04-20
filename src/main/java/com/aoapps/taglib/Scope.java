@@ -37,42 +37,44 @@ import javax.servlet.jsp.PageContext;
 @Deprecated
 public final class Scope {
 
-	/** Make no instances. */
-	private Scope() {throw new AssertionError();}
+  /** Make no instances. */
+  private Scope() {
+    throw new AssertionError();
+  }
 
-	/**
-	 * @deprecated  Please use {@link com.aoapps.servlet.attribute.ScopeEE.Page#SCOPE_PAGE} instead.
-	 */
-	@Deprecated
-	public static final String PAGE = ScopeEE.Page.SCOPE_PAGE;
+  /**
+   * @deprecated  Please use {@link com.aoapps.servlet.attribute.ScopeEE.Page#SCOPE_PAGE} instead.
+   */
+  @Deprecated
+  public static final String PAGE = ScopeEE.Page.SCOPE_PAGE;
 
-	/**
-	 * @deprecated  Please use {@link com.aoapps.servlet.attribute.ScopeEE.Page#SCOPE_REQUEST} instead.
-	 */
-	@Deprecated
-	public static final String REQUEST = ScopeEE.Page.SCOPE_REQUEST;
+  /**
+   * @deprecated  Please use {@link com.aoapps.servlet.attribute.ScopeEE.Page#SCOPE_REQUEST} instead.
+   */
+  @Deprecated
+  public static final String REQUEST = ScopeEE.Page.SCOPE_REQUEST;
 
-	/**
-	 * @deprecated  Please use {@link com.aoapps.servlet.attribute.ScopeEE.Page#SCOPE_SESSION} instead.
-	 */
-	@Deprecated
-	public static final String SESSION = ScopeEE.Page.SCOPE_SESSION;
+  /**
+   * @deprecated  Please use {@link com.aoapps.servlet.attribute.ScopeEE.Page#SCOPE_SESSION} instead.
+   */
+  @Deprecated
+  public static final String SESSION = ScopeEE.Page.SCOPE_SESSION;
 
-	/**
-	 * @deprecated  Please use {@link com.aoapps.servlet.attribute.ScopeEE.Page#SCOPE_APPLICATION} instead.
-	 */
-	@Deprecated
-	public static final String APPLICATION = ScopeEE.Page.SCOPE_APPLICATION;
+  /**
+   * @deprecated  Please use {@link com.aoapps.servlet.attribute.ScopeEE.Page#SCOPE_APPLICATION} instead.
+   */
+  @Deprecated
+  public static final String APPLICATION = ScopeEE.Page.SCOPE_APPLICATION;
 
-	/**
-	 * Gets the {@link PageContext} scope value for the textual scope name.
-	 *
-	 * @throws  LocalizedIllegalArgumentException  if invalid scope
-	 *
-	 * @deprecated  Please use {@link com.aoapps.servlet.attribute.ScopeEE.Page#getScopeId(java.lang.String)} instead.
-	 */
-	@Deprecated
-	public static int getScopeId(String scope) throws LocalizedIllegalArgumentException {
-		return ScopeEE.Page.getScopeId(scope);
-	}
+  /**
+   * Gets the {@link PageContext} scope value for the textual scope name.
+   *
+   * @throws  LocalizedIllegalArgumentException  if invalid scope
+   *
+   * @deprecated  Please use {@link com.aoapps.servlet.attribute.ScopeEE.Page#getScopeId(java.lang.String)} instead.
+   */
+  @Deprecated
+  public static int getScopeId(String scope) throws LocalizedIllegalArgumentException {
+    return ScopeEE.Page.getScopeId(scope);
+  }
 }
