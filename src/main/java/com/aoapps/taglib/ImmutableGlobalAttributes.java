@@ -44,27 +44,27 @@ public class ImmutableGlobalAttributes implements GlobalAttributes {
    * @return  The instance or {@link ImmutableGlobalAttributes#EMPTY} when empty.
    */
   public static ImmutableGlobalAttributes of(
-    String id,
-    String clazz,
-    Map<String, Object> data,
-    String dir,
-    Object style
+      String id,
+      String clazz,
+      Map<String, Object> data,
+      String dir,
+      Object style
   ) {
     if (
-      id == null
-      && clazz == null
-      && (data == null || data.isEmpty())
-      && dir == null
-      && style == null
+        id == null
+            && clazz == null
+            && (data == null || data.isEmpty())
+            && dir == null
+            && style == null
     ) {
       return EMPTY;
     } else {
       return new ImmutableGlobalAttributes(
-        id,
-        clazz,
-        data,
-        dir,
-        style
+          id,
+          clazz,
+          data,
+          dir,
+          style
       );
     }
   }
@@ -76,11 +76,11 @@ public class ImmutableGlobalAttributes implements GlobalAttributes {
    */
   public static ImmutableGlobalAttributes of(GlobalAttributes global) {
     return (global == null) ? EMPTY : of(
-      global.getId(),
-      global.getClazz(),
-      global.getData(),
-      global.getDir(),
-      global.getStyle()
+        global.getId(),
+        global.getClazz(),
+        global.getData(),
+        global.getDir(),
+        global.getStyle()
     );
   }
 
@@ -91,11 +91,11 @@ public class ImmutableGlobalAttributes implements GlobalAttributes {
   private final Object style;
 
   private ImmutableGlobalAttributes(
-    String id,
-    String clazz,
-    Map<String, Object> data,
-    String dir,
-    Object style
+      String id,
+      String clazz,
+      Map<String, Object> data,
+      String dir,
+      Object style
   ) {
     this.id = id;
     this.clazz = clazz;

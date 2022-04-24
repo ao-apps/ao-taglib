@@ -74,14 +74,14 @@ public final class Functions {
     String resourcePath = HttpServletUtil.getAbsolutePath(request, url);
     if (resourcePath.startsWith("/")) {
       URI resourcePathURI = new URI(
-        URIEncoder.encodeURI(
-          resourcePath
-        )
+          URIEncoder.encodeURI(
+              resourcePath
+          )
       );
       return LastModifiedServlet.getLastModified(
-        getServletContext(),
-        request,
-        resourcePathURI.getPath()
+          getServletContext(),
+          request,
+          resourcePathURI.getPath()
       );
     }
     return 0;
@@ -90,11 +90,11 @@ public final class Functions {
   public static String addLastModified(String url) throws MalformedURLException {
     HttpServletRequest request = getRequest();
     return LastModifiedServlet.addLastModified(
-      getServletContext(),
-      request,
-      Dispatcher.getCurrentPagePath(request),
-      url,
-      AddLastModified.TRUE
+        getServletContext(),
+        request,
+        Dispatcher.getCurrentPagePath(request),
+        url,
+        AddLastModified.TRUE
     );
   }
 
@@ -124,7 +124,7 @@ public final class Functions {
    * Application-scope cached key.
    */
   private static final ScopeEE.Application.Attribute<ConcurrentMap<String, Tuple2<Long, String>>> RESOURCE_PROJECT_VERSIONS_APPLICATION_KEY =
-    ScopeEE.APPLICATION.attribute(Functions.class.getName() + ".getProjectVersion.resourceProjectVersions");
+      ScopeEE.APPLICATION.attribute(Functions.class.getName() + ".getProjectVersion.resourceProjectVersions");
 
   /**
    * A distinct String instance used to represent not found, since {@link ConcurrentHashMap} does not support
@@ -157,19 +157,19 @@ public final class Functions {
     if (logger.isLoggable(Level.FINER)) {
       logger.finer(
           "lib.........: \"" + lib + "\"\n"
-        + "groupId.....: \"" + groupId + "\"\n"
-        + "artifactId..: \"" + artifactId + "\"\n"
-        + "def.........: \"" + def + "\"\n"
-        + "absLib......: \"" + absLib + "\"\n"
-        + "resourceName: \"" + resourceName + "\"\n"
-        + "lastModified: \"" + (lastModified == 0 ? "Unknown" : new Date(lastModified)) + "\"\n"
+              + "groupId.....: \"" + groupId + "\"\n"
+              + "artifactId..: \"" + artifactId + "\"\n"
+              + "def.........: \"" + def + "\"\n"
+              + "absLib......: \"" + absLib + "\"\n"
+              + "resourceName: \"" + resourceName + "\"\n"
+              + "lastModified: \"" + (lastModified == 0 ? "Unknown" : new Date(lastModified)) + "\"\n"
       );
     }
     if (lastModified != 0) {
       // Get the application-scope cache
       ConcurrentMap<String, Tuple2<Long, String>> resourceProjectVersions =
-        RESOURCE_PROJECT_VERSIONS_APPLICATION_KEY.context(servletContext)
-          .computeIfAbsent(__ -> new ConcurrentHashMap<>());
+          RESOURCE_PROJECT_VERSIONS_APPLICATION_KEY.context(servletContext)
+              .computeIfAbsent(__ -> new ConcurrentHashMap<>());
       // Find any cache entry
       Tuple2<Long, String> cached = resourceProjectVersions.get(resourceName);
       String result;
@@ -178,7 +178,7 @@ public final class Functions {
         if (logger.isLoggable(Level.FINER)) {
           logger.finer(
               "Found in resourceProjectVersions cache: version \"" + result
-            + "\" from \"" + resourceName + '"'
+                  + "\" from \"" + resourceName + '"'
           );
         }
         if (result == NOT_FOUND) {
@@ -191,16 +191,16 @@ public final class Functions {
         if (logger.isLoggable(Level.FINE)) {
           logger.fine(
               "Store in resourceProjectVersions cache: version \"" + ((result == null) ? NOT_FOUND : result)
-            + "\" from \"" + resourceName + '"'
+                  + "\" from \"" + resourceName + '"'
           );
         }
         // Cache result
         resourceProjectVersions.put(
-          resourceName,
-          new Tuple2<>(
-            lastModified,
-            (result == null) ? NOT_FOUND : result
-          )
+            resourceName,
+            new Tuple2<>(
+                lastModified,
+                (result == null) ? NOT_FOUND : result
+            )
         );
       }
       // Return if found
@@ -215,7 +215,7 @@ public final class Functions {
       if (logger.isLoggable(Level.FINER)) {
         logger.finer(
             "Found in classPathProjectVersions cache: version \"" + result
-          + "\" from \"" + groupId + ':' + artifactId + '"'
+                + "\" from \"" + groupId + ':' + artifactId + '"'
         );
       }
     } else {
@@ -224,13 +224,13 @@ public final class Functions {
       if (logger.isLoggable(Level.FINE)) {
         logger.fine(
             "Store in classPathProjectVersions cache: version \"" + ((result == null) ? NOT_FOUND : result)
-          + "\" from \"" + groupId + ':' + artifactId + '"'
+                + "\" from \"" + groupId + ':' + artifactId + '"'
         );
       }
       // Store result as permanent cache entry
       classPathProjectVersions.put(
-        classPathKey,
-        (result == null) ? NOT_FOUND : result
+          classPathKey,
+          (result == null) ? NOT_FOUND : result
       );
     }
     // Return default if not found
@@ -264,7 +264,7 @@ public final class Functions {
     }
     String prefix = bundleTag.getPrefix();
     return bundleTag.getResources().getMessage(
-      prefix == null || prefix.isEmpty() ? key : prefix.concat(key)
+        prefix == null || prefix.isEmpty() ? key : prefix.concat(key)
     );
   }
 }

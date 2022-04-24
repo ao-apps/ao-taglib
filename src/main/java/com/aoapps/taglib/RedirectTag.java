@@ -54,7 +54,7 @@ import javax.servlet.jsp.SkipPageException;
  */
 // TODO: RedirectBodyTag and RedirectSimpleTag?
 public class RedirectTag extends DispatchTag
-  implements HrefAttribute
+    implements HrefAttribute
 {
 
   private static final Logger logger = Logger.getLogger(RedirectTag.class.getName());
@@ -72,15 +72,15 @@ public class RedirectTag extends DispatchTag
 
   public static boolean isValidStatusCode(String statusCode) {
     return
-      "moved_permanently".equals(statusCode)
-      || "permanent".equals(statusCode)
-      || "301".equals(statusCode)
-      || "moved_temporarily".equals(statusCode)
-      || "found".equals(statusCode)
-      || "temporary".equals(statusCode)
-      || "302".equals(statusCode)
-      || "see_other".equals(statusCode)
-      || "303".equals(statusCode)
+        "moved_permanently".equals(statusCode)
+            || "permanent".equals(statusCode)
+            || "301".equals(statusCode)
+            || "moved_temporarily".equals(statusCode)
+            || "found".equals(statusCode)
+            || "temporary".equals(statusCode)
+            || "302".equals(statusCode)
+            || "see_other".equals(statusCode)
+            || "303".equals(statusCode)
     ;
   }
 
@@ -136,31 +136,31 @@ public class RedirectTag extends DispatchTag
       throw new AttributeRequiredException("statusCode");
     }
     if (
-      "301".equals(statusCode)
-      || "moved_permanently".equals(statusCode)
-      || "permanent".equals(statusCode)
+        "301".equals(statusCode)
+            || "moved_permanently".equals(statusCode)
+            || "permanent".equals(statusCode)
     ) {
       status = HttpServletResponse.SC_MOVED_PERMANENTLY;
     } else if (
-      "302".equals(statusCode)
-      || "moved_temporarily".equals(statusCode)
-      || "found".equals(statusCode)
-      || "temporary".equals(statusCode)
+        "302".equals(statusCode)
+            || "moved_temporarily".equals(statusCode)
+            || "found".equals(statusCode)
+            || "temporary".equals(statusCode)
     ) {
       status = HttpServletResponse.SC_MOVED_TEMPORARILY;
     } else if (
-      "303".equals(statusCode)
-      || "see_other".equals(statusCode)
+        "303".equals(statusCode)
+            || "see_other".equals(statusCode)
     ) {
       status = HttpServletResponse.SC_SEE_OTHER;
     } else {
-      throw new AssertionError("Unexpected value for statusCode: "+statusCode);
+      throw new AssertionError("Unexpected value for statusCode: " + statusCode);
     }
 
-    final PageContext pageContext = (PageContext)getJspContext();
+    final PageContext pageContext = (PageContext) getJspContext();
     final ServletContext servletContext = pageContext.getServletContext();
-    final HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
-    final HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
+    final HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
+    final HttpServletResponse response = (HttpServletResponse) pageContext.getResponse();
 
     // Add any parameters to the URL
     String myHref = href;
@@ -174,28 +174,28 @@ public class RedirectTag extends DispatchTag
 
     // Get the full URL that will be used for the redirect
     String location = LastModifiedUtil.buildRedirectURL(
-      servletContext,
-      request,
-      response,
-      servletPath,
-      myHref,
-      params,
-      addLastModified,
-      absolute,
-      canonical
+        servletContext,
+        request,
+        response,
+        servletPath,
+        myHref,
+        params,
+        addLastModified,
+        absolute,
+        canonical
     );
-    boolean isTooLong = location.length()>MAXIMUM_GET_REQUEST_LENGTH;
+    boolean isTooLong = location.length() > MAXIMUM_GET_REQUEST_LENGTH;
     if (!isTooLong || page == null) {
       if (isTooLong) {
         // Warn about location too long
         if (logger.isLoggable(Level.WARNING)) {
           logger.warning(
-            RESOURCES.getMessage(
-              "locationTooLongWarning",
-              MAXIMUM_GET_REQUEST_LENGTH,
-              location.length(),
-              location.substring(0, 100)
-            )
+              RESOURCES.getMessage(
+                  "locationTooLongWarning",
+                  MAXIMUM_GET_REQUEST_LENGTH,
+                  location.length(),
+                  location.substring(0, 100)
+              )
           );
         }
       }
@@ -207,8 +207,8 @@ public class RedirectTag extends DispatchTag
     } else {
       // Set no-cache header for 302 and 303 redirect
       if (
-        status == HttpServletResponse.SC_MOVED_TEMPORARILY
-        || status == HttpServletResponse.SC_SEE_OTHER
+          status == HttpServletResponse.SC_MOVED_TEMPORARILY
+              || status == HttpServletResponse.SC_SEE_OTHER
       ) {
         response.setHeader("cache-control", "no-cache");
       }

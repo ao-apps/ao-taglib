@@ -38,9 +38,9 @@ import javax.servlet.jsp.JspException;
  */
 public class MethodTag extends EncodingBufferedBodyTag {
 
-/* SimpleTag only:
-  public static final String TAG_NAME = "<ao:method>";
-/**/
+  /* SimpleTag only:
+    public static final String TAG_NAME = "<ao:method>";
+  /**/
 
   @Override
   public MediaType getContentType() {
@@ -52,21 +52,22 @@ public class MethodTag extends EncodingBufferedBodyTag {
     return null;
   }
 
-/* BodyTag only: */
+  /* BodyTag only: */
   private static final long serialVersionUID = 1L;
-/**/
+
+  /**/
 
   @Override
-/* BodyTag only: */
+  /* BodyTag only: */
   protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-/**/
-/* SimpleTag only:
-  protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-/**/
+    /**/
+    /* SimpleTag only:
+      protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+    /**/
     AttributeUtils.requireAttributeParent(TAG_NAME, this, "method", MethodAttribute.class)
-      .setMethod(capturedBody.trim().toString());
-/* BodyTag only: */
+        .setMethod(capturedBody.trim().toString());
+    /* BodyTag only: */
     return EVAL_PAGE;
-/**/
+    /**/
   }
 }

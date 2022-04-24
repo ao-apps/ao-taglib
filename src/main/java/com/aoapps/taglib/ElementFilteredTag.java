@@ -37,7 +37,7 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  * @author  AO Industries, Inc.
  */
 public abstract class ElementFilteredTag extends EncodingFilteredTag
-  implements
+    implements
     GlobalAttributes,
     DynamicAttributes
 {
@@ -48,6 +48,7 @@ public abstract class ElementFilteredTag extends EncodingFilteredTag
   public String getId() {
     return global.getId();
   }
+
   public void setId(String id) {
     global.setId(id);
     // TODO: Validate, and TEI
@@ -57,6 +58,7 @@ public abstract class ElementFilteredTag extends EncodingFilteredTag
   public String getClazz() {
     return global.getClazz();
   }
+
   public void setClazz(String clazz) {
     global.setClazz(clazz);
   }
@@ -70,6 +72,7 @@ public abstract class ElementFilteredTag extends EncodingFilteredTag
   public String getDir() {
     return global.getDir();
   }
+
   public void setDir(String dir) {
     global.setDir(dir);
   }
@@ -78,6 +81,7 @@ public abstract class ElementFilteredTag extends EncodingFilteredTag
   public Object getStyle() {
     return global.getStyle();
   }
+
   public void setStyle(Object style) {
     global.setStyle(style);
   }

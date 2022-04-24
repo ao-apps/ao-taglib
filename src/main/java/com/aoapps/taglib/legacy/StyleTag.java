@@ -41,9 +41,9 @@ import javax.servlet.jsp.JspException;
  */
 public class StyleTag extends EncodingBufferedBodyTag {
 
-/* SimpleTag only:
-  public static final String TAG_NAME = "<ao:style>";
-/**/
+  /* SimpleTag only:
+    public static final String TAG_NAME = "<ao:style>";
+  /**/
 
   public StyleTag() {
     init();
@@ -57,16 +57,17 @@ public class StyleTag extends EncodingBufferedBodyTag {
   @Override
   public MediaType getOutputType() {
     Optional<StyleAttribute> styleAttribute = forceElement
-      ? Optional.empty()
-      : JspTagUtils.findAncestor(this, StyleAttribute.class);
+        ? Optional.empty()
+        : JspTagUtils.findAncestor(this, StyleAttribute.class);
     return styleAttribute.isPresent() ? null : MediaType.XHTML;
   }
 
-/* BodyTag only: */
+  /* BodyTag only: */
   private static final long serialVersionUID = 1L;
-/**/
+  /**/
 
   private boolean forceElement;
+
   public void setForceElement(boolean forceElement) {
     this.forceElement = forceElement;
   }
@@ -77,38 +78,38 @@ public class StyleTag extends EncodingBufferedBodyTag {
   }
 
   @Override
-/* BodyTag only: */
+  /* BodyTag only: */
   protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-/**/
-/* SimpleTag only:
-  protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-    PageContext pageContext = (PageContext)getJspContext();
-/**/
+    /**/
+    /* SimpleTag only:
+      protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+        PageContext pageContext = (PageContext)getJspContext();
+    /**/
     Optional<StyleAttribute> styleAttribute = forceElement
-      ? Optional.empty()
-      : JspTagUtils.findAncestor(this, StyleAttribute.class);
+        ? Optional.empty()
+        : JspTagUtils.findAncestor(this, StyleAttribute.class);
     if (styleAttribute.isPresent()) {
       styleAttribute.get().setStyle(capturedBody.trim());
     } else {
       // Write style tag with src attribute
       DocumentEE document = new DocumentEE(
-        pageContext.getServletContext(),
-        (HttpServletRequest)pageContext.getRequest(),
-        (HttpServletResponse)pageContext.getResponse(),
-        out,
-        false, // Do not add extra newlines to JSP
-        false  // Do not add extra indentation to JSP
+          pageContext.getServletContext(),
+          (HttpServletRequest) pageContext.getRequest(),
+          (HttpServletResponse) pageContext.getResponse(),
+          out,
+          false, // Do not add extra newlines to JSP
+          false  // Do not add extra indentation to JSP
       );
       document.style()
-        .out(capturedBody)
-      .__();
+          .out(capturedBody)
+          .__();
     }
-/* BodyTag only: */
+    /* BodyTag only: */
     return EVAL_PAGE;
-/**/
+    /**/
   }
 
-/* BodyTag only: */
+  /* BodyTag only: */
   @Override
   public void doFinally() {
     try {
@@ -117,5 +118,5 @@ public class StyleTag extends EncodingBufferedBodyTag {
       super.doFinally();
     }
   }
-/**/
+  /**/
 }

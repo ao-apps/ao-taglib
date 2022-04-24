@@ -36,8 +36,8 @@ public class FormTagTEI extends ElementTagTEI {
   // TODO: Change to be validateMethod, like validateDir
   public static boolean isValidMethod(String method) {
     return
-      "get".equals(method)
-      || "post".equals(method)
+        "get".equals(method)
+            || "post".equals(method)
     ;
   }
 
@@ -46,16 +46,16 @@ public class FormTagTEI extends ElementTagTEI {
     super.validate(data, messages);
     Object o = data.getAttribute("method");
     if (
-      o != null
-      && o != TagData.REQUEST_TIME_VALUE
+        o != null
+            && o != TagData.REQUEST_TIME_VALUE
     ) {
-      String method = ((String)o).trim(); // TODO: normalizeMethod
+      String method = ((String) o).trim(); // TODO: normalizeMethod
       if (!isValidMethod(method)) {
         messages.add(
-          new ValidationMessage(
-            data.getId(),
-            FormTag.RESOURCES.getMessage("method.invalid", method)
-          )
+            new ValidationMessage(
+                data.getId(),
+                FormTag.RESOURCES.getMessage("method.invalid", method)
+            )
         );
       }
     }

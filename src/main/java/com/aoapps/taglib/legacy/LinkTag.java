@@ -60,7 +60,7 @@ import javax.servlet.jsp.JspTagException;
  * @author  AO Industries, Inc.
  */
 public class LinkTag extends ElementNullBodyTag
-  implements
+    implements
     // Attributes
     HrefAttribute,
     ParamsAttribute,
@@ -79,9 +79,10 @@ public class LinkTag extends ElementNullBodyTag
     return MediaType.XHTML;
   }
 
-/* BodyTag only: */
+  /* BodyTag only: */
   private static final long serialVersionUID = 1L;
-/**/
+
+  /**/
 
   /**
    * Copies all values from the provided link.
@@ -95,7 +96,7 @@ public class LinkTag extends ElementNullBodyTag
       for (Map.Entry<String, List<String>> entry : linkParams.getParameterMap().entrySet()) {
         String paramName = entry.getKey();
         for (String paramValue : entry.getValue()) {
-          addParam(paramName, (Object)paramValue);
+          addParam(paramName, (Object) paramValue);
         }
       }
     }
@@ -108,12 +109,14 @@ public class LinkTag extends ElementNullBodyTag
   }
 
   private String href;
+
   @Override
   public void setHref(String href) {
     this.href = Strings.nullIfEmpty(href);
   }
 
   private MutableURIParameters params;
+
   @Override
   public void addParam(String name, Object value) {
     if (params == null) {
@@ -123,44 +126,52 @@ public class LinkTag extends ElementNullBodyTag
   }
 
   private boolean absolute;
+
   public void setAbsolute(boolean absolute) {
     this.absolute = absolute;
   }
 
   private boolean canonical;
+
   public void setCanonical(boolean canonical) {
     this.canonical = canonical;
   }
 
   private AddLastModified addLastModified;
+
   public void setAddLastModified(String addLastModified) {
     this.addLastModified = AddLastModified.valueOfLowerName(addLastModified.trim().toLowerCase(Locale.ROOT));
   }
 
   private Object hreflang;
+
   @Override
   public void setHreflang(Object hreflang) {
     this.hreflang = hreflang;
   }
 
   private String rel;
+
   @Override
   public void setRel(String rel) {
     this.rel = rel;
   }
 
   private String type;
+
   @Override
   public void setType(String type) {
     this.type = Strings.trimNullIfEmpty(type);
   }
 
   private String media; // TODO: media to Object
+
   public void setMedia(String media) {
     this.media = Strings.trimNullIfEmpty(media);
   }
 
   private Object title;
+
   @Override
   public void setTitle(Object title) {
     this.title = AttributeUtils.trimNullIfEmpty(title);
@@ -172,8 +183,8 @@ public class LinkTag extends ElementNullBodyTag
   @Override
   protected boolean addDynamicAttribute(String uri, String localName, Object value, List<String> expectedPatterns) throws JspTagException {
     return
-      super.addDynamicAttribute(uri, localName, value, expectedPatterns)
-      || ParamUtils.addDynamicAttribute(uri, localName, value, expectedPatterns, this);
+        super.addDynamicAttribute(uri, localName, value, expectedPatterns)
+            || ParamUtils.addDynamicAttribute(uri, localName, value, expectedPatterns, this);
   }
 
   private void init() {
@@ -190,68 +201,68 @@ public class LinkTag extends ElementNullBodyTag
   }
 
   @Override
-/* BodyTag only: */
+  /* BodyTag only: */
   protected int doEndTag(Writer out) throws JspException, IOException {
-/**/
-/* SimpleTag only:
-  protected void doTag(Writer out) throws JspException, IOException {
-    PageContext pageContext = (PageContext)getJspContext();
-/**/
+    /**/
+    /* SimpleTag only:
+      protected void doTag(Writer out) throws JspException, IOException {
+        PageContext pageContext = (PageContext)getJspContext();
+    /**/
     Optional<LinksAttribute> parent = JspTagUtils.findAncestor(this, LinksAttribute.class);
     if (parent.isPresent()) {
       String hreflangStr;
       if (hreflang instanceof Locale) {
-        hreflangStr = ((Locale)hreflang).toLanguageTag();
+        hreflangStr = ((Locale) hreflang).toLanguageTag();
       } else {
         hreflang = AttributeUtils.trimNullIfEmpty(hreflang);
         hreflangStr = Coercion.toString(hreflang);
       }
       parent.get().addLink(
-        new Link(
-          global.freeze(),
-          href,
-          absolute,
-          canonical,
-          params,
-          addLastModified,
-          hreflangStr,
-          Strings.trimNullIfEmpty(rel),
-          type,
-          media,
-          Coercion.toString(title)
-        )
+          new Link(
+              global.freeze(),
+              href,
+              absolute,
+              canonical,
+              params,
+              addLastModified,
+              hreflangStr,
+              Strings.trimNullIfEmpty(rel),
+              type,
+              media,
+              Coercion.toString(title)
+          )
       );
     } else {
       DocumentEE document = new DocumentEE(
-        pageContext.getServletContext(),
-        (HttpServletRequest)pageContext.getRequest(),
-        (HttpServletResponse)pageContext.getResponse(),
-        out,
-        false, // Do not add extra newlines to JSP
-        false  // Do not add extra indentation to JSP
+          pageContext.getServletContext(),
+          (HttpServletRequest) pageContext.getRequest(),
+          (HttpServletResponse) pageContext.getResponse(),
+          out,
+          false, // Do not add extra newlines to JSP
+          false  // Do not add extra indentation to JSP
       );
       LINK<?> link = document.link();
       GlobalAttributesUtils.doGlobalAttributes(global, link);
       link.href(UrlUtils.getHref(pageContext, href, params, addLastModified, absolute, canonical));
       if (hreflang instanceof Locale) {
-        link.hreflang((Locale)hreflang);
+        link.hreflang((Locale) hreflang);
       } else {
         hreflang = AttributeUtils.trimNullIfEmpty(hreflang);
         link.hreflang(Coercion.toString(hreflang));
       }
       link
-        .rel(rel)
-        .type(type)
-        .media(media)
-        .title(title)
-      .__();
+          .rel(rel)
+          .type(type)
+          .media(media)
+          .title(title)
+          .__();
     }
-/* BodyTag only: */
+    /* BodyTag only: */
     return EVAL_PAGE;
-/**/
+    /**/
   }
 
-/* BodyTag only: */
+  /* BodyTag only: */
   @Override
   public void doFinally() {
     try {
@@ -260,5 +271,5 @@ public class LinkTag extends ElementNullBodyTag
       super.doFinally();
     }
   }
-/**/
+  /**/
 }

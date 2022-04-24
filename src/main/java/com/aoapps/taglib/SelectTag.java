@@ -44,7 +44,7 @@ import javax.servlet.jsp.PageContext;
  * @author  AO Industries, Inc.
  */
 public class SelectTag extends ElementBufferedTag
-  implements
+    implements
     // Attributes
     DisabledAttribute,
     NameAttribute,
@@ -70,47 +70,54 @@ public class SelectTag extends ElementBufferedTag
     return MediaType.XHTML;
   }
 
-/* BodyTag only:
-  private static final long serialVersionUID = 1L;
-/**/
+  /* BodyTag only:
+    private static final long serialVersionUID = 1L;
+  /**/
 
   private boolean disabled;
+
   @Override
   public void setDisabled(boolean disabled) {
     this.disabled = disabled;
   }
 
   private String name;
+
   @Override
   public void setName(String name) {
     this.name = Strings.nullIfEmpty(name);
   }
 
   private Object size;
+
   @Override
   public void setSize(Object size) {
     this.size = AttributeUtils.trimNullIfEmpty(size);
   }
 
   private Object onblur;
+
   @Override
   public void setOnblur(Object onblur) {
     this.onblur = AttributeUtils.trimNullIfEmpty(onblur);
   }
 
   private Object onchange;
+
   @Override
   public void setOnchange(Object onchange) {
     this.onchange = AttributeUtils.trimNullIfEmpty(onchange);
   }
 
   private Object onfocus;
+
   @Override
   public void setOnfocus(Object onfocus) {
     this.onfocus = AttributeUtils.trimNullIfEmpty(onfocus);
   }
 
   private Object onkeypress;
+
   @Override
   public void setOnkeypress(Object onkeypress) {
     this.onkeypress = AttributeUtils.trimNullIfEmpty(onkeypress);
@@ -127,16 +134,16 @@ public class SelectTag extends ElementBufferedTag
   }
 
   @Override
-/* BodyTag only:
-  protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-/**/
-/* SimpleTag only: */
+  /* BodyTag only:
+    protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+  /**/
+  /* SimpleTag only: */
   protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-    PageContext pageContext = (PageContext)getJspContext();
-/**/
+    PageContext pageContext = (PageContext) getJspContext();
+    /**/
     Serialization serialization = SerializationEE.get(
-      pageContext.getServletContext(),
-      (HttpServletRequest)pageContext.getRequest()
+        pageContext.getServletContext(),
+        (HttpServletRequest) pageContext.getRequest()
     );
     out.write("<select");
     GlobalAttributesUtils.writeGlobalAttributes(global, out);
@@ -159,65 +166,65 @@ public class SelectTag extends ElementBufferedTag
     if (onblur != null) {
       out.write(" onblur=\"");
       MarkupCoercion.write(
-        onblur,
-        MarkupType.JAVASCRIPT,
-        true,
-        javascriptInXhtmlAttributeEncoder,
-        false,
-        out
+          onblur,
+          MarkupType.JAVASCRIPT,
+          true,
+          javascriptInXhtmlAttributeEncoder,
+          false,
+          out
       );
       out.append('"');
     }
     if (onchange != null) {
       out.write(" onchange=\"");
       MarkupCoercion.write(
-        onchange,
-        MarkupType.JAVASCRIPT,
-        true,
-        javascriptInXhtmlAttributeEncoder,
-        false,
-        out
+          onchange,
+          MarkupType.JAVASCRIPT,
+          true,
+          javascriptInXhtmlAttributeEncoder,
+          false,
+          out
       );
       out.append('"');
     }
     if (onfocus != null) {
       out.write(" onfocus=\"");
       MarkupCoercion.write(
-        onfocus,
-        MarkupType.JAVASCRIPT,
-        true,
-        javascriptInXhtmlAttributeEncoder,
-        false,
-        out
+          onfocus,
+          MarkupType.JAVASCRIPT,
+          true,
+          javascriptInXhtmlAttributeEncoder,
+          false,
+          out
       );
       out.append('"');
     }
     if (onkeypress != null) {
       out.write(" onkeypress=\"");
       MarkupCoercion.write(
-        onkeypress,
-        MarkupType.JAVASCRIPT,
-        true,
-        javascriptInXhtmlAttributeEncoder,
-        false,
-        out
+          onkeypress,
+          MarkupType.JAVASCRIPT,
+          true,
+          javascriptInXhtmlAttributeEncoder,
+          false,
+          out
       );
       out.append('"');
     }
     out.append('>');
     MarkupCoercion.write(
-      capturedBody,
-      MarkupType.XHTML,
-      out,
-      true
+        capturedBody,
+        MarkupType.XHTML,
+        out,
+        true
     );
     out.write("</select>");
-/* BodyTag only:
-    return EVAL_PAGE;
-/**/
+    /* BodyTag only:
+      return EVAL_PAGE;
+  /**/
   }
 
-/* BodyTag only:
+  /* BodyTag only:
   @Override
   public void doFinally() {
     try {

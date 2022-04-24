@@ -47,17 +47,17 @@ public class Link {
   private final String title;
 
   public Link(
-    GlobalAttributes global,
-    String href,
-    boolean absolute,
-    boolean canonical,
-    URIParameters params,
-    AddLastModified addLastModified,
-    String hreflang,
-    String rel,
-    String type,
-    String media,
-    String title
+      GlobalAttributes global,
+      String href,
+      boolean absolute,
+      boolean canonical,
+      URIParameters params,
+      AddLastModified addLastModified,
+      String hreflang,
+      String rel,
+      String type,
+      String media,
+      String title
   ) {
     this.global = global;
     this.href = href;
@@ -77,57 +77,57 @@ public class Link {
    */
   @Deprecated
   public Link(
-    String href,
-    boolean absolute,
-    boolean canonical,
-    URIParameters params,
-    AddLastModified addLastModified,
-    String hreflang,
-    String rel,
-    String type,
-    String media,
-    String title
+      String href,
+      boolean absolute,
+      boolean canonical,
+      URIParameters params,
+      AddLastModified addLastModified,
+      String hreflang,
+      String rel,
+      String type,
+      String media,
+      String title
   ) {
     this(
-      ImmutableGlobalAttributes.EMPTY,
-      href,
-      absolute,
-      canonical,
-      params,
-      addLastModified,
-      hreflang,
-      rel,
-      type,
-      media,
-      title
+        ImmutableGlobalAttributes.EMPTY,
+        href,
+        absolute,
+        canonical,
+        params,
+        addLastModified,
+        hreflang,
+        rel,
+        type,
+        media,
+        title
     );
   }
 
   public Link(
-    GlobalAttributes global,
-    String href,
-    boolean absolute,
-    boolean canonical,
-    URIParameters params,
-    AddLastModified addLastModified,
-    Locale hreflang,
-    String rel,
-    String type,
-    String media,
-    String title
+      GlobalAttributes global,
+      String href,
+      boolean absolute,
+      boolean canonical,
+      URIParameters params,
+      AddLastModified addLastModified,
+      Locale hreflang,
+      String rel,
+      String type,
+      String media,
+      String title
   ) {
     this(
-      global,
-      href,
-      absolute,
-      canonical,
-      params,
-      addLastModified,
-      hreflang == null ? null : hreflang.toLanguageTag(),
-      rel,
-      type,
-      media,
-      title
+        global,
+        href,
+        absolute,
+        canonical,
+        params,
+        addLastModified,
+        hreflang == null ? null : hreflang.toLanguageTag(),
+        rel,
+        type,
+        media,
+        title
     );
   }
 
@@ -136,29 +136,29 @@ public class Link {
    */
   @Deprecated
   public Link(
-    String href,
-    boolean absolute,
-    boolean canonical,
-    URIParameters params,
-    AddLastModified addLastModified,
-    Locale hreflang,
-    String rel,
-    String type,
-    String media,
-    String title
+      String href,
+      boolean absolute,
+      boolean canonical,
+      URIParameters params,
+      AddLastModified addLastModified,
+      Locale hreflang,
+      String rel,
+      String type,
+      String media,
+      String title
   ) {
     this(
-      ImmutableGlobalAttributes.EMPTY,
-      href,
-      absolute,
-      canonical,
-      params,
-      addLastModified,
-      hreflang,
-      rel,
-      type,
-      media,
-      title
+        ImmutableGlobalAttributes.EMPTY,
+        href,
+        absolute,
+        canonical,
+        params,
+        addLastModified,
+        hreflang,
+        rel,
+        type,
+        media,
+        title
     );
   }
 

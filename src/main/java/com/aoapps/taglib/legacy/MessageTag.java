@@ -49,15 +49,15 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  * @author  AO Industries, Inc.
  */
 public class MessageTag extends EncodingNullBodyTag
-  implements
+    implements
     DynamicAttributes,
     TypeAttribute,
     MessageArgsAttribute
 {
 
-/* SimpleTag only:
-  public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, MessageTag.class);
-/**/
+  /* SimpleTag only:
+    public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, MessageTag.class);
+  /**/
 
   public MessageTag() {
     init();
@@ -68,21 +68,24 @@ public class MessageTag extends EncodingNullBodyTag
     return mediaType;
   }
 
-/* BodyTag only: */
+  /* BodyTag only: */
   private static final long serialVersionUID = 1L;
-/**/
+  /**/
 
   private String bundle;
+
   public void setBundle(String bundle) {
     this.bundle = bundle;
   }
 
   private String key;
+
   public void setKey(String key) {
     this.key = key;
   }
 
   private MediaType mediaType;
+
   @Override
   public void setType(String type) {
     String typeStr = Strings.trim(type);
@@ -99,6 +102,7 @@ public class MessageTag extends EncodingNullBodyTag
 
   private BitSet messageArgsSet;
   private List<Object> messageArgs;
+
   @Override
   public void addMessageArg(Object value) {
     // Create lists on first use
@@ -236,16 +240,16 @@ public class MessageTag extends EncodingNullBodyTag
   }
 
   @Override
-/* BodyTag only: */
+  /* BodyTag only: */
   protected int doEndTag(Writer out) throws JspException, IOException {
-/**/
-/* SimpleTag only:
-  protected void doTag(Writer out) throws JspException, IOException {
-/**/
+    /**/
+    /* SimpleTag only:
+      protected void doTag(Writer out) throws JspException, IOException {
+    /**/
     out.write(lookupResult);
-/* BodyTag only: */
+    /* BodyTag only: */
     return EVAL_PAGE;
-/**/
+    /**/
   }
 
   @Override
@@ -255,7 +259,7 @@ public class MessageTag extends EncodingNullBodyTag
     }
   }
 
-/* BodyTag only: */
+  /* BodyTag only: */
   @Override
   public void doFinally() {
     try {
@@ -264,5 +268,5 @@ public class MessageTag extends EncodingNullBodyTag
       super.doFinally();
     }
   }
-/**/
+  /**/
 }

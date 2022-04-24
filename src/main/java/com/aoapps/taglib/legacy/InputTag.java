@@ -79,7 +79,7 @@ import javax.servlet.jsp.JspTagException;
  * @author  AO Industries, Inc.
  */
 public class InputTag extends ElementBufferedBodyTag
-  implements
+    implements
     // Attributes
     AltAttribute,
     CheckedAttribute,
@@ -104,9 +104,9 @@ public class InputTag extends ElementBufferedBodyTag
     OnkeypressAttribute
 {
 
-/* SimpleTag only:
-  public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, InputTag.class);
-/**/
+  /* SimpleTag only:
+    public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, InputTag.class);
+  /**/
 
   public InputTag() {
     init();
@@ -122,71 +122,82 @@ public class InputTag extends ElementBufferedBodyTag
     return MediaType.XHTML;
   }
 
-/* BodyTag only: */
+  /* BodyTag only: */
   private static final long serialVersionUID = 1L;
-/**/
+  /**/
 
   private Object alt;
+
   @Override
   public void setAlt(Object alt) {
     this.alt = AttributeUtils.trim(alt);
   }
 
   private boolean autocomplete;
+
   // TODO: Support full set of values from ao-fluent-html
   public void setAutocomplete(boolean autocomplete) {
     this.autocomplete = autocomplete;
   }
 
   private boolean checked;
+
   @Override
   public void setChecked(boolean checked) {
     this.checked = checked;
   }
 
   private boolean disabled;
+
   @Override
   public void setDisabled(boolean disabled) {
     this.disabled = disabled;
   }
 
   private Object height;
+
   @Override
   public void setHeight(Object height) {
     this.height = AttributeUtils.trimNullIfEmpty(height);
   }
 
   private Integer maxlength;
+
   @Override
   public void setMaxlength(Integer maxlength) {
     this.maxlength = maxlength;
   }
 
   private String name;
+
   @Override
   public void setName(String name) {
     this.name = name;
   }
 
   private boolean readonly;
+
   @Override
   public void setReadonly(boolean readonly) {
     this.readonly = readonly;
   }
 
   private Object size;
+
   @Override
   public void setSize(Object size) {
     this.size = AttributeUtils.trimNullIfEmpty(size);
   }
 
   private String src;
+
   @Override
   public void setSrc(String src) {
     this.src = Strings.nullIfEmpty(src);
   }
 
   private MutableURIParameters params;
+
   @Override
   public void addParam(String name, Object value) {
     if (params == null) {
@@ -196,33 +207,39 @@ public class InputTag extends ElementBufferedBodyTag
   }
 
   private boolean absolute;
+
   public void setAbsolute(boolean absolute) {
     this.absolute = absolute;
   }
 
   private boolean canonical;
+
   public void setCanonical(boolean canonical) {
     this.canonical = canonical;
   }
 
   private AddLastModified addLastModified;
+
   public void setAddLastModified(String addLastModified) {
     this.addLastModified = AddLastModified.valueOfLowerName(addLastModified.trim().toLowerCase(Locale.ROOT));
   }
 
   private int tabindex;
+
   @Override
   public void setTabindex(int tabindex) {
     this.tabindex = tabindex;
   }
 
   private Object title;
+
   @Override
   public void setTitle(Object title) {
     this.title = AttributeUtils.trimNullIfEmpty(title);
   }
 
   private String type;
+
   @Override
   public void setType(String type) {
     String typeStr = Strings.trimNullIfEmpty(type);
@@ -233,42 +250,49 @@ public class InputTag extends ElementBufferedBodyTag
   }
 
   private Object width;
+
   @Override
   public void setWidth(Object width) {
     this.width = AttributeUtils.trimNullIfEmpty(width);
   }
 
   private Object value;
+
   @Override
   public void setValue(Object value) {
     this.value = AttributeUtils.nullIfEmpty(value);
   }
 
   private Object onblur;
+
   @Override
   public void setOnblur(Object onblur) {
     this.onblur = AttributeUtils.trimNullIfEmpty(onblur);
   }
 
   private Object onchange;
+
   @Override
   public void setOnchange(Object onchange) {
     this.onchange = AttributeUtils.trimNullIfEmpty(onchange);
   }
 
   private Object onclick;
+
   @Override
   public void setOnclick(Object onclick) {
     this.onclick = AttributeUtils.trimNullIfEmpty(onclick);
   }
 
   private Object onfocus;
+
   @Override
   public void setOnfocus(Object onfocus) {
     this.onfocus = AttributeUtils.trimNullIfEmpty(onfocus);
   }
 
   private Object onkeypress;
+
   @Override
   public void setOnkeypress(Object onkeypress) {
     this.onkeypress = AttributeUtils.trimNullIfEmpty(onkeypress);
@@ -280,8 +304,8 @@ public class InputTag extends ElementBufferedBodyTag
   @Override
   protected boolean addDynamicAttribute(String uri, String localName, Object value, List<String> expectedPatterns) throws JspTagException {
     return
-      super.addDynamicAttribute(uri, localName, value, expectedPatterns)
-      || ParamUtils.addDynamicAttribute(uri, localName, value, expectedPatterns, this);
+        super.addDynamicAttribute(uri, localName, value, expectedPatterns)
+            || ParamUtils.addDynamicAttribute(uri, localName, value, expectedPatterns, this);
   }
 
   private void init() {
@@ -312,13 +336,13 @@ public class InputTag extends ElementBufferedBodyTag
   }
 
   @Override
-/* BodyTag only: */
+  /* BodyTag only: */
   protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-/**/
-/* SimpleTag only:
-  protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-    PageContext pageContext = (PageContext)getJspContext();
-/**/
+    /**/
+    /* SimpleTag only:
+      protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+        PageContext pageContext = (PageContext)getJspContext();
+    /**/
     if (type == null) {
       throw new AttributeRequiredException("type");
     }
@@ -331,12 +355,12 @@ public class InputTag extends ElementBufferedBodyTag
       }
     }
     DocumentEE document = new DocumentEE(
-      pageContext.getServletContext(),
-      (HttpServletRequest)pageContext.getRequest(),
-      (HttpServletResponse)pageContext.getResponse(),
-      out,
-      false, // Do not add extra newlines to JSP
-      false  // Do not add extra indentation to JSP
+        pageContext.getServletContext(),
+        (HttpServletRequest) pageContext.getRequest(),
+        (HttpServletResponse) pageContext.getResponse(),
+        out,
+        false, // Do not add extra newlines to JSP
+        false  // Do not add extra indentation to JSP
     );
     INPUT.Dynamic<?> input = document.input().dynamic();
     GlobalAttributesUtils.doGlobalAttributes(global, input);
@@ -347,8 +371,8 @@ public class InputTag extends ElementBufferedBodyTag
       input.autocomplete(AnyINPUT.Autocomplete.OFF);
     }
     input
-      .checked(checked)
-      .disabled(disabled);
+        .checked(checked)
+        .disabled(disabled);
     if (height != null) {
       // TODO: ao-fluent-html attribute as Integer
       out.write(" height=\"");
@@ -356,9 +380,9 @@ public class InputTag extends ElementBufferedBodyTag
       out.append('"');
     }
     input
-      .maxlength(maxlength)
-      .name(name)
-      .readonly(readonly);
+        .maxlength(maxlength)
+        .name(name)
+        .readonly(readonly);
     if (size != null) {
       // TODO: ao-fluent-html attribute as Integer
       out.write(" size=\"");
@@ -367,9 +391,9 @@ public class InputTag extends ElementBufferedBodyTag
     }
     UrlUtils.writeSrc(pageContext, out, src, params, addLastModified, absolute, canonical);
     input
-      .tabindex((tabindex >= 1) ? tabindex : null)
-      .title(title)
-      .type(type);
+        .tabindex((tabindex >= 1) ? tabindex : null)
+        .title(title)
+        .type(type);
     if (width != null) {
       // TODO: ao-fluent-html attribute as Integer
       out.write(" width=\"");
@@ -377,19 +401,19 @@ public class InputTag extends ElementBufferedBodyTag
       out.append('"');
     }
     input
-      .value(value == null ? "" : value)
-      .onblur(onblur)
-      .onchange(onchange)
-      .onclick(onclick)
-      .onfocus(onfocus)
-      .onkeypress(onkeypress)
-    .__();
-/* BodyTag only: */
+        .value(value == null ? "" : value)
+        .onblur(onblur)
+        .onchange(onchange)
+        .onclick(onclick)
+        .onfocus(onfocus)
+        .onkeypress(onkeypress)
+        .__();
+    /* BodyTag only: */
     return EVAL_PAGE;
-/**/
+    /**/
   }
 
-/* BodyTag only: */
+  /* BodyTag only: */
   @Override
   public void doFinally() {
     try {
@@ -398,5 +422,5 @@ public class InputTag extends ElementBufferedBodyTag
       super.doFinally();
     }
   }
-/**/
+  /**/
 }

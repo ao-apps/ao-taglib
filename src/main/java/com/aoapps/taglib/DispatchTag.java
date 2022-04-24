@@ -63,7 +63,7 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
  */
 // TODO: DispatchBodyTag and DispatchSimpleTag?
 public abstract class DispatchTag extends SimpleTagSupport
-  implements
+    implements
     DynamicAttributes,
     PageAttribute,
     ParamsAttribute
@@ -78,7 +78,7 @@ public abstract class DispatchTag extends SimpleTagSupport
    */
   @Deprecated
   protected static final ScopeEE.Request.Attribute<Boolean> FORWARDED_REQUEST_ATTRIBUTE =
-    ScopeEE.REQUEST.attribute(DispatchTag.class.getName() + ".requestForwarded");
+      ScopeEE.REQUEST.attribute(DispatchTag.class.getName() + ".requestForwarded");
 
   /**
    * Checks if the request has been forwarded.
@@ -88,16 +88,16 @@ public abstract class DispatchTag extends SimpleTagSupport
   @Deprecated
   public static boolean isForwarded(ServletRequest req) {
     return
-      FORWARDED_REQUEST_ATTRIBUTE.context(req).get() != null
-      || ScopeEE.Request.FORWARD_SERVLET_PATH.context(req).get() != null;
+        FORWARDED_REQUEST_ATTRIBUTE.context(req).get() != null
+            || ScopeEE.Request.FORWARD_SERVLET_PATH.context(req).get() != null;
   }
 
   @SuppressWarnings("unchecked")
   public static HttpServletRequest getParameterAlteredRequest(
-    HttpServletRequest request,
-    URIParameters params,
-    Map<String, String[]> oldMap,
-    WildcardPatternMatcher clearParamsMatcher
+      HttpServletRequest request,
+      URIParameters params,
+      Map<String, String[]> oldMap,
+      WildcardPatternMatcher clearParamsMatcher
   ) {
     final Map<String, List<String>> newMap;
     if (params == null) {
@@ -130,8 +130,8 @@ public abstract class DispatchTag extends SimpleTagSupport
     for (Map.Entry<String, String[]> entry : oldMap.entrySet()) {
       String name = entry.getKey();
       if (
-        !newMap.containsKey(name)
-        && !clearParamsMatcher.isMatch(name)
+          !newMap.containsKey(name)
+              && !clearParamsMatcher.isMatch(name)
       ) {
         newParameters.put(name, entry.getValue());
       }
@@ -235,8 +235,8 @@ public abstract class DispatchTag extends SimpleTagSupport
   @Override
   @SuppressWarnings("unchecked")
   public void doTag() throws JspException, IOException {
-    final PageContext pageContext = (PageContext)getJspContext();
-    final HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
+    final PageContext pageContext = (PageContext) getJspContext();
+    final HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
     // Track original page when first accessed
     final String oldOriginal = Dispatcher.getOriginalPage(request);
     try {
@@ -255,9 +255,9 @@ public abstract class DispatchTag extends SimpleTagSupport
       try {
         // Determine the path of the current page based on previous dispatch or original request
         final String servletPath =
-          oldDispatchPage == null
-            ? request.getServletPath()
-            : oldDispatchPage
+            oldDispatchPage == null
+                ? request.getServletPath()
+                : oldDispatchPage
         ;
 
         // Find any dispatcher before allowing subclass to intercept dispatch.  This ensures page is a correct
@@ -270,8 +270,8 @@ public abstract class DispatchTag extends SimpleTagSupport
         } else {
           // Make relative to current JSP page
           contextRelativePath = URIResolver.getAbsolutePath(
-            servletPath,
-            page
+              servletPath,
+              page
           );
           // Find dispatcher
           dispatcher = pageContext.getServletContext().getRequestDispatcher(contextRelativePath);
@@ -297,7 +297,7 @@ public abstract class DispatchTag extends SimpleTagSupport
         // Push new arguments
         try (Attribute.OldValue oldArgs = Dispatcher.ARG_REQUEST_ATTRIBUTE.context(request).init(getArgs())) {
           final JspWriter out = pageContext.getOut();
-          final HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
+          final HttpServletResponse response = (HttpServletResponse) pageContext.getResponse();
 
           final WildcardPatternMatcher clearParamsMatcher = getClearParamsMatcher();
           Map<String, String[]> oldMap = null; // Obtained when first needed
@@ -324,10 +324,10 @@ public abstract class DispatchTag extends SimpleTagSupport
 
           // Filter and merge all parameters
           dispatch(
-            dispatcher,
-            out,
-            getParameterAlteredRequest(request, params, oldMap, clearParamsMatcher),
-            response
+              dispatcher,
+              out,
+              getParameterAlteredRequest(request, params, oldMap, clearParamsMatcher),
+              response
           );
         }
       } finally {

@@ -83,24 +83,25 @@ import javax.servlet.jsp.JspTagException;
  */
 public class HtmlTag extends ElementFilteredBodyTag {
 
-/* SimpleTag only:
-  public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, HtmlTag.class);
-/**/
+  /* SimpleTag only:
+    public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, HtmlTag.class);
+  /**/
 
-/* BodyTag only: */
+  /* BodyTag only: */
   public HtmlTag() {
     init();
   }
-/**/
+
+  /**/
 
   @Override
   public MediaType getContentType() {
     return MediaType.XHTML;
   }
 
-/* BodyTag only: */
+  /* BodyTag only: */
   private static final long serialVersionUID = 1L;
-/**/
+  /**/
 
   // TODO: charset here, along with:
   //       Page (model), Page (Servlet), PageTag, Theme, View
@@ -108,6 +109,7 @@ public class HtmlTag extends ElementFilteredBodyTag {
   //       aoweb-struts: PageAttributes, Skin
 
   private Serialization serialization;
+
   public void setSerialization(String serialization) {
     if (serialization == null) {
       this.serialization = null;
@@ -118,6 +120,7 @@ public class HtmlTag extends ElementFilteredBodyTag {
   }
 
   private Doctype doctype;
+
   public void setDoctype(String doctype) {
     if (doctype == null) {
       this.doctype = null;
@@ -128,6 +131,7 @@ public class HtmlTag extends ElementFilteredBodyTag {
   }
 
   private Boolean autonli;
+
   public void setAutonli(String autonli) {
     if (autonli == null) {
       this.autonli = null;
@@ -146,6 +150,7 @@ public class HtmlTag extends ElementFilteredBodyTag {
   }
 
   private Boolean indent;
+
   public void setIndent(String indent) {
     if (indent == null) {
       this.indent = null;
@@ -163,7 +168,7 @@ public class HtmlTag extends ElementFilteredBodyTag {
     }
   }
 
-/* BodyTag only: */
+  /* BodyTag only: */
   // Values that are used in doFinally
   private transient Serialization oldSerialization;
   private transient boolean setSerialization;
@@ -192,28 +197,29 @@ public class HtmlTag extends ElementFilteredBodyTag {
     setIndent = false;
     oldPageRegistry = null;
   }
-/**/
+
+  /**/
 
   @Override
-/* BodyTag only: */
+  /* BodyTag only: */
   protected int doStartTag(Writer out) throws JspException, IOException {
-/**/
-/* SimpleTag only:
-  protected void doTag(Writer out) throws JspException, IOException {
-    PageContext pageContext = (PageContext)getJspContext();
-    Serialization oldSerialization;
-    boolean setSerialization;
-    Attribute.OldValue oldStrutsXhtml;
-    Doctype oldDoctype;
-    boolean setDoctype;
-    Boolean oldAutonli;
-    boolean setAutonli;
-    Boolean oldIndent;
-    boolean setIndent;
-    Registry oldPageRegistry;
-/**/
+    /**/
+    /* SimpleTag only:
+      protected void doTag(Writer out) throws JspException, IOException {
+        PageContext pageContext = (PageContext)getJspContext();
+        Serialization oldSerialization;
+        boolean setSerialization;
+        Attribute.OldValue oldStrutsXhtml;
+        Doctype oldDoctype;
+        boolean setDoctype;
+        Boolean oldAutonli;
+        boolean setAutonli;
+        Boolean oldIndent;
+        boolean setIndent;
+        Registry oldPageRegistry;
+    /**/
     ServletContext servletContext = pageContext.getServletContext();
-    HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
+    HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
 
     Serialization currentSerialization = serialization;
     if (currentSerialization == null) {
@@ -225,82 +231,82 @@ public class HtmlTag extends ElementFilteredBodyTag {
       oldSerialization = SerializationEE.replace(request, currentSerialization);
       setSerialization = true;
       oldStrutsXhtml = STRUTS_XHTML_KEY.context(pageContext).init(
-        Boolean.toString(currentSerialization == Serialization.XML)
+          Boolean.toString(currentSerialization == Serialization.XML)
       );
     }
-/* SimpleTag only:
-    try {
-/**/
-      Doctype currentDoctype = doctype;
-      if (currentDoctype == null) {
-        currentDoctype = DoctypeEE.get(servletContext, request);
-        oldDoctype = null;
-        setDoctype = false;
-      } else {
-        oldDoctype = DoctypeEE.replace(request, currentDoctype);
-        setDoctype = true;
-      }
-/* SimpleTag only:
-      try {
-/**/
-        if (autonli == null) {
-          DocumentEE.getAutonli(servletContext, request); // Gets or sets the request attribute for "auto"
-          oldAutonli = null;
-          setAutonli = false;
-        } else {
-          oldAutonli = DocumentEE.replaceAutonli(request, autonli);
-          setAutonli = true;
-        }
-/* SimpleTag only:
+    /* SimpleTag only:
         try {
-/**/
-          if (indent == null) {
-            DocumentEE.getIndent(servletContext, request); // Gets or sets the request attribute for "auto"
-            oldIndent = null;
-            setIndent = false;
-          } else {
-            oldIndent = DocumentEE.replaceIndent(request, indent);
-            setIndent = true;
-          }
-/* SimpleTag only:
+    /**/
+    Doctype currentDoctype = doctype;
+    if (currentDoctype == null) {
+      currentDoctype = DoctypeEE.get(servletContext, request);
+      oldDoctype = null;
+      setDoctype = false;
+    } else {
+      oldDoctype = DoctypeEE.replace(request, currentDoctype);
+      setDoctype = true;
+    }
+    /* SimpleTag only:
           try {
-/**/
-            oldPageRegistry = RegistryEE.Page.get(request);
-            if (oldPageRegistry == null) {
-              // Create a new page-scope registry
-              RegistryEE.Page.set(request, new Registry());
-            }
-/* SimpleTag only:
+    /**/
+    if (autonli == null) {
+      DocumentEE.getAutonli(servletContext, request); // Gets or sets the request attribute for "auto"
+      oldAutonli = null;
+      setAutonli = false;
+    } else {
+      oldAutonli = DocumentEE.replaceAutonli(request, autonli);
+      setAutonli = true;
+    }
+    /* SimpleTag only:
             try {
-/**/
-              ServletResponse response = pageContext.getResponse();
-              // Clear the output buffer
-              response.resetBuffer();
-              // Set the content type
-              final String documentEncoding = AnyDocument.ENCODING.name();
+    /**/
+    if (indent == null) {
+      DocumentEE.getIndent(servletContext, request); // Gets or sets the request attribute for "auto"
+      oldIndent = null;
+      setIndent = false;
+    } else {
+      oldIndent = DocumentEE.replaceIndent(request, indent);
+      setIndent = true;
+    }
+    /* SimpleTag only:
               try {
-                ServletUtil.setContentType(response, currentSerialization.getContentType(), documentEncoding);
-              } catch (ServletException e) {
-                throw new JspTagException(e);
-              }
-              // Write doctype
-              currentDoctype.xmlDeclaration(currentSerialization, documentEncoding, out);
-              currentDoctype.doctype(currentSerialization, out);
-              // Write <html>
-              beginHtmlTag(response, out, currentSerialization, this);
-/* BodyTag only: */
+    /**/
+    oldPageRegistry = RegistryEE.Page.get(request);
+    if (oldPageRegistry == null) {
+      // Create a new page-scope registry
+      RegistryEE.Page.set(request, new Registry());
+    }
+    /* SimpleTag only:
+                try {
+    /**/
+    ServletResponse response = pageContext.getResponse();
+    // Clear the output buffer
+    response.resetBuffer();
+    // Set the content type
+    final String documentEncoding = AnyDocument.ENCODING.name();
+    try {
+      ServletUtil.setContentType(response, currentSerialization.getContentType(), documentEncoding);
+    } catch (ServletException e) {
+      throw new JspTagException(e);
+    }
+    // Write doctype
+    currentDoctype.xmlDeclaration(currentSerialization, documentEncoding, out);
+    currentDoctype.doctype(currentSerialization, out);
+    // Write <html>
+    beginHtmlTag(response, out, currentSerialization, this);
+    /* BodyTag only: */
     return EVAL_BODY_FILTERED;
   }
 
   @Override
   protected int doEndTag(Writer out) throws JspException, IOException {
-/**/
-/* SimpleTag only:
-              super.doTag(out);
-/**/
-              // Write </html>
-              endHtmlTag(out);
-/* BodyTag only: */
+    /**/
+    /* SimpleTag only:
+                  super.doTag(out);
+    /**/
+    // Write </html>
+    endHtmlTag(out);
+    /* BodyTag only: */
     return EVAL_PAGE;
   }
 
@@ -309,51 +315,51 @@ public class HtmlTag extends ElementFilteredBodyTag {
     try {
       try {
         javax.servlet.ServletRequest request = pageContext.getRequest();
-/**/
-/* SimpleTag only:
-            } finally {
-/**/
-              if (oldPageRegistry == null) {
-                RegistryEE.Page.set(request, null);
-              }
-/* SimpleTag only:
-            }
-          } finally {
-/**/
-            if (setIndent) {
-              DocumentEE.setIndent(request, oldIndent);
-            }
-/* SimpleTag only:
-          }
-        } finally {
-/**/
-          if (setAutonli) {
-            DocumentEE.setAutonli(request, oldAutonli);
-          }
-/* SimpleTag only:
+        /**/
+        /* SimpleTag only:
+                    } finally {
+        /**/
+        if (oldPageRegistry == null) {
+          RegistryEE.Page.set(request, null);
         }
-      } finally {
-/**/
+        /* SimpleTag only:
+                    }
+                  } finally {
+        /**/
+        if (setIndent) {
+          DocumentEE.setIndent(request, oldIndent);
+        }
+        /* SimpleTag only:
+                  }
+                } finally {
+        /**/
+        if (setAutonli) {
+          DocumentEE.setAutonli(request, oldAutonli);
+        }
+        /* SimpleTag only:
+                }
+              } finally {
+        /**/
         if (setDoctype) {
           DoctypeEE.set(request, oldDoctype);
         }
-/* SimpleTag only:
-      }
-    } finally {
-/**/
-      if (setSerialization) {
-        SerializationEE.set(request, oldSerialization);
-      }
-      if (oldStrutsXhtml != null) {
-        oldStrutsXhtml.close();
-      }
-/* BodyTag only: */
+        /* SimpleTag only:
+              }
+            } finally {
+        /**/
+        if (setSerialization) {
+          SerializationEE.set(request, oldSerialization);
+        }
+        if (oldStrutsXhtml != null) {
+          oldStrutsXhtml.close();
+        }
+        /* BodyTag only: */
       } finally {
         init();
       }
     } finally {
       super.doFinally();
-/**/
+      /**/
     }
   }
 }

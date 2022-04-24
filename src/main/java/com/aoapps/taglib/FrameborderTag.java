@@ -38,11 +38,12 @@ import javax.servlet.jsp.JspException;
  */
 public class FrameborderTag extends EncodingBufferedTag {
 
-/* SimpleTag only: */
+  /* SimpleTag only: */
   public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, FrameborderTag.class);
 
   public static final String TAG_NAME = "<ao:frameborder>";
-/**/
+
+  /**/
 
   @Override
   public MediaType getContentType() {
@@ -54,17 +55,17 @@ public class FrameborderTag extends EncodingBufferedTag {
     return null;
   }
 
-/* BodyTag only:
-  private static final long serialVersionUID = 1L;
-/**/
+  /* BodyTag only:
+    private static final long serialVersionUID = 1L;
+  /**/
 
   @Override
-/* BodyTag only:
-  protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-/**/
-/* SimpleTag only: */
+  /* BodyTag only:
+    protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+  /**/
+  /* SimpleTag only: */
   protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-/**/
+    /**/
     FrameborderAttribute frameborderAttribute = AttributeUtils.requireAttributeParent(TAG_NAME, this, "frameborder", FrameborderAttribute.class);
     String value = capturedBody.trim().toString();
     if (!value.isEmpty()) {
@@ -76,8 +77,8 @@ public class FrameborderTag extends EncodingBufferedTag {
         throw new LocalizedJspTagException(RESOURCES, "invalidValue", value);
       }
     }
-/* BodyTag only:
-    return EVAL_PAGE;
-/**/
+    /* BodyTag only:
+      return EVAL_PAGE;
+  /**/
   }
 }

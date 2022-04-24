@@ -40,11 +40,11 @@ import javax.servlet.jsp.JspException;
  */
 public class SelectedTag extends EncodingBufferedBodyTag {
 
-/* SimpleTag only:
-  public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, SelectedTag.class);
-
-  public static final String TAG_NAME = "<ao:selected>";
-/**/
+  /* SimpleTag only:
+    public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, SelectedTag.class);
+  
+    public static final String TAG_NAME = "<ao:selected>";
+  /**/
 
   @Override
   public MediaType getContentType() {
@@ -56,17 +56,18 @@ public class SelectedTag extends EncodingBufferedBodyTag {
     return null;
   }
 
-/* BodyTag only: */
+  /* BodyTag only: */
   private static final long serialVersionUID = 1L;
-/**/
+
+  /**/
 
   @Override
-/* BodyTag only: */
+  /* BodyTag only: */
   protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-/**/
-/* SimpleTag only:
-  protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-/**/
+    /**/
+    /* SimpleTag only:
+      protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+    /**/
     SelectedAttribute selected = AttributeUtils.requireAttributeParent(TAG_NAME, this, "selected", SelectedAttribute.class);
     String value = capturedBody.trim().toString();
     if (!value.isEmpty()) {
@@ -78,8 +79,8 @@ public class SelectedTag extends EncodingBufferedBodyTag {
         throw new LocalizedJspTagException(RESOURCES, "invalidValue", value);
       }
     }
-/* BodyTag only: */
+    /* BodyTag only: */
     return EVAL_PAGE;
-/**/
+    /**/
   }
 }

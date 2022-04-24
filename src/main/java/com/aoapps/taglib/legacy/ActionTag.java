@@ -38,9 +38,9 @@ import javax.servlet.jsp.JspException;
  */
 public class ActionTag extends EncodingBufferedBodyTag {
 
-/* SimpleTag only:
-  public static final String TAG_NAME = "<ao:action>";
-/**/
+  /* SimpleTag only:
+    public static final String TAG_NAME = "<ao:action>";
+  /**/
 
   @Override
   public MediaType getContentType() {
@@ -52,22 +52,23 @@ public class ActionTag extends EncodingBufferedBodyTag {
     return null;
   }
 
-/* BodyTag only: */
+  /* BodyTag only: */
   private static final long serialVersionUID = 1L;
-/**/
+
+  /**/
 
   @Override
-/* BodyTag only: */
+  /* BodyTag only: */
   protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-/**/
-/* SimpleTag only:
-  protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-/**/
+    /**/
+    /* SimpleTag only:
+      protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+    /**/
     assert capturedBody.trim() == capturedBody : "URLs should have already been trimmed";
     AttributeUtils.requireAttributeParent(TAG_NAME, this, "action", ActionAttribute.class)
-      .setAction(capturedBody.toString());
-/* BodyTag only: */
+        .setAction(capturedBody.toString());
+    /* BodyTag only: */
     return EVAL_PAGE;
-/**/
+    /**/
   }
 }

@@ -41,7 +41,7 @@ import javax.servlet.jsp.JspTagException;
  */
 // TODO: ArgDispatchBodyTag and ArgDispatchSimpleTag?
 abstract class ArgDispatchTag extends DispatchTag
-  implements ArgsAttribute
+    implements ArgsAttribute
 {
 
   private static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, ArgDispatchTag.class);
@@ -89,8 +89,8 @@ abstract class ArgDispatchTag extends DispatchTag
     if (super.addDynamicAttribute(uri, localName, value, expectedPatterns)) {
       return true;
     } else if (
-      uri == null
-      && localName.startsWith(ARG_ATTRIBUTE_PREFIX)
+        uri == null
+            && localName.startsWith(ARG_ATTRIBUTE_PREFIX)
     ) {
       addArg(localName.substring(ARG_ATTRIBUTE_PREFIX.length()), value);
       return true;

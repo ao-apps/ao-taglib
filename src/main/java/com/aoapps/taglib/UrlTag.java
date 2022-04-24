@@ -64,11 +64,12 @@ public class UrlTag extends EncodingBufferedTag implements ParamsAttribute, Dyna
     return MediaType.URL;
   }
 
-/* BodyTag only:
-  private static final long serialVersionUID = 1L;
-/**/
+  /* BodyTag only:
+    private static final long serialVersionUID = 1L;
+  /**/
 
   private MutableURIParameters params;
+
   @Override
   public void addParam(String name, Object value) {
     if (params == null) {
@@ -78,23 +79,26 @@ public class UrlTag extends EncodingBufferedTag implements ParamsAttribute, Dyna
   }
 
   private boolean absolute;
+
   public void setAbsolute(boolean absolute) {
     this.absolute = absolute;
   }
 
   private boolean canonical;
+
   public void setCanonical(boolean canonical) {
     this.canonical = canonical;
   }
 
   private AddLastModified addLastModified;
+
   public void setAddLastModified(String addLastModified) {
     this.addLastModified = AddLastModified.valueOfLowerName(addLastModified.trim().toLowerCase(Locale.ROOT));
   }
 
-/* BodyTag only:
-  private Canonical c;
-/**/
+  /* BodyTag only:
+    private Canonical c;
+  /**/
 
   /**
    * @see  ParamUtils#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List, com.aoapps.taglib.ParamsAttribute)
@@ -112,25 +116,25 @@ public class UrlTag extends EncodingBufferedTag implements ParamsAttribute, Dyna
     absolute = false;
     canonical = false;
     addLastModified = AddLastModified.AUTO;
-/* BodyTag only:
-    if (c != null) {
-      c.close();
-      c = null;
+    /* BodyTag only:
+      if (c != null) {
+        c.close();
+        c = null;
+      }
+  /**/
+  }
+
+  /* BodyTag only:
+    @Override
+    protected int doStartTag(Writer out) throws JspException, IOException {
+      c = Canonical.set(canonical);
+      return super.doStartTag(out);
     }
-/**/
-  }
-
-/* BodyTag only:
-  @Override
-  protected int doStartTag(Writer out) throws JspException, IOException {
-    c = Canonical.set(canonical);
-    return super.doStartTag(out);
-  }
-
-  @Override
-  protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-/**/
-/* SimpleTag only: */
+  
+    @Override
+    protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+  /**/
+  /* SimpleTag only: */
   @Deprecated
   @Override
   public void doTag() throws JspException, IOException {
@@ -141,27 +145,27 @@ public class UrlTag extends EncodingBufferedTag implements ParamsAttribute, Dyna
 
   @Override
   protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-    PageContext pageContext = (PageContext)getJspContext();
-/**/
+    PageContext pageContext = (PageContext) getJspContext();
+    /**/
     assert capturedBody.trim() == capturedBody : "URLs should have already been trimmed";
     out.write(
-      LastModifiedUtil.buildURL(
-        pageContext.getServletContext(),
-        (HttpServletRequest)pageContext.getRequest(),
-        new NoEncodeUrlResponseWrapper((HttpServletResponse)pageContext.getResponse()),
-        capturedBody.toString(),
-        params,
-        addLastModified,
-        absolute,
-        canonical
-      )
+        LastModifiedUtil.buildURL(
+            pageContext.getServletContext(),
+            (HttpServletRequest) pageContext.getRequest(),
+            new NoEncodeUrlResponseWrapper((HttpServletResponse) pageContext.getResponse()),
+            capturedBody.toString(),
+            params,
+            addLastModified,
+            absolute,
+            canonical
+        )
     );
-/* BodyTag only:
-    return SKIP_PAGE;
-/**/
+    /* BodyTag only:
+      return SKIP_PAGE;
+  /**/
   }
 
-/* BodyTag only:
+  /* BodyTag only:
   @Override
   public void doFinally() {
     try {

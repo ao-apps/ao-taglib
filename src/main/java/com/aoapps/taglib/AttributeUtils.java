@@ -63,7 +63,7 @@ public final class AttributeUtils  {
    */
   public static <T> T requireAttributeParent(String fromTagName, JspTag from, String attribute, Class<? extends T> clazz) throws NeedAttributeParentException {
     return JspTagUtils.findAncestor(from, clazz).orElseThrow(
-      () -> new NeedAttributeParentException(fromTagName, attribute)
+        () -> new NeedAttributeParentException(fromTagName, attribute)
     );
   }
 
@@ -93,7 +93,7 @@ public final class AttributeUtils  {
     if (value == null) {
       return null;
     } else if (value instanceof ValueExpression) {
-      return resolveValue((ValueExpression)value, type, elContext);
+      return resolveValue((ValueExpression) value, type, elContext);
     } else {
       return type.cast(value);
     }
@@ -239,18 +239,18 @@ public final class AttributeUtils  {
       int size = expectedPatterns.size();
       if (size == 1) {
         return new LocalizedJspTagException(
-          RESOURCES,
-          "unexpectedDynamicAttribute1",
-          localName,
-          expectedPatterns.get(0)
+            RESOURCES,
+            "unexpectedDynamicAttribute1",
+            localName,
+            expectedPatterns.get(0)
         );
       } else if (size == 2) {
         return new LocalizedJspTagException(
-          RESOURCES,
-          "unexpectedDynamicAttribute2",
-          localName,
-          expectedPatterns.get(0),
-          expectedPatterns.get(1)
+            RESOURCES,
+            "unexpectedDynamicAttribute2",
+            localName,
+            expectedPatterns.get(0),
+            expectedPatterns.get(1)
         );
       } else {
         // Quote and comma-separate arbitrary length list here
@@ -262,11 +262,11 @@ public final class AttributeUtils  {
           pre.append('"').append(expectedPatterns.get(i)).append('"');
         }
         return new LocalizedJspTagException(
-          RESOURCES,
-          "unexpectedDynamicAttributeN",
-          localName,
-          pre,
-          '"' + expectedPatterns.get(size - 1) + '"'
+            RESOURCES,
+            "unexpectedDynamicAttributeN",
+            localName,
+            pre,
+            '"' + expectedPatterns.get(size - 1) + '"'
         );
       }
     }

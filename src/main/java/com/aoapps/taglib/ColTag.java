@@ -47,11 +47,12 @@ public class ColTag extends ElementNullTag {
     return MediaType.XHTML;
   }
 
-/* BodyTag only:
-  private static final long serialVersionUID = 1L;
-/**/
+  /* BodyTag only:
+    private static final long serialVersionUID = 1L;
+  /**/
 
   private int span;
+
   public void setSpan(int span) {
     this.span = span;
   }
@@ -61,32 +62,32 @@ public class ColTag extends ElementNullTag {
   }
 
   @Override
-/* BodyTag only:
-  protected int doEndTag(Writer out) throws JspException, IOException {
-/**/
-/* SimpleTag only: */
+  /* BodyTag only:
+    protected int doEndTag(Writer out) throws JspException, IOException {
+  /**/
+  /* SimpleTag only: */
   protected void doTag(Writer out) throws JspException, IOException {
-    PageContext pageContext = (PageContext)getJspContext();
-/**/
+    PageContext pageContext = (PageContext) getJspContext();
+    /**/
     COL<?> col = new DocumentEE(
-      pageContext.getServletContext(),
-      (HttpServletRequest)pageContext.getRequest(),
-      (HttpServletResponse)pageContext.getResponse(),
-      out,
-      false, // Do not add extra newlines to JSP
-      false  // Do not add extra indentation to JSP
+        pageContext.getServletContext(),
+        (HttpServletRequest) pageContext.getRequest(),
+        (HttpServletResponse) pageContext.getResponse(),
+        out,
+        false, // Do not add extra newlines to JSP
+        false  // Do not add extra indentation to JSP
     ).col();
     GlobalAttributesUtils.doGlobalAttributes(global, col);
     if (span != 0) {
       col.span(span);
     }
     col.__();
-/* BodyTag only:
-    return EVAL_PAGE;
-/**/
+    /* BodyTag only:
+      return EVAL_PAGE;
+  /**/
   }
 
-/* BodyTag only:
+  /* BodyTag only:
   @Override
   public void doFinally() {
     try {

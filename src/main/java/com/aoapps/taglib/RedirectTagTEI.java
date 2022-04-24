@@ -36,13 +36,13 @@ public class RedirectTagTEI extends TagExtraInfo {
   public ValidationMessage[] validate(TagData data) {
     Object o = data.getAttribute("statusCode");
     if (
-      o != null
-      && o != TagData.REQUEST_TIME_VALUE
+        o != null
+            && o != TagData.REQUEST_TIME_VALUE
     ) {
-      String statusCode = ((String)o).trim(); // TODO: normalizeStatusCode
+      String statusCode = ((String) o).trim(); // TODO: normalizeStatusCode
       if (!RedirectTag.isValidStatusCode(statusCode)) {
-        return new ValidationMessage[] {
-          new ValidationMessage(data.getId(), RedirectTag.RESOURCES.getMessage("statusCode.invalid", statusCode))
+        return new ValidationMessage[]{
+            new ValidationMessage(data.getId(), RedirectTag.RESOURCES.getMessage("statusCode.invalid", statusCode))
         };
       }
     }

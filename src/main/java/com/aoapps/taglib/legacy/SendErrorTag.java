@@ -52,16 +52,18 @@ public class SendErrorTag extends EncodingBufferedBodyTag {
     return null;
   }
 
-/* BodyTag only: */
+  /* BodyTag only: */
   private static final long serialVersionUID = 1L;
-/**/
+  /**/
 
   private int status;
+
   public void setStatus(int status) {
     this.status = status;
   }
 
   private String message;
+
   public void setMessage(String message) {
     this.message = message;
   }
@@ -72,19 +74,19 @@ public class SendErrorTag extends EncodingBufferedBodyTag {
   }
 
   @Override
-/* BodyTag only: */
+  /* BodyTag only: */
   protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-/**/
-/* SimpleTag only:
-  protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-    PageContext pageContext = (PageContext)getJspContext();
-/**/
+    /**/
+    /* SimpleTag only:
+      protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+        PageContext pageContext = (PageContext)getJspContext();
+    /**/
     if (message == null) {
       message = capturedBody.trim().toString();
     }
 
-    HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
-    HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
+    HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
+    HttpServletResponse response = (HttpServletResponse) pageContext.getResponse();
 
     if (message == null || message.isEmpty()) {
       Includer.sendError(request, response, status);
@@ -93,15 +95,15 @@ public class SendErrorTag extends EncodingBufferedBodyTag {
     }
 
     Includer.setPageSkipped(request);
-/* BodyTag only: */
+    /* BodyTag only: */
     return SKIP_PAGE;
-/**/
-/* SimpleTag only:
-    throw com.aoapps.servlet.ServletUtil.SKIP_PAGE_EXCEPTION;
-/**/
+    /**/
+    /* SimpleTag only:
+      throw com.aoapps.servlet.ServletUtil.SKIP_PAGE_EXCEPTION;
+  /**/
   }
 
-/* BodyTag only: */
+  /* BodyTag only: */
   @Override
   public void doFinally() {
     try {
@@ -110,5 +112,5 @@ public class SendErrorTag extends EncodingBufferedBodyTag {
       super.doFinally();
     }
   }
-/**/
+  /**/
 }

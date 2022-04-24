@@ -41,7 +41,7 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  * @author  AO Industries, Inc.
  */
 public abstract class ElementFilteredBodyTag extends EncodingFilteredBodyTag
-  implements
+    implements
     GlobalAttributes,
     DynamicAttributes
 {
@@ -65,6 +65,7 @@ public abstract class ElementFilteredBodyTag extends EncodingFilteredBodyTag
   public String getClazz() {
     return global.getClazz();
   }
+
   public void setClazz(String clazz) {
     global.setClazz(clazz);
   }
@@ -78,6 +79,7 @@ public abstract class ElementFilteredBodyTag extends EncodingFilteredBodyTag
   public String getDir() {
     return global.getDir();
   }
+
   public void setDir(String dir) {
     global.setDir(dir);
   }
@@ -86,6 +88,7 @@ public abstract class ElementFilteredBodyTag extends EncodingFilteredBodyTag
   public Object getStyle() {
     return global.getStyle();
   }
+
   public void setStyle(Object style) {
     global.setStyle(style);
   }

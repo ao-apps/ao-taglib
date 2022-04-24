@@ -37,8 +37,8 @@ import javax.servlet.jsp.tagext.TryCatchFinally;
  * @author  AO Industries, Inc.
  */
 public class BundleTag
-  extends TagSupport
-  implements TryCatchFinally
+    extends TagSupport
+    implements TryCatchFinally
 {
 
   /**
@@ -46,7 +46,7 @@ public class BundleTag
    * the current BundleTag is stored as a this attribute.
    */
   private static final ScopeEE.Request.Attribute<BundleTag> REQUEST_ATTRIBUTE =
-    ScopeEE.REQUEST.attribute(BundleTag.class.getName());
+      ScopeEE.REQUEST.attribute(BundleTag.class.getName());
 
   /**
    * Gets the current BundleTag or <code>null</code> if not set.

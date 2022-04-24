@@ -35,13 +35,14 @@ import java.beans.SimpleBeanInfo;
 public class ElementFilteredBodyTagBeanInfo extends SimpleBeanInfo {
 
   private static final PropertyDescriptor[] properties;
+
   static {
     try {
-      properties = new PropertyDescriptor[] {
-        new PropertyDescriptor("class", ElementFilteredBodyTag.class, "getClazz", "setClazz"),
-        new PropertyDescriptor("data",  ElementFilteredBodyTag.class, "getData",  null),
-        new PropertyDescriptor("dir",   ElementFilteredBodyTag.class, "getDir",   "setDir"),
-        new PropertyDescriptor("style", ElementFilteredBodyTag.class, "getStyle", "setStyle"),
+      properties = new PropertyDescriptor[]{
+          new PropertyDescriptor("class", ElementFilteredBodyTag.class, "getClazz", "setClazz"),
+          new PropertyDescriptor("data",  ElementFilteredBodyTag.class, "getData",  null),
+          new PropertyDescriptor("dir",   ElementFilteredBodyTag.class, "getDir",   "setDir"),
+          new PropertyDescriptor("style", ElementFilteredBodyTag.class, "getStyle", "setStyle"),
       };
     } catch (IntrospectionException err) {
       throw new ExceptionInInitializerError(err);
@@ -50,7 +51,7 @@ public class ElementFilteredBodyTagBeanInfo extends SimpleBeanInfo {
 
   @Override
   @SuppressWarnings("ReturnOfCollectionOrArrayField") // Not copying array for performance
-  public PropertyDescriptor[] getPropertyDescriptors () {
+  public PropertyDescriptor[] getPropertyDescriptors() {
     return properties;
   }
 
@@ -60,8 +61,8 @@ public class ElementFilteredBodyTagBeanInfo extends SimpleBeanInfo {
   @Override
   public BeanInfo[] getAdditionalBeanInfo() {
     try {
-      return new BeanInfo[] {
-        Introspector.getBeanInfo(ElementFilteredBodyTag.class.getSuperclass())
+      return new BeanInfo[]{
+          Introspector.getBeanInfo(ElementFilteredBodyTag.class.getSuperclass())
       };
     } catch (IntrospectionException err) {
       throw new AssertionError(err);

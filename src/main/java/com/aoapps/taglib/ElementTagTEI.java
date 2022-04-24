@@ -59,7 +59,7 @@ public class ElementTagTEI extends TagExtraInfo {
     Object o = data.getAttribute("dir");
     if (o != TagData.REQUEST_TIME_VALUE) {
       // TODO: Other validation Strings.trimNullIfEmpty (or their normalize* method) for consistency with implementation
-      String dir = Dir.dir.normalize((String)o);
+      String dir = Dir.dir.normalize((String) o);
       ValidationResult validation = Dir.dir.validate(dir);
       if (!validation.isValid()) {
         messages.add(new ValidationMessage(data.getId(), validation.toString()));

@@ -47,7 +47,7 @@ import javax.servlet.jsp.JspException;
  * @author  AO Industries, Inc.
  */
 public class TextareaTag extends ElementBufferedBodyTag
-  implements
+    implements
     // Attributes
     ColsAttribute,
     DisabledAttribute,
@@ -73,47 +73,54 @@ public class TextareaTag extends ElementBufferedBodyTag
     return MediaType.XHTML;
   }
 
-/* BodyTag only: */
+  /* BodyTag only: */
   private static final long serialVersionUID = 1L;
-/**/
+  /**/
 
   private Integer cols;
+
   @Override
   public void setCols(int cols) {
     this.cols = cols;
   }
 
   private boolean disabled;
+
   @Override
   public void setDisabled(boolean disabled) {
     this.disabled = disabled;
   }
 
   private String name;
+
   @Override
   public void setName(String name) {
     this.name = Strings.nullIfEmpty(name);
   }
 
   private boolean readonly;
+
   @Override
   public void setReadonly(boolean readonly) {
     this.readonly = readonly;
   }
 
   private Integer rows;
+
   @Override
   public void setRows(int rows) {
     this.rows = rows;
   }
 
   private Object value;
+
   @Override
   public void setValue(Object value) {
     this.value = AttributeUtils.nullIfEmpty(value);
   }
 
   private Object onchange;
+
   @Override
   public void setOnchange(Object onchange) {
     this.onchange = AttributeUtils.trimNullIfEmpty(onchange);
@@ -130,40 +137,40 @@ public class TextareaTag extends ElementBufferedBodyTag
   }
 
   @Override
-/* BodyTag only: */
+  /* BodyTag only: */
   protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-/**/
-/* SimpleTag only:
-  protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-    PageContext pageContext = (PageContext)getJspContext();
-/**/
+    /**/
+    /* SimpleTag only:
+      protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+        PageContext pageContext = (PageContext)getJspContext();
+    /**/
     if (value == null) {
       setValue(capturedBody.trim());
     }
     DocumentEE document = new DocumentEE(
-      pageContext.getServletContext(),
-      (HttpServletRequest)pageContext.getRequest(),
-      (HttpServletResponse)pageContext.getResponse(),
-      out,
-      false, // Do not add extra newlines to JSP
-      false  // Do not add extra indentation to JSP
+        pageContext.getServletContext(),
+        (HttpServletRequest) pageContext.getRequest(),
+        (HttpServletResponse) pageContext.getResponse(),
+        out,
+        false, // Do not add extra newlines to JSP
+        false  // Do not add extra indentation to JSP
     );
     TEXTAREA<?> textarea = document.textarea();
     GlobalAttributesUtils.doGlobalAttributes(global, textarea);
     textarea
-      .cols(cols)
-      .disabled(disabled)
-      .name(name)
-      .readonly(readonly)
-      .rows(rows)
-      .onchange(onchange)
-    .__(value);
-/* BodyTag only: */
+        .cols(cols)
+        .disabled(disabled)
+        .name(name)
+        .readonly(readonly)
+        .rows(rows)
+        .onchange(onchange)
+        .__(value);
+    /* BodyTag only: */
     return EVAL_PAGE;
-/**/
+    /**/
   }
 
-/* BodyTag only: */
+  /* BodyTag only: */
   @Override
   public void doFinally() {
     try {
@@ -172,5 +179,5 @@ public class TextareaTag extends ElementBufferedBodyTag
       super.doFinally();
     }
   }
-/**/
+  /**/
 }

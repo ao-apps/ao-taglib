@@ -35,14 +35,15 @@ import java.beans.SimpleBeanInfo;
 public class ElementNullTagBeanInfo extends SimpleBeanInfo {
 
   private static final PropertyDescriptor[] properties;
+
   static {
     try {
-      properties = new PropertyDescriptor[] {
-        new PropertyDescriptor("id",    ElementNullTag.class, "getId",    "setId"),
-        new PropertyDescriptor("class", ElementNullTag.class, "getClazz", "setClazz"),
-        new PropertyDescriptor("data",  ElementNullTag.class, "getData",  "setData"),
-        new PropertyDescriptor("dir",   ElementNullTag.class, "getDir",   "setDir"),
-        new PropertyDescriptor("style", ElementNullTag.class, "getStyle", "setStyle"),
+      properties = new PropertyDescriptor[]{
+          new PropertyDescriptor("id",    ElementNullTag.class, "getId",    "setId"),
+          new PropertyDescriptor("class", ElementNullTag.class, "getClazz", "setClazz"),
+          new PropertyDescriptor("data",  ElementNullTag.class, "getData",  "setData"),
+          new PropertyDescriptor("dir",   ElementNullTag.class, "getDir",   "setDir"),
+          new PropertyDescriptor("style", ElementNullTag.class, "getStyle", "setStyle"),
       };
     } catch (IntrospectionException err) {
       throw new ExceptionInInitializerError(err);
@@ -51,7 +52,7 @@ public class ElementNullTagBeanInfo extends SimpleBeanInfo {
 
   @Override
   @SuppressWarnings("ReturnOfCollectionOrArrayField") // Not copying array for performance
-  public PropertyDescriptor[] getPropertyDescriptors () {
+  public PropertyDescriptor[] getPropertyDescriptors() {
     return properties;
   }
 
@@ -61,8 +62,8 @@ public class ElementNullTagBeanInfo extends SimpleBeanInfo {
   @Override
   public BeanInfo[] getAdditionalBeanInfo() {
     try {
-      return new BeanInfo[] {
-        Introspector.getBeanInfo(ElementNullTag.class.getSuperclass())
+      return new BeanInfo[]{
+          Introspector.getBeanInfo(ElementNullTag.class.getSuperclass())
       };
     } catch (IntrospectionException err) {
       throw new AssertionError(err);

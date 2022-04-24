@@ -112,7 +112,7 @@ public final class PropertyUtils {
         if (property == null) {
           // No property lookup, use the bean directly
           @SuppressWarnings("unchecked")
-          T t = (T)bean;
+          T t = (T) bean;
           return t;
         } else {
           // Find the property
@@ -127,7 +127,7 @@ public final class PropertyUtils {
               }
             }
             @SuppressWarnings("unchecked")
-            T t = (T)value;
+            T t = (T) value;
             return t;
           } catch (InvocationTargetException e) {
             // Unwrap cause for more direct stack traces

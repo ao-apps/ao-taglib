@@ -41,17 +41,18 @@ public class MapTag extends ElementFilteredBodyTag {
     return MediaType.XHTML;
   }
 
-/* BodyTag only: */
+  /* BodyTag only: */
   private static final long serialVersionUID = 1L;
-/**/
+
+  /**/
 
   @Override
-/* BodyTag only: */
+  /* BodyTag only: */
   protected int doStartTag(Writer out) throws JspException, IOException {
-/**/
-/* SimpleTag only:
-  protected void doTag(Writer out) throws JspException, IOException {
-/**/
+    /**/
+    /* SimpleTag only:
+      protected void doTag(Writer out) throws JspException, IOException {
+    /**/
     String _id = global.getId();
     if (_id == null) {
       throw new AttributeRequiredException("id");
@@ -62,19 +63,19 @@ public class MapTag extends ElementFilteredBodyTag {
     out.write(" name=\"");
     encodeTextInXhtmlAttribute(_id, out);
     out.write("\">");
-/* BodyTag only: */
+    /* BodyTag only: */
     return EVAL_BODY_FILTERED;
   }
 
   @Override
   protected int doEndTag(Writer out) throws JspException, IOException {
-/**/
-/* SimpleTag only:
-    super.doTag(out);
-/**/
+    /**/
+    /* SimpleTag only:
+        super.doTag(out);
+    /**/
     out.write("</map>");
-/* BodyTag only: */
+    /* BodyTag only: */
     return EVAL_PAGE;
-/**/
+    /**/
   }
 }

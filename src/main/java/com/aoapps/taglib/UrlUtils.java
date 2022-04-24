@@ -60,12 +60,12 @@ public final class UrlUtils {
    * @throws JspTagException when parameters provided with null href
    */
   public static String getHref(
-    PageContext pageContext,
-    String href,
-    URIParameters params,
-    AddLastModified addLastModified,
-    boolean absolute,
-    boolean canonical
+      PageContext pageContext,
+      String href,
+      URIParameters params,
+      AddLastModified addLastModified,
+      boolean absolute,
+      boolean canonical
   ) throws JspTagException, MalformedURLException {
     if (href != null) {
       return LastModifiedUtil.buildURL(pageContext, href, params, addLastModified, absolute, canonical);
@@ -88,13 +88,13 @@ public final class UrlUtils {
    */
   // TODO: Still used once converted to ao-fluent-html?
   public static void writeHref(
-    PageContext pageContext,
-    Appendable out,
-    String href,
-    URIParameters params,
-    AddLastModified addLastModified,
-    boolean absolute,
-    boolean canonical
+      PageContext pageContext,
+      Appendable out,
+      String href,
+      URIParameters params,
+      AddLastModified addLastModified,
+      boolean absolute,
+      boolean canonical
   ) throws JspTagException, IOException {
     href = getHref(pageContext, href, params, addLastModified, absolute, canonical);
     if (href != null) {
@@ -109,22 +109,22 @@ public final class UrlUtils {
    */
   // TODO: Still used once converted to ao-fluent-html?
   public static void writeHref(
-    JspContext jspContext,
-    Appendable out,
-    String href,
-    URIParameters params,
-    AddLastModified addLastModified,
-    boolean absolute,
-    boolean canonical
+      JspContext jspContext,
+      Appendable out,
+      String href,
+      URIParameters params,
+      AddLastModified addLastModified,
+      boolean absolute,
+      boolean canonical
   ) throws JspTagException, IOException {
     writeHref(
-      (PageContext)jspContext,
-      out,
-      href,
-      params,
-      addLastModified,
-      absolute,
-      canonical
+        (PageContext) jspContext,
+        out,
+        href,
+        params,
+        addLastModified,
+        absolute,
+        canonical
     );
   }
 
@@ -138,12 +138,12 @@ public final class UrlUtils {
    * @throws JspTagException when parameters provided with null src
    */
   public static String getSrc(
-    PageContext pageContext,
-    String src,
-    URIParameters params,
-    AddLastModified addLastModified,
-    boolean absolute,
-    boolean canonical
+      PageContext pageContext,
+      String src,
+      URIParameters params,
+      AddLastModified addLastModified,
+      boolean absolute,
+      boolean canonical
   ) throws JspTagException, MalformedURLException {
     if (src != null) {
       return LastModifiedUtil.buildURL(pageContext, src, params, addLastModified, absolute, canonical);
@@ -166,13 +166,13 @@ public final class UrlUtils {
    */
   // TODO: Still used once converted to ao-fluent-html?
   public static void writeSrc(
-    PageContext pageContext,
-    Appendable out,
-    String src,
-    URIParameters params,
-    AddLastModified addLastModified,
-    boolean absolute,
-    boolean canonical
+      PageContext pageContext,
+      Appendable out,
+      String src,
+      URIParameters params,
+      AddLastModified addLastModified,
+      boolean absolute,
+      boolean canonical
   ) throws JspTagException, IOException {
     src = getSrc(pageContext, src, params, addLastModified, absolute, canonical);
     if (src != null) {
@@ -187,22 +187,22 @@ public final class UrlUtils {
    */
   // TODO: Still used once converted to ao-fluent-html?
   public static void writeSrc(
-    JspContext jspContext,
-    Appendable out,
-    String src,
-    URIParameters params,
-    AddLastModified addLastModified,
-    boolean absolute,
-    boolean canonical
+      JspContext jspContext,
+      Appendable out,
+      String src,
+      URIParameters params,
+      AddLastModified addLastModified,
+      boolean absolute,
+      boolean canonical
   ) throws JspTagException, IOException {
     writeSrc(
-      (PageContext)jspContext,
-      out,
-      src,
-      params,
-      addLastModified,
-      absolute,
-      canonical
+        (PageContext) jspContext,
+        out,
+        src,
+        params,
+        addLastModified,
+        absolute,
+        canonical
     );
   }
 }

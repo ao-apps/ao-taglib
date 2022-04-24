@@ -66,15 +66,15 @@ public final class ParamUtils {
    * @see  AttributeUtils#requireAttributeParent(java.lang.String, javax.servlet.jsp.tagext.JspTag, java.lang.String, java.lang.Class)
    */
   public static void addParam(
-    String fromTagName,
-    JspTag from,
-    String name,
-    Object value
+      String fromTagName,
+      JspTag from,
+      String name,
+      Object value
   ) throws JspTagException {
     addParam(
-      AttributeUtils.requireAttributeParent(fromTagName, from, "params", ParamsAttribute.class),
-      name,
-      value
+        AttributeUtils.requireAttributeParent(fromTagName, from, "params", ParamsAttribute.class),
+        name,
+        value
     );
   }
 
@@ -92,9 +92,9 @@ public final class ParamUtils {
    * @param  value            the value of the parameter
    */
   public static void addParam(
-    ParamsAttribute paramsAttribute,
-    String name,
-    Object value
+      ParamsAttribute paramsAttribute,
+      String name,
+      Object value
   ) {
     NullArgumentException.checkNotNull(name, "name");
     if (value != null) {
@@ -116,9 +116,9 @@ public final class ParamUtils {
    * @param  name             the name of the parameter (required)
    */
   public static void addIterableParams(
-    ParamsAttribute paramsAttribute,
-    String name,
-    Iterable<?> values
+      ParamsAttribute paramsAttribute,
+      String name,
+      Iterable<?> values
   ) {
     NullArgumentException.checkNotNull(name, "name");
     if (values != null) {
@@ -140,9 +140,9 @@ public final class ParamUtils {
    * @param  name             the name of the parameter (required)
    */
   public static void addIteratorParams(
-    ParamsAttribute paramsAttribute,
-    String name,
-    Iterator<?> values
+      ParamsAttribute paramsAttribute,
+      String name,
+      Iterator<?> values
   ) {
     NullArgumentException.checkNotNull(name, "name");
     if (values != null) {
@@ -166,9 +166,9 @@ public final class ParamUtils {
    * @param  name             the name of the parameter (required)
    */
   public static void addEnumerationParams(
-    ParamsAttribute paramsAttribute,
-    String name,
-    Enumeration<?> values
+      ParamsAttribute paramsAttribute,
+      String name,
+      Enumeration<?> values
   ) throws JspTagException {
     NullArgumentException.checkNotNull(name, "name");
     if (values != null) {
@@ -192,9 +192,9 @@ public final class ParamUtils {
    * @param  name             the name of the parameter (required)
    */
   public static void addArrayParams(
-    ParamsAttribute paramsAttribute,
-    String name,
-    Object values
+      ParamsAttribute paramsAttribute,
+      String name,
+      Object values
   ) throws JspTagException {
     NullArgumentException.checkNotNull(name, "name");
     if (values != null) {
@@ -220,34 +220,34 @@ public final class ParamUtils {
    */
   public static boolean addDynamicAttribute(String uri, String localName, Object value, List<String> expectedPatterns, ParamsAttribute paramsAttribute) throws JspTagException {
     if (
-      uri == null
-      && localName.startsWith(ParamUtils.PARAM_ATTRIBUTE_PREFIX)
+        uri == null
+            && localName.startsWith(ParamUtils.PARAM_ATTRIBUTE_PREFIX)
     ) {
       if (value != null) {
         String paramName = localName.substring(PARAM_ATTRIBUTE_PREFIX.length());
         if (value instanceof Iterable<?>) {
           addIterableParams(
-            paramsAttribute,
-            paramName,
-            (Iterable<?>)value
+              paramsAttribute,
+              paramName,
+              (Iterable<?>) value
           );
         } else if (value instanceof Iterator<?>) {
           addIteratorParams(
-            paramsAttribute,
-            paramName,
-            (Iterator<?>)value
+              paramsAttribute,
+              paramName,
+              (Iterator<?>) value
           );
         } else if (value instanceof Enumeration<?>) {
           addEnumerationParams(
-            paramsAttribute,
-            paramName,
-            (Enumeration<?>)value
+              paramsAttribute,
+              paramName,
+              (Enumeration<?>) value
           );
         } else if (value.getClass().isArray()) {
           addArrayParams(
-            paramsAttribute,
-            paramName,
-            value
+              paramsAttribute,
+              paramName,
+              value
           );
         } else {
           addParam(paramsAttribute, paramName, value);

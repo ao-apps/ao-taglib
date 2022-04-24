@@ -35,14 +35,15 @@ import java.beans.SimpleBeanInfo;
 public class MutableGlobalAttributesBeanInfo extends SimpleBeanInfo {
 
   private static final PropertyDescriptor[] properties;
+
   static {
     try {
-      properties = new PropertyDescriptor[] {
-        new PropertyDescriptor("id",    MutableGlobalAttributes.class, "getId",    "setId"),
-        new PropertyDescriptor("class", MutableGlobalAttributes.class, "getClazz", "setClazz"),
-        new PropertyDescriptor("data",  MutableGlobalAttributes.class, "getData",  "setData"),
-        new PropertyDescriptor("dir",   MutableGlobalAttributes.class, "getDir",   "setDir"),
-        new PropertyDescriptor("style", MutableGlobalAttributes.class, "getStyle", "setStyle"),
+      properties = new PropertyDescriptor[]{
+          new PropertyDescriptor("id",    MutableGlobalAttributes.class, "getId",    "setId"),
+          new PropertyDescriptor("class", MutableGlobalAttributes.class, "getClazz", "setClazz"),
+          new PropertyDescriptor("data",  MutableGlobalAttributes.class, "getData",  "setData"),
+          new PropertyDescriptor("dir",   MutableGlobalAttributes.class, "getDir",   "setDir"),
+          new PropertyDescriptor("style", MutableGlobalAttributes.class, "getStyle", "setStyle"),
       };
     } catch (IntrospectionException err) {
       throw new ExceptionInInitializerError(err);
@@ -51,7 +52,7 @@ public class MutableGlobalAttributesBeanInfo extends SimpleBeanInfo {
 
   @Override
   @SuppressWarnings("ReturnOfCollectionOrArrayField") // Not copying array for performance
-  public PropertyDescriptor[] getPropertyDescriptors () {
+  public PropertyDescriptor[] getPropertyDescriptors() {
     return properties;
   }
 
@@ -61,8 +62,8 @@ public class MutableGlobalAttributesBeanInfo extends SimpleBeanInfo {
   @Override
   public BeanInfo[] getAdditionalBeanInfo() {
     try {
-      return new BeanInfo[] {
-        Introspector.getBeanInfo(MutableGlobalAttributes.class.getSuperclass())
+      return new BeanInfo[]{
+          Introspector.getBeanInfo(MutableGlobalAttributes.class.getSuperclass())
       };
     } catch (IntrospectionException err) {
       throw new AssertionError(err);

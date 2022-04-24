@@ -66,7 +66,7 @@ import javax.servlet.jsp.JspTagException;
  * @author  AO Industries, Inc.
  */
 public class ATag extends ElementBufferedBodyTag
-  implements
+    implements
     // Attributes
     HrefAttribute,
     ParamsAttribute,
@@ -95,17 +95,19 @@ public class ATag extends ElementBufferedBodyTag
     return MediaType.XHTML;
   }
 
-/* BodyTag only: */
+  /* BodyTag only: */
   private static final long serialVersionUID = 1L;
-/**/
+  /**/
 
   private String href;
+
   @Override
   public void setHref(String href) {
     this.href = Strings.nullIfEmpty(href);
   }
 
   private MutableURIParameters params;
+
   @Override
   public void addParam(String name, Object value) {
     if (params == null) {
@@ -115,63 +117,74 @@ public class ATag extends ElementBufferedBodyTag
   }
 
   private boolean absolute;
+
   public void setAbsolute(boolean absolute) {
     this.absolute = absolute;
   }
 
   private boolean canonical;
+
   public void setCanonical(boolean canonical) {
     this.canonical = canonical;
   }
 
   private AddLastModified addLastModified;
+
   public void setAddLastModified(String addLastModified) {
     this.addLastModified = AddLastModified.valueOfLowerName(addLastModified.trim().toLowerCase(Locale.ROOT));
   }
 
   private Object hreflang;
+
   @Override
   public void setHreflang(Object hreflang) {
     this.hreflang = hreflang;
   }
 
   private String rel;
+
   @Override
   public void setRel(String rel) {
     this.rel = Strings.trimNullIfEmpty(rel);
   }
 
   private String target;
+
   @Override
   public void setTarget(String target) {
     this.target = Strings.trimNullIfEmpty(target);
   }
 
   private Object title;
+
   @Override
   public void setTitle(Object title) {
     this.title = AttributeUtils.trimNullIfEmpty(title);
   }
 
   private String type;
+
   @Override
   public void setType(String type) {
     this.type = Strings.trimNullIfEmpty(type);
   }
 
   private Object onclick;
+
   @Override
   public void setOnclick(Object onclick) {
     this.onclick = AttributeUtils.trimNullIfEmpty(onclick);
   }
 
   private Object onmouseout;
+
   @Override
   public void setOnmouseout(Object onmouseout) {
     this.onmouseout = AttributeUtils.trimNullIfEmpty(onmouseout);
   }
 
   private Object onmouseover;
+
   @Override
   public void setOnmouseover(Object onmouseover) {
     this.onmouseover = AttributeUtils.trimNullIfEmpty(onmouseover);
@@ -183,8 +196,8 @@ public class ATag extends ElementBufferedBodyTag
   @Override
   protected boolean addDynamicAttribute(String uri, String localName, Object value, List<String> expectedPatterns) throws JspTagException {
     return
-      super.addDynamicAttribute(uri, localName, value, expectedPatterns)
-      || ParamUtils.addDynamicAttribute(uri, localName, value, expectedPatterns, this);
+        super.addDynamicAttribute(uri, localName, value, expectedPatterns)
+            || ParamUtils.addDynamicAttribute(uri, localName, value, expectedPatterns, this);
   }
 
   private void init() {
@@ -204,13 +217,13 @@ public class ATag extends ElementBufferedBodyTag
   }
 
   @Override
-/* BodyTag only: */
+  /* BodyTag only: */
   protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-/**/
-/* SimpleTag only:
-  protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-    PageContext pageContext = (PageContext)getJspContext();
-/**/
+    /**/
+    /* SimpleTag only:
+      protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+        PageContext pageContext = (PageContext)getJspContext();
+    /**/
     out.write("<a");
     GlobalAttributesUtils.writeGlobalAttributes(global, out);
     String transformed;
@@ -222,7 +235,7 @@ public class ATag extends ElementBufferedBodyTag
     UrlUtils.writeHref(pageContext, out, transformed, params, addLastModified, absolute, canonical);
     if (hreflang instanceof Locale) {
       out.write(" hreflang=\"");
-      encodeTextInXhtmlAttribute(((Locale)hreflang).toLanguageTag(), out);
+      encodeTextInXhtmlAttribute(((Locale) hreflang).toLanguageTag(), out);
       out.append('"');
     } else {
       hreflang = AttributeUtils.trimNullIfEmpty(hreflang);
@@ -245,12 +258,12 @@ public class ATag extends ElementBufferedBodyTag
     if (title != null) {
       out.write(" title=\"");
       MarkupCoercion.write(
-        title,
-        MarkupType.TEXT,
-        true,
-        textInXhtmlAttributeEncoder,
-        false,
-        out
+          title,
+          MarkupType.TEXT,
+          true,
+          textInXhtmlAttributeEncoder,
+          false,
+          out
       );
       out.append('"');
     }
@@ -262,48 +275,48 @@ public class ATag extends ElementBufferedBodyTag
     if (onclick != null) {
       out.write(" onclick=\"");
       MarkupCoercion.write(
-        onclick,
-        MarkupType.JAVASCRIPT,
-        true,
-        javascriptInXhtmlAttributeEncoder,
-        false,
-        out
+          onclick,
+          MarkupType.JAVASCRIPT,
+          true,
+          javascriptInXhtmlAttributeEncoder,
+          false,
+          out
       );
       out.append('"');
     }
     if (onmouseout != null) {
       out.write(" onmouseout=\"");
       MarkupCoercion.write(
-        onmouseout,
-        MarkupType.JAVASCRIPT,
-        true,
-        javascriptInXhtmlAttributeEncoder,
-        false,
-        out
+          onmouseout,
+          MarkupType.JAVASCRIPT,
+          true,
+          javascriptInXhtmlAttributeEncoder,
+          false,
+          out
       );
       out.append('"');
     }
     if (onmouseover != null) {
       out.write(" onmouseover=\"");
       MarkupCoercion.write(
-        onmouseover,
-        MarkupType.JAVASCRIPT,
-        true,
-        javascriptInXhtmlAttributeEncoder,
-        false,
-        out
+          onmouseover,
+          MarkupType.JAVASCRIPT,
+          true,
+          javascriptInXhtmlAttributeEncoder,
+          false,
+          out
       );
       out.append('"');
     }
     out.append('>');
     BufferResult trimmedBody = capturedBody.trim();
     if (
-      // TODO: Make a BufferResult.isEmpty() that defaults to getLength() == 0, but provides a chance at optimizations
-      trimmedBody.getLength() == 0
+        // TODO: Make a BufferResult.isEmpty() that defaults to getLength() == 0, but provides a chance at optimizations
+        trimmedBody.getLength() == 0
     ) {
       // When the body is empty after trimming, display the href itself
       if (href != null) {
-        HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
+        HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
         String toDecode;
         if (URIParser.isScheme(href, "mailto")) {
           toDecode = href.substring("mailto:".length());
@@ -319,19 +332,19 @@ public class ATag extends ElementBufferedBodyTag
       }
     } else {
       MarkupCoercion.write(
-        trimmedBody,
-        MarkupType.XHTML,
-        out,
-        true
+          trimmedBody,
+          MarkupType.XHTML,
+          out,
+          true
       );
     }
     out.write("</a>");
-/* BodyTag only: */
+    /* BodyTag only: */
     return EVAL_PAGE;
-/**/
+    /**/
   }
 
-/* BodyTag only: */
+  /* BodyTag only: */
   @Override
   public void doFinally() {
     try {
@@ -340,5 +353,5 @@ public class ATag extends ElementBufferedBodyTag
       super.doFinally();
     }
   }
-/**/
+  /**/
 }

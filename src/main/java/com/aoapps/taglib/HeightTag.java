@@ -35,9 +35,10 @@ import javax.servlet.jsp.JspException;
  */
 public class HeightTag extends EncodingBufferedTag {
 
-/* SimpleTag only: */
+  /* SimpleTag only: */
   public static final String TAG_NAME = "<ao:height>";
-/**/
+
+  /**/
 
   @Override
   public MediaType getContentType() {
@@ -49,21 +50,21 @@ public class HeightTag extends EncodingBufferedTag {
     return null;
   }
 
-/* BodyTag only:
-  private static final long serialVersionUID = 1L;
-/**/
+  /* BodyTag only:
+    private static final long serialVersionUID = 1L;
+  /**/
 
   @Override
-/* BodyTag only:
-  protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-/**/
-/* SimpleTag only: */
+  /* BodyTag only:
+    protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+  /**/
+  /* SimpleTag only: */
   protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-/**/
+    /**/
     AttributeUtils.requireAttributeParent(TAG_NAME, this, "height", HeightAttribute.class)
-      .setHeight(capturedBody.trim());
-/* BodyTag only:
-    return EVAL_PAGE;
-/**/
+        .setHeight(capturedBody.trim());
+    /* BodyTag only:
+      return EVAL_PAGE;
+  /**/
   }
 }

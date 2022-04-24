@@ -42,31 +42,31 @@ public class BrTag extends ElementNullTag {
     return MediaType.XHTML;
   }
 
-/* BodyTag only:
-  private static final long serialVersionUID = 1L;
-/**/
+  /* BodyTag only:
+    private static final long serialVersionUID = 1L;
+  /**/
 
   @Override
-/* BodyTag only:
-  protected int doEndTag(Writer out) throws JspException, IOException {
-/**/
-/* SimpleTag only: */
+  /* BodyTag only:
+    protected int doEndTag(Writer out) throws JspException, IOException {
+  /**/
+  /* SimpleTag only: */
   protected void doTag(Writer out) throws JspException, IOException {
-    PageContext pageContext = (PageContext)getJspContext();
-/**/
+    PageContext pageContext = (PageContext) getJspContext();
+    /**/
     GlobalAttributesUtils.doGlobalAttributes(
-      global,
-      new DocumentEE(
-        pageContext.getServletContext(),
-        (HttpServletRequest)pageContext.getRequest(),
-        (HttpServletResponse)pageContext.getResponse(),
-        out,
-        false, // Do not add extra newlines to JSP
-        false  // Do not add extra indentation to JSP
-      ).br()
+        global,
+        new DocumentEE(
+            pageContext.getServletContext(),
+            (HttpServletRequest) pageContext.getRequest(),
+            (HttpServletResponse) pageContext.getResponse(),
+            out,
+            false, // Do not add extra newlines to JSP
+            false  // Do not add extra indentation to JSP
+        ).br()
     ).__();
-/* BodyTag only:
-    return EVAL_PAGE;
-/**/
+    /* BodyTag only:
+      return EVAL_PAGE;
+  /**/
   }
 }

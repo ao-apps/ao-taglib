@@ -48,16 +48,17 @@ import javax.servlet.jsp.PageContext;
  * @author  AO Industries, Inc.
  */
 public class ScriptTag extends ElementBufferedTag
-  implements
+    implements
     // Attributes
     TypeAttribute,
     SrcAttribute,
     ParamsAttribute
 {
 
-/* SimpleTag only: */
+  /* SimpleTag only: */
   public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, ScriptTag.class);
-/**/
+
+  /**/
 
   public ScriptTag() {
     init();
@@ -73,19 +74,20 @@ public class ScriptTag extends ElementBufferedTag
     return MediaType.XHTML;
   }
 
-/* BodyTag only:
-  private static final long serialVersionUID = 1L;
-/**/
+  /* BodyTag only:
+    private static final long serialVersionUID = 1L;
+  /**/
 
   private MediaType mediaType;
+
   @Override
   public void setType(String type) {
     try {
       MediaType newMediaType = MediaType.getMediaTypeForContentType(Strings.trim(type));
       if (
-        newMediaType != MediaType.JAVASCRIPT
-        && newMediaType != MediaType.JSON
-        && newMediaType != MediaType.LD_JSON
+          newMediaType != MediaType.JAVASCRIPT
+              && newMediaType != MediaType.JSON
+              && newMediaType != MediaType.LD_JSON
       ) {
         throw new LocalizedUnsupportedEncodingException(RESOURCES, "unsupportedMediaType", newMediaType);
       }
@@ -96,12 +98,14 @@ public class ScriptTag extends ElementBufferedTag
   }
 
   private String src;
+
   @Override
   public void setSrc(String src) {
     this.src = Strings.nullIfEmpty(src);
   }
 
   private MutableURIParameters params;
+
   @Override
   public void addParam(String name, Object value) {
     if (params == null) {
@@ -111,16 +115,19 @@ public class ScriptTag extends ElementBufferedTag
   }
 
   private boolean absolute;
+
   public void setAbsolute(boolean absolute) {
     this.absolute = absolute;
   }
 
   private boolean canonical;
+
   public void setCanonical(boolean canonical) {
     this.canonical = canonical;
   }
 
   private AddLastModified addLastModified;
+
   public void setAddLastModified(String addLastModified) {
     this.addLastModified = AddLastModified.valueOfLowerName(addLastModified.trim().toLowerCase(Locale.ROOT));
   }
@@ -133,8 +140,8 @@ public class ScriptTag extends ElementBufferedTag
   @Override
   protected boolean addDynamicAttribute(String uri, String localName, Object value, List<String> expectedPatterns) throws JspTagException {
     return
-      super.addDynamicAttribute(uri, localName, value, expectedPatterns)
-      || ParamUtils.addDynamicAttribute(uri, localName, value, expectedPatterns, this);
+        super.addDynamicAttribute(uri, localName, value, expectedPatterns)
+            || ParamUtils.addDynamicAttribute(uri, localName, value, expectedPatterns, this);
   }
 
   //@Override
@@ -155,34 +162,34 @@ public class ScriptTag extends ElementBufferedTag
   }
 
   @Override
-/* BodyTag only:
-  protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-/**/
-/* SimpleTag only: */
+  /* BodyTag only:
+    protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+  /**/
+  /* SimpleTag only: */
   protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-    PageContext pageContext = (PageContext)getJspContext();
-/**/
+    PageContext pageContext = (PageContext) getJspContext();
+    /**/
     // Write script tag with src attribute, discarding any body
     DocumentEE document = new DocumentEE(
-      pageContext.getServletContext(),
-      (HttpServletRequest)pageContext.getRequest(),
-      (HttpServletResponse)pageContext.getResponse(),
-      out,
-      false, // Do not add extra newlines to JSP
-      false  // Do not add extra indentation to JSP
+        pageContext.getServletContext(),
+        (HttpServletRequest) pageContext.getRequest(),
+        (HttpServletResponse) pageContext.getResponse(),
+        out,
+        false, // Do not add extra newlines to JSP
+        false  // Do not add extra indentation to JSP
     );
     GlobalAttributesUtils.doGlobalAttributes(global, document.script(mediaType.getContentType()))
-      // Call getSrc always, since it validates src versus params
-      .src(UrlUtils.getSrc(pageContext, src, params, addLastModified, absolute, canonical))
-      // Only write body when there is no source (discard body when src provided)
-      .out((src != null) ? null : capturedBody)
-    .__();
-/* BodyTag only:
-    return EVAL_PAGE;
-/**/
+        // Call getSrc always, since it validates src versus params
+        .src(UrlUtils.getSrc(pageContext, src, params, addLastModified, absolute, canonical))
+        // Only write body when there is no source (discard body when src provided)
+        .out((src != null) ? null : capturedBody)
+        .__();
+    /* BodyTag only:
+      return EVAL_PAGE;
+  /**/
   }
 
-/* BodyTag only:
+  /* BodyTag only:
   @Override
   public void doFinally() {
     try {

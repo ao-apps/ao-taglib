@@ -35,14 +35,15 @@ import java.beans.SimpleBeanInfo;
 public class ImmutableGlobalAttributesBeanInfo extends SimpleBeanInfo {
 
   private static final PropertyDescriptor[] properties;
+
   static {
     try {
-      properties = new PropertyDescriptor[] {
-        new PropertyDescriptor("id",    ImmutableGlobalAttributesBeanInfo.class, "getId",    null),
-        new PropertyDescriptor("class", ImmutableGlobalAttributesBeanInfo.class, "getClazz", null),
-        new PropertyDescriptor("data",  ImmutableGlobalAttributesBeanInfo.class, "getData",  null),
-        new PropertyDescriptor("dir",   ImmutableGlobalAttributesBeanInfo.class, "getDir",   null),
-        new PropertyDescriptor("style", ImmutableGlobalAttributesBeanInfo.class, "getStyle", null),
+      properties = new PropertyDescriptor[]{
+          new PropertyDescriptor("id",    ImmutableGlobalAttributesBeanInfo.class, "getId",    null),
+          new PropertyDescriptor("class", ImmutableGlobalAttributesBeanInfo.class, "getClazz", null),
+          new PropertyDescriptor("data",  ImmutableGlobalAttributesBeanInfo.class, "getData",  null),
+          new PropertyDescriptor("dir",   ImmutableGlobalAttributesBeanInfo.class, "getDir",   null),
+          new PropertyDescriptor("style", ImmutableGlobalAttributesBeanInfo.class, "getStyle", null),
       };
     } catch (IntrospectionException err) {
       throw new ExceptionInInitializerError(err);
@@ -51,7 +52,7 @@ public class ImmutableGlobalAttributesBeanInfo extends SimpleBeanInfo {
 
   @Override
   @SuppressWarnings("ReturnOfCollectionOrArrayField") // Not copying array for performance
-  public PropertyDescriptor[] getPropertyDescriptors () {
+  public PropertyDescriptor[] getPropertyDescriptors() {
     return properties;
   }
 
@@ -61,8 +62,8 @@ public class ImmutableGlobalAttributesBeanInfo extends SimpleBeanInfo {
   @Override
   public BeanInfo[] getAdditionalBeanInfo() {
     try {
-      return new BeanInfo[] {
-        Introspector.getBeanInfo(ImmutableGlobalAttributesBeanInfo.class.getSuperclass())
+      return new BeanInfo[]{
+          Introspector.getBeanInfo(ImmutableGlobalAttributesBeanInfo.class.getSuperclass())
       };
     } catch (IntrospectionException err) {
       throw new AssertionError(err);

@@ -53,18 +53,18 @@ public class ResourceEditorTag extends EncodingNullTag {
 
   @Override
   protected void doTag(Writer out) throws JspException, IOException {
-    PageContext pageContext = (PageContext)getJspContext();
+    PageContext pageContext = (PageContext) getJspContext();
     out.write("<div style=\"font-size:smaller\">");
     EditableResourceBundle.printEditableResourceBundleLookups(
-      TextInJavaScriptEncoder.textInJavascriptEncoder,
-      TextInXhtmlEncoder.textInXhtmlEncoder,
-      out,
-      SerializationEE.get(
-        pageContext.getServletContext(),
-        (HttpServletRequest)pageContext.getRequest()
-      ) == Serialization.XML,
-      3,
-      false
+        TextInJavaScriptEncoder.textInJavascriptEncoder,
+        TextInXhtmlEncoder.textInXhtmlEncoder,
+        out,
+        SerializationEE.get(
+            pageContext.getServletContext(),
+            (HttpServletRequest) pageContext.getRequest()
+        ) == Serialization.XML,
+        3,
+        false
     );
     out.write("</div>");
   }

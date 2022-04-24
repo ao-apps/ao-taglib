@@ -44,14 +44,15 @@ import javax.servlet.jsp.JspException;
  */
 // TODO: Support output when not inside a containing tag? (or implement applet and object tags to avoid errors of params accidentally passed to client)
 public class ParamsTag extends EncodingNullTag
-  implements NameAttribute
+    implements NameAttribute
 {
 
-/* SimpleTag only: */
+  /* SimpleTag only: */
   public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, ParamsTag.class);
 
   public static final String TAG_NAME = "<ao:params>";
-/**/
+
+  /**/
 
   public ParamsTag() {
     init();
@@ -62,11 +63,12 @@ public class ParamsTag extends EncodingNullTag
     return null;
   }
 
-/* BodyTag only:
-  private static final long serialVersionUID = 1L;
-/**/
+  /* BodyTag only:
+    private static final long serialVersionUID = 1L;
+  /**/
 
   private String name;
+
   @Override
   public void setName(String name) {
     this.name = name;
@@ -74,12 +76,14 @@ public class ParamsTag extends EncodingNullTag
 
 //  private String exclude;
   private WildcardPatternMatcher excludeMatcher;
+
   public void setExclude(String exclude) {
 //    this.exclude = exclude;
     this.excludeMatcher = WildcardPatternMatcher.compile(exclude);
   }
 
   private Object values;
+
   public void setValues(Object values) {
     this.values = values;
   }
@@ -92,19 +96,19 @@ public class ParamsTag extends EncodingNullTag
   }
 
   @Override
-/* BodyTag only:
-  protected int doEndTag(Writer out) throws JspException, IOException {
-/**/
-/* SimpleTag only: */
+  /* BodyTag only:
+    protected int doEndTag(Writer out) throws JspException, IOException {
+  /**/
+  /* SimpleTag only: */
   protected void doTag(Writer out) throws JspException, IOException {
-/**/
+    /**/
     // TODO: These supported types match Html.java and Param.java in ao-fluent-html?
     ParamsAttribute paramsAttribute = AttributeUtils.requireAttributeParent(TAG_NAME, this, "params", ParamsAttribute.class);
     if (values != null) {
       if (name == null) {
         if (values instanceof Map<?, ?>) {
           // Get from Map with exclude
-          for (Map.Entry<?, ?> entry : ((Map<?, ?>)values).entrySet()) {
+          for (Map.Entry<?, ?> entry : ((Map<?, ?>) values).entrySet()) {
             Object entryKey = entry.getKey();
             if (entryKey != null) {
               String paramName = Coercion.toString(entryKey);
@@ -112,27 +116,27 @@ public class ParamsTag extends EncodingNullTag
                 Object entryValue = entry.getValue();
                 if (entryValue instanceof Iterable<?>) {
                   ParamUtils.addIterableParams(
-                    paramsAttribute,
-                    paramName,
-                    (Iterable<?>)entryValue
+                      paramsAttribute,
+                      paramName,
+                      (Iterable<?>) entryValue
                   );
                 } else if (entryValue instanceof Iterator<?>) {
                   ParamUtils.addIteratorParams(
-                    paramsAttribute,
-                    paramName,
-                    (Iterator<?>)entryValue
+                      paramsAttribute,
+                      paramName,
+                      (Iterator<?>) entryValue
                   );
                 } else if (entryValue instanceof Enumeration<?>) {
                   ParamUtils.addEnumerationParams(
-                    paramsAttribute,
-                    paramName,
-                    (Enumeration<?>)entryValue
+                      paramsAttribute,
+                      paramName,
+                      (Enumeration<?>) entryValue
                   );
                 } else if (entryValue != null && entryValue.getClass().isArray()) {
                   ParamUtils.addArrayParams(
-                    paramsAttribute,
-                    paramName,
-                    entryValue
+                      paramsAttribute,
+                      paramName,
+                      entryValue
                   );
                 } else {
                   ParamUtils.addParam(paramsAttribute, paramName, entryValue);
@@ -142,7 +146,7 @@ public class ParamsTag extends EncodingNullTag
           }
         } else if (values instanceof URIParameters) {
           // Get from HttpParameters with exclude
-          URIParameters uriParams = (URIParameters)values;
+          URIParameters uriParams = (URIParameters) values;
           Iterator<String> paramNames = uriParams.getParameterNames();
           while (paramNames.hasNext()) {
             String paramName = paramNames.next();
@@ -165,31 +169,31 @@ public class ParamsTag extends EncodingNullTag
         }
         if (values instanceof Iterable<?>) {
           ParamUtils.addIterableParams(
-            paramsAttribute,
-            name,
-            (Iterable<?>)values
+              paramsAttribute,
+              name,
+              (Iterable<?>) values
           );
         } else if (values instanceof Iterator<?>) {
           ParamUtils.addIteratorParams(
-            paramsAttribute,
-            name,
-            (Iterator<?>)values
+              paramsAttribute,
+              name,
+              (Iterator<?>) values
           );
         } else if (values instanceof Enumeration<?>) {
           ParamUtils.addEnumerationParams(
-            paramsAttribute,
-            name,
-            (Enumeration<?>)values
+              paramsAttribute,
+              name,
+              (Enumeration<?>) values
           );
         } else if (values.getClass().isArray()) {
           ParamUtils.addArrayParams(
-            paramsAttribute,
-            name,
-            values
+              paramsAttribute,
+              name,
+              values
           );
         } else if (
-          values instanceof Map<?, ?>
-          || values instanceof URIParameters
+            values instanceof Map<?, ?>
+                || values instanceof URIParameters
         ) {
           throw new LocalizedJspTagException(RESOURCES, "mapWithNameNotAllowed");
         } else {
@@ -197,12 +201,12 @@ public class ParamsTag extends EncodingNullTag
         }
       }
     }
-/* BodyTag only:
-    return EVAL_PAGE;
-/**/
+    /* BodyTag only:
+      return EVAL_PAGE;
+  /**/
   }
 
-/* BodyTag only:
+  /* BodyTag only:
   @Override
   public void doFinally() {
     try {

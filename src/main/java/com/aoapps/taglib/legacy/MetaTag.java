@@ -47,7 +47,7 @@ import javax.servlet.jsp.JspException;
  * @author  AO Industries, Inc.
  */
 public class MetaTag extends ElementBufferedBodyTag
-  implements
+    implements
     NameAttribute,
     ContentAttribute
 {
@@ -78,32 +78,37 @@ public class MetaTag extends ElementBufferedBodyTag
     setContent(meta.getContent());
   }
 
-/* BodyTag only: */
+  /* BodyTag only: */
   private static final long serialVersionUID = 1L;
-/**/
+  /**/
 
   private String name;
+
   @Override
   public void setName(String name) {
     this.name = name;
   }
 
   private String httpEquiv;
+
   public void setHttpEquiv(String httpEquiv) {
     this.httpEquiv = httpEquiv;
   }
 
   private String itemprop;
+
   public void setItemprop(String itemprop) {
     this.itemprop = Strings.trimNullIfEmpty(itemprop);
   }
 
   private Object charset; // TODO: Support java Charset, too
+
   public void setCharset(Object charset) {
     this.charset = AttributeUtils.trimNullIfEmpty(charset);
   }
 
   private Object content;
+
   @Override
   public void setContent(Object content) {
     this.content = AttributeUtils.nullIfEmpty(content);
@@ -118,58 +123,58 @@ public class MetaTag extends ElementBufferedBodyTag
   }
 
   @Override
-/* BodyTag only: */
+  /* BodyTag only: */
   protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-/**/
-/* SimpleTag only:
-  protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-    PageContext pageContext = (PageContext)getJspContext();
-/**/
+    /**/
+    /* SimpleTag only:
+      protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+        PageContext pageContext = (PageContext)getJspContext();
+    /**/
     Optional<MetasAttribute> parent = JspTagUtils.findAncestor(this, MetasAttribute.class);
     if (content == null) {
       setContent(capturedBody.trim());
     }
     if (parent.isPresent()) {
       parent.get().addMeta(
-        new Meta(
-          global.freeze(),
-          Strings.trimNullIfEmpty(name),
-          Strings.trim(httpEquiv),
-          itemprop,
-          Coercion.toString(charset),
-          Coercion.toString(content)
-        )
+          new Meta(
+              global.freeze(),
+              Strings.trimNullIfEmpty(name),
+              Strings.trim(httpEquiv),
+              itemprop,
+              Coercion.toString(charset),
+              Coercion.toString(content)
+          )
       );
     } else {
       // Write the meta tag directly here
       DocumentEE document = new DocumentEE(
-        pageContext.getServletContext(),
-        (HttpServletRequest)pageContext.getRequest(),
-        (HttpServletResponse)pageContext.getResponse(),
-        out,
-        false, // Do not add extra newlines to JSP
-        false  // Do not add extra indentation to JSP
+          pageContext.getServletContext(),
+          (HttpServletRequest) pageContext.getRequest(),
+          (HttpServletResponse) pageContext.getResponse(),
+          out,
+          false, // Do not add extra newlines to JSP
+          false  // Do not add extra indentation to JSP
       );
       META<?> meta = document.meta();
       GlobalAttributesUtils.doGlobalAttributes(global, meta);
       meta.name(name)
-        .httpEquiv(httpEquiv)
-        // TODO: Create a global "itemprop" in ao-fluent-html
-        .attribute("itemprop", itemprop);
+          .httpEquiv(httpEquiv)
+          // TODO: Create a global "itemprop" in ao-fluent-html
+          .attribute("itemprop", itemprop);
       if (charset != null) {
         // TOOD: charset to String via Meta.charset(String)
         meta.charset(Coercion.toString(charset));
       }
       meta
-        .content(content)
-        .__();
+          .content(content)
+          .__();
     }
-/* BodyTag only: */
+    /* BodyTag only: */
     return EVAL_PAGE;
-/**/
+    /**/
   }
 
-/* BodyTag only: */
+  /* BodyTag only: */
   @Override
   public void doFinally() {
     try {
@@ -178,5 +183,5 @@ public class MetaTag extends ElementBufferedBodyTag
       super.doFinally();
     }
   }
-/**/
+  /**/
 }

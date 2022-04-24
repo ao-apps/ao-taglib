@@ -34,12 +34,13 @@ import javax.servlet.jsp.JspException;
  * @author  AO Industries, Inc.
  */
 public class MessageArgTag extends EncodingBufferedTag
-  implements ValueAttribute
+    implements ValueAttribute
 {
 
-/* SimpleTag only: */
+  /* SimpleTag only: */
   public static final String TAG_NAME = "<ao:messageArg>";
-/**/
+
+  /**/
 
   public MessageArgTag() {
     init();
@@ -55,11 +56,12 @@ public class MessageArgTag extends EncodingBufferedTag
     return null;
   }
 
-/* BodyTag only:
-  private static final long serialVersionUID = 1L;
-/**/
+  /* BodyTag only:
+    private static final long serialVersionUID = 1L;
+  /**/
 
   private Object value;
+
   @Override
   public void setValue(Object value) {
     this.value = value;
@@ -70,23 +72,23 @@ public class MessageArgTag extends EncodingBufferedTag
   }
 
   @Override
-/* BodyTag only:
-  protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-/**/
-/* SimpleTag only: */
+  /* BodyTag only:
+    protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+  /**/
+  /* SimpleTag only: */
   protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-/**/
+    /**/
     if (value == null) {
       setValue(capturedBody.trim());
     }
     AttributeUtils.requireAttributeParent(TAG_NAME, this, "messageArgs", MessageArgsAttribute.class)
-      .addMessageArg(value);
-/* BodyTag only:
-    return EVAL_PAGE;
-/**/
+        .addMessageArg(value);
+    /* BodyTag only:
+      return EVAL_PAGE;
+  /**/
   }
 
-/* BodyTag only:
+  /* BodyTag only:
   @Override
   public void doFinally() {
     try {

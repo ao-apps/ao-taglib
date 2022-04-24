@@ -69,10 +69,10 @@ public final class GlobalAttributesUtils {
         return true;
       } else if (localName.startsWith(DATASET_ATTRIBUTE_PREFIX)) {
         global.addData(
-          Data.dataset.toAttrName(
-            localName.substring(DATASET_ATTRIBUTE_PREFIX.length())
-          ),
-          value
+            Data.dataset.toAttrName(
+                localName.substring(DATASET_ATTRIBUTE_PREFIX.length())
+            ),
+            value
         );
         return true;
       } else {
@@ -160,12 +160,12 @@ public final class GlobalAttributesUtils {
     if (style != null) {
       out.write(" style=\"");
       MarkupCoercion.write(
-        style,
-        MarkupType.CSS,
-        true,
-        styleInXhtmlAttributeEncoder,
-        false,
-        out
+          style,
+          MarkupType.CSS,
+          true,
+          styleInXhtmlAttributeEncoder,
+          false,
+          out
       );
       out.append('"');
     }
@@ -203,12 +203,12 @@ public final class GlobalAttributesUtils {
     if (style != null) {
       out.append(" style=\"");
       MarkupCoercion.append(
-        style,
-        MarkupType.CSS,
-        true,
-        styleInXhtmlAttributeEncoder,
-        false,
-        out
+          style,
+          MarkupType.CSS,
+          true,
+          styleInXhtmlAttributeEncoder,
+          false,
+          out
       );
       out.append('"');
     }

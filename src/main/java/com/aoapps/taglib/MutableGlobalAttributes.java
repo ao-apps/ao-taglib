@@ -116,9 +116,9 @@ public class MutableGlobalAttributes implements GlobalAttributes, Freezable<Glob
         String attrName = Attributes.validate(entry.getKey(), Data.data::validate);
         Object value = entry.getValue();
         newData =
-          (value == null)
-          ? MinimalMap.remove(newData, attrName)
-          : MinimalMap.put(newData, attrName, value);
+            (value == null)
+                ? MinimalMap.remove(newData, attrName)
+                : MinimalMap.put(newData, attrName, value);
       }
       this.data = newData;
     }
@@ -136,9 +136,9 @@ public class MutableGlobalAttributes implements GlobalAttributes, Freezable<Glob
   public MutableGlobalAttributes addData(String attrName, Object value) throws IllegalArgumentException {
     Attributes.validate(attrName, Data.data::validate);
     this.data =
-      (data == null)
-      ? MinimalMap.remove(this.data, attrName)
-      : MinimalMap.put(this.data, attrName, value);
+        (data == null)
+            ? MinimalMap.remove(this.data, attrName)
+            : MinimalMap.put(this.data, attrName, value);
     return this;
   }
 
@@ -172,8 +172,8 @@ public class MutableGlobalAttributes implements GlobalAttributes, Freezable<Glob
 
   public MutableGlobalAttributes setDir(String dir) throws IllegalArgumentException {
     this.dir = Attributes.validate(
-      Dir.dir.normalize(dir),
-      Dir.dir::validate
+        Dir.dir.normalize(dir),
+        Dir.dir::validate
     );
     return this;
   }

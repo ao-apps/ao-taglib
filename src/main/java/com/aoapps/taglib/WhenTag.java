@@ -39,6 +39,7 @@ public class WhenTag extends TagSupport {
   private static final long serialVersionUID = 1L;
 
   private ValueExpression test;
+
   public void setTest(ValueExpression test) {
     this.test = test;
   }
@@ -49,12 +50,12 @@ public class WhenTag extends TagSupport {
     if (!(parent instanceof ChooseTag)) {
       throw new JspTagException(TAG_NAME + " must be directly nested within " + ChooseTag.TAG_NAME);
     }
-    ChooseTag chooseTag = (ChooseTag)parent;
+    ChooseTag chooseTag = (ChooseTag) parent;
     chooseTag.onWhen();
     if (chooseTag.getMatched()) {
       return SKIP_BODY;
     }
-    Boolean matched = (Boolean)test.getValue(pageContext.getELContext());
+    Boolean matched = (Boolean) test.getValue(pageContext.getELContext());
     if (matched != null && matched) {
       chooseTag.setMatched();
       return EVAL_BODY_INCLUDE;

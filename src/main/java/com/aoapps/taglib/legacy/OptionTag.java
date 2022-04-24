@@ -40,7 +40,7 @@ import javax.servlet.jsp.JspException;
  * @author  AO Industries, Inc.
  */
 public class OptionTag extends ElementBufferedBodyTag
-  implements
+    implements
     // Attributes
     DisabledAttribute,
     SelectedAttribute,
@@ -61,17 +61,19 @@ public class OptionTag extends ElementBufferedBodyTag
     return MediaType.XHTML;
   }
 
-/* BodyTag only: */
+  /* BodyTag only: */
   private static final long serialVersionUID = 1L;
-/**/
+  /**/
 
   private boolean disabled;
+
   @Override
   public void setDisabled(boolean disabled) {
     this.disabled = disabled;
   }
 
   private boolean selected;
+
   @Override
   public void setSelected(boolean selected) {
     this.selected = selected;
@@ -79,6 +81,7 @@ public class OptionTag extends ElementBufferedBodyTag
 
   private boolean valueSet;
   private Object value;
+
   @Override
   public void setValue(Object value) {
     this.valueSet = true;
@@ -93,13 +96,13 @@ public class OptionTag extends ElementBufferedBodyTag
   }
 
   @Override
-/* BodyTag only: */
+  /* BodyTag only: */
   protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-/**/
-/* SimpleTag only:
-  protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-    PageContext pageContext = (PageContext)getJspContext();
-/**/
+    /**/
+    /* SimpleTag only:
+      protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+        PageContext pageContext = (PageContext)getJspContext();
+    /**/
     capturedBody = capturedBody.trim();
     // TODO: Should we be setting the value always like this?  Duplicates efforts.
     // TODO: If not setting value this way, this does not need to buffer
@@ -108,26 +111,26 @@ public class OptionTag extends ElementBufferedBodyTag
       setValue(capturedBody);
     }
     GlobalAttributesUtils.doGlobalAttributes(
-      global,
-      new DocumentEE(
-        pageContext.getServletContext(),
-        (HttpServletRequest)pageContext.getRequest(),
-        (HttpServletResponse)pageContext.getResponse(),
-        out,
-        false, // Do not add extra newlines to JSP
-        false  // Do not add extra indentation to JSP
-      ).option()
+        global,
+        new DocumentEE(
+            pageContext.getServletContext(),
+            (HttpServletRequest) pageContext.getRequest(),
+            (HttpServletResponse) pageContext.getResponse(),
+            out,
+            false, // Do not add extra newlines to JSP
+            false  // Do not add extra indentation to JSP
+        ).option()
     )
-      .value(value)
-      .selected(selected)
-      .disabled(disabled)
-      .__(capturedBody);
-/* BodyTag only: */
+        .value(value)
+        .selected(selected)
+        .disabled(disabled)
+        .__(capturedBody);
+    /* BodyTag only: */
     return EVAL_PAGE;
-/**/
+    /**/
   }
 
-/* BodyTag only: */
+  /* BodyTag only: */
   @Override
   public void doFinally() {
     try {
@@ -136,5 +139,5 @@ public class OptionTag extends ElementBufferedBodyTag
       super.doFinally();
     }
   }
-/**/
+  /**/
 }

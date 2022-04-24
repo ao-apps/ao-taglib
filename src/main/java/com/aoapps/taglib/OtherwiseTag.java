@@ -43,7 +43,7 @@ public class OtherwiseTag extends TagSupport {
     if (!(parent instanceof ChooseTag)) {
       throw new JspTagException(TAG_NAME + " must be directly nested within " + ChooseTag.TAG_NAME);
     }
-    ChooseTag chooseTag = (ChooseTag)parent;
+    ChooseTag chooseTag = (ChooseTag) parent;
     chooseTag.onOtherwise();
     return chooseTag.getMatched() ? SKIP_BODY : EVAL_BODY_INCLUDE;
   }

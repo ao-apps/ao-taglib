@@ -41,7 +41,7 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  * @author  AO Industries, Inc.
  */
 public abstract class ElementBufferedBodyTag extends EncodingBufferedBodyTag
-  implements
+    implements
     GlobalBufferedAttributes,
     DynamicAttributes
 {
@@ -65,6 +65,7 @@ public abstract class ElementBufferedBodyTag extends EncodingBufferedBodyTag
   public String getClazz() {
     return global.getClazz();
   }
+
   @Override
   public void setClazz(String clazz) {
     global.setClazz(clazz);
@@ -74,10 +75,12 @@ public abstract class ElementBufferedBodyTag extends EncodingBufferedBodyTag
   public Map<String, Object> getData() {
     return global.getData();
   }
+
   @Override
   public void setData(Map<? extends String, ?> data) {
     global.setData(data);
   }
+
   @Override
   public void addData(String attrName, Object value) {
     global.addData(attrName, value);
@@ -87,6 +90,7 @@ public abstract class ElementBufferedBodyTag extends EncodingBufferedBodyTag
   public String getDir() {
     return global.getDir();
   }
+
   @Override
   public void setDir(String dir) {
     global.setDir(dir);
@@ -96,6 +100,7 @@ public abstract class ElementBufferedBodyTag extends EncodingBufferedBodyTag
   public Object getStyle() {
     return global.getStyle();
   }
+
   @Override
   public void setStyle(Object style) {
     global.setStyle(style);

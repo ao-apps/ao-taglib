@@ -40,24 +40,24 @@ public class ScriptTagTEI extends ElementTagTEI {
     super.validate(data, messages);
     Object typeAttr = data.getAttribute("type");
     if (
-      typeAttr != null
-      && typeAttr != TagData.REQUEST_TIME_VALUE
+        typeAttr != null
+            && typeAttr != TagData.REQUEST_TIME_VALUE
     ) {
-      String type = Strings.trimNullIfEmpty((String)typeAttr); // TODO: normalizeType
+      String type = Strings.trimNullIfEmpty((String) typeAttr); // TODO: normalizeType
       if (type != null) {
         try {
           MediaType mediaType = MediaType.getMediaTypeForContentType(type);
           if (mediaType != MediaType.JAVASCRIPT) {
             messages.add(
-              new ValidationMessage(
-                data.getId(),
-                ScriptTag.RESOURCES.getMessage("unsupportedMediaType", type)
-              )
+                new ValidationMessage(
+                    data.getId(),
+                    ScriptTag.RESOURCES.getMessage("unsupportedMediaType", type)
+                )
             );
           }
         } catch (UnsupportedEncodingException err) {
           messages.add(
-            new ValidationMessage(data.getId(), err.getMessage())
+              new ValidationMessage(data.getId(), err.getMessage())
           );
         }
       }

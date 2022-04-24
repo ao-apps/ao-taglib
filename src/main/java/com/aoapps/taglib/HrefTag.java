@@ -35,9 +35,10 @@ import javax.servlet.jsp.JspException;
  */
 public class HrefTag extends EncodingBufferedTag {
 
-/* SimpleTag only: */
+  /* SimpleTag only: */
   public static final String TAG_NAME = "<ao:href>";
-/**/
+
+  /**/
 
   @Override
   public MediaType getContentType() {
@@ -49,22 +50,22 @@ public class HrefTag extends EncodingBufferedTag {
     return null;
   }
 
-/* BodyTag only:
-  private static final long serialVersionUID = 1L;
-/**/
+  /* BodyTag only:
+    private static final long serialVersionUID = 1L;
+  /**/
 
   @Override
-/* BodyTag only:
-  protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-/**/
-/* SimpleTag only: */
+  /* BodyTag only:
+    protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+  /**/
+  /* SimpleTag only: */
   protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-/**/
+    /**/
     assert capturedBody.trim() == capturedBody : "URLs should have already been trimmed";
     AttributeUtils.requireAttributeParent(TAG_NAME, this, "href", HrefAttribute.class)
-      .setHref(capturedBody.toString());
-/* BodyTag only:
-    return EVAL_PAGE;
-/**/
+        .setHref(capturedBody.toString());
+    /* BodyTag only:
+      return EVAL_PAGE;
+  /**/
   }
 }

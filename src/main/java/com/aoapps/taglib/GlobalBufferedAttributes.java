@@ -33,13 +33,13 @@ import java.util.Map;
  * @author  AO Industries, Inc.
  */
 public interface GlobalBufferedAttributes extends
-  GlobalAttributes,
-  // Allow to be set from within nested tags
-  IdAttribute,
-  ClassAttribute,
-  DataAttribute,
-  DirAttribute,
-  StyleAttribute
+    GlobalAttributes,
+    // Allow to be set from within nested tags
+    IdAttribute,
+    ClassAttribute,
+    DataAttribute,
+    DirAttribute,
+    StyleAttribute
 {
 
   /**

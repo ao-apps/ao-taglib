@@ -34,11 +34,13 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 public class AssertTag extends SimpleTagSupport {
 
   private boolean test;
+
   public void setTest(boolean test) {
     this.test = test;
   }
 
   private ValueExpression message;
+
   public void setMessage(ValueExpression message) {
     this.message = message;
   }
@@ -48,7 +50,7 @@ public class AssertTag extends SimpleTagSupport {
     if (!test) {
       if (message != null) {
         throw new AssertionError(
-          (String)message.getValue(getJspContext().getELContext())
+            (String) message.getValue(getJspContext().getELContext())
         );
       } else {
         throw new AssertionError();

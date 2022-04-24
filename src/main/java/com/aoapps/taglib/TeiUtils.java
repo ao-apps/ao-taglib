@@ -59,8 +59,8 @@ public final class TeiUtils {
   public static List<ValidationMessage> validateScope(TagData data, List<ValidationMessage> messages) {
     Object o = data.getAttribute("scope");
     if (
-      o != null
-      && o != TagData.REQUEST_TIME_VALUE
+        o != null
+            && o != TagData.REQUEST_TIME_VALUE
     ) {
       String scope = Coercion.toString(o).trim(); // TODO: normalizeScope
       try {
@@ -68,11 +68,11 @@ public final class TeiUtils {
         // Value is OK
       } catch (LocalizedIllegalArgumentException err) {
         messages = MinimalList.add(
-          messages,
-          new ValidationMessage(
-            data.getId(),
-            err.getLocalizedMessage()
-          )
+            messages,
+            new ValidationMessage(
+                data.getId(),
+                err.getLocalizedMessage()
+            )
         );
       }
     }

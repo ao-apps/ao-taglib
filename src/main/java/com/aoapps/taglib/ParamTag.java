@@ -35,14 +35,15 @@ import javax.servlet.jsp.JspException;
  */
 // TODO: Support output when not inside a containing tag? (or implement applet and object tags to avoid errors of params accidentally passed to client)
 public class ParamTag extends EncodingBufferedTag
-  implements
+    implements
     NameAttribute,
     ValueAttribute
 {
 
-/* SimpleTag only: */
+  /* SimpleTag only: */
   public static final String TAG_NAME = "<ao:param>";
-/**/
+
+  /**/
 
   public ParamTag() {
     init();
@@ -58,17 +59,19 @@ public class ParamTag extends EncodingBufferedTag
     return null;
   }
 
-/* BodyTag only:
-  private static final long serialVersionUID = 1L;
-/**/
+  /* BodyTag only:
+    private static final long serialVersionUID = 1L;
+  /**/
 
   private String name;
+
   @Override
   public void setName(String name) {
     this.name = name;
   }
 
   private Object value;
+
   @Override
   public void setValue(Object value) {
     this.value = value;
@@ -80,27 +83,27 @@ public class ParamTag extends EncodingBufferedTag
   }
 
   @Override
-/* BodyTag only:
-  protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-/**/
-/* SimpleTag only: */
+  /* BodyTag only:
+    protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+  /**/
+  /* SimpleTag only: */
   protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-/**/
+    /**/
     if (name == null) {
       throw new AttributeRequiredException("name");
     }
     ParamUtils.addParam(
-      TAG_NAME,
-      this,
-      name,
-      (value != null) ? value : capturedBody.trim()
+        TAG_NAME,
+        this,
+        name,
+        (value != null) ? value : capturedBody.trim()
     );
-/* BodyTag only:
-    return EVAL_PAGE;
-/**/
+    /* BodyTag only:
+      return EVAL_PAGE;
+  /**/
   }
 
-/* BodyTag only:
+  /* BodyTag only:
   @Override
   public void doFinally() {
     try {

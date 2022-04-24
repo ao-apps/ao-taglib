@@ -42,28 +42,28 @@ public class DisableResourceEditorTagTEI extends TagExtraInfo {
 
     Object scopeAttr = data.getAttribute("scope");
     if (scopeAttr != null && scopeAttr != TagData.REQUEST_TIME_VALUE) {
-      String scope = (String)scopeAttr;
+      String scope = (String) scopeAttr;
       if (!DisableResourceEditorTag.isValidScope(scope)) {
         messages = MinimalList.add(
-          messages,
-          new ValidationMessage(
-            data.getId(),
-            DisableResourceEditorTag.RESOURCES.getMessage("scope.invalid", scope)
-          )
+            messages,
+            new ValidationMessage(
+                data.getId(),
+                DisableResourceEditorTag.RESOURCES.getMessage("scope.invalid", scope)
+            )
         );
       }
     }
 
     Object modeAttr = data.getAttribute("mode");
     if (modeAttr != null && modeAttr != TagData.REQUEST_TIME_VALUE) {
-      String mode = Strings.trimNullIfEmpty((String)modeAttr);
+      String mode = Strings.trimNullIfEmpty((String) modeAttr);
       if (mode != null) {
         try {
           EditableResourceBundle.ThreadSettings.Mode.valueOf(mode);
         } catch (IllegalArgumentException e) {
           messages = MinimalList.add(
-            messages,
-            new ValidationMessage(data.getId(), e.getLocalizedMessage())
+              messages,
+              new ValidationMessage(data.getId(), e.getLocalizedMessage())
           );
         }
       }

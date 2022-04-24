@@ -46,10 +46,10 @@ public class MessageTagTEI extends TagExtraInfo {
     while (attributeNames.hasMoreElements()) {
       String attributeName = attributeNames.nextElement();
       if (
-        // Standard attribute names
-        !"bundle".equals(attributeName)
-        && !"key".equals(attributeName)
-        && !"type".equals(attributeName)
+          // Standard attribute names
+          !"bundle".equals(attributeName)
+              && !"key".equals(attributeName)
+              && !"type".equals(attributeName)
       ) {
         // Dynamic "arg#" attributes (along with arg0 through arg3 that are standard for code assist only)
         boolean isArg = false;
@@ -68,10 +68,10 @@ public class MessageTagTEI extends TagExtraInfo {
         }
         if (!isArg) {
           messages = MinimalList.add(messages,
-            new ValidationMessage(
-              data.getId(),
-              AttributeUtils.RESOURCES.getMessage("unexpectedDynamicAttribute1", attributeName, "arg*")
-            )
+              new ValidationMessage(
+                  data.getId(),
+                  AttributeUtils.RESOURCES.getMessage("unexpectedDynamicAttribute1", attributeName, "arg*")
+              )
           );
         }
       }

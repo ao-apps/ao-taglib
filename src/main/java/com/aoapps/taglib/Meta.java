@@ -40,12 +40,12 @@ public class Meta {
   private final String content;
 
   public Meta(
-    GlobalAttributes global,
-    String name,
-    String httpEquiv,
-    String itemprop,
-    String charset,
-    String content
+      GlobalAttributes global,
+      String name,
+      String httpEquiv,
+      String itemprop,
+      String charset,
+      String content
   ) {
     this.global = global;
     this.name = name;
@@ -60,19 +60,19 @@ public class Meta {
    */
   @Deprecated
   public Meta(
-    String name,
-    String httpEquiv,
-    String itemprop,
-    String charset,
-    String content
+      String name,
+      String httpEquiv,
+      String itemprop,
+      String charset,
+      String content
   ) {
     this(
-      ImmutableGlobalAttributes.EMPTY,
-      name,
-      httpEquiv,
-      itemprop,
-      charset,
-      content
+        ImmutableGlobalAttributes.EMPTY,
+        name,
+        httpEquiv,
+        itemprop,
+        charset,
+        content
     );
   }
 

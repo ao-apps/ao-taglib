@@ -65,7 +65,7 @@ import javax.servlet.jsp.JspTagException;
  * @author  AO Industries, Inc.
  */
 public class FormTag extends ElementBufferedBodyTag
-  implements
+    implements
     // Attributes
     ActionAttribute,
     EnctypeAttribute,
@@ -76,9 +76,9 @@ public class FormTag extends ElementBufferedBodyTag
     OnsubmitAttribute
 {
 
-/* SimpleTag only:
-  public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, FormTag.class);
-/**/
+  /* SimpleTag only:
+    public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, FormTag.class);
+  /**/
 
   public FormTag() {
     init();
@@ -94,23 +94,26 @@ public class FormTag extends ElementBufferedBodyTag
     return MediaType.XHTML;
   }
 
-/* BodyTag only: */
+  /* BodyTag only: */
   private static final long serialVersionUID = 1L;
-/**/
+  /**/
 
   private String action;
+
   @Override
   public void setAction(String action) {
     this.action = Strings.nullIfEmpty(action);
   }
 
   private String enctype;
+
   @Override
   public void setEnctype(String enctype) {
     this.enctype = Strings.trimNullIfEmpty(enctype);
   }
 
   private String method;
+
   @Override
   public void setMethod(String method) {
     method = Strings.trimNullIfEmpty(method);
@@ -121,6 +124,7 @@ public class FormTag extends ElementBufferedBodyTag
   }
 
   private MutableURIParameters params;
+
   @Override
   public void addParam(String name, Object value) {
     if (params == null) {
@@ -130,12 +134,14 @@ public class FormTag extends ElementBufferedBodyTag
   }
 
   private String target;
+
   @Override
   public void setTarget(String target) {
     this.target = Strings.trimNullIfEmpty(target);
   }
 
   private Object onsubmit;
+
   @Override
   public void setOnsubmit(Object onsubmit) {
     this.onsubmit = AttributeUtils.trimNullIfEmpty(onsubmit);
@@ -147,8 +153,8 @@ public class FormTag extends ElementBufferedBodyTag
   @Override
   protected boolean addDynamicAttribute(String uri, String localName, Object value, List<String> expectedPatterns) throws JspTagException {
     return
-      super.addDynamicAttribute(uri, localName, value, expectedPatterns)
-      || ParamUtils.addDynamicAttribute(uri, localName, value, expectedPatterns, this);
+        super.addDynamicAttribute(uri, localName, value, expectedPatterns)
+            || ParamUtils.addDynamicAttribute(uri, localName, value, expectedPatterns, this);
   }
 
   private void init() {
@@ -161,22 +167,22 @@ public class FormTag extends ElementBufferedBodyTag
   }
 
   @Override
-/* BodyTag only: */
+  /* BodyTag only: */
   protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-/**/
-/* SimpleTag only:
-  protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-    PageContext pageContext = (PageContext)getJspContext();
-/**/
-    HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
-    HttpServletResponse response = (HttpServletResponse)pageContext.getResponse();
+    /**/
+    /* SimpleTag only:
+      protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+        PageContext pageContext = (PageContext)getJspContext();
+    /**/
+    HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
+    HttpServletResponse response = (HttpServletResponse) pageContext.getResponse();
     DocumentEE document = new DocumentEE(
-      pageContext.getServletContext(),
-      request,
-      response,
-      out,
-      false, // Do not add extra newlines to JSP
-      false  // Do not add extra indentation to JSP
+        pageContext.getServletContext(),
+        request,
+        response,
+        out,
+        false, // Do not add extra newlines to JSP
+        false  // Do not add extra indentation to JSP
     );
     Doctype doctype = document.encodingContext.getDoctype();
     out.write("<form");
@@ -222,12 +228,12 @@ public class FormTag extends ElementBufferedBodyTag
     if (onsubmit != null) {
       out.write(" onsubmit=\"");
       MarkupCoercion.write(
-        onsubmit,
-        MarkupType.JAVASCRIPT,
-        true,
-        javascriptInXhtmlAttributeEncoder,
-        false,
-        out
+          onsubmit,
+          MarkupType.JAVASCRIPT,
+          true,
+          javascriptInXhtmlAttributeEncoder,
+          false,
+          out
       );
       out.append('"');
     }
@@ -265,18 +271,18 @@ public class FormTag extends ElementBufferedBodyTag
       out.write("</div>");
     }
     MarkupCoercion.write(
-      capturedBody,
-      MarkupType.XHTML,
-      out,
-      true
+        capturedBody,
+        MarkupType.XHTML,
+        out,
+        true
     );
     out.write("</form>");
-/* BodyTag only: */
+    /* BodyTag only: */
     return EVAL_PAGE;
-/**/
+    /**/
   }
 
-/* BodyTag only: */
+  /* BodyTag only: */
   @Override
   public void doFinally() {
     try {
@@ -285,5 +291,5 @@ public class FormTag extends ElementBufferedBodyTag
       super.doFinally();
     }
   }
-/**/
+  /**/
 }

@@ -35,9 +35,10 @@ import javax.servlet.jsp.JspException;
  */
 public class TabindexTag extends EncodingBufferedTag {
 
-/* SimpleTag only: */
+  /* SimpleTag only: */
   public static final String TAG_NAME = "<ao:tabindex>";
-/**/
+
+  /**/
 
   @Override
   public MediaType getContentType() {
@@ -49,24 +50,24 @@ public class TabindexTag extends EncodingBufferedTag {
     return null;
   }
 
-/* BodyTag only:
-  private static final long serialVersionUID = 1L;
-/**/
+  /* BodyTag only:
+    private static final long serialVersionUID = 1L;
+  /**/
 
   @Override
-/* BodyTag only:
-  protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-/**/
-/* SimpleTag only: */
+  /* BodyTag only:
+    protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+  /**/
+  /* SimpleTag only: */
   protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-/**/
+    /**/
     TabindexAttribute tabindexAttribute = AttributeUtils.requireAttributeParent(TAG_NAME, this, "tabindex", TabindexAttribute.class);
     String value = capturedBody.trim().toString();
     if (!value.isEmpty()) {
       tabindexAttribute.setTabindex(Integer.parseInt(value));
     }
-/* BodyTag only:
-    return EVAL_PAGE;
-/**/
+    /* BodyTag only:
+      return EVAL_PAGE;
+  /**/
   }
 }

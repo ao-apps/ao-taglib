@@ -38,9 +38,9 @@ import javax.servlet.jsp.JspException;
  */
 public class OnchangeTag extends EncodingBufferedBodyTag {
 
-/* SimpleTag only:
-  public static final String TAG_NAME = "<ao:onchange>";
-/**/
+  /* SimpleTag only:
+    public static final String TAG_NAME = "<ao:onchange>";
+  /**/
 
   @Override
   public MediaType getContentType() {
@@ -52,21 +52,22 @@ public class OnchangeTag extends EncodingBufferedBodyTag {
     return null;
   }
 
-/* BodyTag only: */
+  /* BodyTag only: */
   private static final long serialVersionUID = 1L;
-/**/
+
+  /**/
 
   @Override
-/* BodyTag only: */
+  /* BodyTag only: */
   protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-/**/
-/* SimpleTag only:
-  protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-/**/
+    /**/
+    /* SimpleTag only:
+      protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+    /**/
     AttributeUtils.requireAttributeParent(TAG_NAME, this, "onchange", OnchangeAttribute.class)
-      .setOnchange(capturedBody.trim());
-/* BodyTag only: */
+        .setOnchange(capturedBody.trim());
+    /* BodyTag only: */
     return EVAL_PAGE;
-/**/
+    /**/
   }
 }

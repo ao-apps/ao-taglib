@@ -84,24 +84,25 @@ import javax.servlet.jsp.PageContext;
  */
 public class HtmlTag extends ElementFilteredTag {
 
-/* SimpleTag only: */
+  /* SimpleTag only: */
   public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, HtmlTag.class);
-/**/
 
-/* BodyTag only:
-  public HtmlTag() {
-    init();
-  }
-/**/
+  /**/
+
+  /* BodyTag only:
+    public HtmlTag() {
+      init();
+    }
+  /**/
 
   @Override
   public MediaType getContentType() {
     return MediaType.XHTML;
   }
 
-/* BodyTag only:
-  private static final long serialVersionUID = 1L;
-/**/
+  /* BodyTag only:
+    private static final long serialVersionUID = 1L;
+  /**/
 
   // TODO: charset here, along with:
   //       Page (model), Page (Servlet), PageTag, Theme, View
@@ -109,6 +110,7 @@ public class HtmlTag extends ElementFilteredTag {
   //       aoweb-struts: PageAttributes, Skin
 
   private Serialization serialization;
+
   public void setSerialization(String serialization) {
     if (serialization == null) {
       this.serialization = null;
@@ -119,6 +121,7 @@ public class HtmlTag extends ElementFilteredTag {
   }
 
   private Doctype doctype;
+
   public void setDoctype(String doctype) {
     if (doctype == null) {
       this.doctype = null;
@@ -129,6 +132,7 @@ public class HtmlTag extends ElementFilteredTag {
   }
 
   private Boolean autonli;
+
   public void setAutonli(String autonli) {
     if (autonli == null) {
       this.autonli = null;
@@ -147,6 +151,7 @@ public class HtmlTag extends ElementFilteredTag {
   }
 
   private Boolean indent;
+
   public void setIndent(String indent) {
     if (indent == null) {
       this.indent = null;
@@ -164,44 +169,44 @@ public class HtmlTag extends ElementFilteredTag {
     }
   }
 
-/* BodyTag only:
-  // Values that are used in doFinally
-  private transient Serialization oldSerialization;
-  private transient boolean setSerialization;
-  private transient Attribute.OldValue oldStrutsXhtml;
-  private transient Doctype oldDoctype;
-  private transient boolean setDoctype;
-  private transient Boolean oldAutonli;
-  private transient boolean setAutonli;
-  private transient Boolean oldIndent;
-  private transient boolean setIndent;
-  private transient Registry oldPageRegistry;
-
-  private void init() {
-    serialization = null;
-    doctype = null;
-    autonli = null;
-    indent = null;
-    oldSerialization = null;
-    setSerialization = false;
-    oldStrutsXhtml = null;
-    oldDoctype = null;
-    setDoctype = false;
-    oldAutonli = null;
-    setAutonli = false;
-    oldIndent = null;
-    setIndent = false;
-    oldPageRegistry = null;
-  }
-/**/
+  /* BodyTag only:
+    // Values that are used in doFinally
+    private transient Serialization oldSerialization;
+    private transient boolean setSerialization;
+    private transient Attribute.OldValue oldStrutsXhtml;
+    private transient Doctype oldDoctype;
+    private transient boolean setDoctype;
+    private transient Boolean oldAutonli;
+    private transient boolean setAutonli;
+    private transient Boolean oldIndent;
+    private transient boolean setIndent;
+    private transient Registry oldPageRegistry;
+  
+    private void init() {
+      serialization = null;
+      doctype = null;
+      autonli = null;
+      indent = null;
+      oldSerialization = null;
+      setSerialization = false;
+      oldStrutsXhtml = null;
+      oldDoctype = null;
+      setDoctype = false;
+      oldAutonli = null;
+      setAutonli = false;
+      oldIndent = null;
+      setIndent = false;
+      oldPageRegistry = null;
+    }
+  /**/
 
   @Override
-/* BodyTag only:
-  protected int doStartTag(Writer out) throws JspException, IOException {
-/**/
-/* SimpleTag only: */
+  /* BodyTag only:
+    protected int doStartTag(Writer out) throws JspException, IOException {
+  /**/
+  /* SimpleTag only: */
   protected void doTag(Writer out) throws JspException, IOException {
-    PageContext pageContext = (PageContext)getJspContext();
+    PageContext pageContext = (PageContext) getJspContext();
     Serialization oldSerialization;
     boolean setSerialization;
     Attribute.OldValue oldStrutsXhtml;
@@ -212,9 +217,9 @@ public class HtmlTag extends ElementFilteredTag {
     Boolean oldIndent;
     boolean setIndent;
     Registry oldPageRegistry;
-/**/
+    /**/
     ServletContext servletContext = pageContext.getServletContext();
-    HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
+    HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
 
     Serialization currentSerialization = serialization;
     if (currentSerialization == null) {
@@ -226,12 +231,12 @@ public class HtmlTag extends ElementFilteredTag {
       oldSerialization = SerializationEE.replace(request, currentSerialization);
       setSerialization = true;
       oldStrutsXhtml = STRUTS_XHTML_KEY.context(pageContext).init(
-        Boolean.toString(currentSerialization == Serialization.XML)
+          Boolean.toString(currentSerialization == Serialization.XML)
       );
     }
-/* SimpleTag only: */
+    /* SimpleTag only: */
     try {
-/**/
+      /**/
       Doctype currentDoctype = doctype;
       if (currentDoctype == null) {
         currentDoctype = DoctypeEE.get(servletContext, request);
@@ -241,9 +246,9 @@ public class HtmlTag extends ElementFilteredTag {
         oldDoctype = DoctypeEE.replace(request, currentDoctype);
         setDoctype = true;
       }
-/* SimpleTag only: */
+      /* SimpleTag only: */
       try {
-/**/
+        /**/
         if (autonli == null) {
           DocumentEE.getAutonli(servletContext, request); // Gets or sets the request attribute for "auto"
           oldAutonli = null;
@@ -252,9 +257,9 @@ public class HtmlTag extends ElementFilteredTag {
           oldAutonli = DocumentEE.replaceAutonli(request, autonli);
           setAutonli = true;
         }
-/* SimpleTag only: */
+        /* SimpleTag only: */
         try {
-/**/
+          /**/
           if (indent == null) {
             DocumentEE.getIndent(servletContext, request); // Gets or sets the request attribute for "auto"
             oldIndent = null;
@@ -263,17 +268,17 @@ public class HtmlTag extends ElementFilteredTag {
             oldIndent = DocumentEE.replaceIndent(request, indent);
             setIndent = true;
           }
-/* SimpleTag only: */
+          /* SimpleTag only: */
           try {
-/**/
+            /**/
             oldPageRegistry = RegistryEE.Page.get(request);
             if (oldPageRegistry == null) {
               // Create a new page-scope registry
               RegistryEE.Page.set(request, new Registry());
             }
-/* SimpleTag only: */
+            /* SimpleTag only: */
             try {
-/**/
+              /**/
               ServletResponse response = pageContext.getResponse();
               // Clear the output buffer
               response.resetBuffer();
@@ -289,72 +294,72 @@ public class HtmlTag extends ElementFilteredTag {
               currentDoctype.doctype(currentSerialization, out);
               // Write <html>
               beginHtmlTag(response, out, currentSerialization, this);
-/* BodyTag only:
-    return EVAL_BODY_FILTERED;
-  }
-
-  @Override
-  protected int doEndTag(Writer out) throws JspException, IOException {
-/**/
-/* SimpleTag only: */
+              /* BodyTag only:
+                  return EVAL_BODY_FILTERED;
+                }
+              
+                @Override
+                protected int doEndTag(Writer out) throws JspException, IOException {
+              /**/
+              /* SimpleTag only: */
               super.doTag(out);
-/**/
+              /**/
               // Write </html>
               endHtmlTag(out);
-/* BodyTag only:
-    return EVAL_PAGE;
-  }
-
-  @Override
-  public void doFinally() {
-    try {
-      try {
-        javax.servlet.ServletRequest request = pageContext.getRequest();
-/**/
-/* SimpleTag only: */
+              /* BodyTag only:
+                  return EVAL_PAGE;
+                }
+              
+                @Override
+                public void doFinally() {
+                  try {
+                    try {
+                      javax.servlet.ServletRequest request = pageContext.getRequest();
+              /**/
+              /* SimpleTag only: */
             } finally {
-/**/
+              /**/
               if (oldPageRegistry == null) {
                 RegistryEE.Page.set(request, null);
               }
-/* SimpleTag only: */
+              /* SimpleTag only: */
             }
           } finally {
-/**/
+            /**/
             if (setIndent) {
               DocumentEE.setIndent(request, oldIndent);
             }
-/* SimpleTag only: */
+            /* SimpleTag only: */
           }
         } finally {
-/**/
+          /**/
           if (setAutonli) {
             DocumentEE.setAutonli(request, oldAutonli);
           }
-/* SimpleTag only: */
+          /* SimpleTag only: */
         }
       } finally {
-/**/
+        /**/
         if (setDoctype) {
           DoctypeEE.set(request, oldDoctype);
         }
-/* SimpleTag only: */
+        /* SimpleTag only: */
       }
     } finally {
-/**/
+      /**/
       if (setSerialization) {
         SerializationEE.set(request, oldSerialization);
       }
       if (oldStrutsXhtml != null) {
         oldStrutsXhtml.close();
       }
-/* BodyTag only:
-      } finally {
-        init();
-      }
-    } finally {
-      super.doFinally();
-/**/
+      /* BodyTag only:
+          } finally {
+            init();
+          }
+        } finally {
+          super.doFinally();
+    /**/
     }
   }
 
@@ -368,7 +373,7 @@ public class HtmlTag extends ElementFilteredTag {
   // Java 9: module-private
   // Matches nmw-email-taglib:ContentTag.java
   public static final ScopeEE.Page.Attribute<String> STRUTS_XHTML_KEY =
-    ScopeEE.PAGE.attribute("org.apache.struts.globals.XHTML");
+      ScopeEE.PAGE.attribute("org.apache.struts.globals.XHTML");
 
   public static void beginHtmlTag(Locale locale, Appendable out, Serialization serialization, GlobalAttributes global) throws IOException {
     out.append("<html");
@@ -400,16 +405,16 @@ public class HtmlTag extends ElementFilteredTag {
   @Deprecated
   public static void beginHtmlTag(Locale locale, Appendable out, Serialization serialization, String clazz) throws IOException {
     beginHtmlTag(
-      locale,
-      out,
-      serialization,
-      ImmutableGlobalAttributes.of(
-        null, // id
-        clazz,
-        null, // data
-        null, // dir
-        null  // style
-      )
+        locale,
+        out,
+        serialization,
+        ImmutableGlobalAttributes.of(
+            null, // id
+            clazz,
+            null, // data
+            null, // dir
+            null  // style
+        )
     );
   }
 

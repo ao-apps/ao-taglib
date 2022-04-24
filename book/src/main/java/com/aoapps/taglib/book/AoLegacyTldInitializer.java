@@ -29,21 +29,21 @@ public class AoLegacyTldInitializer extends TagReferenceInitializer {
 
   public AoLegacyTldInitializer() {
     super(
-      Maven.properties.getProperty("documented.name") + " Reference (Legacy)",
-      "Taglib Reference (Legacy)",
-      "/taglib",
-      "/ao-legacy.tld",
-      true,
-      Maven.properties.getProperty("documented.javadoc.link.javase"),
-      Maven.properties.getProperty("documented.javadoc.link.javaee"),
-      // Self
-      "com.aoapps.taglib", Maven.properties.getProperty("project.url") + "apidocs/com.aoapps.taglib/",
-      "com.aoapps.taglib.legacy", Maven.properties.getProperty("project.url") + "apidocs/com.aoapps.taglib/",
-      // Dependencies
-      "com.aoapps.encoding.taglib", "https://oss.aoapps.com/encoding/taglib/apidocs/com.aoapps.encoding.taglib/",
-      "com.aoapps.encoding.taglib.legacy", "https://oss.aoapps.com/encoding/taglib/apidocs/com.aoapps.encoding.taglib/",
-      "com.aoapps.lang", "https://oss.aoapps.com/lang/apidocs/com.aoapps.lang/",
-      "com.aoapps.net", "https://oss.aoapps.com/net-types/apidocs/com.aoapps.net.types/"
+        Maven.properties.getProperty("documented.name") + " Reference (Legacy)",
+        "Taglib Reference (Legacy)",
+        "/taglib",
+        "/ao-legacy.tld",
+        true,
+        Maven.properties.getProperty("documented.javadoc.link.javase"),
+        Maven.properties.getProperty("documented.javadoc.link.javaee"),
+        // Self
+        "com.aoapps.taglib", Maven.properties.getProperty("project.url") + "apidocs/com.aoapps.taglib/",
+        "com.aoapps.taglib.legacy", Maven.properties.getProperty("project.url") + "apidocs/com.aoapps.taglib/",
+        // Dependencies
+        "com.aoapps.encoding.taglib", "https://oss.aoapps.com/encoding/taglib/apidocs/com.aoapps.encoding.taglib/",
+        "com.aoapps.encoding.taglib.legacy", "https://oss.aoapps.com/encoding/taglib/apidocs/com.aoapps.encoding.taglib/",
+        "com.aoapps.lang", "https://oss.aoapps.com/lang/apidocs/com.aoapps.lang/",
+        "com.aoapps.net", "https://oss.aoapps.com/net-types/apidocs/com.aoapps.net.types/"
     );
   }
 }

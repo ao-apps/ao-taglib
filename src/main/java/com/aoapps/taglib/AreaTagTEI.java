@@ -35,10 +35,10 @@ public class AreaTagTEI extends ElementTagTEI {
 
   public static boolean isValidShape(String shape) {
     return
-      "default".equals(shape)
-      || "rect".equals(shape)
-      || "circle".equals(shape)
-      || "poly".equals(shape);
+        "default".equals(shape)
+            || "rect".equals(shape)
+            || "circle".equals(shape)
+            || "poly".equals(shape);
   }
 
   @Override
@@ -47,45 +47,45 @@ public class AreaTagTEI extends ElementTagTEI {
     Object shapeAttr = data.getAttribute("shape");
     if (shapeAttr == null) {
       messages.add(
-        new ValidationMessage(
-          data.getId(),
-          AttributeRequiredException.RESOURCES.getMessage("message", "shape")
-        )
+          new ValidationMessage(
+              data.getId(),
+              AttributeRequiredException.RESOURCES.getMessage("message", "shape")
+          )
       );
     } else if (shapeAttr != TagData.REQUEST_TIME_VALUE) {
-      String shape = ((String)shapeAttr).trim(); // TODO: normalizeShape
+      String shape = ((String) shapeAttr).trim(); // TODO: normalizeShape
       if (shape.isEmpty()) {
         messages.add(
-          new ValidationMessage(
-            data.getId(),
-            AttributeRequiredException.RESOURCES.getMessage("message", "shape")
-          )
+            new ValidationMessage(
+                data.getId(),
+                AttributeRequiredException.RESOURCES.getMessage("message", "shape")
+            )
         );
       } else {
         if (!isValidShape(shape)) {
           messages.add(
-            new ValidationMessage(
-              data.getId(),
-              AreaTag.RESOURCES.getMessage("shape.invalid", shape)
-            )
+              new ValidationMessage(
+                  data.getId(),
+                  AreaTag.RESOURCES.getMessage("shape.invalid", shape)
+              )
           );
         } else if (!"default".equals(shape)) {
           Object coordsAttr = data.getAttribute("coords");
           if (coordsAttr == null) {
             messages.add(
-              new ValidationMessage(
-                data.getId(),
-                AttributeRequiredException.RESOURCES.getMessage("message", "coords")
-              )
+                new ValidationMessage(
+                    data.getId(),
+                    AttributeRequiredException.RESOURCES.getMessage("message", "coords")
+                )
             );
           } else if (coordsAttr != TagData.REQUEST_TIME_VALUE) {
-            String coords = Strings.trimNullIfEmpty((String)coordsAttr); // TODO: normalizeCoords
+            String coords = Strings.trimNullIfEmpty((String) coordsAttr); // TODO: normalizeCoords
             if (coords == null) {
               messages.add(
-                new ValidationMessage(
-                  data.getId(),
-                  AttributeRequiredException.RESOURCES.getMessage("message", "coords")
-                )
+                  new ValidationMessage(
+                      data.getId(),
+                      AttributeRequiredException.RESOURCES.getMessage("message", "coords")
+                  )
               );
             }
           }

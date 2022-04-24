@@ -50,14 +50,15 @@ import org.w3c.dom.Node;
  */
 // TODO: Remove or deprecate?  This is old struts-style, and obsoleted by JSTL + EL.
 public class WriteTag extends EncodingNullTag
-  implements
+    implements
     NameAttribute,
     TypeAttribute
 {
 
-/* SimpleTag only: */
+  /* SimpleTag only: */
   public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, WriteTag.class);
-/**/
+
+  /**/
 
   public WriteTag() {
     init();
@@ -68,32 +69,37 @@ public class WriteTag extends EncodingNullTag
     return mediaType;
   }
 
-/* BodyTag only:
-  private static final long serialVersionUID = 1L;
-/**/
+  /* BodyTag only:
+    private static final long serialVersionUID = 1L;
+  /**/
 
   private String scope;
+
   public void setScope(String scope) {
     this.scope = scope.trim();
   }
 
   private String name;
+
   @Override
   public void setName(String name) {
     this.name = name;
   }
 
   private String property;
+
   public void setProperty(String property) {
     this.property = property;
   }
 
   private String method;
+
   public void setMethod(String method) {
     this.method = method;
   }
 
   private MediaType mediaType;
+
   @Override
   public void setType(String type) {
     String typeStr = Strings.trim(type);
@@ -130,21 +136,21 @@ public class WriteTag extends EncodingNullTag
   @SuppressWarnings({"UseSpecificCatch", "TooBroadCatch"})
   protected void writePrefix(MediaType containerType, Writer out) throws JspException, IOException {
     try {
-/* SimpleTag only: */
-      PageContext pageContext = (PageContext)getJspContext();
-/**/
+      /* SimpleTag only: */
+      PageContext pageContext = (PageContext) getJspContext();
+      /**/
       if (name == null) {
         throw new AttributeRequiredException("name");
       }
 
       // Find the bean to write
       Object bean = PropertyUtils.findObject(
-        pageContext,
-        scope,
-        name,
-        property,
-        true,
-        false
+          pageContext,
+          scope,
+          name,
+          property,
+          true,
+          false
       );
 
       // Print the value
@@ -155,16 +161,16 @@ public class WriteTag extends EncodingNullTag
         if ("toString".equals(method)) {
           BundleLookupThreadContext threadContext;
           if (
-            markupType == MarkupType.NONE
-            || (threadContext = BundleLookupThreadContext.getThreadContext()) == null
-            // Avoid intermediate String from Writable
-            || (
-              bean instanceof Writable
-              && !((Writable)bean).isFastToString()
-            )
-            // Other types that will not be converted to String for bundle lookups
-            || value instanceof char[]
-            || value instanceof Node
+              markupType == MarkupType.NONE
+                  || (threadContext = BundleLookupThreadContext.getThreadContext()) == null
+                  // Avoid intermediate String from Writable
+                  || (
+                  bean instanceof Writable
+                      && !((Writable) bean).isFastToString()
+              )
+                  // Other types that will not be converted to String for bundle lookups
+                  || value instanceof char[]
+                  || value instanceof Node
           ) {
             // Stream with coercion in doTag
             value = bean;
@@ -182,17 +188,17 @@ public class WriteTag extends EncodingNullTag
             Method refMethod = bean.getClass().getMethod(method);
             Object retVal = refMethod.invoke(bean);
             if (
-              retVal == null
-              || markupType == MarkupType.NONE
-              || (threadContext = BundleLookupThreadContext.getThreadContext()) == null
-              // Avoid intermediate String from Writable
-              || (
-                retVal instanceof Writable
-                && !((Writable)retVal).isFastToString()
-              )
-              // Other types that will not be converted to String for bundle lookups
-              || value instanceof char[]
-              || value instanceof Node
+                retVal == null
+                    || markupType == MarkupType.NONE
+                    || (threadContext = BundleLookupThreadContext.getThreadContext()) == null
+                    // Avoid intermediate String from Writable
+                    || (
+                    retVal instanceof Writable
+                        && !((Writable) retVal).isFastToString()
+                )
+                    // Other types that will not be converted to String for bundle lookups
+                    || value instanceof char[]
+                    || value instanceof Node
             ) {
               // Stream with coercion in doTag
               value = retVal;
@@ -221,20 +227,20 @@ public class WriteTag extends EncodingNullTag
   }
 
   @Override
-/* BodyTag only:
-  protected int doEndTag(Writer out) throws JspException, IOException {
-/**/
-/* SimpleTag only: */
+  /* BodyTag only:
+    protected int doEndTag(Writer out) throws JspException, IOException {
+  /**/
+  /* SimpleTag only: */
   protected void doTag(Writer out) throws JspException, IOException {
-/**/
+    /**/
     if (toStringResult != null) {
       out.write(toStringResult);
     } else if (value != null) {
       Coercion.write(value, out, true);
     }
-/* BodyTag only:
-    return EVAL_PAGE;
-/**/
+    /* BodyTag only:
+      return EVAL_PAGE;
+  /**/
   }
 
   @Override
@@ -244,7 +250,7 @@ public class WriteTag extends EncodingNullTag
     }
   }
 
-/* BodyTag only:
+  /* BodyTag only:
   @Override
   public void doFinally() {
     try {

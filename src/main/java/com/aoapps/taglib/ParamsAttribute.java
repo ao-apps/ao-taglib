@@ -54,6 +54,6 @@ public interface ParamsAttribute {
    */
   @Deprecated
   default void addParam(String name, String value) {
-    addParam(name, (Object)value);
+    addParam(name, (Object) value);
   }
 }

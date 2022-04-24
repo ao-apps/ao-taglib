@@ -54,10 +54,10 @@ public class DisableResourceEditorTag extends TagSupport implements TryCatchFina
   public static boolean isValidScope(String scope) {
     scope = Strings.trimNullIfEmpty(scope);
     return
-      scope == null
-      || scope.equalsIgnoreCase(AUTO)
-      || scope.equalsIgnoreCase(BODY)
-      || scope.equalsIgnoreCase(ScopeEE.Page.SCOPE_REQUEST);
+        scope == null
+            || scope.equalsIgnoreCase(AUTO)
+            || scope.equalsIgnoreCase(BODY)
+            || scope.equalsIgnoreCase(ScopeEE.Page.SCOPE_REQUEST);
   }
 
   public DisableResourceEditorTag() {
@@ -67,6 +67,7 @@ public class DisableResourceEditorTag extends TagSupport implements TryCatchFina
   private static final long serialVersionUID = 1L;
 
   private String scope;
+
   public void setScope(String scope) {
     scope = Strings.trimNullIfEmpty(scope);
     if (scope == null || scope.equalsIgnoreCase(AUTO)) {
@@ -81,11 +82,12 @@ public class DisableResourceEditorTag extends TagSupport implements TryCatchFina
   }
 
   private EditableResourceBundle.ThreadSettings.Mode mode;
+
   public void setMode(String mode) {
     mode = Strings.trimNullIfEmpty(mode);
     this.mode = (mode == null)
-      ? EditableResourceBundle.ThreadSettings.Mode.DISABLED
-      : EditableResourceBundle.ThreadSettings.Mode.valueOf(mode.toUpperCase(Locale.ROOT));
+        ? EditableResourceBundle.ThreadSettings.Mode.DISABLED
+        : EditableResourceBundle.ThreadSettings.Mode.valueOf(mode.toUpperCase(Locale.ROOT));
   }
 
   private transient EditableResourceBundle.ThreadSettings oldThreadSettings;
@@ -127,11 +129,11 @@ public class DisableResourceEditorTag extends TagSupport implements TryCatchFina
   public void doFinally() {
     try {
       if (
-        oldThreadSettings != null
-        && (
-          (scope == null && hasBody) // Auto mode, with body
-          || scope == BODY // Body mode
-        )
+          oldThreadSettings != null
+              && (
+              (scope == null && hasBody) // Auto mode, with body
+                  || scope == BODY// Body mode
+          )
       ) {
         // Restore old settings
         EditableResourceBundle.setThreadSettings(oldThreadSettings);

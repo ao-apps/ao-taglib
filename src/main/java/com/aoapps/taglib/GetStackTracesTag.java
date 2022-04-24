@@ -64,13 +64,13 @@ public class GetStackTracesTag extends EncodingNullTag {
 
   @Override
   protected void doTag(Writer out) throws JspException, IOException {
-    PageContext pageContext = (PageContext)getJspContext();
+    PageContext pageContext = (PageContext) getJspContext();
     // Find the Throwable to display
     Object value = PropertyUtils.findObject(pageContext, scope, name, property, true, true);
     if (!(value instanceof Throwable)) {
       throw new LocalizedJspTagException(RESOURCES, "notThrowable", (value == null) ? null : value.getClass().getName());
     }
-    Throwable throwable = (Throwable)value;
+    Throwable throwable = (Throwable) value;
 
     // Print the stack traces
     ErrorPrinter.printStackTraces(throwable, out);

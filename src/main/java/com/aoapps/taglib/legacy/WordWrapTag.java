@@ -52,11 +52,12 @@ public class WordWrapTag extends EncodingBufferedBodyTag {
     return MediaType.TEXT;
   }
 
-/* BodyTag only: */
+  /* BodyTag only: */
   private static final long serialVersionUID = 1L;
-/**/
+  /**/
 
   private int width;
+
   public void setWidth(int width) {
     this.width = width;
   }
@@ -66,19 +67,19 @@ public class WordWrapTag extends EncodingBufferedBodyTag {
   }
 
   @Override
-/* BodyTag only: */
+  /* BodyTag only: */
   protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-/**/
-/* SimpleTag only:
-  protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-/**/
+    /**/
+    /* SimpleTag only:
+      protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+    /**/
     Strings.wordWrap(capturedBody.toString(), width, out);
-/* BodyTag only: */
+    /* BodyTag only: */
     return EVAL_PAGE;
-/**/
+    /**/
   }
 
-/* BodyTag only: */
+  /* BodyTag only: */
   @Override
   public void doFinally() {
     try {
@@ -87,5 +88,5 @@ public class WordWrapTag extends EncodingBufferedBodyTag {
       super.doFinally();
     }
   }
-/**/
+  /**/
 }
