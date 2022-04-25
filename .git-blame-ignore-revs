@@ -40,3 +40,6 @@ cc6dc06ca2307374f61c5e5cdf2cdf7754cd6b46
 
 # Auto temp file more places.
 a797579b8c31e446e35430e1b423c1d98266ee61
+
+# Performed automatic source code clean-up with rewrite-maven-plugin
+1f95b8fccef20b5d8de2414351e0d3137711857e
