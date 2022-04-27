@@ -47,4 +47,4 @@ module com.aoapps.taglib {
   // Java SE
   requires java.desktop;
   requires java.logging;
-}
+} // TODO: Avoiding rewrite-maven-plugin-4.22.2 truncation
