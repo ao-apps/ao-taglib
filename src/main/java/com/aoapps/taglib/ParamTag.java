@@ -37,8 +37,7 @@ import javax.servlet.jsp.JspException;
 public class ParamTag extends EncodingBufferedTag
     implements
     NameAttribute,
-    ValueAttribute
-{
+    ValueAttribute {
 
   /* SimpleTag only: */
   public static final String TAG_NAME = "<ao:param>";

@@ -23,9 +23,10 @@
 
 package com.aoapps.taglib.legacy;
 
-import com.aoapps.encoding.MediaType;
 import static com.aoapps.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoapps.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
+
+import com.aoapps.encoding.MediaType;
 import com.aoapps.hodgepodge.i18n.MarkupCoercion;
 import com.aoapps.hodgepodge.i18n.MarkupType;
 import com.aoapps.io.buffer.BufferResult;
@@ -61,8 +62,7 @@ public class IframeTag extends ElementBufferedBodyTag
     ParamsAttribute,
     WidthAttribute,
     HeightAttribute,
-    FrameborderAttribute
-{
+    FrameborderAttribute {
 
   public IframeTag() {
     init();
@@ -139,6 +139,8 @@ public class IframeTag extends ElementBufferedBodyTag
   }
 
   /**
+   * {@inheritDoc}
+   *
    * @see  ParamUtils#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List, com.aoapps.taglib.ParamsAttribute)
    */
   @Override
@@ -164,8 +166,8 @@ public class IframeTag extends ElementBufferedBodyTag
   protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
     /**/
     /* SimpleTag only:
-      protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-        PageContext pageContext = (PageContext)getJspContext();
+  protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+    final PageContext pageContext = (PageContext) getJspContext();
     /**/
     if (src == null) {
       throw new AttributeRequiredException("src");
@@ -173,10 +175,10 @@ public class IframeTag extends ElementBufferedBodyTag
     out.write("<iframe");
     GlobalAttributesUtils.writeGlobalAttributes(global, out);
     // TODO: Include id/name by doctype
-    String _id = global.getId();
-    if (_id != null) {
+    String myId = global.getId();
+    if (myId != null) {
       out.write(" name=\"");
-      encodeTextInXhtmlAttribute(_id, out);
+      encodeTextInXhtmlAttribute(myId, out);
       out.append('"');
     }
     UrlUtils.writeSrc(pageContext, out, src, params, addLastModified, absolute, canonical);

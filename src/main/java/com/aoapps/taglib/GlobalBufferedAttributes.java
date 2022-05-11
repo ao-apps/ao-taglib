@@ -23,7 +23,7 @@
 
 package com.aoapps.taglib;
 
-import com.aoapps.html.any.attributes.Text.Data;
+import com.aoapps.html.any.attributes.text.Data;
 import java.util.Map;
 
 /**
@@ -39,8 +39,7 @@ public interface GlobalBufferedAttributes extends
     ClassAttribute,
     DataAttribute,
     DirAttribute,
-    StyleAttribute
-{
+    StyleAttribute {
 
   /**
    * Replaces all the data with the provided HTML attribute names and values.

@@ -43,8 +43,7 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
 public abstract class ElementFilteredBodyTag extends EncodingFilteredBodyTag
     implements
     GlobalAttributes,
-    DynamicAttributes
-{
+    DynamicAttributes {
 
   private static final long serialVersionUID = 1L;
 

@@ -39,8 +39,7 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
 public abstract class ElementBufferedTag extends EncodingBufferedTag
     implements
     GlobalBufferedAttributes,
-    DynamicAttributes
-{
+    DynamicAttributes {
 
   protected final MutableGlobalAttributes global = new MutableGlobalAttributes();
 

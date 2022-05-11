@@ -52,8 +52,7 @@ import org.w3c.dom.Node;
 public class WriteTag extends EncodingNullTag
     implements
     NameAttribute,
-    TypeAttribute
-{
+    TypeAttribute {
 
   /* SimpleTag only: */
   public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, WriteTag.class);

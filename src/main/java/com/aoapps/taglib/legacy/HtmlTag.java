@@ -23,6 +23,11 @@
 
 package com.aoapps.taglib.legacy;
 
+import static com.aoapps.taglib.HtmlTag.RESOURCES;
+import static com.aoapps.taglib.HtmlTag.STRUTS_XHTML_KEY;
+import static com.aoapps.taglib.HtmlTag.beginHtmlTag;
+import static com.aoapps.taglib.HtmlTag.endHtmlTag;
+
 import com.aoapps.encoding.Doctype;
 import com.aoapps.encoding.MediaType;
 import com.aoapps.encoding.Serialization;
@@ -33,10 +38,6 @@ import com.aoapps.html.servlet.DocumentEE;
 import com.aoapps.lang.LocalizedIllegalArgumentException;
 import com.aoapps.lang.attribute.Attribute;
 import com.aoapps.servlet.ServletUtil;
-import static com.aoapps.taglib.HtmlTag.RESOURCES;
-import static com.aoapps.taglib.HtmlTag.STRUTS_XHTML_KEY;
-import static com.aoapps.taglib.HtmlTag.beginHtmlTag;
-import static com.aoapps.taglib.HtmlTag.endHtmlTag;
 import com.aoapps.web.resources.registry.Registry;
 import com.aoapps.web.resources.servlet.RegistryEE;
 import java.io.IOException;

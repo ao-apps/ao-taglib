@@ -56,8 +56,7 @@ public class TextareaTag extends ElementBufferedBodyTag
     RowsAttribute,
     ValueAttribute,
     // Events
-    OnchangeAttribute
-{
+    OnchangeAttribute {
 
   public TextareaTag() {
     init();

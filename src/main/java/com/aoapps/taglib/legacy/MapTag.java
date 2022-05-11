@@ -23,8 +23,9 @@
 
 package com.aoapps.taglib.legacy;
 
-import com.aoapps.encoding.MediaType;
 import static com.aoapps.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
+
+import com.aoapps.encoding.MediaType;
 import com.aoapps.taglib.AttributeRequiredException;
 import com.aoapps.taglib.GlobalAttributesUtils;
 import java.io.IOException;
@@ -53,15 +54,15 @@ public class MapTag extends ElementFilteredBodyTag {
     /* SimpleTag only:
       protected void doTag(Writer out) throws JspException, IOException {
     /**/
-    String _id = global.getId();
-    if (_id == null) {
+    String myId = global.getId();
+    if (myId == null) {
       throw new AttributeRequiredException("id");
     }
     // TODO: Include id/name by doctype
     out.write("<map");
     GlobalAttributesUtils.writeGlobalAttributes(global, out);
     out.write(" name=\"");
-    encodeTextInXhtmlAttribute(_id, out);
+    encodeTextInXhtmlAttribute(myId, out);
     out.write("\">");
     /* BodyTag only: */
     return EVAL_BODY_FILTERED;

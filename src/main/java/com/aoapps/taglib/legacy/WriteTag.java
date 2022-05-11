@@ -23,6 +23,8 @@
 
 package com.aoapps.taglib.legacy;
 
+import static com.aoapps.taglib.WriteTag.RESOURCES;
+
 import com.aoapps.encoding.MediaType;
 import com.aoapps.encoding.taglib.legacy.EncodingNullBodyTag;
 import com.aoapps.hodgepodge.i18n.BundleLookupMarkup;
@@ -37,7 +39,6 @@ import com.aoapps.taglib.AttributeRequiredException;
 import com.aoapps.taglib.NameAttribute;
 import com.aoapps.taglib.PropertyUtils;
 import com.aoapps.taglib.TypeAttribute;
-import static com.aoapps.taglib.WriteTag.RESOURCES;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
@@ -54,8 +55,7 @@ import org.w3c.dom.Node;
 public class WriteTag extends EncodingNullBodyTag
     implements
     NameAttribute,
-    TypeAttribute
-{
+    TypeAttribute {
 
   /* SimpleTag only:
     public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, WriteTag.class);

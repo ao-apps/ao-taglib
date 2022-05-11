@@ -85,14 +85,14 @@ public final class PropertyUtils {
       if (attribute == null) {
         throw new AttributeRequiredException("name");
       }
-      AttributeEE.Page<T> attrEE = attribute.context(jspContext);
+      AttributeEE.Page<T> pageAttribute = attribute.context(jspContext);
 
       // Find the bean
       Object bean;
       if (scope == null) {
-        bean = attrEE.find();
+        bean = pageAttribute.find();
       } else {
-        bean = attrEE.get(ScopeEE.Page.getScopeId(scope));
+        bean = pageAttribute.get(ScopeEE.Page.getScopeId(scope));
       }
 
       // Check required

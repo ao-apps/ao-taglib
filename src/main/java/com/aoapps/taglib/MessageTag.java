@@ -49,8 +49,7 @@ public class MessageTag extends EncodingNullTag
     implements
     DynamicAttributes,
     TypeAttribute,
-    MessageArgsAttribute
-{
+    MessageArgsAttribute {
 
   /* SimpleTag only: */
   public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, MessageTag.class);
@@ -205,7 +204,7 @@ public class MessageTag extends EncodingNullTag
       combinedKey = key;
     } else {
       // Find parent bundle
-/* SimpleTag only: */
+      /* SimpleTag only: */
       PageContext pageContext = (PageContext) getJspContext();
       /**/
       BundleTag bundleTag = BundleTag.getBundleTag(pageContext.getRequest());

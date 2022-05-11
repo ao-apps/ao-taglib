@@ -23,11 +23,12 @@
 
 package com.aoapps.taglib.legacy;
 
+import static com.aoapps.taglib.MessageArgTag.TAG_NAME;
+
 import com.aoapps.encoding.MediaType;
 import com.aoapps.encoding.taglib.legacy.EncodingBufferedBodyTag;
 import com.aoapps.io.buffer.BufferResult;
 import com.aoapps.taglib.AttributeUtils;
-import static com.aoapps.taglib.MessageArgTag.TAG_NAME;
 import com.aoapps.taglib.MessageArgsAttribute;
 import com.aoapps.taglib.ValueAttribute;
 import java.io.IOException;
@@ -38,8 +39,7 @@ import javax.servlet.jsp.JspException;
  * @author  AO Industries, Inc.
  */
 public class MessageArgTag extends EncodingBufferedBodyTag
-    implements ValueAttribute
-{
+    implements ValueAttribute {
 
   /* SimpleTag only:
     public static final String TAG_NAME = "<ao:messageArg>";

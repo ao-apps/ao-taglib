@@ -24,10 +24,11 @@
 package com.aoapps.taglib;
 
 import static com.aoapps.encoding.JavaScriptInXhtmlAttributeEncoder.javascriptInXhtmlAttributeEncoder;
-import com.aoapps.encoding.MediaType;
-import com.aoapps.encoding.Serialization;
 import static com.aoapps.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoapps.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
+
+import com.aoapps.encoding.MediaType;
+import com.aoapps.encoding.Serialization;
 import com.aoapps.encoding.servlet.SerializationEE;
 import com.aoapps.hodgepodge.i18n.MarkupCoercion;
 import com.aoapps.hodgepodge.i18n.MarkupType;
@@ -53,8 +54,7 @@ public class SelectTag extends ElementBufferedTag
     OnblurAttribute,
     OnchangeAttribute,
     OnfocusAttribute,
-    OnkeypressAttribute
-{
+    OnkeypressAttribute {
 
   public SelectTag() {
     init();

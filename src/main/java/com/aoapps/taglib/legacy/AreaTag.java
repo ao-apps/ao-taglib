@@ -23,6 +23,8 @@
 
 package com.aoapps.taglib.legacy;
 
+import static com.aoapps.taglib.AreaTag.RESOURCES;
+
 import com.aoapps.encoding.MediaType;
 import com.aoapps.html.servlet.AREA;
 import com.aoapps.html.servlet.DocumentEE;
@@ -33,7 +35,6 @@ import com.aoapps.net.MutableURIParameters;
 import com.aoapps.net.URIParametersMap;
 import com.aoapps.servlet.lastmodified.AddLastModified;
 import com.aoapps.taglib.AltAttribute;
-import static com.aoapps.taglib.AreaTag.RESOURCES;
 import com.aoapps.taglib.AreaTagTEI;
 import com.aoapps.taglib.AttributeRequiredException;
 import com.aoapps.taglib.AttributeUtils;
@@ -76,8 +77,7 @@ public class AreaTag extends ElementNullBodyTag
     // Events
     OnclickAttribute,
     OnmouseoverAttribute,
-    OnmouseoutAttribute
-{
+    OnmouseoutAttribute {
 
   /* SimpleTag only:
     public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, AreaTag.class);
@@ -211,6 +211,8 @@ public class AreaTag extends ElementNullBodyTag
   }
 
   /**
+   * {@inheritDoc}
+   *
    * @see  ParamUtils#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List, com.aoapps.taglib.ParamsAttribute)
    */
   @Override
@@ -244,8 +246,8 @@ public class AreaTag extends ElementNullBodyTag
   protected int doEndTag(Writer out) throws JspException, IOException {
     /**/
     /* SimpleTag only:
-      protected void doTag(Writer out) throws JspException, IOException {
-        PageContext pageContext = (PageContext)getJspContext();
+  protected void doTag(Writer out) throws JspException, IOException {
+    final PageContext pageContext = (PageContext) getJspContext();
     /**/
     if (shape == null) {
       throw new AttributeRequiredException("shape");

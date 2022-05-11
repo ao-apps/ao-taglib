@@ -36,8 +36,7 @@ import javax.servlet.jsp.JspException;
 public class ArgTag extends EncodingBufferedTag
     implements
     NameAttribute,
-    ValueAttribute
-{
+    ValueAttribute {
 
   /* SimpleTag only: */
   public static final String TAG_NAME = "<ao:arg>";

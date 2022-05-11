@@ -66,8 +66,7 @@ public abstract class DispatchTag extends SimpleTagSupport
     implements
     DynamicAttributes,
     PageAttribute,
-    ParamsAttribute
-{
+    ParamsAttribute {
 
   private static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, DispatchTag.class);
 
@@ -215,8 +214,9 @@ public abstract class DispatchTag extends SimpleTagSupport
   /**
    * Subclass hook to intercept request after servlet paths have been determined
    * and before dispatch is called.
-   *
+   * <p>
    * This default implementation does nothing.
+   * </p>
    *
    * @exception  SkipPageException  If the implementation has handled the request,
    *                                must throw SkipPageException.
@@ -227,6 +227,8 @@ public abstract class DispatchTag extends SimpleTagSupport
   }
 
   /**
+   * {@inheritDoc}
+   *
    * @deprecated  You should probably be implementing in {@link #dispatch(javax.servlet.RequestDispatcher, javax.servlet.jsp.JspWriter, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)}
    *
    * @see  #dispatch(javax.servlet.RequestDispatcher, javax.servlet.jsp.JspWriter, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
@@ -257,8 +259,7 @@ public abstract class DispatchTag extends SimpleTagSupport
         final String servletPath =
             oldDispatchPage == null
                 ? request.getServletPath()
-                : oldDispatchPage
-        ;
+                : oldDispatchPage;
 
         // Find any dispatcher before allowing subclass to intercept dispatch.  This ensures page is a correct
         // value, even when not used for a particular request.

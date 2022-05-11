@@ -23,14 +23,15 @@
 
 package com.aoapps.taglib.legacy;
 
+import static com.aoapps.taglib.SelectedTag.RESOURCES;
+import static com.aoapps.taglib.SelectedTag.TAG_NAME;
+
 import com.aoapps.encoding.MediaType;
 import com.aoapps.encoding.taglib.legacy.EncodingBufferedBodyTag;
 import com.aoapps.io.buffer.BufferResult;
 import com.aoapps.servlet.jsp.LocalizedJspTagException;
 import com.aoapps.taglib.AttributeUtils;
 import com.aoapps.taglib.SelectedAttribute;
-import static com.aoapps.taglib.SelectedTag.RESOURCES;
-import static com.aoapps.taglib.SelectedTag.TAG_NAME;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -42,7 +43,7 @@ public class SelectedTag extends EncodingBufferedBodyTag {
 
   /* SimpleTag only:
     public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, SelectedTag.class);
-  
+
     public static final String TAG_NAME = "<ao:selected>";
   /**/
 

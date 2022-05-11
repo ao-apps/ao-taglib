@@ -24,10 +24,11 @@
 package com.aoapps.taglib;
 
 import static com.aoapps.encoding.JavaScriptInXhtmlAttributeEncoder.javascriptInXhtmlAttributeEncoder;
-import com.aoapps.encoding.MediaType;
 import static com.aoapps.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoapps.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import static com.aoapps.encoding.TextInXhtmlEncoder.textInXhtmlEncoder;
+
+import com.aoapps.encoding.MediaType;
 import com.aoapps.hodgepodge.i18n.MarkupCoercion;
 import com.aoapps.hodgepodge.i18n.MarkupType;
 import com.aoapps.io.buffer.BufferResult;
@@ -65,8 +66,7 @@ public class ATag extends ElementBufferedTag
     // Events
     OnclickAttribute,
     OnmouseoutAttribute,
-    OnmouseoverAttribute
-{
+    OnmouseoverAttribute {
 
   public ATag() {
     init();
@@ -178,6 +178,8 @@ public class ATag extends ElementBufferedTag
   }
 
   /**
+   * {@inheritDoc}
+   *
    * @see  ParamUtils#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List, com.aoapps.taglib.ParamsAttribute)
    */
   @Override
@@ -205,11 +207,11 @@ public class ATag extends ElementBufferedTag
 
   @Override
   /* BodyTag only:
-    protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+  protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
   /**/
   /* SimpleTag only: */
   protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-    PageContext pageContext = (PageContext) getJspContext();
+    final PageContext pageContext = (PageContext) getJspContext();
     /**/
     out.write("<a");
     GlobalAttributesUtils.writeGlobalAttributes(global, out);

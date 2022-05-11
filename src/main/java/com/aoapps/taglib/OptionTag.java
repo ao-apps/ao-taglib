@@ -41,8 +41,7 @@ public class OptionTag extends ElementBufferedTag
     // Attributes
     DisabledAttribute,
     SelectedAttribute,
-    ValueAttribute
-{
+    ValueAttribute {
 
   public OptionTag() {
     init();

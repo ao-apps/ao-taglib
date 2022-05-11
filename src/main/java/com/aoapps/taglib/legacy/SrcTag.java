@@ -23,12 +23,13 @@
 
 package com.aoapps.taglib.legacy;
 
+import static com.aoapps.taglib.SrcTag.TAG_NAME;
+
 import com.aoapps.encoding.MediaType;
 import com.aoapps.encoding.taglib.legacy.EncodingBufferedBodyTag;
 import com.aoapps.io.buffer.BufferResult;
 import com.aoapps.taglib.AttributeUtils;
 import com.aoapps.taglib.SrcAttribute;
-import static com.aoapps.taglib.SrcTag.TAG_NAME;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;

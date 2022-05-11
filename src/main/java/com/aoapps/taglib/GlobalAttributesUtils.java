@@ -25,9 +25,10 @@ package com.aoapps.taglib;
 
 import static com.aoapps.encoding.StyleInXhtmlAttributeEncoder.styleInXhtmlAttributeEncoder;
 import static com.aoapps.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
+
 import com.aoapps.hodgepodge.i18n.MarkupCoercion;
 import com.aoapps.hodgepodge.i18n.MarkupType;
-import com.aoapps.html.any.attributes.Text.Data;
+import com.aoapps.html.any.attributes.text.Data;
 import com.aoapps.lang.Coercion;
 import com.aoapps.lang.Throwables;
 import java.io.IOException;

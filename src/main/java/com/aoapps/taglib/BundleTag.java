@@ -38,8 +38,7 @@ import javax.servlet.jsp.tagext.TryCatchFinally;
  */
 public class BundleTag
     extends TagSupport
-    implements TryCatchFinally
-{
+    implements TryCatchFinally {
 
   /**
    * For interaction with nested functions (that have no access to the page context),

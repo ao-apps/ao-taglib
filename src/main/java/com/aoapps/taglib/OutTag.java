@@ -29,8 +29,7 @@ package com.aoapps.taglib;
 public class OutTag extends com.aoapps.encoding.taglib.OutTag
     implements
     ValueAttribute,
-    TypeAttribute
-{
+    TypeAttribute {
 
   /* BodyTag only:
   private static final long serialVersionUID = 1L;

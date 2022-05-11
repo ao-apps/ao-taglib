@@ -54,8 +54,7 @@ import javax.servlet.jsp.SkipPageException;
  */
 // TODO: RedirectBodyTag and RedirectSimpleTag?
 public class RedirectTag extends DispatchTag
-    implements HrefAttribute
-{
+    implements HrefAttribute {
 
   private static final Logger logger = Logger.getLogger(RedirectTag.class.getName());
 
@@ -63,8 +62,9 @@ public class RedirectTag extends DispatchTag
 
   /**
    * The maximum length of a URL allowed for redirect.
-   *
+   * <p>
    * Matching limit of Internet Explorer: <a href="http://support.microsoft.com/kb/208427">http://support.microsoft.com/kb/208427</a>
+   * </p>
    *
    * @see <a href="http://www.boutell.com/newfaq/misc/urllength.html">WWW FAQs: What is the maximum length of a URL?</a>
    */
@@ -80,8 +80,7 @@ public class RedirectTag extends DispatchTag
             || "temporary".equals(statusCode)
             || "302".equals(statusCode)
             || "see_other".equals(statusCode)
-            || "303".equals(statusCode)
-    ;
+            || "303".equals(statusCode);
   }
 
   private String statusCode;
@@ -216,7 +215,7 @@ public class RedirectTag extends DispatchTag
   }
 
   /**
-   * Dispatch as forward
+   * Dispatch as forward.
    */
   @Override
   @SuppressWarnings("deprecation")

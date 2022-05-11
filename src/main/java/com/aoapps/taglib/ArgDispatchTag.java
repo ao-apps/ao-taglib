@@ -41,8 +41,7 @@ import javax.servlet.jsp.JspTagException;
  */
 // TODO: ArgDispatchBodyTag and ArgDispatchSimpleTag?
 abstract class ArgDispatchTag extends DispatchTag
-    implements ArgsAttribute
-{
+    implements ArgsAttribute {
 
   private static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, ArgDispatchTag.class);
 
@@ -82,6 +81,8 @@ abstract class ArgDispatchTag extends DispatchTag
   }
 
   /**
+   * {@inheritDoc}
+   *
    * @see  #addArg(java.lang.String, java.lang.Object)
    */
   @Override

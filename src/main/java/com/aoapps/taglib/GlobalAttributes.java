@@ -38,7 +38,7 @@ public interface GlobalAttributes {
   String getId();
 
   /**
-   * Getter required because without it, we get the exception:
+   * Getter required.  Because without it, we get the exception:
    * <pre>Unable to find setter method for attribute: class</pre>
    */
   String getClazz();

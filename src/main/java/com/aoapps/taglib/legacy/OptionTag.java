@@ -44,8 +44,7 @@ public class OptionTag extends ElementBufferedBodyTag
     // Attributes
     DisabledAttribute,
     SelectedAttribute,
-    ValueAttribute
-{
+    ValueAttribute {
 
   public OptionTag() {
     init();

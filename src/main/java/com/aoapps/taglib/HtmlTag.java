@@ -23,10 +23,11 @@
 
 package com.aoapps.taglib;
 
+import static com.aoapps.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
+
 import com.aoapps.encoding.Doctype;
 import com.aoapps.encoding.MediaType;
 import com.aoapps.encoding.Serialization;
-import static com.aoapps.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import com.aoapps.encoding.servlet.DoctypeEE;
 import com.aoapps.encoding.servlet.SerializationEE;
 import com.aoapps.html.any.AnyDocument;
@@ -181,7 +182,7 @@ public class HtmlTag extends ElementFilteredTag {
     private transient Boolean oldIndent;
     private transient boolean setIndent;
     private transient Registry oldPageRegistry;
-  
+
     private void init() {
       serialization = null;
       doctype = null;
@@ -297,7 +298,7 @@ public class HtmlTag extends ElementFilteredTag {
               /* BodyTag only:
                   return EVAL_BODY_FILTERED;
                 }
-              
+
                 @Override
                 protected int doEndTag(Writer out) throws JspException, IOException {
               /**/
@@ -309,7 +310,7 @@ public class HtmlTag extends ElementFilteredTag {
               /* BodyTag only:
                   return EVAL_PAGE;
                 }
-              
+
                 @Override
                 public void doFinally() {
                   try {

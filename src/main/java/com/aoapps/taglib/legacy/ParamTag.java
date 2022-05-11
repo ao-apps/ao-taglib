@@ -23,12 +23,13 @@
 
 package com.aoapps.taglib.legacy;
 
+import static com.aoapps.taglib.ParamTag.TAG_NAME;
+
 import com.aoapps.encoding.MediaType;
 import com.aoapps.encoding.taglib.legacy.EncodingBufferedBodyTag;
 import com.aoapps.io.buffer.BufferResult;
 import com.aoapps.taglib.AttributeRequiredException;
 import com.aoapps.taglib.NameAttribute;
-import static com.aoapps.taglib.ParamTag.TAG_NAME;
 import com.aoapps.taglib.ParamUtils;
 import com.aoapps.taglib.ValueAttribute;
 import java.io.IOException;
@@ -42,8 +43,7 @@ import javax.servlet.jsp.JspException;
 public class ParamTag extends EncodingBufferedBodyTag
     implements
     NameAttribute,
-    ValueAttribute
-{
+    ValueAttribute {
 
   /* SimpleTag only:
     public static final String TAG_NAME = "<ao:param>";

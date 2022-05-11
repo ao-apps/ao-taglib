@@ -23,10 +23,11 @@
 
 package com.aoapps.taglib.legacy;
 
+import static com.aoapps.taglib.ArgTag.TAG_NAME;
+
 import com.aoapps.encoding.MediaType;
 import com.aoapps.encoding.taglib.legacy.EncodingBufferedBodyTag;
 import com.aoapps.io.buffer.BufferResult;
-import static com.aoapps.taglib.ArgTag.TAG_NAME;
 import com.aoapps.taglib.ArgsAttribute;
 import com.aoapps.taglib.AttributeRequiredException;
 import com.aoapps.taglib.AttributeUtils;
@@ -42,8 +43,7 @@ import javax.servlet.jsp.JspException;
 public class ArgTag extends EncodingBufferedBodyTag
     implements
     NameAttribute,
-    ValueAttribute
-{
+    ValueAttribute {
 
   /* SimpleTag only:
     public static final String TAG_NAME = "<ao:arg>";

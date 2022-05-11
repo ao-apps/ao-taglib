@@ -57,7 +57,9 @@ public class IncludeTag extends ArgDispatchTag {
           new HttpServletResponseWrapper(response) {
             @Override
             public ServletOutputStream getOutputStream() throws IOException {
-              throw new NotImplementedException("Implement when first needed, and how would we accomplish this?  What would it mean in a JSP context?  Pass-through to original response out and clear previous content?");
+              throw new NotImplementedException("Implement when first needed, and how would we accomplish this?  "
+                  + "What would it mean in a JSP context?  "
+                  + "Pass-through to original response out and clear previous content?");
             }
 
             /**

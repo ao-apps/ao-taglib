@@ -67,8 +67,7 @@ public class LinkTag extends ElementNullBodyTag
     HreflangAttribute,
     RelAttribute,
     TypeAttribute,
-    TitleAttribute
-{
+    TitleAttribute {
 
   public LinkTag() {
     init();
@@ -178,6 +177,8 @@ public class LinkTag extends ElementNullBodyTag
   }
 
   /**
+   * {@inheritDoc}
+   *
    * @see  ParamUtils#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List, com.aoapps.taglib.ParamsAttribute)
    */
   @Override

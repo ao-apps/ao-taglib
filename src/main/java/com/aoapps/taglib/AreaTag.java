@@ -61,8 +61,7 @@ public class AreaTag extends ElementNullTag
     // Events
     OnclickAttribute,
     OnmouseoverAttribute,
-    OnmouseoutAttribute
-{
+    OnmouseoutAttribute {
 
   /* SimpleTag only: */
   public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, AreaTag.class);
@@ -197,6 +196,8 @@ public class AreaTag extends ElementNullTag
   }
 
   /**
+   * {@inheritDoc}
+   *
    * @see  ParamUtils#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List, com.aoapps.taglib.ParamsAttribute)
    */
   @Override
@@ -231,7 +232,7 @@ public class AreaTag extends ElementNullTag
   /**/
   /* SimpleTag only: */
   protected void doTag(Writer out) throws JspException, IOException {
-    PageContext pageContext = (PageContext) getJspContext();
+    final PageContext pageContext = (PageContext) getJspContext();
     /**/
     if (shape == null) {
       throw new AttributeRequiredException("shape");

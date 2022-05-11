@@ -23,11 +23,13 @@
 
 package com.aoapps.taglib.legacy;
 
-import com.aoapps.encoding.Doctype;
 import static com.aoapps.encoding.JavaScriptInXhtmlAttributeEncoder.javascriptInXhtmlAttributeEncoder;
-import com.aoapps.encoding.MediaType;
 import static com.aoapps.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoapps.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
+import static com.aoapps.taglib.FormTag.RESOURCES;
+
+import com.aoapps.encoding.Doctype;
+import com.aoapps.encoding.MediaType;
 import com.aoapps.hodgepodge.i18n.MarkupCoercion;
 import com.aoapps.hodgepodge.i18n.MarkupType;
 import com.aoapps.html.servlet.DocumentEE;
@@ -44,7 +46,6 @@ import com.aoapps.servlet.http.Dispatcher;
 import com.aoapps.taglib.ActionAttribute;
 import com.aoapps.taglib.AttributeUtils;
 import com.aoapps.taglib.EnctypeAttribute;
-import static com.aoapps.taglib.FormTag.RESOURCES;
 import com.aoapps.taglib.FormTagTEI;
 import com.aoapps.taglib.GlobalAttributesUtils;
 import com.aoapps.taglib.MethodAttribute;
@@ -73,8 +74,7 @@ public class FormTag extends ElementBufferedBodyTag
     ParamsAttribute,
     TargetAttribute,
     // Events
-    OnsubmitAttribute
-{
+    OnsubmitAttribute {
 
   /* SimpleTag only:
     public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, FormTag.class);
@@ -148,6 +148,8 @@ public class FormTag extends ElementBufferedBodyTag
   }
 
   /**
+   * {@inheritDoc}
+   *
    * @see  ParamUtils#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List, com.aoapps.taglib.ParamsAttribute)
    */
   @Override

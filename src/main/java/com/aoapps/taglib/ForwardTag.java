@@ -42,7 +42,7 @@ import javax.servlet.jsp.JspWriter;
 public class ForwardTag extends ArgDispatchTag {
 
   /**
-   * Dispatch as forward
+   * Dispatch as forward.
    */
   @Override
   @SuppressWarnings("deprecation")

@@ -34,8 +34,7 @@ import javax.servlet.jsp.JspException;
  * @author  AO Industries, Inc.
  */
 public class MessageArgTag extends EncodingBufferedTag
-    implements ValueAttribute
-{
+    implements ValueAttribute {
 
   /* SimpleTag only: */
   public static final String TAG_NAME = "<ao:messageArg>";

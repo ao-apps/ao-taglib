@@ -44,8 +44,7 @@ import javax.servlet.jsp.PageContext;
 public class MetaTag extends ElementBufferedTag
     implements
     NameAttribute,
-    ContentAttribute
-{
+    ContentAttribute {
 
   public MetaTag() {
     init();

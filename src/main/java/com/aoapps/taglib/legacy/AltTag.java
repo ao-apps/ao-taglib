@@ -23,11 +23,12 @@
 
 package com.aoapps.taglib.legacy;
 
+import static com.aoapps.taglib.AltTag.TAG_NAME;
+
 import com.aoapps.encoding.MediaType;
 import com.aoapps.encoding.taglib.legacy.EncodingBufferedBodyTag;
 import com.aoapps.io.buffer.BufferResult;
 import com.aoapps.taglib.AltAttribute;
-import static com.aoapps.taglib.AltTag.TAG_NAME;
 import com.aoapps.taglib.AttributeUtils;
 import java.io.IOException;
 import java.io.Writer;

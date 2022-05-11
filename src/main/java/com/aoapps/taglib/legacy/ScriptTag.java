@@ -23,6 +23,8 @@
 
 package com.aoapps.taglib.legacy;
 
+import static com.aoapps.taglib.ScriptTag.RESOURCES;
+
 import com.aoapps.encoding.MediaType;
 import com.aoapps.html.servlet.DocumentEE;
 import com.aoapps.io.buffer.BufferResult;
@@ -34,7 +36,6 @@ import com.aoapps.servlet.lastmodified.AddLastModified;
 import com.aoapps.taglib.GlobalAttributesUtils;
 import com.aoapps.taglib.ParamUtils;
 import com.aoapps.taglib.ParamsAttribute;
-import static com.aoapps.taglib.ScriptTag.RESOURCES;
 import com.aoapps.taglib.SrcAttribute;
 import com.aoapps.taglib.TypeAttribute;
 import com.aoapps.taglib.UrlUtils;
@@ -56,8 +57,7 @@ public class ScriptTag extends ElementBufferedBodyTag
     // Attributes
     TypeAttribute,
     SrcAttribute,
-    ParamsAttribute
-{
+    ParamsAttribute {
 
   /* SimpleTag only:
     public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, ScriptTag.class);
@@ -138,6 +138,8 @@ public class ScriptTag extends ElementBufferedBodyTag
   // TODO: async, defer, ...
 
   /**
+   * {@inheritDoc}
+   *
    * @see  ParamUtils#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List, com.aoapps.taglib.ParamsAttribute)
    */
   @Override

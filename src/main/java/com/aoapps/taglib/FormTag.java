@@ -23,11 +23,12 @@
 
 package com.aoapps.taglib;
 
-import com.aoapps.encoding.Doctype;
 import static com.aoapps.encoding.JavaScriptInXhtmlAttributeEncoder.javascriptInXhtmlAttributeEncoder;
-import com.aoapps.encoding.MediaType;
 import static com.aoapps.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoapps.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
+
+import com.aoapps.encoding.Doctype;
+import com.aoapps.encoding.MediaType;
 import com.aoapps.hodgepodge.i18n.MarkupCoercion;
 import com.aoapps.hodgepodge.i18n.MarkupType;
 import com.aoapps.html.servlet.DocumentEE;
@@ -65,8 +66,7 @@ public class FormTag extends ElementBufferedTag
     ParamsAttribute,
     TargetAttribute,
     // Events
-    OnsubmitAttribute
-{
+    OnsubmitAttribute {
 
   /* SimpleTag only: */
   public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, FormTag.class);
@@ -141,6 +141,8 @@ public class FormTag extends ElementBufferedTag
   }
 
   /**
+   * {@inheritDoc}
+   *
    * @see  ParamUtils#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List, com.aoapps.taglib.ParamsAttribute)
    */
   @Override

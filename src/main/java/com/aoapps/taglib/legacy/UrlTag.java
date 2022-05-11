@@ -99,11 +99,13 @@ public class UrlTag extends EncodingBufferedBodyTag implements ParamsAttribute, 
   }
 
   /* BodyTag only: */
-  private Canonical c;
+  private Canonical currentCanonical;
 
   /**/
 
   /**
+   * {@inheritDoc}
+   *
    * @see  ParamUtils#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List, com.aoapps.taglib.ParamsAttribute)
    */
   @Override
@@ -120,9 +122,9 @@ public class UrlTag extends EncodingBufferedBodyTag implements ParamsAttribute, 
     canonical = false;
     addLastModified = AddLastModified.AUTO;
     /* BodyTag only: */
-    if (c != null) {
-      c.close();
-      c = null;
+    if (currentCanonical != null) {
+      currentCanonical.close();
+      currentCanonical = null;
     }
     /**/
   }
@@ -130,7 +132,7 @@ public class UrlTag extends EncodingBufferedBodyTag implements ParamsAttribute, 
   /* BodyTag only: */
   @Override
   protected int doStartTag(Writer out) throws JspException, IOException {
-    c = Canonical.set(canonical);
+    currentCanonical = Canonical.set(canonical);
     return super.doStartTag(out);
   }
 
@@ -141,11 +143,11 @@ public class UrlTag extends EncodingBufferedBodyTag implements ParamsAttribute, 
       @Deprecated
       @Override
       public void doTag() throws JspException, IOException {
-        try (Canonical c = Canonical.set(canonical)) {
+        try (Canonical currentCanonical = Canonical.set(canonical)) {
           super.doTag();
         }
       }
-    
+
       @Override
       protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
         PageContext pageContext = (PageContext)getJspContext();

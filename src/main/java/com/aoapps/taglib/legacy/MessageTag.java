@@ -23,6 +23,8 @@
 
 package com.aoapps.taglib.legacy;
 
+import static com.aoapps.taglib.MessageTag.RESOURCES;
+
 import com.aoapps.encoding.MediaType;
 import com.aoapps.encoding.taglib.legacy.EncodingNullBodyTag;
 import com.aoapps.hodgepodge.i18n.BundleLookupMarkup;
@@ -34,7 +36,6 @@ import com.aoapps.servlet.jsp.LocalizedJspTagException;
 import com.aoapps.taglib.AttributeUtils;
 import com.aoapps.taglib.BundleTag;
 import com.aoapps.taglib.MessageArgsAttribute;
-import static com.aoapps.taglib.MessageTag.RESOURCES;
 import com.aoapps.taglib.TypeAttribute;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -52,8 +53,7 @@ public class MessageTag extends EncodingNullBodyTag
     implements
     DynamicAttributes,
     TypeAttribute,
-    MessageArgsAttribute
-{
+    MessageArgsAttribute {
 
   /* SimpleTag only:
     public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, MessageTag.class);
@@ -207,9 +207,9 @@ public class MessageTag extends EncodingNullBodyTag
       combinedKey = key;
     } else {
       // Find parent bundle
-/* SimpleTag only:
+      /* SimpleTag only:
       PageContext pageContext = (PageContext)getJspContext();
-/**/
+      /**/
       BundleTag bundleTag = BundleTag.getBundleTag(pageContext.getRequest());
       if (bundleTag == null) {
         throw new LocalizedJspTagException(RESOURCES, "requiredParentTagNotFound", "bundle");

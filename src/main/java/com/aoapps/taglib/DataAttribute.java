@@ -23,7 +23,7 @@
 
 package com.aoapps.taglib;
 
-import com.aoapps.html.any.attributes.Text.Data;
+import com.aoapps.html.any.attributes.text.Data;
 
 /**
  * Something with data-* attributes.

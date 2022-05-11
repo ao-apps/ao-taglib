@@ -61,8 +61,7 @@ public class ImgTag extends ElementBufferedBodyTag
     WidthAttribute,
     HeightAttribute,
     AltAttribute,
-    TitleAttribute
-{
+    TitleAttribute {
 
   public ImgTag() {
     init();
@@ -158,6 +157,8 @@ public class ImgTag extends ElementBufferedBodyTag
   }
 
   /**
+   * {@inheritDoc}
+   *
    * @see  ParamUtils#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List, com.aoapps.taglib.ParamsAttribute)
    */
   @Override
@@ -186,8 +187,8 @@ public class ImgTag extends ElementBufferedBodyTag
   protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
     /**/
     /* SimpleTag only:
-      protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-        PageContext pageContext = (PageContext)getJspContext();
+  protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+    final PageContext pageContext = (PageContext) getJspContext();
     /**/
     assert capturedBody.trim() == capturedBody : "URLs should have already been trimmed";
     if (src == null) {

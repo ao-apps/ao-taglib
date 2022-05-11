@@ -37,8 +37,7 @@ public class FormTagTEI extends ElementTagTEI {
   public static boolean isValidMethod(String method) {
     return
         "get".equals(method)
-            || "post".equals(method)
-    ;
+            || "post".equals(method);
   }
 
   @Override

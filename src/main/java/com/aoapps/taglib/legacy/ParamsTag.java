@@ -23,6 +23,9 @@
 
 package com.aoapps.taglib.legacy;
 
+import static com.aoapps.taglib.ParamsTag.RESOURCES;
+import static com.aoapps.taglib.ParamsTag.TAG_NAME;
+
 import com.aoapps.encoding.MediaType;
 import com.aoapps.encoding.taglib.legacy.EncodingNullBodyTag;
 import com.aoapps.hodgepodge.util.WildcardPatternMatcher;
@@ -33,8 +36,6 @@ import com.aoapps.taglib.AttributeUtils;
 import com.aoapps.taglib.NameAttribute;
 import com.aoapps.taglib.ParamUtils;
 import com.aoapps.taglib.ParamsAttribute;
-import static com.aoapps.taglib.ParamsTag.RESOURCES;
-import static com.aoapps.taglib.ParamsTag.TAG_NAME;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Enumeration;
@@ -48,12 +49,11 @@ import javax.servlet.jsp.JspException;
  */
 // TODO: Support output when not inside a containing tag? (or implement applet and object tags to avoid errors of params accidentally passed to client)
 public class ParamsTag extends EncodingNullBodyTag
-    implements NameAttribute
-{
+    implements NameAttribute {
 
   /* SimpleTag only:
     public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, ParamsTag.class);
-  
+
     public static final String TAG_NAME = "<ao:params>";
   /**/
 
@@ -77,11 +77,11 @@ public class ParamsTag extends EncodingNullBodyTag
     this.name = name;
   }
 
-//  private String exclude;
+  // private String exclude;
   private WildcardPatternMatcher excludeMatcher;
 
   public void setExclude(String exclude) {
-//    this.exclude = exclude;
+    // this.exclude = exclude;
     this.excludeMatcher = WildcardPatternMatcher.compile(exclude);
   }
 
@@ -93,7 +93,7 @@ public class ParamsTag extends EncodingNullBodyTag
 
   private void init() {
     name = null;
-//    exclude = null;
+    // exclude = null;
     excludeMatcher = WildcardPatternMatcher.matchNone();
     values = null;
   }

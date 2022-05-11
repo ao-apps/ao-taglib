@@ -39,8 +39,7 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
 public abstract class ElementFilteredTag extends EncodingFilteredTag
     implements
     GlobalAttributes,
-    DynamicAttributes
-{
+    DynamicAttributes {
 
   protected final MutableGlobalAttributes global = new MutableGlobalAttributes();
 

@@ -23,7 +23,7 @@
 
 package com.aoapps.taglib;
 
-import com.aoapps.html.any.attributes.Enum.Dir;
+import com.aoapps.html.any.attributes.enumeration.Dir;
 import com.aoapps.lang.validation.ValidationResult;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +39,8 @@ import javax.servlet.jsp.tagext.ValidationMessage;
 public class ElementTagTEI extends TagExtraInfo {
 
   /**
+   * {@inheritDoc}
+   *
    * @deprecated  You should probably be implementing in {@link #validate(javax.servlet.jsp.tagext.TagData, java.util.List)}
    *
    * @see  #validate(javax.servlet.jsp.tagext.TagData, java.util.List)

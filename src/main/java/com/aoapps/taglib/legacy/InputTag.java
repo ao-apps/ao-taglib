@@ -23,8 +23,10 @@
 
 package com.aoapps.taglib.legacy;
 
-import com.aoapps.encoding.MediaType;
 import static com.aoapps.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
+import static com.aoapps.taglib.InputTag.RESOURCES;
+
+import com.aoapps.encoding.MediaType;
 import com.aoapps.html.any.AnyINPUT;
 import com.aoapps.html.servlet.DocumentEE;
 import com.aoapps.html.servlet.INPUT;
@@ -42,7 +44,6 @@ import com.aoapps.taglib.CheckedAttribute;
 import com.aoapps.taglib.DisabledAttribute;
 import com.aoapps.taglib.GlobalAttributesUtils;
 import com.aoapps.taglib.HeightAttribute;
-import static com.aoapps.taglib.InputTag.RESOURCES;
 import com.aoapps.taglib.InputTagTEI;
 import com.aoapps.taglib.MaxlengthAttribute;
 import com.aoapps.taglib.NameAttribute;
@@ -73,7 +74,7 @@ import javax.servlet.jsp.JspTagException;
 
 /**
  * <p>
- * TODO: Have a default value of "true" for input type checkbox and radio?
+ * TODO: Have a default value of "true" for input type checkbox and radio?.
  * </p>
  *
  * @author  AO Industries, Inc.
@@ -101,8 +102,7 @@ public class InputTag extends ElementBufferedBodyTag
     OnchangeAttribute,
     OnclickAttribute,
     OnfocusAttribute,
-    OnkeypressAttribute
-{
+    OnkeypressAttribute {
 
   /* SimpleTag only:
     public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, InputTag.class);
@@ -299,6 +299,8 @@ public class InputTag extends ElementBufferedBodyTag
   }
 
   /**
+   * {@inheritDoc}
+   *
    * @see  ParamUtils#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List, com.aoapps.taglib.ParamsAttribute)
    */
   @Override
@@ -340,8 +342,8 @@ public class InputTag extends ElementBufferedBodyTag
   protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
     /**/
     /* SimpleTag only:
-      protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-        PageContext pageContext = (PageContext)getJspContext();
+  protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
+    final PageContext pageContext = (PageContext) getJspContext();
     /**/
     if (type == null) {
       throw new AttributeRequiredException("type");

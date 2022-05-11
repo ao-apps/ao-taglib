@@ -23,6 +23,10 @@
 
 package com.aoapps.taglib;
 
+import static com.aoapps.servlet.filter.FunctionContext.getRequest;
+import static com.aoapps.servlet.filter.FunctionContext.getResponse;
+import static com.aoapps.servlet.filter.FunctionContext.getServletContext;
+
 import com.aoapps.hodgepodge.util.Tuple2;
 import com.aoapps.lang.NullArgumentException;
 import com.aoapps.lang.Projects;
@@ -32,9 +36,6 @@ import com.aoapps.net.URIEncoder;
 import com.aoapps.servlet.ServletContextCache;
 import com.aoapps.servlet.attribute.ScopeEE;
 import com.aoapps.servlet.filter.FunctionContext;
-import static com.aoapps.servlet.filter.FunctionContext.getRequest;
-import static com.aoapps.servlet.filter.FunctionContext.getResponse;
-import static com.aoapps.servlet.filter.FunctionContext.getServletContext;
 import com.aoapps.servlet.http.Dispatcher;
 import com.aoapps.servlet.http.HttpServletUtil;
 import com.aoapps.servlet.jsp.LocalizedJspTagException;
@@ -54,6 +55,9 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspTagException;
 
+/**
+ * Tag library function implementations.
+ */
 public final class Functions {
 
   /** Make no instances. */
@@ -142,16 +146,16 @@ public final class Functions {
     // Make lib relative to the current page
     String absLib = HttpServletUtil.getAbsolutePath(request, lib);
     String resourceName;
-    {
-      StringBuilder sb = new StringBuilder();
-      sb.append(absLib);
-      int len = sb.length();
-      if (len == 0 || sb.charAt(len - 1) != '/') {
-        sb.append('/');
+      {
+        StringBuilder sb = new StringBuilder();
+        sb.append(absLib);
+        int len = sb.length();
+        if (len == 0 || sb.charAt(len - 1) != '/') {
+          sb.append('/');
+        }
+        sb.append("META-INF/maven/").append(groupId).append('/').append(artifactId).append("/pom.properties");
+        resourceName = sb.toString();
       }
-      sb.append("META-INF/maven/").append(groupId).append('/').append(artifactId).append("/pom.properties");
-      resourceName = sb.toString();
-    }
     // Find the current resource modified time
     long lastModified = ServletContextCache.getLastModified(servletContext, resourceName);
     if (logger.isLoggable(Level.FINER)) {
@@ -169,7 +173,7 @@ public final class Functions {
       // Get the application-scope cache
       ConcurrentMap<String, Tuple2<Long, String>> resourceProjectVersions =
           RESOURCE_PROJECT_VERSIONS_APPLICATION_KEY.context(servletContext)
-              .computeIfAbsent(__ -> new ConcurrentHashMap<>());
+              .computeIfAbsent(name -> new ConcurrentHashMap<>());
       // Find any cache entry
       Tuple2<Long, String> cached = resourceProjectVersions.get(resourceName);
       String result;

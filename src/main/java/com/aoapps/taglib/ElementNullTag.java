@@ -39,8 +39,7 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
 public abstract class ElementNullTag extends EncodingNullTag
     implements
     GlobalBufferedAttributes,
-    DynamicAttributes
-{
+    DynamicAttributes {
 
   protected final MutableGlobalAttributes global = new MutableGlobalAttributes();
 

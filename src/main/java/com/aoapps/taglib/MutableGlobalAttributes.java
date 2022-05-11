@@ -25,8 +25,8 @@ package com.aoapps.taglib;
 
 import com.aoapps.collections.MinimalMap;
 import com.aoapps.html.any.Attributes;
-import com.aoapps.html.any.attributes.Enum.Dir;
-import com.aoapps.html.any.attributes.Text.Data;
+import com.aoapps.html.any.attributes.enumeration.Dir;
+import com.aoapps.html.any.attributes.text.Data;
 import com.aoapps.lang.Freezable;
 import com.aoapps.lang.Strings;
 import java.util.Map;

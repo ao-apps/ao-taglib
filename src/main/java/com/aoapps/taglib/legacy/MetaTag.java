@@ -49,8 +49,7 @@ import javax.servlet.jsp.JspException;
 public class MetaTag extends ElementBufferedBodyTag
     implements
     NameAttribute,
-    ContentAttribute
-{
+    ContentAttribute {
 
   public MetaTag() {
     init();

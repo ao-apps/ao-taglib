@@ -44,8 +44,7 @@ import javax.servlet.jsp.JspException;
  */
 // TODO: Support output when not inside a containing tag? (or implement applet and object tags to avoid errors of params accidentally passed to client)
 public class ParamsTag extends EncodingNullTag
-    implements NameAttribute
-{
+    implements NameAttribute {
 
   /* SimpleTag only: */
   public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, ParamsTag.class);
@@ -74,11 +73,11 @@ public class ParamsTag extends EncodingNullTag
     this.name = name;
   }
 
-//  private String exclude;
+  // private String exclude;
   private WildcardPatternMatcher excludeMatcher;
 
   public void setExclude(String exclude) {
-//    this.exclude = exclude;
+    // this.exclude = exclude;
     this.excludeMatcher = WildcardPatternMatcher.compile(exclude);
   }
 
@@ -90,7 +89,7 @@ public class ParamsTag extends EncodingNullTag
 
   private void init() {
     name = null;
-//    exclude = null;
+    // exclude = null;
     excludeMatcher = WildcardPatternMatcher.matchNone();
     values = null;
   }

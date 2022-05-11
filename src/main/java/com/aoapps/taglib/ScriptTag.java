@@ -52,8 +52,7 @@ public class ScriptTag extends ElementBufferedTag
     // Attributes
     TypeAttribute,
     SrcAttribute,
-    ParamsAttribute
-{
+    ParamsAttribute {
 
   /* SimpleTag only: */
   public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, ScriptTag.class);
@@ -135,6 +134,8 @@ public class ScriptTag extends ElementBufferedTag
   // TODO: async, defer, ...
 
   /**
+   * {@inheritDoc}
+   *
    * @see  ParamUtils#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List, com.aoapps.taglib.ParamsAttribute)
    */
   @Override

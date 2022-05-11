@@ -97,10 +97,12 @@ public class UrlTag extends EncodingBufferedTag implements ParamsAttribute, Dyna
   }
 
   /* BodyTag only:
-    private Canonical c;
+    private Canonical currentCanonical;
   /**/
 
   /**
+   * {@inheritDoc}
+   *
    * @see  ParamUtils#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List, com.aoapps.taglib.ParamsAttribute)
    */
   @Override
@@ -117,9 +119,9 @@ public class UrlTag extends EncodingBufferedTag implements ParamsAttribute, Dyna
     canonical = false;
     addLastModified = AddLastModified.AUTO;
     /* BodyTag only:
-      if (c != null) {
-        c.close();
-        c = null;
+      if (currentCanonical != null) {
+        currentCanonical.close();
+        currentCanonical = null;
       }
   /**/
   }
@@ -127,10 +129,10 @@ public class UrlTag extends EncodingBufferedTag implements ParamsAttribute, Dyna
   /* BodyTag only:
     @Override
     protected int doStartTag(Writer out) throws JspException, IOException {
-      c = Canonical.set(canonical);
+      currentCanonical = Canonical.set(canonical);
       return super.doStartTag(out);
     }
-  
+
     @Override
     protected int doEndTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
   /**/
@@ -138,7 +140,7 @@ public class UrlTag extends EncodingBufferedTag implements ParamsAttribute, Dyna
   @Deprecated
   @Override
   public void doTag() throws JspException, IOException {
-    try (Canonical c = Canonical.set(canonical)) {
+    try (Canonical currentCanonical = Canonical.set(canonical)) {
       super.doTag();
     }
   }
