@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
     shortTitle="Changelog"
     tocLevels="1"
     datePublished="2016-10-29T22:02:09-05:00"
-    dateModified="2022-05-14T00:11:08-05:00"
+    dateModified="2022-05-14T16:17:29-05:00"
   >
     <c:if test="${fn:endsWith('@{project.version}', '-SNAPSHOT') and !fn:endsWith('@{project.version}', '-POST-SNAPSHOT')}">
       <changelog:release
@@ -78,7 +78,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
               (or with the new <code>forceElement="true"</code> attribute) to manually establish
               a <ao:a href="https://www.w3schools.com/tags/tag_style.asp">style context</ao:a>.  Under
               the usual case of being within an XHTML container context, this will result in the expected
-              <code><![CDATA[&lt;code&gt;]]></code> element.
+              <code><![CDATA[&lt;style&gt;]]></code> element.
             </li>
             <li>
               Tags that generate plaintext output, such as the default type on
