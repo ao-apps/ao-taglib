@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
     shortTitle="Changelog"
     tocLevels="1"
     datePublished="2016-10-29T22:02:09-05:00"
-    dateModified="2022-04-05T01:40:09-05:00"
+    dateModified="2022-05-14T00:11:08-05:00"
   >
     <c:if test="${fn:endsWith('@{project.version}', '-SNAPSHOT') and !fn:endsWith('@{project.version}', '-POST-SNAPSHOT')}">
       <changelog:release
@@ -57,29 +57,39 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
           <li>Support other nice HTML 5 features of textarea/input)</li>
         </ul>
         -->
-        <ul>
-          <li>More use of <core:link book="/fluent-html/servlet" page="/index.jspx" /> as underlying implementation.</li>
-          <li>Implemented <ao:a href="https://www.w3.org/TR/CSS2/syndata.html#characters">CSS encoding</ao:a>:
-            <ol>
-              <li>
-                <core:link page="ao.tld/tag-style" /> may now be used outside the scope of a
-                <ao:a href="apidocs/com.aoapps.taglib/com/aoapps/taglib/StyleAttribute.html">StyleAttribute</ao:a>
-                (or with the new <code>forceElement="true"</code> attribute) to manually establish
-                a <ao:a href="https://www.w3schools.com/tags/tag_style.asp">style context</ao:a>.  Under
-                the usual case of being within an XHTML container context, this will result in the expected
-                <code><![CDATA[&lt;code&gt;]]></code> element.
-              </li>
-              <li>
-                Tags that generate plaintext output, such as the default type on
-                <core:link page="ao.tld/tag-message" />, <core:link page="ao.tld/tag-out" />, and
-                <core:link page="ao.tld/tag-write" />, will have the plaintext content surrounded by
-                <code>"…"</code> and fully encoded as a <ao:a href="https://www.w3.org/TR/CSS2/syndata.html#strings">CSS string</ao:a>.
-              </li>
-            </ol>
-          </li>
-        </ul>
       </changelog:release>
     </c:if>
+
+    <changelog:release
+      projectName="@{documented.name}"
+      version="7.2.0"
+      datePublished="2022-05-14T00:11:08-05:00"
+      groupId="@{project.groupId}"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>More use of <core:link book="/fluent-html/servlet" page="/index.jspx" /> as underlying implementation.</li>
+        <li>Implemented <ao:a href="https://www.w3.org/TR/CSS2/syndata.html#characters">CSS encoding</ao:a>:
+          <ol>
+            <li>
+              <core:link page="ao.tld/tag-style" /> may now be used outside the scope of a
+              <ao:a href="apidocs/com.aoapps.taglib/com/aoapps/taglib/StyleAttribute.html">StyleAttribute</ao:a>
+              (or with the new <code>forceElement="true"</code> attribute) to manually establish
+              a <ao:a href="https://www.w3schools.com/tags/tag_style.asp">style context</ao:a>.  Under
+              the usual case of being within an XHTML container context, this will result in the expected
+              <code><![CDATA[&lt;code&gt;]]></code> element.
+            </li>
+            <li>
+              Tags that generate plaintext output, such as the default type on
+              <core:link page="ao.tld/tag-message" />, <core:link page="ao.tld/tag-out" />, and
+              <core:link page="ao.tld/tag-write" />, will have the plaintext content surrounded by
+              <code>"…"</code> and fully encoded as a <ao:a href="https://www.w3.org/TR/CSS2/syndata.html#strings">CSS string</ao:a>.
+            </li>
+          </ol>
+        </li>
+      </ul>
+    </changelog:release>
 
     <changelog:release
       projectName="@{documented.name}"
