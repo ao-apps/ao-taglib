@@ -36,7 +36,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
     <module.name>com.aoapps.taglib.devel</module.name>
   </properties>
 
-  <name>AO Taglig Devel</name>
+  <name>AO Taglib Devel</name>
   <url>https://oss.aoapps.com/taglib/</url>
   <description>Development-only components of AO Encoding.</description>
   <inceptionYear>2020</inceptionYear>
