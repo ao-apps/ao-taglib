@@ -50,7 +50,6 @@ public class ParamsTag extends EncodingNullTag
   public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, ParamsTag.class);
 
   public static final String TAG_NAME = "<ao:params>";
-
   /**/
 
   public ParamsTag() {
@@ -83,7 +82,20 @@ public class ParamsTag extends EncodingNullTag
 
   private Object values;
 
+  /* BodyTag only:
+    // Required due to conflicting inherited getValues()
+    public Object getValuez() {
+      return values;
+    }
+  /**/
+
+  /* SimpleTag only: */
   public void setValues(Object values) {
+    /**/
+    /* BodyTag only:
+      // Not named "setValues" because of inherited getValues() method conflicting with JavaBeans property names
+      public void setValuez(Object values) {
+    /**/
     this.values = values;
   }
 

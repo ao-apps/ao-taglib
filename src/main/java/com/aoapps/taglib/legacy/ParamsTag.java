@@ -87,7 +87,20 @@ public class ParamsTag extends EncodingNullBodyTag
 
   private Object values;
 
-  public void setValues(Object values) {
+  /* BodyTag only: */
+  // Required due to conflicting inherited getValues()
+  public Object getValuez() {
+    return values;
+  }
+  /**/
+
+  /* SimpleTag only:
+    public void setValues(Object values) {
+  /**/
+  /* BodyTag only: */
+  // Not named "setValues" because of inherited getValues() method conflicting with JavaBeans property names
+  public void setValuez(Object values) {
+    /**/
     this.values = values;
   }
 

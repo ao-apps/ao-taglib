@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
     shortTitle="Changelog"
     tocLevels="1"
     datePublished="2016-10-29T22:02:09-05:00"
-    dateModified="2022-05-14T16:17:29-05:00"
+    dateModified="2022-07-07T12:25:38-05:00"
   >
     <c:if test="${fn:endsWith('@{project.version}', '-SNAPSHOT') and !fn:endsWith('@{project.version}', '-POST-SNAPSHOT')}">
       <changelog:release
@@ -57,6 +57,13 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
           <li>Support other nice HTML 5 features of textarea/input)</li>
         </ul>
         -->
+        <ul>
+          <li>
+            Fixed <core:link page="ao-legacy.tld/tag-params"><![CDATA[&lt;ao:params values="…" /&gt;]]></core:link>
+            setter in legacy taglib.  The implementation requires a <code>ParamsTagBeanInfo</code> class due to
+            inheriting a <code>getValues()</code> method from <code>TagSupport</code>.
+          </li>
+        </ul>
       </changelog:release>
     </c:if>
 
