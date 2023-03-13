@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2012, 2014, 2015, 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2012, 2014, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -89,10 +89,12 @@ public class SendErrorTag extends EncodingBufferedTag {
     HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
     HttpServletResponse response = (HttpServletResponse) pageContext.getResponse();
 
-    if (message == null || message.isEmpty()) {
-      Includer.sendError(request, response, status);
-    } else {
-      Includer.sendError(request, response, status, message);
+    if (!response.isCommitted()) {
+      if (message == null || message.isEmpty()) {
+        Includer.sendError(request, response, status);
+      } else {
+        Includer.sendError(request, response, status, message);
+      }
     }
 
     Includer.setPageSkipped(request);
