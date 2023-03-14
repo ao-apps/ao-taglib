@@ -230,6 +230,9 @@ public class RedirectTag extends DispatchTag
           throw new JspTagException(e);
         }
       }
+    } else {
+      logger.log(Level.FINE, "Not forwarding due to response already committed: request.servletPath = {0}, dispatcher = {1}",
+          new Object[] {request.getServletPath(), dispatcher});
     }
     Includer.setPageSkipped(request);
     throw ServletUtil.SKIP_PAGE_EXCEPTION;

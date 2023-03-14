@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
     shortTitle="Changelog"
     tocLevels="1"
     datePublished="2016-10-29T22:02:09-05:00"
-    dateModified="2023-03-14T03:57:46Z"
+    dateModified="2023-03-14T11:36:35Z"
   >
     <c:if test="${fn:endsWith('@{project.version}', '-SNAPSHOT') and !fn:endsWith('@{project.version}', '-POST-SNAPSHOT')}">
       <changelog:release
@@ -57,6 +57,23 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
           <li>Support other nice HTML 5 features of textarea/input)</li>
         </ul>
         -->
+        <ul>
+          <li>
+            Log FINE-level notice when <core:link page="ao.tld/tag-forward"><![CDATA[&lt;ao:forward /&gt;]]></core:link>
+            does not forward due to the
+            <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletResponse.html#isCommitted--">response already being committed</ao:a>.
+          </li>
+          <li>
+            Log FINE-level notice when <core:link page="ao.tld/tag-redirect"><![CDATA[&lt;ao:redirect /&gt;]]></core:link>
+            does not send redirect due to the
+            <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletResponse.html#isCommitted--">response already being committed</ao:a>.
+          </li>
+          <li>
+            Log FINE-level notice when <core:link page="ao.tld/tag-sendError"><![CDATA[&lt;ao:sendError /&gt;]]></core:link>
+            does not send error due to the
+            <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletResponse.html#isCommitted--">response already being committed</ao:a>.
+          </li>
+        </ul>
       </changelog:release>
     </c:if>
 

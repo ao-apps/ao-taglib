@@ -27,6 +27,8 @@ import com.aoapps.lang.attribute.Attribute;
 import com.aoapps.servlet.ServletUtil;
 import com.aoapps.servlet.http.Includer;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -40,6 +42,8 @@ import javax.servlet.jsp.JspWriter;
  */
 // TODO: ForwardBodyTag and ForwardSimpleTag?
 public class ForwardTag extends ArgDispatchTag {
+
+  private static final Logger logger = Logger.getLogger(ForwardTag.class.getName());
 
   /**
    * Dispatch as forward.
@@ -57,6 +61,9 @@ public class ForwardTag extends ArgDispatchTag {
           throw new JspTagException(e);
         }
       }
+    } else {
+      logger.log(Level.FINE, "Not forwarding due to response already committed: request.servletPath = {0}, dispatcher = {1}",
+          new Object[] {request.getServletPath(), dispatcher});
     }
     Includer.setPageSkipped(request);
     throw ServletUtil.SKIP_PAGE_EXCEPTION;

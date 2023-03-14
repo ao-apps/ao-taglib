@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 ao-taglib - Making JSP be what it should have been all along.
-Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021, 2022  AO Industries, Inc.
+Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
     support@aoindustries.com
     7262 Bull Pen Cir
     Mobile, AL 36695
@@ -1210,7 +1210,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2021-06-03T22:53:21-05:00" -->
+    <!-- dateModified="2023-03-14T11:36:35Z" -->
     <description><![CDATA[
       <div class="semanticcms-tag-reference-summary">
         <p>
@@ -1230,6 +1230,10 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
           </li>
         </ol>
       </div>
+      <p>
+        Does not forward when the <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletResponse.html#isCommitted--">response has already been committed</a>,
+        but also does not throw any exception; logs FINE-level notice instead.
+      </p>
       <p>
         Any attribute that has no namespace and begins with <code>param.</code> is added to the parameters.
         The parameter name is the part of the attribute name following <code>param.</code>.
@@ -3617,12 +3621,16 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2021-09-25T23:27:50-05:00" -->
+    <!-- dateModified="2023-03-14T11:36:35Z" -->
     <description><![CDATA[
       <div class="semanticcms-tag-reference-summary">
         <p>
           Redirects the browser to another location.
           Stops processing of the containing JSP page.
+        </p>
+        <p>
+          Does not send redirect when the <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletResponse.html#isCommitted--">response has already been committed</a>,
+          but also does not throw any exception; logs FINE-level notice instead.
         </p>
         <p>
           <strong>Important:</strong>
@@ -4146,12 +4154,16 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2021-06-03T22:53:21-05:00" -->
+    <!-- dateModified="2023-03-14T11:36:35Z" -->
     <description><![CDATA[
       <p>
         Returns an error status.
         Stops processing of the containing JSP page.
         Results in error handler processing.
+      </p>
+      <p>
+        Does not send error when the <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletResponse.html#isCommitted--">response has already been committed</a>,
+        but also does not throw any exception; logs FINE-level notice instead.
       </p>
       <p>
         <strong>Important:</strong>
