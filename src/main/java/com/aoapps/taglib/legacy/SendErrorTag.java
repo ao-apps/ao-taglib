@@ -88,12 +88,10 @@ public class SendErrorTag extends EncodingBufferedBodyTag {
     HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
     HttpServletResponse response = (HttpServletResponse) pageContext.getResponse();
 
-    if (!response.isCommitted()) {
-      if (message == null || message.isEmpty()) {
-        Includer.sendError(request, response, status);
-      } else {
-        Includer.sendError(request, response, status, message);
-      }
+    if (message == null || message.isEmpty()) {
+      Includer.sendError(request, response, status);
+    } else {
+      Includer.sendError(request, response, status, message);
     }
 
     Includer.setPageSkipped(request);

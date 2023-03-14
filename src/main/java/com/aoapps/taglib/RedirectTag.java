@@ -199,10 +199,8 @@ public class RedirectTag extends DispatchTag
         }
       }
 
-      if (!response.isCommitted()) {
-        Includer.setLocation(request, response, location);
-        Includer.sendError(request, response, status);
-      }
+      Includer.setLocation(request, response, location);
+      Includer.sendError(request, response, status);
       Includer.setPageSkipped(request);
       throw ServletUtil.SKIP_PAGE_EXCEPTION;
     } else {
