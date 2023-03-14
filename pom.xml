@@ -29,11 +29,11 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
     <relativePath>../parent/pom.xml</relativePath>
   </parent>
 
-  <groupId>com.aoapps</groupId><artifactId>ao-taglib</artifactId><version>7.2.2</version>
+  <groupId>com.aoapps</groupId><artifactId>ao-taglib</artifactId><version>7.2.2-POST-SNAPSHOT</version>
   <packaging>bundle</packaging>
 
   <properties>
-    <project.build.outputTimestamp>2023-03-14T03:56:34Z</project.build.outputTimestamp>
+    <project.build.outputTimestamp>2023-03-14T03:57:49Z</project.build.outputTimestamp>
     <module.name>com.aoapps.taglib</module.name>
     <!-- Java 1.8 -->
     <javase.version>1.8</javase.version>
@@ -97,7 +97,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
     <connection>scm:git:git://github.com/ao-apps/ao-taglib.git</connection>
     <developerConnection>scm:git:git@github.com:ao-apps/ao-taglib.git</developerConnection>
     <url>https://github.com/ao-apps/ao-taglib</url>
-    <tag>ao-taglib-7.2.2</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <issueManagement>
