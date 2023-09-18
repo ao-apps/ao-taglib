@@ -39,7 +39,12 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
     datePublished="2016-10-29T22:02:09-05:00"
     dateModified="2023-03-14T11:36:35Z"
   >
-    <c:if test="${fn:endsWith('@{project.version}', '-SNAPSHOT') and !fn:endsWith('@{project.version}', '-POST-SNAPSHOT')}">
+    <c:set var="latestRelease" value="7.2.2" />
+    <c:if test="${
+      fn:endsWith('@{project.version}', '-SNAPSHOT')
+      and !fn:endsWith('@{project.version}', '-POST-SNAPSHOT')
+      and '@{project.version}' != (latestRelease.concat('-SNAPSHOT'))
+    }">
       <changelog:release
         projectName="@{documented.name}"
         version="@{project.version}"
