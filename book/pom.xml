@@ -44,6 +44,18 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
     <!-- Java 1.8 -->
     <documented.javase.version>1.8</documented.javase.version>
     <documented.javadoc.link.javase>${javadoc.link.javase.8}</documented.javadoc.link.javase>
+    <javadoc.breadcrumbs><![CDATA[<a target="${javadoc.target}" href="https://oss.aoapps.com/">AO OSS</a>
+/ <a target="${javadoc.target}" href="${project.url}">Taglib</a>]]></javadoc.breadcrumbs>
+    <javadoc.taglibReference><![CDATA[
+      <li><a target="${javadoc.target}" href="${project.url}ao.tld/">Taglib Reference</a></li>
+      <li><a target="${javadoc.target}" href="${project.url}ao-legacy.tld/">Taglib Reference (Legacy)</a></li>
+    ]]></javadoc.taglibReference>
+    <javadoc.relatedProjects><![CDATA[<div>
+      <h2>Related Projects</h2>
+      <ul>
+        <li><a target="${javadoc.target}" href="https://oss.aoapps.com/encoding/taglib/">AO Encoding Taglib</a></li>
+      </ul>
+    </div>]]></javadoc.relatedProjects>
 
     <description.html><![CDATA[Documentation for <a target="${javadoc.target}" href="${project.url}">${documented.name}</a> in <a target="${javadoc.target}" href="https://semanticcms.com/">SemanticCMS</a> format.]]></description.html>
   </properties>
