@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
     shortTitle="Changelog"
     tocLevels="1"
     datePublished="2016-10-29T22:02:09-05:00"
-    dateModified="2023-10-02T00:34:59Z"
+    dateModified="2023-10-02T14:48:12Z"
   >
     <c:set var="latestRelease" value="7.2.2" />
     <c:if test="${
@@ -95,6 +95,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
             <code>java.lang.Integer</code> instead of <code>java.lang.Object</code>.
           </li>
           <li><code>charset</code> attributes now support <code>java.nio.charset.Charset</code>.</li>
+          <li>Moved <code>resolveValue</code> from <core:link page="/index.jspx" /> to <core:link book="/servlet-util" page="/index.jspx" />.</li>
         </ul>
       </changelog:release>
     </c:if>

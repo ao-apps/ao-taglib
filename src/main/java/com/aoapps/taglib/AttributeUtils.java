@@ -32,8 +32,6 @@ import com.aoapps.servlet.jsp.tagext.JspTagUtils;
 import java.io.IOException;
 import java.util.List;
 import java.util.ResourceBundle;
-import javax.el.ELContext;
-import javax.el.ValueExpression;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.JspTag;
 
@@ -61,32 +59,6 @@ public final class AttributeUtils  {
     return JspTagUtils.findAncestor(from, clazz).orElseThrow(
         () -> new NeedAttributeParentException(fromTagName, attribute)
     );
-  }
-
-  /**
-   * Evaluates an expression then casts to the provided type.
-   */
-  // TODO: Move to ao-servlet-util since not used in ao-taglib
-  public static <T> T resolveValue(ValueExpression expression, Class<T> type, ELContext elContext) {
-    if (expression == null) {
-      return null;
-    } else {
-      return type.cast(expression.getValue(elContext));
-    }
-  }
-
-  /**
-   * Casts or evaluates an expression then casts to the provided type.
-   */
-  // TODO: Move to ao-servlet-util since not used in ao-taglib
-  public static <T> T resolveValue(Object value, Class<T> type, ELContext elContext) {
-    if (value == null) {
-      return null;
-    } else if (value instanceof ValueExpression) {
-      return resolveValue((ValueExpression) value, type, elContext);
-    } else {
-      return type.cast(value);
-    }
   }
 
   private static boolean isAllDigits(String value) {
