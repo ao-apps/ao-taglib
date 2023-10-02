@@ -66,6 +66,7 @@ public final class AttributeUtils  {
   /**
    * Evaluates an expression then casts to the provided type.
    */
+  // TODO: Move to ao-servlet-util since not used in ao-taglib
   public static <T> T resolveValue(ValueExpression expression, Class<T> type, ELContext elContext) {
     if (expression == null) {
       return null;
@@ -77,6 +78,7 @@ public final class AttributeUtils  {
   /**
    * Casts or evaluates an expression then casts to the provided type.
    */
+  // TODO: Move to ao-servlet-util since not used in ao-taglib
   public static <T> T resolveValue(Object value, Class<T> type, ELContext elContext) {
     if (value == null) {
       return null;
