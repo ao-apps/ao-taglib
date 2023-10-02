@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
     shortTitle="Changelog"
     tocLevels="1"
     datePublished="2016-10-29T22:02:09-05:00"
-    dateModified="2023-03-14T11:36:35Z"
+    dateModified="2023-10-02T00:34:59Z"
   >
     <c:set var="latestRelease" value="7.2.2" />
     <c:if test="${
@@ -64,6 +64,10 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
         -->
         <ul>
           <li>
+            This is a major version bump for incompatible changes of Java API only.  The taglib itself is completely
+            backward compatible.
+          </li>
+          <li>
             Log FINE-level notice when <core:link page="ao.tld/tag-forward"><![CDATA[&lt;ao:forward /&gt;]]></core:link>
             does not forward due to the
             <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletResponse.html#isCommitted--">response already being committed</ao:a>.
@@ -78,6 +82,19 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
             does not send error due to the
             <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletResponse.html#isCommitted--">response already being committed</ao:a>.
           </li>
+          <li>
+            Using normalization methods from <core:link book="/fluent-html/any" page="/index.jspx">underlying implementation</core:link>.
+            Throwing more exceptions matching the normalization methods.
+          </li>
+          <li>
+            <code>class</code>, <code>media</code>, <code>name</code>, and <code>type</code> attributes are now
+            <code>java.lang.Object</code> instead of <code>java.lang.String</code>.
+          </li>
+          <li>
+            <code>width</code>, <code>height</code>, and <code>size</code> attributes are now
+            <code>java.lang.Integer</code> instead of <code>java.lang.Object</code>.
+          </li>
+          <li><code>charset</code> attributes now support <code>java.nio.charset.Charset</code>.</li>
         </ul>
       </changelog:release>
     </c:if>

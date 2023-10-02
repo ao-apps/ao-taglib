@@ -74,7 +74,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <name>class</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>">
 
 <!ENTITY ClassBufferedAttribute_description "&ClassAttribute_description;
@@ -89,7 +89,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <name>class</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>">
 
 <!ENTITY DirAttribute_description "The &lt;a href=&quot;https://www.w3schools.com/tags/att_global_dir.asp&quot;&gt;dir of the element&lt;/a&gt;.">
@@ -203,7 +203,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   <!-- TODO: Implement validator(s), such as ao:when directly inside ao:choose and similar -->
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2021-09-25T23:27:50-05:00" -->
+    <!-- dateModified="2023-10-02T00:34:59Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Renders an <a href="https://www.w3schools.com/tags/tag_a.asp">&lt;a&gt;</a> tag.
@@ -392,7 +392,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <name>type</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <attribute>
       <description><![CDATA[
@@ -464,7 +464,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2019-10-08T21:41:35-05:00" -->
-    <!-- dateModified="2021-09-25T23:27:50-05:00" -->
+    <!-- dateModified="2023-10-02T00:34:59Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Renders an <a href="https://www.w3schools.com/tags/tag_area.asp">&lt;area&gt;</a> tag.
@@ -659,7 +659,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <name>type</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <attribute>
       <description><![CDATA[
@@ -726,7 +726,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2021-06-16T12:55:45-05:00" -->
+    <!-- dateModified="2023-10-02T00:34:59Z" -->
     <description><![CDATA[
       <p>
         Adds an argument to its
@@ -747,7 +747,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <name>name</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <attribute>
       <description><![CDATA[
@@ -805,7 +805,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2021-06-03T22:53:21-05:00" -->
+    <!-- dateModified="2023-10-02T00:34:59Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Adds a <a href="https://www.w3schools.com/tags/tag_base.asp">&lt;base&gt;</a> tag only when necessary.
@@ -836,7 +836,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2019-10-20T05:53:01-05:00" -->
-    <!-- dateModified="2021-06-03T22:53:21-05:00" -->
+    <!-- dateModified="2023-10-02T00:34:59Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Writes a <a href="https://www.w3schools.com/tags/tag_br.asp">&lt;br&gt;</a>
@@ -932,7 +932,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2020-02-11T20:25:52-06:00" -->
-    <!-- dateModified="2021-06-03T22:53:21-05:00" -->
+    <!-- dateModified="2023-10-02T00:34:59Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Writes a <a href="https://www.w3schools.com/tags/tag_col.asp">&lt;col&gt;</a>
@@ -1074,7 +1074,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2021-09-25T23:27:50-05:00" -->
+    <!-- dateModified="2023-10-02T00:34:59Z" -->
     <!-- TODO: param.* dynamic attributes should not do automatic multi-parameter.  Make a params.* dynamic attribute for this purpose. -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
@@ -1362,7 +1362,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2021-06-16T12:55:45-05:00" -->
+    <!-- dateModified="2023-10-02T00:34:59Z" -->
     <description><![CDATA[
       <p>
         Gets a detailed report of a
@@ -1403,7 +1403,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <name>name</name>
       <required>true</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <attribute>
       <description><![CDATA[
@@ -1436,7 +1436,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2019-10-30T20:50:04-05:00" -->
-    <!-- dateModified="2021-06-03T22:53:21-05:00" -->
+    <!-- dateModified="2023-10-02T00:34:59Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Writes a <a href="https://www.w3schools.com/tags/tag_hr.asp">&lt;hr&gt;</a>
@@ -1452,7 +1452,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2021-06-03T22:53:21-05:00" -->
+    <!-- dateModified="2023-10-02T00:34:59Z" -->
     <description><![CDATA[
       <ol>
         <li>Clears the current output buffer (leaving status code and headers)</li>
@@ -1636,7 +1636,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2021-09-25T23:27:50-05:00" -->
+    <!-- dateModified="2023-10-02T00:34:59Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Renders an <a href="https://www.w3schools.com/tags/tag_iframe.asp">&lt;iframe&gt;</a> tag.
@@ -1786,7 +1786,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <name>width</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.Object</type>
+      <type>java.lang.Integer</type>
     </attribute>
     <attribute>
       <description><![CDATA[
@@ -1799,7 +1799,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <name>height</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.Object</type>
+      <type>java.lang.Integer</type>
     </attribute>
     <attribute>
       <description><![CDATA[
@@ -1820,7 +1820,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2021-09-25T23:27:50-05:00" -->
+    <!-- dateModified="2023-10-02T00:34:59Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Renders an <a href="https://www.w3schools.com/tags/tag_img.asp">&lt;img&gt;</a> tag.
@@ -1968,7 +1968,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <name>width</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.Object</type>
+      <type>java.lang.Integer</type>
     </attribute>
     <attribute>
       <description><![CDATA[
@@ -1981,7 +1981,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <name>height</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.Object</type>
+      <type>java.lang.Integer</type>
     </attribute>
     <attribute>
       <description><![CDATA[
@@ -2170,7 +2170,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2021-09-25T23:27:50-05:00" -->
+    <!-- dateModified="2023-10-02T00:34:59Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Renders an <a href="https://www.w3schools.com/tags/tag_input.asp">&lt;input&gt;</a> tag.
@@ -2292,7 +2292,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <name>height</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.Object</type>
+      <type>java.lang.Integer</type>
     </attribute>
     <attribute>
       <description><![CDATA[
@@ -2318,7 +2318,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <name>name</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <attribute>
       <description><![CDATA[
@@ -2347,7 +2347,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <name>size</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.Object</type>
+      <type>java.lang.Integer</type>
     </attribute>
     <attribute>
       <description><![CDATA[
@@ -2478,7 +2478,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <name>type</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <attribute>
       <description><![CDATA[
@@ -2492,7 +2492,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <name>width</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.Object</type>
+      <type>java.lang.Integer</type>
     </attribute>
     <attribute>
       <description><![CDATA[
@@ -2577,7 +2577,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2021-09-25T23:27:50-05:00" -->
+    <!-- dateModified="2023-10-02T00:34:59Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         If contained within any
@@ -2752,7 +2752,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <name>type</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <attribute>
       <description><![CDATA[
@@ -2763,7 +2763,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <name>media</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <attribute>
       <description><![CDATA[
@@ -2782,7 +2782,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2019-10-08T21:41:35-05:00" -->
-    <!-- dateModified="2021-06-03T22:53:21-05:00" -->
+    <!-- dateModified="2023-10-02T00:34:59Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Renders a <a href="https://www.w3schools.com/tags/tag_map.asp">&lt;map&gt;</a> tag.
@@ -2839,7 +2839,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2022-04-05T01:40:09-05:00" -->
+    <!-- dateModified="2023-10-02T00:34:59Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Writes a value from the current localization bundle given its key.
@@ -2987,7 +2987,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <name>type</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <dynamic-attributes>true</dynamic-attributes>
   </tag>
@@ -3021,7 +3021,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2021-08-20T23:23:57-05:00" -->
+    <!-- dateModified="2023-10-02T00:34:59Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         If contained within any
@@ -3067,7 +3067,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <name>name</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <attribute>
       <description><![CDATA[
@@ -3095,6 +3095,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <description><![CDATA[
         <p>
           The <a href="https://www.w3schools.com/tags/att_meta_charset.asp">charset of the meta element</a>.
+          Supports <a rel="nofollow" href="@{javadoc.link.javase}java/nio/charset/Charset.html">java.nio.charset.Charset</a>.
+          Any other object is coerced to string.
         </p>
       ]]></description>
       <name>charset</name>
@@ -3274,7 +3276,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2021-06-03T22:53:21-05:00" -->
+    <!-- dateModified="2023-10-02T00:34:59Z" -->
     <description><![CDATA[
       <p>
         Renders an <a href="https://www.w3schools.com/tags/tag_option.asp">&lt;option&gt;</a> tag.
@@ -3349,7 +3351,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2022-04-05T01:40:09-05:00" -->
+    <!-- dateModified="2023-10-02T00:34:59Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Writes the value with proper escaping based on the context of the tag.
@@ -3431,7 +3433,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <name>type</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
   </tag>
   <tag>
@@ -3450,7 +3452,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2021-06-16T12:55:45-05:00" -->
+    <!-- dateModified="2023-10-02T00:34:59Z" -->
     <description><![CDATA[
       <p>
         Adds a parameter to its
@@ -3472,7 +3474,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <name>name</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <attribute>
       <description><![CDATA[
@@ -3491,7 +3493,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2021-10-25T18:37:50-05:00" -->
+    <!-- dateModified="2023-10-02T00:34:59Z" -->
     <description><![CDATA[
       <p>
         Adds multiple parameters to its
@@ -3519,7 +3521,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <name>name</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <attribute>
       <description><![CDATA[
@@ -3862,7 +3864,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2021-09-25T23:27:50-05:00" -->
+    <!-- dateModified="2023-10-02T00:34:59Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Manually establishes a <a href="https://www.w3schools.com/tags/tag_script.asp">script context</a> when automatic detection is not possible.
@@ -3931,7 +3933,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <name>type</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <attribute>
       <description><![CDATA[
@@ -4027,7 +4029,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2021-06-03T22:53:21-05:00" -->
+    <!-- dateModified="2023-10-02T00:34:59Z" -->
     <description><![CDATA[
       <p>
         Renders a <a href="https://www.w3schools.com/tags/tag_select.asp">&lt;select&gt;</a> tag.
@@ -4065,7 +4067,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <name>name</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <attribute>
       <description><![CDATA[
@@ -4078,7 +4080,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <name>size</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.Object</type>
+      <type>java.lang.Integer</type>
     </attribute>
     <attribute>
       <description><![CDATA[
@@ -4304,7 +4306,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2021-06-03T22:53:21-05:00" -->
+    <!-- dateModified="2023-10-02T00:34:59Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Renders a <a href="https://www.w3schools.com/tags/tag_textarea.asp">&lt;textarea&gt;</a> tag.
@@ -4360,7 +4362,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <name>name</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <attribute>
       <description><![CDATA[
@@ -4658,7 +4660,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2022-04-05T01:40:09-05:00" -->
+    <!-- dateModified="2023-10-02T00:34:59Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Writes the bean contents.  Supports data types beyond
@@ -4733,7 +4735,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <name>name</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
     <attribute>
       <description><![CDATA[
@@ -4775,7 +4777,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <name>type</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.String</type>
+      <type>java.lang.Object</type>
     </attribute>
   </tag>
   <function>

@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2010, 2011, 2012, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2012, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -26,6 +26,7 @@ package com.aoapps.taglib;
 import com.aoapps.encoding.MediaType;
 import com.aoapps.encoding.taglib.EncodingNullTag;
 import com.aoapps.hodgepodge.util.WildcardPatternMatcher;
+import com.aoapps.html.any.attributes.text.Name;
 import com.aoapps.lang.Coercion;
 import com.aoapps.lang.i18n.Resources;
 import com.aoapps.net.URIParameters;
@@ -68,8 +69,8 @@ public class ParamsTag extends EncodingNullTag
   private String name;
 
   @Override
-  public void setName(String name) {
-    this.name = name;
+  public void setName(Object name) throws IOException {
+    this.name = Coercion.toString(Name.name.normalize(name));
   }
 
   // private String exclude;

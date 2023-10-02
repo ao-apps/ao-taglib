@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -26,6 +26,18 @@ package com.aoapps.taglib.legacy;
 import static com.aoapps.taglib.AreaTag.RESOURCES;
 
 import com.aoapps.encoding.MediaType;
+import com.aoapps.html.any.attributes.dimension.Coords;
+import com.aoapps.html.any.attributes.enumeration.Rel;
+import com.aoapps.html.any.attributes.enumeration.Shape;
+import com.aoapps.html.any.attributes.enumeration.Target;
+import com.aoapps.html.any.attributes.event.Onclick;
+import com.aoapps.html.any.attributes.event.Onmouseout;
+import com.aoapps.html.any.attributes.event.Onmouseover;
+import com.aoapps.html.any.attributes.text.Alt;
+import com.aoapps.html.any.attributes.text.Hreflang;
+import com.aoapps.html.any.attributes.text.Title;
+import com.aoapps.html.any.attributes.text.Type;
+import com.aoapps.html.any.attributes.url.Href;
 import com.aoapps.html.servlet.AREA;
 import com.aoapps.html.servlet.DocumentEE;
 import com.aoapps.lang.Coercion;
@@ -37,7 +49,6 @@ import com.aoapps.servlet.lastmodified.AddLastModified;
 import com.aoapps.taglib.AltAttribute;
 import com.aoapps.taglib.AreaTagTEI;
 import com.aoapps.taglib.AttributeRequiredException;
-import com.aoapps.taglib.AttributeUtils;
 import com.aoapps.taglib.GlobalAttributesUtils;
 import com.aoapps.taglib.HrefAttribute;
 import com.aoapps.taglib.HreflangAttribute;
@@ -99,7 +110,7 @@ public class AreaTag extends ElementNullBodyTag
   private String shape;
 
   public void setShape(String shape) {
-    shape = shape.trim();
+    shape = Shape.shape.normalize(shape);
     if (!AreaTagTEI.isValidShape(shape)) {
       throw new LocalizedIllegalArgumentException(RESOURCES, "shape.invalid", shape);
     }
@@ -109,14 +120,14 @@ public class AreaTag extends ElementNullBodyTag
   private String coords;
 
   public void setCoords(String coords) {
-    this.coords = Strings.trimNullIfEmpty(coords);
+    this.coords = Coords.coords.normalize(coords);
   }
 
   private String href;
 
   @Override
   public void setHref(String href) {
-    this.href = Strings.nullIfEmpty(href);
+    this.href = Href.href.normalize(href);
   }
 
   private MutableURIParameters params;
@@ -144,70 +155,70 @@ public class AreaTag extends ElementNullBodyTag
   private AddLastModified addLastModified;
 
   public void setAddLastModified(String addLastModified) {
-    this.addLastModified = AddLastModified.valueOfLowerName(addLastModified.trim().toLowerCase(Locale.ROOT));
+    this.addLastModified = AddLastModified.valueOfLowerName(Strings.trim(addLastModified).toLowerCase(Locale.ROOT));
   }
 
   private Object hreflang;
 
   @Override
-  public void setHreflang(Object hreflang) {
-    this.hreflang = hreflang;
+  public void setHreflang(Object hreflang) throws IOException {
+    this.hreflang = Hreflang.hreflang.normalize(hreflang);
   }
 
   private String rel;
 
   @Override
   public void setRel(String rel) {
-    this.rel = rel;
+    this.rel = Rel.rel.normalize(rel);
   }
 
-  private String type;
+  private Object type;
 
   @Override
-  public void setType(String type) {
-    this.type = Strings.trimNullIfEmpty(type);
+  public void setType(Object type) throws IOException {
+    this.type = Type.type.normalize(type);
   }
 
   private String target;
 
   @Override
   public void setTarget(String target) {
-    this.target = Strings.trimNullIfEmpty(target);
+    this.target = Target.target.normalize(target);
   }
 
   private Object alt;
 
   @Override
-  public void setAlt(Object alt) {
-    this.alt = AttributeUtils.trim(alt);
+  public void setAlt(Object alt) throws IOException {
+    this.alt = Alt.alt.normalize(alt);
   }
 
   private Object title;
 
   @Override
-  public void setTitle(Object title) {
-    this.title = AttributeUtils.trimNullIfEmpty(title);
+  public void setTitle(Object title) throws IOException {
+    this.title = Title.title.normalize(title);
   }
 
   private Object onclick;
 
   @Override
-  public void setOnclick(Object onclick) {
-    this.onclick = AttributeUtils.trimNullIfEmpty(onclick);
+  public void setOnclick(Object onclick) throws IOException {
+    this.onclick = Onclick.onclick.normalize(onclick);
   }
 
   private Object onmouseover;
 
   @Override
-  public void setOnmouseover(Object onmouseover) {
-    this.onmouseover = AttributeUtils.trimNullIfEmpty(onmouseover);
+  public void setOnmouseover(Object onmouseover) throws IOException {
+    this.onmouseover = Onmouseover.onmouseover.normalize(onmouseover);
   }
 
   private Object onmouseout;
 
   @Override
-  public void setOnmouseout(Object onmouseout) {
-    this.onmouseout = AttributeUtils.trimNullIfEmpty(onmouseout);
+  public void setOnmouseout(Object onmouseout) throws IOException {
+    this.onmouseout = Onmouseout.onmouseout.normalize(onmouseout);
   }
 
   /**
@@ -273,14 +284,8 @@ public class AreaTag extends ElementNullBodyTag
     AREA<?> area = GlobalAttributesUtils.doGlobalAttributes(global, document.area())
         .shape(shape)
         .coords(coords)
-        .href(UrlUtils.getHref(pageContext, href, params, addLastModified, absolute, canonical));
-    if (hreflang instanceof Locale) {
-      area.hreflang((Locale) hreflang);
-    } else {
-      hreflang = AttributeUtils.trimNullIfEmpty(hreflang);
-      area.hreflang(Coercion.toString(hreflang));
-    }
-    area
+        .href(UrlUtils.getHref(pageContext, href, params, addLastModified, absolute, canonical))
+        .hreflang(hreflang)
         .rel(rel)
         // TODO: type to Area (or remove entirely since this part of the standard is uncertain and currently unimplemented by all browsers?)
         .attribute("type", type)

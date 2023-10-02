@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2011, 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2011, 2016, 2017, 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -25,6 +25,7 @@ package com.aoapps.taglib;
 
 import com.aoapps.encoding.Doctype;
 import com.aoapps.encoding.Serialization;
+import com.aoapps.lang.Strings;
 import java.util.List;
 import java.util.Locale;
 import javax.servlet.jsp.tagext.TagData;
@@ -43,7 +44,7 @@ public class HtmlTagTEI extends ElementTagTEI {
         serializationAttr != null
             && serializationAttr != TagData.REQUEST_TIME_VALUE
     ) {
-      String serialization = ((String) serializationAttr).trim(); // TODO: normalizeSerialization
+      String serialization = Strings.trim((String) serializationAttr); // TODO: normalizeSerialization
       if (!serialization.isEmpty() && !"auto".equalsIgnoreCase(serialization)) {
         try {
           Serialization.valueOf(serialization.toUpperCase(Locale.ROOT));
@@ -62,7 +63,7 @@ public class HtmlTagTEI extends ElementTagTEI {
         doctypeAttr != null
             && doctypeAttr != TagData.REQUEST_TIME_VALUE
     ) {
-      String doctype = ((String) doctypeAttr).trim(); // TODO: normalizeDoctype
+      String doctype = Strings.trim((String) doctypeAttr); // TODO: normalizeDoctype
       if (!doctype.isEmpty() && !"default".equalsIgnoreCase(doctype)) {
         try {
           Doctype.valueOf(doctype.toUpperCase(Locale.ROOT));
@@ -81,7 +82,7 @@ public class HtmlTagTEI extends ElementTagTEI {
         autonliAttr != null
             && autonliAttr != TagData.REQUEST_TIME_VALUE
     ) {
-      String autonli = ((String) autonliAttr).trim(); // TODO: normalizeAutonli
+      String autonli = Strings.trim((String) autonliAttr); // TODO: normalizeAutonli
       if (
           !autonli.isEmpty()
               && !"auto".equalsIgnoreCase(autonli)
@@ -101,7 +102,7 @@ public class HtmlTagTEI extends ElementTagTEI {
         indentAttr != null
             && indentAttr != TagData.REQUEST_TIME_VALUE
     ) {
-      String indent = ((String) indentAttr).trim(); // TODO: normalizeIndent
+      String indent = Strings.trim((String) indentAttr); // TODO: normalizeIndent
       if (
           !indent.isEmpty()
               && !"auto".equalsIgnoreCase(indent)

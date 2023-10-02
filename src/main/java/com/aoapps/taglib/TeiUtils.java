@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -27,6 +27,7 @@ import com.aoapps.collections.MinimalList;
 import com.aoapps.lang.Coercion;
 import com.aoapps.lang.LocalizedIllegalArgumentException;
 import com.aoapps.servlet.attribute.ScopeEE;
+import java.io.IOException;
 import java.util.List;
 import javax.servlet.jsp.tagext.TagData;
 import javax.servlet.jsp.tagext.TagExtraInfo;
@@ -62,11 +63,11 @@ public final class TeiUtils {
         o != null
             && o != TagData.REQUEST_TIME_VALUE
     ) {
-      String scope = Coercion.toString(o).trim(); // TODO: normalizeScope
       try {
+        String scope = Coercion.toString(Coercion.trim(o)); // TODO: normalizeScope
         ScopeEE.Page.getScopeId(scope);
         // Value is OK
-      } catch (LocalizedIllegalArgumentException err) {
+      } catch (IOException | LocalizedIllegalArgumentException err) {
         messages = MinimalList.add(
             messages,
             new ValidationMessage(

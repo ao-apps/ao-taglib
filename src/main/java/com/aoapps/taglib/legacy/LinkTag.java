@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -24,6 +24,12 @@
 package com.aoapps.taglib.legacy;
 
 import com.aoapps.encoding.MediaType;
+import com.aoapps.html.any.attributes.enumeration.Rel;
+import com.aoapps.html.any.attributes.text.Hreflang;
+import com.aoapps.html.any.attributes.text.Media;
+import com.aoapps.html.any.attributes.text.Title;
+import com.aoapps.html.any.attributes.text.Type;
+import com.aoapps.html.any.attributes.url.Href;
 import com.aoapps.html.servlet.DocumentEE;
 import com.aoapps.html.servlet.LINK;
 import com.aoapps.lang.Coercion;
@@ -33,7 +39,6 @@ import com.aoapps.net.URIParameters;
 import com.aoapps.net.URIParametersMap;
 import com.aoapps.servlet.jsp.tagext.JspTagUtils;
 import com.aoapps.servlet.lastmodified.AddLastModified;
-import com.aoapps.taglib.AttributeUtils;
 import com.aoapps.taglib.GlobalAttributesUtils;
 import com.aoapps.taglib.HrefAttribute;
 import com.aoapps.taglib.HreflangAttribute;
@@ -46,6 +51,7 @@ import com.aoapps.taglib.TitleAttribute;
 import com.aoapps.taglib.TypeAttribute;
 import com.aoapps.taglib.UrlUtils;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.io.Writer;
 import java.util.List;
 import java.util.Locale;
@@ -87,31 +93,35 @@ public class LinkTag extends ElementNullBodyTag
    * Copies all values from the provided link.
    */
   public void setLink(Link link) {
-    GlobalAttributesUtils.copy(link.getGlobal(), this);
-    setHref(link.getHref());
-    setAbsolute(link.getAbsolute());
-    URIParameters linkParams = link.getParams();
-    if (linkParams != null) {
-      for (Map.Entry<String, List<String>> entry : linkParams.getParameterMap().entrySet()) {
-        String paramName = entry.getKey();
-        for (String paramValue : entry.getValue()) {
-          addParam(paramName, (Object) paramValue);
+    try {
+      GlobalAttributesUtils.copy(link.getGlobal(), this);
+      setHref(link.getHref());
+      setAbsolute(link.getAbsolute());
+      URIParameters linkParams = link.getParams();
+      if (linkParams != null) {
+        for (Map.Entry<String, List<String>> entry : linkParams.getParameterMap().entrySet()) {
+          String paramName = entry.getKey();
+          for (String paramValue : entry.getValue()) {
+            addParam(paramName, (Object) paramValue);
+          }
         }
       }
+      this.addLastModified = link.getAddLastModified();
+      setHreflang(link.getHreflang());
+      setRel(link.getRel());
+      setType(link.getType());
+      setMedia(link.getMedia());
+      setTitle(link.getTitle());
+    } catch (IOException e) {
+      throw new UncheckedIOException(e);
     }
-    this.addLastModified = link.getAddLastModified();
-    setHreflang(link.getHreflang());
-    setRel(link.getRel());
-    setType(link.getType());
-    setMedia(link.getMedia());
-    setTitle(link.getTitle());
   }
 
   private String href;
 
   @Override
   public void setHref(String href) {
-    this.href = Strings.nullIfEmpty(href);
+    this.href = Href.href.normalize(href);
   }
 
   private MutableURIParameters params;
@@ -139,41 +149,41 @@ public class LinkTag extends ElementNullBodyTag
   private AddLastModified addLastModified;
 
   public void setAddLastModified(String addLastModified) {
-    this.addLastModified = AddLastModified.valueOfLowerName(addLastModified.trim().toLowerCase(Locale.ROOT));
+    this.addLastModified = AddLastModified.valueOfLowerName(Strings.trim(addLastModified).toLowerCase(Locale.ROOT));
   }
 
   private Object hreflang;
 
   @Override
-  public void setHreflang(Object hreflang) {
-    this.hreflang = hreflang;
+  public void setHreflang(Object hreflang) throws IOException {
+    this.hreflang = Hreflang.hreflang.normalize(hreflang);
   }
 
   private String rel;
 
   @Override
   public void setRel(String rel) {
-    this.rel = rel;
+    this.rel = Rel.rel.normalize(rel);
   }
 
   private String type;
 
   @Override
-  public void setType(String type) {
-    this.type = Strings.trimNullIfEmpty(type);
+  public void setType(Object type) throws IOException {
+    this.type = Coercion.toString(Type.type.normalize(type));
   }
 
-  private String media; // TODO: media to Object
+  private Object media;
 
-  public void setMedia(String media) {
-    this.media = Strings.trimNullIfEmpty(media);
+  public void setMedia(Object media) throws IOException {
+    this.media = Media.media.normalize(media);
   }
 
   private Object title;
 
   @Override
-  public void setTitle(Object title) {
-    this.title = AttributeUtils.trimNullIfEmpty(title);
+  public void setTitle(Object title) throws IOException {
+    this.title = Title.title.normalize(title);
   }
 
   /**
@@ -211,13 +221,6 @@ public class LinkTag extends ElementNullBodyTag
     /**/
     Optional<LinksAttribute> parent = JspTagUtils.findAncestor(this, LinksAttribute.class);
     if (parent.isPresent()) {
-      String hreflangStr;
-      if (hreflang instanceof Locale) {
-        hreflangStr = ((Locale) hreflang).toLanguageTag();
-      } else {
-        hreflang = AttributeUtils.trimNullIfEmpty(hreflang);
-        hreflangStr = Coercion.toString(hreflang);
-      }
       parent.get().addLink(
           new Link(
               global.freeze(),
@@ -226,10 +229,10 @@ public class LinkTag extends ElementNullBodyTag
               canonical,
               params,
               addLastModified,
-              hreflangStr,
+              Coercion.toString(hreflang),
               Strings.trimNullIfEmpty(rel),
               type,
-              media,
+              Coercion.toString(media),
               Coercion.toString(title)
           )
       );
@@ -244,14 +247,8 @@ public class LinkTag extends ElementNullBodyTag
       );
       LINK<?> link = document.link();
       GlobalAttributesUtils.doGlobalAttributes(global, link);
-      link.href(UrlUtils.getHref(pageContext, href, params, addLastModified, absolute, canonical));
-      if (hreflang instanceof Locale) {
-        link.hreflang((Locale) hreflang);
-      } else {
-        hreflang = AttributeUtils.trimNullIfEmpty(hreflang);
-        link.hreflang(Coercion.toString(hreflang));
-      }
-      link
+      link.href(UrlUtils.getHref(pageContext, href, params, addLastModified, absolute, canonical))
+          .hreflang(hreflang)
           .rel(rel)
           .type(type)
           .media(media)

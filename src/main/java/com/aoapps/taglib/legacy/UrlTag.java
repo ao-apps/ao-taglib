@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2016, 2017, 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -26,6 +26,7 @@ package com.aoapps.taglib.legacy;
 import com.aoapps.encoding.MediaType;
 import com.aoapps.encoding.taglib.legacy.EncodingBufferedBodyTag;
 import com.aoapps.io.buffer.BufferResult;
+import com.aoapps.lang.Strings;
 import com.aoapps.net.MutableURIParameters;
 import com.aoapps.net.URIParametersMap;
 import com.aoapps.servlet.http.Canonical;
@@ -95,7 +96,7 @@ public class UrlTag extends EncodingBufferedBodyTag implements ParamsAttribute, 
   private AddLastModified addLastModified;
 
   public void setAddLastModified(String addLastModified) {
-    this.addLastModified = AddLastModified.valueOfLowerName(addLastModified.trim().toLowerCase(Locale.ROOT));
+    this.addLastModified = AddLastModified.valueOfLowerName(Strings.trim(addLastModified).toLowerCase(Locale.ROOT));
   }
 
   /* BodyTag only: */

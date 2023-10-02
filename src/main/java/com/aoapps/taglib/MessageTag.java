@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -27,6 +27,8 @@ import com.aoapps.encoding.MediaType;
 import com.aoapps.encoding.taglib.EncodingNullTag;
 import com.aoapps.hodgepodge.i18n.BundleLookupMarkup;
 import com.aoapps.hodgepodge.i18n.BundleLookupThreadContext;
+import com.aoapps.html.any.attributes.text.Type;
+import com.aoapps.lang.Coercion;
 import com.aoapps.lang.LocalizedIllegalArgumentException;
 import com.aoapps.lang.Strings;
 import com.aoapps.lang.i18n.Resources;
@@ -84,8 +86,8 @@ public class MessageTag extends EncodingNullTag
   private MediaType mediaType;
 
   @Override
-  public void setType(String type) {
-    String typeStr = Strings.trim(type);
+  public void setType(Object type) throws IOException {
+    String typeStr = Coercion.toString(Type.type.normalize(type));
     MediaType newMediaType = MediaType.getMediaTypeByName(typeStr);
     if (newMediaType == null) {
       try {

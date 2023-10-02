@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2010, 2011, 2012, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2012, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -32,10 +32,13 @@ import com.aoapps.encoding.Serialization;
 import com.aoapps.encoding.servlet.SerializationEE;
 import com.aoapps.hodgepodge.i18n.MarkupCoercion;
 import com.aoapps.hodgepodge.i18n.MarkupType;
+import com.aoapps.html.any.attributes.event.Onblur;
+import com.aoapps.html.any.attributes.event.Onchange;
+import com.aoapps.html.any.attributes.event.Onfocus;
+import com.aoapps.html.any.attributes.event.Onkeypress;
+import com.aoapps.html.any.attributes.text.Name;
 import com.aoapps.io.buffer.BufferResult;
 import com.aoapps.lang.Coercion;
-import com.aoapps.lang.Strings;
-import com.aoapps.taglib.AttributeUtils;
 import com.aoapps.taglib.DisabledAttribute;
 import com.aoapps.taglib.GlobalAttributesUtils;
 import com.aoapps.taglib.NameAttribute;
@@ -89,46 +92,46 @@ public class SelectTag extends ElementBufferedBodyTag
     this.disabled = disabled;
   }
 
-  private String name;
+  private Object name;
 
   @Override
-  public void setName(String name) {
-    this.name = Strings.nullIfEmpty(name);
+  public void setName(Object name) throws IOException {
+    this.name = Name.name.normalize(name);
   }
 
-  private Object size;
+  private Integer size;
 
   @Override
-  public void setSize(Object size) {
-    this.size = AttributeUtils.trimNullIfEmpty(size);
+  public void setSize(Integer size) {
+    this.size = size;
   }
 
   private Object onblur;
 
   @Override
-  public void setOnblur(Object onblur) {
-    this.onblur = AttributeUtils.trimNullIfEmpty(onblur);
+  public void setOnblur(Object onblur) throws IOException {
+    this.onblur = Onblur.onblur.normalize(onblur);
   }
 
   private Object onchange;
 
   @Override
-  public void setOnchange(Object onchange) {
-    this.onchange = AttributeUtils.trimNullIfEmpty(onchange);
+  public void setOnchange(Object onchange) throws IOException {
+    this.onchange = Onchange.onchange.normalize(onchange);
   }
 
   private Object onfocus;
 
   @Override
-  public void setOnfocus(Object onfocus) {
-    this.onfocus = AttributeUtils.trimNullIfEmpty(onfocus);
+  public void setOnfocus(Object onfocus) throws IOException {
+    this.onfocus = Onfocus.onfocus.normalize(onfocus);
   }
 
   private Object onkeypress;
 
   @Override
-  public void setOnkeypress(Object onkeypress) {
-    this.onkeypress = AttributeUtils.trimNullIfEmpty(onkeypress);
+  public void setOnkeypress(Object onkeypress) throws IOException {
+    this.onkeypress = Onkeypress.onkeypress.normalize(onkeypress);
   }
 
   private void init() {
@@ -153,6 +156,7 @@ public class SelectTag extends ElementBufferedBodyTag
         pageContext.getServletContext(),
         (HttpServletRequest) pageContext.getRequest()
     );
+    // TODO: ao-fluent-html
     out.write("<select");
     GlobalAttributesUtils.writeGlobalAttributes(global, out);
     if (disabled) {

@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2012, 2013, 2016, 2017, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2012, 2013, 2016, 2017, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -65,9 +65,9 @@ public class MaxlengthTag extends EncodingBufferedBodyTag {
     /* SimpleTag only:
       protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
     /**/
-    String trimmedMaxlength = capturedBody.trim().toString();
+    String trimmed = capturedBody.trim().toString();
     AttributeUtils.requireAttributeParent(TAG_NAME, this, "maxlength", MaxlengthAttribute.class)
-        .setMaxlength(trimmedMaxlength.isEmpty() ? null : Integer.valueOf(trimmedMaxlength));
+        .setMaxlength(trimmed.isEmpty() ? null : Integer.valueOf(trimmed));
     /* BodyTag only: */
     return EVAL_PAGE;
     /**/

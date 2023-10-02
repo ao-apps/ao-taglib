@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2011, 2012, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -29,6 +29,7 @@ import static com.aoapps.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttribu
 import com.aoapps.encoding.MediaType;
 import com.aoapps.hodgepodge.i18n.MarkupCoercion;
 import com.aoapps.hodgepodge.i18n.MarkupType;
+import com.aoapps.html.any.attributes.url.Src;
 import com.aoapps.io.buffer.BufferResult;
 import com.aoapps.lang.Coercion;
 import com.aoapps.lang.Strings;
@@ -36,7 +37,6 @@ import com.aoapps.net.MutableURIParameters;
 import com.aoapps.net.URIParametersMap;
 import com.aoapps.servlet.lastmodified.AddLastModified;
 import com.aoapps.taglib.AttributeRequiredException;
-import com.aoapps.taglib.AttributeUtils;
 import com.aoapps.taglib.FrameborderAttribute;
 import com.aoapps.taglib.GlobalAttributesUtils;
 import com.aoapps.taglib.HeightAttribute;
@@ -86,7 +86,7 @@ public class IframeTag extends ElementBufferedBodyTag
 
   @Override
   public void setSrc(String src) {
-    this.src = Strings.nullIfEmpty(src);
+    this.src = Src.src.normalize(src);
   }
 
   private MutableURIParameters params;
@@ -114,21 +114,21 @@ public class IframeTag extends ElementBufferedBodyTag
   private AddLastModified addLastModified;
 
   public void setAddLastModified(String addLastModified) {
-    this.addLastModified = AddLastModified.valueOfLowerName(addLastModified.trim().toLowerCase(Locale.ROOT));
+    this.addLastModified = AddLastModified.valueOfLowerName(Strings.trim(addLastModified).toLowerCase(Locale.ROOT));
   }
 
-  private Object width;
+  private Integer width;
 
   @Override
-  public void setWidth(Object width) {
-    this.width = AttributeUtils.trimNullIfEmpty(width);
+  public void setWidth(Integer width) {
+    this.width = width;
   }
 
-  private Object height;
+  private Integer height;
 
   @Override
-  public void setHeight(Object height) {
-    this.height = AttributeUtils.trimNullIfEmpty(height);
+  public void setHeight(Integer height) {
+    this.height = height;
   }
 
   private boolean frameborder;

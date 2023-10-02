@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -31,6 +31,15 @@ import static com.aoapps.encoding.TextInXhtmlEncoder.textInXhtmlEncoder;
 import com.aoapps.encoding.MediaType;
 import com.aoapps.hodgepodge.i18n.MarkupCoercion;
 import com.aoapps.hodgepodge.i18n.MarkupType;
+import com.aoapps.html.any.attributes.enumeration.Rel;
+import com.aoapps.html.any.attributes.enumeration.Target;
+import com.aoapps.html.any.attributes.event.Onclick;
+import com.aoapps.html.any.attributes.event.Onmouseout;
+import com.aoapps.html.any.attributes.event.Onmouseover;
+import com.aoapps.html.any.attributes.text.Hreflang;
+import com.aoapps.html.any.attributes.text.Title;
+import com.aoapps.html.any.attributes.text.Type;
+import com.aoapps.html.any.attributes.url.Href;
 import com.aoapps.io.buffer.BufferResult;
 import com.aoapps.lang.Coercion;
 import com.aoapps.lang.Strings;
@@ -41,7 +50,6 @@ import com.aoapps.net.URIParser;
 import com.aoapps.net.URIResolver;
 import com.aoapps.servlet.http.Dispatcher;
 import com.aoapps.servlet.lastmodified.AddLastModified;
-import com.aoapps.taglib.AttributeUtils;
 import com.aoapps.taglib.GlobalAttributesUtils;
 import com.aoapps.taglib.HrefAttribute;
 import com.aoapps.taglib.HreflangAttribute;
@@ -103,7 +111,7 @@ public class ATag extends ElementBufferedBodyTag
 
   @Override
   public void setHref(String href) {
-    this.href = Strings.nullIfEmpty(href);
+    this.href = Href.href.normalize(href);
   }
 
   private MutableURIParameters params;
@@ -131,63 +139,63 @@ public class ATag extends ElementBufferedBodyTag
   private AddLastModified addLastModified;
 
   public void setAddLastModified(String addLastModified) {
-    this.addLastModified = AddLastModified.valueOfLowerName(addLastModified.trim().toLowerCase(Locale.ROOT));
+    this.addLastModified = AddLastModified.valueOfLowerName(Strings.trim(addLastModified).toLowerCase(Locale.ROOT));
   }
 
   private Object hreflang;
 
   @Override
-  public void setHreflang(Object hreflang) {
-    this.hreflang = hreflang;
+  public void setHreflang(Object hreflang) throws IOException {
+    this.hreflang = Hreflang.hreflang.normalize(hreflang);
   }
 
   private String rel;
 
   @Override
   public void setRel(String rel) {
-    this.rel = Strings.trimNullIfEmpty(rel);
+    this.rel = Rel.rel.normalize(rel);
   }
 
   private String target;
 
   @Override
   public void setTarget(String target) {
-    this.target = Strings.trimNullIfEmpty(target);
+    this.target = Target.target.normalize(target);
   }
 
   private Object title;
 
   @Override
-  public void setTitle(Object title) {
-    this.title = AttributeUtils.trimNullIfEmpty(title);
+  public void setTitle(Object title) throws IOException {
+    this.title = Title.title.normalize(title);
   }
 
-  private String type;
+  private Object type;
 
   @Override
-  public void setType(String type) {
-    this.type = Strings.trimNullIfEmpty(type);
+  public void setType(Object type) throws IOException {
+    this.type = Type.type.normalize(type);
   }
 
   private Object onclick;
 
   @Override
-  public void setOnclick(Object onclick) {
-    this.onclick = AttributeUtils.trimNullIfEmpty(onclick);
+  public void setOnclick(Object onclick) throws IOException {
+    this.onclick = Onclick.onclick.normalize(onclick);
   }
 
   private Object onmouseout;
 
   @Override
-  public void setOnmouseout(Object onmouseout) {
-    this.onmouseout = AttributeUtils.trimNullIfEmpty(onmouseout);
+  public void setOnmouseout(Object onmouseout) throws IOException {
+    this.onmouseout = Onmouseout.onmouseout.normalize(onmouseout);
   }
 
   private Object onmouseover;
 
   @Override
-  public void setOnmouseover(Object onmouseover) {
-    this.onmouseover = AttributeUtils.trimNullIfEmpty(onmouseover);
+  public void setOnmouseover(Object onmouseover) throws IOException {
+    this.onmouseover = Onmouseover.onmouseover.normalize(onmouseover);
   }
 
   /**
@@ -226,6 +234,7 @@ public class ATag extends ElementBufferedBodyTag
   protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
     final PageContext pageContext = (PageContext) getJspContext();
     /**/
+    // TODO: ao-fluent-html
     out.write("<a");
     GlobalAttributesUtils.writeGlobalAttributes(global, out);
     String transformed;
@@ -235,17 +244,10 @@ public class ATag extends ElementBufferedBodyTag
       transformed = href;
     }
     UrlUtils.writeHref(pageContext, out, transformed, params, addLastModified, absolute, canonical);
-    if (hreflang instanceof Locale) {
+    if (hreflang != null) {
       out.write(" hreflang=\"");
-      encodeTextInXhtmlAttribute(((Locale) hreflang).toLanguageTag(), out);
+      Coercion.write(hreflang, textInXhtmlAttributeEncoder, out);
       out.append('"');
-    } else {
-      hreflang = AttributeUtils.trimNullIfEmpty(hreflang);
-      if (hreflang != null) {
-        out.write(" hreflang=\"");
-        Coercion.write(hreflang, textInXhtmlAttributeEncoder, out);
-        out.append('"');
-      }
     }
     if (rel != null) {
       out.write(" rel=\"");

@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2010, 2011, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -31,10 +31,14 @@ import com.aoapps.encoding.Doctype;
 import com.aoapps.encoding.MediaType;
 import com.aoapps.hodgepodge.i18n.MarkupCoercion;
 import com.aoapps.hodgepodge.i18n.MarkupType;
+import com.aoapps.html.any.attributes.enumeration.Enctype;
+import com.aoapps.html.any.attributes.enumeration.Method;
+import com.aoapps.html.any.attributes.enumeration.Target;
+import com.aoapps.html.any.attributes.event.Onsubmit;
+import com.aoapps.html.any.attributes.url.Action;
 import com.aoapps.html.servlet.DocumentEE;
 import com.aoapps.io.buffer.BufferResult;
 import com.aoapps.lang.LocalizedIllegalArgumentException;
-import com.aoapps.lang.Strings;
 import com.aoapps.lang.i18n.Resources;
 import com.aoapps.net.AnyURI;
 import com.aoapps.net.MutableURIParameters;
@@ -95,21 +99,21 @@ public class FormTag extends ElementBufferedTag
 
   @Override
   public void setAction(String action) {
-    this.action = Strings.nullIfEmpty(action);
+    this.action = Action.action.normalize(action);
   }
 
   private String enctype;
 
   @Override
   public void setEnctype(String enctype) {
-    this.enctype = Strings.trimNullIfEmpty(enctype);
+    this.enctype = Enctype.enctype.normalize(enctype);
   }
 
   private String method;
 
   @Override
   public void setMethod(String method) {
-    method = Strings.trimNullIfEmpty(method);
+    method = Method.method.normalize(method);
     if (method != null && !FormTagTEI.isValidMethod(method)) {
       throw new LocalizedIllegalArgumentException(RESOURCES, "method.invalid", method);
     }
@@ -130,14 +134,14 @@ public class FormTag extends ElementBufferedTag
 
   @Override
   public void setTarget(String target) {
-    this.target = Strings.trimNullIfEmpty(target);
+    this.target = Target.target.normalize(target);
   }
 
   private Object onsubmit;
 
   @Override
-  public void setOnsubmit(Object onsubmit) {
-    this.onsubmit = AttributeUtils.trimNullIfEmpty(onsubmit);
+  public void setOnsubmit(Object onsubmit) throws IOException {
+    this.onsubmit = Onsubmit.onsubmit.normalize(onsubmit);
   }
 
   /**

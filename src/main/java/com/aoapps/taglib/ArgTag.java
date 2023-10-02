@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2013, 2015, 2016, 2017, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2013, 2015, 2016, 2017, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -25,7 +25,9 @@ package com.aoapps.taglib;
 
 import com.aoapps.encoding.MediaType;
 import com.aoapps.encoding.taglib.EncodingBufferedTag;
+import com.aoapps.html.any.attributes.text.Name;
 import com.aoapps.io.buffer.BufferResult;
+import com.aoapps.lang.Coercion;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
@@ -64,8 +66,8 @@ public class ArgTag extends EncodingBufferedTag
   private String name;
 
   @Override
-  public void setName(String name) {
-    this.name = name;
+  public void setName(Object name) throws IOException {
+    this.name = Coercion.toString(Name.name.normalize(name));
   }
 
   private Object value;

@@ -24,6 +24,7 @@
 package com.aoapps.taglib;
 
 import com.aoapps.hodgepodge.util.WildcardPatternMatcher;
+import com.aoapps.html.any.attributes.url.Href;
 import com.aoapps.lang.LocalizedIllegalArgumentException;
 import com.aoapps.lang.Strings;
 import com.aoapps.lang.attribute.Attribute;
@@ -90,7 +91,7 @@ public class RedirectTag extends DispatchTag
   private AddLastModified addLastModified = AddLastModified.AUTO;
 
   public void setStatusCode(String statusCode) {
-    statusCode = statusCode.trim();
+    statusCode = Strings.trim(statusCode);
     if (!isValidStatusCode(statusCode)) {
       throw new LocalizedIllegalArgumentException(RESOURCES, "statusCode.invalid", statusCode);
     }
@@ -99,7 +100,7 @@ public class RedirectTag extends DispatchTag
 
   @Override
   public void setHref(String href) {
-    this.href = Strings.nullIfEmpty(href);
+    this.href = Href.href.normalize(href);
   }
 
   public void setAbsolute(boolean absolute) {
@@ -111,7 +112,7 @@ public class RedirectTag extends DispatchTag
   }
 
   public void setAddLastModified(String addLastModified) {
-    this.addLastModified = AddLastModified.valueOfLowerName(addLastModified.trim().toLowerCase(Locale.ROOT));
+    this.addLastModified = AddLastModified.valueOfLowerName(Strings.trim(addLastModified).toLowerCase(Locale.ROOT));
   }
 
   @Override

@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -26,9 +26,14 @@ package com.aoapps.taglib;
 import com.aoapps.collections.MinimalMap;
 import com.aoapps.html.any.Attributes;
 import com.aoapps.html.any.attributes.enumeration.Dir;
+import com.aoapps.html.any.attributes.text.Class;
 import com.aoapps.html.any.attributes.text.Data;
+import com.aoapps.html.any.attributes.text.Id;
+import com.aoapps.html.any.attributes.text.Style;
+import com.aoapps.lang.Coercion;
 import com.aoapps.lang.Freezable;
-import com.aoapps.lang.Strings;
+import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.util.Map;
 
 /**
@@ -37,7 +42,7 @@ import java.util.Map;
 public class MutableGlobalAttributes implements GlobalAttributes, Freezable<GlobalAttributes> {
 
   private String id;
-  private String clazz;
+  private Object clazz;
   private Map<String, Object> data = MinimalMap.emptyMap();
   private String dir;
   private Object style;
@@ -48,11 +53,15 @@ public class MutableGlobalAttributes implements GlobalAttributes, Freezable<Glob
 
   @SuppressWarnings("OverridableMethodCallInConstructor")
   public MutableGlobalAttributes(GlobalAttributes global) {
-    setId(global.getId());
-    setClazz(global.getClazz());
-    setData(global.getData());
-    setDir(global.getDir());
-    setStyle(global.getStyle());
+    try {
+      setId(global.getId());
+      setClazz(global.getClazz());
+      setData(global.getData());
+      setDir(global.getDir());
+      setStyle(global.getStyle());
+    } catch (IOException e) {
+      throw new UncheckedIOException(e);
+    }
   }
 
   @Override
@@ -61,17 +70,22 @@ public class MutableGlobalAttributes implements GlobalAttributes, Freezable<Glob
   }
 
   public MutableGlobalAttributes setId(String id) {
-    this.id = Strings.trimNullIfEmpty(id); // TODO: normalize and validate
+    // TODO: validate, too
+    try {
+      this.id = Coercion.toString(Id.id.normalize(id));
+    } catch (IOException e) {
+      throw new AssertionError("IOException should not happen on String", e);
+    }
     return this;
   }
 
   @Override
-  public String getClazz() {
+  public Object getClazz() {
     return clazz;
   }
 
-  public MutableGlobalAttributes setClazz(String clazz) {
-    this.clazz = Strings.trimNullIfEmpty(clazz);
+  public MutableGlobalAttributes setClazz(Object clazz) throws IOException {
+    this.clazz = Class.clazz.normalize(clazz);
     return this;
   }
 
@@ -88,7 +102,7 @@ public class MutableGlobalAttributes implements GlobalAttributes, Freezable<Glob
    *
    * @see  GlobalBufferedAttributes#setData(java.util.Map)
    */
-  public MutableGlobalAttributes setData(Map<? extends String, ?> data) throws IllegalArgumentException {
+  public MutableGlobalAttributes setData(Map<? extends String, ?> data) throws IOException, IllegalArgumentException {
     Map<String, Object> newData = MinimalMap.emptyMap();
     if (data != null) {
       for (Map.Entry<? extends String, ?> entry : data.entrySet()) {
@@ -109,7 +123,7 @@ public class MutableGlobalAttributes implements GlobalAttributes, Freezable<Glob
    *
    * @throws  IllegalArgumentException  When {@code attrName} is not {@linkplain Data.data#validate(java.lang.String) valid}
    */
-  public MutableGlobalAttributes addData(Map<? extends String, ?> data) throws IllegalArgumentException {
+  public MutableGlobalAttributes addData(Map<? extends String, ?> data) throws IOException, IllegalArgumentException {
     if (data != null) {
       Map<String, Object> newData = this.data;
       for (Map.Entry<? extends String, ?> entry : data.entrySet()) {
@@ -183,8 +197,8 @@ public class MutableGlobalAttributes implements GlobalAttributes, Freezable<Glob
     return style;
   }
 
-  public MutableGlobalAttributes setStyle(Object style) throws IllegalArgumentException {
-    this.style = AttributeUtils.trimNullIfEmpty(style); // TODO: .normalize()
+  public MutableGlobalAttributes setStyle(Object style) throws IOException {
+    this.style = Style.style.normalize(style);
     return this;
   }
 

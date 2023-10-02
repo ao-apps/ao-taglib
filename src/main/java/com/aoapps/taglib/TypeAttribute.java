@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2013, 2016, 2017, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2013, 2016, 2017, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -23,6 +23,8 @@
 
 package com.aoapps.taglib;
 
+import java.io.IOException;
+
 /**
  * Something with a type attribute.
  *
@@ -30,5 +32,5 @@ package com.aoapps.taglib;
  */
 public interface TypeAttribute {
 
-  void setType(String type);
+  void setType(Object type) throws IOException;
 }

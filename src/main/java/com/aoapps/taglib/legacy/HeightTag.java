@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2016, 2017, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2016, 2017, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -65,8 +65,9 @@ public class HeightTag extends EncodingBufferedBodyTag {
     /* SimpleTag only:
       protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
     /**/
+    String trimmed = capturedBody.trim().toString();
     AttributeUtils.requireAttributeParent(TAG_NAME, this, "height", HeightAttribute.class)
-        .setHeight(capturedBody.trim());
+        .setHeight(trimmed.isEmpty() ? null : Integer.valueOf(trimmed));
     /* BodyTag only: */
     return EVAL_PAGE;
     /**/

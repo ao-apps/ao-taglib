@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -24,6 +24,10 @@
 package com.aoapps.taglib.legacy;
 
 import com.aoapps.encoding.MediaType;
+import com.aoapps.html.any.attributes.text.Alt;
+import com.aoapps.html.any.attributes.text.Title;
+import com.aoapps.html.any.attributes.text.Usemap;
+import com.aoapps.html.any.attributes.url.Src;
 import com.aoapps.html.servlet.DocumentEE;
 import com.aoapps.io.buffer.BufferResult;
 import com.aoapps.lang.Strings;
@@ -32,7 +36,6 @@ import com.aoapps.net.URIParametersMap;
 import com.aoapps.servlet.lastmodified.AddLastModified;
 import com.aoapps.taglib.AltAttribute;
 import com.aoapps.taglib.AttributeRequiredException;
-import com.aoapps.taglib.AttributeUtils;
 import com.aoapps.taglib.GlobalAttributesUtils;
 import com.aoapps.taglib.HeightAttribute;
 import com.aoapps.taglib.ParamUtils;
@@ -85,7 +88,7 @@ public class ImgTag extends ElementBufferedBodyTag
 
   @Override
   public void setSrc(String src) {
-    this.src = Strings.nullIfEmpty(src);
+    this.src = Src.src.normalize(src);
   }
 
   private MutableURIParameters params;
@@ -113,41 +116,41 @@ public class ImgTag extends ElementBufferedBodyTag
   private AddLastModified addLastModified;
 
   public void setAddLastModified(String addLastModified) {
-    this.addLastModified = AddLastModified.valueOfLowerName(addLastModified.trim().toLowerCase(Locale.ROOT));
+    this.addLastModified = AddLastModified.valueOfLowerName(Strings.trim(addLastModified).toLowerCase(Locale.ROOT));
   }
 
-  private Object width;
+  private Integer width;
 
   @Override
-  public void setWidth(Object width) {
-    this.width = AttributeUtils.trimNullIfEmpty(width);
+  public void setWidth(Integer width) {
+    this.width = width;
   }
 
-  private Object height;
+  private Integer height;
 
   @Override
-  public void setHeight(Object height) {
-    this.height = AttributeUtils.trimNullIfEmpty(height);
+  public void setHeight(Integer height) {
+    this.height = height;
   }
 
   private Object alt;
 
   @Override
-  public void setAlt(Object alt) {
-    this.alt = AttributeUtils.trim(alt);
+  public void setAlt(Object alt) throws IOException {
+    this.alt = Alt.alt.normalize(alt);
   }
 
   private Object title;
 
   @Override
-  public void setTitle(Object title) {
-    this.title = AttributeUtils.trimNullIfEmpty(title);
+  public void setTitle(Object title) throws IOException {
+    this.title = Title.title.normalize(title);
   }
 
   private String usemap;
 
   public void setUsemap(String usemap) {
-    this.usemap = Strings.trimNullIfEmpty(usemap);
+    this.usemap = Usemap.usemap.normalize(usemap);
   }
 
   private boolean ismap;
@@ -198,13 +201,6 @@ public class ImgTag extends ElementBufferedBodyTag
     if (usemap == null && alt == null) {
       throw new AttributeRequiredException("alt");
     }
-    // Automatically prefix '#' if missing
-    if (usemap != null) {
-      assert !usemap.isEmpty() : "empty converted to null in setUsemap method";
-      if (usemap.charAt(0) != '#') {
-        usemap = '#' + usemap;
-      }
-    }
     DocumentEE document = new DocumentEE(
         pageContext.getServletContext(),
         (HttpServletRequest) pageContext.getRequest(),
@@ -215,10 +211,8 @@ public class ImgTag extends ElementBufferedBodyTag
     );
     GlobalAttributesUtils.doGlobalAttributes(global, document.img())
         .src(UrlUtils.getSrc(pageContext, src, params, addLastModified, absolute, canonical))
-        // TOOD: width to Integer via Img.width(Integer)
-        .attribute("width", width)
-        // TOOD: height to Integer via Img.height(Integer)
-        .attribute("height", height)
+        .width(width)
+        .height(height)
         .alt(alt)
         .title(title)
         .usemap(usemap)

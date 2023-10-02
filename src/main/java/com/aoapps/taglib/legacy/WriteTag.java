@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -30,6 +30,8 @@ import com.aoapps.encoding.taglib.legacy.EncodingNullBodyTag;
 import com.aoapps.hodgepodge.i18n.BundleLookupMarkup;
 import com.aoapps.hodgepodge.i18n.BundleLookupThreadContext;
 import com.aoapps.hodgepodge.i18n.MarkupType;
+import com.aoapps.html.any.attributes.text.Name;
+import com.aoapps.html.any.attributes.text.Type;
 import com.aoapps.lang.Coercion;
 import com.aoapps.lang.Strings;
 import com.aoapps.lang.Throwables;
@@ -77,14 +79,14 @@ public class WriteTag extends EncodingNullBodyTag
   private String scope;
 
   public void setScope(String scope) {
-    this.scope = scope.trim();
+    this.scope = Strings.trim(scope);
   }
 
   private String name;
 
   @Override
-  public void setName(String name) {
-    this.name = name;
+  public void setName(Object name) throws IOException {
+    this.name = Coercion.toString(Name.name.normalize(name));
   }
 
   private String property;
@@ -102,8 +104,8 @@ public class WriteTag extends EncodingNullBodyTag
   private MediaType mediaType;
 
   @Override
-  public void setType(String type) {
-    String typeStr = Strings.trim(type);
+  public void setType(Object type) throws IOException {
+    String typeStr = Coercion.toString(Type.type.normalize(type));
     MediaType newMediaType = MediaType.getMediaTypeByName(typeStr);
     if (newMediaType == null) {
       try {

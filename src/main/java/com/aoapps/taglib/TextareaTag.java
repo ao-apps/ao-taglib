@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2010, 2011, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -24,10 +24,12 @@
 package com.aoapps.taglib;
 
 import com.aoapps.encoding.MediaType;
+import com.aoapps.html.any.attributes.event.Onchange;
+import com.aoapps.html.any.attributes.text.Name;
 import com.aoapps.html.servlet.DocumentEE;
 import com.aoapps.html.servlet.TEXTAREA;
 import com.aoapps.io.buffer.BufferResult;
-import com.aoapps.lang.Strings;
+import com.aoapps.lang.Coercion;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
@@ -82,11 +84,11 @@ public class TextareaTag extends ElementBufferedTag
     this.disabled = disabled;
   }
 
-  private String name;
+  private Object name;
 
   @Override
-  public void setName(String name) {
-    this.name = Strings.nullIfEmpty(name);
+  public void setName(Object name) throws IOException {
+    this.name = Name.name.normalize(name);
   }
 
   private boolean readonly;
@@ -106,15 +108,15 @@ public class TextareaTag extends ElementBufferedTag
   private Object value;
 
   @Override
-  public void setValue(Object value) {
-    this.value = AttributeUtils.nullIfEmpty(value);
+  public void setValue(Object value) throws IOException {
+    this.value = Coercion.nullIfEmpty(value);
   }
 
   private Object onchange;
 
   @Override
-  public void setOnchange(Object onchange) {
-    this.onchange = AttributeUtils.trimNullIfEmpty(onchange);
+  public void setOnchange(Object onchange) throws IOException {
+    this.onchange = Onchange.onchange.normalize(onchange);
   }
 
   private void init() {

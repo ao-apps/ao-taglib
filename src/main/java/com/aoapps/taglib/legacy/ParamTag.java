@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2015, 2016, 2017, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2015, 2016, 2017, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -27,7 +27,9 @@ import static com.aoapps.taglib.ParamTag.TAG_NAME;
 
 import com.aoapps.encoding.MediaType;
 import com.aoapps.encoding.taglib.legacy.EncodingBufferedBodyTag;
+import com.aoapps.html.any.attributes.text.Name;
 import com.aoapps.io.buffer.BufferResult;
+import com.aoapps.lang.Coercion;
 import com.aoapps.taglib.AttributeRequiredException;
 import com.aoapps.taglib.NameAttribute;
 import com.aoapps.taglib.ParamUtils;
@@ -70,8 +72,8 @@ public class ParamTag extends EncodingBufferedBodyTag
   private String name;
 
   @Override
-  public void setName(String name) {
-    this.name = name;
+  public void setName(Object name) throws IOException {
+    this.name = Coercion.toString(Name.name.normalize(name));
   }
 
   private Object value;

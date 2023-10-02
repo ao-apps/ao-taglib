@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -60,7 +60,6 @@ public class ElementTagTEI extends TagExtraInfo {
   protected void validate(TagData data, List<ValidationMessage> messages) {
     Object o = data.getAttribute("dir");
     if (o != TagData.REQUEST_TIME_VALUE) {
-      // TODO: Other validation Strings.trimNullIfEmpty (or their normalize* method) for consistency with implementation
       String dir = Dir.dir.normalize((String) o);
       ValidationResult validation = Dir.dir.validate(dir);
       if (!validation.isValid()) {

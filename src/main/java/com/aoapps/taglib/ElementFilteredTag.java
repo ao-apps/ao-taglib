@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -24,6 +24,7 @@
 package com.aoapps.taglib;
 
 import com.aoapps.encoding.taglib.EncodingFilteredTag;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -54,11 +55,11 @@ public abstract class ElementFilteredTag extends EncodingFilteredTag
   }
 
   @Override
-  public String getClazz() {
+  public Object getClazz() {
     return global.getClazz();
   }
 
-  public void setClazz(String clazz) {
+  public void setClazz(Object clazz) throws IOException {
     global.setClazz(clazz);
   }
 
@@ -81,7 +82,7 @@ public abstract class ElementFilteredTag extends EncodingFilteredTag
     return global.getStyle();
   }
 
-  public void setStyle(Object style) {
+  public void setStyle(Object style) throws IOException {
     global.setStyle(style);
   }
 

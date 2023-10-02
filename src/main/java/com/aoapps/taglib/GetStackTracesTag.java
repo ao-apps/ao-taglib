@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2016, 2017, 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -25,6 +25,8 @@ package com.aoapps.taglib;
 
 import com.aoapps.encoding.MediaType;
 import com.aoapps.encoding.taglib.EncodingNullTag;
+import com.aoapps.html.any.attributes.text.Name;
+import com.aoapps.lang.Coercion;
 import com.aoapps.lang.i18n.Resources;
 import com.aoapps.lang.util.ErrorPrinter;
 import com.aoapps.servlet.jsp.LocalizedJspTagException;
@@ -37,7 +39,7 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author  AO Industries, Inc.
  */
-public class GetStackTracesTag extends EncodingNullTag {
+public class GetStackTracesTag extends EncodingNullTag implements NameAttribute {
 
   private static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, GetStackTracesTag.class);
 
@@ -54,8 +56,9 @@ public class GetStackTracesTag extends EncodingNullTag {
     this.scope = scope;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  @Override
+  public void setName(Object name) throws IOException {
+    this.name = Coercion.toString(Name.name.normalize(name));
   }
 
   public void setProperty(String property) {

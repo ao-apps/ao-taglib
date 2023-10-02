@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2013, 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2013, 2016, 2017, 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -25,18 +25,13 @@ package com.aoapps.taglib;
 
 import static com.aoapps.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 
-import com.aoapps.html.any.Attributes;
-import com.aoapps.lang.Coercion;
 import com.aoapps.lang.Strings;
 import com.aoapps.lang.i18n.Resources;
-import com.aoapps.lang.validation.ValidationResult;
 import com.aoapps.servlet.jsp.LocalizedJspTagException;
 import com.aoapps.servlet.jsp.tagext.JspTagUtils;
 import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.function.Function;
 import javax.el.ELContext;
 import javax.el.ValueExpression;
 import javax.servlet.jsp.JspTagException;
@@ -69,14 +64,6 @@ public final class AttributeUtils  {
   }
 
   /**
-   * @deprecated  Please use {@link #requireAttributeParent(java.lang.String, javax.servlet.jsp.tagext.JspTag, java.lang.String, java.lang.Class)}.
-   */
-  @Deprecated
-  public static <T> T findAttributeParent(String fromTagName, JspTag from, String attribute, Class<? extends T> clazz) throws NeedAttributeParentException {
-    return requireAttributeParent(fromTagName, from, attribute, clazz);
-  }
-
-  /**
    * Evaluates an expression then casts to the provided type.
    */
   public static <T> T resolveValue(ValueExpression expression, Class<T> type, ELContext elContext) {
@@ -100,60 +87,7 @@ public final class AttributeUtils  {
     }
   }
 
-  /**
-   * @see  Coercion#nullIfEmpty(java.lang.Object)
-   */
-  public static Object nullIfEmpty(Object value) throws UncheckedIOException {
-    try {
-      return Coercion.nullIfEmpty(value);
-    } catch (IOException e) {
-      throw new UncheckedIOException(e);
-    }
-  }
-
-  /**
-   * @deprecated  Please use {@link Strings#nullIfEmpty(java.lang.String)} directly.
-   */
-  @Deprecated
-  public static String nullIfEmpty(String value) {
-    return Strings.nullIfEmpty(value);
-  }
-
-  /**
-   * @see  Coercion#trim(java.lang.Object)
-   *
-   * @throws  UncheckedIOException  when an underlying {@link IOException} occurs.
-   */
-  public static Object trim(Object value) throws UncheckedIOException {
-    try {
-      return Coercion.trim(value);
-    } catch (IOException e) {
-      throw new UncheckedIOException(e);
-    }
-  }
-
-  /**
-   * @see  Coercion#trimNullIfEmpty(java.lang.Object)
-   *
-   * @throws  UncheckedIOException  when an underlying {@link IOException} occurs.
-   */
-  public static Object trimNullIfEmpty(Object value) throws UncheckedIOException {
-    try {
-      return Coercion.trimNullIfEmpty(value);
-    } catch (IOException e) {
-      throw new UncheckedIOException(e);
-    }
-  }
-
-  /**
-   * @deprecated  Please use {@link Strings#trimNullIfEmpty(java.lang.String)} directly.
-   */
-  @Deprecated
-  public static String trimNullIfEmpty(String value) {
-    return Strings.trimNullIfEmpty(value);
-  }
-
-  public static boolean isAllDigits(String value) {
+  private static boolean isAllDigits(String value) {
     for (int i = 0, len = value.length(); i < len; i++) {
       char ch = value.charAt(i);
       if (ch < '0' || ch > '9') {
@@ -163,7 +97,7 @@ public final class AttributeUtils  {
     return true;
   }
 
-  public static boolean isZero(String value) {
+  private static boolean isZero(String value) {
     for (int i = 0, len = value.length(); i < len; i++) {
       char ch = value.charAt(i);
       if (ch != '0') {
@@ -212,22 +146,6 @@ public final class AttributeUtils  {
     } else {
       return null;
     }
-  }
-
-  /**
-   * @deprecated  Please use {@link Attributes#validate(java.lang.Object, com.aoapps.lang.validation.ValidationResult)} instead.
-   */
-  @Deprecated
-  public static <T> T validate(T value, ValidationResult validationResult) throws IllegalArgumentException {
-    return Attributes.validate(value, validationResult);
-  }
-
-  /**
-   * @deprecated  Please use {@link Attributes#validate(java.lang.Object, java.util.function.Function)} instead.
-   */
-  @Deprecated
-  public static <T> T validate(T value, Function<? super T, ValidationResult> validator) throws IllegalArgumentException {
-    return Attributes.validate(value, validator);
   }
 
   /**

@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -32,6 +32,7 @@ import com.aoapps.html.any.attributes.text.Data;
 import com.aoapps.lang.Coercion;
 import com.aoapps.lang.Throwables;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.io.Writer;
 import java.util.List;
 import java.util.Map;
@@ -90,11 +91,15 @@ public final class GlobalAttributesUtils {
    * Copies all global attributes.
    */
   public static void copy(GlobalAttributes from, GlobalBufferedAttributes to) {
-    to.setId(from.getId());
-    to.setClazz(from.getClazz());
-    to.setData(from.getData());
-    to.setDir(from.getDir());
-    to.setStyle(from.getStyle());
+    try {
+      to.setId(from.getId());
+      to.setClazz(from.getClazz());
+      to.setData(from.getData());
+      to.setDir(from.getDir());
+      to.setStyle(from.getStyle());
+    } catch (IOException e) {
+      throw new UncheckedIOException(e);
+    }
   }
 
   public static <G extends com.aoapps.html.any.GlobalAttributes<?>> G doGlobalAttributes(GlobalAttributes from, G to) throws IOException {
@@ -109,7 +114,7 @@ public final class GlobalAttributesUtils {
       to.id(id);
     }
     // class is not valid in all doctypes
-    String clazz = from.getClazz();
+    Object clazz = from.getClazz();
     if (clazz != null) {
       to.clazz(clazz);
     }
@@ -137,7 +142,7 @@ public final class GlobalAttributesUtils {
       encodeTextInXhtmlAttribute(id, out);
       out.append('"');
     }
-    String clazz = global.getClazz();
+    Object clazz = global.getClazz();
     if (clazz != null) {
       out.write(" class=\"");
       encodeTextInXhtmlAttribute(clazz, out);
@@ -179,7 +184,7 @@ public final class GlobalAttributesUtils {
       encodeTextInXhtmlAttribute(id, out);
       out.append('"');
     }
-    String clazz = global.getClazz();
+    Object clazz = global.getClazz();
     if (clazz != null) {
       out.append(" class=\"");
       encodeTextInXhtmlAttribute(clazz, out);

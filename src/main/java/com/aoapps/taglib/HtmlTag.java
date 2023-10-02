@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2011, 2012, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -33,6 +33,7 @@ import com.aoapps.encoding.servlet.SerializationEE;
 import com.aoapps.html.any.AnyDocument;
 import com.aoapps.html.servlet.DocumentEE;
 import com.aoapps.lang.LocalizedIllegalArgumentException;
+import com.aoapps.lang.Strings;
 import com.aoapps.lang.attribute.Attribute;
 import com.aoapps.lang.i18n.Resources;
 import com.aoapps.servlet.ServletUtil;
@@ -116,7 +117,7 @@ public class HtmlTag extends ElementFilteredTag {
     if (serialization == null) {
       this.serialization = null;
     } else {
-      serialization = serialization.trim();
+      serialization = Strings.trim(serialization);
       this.serialization = (serialization.isEmpty() || "auto".equalsIgnoreCase(serialization)) ? null : Serialization.valueOf(serialization.toUpperCase(Locale.ROOT));
     }
   }
@@ -127,7 +128,7 @@ public class HtmlTag extends ElementFilteredTag {
     if (doctype == null) {
       this.doctype = null;
     } else {
-      doctype = doctype.trim();
+      doctype = Strings.trim(doctype);
       this.doctype = (doctype.isEmpty() || "default".equalsIgnoreCase(doctype)) ? null : Doctype.valueOf(doctype.toUpperCase(Locale.ROOT));
     }
   }
@@ -138,7 +139,7 @@ public class HtmlTag extends ElementFilteredTag {
     if (autonli == null) {
       this.autonli = null;
     } else {
-      autonli = autonli.trim();
+      autonli = Strings.trim(autonli);
       if (autonli.isEmpty() || "auto".equalsIgnoreCase(autonli)) {
         this.autonli = null;
       } else if ("true".equalsIgnoreCase(autonli)) {
@@ -157,7 +158,7 @@ public class HtmlTag extends ElementFilteredTag {
     if (indent == null) {
       this.indent = null;
     } else {
-      indent = indent.trim();
+      indent = Strings.trim(indent);
       if (indent.isEmpty() || "auto".equalsIgnoreCase(indent)) {
         this.indent = null;
       } else if ("true".equalsIgnoreCase(indent)) {

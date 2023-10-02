@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -41,7 +41,7 @@ public interface GlobalAttributes {
    * Getter required.  Because without it, we get the exception:
    * <pre>Unable to find setter method for attribute: class</pre>
    */
-  String getClazz();
+  Object getClazz();
 
   /**
    * Gets the HTML data attributes or an empty map when there are none.

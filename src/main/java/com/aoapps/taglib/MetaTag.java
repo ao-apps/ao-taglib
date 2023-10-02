@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2011, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2011, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -24,6 +24,9 @@
 package com.aoapps.taglib;
 
 import com.aoapps.encoding.MediaType;
+import com.aoapps.html.any.attributes.enumeration.HttpEquiv;
+import com.aoapps.html.any.attributes.text.Content;
+import com.aoapps.html.any.attributes.text.Name;
 import com.aoapps.html.servlet.DocumentEE;
 import com.aoapps.html.servlet.META;
 import com.aoapps.io.buffer.BufferResult;
@@ -31,7 +34,9 @@ import com.aoapps.lang.Coercion;
 import com.aoapps.lang.Strings;
 import com.aoapps.servlet.jsp.tagext.JspTagUtils;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.io.Writer;
+import java.nio.charset.Charset;
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -64,12 +69,16 @@ public class MetaTag extends ElementBufferedTag
    * Copies all values from the provided meta.
    */
   public void setMeta(Meta meta) {
-    GlobalAttributesUtils.copy(meta.getGlobal(), this);
-    setName(meta.getName());
-    setHttpEquiv(meta.getHttpEquiv());
-    setItemprop(meta.getItemprop());
-    setCharset(meta.getCharset());
-    setContent(meta.getContent());
+    try {
+      GlobalAttributesUtils.copy(meta.getGlobal(), this);
+      setName(meta.getName());
+      setHttpEquiv(meta.getHttpEquiv());
+      setItemprop(meta.getItemprop());
+      setCharset(meta.getCharset());
+      setContent(meta.getContent());
+    } catch (IOException e) {
+      throw new UncheckedIOException(e);
+    }
   }
 
   /* BodyTag only:
@@ -79,33 +88,35 @@ public class MetaTag extends ElementBufferedTag
   private String name;
 
   @Override
-  public void setName(String name) {
-    this.name = name;
+  public void setName(Object name) throws IOException {
+    this.name = Coercion.toString(Name.name.normalize(name));
   }
 
   private String httpEquiv;
 
   public void setHttpEquiv(String httpEquiv) {
-    this.httpEquiv = httpEquiv;
+    this.httpEquiv = HttpEquiv.httpEquiv.normalize(httpEquiv);
   }
 
   private String itemprop;
 
   public void setItemprop(String itemprop) {
+    // TODO: Itemprop.itemprop.normalize
     this.itemprop = Strings.trimNullIfEmpty(itemprop);
   }
 
-  private Object charset; // TODO: Support java Charset, too
+  private String charset;
 
   public void setCharset(Object charset) {
-    this.charset = AttributeUtils.trimNullIfEmpty(charset);
+    this.charset = (charset instanceof Charset) ? ((Charset) charset).name()
+        : com.aoapps.html.any.attributes.enumeration.Charset.charset.normalize(Coercion.toString(charset));
   }
 
   private Object content;
 
   @Override
-  public void setContent(Object content) {
-    this.content = AttributeUtils.nullIfEmpty(content);
+  public void setContent(Object content) throws IOException {
+    this.content = Content.content.normalize(content);
   }
 
   private void init() {
@@ -133,9 +144,9 @@ public class MetaTag extends ElementBufferedTag
           new Meta(
               global.freeze(),
               Strings.trimNullIfEmpty(name),
-              Strings.trim(httpEquiv),
+              httpEquiv,
               itemprop,
-              Coercion.toString(charset),
+              charset,
               Coercion.toString(content)
           )
       );
@@ -154,12 +165,8 @@ public class MetaTag extends ElementBufferedTag
       meta.name(name)
           .httpEquiv(httpEquiv)
           // TODO: Create a global "itemprop" in ao-fluent-html
-          .attribute("itemprop", itemprop);
-      if (charset != null) {
-        // TOOD: charset to String via Meta.charset(String)
-        meta.charset(Coercion.toString(charset));
-      }
-      meta
+          .attribute("itemprop", itemprop)
+          .charset(charset)
           .content(content)
           .__();
     }

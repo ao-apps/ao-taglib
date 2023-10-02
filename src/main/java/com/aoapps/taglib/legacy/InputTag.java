@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -23,11 +23,20 @@
 
 package com.aoapps.taglib.legacy;
 
-import static com.aoapps.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import static com.aoapps.taglib.InputTag.RESOURCES;
 
 import com.aoapps.encoding.MediaType;
 import com.aoapps.html.any.AnyINPUT;
+import com.aoapps.html.any.attributes.event.Onblur;
+import com.aoapps.html.any.attributes.event.Onchange;
+import com.aoapps.html.any.attributes.event.Onclick;
+import com.aoapps.html.any.attributes.event.Onfocus;
+import com.aoapps.html.any.attributes.event.Onkeypress;
+import com.aoapps.html.any.attributes.text.Alt;
+import com.aoapps.html.any.attributes.text.Name;
+import com.aoapps.html.any.attributes.text.Title;
+import com.aoapps.html.any.attributes.text.Type;
+import com.aoapps.html.any.attributes.url.Src;
 import com.aoapps.html.servlet.DocumentEE;
 import com.aoapps.html.servlet.INPUT;
 import com.aoapps.io.buffer.BufferResult;
@@ -39,7 +48,6 @@ import com.aoapps.net.URIParametersMap;
 import com.aoapps.servlet.lastmodified.AddLastModified;
 import com.aoapps.taglib.AltAttribute;
 import com.aoapps.taglib.AttributeRequiredException;
-import com.aoapps.taglib.AttributeUtils;
 import com.aoapps.taglib.CheckedAttribute;
 import com.aoapps.taglib.DisabledAttribute;
 import com.aoapps.taglib.GlobalAttributesUtils;
@@ -129,8 +137,8 @@ public class InputTag extends ElementBufferedBodyTag
   private Object alt;
 
   @Override
-  public void setAlt(Object alt) {
-    this.alt = AttributeUtils.trim(alt);
+  public void setAlt(Object alt) throws IOException {
+    this.alt = Alt.alt.normalize(alt);
   }
 
   private boolean autocomplete;
@@ -154,11 +162,11 @@ public class InputTag extends ElementBufferedBodyTag
     this.disabled = disabled;
   }
 
-  private Object height;
+  private Integer height;
 
   @Override
-  public void setHeight(Object height) {
-    this.height = AttributeUtils.trimNullIfEmpty(height);
+  public void setHeight(Integer height) {
+    this.height = height;
   }
 
   private Integer maxlength;
@@ -168,11 +176,11 @@ public class InputTag extends ElementBufferedBodyTag
     this.maxlength = maxlength;
   }
 
-  private String name;
+  private Object name;
 
   @Override
-  public void setName(String name) {
-    this.name = name;
+  public void setName(Object name) throws IOException {
+    this.name = Name.name.normalize(name);
   }
 
   private boolean readonly;
@@ -182,18 +190,18 @@ public class InputTag extends ElementBufferedBodyTag
     this.readonly = readonly;
   }
 
-  private Object size;
+  private Integer size;
 
   @Override
-  public void setSize(Object size) {
-    this.size = AttributeUtils.trimNullIfEmpty(size);
+  public void setSize(Integer size) {
+    this.size = size;
   }
 
   private String src;
 
   @Override
   public void setSrc(String src) {
-    this.src = Strings.nullIfEmpty(src);
+    this.src = Src.src.normalize(src);
   }
 
   private MutableURIParameters params;
@@ -221,7 +229,7 @@ public class InputTag extends ElementBufferedBodyTag
   private AddLastModified addLastModified;
 
   public void setAddLastModified(String addLastModified) {
-    this.addLastModified = AddLastModified.valueOfLowerName(addLastModified.trim().toLowerCase(Locale.ROOT));
+    this.addLastModified = AddLastModified.valueOfLowerName(Strings.trim(addLastModified).toLowerCase(Locale.ROOT));
   }
 
   private int tabindex;
@@ -234,68 +242,68 @@ public class InputTag extends ElementBufferedBodyTag
   private Object title;
 
   @Override
-  public void setTitle(Object title) {
-    this.title = AttributeUtils.trimNullIfEmpty(title);
+  public void setTitle(Object title) throws IOException {
+    this.title = Title.title.normalize(title);
   }
 
   private String type;
 
   @Override
-  public void setType(String type) {
-    String typeStr = Strings.trimNullIfEmpty(type);
+  public void setType(Object type) throws IOException {
+    String typeStr = Coercion.toString(Type.type.normalize(type));
     if (typeStr != null && !InputTagTEI.isValidType(typeStr)) {
       throw new LocalizedIllegalArgumentException(RESOURCES, "type.invalid", typeStr);
     }
     this.type = typeStr;
   }
 
-  private Object width;
+  private Integer width;
 
   @Override
-  public void setWidth(Object width) {
-    this.width = AttributeUtils.trimNullIfEmpty(width);
+  public void setWidth(Integer width) {
+    this.width = width;
   }
 
   private Object value;
 
   @Override
-  public void setValue(Object value) {
-    this.value = AttributeUtils.nullIfEmpty(value);
+  public void setValue(Object value) throws IOException {
+    this.value = Coercion.nullIfEmpty(value);
   }
 
   private Object onblur;
 
   @Override
-  public void setOnblur(Object onblur) {
-    this.onblur = AttributeUtils.trimNullIfEmpty(onblur);
+  public void setOnblur(Object onblur) throws IOException {
+    this.onblur = Onblur.onblur.normalize(onblur);
   }
 
   private Object onchange;
 
   @Override
-  public void setOnchange(Object onchange) {
-    this.onchange = AttributeUtils.trimNullIfEmpty(onchange);
+  public void setOnchange(Object onchange) throws IOException {
+    this.onchange = Onchange.onchange.normalize(onchange);
   }
 
   private Object onclick;
 
   @Override
-  public void setOnclick(Object onclick) {
-    this.onclick = AttributeUtils.trimNullIfEmpty(onclick);
+  public void setOnclick(Object onclick) throws IOException {
+    this.onclick = Onclick.onclick.normalize(onclick);
   }
 
   private Object onfocus;
 
   @Override
-  public void setOnfocus(Object onfocus) {
-    this.onfocus = AttributeUtils.trimNullIfEmpty(onfocus);
+  public void setOnfocus(Object onfocus) throws IOException {
+    this.onfocus = Onfocus.onfocus.normalize(onfocus);
   }
 
   private Object onkeypress;
 
   @Override
-  public void setOnkeypress(Object onkeypress) {
-    this.onkeypress = AttributeUtils.trimNullIfEmpty(onkeypress);
+  public void setOnkeypress(Object onkeypress) throws IOException {
+    this.onkeypress = Onkeypress.onkeypress.normalize(onkeypress);
   }
 
   /**
@@ -374,35 +382,18 @@ public class InputTag extends ElementBufferedBodyTag
     }
     input
         .checked(checked)
-        .disabled(disabled);
-    if (height != null) {
-      // TODO: ao-fluent-html attribute as Integer
-      out.write(" height=\"");
-      Coercion.write(height, textInXhtmlAttributeEncoder, out);
-      out.append('"');
-    }
-    input
+        .disabled(disabled)
+        .height(height)
         .maxlength(maxlength)
         .name(name)
-        .readonly(readonly);
-    if (size != null) {
-      // TODO: ao-fluent-html attribute as Integer
-      out.write(" size=\"");
-      Coercion.write(size, textInXhtmlAttributeEncoder, out);
-      out.append('"');
-    }
+        .readonly(readonly)
+        .size(size);
     UrlUtils.writeSrc(pageContext, out, src, params, addLastModified, absolute, canonical);
     input
         .tabindex((tabindex >= 1) ? tabindex : null)
         .title(title)
-        .type(type);
-    if (width != null) {
-      // TODO: ao-fluent-html attribute as Integer
-      out.write(" width=\"");
-      Coercion.write(width, textInXhtmlAttributeEncoder, out);
-      out.append('"');
-    }
-    input
+        .type(type)
+        .width(width)
         .value(value == null ? "" : value)
         .onblur(onblur)
         .onchange(onchange)

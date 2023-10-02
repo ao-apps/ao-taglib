@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -23,6 +23,7 @@
 
 package com.aoapps.taglib;
 
+import com.aoapps.html.any.attributes.enumeration.Shape;
 import com.aoapps.lang.Strings;
 import java.util.List;
 import javax.servlet.jsp.tagext.TagData;
@@ -53,8 +54,8 @@ public class AreaTagTEI extends ElementTagTEI {
           )
       );
     } else if (shapeAttr != TagData.REQUEST_TIME_VALUE) {
-      String shape = ((String) shapeAttr).trim(); // TODO: normalizeShape
-      if (shape.isEmpty()) {
+      String shape = Shape.shape.normalize((String) shapeAttr);
+      if (shape != null) {
         messages.add(
             new ValidationMessage(
                 data.getId(),
