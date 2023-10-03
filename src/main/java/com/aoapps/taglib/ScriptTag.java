@@ -85,7 +85,8 @@ public class ScriptTag extends ElementBufferedTag
   @Override
   public void setType(Object type) throws IOException {
     try {
-      MediaType newMediaType = MediaType.getMediaTypeForContentType(Coercion.toString(Type.type.normalize(type)));
+      type = Type.type.normalize(type);
+      MediaType newMediaType = MediaType.getMediaTypeForContentType((type == null) ? null : Coercion.toString(type));
       if (
           newMediaType != MediaType.JAVASCRIPT
               && newMediaType != MediaType.JSON

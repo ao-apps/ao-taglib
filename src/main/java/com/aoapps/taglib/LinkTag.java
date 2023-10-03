@@ -159,7 +159,8 @@ public class LinkTag extends ElementNullTag
 
   @Override
   public void setType(Object type) throws IOException {
-    this.type = Coercion.toString(Type.type.normalize(type));
+    type = Type.type.normalize(type);
+    this.type = (type == null) ? null : Coercion.toString(type);
   }
 
   private Object media;
@@ -218,11 +219,11 @@ public class LinkTag extends ElementNullTag
               canonical,
               params,
               addLastModified,
-              Coercion.toString(hreflang),
+              (hreflang == null) ? null : Coercion.toString(hreflang),
               Strings.trimNullIfEmpty(rel),
               type,
-              Coercion.toString(media),
-              Coercion.toString(title)
+              (media == null) ? null : Coercion.toString(media),
+              (title == null) ? null : Coercion.toString(title)
           )
       );
     } else {

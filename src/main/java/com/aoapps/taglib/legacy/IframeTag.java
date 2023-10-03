@@ -177,6 +177,7 @@ public class IframeTag extends ElementBufferedBodyTag
     // TODO: Include id/name by doctype
     String myId = global.getId();
     if (myId != null) {
+      assert !myId.isEmpty() : "global.setId(String) trims to null";
       out.write(" name=\"");
       encodeTextInXhtmlAttribute(myId, out);
       out.append('"');

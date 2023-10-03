@@ -93,7 +93,8 @@ public class MetaTag extends ElementBufferedBodyTag
 
   @Override
   public void setName(Object name) throws IOException {
-    this.name = Coercion.toString(Name.name.normalize(name));
+    name = Name.name.normalize(name);
+    this.name = (name == null) ? null : Coercion.toString(name);
   }
 
   private String httpEquiv;
@@ -112,8 +113,13 @@ public class MetaTag extends ElementBufferedBodyTag
   private String charset;
 
   public void setCharset(Object charset) {
-    this.charset = (charset instanceof Charset) ? ((Charset) charset).name()
-        : com.aoapps.html.any.attributes.enumeration.Charset.charset.normalize(Coercion.toString(charset));
+    if (charset == null) {
+      this.charset = null;
+    } else if (charset instanceof Charset) {
+      this.charset = ((Charset) charset).name();
+    } else {
+      this.charset = com.aoapps.html.any.attributes.enumeration.Charset.charset.normalize(Coercion.toString(charset));
+    }
   }
 
   private Object content;
@@ -147,11 +153,11 @@ public class MetaTag extends ElementBufferedBodyTag
       parent.get().addMeta(
           new Meta(
               global.freeze(),
-              Strings.trimNullIfEmpty(name),
+              name,
               httpEquiv,
               itemprop,
               charset,
-              Coercion.toString(content)
+              (content == null) ? null : Coercion.toString(content)
           )
       );
     } else {

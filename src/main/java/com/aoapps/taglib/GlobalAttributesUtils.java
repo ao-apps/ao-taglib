@@ -111,6 +111,7 @@ public final class GlobalAttributesUtils {
     // id is not valid in all doctypes
     String id = from.getId();
     if (id != null) {
+      assert !id.isEmpty() : "global.setId(String) trims to null";
       to.id(id);
     }
     // class is not valid in all doctypes
@@ -138,6 +139,7 @@ public final class GlobalAttributesUtils {
   public static void writeGlobalAttributes(GlobalAttributes global, Writer out) throws IOException {
     String id = global.getId();
     if (id != null) {
+      assert !id.isEmpty() : "global.setId(String) trims to null";
       out.write(" id=\"");
       encodeTextInXhtmlAttribute(id, out);
       out.append('"');
@@ -180,6 +182,7 @@ public final class GlobalAttributesUtils {
   public static void appendGlobalAttributes(GlobalAttributes global, Appendable out) throws IOException {
     String id = global.getId();
     if (id != null) {
+      assert !id.isEmpty() : "global.setId(String) trims to null";
       out.append(" id=\"");
       encodeTextInXhtmlAttribute(id, out);
       out.append('"');

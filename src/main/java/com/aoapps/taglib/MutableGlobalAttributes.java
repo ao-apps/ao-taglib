@@ -72,7 +72,8 @@ public class MutableGlobalAttributes implements GlobalAttributes, Freezable<Glob
   public MutableGlobalAttributes setId(String id) {
     // TODO: validate, too
     try {
-      this.id = Coercion.toString(Id.id.normalize(id));
+      Object idObj = Id.id.normalize(id);
+      this.id = (idObj == null) ? null : Coercion.toString(id);
     } catch (IOException e) {
       throw new AssertionError("IOException should not happen on String", e);
     }

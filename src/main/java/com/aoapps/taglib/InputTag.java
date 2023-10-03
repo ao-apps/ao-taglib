@@ -227,7 +227,8 @@ public class InputTag extends ElementBufferedTag
 
   @Override
   public void setType(Object type) throws IOException {
-    String typeStr = Coercion.toString(Type.type.normalize(type));
+    type = Type.type.normalize(type);
+    String typeStr = (type == null) ? null : Coercion.toString(type);
     if (typeStr != null && !InputTagTEI.isValidType(typeStr)) {
       throw new LocalizedIllegalArgumentException(RESOURCES, "type.invalid", typeStr);
     }
