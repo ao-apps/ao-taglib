@@ -26,6 +26,7 @@ package com.aoapps.taglib.legacy;
 import static com.aoapps.taglib.ScriptTag.RESOURCES;
 
 import com.aoapps.encoding.MediaType;
+import com.aoapps.html.any.attributes.event.Onload;
 import com.aoapps.html.any.attributes.text.Type;
 import com.aoapps.html.any.attributes.url.Src;
 import com.aoapps.html.servlet.DocumentEE;
@@ -37,6 +38,7 @@ import com.aoapps.net.MutableURIParameters;
 import com.aoapps.net.URIParametersMap;
 import com.aoapps.servlet.lastmodified.AddLastModified;
 import com.aoapps.taglib.GlobalAttributesUtils;
+import com.aoapps.taglib.OnloadAttribute;
 import com.aoapps.taglib.ParamUtils;
 import com.aoapps.taglib.ParamsAttribute;
 import com.aoapps.taglib.SrcAttribute;
@@ -60,7 +62,9 @@ public class ScriptTag extends ElementBufferedBodyTag
     // Attributes
     TypeAttribute,
     SrcAttribute,
-    ParamsAttribute {
+    ParamsAttribute,
+    // Events
+    OnloadAttribute {
 
   /* SimpleTag only:
     public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, ScriptTag.class);
@@ -139,7 +143,24 @@ public class ScriptTag extends ElementBufferedBodyTag
     this.addLastModified = AddLastModified.valueOfLowerName(Strings.trim(addLastModified).toLowerCase(Locale.ROOT));
   }
 
-  // TODO: async, defer, ...
+  private boolean async;
+
+  public void setAsync(boolean async) {
+    this.async = async;
+  }
+
+  private boolean defer;
+
+  public void setDefer(boolean defer) {
+    this.defer = defer;
+  }
+
+  private Object onload;
+
+  @Override
+  public void setOnload(Object onload) throws IOException {
+    this.onload = Onload.onload.normalize(onload);
+  }
 
   /**
    * {@inheritDoc}
@@ -168,6 +189,9 @@ public class ScriptTag extends ElementBufferedBodyTag
     absolute = false;
     canonical = false;
     addLastModified = AddLastModified.AUTO;
+    async = false;
+    defer = false;
+    onload = null;
   }
 
   @Override
@@ -190,6 +214,9 @@ public class ScriptTag extends ElementBufferedBodyTag
     GlobalAttributesUtils.doGlobalAttributes(global, document.script(mediaType.getContentType()))
         // Call getSrc always, since it validates src versus params
         .src(UrlUtils.getSrc(pageContext, src, params, addLastModified, absolute, canonical))
+        .async(async)
+        .defer(defer)
+        .onload(onload)
         // Only write body when there is no source (discard body when src provided)
         .out((src != null) ? null : capturedBody)
         .__();

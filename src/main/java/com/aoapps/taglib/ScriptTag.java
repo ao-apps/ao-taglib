@@ -24,6 +24,7 @@
 package com.aoapps.taglib;
 
 import com.aoapps.encoding.MediaType;
+import com.aoapps.html.any.attributes.event.Onload;
 import com.aoapps.html.any.attributes.text.Type;
 import com.aoapps.html.any.attributes.url.Src;
 import com.aoapps.html.servlet.DocumentEE;
@@ -55,7 +56,9 @@ public class ScriptTag extends ElementBufferedTag
     // Attributes
     TypeAttribute,
     SrcAttribute,
-    ParamsAttribute {
+    ParamsAttribute,
+    // Events
+    OnloadAttribute {
 
   /* SimpleTag only: */
   public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, ScriptTag.class);
@@ -135,7 +138,24 @@ public class ScriptTag extends ElementBufferedTag
     this.addLastModified = AddLastModified.valueOfLowerName(Strings.trim(addLastModified).toLowerCase(Locale.ROOT));
   }
 
-  // TODO: async, defer, ...
+  private boolean async;
+
+  public void setAsync(boolean async) {
+    this.async = async;
+  }
+
+  private boolean defer;
+
+  public void setDefer(boolean defer) {
+    this.defer = defer;
+  }
+
+  private Object onload;
+
+  @Override
+  public void setOnload(Object onload) throws IOException {
+    this.onload = Onload.onload.normalize(onload);
+  }
 
   /**
    * {@inheritDoc}
@@ -164,6 +184,9 @@ public class ScriptTag extends ElementBufferedTag
     absolute = false;
     canonical = false;
     addLastModified = AddLastModified.AUTO;
+    async = false;
+    defer = false;
+    onload = null;
   }
 
   @Override
@@ -186,6 +209,9 @@ public class ScriptTag extends ElementBufferedTag
     GlobalAttributesUtils.doGlobalAttributes(global, document.script(mediaType.getContentType()))
         // Call getSrc always, since it validates src versus params
         .src(UrlUtils.getSrc(pageContext, src, params, addLastModified, absolute, canonical))
+        .async(async)
+        .defer(defer)
+        .onload(onload)
         // Only write body when there is no source (discard body when src provided)
         .out((src != null) ? null : capturedBody)
         .__();

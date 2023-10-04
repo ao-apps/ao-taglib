@@ -3864,7 +3864,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2023-10-02T00:34:59Z" -->
+    <!-- dateModified="2023-10-03T17:58:59Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Manually establishes a <a href="https://www.w3schools.com/tags/tag_script.asp">script context</a> when automatic detection is not possible.
@@ -4024,6 +4024,42 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description><![CDATA[
+        <p>
+          When <code>true</code>, loads the script asynchronously.
+          Defaults to <code>false</code>.
+        </p>
+      ]]></description>
+      <name>async</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>boolean</type>
+    </attribute>
+    <attribute>
+      <description><![CDATA[
+        <p>
+          When <code>true</code>, loads the script deferred.
+          Defaults to <code>false</code>.
+        </p>
+      ]]></description>
+      <name>defer</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>boolean</type>
+    </attribute>
+    <attribute>
+      <description><![CDATA[
+        <p>
+          A JavaScript <a href="https://www.w3schools.com/jsref/event_onload.asp">onload</a> handler.
+          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-onload">&lt;ao:onload&gt;</a> tag will override this value.
+        </p>
+      ]]></description>
+      <name>onload</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.Object</type>
     </attribute>
     <dynamic-attributes>true</dynamic-attributes>
   </tag>
