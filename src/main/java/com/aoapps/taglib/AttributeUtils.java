@@ -27,11 +27,14 @@ import static com.aoapps.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlA
 
 import com.aoapps.lang.Strings;
 import com.aoapps.lang.i18n.Resources;
+import com.aoapps.servlet.el.ElUtils;
 import com.aoapps.servlet.jsp.LocalizedJspTagException;
 import com.aoapps.servlet.jsp.tagext.JspTagUtils;
 import java.io.IOException;
 import java.util.List;
 import java.util.ResourceBundle;
+import javax.el.ELContext;
+import javax.el.ValueExpression;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.JspTag;
 
@@ -59,6 +62,26 @@ public final class AttributeUtils  {
     return JspTagUtils.findAncestor(from, clazz).orElseThrow(
         () -> new NeedAttributeParentException(fromTagName, attribute)
     );
+  }
+
+  /**
+   * Evaluates an expression then casts to the provided type.
+   *
+   * @deprecated Please use {@link ElUtils#resolveValue(javax.el.ValueExpression, java.lang.Class, javax.el.ELContext)} directly.
+   */
+  @Deprecated
+  public static <T> T resolveValue(ValueExpression expression, Class<T> type, ELContext elContext) {
+    return ElUtils.resolveValue(expression, type, elContext);
+  }
+
+  /**
+   * Casts or evaluates an expression then casts to the provided type.
+   *
+   * @deprecated Please use {@link ElUtils#resolveValue(java.lang.Object, java.lang.Class, javax.el.ELContext)} directly.
+   */
+  @Deprecated
+  public static <T> T resolveValue(Object value, Class<T> type, ELContext elContext) {
+    return ElUtils.resolveValue(value, type, elContext);
   }
 
   private static boolean isAllDigits(String value) {
