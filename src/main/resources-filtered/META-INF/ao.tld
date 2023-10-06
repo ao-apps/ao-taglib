@@ -161,7 +161,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <description>
         &lt;p&gt;
           A JavaScript &lt;a href=&quot;https://www.w3schools.com/tags/ev_onblur.asp&quot;&gt;onblur&lt;/a&gt; handler.
-          A nested &lt;a href=&quot;@{project.url}&tld;/tag-onblur&quot;&gt;<![CDATA[&lt;ao:onblur&gt;]]>&lt;/a&gt;
+          A nested &lt;a href=&quot;@{project.url}&tld;/tag-onblur&quot;&gt;&lt;<![CDATA[ao:onblur&gt;]]>&lt;/a&gt;
           tag will override this value.
         &lt;/p&gt;
       </description>
@@ -175,7 +175,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <description>
         &lt;p&gt;
           A JavaScript &lt;a href=&quot;https://www.w3schools.com/tags/ev_onchange.asp&quot;&gt;onchange&lt;/a&gt; handler.
-          A nested &lt;a href=&quot;@{project.url}&tld;/tag-onchange&quot;&gt;<![CDATA[&lt;ao:onchange&gt;]]>&lt;/a&gt;
+          A nested &lt;a href=&quot;@{project.url}&tld;/tag-onchange&quot;&gt;&lt;<![CDATA[ao:onchange&gt;]]>&lt;/a&gt;
           tag will override this value.
         &lt;/p&gt;
       </description>
@@ -189,7 +189,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <description>
         &lt;p&gt;
           A JavaScript &lt;a href=&quot;https://www.w3schools.com/tags/ev_onclick.asp&quot;&gt;onclick&lt;/a&gt; handler.
-          A nested &lt;a href=&quot;@{project.url}&tld;/tag-onclick&quot;&gt;<![CDATA[&lt;ao:onclick&gt;]]>&lt;/a&gt;
+          A nested &lt;a href=&quot;@{project.url}&tld;/tag-onclick&quot;&gt;&lt;<![CDATA[ao:onclick&gt;]]>&lt;/a&gt;
           tag will override this value.
         &lt;/p&gt;
       </description>
@@ -203,7 +203,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <description>
         &lt;p&gt;
           A JavaScript &lt;a href=&quot;https://www.w3schools.com/jsref/event_onerror.asp&quot;&gt;onerror&lt;/a&gt; handler.
-          A nested &lt;a href=&quot;@{project.url}&tld;/tag-onerror&quot;&gt;<![CDATA[&lt;ao:onerror&gt;]]>&lt;/a&gt;
+          A nested &lt;a href=&quot;@{project.url}&tld;/tag-onerror&quot;&gt;&lt;<![CDATA[ao:onerror&gt;]]>&lt;/a&gt;
           tag will override this value.
         &lt;/p&gt;
       </description>
@@ -217,7 +217,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <description>
         &lt;p&gt;
           A JavaScript &lt;a href=&quot;https://www.w3schools.com/tags/ev_onfocus.asp&quot;&gt;onfocus&lt;/a&gt; handler.
-          A nested &lt;a href=&quot;@{project.url}&tld;/tag-onfocus&quot;&gt;<![CDATA[&lt;ao:onfocus&gt;]]>&lt;/a&gt;
+          A nested &lt;a href=&quot;@{project.url}&tld;/tag-onfocus&quot;&gt;&lt;<![CDATA[ao:onfocus&gt;]]>&lt;/a&gt;
           tag will override this value.
         &lt;/p&gt;
       </description>
@@ -231,7 +231,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <description>
         &lt;p&gt;
           A JavaScript &lt;a href=&quot;https://www.w3schools.com/tags/ev_onkeypress.asp&quot;&gt;onkeypress&lt;/a&gt; handler.
-          A nested &lt;a href=&quot;@{project.url}&tld;/tag-onkeypress&quot;&gt;<![CDATA[&lt;ao:onkeypress&gt;]]>&lt;/a&gt;
+          A nested &lt;a href=&quot;@{project.url}&tld;/tag-onkeypress&quot;&gt;&lt;<![CDATA[ao:onkeypress&gt;]]>&lt;/a&gt;
           tag will override this value.
         &lt;/p&gt;
       </description>
@@ -245,7 +245,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <description>
         &lt;p&gt;
           A JavaScript &lt;a href=&quot;https://www.w3schools.com/jsref/event_onload.asp&quot;&gt;onload&lt;/a&gt; handler.
-          A nested &lt;a href=&quot;@{project.url}&tld;/tag-onload&quot;&gt;<![CDATA[&lt;ao:onload&gt;]]>&lt;/a&gt;
+          A nested &lt;a href=&quot;@{project.url}&tld;/tag-onload&quot;&gt;&lt;<![CDATA[ao:onload&gt;]]>&lt;/a&gt;
           tag will override this value.
         &lt;/p&gt;
       </description>
@@ -259,7 +259,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <description>
         &lt;p&gt;
           A JavaScript &lt;a href=&quot;https://www.w3schools.com/tags/ev_onmouseout.asp&quot;&gt;onmouseout&lt;/a&gt; handler.
-          A nested &lt;a href=&quot;@{project.url}&tld;/tag-onmouseout&quot;&gt;<![CDATA[&lt;ao:onmouseout&gt;]]>&lt;/a&gt;
+          A nested &lt;a href=&quot;@{project.url}&tld;/tag-onmouseout&quot;&gt;&lt;<![CDATA[ao:onmouseout&gt;]]>&lt;/a&gt;
           tag will override this value.
         &lt;/p&gt;
       </description>
@@ -273,7 +273,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <description>
         &lt;p&gt;
           A JavaScript &lt;a href=&quot;https://www.w3schools.com/tags/ev_onmouseover.asp&quot;&gt;onmouseover&lt;/a&gt; handler.
-          A nested &lt;a href=&quot;@{project.url}&tld;/tag-onmouseover&quot;&gt;<![CDATA[&lt;ao:onmouseover&gt;]]>&lt;/a&gt;
+          A nested &lt;a href=&quot;@{project.url}&tld;/tag-onmouseover&quot;&gt;&lt;<![CDATA[ao:onmouseover&gt;]]>&lt;/a&gt;
           tag will override this value.
         &lt;/p&gt;
       </description>
@@ -287,7 +287,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <description>
         &lt;p&gt;
           A JavaScript &lt;a href=&quot;https://www.w3schools.com/tags/ev_onsubmit.asp&quot;&gt;onsubmit&lt;/a&gt; handler.
-          A nested &lt;a href=&quot;@{project.url}&tld;/tag-onsubmit&quot;&gt;<![CDATA[&lt;ao:onsubmit&gt;]]>&lt;/a&gt;
+          A nested &lt;a href=&quot;@{project.url}&tld;/tag-onsubmit&quot;&gt;&lt;<![CDATA[ao:onsubmit&gt;]]>&lt;/a&gt;
           tag will override this value.
         &lt;/p&gt;
       </description>
