@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2013, 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2013, 2016, 2017, 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -45,6 +45,9 @@ public class Link {
   private final String type;
   private final String media;
   private final String title;
+  // Events
+  private final Object onerror;
+  private final Object onload;
 
   public Link(
       GlobalAttributes global,
@@ -57,7 +60,10 @@ public class Link {
       String rel,
       String type,
       String media,
-      String title
+      String title,
+      // Events
+      Object onerror,
+      Object onload
   ) {
     this.global = global;
     this.href = href;
@@ -70,37 +76,9 @@ public class Link {
     this.type = type;
     this.media = media;
     this.title = title;
-  }
-
-  /**
-   * @deprecated  Please use {@link #Link(com.aoapps.taglib.GlobalAttributes, java.lang.String, boolean, boolean, com.aoapps.net.URIParameters, com.aoapps.servlet.lastmodified.AddLastModified, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)}
-   */
-  @Deprecated
-  public Link(
-      String href,
-      boolean absolute,
-      boolean canonical,
-      URIParameters params,
-      AddLastModified addLastModified,
-      String hreflang,
-      String rel,
-      String type,
-      String media,
-      String title
-  ) {
-    this(
-        ImmutableGlobalAttributes.EMPTY,
-        href,
-        absolute,
-        canonical,
-        params,
-        addLastModified,
-        hreflang,
-        rel,
-        type,
-        media,
-        title
-    );
+    // Events
+    this.onerror = onerror;
+    this.onload = onload;
   }
 
   public Link(
@@ -114,7 +92,10 @@ public class Link {
       String rel,
       String type,
       String media,
-      String title
+      String title,
+      // Events
+      Object onerror,
+      Object onload
   ) {
     this(
         global,
@@ -127,38 +108,10 @@ public class Link {
         rel,
         type,
         media,
-        title
-    );
-  }
-
-  /**
-   * @deprecated  Please use {@link #Link(com.aoapps.taglib.GlobalAttributes, java.lang.String, boolean, boolean, com.aoapps.net.URIParameters, com.aoapps.servlet.lastmodified.AddLastModified, java.util.Locale, java.lang.String, java.lang.String, java.lang.String, java.lang.String)}
-   */
-  @Deprecated
-  public Link(
-      String href,
-      boolean absolute,
-      boolean canonical,
-      URIParameters params,
-      AddLastModified addLastModified,
-      Locale hreflang,
-      String rel,
-      String type,
-      String media,
-      String title
-  ) {
-    this(
-        ImmutableGlobalAttributes.EMPTY,
-        href,
-        absolute,
-        canonical,
-        params,
-        addLastModified,
-        hreflang,
-        rel,
-        type,
-        media,
-        title
+        title,
+        // Events
+        onerror,
+        onload
     );
   }
 
@@ -208,5 +161,15 @@ public class Link {
   // TODO: Move to GlobalAttributes (or AlmostGlobalAttributes)
   public String getTitle() {
     return title;
+  }
+
+  // Events
+
+  public Object getOnerror() {
+    return onerror;
+  }
+
+  public Object getOnload() {
+    return onload;
   }
 }

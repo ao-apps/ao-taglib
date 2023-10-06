@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
     shortTitle="Changelog"
     tocLevels="1"
     datePublished="2016-10-29T22:02:09-05:00"
-    dateModified="2023-10-03T17:58:59Z"
+    dateModified="2023-10-05T23:33:39Z"
   >
     <c:set var="latestRelease" value="7.2.2" />
     <c:if test="${
@@ -97,8 +97,19 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
           <li><code>charset</code> attributes now support <code>java.nio.charset.Charset</code>.</li>
           <li>Moved <code>resolveValue</code> from <core:link page="/index.jspx" /> to <core:link book="/servlet-util" page="/index.jspx" />.</li>
           <li>
-            Added <code>async</code>, <code>defer</code>, and <code>onload</code> attributes to
+            Added <code>async</code> and <code>defer</code> attributes to
             <core:link page="ao.tld/tag-script"><![CDATA[&lt;ao:script /&gt;]]></core:link>.
+          </li>
+          <li>
+            New tag <core:link page="ao.tld/tag-onerror"><![CDATA[&lt;ao:onerror /&gt;]]></core:link>
+            to provide scripts in nested context.
+          </li>
+          <li>
+            Added <code>onerror</code> and <code>onload</code> attributes to
+            <core:link page="ao.tld/tag-img"><![CDATA[&lt;ao:img /&gt;]]></core:link>,
+            <core:link page="ao.tld/tag-input"><![CDATA[&lt;ao:input /&gt;]]></core:link>,
+            <core:link page="ao.tld/tag-link"><![CDATA[&lt;ao:link /&gt;]]></core:link>,
+            and <core:link page="ao.tld/tag-script"><![CDATA[&lt;ao:script /&gt;]]></core:link>.
           </li>
         </ul>
       </changelog:release>

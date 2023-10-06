@@ -25,6 +25,8 @@ package com.aoapps.taglib.legacy;
 
 import com.aoapps.encoding.MediaType;
 import com.aoapps.html.any.attributes.enumeration.Rel;
+import com.aoapps.html.any.attributes.event.Onerror;
+import com.aoapps.html.any.attributes.event.Onload;
 import com.aoapps.html.any.attributes.text.Hreflang;
 import com.aoapps.html.any.attributes.text.Media;
 import com.aoapps.html.any.attributes.text.Title;
@@ -44,6 +46,8 @@ import com.aoapps.taglib.HrefAttribute;
 import com.aoapps.taglib.HreflangAttribute;
 import com.aoapps.taglib.Link;
 import com.aoapps.taglib.LinksAttribute;
+import com.aoapps.taglib.OnerrorAttribute;
+import com.aoapps.taglib.OnloadAttribute;
 import com.aoapps.taglib.ParamUtils;
 import com.aoapps.taglib.ParamsAttribute;
 import com.aoapps.taglib.RelAttribute;
@@ -73,7 +77,10 @@ public class LinkTag extends ElementNullBodyTag
     HreflangAttribute,
     RelAttribute,
     TypeAttribute,
-    TitleAttribute {
+    TitleAttribute,
+    // Events
+    OnerrorAttribute,
+    OnloadAttribute {
 
   public LinkTag() {
     init();
@@ -112,6 +119,9 @@ public class LinkTag extends ElementNullBodyTag
       setType(link.getType());
       setMedia(link.getMedia());
       setTitle(link.getTitle());
+      // Events
+      setOnerror(link.getOnerror());
+      setOnload(link.getOnload());
     } catch (IOException e) {
       throw new UncheckedIOException(e);
     }
@@ -187,6 +197,22 @@ public class LinkTag extends ElementNullBodyTag
     this.title = Title.title.normalize(title);
   }
 
+  // Events
+
+  private Object onerror;
+
+  @Override
+  public void setOnerror(Object onerror) throws IOException {
+    this.onerror = Onerror.onerror.normalize(onerror);
+  }
+
+  private Object onload;
+
+  @Override
+  public void setOnload(Object onload) throws IOException {
+    this.onload = Onload.onload.normalize(onload);
+  }
+
   /**
    * {@inheritDoc}
    *
@@ -210,6 +236,9 @@ public class LinkTag extends ElementNullBodyTag
     type = null;
     media = null;
     title = null;
+    // Events
+    onerror = null;
+    onload = null;
   }
 
   @Override
@@ -234,7 +263,10 @@ public class LinkTag extends ElementNullBodyTag
               Strings.trimNullIfEmpty(rel),
               type,
               (media == null) ? null : Coercion.toString(media),
-              (title == null) ? null : Coercion.toString(title)
+              (title == null) ? null : Coercion.toString(title),
+              // Events
+              onerror,
+              onload
           )
       );
     } else {
@@ -254,6 +286,9 @@ public class LinkTag extends ElementNullBodyTag
           .type(type)
           .media(media)
           .title(title)
+          // Events
+          .onerror(onerror)
+          .onload(onload)
           .__();
     }
     /* BodyTag only: */

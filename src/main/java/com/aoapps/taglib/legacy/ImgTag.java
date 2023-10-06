@@ -24,6 +24,8 @@
 package com.aoapps.taglib.legacy;
 
 import com.aoapps.encoding.MediaType;
+import com.aoapps.html.any.attributes.event.Onerror;
+import com.aoapps.html.any.attributes.event.Onload;
 import com.aoapps.html.any.attributes.text.Alt;
 import com.aoapps.html.any.attributes.text.Title;
 import com.aoapps.html.any.attributes.text.Usemap;
@@ -38,6 +40,8 @@ import com.aoapps.taglib.AltAttribute;
 import com.aoapps.taglib.AttributeRequiredException;
 import com.aoapps.taglib.GlobalAttributesUtils;
 import com.aoapps.taglib.HeightAttribute;
+import com.aoapps.taglib.OnerrorAttribute;
+import com.aoapps.taglib.OnloadAttribute;
 import com.aoapps.taglib.ParamUtils;
 import com.aoapps.taglib.ParamsAttribute;
 import com.aoapps.taglib.SrcAttribute;
@@ -64,7 +68,10 @@ public class ImgTag extends ElementBufferedBodyTag
     WidthAttribute,
     HeightAttribute,
     AltAttribute,
-    TitleAttribute {
+    TitleAttribute,
+    // Events
+    OnerrorAttribute,
+    OnloadAttribute {
 
   public ImgTag() {
     init();
@@ -159,6 +166,22 @@ public class ImgTag extends ElementBufferedBodyTag
     this.ismap = ismap;
   }
 
+  // Events
+
+  private Object onerror;
+
+  @Override
+  public void setOnerror(Object onerror) throws IOException {
+    this.onerror = Onerror.onerror.normalize(onerror);
+  }
+
+  private Object onload;
+
+  @Override
+  public void setOnload(Object onload) throws IOException {
+    this.onload = Onload.onload.normalize(onload);
+  }
+
   /**
    * {@inheritDoc}
    *
@@ -183,6 +206,9 @@ public class ImgTag extends ElementBufferedBodyTag
     title = null;
     usemap = null;
     ismap = false;
+    // Events
+    onerror = null;
+    onload = null;
   }
 
   @Override
@@ -217,6 +243,9 @@ public class ImgTag extends ElementBufferedBodyTag
         .title(title)
         .usemap(usemap)
         .ismap(ismap)
+        // Events
+        .onerror(onerror)
+        .onload(onload)
         .__();
     /* BodyTag only: */
     return EVAL_PAGE;

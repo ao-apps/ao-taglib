@@ -30,8 +30,10 @@ import com.aoapps.html.any.AnyINPUT;
 import com.aoapps.html.any.attributes.event.Onblur;
 import com.aoapps.html.any.attributes.event.Onchange;
 import com.aoapps.html.any.attributes.event.Onclick;
+import com.aoapps.html.any.attributes.event.Onerror;
 import com.aoapps.html.any.attributes.event.Onfocus;
 import com.aoapps.html.any.attributes.event.Onkeypress;
+import com.aoapps.html.any.attributes.event.Onload;
 import com.aoapps.html.any.attributes.text.Alt;
 import com.aoapps.html.any.attributes.text.Name;
 import com.aoapps.html.any.attributes.text.Title;
@@ -58,8 +60,10 @@ import com.aoapps.taglib.NameAttribute;
 import com.aoapps.taglib.OnblurAttribute;
 import com.aoapps.taglib.OnchangeAttribute;
 import com.aoapps.taglib.OnclickAttribute;
+import com.aoapps.taglib.OnerrorAttribute;
 import com.aoapps.taglib.OnfocusAttribute;
 import com.aoapps.taglib.OnkeypressAttribute;
+import com.aoapps.taglib.OnloadAttribute;
 import com.aoapps.taglib.ParamUtils;
 import com.aoapps.taglib.ParamsAttribute;
 import com.aoapps.taglib.ReadonlyAttribute;
@@ -109,11 +113,14 @@ public class InputTag extends ElementBufferedBodyTag
     OnblurAttribute,
     OnchangeAttribute,
     OnclickAttribute,
+    OnerrorAttribute,
     OnfocusAttribute,
-    OnkeypressAttribute {
+    OnkeypressAttribute,
+    OnloadAttribute {
 
   /* SimpleTag only:
     public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, InputTag.class);
+
   /**/
 
   public InputTag() {
@@ -272,6 +279,8 @@ public class InputTag extends ElementBufferedBodyTag
     this.value = Coercion.nullIfEmpty(value);
   }
 
+  // Events
+
   private Object onblur;
 
   @Override
@@ -293,6 +302,13 @@ public class InputTag extends ElementBufferedBodyTag
     this.onclick = Onclick.onclick.normalize(onclick);
   }
 
+  private Object onerror;
+
+  @Override
+  public void setOnerror(Object onerror) throws IOException {
+    this.onerror = Onerror.onerror.normalize(onerror);
+  }
+
   private Object onfocus;
 
   @Override
@@ -305,6 +321,13 @@ public class InputTag extends ElementBufferedBodyTag
   @Override
   public void setOnkeypress(Object onkeypress) throws IOException {
     this.onkeypress = Onkeypress.onkeypress.normalize(onkeypress);
+  }
+
+  private Object onload;
+
+  @Override
+  public void setOnload(Object onload) throws IOException {
+    this.onload = Onload.onload.normalize(onload);
   }
 
   /**
@@ -339,11 +362,14 @@ public class InputTag extends ElementBufferedBodyTag
     type = null;
     width = null;
     value = null;
+    // Events
     onblur = null;
     onchange = null;
     onclick = null;
+    onerror = null;
     onfocus = null;
     onkeypress = null;
+    onload = null;
   }
 
   @Override
@@ -358,7 +384,8 @@ public class InputTag extends ElementBufferedBodyTag
       throw new AttributeRequiredException("type");
     }
     if (value == null) {
-      setValue(capturedBody.trim()); // TODO: Distinguish between empty and null, track valueSet boolean for when is set to null?
+      // TODO: Distinguish between empty and null, track valueSet boolean for when is set to null?
+      setValue(capturedBody.trim());
     }
     if (AnyINPUT.Dynamic.Type.IMAGE.toString().equalsIgnoreCase(type)) {
       if (alt == null) {

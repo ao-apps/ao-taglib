@@ -157,6 +157,146 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
     &DirBufferedAttribute;
     &StyleBufferedAttribute;">
 
+<!ENTITY OnblurAttribute "<attribute>
+      <description>
+        &lt;p&gt;
+          A JavaScript &lt;a href="https://www.w3schools.com/tags/ev_onblur.asp"&gt;onblur&lt;/a&gt; handler.
+          A nested &lt;a href="@{project.url}&tld;/tag-onblur"&gt;&lt;ao:onblur&gt;&lt;/a&gt;
+          tag will override this value.
+        &lt;/p&gt;
+      </description>
+      <name>onblur</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.Object</type>
+    </attribute>">
+
+<!ENTITY OnchangeAttribute "<attribute>
+      <description>
+        &lt;p&gt;
+          A JavaScript &lt;a href="https://www.w3schools.com/tags/ev_onchange.asp"&gt;onchange&lt;/a&gt; handler.
+          A nested &lt;a href="@{project.url}&tld;/tag-onchange"&gt;&lt;ao:onchange&gt;&lt;/a&gt;
+          tag will override this value.
+        &lt;/p&gt;
+      </description>
+      <name>onchange</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.Object</type>
+    </attribute>">
+
+<!ENTITY OnclickAttribute "<attribute>
+      <description>
+        &lt;p&gt;
+          A JavaScript &lt;a href="https://www.w3schools.com/tags/ev_onclick.asp"&gt;onclick&lt;/a&gt; handler.
+          A nested &lt;a href="@{project.url}&tld;/tag-onclick"&gt;&lt;ao:onclick&gt;&lt;/a&gt;
+          tag will override this value.
+        &lt;/p&gt;
+      </description>
+      <name>onclick</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.Object</type>
+    </attribute>">
+
+<!ENTITY OnerrorAttribute "<attribute>
+      <description>
+        &lt;p&gt;
+          A JavaScript &lt;a href="https://www.w3schools.com/jsref/event_onerror.asp"&gt;onerror&lt;/a&gt; handler.
+          A nested &lt;a href="@{project.url}&tld;/tag-onerror"&gt;&lt;ao:onerror&gt;&lt;/a&gt;
+          tag will override this value.
+        &lt;/p&gt;
+      </description>
+      <name>onerror</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.Object</type>
+    </attribute>">
+
+<!ENTITY OnfocusAttribute "<attribute>
+      <description>
+        &lt;p&gt;
+          A JavaScript &lt;a href="https://www.w3schools.com/tags/ev_onfocus.asp"&gt;onfocus&lt;/a&gt; handler.
+          A nested &lt;a href="@{project.url}&tld;/tag-onfocus"&gt;&lt;ao:onfocus&gt;&lt;/a&gt;
+          tag will override this value.
+        &lt;/p&gt;
+      </description>
+      <name>onfocus</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.Object</type>
+    </attribute>">
+
+<!ENTITY OnkeypressAttribute "<attribute>
+      <description>
+        &lt;p&gt;
+          A JavaScript &lt;a href="https://www.w3schools.com/tags/ev_onkeypress.asp"&gt;onkeypress&lt;/a&gt; handler.
+          A nested &lt;a href="@{project.url}&tld;/tag-onkeypress"&gt;&lt;ao:onkeypress&gt;&lt;/a&gt;
+          tag will override this value.
+        &lt;/p&gt;
+      </description>
+      <name>onkeypress</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.Object</type>
+    </attribute>">
+
+<!ENTITY OnloadAttribute "<attribute>
+      <description>
+        &lt;p&gt;
+          A JavaScript &lt;a href="https://www.w3schools.com/jsref/event_onload.asp"&gt;onload&lt;/a&gt; handler.
+          A nested &lt;a href="@{project.url}&tld;/tag-onload"&gt;&lt;ao:onload&gt;&lt;/a&gt;
+          tag will override this value.
+        &lt;/p&gt;
+      </description>
+      <name>onload</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.Object</type>
+    </attribute>">
+
+<!ENTITY OnmouseoutAttribute "<attribute>
+      <description>
+        &lt;p&gt;
+          A JavaScript &lt;a href="https://www.w3schools.com/tags/ev_onmouseout.asp"&gt;onmouseout&lt;/a&gt; handler.
+          A nested &lt;a href="@{project.url}&tld;/tag-onmouseout"&gt;&lt;ao:onmouseout&gt;&lt;/a&gt;
+          tag will override this value.
+        &lt;/p&gt;
+      </description>
+      <name>onmouseout</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.Object</type>
+    </attribute>">
+
+<!ENTITY OnmouseoverAttribute "<attribute>
+      <description>
+        &lt;p&gt;
+          A JavaScript &lt;a href="https://www.w3schools.com/tags/ev_onmouseover.asp"&gt;onmouseover&lt;/a&gt; handler.
+          A nested &lt;a href="@{project.url}&tld;/tag-onmouseover"&gt;&lt;ao:onmouseover&gt;&lt;/a&gt;
+          tag will override this value.
+        &lt;/p&gt;
+      </description>
+      <name>onmouseover</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.Object</type>
+    </attribute>">
+
+<!ENTITY OnsubmitAttribute "<attribute>
+      <description>
+        &lt;p&gt;
+          A JavaScript &lt;a href="https://www.w3schools.com/tags/ev_onsubmit.asp"&gt;onsubmit&lt;/a&gt; handler.
+          A nested &lt;a href="@{project.url}&tld;/tag-onsubmit"&gt;&lt;ao:onsubmit&gt;&lt;/a&gt;
+          tag will override this value.
+        &lt;/p&gt;
+      </description>
+      <name>onsubmit</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.Object</type>
+    </attribute>">
+
 ]>
 <taglib xmlns="http://java.sun.com/xml/ns/javaee"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -251,7 +391,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
           The href is modified in several ways to make things much easier to work with.
         </p>
         <p>
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-href">&lt;ao:href&gt;</a> tag will override this value.
+          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-href">&lt;ao:href&gt;</a>
+          tag will override this value.
         </p>
         <p>
           In order to make relative paths predictable, relative paths are interpreted from
@@ -338,7 +479,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <description><![CDATA[
         <p>
           The <a href="https://www.w3schools.com/tags/att_a_hreflang.asp">hreflang for the link</a>.
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-hreflang">&lt;ao:hreflang&gt;</a> tag will override this value.
+          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-hreflang">&lt;ao:hreflang&gt;</a>
+          tag will override this value.
         </p>
       ]]></description>
       <name>hreflang</name>
@@ -350,7 +492,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <description><![CDATA[
         <p>
           The <a href="https://www.w3schools.com/tags/att_a_rel.asp">rel for the link</a>.
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-param">&lt;ao:rel&gt;</a> tag will override this value.
+          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-param">&lt;ao:rel&gt;</a>
+          tag will override this value.
         </p>
       ]]></description>
       <name>rel</name>
@@ -362,7 +505,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <description><![CDATA[
         <p>
           The <a href="https://www.w3schools.com/tags/att_a_target.asp">target for the link</a>.
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-target">&lt;ao:target&gt;</a> tag will override this value.
+          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-target">&lt;ao:target&gt;</a>
+          tag will override this value.
         </p>
       ]]></description>
       <name>target</name>
@@ -374,7 +518,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <description><![CDATA[
         <p>
           The <a href="https://www.w3schools.com/tags/att_global_title.asp">title text for the element</a>.
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-title">&lt;ao:title&gt;</a> tag will override this value.
+          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-title">&lt;ao:title&gt;</a>
+          tag will override this value.
         </p>
       ]]></description>
       <name>title</name>
@@ -386,7 +531,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <description><![CDATA[
         <p>
           The <a href="https://www.w3schools.com/tags/att_a_type.asp">type for the link</a>.
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-type">&lt;ao:type&gt;</a> tag will override this value.
+          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-type">&lt;ao:type&gt;</a>
+          tag will override this value.
         </p>
       ]]></description>
       <name>type</name>
@@ -394,42 +540,9 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
-    <attribute>
-      <description><![CDATA[
-        <p>
-          A JavaScript <a href="https://www.w3schools.com/tags/ev_onclick.asp">onclick</a> handler.
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-onclick">&lt;ao:onclick&gt;</a> tag will override this value.
-        </p>
-      ]]></description>
-      <name>onclick</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.Object</type>
-    </attribute>
-    <attribute>
-      <description><![CDATA[
-        <p>
-          A JavaScript <a href="https://www.w3schools.com/tags/ev_onmouseout.asp">onmouseout</a> handler.
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-onmouseout">&lt;ao:onmouseout&gt;</a> tag will override this value.
-        </p>
-      ]]></description>
-      <name>onmouseout</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.Object</type>
-    </attribute>
-    <attribute>
-      <description><![CDATA[
-        <p>
-          A JavaScript <a href="https://www.w3schools.com/tags/ev_onmouseover.asp">onmouseover</a> handler.
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-onmouseover">&lt;ao:onmouseover&gt;</a> tag will override this value.
-        </p>
-      ]]></description>
-      <name>onmouseover</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.Object</type>
-    </attribute>
+    &OnclickAttribute;
+    &OnmouseoutAttribute;
+    &OnmouseoverAttribute;
     <dynamic-attributes>true</dynamic-attributes>
   </tag>
   <tag>
@@ -530,7 +643,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
           The href is modified in several ways to make things much easier to work with.
         </p>
         <p>
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-href">&lt;ao:href&gt;</a> tag will override this value.
+          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-href">&lt;ao:href&gt;</a>
+          tag will override this value.
         </p>
         <p>
           In order to make relative paths predictable, relative paths are interpreted from
@@ -617,7 +731,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <description><![CDATA[
         <p>
           The <a href="https://www.w3schools.com/tags/att_area_hreflang.asp">hreflang for the area</a>.
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-hreflang">&lt;ao:hreflang&gt;</a> tag will override this value.
+          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-hreflang">&lt;ao:hreflang&gt;</a>
+          tag will override this value.
         </p>
       ]]></description>
       <name>hreflang</name>
@@ -629,7 +744,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <description><![CDATA[
         <p>
           The <a href="https://www.w3schools.com/tags/att_area_rel.asp">rel for the area</a>.
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-param">&lt;ao:rel&gt;</a> tag will override this value.
+          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-param">&lt;ao:rel&gt;</a>
+          tag will override this value.
         </p>
       ]]></description>
       <name>rel</name>
@@ -641,7 +757,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <description><![CDATA[
         <p>
           The <a href="https://www.w3schools.com/tags/att_area_target.asp">target for the area</a>.
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-target">&lt;ao:target&gt;</a> tag will override this value.
+          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-target">&lt;ao:target&gt;</a>
+          tag will override this value.
         </p>
       ]]></description>
       <name>target</name>
@@ -653,7 +770,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <description><![CDATA[
         <p>
           The <a href="https://www.w3schools.com/tags/att_area_type.asp">type for the area</a>.
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-type">&lt;ao:type&gt;</a> tag will override this value.
+          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-type">&lt;ao:type&gt;</a>
+          tag will override this value.
         </p>
       ]]></description>
       <name>type</name>
@@ -678,7 +796,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <description><![CDATA[
         <p>
           The <a href="https://www.w3schools.com/tags/att_global_title.asp">title text for the element</a>.
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-title">&lt;ao:title&gt;</a> tag will override this value.
+          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-title">&lt;ao:title&gt;</a>
+          tag will override this value.
         </p>
       ]]></description>
       <name>title</name>
@@ -686,42 +805,9 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
-    <attribute>
-      <description><![CDATA[
-        <p>
-          A JavaScript <a href="https://www.w3schools.com/tags/ev_onclick.asp">onclick</a> handler.
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-onclick">&lt;ao:onclick&gt;</a> tag will override this value.
-        </p>
-      ]]></description>
-      <name>onclick</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.Object</type>
-    </attribute>
-    <attribute>
-      <description><![CDATA[
-        <p>
-          A JavaScript <a href="https://www.w3schools.com/tags/ev_onmouseover.asp">onmouseover</a> handler.
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-onmouseover">&lt;ao:onmouseover&gt;</a> tag will override this value.
-        </p>
-      ]]></description>
-      <name>onmouseover</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.Object</type>
-    </attribute>
-    <attribute>
-      <description><![CDATA[
-        <p>
-          A JavaScript <a href="https://www.w3schools.com/tags/ev_onmouseout.asp">onmouseout</a> handler.
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-onmouseout">&lt;ao:onmouseout&gt;</a> tag will override this value.
-        </p>
-      ]]></description>
-      <name>onmouseout</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.Object</type>
-    </attribute>
+    &OnclickAttribute;
+    &OnmouseoverAttribute;
+    &OnmouseoutAttribute;
     <dynamic-attributes>true</dynamic-attributes>
   </tag>
   <tag>
@@ -741,7 +827,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <description><![CDATA[
         <p>
           The name of argument tag.
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-name">&lt;ao:name&gt;</a> tag will override this value.
+          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-name">&lt;ao:name&gt;</a>
+          tag will override this value.
         </p>
       ]]></description>
       <name>name</name>
@@ -753,7 +840,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <description><![CDATA[
         <p>
           The value of the parameter.
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-value">&lt;ao:value&gt;</a> tag will override this value.
+          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-value">&lt;ao:value&gt;</a>
+          tag will override this value.
           If neither is provided, the output of the body is used with whitespace trimmed.
         </p>
       ]]></description>
@@ -1114,7 +1202,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
           The action is modified in several ways to make things much easier to work with.
         </p>
         <p>
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-action">&lt;ao:action&gt;</a> tag will override this value.
+          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-action">&lt;ao:action&gt;</a>
+          tag will override this value.
         </p>
         <p>
           In order to make relative paths predictable, relative paths are interpreted from
@@ -1193,19 +1282,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.String</type>
     </attribute>
-    <attribute>
-      <description><![CDATA[
-        <p>
-          A JavaScript <a href="https://www.w3schools.com/tags/ev_onsubmit.asp">onsubmit</a> handler.
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-onsubmit">&lt;ao:onsubmit&gt;</a>
-          tag will override this value.
-        </p>
-      ]]></description>
-      <name>onsubmit</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.Object</type>
-    </attribute>
+    &OnsubmitAttribute;
     <dynamic-attributes>true</dynamic-attributes>
   </tag>
   <tag>
@@ -1692,7 +1769,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
           The src is modified in several ways to make things much easier to work with.
         </p>
         <p>
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-src">&lt;ao:src&gt;</a> tag will override this value.
+          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-src">&lt;ao:src&gt;</a>
+          tag will override this value.
         </p>
         <p>
           In order to make relative paths predictable, relative paths are interpreted from
@@ -1820,7 +1898,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2023-10-02T00:34:59Z" -->
+    <!-- dateModified="2023-10-05T23:33:39Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Renders an <a href="https://www.w3schools.com/tags/tag_img.asp">&lt;img&gt;</a> tag.
@@ -1874,7 +1952,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
           The src is modified in several ways to make things much easier to work with.
         </p>
         <p>
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-src">&lt;ao:src&gt;</a> tag will override this value.
+          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-src">&lt;ao:src&gt;</a>
+          tag will override this value.
         </p>
         <p>
           In order to make relative paths predictable, relative paths are interpreted from
@@ -2038,6 +2117,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <rtexprvalue>true</rtexprvalue>
       <type>boolean</type>
     </attribute>
+    &OnerrorAttribute;
+    &OnloadAttribute;
     <dynamic-attributes>true</dynamic-attributes>
   </tag>
   <tag>
@@ -2170,7 +2251,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2023-10-02T00:34:59Z" -->
+    <!-- dateModified="2023-10-05T23:33:39Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Renders an <a href="https://www.w3schools.com/tags/tag_input.asp">&lt;input&gt;</a> tag.
@@ -2357,7 +2438,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
           The src is modified in several ways to make things much easier to work with.
         </p>
         <p>
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-src">&lt;ao:src&gt;</a> tag will override this value.
+          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-src">&lt;ao:src&gt;</a>
+          tag will override this value.
         </p>
         <p>
           In order to make relative paths predictable, relative paths are interpreted from
@@ -2459,7 +2541,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <description><![CDATA[
         <p>
           The <a href="https://www.w3schools.com/tags/att_global_title.asp">title text for the element</a>.
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-title">&lt;ao:title&gt;</a> tag will override this value.
+          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-title">&lt;ao:title&gt;</a>
+          tag will override this value.
         </p>
       ]]></description>
       <name>title</name>
@@ -2508,76 +2591,18 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
-    <attribute>
-      <description><![CDATA[
-        <p>
-          A JavaScript <a href="https://www.w3schools.com/tags/ev_onblur.asp">onblur</a> handler.
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-onblur">&lt;ao:onblur&gt;</a>
-          tag will override this value.
-        </p>
-      ]]></description>
-      <name>onblur</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.Object</type>
-    </attribute>
-    <attribute>
-      <description><![CDATA[
-        <p>
-          A JavaScript <a href="https://www.w3schools.com/tags/ev_onchange.asp">onchange</a> handler.
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-onchange">&lt;ao:onchange&gt;</a>
-          tag will override this value.
-        </p>
-      ]]></description>
-      <name>onchange</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.Object</type>
-    </attribute>
-    <attribute>
-      <description><![CDATA[
-        <p>
-          A JavaScript <a href="https://www.w3schools.com/tags/ev_onclick.asp">onclick</a> handler.
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-onclick">&lt;ao:onclick&gt;</a>
-          tag will override this value.
-        </p>
-      ]]></description>
-      <name>onclick</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.Object</type>
-    </attribute>
-    <attribute>
-      <description><![CDATA[
-        <p>
-          A JavaScript <a href="https://www.w3schools.com/tags/ev_onfocus.asp">onfocus</a> handler.
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-onfocus">&lt;ao:onfocus&gt;</a>
-          tag will override this value.
-        </p>
-      ]]></description>
-      <name>onfocus</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.Object</type>
-    </attribute>
-    <attribute>
-      <description><![CDATA[
-        <p>
-          A JavaScript <a href="https://www.w3schools.com/tags/ev_onkeypress.asp">onkeypress</a> handler.
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-onkeypress">&lt;ao:onkeypress&gt;</a>
-          tag will override this value.
-        </p>
-      ]]></description>
-      <name>onkeypress</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.Object</type>
-    </attribute>
+    &OnblurAttribute;
+    &OnchangeAttribute;
+    &OnclickAttribute;
+    &OnerrorAttribute;
+    &OnfocusAttribute;
+    &OnkeypressAttribute;
+    &OnloadAttribute;
     <dynamic-attributes>true</dynamic-attributes>
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2023-10-02T00:34:59Z" -->
+    <!-- dateModified="2023-10-05T23:33:39Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         If contained within any
@@ -2632,7 +2657,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
           The href is modified in several ways to make things much easier to work with.
         </p>
         <p>
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-href">&lt;ao:href&gt;</a> tag will override this value.
+          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-href">&lt;ao:href&gt;</a>
+          tag will override this value.
         </p>
         <p>
           In order to make relative paths predictable, relative paths are interpreted from
@@ -2778,6 +2804,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
+    &OnerrorAttribute;
+    &OnloadAttribute;
     <dynamic-attributes>true</dynamic-attributes>
   </tag>
   <tag>
@@ -2800,7 +2828,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
         <p>
           The required <a href="https://www.w3schools.com/tags/att_map_name.asp">id (and name) of the map</a>.
           Must be provided as either this attribute or a nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-id">&lt;ao:id&gt;</a> tag.
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-id">&lt;ao:id&gt;</a> tag will override this value.
+          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-id">&lt;ao:id&gt;</a>
+          tag will override this value.
         </p>
         <p>
           For maximum HTML/XHTML and HTML 4/5 compatibility, this value is
@@ -3188,6 +3217,19 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
     ]]></description>
     <name>onclick</name>
     <tag-class>&package;.OnclickTag</tag-class>
+    <body-content>&JSP;</body-content>
+  </tag>
+  <tag>
+    <!-- datePublished="2023-10-05T23:33:39Z" -->
+    <description><![CDATA[
+      <p>
+        Provides an <a href="https://www.w3schools.com/tags/ev_onerror.asp">onerror</a> script to its
+        <a href="@{project.url}apidocs/com.aoapps.taglib/com/aoapps/taglib/OnerrorAttribute.html">OnerrorAttribute</a>
+        parent tag.
+      </p>
+    ]]></description>
+    <name>onerror</name>
+    <tag-class>&package;.OnerrorTag</tag-class>
     <body-content>&JSP;</body-content>
   </tag>
   <tag>
@@ -3710,7 +3752,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
           The href is modified in several ways to make things much easier to work with.
         </p>
         <p>
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-href">&lt;ao:href&gt;</a> tag will override this value.
+          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-href">&lt;ao:href&gt;</a>
+          tag will override this value.
         </p>
         <p>
           When not provided as attribute or a nested tag, defaults to the value for "page".
@@ -3864,7 +3907,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2023-10-03T17:58:59Z" -->
+    <!-- dateModified="2023-10-05T23:33:39Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Manually establishes a <a href="https://www.w3schools.com/tags/tag_script.asp">script context</a> when automatic detection is not possible.
@@ -3942,7 +3985,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
           The src is modified in several ways to make things much easier to work with.
         </p>
         <p>
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-src">&lt;ao:src&gt;</a> tag will override this value.
+          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-src">&lt;ao:src&gt;</a>
+          tag will override this value.
         </p>
         <p>
           In order to make relative paths predictable, relative paths are interpreted from
@@ -4049,18 +4093,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <rtexprvalue>true</rtexprvalue>
       <type>boolean</type>
     </attribute>
-    <attribute>
-      <description><![CDATA[
-        <p>
-          A JavaScript <a href="https://www.w3schools.com/jsref/event_onload.asp">onload</a> handler.
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-onload">&lt;ao:onload&gt;</a> tag will override this value.
-        </p>
-      ]]></description>
-      <name>onload</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.Object</type>
-    </attribute>
+    &OnerrorAttribute;
+    &OnloadAttribute;
     <dynamic-attributes>true</dynamic-attributes>
   </tag>
   <tag>
@@ -4118,58 +4152,10 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Integer</type>
     </attribute>
-    <attribute>
-      <description><![CDATA[
-        <p>
-          A JavaScript <a href="https://www.w3schools.com/tags/ev_onblur.asp">onblur</a> handler.
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-onblur">&lt;ao:onblur&gt;</a>
-          tag will override this value.
-        </p>
-      ]]></description>
-      <name>onblur</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.Object</type>
-    </attribute>
-    <attribute>
-      <description><![CDATA[
-        <p>
-          A JavaScript <a href="https://www.w3schools.com/tags/ev_onchange.asp">onchange</a> handler.
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-onchange">&lt;ao:onchange&gt;</a>
-          tag will override this value.
-        </p>
-      ]]></description>
-      <name>onchange</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.Object</type>
-    </attribute>
-    <attribute>
-      <description><![CDATA[
-        <p>
-          A JavaScript <a href="https://www.w3schools.com/tags/ev_onfocus.asp">onfocus</a> handler.
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-onfocus">&lt;ao:onfocus&gt;</a>
-          tag will override this value.
-        </p>
-      ]]></description>
-      <name>onfocus</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.Object</type>
-    </attribute>
-    <attribute>
-      <description><![CDATA[
-        <p>
-          A JavaScript <a href="https://www.w3schools.com/tags/ev_onkeypress.asp">onkeypress</a> handler.
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-onkeypress">&lt;ao:onkeypress&gt;</a>
-          tag will override this value.
-        </p>
-      ]]></description>
-      <name>onkeypress</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.Object</type>
-    </attribute>
+    &OnblurAttribute;
+    &OnchangeAttribute;
+    &OnfocusAttribute;
+    &OnkeypressAttribute;
     <dynamic-attributes>true</dynamic-attributes>
   </tag>
   <tag>
@@ -4441,19 +4427,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.Object</type>
     </attribute>
-    <attribute>
-      <description><![CDATA[
-        <p>
-          A JavaScript <a href="https://www.w3schools.com/tags/ev_onchange.asp">onchange</a> handler.
-          A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-onchange">&lt;ao:onchange&gt;</a>
-          tag will override this value.
-        </p>
-      ]]></description>
-      <name>onchange</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.Object</type>
-    </attribute>
+    &OnchangeAttribute;
     <dynamic-attributes>true</dynamic-attributes>
   </tag>
   <tag>

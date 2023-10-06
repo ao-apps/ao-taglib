@@ -28,8 +28,10 @@ import com.aoapps.html.any.AnyINPUT;
 import com.aoapps.html.any.attributes.event.Onblur;
 import com.aoapps.html.any.attributes.event.Onchange;
 import com.aoapps.html.any.attributes.event.Onclick;
+import com.aoapps.html.any.attributes.event.Onerror;
 import com.aoapps.html.any.attributes.event.Onfocus;
 import com.aoapps.html.any.attributes.event.Onkeypress;
+import com.aoapps.html.any.attributes.event.Onload;
 import com.aoapps.html.any.attributes.text.Alt;
 import com.aoapps.html.any.attributes.text.Name;
 import com.aoapps.html.any.attributes.text.Title;
@@ -85,8 +87,10 @@ public class InputTag extends ElementBufferedTag
     OnblurAttribute,
     OnchangeAttribute,
     OnclickAttribute,
+    OnerrorAttribute,
     OnfocusAttribute,
-    OnkeypressAttribute {
+    OnkeypressAttribute,
+    OnloadAttribute {
 
   /* SimpleTag only: */
   public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, InputTag.class);
@@ -249,6 +253,8 @@ public class InputTag extends ElementBufferedTag
     this.value = Coercion.nullIfEmpty(value);
   }
 
+  // Events
+
   private Object onblur;
 
   @Override
@@ -270,6 +276,13 @@ public class InputTag extends ElementBufferedTag
     this.onclick = Onclick.onclick.normalize(onclick);
   }
 
+  private Object onerror;
+
+  @Override
+  public void setOnerror(Object onerror) throws IOException {
+    this.onerror = Onerror.onerror.normalize(onerror);
+  }
+
   private Object onfocus;
 
   @Override
@@ -282,6 +295,13 @@ public class InputTag extends ElementBufferedTag
   @Override
   public void setOnkeypress(Object onkeypress) throws IOException {
     this.onkeypress = Onkeypress.onkeypress.normalize(onkeypress);
+  }
+
+  private Object onload;
+
+  @Override
+  public void setOnload(Object onload) throws IOException {
+    this.onload = Onload.onload.normalize(onload);
   }
 
   /**
@@ -316,11 +336,14 @@ public class InputTag extends ElementBufferedTag
     type = null;
     width = null;
     value = null;
+    // Events
     onblur = null;
     onchange = null;
     onclick = null;
+    onerror = null;
     onfocus = null;
     onkeypress = null;
+    onload = null;
   }
 
   @Override

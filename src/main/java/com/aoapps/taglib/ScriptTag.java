@@ -24,6 +24,7 @@
 package com.aoapps.taglib;
 
 import com.aoapps.encoding.MediaType;
+import com.aoapps.html.any.attributes.event.Onerror;
 import com.aoapps.html.any.attributes.event.Onload;
 import com.aoapps.html.any.attributes.text.Type;
 import com.aoapps.html.any.attributes.url.Src;
@@ -58,6 +59,7 @@ public class ScriptTag extends ElementBufferedTag
     SrcAttribute,
     ParamsAttribute,
     // Events
+    OnerrorAttribute,
     OnloadAttribute {
 
   /* SimpleTag only: */
@@ -150,6 +152,15 @@ public class ScriptTag extends ElementBufferedTag
     this.defer = defer;
   }
 
+  // Events
+
+  private Object onerror;
+
+  @Override
+  public void setOnerror(Object onerror) throws IOException {
+    this.onerror = Onerror.onerror.normalize(onerror);
+  }
+
   private Object onload;
 
   @Override
@@ -186,6 +197,8 @@ public class ScriptTag extends ElementBufferedTag
     addLastModified = AddLastModified.AUTO;
     async = false;
     defer = false;
+    // Events
+    onerror = null;
     onload = null;
   }
 
@@ -211,6 +224,8 @@ public class ScriptTag extends ElementBufferedTag
         .src(UrlUtils.getSrc(pageContext, src, params, addLastModified, absolute, canonical))
         .async(async)
         .defer(defer)
+        // Events
+        .onerror(onerror)
         .onload(onload)
         // Only write body when there is no source (discard body when src provided)
         .out((src != null) ? null : capturedBody)

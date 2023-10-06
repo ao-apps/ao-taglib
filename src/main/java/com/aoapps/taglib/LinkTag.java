@@ -25,6 +25,8 @@ package com.aoapps.taglib;
 
 import com.aoapps.encoding.MediaType;
 import com.aoapps.html.any.attributes.enumeration.Rel;
+import com.aoapps.html.any.attributes.event.Onerror;
+import com.aoapps.html.any.attributes.event.Onload;
 import com.aoapps.html.any.attributes.text.Hreflang;
 import com.aoapps.html.any.attributes.text.Media;
 import com.aoapps.html.any.attributes.text.Title;
@@ -63,7 +65,10 @@ public class LinkTag extends ElementNullTag
     HreflangAttribute,
     RelAttribute,
     TypeAttribute,
-    TitleAttribute {
+    TitleAttribute,
+    // Events
+    OnerrorAttribute,
+    OnloadAttribute {
 
   public LinkTag() {
     init();
@@ -101,6 +106,9 @@ public class LinkTag extends ElementNullTag
       setType(link.getType());
       setMedia(link.getMedia());
       setTitle(link.getTitle());
+      // Events
+      setOnerror(link.getOnerror());
+      setOnload(link.getOnload());
     } catch (IOException e) {
       throw new UncheckedIOException(e);
     }
@@ -176,6 +184,22 @@ public class LinkTag extends ElementNullTag
     this.title = Title.title.normalize(title);
   }
 
+  // Events
+
+  private Object onerror;
+
+  @Override
+  public void setOnerror(Object onerror) throws IOException {
+    this.onerror = Onerror.onerror.normalize(onerror);
+  }
+
+  private Object onload;
+
+  @Override
+  public void setOnload(Object onload) throws IOException {
+    this.onload = Onload.onload.normalize(onload);
+  }
+
   /**
    * {@inheritDoc}
    *
@@ -199,6 +223,9 @@ public class LinkTag extends ElementNullTag
     type = null;
     media = null;
     title = null;
+    // Events
+    onerror = null;
+    onload = null;
   }
 
   @Override
@@ -223,7 +250,10 @@ public class LinkTag extends ElementNullTag
               Strings.trimNullIfEmpty(rel),
               type,
               (media == null) ? null : Coercion.toString(media),
-              (title == null) ? null : Coercion.toString(title)
+              (title == null) ? null : Coercion.toString(title),
+              // Events
+              onerror,
+              onload
           )
       );
     } else {
@@ -243,6 +273,9 @@ public class LinkTag extends ElementNullTag
           .type(type)
           .media(media)
           .title(title)
+          // Events
+          .onerror(onerror)
+          .onload(onload)
           .__();
     }
     /* BodyTag only:

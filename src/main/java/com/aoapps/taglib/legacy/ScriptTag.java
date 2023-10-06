@@ -26,6 +26,7 @@ package com.aoapps.taglib.legacy;
 import static com.aoapps.taglib.ScriptTag.RESOURCES;
 
 import com.aoapps.encoding.MediaType;
+import com.aoapps.html.any.attributes.event.Onerror;
 import com.aoapps.html.any.attributes.event.Onload;
 import com.aoapps.html.any.attributes.text.Type;
 import com.aoapps.html.any.attributes.url.Src;
@@ -38,6 +39,7 @@ import com.aoapps.net.MutableURIParameters;
 import com.aoapps.net.URIParametersMap;
 import com.aoapps.servlet.lastmodified.AddLastModified;
 import com.aoapps.taglib.GlobalAttributesUtils;
+import com.aoapps.taglib.OnerrorAttribute;
 import com.aoapps.taglib.OnloadAttribute;
 import com.aoapps.taglib.ParamUtils;
 import com.aoapps.taglib.ParamsAttribute;
@@ -64,10 +66,12 @@ public class ScriptTag extends ElementBufferedBodyTag
     SrcAttribute,
     ParamsAttribute,
     // Events
+    OnerrorAttribute,
     OnloadAttribute {
 
   /* SimpleTag only:
     public static final Resources RESOURCES = Resources.getResources(ResourceBundle::getBundle, ScriptTag.class);
+
   /**/
 
   public ScriptTag() {
@@ -155,6 +159,15 @@ public class ScriptTag extends ElementBufferedBodyTag
     this.defer = defer;
   }
 
+  // Events
+
+  private Object onerror;
+
+  @Override
+  public void setOnerror(Object onerror) throws IOException {
+    this.onerror = Onerror.onerror.normalize(onerror);
+  }
+
   private Object onload;
 
   @Override
@@ -191,6 +204,8 @@ public class ScriptTag extends ElementBufferedBodyTag
     addLastModified = AddLastModified.AUTO;
     async = false;
     defer = false;
+    // Events
+    onerror = null;
     onload = null;
   }
 
@@ -200,7 +215,7 @@ public class ScriptTag extends ElementBufferedBodyTag
     /**/
     /* SimpleTag only:
       protected void doTag(BufferResult capturedBody, Writer out) throws JspException, IOException {
-        PageContext pageContext = (PageContext)getJspContext();
+        PageContext pageContext = (PageContext) getJspContext();
     /**/
     // Write script tag with src attribute, discarding any body
     DocumentEE document = new DocumentEE(
@@ -216,6 +231,8 @@ public class ScriptTag extends ElementBufferedBodyTag
         .src(UrlUtils.getSrc(pageContext, src, params, addLastModified, absolute, canonical))
         .async(async)
         .defer(defer)
+        // Events
+        .onerror(onerror)
         .onload(onload)
         // Only write body when there is no source (discard body when src provided)
         .out((src != null) ? null : capturedBody)
