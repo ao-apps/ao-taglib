@@ -23,8 +23,6 @@
 
 package com.aoapps.taglib;
 
-import java.io.IOException;
-
 /**
  * Something with an onfocus attribute.
  *
@@ -32,5 +30,5 @@ import java.io.IOException;
  */
 public interface OnfocusAttribute {
 
-  void setOnfocus(Object onfocus) throws IOException;
+  void setOnfocus(Object onfocus);
 }

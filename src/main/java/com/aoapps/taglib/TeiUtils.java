@@ -27,7 +27,6 @@ import com.aoapps.collections.MinimalList;
 import com.aoapps.lang.Coercion;
 import com.aoapps.lang.LocalizedIllegalArgumentException;
 import com.aoapps.servlet.attribute.ScopeEE;
-import java.io.IOException;
 import java.util.List;
 import javax.servlet.jsp.tagext.TagData;
 import javax.servlet.jsp.tagext.TagExtraInfo;
@@ -67,7 +66,7 @@ public final class TeiUtils {
         String scope = Coercion.toString(Coercion.trim(o)); // TODO: normalizeScope
         ScopeEE.Page.getScopeId(scope);
         // Value is OK
-      } catch (IOException | LocalizedIllegalArgumentException err) {
+      } catch (LocalizedIllegalArgumentException err) {
         messages = MinimalList.add(
             messages,
             new ValidationMessage(

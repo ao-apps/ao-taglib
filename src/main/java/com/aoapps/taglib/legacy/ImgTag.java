@@ -143,14 +143,14 @@ public class ImgTag extends ElementBufferedBodyTag
   private Object alt;
 
   @Override
-  public void setAlt(Object alt) throws IOException {
+  public void setAlt(Object alt) {
     this.alt = Alt.alt.normalize(alt);
   }
 
   private Object title;
 
   @Override
-  public void setTitle(Object title) throws IOException {
+  public void setTitle(Object title) {
     this.title = Title.title.normalize(title);
   }
 
@@ -171,14 +171,14 @@ public class ImgTag extends ElementBufferedBodyTag
   private Object onerror;
 
   @Override
-  public void setOnerror(Object onerror) throws IOException {
+  public void setOnerror(Object onerror) {
     this.onerror = Onerror.onerror.normalize(onerror);
   }
 
   private Object onload;
 
   @Override
-  public void setOnload(Object onload) throws IOException {
+  public void setOnload(Object onload) {
     this.onload = Onload.onload.normalize(onload);
   }
 

@@ -23,8 +23,6 @@
 
 package com.aoapps.taglib;
 
-import java.io.IOException;
-
 /**
  * Something with a class attribute.
  *
@@ -32,5 +30,5 @@ import java.io.IOException;
  */
 public interface ClassAttribute {
 
-  void setClazz(Object clazz) throws IOException;
+  void setClazz(Object clazz);
 }

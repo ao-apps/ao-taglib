@@ -74,7 +74,7 @@ public class ParamsTag extends EncodingNullBodyTag
   private String name;
 
   @Override
-  public void setName(Object name) throws IOException {
+  public void setName(Object name) {
     name = Name.name.normalize(name);
     this.name = (name == null) ? null : Coercion.toString(name);
   }

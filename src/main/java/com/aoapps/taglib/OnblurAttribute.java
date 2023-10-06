@@ -23,8 +23,6 @@
 
 package com.aoapps.taglib;
 
-import java.io.IOException;
-
 /**
  * Something with an onblur attribute.
  *
@@ -32,5 +30,5 @@ import java.io.IOException;
  */
 public interface OnblurAttribute {
 
-  void setOnblur(Object onblur) throws IOException;
+  void setOnblur(Object onblur);
 }

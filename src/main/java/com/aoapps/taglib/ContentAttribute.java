@@ -23,8 +23,6 @@
 
 package com.aoapps.taglib;
 
-import java.io.IOException;
-
 /**
  * Something with a content attribute.
  *
@@ -32,5 +30,5 @@ import java.io.IOException;
  */
 public interface ContentAttribute {
 
-  void setContent(Object content) throws IOException;
+  void setContent(Object content);
 }

@@ -94,7 +94,7 @@ public class TextareaTag extends ElementBufferedBodyTag
   private Object name;
 
   @Override
-  public void setName(Object name) throws IOException {
+  public void setName(Object name) {
     this.name = Name.name.normalize(name);
   }
 
@@ -115,14 +115,14 @@ public class TextareaTag extends ElementBufferedBodyTag
   private Object value;
 
   @Override
-  public void setValue(Object value) throws IOException {
+  public void setValue(Object value) {
     this.value = Coercion.nullIfEmpty(value);
   }
 
   private Object onchange;
 
   @Override
-  public void setOnchange(Object onchange) throws IOException {
+  public void setOnchange(Object onchange) {
     this.onchange = Onchange.onchange.normalize(onchange);
   }
 

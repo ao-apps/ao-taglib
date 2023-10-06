@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
     shortTitle="Changelog"
     tocLevels="1"
     datePublished="2016-10-29T22:02:09-05:00"
-    dateModified="2023-10-05T23:33:39Z"
+    dateModified="2023-10-06T03:04:42Z"
   >
     <c:set var="latestRelease" value="7.2.2" />
     <c:if test="${
@@ -84,7 +84,6 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
           </li>
           <li>
             Using normalization methods from <core:link book="/fluent-html/any" page="/index.jspx">underlying implementation</core:link>.
-            Throwing more exceptions matching the normalization methods.
           </li>
           <li>
             <code>class</code>, <code>media</code>, <code>name</code>, and <code>type</code> attributes are now

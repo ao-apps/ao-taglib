@@ -23,8 +23,6 @@
 
 package com.aoapps.taglib;
 
-import java.io.IOException;
-
 /**
  * Something with a style attribute.
  *
@@ -32,5 +30,5 @@ import java.io.IOException;
  */
 public interface StyleAttribute {
 
-  void setStyle(Object style) throws IOException;
+  void setStyle(Object style);
 }

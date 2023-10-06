@@ -23,8 +23,6 @@
 
 package com.aoapps.taglib;
 
-import java.io.IOException;
-
 /**
  * Something with an onload attribute.
  *
@@ -32,5 +30,5 @@ import java.io.IOException;
  */
 public interface OnloadAttribute {
 
-  void setOnload(Object onload) throws IOException;
+  void setOnload(Object onload);
 }

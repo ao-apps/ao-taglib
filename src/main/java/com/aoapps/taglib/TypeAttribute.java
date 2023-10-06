@@ -23,8 +23,6 @@
 
 package com.aoapps.taglib;
 
-import java.io.IOException;
-
 /**
  * Something with a type attribute.
  *
@@ -32,5 +30,5 @@ import java.io.IOException;
  */
 public interface TypeAttribute {
 
-  void setType(Object type) throws IOException;
+  void setType(Object type);
 }

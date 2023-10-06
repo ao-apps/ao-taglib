@@ -23,8 +23,6 @@
 
 package com.aoapps.taglib;
 
-import java.io.IOException;
-
 /**
  * Something with an onkeypress attribute.
  *
@@ -32,5 +30,5 @@ import java.io.IOException;
  */
 public interface OnkeypressAttribute {
 
-  void setOnkeypress(Object onkeypress) throws IOException;
+  void setOnkeypress(Object onkeypress);
 }

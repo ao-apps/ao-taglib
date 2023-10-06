@@ -88,7 +88,7 @@ public class ScriptTag extends ElementBufferedTag
   private MediaType mediaType;
 
   @Override
-  public void setType(Object type) throws IOException {
+  public void setType(Object type) {
     try {
       type = Type.type.normalize(type);
       MediaType newMediaType = MediaType.getMediaTypeForContentType((type == null) ? null : Coercion.toString(type));
@@ -157,14 +157,14 @@ public class ScriptTag extends ElementBufferedTag
   private Object onerror;
 
   @Override
-  public void setOnerror(Object onerror) throws IOException {
+  public void setOnerror(Object onerror) {
     this.onerror = Onerror.onerror.normalize(onerror);
   }
 
   private Object onload;
 
   @Override
-  public void setOnload(Object onload) throws IOException {
+  public void setOnload(Object onload) {
     this.onload = Onload.onload.normalize(onload);
   }
 

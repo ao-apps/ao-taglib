@@ -24,7 +24,6 @@
 package com.aoapps.taglib;
 
 import com.aoapps.encoding.taglib.EncodingBufferedTag;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -61,7 +60,7 @@ public abstract class ElementBufferedTag extends EncodingBufferedTag
   }
 
   @Override
-  public void setClazz(Object clazz) throws IOException {
+  public void setClazz(Object clazz) {
     global.setClazz(clazz);
   }
 
@@ -71,7 +70,7 @@ public abstract class ElementBufferedTag extends EncodingBufferedTag
   }
 
   @Override
-  public void setData(Map<? extends String, ?> data) throws IOException {
+  public void setData(Map<? extends String, ?> data) {
     global.setData(data);
   }
 
@@ -96,7 +95,7 @@ public abstract class ElementBufferedTag extends EncodingBufferedTag
   }
 
   @Override
-  public void setStyle(Object style) throws IOException {
+  public void setStyle(Object style) {
     global.setStyle(style);
   }
 

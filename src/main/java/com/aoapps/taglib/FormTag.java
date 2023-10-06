@@ -140,7 +140,7 @@ public class FormTag extends ElementBufferedTag
   private Object onsubmit;
 
   @Override
-  public void setOnsubmit(Object onsubmit) throws IOException {
+  public void setOnsubmit(Object onsubmit) {
     this.onsubmit = Onsubmit.onsubmit.normalize(onsubmit);
   }
 

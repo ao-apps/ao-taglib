@@ -146,7 +146,7 @@ public class FormTag extends ElementBufferedBodyTag
   private Object onsubmit;
 
   @Override
-  public void setOnsubmit(Object onsubmit) throws IOException {
+  public void setOnsubmit(Object onsubmit) {
     this.onsubmit = Onsubmit.onsubmit.normalize(onsubmit);
   }
 

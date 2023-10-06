@@ -42,7 +42,6 @@ import com.aoapps.net.URIParametersMap;
 import com.aoapps.servlet.jsp.tagext.JspTagUtils;
 import com.aoapps.servlet.lastmodified.AddLastModified;
 import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.io.Writer;
 import java.util.List;
 import java.util.Locale;
@@ -87,31 +86,27 @@ public class LinkTag extends ElementNullTag
    * Copies all values from the provided link.
    */
   public void setLink(Link link) {
-    try {
-      GlobalAttributesUtils.copy(link.getGlobal(), this);
-      setHref(link.getHref());
-      setAbsolute(link.getAbsolute());
-      URIParameters linkParams = link.getParams();
-      if (linkParams != null) {
-        for (Map.Entry<String, List<String>> entry : linkParams.getParameterMap().entrySet()) {
-          String paramName = entry.getKey();
-          for (String paramValue : entry.getValue()) {
-            addParam(paramName, (Object) paramValue);
-          }
+    GlobalAttributesUtils.copy(link.getGlobal(), this);
+    setHref(link.getHref());
+    setAbsolute(link.getAbsolute());
+    URIParameters linkParams = link.getParams();
+    if (linkParams != null) {
+      for (Map.Entry<String, List<String>> entry : linkParams.getParameterMap().entrySet()) {
+        String paramName = entry.getKey();
+        for (String paramValue : entry.getValue()) {
+          addParam(paramName, (Object) paramValue);
         }
       }
-      this.addLastModified = link.getAddLastModified();
-      setHreflang(link.getHreflang());
-      setRel(link.getRel());
-      setType(link.getType());
-      setMedia(link.getMedia());
-      setTitle(link.getTitle());
-      // Events
-      setOnerror(link.getOnerror());
-      setOnload(link.getOnload());
-    } catch (IOException e) {
-      throw new UncheckedIOException(e);
     }
+    this.addLastModified = link.getAddLastModified();
+    setHreflang(link.getHreflang());
+    setRel(link.getRel());
+    setType(link.getType());
+    setMedia(link.getMedia());
+    setTitle(link.getTitle());
+    // Events
+    setOnerror(link.getOnerror());
+    setOnload(link.getOnload());
   }
 
   private String href;
@@ -152,7 +147,7 @@ public class LinkTag extends ElementNullTag
   private Object hreflang;
 
   @Override
-  public void setHreflang(Object hreflang) throws IOException {
+  public void setHreflang(Object hreflang) {
     this.hreflang = Hreflang.hreflang.normalize(hreflang);
   }
 
@@ -166,21 +161,21 @@ public class LinkTag extends ElementNullTag
   private String type;
 
   @Override
-  public void setType(Object type) throws IOException {
+  public void setType(Object type) {
     type = Type.type.normalize(type);
     this.type = (type == null) ? null : Coercion.toString(type);
   }
 
   private Object media;
 
-  public void setMedia(Object media) throws IOException {
+  public void setMedia(Object media) {
     this.media = Media.media.normalize(media);
   }
 
   private Object title;
 
   @Override
-  public void setTitle(Object title) throws IOException {
+  public void setTitle(Object title) {
     this.title = Title.title.normalize(title);
   }
 
@@ -189,14 +184,14 @@ public class LinkTag extends ElementNullTag
   private Object onerror;
 
   @Override
-  public void setOnerror(Object onerror) throws IOException {
+  public void setOnerror(Object onerror) {
     this.onerror = Onerror.onerror.normalize(onerror);
   }
 
   private Object onload;
 
   @Override
-  public void setOnload(Object onload) throws IOException {
+  public void setOnload(Object onload) {
     this.onload = Onload.onload.normalize(onload);
   }
 

@@ -24,7 +24,6 @@
 package com.aoapps.taglib;
 
 import com.aoapps.html.any.attributes.text.Data;
-import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -50,5 +49,5 @@ public interface GlobalBufferedAttributes extends
    *
    * @see  MutableGlobalAttributes#setData(java.util.Map)
    */
-  void setData(Map<? extends String, ?> data) throws IllegalArgumentException, IOException;
+  void setData(Map<? extends String, ?> data) throws IllegalArgumentException;
 }

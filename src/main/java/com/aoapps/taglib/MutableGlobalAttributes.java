@@ -32,8 +32,6 @@ import com.aoapps.html.any.attributes.text.Id;
 import com.aoapps.html.any.attributes.text.Style;
 import com.aoapps.lang.Coercion;
 import com.aoapps.lang.Freezable;
-import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.util.Map;
 
 /**
@@ -53,15 +51,11 @@ public class MutableGlobalAttributes implements GlobalAttributes, Freezable<Glob
 
   @SuppressWarnings("OverridableMethodCallInConstructor")
   public MutableGlobalAttributes(GlobalAttributes global) {
-    try {
-      setId(global.getId());
-      setClazz(global.getClazz());
-      setData(global.getData());
-      setDir(global.getDir());
-      setStyle(global.getStyle());
-    } catch (IOException e) {
-      throw new UncheckedIOException(e);
-    }
+    setId(global.getId());
+    setClazz(global.getClazz());
+    setData(global.getData());
+    setDir(global.getDir());
+    setStyle(global.getStyle());
   }
 
   @Override
@@ -71,12 +65,8 @@ public class MutableGlobalAttributes implements GlobalAttributes, Freezable<Glob
 
   public MutableGlobalAttributes setId(String id) {
     // TODO: validate, too
-    try {
-      Object idObj = Id.id.normalize(id);
-      this.id = (idObj == null) ? null : Coercion.toString(id);
-    } catch (IOException e) {
-      throw new AssertionError("IOException should not happen on String", e);
-    }
+    Object idObj = Id.id.normalize(id);
+    this.id = (idObj == null) ? null : Coercion.toString(id);
     return this;
   }
 
@@ -85,7 +75,7 @@ public class MutableGlobalAttributes implements GlobalAttributes, Freezable<Glob
     return clazz;
   }
 
-  public MutableGlobalAttributes setClazz(Object clazz) throws IOException {
+  public MutableGlobalAttributes setClazz(Object clazz) {
     this.clazz = Class.clazz.normalize(clazz);
     return this;
   }
@@ -103,7 +93,7 @@ public class MutableGlobalAttributes implements GlobalAttributes, Freezable<Glob
    *
    * @see  GlobalBufferedAttributes#setData(java.util.Map)
    */
-  public MutableGlobalAttributes setData(Map<? extends String, ?> data) throws IOException, IllegalArgumentException {
+  public MutableGlobalAttributes setData(Map<? extends String, ?> data) throws IllegalArgumentException {
     Map<String, Object> newData = MinimalMap.emptyMap();
     if (data != null) {
       for (Map.Entry<? extends String, ?> entry : data.entrySet()) {
@@ -124,7 +114,7 @@ public class MutableGlobalAttributes implements GlobalAttributes, Freezable<Glob
    *
    * @throws  IllegalArgumentException  When {@code attrName} is not {@linkplain Data.data#validate(java.lang.String) valid}
    */
-  public MutableGlobalAttributes addData(Map<? extends String, ?> data) throws IOException, IllegalArgumentException {
+  public MutableGlobalAttributes addData(Map<? extends String, ?> data) throws IllegalArgumentException {
     if (data != null) {
       Map<String, Object> newData = this.data;
       for (Map.Entry<? extends String, ?> entry : data.entrySet()) {
@@ -198,7 +188,7 @@ public class MutableGlobalAttributes implements GlobalAttributes, Freezable<Glob
     return style;
   }
 
-  public MutableGlobalAttributes setStyle(Object style) throws IOException {
+  public MutableGlobalAttributes setStyle(Object style) {
     this.style = Style.style.normalize(style);
     return this;
   }

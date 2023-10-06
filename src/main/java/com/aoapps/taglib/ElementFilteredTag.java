@@ -24,7 +24,6 @@
 package com.aoapps.taglib;
 
 import com.aoapps.encoding.taglib.EncodingFilteredTag;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -59,7 +58,7 @@ public abstract class ElementFilteredTag extends EncodingFilteredTag
     return global.getClazz();
   }
 
-  public void setClazz(Object clazz) throws IOException {
+  public void setClazz(Object clazz) {
     global.setClazz(clazz);
   }
 
@@ -82,7 +81,7 @@ public abstract class ElementFilteredTag extends EncodingFilteredTag
     return global.getStyle();
   }
 
-  public void setStyle(Object style) throws IOException {
+  public void setStyle(Object style) {
     global.setStyle(style);
   }
 

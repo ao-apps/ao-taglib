@@ -32,7 +32,6 @@ import com.aoapps.html.any.attributes.text.Data;
 import com.aoapps.lang.Coercion;
 import com.aoapps.lang.Throwables;
 import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.io.Writer;
 import java.util.List;
 import java.util.Map;
@@ -91,15 +90,11 @@ public final class GlobalAttributesUtils {
    * Copies all global attributes.
    */
   public static void copy(GlobalAttributes from, GlobalBufferedAttributes to) {
-    try {
-      to.setId(from.getId());
-      to.setClazz(from.getClazz());
-      to.setData(from.getData());
-      to.setDir(from.getDir());
-      to.setStyle(from.getStyle());
-    } catch (IOException e) {
-      throw new UncheckedIOException(e);
-    }
+    to.setId(from.getId());
+    to.setClazz(from.getClazz());
+    to.setData(from.getData());
+    to.setDir(from.getDir());
+    to.setStyle(from.getStyle());
   }
 
   public static <G extends com.aoapps.html.any.GlobalAttributes<?>> G doGlobalAttributes(GlobalAttributes from, G to) throws IOException {

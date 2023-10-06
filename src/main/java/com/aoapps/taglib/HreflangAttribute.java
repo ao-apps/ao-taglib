@@ -23,8 +23,6 @@
 
 package com.aoapps.taglib;
 
-import java.io.IOException;
-
 /**
  * Something with a hreflang attribute.
  *
@@ -32,5 +30,5 @@ import java.io.IOException;
  */
 public interface HreflangAttribute {
 
-  void setHreflang(Object hreflang) throws IOException;
+  void setHreflang(Object hreflang);
 }

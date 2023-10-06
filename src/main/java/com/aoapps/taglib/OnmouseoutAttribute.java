@@ -23,8 +23,6 @@
 
 package com.aoapps.taglib;
 
-import java.io.IOException;
-
 /**
  * Something with an onmouseout attribute.
  *
@@ -32,5 +30,5 @@ import java.io.IOException;
  */
 public interface OnmouseoutAttribute {
 
-  void setOnmouseout(Object onmouseout) throws IOException;
+  void setOnmouseout(Object onmouseout);
 }

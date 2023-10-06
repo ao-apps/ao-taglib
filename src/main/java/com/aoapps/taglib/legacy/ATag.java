@@ -145,7 +145,7 @@ public class ATag extends ElementBufferedBodyTag
   private Object hreflang;
 
   @Override
-  public void setHreflang(Object hreflang) throws IOException {
+  public void setHreflang(Object hreflang) {
     this.hreflang = Hreflang.hreflang.normalize(hreflang);
   }
 
@@ -166,35 +166,35 @@ public class ATag extends ElementBufferedBodyTag
   private Object title;
 
   @Override
-  public void setTitle(Object title) throws IOException {
+  public void setTitle(Object title) {
     this.title = Title.title.normalize(title);
   }
 
   private Object type;
 
   @Override
-  public void setType(Object type) throws IOException {
+  public void setType(Object type) {
     this.type = Type.type.normalize(type);
   }
 
   private Object onclick;
 
   @Override
-  public void setOnclick(Object onclick) throws IOException {
+  public void setOnclick(Object onclick) {
     this.onclick = Onclick.onclick.normalize(onclick);
   }
 
   private Object onmouseout;
 
   @Override
-  public void setOnmouseout(Object onmouseout) throws IOException {
+  public void setOnmouseout(Object onmouseout) {
     this.onmouseout = Onmouseout.onmouseout.normalize(onmouseout);
   }
 
   private Object onmouseover;
 
   @Override
-  public void setOnmouseover(Object onmouseover) throws IOException {
+  public void setOnmouseover(Object onmouseover) {
     this.onmouseover = Onmouseover.onmouseover.normalize(onmouseover);
   }
 

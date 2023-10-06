@@ -160,8 +160,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 <!ENTITY OnblurAttribute "<attribute>
       <description>
         &lt;p&gt;
-          A JavaScript &lt;a href="https://www.w3schools.com/tags/ev_onblur.asp"&gt;onblur&lt;/a&gt; handler.
-          A nested &lt;a href="@{project.url}&tld;/tag-onblur"&gt;&lt;ao:onblur&gt;&lt;/a&gt;
+          A JavaScript &lt;a href=&quot;https://www.w3schools.com/tags/ev_onblur.asp&quot;&gt;onblur&lt;/a&gt; handler.
+          A nested &lt;a href=&quot;@{project.url}&tld;/tag-onblur&quot;&gt;&lt;ao:onblur&gt;&lt;/a&gt;
           tag will override this value.
         &lt;/p&gt;
       </description>
@@ -174,8 +174,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 <!ENTITY OnchangeAttribute "<attribute>
       <description>
         &lt;p&gt;
-          A JavaScript &lt;a href="https://www.w3schools.com/tags/ev_onchange.asp"&gt;onchange&lt;/a&gt; handler.
-          A nested &lt;a href="@{project.url}&tld;/tag-onchange"&gt;&lt;ao:onchange&gt;&lt;/a&gt;
+          A JavaScript &lt;a href=&quot;https://www.w3schools.com/tags/ev_onchange.asp&quot;&gt;onchange&lt;/a&gt; handler.
+          A nested &lt;a href=&quot;@{project.url}&tld;/tag-onchange&quot;&gt;&lt;ao:onchange&gt;&lt;/a&gt;
           tag will override this value.
         &lt;/p&gt;
       </description>
@@ -188,8 +188,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 <!ENTITY OnclickAttribute "<attribute>
       <description>
         &lt;p&gt;
-          A JavaScript &lt;a href="https://www.w3schools.com/tags/ev_onclick.asp"&gt;onclick&lt;/a&gt; handler.
-          A nested &lt;a href="@{project.url}&tld;/tag-onclick"&gt;&lt;ao:onclick&gt;&lt;/a&gt;
+          A JavaScript &lt;a href=&quot;https://www.w3schools.com/tags/ev_onclick.asp&quot;&gt;onclick&lt;/a&gt; handler.
+          A nested &lt;a href=&quot;@{project.url}&tld;/tag-onclick&quot;&gt;&lt;ao:onclick&gt;&lt;/a&gt;
           tag will override this value.
         &lt;/p&gt;
       </description>
@@ -202,8 +202,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 <!ENTITY OnerrorAttribute "<attribute>
       <description>
         &lt;p&gt;
-          A JavaScript &lt;a href="https://www.w3schools.com/jsref/event_onerror.asp"&gt;onerror&lt;/a&gt; handler.
-          A nested &lt;a href="@{project.url}&tld;/tag-onerror"&gt;&lt;ao:onerror&gt;&lt;/a&gt;
+          A JavaScript &lt;a href=&quot;https://www.w3schools.com/jsref/event_onerror.asp&quot;&gt;onerror&lt;/a&gt; handler.
+          A nested &lt;a href=&quot;@{project.url}&tld;/tag-onerror&quot;&gt;&lt;ao:onerror&gt;&lt;/a&gt;
           tag will override this value.
         &lt;/p&gt;
       </description>
@@ -216,8 +216,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 <!ENTITY OnfocusAttribute "<attribute>
       <description>
         &lt;p&gt;
-          A JavaScript &lt;a href="https://www.w3schools.com/tags/ev_onfocus.asp"&gt;onfocus&lt;/a&gt; handler.
-          A nested &lt;a href="@{project.url}&tld;/tag-onfocus"&gt;&lt;ao:onfocus&gt;&lt;/a&gt;
+          A JavaScript &lt;a href=&quot;https://www.w3schools.com/tags/ev_onfocus.asp&quot;&gt;onfocus&lt;/a&gt; handler.
+          A nested &lt;a href=&quot;@{project.url}&tld;/tag-onfocus&quot;&gt;&lt;ao:onfocus&gt;&lt;/a&gt;
           tag will override this value.
         &lt;/p&gt;
       </description>
@@ -230,8 +230,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 <!ENTITY OnkeypressAttribute "<attribute>
       <description>
         &lt;p&gt;
-          A JavaScript &lt;a href="https://www.w3schools.com/tags/ev_onkeypress.asp"&gt;onkeypress&lt;/a&gt; handler.
-          A nested &lt;a href="@{project.url}&tld;/tag-onkeypress"&gt;&lt;ao:onkeypress&gt;&lt;/a&gt;
+          A JavaScript &lt;a href=&quot;https://www.w3schools.com/tags/ev_onkeypress.asp&quot;&gt;onkeypress&lt;/a&gt; handler.
+          A nested &lt;a href=&quot;@{project.url}&tld;/tag-onkeypress&quot;&gt;&lt;ao:onkeypress&gt;&lt;/a&gt;
           tag will override this value.
         &lt;/p&gt;
       </description>
@@ -244,8 +244,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 <!ENTITY OnloadAttribute "<attribute>
       <description>
         &lt;p&gt;
-          A JavaScript &lt;a href="https://www.w3schools.com/jsref/event_onload.asp"&gt;onload&lt;/a&gt; handler.
-          A nested &lt;a href="@{project.url}&tld;/tag-onload"&gt;&lt;ao:onload&gt;&lt;/a&gt;
+          A JavaScript &lt;a href=&quot;https://www.w3schools.com/jsref/event_onload.asp&quot;&gt;onload&lt;/a&gt; handler.
+          A nested &lt;a href=&quot;@{project.url}&tld;/tag-onload&quot;&gt;&lt;ao:onload&gt;&lt;/a&gt;
           tag will override this value.
         &lt;/p&gt;
       </description>
@@ -258,8 +258,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 <!ENTITY OnmouseoutAttribute "<attribute>
       <description>
         &lt;p&gt;
-          A JavaScript &lt;a href="https://www.w3schools.com/tags/ev_onmouseout.asp"&gt;onmouseout&lt;/a&gt; handler.
-          A nested &lt;a href="@{project.url}&tld;/tag-onmouseout"&gt;&lt;ao:onmouseout&gt;&lt;/a&gt;
+          A JavaScript &lt;a href=&quot;https://www.w3schools.com/tags/ev_onmouseout.asp&quot;&gt;onmouseout&lt;/a&gt; handler.
+          A nested &lt;a href=&quot;@{project.url}&tld;/tag-onmouseout&quot;&gt;&lt;ao:onmouseout&gt;&lt;/a&gt;
           tag will override this value.
         &lt;/p&gt;
       </description>
@@ -272,8 +272,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 <!ENTITY OnmouseoverAttribute "<attribute>
       <description>
         &lt;p&gt;
-          A JavaScript &lt;a href="https://www.w3schools.com/tags/ev_onmouseover.asp"&gt;onmouseover&lt;/a&gt; handler.
-          A nested &lt;a href="@{project.url}&tld;/tag-onmouseover"&gt;&lt;ao:onmouseover&gt;&lt;/a&gt;
+          A JavaScript &lt;a href=&quot;https://www.w3schools.com/tags/ev_onmouseover.asp&quot;&gt;onmouseover&lt;/a&gt; handler.
+          A nested &lt;a href=&quot;@{project.url}&tld;/tag-onmouseover&quot;&gt;&lt;ao:onmouseover&gt;&lt;/a&gt;
           tag will override this value.
         &lt;/p&gt;
       </description>
@@ -286,8 +286,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
 <!ENTITY OnsubmitAttribute "<attribute>
       <description>
         &lt;p&gt;
-          A JavaScript &lt;a href="https://www.w3schools.com/tags/ev_onsubmit.asp"&gt;onsubmit&lt;/a&gt; handler.
-          A nested &lt;a href="@{project.url}&tld;/tag-onsubmit"&gt;&lt;ao:onsubmit&gt;&lt;/a&gt;
+          A JavaScript &lt;a href=&quot;https://www.w3schools.com/tags/ev_onsubmit.asp&quot;&gt;onsubmit&lt;/a&gt; handler.
+          A nested &lt;a href=&quot;@{project.url}&tld;/tag-onsubmit&quot;&gt;&lt;ao:onsubmit&gt;&lt;/a&gt;
           tag will override this value.
         &lt;/p&gt;
       </description>

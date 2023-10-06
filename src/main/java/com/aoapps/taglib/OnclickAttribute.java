@@ -23,8 +23,6 @@
 
 package com.aoapps.taglib;
 
-import java.io.IOException;
-
 /**
  * Something with an onclick attribute.
  *
@@ -32,5 +30,5 @@ import java.io.IOException;
  */
 public interface OnclickAttribute {
 
-  void setOnclick(Object onclick) throws IOException;
+  void setOnclick(Object onclick);
 }

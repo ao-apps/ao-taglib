@@ -34,7 +34,6 @@ import com.aoapps.lang.Coercion;
 import com.aoapps.lang.Strings;
 import com.aoapps.servlet.jsp.tagext.JspTagUtils;
 import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.io.Writer;
 import java.nio.charset.Charset;
 import java.util.Optional;
@@ -69,16 +68,12 @@ public class MetaTag extends ElementBufferedTag
    * Copies all values from the provided meta.
    */
   public void setMeta(Meta meta) {
-    try {
-      GlobalAttributesUtils.copy(meta.getGlobal(), this);
-      setName(meta.getName());
-      setHttpEquiv(meta.getHttpEquiv());
-      setItemprop(meta.getItemprop());
-      setCharset(meta.getCharset());
-      setContent(meta.getContent());
-    } catch (IOException e) {
-      throw new UncheckedIOException(e);
-    }
+    GlobalAttributesUtils.copy(meta.getGlobal(), this);
+    setName(meta.getName());
+    setHttpEquiv(meta.getHttpEquiv());
+    setItemprop(meta.getItemprop());
+    setCharset(meta.getCharset());
+    setContent(meta.getContent());
   }
 
   /* BodyTag only:
@@ -88,7 +83,7 @@ public class MetaTag extends ElementBufferedTag
   private String name;
 
   @Override
-  public void setName(Object name) throws IOException {
+  public void setName(Object name) {
     name = Name.name.normalize(name);
     this.name = (name == null) ? null : Coercion.toString(name);
   }
@@ -121,7 +116,7 @@ public class MetaTag extends ElementBufferedTag
   private Object content;
 
   @Override
-  public void setContent(Object content) throws IOException {
+  public void setContent(Object content) {
     this.content = Content.content.normalize(content);
   }
 

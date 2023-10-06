@@ -23,8 +23,6 @@
 
 package com.aoapps.taglib;
 
-import java.io.IOException;
-
 /**
  * Something with an onsubmit attribute.
  *
@@ -32,5 +30,5 @@ import java.io.IOException;
  */
 public interface OnsubmitAttribute {
 
-  void setOnsubmit(Object onsubmit) throws IOException;
+  void setOnsubmit(Object onsubmit);
 }

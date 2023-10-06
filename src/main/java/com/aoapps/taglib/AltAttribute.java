@@ -23,8 +23,6 @@
 
 package com.aoapps.taglib;
 
-import java.io.IOException;
-
 /**
  * Something with an alt attribute.
  *
@@ -32,5 +30,5 @@ import java.io.IOException;
  */
 public interface AltAttribute {
 
-  void setAlt(Object alt) throws IOException;
+  void setAlt(Object alt);
 }

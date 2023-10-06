@@ -161,7 +161,7 @@ public class AreaTag extends ElementNullBodyTag
   private Object hreflang;
 
   @Override
-  public void setHreflang(Object hreflang) throws IOException {
+  public void setHreflang(Object hreflang) {
     this.hreflang = Hreflang.hreflang.normalize(hreflang);
   }
 
@@ -175,7 +175,7 @@ public class AreaTag extends ElementNullBodyTag
   private Object type;
 
   @Override
-  public void setType(Object type) throws IOException {
+  public void setType(Object type) {
     this.type = Type.type.normalize(type);
   }
 
@@ -189,35 +189,35 @@ public class AreaTag extends ElementNullBodyTag
   private Object alt;
 
   @Override
-  public void setAlt(Object alt) throws IOException {
+  public void setAlt(Object alt) {
     this.alt = Alt.alt.normalize(alt);
   }
 
   private Object title;
 
   @Override
-  public void setTitle(Object title) throws IOException {
+  public void setTitle(Object title) {
     this.title = Title.title.normalize(title);
   }
 
   private Object onclick;
 
   @Override
-  public void setOnclick(Object onclick) throws IOException {
+  public void setOnclick(Object onclick) {
     this.onclick = Onclick.onclick.normalize(onclick);
   }
 
   private Object onmouseover;
 
   @Override
-  public void setOnmouseover(Object onmouseover) throws IOException {
+  public void setOnmouseover(Object onmouseover) {
     this.onmouseover = Onmouseover.onmouseover.normalize(onmouseover);
   }
 
   private Object onmouseout;
 
   @Override
-  public void setOnmouseout(Object onmouseout) throws IOException {
+  public void setOnmouseout(Object onmouseout) {
     this.onmouseout = Onmouseout.onmouseout.normalize(onmouseout);
   }
 

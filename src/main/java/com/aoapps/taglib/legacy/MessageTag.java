@@ -32,7 +32,6 @@ import com.aoapps.hodgepodge.i18n.BundleLookupThreadContext;
 import com.aoapps.html.any.attributes.text.Type;
 import com.aoapps.lang.Coercion;
 import com.aoapps.lang.LocalizedIllegalArgumentException;
-import com.aoapps.lang.Strings;
 import com.aoapps.lang.i18n.Resources;
 import com.aoapps.servlet.jsp.LocalizedJspTagException;
 import com.aoapps.taglib.AttributeUtils;
@@ -89,7 +88,7 @@ public class MessageTag extends EncodingNullBodyTag
   private MediaType mediaType;
 
   @Override
-  public void setType(Object type) throws IOException {
+  public void setType(Object type) {
     type = Type.type.normalize(type);
     String typeStr = (type == null) ? null : Coercion.toString(type);
     MediaType newMediaType = MediaType.getMediaTypeByName(typeStr);

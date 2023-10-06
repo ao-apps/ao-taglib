@@ -28,7 +28,6 @@ import com.aoapps.taglib.AttributeUtils;
 import com.aoapps.taglib.GlobalAttributesUtils;
 import com.aoapps.taglib.GlobalBufferedAttributes;
 import com.aoapps.taglib.MutableGlobalAttributes;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -67,7 +66,7 @@ public abstract class ElementNullBodyTag extends EncodingNullBodyTag
   }
 
   @Override
-  public void setClazz(Object clazz) throws IOException {
+  public void setClazz(Object clazz) {
     global.setClazz(clazz);
   }
 
@@ -77,7 +76,7 @@ public abstract class ElementNullBodyTag extends EncodingNullBodyTag
   }
 
   @Override
-  public void setData(Map<? extends String, ?> data) throws IOException {
+  public void setData(Map<? extends String, ?> data) {
     global.setData(data);
   }
 
@@ -102,7 +101,7 @@ public abstract class ElementNullBodyTag extends EncodingNullBodyTag
   }
 
   @Override
-  public void setStyle(Object style) throws IOException {
+  public void setStyle(Object style) {
     global.setStyle(style);
   }
 

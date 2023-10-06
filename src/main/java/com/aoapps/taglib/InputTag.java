@@ -118,7 +118,7 @@ public class InputTag extends ElementBufferedTag
   private Object alt;
 
   @Override
-  public void setAlt(Object alt) throws IOException {
+  public void setAlt(Object alt) {
     this.alt = Alt.alt.normalize(alt);
   }
 
@@ -160,7 +160,7 @@ public class InputTag extends ElementBufferedTag
   private Object name;
 
   @Override
-  public void setName(Object name) throws IOException {
+  public void setName(Object name) {
     this.name = Name.name.normalize(name);
   }
 
@@ -223,14 +223,14 @@ public class InputTag extends ElementBufferedTag
   private Object title;
 
   @Override
-  public void setTitle(Object title) throws IOException {
+  public void setTitle(Object title) {
     this.title = Title.title.normalize(title);
   }
 
   private String type;
 
   @Override
-  public void setType(Object type) throws IOException {
+  public void setType(Object type) {
     type = Type.type.normalize(type);
     String typeStr = (type == null) ? null : Coercion.toString(type);
     if (typeStr != null && !InputTagTEI.isValidType(typeStr)) {
@@ -249,7 +249,7 @@ public class InputTag extends ElementBufferedTag
   private Object value;
 
   @Override
-  public void setValue(Object value) throws IOException {
+  public void setValue(Object value) {
     this.value = Coercion.nullIfEmpty(value);
   }
 
@@ -258,49 +258,49 @@ public class InputTag extends ElementBufferedTag
   private Object onblur;
 
   @Override
-  public void setOnblur(Object onblur) throws IOException {
+  public void setOnblur(Object onblur) {
     this.onblur = Onblur.onblur.normalize(onblur);
   }
 
   private Object onchange;
 
   @Override
-  public void setOnchange(Object onchange) throws IOException {
+  public void setOnchange(Object onchange) {
     this.onchange = Onchange.onchange.normalize(onchange);
   }
 
   private Object onclick;
 
   @Override
-  public void setOnclick(Object onclick) throws IOException {
+  public void setOnclick(Object onclick) {
     this.onclick = Onclick.onclick.normalize(onclick);
   }
 
   private Object onerror;
 
   @Override
-  public void setOnerror(Object onerror) throws IOException {
+  public void setOnerror(Object onerror) {
     this.onerror = Onerror.onerror.normalize(onerror);
   }
 
   private Object onfocus;
 
   @Override
-  public void setOnfocus(Object onfocus) throws IOException {
+  public void setOnfocus(Object onfocus) {
     this.onfocus = Onfocus.onfocus.normalize(onfocus);
   }
 
   private Object onkeypress;
 
   @Override
-  public void setOnkeypress(Object onkeypress) throws IOException {
+  public void setOnkeypress(Object onkeypress) {
     this.onkeypress = Onkeypress.onkeypress.normalize(onkeypress);
   }
 
   private Object onload;
 
   @Override
-  public void setOnload(Object onload) throws IOException {
+  public void setOnload(Object onload) {
     this.onload = Onload.onload.normalize(onload);
   }
 

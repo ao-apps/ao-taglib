@@ -88,7 +88,7 @@ public class SelectTag extends ElementBufferedTag
   private Object name;
 
   @Override
-  public void setName(Object name) throws IOException {
+  public void setName(Object name) {
     this.name = Name.name.normalize(name);
   }
 
@@ -102,28 +102,28 @@ public class SelectTag extends ElementBufferedTag
   private Object onblur;
 
   @Override
-  public void setOnblur(Object onblur) throws IOException {
+  public void setOnblur(Object onblur) {
     this.onblur = Onblur.onblur.normalize(onblur);
   }
 
   private Object onchange;
 
   @Override
-  public void setOnchange(Object onchange) throws IOException {
+  public void setOnchange(Object onchange) {
     this.onchange = Onchange.onchange.normalize(onchange);
   }
 
   private Object onfocus;
 
   @Override
-  public void setOnfocus(Object onfocus) throws IOException {
+  public void setOnfocus(Object onfocus) {
     this.onfocus = Onfocus.onfocus.normalize(onfocus);
   }
 
   private Object onkeypress;
 
   @Override
-  public void setOnkeypress(Object onkeypress) throws IOException {
+  public void setOnkeypress(Object onkeypress) {
     this.onkeypress = Onkeypress.onkeypress.normalize(onkeypress);
   }
 

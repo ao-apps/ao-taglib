@@ -23,8 +23,6 @@
 
 package com.aoapps.taglib;
 
-import java.io.IOException;
-
 /**
  * Something with an onchange attribute.
  *
@@ -32,5 +30,5 @@ import java.io.IOException;
  */
 public interface OnchangeAttribute {
 
-  void setOnchange(Object onchange) throws IOException;
+  void setOnchange(Object onchange);
 }

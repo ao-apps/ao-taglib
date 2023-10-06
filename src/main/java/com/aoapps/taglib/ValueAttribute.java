@@ -23,8 +23,6 @@
 
 package com.aoapps.taglib;
 
-import java.io.IOException;
-
 /**
  * Something with a value attribute.
  *
@@ -32,5 +30,5 @@ import java.io.IOException;
  */
 public interface ValueAttribute {
 
-  void setValue(Object value) throws IOException;
+  void setValue(Object value);
 }

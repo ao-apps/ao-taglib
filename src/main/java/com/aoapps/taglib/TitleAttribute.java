@@ -23,8 +23,6 @@
 
 package com.aoapps.taglib;
 
-import java.io.IOException;
-
 /**
  * Something with a title attribute.
  *
@@ -32,5 +30,5 @@ import java.io.IOException;
  */
 public interface TitleAttribute {
 
-  void setTitle(Object title) throws IOException;
+  void setTitle(Object title);
 }
