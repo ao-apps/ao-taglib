@@ -53,6 +53,8 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
         <li><a target="${javadoc.target}" href="https://oss.aoapps.com/encoding/taglib/">AO Encoding Taglib</a></li>
       </ul>
     </div>]]></javadoc.relatedProjects>
+    <!-- Exclude legacy package since is largely a duplicate -->
+    <seo-javadoc-filter.nofollow>default, /com.aoapps.taglib/com/aoapps/taglib/legacy/</seo-javadoc-filter.nofollow>
     <!-- TODO: Implement tests -->
     <sonar.coverage.exclusions>**.*</sonar.coverage.exclusions>
   </properties>
