@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2016, 2017, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2016, 2017, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -30,6 +30,7 @@ import com.aoapps.io.buffer.BufferResult;
 import com.aoapps.servlet.jsp.tagext.JspTagUtils;
 import com.aoapps.taglib.StyleAttribute;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Writer;
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
@@ -46,6 +47,11 @@ public class StyleTag extends EncodingBufferedBodyTag {
   /**/
 
   public StyleTag() {
+    init();
+  }
+
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    in.defaultReadObject();
     init();
   }
 
@@ -66,7 +72,7 @@ public class StyleTag extends EncodingBufferedBodyTag {
   private static final long serialVersionUID = 1L;
   /**/
 
-  private boolean forceElement;
+  private transient boolean forceElement;
 
   public void setForceElement(boolean forceElement) {
     this.forceElement = forceElement;

@@ -64,6 +64,7 @@ import com.aoapps.taglib.TitleAttribute;
 import com.aoapps.taglib.TypeAttribute;
 import com.aoapps.taglib.UrlUtils;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Writer;
 import java.util.List;
 import java.util.Locale;
@@ -93,6 +94,11 @@ public class ATag extends ElementBufferedBodyTag
     init();
   }
 
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    in.defaultReadObject();
+    init();
+  }
+
   @Override
   public MediaType getContentType() {
     return MediaType.XHTML;
@@ -107,14 +113,14 @@ public class ATag extends ElementBufferedBodyTag
   private static final long serialVersionUID = 1L;
   /**/
 
-  private String href;
+  private transient String href;
 
   @Override
   public void setHref(String href) {
     this.href = Href.href.normalize(href);
   }
 
-  private MutableURIParameters params;
+  private transient MutableURIParameters params;
 
   @Override
   public void addParam(String name, Object value) {
@@ -124,74 +130,74 @@ public class ATag extends ElementBufferedBodyTag
     params.add(name, value);
   }
 
-  private boolean absolute;
+  private transient boolean absolute;
 
   public void setAbsolute(boolean absolute) {
     this.absolute = absolute;
   }
 
-  private boolean canonical;
+  private transient boolean canonical;
 
   public void setCanonical(boolean canonical) {
     this.canonical = canonical;
   }
 
-  private AddLastModified addLastModified;
+  private transient AddLastModified addLastModified;
 
   public void setAddLastModified(String addLastModified) {
     this.addLastModified = AddLastModified.valueOfLowerName(Strings.trim(addLastModified).toLowerCase(Locale.ROOT));
   }
 
-  private Object hreflang;
+  private transient Object hreflang;
 
   @Override
   public void setHreflang(Object hreflang) {
     this.hreflang = Hreflang.hreflang.normalize(hreflang);
   }
 
-  private String rel;
+  private transient String rel;
 
   @Override
   public void setRel(String rel) {
     this.rel = Rel.rel.normalize(rel);
   }
 
-  private String target;
+  private transient String target;
 
   @Override
   public void setTarget(String target) {
     this.target = Target.target.normalize(target);
   }
 
-  private Object title;
+  private transient Object title;
 
   @Override
   public void setTitle(Object title) {
     this.title = Title.title.normalize(title);
   }
 
-  private Object type;
+  private transient Object type;
 
   @Override
   public void setType(Object type) {
     this.type = Type.type.normalize(type);
   }
 
-  private Object onclick;
+  private transient Object onclick;
 
   @Override
   public void setOnclick(Object onclick) {
     this.onclick = Onclick.onclick.normalize(onclick);
   }
 
-  private Object onmouseout;
+  private transient Object onmouseout;
 
   @Override
   public void setOnmouseout(Object onmouseout) {
     this.onmouseout = Onmouseout.onmouseout.normalize(onmouseout);
   }
 
-  private Object onmouseover;
+  private transient Object onmouseover;
 
   @Override
   public void setOnmouseover(Object onmouseover) {

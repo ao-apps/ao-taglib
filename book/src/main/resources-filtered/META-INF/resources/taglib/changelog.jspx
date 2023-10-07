@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
     shortTitle="Changelog"
     tocLevels="1"
     datePublished="2016-10-29T22:02:09-05:00"
-    dateModified="2023-10-06T03:04:42Z"
+    dateModified="2023-10-07T03:54:47Z"
   >
     <c:set var="latestRelease" value="7.2.2" />
     <c:if test="${
@@ -109,6 +109,10 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
             <core:link page="ao.tld/tag-input"><![CDATA[&lt;ao:input /&gt;]]></core:link>,
             <core:link page="ao.tld/tag-link"><![CDATA[&lt;ao:link /&gt;]]></core:link>,
             and <core:link page="ao.tld/tag-script"><![CDATA[&lt;ao:script /&gt;]]></core:link>.
+          </li>
+          <li>
+            Improved support for taglib serialization: marked attribute fields <code>transient</code> and calling
+            <code>init()</code> from <code>readObject(…)</code>.
           </li>
         </ul>
       </changelog:release>

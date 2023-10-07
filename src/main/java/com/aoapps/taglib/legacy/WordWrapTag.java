@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2011, 2013, 2016, 2017, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2011, 2013, 2016, 2017, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -28,6 +28,7 @@ import com.aoapps.encoding.taglib.legacy.EncodingBufferedBodyTag;
 import com.aoapps.io.buffer.BufferResult;
 import com.aoapps.lang.Strings;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
 
@@ -39,6 +40,11 @@ import javax.servlet.jsp.JspException;
 public class WordWrapTag extends EncodingBufferedBodyTag {
 
   public WordWrapTag() {
+    init();
+  }
+
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    in.defaultReadObject();
     init();
   }
 
@@ -56,7 +62,7 @@ public class WordWrapTag extends EncodingBufferedBodyTag {
   private static final long serialVersionUID = 1L;
   /**/
 
-  private int width;
+  private transient int width;
 
   public void setWidth(int width) {
     this.width = width;

@@ -57,6 +57,7 @@ import com.aoapps.taglib.ParamUtils;
 import com.aoapps.taglib.ParamsAttribute;
 import com.aoapps.taglib.TargetAttribute;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Writer;
 import java.util.List;
 import java.util.Map;
@@ -87,6 +88,11 @@ public class FormTag extends ElementBufferedBodyTag
     init();
   }
 
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    in.defaultReadObject();
+    init();
+  }
+
   @Override
   public MediaType getContentType() {
     return MediaType.XHTML;
@@ -101,21 +107,21 @@ public class FormTag extends ElementBufferedBodyTag
   private static final long serialVersionUID = 1L;
   /**/
 
-  private String action;
+  private transient String action;
 
   @Override
   public void setAction(String action) {
     this.action = Action.action.normalize(action);
   }
 
-  private String enctype;
+  private transient String enctype;
 
   @Override
   public void setEnctype(String enctype) {
     this.enctype = Enctype.enctype.normalize(enctype);
   }
 
-  private String method;
+  private transient String method;
 
   @Override
   public void setMethod(String method) {
@@ -126,7 +132,7 @@ public class FormTag extends ElementBufferedBodyTag
     this.method = method;
   }
 
-  private MutableURIParameters params;
+  private transient MutableURIParameters params;
 
   @Override
   public void addParam(String name, Object value) {
@@ -136,14 +142,14 @@ public class FormTag extends ElementBufferedBodyTag
     params.add(name, value);
   }
 
-  private String target;
+  private transient String target;
 
   @Override
   public void setTarget(String target) {
     this.target = Target.target.normalize(target);
   }
 
-  private Object onsubmit;
+  private transient Object onsubmit;
 
   @Override
   public void setOnsubmit(Object onsubmit) {

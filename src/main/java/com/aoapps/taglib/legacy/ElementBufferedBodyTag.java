@@ -28,6 +28,8 @@ import com.aoapps.taglib.AttributeUtils;
 import com.aoapps.taglib.GlobalAttributesUtils;
 import com.aoapps.taglib.GlobalBufferedAttributes;
 import com.aoapps.taglib.MutableGlobalAttributes;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -51,7 +53,12 @@ public abstract class ElementBufferedBodyTag extends EncodingBufferedBodyTag
     init();
   }
 
-  protected MutableGlobalAttributes global;
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    in.defaultReadObject();
+    init();
+  }
+
+  protected transient MutableGlobalAttributes global;
 
   @Override
   public void setId(String id) {

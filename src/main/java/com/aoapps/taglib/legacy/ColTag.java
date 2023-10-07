@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -28,6 +28,7 @@ import com.aoapps.html.servlet.COL;
 import com.aoapps.html.servlet.DocumentEE;
 import com.aoapps.taglib.GlobalAttributesUtils;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -42,6 +43,11 @@ public class ColTag extends ElementNullBodyTag {
     init();
   }
 
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    in.defaultReadObject();
+    init();
+  }
+
   @Override
   public MediaType getOutputType() {
     return MediaType.XHTML;
@@ -51,7 +57,7 @@ public class ColTag extends ElementNullBodyTag {
   private static final long serialVersionUID = 1L;
   /**/
 
-  private int span;
+  private transient int span;
 
   public void setSpan(int span) {
     this.span = span;

@@ -48,6 +48,7 @@ import com.aoapps.taglib.OnfocusAttribute;
 import com.aoapps.taglib.OnkeypressAttribute;
 import com.aoapps.taglib.SizeAttribute;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
@@ -71,6 +72,11 @@ public class SelectTag extends ElementBufferedBodyTag
     init();
   }
 
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    in.defaultReadObject();
+    init();
+  }
+
   @Override
   public MediaType getContentType() {
     return MediaType.XHTML;
@@ -85,49 +91,49 @@ public class SelectTag extends ElementBufferedBodyTag
   private static final long serialVersionUID = 1L;
   /**/
 
-  private boolean disabled;
+  private transient boolean disabled;
 
   @Override
   public void setDisabled(boolean disabled) {
     this.disabled = disabled;
   }
 
-  private Object name;
+  private transient Object name;
 
   @Override
   public void setName(Object name) {
     this.name = Name.name.normalize(name);
   }
 
-  private Integer size;
+  private transient Integer size;
 
   @Override
   public void setSize(Integer size) {
     this.size = size;
   }
 
-  private Object onblur;
+  private transient Object onblur;
 
   @Override
   public void setOnblur(Object onblur) {
     this.onblur = Onblur.onblur.normalize(onblur);
   }
 
-  private Object onchange;
+  private transient Object onchange;
 
   @Override
   public void setOnchange(Object onchange) {
     this.onchange = Onchange.onchange.normalize(onchange);
   }
 
-  private Object onfocus;
+  private transient Object onfocus;
 
   @Override
   public void setOnfocus(Object onfocus) {
     this.onfocus = Onfocus.onfocus.normalize(onfocus);
   }
 
-  private Object onkeypress;
+  private transient Object onkeypress;
 
   @Override
   public void setOnkeypress(Object onkeypress) {

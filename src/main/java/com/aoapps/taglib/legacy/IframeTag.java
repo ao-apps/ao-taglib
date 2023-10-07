@@ -46,6 +46,7 @@ import com.aoapps.taglib.SrcAttribute;
 import com.aoapps.taglib.UrlUtils;
 import com.aoapps.taglib.WidthAttribute;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Writer;
 import java.util.List;
 import java.util.Locale;
@@ -68,6 +69,11 @@ public class IframeTag extends ElementBufferedBodyTag
     init();
   }
 
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    in.defaultReadObject();
+    init();
+  }
+
   @Override
   public MediaType getContentType() {
     return MediaType.XHTML;
@@ -82,14 +88,14 @@ public class IframeTag extends ElementBufferedBodyTag
   private static final long serialVersionUID = 1L;
   /**/
 
-  private String src;
+  private transient String src;
 
   @Override
   public void setSrc(String src) {
     this.src = Src.src.normalize(src);
   }
 
-  private MutableURIParameters params;
+  private transient MutableURIParameters params;
 
   @Override
   public void addParam(String name, Object value) {
@@ -99,39 +105,39 @@ public class IframeTag extends ElementBufferedBodyTag
     params.add(name, value);
   }
 
-  private boolean absolute;
+  private transient boolean absolute;
 
   public void setAbsolute(boolean absolute) {
     this.absolute = absolute;
   }
 
-  private boolean canonical;
+  private transient boolean canonical;
 
   public void setCanonical(boolean canonical) {
     this.canonical = canonical;
   }
 
-  private AddLastModified addLastModified;
+  private transient AddLastModified addLastModified;
 
   public void setAddLastModified(String addLastModified) {
     this.addLastModified = AddLastModified.valueOfLowerName(Strings.trim(addLastModified).toLowerCase(Locale.ROOT));
   }
 
-  private Integer width;
+  private transient Integer width;
 
   @Override
   public void setWidth(Integer width) {
     this.width = width;
   }
 
-  private Integer height;
+  private transient Integer height;
 
   @Override
   public void setHeight(Integer height) {
     this.height = height;
   }
 
-  private boolean frameborder;
+  private transient boolean frameborder;
 
   @Override
   public void setFrameborder(boolean frameborder) {

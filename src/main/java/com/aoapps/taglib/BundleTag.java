@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2013, 2016, 2017, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2013, 2016, 2017, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -60,9 +60,14 @@ public class BundleTag
     init();
   }
 
-  private String basename;
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    in.defaultReadObject();
+    init();
+  }
+
+  private transient String basename;
   private transient Resources resources; // Set along with basename
-  private String prefix;
+  private transient String prefix;
   private transient Attribute.OldValue oldRequestValue;
 
   private void init() {
@@ -70,12 +75,6 @@ public class BundleTag
     resources = null;
     prefix = null;
     oldRequestValue = null;
-  }
-
-  @SuppressWarnings("deprecation")
-  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
-    in.defaultReadObject();
-    this.resources = basename == null ? null : Resources.getResources(basename);
   }
 
   public Resources getResources() {

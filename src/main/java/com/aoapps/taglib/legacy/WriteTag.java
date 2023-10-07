@@ -42,6 +42,7 @@ import com.aoapps.taglib.NameAttribute;
 import com.aoapps.taglib.PropertyUtils;
 import com.aoapps.taglib.TypeAttribute;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.lang.reflect.InvocationTargetException;
@@ -67,6 +68,11 @@ public class WriteTag extends EncodingNullBodyTag
     init();
   }
 
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    in.defaultReadObject();
+    init();
+  }
+
   @Override
   public MediaType getOutputType() {
     return mediaType;
@@ -76,13 +82,13 @@ public class WriteTag extends EncodingNullBodyTag
   private static final long serialVersionUID = 1L;
   /**/
 
-  private String scope;
+  private transient String scope;
 
   public void setScope(String scope) {
     this.scope = Strings.trim(scope);
   }
 
-  private String name;
+  private transient String name;
 
   @Override
   public void setName(Object name) {
@@ -90,19 +96,19 @@ public class WriteTag extends EncodingNullBodyTag
     this.name = (name == null) ? null : Coercion.toString(name);
   }
 
-  private String property;
+  private transient String property;
 
   public void setProperty(String property) {
     this.property = property;
   }
 
-  private String method;
+  private transient String method;
 
   public void setMethod(String method) {
     this.method = method;
   }
 
-  private MediaType mediaType;
+  private transient MediaType mediaType;
 
   @Override
   public void setType(Object type) {
@@ -120,10 +126,10 @@ public class WriteTag extends EncodingNullBodyTag
   }
 
   // One or neither of these values will be set after writePrefix, but not both
-  private MarkupType markupType;
-  private String toStringResult;
-  private BundleLookupMarkup lookupMarkup;
-  private Object value;
+  private transient MarkupType markupType;
+  private transient String toStringResult;
+  private transient BundleLookupMarkup lookupMarkup;
+  private transient Object value;
 
   private void init() {
     scope = null;

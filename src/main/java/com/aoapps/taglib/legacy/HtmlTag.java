@@ -42,6 +42,7 @@ import com.aoapps.servlet.ServletUtil;
 import com.aoapps.web.resources.registry.Registry;
 import com.aoapps.web.resources.servlet.RegistryEE;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Writer;
 import java.util.Locale;
 import javax.servlet.ServletContext;
@@ -94,6 +95,11 @@ public class HtmlTag extends ElementFilteredBodyTag {
     init();
   }
 
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    in.defaultReadObject();
+    init();
+  }
+
   /**/
 
   @Override
@@ -110,7 +116,7 @@ public class HtmlTag extends ElementFilteredBodyTag {
   //       ao-web-framework: WebPage, WebPageLayout
   //       aoweb-struts: PageAttributes, Skin
 
-  private Serialization serialization;
+  private transient Serialization serialization;
 
   public void setSerialization(String serialization) {
     if (serialization == null) {
@@ -121,7 +127,7 @@ public class HtmlTag extends ElementFilteredBodyTag {
     }
   }
 
-  private Doctype doctype;
+  private transient Doctype doctype;
 
   public void setDoctype(String doctype) {
     if (doctype == null) {
@@ -132,7 +138,7 @@ public class HtmlTag extends ElementFilteredBodyTag {
     }
   }
 
-  private Boolean autonli;
+  private transient Boolean autonli;
 
   public void setAutonli(String autonli) {
     if (autonli == null) {
@@ -151,7 +157,7 @@ public class HtmlTag extends ElementFilteredBodyTag {
     }
   }
 
-  private Boolean indent;
+  private transient Boolean indent;
 
   public void setIndent(String indent) {
     if (indent == null) {

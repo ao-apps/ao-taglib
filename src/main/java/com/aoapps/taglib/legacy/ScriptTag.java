@@ -47,6 +47,7 @@ import com.aoapps.taglib.SrcAttribute;
 import com.aoapps.taglib.TypeAttribute;
 import com.aoapps.taglib.UrlUtils;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.List;
@@ -78,6 +79,11 @@ public class ScriptTag extends ElementBufferedBodyTag
     init();
   }
 
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    in.defaultReadObject();
+    init();
+  }
+
   @Override
   public MediaType getContentType() {
     return mediaType;
@@ -92,7 +98,7 @@ public class ScriptTag extends ElementBufferedBodyTag
   private static final long serialVersionUID = 1L;
   /**/
 
-  private MediaType mediaType;
+  private transient MediaType mediaType;
 
   @Override
   public void setType(Object type) {
@@ -112,14 +118,14 @@ public class ScriptTag extends ElementBufferedBodyTag
     }
   }
 
-  private String src;
+  private transient String src;
 
   @Override
   public void setSrc(String src) {
     this.src = Src.src.normalize(src);
   }
 
-  private MutableURIParameters params;
+  private transient MutableURIParameters params;
 
   @Override
   public void addParam(String name, Object value) {
@@ -129,31 +135,31 @@ public class ScriptTag extends ElementBufferedBodyTag
     params.add(name, value);
   }
 
-  private boolean absolute;
+  private transient boolean absolute;
 
   public void setAbsolute(boolean absolute) {
     this.absolute = absolute;
   }
 
-  private boolean canonical;
+  private transient boolean canonical;
 
   public void setCanonical(boolean canonical) {
     this.canonical = canonical;
   }
 
-  private AddLastModified addLastModified;
+  private transient AddLastModified addLastModified;
 
   public void setAddLastModified(String addLastModified) {
     this.addLastModified = AddLastModified.valueOfLowerName(Strings.trim(addLastModified).toLowerCase(Locale.ROOT));
   }
 
-  private boolean async;
+  private transient boolean async;
 
   public void setAsync(boolean async) {
     this.async = async;
   }
 
-  private boolean defer;
+  private transient boolean defer;
 
   public void setDefer(boolean defer) {
     this.defer = defer;
@@ -161,14 +167,14 @@ public class ScriptTag extends ElementBufferedBodyTag
 
   // Events
 
-  private Object onerror;
+  private transient Object onerror;
 
   @Override
   public void setOnerror(Object onerror) {
     this.onerror = Onerror.onerror.normalize(onerror);
   }
 
-  private Object onload;
+  private transient Object onload;
 
   @Override
   public void setOnload(Object onload) {

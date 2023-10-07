@@ -39,6 +39,7 @@ import com.aoapps.taglib.BundleTag;
 import com.aoapps.taglib.MessageArgsAttribute;
 import com.aoapps.taglib.TypeAttribute;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.ArrayList;
@@ -64,6 +65,11 @@ public class MessageTag extends EncodingNullBodyTag
     init();
   }
 
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    in.defaultReadObject();
+    init();
+  }
+
   @Override
   public MediaType getOutputType() {
     return mediaType;
@@ -73,19 +79,19 @@ public class MessageTag extends EncodingNullBodyTag
   private static final long serialVersionUID = 1L;
   /**/
 
-  private String bundle;
+  private transient String bundle;
 
   public void setBundle(String bundle) {
     this.bundle = bundle;
   }
 
-  private String key;
+  private transient String key;
 
   public void setKey(String key) {
     this.key = key;
   }
 
-  private MediaType mediaType;
+  private transient MediaType mediaType;
 
   @Override
   public void setType(Object type) {
@@ -102,8 +108,8 @@ public class MessageTag extends EncodingNullBodyTag
     this.mediaType = newMediaType;
   }
 
-  private BitSet messageArgsSet;
-  private List<Object> messageArgs;
+  private transient BitSet messageArgsSet;
+  private transient List<Object> messageArgs;
 
   @Override
   public void addMessageArg(Object value) {
@@ -182,8 +188,8 @@ public class MessageTag extends EncodingNullBodyTag
     }
   }
 
-  private String lookupResult;
-  private BundleLookupMarkup lookupMarkup;
+  private transient String lookupResult;
+  private transient BundleLookupMarkup lookupMarkup;
 
   private void init() {
     bundle = null;

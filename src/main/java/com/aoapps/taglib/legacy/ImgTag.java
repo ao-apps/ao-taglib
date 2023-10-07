@@ -49,6 +49,7 @@ import com.aoapps.taglib.TitleAttribute;
 import com.aoapps.taglib.UrlUtils;
 import com.aoapps.taglib.WidthAttribute;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Writer;
 import java.util.List;
 import java.util.Locale;
@@ -77,6 +78,11 @@ public class ImgTag extends ElementBufferedBodyTag
     init();
   }
 
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    in.defaultReadObject();
+    init();
+  }
+
   @Override
   public MediaType getContentType() {
     return MediaType.URL;
@@ -91,14 +97,14 @@ public class ImgTag extends ElementBufferedBodyTag
   private static final long serialVersionUID = 1L;
   /**/
 
-  private String src;
+  private transient String src;
 
   @Override
   public void setSrc(String src) {
     this.src = Src.src.normalize(src);
   }
 
-  private MutableURIParameters params;
+  private transient MutableURIParameters params;
 
   @Override
   public void addParam(String name, Object value) {
@@ -108,59 +114,59 @@ public class ImgTag extends ElementBufferedBodyTag
     params.add(name, value);
   }
 
-  private boolean absolute;
+  private transient boolean absolute;
 
   public void setAbsolute(boolean absolute) {
     this.absolute = absolute;
   }
 
-  private boolean canonical;
+  private transient boolean canonical;
 
   public void setCanonical(boolean canonical) {
     this.canonical = canonical;
   }
 
-  private AddLastModified addLastModified;
+  private transient AddLastModified addLastModified;
 
   public void setAddLastModified(String addLastModified) {
     this.addLastModified = AddLastModified.valueOfLowerName(Strings.trim(addLastModified).toLowerCase(Locale.ROOT));
   }
 
-  private Integer width;
+  private transient Integer width;
 
   @Override
   public void setWidth(Integer width) {
     this.width = width;
   }
 
-  private Integer height;
+  private transient Integer height;
 
   @Override
   public void setHeight(Integer height) {
     this.height = height;
   }
 
-  private Object alt;
+  private transient Object alt;
 
   @Override
   public void setAlt(Object alt) {
     this.alt = Alt.alt.normalize(alt);
   }
 
-  private Object title;
+  private transient Object title;
 
   @Override
   public void setTitle(Object title) {
     this.title = Title.title.normalize(title);
   }
 
-  private String usemap;
+  private transient String usemap;
 
   public void setUsemap(String usemap) {
     this.usemap = Usemap.usemap.normalize(usemap);
   }
 
-  private boolean ismap;
+  private transient boolean ismap;
 
   public void setIsmap(boolean ismap) {
     this.ismap = ismap;
@@ -168,14 +174,14 @@ public class ImgTag extends ElementBufferedBodyTag
 
   // Events
 
-  private Object onerror;
+  private transient Object onerror;
 
   @Override
   public void setOnerror(Object onerror) {
     this.onerror = Onerror.onerror.normalize(onerror);
   }
 
-  private Object onload;
+  private transient Object onload;
 
   @Override
   public void setOnload(Object onload) {

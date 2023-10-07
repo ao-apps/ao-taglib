@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2010, 2011, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -31,6 +31,7 @@ import com.aoapps.taglib.GlobalAttributesUtils;
 import com.aoapps.taglib.SelectedAttribute;
 import com.aoapps.taglib.ValueAttribute;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -50,6 +51,11 @@ public class OptionTag extends ElementBufferedBodyTag
     init();
   }
 
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    in.defaultReadObject();
+    init();
+  }
+
   @Override
   public MediaType getContentType() {
     return MediaType.TEXT;
@@ -64,22 +70,22 @@ public class OptionTag extends ElementBufferedBodyTag
   private static final long serialVersionUID = 1L;
   /**/
 
-  private boolean disabled;
+  private transient boolean disabled;
 
   @Override
   public void setDisabled(boolean disabled) {
     this.disabled = disabled;
   }
 
-  private boolean selected;
+  private transient boolean selected;
 
   @Override
   public void setSelected(boolean selected) {
     this.selected = selected;
   }
 
-  private boolean valueSet;
-  private Object value;
+  private transient boolean valueSet;
+  private transient Object value;
 
   @Override
   public void setValue(Object value) {

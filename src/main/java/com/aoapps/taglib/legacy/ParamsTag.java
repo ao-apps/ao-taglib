@@ -38,6 +38,7 @@ import com.aoapps.taglib.NameAttribute;
 import com.aoapps.taglib.ParamUtils;
 import com.aoapps.taglib.ParamsAttribute;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Writer;
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -62,6 +63,11 @@ public class ParamsTag extends EncodingNullBodyTag
     init();
   }
 
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    in.defaultReadObject();
+    init();
+  }
+
   @Override
   public MediaType getOutputType() {
     return null;
@@ -71,7 +77,7 @@ public class ParamsTag extends EncodingNullBodyTag
   private static final long serialVersionUID = 1L;
   /**/
 
-  private String name;
+  private transient String name;
 
   @Override
   public void setName(Object name) {
@@ -80,14 +86,14 @@ public class ParamsTag extends EncodingNullBodyTag
   }
 
   // private String exclude;
-  private WildcardPatternMatcher excludeMatcher;
+  private transient WildcardPatternMatcher excludeMatcher;
 
   public void setExclude(String exclude) {
     // this.exclude = exclude;
     this.excludeMatcher = WildcardPatternMatcher.compile(exclude);
   }
 
-  private Object values;
+  private transient Object values;
 
   /* BodyTag only: */
   // Required due to conflicting inherited getValues()

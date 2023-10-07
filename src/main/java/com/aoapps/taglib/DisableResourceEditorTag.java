@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2011, 2012, 2013, 2016, 2017, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2016, 2017, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -28,6 +28,8 @@ import com.aoapps.lang.LocalizedIllegalArgumentException;
 import com.aoapps.lang.Strings;
 import com.aoapps.lang.i18n.Resources;
 import com.aoapps.servlet.attribute.ScopeEE;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.servlet.jsp.JspException;
@@ -64,9 +66,14 @@ public class DisableResourceEditorTag extends TagSupport implements TryCatchFina
     init();
   }
 
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    in.defaultReadObject();
+    init();
+  }
+
   private static final long serialVersionUID = 1L;
 
-  private String scope;
+  private transient String scope;
 
   public void setScope(String scope) {
     scope = Strings.trimNullIfEmpty(scope);
@@ -81,7 +88,7 @@ public class DisableResourceEditorTag extends TagSupport implements TryCatchFina
     }
   }
 
-  private EditableResourceBundle.ThreadSettings.Mode mode;
+  private transient EditableResourceBundle.ThreadSettings.Mode mode;
 
   public void setMode(String mode) {
     mode = Strings.trimNullIfEmpty(mode);

@@ -55,6 +55,7 @@ import com.aoapps.taglib.TitleAttribute;
 import com.aoapps.taglib.TypeAttribute;
 import com.aoapps.taglib.UrlUtils;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Writer;
 import java.util.List;
 import java.util.Locale;
@@ -82,6 +83,11 @@ public class LinkTag extends ElementNullBodyTag
     OnloadAttribute {
 
   public LinkTag() {
+    init();
+  }
+
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    in.defaultReadObject();
     init();
   }
 
@@ -122,14 +128,14 @@ public class LinkTag extends ElementNullBodyTag
     setOnload(link.getOnload());
   }
 
-  private String href;
+  private transient String href;
 
   @Override
   public void setHref(String href) {
     this.href = Href.href.normalize(href);
   }
 
-  private MutableURIParameters params;
+  private transient MutableURIParameters params;
 
   @Override
   public void addParam(String name, Object value) {
@@ -139,39 +145,39 @@ public class LinkTag extends ElementNullBodyTag
     params.add(name, value);
   }
 
-  private boolean absolute;
+  private transient boolean absolute;
 
   public void setAbsolute(boolean absolute) {
     this.absolute = absolute;
   }
 
-  private boolean canonical;
+  private transient boolean canonical;
 
   public void setCanonical(boolean canonical) {
     this.canonical = canonical;
   }
 
-  private AddLastModified addLastModified;
+  private transient AddLastModified addLastModified;
 
   public void setAddLastModified(String addLastModified) {
     this.addLastModified = AddLastModified.valueOfLowerName(Strings.trim(addLastModified).toLowerCase(Locale.ROOT));
   }
 
-  private Object hreflang;
+  private transient Object hreflang;
 
   @Override
   public void setHreflang(Object hreflang) {
     this.hreflang = Hreflang.hreflang.normalize(hreflang);
   }
 
-  private String rel;
+  private transient String rel;
 
   @Override
   public void setRel(String rel) {
     this.rel = Rel.rel.normalize(rel);
   }
 
-  private String type;
+  private transient String type;
 
   @Override
   public void setType(Object type) {
@@ -179,13 +185,13 @@ public class LinkTag extends ElementNullBodyTag
     this.type = (type == null) ? null : Coercion.toString(type);
   }
 
-  private Object media;
+  private transient Object media;
 
   public void setMedia(Object media) {
     this.media = Media.media.normalize(media);
   }
 
-  private Object title;
+  private transient Object title;
 
   @Override
   public void setTitle(Object title) {
@@ -194,14 +200,14 @@ public class LinkTag extends ElementNullBodyTag
 
   // Events
 
-  private Object onerror;
+  private transient Object onerror;
 
   @Override
   public void setOnerror(Object onerror) {
     this.onerror = Onerror.onerror.normalize(onerror);
   }
 
-  private Object onload;
+  private transient Object onload;
 
   @Override
   public void setOnload(Object onload) {

@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2013, 2016, 2017, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2013, 2016, 2017, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -32,6 +32,7 @@ import com.aoapps.taglib.AttributeUtils;
 import com.aoapps.taglib.MessageArgsAttribute;
 import com.aoapps.taglib.ValueAttribute;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
 
@@ -49,6 +50,11 @@ public class MessageArgTag extends EncodingBufferedBodyTag
     init();
   }
 
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    in.defaultReadObject();
+    init();
+  }
+
   @Override
   public MediaType getContentType() {
     return MediaType.TEXT;
@@ -63,7 +69,7 @@ public class MessageArgTag extends EncodingBufferedBodyTag
   private static final long serialVersionUID = 1L;
   /**/
 
-  private Object value;
+  private transient Object value;
 
   @Override
   public void setValue(Object value) {

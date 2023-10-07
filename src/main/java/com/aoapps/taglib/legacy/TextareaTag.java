@@ -39,6 +39,7 @@ import com.aoapps.taglib.ReadonlyAttribute;
 import com.aoapps.taglib.RowsAttribute;
 import com.aoapps.taglib.ValueAttribute;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -63,6 +64,11 @@ public class TextareaTag extends ElementBufferedBodyTag
     init();
   }
 
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    in.defaultReadObject();
+    init();
+  }
+
   @Override
   public MediaType getContentType() {
     return MediaType.TEXT;
@@ -77,49 +83,49 @@ public class TextareaTag extends ElementBufferedBodyTag
   private static final long serialVersionUID = 1L;
   /**/
 
-  private Integer cols;
+  private transient Integer cols;
 
   @Override
   public void setCols(int cols) {
     this.cols = cols;
   }
 
-  private boolean disabled;
+  private transient boolean disabled;
 
   @Override
   public void setDisabled(boolean disabled) {
     this.disabled = disabled;
   }
 
-  private Object name;
+  private transient Object name;
 
   @Override
   public void setName(Object name) {
     this.name = Name.name.normalize(name);
   }
 
-  private boolean readonly;
+  private transient boolean readonly;
 
   @Override
   public void setReadonly(boolean readonly) {
     this.readonly = readonly;
   }
 
-  private Integer rows;
+  private transient Integer rows;
 
   @Override
   public void setRows(int rows) {
     this.rows = rows;
   }
 
-  private Object value;
+  private transient Object value;
 
   @Override
   public void setValue(Object value) {
     this.value = Coercion.nullIfEmpty(value);
   }
 
-  private Object onchange;
+  private transient Object onchange;
 
   @Override
   public void setOnchange(Object onchange) {

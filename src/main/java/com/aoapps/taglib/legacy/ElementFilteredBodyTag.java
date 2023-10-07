@@ -29,6 +29,7 @@ import com.aoapps.taglib.GlobalAttributes;
 import com.aoapps.taglib.GlobalAttributesUtils;
 import com.aoapps.taglib.MutableGlobalAttributes;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -52,7 +53,12 @@ public abstract class ElementFilteredBodyTag extends EncodingFilteredBodyTag
     init();
   }
 
-  protected MutableGlobalAttributes global;
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    in.defaultReadObject();
+    init();
+  }
+
+  protected transient MutableGlobalAttributes global;
 
   @Override
   public void setId(String id) {

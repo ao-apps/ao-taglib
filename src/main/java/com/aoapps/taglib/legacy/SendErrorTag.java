@@ -28,6 +28,7 @@ import com.aoapps.encoding.taglib.legacy.EncodingBufferedBodyTag;
 import com.aoapps.io.buffer.BufferResult;
 import com.aoapps.servlet.http.Includer;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,6 +40,11 @@ import javax.servlet.jsp.JspException;
 public class SendErrorTag extends EncodingBufferedBodyTag {
 
   public SendErrorTag() {
+    init();
+  }
+
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    in.defaultReadObject();
     init();
   }
 
@@ -56,13 +62,13 @@ public class SendErrorTag extends EncodingBufferedBodyTag {
   private static final long serialVersionUID = 1L;
   /**/
 
-  private int status;
+  private transient int status;
 
   public void setStatus(int status) {
     this.status = status;
   }
 
-  private String message;
+  private transient String message;
 
   public void setMessage(String message) {
     this.message = message;

@@ -35,6 +35,7 @@ import com.aoapps.taglib.NameAttribute;
 import com.aoapps.taglib.ParamUtils;
 import com.aoapps.taglib.ValueAttribute;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Writer;
 import javax.servlet.jsp.JspException;
 
@@ -55,6 +56,11 @@ public class ParamTag extends EncodingBufferedBodyTag
     init();
   }
 
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    in.defaultReadObject();
+    init();
+  }
+
   @Override
   public MediaType getContentType() {
     return MediaType.TEXT;
@@ -69,7 +75,7 @@ public class ParamTag extends EncodingBufferedBodyTag
   private static final long serialVersionUID = 1L;
   /**/
 
-  private String name;
+  private transient String name;
 
   @Override
   public void setName(Object name) {
@@ -77,7 +83,7 @@ public class ParamTag extends EncodingBufferedBodyTag
     this.name = (name == null) ? null : Coercion.toString(name);
   }
 
-  private Object value;
+  private transient Object value;
 
   @Override
   public void setValue(Object value) {

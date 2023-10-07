@@ -39,6 +39,7 @@ import com.aoapps.taglib.Meta;
 import com.aoapps.taglib.MetasAttribute;
 import com.aoapps.taglib.NameAttribute;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Writer;
 import java.nio.charset.Charset;
 import java.util.Optional;
@@ -55,6 +56,11 @@ public class MetaTag extends ElementBufferedBodyTag
     ContentAttribute {
 
   public MetaTag() {
+    init();
+  }
+
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    in.defaultReadObject();
     init();
   }
 
@@ -84,7 +90,7 @@ public class MetaTag extends ElementBufferedBodyTag
   private static final long serialVersionUID = 1L;
   /**/
 
-  private String name;
+  private transient String name;
 
   @Override
   public void setName(Object name) {
@@ -92,20 +98,20 @@ public class MetaTag extends ElementBufferedBodyTag
     this.name = (name == null) ? null : Coercion.toString(name);
   }
 
-  private String httpEquiv;
+  private transient String httpEquiv;
 
   public void setHttpEquiv(String httpEquiv) {
     this.httpEquiv = HttpEquiv.httpEquiv.normalize(httpEquiv);
   }
 
-  private String itemprop;
+  private transient String itemprop;
 
   public void setItemprop(String itemprop) {
     // TODO: Itemprop.itemprop.normalize
     this.itemprop = Strings.trimNullIfEmpty(itemprop);
   }
 
-  private String charset;
+  private transient String charset;
 
   public void setCharset(Object charset) {
     if (charset == null) {
@@ -117,7 +123,7 @@ public class MetaTag extends ElementBufferedBodyTag
     }
   }
 
-  private Object content;
+  private transient Object content;
 
   @Override
   public void setContent(Object content) {
