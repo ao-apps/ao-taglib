@@ -241,11 +241,11 @@ public class LinkTag extends ElementNullTag
               canonical,
               params,
               addLastModified,
-              (hreflang == null) ? null : Coercion.toString(hreflang),
-              Strings.trimNullIfEmpty(rel),
+              hreflang,
+              rel,
               type,
-              (media == null) ? null : Coercion.toString(media),
-              (title == null) ? null : Coercion.toString(title),
+              media,
+              title,
               // Events
               onerror,
               onload

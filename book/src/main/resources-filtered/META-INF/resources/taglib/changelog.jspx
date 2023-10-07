@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
     shortTitle="Changelog"
     tocLevels="1"
     datePublished="2016-10-29T22:02:09-05:00"
-    dateModified="2023-10-07T03:54:47Z"
+    dateModified="2023-10-07T05:15:43Z"
   >
     <c:set var="latestRelease" value="7.2.2" />
     <c:if test="${
@@ -113,6 +113,11 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
           <li>
             Improved support for taglib serialization: marked attribute fields <code>transient</code> and calling
             <code>init()</code> from <code>readObject(…)</code>.
+          </li>
+          <li>
+            <code>Link</code> attributes <code>hreflang</code>, <code>media</code>, and <code>title</code> are now
+            <code>java.lang.Object</code> instead of <code>java.lang.String</code>.  This allows delegation to
+            underlying API that may stream some value types.
           </li>
         </ul>
       </changelog:release>

@@ -23,6 +23,8 @@
 
 package com.aoapps.taglib;
 
+import com.aoapps.html.any.attributes.text.Hreflang.hreflang;
+import com.aoapps.lang.Coercion;
 import com.aoapps.net.URIParameters;
 import com.aoapps.servlet.lastmodified.AddLastModified;
 import java.util.Locale;
@@ -40,15 +42,24 @@ public class Link {
   private final boolean absolute;
   private final boolean canonical;
   private final AddLastModified addLastModified;
-  private final String hreflang;
+  private final Object hreflang;
   private final String rel;
   private final String type;
-  private final String media;
-  private final String title;
+  private final Object media;
+  private final Object title;
   // Events
   private final Object onerror;
   private final Object onload;
 
+  /**
+   * Creates a new link.
+   *
+   * @param hreflang When is a {@link Locale}, calls {@link Locale#toLanguageTag()}.  Anything else is either
+   *                 {@linkplain Coercion#write(java.lang.Object, java.io.Writer) directly streamed}
+   *                 or {@linkplain Coercion#toString(java.lang.Object) coerced to String}.
+   *
+   * @see hreflang#normalize(java.lang.Object)
+   */
   public Link(
       GlobalAttributes global,
       String href,
@@ -56,11 +67,11 @@ public class Link {
       boolean canonical,
       URIParameters params,
       AddLastModified addLastModified,
-      String hreflang,
+      Object hreflang,
       String rel,
       String type,
-      String media,
-      String title,
+      Object media,
+      Object title,
       // Events
       Object onerror,
       Object onload
@@ -79,40 +90,6 @@ public class Link {
     // Events
     this.onerror = onerror;
     this.onload = onload;
-  }
-
-  public Link(
-      GlobalAttributes global,
-      String href,
-      boolean absolute,
-      boolean canonical,
-      URIParameters params,
-      AddLastModified addLastModified,
-      Locale hreflang,
-      String rel,
-      String type,
-      String media,
-      String title,
-      // Events
-      Object onerror,
-      Object onload
-  ) {
-    this(
-        global,
-        href,
-        absolute,
-        canonical,
-        params,
-        addLastModified,
-        hreflang == null ? null : hreflang.toLanguageTag(),
-        rel,
-        type,
-        media,
-        title,
-        // Events
-        onerror,
-        onload
-    );
   }
 
   public GlobalAttributes getGlobal() {
@@ -140,9 +117,15 @@ public class Link {
   }
 
   /**
-   * @see  Locale#toLanguageTag()
+   * Gets the hreflang.
+   *
+   * @return When is a {@link Locale}, call {@link Locale#toLanguageTag()}.  Anything else either
+   *         {@linkplain Coercion#write(java.lang.Object, java.io.Writer) stream directly}
+   *         or {@linkplain Coercion#toString(java.lang.Object) coerce to String}.
+   *
+   * @see hreflang#normalize(java.lang.Object)
    */
-  public String getHreflang() {
+  public Object getHreflang() {
     return hreflang;
   }
 
@@ -154,12 +137,12 @@ public class Link {
     return type;
   }
 
-  public String getMedia() {
+  public Object getMedia() {
     return media;
   }
 
   // TODO: Move to GlobalAttributes (or AlmostGlobalAttributes)
-  public String getTitle() {
+  public Object getTitle() {
     return title;
   }
 
