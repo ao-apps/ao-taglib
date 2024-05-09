@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 ao-taglib - Making JSP be what it should have been all along.
-Copyright (C) 2016, 2017, 2018, 2019, 2020, 2021. 2022, 2023  AO Industries, Inc.
+Copyright (C) 2016, 2017, 2018, 2019, 2020, 2021. 2022, 2023, 2024  AO Industries, Inc.
     support@aoindustries.com
     7262 Bull Pen Cir
     Mobile, AL 36695
@@ -37,9 +37,9 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
     shortTitle="Changelog"
     tocLevels="1"
     datePublished="2016-10-29T22:02:09-05:00"
-    dateModified="2023-10-07T05:15:43Z"
+    dateModified="2024-05-09T18:13:15Z"
   >
-    <c:set var="latestRelease" value="7.2.2" />
+    <c:set var="latestRelease" value="8.0.0" />
     <c:if test="${
       fn:endsWith('@{project.version}', '-SNAPSHOT')
       and !fn:endsWith('@{project.version}', '-POST-SNAPSHOT')
@@ -62,66 +62,76 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
           <li>Support other nice HTML 5 features of textarea/input)</li>
         </ul>
         -->
-        <ul>
-          <li>
-            This is a major version bump for incompatible changes of Java API only.  The taglib itself is completely
-            backward compatible.
-          </li>
-          <li>
-            Log FINE-level notice when <core:link page="ao.tld/tag-forward"><![CDATA[&lt;ao:forward /&gt;]]></core:link>
-            does not forward due to the
-            <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletResponse.html#isCommitted--">response already being committed</ao:a>.
-          </li>
-          <li>
-            Log FINE-level notice when <core:link page="ao.tld/tag-redirect"><![CDATA[&lt;ao:redirect /&gt;]]></core:link>
-            does not send redirect due to the
-            <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletResponse.html#isCommitted--">response already being committed</ao:a>.
-          </li>
-          <li>
-            Log FINE-level notice when <core:link page="ao.tld/tag-sendError"><![CDATA[&lt;ao:sendError /&gt;]]></core:link>
-            does not send error due to the
-            <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletResponse.html#isCommitted--">response already being committed</ao:a>.
-          </li>
-          <li>
-            Using normalization methods from <core:link book="/fluent-html/any" page="/index.jspx">underlying implementation</core:link>.
-          </li>
-          <li>
-            <code>class</code>, <code>media</code>, <code>name</code>, and <code>type</code> attributes are now
-            <code>java.lang.Object</code> instead of <code>java.lang.String</code>.
-          </li>
-          <li>
-            <code>width</code>, <code>height</code>, and <code>size</code> attributes are now
-            <code>java.lang.Integer</code> instead of <code>java.lang.Object</code>.
-          </li>
-          <li><code>charset</code> attributes now support <code>java.nio.charset.Charset</code>.</li>
-          <li>Moved <code>resolveValue</code> from <core:link page="/index.jspx" /> to <core:link book="/servlet-util" page="/index.jspx" />.</li>
-          <li>
-            Added <code>async</code> and <code>defer</code> attributes to
-            <core:link page="ao.tld/tag-script"><![CDATA[&lt;ao:script /&gt;]]></core:link>.
-          </li>
-          <li>
-            New tag <core:link page="ao.tld/tag-onerror"><![CDATA[&lt;ao:onerror /&gt;]]></core:link>
-            to provide scripts in nested context.
-          </li>
-          <li>
-            Added <code>onerror</code> and <code>onload</code> attributes to
-            <core:link page="ao.tld/tag-img"><![CDATA[&lt;ao:img /&gt;]]></core:link>,
-            <core:link page="ao.tld/tag-input"><![CDATA[&lt;ao:input /&gt;]]></core:link>,
-            <core:link page="ao.tld/tag-link"><![CDATA[&lt;ao:link /&gt;]]></core:link>,
-            and <core:link page="ao.tld/tag-script"><![CDATA[&lt;ao:script /&gt;]]></core:link>.
-          </li>
-          <li>
-            Improved support for taglib serialization: marked attribute fields <code>transient</code> and calling
-            <code>init()</code> from <code>readObject(…)</code>.
-          </li>
-          <li>
-            <code>Link</code> attributes <code>hreflang</code>, <code>media</code>, and <code>title</code> are now
-            <code>java.lang.Object</code> instead of <code>java.lang.String</code>.  This allows delegation to
-            underlying API that may stream some value types.
-          </li>
-        </ul>
       </changelog:release>
     </c:if>
+
+    <changelog:release
+      projectName="@{documented.name}"
+      version="8.0.0"
+      datePublished="2024-05-09T18:13:15Z"
+      groupId="@{project.groupId}"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>
+          This is a major version bump for incompatible changes of Java API only.  The taglib itself is completely
+          backward compatible.
+        </li>
+        <li>
+          Log FINE-level notice when <core:link page="ao.tld/tag-forward"><![CDATA[&lt;ao:forward /&gt;]]></core:link>
+          does not forward due to the
+          <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletResponse.html#isCommitted--">response already being committed</ao:a>.
+        </li>
+        <li>
+          Log FINE-level notice when <core:link page="ao.tld/tag-redirect"><![CDATA[&lt;ao:redirect /&gt;]]></core:link>
+          does not send redirect due to the
+          <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletResponse.html#isCommitted--">response already being committed</ao:a>.
+        </li>
+        <li>
+          Log FINE-level notice when <core:link page="ao.tld/tag-sendError"><![CDATA[&lt;ao:sendError /&gt;]]></core:link>
+          does not send error due to the
+          <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletResponse.html#isCommitted--">response already being committed</ao:a>.
+        </li>
+        <li>
+          Using normalization methods from <core:link book="/fluent-html/any" page="/index.jspx">underlying implementation</core:link>.
+        </li>
+        <li>
+          <code>class</code>, <code>media</code>, <code>name</code>, and <code>type</code> attributes are now
+          <code>java.lang.Object</code> instead of <code>java.lang.String</code>.
+        </li>
+        <li>
+          <code>width</code>, <code>height</code>, and <code>size</code> attributes are now
+          <code>java.lang.Integer</code> instead of <code>java.lang.Object</code>.
+        </li>
+        <li><code>charset</code> attributes now support <code>java.nio.charset.Charset</code>.</li>
+        <li>Moved <code>resolveValue</code> from <core:link page="/index.jspx" /> to <core:link book="/servlet-util" page="/index.jspx" />.</li>
+        <li>
+          Added <code>async</code> and <code>defer</code> attributes to
+          <core:link page="ao.tld/tag-script"><![CDATA[&lt;ao:script /&gt;]]></core:link>.
+        </li>
+        <li>
+          New tag <core:link page="ao.tld/tag-onerror"><![CDATA[&lt;ao:onerror /&gt;]]></core:link>
+          to provide scripts in nested context.
+        </li>
+        <li>
+          Added <code>onerror</code> and <code>onload</code> attributes to
+          <core:link page="ao.tld/tag-img"><![CDATA[&lt;ao:img /&gt;]]></core:link>,
+          <core:link page="ao.tld/tag-input"><![CDATA[&lt;ao:input /&gt;]]></core:link>,
+          <core:link page="ao.tld/tag-link"><![CDATA[&lt;ao:link /&gt;]]></core:link>,
+          and <core:link page="ao.tld/tag-script"><![CDATA[&lt;ao:script /&gt;]]></core:link>.
+        </li>
+        <li>
+          Improved support for taglib serialization: marked attribute fields <code>transient</code> and calling
+          <code>init()</code> from <code>readObject(…)</code>.
+        </li>
+        <li>
+          <code>Link</code> attributes <code>hreflang</code>, <code>media</code>, and <code>title</code> are now
+          <code>java.lang.Object</code> instead of <code>java.lang.String</code>.  This allows delegation to
+          underlying API that may stream some value types.
+        </li>
+      </ul>
+    </changelog:release>
 
     <changelog:release
       projectName="@{documented.name}"
