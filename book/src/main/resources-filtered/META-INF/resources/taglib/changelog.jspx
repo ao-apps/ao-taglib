@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
     shortTitle="Changelog"
     tocLevels="1"
     datePublished="2016-10-29T22:02:09-05:00"
-    dateModified="2024-06-13T19:43:11Z"
+    dateModified="2024-06-13T20:02:22Z"
   >
     <c:set var="latestRelease" value="8.0.0" />
     <c:if test="${
@@ -53,15 +53,18 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
         repository="@{nexusUrl}content/repositories/snapshots/"
         scmUrl="@{project.scm.url}"
       >
-        <!-- TODO:
         <ul>
+          <li>Fixed regression (bug): <code>alt="\${null}"</code> (or equivalent) was not accepted, causing error
+            "alt attribute required".
+          </li>
+          <!-- TODO:
           <li>Why aren't tag descriptions in the NetBeans code assist?  They are for JSTL.  Is it the HTML formatting?  Is the element ordering?</li>
           <li>No more nested tags for simply setting attributes: use jsp:attribute instead?</li>
           <li>Support script async and defer attributes</li>
           <li>Support autofocus and required attributes (textarea, input, ...)</li>
           <li>Support other nice HTML 5 features of textarea/input)</li>
+          -->
         </ul>
-        -->
       </changelog:release>
     </c:if>
 
