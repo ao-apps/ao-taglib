@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
     shortTitle="Changelog"
     tocLevels="1"
     datePublished="2016-10-29T22:02:09-05:00"
-    dateModified="2024-05-09T18:13:15Z"
+    dateModified="2024-06-13T19:43:11Z"
   >
     <c:set var="latestRelease" value="8.0.0" />
     <c:if test="${
@@ -75,8 +75,14 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
     >
       <ul>
         <li>
-          This is a major version bump for incompatible changes of Java API only.  The taglib itself is completely
-          backward compatible.
+          This is a major version bump for incompatible changes of Java API only.  The taglib was intended to be completely
+          backward compatible, yet a couple of regressions were introduced:
+          <ol type="a">
+            <li><code>height=""</code> and <code>height="auto"</code> no longer supported, attribute not required</li>
+            <li>Regression (bug): <code>alt="\${null}"</code> (or equivalent) is not accepted, causes error
+              "alt attribute required".  Workaround: Use <code>alt=" \${expression}"</code>.
+            </li>
+          </ol>
         </li>
         <li>
           Log FINE-level notice when <core:link page="ao.tld/tag-forward"><![CDATA[&lt;ao:forward /&gt;]]></core:link>
