@@ -37,9 +37,9 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
     shortTitle="Changelog"
     tocLevels="1"
     datePublished="2016-10-29T22:02:09-05:00"
-    dateModified="2024-06-13T20:02:22Z"
+    dateModified="2024-07-22T07:45:28Z"
   >
-    <c:set var="latestRelease" value="8.0.0" />
+    <c:set var="latestRelease" value="8.0.1" />
     <c:if test="${
       fn:endsWith('@{project.version}', '-SNAPSHOT')
       and !fn:endsWith('@{project.version}', '-POST-SNAPSHOT')
@@ -54,9 +54,6 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
         scmUrl="@{project.scm.url}"
       >
         <ul>
-          <li>Fixed regression (bug): <code>alt="\${null}"</code> (or equivalent) was not accepted, causing error
-            "alt attribute required".
-          </li>
           <!-- TODO:
           <li>Why aren't tag descriptions in the NetBeans code assist?  They are for JSTL.  Is it the HTML formatting?  Is the element ordering?</li>
           <li>No more nested tags for simply setting attributes: use jsp:attribute instead?</li>
@@ -67,6 +64,21 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
         </ul>
       </changelog:release>
     </c:if>
+
+    <changelog:release
+      projectName="@{documented.name}"
+      version="8.0.1"
+      datePublished="2024-07-22T07:45:28Z"
+      groupId="@{project.groupId}"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>Fixed regression (bug): <code>alt="\${null}"</code> (or equivalent) was not accepted, causing error
+          "alt attribute required".
+        </li>
+      </ul>
+    </changelog:release>
 
     <changelog:release
       projectName="@{documented.name}"
