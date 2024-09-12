@@ -24,6 +24,7 @@
 package com.aoapps.taglib;
 
 import com.aoapps.encoding.MediaType;
+import com.aoapps.html.any.attributes.event.Onclick;
 import com.aoapps.html.any.attributes.event.Onerror;
 import com.aoapps.html.any.attributes.event.Onload;
 import com.aoapps.html.any.attributes.text.Alt;
@@ -60,6 +61,7 @@ public class ImgTag extends ElementBufferedTag
     AltAttribute,
     TitleAttribute,
     // Events
+    OnclickAttribute,
     OnerrorAttribute,
     OnloadAttribute {
 
@@ -158,6 +160,13 @@ public class ImgTag extends ElementBufferedTag
 
   // Events
 
+  private Object onclick;
+
+  @Override
+  public void setOnclick(Object onclick) {
+    this.onclick = Onclick.onclick.normalize(onclick);
+  }
+
   private Object onerror;
 
   @Override
@@ -197,6 +206,7 @@ public class ImgTag extends ElementBufferedTag
     usemap = null;
     ismap = false;
     // Events
+    onclick = null;
     onerror = null;
     onload = null;
   }
@@ -234,6 +244,7 @@ public class ImgTag extends ElementBufferedTag
         .usemap(usemap)
         .ismap(ismap)
         // Events
+        .onclick(onclick)
         .onerror(onerror)
         .onload(onload)
         .__();

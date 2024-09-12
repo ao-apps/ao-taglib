@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
     shortTitle="Changelog"
     tocLevels="1"
     datePublished="2016-10-29T22:02:09-05:00"
-    dateModified="2024-07-22T07:45:28Z"
+    dateModified="2024-09-12T16:54:27Z"
   >
     <c:set var="latestRelease" value="8.0.1" />
     <c:if test="${
@@ -61,6 +61,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
           <li>Support autofocus and required attributes (textarea, input, ...)</li>
           <li>Support other nice HTML 5 features of textarea/input)</li>
           -->
+          <li>Added <code>onclick</code> attribute to <core:link page="ao.tld/tag-img"><![CDATA[&lt;ao:img /&gt;]]></core:link>.</li>
         </ul>
       </changelog:release>
     </c:if>
