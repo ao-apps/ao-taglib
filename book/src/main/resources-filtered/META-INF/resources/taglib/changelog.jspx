@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
     shortTitle="Changelog"
     tocLevels="1"
     datePublished="2016-10-29T22:02:09-05:00"
-    dateModified="2024-09-12T16:54:27Z"
+    dateModified="2024-09-12T21:07:22Z"
   >
     <c:set var="latestRelease" value="8.0.1" />
     <c:if test="${
@@ -62,6 +62,11 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
           <li>Support other nice HTML 5 features of textarea/input)</li>
           -->
           <li>Added <code>onclick</code> attribute to <core:link page="ao.tld/tag-img"><![CDATA[&lt;ao:img /&gt;]]></core:link>.</li>
+          <li>
+            When parameter values are an <code>Enum</code>, the parameter value is obtained from <code>Enum.name()</code> instead of
+            <code>Enum.toString()</code>.  This is to intuitively use enums as parameters when <code>Enum.toString()</code> is
+            overridden.
+          </li>
         </ul>
       </changelog:release>
     </c:if>

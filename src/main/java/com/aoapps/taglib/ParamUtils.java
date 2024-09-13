@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2013, 2015, 2016, 2017, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2013, 2015, 2016, 2017, 2020, 2021, 2022, 2024  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -57,6 +57,11 @@ public final class ParamUtils {
    * converted to a string.  It is incorrect to change the state of the provided value; doing
    * so may or may not affect the value of the resulting parameter.
    * </p>
+   * <p>
+   * When the value is an {@link Enum}, the parameter value is obtained from {@link Enum#name()} instead of
+   * {@link Enum#toString()}.  This is to intuitively use enums as parameters when {@link Enum#toString()} is
+   * overridden.
+   * </p>
    *
    * @param  fromTagName  the name of the tag searching from
    * @param  from         the tag to search from
@@ -86,6 +91,11 @@ public final class ParamUtils {
    * converted to a string.  It is incorrect to change the state of the provided value; doing
    * so may or may not affect the value of the resulting parameter.
    * </p>
+   * <p>
+   * When the value is an {@link Enum}, the parameter value is obtained from {@link Enum#name()} instead of
+   * {@link Enum#toString()}.  This is to intuitively use enums as parameters when {@link Enum#toString()} is
+   * overridden.
+   * </p>
    *
    * @param  paramsAttribute  the parent tag that will receive the parameters
    * @param  name             the name of the parameter (required)
@@ -111,6 +121,11 @@ public final class ParamUtils {
    * converted to a string.  It is incorrect to change the state of the provided value; doing
    * so may or may not affect the value of the resulting parameter.
    * </p>
+   * <p>
+   * When the value is an {@link Enum}, the parameter value is obtained from {@link Enum#name()} instead of
+   * {@link Enum#toString()}.  This is to intuitively use enums as parameters when {@link Enum#toString()} is
+   * overridden.
+   * </p>
    *
    * @param  paramsAttribute  the parent tag that will receive the parameters
    * @param  name             the name of the parameter (required)
@@ -134,6 +149,11 @@ public final class ParamUtils {
    * The conversion to string may be deferred, or the value may be streamed instead of being
    * converted to a string.  It is incorrect to change the state of the provided value; doing
    * so may or may not affect the value of the resulting parameter.
+   * </p>
+   * <p>
+   * When the value is an {@link Enum}, the parameter value is obtained from {@link Enum#name()} instead of
+   * {@link Enum#toString()}.  This is to intuitively use enums as parameters when {@link Enum#toString()} is
+   * overridden.
    * </p>
    *
    * @param  paramsAttribute  the parent tag that will receive the parameters
@@ -161,6 +181,11 @@ public final class ParamUtils {
    * converted to a string.  It is incorrect to change the state of the provided value; doing
    * so may or may not affect the value of the resulting parameter.
    * </p>
+   * <p>
+   * When the value is an {@link Enum}, the parameter value is obtained from {@link Enum#name()} instead of
+   * {@link Enum#toString()}.  This is to intuitively use enums as parameters when {@link Enum#toString()} is
+   * overridden.
+   * </p>
    *
    * @param  paramsAttribute  the parent tag that will receive the parameters
    * @param  name             the name of the parameter (required)
@@ -187,6 +212,11 @@ public final class ParamUtils {
    * converted to a string.  It is incorrect to change the state of the provided value; doing
    * so may or may not affect the value of the resulting parameter.
    * </p>
+   * <p>
+   * When the value is an {@link Enum}, the parameter value is obtained from {@link Enum#name()} instead of
+   * {@link Enum#toString()}.  This is to intuitively use enums as parameters when {@link Enum#toString()} is
+   * overridden.
+   * </p>
    *
    * @param  paramsAttribute  the parent tag that will receive the parameters
    * @param  name             the name of the parameter (required)
@@ -212,6 +242,11 @@ public final class ParamUtils {
    * The conversion to string may be deferred, or the value may be streamed instead of being
    * converted to a string.  It is incorrect to change the state of the provided value; doing
    * so may or may not affect the value of the resulting parameter.
+   * </p>
+   * <p>
+   * When the value is an {@link Enum}, the parameter value is obtained from {@link Enum#name()} instead of
+   * {@link Enum#toString()}.  This is to intuitively use enums as parameters when {@link Enum#toString()} is
+   * overridden.
    * </p>
    *
    * @return  {@code true} when added, or {@code false} when attribute not expected and has not been added.

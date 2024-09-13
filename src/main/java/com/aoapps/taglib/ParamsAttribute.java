@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2016, 2017, 2019, 2020, 2021, 2022, 2024  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -40,13 +40,18 @@ public interface ParamsAttribute {
    * so may or may not affect the value of the resulting parameter.
    * </p>
    * <p>
+   * When the value is an {@link Enum}, the parameter value is obtained from {@link Enum#name()} instead of
+   * {@link Enum#toString()}.  This is to intuitively use enums as parameters when {@link Enum#toString()} is
+   * overridden.
+   * </p>
+   * <p>
    * Default method is for backward compatibility only.
    * Implementations should override this version.
    * </p>
    */
   // TODO: Remove default in a major release, once no "addParam(String,String)" is completely unused.
   default void addParam(String name, Object value) {
-    addParam(name, (value == null) ? null : Coercion.toString(value));
+    addParam(name, (value == null) ? null : (value instanceof Enum) ? ((Enum) value).name() : Coercion.toString(value));
   }
 
   /**

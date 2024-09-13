@@ -343,7 +343,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   <!-- TODO: Implement validator(s), such as ao:when directly inside ao:choose and similar -->
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2023-10-02T00:34:59Z" -->
+    <!-- dateModified="2024-09-12T21:07:22Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Renders an <a href="https://www.w3schools.com/tags/tag_a.asp">&lt;a&gt;</a> tag.
@@ -363,6 +363,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       </p>
       <p>
         When a parameter value is <code>null</code> it is not added.
+        When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html">Enum</a>, the
+        value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html#name()">Enum.name()</a>.
         If the value is an
         <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Iterable.html">Iterable</a>,
         <a rel="nofollow" href="@{javadoc.link.javase}java/util/Iterator.html">Iterator</a>,
@@ -577,7 +579,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2019-10-08T21:41:35-05:00" -->
-    <!-- dateModified="2023-10-02T00:34:59Z" -->
+    <!-- dateModified="2024-09-12T21:07:22Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Renders an <a href="https://www.w3schools.com/tags/tag_area.asp">&lt;area&gt;</a> tag.
@@ -591,6 +593,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       </p>
       <p>
         When a parameter value is <code>null</code> it is not added.
+        When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html">Enum</a>, the
+        value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html#name()">Enum.name()</a>.
         If the value is an
         <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Iterable.html">Iterable</a>,
         <a rel="nofollow" href="@{javadoc.link.javase}java/util/Iterator.html">Iterator</a>,
@@ -1162,7 +1166,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2023-10-02T00:34:59Z" -->
+    <!-- dateModified="2024-09-12T21:07:22Z" -->
     <!-- TODO: param.* dynamic attributes should not do automatic multi-parameter.  Make a params.* dynamic attribute for this purpose. -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
@@ -1174,6 +1178,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       </p>
       <p>
         When a parameter value is <code>null</code> it is not added.
+        When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html">Enum</a>, the
+        value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html#name()">Enum.name()</a>.
         If the value is an
         <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Iterable.html">Iterable</a>,
         <a rel="nofollow" href="@{javadoc.link.javase}java/util/Iterator.html">Iterator</a>,
@@ -1287,7 +1293,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2023-03-14T11:36:35Z" -->
+    <!-- dateModified="2024-09-12T21:07:22Z" -->
     <description><![CDATA[
       <div class="semanticcms-tag-reference-summary">
         <p>
@@ -1317,6 +1323,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       </p>
       <p>
         When a parameter value is <code>null</code> it is not added.
+        When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html">Enum</a>, the
+        value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html#name()">Enum.name()</a>.
         If the value is an
         <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Iterable.html">Iterable</a>,
         <a rel="nofollow" href="@{javadoc.link.javase}java/util/Iterator.html">Iterator</a>,
@@ -1713,7 +1721,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2023-10-02T00:34:59Z" -->
+    <!-- dateModified="2024-09-12T21:07:22Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Renders an <a href="https://www.w3schools.com/tags/tag_iframe.asp">&lt;iframe&gt;</a> tag.
@@ -1724,6 +1732,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       </p>
       <p>
         When a parameter value is <code>null</code> it is not added.
+        When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html">Enum</a>, the
+        value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html#name()">Enum.name()</a>.
         If the value is an
         <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Iterable.html">Iterable</a>,
         <a rel="nofollow" href="@{javadoc.link.javase}java/util/Iterator.html">Iterator</a>,
@@ -1898,7 +1908,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2024-09-12T16:54:27Z" -->
+    <!-- dateModified="2024-09-12T21:07:22Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Renders an <a href="https://www.w3schools.com/tags/tag_img.asp">&lt;img&gt;</a> tag.
@@ -1924,6 +1934,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       </p>
       <p>
         When a parameter value is <code>null</code> it is not added.
+        When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html">Enum</a>, the
+        value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html#name()">Enum.name()</a>.
         If the value is an
         <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Iterable.html">Iterable</a>,
         <a rel="nofollow" href="@{javadoc.link.javase}java/util/Iterator.html">Iterator</a>,
@@ -2124,7 +2136,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2021-06-03T22:53:21-05:00" -->
+    <!-- dateModified="2024-09-12T21:07:22Z" -->
     <description><![CDATA[
       <div class="semanticcms-tag-reference-summary">
         <p>
@@ -2149,6 +2161,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       </p>
       <p>
         When a parameter value is <code>null</code> it is not added.
+        When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html">Enum</a>, the
+        value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html#name()">Enum.name()</a>.
         If the value is an
         <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Iterable.html">Iterable</a>,
         <a rel="nofollow" href="@{javadoc.link.javase}java/util/Iterator.html">Iterator</a>,
@@ -2252,7 +2266,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2023-10-05T23:33:39Z" -->
+    <!-- dateModified="2024-09-12T21:07:22Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Renders an <a href="https://www.w3schools.com/tags/tag_input.asp">&lt;input&gt;</a> tag.
@@ -2278,6 +2292,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       </p>
       <p>
         When a parameter value is <code>null</code> it is not added.
+        When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html">Enum</a>, the
+        value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html#name()">Enum.name()</a>.
         If the value is an
         <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Iterable.html">Iterable</a>,
         <a rel="nofollow" href="@{javadoc.link.javase}java/util/Iterator.html">Iterator</a>,
@@ -2603,7 +2619,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2023-10-05T23:33:39Z" -->
+    <!-- dateModified="2024-09-12T21:07:22Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         If contained within any
@@ -2617,6 +2633,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       </p>
       <p>
         When a parameter value is <code>null</code> it is not added.
+        When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html">Enum</a>, the
+        value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html#name()">Enum.name()</a>.
         If the value is an
         <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Iterable.html">Iterable</a>,
         <a rel="nofollow" href="@{javadoc.link.javase}java/util/Iterator.html">Iterator</a>,
@@ -3495,7 +3513,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2023-10-02T00:34:59Z" -->
+    <!-- dateModified="2024-09-12T21:07:22Z" -->
     <description><![CDATA[
       <p>
         Adds a parameter to its
@@ -3523,6 +3541,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <description><![CDATA[
         <p>
           The value of the parameter.
+          When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html">Enum</a>, the
+          value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html#name()">Enum.name()</a>.
           A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-value">&lt;ao:value&gt;</a>
           tag will override this value.
           If neither is provided, the output of the body is used with whitespace trimmed.
@@ -3536,7 +3556,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2023-10-02T00:34:59Z" -->
+    <!-- dateModified="2024-09-12T21:07:22Z" -->
     <description><![CDATA[
       <p>
         Adds multiple parameters to its
@@ -3638,6 +3658,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
         </p>
         <p>
           Parameters are never added with <code>null</code> values.
+          When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html">Enum</a>, the
+          value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html#name()">Enum.name()</a>.
         </p>
       ]]></description>
       <name>values</name>
@@ -3666,7 +3688,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2023-03-14T11:36:35Z" -->
+    <!-- dateModified="2024-09-12T21:07:22Z" -->
     <description><![CDATA[
       <div class="semanticcms-tag-reference-summary">
         <p>
@@ -3693,6 +3715,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       </p>
       <p>
         When a parameter value is <code>null</code> it is not added.
+        When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html">Enum</a>, the
+        value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html#name()">Enum.name()</a>.
         If the value is an
         <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Iterable.html">Iterable</a>,
         <a rel="nofollow" href="@{javadoc.link.javase}java/util/Iterator.html">Iterator</a>,
@@ -3908,7 +3932,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2023-10-05T23:33:39Z" -->
+    <!-- dateModified="2024-09-12T21:07:22Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Manually establishes a <a href="https://www.w3schools.com/tags/tag_script.asp">script context</a> when automatic detection is not possible.
@@ -3935,6 +3959,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       </p>
       <p>
         When a parameter value is <code>null</code> it is not added.
+        When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html">Enum</a>, the
+        value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html#name()">Enum.name()</a>.
         If the value is an
         <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Iterable.html">Iterable</a>,
         <a rel="nofollow" href="@{javadoc.link.javase}java/util/Iterator.html">Iterator</a>,
@@ -4461,7 +4487,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2022-03-25T17:25:18-05:00" -->
+    <!-- dateModified="2024-09-12T21:07:22Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Manually establishes a URL context when automatic detection is not possible.
@@ -4510,6 +4536,8 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       </p>
       <p>
         When a parameter value is <code>null</code> it is not added.
+        When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html">Enum</a>, the
+        value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html#name()">Enum.name()</a>.
         If the value is an
         <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Iterable.html">Iterable</a>,
         <a rel="nofollow" href="@{javadoc.link.javase}java/util/Iterator.html">Iterator</a>,
