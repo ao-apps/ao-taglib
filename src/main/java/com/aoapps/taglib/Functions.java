@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2024  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -270,5 +270,9 @@ public final class Functions {
     return bundleTag.getResources().getMessage(
         prefix == null || prefix.isEmpty() ? key : prefix.concat(key)
     );
+  }
+
+  public static boolean resourceExists(String path) throws MalformedURLException {
+    return ServletContextCache.getResource(FunctionContext.getServletContext(), path) != null;
   }
 }

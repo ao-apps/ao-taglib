@@ -5184,5 +5184,26 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
     <function-signature>long round(double)</function-signature>
     <example><![CDATA[<code>${ao:round(a)}</code>]]></example>
   </function>
+  <function>
+    <!-- datePublished="2020-06-16T10:46:34-05:00" -->
+    <!-- dateModified="2024-09-14T14:56:11Z" -->
+    <description><![CDATA[
+      <p class="semanticcms-tag-reference-summary">
+        Checks if a resource exists in the web application.
+      </p>
+      <p>
+        The path must begin with a slash (/), since it is passed unaltered to
+        <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletContext.html#getResource(java.lang.String)">ServletContext.getResource(…)</a>
+      </p>
+      <p>
+        This is useful to dynamically determine if a JSP page exists before
+        forwarding or including the resource.
+      </p>
+    ]]></description>
+    <name>resourceExists</name>
+    <function-class>com.aoapps.taglib.Functions</function-class>
+    <function-signature>boolean resourceExists(java.lang.String)</function-signature>
+    <example><![CDATA[<code>${ao:resourceExists(path)}</code>]]></example>
+  </function>
 </taglib>
 <!-- </common> -->
