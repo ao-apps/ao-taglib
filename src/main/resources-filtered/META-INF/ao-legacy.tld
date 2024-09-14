@@ -2619,7 +2619,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2024-09-12T21:07:22Z" -->
+    <!-- dateModified="2024-09-14T01:35:44Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         If contained within any
@@ -2668,6 +2668,18 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>com.aoapps.taglib.Link</type>
+    </attribute>
+    <attribute>
+      <description><![CDATA[
+        <p>
+          When <code>true</code>, surrounds the element with <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/noscript">&lt;noscript&gt;</a>.
+          Defaults to <code>false</code>.
+        </p>
+      ]]></description>
+      <name>noscript</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>boolean</type>
     </attribute>
     <attribute>
       <description><![CDATA[
@@ -3069,7 +3081,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2023-10-02T00:34:59Z" -->
+    <!-- dateModified="2024-09-14T01:35:44Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         If contained within any
@@ -3103,6 +3115,18 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>com.aoapps.taglib.Meta</type>
+    </attribute>
+    <attribute>
+      <description><![CDATA[
+        <p>
+          When <code>true</code>, surrounds the element with <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/noscript">&lt;noscript&gt;</a>.
+          Defaults to <code>false</code>.
+        </p>
+      ]]></description>
+      <name>noscript</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>boolean</type>
     </attribute>
     <attribute>
       <description><![CDATA[
@@ -4288,7 +4312,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2022-03-25T17:25:18-05:00" -->
+    <!-- dateModified="2024-09-14T01:35:44Z" -->
     <description><![CDATA[
       <p>
         Provides a <a href="https://www.w3schools.com/tags/att_style.asp">style attribute</a> to its
@@ -4316,6 +4340,18 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
         </p>
       ]]></description>
       <name>forceElement</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>boolean</type>
+    </attribute>
+    <attribute>
+      <description><![CDATA[
+        <p>
+          When <code>true</code>, surrounds the element with <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/noscript">&lt;noscript&gt;</a>.
+          Defaults to <code>false</code>.
+        </p>
+      ]]></description>
+      <name>noscript</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>boolean</type>

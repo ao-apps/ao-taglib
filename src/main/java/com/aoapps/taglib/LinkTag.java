@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
+ * Copyright (C) 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2023, 2024  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -87,6 +87,7 @@ public class LinkTag extends ElementNullTag
    */
   public void setLink(Link link) {
     GlobalAttributesUtils.copy(link.getGlobal(), this);
+    setNoscript(link.isNoscript());
     setHref(link.getHref());
     setAbsolute(link.getAbsolute());
     URIParameters linkParams = link.getParams();
@@ -107,6 +108,12 @@ public class LinkTag extends ElementNullTag
     // Events
     setOnerror(link.getOnerror());
     setOnload(link.getOnload());
+  }
+
+  private transient boolean noscript;
+
+  public void setNoscript(boolean noscript) {
+    this.noscript = noscript;
   }
 
   private String href;
@@ -208,6 +215,7 @@ public class LinkTag extends ElementNullTag
   }
 
   private void init() {
+    noscript = false;
     href = null;
     params = null;
     absolute = false;
@@ -236,6 +244,7 @@ public class LinkTag extends ElementNullTag
       parent.get().addLink(
           new Link(
               global.freeze(),
+              noscript,
               href,
               absolute,
               canonical,
@@ -260,6 +269,9 @@ public class LinkTag extends ElementNullTag
           false, // Do not add extra newlines to JSP
           false  // Do not add extra indentation to JSP
       );
+      if (noscript) {
+        document.autoIndent().unsafe("<noscript>").incDepth();
+      }
       LINK<?> link = document.link();
       GlobalAttributesUtils.doGlobalAttributes(global, link);
       link.href(UrlUtils.getHref(pageContext, href, params, addLastModified, absolute, canonical))
@@ -272,6 +284,9 @@ public class LinkTag extends ElementNullTag
           .onerror(onerror)
           .onload(onload)
           .__();
+      if (noscript) {
+        document.decDepth().autoIndent().unsafe("</noscript>").autoNl();
+      }
     }
     /* BodyTag only:
       return EVAL_PAGE;

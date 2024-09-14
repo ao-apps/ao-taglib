@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2011, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
+ * Copyright (C) 2011, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2023, 2024  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -79,6 +79,7 @@ public class MetaTag extends ElementBufferedBodyTag
    */
   public void setMeta(Meta meta) {
     GlobalAttributesUtils.copy(meta.getGlobal(), this);
+    setNoscript(meta.isNoscript());
     setName(meta.getName());
     setHttpEquiv(meta.getHttpEquiv());
     setItemprop(meta.getItemprop());
@@ -89,6 +90,12 @@ public class MetaTag extends ElementBufferedBodyTag
   /* BodyTag only: */
   private static final long serialVersionUID = 1L;
   /**/
+
+  private transient boolean noscript;
+
+  public void setNoscript(boolean noscript) {
+    this.noscript = noscript;
+  }
 
   private transient String name;
 
@@ -131,6 +138,7 @@ public class MetaTag extends ElementBufferedBodyTag
   }
 
   private void init() {
+    noscript = false;
     name = null;
     httpEquiv = null;
     itemprop = null;
@@ -154,6 +162,7 @@ public class MetaTag extends ElementBufferedBodyTag
       parent.get().addMeta(
           new Meta(
               global.freeze(),
+              noscript,
               name,
               httpEquiv,
               itemprop,
@@ -171,6 +180,9 @@ public class MetaTag extends ElementBufferedBodyTag
           false, // Do not add extra newlines to JSP
           false  // Do not add extra indentation to JSP
       );
+      if (noscript) {
+        document.autoIndent().unsafe("<noscript>").incDepth();
+      }
       META<?> meta = document.meta();
       GlobalAttributesUtils.doGlobalAttributes(global, meta);
       meta.name(name)
@@ -180,6 +192,9 @@ public class MetaTag extends ElementBufferedBodyTag
           .charset(charset)
           .content(content)
           .__();
+      if (noscript) {
+        document.decDepth().autoIndent().unsafe("</noscript>").autoNl();
+      }
     }
     /* BodyTag only: */
     return EVAL_PAGE;

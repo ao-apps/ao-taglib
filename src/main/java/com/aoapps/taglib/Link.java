@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2013, 2016, 2017, 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
+ * Copyright (C) 2013, 2016, 2017, 2019, 2020, 2021, 2022, 2023, 2024  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -30,13 +30,14 @@ import com.aoapps.servlet.lastmodified.AddLastModified;
 import java.util.Locale;
 
 /**
- * Holds the data for a Link tag that is passed between LinkTag and any LinksAttribute parent.
+ * Holds the data for a Link tag that is passed between {@link LinkTag} and any {@link LinksAttribute} parent.
  *
  * @author  AO Industries, Inc.
  */
 public class Link {
 
   private final GlobalAttributes global;
+  private final boolean noscript;
   private final String href;
   private final URIParameters params;
   private final boolean absolute;
@@ -62,6 +63,7 @@ public class Link {
    */
   public Link(
       GlobalAttributes global,
+      boolean noscript,
       String href,
       boolean absolute,
       boolean canonical,
@@ -77,6 +79,7 @@ public class Link {
       Object onload
   ) {
     this.global = global;
+    this.noscript = noscript;
     this.href = href;
     this.params = params;
     this.absolute = absolute;
@@ -94,6 +97,10 @@ public class Link {
 
   public GlobalAttributes getGlobal() {
     return global;
+  }
+
+  public boolean isNoscript() {
+    return noscript;
   }
 
   public String getHref() {

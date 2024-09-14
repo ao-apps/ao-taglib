@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2011, 2012, 2013, 2016, 2017, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2016, 2017, 2020, 2021, 2022, 2024  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -26,13 +26,14 @@ package com.aoapps.taglib;
 import com.aoapps.lang.NullArgumentException;
 
 /**
- * Holds the data for a Meta tag that is passed between MetaTag and any MetasAttribute parent.
+ * Holds the data for a Meta tag that is passed between {@link MetaTag} and any {@link MetasAttribute} parent.
  *
  * @author  AO Industries, Inc.
  */
 public class Meta {
 
   private final GlobalAttributes global;
+  private final boolean noscript;
   private final String name;
   private final String httpEquiv;
   private final String itemprop;
@@ -41,6 +42,7 @@ public class Meta {
 
   public Meta(
       GlobalAttributes global,
+      boolean noscript,
       String name,
       String httpEquiv,
       String itemprop,
@@ -48,6 +50,7 @@ public class Meta {
       String content
   ) {
     this.global = global;
+    this.noscript = noscript;
     this.name = name;
     this.httpEquiv = httpEquiv;
     this.itemprop = itemprop;
@@ -55,29 +58,12 @@ public class Meta {
     this.content = NullArgumentException.checkNotNull(content, "content");
   }
 
-  /**
-   * @deprecated  Please use {@link #Meta(com.aoapps.taglib.GlobalAttributes, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)}
-   */
-  @Deprecated
-  public Meta(
-      String name,
-      String httpEquiv,
-      String itemprop,
-      String charset,
-      String content
-  ) {
-    this(
-        ImmutableGlobalAttributes.EMPTY,
-        name,
-        httpEquiv,
-        itemprop,
-        charset,
-        content
-    );
-  }
-
   public GlobalAttributes getGlobal() {
     return global;
+  }
+
+  public boolean isNoscript() {
+    return noscript;
   }
 
   public String getName() {
