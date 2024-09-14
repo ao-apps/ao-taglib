@@ -2136,12 +2136,12 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2024-09-12T21:07:22Z" -->
+    <!-- dateModified="2024-09-14T19:15:38Z" -->
     <description><![CDATA[
       <div class="semanticcms-tag-reference-summary">
         <p>
           Includes another resource and then continues processing of the current JSP page.
-          This has three advantages over the standard
+          This has several advantages over the standard
           <a rel="nofollow" href="https://docs.oracle.com/cd/A87860_01/doc/java.817/a83726/genlovw3.htm#1008181">&lt;jsp:include&gt;</a>
           tag:
         </p>
@@ -2152,6 +2152,14 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
             You may pass argument objects instead of only
             <a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</a>
             parameters (see below)
+          </li>
+          <li>
+            You may <a href="@{project.url}]]>&tld;<![CDATA[/tag-redirect">send redirects</a> from within the included
+            page.
+          </li>
+          <li>
+            You may <a href="@{project.url}]]>&tld;<![CDATA[/tag-sendError">send errors</a> from within the included
+            page.
           </li>
         </ol>
       </div>
