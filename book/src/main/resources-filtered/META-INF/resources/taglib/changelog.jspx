@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
     shortTitle="Changelog"
     tocLevels="1"
     datePublished="2016-10-29T22:02:09-05:00"
-    dateModified="2024-09-14T01:35:44Z"
+    dateModified="2024-09-14T05:26:48Z"
   >
     <c:set var="latestRelease" value="8.0.1" />
     <c:if test="${
@@ -71,7 +71,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
             Added <code>noscript</code> attribute to <core:link page="ao.tld/tag-link"><![CDATA[&lt;ao:link /&gt;]]></core:link>,
             <core:link page="ao.tld/tag-meta"><![CDATA[&lt;ao:meta /&gt;]]></core:link>, and
             <core:link page="ao.tld/tag-style"><![CDATA[&lt;ao:style /&gt;]]></core:link>.  When <code>true</code>,
-            surrounds the element with <ao:a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/noscript">&lt;noscript&gt;</ao:a>.
+            surrounds the element with <ao:a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/noscript"><![CDATA[&lt;noscript&gt;]]></ao:a>.
           </li>
         </ul>
       </changelog:release>
