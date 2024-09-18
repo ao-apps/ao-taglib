@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
     shortTitle="Changelog"
     tocLevels="1"
     datePublished="2016-10-29T22:02:09-05:00"
-    dateModified="2024-09-14T14:56:11Z"
+    dateModified="2024-09-18T19:33:13Z"
   >
     <c:set var="latestRelease" value="8.0.1" />
     <c:if test="${
@@ -76,6 +76,11 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
           <li>
             New function <core:link page="ao.tld/function-resourceExists" /> that checks if a resource exists in the web
             application.
+          </li>
+          <li>
+            When capturing into a <code>LinksAttribute</code> parent, <core:link page="ao.tld/tag-link"><![CDATA[&lt;ao:link /&gt;]]></core:link>
+            now processes the href-related attributes immediately instead of deferring to parent.  This allows relative
+            hrefs to work correctly: relative to the initial content page, not the template.
           </li>
         </ul>
       </changelog:release>

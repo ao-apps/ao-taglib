@@ -81,7 +81,7 @@ public class MetaTag extends ElementBufferedTag
     private static final long serialVersionUID = 1L;
   /**/
 
-  private transient boolean noscript;
+  private boolean noscript;
 
   public void setNoscript(boolean noscript) {
     this.noscript = noscript;

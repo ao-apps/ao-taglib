@@ -25,8 +25,6 @@ package com.aoapps.taglib;
 
 import com.aoapps.html.any.attributes.text.Hreflang.hreflang;
 import com.aoapps.lang.Coercion;
-import com.aoapps.net.URIParameters;
-import com.aoapps.servlet.lastmodified.AddLastModified;
 import java.util.Locale;
 
 /**
@@ -39,10 +37,6 @@ public class Link {
   private final GlobalAttributes global;
   private final boolean noscript;
   private final String href;
-  private final URIParameters params;
-  private final boolean absolute;
-  private final boolean canonical;
-  private final AddLastModified addLastModified;
   private final Object hreflang;
   private final String rel;
   private final String type;
@@ -65,10 +59,6 @@ public class Link {
       GlobalAttributes global,
       boolean noscript,
       String href,
-      boolean absolute,
-      boolean canonical,
-      URIParameters params,
-      AddLastModified addLastModified,
       Object hreflang,
       String rel,
       String type,
@@ -81,10 +71,6 @@ public class Link {
     this.global = global;
     this.noscript = noscript;
     this.href = href;
-    this.params = params;
-    this.absolute = absolute;
-    this.canonical = canonical;
-    this.addLastModified = addLastModified;
     this.hreflang = hreflang;
     this.rel = rel;
     this.type = type;
@@ -105,22 +91,6 @@ public class Link {
 
   public String getHref() {
     return href;
-  }
-
-  public boolean getAbsolute() {
-    return absolute;
-  }
-
-  public boolean getCanonical() {
-    return canonical;
-  }
-
-  public URIParameters getParams() {
-    return params;
-  }
-
-  public AddLastModified getAddLastModified() {
-    return addLastModified;
   }
 
   /**

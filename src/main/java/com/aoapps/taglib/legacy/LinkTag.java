@@ -37,7 +37,6 @@ import com.aoapps.html.servlet.LINK;
 import com.aoapps.lang.Coercion;
 import com.aoapps.lang.Strings;
 import com.aoapps.net.MutableURIParameters;
-import com.aoapps.net.URIParameters;
 import com.aoapps.net.URIParametersMap;
 import com.aoapps.servlet.jsp.tagext.JspTagUtils;
 import com.aoapps.servlet.lastmodified.AddLastModified;
@@ -59,7 +58,6 @@ import java.io.ObjectInputStream;
 import java.io.Writer;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -108,17 +106,9 @@ public class LinkTag extends ElementNullBodyTag
     GlobalAttributesUtils.copy(link.getGlobal(), this);
     setNoscript(link.isNoscript());
     setHref(link.getHref());
-    setAbsolute(link.getAbsolute());
-    URIParameters linkParams = link.getParams();
-    if (linkParams != null) {
-      for (Map.Entry<String, List<String>> entry : linkParams.getParameterMap().entrySet()) {
-        String paramName = entry.getKey();
-        for (String paramValue : entry.getValue()) {
-          addParam(paramName, (Object) paramValue);
-        }
-      }
-    }
-    this.addLastModified = link.getAddLastModified();
+    setAbsolute(false);
+    setCanonical(false);
+    this.addLastModified = AddLastModified.FALSE;
     setHreflang(link.getHreflang());
     setRel(link.getRel());
     setType(link.getType());
@@ -256,19 +246,16 @@ public class LinkTag extends ElementNullBodyTag
     /**/
     /* SimpleTag only:
       protected void doTag(Writer out) throws JspException, IOException {
-        PageContext pageContext = (PageContext)getJspContext();
+        PageContext pageContext = (PageContext) getJspContext();
     /**/
     Optional<LinksAttribute> parent = JspTagUtils.findAncestor(this, LinksAttribute.class);
+    String combinedHref = UrlUtils.getHref(pageContext, href, params, addLastModified, absolute, canonical);
     if (parent.isPresent()) {
       parent.get().addLink(
           new Link(
               global.freeze(),
               noscript,
-              href,
-              absolute,
-              canonical,
-              params,
-              addLastModified,
+              combinedHref,
               hreflang,
               rel,
               type,
@@ -293,7 +280,7 @@ public class LinkTag extends ElementNullBodyTag
       }
       LINK<?> link = document.link();
       GlobalAttributesUtils.doGlobalAttributes(global, link);
-      link.href(UrlUtils.getHref(pageContext, href, params, addLastModified, absolute, canonical))
+      link.href(combinedHref)
           .hreflang(hreflang)
           .rel(rel)
           .type(type)
