@@ -37,6 +37,8 @@ import com.aoapps.html.servlet.LINK;
 import com.aoapps.lang.Coercion;
 import com.aoapps.lang.Strings;
 import com.aoapps.net.MutableURIParameters;
+import com.aoapps.net.URIDecoder;
+import com.aoapps.net.URIEncoder;
 import com.aoapps.net.URIParametersMap;
 import com.aoapps.servlet.jsp.tagext.JspTagUtils;
 import com.aoapps.servlet.lastmodified.AddLastModified;
@@ -228,10 +230,28 @@ public class LinkTag extends ElementNullTag
   /* SimpleTag only: */
   protected void doTag(Writer out) throws JspException, IOException {
     PageContext pageContext = (PageContext) getJspContext();
+    HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
     /**/
     Optional<LinksAttribute> parent = JspTagUtils.findAncestor(this, LinksAttribute.class);
     String combinedHref = UrlUtils.getHref(pageContext, href, params, addLastModified, absolute, canonical);
     if (parent.isPresent()) {
+      if (combinedHref.startsWith("/")) {
+        // TODO: It would be cleaner to not even add the contextPath, but that would require more underlying API work.
+        String contextPath = request.getContextPath();
+        if (!contextPath.isEmpty()) {
+          String contextPathUri = URIEncoder.encodeURI(contextPath);
+          if (combinedHref.startsWith(contextPathUri)) {
+            combinedHref = combinedHref.substring(contextPathUri.length());
+          } else {
+            String contextPathIri = URIDecoder.decodeURI(contextPath);
+            if (combinedHref.startsWith(contextPathIri)) {
+              combinedHref = combinedHref.substring(contextPathIri.length());
+            } else {
+              throw new AssertionError("combinedHref does not start with contextPath: combinedHref=" + combinedHref + ", contextPath=" + contextPath);
+            }
+          }
+        }
+      }
       parent.get().addLink(
           new Link(
               global.freeze(),
@@ -250,7 +270,7 @@ public class LinkTag extends ElementNullTag
     } else {
       DocumentEE document = new DocumentEE(
           pageContext.getServletContext(),
-          (HttpServletRequest) pageContext.getRequest(),
+          request,
           (HttpServletResponse) pageContext.getResponse(),
           out,
           false, // Do not add extra newlines to JSP
