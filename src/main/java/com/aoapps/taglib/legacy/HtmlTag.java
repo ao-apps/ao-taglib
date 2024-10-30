@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2011, 2012, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2023, 2024  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -53,7 +53,6 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 
 /**
- * <p>
  * TODO: Support both filtered and buffered modes, defaulting to filtered
  * This would allow nested tags while in buffered mode.  Would be a
  * boolean attribute "buffered", defaulting to false.  A TLD validator
@@ -61,28 +60,24 @@ import javax.servlet.jsp.JspTagException;
  * unbuffered parent.  This would also likely converge FilteredBodyTag
  * and BufferedBodyTag into a single implementation.  Also, all
  * *Attribute interfaces sould have a "boolean isBuffered()".
- * </p>
- * <p>
- * TODO: Have dir attribute accept a new value "response", which would be
+ *
+ * <p>TODO: Have dir attribute accept a new value "response", which would be
  * the default.  This would set the dir value based on the current
  * response locale.  This would be consistent with the current lang
  * implementation.  "auto" could still be used to override this.
- * Possibly allow set as empty string to override, too.
- * </p>
- * <p>
- * TODO: Support an open-only mode, which would be the default when there
+ * Possibly allow set as empty string to override, too.</p>
+ *
+ * <p>TODO: Support an open-only mode, which would be the default when there
  * is no body.  Values "true", "false", "auto" (the default).  When
  * open-only, the closing &lt;/ao:html&gt; would not be written, and the
  * request attributes would not be restored.  This would allow the
  * &lt;ao:html&gt; tag to be used where the header and footer are split
- * into separate files.  Maybe negate it and call the attribute "close".
- * </p>
- * <p>
- * TODO: Implement GlobalAttributes, but beware this would make ScriptTag always thing its inside a StyleAttribute.
+ * into separate files.  Maybe negate it and call the attribute "close".</p>
+ *
+ * <p>TODO: Implement GlobalAttributes, but beware this would make ScriptTag always thing its inside a StyleAttribute.
  *       Could workaround this issue by making a StyleUnexpectedAttribute, which would override StyleAttribute with a
  *       set of deprecated methods, then StyleTag would ignore its StyleAttribute parent tag if it is actually a
- *       StyleUnexpectedAttribute.
- * </p>
+ *       StyleUnexpectedAttribute.</p>
  */
 public class HtmlTag extends ElementFilteredBodyTag {
 

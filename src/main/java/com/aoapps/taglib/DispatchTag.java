@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2012, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2012, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2024  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -214,9 +214,8 @@ public abstract class DispatchTag extends SimpleTagSupport
   /**
    * Subclass hook to intercept request after servlet paths have been determined
    * and before dispatch is called.
-   * <p>
-   * This default implementation does nothing.
-   * </p>
+   *
+   * <p>This default implementation does nothing.</p>
    *
    * @exception  SkipPageException  If the implementation has handled the request,
    *                                must throw SkipPageException.
@@ -345,11 +344,10 @@ public abstract class DispatchTag extends SimpleTagSupport
    * Invokes the body.  This is only called when a body exists.  Subclasses may override this to perform
    * actions before and/or after invoking the body.  Any overriding implementation should call
    * super.invoke(JspFragment) to invoke the body.
-   * <p>
-   * Discards all nested output, since this will not use the output and this
+   *
+   * <p>Discards all nested output, since this will not use the output and this
    * output could possibly fill the response buffer and prevent the dispatch
-   * from functioning.
-   * </p>
+   * from functioning.</p>
    */
   protected void invoke(JspFragment body) throws JspException, IOException {
     // TODO: Should other places that invoke body with NullWriter also setup RequestEncodingContext.DISCARD explicitly?  Parent tag for this?

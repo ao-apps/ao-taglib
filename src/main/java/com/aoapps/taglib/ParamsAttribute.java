@@ -34,20 +34,17 @@ public interface ParamsAttribute {
 
   /**
    * Adds a parameter.
-   * <p>
-   * The conversion to string may be deferred, or the value may be streamed instead of being
+   *
+   * <p>The conversion to string may be deferred, or the value may be streamed instead of being
    * converted to a string.  It is incorrect to change the state of the provided value; doing
-   * so may or may not affect the value of the resulting parameter.
-   * </p>
-   * <p>
-   * When the value is an {@link Enum}, the parameter value is obtained from {@link Enum#name()} instead of
+   * so may or may not affect the value of the resulting parameter.</p>
+   *
+   * <p>When the value is an {@link Enum}, the parameter value is obtained from {@link Enum#name()} instead of
    * {@link Enum#toString()}.  This is to intuitively use enums as parameters when {@link Enum#toString()} is
-   * overridden.
-   * </p>
-   * <p>
-   * Default method is for backward compatibility only.
-   * Implementations should override this version.
-   * </p>
+   * overridden.</p>
+   *
+   * <p>Default method is for backward compatibility only.
+   * Implementations should override this version.</p>
    */
   // TODO: Remove default in a major release, once no "addParam(String,String)" is completely unused.
   default void addParam(String name, Object value) {

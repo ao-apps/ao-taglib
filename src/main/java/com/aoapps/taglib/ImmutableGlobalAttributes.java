@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2020, 2021, 2022, 2023  AO Industries, Inc.
+ * Copyright (C) 2020, 2021, 2022, 2023, 2024  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -36,10 +36,9 @@ public class ImmutableGlobalAttributes implements GlobalAttributes {
 
   /**
    * Gets an immutable, thread-safe instance, returning {@link ImmutableGlobalAttributes#EMPTY} when has no attributes.
-   * <p>
-   * To future-proof code, prefer using {@link MutableGlobalAttributes} in a builder pattern.  However, if maximum
-   * code efficiency is desired, this method is available.
-   * </p>
+   *
+   * <p>To future-proof code, prefer using {@link MutableGlobalAttributes} in a builder pattern.  However, if maximum
+   * code efficiency is desired, this method is available.</p>
    *
    * @return  The instance or {@link ImmutableGlobalAttributes#EMPTY} when empty.
    */
