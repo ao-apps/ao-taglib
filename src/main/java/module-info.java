@@ -39,7 +39,10 @@ module com.aoapps.taglib {
   requires com.aoapps.servlet.util; // <groupId>com.aoapps</groupId><artifactId>ao-servlet-util</artifactId>
   requires com.aoapps.web.resources.registry; // <groupId>com.aoapps</groupId><artifactId>ao-web-resources-registry</artifactId>
   requires com.aoapps.web.resources.servlet; // <groupId>com.aoapps</groupId><artifactId>ao-web-resources-servlet</artifactId>
-  requires static org.apache.commons.beanutils; // <groupId>commons-beanutils</groupId><artifactId>commons-beanutils</artifactId>
+  // TODO: commons-beanutils-1.10.0 includes a new module-info.class specifying a new module name of
+  // "org.apache.commons.beanutils" while commons-validator-1.9.0 references the old name "commons.beanutils".
+  // Stay on commons-beanutils-1.9.4 util commons-validator-1.9.0 is updated to reference the new module name.
+  requires static commons.beanutils; // <groupId>commons-beanutils</groupId><artifactId>commons-beanutils</artifactId>
   requires org.apache.commons.lang3; // <groupId>org.apache.commons</groupId><artifactId>commons-lang3</artifactId>
   requires javax.el.api; // <groupId>javax.el</groupId><artifactId>javax.el-api</artifactId>
   requires javax.servlet.api; // <groupId>javax.servlet</groupId><artifactId>javax.servlet-api</artifactId>
