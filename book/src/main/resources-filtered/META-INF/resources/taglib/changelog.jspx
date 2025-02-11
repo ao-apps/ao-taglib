@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
     shortTitle="Changelog"
     tocLevels="1"
     datePublished="2016-10-29T22:02:09-05:00"
-    dateModified="2025-02-11T06:06:22Z"
+    dateModified="2025-02-11T08:29:44Z"
   >
     <c:set var="latestRelease" value="8.0.1" />
     <c:if test="${
@@ -83,6 +83,10 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
             hrefs to work correctly: relative to the initial content page, not the template.
           </li>
           <li>Minimum Java version changed from 1.8 to 11.</li>
+          <li>
+            Fixed missing writing of <code>onerror</code> and <code>onload</code> attributes on
+            <core:link page="ao.tld/tag-input"><![CDATA[&lt;ao:input /&gt;]]></core:link>.
+          </li>
         </ul>
       </changelog:release>
     </c:if>
