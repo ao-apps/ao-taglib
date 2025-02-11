@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2012, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2024  AO Industries, Inc.
+ * Copyright (C) 2012, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2024, 2025  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -115,7 +115,7 @@ public abstract class DispatchTag extends SimpleTagSupport
       String[] merged;
       if (oldValues == null) {
         // No need to merge values
-        merged = newValues.toArray(new String[newValues.size()]);
+        merged = newValues.toArray(String[]::new);
       } else {
         // Merge values into single String[]
         merged = new String[newValues.size() + oldValues.length];

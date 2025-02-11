@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 ao-taglib - Making JSP be what it should have been all along.
-Copyright (C) 2016, 2017, 2018, 2019, 2020, 2021. 2022, 2023, 2024  AO Industries, Inc.
+Copyright (C) 2016, 2017, 2018, 2019, 2020, 2021. 2022, 2023, 2024, 2025  AO Industries, Inc.
     support@aoindustries.com
     7262 Bull Pen Cir
     Mobile, AL 36695
@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
     shortTitle="Changelog"
     tocLevels="1"
     datePublished="2016-10-29T22:02:09-05:00"
-    dateModified="2024-09-18T19:33:13Z"
+    dateModified="2025-02-11T06:06:22Z"
   >
     <c:set var="latestRelease" value="8.0.1" />
     <c:if test="${
@@ -82,6 +82,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
             now processes the href-related attributes immediately instead of deferring to parent.  This allows relative
             hrefs to work correctly: relative to the initial content page, not the template.
           </li>
+          <li>Minimum Java version changed from 1.8 to 11.</li>
         </ul>
       </changelog:release>
     </c:if>

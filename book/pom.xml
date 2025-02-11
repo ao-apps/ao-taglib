@@ -41,9 +41,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
     <documented.artifactId>ao-taglib</documented.artifactId>
     <documented.name>AO Taglib</documented.name>
     <documented.description>Making JSP be what it should have been all along.</documented.description>
-    <!-- Java 1.8 -->
-    <documented.javase.version>1.8</documented.javase.version>
-    <documented.javadoc.link.javase>${javadoc.link.javase.8}</documented.javadoc.link.javase>
+
     <javadoc.breadcrumbs><![CDATA[<a target="${javadoc.target}" href="https://oss.aoapps.com/">AO OSS</a>
 / <a target="${javadoc.target}" href="${project.url}">Taglib</a>]]></javadoc.breadcrumbs>
     <javadoc.taglibReference><![CDATA[
@@ -291,10 +289,10 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
         <groupId>com.aoapps</groupId><artifactId>ao-fluent-html</artifactId><version>0.7.0${POST-SNAPSHOT}</version>
       </dependency>
       <dependency>
-        <groupId>com.aoapps</groupId><artifactId>ao-fluent-html-any</artifactId><version>0.8.0${POST-SNAPSHOT}</version>
+        <groupId>com.aoapps</groupId><artifactId>ao-fluent-html-any</artifactId><version>0.9.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
       </dependency>
       <dependency>
-        <groupId>com.aoapps</groupId><artifactId>ao-fluent-html-servlet</artifactId><version>0.7.0${POST-SNAPSHOT}</version>
+        <groupId>com.aoapps</groupId><artifactId>ao-fluent-html-servlet</artifactId><version>0.8.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
       </dependency>
       <dependency>
         <groupId>com.aoapps</groupId><artifactId>ao-hodgepodge</artifactId><version>5.2.0${POST-SNAPSHOT}</version>
