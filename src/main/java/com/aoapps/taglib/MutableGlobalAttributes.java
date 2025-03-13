@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2020, 2021, 2022, 2023  AO Industries, Inc.
+ * Copyright (C) 2020, 2021, 2022, 2023, 2025  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -93,10 +93,10 @@ public class MutableGlobalAttributes implements GlobalAttributes, Freezable<Glob
    *
    * @see  GlobalBufferedAttributes#setData(java.util.Map)
    */
-  public MutableGlobalAttributes setData(Map<? extends String, ?> data) throws IllegalArgumentException {
+  public MutableGlobalAttributes setData(Map<String, ?> data) throws IllegalArgumentException {
     Map<String, Object> newData = MinimalMap.emptyMap();
     if (data != null) {
-      for (Map.Entry<? extends String, ?> entry : data.entrySet()) {
+      for (Map.Entry<String, ?> entry : data.entrySet()) {
         String attrName = Attributes.validate(entry.getKey(), Data.data::validate);
         Object value = entry.getValue();
         if (value != null) {
@@ -114,10 +114,10 @@ public class MutableGlobalAttributes implements GlobalAttributes, Freezable<Glob
    *
    * @throws  IllegalArgumentException  When {@code attrName} is not {@linkplain Data.data#validate(java.lang.String) valid}
    */
-  public MutableGlobalAttributes addData(Map<? extends String, ?> data) throws IllegalArgumentException {
+  public MutableGlobalAttributes addData(Map<String, ?> data) throws IllegalArgumentException {
     if (data != null) {
       Map<String, Object> newData = this.data;
-      for (Map.Entry<? extends String, ?> entry : data.entrySet()) {
+      for (Map.Entry<String, ?> entry : data.entrySet()) {
         String attrName = Attributes.validate(entry.getKey(), Data.data::validate);
         Object value = entry.getValue();
         newData =
@@ -150,7 +150,7 @@ public class MutableGlobalAttributes implements GlobalAttributes, Freezable<Glob
   /**
    * Removes the data with the provided HTML attribute names.
    */
-  public MutableGlobalAttributes removeData(Iterable<? extends String> attrNames) {
+  public MutableGlobalAttributes removeData(Iterable<String> attrNames) {
     if (attrNames != null) {
       Map<String, Object> newData = this.data;
       // TODO: MinimalMap.removeAll

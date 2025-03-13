@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2020, 2021, 2022, 2023  AO Industries, Inc.
+ * Copyright (C) 2020, 2021, 2022, 2023, 2025  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -70,7 +70,7 @@ public abstract class ElementBufferedTag extends EncodingBufferedTag
   }
 
   @Override
-  public void setData(Map<? extends String, ?> data) {
+  public void setData(Map<String, ?> data) {
     global.setData(data);
   }
 
