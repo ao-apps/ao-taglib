@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2024  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2024, 2025  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -146,16 +146,16 @@ public final class Functions {
     // Make lib relative to the current page
     String absLib = HttpServletUtil.getAbsolutePath(request, lib);
     String resourceName;
-      {
-        StringBuilder sb = new StringBuilder();
-        sb.append(absLib);
-        int len = sb.length();
-        if (len == 0 || sb.charAt(len - 1) != '/') {
-          sb.append('/');
-        }
-        sb.append("META-INF/maven/").append(groupId).append('/').append(artifactId).append("/pom.properties");
-        resourceName = sb.toString();
+    {
+      StringBuilder sb = new StringBuilder();
+      sb.append(absLib);
+      int len = sb.length();
+      if (len == 0 || sb.charAt(len - 1) != '/') {
+        sb.append('/');
       }
+      sb.append("META-INF/maven/").append(groupId).append('/').append(artifactId).append("/pom.properties");
+      resourceName = sb.toString();
+    }
     // Find the current resource modified time
     long lastModified = ServletContextCache.getLastModified(servletContext, resourceName);
     if (logger.isLoggable(Level.FINER)) {
