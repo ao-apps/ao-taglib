@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2023, 2025  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -170,7 +170,7 @@ public class WriteTag extends EncodingNullTag
                   || (
                   bean instanceof Writable
                       && !((Writable) bean).isFastToString()
-              )
+                )
                   // Other types that will not be converted to String for bundle lookups
                   || value instanceof char[]
                   || value instanceof Node
@@ -198,7 +198,7 @@ public class WriteTag extends EncodingNullTag
                     || (
                     retVal instanceof Writable
                         && !((Writable) retVal).isFastToString()
-                )
+                  )
                     // Other types that will not be converted to String for bundle lookups
                     || value instanceof char[]
                     || value instanceof Node
