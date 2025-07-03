@@ -25,7 +25,7 @@ Making JSP be what it should have been all along.
 * [Taglib Reference](https://oss.aoapps.com/taglib/ao.tld/)
 * [Taglib Reference (Legacy)](https://oss.aoapps.com/taglib/ao-legacy.tld/)
 * [API Docs](https://oss.aoapps.com/taglib/apidocs/)
-* [Maven Central Repository](https://central.sonatype.com/artifact/com.aoapps/ao-taglib)
+* [Central Repository](https://central.sonatype.com/artifact/com.aoapps/ao-taglib)
 * [GitHub](https://github.com/ao-apps/ao-taglib)
 
 ## Related Projects
