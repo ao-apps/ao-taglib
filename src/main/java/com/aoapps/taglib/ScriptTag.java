@@ -180,13 +180,13 @@ public class ScriptTag extends ElementBufferedTag
             || ParamUtils.addDynamicAttribute(uri, localName, value, expectedPatterns, this);
   }
 
-  //@Override
-  //protected void setMediaEncoderOptions(MediaWriter mediaWriter) {
-  //  if (mediaWriter instanceof JavaScriptInXhtmlWriter) {
-  //    assert src == null;
-  //    ((JavaScriptInXhtmlWriter)mediaWriter).setType(type); // .trim()?
-  //  }
-  //}
+  // @Override
+  // protected void setMediaEncoderOptions(MediaWriter mediaWriter) {
+  //   if (mediaWriter instanceof JavaScriptInXhtmlWriter) {
+  //     assert src == null;
+  //     ((JavaScriptInXhtmlWriter)mediaWriter).setType(type); // .trim()?
+  //   }
+  // }
 
   private void init() {
     mediaType = MediaType.JAVASCRIPT;
