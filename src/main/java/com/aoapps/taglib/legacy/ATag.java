@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
+ * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2023, 2025  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -337,6 +337,27 @@ public class ATag extends ElementBufferedBodyTag
         } else {
           toDecode = URIResolver.getAbsolutePath(Dispatcher.getCurrentPagePath(request), href);
         }
+        // Decode (for display onlyh) "Printable characters in US-ASCII that are not allowed in URIs" that were
+        // previously considered valid and converted within URIDecoder
+        toDecode = toDecode
+            .replace("%3C", "<")
+            .replace("%3c", "<")
+            .replace("%3E", ">")
+            .replace("%3E", ">")
+            .replace("%22", "\"")
+            .replace("%20", " ")
+            .replace("%7B", "{")
+            .replace("%7b", "{")
+            .replace("%7D", "}")
+            .replace("%7d", "}")
+            .replace("%7C", "|")
+            .replace("%7c", "|")
+            .replace("%5C", "\\")
+            .replace("%5c", "\\")
+            .replace("%5E", "^")
+            .replace("%5e", "^")
+            .replace("%60", "`")
+        ;
         // Decode to get a human-readable (but still unambiguous) display
         URIDecoder.decodeURI(toDecode, textInXhtmlEncoder, out);
       }
