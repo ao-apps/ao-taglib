@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
+ * Copyright (C) 2019, 2020, 2021, 2022, 2023, 2025  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -55,7 +55,7 @@ public class AreaTagTEI extends ElementTagTEI {
       );
     } else if (shapeAttr != TagData.REQUEST_TIME_VALUE) {
       String shape = Shape.shape.normalize((String) shapeAttr);
-      if (shape != null) {
+      if (shape == null) {
         messages.add(
             new ValidationMessage(
                 data.getId(),
