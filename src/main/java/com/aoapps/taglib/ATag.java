@@ -317,29 +317,8 @@ public class ATag extends ElementBufferedTag
         } else {
           toDecode = URIResolver.getAbsolutePath(Dispatcher.getCurrentPagePath(request), href);
         }
-        // Decode (for display onlyh) "Printable characters in US-ASCII that are not allowed in URIs" that were
-        // previously considered valid and converted within URIDecoder
-        toDecode = toDecode
-            .replace("%3C", "<")
-            .replace("%3c", "<")
-            .replace("%3E", ">")
-            .replace("%3E", ">")
-            .replace("%22", "\"")
-            .replace("%20", " ")
-            .replace("%7B", "{")
-            .replace("%7b", "{")
-            .replace("%7D", "}")
-            .replace("%7d", "}")
-            .replace("%7C", "|")
-            .replace("%7c", "|")
-            .replace("%5C", "\\")
-            .replace("%5c", "\\")
-            .replace("%5E", "^")
-            .replace("%5e", "^")
-            .replace("%60", "`")
-        ;
-        // Decode to get a human-readable (but still unambiguous) display
-        URIDecoder.decodeURI(toDecode, textInXhtmlEncoder, out);
+        // Decode to get a human-readable (but possibly ambiguous) display
+        URIDecoder.decodeURIComponent(toDecode, textInXhtmlEncoder, out);
       }
     } else {
       MarkupCoercion.write(
