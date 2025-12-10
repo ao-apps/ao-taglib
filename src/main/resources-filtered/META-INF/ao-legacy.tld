@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 ao-taglib - Making JSP be what it should have been all along.
-Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024  AO Industries, Inc.
+Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025  AO Industries, Inc.
     support@aoindustries.com
     7262 Bull Pen Cir
     Mobile, AL 36695
@@ -343,7 +343,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
   <!-- TODO: Implement validator(s), such as ao:when directly inside ao:choose and similar -->
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2024-09-12T21:07:22Z" -->
+    <!-- dateModified="2025-12-10T09:41:50Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Renders an <a href="https://www.w3schools.com/tags/tag_a.asp">&lt;a&gt;</a> tag.
@@ -353,7 +353,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
       </p>
       <p>
         If the body is empty after being trimmed, then href itself will be written as the body,
-        represented in <a href="https://datatracker.ietf.org/doc/html/rfc3987">RFC 3987: IRI</a> Unicode format.
+        decoded into in a human-readable (but possibly ambiguous) format.
         If the href has a scheme of <code>mailto:</code>, <code>telnet:</code>, or <code>tel:</code>,
         the scheme is stripped and the remainder of the href is displayed.
       </p>
