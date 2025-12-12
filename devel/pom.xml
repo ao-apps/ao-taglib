@@ -37,6 +37,8 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
     <project.build.outputTimestamp>${git.commit.time}</project.build.outputTimestamp>
     <subproject.subpath>devel/</subproject.subpath>
     <module.name>com.aoapps.taglib.devel</module.name>
+    <!-- SonarQube -->
+    <sonar.projectKey>${project.groupId}:${project.artifactId}:javaee</sonar.projectKey>
   </properties>
 
   <name>AO Taglib Devel</name>
