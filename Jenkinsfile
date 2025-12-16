@@ -36,19 +36,19 @@ def upstreamProjects = [
   // Direct
   'collections', // <groupId>com.aoapps</groupId><artifactId>ao-collections</artifactId>
   'encoding', // <groupId>com.aoapps</groupId><artifactId>ao-encoding</artifactId>
-  'encoding-servlet', // <groupId>com.aoapps</groupId><artifactId>ao-encoding-servlet</artifactId>
-  'encoding-taglib', // <groupId>com.aoapps</groupId><artifactId>ao-encoding-taglib</artifactId>
+  'encoding-servlet-javaee', // <groupId>com.aoapps</groupId><artifactId>ao-encoding-servlet</artifactId>
+  'encoding-taglib-javaee', // <groupId>com.aoapps</groupId><artifactId>ao-encoding-taglib</artifactId>
   'fluent-html-any', // <groupId>com.aoapps</groupId><artifactId>ao-fluent-html-any</artifactId>
-  'fluent-html-servlet', // <groupId>com.aoapps</groupId><artifactId>ao-fluent-html-servlet</artifactId>
+  'fluent-html-servlet-javaee', // <groupId>com.aoapps</groupId><artifactId>ao-fluent-html-servlet</artifactId>
   'hodgepodge', // <groupId>com.aoapps</groupId><artifactId>ao-hodgepodge</artifactId>
   'io-buffer', // <groupId>com.aoapps</groupId><artifactId>ao-io-buffer</artifactId>
   'lang', // <groupId>com.aoapps</groupId><artifactId>ao-lang</artifactId>
   'net-types', // <groupId>com.aoapps</groupId><artifactId>ao-net-types</artifactId>
-  'servlet-filter', // <groupId>com.aoapps</groupId><artifactId>ao-servlet-filter</artifactId>
-  'servlet-last-modified', // <groupId>com.aoapps</groupId><artifactId>ao-servlet-last-modified</artifactId>
-  'servlet-util', // <groupId>com.aoapps</groupId><artifactId>ao-servlet-util</artifactId>
+  'servlet-filter-javaee', // <groupId>com.aoapps</groupId><artifactId>ao-servlet-filter</artifactId>
+  'servlet-last-modified-javaee', // <groupId>com.aoapps</groupId><artifactId>ao-servlet-last-modified</artifactId>
+  'servlet-util-javaee', // <groupId>com.aoapps</groupId><artifactId>ao-servlet-util</artifactId>
   'web-resources/registry', // <groupId>com.aoapps</groupId><artifactId>ao-web-resources-registry</artifactId>
-  'web-resources/servlet', // <groupId>com.aoapps</groupId><artifactId>ao-web-resources-servlet</artifactId>
+  'web-resources/servlet-javaee', // <groupId>com.aoapps</groupId><artifactId>ao-web-resources-servlet</artifactId>
   // No Jenkins: <groupId>commons-beanutils</groupId><artifactId>commons-beanutils</artifactId>
   // No Jenkins: <groupId>org.apache.commons</groupId><artifactId>commons-lang3</artifactId>
   // No Jenkins: <groupId>javax.el</groupId><artifactId>javax.el-api</artifactId>

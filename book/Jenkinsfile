@@ -34,12 +34,12 @@ def upstreamProjects = [
   'checkstyle-config', // <groupId>com.aoapps</groupId><artifactId>ao-checkstyle-config</artifactId>
 
   // Plugins
-  'taglib', // <groupId>com.aoapps</groupId><artifactId>ao-taglib</artifactId>
+  'taglib-javaee', // <groupId>com.aoapps</groupId><artifactId>ao-taglib</artifactId>
 
   // Direct
   'badges-1.x', // <groupId>com.aoapps</groupId><artifactId>ao-badges</artifactId>
   'lang', // <groupId>com.aoapps</groupId><artifactId>ao-lang</artifactId>
-  'taglib', // <groupId>com.aoapps</groupId><artifactId>ao-taglib</artifactId>
+  'taglib-javaee', // <groupId>com.aoapps</groupId><artifactId>ao-taglib</artifactId>
   // No Jenkins: <groupId>javax.servlet</groupId><artifactId>javax.servlet-api</artifactId>
   '../semanticcms-1.x/changelog-taglib', // <groupId>com.semanticcms</groupId><artifactId>semanticcms-changelog-taglib</artifactId>
   '../semanticcms-1.x/core/taglib', // <groupId>com.semanticcms</groupId><artifactId>semanticcms-core-taglib</artifactId>
@@ -49,7 +49,7 @@ def upstreamProjects = [
 
   // Runtime Direct
   'mime-mappings', // <groupId>com.aoapps</groupId><artifactId>ao-mime-mappings</artifactId>
-  'style', // <groupId>com.aoapps</groupId><artifactId>ao-style</artifactId>
+  'style-javaee', // <groupId>com.aoapps</groupId><artifactId>ao-style</artifactId>
   // No Jenkins: <groupId>org.apache.taglibs</groupId><artifactId>taglibs-standard-impl</artifactId>
 
   // BOM
