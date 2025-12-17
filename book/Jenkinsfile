@@ -41,10 +41,10 @@ def upstreamProjects = [
   'lang', // <groupId>com.aoapps</groupId><artifactId>ao-lang</artifactId>
   'taglib', // <groupId>com.aoapps</groupId><artifactId>ao-taglib</artifactId>
   // No Jenkins: <groupId>javax.servlet</groupId><artifactId>javax.servlet-api</artifactId>
-  '../semanticcms-1.x/changelog-taglib', // <groupId>com.semanticcms</groupId><artifactId>semanticcms-changelog-taglib</artifactId>
-  '../semanticcms-1.x/core/taglib', // <groupId>com.semanticcms</groupId><artifactId>semanticcms-core-taglib</artifactId>
-  '../semanticcms-1.x/section/taglib', // <groupId>com.semanticcms</groupId><artifactId>semanticcms-section-taglib</artifactId>
-  '../semanticcms-1.x/tag-reference', // <groupId>com.semanticcms</groupId><artifactId>semanticcms-tag-reference</artifactId>
+  '../semanticcms-2.x/changelog-taglib', // <groupId>com.semanticcms</groupId><artifactId>semanticcms-changelog-taglib</artifactId>
+  '../semanticcms-2.x/core/taglib', // <groupId>com.semanticcms</groupId><artifactId>semanticcms-core-taglib</artifactId>
+  '../semanticcms-2.x/section/taglib', // <groupId>com.semanticcms</groupId><artifactId>semanticcms-section-taglib</artifactId>
+  '../semanticcms-2.x/tag-reference', // <groupId>com.semanticcms</groupId><artifactId>semanticcms-tag-reference</artifactId>
   // No Jenkins: <groupId>org.apache.taglibs</groupId><artifactId>taglibs-standard-spec</artifactId>
 
   // Runtime Direct
