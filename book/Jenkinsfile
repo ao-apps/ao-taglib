@@ -37,7 +37,7 @@ def upstreamProjects = [
   'taglib', // <groupId>com.aoapps</groupId><artifactId>ao-taglib</artifactId>
 
   // Direct
-  'badges-1.x', // <groupId>com.aoapps</groupId><artifactId>ao-badges</artifactId>
+  'badges', // <groupId>com.aoapps</groupId><artifactId>ao-badges</artifactId>
   'lang', // <groupId>com.aoapps</groupId><artifactId>ao-lang</artifactId>
   'taglib', // <groupId>com.aoapps</groupId><artifactId>ao-taglib</artifactId>
   // No Jenkins: <groupId>javax.servlet</groupId><artifactId>javax.servlet-api</artifactId>
