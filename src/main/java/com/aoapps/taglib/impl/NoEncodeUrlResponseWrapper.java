@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2021, 2022, 2025, 2026  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -23,8 +23,8 @@
 
 package com.aoapps.taglib.impl;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpServletResponseWrapper;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponseWrapper;
 
 /**
  * Does not encode URL, since that will be done automatically and selectively by tag context.
@@ -42,15 +42,6 @@ public class NoEncodeUrlResponseWrapper extends HttpServletResponseWrapper {
    */
   @Override
   public String encodeURL(String url) {
-    return url;
-  }
-
-  /**
-   * Do not encode URL, since that will be done automatically and selectively by tag context.
-   */
-  @Override
-  @Deprecated
-  public String encodeUrl(String url) {
     return url;
   }
 }

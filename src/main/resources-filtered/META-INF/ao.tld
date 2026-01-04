@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 ao-taglib - Making JSP be what it should have been all along.
-Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025  AO Industries, Inc.
+Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026  AO Industries, Inc.
     support@aoindustries.com
     7262 Bull Pen Cir
     Mobile, AL 36695
@@ -27,7 +27,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
 <!ENTITY tld "ao.tld">
 <!ENTITY tld_displayName "@{project.name}">
 <!ENTITY tld_uri "@{project.url}">
-<!ENTITY tld_description "&lt;em&gt;This is the scriptless implementation based on &lt;a rel=&quot;nofollow&quot; href=&quot;@{javadoc.link.javaee}javax/servlet/jsp/tagext/SimpleTagSupport.html&quot;&gt;javax.servlet.jsp.tagext.SimpleTagSupport&lt;/a&gt;.&lt;/em&gt;
+<!ENTITY tld_description "&lt;em&gt;This is the scriptless implementation based on &lt;a rel=&quot;nofollow&quot; href=&quot;@{javadoc.link.javaee}jakarta/servlet/jsp/tagext/SimpleTagSupport.html&quot;&gt;jakarta.servlet.jsp.tagext.SimpleTagSupport&lt;/a&gt;.&lt;/em&gt;
 For compatibility with legacy applications that use JSP scriptlets, please use &lt;a rel=&quot;nofollow&quot; href=&quot;@{project.url}ao-legacy.tld/&quot;&gt;@{project.name} Reference (Legacy)&lt;/a&gt;.">
 <!ENTITY package "com.aoapps.taglib">
 <!ENTITY JSP "scriptless">
@@ -298,12 +298,13 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
     </attribute>">
 
 ]>
-<taglib xmlns="http://java.sun.com/xml/ns/javaee"
+<taglib xmlns="https://jakarta.ee/xml/ns/jakartaee"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
-  version="2.1">
+  xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
+                      https://jakarta.ee/xml/ns/jakartaee/web-jsptaglibrary_3_1.xsd"
+  version="3.1">
   <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-  <!-- dateModified="2021-09-09T01:33:34-05:00" -->
+  <!-- dateModified="2025-12-30T13:42:11Z" -->
 <!-- </common> -->
   <!-- allowRobots="auto" -->
 <!-- <common> -->
@@ -343,7 +344,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   <!-- TODO: Implement validator(s), such as ao:when directly inside ao:choose and similar -->
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2025-12-10T09:41:50Z" -->
+    <!-- dateModified="2025-12-30T13:42:11Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Renders an <a href="https://www.w3schools.com/tags/tag_a.asp">&lt;a&gt;</a> tag.
@@ -411,7 +412,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
         </p>
         <p>
           URL rewriting is performed as needed via
-          <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>.
+          <a rel="nofollow" href="@{javadoc.link.javaee}jakarta/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>.
         </p>
         <p>
           To support paths in different character sets, a Unicode to ASCII URI encoding is performed
@@ -579,7 +580,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2019-10-08T21:41:35-05:00" -->
-    <!-- dateModified="2024-09-12T21:07:22Z" -->
+    <!-- dateModified="2025-12-30T13:42:11Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Renders an <a href="https://www.w3schools.com/tags/tag_area.asp">&lt;area&gt;</a> tag.
@@ -665,7 +666,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
         </p>
         <p>
           URL rewriting is performed as needed via
-          <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>.
+          <a rel="nofollow" href="@{javadoc.link.javaee}jakarta/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>.
         </p>
         <p>
           To support paths in different character sets, a Unicode to ASCII URI encoding is performed
@@ -1166,7 +1167,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2024-09-12T21:07:22Z" -->
+    <!-- dateModified="2025-12-30T13:42:11Z" -->
     <!-- TODO: param.* dynamic attributes should not do automatic multi-parameter.  Make a params.* dynamic attribute for this purpose. -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
@@ -1226,7 +1227,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
         </p>
         <p>
           URL rewriting is performed as needed via
-          <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>.
+          <a rel="nofollow" href="@{javadoc.link.javaee}jakarta/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>.
         </p>
         <p>
           To support paths in different character sets, a Unicode to ASCII URI encoding is performed
@@ -1293,7 +1294,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2024-09-12T21:07:22Z" -->
+    <!-- dateModified="2025-12-30T13:42:11Z" -->
     <description><![CDATA[
       <div class="semanticcms-tag-reference-summary">
         <p>
@@ -1314,7 +1315,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
         </ol>
       </div>
       <p>
-        Does not forward when the <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletResponse.html#isCommitted--">response has already been committed</a>,
+        Does not forward when the <a rel="nofollow" href="@{javadoc.link.javaee}jakarta/servlet/ServletResponse.html#isCommitted--">response has already been committed</a>,
         but also does not throw any exception; logs FINE-level notice instead.
       </p>
       <p>
@@ -1377,7 +1378,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
         </p>
         <p>
           Security Note: page must be a trusted value since it can access any resource available via
-          <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/RequestDispatcher.html">RequestDispatcher</a>.
+          <a rel="nofollow" href="@{javadoc.link.javaee}jakarta/servlet/RequestDispatcher.html">RequestDispatcher</a>.
           It would be incorrect to use a value that can be manipulated by a client in any way.
         </p>
         <p>
@@ -1447,7 +1448,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2023-10-02T00:34:59Z" -->
+    <!-- dateModified="2025-12-30T13:42:11Z" -->
     <description><![CDATA[
       <p>
         Gets a detailed report of a
@@ -1468,7 +1469,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
         <p>
           Specifies the variable scope searched to retrieve the bean specified
           by name. If not specified, the default rules applied by
-          <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/jsp/JspContext.html#findAttribute%28java.lang.String%29">JspContext.findAttribute()</a>
+          <a rel="nofollow" href="@{javadoc.link.javaee}jakarta/servlet/jsp/JspContext.html#findAttribute%28java.lang.String%29">JspContext.findAttribute()</a>
           are applied.
         </p>
       ]]></description>
@@ -1537,7 +1538,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2023-10-02T00:34:59Z" -->
+    <!-- dateModified="2025-12-30T13:42:11Z" -->
     <description><![CDATA[
       <ol>
         <li>Clears the current output buffer (leaving status code and headers)</li>
@@ -1574,7 +1575,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
         <ol>
           <li>Use the serialization active on the current request.</li>
           <li>
-            Use the application <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</a>
+            Use the application <a rel="nofollow" href="@{javadoc.link.javaee}jakarta/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</a>
             <code>com.aoapps.encoding.Serialization.default</code>
             that allows an application to control the selection of HTML versus XHTML.
           </li>
@@ -1607,7 +1608,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
         <ol>
           <li>Use the doctype active on the current request.</li>
           <li>
-            Use the application <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</a>
+            Use the application <a rel="nofollow" href="@{javadoc.link.javaee}jakarta/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</a>
             <code>com.aoapps.encoding.Doctype.default</code>
             that allows an application to control the default doctype.
           </li>
@@ -1633,7 +1634,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
         <ol>
           <li>Use the autonli setting active on the current request.</li>
           <li>
-            Use the application <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</a>
+            Use the application <a rel="nofollow" href="@{javadoc.link.javaee}jakarta/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</a>
             <code>com.aoapps.html.servlet.DocumentEE.autonli</code>
             that allows an application to control the default autonli setting.
           </li>
@@ -1658,7 +1659,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
         <ol>
           <li>Use the indent setting active on the current request.</li>
           <li>
-            Use the application <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</a>
+            Use the application <a rel="nofollow" href="@{javadoc.link.javaee}jakarta/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</a>
             <code>com.aoapps.html.servlet.DocumentEE.indent</code>
             that allows an application to control the default indent setting.
           </li>
@@ -1721,7 +1722,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2024-09-12T21:07:22Z" -->
+    <!-- dateModified="2025-12-30T13:42:11Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Renders an <a href="https://www.w3schools.com/tags/tag_iframe.asp">&lt;iframe&gt;</a> tag.
@@ -1797,7 +1798,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
         </p>
         <p>
           URL rewriting is performed as needed via
-          <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>.
+          <a rel="nofollow" href="@{javadoc.link.javaee}jakarta/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>.
         </p>
         <p>
           To support paths in different character sets, a Unicode to ASCII URI encoding is performed
@@ -1908,7 +1909,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2024-09-12T21:07:22Z" -->
+    <!-- dateModified="2025-12-30T13:42:11Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Renders an <a href="https://www.w3schools.com/tags/tag_img.asp">&lt;img&gt;</a> tag.
@@ -1982,7 +1983,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
         </p>
         <p>
           URL rewriting is performed as needed via
-          <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>.
+          <a rel="nofollow" href="@{javadoc.link.javaee}jakarta/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>.
         </p>
         <p>
           To support paths in different character sets, a Unicode to ASCII URI encoding is performed
@@ -2136,7 +2137,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2024-09-14T19:15:38Z" -->
+    <!-- dateModified="2025-12-30T13:42:11Z" -->
     <description><![CDATA[
       <div class="semanticcms-tag-reference-summary">
         <p>
@@ -2223,7 +2224,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
         </p>
         <p>
           Security Note: page must be a trusted value since it can access any resource available via
-          <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/RequestDispatcher.html">RequestDispatcher</a>.
+          <a rel="nofollow" href="@{javadoc.link.javaee}jakarta/servlet/RequestDispatcher.html">RequestDispatcher</a>.
           It would be incorrect to use a value that can be manipulated by a client in any way.
         </p>
       ]]></description>
@@ -2274,7 +2275,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2024-09-12T21:07:22Z" -->
+    <!-- dateModified="2025-12-30T13:42:11Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Renders an <a href="https://www.w3schools.com/tags/tag_input.asp">&lt;input&gt;</a> tag.
@@ -2481,7 +2482,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
         </p>
         <p>
           URL rewriting is performed as needed via
-          <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>.
+          <a rel="nofollow" href="@{javadoc.link.javaee}jakarta/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>.
         </p>
         <p>
           To support paths in different character sets, a Unicode to ASCII URI encoding is performed
@@ -2627,7 +2628,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2024-09-14T01:35:44Z" -->
+    <!-- dateModified="2025-12-30T13:42:11Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         If contained within any
@@ -2714,7 +2715,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
         </p>
         <p>
           URL rewriting is performed as needed via
-          <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>.
+          <a rel="nofollow" href="@{javadoc.link.javaee}jakarta/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>.
         </p>
         <p>
           To support paths in different character sets, a Unicode to ASCII URI encoding is performed
@@ -3720,7 +3721,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2024-09-12T21:07:22Z" -->
+    <!-- dateModified="2025-12-30T13:42:11Z" -->
     <description><![CDATA[
       <div class="semanticcms-tag-reference-summary">
         <p>
@@ -3728,7 +3729,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
           Stops processing of the containing JSP page.
         </p>
         <p>
-          Does not send redirect when the <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletResponse.html#isCommitted--">response has already been committed</a>,
+          Does not send redirect when the <a rel="nofollow" href="@{javadoc.link.javaee}jakarta/servlet/ServletResponse.html#isCommitted--">response has already been committed</a>,
           but also does not throw any exception; logs FINE-level notice instead.
         </p>
         <p>
@@ -3831,7 +3832,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
         </p>
         <p>
           URL rewriting is performed as needed via
-          <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>.
+          <a rel="nofollow" href="@{javadoc.link.javaee}jakarta/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>.
         </p>
         <p>
           To support paths in different character sets, a Unicode to ASCII URI encoding is performed
@@ -3915,7 +3916,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
         </p>
         <p>
           Security Note: page must be a trusted value since it can access any resource available via
-          <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/RequestDispatcher.html">RequestDispatcher</a>.
+          <a rel="nofollow" href="@{javadoc.link.javaee}jakarta/servlet/RequestDispatcher.html">RequestDispatcher</a>.
           It would be incorrect to use a value that can be manipulated by a client in any way.
         </p>
         <p>
@@ -3964,7 +3965,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2024-09-12T21:07:22Z" -->
+    <!-- dateModified="2025-12-30T13:42:11Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Manually establishes a <a href="https://www.w3schools.com/tags/tag_script.asp">script context</a> when automatic detection is not possible.
@@ -4062,7 +4063,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
         </p>
         <p>
           URL rewriting is performed as needed via
-          <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>.
+          <a rel="nofollow" href="@{javadoc.link.javaee}jakarta/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>.
         </p>
         <p>
           To support paths in different character sets, a Unicode to ASCII URI encoding is performed
@@ -4237,7 +4238,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2023-03-14T11:36:35Z" -->
+    <!-- dateModified="2025-12-30T13:42:11Z" -->
     <description><![CDATA[
       <p>
         Returns an error status.
@@ -4245,7 +4246,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
         Results in error handler processing.
       </p>
       <p>
-        Does not send error when the <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletResponse.html#isCommitted--">response has already been committed</a>,
+        Does not send error when the <a rel="nofollow" href="@{javadoc.link.javaee}jakarta/servlet/ServletResponse.html#isCommitted--">response has already been committed</a>,
         but also does not throw any exception; logs FINE-level notice instead.
       </p>
       <p>
@@ -4257,7 +4258,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
         instead of
         <a rel="nofollow" href="https://docs.oracle.com/cd/A87860_01/doc/java.817/a83726/genlovw3.htm#1008181">&lt;jsp:include&gt;</a>
         to support
-        <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#sendError(int)">sendError</a>
+        <a rel="nofollow" href="@{javadoc.link.javaee}jakarta/servlet/http/HttpServletResponse.html#sendError(int)">sendError</a>
         inside of includes.
       </p>
     ]]></description>
@@ -4268,7 +4269,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       <description><![CDATA[
         <p>
           The status code for
-          <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#sendError(int)">response.sendError</a>.
+          <a rel="nofollow" href="@{javadoc.link.javaee}jakarta/servlet/http/HttpServletResponse.html#sendError(int)">response.sendError</a>.
         </p>
       ]]></description>
       <name>status</name>
@@ -4531,7 +4532,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2024-09-12T21:07:22Z" -->
+    <!-- dateModified="2025-12-30T13:42:11Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Manually establishes a URL context when automatic detection is not possible.
@@ -4566,7 +4567,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
       </p>
       <p>
         Depending on context, the URL will be passed through
-        <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>
+        <a rel="nofollow" href="@{javadoc.link.javaee}jakarta/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>
         to add any URL-based session state.  Session state will never be added to external links.
       </p>
       <p>
@@ -4743,7 +4744,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2023-10-02T00:34:59Z" -->
+    <!-- dateModified="2025-12-30T13:42:11Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Writes the bean contents.  Supports data types beyond
@@ -4794,7 +4795,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
         <p>
           Specifies the variable scope searched to retrieve the bean specified
           by name. If not specified, the default rules applied by
-          <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/jsp/JspContext.html#findAttribute%28java.lang.String%29">JspContext.findAttribute()</a>
+          <a rel="nofollow" href="@{javadoc.link.javaee}jakarta/servlet/jsp/JspContext.html#findAttribute%28java.lang.String%29">JspContext.findAttribute()</a>
           are applied.
         </p>
       ]]></description>
@@ -4961,14 +4962,14 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </function>
   <function>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2021-06-16T12:55:45-05:00" -->
+    <!-- dateModified="2025-12-30T13:42:11Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Rewrites a URL to maintain session state or otherwise alter the URL mapping.
       </p>
       <p>
         <a href="https://oss.aoapps.com/net-types/apidocs/com.aoapps.net.types/com/aoapps/net/URIEncoder.html#encodeURI(java.lang.String)">Encodes the URI to ASCII format</a>
-        then passes through <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>.
+        then passes through <a rel="nofollow" href="@{javadoc.link.javaee}jakarta/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">HttpServletResponse.encodeURL</a>.
       </p>
       <p>
         Encodes characters in the <a href="https://www.w3.org/TR/html40/appendix/notes.html#non-ascii-chars">recommended <code>UTF-8</code> encoding</a>.
@@ -4997,7 +4998,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </function>
   <function>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2021-06-03T22:53:21-05:00" -->
+    <!-- dateModified="2025-12-30T13:42:11Z" -->
     <description><![CDATA[
       <p>
         Gets an absolute URL for the given path.  This includes
@@ -5008,7 +5009,7 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
         <a href="@{project.url}]]>&tld;<![CDATA[/function-getAbsolutePath">${ao:getAbsolutePath()}</a>.
       </p>
       <p>
-        No <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">URL rewriting</a> is performed.
+        No <a rel="nofollow" href="@{javadoc.link.javaee}jakarta/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)">URL rewriting</a> is performed.
         Please additionally use <a href="@{project.url}]]>&tld;<![CDATA[/function-encodeURL">${ao:encodeURL()}</a>, as-needed.
       </p>
     ]]></description>
@@ -5096,10 +5097,10 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </function>
   <function>
     <!-- datePublished="2020-12-03T20:49:12-06:00" -->
-    <!-- dateModified="2021-06-16T12:55:45-05:00" -->
+    <!-- dateModified="2025-12-30T13:42:11Z" -->
     <description><![CDATA[
       <p>
-        Determines if <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletResponse.html#getLocale()">the response locale</a>
+        Determines if <a rel="nofollow" href="@{javadoc.link.javaee}jakarta/servlet/ServletResponse.html#getLocale()">the response locale</a>
         is <a href="https://oss.aoapps.com/lang/apidocs/com.aoapps.lang/com/aoapps/lang/i18n/Locales.html#isRightToLeft(java.util.Locale)">a right-to-left language</a>.
       </p>
     ]]></description>
@@ -5194,14 +5195,14 @@ For compatibility with legacy applications that use JSP scriptlets, please use &
   </function>
   <function>
     <!-- datePublished="2020-06-16T10:46:34-05:00" -->
-    <!-- dateModified="2024-09-14T14:56:11Z" -->
+    <!-- dateModified="2025-12-30T13:42:11Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Checks if a resource exists in the web application.
       </p>
       <p>
         The path must begin with a slash (/), since it is passed unaltered to
-        <a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletContext.html#getResource(java.lang.String)">ServletContext.getResource(…)</a>
+        <a rel="nofollow" href="@{javadoc.link.javaee}jakarta/servlet/ServletContext.html#getResource(java.lang.String)">ServletContext.getResource(…)</a>
       </p>
       <p>
         This is useful to dynamically determine if a JSP page exists before

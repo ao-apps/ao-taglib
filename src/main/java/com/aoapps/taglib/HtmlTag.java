@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2011, 2012, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2023, 2024  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -40,17 +40,17 @@ import com.aoapps.servlet.ServletUtil;
 import com.aoapps.servlet.attribute.ScopeEE;
 import com.aoapps.web.resources.registry.Registry;
 import com.aoapps.web.resources.servlet.RegistryEE;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.jsp.JspException;
+import jakarta.servlet.jsp.JspTagException;
+import jakarta.servlet.jsp.PageContext;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.JspTagException;
-import javax.servlet.jsp.PageContext;
 
 /**
  * TODO: Support both filtered and buffered modes, defaulting to filtered
@@ -311,7 +311,7 @@ public class HtmlTag extends ElementFilteredTag {
                 public void doFinally() {
                   try {
                     try {
-                      javax.servlet.ServletRequest request = pageContext.getRequest();
+                      jakarta.servlet.ServletRequest request = pageContext.getRequest();
               /**/
               /* SimpleTag only: */
             } finally {
@@ -421,7 +421,7 @@ public class HtmlTag extends ElementFilteredTag {
   }
 
   /**
-   * @deprecated  Please use {@link #beginHtmlTag(javax.servlet.ServletResponse, java.lang.Appendable, com.aoapps.encoding.Serialization, com.aoapps.taglib.GlobalAttributes)}
+   * @deprecated  Please use {@link #beginHtmlTag(jakarta.servlet.ServletResponse, java.lang.Appendable, com.aoapps.encoding.Serialization, com.aoapps.taglib.GlobalAttributes)}
    */
   @Deprecated
   public static void beginHtmlTag(ServletResponse response, Appendable out, Serialization serialization, String clazz) throws IOException {

@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2024, 2025  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2024, 2025, 2026  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -41,6 +41,9 @@ import com.aoapps.servlet.http.HttpServletUtil;
 import com.aoapps.servlet.jsp.LocalizedJspTagException;
 import com.aoapps.servlet.lastmodified.AddLastModified;
 import com.aoapps.servlet.lastmodified.LastModifiedServlet;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.jsp.JspTagException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -51,9 +54,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.jsp.JspTagException;
 
 /**
  * Tag library function implementations.
@@ -70,7 +70,7 @@ public final class Functions {
   /**
    * Gets the lastModified or {@code 0} when not known.
    *
-   * @see  LastModifiedServlet#getLastModified(javax.servlet.ServletContext, javax.servlet.http.HttpServletRequest, java.lang.String)
+   * @see  LastModifiedServlet#getLastModified(jakarta.servlet.ServletContext, jakarta.servlet.http.HttpServletRequest, java.lang.String)
    */
   public static long getLastModified(String url) throws MalformedURLException, URISyntaxException {
     HttpServletRequest request = getRequest();
@@ -107,14 +107,14 @@ public final class Functions {
   }
 
   /**
-   * @see  HttpServletUtil#getAbsolutePath(javax.servlet.http.HttpServletRequest, java.lang.String)
+   * @see  HttpServletUtil#getAbsolutePath(jakarta.servlet.http.HttpServletRequest, java.lang.String)
    */
   public static String getAbsolutePath(String relPath) throws MalformedURLException {
     return HttpServletUtil.getAbsolutePath(getRequest(), relPath);
   }
 
   /**
-   * @see  HttpServletUtil#getAbsoluteURL(javax.servlet.http.HttpServletRequest, java.lang.String)
+   * @see  HttpServletUtil#getAbsoluteURL(jakarta.servlet.http.HttpServletRequest, java.lang.String)
    */
   public static String getAbsoluteURL(String relPath) {
     return HttpServletUtil.getAbsoluteURL(getRequest(), relPath);
@@ -242,7 +242,7 @@ public final class Functions {
   }
 
   /**
-   * @see DispatchTag#isForwarded(javax.servlet.ServletRequest)
+   * @see DispatchTag#isForwarded(jakarta.servlet.ServletRequest)
    */
   @SuppressWarnings("deprecation")
   public static boolean isForwarded() {

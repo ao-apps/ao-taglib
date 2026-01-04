@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2020, 2021, 2022, 2023  AO Industries, Inc.
+ * Copyright (C) 2020, 2021, 2022, 2023, 2025, 2026  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -31,12 +31,12 @@ import com.aoapps.hodgepodge.i18n.MarkupType;
 import com.aoapps.html.any.attributes.text.Data;
 import com.aoapps.lang.Coercion;
 import com.aoapps.lang.Throwables;
+import jakarta.servlet.jsp.JspTagException;
+import jakarta.servlet.jsp.tagext.DynamicAttributes;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
 import java.util.Map;
-import javax.servlet.jsp.JspTagException;
-import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
  * Utilities for working with {@linkplain com.aoapps.html.any.GlobalAttributes global attributes}.

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 ao-taglib - Making JSP be what it should have been all along.
-Copyright (C) 2016, 2017, 2018, 2019, 2020, 2021. 2022, 2023, 2024, 2025  AO Industries, Inc.
+Copyright (C) 2016, 2017, 2018, 2019, 2020, 2021. 2022, 2023, 2024, 2025, 2026  AO Industries, Inc.
     support@aoindustries.com
     7262 Bull Pen Cir
     Mobile, AL 36695
@@ -23,10 +23,10 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
 -->
 <jsp:root
   xmlns:ao="https://oss.aoapps.com/taglib/"
-  xmlns:c="http://java.sun.com/jsp/jstl/core"
+  xmlns:c="jakarta.tags.core"
   xmlns:changelog="https://semanticcms.com/changelog/taglib/"
   xmlns:core="https://semanticcms.com/core/taglib/"
-  xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+  xmlns:fn="jakarta.tags.functions"
   xmlns:jsp="http://java.sun.com/JSP/Page"
   version="2.1"
 >
@@ -37,7 +37,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
     shortTitle="Changelog"
     tocLevels="1"
     datePublished="2016-10-29T22:02:09-05:00"
-    dateModified="2025-07-02T23:05:45Z"
+    dateModified="2025-12-30T13:42:11Z"
   >
     <c:set var="latestRelease" value="8.0.1" />
     <c:if test="${
@@ -60,6 +60,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
           <li>Support autofocus and required attributes (textarea, input, ...)</li>
           <li>Support other nice HTML 5 features of textarea/input)</li>
           -->
+          <li>Updated to <ao:a href="https://jakarta.ee/specifications/webprofile/10/">Jakarta EE Web Profile 10</ao:a> (Servlet 6.0, JSP 3.1, EL 5.0, and JSTL 3.0).</li>
           <li>Added <code>onclick</code> attribute to <core:link page="ao.tld/tag-img"><![CDATA[&lt;ao:img /&gt;]]></core:link>.</li>
           <li>
             When parameter values are an <code>Enum</code>, the parameter value is obtained from <code>Enum.name()</code> instead of
@@ -127,17 +128,17 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
         <li>
           Log FINE-level notice when <core:link page="ao.tld/tag-forward"><![CDATA[&lt;ao:forward /&gt;]]></core:link>
           does not forward due to the
-          <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletResponse.html#isCommitted--">response already being committed</ao:a>.
+          <ao:a rel="nofollow" href="@{javadoc.link.javaee.7}javax/servlet/ServletResponse.html#isCommitted--">response already being committed</ao:a>.
         </li>
         <li>
           Log FINE-level notice when <core:link page="ao.tld/tag-redirect"><![CDATA[&lt;ao:redirect /&gt;]]></core:link>
           does not send redirect due to the
-          <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletResponse.html#isCommitted--">response already being committed</ao:a>.
+          <ao:a rel="nofollow" href="@{javadoc.link.javaee.7}javax/servlet/ServletResponse.html#isCommitted--">response already being committed</ao:a>.
         </li>
         <li>
           Log FINE-level notice when <core:link page="ao.tld/tag-sendError"><![CDATA[&lt;ao:sendError /&gt;]]></core:link>
           does not send error due to the
-          <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletResponse.html#isCommitted--">response already being committed</ao:a>.
+          <ao:a rel="nofollow" href="@{javadoc.link.javaee.7}javax/servlet/ServletResponse.html#isCommitted--">response already being committed</ao:a>.
         </li>
         <li>
           Using normalization methods from <core:link book="/fluent-html/any" page="/index.jspx">underlying implementation</core:link>.
@@ -190,21 +191,21 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
       <ul>
         <li>
           Do not forward from <core:link page="ao.tld/tag-forward"><![CDATA[&lt;ao:forward /&gt;]]></core:link> when the
-          <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletResponse.html#isCommitted--">response has already been committed</ao:a>.
+          <ao:a rel="nofollow" href="@{javadoc.link.javaee.7}javax/servlet/ServletResponse.html#isCommitted--">response has already been committed</ao:a>.
           Page processing is still stopped by
-          <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/jsp/SkipPageException.html">SkipPageException</ao:a>.
+          <ao:a rel="nofollow" href="@{javadoc.link.javaee.7}javax/servlet/jsp/SkipPageException.html">SkipPageException</ao:a>.
         </li>
         <li>
           Do not send redirect from <core:link page="ao.tld/tag-redirect"><![CDATA[&lt;ao:redirect /&gt;]]></core:link> when the
-          <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletResponse.html#isCommitted--">response has already been committed</ao:a>.
+          <ao:a rel="nofollow" href="@{javadoc.link.javaee.7}javax/servlet/ServletResponse.html#isCommitted--">response has already been committed</ao:a>.
           Page processing is still stopped by
-          <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/jsp/SkipPageException.html">SkipPageException</ao:a>.
+          <ao:a rel="nofollow" href="@{javadoc.link.javaee.7}javax/servlet/jsp/SkipPageException.html">SkipPageException</ao:a>.
         </li>
         <li>
           Do not send error from <core:link page="ao.tld/tag-sendError"><![CDATA[&lt;ao:sendError /&gt;]]></core:link> when the
-          <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletResponse.html#isCommitted--">response has already been committed</ao:a>.
+          <ao:a rel="nofollow" href="@{javadoc.link.javaee.7}javax/servlet/ServletResponse.html#isCommitted--">response has already been committed</ao:a>.
           Page processing is still stopped by
-          <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/jsp/SkipPageException.html">SkipPageException</ao:a>.
+          <ao:a rel="nofollow" href="@{javadoc.link.javaee.7}javax/servlet/jsp/SkipPageException.html">SkipPageException</ao:a>.
         </li>
       </ul>
     </changelog:release>
@@ -453,7 +454,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
         </li>
         <li>
           New function <core:link page="ao.tld/function-isRtl" /> that determines if
-          <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletResponse.html#getLocale()">the response locale</ao:a>
+          <ao:a rel="nofollow" href="@{javadoc.link.javaee.7}javax/servlet/ServletResponse.html#getLocale()">the response locale</ao:a>
           is <ao:a href="https://oss.aoapps.com/lang/apidocs/com.aoapps.lang/com/aoapps/lang/i18n/Locales.html#isRightToLeft(java.util.Locale)">a right-to-left language</ao:a>.
         </li>
         <li>
@@ -528,7 +529,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
         <li>Added generics to TLD types and signatures.</li>
         <li>
           Improved platform compatibility by falling back to
-          <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/RequestDispatcher.html#FORWARD_SERVLET_PATH">RequestDispatcher.FORWARD_SERVLET_PATH</ao:a>
+          <ao:a rel="nofollow" href="@{javadoc.link.javaee.7}javax/servlet/RequestDispatcher.html#FORWARD_SERVLET_PATH">RequestDispatcher.FORWARD_SERVLET_PATH</ao:a>
           where appropriate.
         </li>
       </ul>
@@ -578,7 +579,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
           <ol>
             <li>Use the serialization active on the current request.</li>
             <li>
-              Use the application <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</ao:a>
+              Use the application <ao:a rel="nofollow" href="@{javadoc.link.javaee.7}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</ao:a>
               <code>com.aoindustries.encoding.Serialization.default</code>
               that allows an application to control the selection of HTML versus XHTML.
             </li>
@@ -594,7 +595,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
           <ol>
             <li>Use the doctype active on the current request.</li>
             <li>
-              Use the application <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</ao:a>
+              Use the application <ao:a rel="nofollow" href="@{javadoc.link.javaee.7}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">context-param</ao:a>
               <code>com.aoindustries.encoding.Doctype.default</code>
               that allows an application to control the default doctype.
             </li>
@@ -730,7 +731,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
           </ol>
         </li>
         <li>Added relevant links to <ao:a href="https://www.w3schools.com/">w3schools</ao:a> in <core:link page="ao.tld/" />.</li>
-        <li>Attribute settings may now throw <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/jsp/JspTagException.html">JspTagException</ao:a>.</li>
+        <li>Attribute settings may now throw <ao:a rel="nofollow" href="@{javadoc.link.javaee.7}javax/servlet/jsp/JspTagException.html">JspTagException</ao:a>.</li>
         <li>Trimming more attributes, and avoiding writing most attributes when they would be empty.</li>
         <li><core:link page="ao.tld/tag-iframe" /> now writes both <code>id</code> and <code>name</code> attributes for maximum compatibility.</li>
         <li><core:link page="ao.tld/function-getLastModified" /> now properly decodes paths</li>

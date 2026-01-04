@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2025, 2026  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -30,12 +30,12 @@ import com.aoapps.net.URIParameters;
 import com.aoapps.servlet.jsp.LocalizedJspTagException;
 import com.aoapps.servlet.lastmodified.AddLastModified;
 import com.aoapps.servlet.lastmodified.LastModifiedUtil;
+import jakarta.servlet.jsp.JspContext;
+import jakarta.servlet.jsp.JspTagException;
+import jakarta.servlet.jsp.PageContext;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ResourceBundle;
-import javax.servlet.jsp.JspContext;
-import javax.servlet.jsp.JspTagException;
-import javax.servlet.jsp.PageContext;
 
 /**
  * Helper utility for handling URLs.
@@ -56,7 +56,7 @@ public final class UrlUtils {
    * Adds contextPath to URLs that begin with a slash (/).
    * Encodes the URL.
    *
-   * @see #writeHref(javax.servlet.jsp.PageContext, java.lang.Appendable, java.lang.String, com.aoapps.net.URIParameters, com.aoapps.servlet.lastmodified.AddLastModified, boolean, boolean)
+   * @see #writeHref(jakarta.servlet.jsp.PageContext, java.lang.Appendable, java.lang.String, com.aoapps.net.URIParameters, com.aoapps.servlet.lastmodified.AddLastModified, boolean, boolean)
    *
    * @throws JspTagException when parameters provided with null href
    */
@@ -83,7 +83,7 @@ public final class UrlUtils {
    * Adds contextPath to URLs that begin with a slash (/).
    * Encodes the URL.
    *
-   * @see #getHref(javax.servlet.jsp.PageContext, java.lang.String, com.aoapps.net.URIParameters, com.aoapps.servlet.lastmodified.AddLastModified, boolean, boolean)
+   * @see #getHref(jakarta.servlet.jsp.PageContext, java.lang.String, com.aoapps.net.URIParameters, com.aoapps.servlet.lastmodified.AddLastModified, boolean, boolean)
    *
    * @throws JspTagException when parameters provided with null href
    */
@@ -106,7 +106,7 @@ public final class UrlUtils {
   }
 
   /**
-   * @see  #writeHref(javax.servlet.jsp.PageContext, java.lang.Appendable, java.lang.String, com.aoapps.net.URIParameters, com.aoapps.servlet.lastmodified.AddLastModified, boolean, boolean)
+   * @see  #writeHref(jakarta.servlet.jsp.PageContext, java.lang.Appendable, java.lang.String, com.aoapps.net.URIParameters, com.aoapps.servlet.lastmodified.AddLastModified, boolean, boolean)
    */
   // TODO: Still used once converted to ao-fluent-html?
   public static void writeHref(
@@ -134,7 +134,7 @@ public final class UrlUtils {
    * Adds contextPath to URLs that begin with a slash (/).
    * Encodes the URL.
    *
-   * @see #writeSrc(javax.servlet.jsp.PageContext, java.lang.Appendable, java.lang.String, com.aoapps.net.URIParameters, com.aoapps.servlet.lastmodified.AddLastModified, boolean, boolean)
+   * @see #writeSrc(jakarta.servlet.jsp.PageContext, java.lang.Appendable, java.lang.String, com.aoapps.net.URIParameters, com.aoapps.servlet.lastmodified.AddLastModified, boolean, boolean)
    *
    * @throws JspTagException when parameters provided with null src
    */
@@ -161,7 +161,7 @@ public final class UrlUtils {
    * Adds contextPath to URLs that begin with a slash (/).
    * Encodes the URL.
    *
-   * @see #getSrc(javax.servlet.jsp.PageContext, java.lang.String, com.aoapps.net.URIParameters, com.aoapps.servlet.lastmodified.AddLastModified, boolean, boolean)
+   * @see #getSrc(jakarta.servlet.jsp.PageContext, java.lang.String, com.aoapps.net.URIParameters, com.aoapps.servlet.lastmodified.AddLastModified, boolean, boolean)
    *
    * @throws JspTagException when parameters provided with null src
    */
@@ -184,7 +184,7 @@ public final class UrlUtils {
   }
 
   /**
-   * @see  #writeSrc(javax.servlet.jsp.PageContext, java.lang.Appendable, java.lang.String, com.aoapps.net.URIParameters, com.aoapps.servlet.lastmodified.AddLastModified, boolean, boolean)
+   * @see  #writeSrc(jakarta.servlet.jsp.PageContext, java.lang.Appendable, java.lang.String, com.aoapps.net.URIParameters, com.aoapps.servlet.lastmodified.AddLastModified, boolean, boolean)
    */
   // TODO: Still used once converted to ao-fluent-html?
   public static void writeSrc(

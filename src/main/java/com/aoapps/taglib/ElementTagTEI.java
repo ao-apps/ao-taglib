@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2020, 2021, 2022, 2023  AO Industries, Inc.
+ * Copyright (C) 2020, 2021, 2022, 2023, 2025, 2026  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -25,11 +25,11 @@ package com.aoapps.taglib;
 
 import com.aoapps.html.any.attributes.enumeration.Dir;
 import com.aoapps.lang.validation.ValidationResult;
+import jakarta.servlet.jsp.tagext.TagData;
+import jakarta.servlet.jsp.tagext.TagExtraInfo;
+import jakarta.servlet.jsp.tagext.ValidationMessage;
 import java.util.ArrayList;
 import java.util.List;
-import javax.servlet.jsp.tagext.TagData;
-import javax.servlet.jsp.tagext.TagExtraInfo;
-import javax.servlet.jsp.tagext.ValidationMessage;
 
 /**
  * Validates {@linkplain com.aoapps.html.any.GlobalAttributes global attributes}.
@@ -41,9 +41,9 @@ public class ElementTagTEI extends TagExtraInfo {
   /**
    * {@inheritDoc}
    *
-   * @deprecated  You should probably be implementing in {@link #validate(javax.servlet.jsp.tagext.TagData, java.util.List)}
+   * @deprecated  You should probably be implementing in {@link #validate(jakarta.servlet.jsp.tagext.TagData, java.util.List)}
    *
-   * @see  #validate(javax.servlet.jsp.tagext.TagData, java.util.List)
+   * @see  #validate(jakarta.servlet.jsp.tagext.TagData, java.util.List)
    */
   @Deprecated
   @Override

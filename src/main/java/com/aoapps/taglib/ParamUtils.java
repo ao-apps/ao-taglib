@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2013, 2015, 2016, 2017, 2020, 2021, 2022, 2024  AO Industries, Inc.
+ * Copyright (C) 2013, 2015, 2016, 2017, 2020, 2021, 2022, 2024, 2025, 2026  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -24,13 +24,13 @@
 package com.aoapps.taglib;
 
 import com.aoapps.lang.NullArgumentException;
+import jakarta.servlet.jsp.JspTagException;
+import jakarta.servlet.jsp.tagext.DynamicAttributes;
+import jakarta.servlet.jsp.tagext.JspTag;
 import java.lang.reflect.Array;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
-import javax.servlet.jsp.JspTagException;
-import javax.servlet.jsp.tagext.DynamicAttributes;
-import javax.servlet.jsp.tagext.JspTag;
 
 /**
  * Helper utility for handling parameter values.
@@ -66,7 +66,7 @@ public final class ParamUtils {
    * @param  name         the name of the parameter (required)
    * @param  value        the value of the parameter
    *
-   * @see  AttributeUtils#requireAttributeParent(java.lang.String, javax.servlet.jsp.tagext.JspTag, java.lang.String, java.lang.Class)
+   * @see  AttributeUtils#requireAttributeParent(java.lang.String, jakarta.servlet.jsp.tagext.JspTag, java.lang.String, java.lang.Class)
    */
   public static void addParam(
       String fromTagName,

@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2012, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2024, 2025  AO Industries, Inc.
+ * Copyright (C) 2012, 2013, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2024, 2025, 2026  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -35,6 +35,19 @@ import com.aoapps.net.URIResolver;
 import com.aoapps.servlet.attribute.ScopeEE;
 import com.aoapps.servlet.http.Dispatcher;
 import com.aoapps.servlet.jsp.LocalizedJspTagException;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequestWrapper;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.jsp.JspException;
+import jakarta.servlet.jsp.JspTagException;
+import jakarta.servlet.jsp.JspWriter;
+import jakarta.servlet.jsp.PageContext;
+import jakarta.servlet.jsp.SkipPageException;
+import jakarta.servlet.jsp.tagext.DynamicAttributes;
+import jakarta.servlet.jsp.tagext.JspFragment;
+import jakarta.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,19 +55,6 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.JspTagException;
-import javax.servlet.jsp.JspWriter;
-import javax.servlet.jsp.PageContext;
-import javax.servlet.jsp.SkipPageException;
-import javax.servlet.jsp.tagext.DynamicAttributes;
-import javax.servlet.jsp.tagext.JspFragment;
-import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 /**
  * The base class for any tag that may call a request dispatcher.
@@ -228,9 +228,9 @@ public abstract class DispatchTag extends SimpleTagSupport
   /**
    * {@inheritDoc}
    *
-   * @deprecated  You should probably be implementing in {@link #dispatch(javax.servlet.RequestDispatcher, javax.servlet.jsp.JspWriter, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)}
+   * @deprecated  You should probably be implementing in {@link #dispatch(jakarta.servlet.RequestDispatcher, jakarta.servlet.jsp.JspWriter, jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)}
    *
-   * @see  #dispatch(javax.servlet.RequestDispatcher, javax.servlet.jsp.JspWriter, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+   * @see  #dispatch(jakarta.servlet.RequestDispatcher, jakarta.servlet.jsp.JspWriter, jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
    */
   @Deprecated
   @Override

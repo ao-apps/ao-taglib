@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2013, 2016, 2017, 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
+ * Copyright (C) 2013, 2016, 2017, 2019, 2020, 2021, 2022, 2023, 2025, 2026  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -30,13 +30,13 @@ import com.aoapps.lang.i18n.Resources;
 import com.aoapps.servlet.el.ElUtils;
 import com.aoapps.servlet.jsp.LocalizedJspTagException;
 import com.aoapps.servlet.jsp.tagext.JspTagUtils;
+import jakarta.el.ELContext;
+import jakarta.el.ValueExpression;
+import jakarta.servlet.jsp.JspTagException;
+import jakarta.servlet.jsp.tagext.JspTag;
 import java.io.IOException;
 import java.util.List;
 import java.util.ResourceBundle;
-import javax.el.ELContext;
-import javax.el.ValueExpression;
-import javax.servlet.jsp.JspTagException;
-import javax.servlet.jsp.tagext.JspTag;
 
 /**
  * @author  AO Industries, Inc.
@@ -56,7 +56,7 @@ public final class AttributeUtils  {
    * @return  the parent tag
    * @exception  NeedAttributeParentException  if parent not found
    *
-   * @see  JspTagUtils#findAncestor(javax.servlet.jsp.tagext.JspTag, java.lang.Class)
+   * @see  JspTagUtils#findAncestor(jakarta.servlet.jsp.tagext.JspTag, java.lang.Class)
    */
   public static <T> T requireAttributeParent(String fromTagName, JspTag from, String attribute, Class<? extends T> clazz) throws NeedAttributeParentException {
     return JspTagUtils.findAncestor(from, clazz).orElseThrow(
@@ -67,7 +67,7 @@ public final class AttributeUtils  {
   /**
    * Evaluates an expression then casts to the provided type.
    *
-   * @deprecated Please use {@link ElUtils#resolveValue(javax.el.ValueExpression, java.lang.Class, javax.el.ELContext)} directly.
+   * @deprecated Please use {@link ElUtils#resolveValue(jakarta.el.ValueExpression, java.lang.Class, jakarta.el.ELContext)} directly.
    */
   @Deprecated
   public static <T> T resolveValue(ValueExpression expression, Class<T> type, ELContext elContext) {
@@ -77,7 +77,7 @@ public final class AttributeUtils  {
   /**
    * Casts or evaluates an expression then casts to the provided type.
    *
-   * @deprecated Please use {@link ElUtils#resolveValue(java.lang.Object, java.lang.Class, javax.el.ELContext)} directly.
+   * @deprecated Please use {@link ElUtils#resolveValue(java.lang.Object, java.lang.Class, jakarta.el.ELContext)} directly.
    */
   @Deprecated
   public static <T> T resolveValue(Object value, Class<T> type, ELContext elContext) {
