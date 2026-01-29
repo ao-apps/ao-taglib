@@ -41,9 +41,9 @@ public class ElementTagTEI extends TagExtraInfo {
   /**
    * {@inheritDoc}
    *
-   * @deprecated  You should probably be implementing in {@link #validate(javax.servlet.jsp.tagext.TagData, java.util.List)}
+   * @deprecated  You should probably be implementing in {@link ElementTagTEI#validate(javax.servlet.jsp.tagext.TagData, java.util.List)}
    *
-   * @see  #validate(javax.servlet.jsp.tagext.TagData, java.util.List)
+   * @see  ElementTagTEI#validate(javax.servlet.jsp.tagext.TagData, java.util.List)
    */
   @Deprecated
   @Override

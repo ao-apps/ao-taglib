@@ -184,7 +184,7 @@ public abstract class DispatchTag extends SimpleTagSupport
    * @return  {@code true} when added, or {@code false} when attribute not expected and has not been added.
    *
    * @see  ParamUtils#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List, com.aoapps.taglib.ParamsAttribute)
-   * @see  #setDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object)
+   * @see  DispatchTag#setDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object)
    */
   protected boolean addDynamicAttribute(String uri, String localName, Object value, List<String> expectedPatterns) throws JspTagException {
     return ParamUtils.addDynamicAttribute(uri, localName, value, expectedPatterns, this);
@@ -193,9 +193,9 @@ public abstract class DispatchTag extends SimpleTagSupport
   /**
    * Sets a {@linkplain DynamicAttributes dynamic attribute}.
    *
-   * @deprecated  You should probably be implementing in {@link #addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List)}
+   * @deprecated  You should probably be implementing in {@link DispatchTag#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List)}
    *
-   * @see  #addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List)
+   * @see  DispatchTag#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List)
    */
   @Deprecated
   @Override
@@ -228,9 +228,9 @@ public abstract class DispatchTag extends SimpleTagSupport
   /**
    * {@inheritDoc}
    *
-   * @deprecated  You should probably be implementing in {@link #dispatch(javax.servlet.RequestDispatcher, javax.servlet.jsp.JspWriter, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)}
+   * @deprecated  You should probably be implementing in {@link DispatchTag#dispatch(javax.servlet.RequestDispatcher, javax.servlet.jsp.JspWriter, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)}
    *
-   * @see  #dispatch(javax.servlet.RequestDispatcher, javax.servlet.jsp.JspWriter, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+   * @see  DispatchTag#dispatch(javax.servlet.RequestDispatcher, javax.servlet.jsp.JspWriter, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
    */
   @Deprecated
   @Override

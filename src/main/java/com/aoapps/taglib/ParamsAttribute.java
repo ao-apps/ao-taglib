@@ -52,7 +52,7 @@ public interface ParamsAttribute {
   }
 
   /**
-   * @deprecated  Use {@link #addParam(java.lang.String, java.lang.Object)} instead.
+   * @deprecated  Use {@link ParamsAttribute#addParam(java.lang.String, java.lang.Object)} instead.
    */
   @Deprecated
   default void addParam(String name, String value) {

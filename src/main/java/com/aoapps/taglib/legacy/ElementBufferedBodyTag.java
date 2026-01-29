@@ -118,7 +118,7 @@ public abstract class ElementBufferedBodyTag extends EncodingBufferedBodyTag
    * @return  {@code true} when added, or {@code false} when attribute not expected and has not been added.
    *
    * @see  GlobalAttributesUtils#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List, com.aoapps.taglib.MutableGlobalAttributes)
-   * @see  #setDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object)
+   * @see  ElementBufferedBodyTag#setDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object)
    */
   protected boolean addDynamicAttribute(String uri, String localName, Object value, List<String> expectedPatterns) throws JspTagException {
     return GlobalAttributesUtils.addDynamicAttribute(uri, localName, value, expectedPatterns, global);
@@ -127,9 +127,9 @@ public abstract class ElementBufferedBodyTag extends EncodingBufferedBodyTag
   /**
    * Sets a {@linkplain DynamicAttributes dynamic attribute}.
    *
-   * @deprecated  You should probably be implementing in {@link #addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List)}
+   * @deprecated  You should probably be implementing in {@link ElementBufferedBodyTag#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List)}
    *
-   * @see  #addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List)
+   * @see  ElementBufferedBodyTag#addDynamicAttribute(java.lang.String, java.lang.String, java.lang.Object, java.util.List)
    */
   @Deprecated
   @Override

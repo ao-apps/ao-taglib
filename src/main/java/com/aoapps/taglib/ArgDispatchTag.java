@@ -83,7 +83,7 @@ abstract class ArgDispatchTag extends DispatchTag
   /**
    * {@inheritDoc}
    *
-   * @see  #addArg(java.lang.String, java.lang.Object)
+   * @see  ArgDispatchTag#addArg(java.lang.String, java.lang.Object)
    */
   @Override
   protected boolean addDynamicAttribute(String uri, String localName, Object value, List<String> expectedPatterns) throws JspTagException {
