@@ -397,7 +397,7 @@ public class HtmlTag extends ElementFilteredTag {
   }
 
   /**
-   * @deprecated  Please use {@link #beginHtmlTag(java.util.Locale, java.lang.Appendable, com.aoapps.encoding.Serialization, com.aoapps.taglib.GlobalAttributes)}
+   * @deprecated  Please use {@link HtmlTag#beginHtmlTag(java.util.Locale, java.lang.Appendable, com.aoapps.encoding.Serialization, com.aoapps.taglib.GlobalAttributes)}
    */
   @Deprecated
   public static void beginHtmlTag(Locale locale, Appendable out, Serialization serialization, String clazz) throws IOException {
@@ -421,7 +421,7 @@ public class HtmlTag extends ElementFilteredTag {
   }
 
   /**
-   * @deprecated  Please use {@link #beginHtmlTag(jakarta.servlet.ServletResponse, java.lang.Appendable, com.aoapps.encoding.Serialization, com.aoapps.taglib.GlobalAttributes)}
+   * @deprecated  Please use {@link HtmlTag#beginHtmlTag(jakarta.servlet.ServletResponse, java.lang.Appendable, com.aoapps.encoding.Serialization, com.aoapps.taglib.GlobalAttributes)}
    */
   @Deprecated
   public static void beginHtmlTag(ServletResponse response, Appendable out, Serialization serialization, String clazz) throws IOException {
