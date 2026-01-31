@@ -37,9 +37,9 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
     shortTitle="Changelog"
     tocLevels="1"
     datePublished="2016-10-29T22:02:09-05:00"
-    dateModified="2025-12-30T13:42:11Z"
+    dateModified="2026-01-31T14:56:43Z"
   >
-    <c:set var="latestRelease" value="8.0.1" />
+    <c:set var="latestRelease" value="9.0.0" />
     <c:if test="${
       fn:endsWith('@{project.version}', '-SNAPSHOT')
       and !fn:endsWith('@{project.version}', '-POST-SNAPSHOT')
@@ -61,35 +61,47 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
           <li>Support other nice HTML 5 features of textarea/input)</li>
           -->
           <li>Updated to <ao:a href="https://jakarta.ee/specifications/webprofile/10/">Jakarta EE Web Profile 10</ao:a> (Servlet 6.0, JSP 3.1, EL 5.0, and JSTL 3.0).</li>
-          <li>Added <code>onclick</code> attribute to <core:link page="ao.tld/tag-img"><![CDATA[&lt;ao:img /&gt;]]></core:link>.</li>
-          <li>
-            When parameter values are an <code>Enum</code>, the parameter value is obtained from <code>Enum.name()</code> instead of
-            <code>Enum.toString()</code>.  This is to intuitively use enums as parameters when <code>Enum.toString()</code> is
-            overridden.
-          </li>
-          <li>
-            Added <code>noscript</code> attribute to <core:link page="ao.tld/tag-link"><![CDATA[&lt;ao:link /&gt;]]></core:link>,
-            <core:link page="ao.tld/tag-meta"><![CDATA[&lt;ao:meta /&gt;]]></core:link>, and
-            <core:link page="ao.tld/tag-style"><![CDATA[&lt;ao:style /&gt;]]></core:link>.  When <code>true</code>,
-            surrounds the element with <ao:a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/noscript"><![CDATA[&lt;noscript&gt;]]></ao:a>.
-          </li>
-          <li>
-            New function <core:link page="ao.tld/function-resourceExists" /> that checks if a resource exists in the web
-            application.
-          </li>
-          <li>
-            When capturing into a <code>LinksAttribute</code> parent, <core:link page="ao.tld/tag-link"><![CDATA[&lt;ao:link /&gt;]]></core:link>
-            now processes the href-related attributes immediately instead of deferring to parent.  This allows relative
-            hrefs to work correctly: relative to the initial content page, not the template.
-          </li>
-          <li>Minimum Java version changed from 1.8 to 11.</li>
-          <li>
-            Fixed missing writing of <code>onerror</code> and <code>onload</code> attributes on
-            <core:link page="ao.tld/tag-input"><![CDATA[&lt;ao:input /&gt;]]></core:link>.
-          </li>
         </ul>
       </changelog:release>
     </c:if>
+
+    <changelog:release
+      projectName="@{documented.name}"
+      version="9.0.0"
+      datePublished="2026-01-31T14:56:43Z"
+      groupId="@{project.groupId}"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>Added <code>onclick</code> attribute to <core:link page="ao.tld/tag-img"><![CDATA[&lt;ao:img /&gt;]]></core:link>.</li>
+        <li>
+          When parameter values are an <code>Enum</code>, the parameter value is obtained from <code>Enum.name()</code> instead of
+          <code>Enum.toString()</code>.  This is to intuitively use enums as parameters when <code>Enum.toString()</code> is
+          overridden.
+        </li>
+        <li>
+          Added <code>noscript</code> attribute to <core:link page="ao.tld/tag-link"><![CDATA[&lt;ao:link /&gt;]]></core:link>,
+          <core:link page="ao.tld/tag-meta"><![CDATA[&lt;ao:meta /&gt;]]></core:link>, and
+          <core:link page="ao.tld/tag-style"><![CDATA[&lt;ao:style /&gt;]]></core:link>.  When <code>true</code>,
+          surrounds the element with <ao:a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/noscript"><![CDATA[&lt;noscript&gt;]]></ao:a>.
+        </li>
+        <li>
+          New function <core:link page="ao.tld/function-resourceExists" /> that checks if a resource exists in the web
+          application.
+        </li>
+        <li>
+          When capturing into a <code>LinksAttribute</code> parent, <core:link page="ao.tld/tag-link"><![CDATA[&lt;ao:link /&gt;]]></core:link>
+          now processes the href-related attributes immediately instead of deferring to parent.  This allows relative
+          hrefs to work correctly: relative to the initial content page, not the template.
+        </li>
+        <li>Minimum Java version changed from 1.8 to 11.</li>
+        <li>
+          Fixed missing writing of <code>onerror</code> and <code>onload</code> attributes on
+          <core:link page="ao.tld/tag-input"><![CDATA[&lt;ao:input /&gt;]]></core:link>.
+        </li>
+      </ul>
+    </changelog:release>
 
     <changelog:release
       projectName="@{documented.name}"
