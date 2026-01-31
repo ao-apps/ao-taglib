@@ -29,12 +29,12 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
     <relativePath>../parent/pom.xml</relativePath>
   </parent>
 
-  <groupId>com.aoapps</groupId><artifactId>ao-taglib</artifactId><version>10.0.0</version>
+  <groupId>com.aoapps</groupId><artifactId>ao-taglib</artifactId><version>10.0.0-POST-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <properties>
     <!-- Must be set to ${git.commit.time} for snapshots or ISO 8601 timestamp for releases. -->
-    <project.build.outputTimestamp>2026-01-31T15:10:38Z</project.build.outputTimestamp>
+    <project.build.outputTimestamp>${git.commit.time}</project.build.outputTimestamp>
     <module.name>com.aoapps.taglib</module.name>
 
     <javadoc.breadcrumbs><![CDATA[<a target="${javadoc.target}" href="https://oss.aoapps.com/">AO OSS</a>
@@ -90,7 +90,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
     <connection>scm:git:git://github.com/ao-apps/ao-taglib.git</connection>
     <developerConnection>scm:git:git@github.com:ao-apps/ao-taglib.git</developerConnection>
     <url>https://github.com/ao-apps/ao-taglib</url>
-    <tag>ao-taglib-10.0.0</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <issueManagement>
