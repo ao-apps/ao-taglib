@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 ao-taglib - Making JSP be what it should have been all along.
-Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025  AO Industries, Inc.
+Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026  AO Industries, Inc.
     support@aoindustries.com
     7262 Bull Pen Cir
     Mobile, AL 36695
@@ -343,7 +343,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
   <!-- TODO: Implement validator(s), such as ao:when directly inside ao:choose and similar -->
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2025-12-10T09:41:50Z" -->
+    <!-- dateModified="2026-02-05T18:09:30Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Renders an <a href="https://www.w3schools.com/tags/tag_a.asp">&lt;a&gt;</a> tag.
@@ -363,16 +363,16 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
       </p>
       <p>
         When a parameter value is <code>null</code> it is not added.
-        When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html">Enum</a>, the
-        value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html#name()">Enum.name()</a>.
+        When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Enum.html">Enum</a>, the
+        value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Enum.html#name()">Enum.name()</a>.
         If the value is an
-        <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Iterable.html">Iterable</a>,
-        <a rel="nofollow" href="@{javadoc.link.javase}java/util/Iterator.html">Iterator</a>,
-        <a rel="nofollow" href="@{javadoc.link.javase}java/util/Enumeration.html">Enumeration</a>,
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Iterable.html">Iterable</a>,
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/util/Iterator.html">Iterator</a>,
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/util/Enumeration.html">Enumeration</a>,
         or array, then each non-null element is coerced to
-        <a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</a> as a separate
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/String.html">String</a> as a separate
         parameter in iteration order.  Otherwise, the value itself is
-        coerced to <a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</a>
+        coerced to <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/String.html">String</a>
         for the parameter value.
       </p>
       <p>
@@ -579,7 +579,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
   </tag>
   <tag>
     <!-- datePublished="2019-10-08T21:41:35-05:00" -->
-    <!-- dateModified="2024-09-12T21:07:22Z" -->
+    <!-- dateModified="2026-02-05T18:09:30Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Renders an <a href="https://www.w3schools.com/tags/tag_area.asp">&lt;area&gt;</a> tag.
@@ -593,16 +593,16 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
       </p>
       <p>
         When a parameter value is <code>null</code> it is not added.
-        When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html">Enum</a>, the
-        value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html#name()">Enum.name()</a>.
+        When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Enum.html">Enum</a>, the
+        value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Enum.html#name()">Enum.name()</a>.
         If the value is an
-        <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Iterable.html">Iterable</a>,
-        <a rel="nofollow" href="@{javadoc.link.javase}java/util/Iterator.html">Iterator</a>,
-        <a rel="nofollow" href="@{javadoc.link.javase}java/util/Enumeration.html">Enumeration</a>,
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Iterable.html">Iterable</a>,
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/util/Iterator.html">Iterator</a>,
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/util/Enumeration.html">Enumeration</a>,
         or array, then each non-null element is coerced to
-        <a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</a> as a separate
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/String.html">String</a> as a separate
         parameter in iteration order.  Otherwise, the value itself is
-        coerced to <a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</a>
+        coerced to <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/String.html">String</a>
         for the parameter value.
       </p>
       <p>
@@ -857,11 +857,11 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
   </tag>
   <tag>
     <!-- datePublished="2016-09-25T11:33:29-05:00" -->
-    <!-- dateModified="2021-06-03T22:53:21-05:00" -->
+    <!-- dateModified="2026-02-05T18:09:30Z" -->
     <description><![CDATA[
       <p>
         Evaluates the test expression, if it is not <code>true</code> throws
-        <a rel="nofollow" href="@{javadoc.link.javase}java/lang/AssertionError.html">AssertionError</a>
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/AssertionError.html">AssertionError</a>
         with the optional message.
       </p>
     ]]></description>
@@ -884,7 +884,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
       <description><![CDATA[
         <p>
           The message included in the
-          <a rel="nofollow" href="@{javadoc.link.javase}java/lang/AssertionError.html">AssertionError</a>,
+          <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/AssertionError.html">AssertionError</a>,
           only evaluated as-needed due to use of deferred expressions.
         </p>
       ]]></description>
@@ -1166,7 +1166,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2024-09-12T21:07:22Z" -->
+    <!-- dateModified="2026-02-05T18:09:30Z" -->
     <!-- TODO: param.* dynamic attributes should not do automatic multi-parameter.  Make a params.* dynamic attribute for this purpose. -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
@@ -1178,16 +1178,16 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
       </p>
       <p>
         When a parameter value is <code>null</code> it is not added.
-        When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html">Enum</a>, the
-        value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html#name()">Enum.name()</a>.
+        When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Enum.html">Enum</a>, the
+        value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Enum.html#name()">Enum.name()</a>.
         If the value is an
-        <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Iterable.html">Iterable</a>,
-        <a rel="nofollow" href="@{javadoc.link.javase}java/util/Iterator.html">Iterator</a>,
-        <a rel="nofollow" href="@{javadoc.link.javase}java/util/Enumeration.html">Enumeration</a>,
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Iterable.html">Iterable</a>,
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/util/Iterator.html">Iterator</a>,
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/util/Enumeration.html">Enumeration</a>,
         or array, then each non-null element is coerced to
-        <a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</a>
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/String.html">String</a>
         as a separate parameter in iteration order.  Otherwise, the value itself is
-        coerced to <a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</a>
+        coerced to <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/String.html">String</a>
         for the parameter value.
       </p>
       <p>
@@ -1293,7 +1293,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2024-09-12T21:07:22Z" -->
+    <!-- dateModified="2026-02-05T18:09:30Z" -->
     <description><![CDATA[
       <div class="semanticcms-tag-reference-summary">
         <p>
@@ -1308,7 +1308,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
           <li>You may have other nested tags used to select and build the set of parameters</li>
           <li>
             You may pass argument objects instead of only
-            <a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</a>
+            <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/String.html">String</a>
             parameters (see below)
           </li>
         </ol>
@@ -1323,16 +1323,16 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
       </p>
       <p>
         When a parameter value is <code>null</code> it is not added.
-        When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html">Enum</a>, the
-        value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html#name()">Enum.name()</a>.
+        When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Enum.html">Enum</a>, the
+        value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Enum.html#name()">Enum.name()</a>.
         If the value is an
-        <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Iterable.html">Iterable</a>,
-        <a rel="nofollow" href="@{javadoc.link.javase}java/util/Iterator.html">Iterator</a>,
-        <a rel="nofollow" href="@{javadoc.link.javase}java/util/Enumeration.html">Enumeration</a>,
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Iterable.html">Iterable</a>,
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/util/Iterator.html">Iterator</a>,
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/util/Enumeration.html">Enumeration</a>,
         or array, then each non-null element is coerced to
-        <a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</a>
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/String.html">String</a>
         as a separate parameter in iteration order.  Otherwise, the value itself is
-        coerced to <a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</a>
+        coerced to <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/String.html">String</a>
         for the parameter value.
       </p>
       <p>
@@ -1343,7 +1343,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
       </p>
       <p>
         Argument objects are passed to the forwarded page via request-scope <code>arg</code>
-        <a rel="nofollow" href="@{javadoc.link.javase}java/util/Map.html">Map</a>.
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/util/Map.html">Map</a>.
         Any arguments to the current JSP page are not automatically passed-on to the forwarded page 
         (this differs from parameters in this way).
       </p>
@@ -1351,7 +1351,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
         Any attribute that has no namespace and begins with <code>arg.</code> is added as an argument.
         The argument name is the part of the attribute name following <code>arg.</code>.
         Because this argument becomes an element in the
-        <a rel="nofollow" href="@{javadoc.link.javase}java/util/Map.html">Map</a>
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/util/Map.html">Map</a>
         named <code>arg</code> in the forwarded page, the attribute
         name and JSP <a rel="nofollow" href="https://docs.oracle.com/cd/E19226-01/820-7627/gjddd/">Expression Language</a> name will match precisely.
       </p>
@@ -1447,11 +1447,11 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2023-10-02T00:34:59Z" -->
+    <!-- dateModified="2026-02-05T18:09:30Z" -->
     <description><![CDATA[
       <p>
         Gets a detailed report of a
-        <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Throwable.html">Throwable</a>
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Throwable.html">Throwable</a>
         as generated by
         <a href="https://oss.aoapps.com/lang/apidocs/com.aoapps.lang/com/aoapps/lang/util/ErrorPrinter.html">ErrorPrinter</a>.
       </p>
@@ -1721,7 +1721,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2024-09-12T21:07:22Z" -->
+    <!-- dateModified="2026-02-05T18:09:30Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Renders an <a href="https://www.w3schools.com/tags/tag_iframe.asp">&lt;iframe&gt;</a> tag.
@@ -1732,16 +1732,16 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
       </p>
       <p>
         When a parameter value is <code>null</code> it is not added.
-        When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html">Enum</a>, the
-        value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html#name()">Enum.name()</a>.
+        When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Enum.html">Enum</a>, the
+        value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Enum.html#name()">Enum.name()</a>.
         If the value is an
-        <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Iterable.html">Iterable</a>,
-        <a rel="nofollow" href="@{javadoc.link.javase}java/util/Iterator.html">Iterator</a>,
-        <a rel="nofollow" href="@{javadoc.link.javase}java/util/Enumeration.html">Enumeration</a>,
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Iterable.html">Iterable</a>,
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/util/Iterator.html">Iterator</a>,
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/util/Enumeration.html">Enumeration</a>,
         or array, then each non-null element is coerced to
-        <a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</a>
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/String.html">String</a>
         as a separate parameter in iteration order.  Otherwise, the value itself is
-        coerced to <a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</a>
+        coerced to <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/String.html">String</a>
         for the parameter value.
       </p>
       <p>
@@ -1908,7 +1908,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2024-09-12T21:07:22Z" -->
+    <!-- dateModified="2026-02-05T18:09:30Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Renders an <a href="https://www.w3schools.com/tags/tag_img.asp">&lt;img&gt;</a> tag.
@@ -1934,16 +1934,16 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
       </p>
       <p>
         When a parameter value is <code>null</code> it is not added.
-        When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html">Enum</a>, the
-        value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html#name()">Enum.name()</a>.
+        When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Enum.html">Enum</a>, the
+        value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Enum.html#name()">Enum.name()</a>.
         If the value is an
-        <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Iterable.html">Iterable</a>,
-        <a rel="nofollow" href="@{javadoc.link.javase}java/util/Iterator.html">Iterator</a>,
-        <a rel="nofollow" href="@{javadoc.link.javase}java/util/Enumeration.html">Enumeration</a>,
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Iterable.html">Iterable</a>,
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/util/Iterator.html">Iterator</a>,
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/util/Enumeration.html">Enumeration</a>,
         or array, then each non-null element is coerced to
-        <a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</a>
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/String.html">String</a>
         as a separate parameter in iteration order.  Otherwise, the value itself is
-        coerced to <a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</a>
+        coerced to <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/String.html">String</a>
         for the parameter value.
       </p>
       <p>
@@ -2136,7 +2136,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2024-09-14T19:15:38Z" -->
+    <!-- dateModified="2026-02-05T18:09:30Z" -->
     <description><![CDATA[
       <div class="semanticcms-tag-reference-summary">
         <p>
@@ -2150,7 +2150,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
           <li>You may have other nested tags used to select and build the set of parameters</li>
           <li>
             You may pass argument objects instead of only
-            <a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</a>
+            <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/String.html">String</a>
             parameters (see below)
           </li>
           <li>
@@ -2169,16 +2169,16 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
       </p>
       <p>
         When a parameter value is <code>null</code> it is not added.
-        When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html">Enum</a>, the
-        value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html#name()">Enum.name()</a>.
+        When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Enum.html">Enum</a>, the
+        value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Enum.html#name()">Enum.name()</a>.
         If the value is an
-        <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Iterable.html">Iterable</a>,
-        <a rel="nofollow" href="@{javadoc.link.javase}java/util/Iterator.html">Iterator</a>,
-        <a rel="nofollow" href="@{javadoc.link.javase}java/util/Enumeration.html">Enumeration</a>,
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Iterable.html">Iterable</a>,
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/util/Iterator.html">Iterator</a>,
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/util/Enumeration.html">Enumeration</a>,
         or array, then each non-null element is coerced to
-        <a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</a>
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/String.html">String</a>
         as a separate parameter in iteration order.  Otherwise, the value itself is
-        coerced to <a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</a>
+        coerced to <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/String.html">String</a>
         for the parameter value.
       </p>
       <p>
@@ -2189,7 +2189,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
       </p>
       <p>
         Argument objects are passed to the included page via request-scope <code>arg</code>
-        <a rel="nofollow" href="@{javadoc.link.javase}java/util/Map.html">Map</a>.
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/util/Map.html">Map</a>.
         Any arguments to the current JSP page are not automatically passed-on to the included page 
         (this differs from parameters in this way).
         The current JSP page arguments are restored when the include completes.
@@ -2198,7 +2198,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
         Any attribute that has no namespace and begins with <code>arg.</code> is added as an argument.
         The argument name is the part of the attribute name following <code>arg.</code>.
         Because this argument becomes an element in the
-        <a rel="nofollow" href="@{javadoc.link.javase}java/util/Map.html">Map</a>
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/util/Map.html">Map</a>
         named <code>arg</code> in the included page, the attribute
         name and JSP <a rel="nofollow" href="https://docs.oracle.com/cd/E19226-01/820-7627/gjddd/">Expression Language</a> name will match precisely.
       </p>
@@ -2274,7 +2274,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2024-09-12T21:07:22Z" -->
+    <!-- dateModified="2026-02-05T18:09:30Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Renders an <a href="https://www.w3schools.com/tags/tag_input.asp">&lt;input&gt;</a> tag.
@@ -2300,16 +2300,16 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
       </p>
       <p>
         When a parameter value is <code>null</code> it is not added.
-        When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html">Enum</a>, the
-        value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html#name()">Enum.name()</a>.
+        When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Enum.html">Enum</a>, the
+        value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Enum.html#name()">Enum.name()</a>.
         If the value is an
-        <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Iterable.html">Iterable</a>,
-        <a rel="nofollow" href="@{javadoc.link.javase}java/util/Iterator.html">Iterator</a>,
-        <a rel="nofollow" href="@{javadoc.link.javase}java/util/Enumeration.html">Enumeration</a>,
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Iterable.html">Iterable</a>,
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/util/Iterator.html">Iterator</a>,
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/util/Enumeration.html">Enumeration</a>,
         or array, then each non-null element is coerced to
-        <a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</a>
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/String.html">String</a>
         as a separate parameter in iteration order.  Otherwise, the value itself is
-        coerced to <a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</a>
+        coerced to <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/String.html">String</a>
         for the parameter value.
       </p>
       <p>
@@ -2627,7 +2627,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2024-09-14T01:35:44Z" -->
+    <!-- dateModified="2026-02-05T18:09:30Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         If contained within any
@@ -2641,16 +2641,16 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
       </p>
       <p>
         When a parameter value is <code>null</code> it is not added.
-        When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html">Enum</a>, the
-        value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html#name()">Enum.name()</a>.
+        When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Enum.html">Enum</a>, the
+        value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Enum.html#name()">Enum.name()</a>.
         If the value is an
-        <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Iterable.html">Iterable</a>,
-        <a rel="nofollow" href="@{javadoc.link.javase}java/util/Iterator.html">Iterator</a>,
-        <a rel="nofollow" href="@{javadoc.link.javase}java/util/Enumeration.html">Enumeration</a>,
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Iterable.html">Iterable</a>,
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/util/Iterator.html">Iterator</a>,
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/util/Enumeration.html">Enumeration</a>,
         or array, then each non-null element is coerced to
-        <a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</a>
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/String.html">String</a>
         as a separate parameter in iteration order.  Otherwise, the value itself is
-        coerced to <a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</a>
+        coerced to <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/String.html">String</a>
         for the parameter value.
       </p>
       <p>
@@ -3089,7 +3089,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2024-09-14T01:35:44Z" -->
+    <!-- dateModified="2026-02-05T18:09:30Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         If contained within any
@@ -3175,7 +3175,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
       <description><![CDATA[
         <p>
           The <a href="https://www.w3schools.com/tags/att_meta_charset.asp">charset of the meta element</a>.
-          Supports <a rel="nofollow" href="@{javadoc.link.javase}java/nio/charset/Charset.html">java.nio.charset.Charset</a>.
+          Supports <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/nio/charset/Charset.html">java.nio.charset.Charset</a>.
           Any other object is coerced to string.
         </p>
       ]]></description>
@@ -3545,7 +3545,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2024-09-12T21:07:22Z" -->
+    <!-- dateModified="2026-02-05T18:09:30Z" -->
     <description><![CDATA[
       <p>
         Adds a parameter to its
@@ -3573,8 +3573,8 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
       <description><![CDATA[
         <p>
           The value of the parameter.
-          When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html">Enum</a>, the
-          value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html#name()">Enum.name()</a>.
+          When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Enum.html">Enum</a>, the
+          value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Enum.html#name()">Enum.name()</a>.
           A nested <a href="@{project.url}]]>&tld;<![CDATA[/tag-value">&lt;ao:value&gt;</a>
           tag will override this value.
           If neither is provided, the output of the body is used with whitespace trimmed.
@@ -3588,7 +3588,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2024-09-12T21:07:22Z" -->
+    <!-- dateModified="2026-02-05T18:09:30Z" -->
     <description><![CDATA[
       <p>
         Adds multiple parameters to its
@@ -3608,7 +3608,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
         </p>
         <p>
           When provided, the values may not contain a
-          <a rel="nofollow" href="@{javadoc.link.javase}java/util/Map.html">Map</a>
+          <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/util/Map.html">Map</a>
           or <a href="https://oss.aoapps.com/net-types/apidocs/com.aoapps.net.types/com/aoapps/net/URIParameters.html">URIParameters</a>.
           When provided, the exclude attribute may not be provided.
         </p>
@@ -3622,7 +3622,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
       <description><![CDATA[
         <p>
           Optionally excludes all elements of a
-          <a rel="nofollow" href="@{javadoc.link.javase}java/util/Map.html">Map</a>
+          <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/util/Map.html">Map</a>
           or <a href="https://oss.aoapps.com/net-types/apidocs/com.aoapps.net.types/com/aoapps/net/URIParameters.html">URIParameters</a>
           that match any of the comma-separated patterns.
           May not be used in conjunction with the name attribute.
@@ -3666,32 +3666,32 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
         </p>
         <p>
           When name is provided, supports
-          <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Iterable.html">Iterable</a>,
-          <a rel="nofollow" href="@{javadoc.link.javase}java/util/Iterator.html">Iterator</a>,
-          <a rel="nofollow" href="@{javadoc.link.javase}java/util/Enumeration.html">Enumeration</a>,
+          <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Iterable.html">Iterable</a>,
+          <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/util/Iterator.html">Iterator</a>,
+          <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/util/Enumeration.html">Enumeration</a>,
           or array values.
         </p>
         <p>
           When name is not provided, requires
-          <a rel="nofollow" href="@{javadoc.link.javase}java/util/Map.html">Map</a>
+          <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/util/Map.html">Map</a>
           or <a href="https://oss.aoapps.com/net-types/apidocs/com.aoapps.net.types/com/aoapps/net/URIParameters.html">URIParameters</a>,
-          where the parameter name is the map key coerced to <a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</a>
+          where the parameter name is the map key coerced to <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/String.html">String</a>
           and the value (or set of values) is the map value.  Each of the entry values may be
-          <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Iterable.html">Iterable</a>,
-          <a rel="nofollow" href="@{javadoc.link.javase}java/util/Iterator.html">Iterator</a>,
-          <a rel="nofollow" href="@{javadoc.link.javase}java/util/Enumeration.html">Enumeration</a>,
+          <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Iterable.html">Iterable</a>,
+          <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/util/Iterator.html">Iterator</a>,
+          <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/util/Enumeration.html">Enumeration</a>,
           array, or single value.
         </p>
         <p>
           When obtaining values from a
-          <a rel="nofollow" href="@{javadoc.link.javase}java/util/Map.html">Map</a>
+          <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/util/Map.html">Map</a>
           or <a href="https://oss.aoapps.com/net-types/apidocs/com.aoapps.net.types/com/aoapps/net/URIParameters.html">URIParameters</a>,
           parameters may be excluded with the "exclude" attribute.
         </p>
         <p>
           Parameters are never added with <code>null</code> values.
-          When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html">Enum</a>, the
-          value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html#name()">Enum.name()</a>.
+          When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Enum.html">Enum</a>, the
+          value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Enum.html#name()">Enum.name()</a>.
         </p>
       ]]></description>
       <name>values</name>
@@ -3720,7 +3720,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2024-09-12T21:07:22Z" -->
+    <!-- dateModified="2026-02-05T18:09:30Z" -->
     <description><![CDATA[
       <div class="semanticcms-tag-reference-summary">
         <p>
@@ -3747,16 +3747,16 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
       </p>
       <p>
         When a parameter value is <code>null</code> it is not added.
-        When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html">Enum</a>, the
-        value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html#name()">Enum.name()</a>.
+        When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Enum.html">Enum</a>, the
+        value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Enum.html#name()">Enum.name()</a>.
         If the value is an
-        <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Iterable.html">Iterable</a>,
-        <a rel="nofollow" href="@{javadoc.link.javase}java/util/Iterator.html">Iterator</a>,
-        <a rel="nofollow" href="@{javadoc.link.javase}java/util/Enumeration.html">Enumeration</a>,
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Iterable.html">Iterable</a>,
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/util/Iterator.html">Iterator</a>,
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/util/Enumeration.html">Enumeration</a>,
         or array, then each non-null element is coerced to
-        <a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</a>
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/String.html">String</a>
         as a separate parameter in iteration order.  Otherwise, the value itself is
-        coerced to <a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</a>
+        coerced to <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/String.html">String</a>
         for the parameter value.
       </p>
       <p>
@@ -3964,7 +3964,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2024-09-12T21:07:22Z" -->
+    <!-- dateModified="2026-02-05T18:09:30Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Manually establishes a <a href="https://www.w3schools.com/tags/tag_script.asp">script context</a> when automatic detection is not possible.
@@ -3991,16 +3991,16 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
       </p>
       <p>
         When a parameter value is <code>null</code> it is not added.
-        When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html">Enum</a>, the
-        value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html#name()">Enum.name()</a>.
+        When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Enum.html">Enum</a>, the
+        value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Enum.html#name()">Enum.name()</a>.
         If the value is an
-        <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Iterable.html">Iterable</a>,
-        <a rel="nofollow" href="@{javadoc.link.javase}java/util/Iterator.html">Iterator</a>,
-        <a rel="nofollow" href="@{javadoc.link.javase}java/util/Enumeration.html">Enumeration</a>,
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Iterable.html">Iterable</a>,
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/util/Iterator.html">Iterator</a>,
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/util/Enumeration.html">Enumeration</a>,
         or array, then each non-null element is coerced to
-        <a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</a>
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/String.html">String</a>
         as a separate parameter in iteration order.  Otherwise, the value itself is
-        coerced to <a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</a>
+        coerced to <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/String.html">String</a>
         for the parameter value.
       </p>
       <p>
@@ -4531,7 +4531,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2024-09-12T21:07:22Z" -->
+    <!-- dateModified="2026-02-05T18:09:30Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Manually establishes a URL context when automatic detection is not possible.
@@ -4580,16 +4580,16 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
       </p>
       <p>
         When a parameter value is <code>null</code> it is not added.
-        When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html">Enum</a>, the
-        value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Enum.html#name()">Enum.name()</a>.
+        When a parameter value is an <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Enum.html">Enum</a>, the
+        value is obtained via <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Enum.html#name()">Enum.name()</a>.
         If the value is an
-        <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Iterable.html">Iterable</a>,
-        <a rel="nofollow" href="@{javadoc.link.javase}java/util/Iterator.html">Iterator</a>,
-        <a rel="nofollow" href="@{javadoc.link.javase}java/util/Enumeration.html">Enumeration</a>,
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Iterable.html">Iterable</a>,
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/util/Iterator.html">Iterator</a>,
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/util/Enumeration.html">Enumeration</a>,
         or array, then each non-null element is coerced to
-        <a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</a> as a separate
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/String.html">String</a> as a separate
         parameter in iteration order.  Otherwise, the value itself is
-        coerced to <a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</a>
+        coerced to <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/String.html">String</a>
         for the parameter value.
       </p>
       <p>
@@ -4743,7 +4743,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
   </tag>
   <tag>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2023-10-02T00:34:59Z" -->
+    <!-- dateModified="2026-02-05T18:09:30Z" -->
     <description><![CDATA[
       <p class="semanticcms-tag-reference-summary">
         Writes the bean contents.  Supports data types beyond
@@ -4763,7 +4763,7 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
       </p>
       <p>
         The method attribute provides the name of the method that will be used to get the display value.
-        If not provided, it will default to <code><a rel="nofollow" href="@{javadoc.link.javase}java/lang/Object.html#toString%28%29">toString</a></code>.
+        If not provided, it will default to <code><a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Object.html#toString%28%29">toString</a></code>.
         This method searches for the method of the given name with no parameters.  It is an error if the method is
         not found.
       </p>
@@ -4838,9 +4838,9 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
       <description><![CDATA[
         <p>
           Specifies the method that will be used to convert the object to a
-          <a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</a>.
+          <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/String.html">String</a>.
           This defaults to
-          <code><a rel="nofollow" href="@{javadoc.link.javase}java/lang/Object.html#toString%28%29">toString</a></code>.
+          <code><a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Object.html#toString%28%29">toString</a></code>.
         </p>
       ]]></description>
       <name>method</name>
@@ -5110,12 +5110,12 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
   </function>
   <function>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2021-06-03T22:53:21-05:00" -->
+    <!-- dateModified="2026-02-05T18:09:30Z" -->
     <description><![CDATA[
       <p>
         Joins elements of any
-        <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Iterable.html">Iterable</a>
-        into a <a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</a>.
+        <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Iterable.html">Iterable</a>
+        into a <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/String.html">String</a>.
       </p>
     ]]></description>
     <name>join</name>
@@ -5142,10 +5142,10 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
   </function>
   <function>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2021-06-03T22:53:21-05:00" -->
+    <!-- dateModified="2026-02-05T18:09:30Z" -->
     <description><![CDATA[
       <p>
-        Word wraps a <a rel="nofollow" href="@{javadoc.link.javase}java/lang/String.html">String</a>.
+        Word wraps a <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/String.html">String</a>.
       </p>
     ]]></description>
     <name>wordWrap</name>
@@ -5155,10 +5155,10 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
   </function>
   <function>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2019-04-15T19:37:30-05:00" -->
+    <!-- dateModified="2026-02-05T18:09:30Z" -->
     <description><![CDATA[
       <p>
-        Calls <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Math.html#ceil%28double%29">java.lang.Math.ceil(double)</a>.
+        Calls <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Math.html#ceil%28double%29">java.lang.Math.ceil(double)</a>.
       </p>
     ]]></description>
     <name>ceil</name>
@@ -5168,10 +5168,10 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
   </function>
   <function>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2019-04-15T19:37:30-05:00" -->
+    <!-- dateModified="2026-02-05T18:09:30Z" -->
     <description><![CDATA[
       <p>
-        Calls <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Math.html#floor%28double%29">java.lang.Math.floor(double)</a>.
+        Calls <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Math.html#floor%28double%29">java.lang.Math.floor(double)</a>.
       </p>
     ]]></description>
     <name>floor</name>
@@ -5181,10 +5181,10 @@ When JSP scriptlets are not required, please use &lt;a href=&quot;@{project.url}
   </function>
   <function>
     <!-- datePublished="2016-08-07T16:29:54-05:00" -->
-    <!-- dateModified="2019-04-15T19:37:30-05:00" -->
+    <!-- dateModified="2026-02-05T18:09:30Z" -->
     <description><![CDATA[
       <p>
-        Calls <a rel="nofollow" href="@{javadoc.link.javase}java/lang/Math.html#round%28double%29">java.lang.Math.round(double)</a>.
+        Calls <a rel="nofollow" href="@{javadoc.link.javase}java.base/java/lang/Math.html#round%28double%29">java.lang.Math.round(double)</a>.
       </p>
     ]]></description>
     <name>round</name>
