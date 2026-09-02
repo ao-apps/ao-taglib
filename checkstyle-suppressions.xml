@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 ao-taglib - Making JSP be what it should have been all along.
-Copyright (C) 2022  AO Industries, Inc.
+Copyright (C) 2022, 2026  AO Industries, Inc.
     support@aoindustries.com
     7262 Bull Pen Cir
     Mobile, AL 36695
@@ -42,7 +42,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
     message="'actionURI'"
   />
   <suppress
-    checks="AbbreviationAsWordInName"
+    checks="(AbbreviationAsWordInName|GoogleMethodName)"
     files="[/\\]com[/\\]aoapps[/\\]taglib[/\\]Functions\.java$"
     message="'(encodeURL|getAbsoluteURL|resourcePathURI)'"
   />
@@ -59,6 +59,18 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
     checks="AbbreviationAsWordInName"
     files="[/\\]com[/\\]aoapps[/\\]taglib[/\\](legacy[/\\])?[A-Z]Tag\.java$"
     message="'[A-Z]Tag'"
+  />
+
+  <!-- Unusual multiline comment style is to minimize diffs between the scriptless and legacy implementations -->
+  <suppress
+    checks="MultilineCommentLeadingAsteriskPresence"
+    files=".*Tag\.java$"
+  />
+
+  <!-- Using multiple spaces for vertical alignment -->
+  <suppress
+    checks="SingleSpaceSeparator"
+    files=".*BeanInfo\.java$"
   />
 
 </suppressions>

@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2022  AO Industries, Inc.
+ * Copyright (C) 2022, 2026  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -38,7 +38,7 @@ public class ParamsTagBeanInfo extends SimpleBeanInfo {
 
   static {
     try {
-      properties = new PropertyDescriptor[]{
+      properties = new PropertyDescriptor[] {
           new PropertyDescriptor("name",    ParamsTag.class, null,        "setName"),
           new PropertyDescriptor("exclude", ParamsTag.class, null,        "setExclude"),
           new PropertyDescriptor("values",  ParamsTag.class, "getValuez", "setValuez"),
@@ -60,7 +60,7 @@ public class ParamsTagBeanInfo extends SimpleBeanInfo {
   @Override
   public BeanInfo[] getAdditionalBeanInfo() {
     try {
-      return new BeanInfo[]{
+      return new BeanInfo[] {
           Introspector.getBeanInfo(ParamsTag.class.getSuperclass())
       };
     } catch (IntrospectionException err) {
