@@ -41,7 +41,7 @@ import java.util.ResourceBundle;
 /**
  * @author  AO Industries, Inc.
  */
-public final class AttributeUtils  {
+public final class AttributeUtils {
 
   /** Make no instances. */
   private AttributeUtils() {

@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2020, 2021, 2022, 2023  AO Industries, Inc.
+ * Copyright (C) 2020, 2021, 2022, 2023, 2026  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -38,7 +38,7 @@ public class ElementBufferedTagBeanInfo extends SimpleBeanInfo {
 
   static {
     try {
-      properties = new PropertyDescriptor[]{
+      properties = new PropertyDescriptor[] {
           new PropertyDescriptor("id",    ElementBufferedTag.class, "getId",    "setId"),
           new PropertyDescriptor("class", ElementBufferedTag.class, "getClazz", "setClazz"),
           new PropertyDescriptor("data",  ElementBufferedTag.class, "getData",  "setData"),
@@ -62,7 +62,7 @@ public class ElementBufferedTagBeanInfo extends SimpleBeanInfo {
   @Override
   public BeanInfo[] getAdditionalBeanInfo() {
     try {
-      return new BeanInfo[]{
+      return new BeanInfo[] {
           Introspector.getBeanInfo(ElementBufferedTag.class.getSuperclass())
       };
     } catch (IntrospectionException err) {

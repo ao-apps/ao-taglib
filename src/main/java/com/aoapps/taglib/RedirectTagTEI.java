@@ -42,7 +42,7 @@ public class RedirectTagTEI extends TagExtraInfo {
     ) {
       String statusCode = Strings.trim((String) o); // TODO: normalizeStatusCode
       if (!RedirectTag.isValidStatusCode(statusCode)) {
-        return new ValidationMessage[]{
+        return new ValidationMessage[] {
             new ValidationMessage(data.getId(), RedirectTag.RESOURCES.getMessage("statusCode.invalid", statusCode))
         };
       }
