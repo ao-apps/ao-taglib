@@ -21,8 +21,6 @@
  * along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
  */
 module com.aoapps.taglib {
-  exports com.aoapps.taglib;
-  exports com.aoapps.taglib.legacy;
   // Direct
   requires com.aoapps.collections; // <groupId>com.aoapps</groupId><artifactId>ao-collections</artifactId>
   requires com.aoapps.encoding; // <groupId>com.aoapps</groupId><artifactId>ao-encoding</artifactId>
@@ -47,4 +45,7 @@ module com.aoapps.taglib {
   // Java SE
   requires java.desktop;
   requires java.logging;
+
+  exports com.aoapps.taglib;
+  exports com.aoapps.taglib.legacy;
 }
