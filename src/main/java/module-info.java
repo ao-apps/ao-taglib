@@ -1,6 +1,6 @@
 /*
  * ao-taglib - Making JSP be what it should have been all along.
- * Copyright (C) 2021, 2022, 2025  AO Industries, Inc.
+ * Copyright (C) 2021, 2022, 2025, 2026  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -21,8 +21,6 @@
  * along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
  */
 module com.aoapps.taglib {
-  exports com.aoapps.taglib;
-  exports com.aoapps.taglib.legacy;
   // Direct
   requires com.aoapps.collections; // <groupId>com.aoapps</groupId><artifactId>ao-collections</artifactId>
   requires com.aoapps.encoding; // <groupId>com.aoapps</groupId><artifactId>ao-encoding</artifactId>
@@ -47,4 +45,7 @@ module com.aoapps.taglib {
   // Java SE
   requires java.desktop;
   requires java.logging;
+
+  exports com.aoapps.taglib;
+  exports com.aoapps.taglib.legacy;
 }
