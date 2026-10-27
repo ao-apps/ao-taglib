@@ -357,6 +357,7 @@ along with ao-taglib.  If not, see <https://www.gnu.org/licenses/>.
                   javax.servlet.jsp-api-2.3.3.jar
                 -->
                 <Automatic-Module-Name>${module.name}</Automatic-Module-Name>
+                <Include-Resource>{maven-resources}</Include-Resource>
                 <Private-Package>!.</Private-Package>
               </instructions>
             </configuration>
